@@ -3,125 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MTBB · Páginas de venda</title>
-<meta name="robots" content="noindex,nofollow">
+<title>MTBB · Em que momento está o seu livro?</title>
+<meta name="description" content="Identifique o momento do seu livro e veja o caminho do Método The Book Business pra ele chegar aos leitores certos.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MTBB · Em que momento está o seu livro?">
+<meta property="og:description" content="Identifique o momento do seu livro e veja o caminho do Método The Book Business pra ele chegar aos leitores certos.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0A0A0A;
+    --bg-card: #141414;
+    --bg-card-hover: #1A1A1A;
+    --accent: #FAAB00;
+    --text: #F8F8F8;
+    --text-soft: rgba(255,255,255,0.65);
+    --text-mute: rgba(255,255,255,0.4);
+    --border: rgba(255,255,255,0.08);
+  }
+  html { -webkit-font-smoothing: antialiased; }
   body {
     font-family: 'Poppins', sans-serif;
-    background: #0A0A0A;
-    color: #F8F8F8;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     padding: 40px 24px;
+    line-height: 1.5;
   }
-  .wrap { max-width: 720px; width: 100%; }
+  .wrap {
+    max-width: 880px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+  .logo {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .logo span { color: var(--accent); }
   .eyebrow {
-    font-size: 12px;
-    letter-spacing: 0.18em;
+    font-size: 11px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #FAAB00;
-    margin-bottom: 16px;
+    color: var(--accent);
+    margin-bottom: 36px;
   }
   h1 {
-    font-size: clamp(28px, 4vw, 42px);
+    font-size: clamp(30px, 5vw, 52px);
     font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 12px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
   }
   h1 .italic {
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-weight: 500;
-    color: #FAAB00;
   }
   .sub {
-    font-size: 16px;
-    color: rgba(255,255,255,0.6);
+    font-size: clamp(15px, 1.6vw, 17px);
+    color: var(--text-soft);
+    max-width: 520px;
+    margin: 0 auto 56px;
     line-height: 1.6;
-    margin-bottom: 48px;
   }
-  .grid {
+  .options {
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
+    max-width: 720px;
+    margin: 0 auto;
   }
-  @media (min-width: 720px) {
-    .grid { grid-template-columns: repeat(3, 1fr); }
+  @media (min-width: 760px) {
+    .options { grid-template-columns: repeat(3, 1fr); gap: 18px; }
   }
-  .card {
-    display: block;
-    background: #141414;
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 28px 24px;
-    border-radius: 14px;
+  .option {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 28px 24px 24px;
+    border-radius: 16px;
     text-decoration: none;
-    color: inherit;
-    transition: all 0.2s ease;
+    color: var(--text);
+    transition: all 0.25s ease;
+    position: relative;
+    min-height: 200px;
   }
-  .card:hover {
-    border-color: #FAAB00;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(250,171,0,0.12);
+  .option:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(250,171,0,0.16);
   }
-  .card .label {
+  .option:hover .arrow { transform: translateX(4px); color: var(--accent); }
+  .option:hover .stage-num { color: var(--accent); }
+  .stage-num {
     font-size: 11px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 12px;
+    color: var(--text-mute);
+    margin-bottom: 16px;
+    transition: color 0.25s ease;
   }
-  .card .title {
+  .option .emoji {
+    font-size: 32px;
+    margin-bottom: 18px;
+    line-height: 1;
+  }
+  .option .label {
     font-size: 19px;
     font-weight: 600;
     line-height: 1.3;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
-  .card .desc {
+  .option .desc {
     font-family: 'Fraunces', serif;
     font-style: italic;
-    color: #FAAB00;
+    color: var(--accent);
     font-size: 14px;
     line-height: 1.4;
+    margin-bottom: 24px;
+  }
+  .arrow {
+    margin-top: auto;
+    font-size: 18px;
+    color: var(--text-mute);
+    transition: all 0.25s ease;
+    display: inline-block;
   }
   footer {
-    margin-top: 48px;
+    margin-top: 64px;
     font-size: 12px;
-    color: rgba(255,255,255,0.35);
+    color: var(--text-mute);
     text-align: center;
+    line-height: 1.6;
+  }
+  footer .name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--text-soft);
   }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <p class="eyebrow">MTBB · Método The Book Business</p>
-    <h1>Páginas de venda<br><span class="italic">por estágio do autor.</span></h1>
-    <p class="sub">3 entradas. 1 método. Cada página fala diretamente com o autor no estágio em que está hoje.</p>
+    <div class="logo">MTBB<span>.</span></div>
+    <p class="eyebrow">Método The Book Business</p>
 
-    <div class="grid">
-      <a class="card" href="escrevendo.html">
-        <div class="label">Estágio 1</div>
-        <div class="title">Escrevendo</div>
+    <h1>Em que momento está<br><span class="italic">o seu livro hoje?</span></h1>
+    <p class="sub">O caminho pra ele chegar aos leitores certos depende de onde você está agora.</p>
+
+    <div class="options">
+      <a class="option" href="escrevendo.html">
+        <div class="stage-num">Estágio 01</div>
+        <div class="emoji">📝</div>
+        <div class="label">Ainda estou escrevendo</div>
         <div class="desc">Quantos leitores já estão esperando?</div>
+        <span class="arrow">→</span>
       </a>
-      <a class="card" href="lancando.html">
-        <div class="label">Estágio 2</div>
-        <div class="title">Prestes a lançar</div>
+      <a class="option" href="lancando.html">
+        <div class="stage-num">Estágio 02</div>
+        <div class="emoji">🚀</div>
+        <div class="label">Estou prestes a lançar</div>
         <div class="desc">Mas os leitores sabem disso?</div>
+        <span class="arrow">→</span>
       </a>
-      <a class="card" href="publicado.html">
-        <div class="label">Estágio 3</div>
-        <div class="title">Livro lançado</div>
+      <a class="option" href="publicado.html">
+        <div class="stage-num">Estágio 03</div>
+        <div class="emoji">🔄</div>
+        <div class="label">Já lancei e quero reativar</div>
         <div class="desc">Mas ele foi lido de verdade?</div>
+        <span class="arrow">→</span>
       </a>
     </div>
 
-    <footer>© The Book Business · Dany Sakugawa</footer>
+    <footer>© The Book Business · <span class="name">Dany Sakugawa</span></footer>
   </div>
 </body>
 </html>
