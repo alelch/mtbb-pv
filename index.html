@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MTBB · Em que momento está o seu livro?</title>
-<meta name="description" content="Identifique o momento do seu livro e veja o caminho do Método The Book Business pra ele chegar aos leitores certos.">
+<meta name="description" content="Identifique o momento do seu livro e veja o caminho pra ele chegar aos leitores certos.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MTBB · Em que momento está o seu livro?">
-<meta property="og:description" content="Identifique o momento do seu livro e veja o caminho do Método The Book Business pra ele chegar aos leitores certos.">
+<meta property="og:description" content="Identifique o momento do seu livro e veja o caminho pra ele chegar aos leitores certos.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,14 +15,14 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #0A0A0A;
-    --bg-card: #141414;
-    --bg-card-hover: #1A1A1A;
+    --bg: #F8F8F8;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FFFFFF;
     --accent: #FAAB00;
-    --text: #F8F8F8;
-    --text-soft: rgba(255,255,255,0.65);
-    --text-mute: rgba(255,255,255,0.4);
-    --border: rgba(255,255,255,0.08);
+    --text: #1A1A1A;
+    --text-soft: #555555;
+    --text-mute: #999999;
+    --border: #EEEEEE;
   }
   html { -webkit-font-smoothing: antialiased; }
   body {
@@ -46,16 +46,9 @@
     font-weight: 700;
     letter-spacing: 0.04em;
     color: var(--text);
-    margin-bottom: 8px;
-  }
-  .logo span { color: var(--accent); }
-  .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent);
     margin-bottom: 36px;
   }
+  .logo span { color: var(--accent); }
   h1 {
     font-size: clamp(30px, 5vw, 52px);
     font-weight: 700;
@@ -109,10 +102,9 @@
     transition: background 0.25s ease;
   }
   .option:hover {
-    background: var(--bg-card-hover);
     border-color: var(--accent);
     transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(250,171,0,0.16);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.06);
   }
   .option:hover::before { background: var(--accent); }
   .option:hover .arrow { transform: translateX(4px); color: var(--accent); }
@@ -136,17 +128,11 @@
     text-align: center;
     line-height: 1.6;
   }
-  footer .name {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    color: var(--text-soft);
-  }
 </style>
 </head>
 <body>
   <div class="wrap">
     <div class="logo">MTBB<span>.</span></div>
-    <p class="eyebrow">Método The Book Business</p>
 
     <h1>Em que momento está<br><span class="italic">o seu livro hoje?</span></h1>
     <p class="sub">O caminho pra ele chegar aos leitores certos depende de onde você está agora.</p>
@@ -166,7 +152,7 @@
       </a>
     </div>
 
-    <footer>© The Book Business · <span class="name">Dany Sakugawa</span></footer>
+    <footer>© The Book Business</footer>
   </div>
 </body>
 </html>
