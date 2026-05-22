@@ -105,12 +105,10 @@
   }
   .option:hover::before { transform: scaleX(1); }
   .option:hover .label { color: var(--text); }
-  .option:hover .cta-pill {
-    background: var(--accent);
-    color: #0A0A0A;
-    border-color: var(--accent);
+  .option:hover .arrow {
+    color: var(--accent);
+    transform: translateX(4px);
   }
-  .option:hover .cta-pill .arr { transform: translateX(4px); }
   .option .label {
     font-size: 20px;
     font-weight: 600;
@@ -118,25 +116,15 @@
     margin-bottom: 28px;
     transition: color 0.25s ease;
   }
-  .cta-pill {
+  .arrow {
     margin-top: auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    background: transparent;
-    border: 1.5px solid var(--text);
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--text);
-    transition: all 0.25s ease;
-  }
-  .cta-pill .arr {
+    font-size: 24px;
+    color: var(--text-mute);
+    font-weight: 400;
+    line-height: 1;
+    transition: all 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
     display: inline-block;
-    transition: transform 0.25s ease;
-    font-weight: 700;
+    align-self: flex-end;
   }
   footer {
     margin-top: 64px;
@@ -156,15 +144,15 @@
     <div class="options">
       <a class="option" href="escrevendo.html">
         <div class="label">Ainda estou escrevendo</div>
-        <span class="cta-pill">Ver caminho <span class="arr">→</span></span>
+        <span class="arrow">→</span>
       </a>
       <a class="option" href="lancando.html">
         <div class="label">Estou prestes a lançar</div>
-        <span class="cta-pill">Ver caminho <span class="arr">→</span></span>
+        <span class="arrow">→</span>
       </a>
       <a class="option" href="publicado.html">
         <div class="label">Já lancei meu livro</div>
-        <span class="cta-pill">Ver caminho <span class="arr">→</span></span>
+        <span class="arrow">→</span>
       </a>
     </div>
 
