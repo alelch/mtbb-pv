@@ -169,9 +169,9 @@
 
   /* BLOCO 3 — BARRA DE NÚMEROS */
   .numbers-bar {
-    background: var(--bg-dark);
-    color: white;
-    padding: 64px 0 40px;
+    background: #FFFFFF;
+    color: var(--text);
+    padding: 72px 0 56px;
   }
   .numbers-grid {
     display: grid;
@@ -180,7 +180,7 @@
     text-align: center;
   }
   @media (max-width: 700px) {
-    .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 44px; }
   }
   .number-item .num {
     font-family: 'Fraunces', serif;
@@ -196,25 +196,25 @@
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.42);
+    color: var(--text-mute);
     font-weight: 500;
     line-height: 1.5;
     max-width: 150px;
     margin: 0 auto;
   }
 
-  /* BLOCO 4 — LOGOS (agora dark, integrado ao numbers-bar) */
+  /* BLOCO 4 — LOGOS (cinza claro, contrasta levemente com numbers branco) */
   .logos-section {
-    padding: 36px 0 56px;
-    background: var(--bg-dark);
-    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 44px 0 56px;
+    background: #F1F1F1;
+    border-top: none;
     border-bottom: none;
   }
   .logos-eyebrow {
     text-align: center;
     font-size: 11px;
     letter-spacing: 0.22em;
-    color: rgba(255,255,255,0.4);
+    color: var(--text-mute);
     text-transform: uppercase;
     font-weight: 500;
     margin-bottom: 24px;
@@ -229,10 +229,10 @@
   .logo-item {
     font-weight: 600;
     font-size: 15px;
-    color: rgba(255,255,255,0.55);
+    color: var(--text-soft);
     letter-spacing: -0.3px;
     padding: 0 28px;
-    border-right: 1px solid rgba(255,255,255,0.1);
+    border-right: 1px solid #DDDDDD;
     line-height: 1;
   }
   .logo-item:last-child { border-right: none; }
