@@ -92,13 +92,21 @@
     text-align: left;
     background: var(--bg-card);
     border: 1px solid var(--border);
-    padding: 28px 24px 24px;
+    padding: 32px 28px 26px;
     border-radius: 16px;
     text-decoration: none;
     color: var(--text);
     transition: all 0.25s ease;
     position: relative;
-    min-height: 200px;
+    min-height: 240px;
+  }
+  .option::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 28px; right: 28px;
+    height: 1px;
+    background: var(--border);
+    transition: background 0.25s ease;
   }
   .option:hover {
     background: var(--bg-card-hover);
@@ -106,20 +114,19 @@
     transform: translateY(-3px);
     box-shadow: 0 14px 40px rgba(250,171,0,0.16);
   }
+  .option:hover::before { background: var(--accent); }
   .option:hover .arrow { transform: translateX(4px); color: var(--accent); }
-  .option:hover .stage-num { color: var(--accent); }
-  .stage-num {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--text-mute);
-    margin-bottom: 16px;
-    transition: color 0.25s ease;
-  }
-  .option .emoji {
-    font-size: 32px;
-    margin-bottom: 18px;
+  .option:hover .numeral { color: var(--accent); }
+  .numeral {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 56px;
     line-height: 1;
+    color: var(--text-mute);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    transition: color 0.3s ease;
   }
   .option .label {
     font-size: 19px;
@@ -166,22 +173,19 @@
 
     <div class="options">
       <a class="option" href="escrevendo.html">
-        <div class="stage-num">Estágio 01</div>
-        <div class="emoji">📝</div>
+        <div class="numeral">01</div>
         <div class="label">Ainda estou escrevendo</div>
         <div class="desc">Quantos leitores já estão esperando?</div>
         <span class="arrow">→</span>
       </a>
       <a class="option" href="lancando.html">
-        <div class="stage-num">Estágio 02</div>
-        <div class="emoji">🚀</div>
+        <div class="numeral">02</div>
         <div class="label">Estou prestes a lançar</div>
         <div class="desc">Mas os leitores sabem disso?</div>
         <span class="arrow">→</span>
       </a>
       <a class="option" href="publicado.html">
-        <div class="stage-num">Estágio 03</div>
-        <div class="emoji">🔄</div>
+        <div class="numeral">03</div>
         <div class="label">Já lancei e quero reativar</div>
         <div class="desc">Mas ele foi lido de verdade?</div>
         <span class="arrow">→</span>
