@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTBB · Páginas de venda</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #0A0A0A;
+    color: #F8F8F8;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+  }
+  .wrap { max-width: 720px; width: 100%; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #FAAB00;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  h1 .italic {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: #FAAB00;
+  }
+  .sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 720px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .card {
+    display: block;
+    background: #141414;
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 24px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+  }
+  .card:hover {
+    border-color: #FAAB00;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(250,171,0,0.12);
+  }
+  .card .label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 12px;
+  }
+  .card .title {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .card .desc {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: #FAAB00;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  footer {
+    margin-top: 48px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">MTBB · Método The Book Business</p>
+    <h1>Páginas de venda<br><span class="italic">por estágio do autor.</span></h1>
+    <p class="sub">3 entradas. 1 método. Cada página fala diretamente com o autor no estágio em que está hoje.</p>
+
+    <div class="grid">
+      <a class="card" href="escrevendo.html">
+        <div class="label">Estágio 1</div>
+        <div class="title">Escrevendo</div>
+        <div class="desc">Quantos leitores já estão esperando?</div>
+      </a>
+      <a class="card" href="lancando.html">
+        <div class="label">Estágio 2</div>
+        <div class="title">Prestes a lançar</div>
+        <div class="desc">Mas os leitores sabem disso?</div>
+      </a>
+      <a class="card" href="publicado.html">
+        <div class="label">Estágio 3</div>
+        <div class="title">Livro lançado</div>
+        <div class="desc">Mas ele foi lido de verdade?</div>
+      </a>
+    </div>
+
+    <footer>© The Book Business · Dany Sakugawa</footer>
+  </div>
+</body>
+</html>
