@@ -145,6 +145,7 @@
   }
 </style>
 <script src="utm.js" defer></script>
+<script src="tracker.js" defer></script>
 </head>
 <body>
   <div class="wrap">
@@ -225,6 +226,10 @@
             var stage = el.getAttribute('data-stage');
             var variant = getStickyVariant(stage, cfg[stage]);
             el.setAttribute('href', buildHref(stage, variant));
+            // Track stage_click no momento do clique
+            el.addEventListener('click', function () {
+              if (window.MTBB_TRACK) window.MTBB_TRACK('stage_click', { stage: stage, variant: variant });
+            });
           });
         })
         .catch(function() {

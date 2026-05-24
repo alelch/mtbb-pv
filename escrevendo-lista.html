@@ -1912,6 +1912,7 @@
   }
 </style>
 <script src="utm.js" defer></script>
+<script src="tracker.js" defer></script>
 </head>
 <body>
 
@@ -3095,6 +3096,13 @@
         stage: 'escrevendo'
       };
       Object.keys(utms).forEach(function (k) { data[k] = utms[k]; });
+
+      if (window.MTBB_TRACK) {
+        window.MTBB_TRACK('form_submit', {
+          stage: 'escrevendo', variant: 'lista',
+          meta: { email_domain: (data.email.split('@')[1] || '').toLowerCase() }
+        });
+      }
 
       // TODO: integração ActiveCampaign — substituir o trecho abaixo
       // pelo endpoint real da AC ou pelo JS de embed do form.

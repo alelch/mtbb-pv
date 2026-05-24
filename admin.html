@@ -181,8 +181,120 @@
   }
 
   .footer-note { text-align: center; margin-top: 48px; font-size: 12px; color: var(--text-mute); }
+
+  /* TABS */
+  .tabs {
+    display: flex; gap: 6px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    padding: 12px 18px; font-size: 14px; font-weight: 600;
+    color: var(--text-mute); cursor: pointer; border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--text); border-bottom-color: var(--accent); }
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* METRICS */
+  .period-row {
+    display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;
+  }
+  .period-btn {
+    padding: 8px 14px; font-size: 12px;
+    border: 1px solid var(--border); border-radius: 999px;
+    background: white; color: var(--text-soft); cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+  }
+  .period-btn:hover { border-color: var(--accent); color: var(--text); }
+  .period-btn.active {
+    background: var(--text); color: white; border-color: var(--text);
+  }
+
+  .global-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .metric-card .label {
+    font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-mute);
+    font-weight: 600; margin-bottom: 8px;
+  }
+  .metric-card .value {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .metric-card .value.accent { color: var(--accent); }
+  .metric-card .sub {
+    font-size: 11px; color: var(--text-mute); margin-top: 6px;
+  }
+
+  table.funnel {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    border: 1px solid var(--border);
+  }
+  table.funnel th, table.funnel td {
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.funnel th {
+    background: #F1F1F1;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-mute);
+    font-weight: 700;
+  }
+  table.funnel tr:last-child td { border-bottom: none; }
+  table.funnel .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--text);
+  }
+  table.funnel .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+  }
+  table.funnel .badge.preco { background: #1A1A1A; color: white; }
+  table.funnel .badge.lista { background: var(--accent); color: #1A1A1A; }
+  table.funnel .pct {
+    font-size: 11px; color: var(--text-mute); margin-left: 6px;
+  }
+
+  .loading-state {
+    text-align: center; padding: 32px 0; color: var(--text-mute);
+    font-size: 14px;
+  }
+  .empty-state {
+    text-align: center; padding: 48px 24px; color: var(--text-mute);
+    font-size: 14px;
+    background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);
+  }
 </style>
 <script src="utm.js" defer></script>
+<script src="tracker.js" defer></script>
 </head>
 <body>
   <div class="wrap">
@@ -200,26 +312,53 @@
 
     <!-- PANEL -->
     <div class="panel" id="panel">
-      <h1>Controle de <span class="italic">roteamento.</span></h1>
-      <p class="sub">Cada estágio do quiz tem um split percentual entre <strong>Preço</strong> e <strong>Lista de espera</strong>. Visitante é sticky (sempre vê a mesma versão).</p>
 
-      <!-- Cards gerados via JS -->
-      <div id="stages"></div>
+      <div class="tabs">
+        <div class="tab active" data-view="routing">Roteamento</div>
+        <div class="tab" data-view="metrics">Métricas</div>
+      </div>
 
-      <div class="save-row">
-        <h3>Novo config.json</h3>
-        <pre id="output">{}</pre>
-        <div class="save-actions">
-          <button class="btn btn-primary" onclick="copyConfig()">Copiar JSON</button>
-          <button class="btn btn-secondary" onclick="downloadConfig()">Baixar arquivo</button>
-          <span class="copied" id="copied"></span>
+      <!-- VIEW: Roteamento -->
+      <div class="view active" id="view-routing">
+        <h1>Controle de <span class="italic">roteamento.</span></h1>
+        <p class="sub">Cada estágio do quiz tem um split percentual entre <strong>Preço</strong> e <strong>Lista de espera</strong>. Visitante é sticky (sempre vê a mesma versão).</p>
+
+        <div id="stages"></div>
+
+        <div class="save-row">
+          <h3>Novo config.json</h3>
+          <pre id="output">{}</pre>
+          <div class="save-actions">
+            <button class="btn btn-primary" onclick="copyConfig()">Copiar JSON</button>
+            <button class="btn btn-secondary" onclick="downloadConfig()">Baixar arquivo</button>
+            <span class="copied" id="copied"></span>
+          </div>
+        </div>
+
+        <div class="summary">
+          <strong>Pra valer:</strong> copie o JSON acima → cole no <code>config.json</code> do repo → commit + push. Em ~30s o quiz já roteia pra nova configuração.<br><br>
+          <strong>Tracking no Hotmart:</strong> cada visitante recebe automaticamente um UTM <code>utm_test=preco-escrevendo</code> (ou similar). Filtre por esse param no Hotmart Analytics pra ver vendas por versão.<br><br>
+          <strong>Sticky:</strong> visitantes que já passaram pelo quiz ficam fixos na versão que receberam. Mudanças aqui só afetam NOVOS visitantes.
         </div>
       </div>
 
-      <div class="summary">
-        <strong>Pra valer:</strong> copie o JSON acima → cole no <code>config.json</code> do repo → commit + push. Em ~30s o quiz já roteia pra nova configuração.<br><br>
-        <strong>Tracking no Hotmart:</strong> cada visitante que clica recebe automaticamente um UTM <code>utm_test=preco-escrevendo</code> (ou similar). Filtre por esse param no Hotmart Analytics pra ver vendas por versão.<br><br>
-        <strong>Importante:</strong> visitantes que já passaram pelo quiz ficam fixos na versão que receberam (sticky via localStorage). Mudanças aqui só afetam NOVOS visitantes.
+      <!-- VIEW: Métricas -->
+      <div class="view" id="view-metrics">
+        <h1>Funil <span class="italic">do teste.</span></h1>
+        <p class="sub">Eventos coletados em tempo real via Supabase. Vendas (purchase) entram automaticamente quando o webhook do Hotmart estiver configurado.</p>
+
+        <div class="period-row">
+          <span class="period-btn" data-days="1">24h</span>
+          <span class="period-btn active" data-days="7">7 dias</span>
+          <span class="period-btn" data-days="30">30 dias</span>
+          <span class="period-btn" data-days="90">90 dias</span>
+          <span class="period-btn" data-days="3650">Tudo</span>
+          <button class="btn btn-secondary" style="margin-left:auto;padding:6px 14px;font-size:12px;" onclick="loadMetrics()">↻ Atualizar</button>
+        </div>
+
+        <div id="metrics-content">
+          <div class="loading-state">Carregando…</div>
+        </div>
       </div>
 
       <p class="footer-note">© The Book Business · admin</p>
@@ -249,10 +388,121 @@
         document.getElementById('gate').style.display = 'none';
         document.getElementById('panel').classList.add('show');
         loadCurrentConfig();
+        setupTabs();
       } else {
         document.getElementById('err').textContent = 'Senha incorreta.';
         document.getElementById('pwd').value = '';
       }
+    }
+
+    function setupTabs() {
+      document.querySelectorAll('.tab').forEach(function (t) {
+        t.addEventListener('click', function () {
+          var view = this.getAttribute('data-view');
+          document.querySelectorAll('.tab').forEach(function (x) { x.classList.remove('active'); });
+          this.classList.add('active');
+          document.querySelectorAll('.view').forEach(function (x) { x.classList.remove('active'); });
+          document.getElementById('view-' + view).classList.add('active');
+          if (view === 'metrics') loadMetrics();
+        });
+      });
+      document.querySelectorAll('.period-btn').forEach(function (b) {
+        b.addEventListener('click', function () {
+          document.querySelectorAll('.period-btn').forEach(function (x) { x.classList.remove('active'); });
+          this.classList.add('active');
+          loadMetrics();
+        });
+      });
+    }
+
+    // === MÉTRICAS (Supabase) ===
+    var SB_URL = 'https://jsqtpsxpaclslakafmvd.supabase.co';
+    var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
+
+    function getActiveDays() {
+      var active = document.querySelector('.period-btn.active');
+      return active ? parseInt(active.getAttribute('data-days'), 10) : 7;
+    }
+
+    function callRpc(fn) {
+      var since = new Date(Date.now() - getActiveDays() * 86400000).toISOString();
+      return fetch(SB_URL + '/rest/v1/rpc/' + fn, {
+        method: 'POST',
+        headers: {
+          'apikey': SB_KEY,
+          'Authorization': 'Bearer ' + SB_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ p_since: since })
+      }).then(function (r) { return r.json(); });
+    }
+
+    function fmt(n) {
+      if (n === null || n === undefined) return '0';
+      return String(n);
+    }
+
+    function pct(num, den) {
+      if (!den) return '';
+      var p = (num / den * 100);
+      return '<span class="pct">' + p.toFixed(1) + '%</span>';
+    }
+
+    function brl(n) {
+      if (!n) return 'R$ 0';
+      return 'R$ ' + Number(n).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    function loadMetrics() {
+      var box = document.getElementById('metrics-content');
+      box.innerHTML = '<div class="loading-state">Carregando…</div>';
+
+      Promise.all([callRpc('mtbb_pv_global_get'), callRpc('mtbb_pv_funnel_get')])
+        .then(function (results) {
+          var global = (results[0] && results[0][0]) || {};
+          var funnel = results[1] || [];
+
+          if (!global.quiz_views && (!funnel || funnel.length === 0)) {
+            box.innerHTML = '<div class="empty-state">Sem eventos no período selecionado. Os primeiros cliques vão aparecer aqui em ~10 segundos depois de chegarem no site.</div>';
+            return;
+          }
+
+          var html = '<div class="global-grid">' +
+            '<div class="metric-card"><div class="label">Visitas</div><div class="value">' + fmt(global.quiz_views) + '</div><div class="sub">' + fmt(global.quiz_views_unique) + ' únicos</div></div>' +
+            '<div class="metric-card"><div class="label">Cliques no quiz</div><div class="value">' + fmt(global.total_stage_clicks) + '</div></div>' +
+            '<div class="metric-card"><div class="label">Cliques no Hotmart</div><div class="value accent">' + fmt(global.total_hotmart_clicks) + '</div></div>' +
+            '<div class="metric-card"><div class="label">Forms lista</div><div class="value">' + fmt(global.total_form_submits) + '</div></div>' +
+            '<div class="metric-card"><div class="label">Cliques WhatsApp</div><div class="value">' + fmt(global.total_whatsapp_clicks) + '</div></div>' +
+            '<div class="metric-card"><div class="label">Vendas</div><div class="value accent">' + fmt(global.total_purchases) + '</div><div class="sub">' + brl(global.total_revenue) + '</div></div>' +
+          '</div>';
+
+          html += '<table class="funnel"><thead><tr>' +
+            '<th>Estágio</th><th>Variante</th><th>Cliques</th><th>Únicos</th>' +
+            '<th>Hotmart</th><th>Form</th><th>WhatsApp</th><th>Vendas</th>' +
+          '</tr></thead><tbody>';
+
+          var stageLabel = { escrevendo: 'Escrevendo', lancando: 'Lançando', publicado: 'Publicado' };
+
+          funnel.forEach(function (row) {
+            var bottom = (row.variant === 'preco') ? row.hotmart_clicks : row.form_submits;
+            html += '<tr>' +
+              '<td><strong>' + (stageLabel[row.stage] || row.stage) + '</strong></td>' +
+              '<td><span class="badge ' + row.variant + '">' + row.variant + '</span></td>' +
+              '<td class="num">' + fmt(row.stage_clicks) + '</td>' +
+              '<td class="num">' + fmt(row.stage_clicks_unique) + '</td>' +
+              '<td class="num">' + fmt(row.hotmart_clicks) + pct(row.hotmart_clicks, row.stage_clicks) + '</td>' +
+              '<td class="num">' + fmt(row.form_submits) + pct(row.form_submits, row.stage_clicks) + '</td>' +
+              '<td class="num">' + fmt(row.whatsapp_clicks) + '</td>' +
+              '<td class="num">' + fmt(row.purchases) + pct(row.purchases, bottom) + '</td>' +
+            '</tr>';
+          });
+          html += '</tbody></table>';
+
+          box.innerHTML = html;
+        })
+        .catch(function (err) {
+          box.innerHTML = '<div class="empty-state">Erro carregando métricas: ' + (err.message || err) + '</div>';
+        });
     }
     document.getElementById('pwd').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') tryLogin();
