@@ -1911,6 +1911,7 @@
     line-height: 1.5;
   }
 </style>
+<script src="utm.js" defer></script>
 </head>
 <body>
 
@@ -3082,19 +3083,24 @@
       submit.disabled = true;
       submit.textContent = 'Enviando...';
 
+      var utms = (window.MTBB_UTMS && window.MTBB_UTMS()) || {};
       var data = {
         nome: form.nome.value.trim(),
         email: form.email.value.trim(),
         whatsapp: form.whatsapp.value.trim(),
         stage: 'publicado'
       };
+      Object.keys(utms).forEach(function (k) { data[k] = utms[k]; });
 
       // TODO: integração ActiveCampaign — substituir o trecho abaixo
       // pelo endpoint real da AC ou pelo JS de embed do form.
       try { localStorage.setItem('wl_last_' + Date.now(), JSON.stringify(data)); } catch (e) {}
 
+      var qs = Object.keys(utms).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(utms[k]);
+      }).join('&');
       setTimeout(function() {
-        window.location.href = 'lista-de-espera.html';
+        window.location.href = 'lista-de-espera.html' + (qs ? '?' + qs : '');
       }, 400);
     });
   })();
