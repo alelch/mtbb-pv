@@ -218,22 +218,39 @@
         return base + (parts.length ? '?' + parts.join('&') : '');
       }
 
-      var bust = '?v=' + Date.now();
-      fetch('config.json' + bust)
-        .then(function(r) { return r.json(); })
-        .then(function(cfg) {
-          document.querySelectorAll('.option[data-stage]').forEach(function(el) {
-            var stage = el.getAttribute('data-stage');
-            var variant = getStickyVariant(stage, cfg[stage]);
-            el.setAttribute('href', buildHref(stage, variant));
-            // Track stage_click no momento do clique
-            el.addEventListener('click', function () {
-              if (window.MTBB_TRACK) window.MTBB_TRACK('stage_click', { stage: stage, variant: variant });
-            });
+      // Fonte da verdade: Supabase (mtbb_pv_config). Fallback: config.json estático.
+      var SB_URL = 'https://jsqtpsxpaclslakafmvd.supabase.co';
+      var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
+
+      function applyConfig(cfg) {
+        document.querySelectorAll('.option[data-stage]').forEach(function(el) {
+          var stage = el.getAttribute('data-stage');
+          var variant = getStickyVariant(stage, cfg[stage]);
+          el.setAttribute('href', buildHref(stage, variant));
+          el.addEventListener('click', function () {
+            if (window.MTBB_TRACK) window.MTBB_TRACK('stage_click', { stage: stage, variant: variant });
           });
+        });
+      }
+
+      fetch(SB_URL + '/rest/v1/mtbb_pv_config?select=stage,preco_pct', {
+        headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (rows) {
+          if (!Array.isArray(rows) || rows.length === 0) throw new Error('empty');
+          var cfg = {};
+          rows.forEach(function (r) {
+            cfg[r.stage] = { preco: r.preco_pct, lista: 100 - r.preco_pct };
+          });
+          applyConfig(cfg);
         })
         .catch(function() {
-          // fallback: mantém hrefs estáticos (preco)
+          // fallback: config.json estático
+          fetch('config.json?v=' + Date.now())
+            .then(function(r) { return r.json(); })
+            .then(applyConfig)
+            .catch(function() {});
         });
     })();
   </script>

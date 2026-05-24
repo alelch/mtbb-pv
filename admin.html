@@ -325,18 +325,18 @@
 
         <div id="stages"></div>
 
-        <div class="save-row">
-          <h3>Novo config.json</h3>
-          <pre id="output">{}</pre>
-          <div class="save-actions">
-            <button class="btn btn-primary" onclick="copyConfig()">Copiar JSON</button>
-            <button class="btn btn-secondary" onclick="downloadConfig()">Baixar arquivo</button>
-            <span class="copied" id="copied"></span>
+        <div class="save-row" style="text-align:center;">
+          <button class="btn btn-primary" id="save-btn" onclick="saveConfig()" style="font-size:15px;padding:14px 32px;">Salvar alterações</button>
+          <span class="copied" id="save-feedback"></span>
+          <div style="margin-top: 18px; font-size:12px; color: var(--text-mute);">
+            <span id="last-updated">Última alteração: —</span>
+            <span style="margin: 0 8px;">·</span>
+            <a href="#" onclick="loadCurrentConfig();return false;" style="color:var(--text-soft);text-decoration:none;border-bottom:1px dashed var(--text-mute);">↻ Recarregar</a>
           </div>
         </div>
 
         <div class="summary">
-          <strong>Pra valer:</strong> copie o JSON acima → cole no <code>config.json</code> do repo → commit + push. Em ~30s o quiz já roteia pra nova configuração.<br><br>
+          <strong>Como funciona:</strong> ao clicar em "Salvar", o config é gravado no Supabase. O quiz começa a usar a nova distribuição em ~5 segundos pra novos visitantes.<br><br>
           <strong>Tracking no Hotmart:</strong> cada visitante recebe automaticamente um UTM <code>utm_test=preco-escrevendo</code> (ou similar). Filtre por esse param no Hotmart Analytics pra ver vendas por versão.<br><br>
           <strong>Sticky:</strong> visitantes que já passaram pelo quiz ficam fixos na versão que receberam. Mudanças aqui só afetam NOVOS visitantes.
         </div>
@@ -509,15 +509,86 @@
     });
 
     function loadCurrentConfig() {
-      fetch('config.json?v=' + Date.now())
-        .then(function(r) { return r.json(); })
-        .then(function(cfg) {
-          STAGES.forEach(function (s) {
-            state[s.key] = normalize(cfg[s.key]);
-          });
-          renderStages();
+      var fb = document.getElementById('save-feedback');
+      if (fb) fb.textContent = '';
+      // Le do Supabase (fonte da verdade); fallback config.json se Supabase falhar
+      fetch(SB_URL + '/rest/v1/mtbb_pv_config?select=stage,preco_pct,updated_at', {
+        headers: {
+          'apikey': SB_KEY,
+          'Authorization': 'Bearer ' + SB_KEY
+        }
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) {
+        if (!Array.isArray(rows) || rows.length === 0) throw new Error('empty');
+        var latest = '';
+        rows.forEach(function (row) {
+          state[row.stage] = row.preco_pct;
+          if (!latest || row.updated_at > latest) latest = row.updated_at;
+        });
+        renderStages();
+        if (latest) {
+          var d = new Date(latest);
+          var lbl = document.getElementById('last-updated');
+          if (lbl) lbl.textContent = 'Última alteração: ' + d.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+        }
+      })
+      .catch(function () {
+        // fallback: tenta o config.json estático
+        fetch('config.json?v=' + Date.now())
+          .then(function (r) { return r.json(); })
+          .then(function (cfg) {
+            STAGES.forEach(function (s) { state[s.key] = normalize(cfg[s.key]); });
+            renderStages();
+          })
+          .catch(function () { renderStages(); });
+      });
+    }
+
+    function saveConfig() {
+      var btn = document.getElementById('save-btn');
+      var fb = document.getElementById('save-feedback');
+      btn.disabled = true;
+      var originalText = btn.textContent;
+      btn.textContent = 'Salvando…';
+      fb.textContent = '';
+
+      fetch(SB_URL + '/rest/v1/rpc/mtbb_pv_set_config', {
+        method: 'POST',
+        headers: {
+          'apikey': SB_KEY,
+          'Authorization': 'Bearer ' + SB_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          p_password: SENHA,
+          p_escrevendo: state.escrevendo,
+          p_lancando: state.lancando,
+          p_publicado: state.publicado
         })
-        .catch(function() { renderStages(); });
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (result) {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        if (result === true) {
+          fb.textContent = '✓ Salvo';
+          fb.style.color = '#16A34A';
+          // Atualiza timestamp na UI
+          var lbl = document.getElementById('last-updated');
+          if (lbl) lbl.textContent = 'Última alteração: ' + new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+          setTimeout(function () { fb.textContent = ''; }, 3000);
+        } else {
+          fb.textContent = '✗ Falhou (senha?)';
+          fb.style.color = '#C7252E';
+        }
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        fb.textContent = '✗ Erro: ' + (err.message || err);
+        fb.style.color = '#C7252E';
+      });
     }
 
     function renderStages() {
@@ -590,35 +661,8 @@
       card.querySelector('.slider-track').style.setProperty('--p', pPreco + '%');
     }
 
-    function updateOutput() {
-      var out = {
-        "_doc": "Split percentual de tráfego A/B. Valores em % (preco + lista = 100).",
-        "escrevendo": { "preco": state.escrevendo, "lista": 100 - state.escrevendo },
-        "lancando":   { "preco": state.lancando,   "lista": 100 - state.lancando },
-        "publicado":  { "preco": state.publicado,  "lista": 100 - state.publicado },
-        "updated_at": new Date().toISOString().split('T')[0]
-      };
-      document.getElementById('output').textContent = JSON.stringify(out, null, 2);
-    }
-
-    function copyConfig() {
-      var txt = document.getElementById('output').textContent;
-      navigator.clipboard.writeText(txt).then(function() {
-        var c = document.getElementById('copied');
-        c.textContent = '✓ Copiado!';
-        setTimeout(function() { c.textContent = ''; }, 2400);
-      });
-    }
-
-    function downloadConfig() {
-      var txt = document.getElementById('output').textContent;
-      var blob = new Blob([txt], { type: 'application/json' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url; a.download = 'config.json';
-      a.click();
-      URL.revokeObjectURL(url);
-    }
+    // updateOutput é no-op agora que salvamos direto no Supabase
+    function updateOutput() {}
   </script>
 </body>
 </html>
