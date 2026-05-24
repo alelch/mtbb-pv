@@ -10,160 +10,223 @@
 <meta property="og:title" content="Imersão Lançamento que Vende · 31 de Maio">
 <meta property="og:description" content="Em uma manhã, você estrutura os 90 dias que fazem seu livro entrar no mercado vendendo. Com Dany Sakugawa. R$ 29.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Imersão Lançamento que Vende · 31 de Maio">
-<meta name="twitter:description" content="Em uma manhã, você estrutura os 90 dias que fazem seu livro entrar no mercado vendendo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="//jsqtpsxpaclslakafmvd.supabase.co">
 <link rel="preconnect" href="https://jsqtpsxpaclslakafmvd.supabase.co" crossorigin>
 <link rel="dns-prefetch" href="//pay.hotmart.com">
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fraunces:ital,wght@1,500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"></noscript>
 <script src="utm.js" defer></script>
 <script src="tracker.js" defer></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #F8F8F8;
-    --bg-card: #FFFFFF;
-    --bg-dark: #0A0A0A;
-    --bg-dark-soft: #141414;
-    --bg-grey: #EBEBEB;
-    --accent: #FAAB00;
-    --accent-soft: rgba(250,171,0,0.12);
-    --text: #1A1A1A;
-    --text-soft: #555555;
-    --text-mute: #999999;
-    --border: #EEEEEE;
+    --bg:          hsl(220 20% 7%);    /* #0E1118 */
+    --bg-elev:     hsl(220 18% 10%);   /* #15181F (card) */
+    --bg-soft:     hsl(220 18% 12%);   /* gradient bottom */
+    --border:      hsl(220 15% 16%);   /* #22262E */
+    --border-strong: hsl(220 15% 22%);
+    --text:        hsl(60 10% 95%);    /* #F4F4F1 */
+    --text-soft:   hsl(220 10% 65%);
+    --text-mute:   hsl(220 10% 45%);
+    --primary:     hsl(78 100% 50%);   /* #B7FF00 — verde neon */
+    --primary-soft: hsl(78 100% 50% / .12);
+    --primary-glow: hsl(78 100% 50% / .25);
+    --whatsapp:    #25D366;
+    --whatsapp-h:  #1FB855;
+    --gradient-dark: linear-gradient(180deg, hsl(220 20% 7%), hsl(220 18% 12%));
+    --gradient-hero: linear-gradient(135deg, hsl(78 100% 50%), hsl(90 80% 40%));
+    --radial-glow: radial-gradient(ellipse at 50% 0%, hsl(78 100% 50% / .08) 0%, transparent 60%);
+    --shadow-card: 0 4px 30px hsl(0 0% 0% / .3);
+    --shadow-elev: 0 20px 60px hsl(0 0% 0% / .5), 0 0 40px hsl(78 100% 50% / .05);
+    --shadow-glow: 0 0 60px hsl(78 100% 50% / .15), 0 0 120px hsl(78 100% 50% / .05);
+    --r: 0.75rem;
   }
   html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
   body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
+    min-height: 100vh;
   }
-  .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; }
+  ::selection { background: var(--primary); color: var(--bg); }
+
+  .display { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
   .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  .container-narrow { max-width: 780px; margin: 0 auto; padding: 0 24px; }
 
   /* ===== BTN ===== */
-  .btn-cta {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px;
     padding: 18px 36px;
-    background: var(--accent);
-    color: var(--text);
-    border-radius: 999px;
+    background: var(--primary);
+    color: var(--bg);
+    border-radius: var(--r);
     text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
     font-size: 17px;
     font-weight: 700;
     letter-spacing: 0.01em;
-    transition: all 0.2s ease;
-    box-shadow: 0 8px 24px rgba(250,171,0,0.25);
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow-glow);
     border: none;
     cursor: pointer;
+    text-align: center;
   }
-  .btn-cta:hover { filter: brightness(0.96); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(250,171,0,0.35); }
-  .btn-cta.large { font-size: 19px; padding: 22px 44px; }
-  .btn-cta.block { display: flex; width: 100%; max-width: 480px; margin: 0 auto; }
+  .btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 0 80px hsl(78 100% 50% / .35), 0 10px 30px hsl(0 0% 0% / .3);
+  }
+  .btn.large { font-size: 19px; padding: 22px 44px; }
+  .btn.block { display: flex; width: 100%; max-width: 480px; margin: 0 auto; }
+  .btn.outline {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--border-strong);
+    box-shadow: none;
+  }
+  .btn.outline:hover { border-color: var(--primary); color: var(--primary); }
 
   /* ===== HERO ===== */
   .hero {
-    background: var(--bg);
-    padding: 56px 0 64px;
     position: relative;
+    padding: 64px 0 80px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--radial-glow);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+    .hero-photo { order: -1; max-width: 320px; margin: 0 auto; }
   }
   .hero-eyebrow {
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 18px;
-  }
-  .hero-date {
-    text-align: center;
     display: inline-block;
-    padding: 8px 18px;
-    background: var(--text);
-    color: white;
+    padding: 6px 14px;
+    background: var(--primary-soft);
+    color: var(--primary);
     border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    margin: 0 auto 28px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 22px;
   }
-  .hero-date-wrap { text-align: center; }
   .hero h1 {
-    text-align: center;
-    font-size: clamp(34px, 5.8vw, 58px);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(34px, 5vw, 56px);
     font-weight: 700;
     line-height: 1.05;
-    letter-spacing: -0.02em;
-    max-width: 900px;
-    margin: 0 auto 24px;
+    letter-spacing: -0.025em;
+    margin-bottom: 22px;
     color: var(--text);
   }
-  .hero h1 .y { color: var(--accent); }
+  .hero h1 .accent { color: var(--primary); }
   .hero-sub {
-    text-align: center;
-    font-size: clamp(16px, 1.9vw, 20px);
+    font-size: clamp(16px, 1.7vw, 19px);
     color: var(--text-soft);
-    max-width: 700px;
-    margin: 0 auto 40px;
+    margin-bottom: 30px;
     line-height: 1.55;
+    max-width: 520px;
   }
-  .hero-sub .italic { color: var(--text); }
-  .hero-cta-row { text-align: center; margin-bottom: 16px; }
+  @media (max-width: 880px) { .hero-sub { margin-left: auto; margin-right: auto; } }
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+  .hero-cta-row {
+    display: flex; align-items: center; gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 880px) { .hero-cta-row { justify-content: center; } }
   .hero-meta {
-    text-align: center;
     font-size: 13px;
     color: var(--text-mute);
     line-height: 1.5;
   }
-  .hero-meta strong { color: var(--text); font-weight: 600; }
-
-  /* ===== NUMBERS ===== */
-  .numbers-bar {
-    background: var(--bg);
+  .hero-meta strong { color: var(--text-soft); font-weight: 600; }
+  .hero-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    font-size: 13px;
+    font-weight: 600;
     color: var(--text);
-    padding: 56px 0 56px;
+    letter-spacing: 0.02em;
+    margin-bottom: 22px;
   }
-  .numbers-grid {
+  .hero-date-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 12px var(--primary); }
+
+  .hero-photo {
+    aspect-ratio: 1;
+    background: var(--bg-elev);
+    border-radius: var(--r);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-elev);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: var(--text-mute);
+    letter-spacing: -0.04em;
+  }
+
+  /* ===== METRICS BAR ===== */
+  .metrics-bar {
+    background: var(--bg-elev);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 0;
+  }
+  .metrics-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
     text-align: center;
-    max-width: 720px;
-    margin: 0 auto;
   }
-  @media (max-width: 700px) { .numbers-grid { grid-template-columns: 1fr; gap: 36px; } }
-  .number-item .num {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: clamp(42px, 5.4vw, 58px);
-    color: var(--accent);
-    line-height: 1;
+  @media (max-width: 720px) { .metrics-grid { grid-template-columns: 1fr; gap: 28px; } }
+  .metric .num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(34px, 4.4vw, 48px);
+    font-weight: 700;
+    color: var(--primary);
     letter-spacing: -0.02em;
-    margin-bottom: 12px;
+    line-height: 1;
+    margin-bottom: 8px;
   }
-  .number-item .lbl {
-    font-size: 11px;
-    letter-spacing: 0.18em;
+  .metric .lbl {
+    font-size: 12px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-mute);
-    font-weight: 500;
-    max-width: 180px;
-    margin: 0 auto;
-    line-height: 1.5;
+    font-weight: 600;
   }
 
   /* ===== LOGOS ===== */
-  .logos-section {
-    background: var(--bg-grey);
-    padding: 44px 0 56px;
+  .logos {
+    padding: 36px 0 44px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
   }
   .logos-eye {
     text-align: center;
@@ -171,8 +234,8 @@
     letter-spacing: 0.22em;
     color: var(--text-mute);
     text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 24px;
+    font-weight: 600;
+    margin-bottom: 22px;
   }
   .logos-grid {
     display: flex; flex-wrap: wrap;
@@ -181,109 +244,115 @@
   }
   .logo-item {
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-soft);
-    letter-spacing: -0.3px;
     padding: 6px 22px;
-    border-right: 1px solid #DDD;
+    border-right: 1px solid var(--border);
     line-height: 1;
+    opacity: 0.7;
   }
   .logo-item:last-child { border-right: none; }
-  .logo-item.serif { font-family: 'Fraunces', serif; font-style: italic; }
 
-  /* ===== TESE / AGITAÇÃO (dark) ===== */
+  /* ===== TESE (with glow) ===== */
   .tese {
-    background: var(--bg-dark);
-    color: white;
-    padding: 80px 0;
+    padding: 96px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .tese::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 600px; height: 600px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse, hsl(78 100% 50% / .08), transparent 70%);
+    pointer-events: none;
+  }
+  .tese-inner {
+    position: relative; z-index: 1;
+    max-width: 760px; margin: 0 auto;
     text-align: center;
   }
   .tese h2 {
-    font-size: clamp(28px, 4.4vw, 44px);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(30px, 4.4vw, 44px);
     font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    max-width: 760px;
-    margin: 0 auto 20px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 18px;
   }
-  .tese h2 .y { color: var(--accent); }
-  .tese .sub {
+  .tese h2 .accent { color: var(--primary); }
+  .tese .lead {
     font-size: clamp(16px, 1.8vw, 19px);
-    color: rgba(255,255,255,0.7);
-    max-width: 640px;
-    margin: 0 auto 36px;
+    color: var(--text-soft);
+    margin-bottom: 40px;
     line-height: 1.55;
   }
-  .tese .sub .italic { color: white; }
-  .tese .quote {
-    margin: 28px auto 0;
-    max-width: 580px;
-    padding: 24px 32px;
-    border-left: 3px solid var(--accent);
+  .tese-quote {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--r);
+    padding: 26px 30px;
     text-align: left;
-    background: var(--bg-dark-soft);
-    border-radius: 0 12px 12px 0;
+    box-shadow: var(--shadow-card);
   }
-  .tese .quote p {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: clamp(17px, 2vw, 20px);
+  .tese-quote p {
+    font-size: clamp(17px, 1.9vw, 20px);
+    font-weight: 500;
     line-height: 1.5;
-    color: rgba(255,255,255,0.92);
+    color: var(--text);
   }
-  .tese .quote .author {
-    margin-top: 12px;
-    font-family: 'Poppins', sans-serif;
-    font-style: normal;
+  .tese-quote .author {
+    margin-top: 14px;
     font-size: 12px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    font-weight: 600;
+    color: var(--text-mute);
+    font-weight: 700;
   }
 
-  /* ===== SECTION COMMON ===== */
-  .section { padding: 80px 0; }
+  /* ===== SECTION ===== */
+  .section { padding: 88px 0; }
   .section-eyebrow {
     text-align: center;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 600;
+    color: var(--primary);
+    font-weight: 700;
     margin-bottom: 16px;
   }
   .section-title {
     text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(28px, 4vw, 42px);
     font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     margin-bottom: 18px;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto; margin-right: auto;
   }
-  .section-title .italic { color: var(--text); }
+  .section-title .accent { color: var(--primary); }
   .section-sub {
     text-align: center;
     font-size: 17px;
     color: var(--text-soft);
-    max-width: 620px;
+    max-width: 600px;
     margin: 0 auto 48px;
     line-height: 1.6;
   }
 
   /* ===== PARA QUEM É ===== */
-  .filter-section { background: var(--bg-card); }
+  .filter-section { background: var(--bg-elev); }
   .filter-list {
-    max-width: 720px;
-    margin: 0 auto;
+    max-width: 720px; margin: 0 auto;
     list-style: none;
   }
   .filter-list li {
     display: flex; gap: 16px;
-    padding: 18px 4px;
+    padding: 20px 4px;
     border-bottom: 1px solid var(--border);
     font-size: 16px;
     line-height: 1.55;
@@ -295,17 +364,16 @@
     flex-shrink: 0;
     width: 22px; height: 22px;
     margin-top: 2px;
-    background: var(--accent-soft);
+    background: var(--primary);
     border-radius: 50%;
-    position: relative;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FAAB00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5,12 10,17 19,7'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E1118' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5,12 10,17 19,7'/%3E%3C/svg%3E");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 14px;
+    box-shadow: 0 0 12px hsl(78 100% 50% / .3);
   }
 
-  /* ===== O QUE VOCÊ VAI CONSTRUIR ===== */
-  .construct-section { background: var(--bg); }
+  /* ===== O QUE VOCÊ VAI CONSTRUIR (bento cards) ===== */
   .construct-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -315,38 +383,32 @@
   }
   @media (max-width: 800px) { .construct-grid { grid-template-columns: 1fr; } }
   .construct-card {
-    background: var(--bg-card);
+    background: var(--bg-elev);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: var(--r);
     padding: 28px 28px;
     transition: all 0.25s ease;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    box-shadow: var(--shadow-card);
   }
   .construct-card:hover {
-    border-color: var(--accent);
+    border-color: var(--primary);
     transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-  }
-  .construct-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 28px; right: 28px;
-    height: 3px;
-    background: var(--accent);
+    box-shadow: var(--shadow-elev);
   }
   .construct-card h3 {
-    font-size: 19px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
     font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 14px;
+    line-height: 1.25;
+    margin-bottom: 16px;
     color: var(--text);
+    letter-spacing: -0.01em;
   }
   .construct-card ul {
     list-style: none;
   }
   .construct-card ul li {
-    padding: 6px 0 6px 22px;
+    padding: 7px 0 7px 22px;
     font-size: 14px;
     color: var(--text-soft);
     line-height: 1.55;
@@ -356,41 +418,43 @@
     content: '→';
     position: absolute;
     left: 0;
-    color: var(--accent);
+    color: var(--primary);
     font-weight: 700;
   }
   .construct-finale {
-    margin-top: 36px;
+    margin-top: 40px;
     text-align: center;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: clamp(20px, 2.4vw, 24px);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(20px, 2.4vw, 26px);
     color: var(--text);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.4;
+    max-width: 640px;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.35;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
-  .construct-finale strong { color: var(--accent); font-weight: 500; }
+  .construct-finale strong { color: var(--primary); font-weight: 700; }
 
-  /* ===== O QUE VOCÊ VAI RECEBER (dark) ===== */
-  .receive-section {
-    background: var(--bg-dark);
-    color: white;
-    padding: 80px 0;
-  }
-  .receive-section .section-eyebrow { color: var(--accent); }
-  .receive-section .section-title { color: white; }
+  /* ===== RECEIVE CARD ===== */
   .receive-card {
-    background: linear-gradient(180deg, #141414 0%, #0A0A0A 100%);
-    border: 1px solid rgba(250,171,0,0.18);
-    border-radius: 20px;
-    padding: 40px 40px;
-    max-width: 720px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 44px 40px;
+    max-width: 760px;
     margin: 0 auto;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    box-shadow: var(--shadow-elev);
+    position: relative;
+    overflow: hidden;
   }
-  @media (max-width: 600px) { .receive-card { padding: 32px 24px; } }
+  @media (max-width: 600px) { .receive-card { padding: 36px 24px; } }
+  .receive-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gradient-hero);
+  }
   .receive-list {
     list-style: none;
     margin-bottom: 28px;
@@ -398,10 +462,10 @@
   .receive-list li {
     display: flex; gap: 16px;
     padding: 18px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid var(--border);
     font-size: 16px;
     line-height: 1.55;
-    color: rgba(255,255,255,0.92);
+    color: var(--text);
   }
   .receive-list li:last-child { border-bottom: none; }
   .receive-list li::before {
@@ -409,149 +473,136 @@
     flex-shrink: 0;
     width: 24px; height: 24px;
     margin-top: 2px;
-    background: var(--accent);
+    background: var(--primary);
     border-radius: 50%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5,12 10,17 19,7'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E1118' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5,12 10,17 19,7'/%3E%3C/svg%3E");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 14px;
+    box-shadow: 0 0 12px hsl(78 100% 50% / .3);
   }
   .receive-quote {
     margin-top: 24px;
     padding: 22px 26px;
-    border-left: 3px solid var(--accent);
-    background: rgba(255,255,255,0.04);
-    border-radius: 0 12px 12px 0;
-    font-family: 'Fraunces', serif;
+    border-left: 3px solid var(--primary);
+    background: var(--bg-soft);
+    border-radius: 0 var(--r) var(--r) 0;
     font-style: italic;
-    font-size: clamp(17px, 2vw, 20px);
+    font-size: clamp(16px, 1.9vw, 19px);
     line-height: 1.5;
-    color: rgba(255,255,255,0.95);
+    color: var(--text);
   }
 
   /* ===== CRONOGRAMA ===== */
-  .schedule-section { background: var(--bg); }
+  .schedule-section { background: var(--bg-elev); }
   .schedule-list {
-    max-width: 680px;
+    max-width: 720px;
     margin: 0 auto;
     position: relative;
   }
   .schedule-list::before {
     content: '';
     position: absolute;
-    left: 88px;
-    top: 14px;
-    bottom: 14px;
+    left: 92px;
+    top: 18px;
+    bottom: 18px;
     width: 2px;
-    background: var(--border);
+    background: var(--border-strong);
   }
-  @media (max-width: 700px) { .schedule-list::before { left: 64px; } }
+  @media (max-width: 700px) { .schedule-list::before { left: 60px; } }
   .schedule-item {
-    display: flex; gap: 24px;
+    display: flex; gap: 28px;
     padding: 18px 0;
     position: relative;
     align-items: flex-start;
   }
   .schedule-time {
     flex-shrink: 0;
-    width: 80px;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 22px;
-    color: var(--accent);
+    width: 84px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--primary);
     line-height: 1.1;
     text-align: right;
     padding-right: 4px;
+    letter-spacing: -0.01em;
   }
-  @media (max-width: 700px) { .schedule-time { width: 56px; font-size: 18px; } }
+  @media (max-width: 700px) { .schedule-time { width: 52px; font-size: 17px; } }
   .schedule-dot {
     flex-shrink: 0;
-    width: 16px; height: 16px;
+    width: 18px; height: 18px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--primary);
     margin-top: 6px;
-    box-shadow: 0 0 0 4px var(--bg);
+    box-shadow: 0 0 0 4px var(--bg-elev), 0 0 12px hsl(78 100% 50% / .4);
     z-index: 1;
   }
-  .schedule-content { padding-top: 4px; }
+  .schedule-content { padding-top: 0; }
   .schedule-content h4 {
-    font-size: 16px;
-    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
     margin-bottom: 6px;
     color: var(--text);
+    letter-spacing: -0.01em;
   }
   .schedule-content p {
     font-size: 14px;
     color: var(--text-soft);
-    line-height: 1.5;
-  }
-  .schedule-note {
-    margin-top: 36px;
-    text-align: center;
-    font-size: 14px;
-    color: var(--text-soft);
-    max-width: 580px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-    font-style: italic;
+    line-height: 1.55;
   }
 
-  /* ===== COMPARATIVO (dark) ===== */
-  .compare-section {
-    background: var(--bg-dark);
-    color: white;
-    padding: 80px 0;
-  }
-  .compare-section .section-eyebrow { color: var(--accent); }
-  .compare-section .section-title { color: white; }
+  /* ===== COMPARATIVO ===== */
   .compare-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-    max-width: 900px;
+    max-width: 920px;
     margin: 0 auto;
   }
   @media (max-width: 700px) { .compare-grid { grid-template-columns: 1fr; } }
   .compare-card {
-    background: var(--bg-dark-soft);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 28px 28px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
   }
   .compare-card.win {
-    border-color: var(--accent);
-    box-shadow: 0 12px 32px rgba(250,171,0,0.16);
-    background: linear-gradient(180deg, rgba(250,171,0,0.04) 0%, var(--bg-dark-soft) 100%);
+    border-color: var(--primary);
+    background: linear-gradient(180deg, hsl(78 100% 50% / .04), var(--bg-elev) 80%);
+    box-shadow: var(--shadow-elev);
   }
   .compare-card h4 {
-    font-size: 11px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     font-weight: 700;
   }
-  .compare-card.lose h4 { color: rgba(255,255,255,0.4); }
-  .compare-card.win h4 { color: var(--accent); }
+  .compare-card.lose h4 { color: var(--text-mute); }
+  .compare-card.win h4 { color: var(--primary); }
   .compare-card ul { list-style: none; }
   .compare-card ul li {
-    padding: 10px 0 10px 28px;
+    padding: 10px 0 10px 30px;
     font-size: 15px;
     line-height: 1.5;
-    color: rgba(255,255,255,0.85);
+    color: var(--text-soft);
     position: relative;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid var(--border);
   }
   .compare-card ul li:last-child { border-bottom: none; }
+  .compare-card.win ul li { color: var(--text); }
   .compare-card.lose ul li::before {
     content: '';
     position: absolute;
-    left: 0; top: 16px;
-    width: 14px; height: 14px;
+    left: 0; top: 14px;
+    width: 16px; height: 16px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='5' y1='5' x2='19' y2='19'/%3E%3Cline x1='19' y1='5' x2='5' y2='19'/%3E%3C/svg%3E");
+    background: var(--border-strong);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23858A93' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='5' y1='5' x2='19' y2='19'/%3E%3Cline x1='19' y1='5' x2='5' y2='19'/%3E%3C/svg%3E");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 10px;
@@ -559,50 +610,50 @@
   .compare-card.win ul li::before {
     content: '';
     position: absolute;
-    left: 0; top: 14px;
+    left: 0; top: 13px;
     width: 18px; height: 18px;
     border-radius: 50%;
-    background: var(--accent);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5,12 10,17 19,7'/%3E%3C/svg%3E");
+    background: var(--primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E1118' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5,12 10,17 19,7'/%3E%3C/svg%3E");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 12px;
   }
 
   /* ===== CASES ===== */
-  .cases-section { background: var(--bg); }
   .cases-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    max-width: 1000px;
+    max-width: 980px;
     margin: 0 auto;
   }
   @media (max-width: 880px) { .cases-grid { grid-template-columns: repeat(2, 1fr); } }
   .case-card {
-    background: var(--bg-card);
+    background: var(--bg-elev);
     border: 1px solid var(--border);
-    border-radius: 14px;
+    border-radius: var(--r);
     padding: 24px 18px;
     text-align: center;
     transition: all 0.2s;
   }
   .case-card:hover {
-    border-color: var(--accent);
+    border-color: var(--primary);
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 24px hsl(0 0% 0% / .4);
   }
   .case-photo {
     width: 76px; height: 76px;
-    background: var(--bg-grey);
+    background: var(--bg);
+    border: 2px solid var(--border-strong);
     border-radius: 50%;
-    margin: 0 auto 12px;
+    margin: 0 auto 14px;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 26px;
-    color: var(--text-mute);
-    font-weight: 500;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
   .case-name {
     font-size: 14px;
@@ -612,42 +663,46 @@
   }
 
   /* ===== BIO ===== */
-  .bio-section { background: var(--bg-card); padding: 80px 0; }
+  .bio-section { background: var(--bg-elev); padding: 88px 0; }
   .bio-grid {
     display: grid;
     grid-template-columns: 280px 1fr;
     gap: 48px;
-    max-width: 920px;
+    max-width: 940px;
     margin: 0 auto;
     align-items: center;
   }
   @media (max-width: 740px) { .bio-grid { grid-template-columns: 1fr; gap: 28px; text-align: center; } }
   .bio-photo {
     aspect-ratio: 1;
-    background: var(--bg-grey);
-    border-radius: 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 64px;
-    color: var(--text-mute);
-    font-weight: 500;
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    box-shadow: var(--shadow-card);
   }
   @media (max-width: 740px) { .bio-photo { max-width: 220px; margin: 0 auto; } }
   .bio-eyebrow {
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 8px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 10px;
   }
   .bio-h2 {
-    font-size: clamp(26px, 3.4vw, 32px);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 3.6vw, 36px);
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     color: var(--text);
-    line-height: 1.15;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
   .bio-text {
     font-size: 15px;
@@ -657,92 +712,94 @@
   }
   .bio-text strong { color: var(--text); font-weight: 600; }
   .bio-tag {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 17px;
+    margin-top: 24px;
+    padding: 18px 22px;
+    border-left: 3px solid var(--primary);
+    background: var(--bg);
+    border-radius: 0 var(--r) var(--r) 0;
+    font-size: 16px;
     color: var(--text);
-    line-height: 1.45;
+    line-height: 1.5;
   }
-  .bio-tag .y { color: var(--accent); }
+  .bio-tag .accent { color: var(--primary); font-weight: 600; }
 
   /* ===== GARANTIA ===== */
-  .guarantee-section { background: var(--bg); padding: 72px 0; }
+  .guarantee-section { padding: 88px 0; }
   .guarantee-card {
-    background: var(--bg-card);
-    border-radius: 20px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
     padding: 44px 40px;
     max-width: 720px;
     margin: 0 auto;
     text-align: center;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-    border: 1px solid var(--border);
+    box-shadow: var(--shadow-elev);
   }
   @media (max-width: 600px) { .guarantee-card { padding: 36px 24px; } }
   .guarantee-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    display: inline-flex; align-items: center; gap: 8px;
     padding: 8px 18px;
-    background: var(--accent-soft);
-    color: #B07700;
+    background: var(--primary-soft);
+    color: var(--primary);
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     margin-bottom: 24px;
   }
-  .guarantee-badge svg { width: 16px; height: 16px; fill: var(--accent); }
+  .guarantee-badge svg { width: 16px; height: 16px; fill: var(--primary); }
   .guarantee-h {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(24px, 3.4vw, 32px);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.15;
     margin-bottom: 18px;
     color: var(--text);
+    letter-spacing: -0.02em;
   }
   .guarantee-body {
     font-size: 16px;
     color: var(--text-soft);
     line-height: 1.6;
     max-width: 540px;
-    margin: 0 auto 24px;
+    margin: 0 auto 26px;
   }
   .guarantee-quote {
     padding: 20px 24px;
-    border-left: 3px solid var(--accent);
+    border-left: 3px solid var(--primary);
     background: var(--bg);
-    border-radius: 0 12px 12px 0;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 16px;
+    border-radius: 0 var(--r) var(--r) 0;
+    font-size: 15px;
     color: var(--text);
     text-align: left;
     line-height: 1.55;
   }
   .guarantee-quote .author {
-    margin-top: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-style: normal;
+    margin-top: 12px;
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-mute);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   /* ===== FAQ ===== */
-  .faq-section { background: var(--bg); padding: 80px 0; }
-  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-section { padding: 88px 0; background: var(--bg-elev); }
+  .faq-list { max-width: 780px; margin: 0 auto; }
   .faq-item {
-    border-bottom: 1px solid var(--border);
-    padding: 0;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
   }
+  .faq-item[open] { border-color: var(--primary); }
   .faq-item summary {
     cursor: pointer;
     list-style: none;
-    padding: 22px 36px 22px 4px;
+    padding: 22px 50px 22px 24px;
     font-size: 16px;
     font-weight: 600;
     color: var(--text);
@@ -753,137 +810,102 @@
   .faq-item summary::after {
     content: '+';
     position: absolute;
-    right: 8px;
+    right: 22px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 28px;
-    color: var(--accent);
+    color: var(--primary);
     font-weight: 300;
     line-height: 1;
     transition: transform 0.25s;
   }
   .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
   .faq-item .answer {
-    padding: 0 4px 24px;
+    padding: 0 24px 24px;
     font-size: 15px;
     color: var(--text-soft);
     line-height: 1.65;
   }
   .faq-support {
-    margin-top: 36px;
+    margin-top: 32px;
     text-align: center;
     font-size: 14px;
     color: var(--text-soft);
   }
   .faq-support a {
-    color: var(--accent);
+    color: var(--primary);
     font-weight: 600;
     text-decoration: none;
-    border-bottom: 1px dashed var(--accent);
+    border-bottom: 1px dashed var(--primary);
   }
 
   /* ===== CTA FINAL ===== */
   .final-cta {
-    background: var(--bg-dark);
-    color: white;
-    padding: 88px 0;
+    padding: 96px 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse at center top, hsl(78 100% 50% / .12), transparent 70%);
+    pointer-events: none;
+  }
+  .final-cta-inner { position: relative; z-index: 1; }
   .final-cta h2 {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(30px, 4.6vw, 48px);
     font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    margin-bottom: 18px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 20px;
     max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto; margin-right: auto;
   }
-  .final-cta h2 .italic { color: var(--accent); }
+  .final-cta h2 .accent { color: var(--primary); }
   .final-cta .sub {
     font-size: clamp(16px, 1.8vw, 19px);
-    color: rgba(255,255,255,0.65);
+    color: var(--text-soft);
     max-width: 580px;
-    margin: 0 auto 36px;
+    margin: 0 auto 32px;
     line-height: 1.55;
   }
   .final-cta .kicker {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
+    margin-top: 26px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(20px, 2.6vw, 26px);
-    color: var(--accent);
-    margin-top: 20px;
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
+  .final-cta .kicker .accent { color: var(--primary); }
   .final-cta .small {
     font-size: 13px;
-    color: rgba(255,255,255,0.5);
-    margin-top: 16px;
-  }
-
-  /* ===== PRICE BLOCK (above main CTAs) ===== */
-  .price-block {
-    margin-top: 28px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-    text-align: center;
-  }
-  .price-strike {
-    font-size: 14px;
     color: var(--text-mute);
-    text-decoration: line-through;
-    margin-bottom: 4px;
-  }
-  .price-main {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: clamp(44px, 6vw, 64px);
-    color: var(--accent);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    margin-bottom: 6px;
-  }
-  .price-main .currency {
-    font-size: 0.55em;
-    vertical-align: top;
-    margin-right: 4px;
-  }
-  .price-install {
-    font-size: 14px;
-    color: var(--text-soft);
-    margin-bottom: 8px;
-  }
-  .price-install strong { color: var(--text); font-weight: 600; }
-  .price-urgency {
-    display: inline-block;
-    padding: 6px 14px;
-    background: rgba(250,171,0,0.12);
-    color: #B07700;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    margin-top: 8px;
+    margin-top: 16px;
   }
 
   /* ===== FOOTER ===== */
   footer {
-    background: var(--bg-dark);
-    color: rgba(255,255,255,0.4);
-    padding: 36px 24px 48px;
+    background: var(--bg);
+    color: var(--text-mute);
+    padding: 36px 24px 56px;
     text-align: center;
     font-size: 12px;
     line-height: 1.7;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid var(--border);
   }
-  footer strong { color: rgba(255,255,255,0.7); }
+  footer strong { color: var(--text-soft); }
   footer .disclaimer {
     margin-top: 18px;
     font-size: 11px;
-    color: rgba(255,255,255,0.3);
+    color: hsl(220 10% 35%);
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto; margin-right: auto;
     line-height: 1.6;
   }
   footer .links {
@@ -891,10 +913,11 @@
     font-size: 11px;
   }
   footer .links a {
-    color: rgba(255,255,255,0.5);
+    color: var(--text-mute);
     text-decoration: none;
     margin: 0 8px;
   }
+  footer .links a:hover { color: var(--primary); }
 </style>
 </head>
 <body>
@@ -902,41 +925,37 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <p class="hero-eyebrow">Imersão · ao vivo · online</p>
-    <div class="hero-date-wrap">
-      <span class="hero-date">31 DE MAIO · DOMINGO · 8H ÀS 12H</span>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-date-badge">
+          <span class="dot"></span>
+          <span>31 DE MAIO · 8H ÀS 12H · AO VIVO</span>
+        </div>
+        <h1>Crie desejo. Gere antecipação. <span class="accent">Lance vendendo</span> desde o primeiro dia.</h1>
+        <p class="hero-sub">Em uma manhã, você estrutura os <strong>90 dias</strong> que fazem seu livro entrar no mercado vendendo — mesmo sem editora ou milhares de seguidores.</p>
+        <div class="hero-cta-row">
+          <a href="https://pay.hotmart.com/D104614574Y?off=yaskbrlp&checkoutMode=10" class="btn large">Garantir vaga · R$ 29 →</a>
+        </div>
+        <p class="hero-meta"><strong>62% dos ingressos</strong> vendidos · vagas limitadas por lote</p>
+      </div>
+      <div class="hero-photo">DS</div>
     </div>
-    <h1>Crie desejo. Gere antecipação.<br><span class="y">Lance vendendo desde o primeiro dia.</span></h1>
-    <p class="hero-sub">Em uma manhã, você estrutura os <strong>90 dias</strong> que fazem seu livro entrar no mercado vendendo. <span class="italic">Mesmo sem editora ou milhares de seguidores.</span></p>
-    <div class="hero-cta-row">
-      <a href="https://pay.hotmart.com/D104614574Y?off=yaskbrlp&checkoutMode=10" class="btn-cta large">Garantir minha vaga por R$ 29 →</a>
-    </div>
-    <p class="hero-meta"><strong>62% dos ingressos</strong> já vendidos por R$ 29. Vagas limitadas por lote.</p>
   </div>
 </section>
 
-<!-- NÚMEROS -->
-<section class="numbers-bar">
+<!-- METRICS -->
+<section class="metrics-bar">
   <div class="container">
-    <div class="numbers-grid">
-      <div class="number-item">
-        <div class="num">+700</div>
-        <div class="lbl">autores lançados</div>
-      </div>
-      <div class="number-item">
-        <div class="num">+10M</div>
-        <div class="lbl">livros vendidos</div>
-      </div>
-      <div class="number-item">
-        <div class="num">+4.400</div>
-        <div class="lbl">alunos formados</div>
-      </div>
+    <div class="metrics-grid">
+      <div class="metric"><div class="num">+700</div><div class="lbl">autores lançados</div></div>
+      <div class="metric"><div class="num">+10M</div><div class="lbl">livros vendidos</div></div>
+      <div class="metric"><div class="num">+4.400</div><div class="lbl">alunos formados</div></div>
     </div>
   </div>
 </section>
 
 <!-- LOGOS -->
-<section class="logos-section">
+<section class="logos">
   <div class="container">
     <p class="logos-eye">Como visto em</p>
     <div class="logos-grid">
@@ -954,11 +973,13 @@
 <!-- TESE -->
 <section class="tese">
   <div class="container">
-    <h2>O lançamento decide<br>o <span class="y">destino do seu livro.</span></h2>
-    <p class="sub">É exatamente nessa hora que a maioria dos autores <span class="italic">improvisa.</span></p>
-    <div class="quote">
-      <p>"Vender algumas cópias qualquer um consegue. Difícil é fazer o livro continuar vendendo depois do lançamento."</p>
-      <div class="author">Dany Sakugawa</div>
+    <div class="tese-inner">
+      <h2>O lançamento decide<br>o <span class="accent">destino do seu livro.</span></h2>
+      <p class="lead">É exatamente nessa hora que a maioria dos autores improvisa.</p>
+      <div class="tese-quote">
+        <p>"Vender algumas cópias qualquer um consegue. Difícil é fazer o livro continuar vendendo depois do lançamento."</p>
+        <div class="author">Dany Sakugawa</div>
+      </div>
     </div>
   </div>
 </section>
@@ -967,7 +988,7 @@
 <section class="section filter-section">
   <div class="container-narrow">
     <p class="section-eyebrow">Para quem é</p>
-    <h2 class="section-title">Essa Imersão é <span class="italic">pra você</span> se...</h2>
+    <h2 class="section-title">Essa Imersão <span class="accent">é pra você</span></h2>
     <ul class="filter-list">
       <li>Você tem um livro pronto (ou quase pronto) e quer lançar com vendas, não com torcida.</li>
       <li>Você já entendeu que escrever bem não é suficiente pro livro chegar nos leitores.</li>
@@ -979,10 +1000,10 @@
 </section>
 
 <!-- O QUE VOCÊ VAI CONSTRUIR -->
-<section class="section construct-section">
+<section class="section">
   <div class="container">
     <p class="section-eyebrow">O que você sai com</p>
-    <h2 class="section-title">O que você vai <span class="italic">construir.</span></h2>
+    <h2 class="section-title">O que você vai <span class="accent">construir.</span></h2>
     <p class="section-sub">Quatro entregáveis concretos pra você sair da Imersão com o lançamento mapeado.</p>
 
     <div class="construct-grid">
@@ -1025,10 +1046,10 @@
 </section>
 
 <!-- O QUE VOCÊ VAI RECEBER -->
-<section class="receive-section">
+<section class="section" style="background: var(--bg-elev);">
   <div class="container">
     <p class="section-eyebrow">Incluso no ingresso</p>
-    <h2 class="section-title">O que você <span class="italic">vai receber.</span></h2>
+    <h2 class="section-title">O que você <span class="accent">vai receber.</span></h2>
 
     <div class="receive-card">
       <ul class="receive-list">
@@ -1050,7 +1071,7 @@
 <section class="section schedule-section">
   <div class="container-narrow">
     <p class="section-eyebrow">31 de maio</p>
-    <h2 class="section-title">Como será <span class="italic">a manhã.</span></h2>
+    <h2 class="section-title">Como será <span class="accent">a manhã.</span></h2>
     <p class="section-sub">Conteúdo em blocos estratégicos pra você sair com o plano de lançamento pronto pra executar.</p>
 
     <div class="schedule-list">
@@ -1075,7 +1096,7 @@
         <div class="schedule-dot"></div>
         <div class="schedule-content">
           <h4>Autor, imagem, autoridade</h4>
-          <p>Foco em como você se posiciona como autor: o que comunicar antes, durante e depois do lançamento.</p>
+          <p>Como você se posiciona como autor: o que comunicar antes, durante e depois do lançamento.</p>
         </div>
       </div>
       <div class="schedule-item">
@@ -1091,10 +1112,10 @@
 </section>
 
 <!-- COMPARATIVO -->
-<section class="compare-section">
+<section class="section">
   <div class="container">
     <p class="section-eyebrow">A diferença</p>
-    <h2 class="section-title">Sem método <span class="italic">vs</span> com método.</h2>
+    <h2 class="section-title">Sem método <span class="accent">vs</span> com método.</h2>
 
     <div class="compare-grid">
       <div class="compare-card lose">
@@ -1122,16 +1143,16 @@
 </section>
 
 <!-- CASES -->
-<section class="section cases-section">
+<section class="section" style="background: var(--bg-elev);">
   <div class="container">
     <p class="section-eyebrow">Quem passou pelo método</p>
-    <h2 class="section-title">Autores que <span class="italic">lançaram vendendo.</span></h2>
+    <h2 class="section-title">Autores que <span class="accent">lançaram vendendo.</span></h2>
     <p class="section-sub">Mais de 700 autores estruturaram lançamentos com o método. Alguns deles:</p>
 
     <div class="cases-grid">
       <div class="case-card"><div class="case-photo">LA</div><div class="case-name">Lelo Apovian</div></div>
       <div class="case-card"><div class="case-photo">AA</div><div class="case-name">Aurê Aguiar</div></div>
-      <div class="case-card"><div class="case-photo">P</div><div class="case-name">Profinho</div></div>
+      <div class="case-card"><div class="case-photo">PR</div><div class="case-name">Profinho</div></div>
       <div class="case-card"><div class="case-photo">CR</div><div class="case-name">Ciça Rocha</div></div>
       <div class="case-card"><div class="case-photo">CL</div><div class="case-name">Cibele Laurentino</div></div>
       <div class="case-card"><div class="case-photo">CP</div><div class="case-name">Candice Pascoal</div></div>
@@ -1152,7 +1173,7 @@
         <p class="bio-text">Esteve à frente do lançamento de <strong>mais de 700 autores</strong>, somando mais de 10 milhões de livros vendidos.</p>
         <p class="bio-text">Depois de anos nos bastidores das grandes editoras, passou a ensinar autores independentes a fazer o que o mercado raramente explica: <strong>lançar com estratégia, metas e estrutura.</strong></p>
         <p class="bio-text">Criadora do Método The Book Business, já ajudou mais de 4.400 alunos a sair do improviso e entrar no mercado com plano.</p>
-        <p class="bio-tag">Aqui, você não aprende teoria. Aprende o que realmente funciona na semana <span class="y">que decide o destino do seu livro.</span></p>
+        <div class="bio-tag">Aqui, você não aprende teoria. Aprende o que realmente funciona na semana <span class="accent">que decide o destino do seu livro.</span></div>
       </div>
     </div>
   </div>
@@ -1164,7 +1185,7 @@
     <div class="guarantee-card">
       <div class="guarantee-badge">
         <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-        Garantia incondicional · 7 dias
+        Garantia 7 dias
       </div>
       <h2 class="guarantee-h">Entre. Faça o curso. Decida depois.</h2>
       <p class="guarantee-body">Se dentro de 7 dias você sentir que o conteúdo não é pra você, basta pedir o reembolso. Devolvemos 100% do investimento. Sem perguntas. Sem burocracia.</p>
@@ -1180,7 +1201,7 @@
 <section class="faq-section">
   <div class="container-narrow">
     <p class="section-eyebrow">Tira-dúvidas</p>
-    <h2 class="section-title">Alguma <span class="italic">dúvida?</span></h2>
+    <h2 class="section-title">Alguma <span class="accent">dúvida?</span></h2>
 
     <div class="faq-list">
       <details class="faq-item">
@@ -1197,7 +1218,7 @@
       </details>
       <details class="faq-item">
         <summary>E se eu ainda não tiver terminado meu livro?</summary>
-        <div class="answer">Tudo bem. A Imersão é justamente sobre estruturar os 90 dias antes do livro sair. Quanto antes você entrar, mais tempo tem pra construir audiência e demanda em paralelo à escrita. O método funciona pra quem está escrevendo, quase publicando ou prestes a lançar.</div>
+        <div class="answer">Tudo bem. A Imersão é justamente sobre estruturar os 90 dias antes do livro sair. Quanto antes você entrar, mais tempo tem pra construir audiência e demanda em paralelo à escrita.</div>
       </details>
       <details class="faq-item">
         <summary>Preciso ter uma editora?</summary>
@@ -1209,15 +1230,15 @@
       </details>
       <details class="faq-item">
         <summary>Você vai publicar o meu livro?</summary>
-        <div class="answer">Não. A Dany não é editora nem agente literário. O que você recebe é o método e a estrutura pra você lançar seu livro com estratégia, independente do caminho que escolher (editora, parceria, autopublicação).</div>
+        <div class="answer">Não. A Dany não é editora nem agente literário. O que você recebe é o método e a estrutura pra você lançar seu livro com estratégia, independente do caminho que escolher.</div>
       </details>
       <details class="faq-item">
         <summary>E se eu não tiver público ainda?</summary>
-        <div class="answer">Boa notícia: o método assume que você está começando do zero. Tudo o que você vai aprender pode ser aplicado mesmo sem seguidores. Audiência se constrói com estratégia, não com sorte.</div>
+        <div class="answer">O método assume que você está começando do zero. Tudo o que você vai aprender pode ser aplicado mesmo sem seguidores. Audiência se constrói com estratégia, não com sorte.</div>
       </details>
       <details class="faq-item">
         <summary>E se meu livro for de um nicho "diferente"?</summary>
-        <div class="answer">O método já foi aplicado em ficção, não-ficção, técnica, autoajuda, infantil, biografia, poesia e mais. O que muda é como você usa cada parte. A lógica de construir leitor, demanda e tração funciona em todos.</div>
+        <div class="answer">O método já foi aplicado em ficção, não-ficção, técnica, autoajuda, infantil, biografia, poesia e mais. A lógica de construir leitor, demanda e tração funciona em todos.</div>
       </details>
     </div>
 
@@ -1227,12 +1248,12 @@
 
 <!-- CTA FINAL -->
 <section class="final-cta">
-  <div class="container">
-    <h2>Você vai continuar esperando<br>ou <span class="italic">vai agir?</span></h2>
+  <div class="container final-cta-inner">
+    <h2>Você vai continuar esperando<br>ou <span class="accent">vai agir?</span></h2>
     <p class="sub">Todo autor chega nesse ponto. A diferença está em quem decide fazer diferente.</p>
-    <a href="https://pay.hotmart.com/D104614574Y?off=yaskbrlp&checkoutMode=10" class="btn-cta large">Garantir minha vaga por R$ 29 →</a>
+    <a href="https://pay.hotmart.com/D104614574Y?off=yaskbrlp&checkoutMode=10" class="btn large">Garantir vaga · R$ 29 →</a>
     <p class="small">Pagamento em até 4x sem juros · Acesso imediato ao grupo</p>
-    <p class="kicker">R$ 29 não é o risco. <span style="color:white;">Improvisar é.</span></p>
+    <p class="kicker">R$ 29 não é o risco. <span class="accent">Improvisar é.</span></p>
   </div>
 </section>
 
