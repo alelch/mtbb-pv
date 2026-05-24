@@ -152,15 +152,15 @@
     <h1>Em que momento está<br><span class="italic">o seu livro hoje?</span></h1>
 
     <div class="options">
-      <a class="option" href="escrevendo.html">
+      <a class="option" data-stage="escrevendo" href="escrevendo.html">
         <div class="label">Ainda estou escrevendo</div>
         <span class="arrow"><span class="arrow-circle">→</span></span>
       </a>
-      <a class="option" href="lancando.html">
+      <a class="option" data-stage="lancando" href="lancando.html">
         <div class="label">Estou prestes a lançar</div>
         <span class="arrow"><span class="arrow-circle">→</span></span>
       </a>
-      <a class="option" href="publicado.html">
+      <a class="option" data-stage="publicado" href="publicado.html">
         <div class="label">Já lancei meu livro</div>
         <span class="arrow"><span class="arrow-circle">→</span></span>
       </a>
@@ -168,5 +168,25 @@
 
     <footer>© The Book Business</footer>
   </div>
+
+  <script>
+    // Roteamento dinâmico A/B controlado por config.json
+    (function() {
+      var bust = '?v=' + Date.now();
+      fetch('config.json' + bust)
+        .then(function(r) { return r.json(); })
+        .then(function(cfg) {
+          document.querySelectorAll('.option[data-stage]').forEach(function(el) {
+            var stage = el.getAttribute('data-stage');
+            var variant = cfg[stage] || 'preco';
+            var target = (variant === 'lista') ? (stage + '-lista.html') : (stage + '.html');
+            el.setAttribute('href', target);
+          });
+        })
+        .catch(function() {
+          // se config.json falhar, mantém os hrefs estáticos (preco)
+        });
+    })();
+  </script>
 </body>
 </html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTBB · Admin A/B</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fraunces:ital,wght@1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #F8F8F8;
+    --bg-card: #FFFFFF;
+    --accent: #FAAB00;
+    --text: #1A1A1A;
+    --text-soft: #555555;
+    --text-mute: #999999;
+    --border: #EEEEEE;
+    --preco: #1A1A1A;
+    --lista: #FAAB00;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 24px;
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .logo {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .logo span { color: var(--accent); }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 36px;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  h1 .italic {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+  }
+  .sub {
+    color: var(--text-soft);
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* LOGIN */
+  .gate {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 32px;
+    max-width: 420px;
+    margin: 60px auto 0;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+  }
+  .gate h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .gate p {
+    font-size: 14px;
+    color: var(--text-mute);
+    margin-bottom: 22px;
+  }
+  .gate input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    margin-bottom: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .gate input:focus { border-color: var(--accent); }
+  .gate button {
+    width: 100%;
+    padding: 14px;
+    background: var(--text);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .gate button:hover { background: var(--accent); color: var(--text); }
+  .gate .err {
+    color: #C7252E;
+    font-size: 13px;
+    margin-top: 10px;
+    min-height: 18px;
+  }
+
+  /* PANEL */
+  .panel { display: none; }
+  .panel.show { display: block; }
+
+  .stage-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+  }
+  .stage-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .stage-info p {
+    font-size: 13px;
+    color: var(--text-mute);
+  }
+
+  .toggle {
+    position: relative;
+    display: inline-flex;
+    background: #F1F1F1;
+    border-radius: 999px;
+    padding: 4px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .toggle-opt {
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 999px;
+    color: var(--text-mute);
+    transition: all 0.2s ease;
+    letter-spacing: 0.02em;
+  }
+  .toggle-opt.active.preco {
+    background: var(--text);
+    color: white;
+  }
+  .toggle-opt.active.lista {
+    background: var(--accent);
+    color: var(--text);
+  }
+
+  .save-row {
+    margin-top: 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+  }
+  .save-row h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-mute);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  pre {
+    background: #0A0A0A;
+    color: #F8F8F8;
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin-bottom: 14px;
+  }
+  .save-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--text);
+  }
+  .btn-primary:hover { background: #E89900; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--accent); }
+  .copied { color: #16A34A; font-size: 13px; margin-left: 8px; font-weight: 600; }
+
+  .summary {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: var(--bg-card);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .summary strong { color: var(--text); }
+  .summary code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: #F1F1F1;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .footer-note {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 12px;
+    color: var(--text-mute);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">MTBB<span>.</span></div>
+    <p class="eyebrow">Admin · Teste A/B</p>
+
+    <!-- LOGIN GATE -->
+    <div class="gate" id="gate">
+      <h2>Acesso restrito</h2>
+      <p>Digite a senha pra acessar o painel.</p>
+      <input type="password" id="pwd" placeholder="Senha" autocomplete="off">
+      <button onclick="tryLogin()">Entrar</button>
+      <div class="err" id="err"></div>
+    </div>
+
+    <!-- PANEL -->
+    <div class="panel" id="panel">
+      <h1>Controle de <span class="italic">roteamento.</span></h1>
+      <p class="sub">Cada estágio do quiz pode apontar pra versão com preço ou pra versão com lista de espera. Mude aqui, copie o JSON, e commita no repo.</p>
+
+      <div class="stage-card">
+        <div class="stage-info">
+          <h3>Escrevendo</h3>
+          <p>Autores ainda escrevendo o livro</p>
+        </div>
+        <div class="toggle" data-stage="escrevendo">
+          <div class="toggle-opt preco" data-variant="preco">Preço</div>
+          <div class="toggle-opt lista" data-variant="lista">Lista</div>
+        </div>
+      </div>
+
+      <div class="stage-card">
+        <div class="stage-info">
+          <h3>Lançando</h3>
+          <p>Autores prestes a lançar</p>
+        </div>
+        <div class="toggle" data-stage="lancando">
+          <div class="toggle-opt preco" data-variant="preco">Preço</div>
+          <div class="toggle-opt lista" data-variant="lista">Lista</div>
+        </div>
+      </div>
+
+      <div class="stage-card">
+        <div class="stage-info">
+          <h3>Publicado</h3>
+          <p>Autores com livro lançado</p>
+        </div>
+        <div class="toggle" data-stage="publicado">
+          <div class="toggle-opt preco" data-variant="preco">Preço</div>
+          <div class="toggle-opt lista" data-variant="lista">Lista</div>
+        </div>
+      </div>
+
+      <div class="save-row">
+        <h3>Novo config.json</h3>
+        <pre id="output">{}</pre>
+        <div class="save-actions">
+          <button class="btn btn-primary" onclick="copyConfig()">Copiar JSON</button>
+          <button class="btn btn-secondary" onclick="downloadConfig()">Baixar arquivo</button>
+          <span class="copied" id="copied"></span>
+        </div>
+      </div>
+
+      <div class="summary">
+        <strong>Pra valer:</strong> copie o JSON acima → cole no arquivo <code>config.json</code> do repo → commit + push. Em ~30s o quiz já roteia pra nova configuração.<br><br>
+        <strong>Verificar:</strong> abra <code>/index.html</code> no navegador (Cmd+Shift+R pra ignorar cache) e clique nos cards — devem ir pras versões corretas.
+      </div>
+
+      <p class="footer-note">© The Book Business · admin</p>
+    </div>
+  </div>
+
+  <script>
+    var SENHA = 'mtbb2025';
+    var state = {
+      escrevendo: 'preco',
+      lancando: 'preco',
+      publicado: 'preco'
+    };
+
+    function tryLogin() {
+      var pwd = document.getElementById('pwd').value;
+      if (pwd === SENHA) {
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('panel').classList.add('show');
+        loadCurrentConfig();
+        renderToggles();
+      } else {
+        document.getElementById('err').textContent = 'Senha incorreta.';
+        document.getElementById('pwd').value = '';
+      }
+    }
+    document.getElementById('pwd').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') tryLogin();
+    });
+
+    function loadCurrentConfig() {
+      fetch('config.json?v=' + Date.now())
+        .then(function(r) { return r.json(); })
+        .then(function(cfg) {
+          if (cfg.escrevendo) state.escrevendo = cfg.escrevendo;
+          if (cfg.lancando) state.lancando = cfg.lancando;
+          if (cfg.publicado) state.publicado = cfg.publicado;
+          renderToggles();
+        })
+        .catch(function() { renderToggles(); });
+    }
+
+    function renderToggles() {
+      document.querySelectorAll('.toggle').forEach(function(t) {
+        var stage = t.getAttribute('data-stage');
+        var current = state[stage];
+        t.querySelectorAll('.toggle-opt').forEach(function(o) {
+          var variant = o.getAttribute('data-variant');
+          if (variant === current) o.classList.add('active');
+          else o.classList.remove('active');
+        });
+      });
+      updateOutput();
+    }
+
+    document.querySelectorAll('.toggle-opt').forEach(function(o) {
+      o.addEventListener('click', function() {
+        var stage = this.parentElement.getAttribute('data-stage');
+        var variant = this.getAttribute('data-variant');
+        state[stage] = variant;
+        renderToggles();
+      });
+    });
+
+    function updateOutput() {
+      var out = {
+        "_doc": "Controla qual versão cada estágio do quiz mostra. Valores: 'preco' ou 'lista'.",
+        "escrevendo": state.escrevendo,
+        "lancando": state.lancando,
+        "publicado": state.publicado,
+        "updated_at": new Date().toISOString().split('T')[0]
+      };
+      document.getElementById('output').textContent = JSON.stringify(out, null, 2);
+    }
+
+    function copyConfig() {
+      var txt = document.getElementById('output').textContent;
+      navigator.clipboard.writeText(txt).then(function() {
+        var c = document.getElementById('copied');
+        c.textContent = '✓ Copiado!';
+        setTimeout(function() { c.textContent = ''; }, 2400);
+      });
+    }
+
+    function downloadConfig() {
+      var txt = document.getElementById('output').textContent;
+      var blob = new Blob([txt], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'config.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

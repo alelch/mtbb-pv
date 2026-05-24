@@ -1,0 +1,7 @@
+{
+  "_doc": "Controla qual versão cada estágio do quiz mostra. Valores: 'preco' ou 'lista'.",
+  "escrevendo": "preco",
+  "lancando": "preco",
+  "publicado": "preco",
+  "updated_at": "2026-05-22"
+}
