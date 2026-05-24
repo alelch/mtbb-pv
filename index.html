@@ -171,21 +171,64 @@
   </div>
 
   <script>
-    // Roteamento dinâmico A/B controlado por config.json
+    // Roteamento A/B percentual com sticky assignment
+    // config.json: { escrevendo: { preco: 70, lista: 30 }, ... }
+    // - Sorteia por % no primeiro acesso, salva em localStorage
+    // - Mesmo visitante sempre vê a mesma versão (sticky)
+    // - Injeta utm_test=<variant>-<stage> pra cruzamento no Hotmart
     (function() {
+      function normalize(entry) {
+        if (!entry) return { preco: 100, lista: 0 };
+        if (typeof entry === 'string') {
+          return entry === 'lista'
+            ? { preco: 0, lista: 100 }
+            : { preco: 100, lista: 0 };
+        }
+        return {
+          preco: typeof entry.preco === 'number' ? entry.preco : 50,
+          lista: typeof entry.lista === 'number' ? entry.lista : 50
+        };
+      }
+
+      function pickVariant(pct) {
+        var rand = Math.random() * 100;
+        return (rand < pct.preco) ? 'preco' : 'lista';
+      }
+
+      function getStickyVariant(stage, entry) {
+        var key = 'mtbb_variant_' + stage;
+        try {
+          var saved = localStorage.getItem(key);
+          if (saved === 'preco' || saved === 'lista') return saved;
+        } catch (e) {}
+        var variant = pickVariant(normalize(entry));
+        try { localStorage.setItem(key, variant); } catch (e) {}
+        return variant;
+      }
+
+      function buildHref(stage, variant) {
+        var base = (variant === 'lista') ? (stage + '-lista.html') : (stage + '.html');
+        var utms = (window.MTBB_UTMS && window.MTBB_UTMS()) || {};
+        utms.utm_test = variant + '-' + stage;
+        var parts = [];
+        Object.keys(utms).forEach(function (k) {
+          parts.push(encodeURIComponent(k) + '=' + encodeURIComponent(utms[k]));
+        });
+        return base + (parts.length ? '?' + parts.join('&') : '');
+      }
+
       var bust = '?v=' + Date.now();
       fetch('config.json' + bust)
         .then(function(r) { return r.json(); })
         .then(function(cfg) {
           document.querySelectorAll('.option[data-stage]').forEach(function(el) {
             var stage = el.getAttribute('data-stage');
-            var variant = cfg[stage] || 'preco';
-            var target = (variant === 'lista') ? (stage + '-lista.html') : (stage + '.html');
-            el.setAttribute('href', target);
+            var variant = getStickyVariant(stage, cfg[stage]);
+            el.setAttribute('href', buildHref(stage, variant));
           });
         })
         .catch(function() {
-          // se config.json falhar, mantém os hrefs estáticos (preco)
+          // fallback: mantém hrefs estáticos (preco)
         });
     })();
   </script>

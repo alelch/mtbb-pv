@@ -1,7 +1,7 @@
 {
-  "_doc": "Controla qual versão cada estágio do quiz mostra. Valores: 'preco' ou 'lista'.",
-  "escrevendo": "preco",
-  "lancando": "preco",
-  "publicado": "preco",
-  "updated_at": "2026-05-22"
+  "_doc": "Split percentual de tráfego A/B. Valores em % (preco + lista = 100).",
+  "escrevendo": { "preco": 100, "lista": 0 },
+  "lancando":   { "preco": 100, "lista": 0 },
+  "publicado":  { "preco": 100, "lista": 0 },
+  "updated_at": "2026-05-24"
 }

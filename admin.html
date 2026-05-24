@@ -29,93 +29,39 @@
     padding: 40px 24px;
     line-height: 1.5;
   }
-  .wrap {
-    max-width: 640px;
-    margin: 0 auto;
-  }
-  .logo {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
+  .wrap { max-width: 680px; margin: 0 auto; }
+  .logo { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
   .logo span { color: var(--accent); }
   .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 36px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 36px;
   }
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 12px;
-  }
-  h1 .italic {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-  }
-  .sub {
-    color: var(--text-soft);
-    margin-bottom: 40px;
-    font-size: 15px;
-    line-height: 1.6;
-  }
+  h1 { font-size: 32px; font-weight: 700; line-height: 1.15; margin-bottom: 12px; }
+  h1 .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; }
+  .sub { color: var(--text-soft); margin-bottom: 40px; font-size: 15px; line-height: 1.6; }
 
   /* LOGIN */
   .gate {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px 32px;
-    max-width: 420px;
-    margin: 60px auto 0;
-    text-align: center;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 36px 32px; max-width: 420px; margin: 60px auto 0;
+    text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.04);
   }
-  .gate h2 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  .gate p {
-    font-size: 14px;
-    color: var(--text-mute);
-    margin-bottom: 22px;
-  }
+  .gate h2 { font-size: 22px; font-weight: 600; margin-bottom: 10px; }
+  .gate p { font-size: 14px; color: var(--text-mute); margin-bottom: 22px; }
   .gate input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 15px;
-    margin-bottom: 14px;
-    outline: none;
-    transition: border-color 0.2s;
+    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
+    border-radius: 10px; font-family: inherit; font-size: 15px;
+    margin-bottom: 14px; outline: none; transition: border-color 0.2s;
   }
   .gate input:focus { border-color: var(--accent); }
   .gate button {
-    width: 100%;
-    padding: 14px;
-    background: var(--text);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
+    width: 100%; padding: 14px; background: var(--text); color: white;
+    border: none; border-radius: 10px; font-family: inherit; font-size: 15px;
+    font-weight: 600; cursor: pointer; transition: background 0.2s;
   }
   .gate button:hover { background: var(--accent); color: var(--text); }
   .gate .err {
-    color: #C7252E;
-    font-size: 13px;
-    margin-top: 10px;
-    min-height: 18px;
+    color: #C7252E; font-size: 13px; margin-top: 10px; min-height: 18px;
   }
 
   /* PANEL */
@@ -123,133 +69,118 @@
   .panel.show { display: block; }
 
   .stage-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px 28px;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px 28px; margin-bottom: 14px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.04);
   }
-  .stage-info h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 4px;
+  .stage-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 18px;
   }
-  .stage-info p {
-    font-size: 13px;
-    color: var(--text-mute);
+  .stage-info h3 { font-size: 18px; font-weight: 600; margin-bottom: 2px; }
+  .stage-info p { font-size: 13px; color: var(--text-mute); }
+  .stage-split {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--text);
+    font-weight: 600;
+    background: #F1F1F1;
+    padding: 6px 10px;
+    border-radius: 999px;
   }
 
-  .toggle {
+  /* SLIDER */
+  .slider-wrap { position: relative; padding: 0; }
+  .slider-row {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 8px;
+  }
+  .slider-track {
+    flex: 1; height: 8px; border-radius: 999px;
+    background: linear-gradient(to right, var(--preco) 0%, var(--preco) var(--p, 50%), var(--lista) var(--p, 50%), var(--lista) 100%);
     position: relative;
-    display: inline-flex;
-    background: #F1F1F1;
-    border-radius: 999px;
-    padding: 4px;
+  }
+  .slider-input {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 32px; background: transparent;
+    margin: -12px 0 0; cursor: pointer;
+    position: absolute; left: 0; top: 0;
+  }
+  .slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 3px solid var(--text);
     cursor: pointer;
-    user-select: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
-  .toggle-opt {
-    padding: 8px 18px;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 999px;
+  .slider-input::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 3px solid var(--text);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .slider-labels {
+    display: flex; justify-content: space-between;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--text-mute);
-    transition: all 0.2s ease;
-    letter-spacing: 0.02em;
+    margin-top: 10px;
   }
-  .toggle-opt.active.preco {
-    background: var(--text);
-    color: white;
+  .slider-labels .preco-side { color: var(--preco); }
+  .slider-labels .lista-side { color: #B07700; }
+
+  /* Quick presets */
+  .presets {
+    display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap;
   }
-  .toggle-opt.active.lista {
-    background: var(--accent);
-    color: var(--text);
+  .preset {
+    font-size: 11px; padding: 6px 12px;
+    border: 1px solid var(--border); border-radius: 999px;
+    cursor: pointer; transition: all 0.2s;
+    color: var(--text-soft); background: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
   }
+  .preset:hover { border-color: var(--accent); color: var(--text); }
 
   .save-row {
-    margin-top: 28px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
+    margin-top: 28px; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.04);
   }
   .save-row h3 {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-mute);
-    margin-bottom: 12px;
-    font-weight: 600;
+    font-size: 14px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-mute); margin-bottom: 12px; font-weight: 600;
   }
   pre {
-    background: #0A0A0A;
-    color: #F8F8F8;
-    border-radius: 10px;
-    padding: 16px 18px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    line-height: 1.6;
-    overflow-x: auto;
-    margin-bottom: 14px;
+    background: #0A0A0A; color: #F8F8F8; border-radius: 10px;
+    padding: 16px 18px; font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; line-height: 1.6; overflow-x: auto; margin-bottom: 14px;
   }
-  .save-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+  .save-actions { display: flex; gap: 10px; flex-wrap: wrap; }
   .btn {
-    padding: 12px 18px;
-    border: none;
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    padding: 12px 18px; border: none; border-radius: 10px;
+    font-family: inherit; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s ease;
   }
-  .btn-primary {
-    background: var(--accent);
-    color: var(--text);
-  }
+  .btn-primary { background: var(--accent); color: var(--text); }
   .btn-primary:hover { background: #E89900; }
   .btn-secondary {
-    background: transparent;
-    color: var(--text);
-    border: 1.5px solid var(--border);
+    background: transparent; color: var(--text); border: 1.5px solid var(--border);
   }
   .btn-secondary:hover { border-color: var(--accent); }
   .copied { color: #16A34A; font-size: 13px; margin-left: 8px; font-weight: 600; }
 
   .summary {
-    margin-top: 32px;
-    padding: 20px 24px;
-    background: var(--bg-card);
-    border-left: 4px solid var(--accent);
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.6;
+    margin-top: 32px; padding: 20px 24px; background: var(--bg-card);
+    border-left: 4px solid var(--accent); border-radius: 8px;
+    font-size: 14px; line-height: 1.6;
   }
   .summary strong { color: var(--text); }
   .summary code {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    background: #F1F1F1;
-    padding: 2px 6px;
-    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    background: #F1F1F1; padding: 2px 6px; border-radius: 4px;
   }
 
-  .footer-note {
-    text-align: center;
-    margin-top: 48px;
-    font-size: 12px;
-    color: var(--text-mute);
-  }
+  .footer-note { text-align: center; margin-top: 48px; font-size: 12px; color: var(--text-mute); }
 </style>
 <script src="utm.js" defer></script>
 </head>
@@ -270,40 +201,10 @@
     <!-- PANEL -->
     <div class="panel" id="panel">
       <h1>Controle de <span class="italic">roteamento.</span></h1>
-      <p class="sub">Cada estágio do quiz pode apontar pra versão com preço ou pra versão com lista de espera. Mude aqui, copie o JSON, e commita no repo.</p>
+      <p class="sub">Cada estágio do quiz tem um split percentual entre <strong>Preço</strong> e <strong>Lista de espera</strong>. Visitante é sticky (sempre vê a mesma versão).</p>
 
-      <div class="stage-card">
-        <div class="stage-info">
-          <h3>Escrevendo</h3>
-          <p>Autores ainda escrevendo o livro</p>
-        </div>
-        <div class="toggle" data-stage="escrevendo">
-          <div class="toggle-opt preco" data-variant="preco">Preço</div>
-          <div class="toggle-opt lista" data-variant="lista">Lista</div>
-        </div>
-      </div>
-
-      <div class="stage-card">
-        <div class="stage-info">
-          <h3>Lançando</h3>
-          <p>Autores prestes a lançar</p>
-        </div>
-        <div class="toggle" data-stage="lancando">
-          <div class="toggle-opt preco" data-variant="preco">Preço</div>
-          <div class="toggle-opt lista" data-variant="lista">Lista</div>
-        </div>
-      </div>
-
-      <div class="stage-card">
-        <div class="stage-info">
-          <h3>Publicado</h3>
-          <p>Autores com livro lançado</p>
-        </div>
-        <div class="toggle" data-stage="publicado">
-          <div class="toggle-opt preco" data-variant="preco">Preço</div>
-          <div class="toggle-opt lista" data-variant="lista">Lista</div>
-        </div>
-      </div>
+      <!-- Cards gerados via JS -->
+      <div id="stages"></div>
 
       <div class="save-row">
         <h3>Novo config.json</h3>
@@ -316,8 +217,9 @@
       </div>
 
       <div class="summary">
-        <strong>Pra valer:</strong> copie o JSON acima → cole no arquivo <code>config.json</code> do repo → commit + push. Em ~30s o quiz já roteia pra nova configuração.<br><br>
-        <strong>Verificar:</strong> abra <code>/index.html</code> no navegador (Cmd+Shift+R pra ignorar cache) e clique nos cards — devem ir pras versões corretas.
+        <strong>Pra valer:</strong> copie o JSON acima → cole no <code>config.json</code> do repo → commit + push. Em ~30s o quiz já roteia pra nova configuração.<br><br>
+        <strong>Tracking no Hotmart:</strong> cada visitante que clica recebe automaticamente um UTM <code>utm_test=preco-escrevendo</code> (ou similar). Filtre por esse param no Hotmart Analytics pra ver vendas por versão.<br><br>
+        <strong>Importante:</strong> visitantes que já passaram pelo quiz ficam fixos na versão que receberam (sticky via localStorage). Mudanças aqui só afetam NOVOS visitantes.
       </div>
 
       <p class="footer-note">© The Book Business · admin</p>
@@ -326,11 +228,20 @@
 
   <script>
     var SENHA = 'mtbb2025';
-    var state = {
-      escrevendo: 'preco',
-      lancando: 'preco',
-      publicado: 'preco'
-    };
+    var STAGES = [
+      { key: 'escrevendo', name: 'Escrevendo', desc: 'Autores ainda escrevendo o livro' },
+      { key: 'lancando',   name: 'Lançando',   desc: 'Autores prestes a lançar' },
+      { key: 'publicado',  name: 'Publicado',  desc: 'Autores com livro lançado' }
+    ];
+    // % indo pra PREÇO. 100 - state[key] = % pra LISTA.
+    var state = { escrevendo: 100, lancando: 100, publicado: 100 };
+
+    function normalize(entry) {
+      if (!entry) return 100;
+      if (typeof entry === 'string') return entry === 'lista' ? 0 : 100;
+      if (typeof entry.preco === 'number') return entry.preco;
+      return 100;
+    }
 
     function tryLogin() {
       var pwd = document.getElementById('pwd').value;
@@ -338,7 +249,6 @@
         document.getElementById('gate').style.display = 'none';
         document.getElementById('panel').classList.add('show');
         loadCurrentConfig();
-        renderToggles();
       } else {
         document.getElementById('err').textContent = 'Senha incorreta.';
         document.getElementById('pwd').value = '';
@@ -352,42 +262,90 @@
       fetch('config.json?v=' + Date.now())
         .then(function(r) { return r.json(); })
         .then(function(cfg) {
-          if (cfg.escrevendo) state.escrevendo = cfg.escrevendo;
-          if (cfg.lancando) state.lancando = cfg.lancando;
-          if (cfg.publicado) state.publicado = cfg.publicado;
-          renderToggles();
+          STAGES.forEach(function (s) {
+            state[s.key] = normalize(cfg[s.key]);
+          });
+          renderStages();
         })
-        .catch(function() { renderToggles(); });
+        .catch(function() { renderStages(); });
     }
 
-    function renderToggles() {
-      document.querySelectorAll('.toggle').forEach(function(t) {
-        var stage = t.getAttribute('data-stage');
-        var current = state[stage];
-        t.querySelectorAll('.toggle-opt').forEach(function(o) {
-          var variant = o.getAttribute('data-variant');
-          if (variant === current) o.classList.add('active');
-          else o.classList.remove('active');
+    function renderStages() {
+      var html = STAGES.map(function (s) {
+        var pPreco = state[s.key];
+        var pLista = 100 - pPreco;
+        return '' +
+          '<div class="stage-card" data-stage="' + s.key + '">' +
+            '<div class="stage-head">' +
+              '<div class="stage-info"><h3>' + s.name + '</h3><p>' + s.desc + '</p></div>' +
+              '<div class="stage-split">' +
+                '<span class="p-val">' + pPreco + '</span>% Preço · ' +
+                '<span class="l-val">' + pLista + '</span>% Lista' +
+              '</div>' +
+            '</div>' +
+            '<div class="slider-wrap">' +
+              '<div class="slider-row">' +
+                '<div class="slider-track" style="--p: ' + pPreco + '%"></div>' +
+                '<input type="range" min="0" max="100" step="5" value="' + pPreco + '" class="slider-input" data-stage="' + s.key + '">' +
+              '</div>' +
+              '<div class="slider-labels">' +
+                '<span class="preco-side">← 100% Preço</span>' +
+                '<span class="lista-side">100% Lista →</span>' +
+              '</div>' +
+              '<div class="presets" data-stage="' + s.key + '">' +
+                '<span class="preset" data-val="100">100/0</span>' +
+                '<span class="preset" data-val="75">75/25</span>' +
+                '<span class="preset" data-val="50">50/50</span>' +
+                '<span class="preset" data-val="25">25/75</span>' +
+                '<span class="preset" data-val="0">0/100</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+      }).join('');
+      document.getElementById('stages').innerHTML = html;
+
+      // bind sliders
+      document.querySelectorAll('.slider-input').forEach(function (input) {
+        input.addEventListener('input', function () {
+          var stage = this.getAttribute('data-stage');
+          var val = parseInt(this.value, 10);
+          state[stage] = val;
+          updateStageVisual(stage);
+          updateOutput();
         });
       });
+      // bind presets
+      document.querySelectorAll('.preset').forEach(function (p) {
+        p.addEventListener('click', function () {
+          var stage = this.parentElement.getAttribute('data-stage');
+          var val = parseInt(this.getAttribute('data-val'), 10);
+          state[stage] = val;
+          var input = document.querySelector('.slider-input[data-stage="' + stage + '"]');
+          if (input) input.value = val;
+          updateStageVisual(stage);
+          updateOutput();
+        });
+      });
+
       updateOutput();
     }
 
-    document.querySelectorAll('.toggle-opt').forEach(function(o) {
-      o.addEventListener('click', function() {
-        var stage = this.parentElement.getAttribute('data-stage');
-        var variant = this.getAttribute('data-variant');
-        state[stage] = variant;
-        renderToggles();
-      });
-    });
+    function updateStageVisual(stage) {
+      var card = document.querySelector('.stage-card[data-stage="' + stage + '"]');
+      if (!card) return;
+      var pPreco = state[stage];
+      var pLista = 100 - pPreco;
+      card.querySelector('.p-val').textContent = pPreco;
+      card.querySelector('.l-val').textContent = pLista;
+      card.querySelector('.slider-track').style.setProperty('--p', pPreco + '%');
+    }
 
     function updateOutput() {
       var out = {
-        "_doc": "Controla qual versão cada estágio do quiz mostra. Valores: 'preco' ou 'lista'.",
-        "escrevendo": state.escrevendo,
-        "lancando": state.lancando,
-        "publicado": state.publicado,
+        "_doc": "Split percentual de tráfego A/B. Valores em % (preco + lista = 100).",
+        "escrevendo": { "preco": state.escrevendo, "lista": 100 - state.escrevendo },
+        "lancando":   { "preco": state.lancando,   "lista": 100 - state.lancando },
+        "publicado":  { "preco": state.publicado,  "lista": 100 - state.publicado },
         "updated_at": new Date().toISOString().split('T')[0]
       };
       document.getElementById('output').textContent = JSON.stringify(out, null, 2);
@@ -407,8 +365,7 @@
       var blob = new Blob([txt], { type: 'application/json' });
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
-      a.href = url;
-      a.download = 'config.json';
+      a.href = url; a.download = 'config.json';
       a.click();
       URL.revokeObjectURL(url);
     }
