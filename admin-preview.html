@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTBB · Preview Métricas (dados mockados)</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fraunces:ital,wght@1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #F8F8F8;
+    --bg-card: #FFFFFF;
+    --accent: #FAAB00;
+    --text: #1A1A1A;
+    --text-soft: #555555;
+    --text-mute: #999999;
+    --border: #EEEEEE;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 24px;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  .preview-banner {
+    background: #FFF7E5;
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 13px;
+    color: #8C5A00;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+  .preview-banner strong { color: #5C3D00; }
+  .logo { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .logo span { color: var(--accent); }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px;
+  }
+  h1 { font-size: 32px; font-weight: 700; line-height: 1.15; margin-bottom: 12px; }
+  h1 .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; }
+  .sub { color: var(--text-soft); margin-bottom: 28px; font-size: 15px; line-height: 1.6; }
+
+  .tabs {
+    display: flex; gap: 6px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    padding: 12px 18px; font-size: 14px; font-weight: 600;
+    color: var(--text-mute); cursor: pointer; border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+  .period-row {
+    display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; align-items: center;
+  }
+  .period-btn {
+    padding: 8px 14px; font-size: 12px;
+    border: 1px solid var(--border); border-radius: 999px;
+    background: white; color: var(--text-soft); cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+  }
+  .period-btn.active {
+    background: var(--text); color: white; border-color: var(--text);
+  }
+  .refresh {
+    margin-left: auto; padding: 6px 14px; font-size: 12px;
+    background: transparent; color: var(--text); border: 1.5px solid var(--border);
+    border-radius: 10px; font-weight: 600; cursor: pointer;
+  }
+
+  .global-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .metric-card .label {
+    font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-mute);
+    font-weight: 600; margin-bottom: 8px;
+  }
+  .metric-card .value {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .metric-card .value.accent { color: var(--accent); }
+  .metric-card .sub-num {
+    font-size: 11px; color: var(--text-mute); margin-top: 6px;
+  }
+
+  table.funnel {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    border: 1px solid var(--border);
+  }
+  table.funnel th, table.funnel td {
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.funnel th {
+    background: #F1F1F1;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-mute);
+    font-weight: 700;
+  }
+  table.funnel tr:last-child td { border-bottom: none; }
+  table.funnel .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--text);
+  }
+  table.funnel .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+  }
+  table.funnel .badge.preco { background: #1A1A1A; color: white; }
+  table.funnel .badge.lista { background: var(--accent); color: #1A1A1A; }
+  table.funnel .pct {
+    font-size: 11px; color: var(--text-mute); margin-left: 6px;
+  }
+  table.funnel .winner {
+    background: rgba(250,171,0,0.06);
+  }
+  table.funnel .winner .num {
+    color: #B07700;
+  }
+
+  .legend {
+    margin-top: 24px; padding: 18px 22px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; font-size: 13px; line-height: 1.7;
+    color: var(--text-soft);
+  }
+  .legend strong { color: var(--text); }
+  .legend code {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    background: #F1F1F1; padding: 2px 6px; border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="preview-banner">
+      <strong>👁 Preview com dados mockados.</strong> Esta é uma simulação de como o admin vai parecer com tráfego real. Os números são fictícios, gerados pra ilustrar o layout.
+    </div>
+
+    <div class="logo">MTBB<span>.</span></div>
+    <p class="eyebrow">Admin · Teste A/B</p>
+
+    <div class="tabs">
+      <div class="tab">Roteamento</div>
+      <div class="tab active">Métricas</div>
+    </div>
+
+    <h1>Funil <span class="italic">do teste.</span></h1>
+    <p class="sub">Eventos coletados em tempo real via Supabase. Vendas entram automaticamente quando o webhook do Hotmart estiver configurado.</p>
+
+    <div class="period-row">
+      <span class="period-btn">24h</span>
+      <span class="period-btn active">7 dias</span>
+      <span class="period-btn">30 dias</span>
+      <span class="period-btn">90 dias</span>
+      <span class="period-btn">Tudo</span>
+      <button class="refresh">↻ Atualizar</button>
+    </div>
+
+    <div class="global-grid">
+      <div class="metric-card">
+        <div class="label">Visitas</div>
+        <div class="value">1.847</div>
+        <div class="sub-num">1.412 únicos</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Cliques no quiz</div>
+        <div class="value">1.092</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Cliques no Hotmart</div>
+        <div class="value accent">256</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Forms lista</div>
+        <div class="value">178</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Cliques WhatsApp</div>
+        <div class="value">124</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Vendas</div>
+        <div class="value accent">23</div>
+        <div class="sub-num">R$ 34.500</div>
+      </div>
+    </div>
+
+    <table class="funnel">
+      <thead>
+        <tr>
+          <th>Estágio</th>
+          <th>Variante</th>
+          <th>Cliques</th>
+          <th>Únicos</th>
+          <th>Hotmart</th>
+          <th>Form</th>
+          <th>WhatsApp</th>
+          <th>Vendas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Escrevendo</strong></td>
+          <td><span class="badge preco">preco</span></td>
+          <td class="num">215</td>
+          <td class="num">178</td>
+          <td class="num">48<span class="pct">22.3%</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">2<span class="pct">4.2%</span></td>
+        </tr>
+        <tr class="winner">
+          <td><strong>Escrevendo</strong></td>
+          <td><span class="badge lista">lista</span></td>
+          <td class="num">142</td>
+          <td class="num">121</td>
+          <td class="num">0</td>
+          <td class="num">64<span class="pct">45.1%</span></td>
+          <td class="num">41</td>
+          <td class="num">4<span class="pct">6.3%</span></td>
+        </tr>
+        <tr class="winner">
+          <td><strong>Lançando</strong></td>
+          <td><span class="badge preco">preco</span></td>
+          <td class="num">312</td>
+          <td class="num">251</td>
+          <td class="num">132<span class="pct">42.3%</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">11<span class="pct">8.3%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lançando</strong></td>
+          <td><span class="badge lista">lista</span></td>
+          <td class="num">178</td>
+          <td class="num">145</td>
+          <td class="num">0</td>
+          <td class="num">72<span class="pct">40.4%</span></td>
+          <td class="num">58</td>
+          <td class="num">3<span class="pct">4.2%</span></td>
+        </tr>
+        <tr class="winner">
+          <td><strong>Publicado</strong></td>
+          <td><span class="badge preco">preco</span></td>
+          <td class="num">158</td>
+          <td class="num">128</td>
+          <td class="num">76<span class="pct">48.1%</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">3<span class="pct">3.9%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Publicado</strong></td>
+          <td><span class="badge lista">lista</span></td>
+          <td class="num">87</td>
+          <td class="num">74</td>
+          <td class="num">0</td>
+          <td class="num">42<span class="pct">48.3%</span></td>
+          <td class="num">25</td>
+          <td class="num">0</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="legend">
+      <strong>Como ler:</strong><br>
+      <strong>Cliques</strong> = total de visitantes que clicaram nesse card do quiz. <strong>Únicos</strong> = pessoas distintas (deduplicado por visitor_id).<br>
+      <strong>Hotmart</strong> = só aparece em variantes <span style="background:#1A1A1A;color:white;padding:1px 8px;border-radius:8px;font-size:11px;">preco</span> (clicaram no checkout). % é em relação aos cliques.<br>
+      <strong>Form / WhatsApp</strong> = só aparece em <span style="background:#FAAB00;color:#1A1A1A;padding:1px 8px;border-radius:8px;font-size:11px;">lista</span> (entraram na lista de espera / clicaram em "furar fila").<br>
+      <strong>Vendas</strong> = vendas confirmadas via webhook do Hotmart (Fase 2). % é em relação aos cliques no Hotmart (preco) ou aos forms (lista).<br>
+      <strong>Linhas com fundo amarelo</strong> = variante vencedora do estágio (maior taxa de venda).<br><br>
+      Cada visitante carrega <code>utm_test=preco-escrevendo</code> ou similar, propagado até o checkout Hotmart pra cruzamento.
+    </div>
+  </div>
+</body>
+</html>
