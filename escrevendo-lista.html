@@ -1044,28 +1044,50 @@
     flex-direction: column;
     justify-content: center;
   }
-  .del-playbook-visual .pb-label {
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 700;
-    margin-bottom: 14px;
+  .pb-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto 18px;
   }
-  .del-playbook-visual .pb-title {
-    font-size: clamp(18px, 2vw, 22px);
+  .pb-book {
+    height: 44px;
+    border-radius: 5px 7px 7px 5px;
+    display: flex;
+    align-items: center;
+    padding-left: 22px;
+    position: relative;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.45);
+    background: #F4F0E8;
+  }
+  .pb-book:nth-child(2) { background: #ECE5D6; margin-left: 6px; }
+  .pb-book:nth-child(3) { background: #E0D8C6; margin-left: 12px; }
+  .pb-book::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    bottom: 7px;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .pb-book span {
+    font-size: 11px;
     font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-    color: white;
-    margin-bottom: 14px;
-  }
-  .del-playbook-visual .pb-sub {
-    font-size: 9px;
-    letter-spacing: 2px;
+    letter-spacing: 0.3px;
+    color: #1A1A1A;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    font-weight: 600;
+  }
+  .pb-caption {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    font-weight: 700;
+    text-align: center;
   }
 
   /* COMUNIDADE — grande stat */
@@ -1100,23 +1122,40 @@
   .del-live-badge {
     background: var(--accent);
     color: #000;
-    border-radius: 12px;
-    padding: 10px 12px;
+    border-radius: 14px;
+    padding: 14px 12px;
     text-align: center;
     flex-shrink: 0;
-    min-width: 52px;
+    min-width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
   }
-  .del-live-badge .dlb-month {
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+  .dlb-pulse {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #000;
+    position: relative;
   }
-  .del-live-badge .dlb-day {
-    font-size: 30px;
+  .dlb-pulse::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.45);
+    animation: dlbpulse 1.8s ease-out infinite;
+  }
+  @keyframes dlbpulse {
+    0%   { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+  .dlb-text {
+    font-size: 13px;
     font-weight: 800;
-    line-height: 1.1;
-    margin-top: 2px;
+    letter-spacing: 1px;
+    line-height: 1.05;
   }
 
   /* FORNECEDORES */
@@ -1138,7 +1177,12 @@
   }
 
   /* TRILHA */
-  .del-card-trilha { grid-column: 1; }
+  .del-card-trilha {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 
   /* Fechamento */
   .del-closing {
@@ -2600,7 +2644,7 @@
         <div class="del-playbook-content">
           <p class="del-eyebrow-tag">Material físico</p>
           <h3>Playbooks do<br>Autor Estratégico</h3>
-          <p>O método sai da tela e vai pra sua mesa. 3 livros físicos com tudo o que você precisa preencher à mão pra sair do plano e entrar na execução.</p>
+          <p>O método sai da tela e vai pra sua mesa. 3 volumes físicos pra preencher à mão e sair do plano pra execução.</p>
           <ul class="del-features">
             <li>Frameworks para preencher à mão</li>
             <li>Cronograma estratégico impresso</li>
@@ -2608,38 +2652,43 @@
           </ul>
         </div>
         <div class="del-playbook-visual">
-          <div class="pb-label">THE BOOK BUSINESS</div>
-          <div class="pb-title">Playbook do<br>Autor Estratégico</div>
-          <div class="pb-sub">DANY SAKUGAWA</div>
+          <div class="pb-stack">
+            <div class="pb-book"><span>I · Fundamentos</span></div>
+            <div class="pb-book"><span>II · Estratégia</span></div>
+            <div class="pb-book"><span>III · Execução</span></div>
+          </div>
+          <div class="pb-caption">3 volumes entregues na sua casa</div>
         </div>
       </div>
 
       <!-- TRILHA -->
       <div class="del-card del-card-trilha">
+        <div class="del-stat">+70</div>
+        <p class="del-stat-label">aulas no método</p>
         <p class="del-eyebrow-tag">Conteúdo</p>
         <h3>Trilha Completa do Método</h3>
-        <p>+70 aulas que te levam do livro pronto ao livro lido. Construídas pra o mercado editorial brasileiro. Não pra infoprodutos, não pra e-commerce. Pra livros.</p>
+        <p>Do livro pronto ao livro lido. Construída pro mercado editorial brasileiro — não pra infoproduto, não pra e-commerce. Pra livros.</p>
       </div>
 
       <!-- COMUNIDADE — col 3, spans 2 rows -->
       <div class="del-card del-card-community">
         <div class="del-stat">+2.000</div>
-        <p class="del-stat-label">escritores reunidos</p>
+        <p class="del-stat-label">autores reunidos</p>
         <p class="del-eyebrow-tag">Comunidade</p>
-        <h3>A Maior Comunidade de Autores Estratégicos</h3>
-        <p>+2.000 autores aplicando o método ao mesmo tempo que você. Onde capas evoluem antes de imprimir, parcerias de lançamento nascem, e você não lança mais sozinho.</p>
+        <h3>Comunidade de Autores Estratégicos</h3>
+        <p>Autores aplicando o método ao mesmo tempo que você. Onde capas evoluem antes de imprimir, parcerias de lançamento nascem, e você não lança mais sozinho.</p>
       </div>
 
       <!-- ENCONTROS AO VIVO -->
       <div class="del-card del-card-live">
         <div class="del-live-badge">
-          <div class="dlb-month">MAI</div>
-          <div class="dlb-day">26</div>
+          <span class="dlb-pulse"></span>
+          <div class="dlb-text">AO<br>VIVO</div>
         </div>
         <div>
           <p class="del-eyebrow-tag">Ao vivo · mensal</p>
           <h3>Encontros ao Vivo com a Dany</h3>
-          <p>Todo mês, ao vivo. Antes de fechar a capa, antes de assinar com editora, antes de marcar a data. Você valida com quem guiou 700 lançamentos. Próximo encontro: 26 de maio.</p>
+          <p>Antes de fechar a capa, antes de assinar com editora, antes de marcar a data — você valida cada decisão com quem já guiou 700 lançamentos.</p>
         </div>
       </div>
 
@@ -2647,7 +2696,7 @@
       <div class="del-card del-card-fornecedores">
         <p class="del-eyebrow-tag">Guia</p>
         <h3>Mapa de Fornecedores do Autor</h3>
-        <p>Quem cuida da capa. Onde imprimir. Quem revisar. Quem te ajuda na divulgação. Todos testados pela Dany.</p>
+        <p>Quem cuida da capa, onde imprimir, quem revisa, quem divulga. A rede que os autores do método já usam — sem perder tempo procurando.</p>
         <div class="del-tags">
           <span>Capistas</span><span>Gráficas</span><span>Designers</span><span>Assessoria</span>
         </div>
@@ -2655,7 +2704,7 @@
 
     </div>
 
-    <p class="del-closing">Não é só conteúdo. <strong>É estrutura para executar.</strong></p>
+    <p class="del-closing">Cada peça resolve um ponto onde autores travam. <strong>Juntas, elas tiram seu livro do esquecimento.</strong></p>
 
   </div>
 </section>
@@ -2665,7 +2714,7 @@
   <div class="container-wide">
     <p class="section-eyebrow">Histórias reais</p>
     <h2 class="section-title">O livro era incrível.<br>O método fez voar.</h2>
-    <p class="section-subtitle">6 autores. 6 nichos. Cada um começou onde você está agora.</p>
+    <p class="section-subtitle">8 autores. 8 nichos. Cada um começou onde você está agora.</p>
 
     <div class="cases-grid">
       <div class="case-card">
