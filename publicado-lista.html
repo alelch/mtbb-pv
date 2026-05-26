@@ -1359,64 +1359,24 @@
   .cases-section { background: var(--bg); }
   .cases-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
     margin-top: 48px;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  @media (max-width: 900px) {
-    .cases-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .cases-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 900px) { .cases-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .cases-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
   .case-card {
-    background: var(--bg);
     border-radius: 14px;
-    padding: 24px;
-    transition: transform 0.2s;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .case-card:hover { transform: translateY(-2px); }
-  .case-avatar {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #FAAB00, #B87E00);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    font-weight: 700;
-    font-size: 20px;
-  }
-  .case-card .name {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .case-card .role {
-    font-size: 12px;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .case-card .situation {
-    font-size: 13.5px;
-    color: var(--text-soft);
-    line-height: 1.5;
-    margin-bottom: 14px;
-    font-style: italic;
-  }
-  .case-card .result {
-    font-size: 13.5px;
-    color: var(--text);
-    font-weight: 500;
-    line-height: 1.4;
-    padding-top: 14px;
-    border-top: 1px solid var(--border);
-  }
-  .case-card .result strong { color: var(--text); font-weight: 700; }
+  .case-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+  .case-card picture, .case-card img { display: block; width: 100%; height: auto; }
 
   /* BLOCO 13 — BIO DANY */
   .bio-section { background: var(--bg); }
@@ -1572,21 +1532,14 @@
     border: 1px solid var(--border);
     background: var(--bg-card);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background: var(--bg-card);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .media-photo-item:hover {
     transform: translateY(-2px);
     border-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
   }
-  .media-photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .media-photo-item picture { display: block; }
+  .media-photo-item img { width: 100%; height: auto; display: block; }
   .media-photo-ph {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 8px; text-align: center; padding: 20px 16px;
@@ -2720,51 +2673,52 @@
 
     <div class="cases-grid">
       <div class="case-card">
-        <div class="case-avatar">T</div>
-        <div class="name">Tônia Casarin</div>
-        <div class="role">Liderança · Não-ficção</div>
-        <p class="situation">Livro pronto. Mercado de nicho competitivo. Sem audiência. Só o método.</p>
-        <p class="result"><strong>Best-seller #1 na Amazon</strong> · Saiu na Exame.</p>
+        <picture>
+          <source srcset="assets/case-lelo.avif" type="image/avif">
+          <img src="assets/case-lelo.webp" alt="Depoimento — Lelo Apovian" loading="lazy" decoding="async">
+        </picture>
       </div>
-
       <div class="case-card">
-        <div class="case-avatar">M</div>
-        <div class="name">Maurício Benvenutti</div>
-        <div class="role">Autor · "O Seu Sonho Tem Futuro"</div>
-        <p class="situation">Sabia que lançar livro no Brasil é difícil. Não tinha plano. Só o método.</p>
-        <p class="result"><strong>Listas dos mais vendidos</strong> · Traduzido pela Cultura Inglesa · Adotado em escolas.</p>
+        <picture>
+          <source srcset="assets/case-aure.avif" type="image/avif">
+          <img src="assets/case-aure.webp" alt="Depoimento — Aurê Aguiar" loading="lazy" decoding="async">
+        </picture>
       </div>
-
       <div class="case-card">
-        <div class="case-avatar">A</div>
-        <div class="name">André Siqueira</div>
-        <div class="role">Negócios · Não-ficção</div>
-        <p class="situation">Especialista no tema. Zero experiência em lançar livro. Só o método.</p>
-        <p class="result"><strong>Best-seller + long-seller</strong> · Top 5 da categoria após 3 semanas, físico e digital.</p>
+        <picture>
+          <source srcset="assets/case-profinho.avif" type="image/avif">
+          <img src="assets/case-profinho.webp" alt="Depoimento — Profinho" loading="lazy" decoding="async">
+        </picture>
       </div>
-
       <div class="case-card">
-        <div class="case-avatar">J</div>
-        <div class="name">Júlio Rocha</div>
-        <div class="role">Saúde Mental · Não-ficção</div>
-        <p class="situation">Sem credencial clínica para o tema. Construiu autoridade do zero, só com o método.</p>
-        <p class="result"><strong>Best-seller BookInfo, PublishNews e O Globo</strong> · Adotado em grupos de apoio.</p>
+        <picture>
+          <source srcset="assets/case-cica.avif" type="image/avif">
+          <img src="assets/case-cica.webp" alt="Depoimento — Ciça Rocha" loading="lazy" decoding="async">
+        </picture>
       </div>
-
       <div class="case-card">
-        <div class="case-avatar">N</div>
-        <div class="name">Naya Pádua</div>
-        <div class="role">Infantil · Saúde Bucal</div>
-        <p class="situation">Dentista, não escritora. Sem credibilidade editorial. Só a expertise e o método.</p>
-        <p class="result"><strong>Selecionada para a Feira de Bolonha</strong> · Livro adotado em programa de governo.</p>
+        <picture>
+          <source srcset="assets/case-cibele.avif" type="image/avif">
+          <img src="assets/case-cibele.webp" alt="Depoimento — Cibele Laurentino" loading="lazy" decoding="async">
+        </picture>
       </div>
-
       <div class="case-card">
-        <div class="case-avatar">S</div>
-        <div class="name">Sibélie Rangel</div>
-        <div class="role">Romance · Ficção</div>
-        <p class="situation">Sem editora. Sem agente. Sem audiência. Construiu a estratégia do zero, só com o método.</p>
-        <p class="result"><strong>Prêmio Asas da Literatura</strong> · Quase 10 mil livros vendidos de forma independente.</p>
+        <picture>
+          <source srcset="assets/case-candice.avif" type="image/avif">
+          <img src="assets/case-candice.webp" alt="Depoimento — Candice Pascoal" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="case-card">
+        <picture>
+          <source srcset="assets/case-emilia.avif" type="image/avif">
+          <img src="assets/case-emilia.webp" alt="Depoimento — Emília Nuñes" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="case-card">
+        <picture>
+          <source srcset="assets/case-robson.avif" type="image/avif">
+          <img src="assets/case-robson.webp" alt="Depoimento — Robson Leite" loading="lazy" decoding="async">
+        </picture>
       </div>
     </div>
   </div>
