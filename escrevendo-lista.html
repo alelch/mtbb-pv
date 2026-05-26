@@ -1553,17 +1553,19 @@
   /* MEDIA GRID — seção separada */
   .media-grid-section { background: var(--bg); padding: 80px 0; }
   .media-photos-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px;
-    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 215px;
+    gap: 12px;
+    max-width: 1120px;
     margin: 48px auto 0;
   }
-  @media (max-width: 700px) { .media-photos-grid { gap: 10px; } }
+  @media (max-width: 760px) {
+    .media-photos-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; gap: 8px; }
+  }
   .media-photo-item {
-    flex: 0 0 calc(25% - 11px);
-    aspect-ratio: 4/3;
+    position: relative;
+    background: var(--bg-card);
     background: var(--bg-card);
     border-radius: 12px;
     border: 1px solid var(--border);
@@ -1600,6 +1602,13 @@
   .media-photo-item picture, .media-photo-item picture img {
     width: 100%; height: 100%; object-fit: cover; display: block;
   }
+  .media-photo-item.mp-big { grid-column: span 2; grid-row: span 2; }
+  .media-photo-item.mp-wide { grid-column: span 2; }
+  @media (max-width: 760px) {
+    .media-photo-item.mp-big { grid-column: span 2; grid-row: span 2; }
+    .media-photo-item.mp-wide { grid-column: span 2; grid-row: span 1; }
+  }
+
   .media-photo-cap {
     position: absolute; left: 0; right: 0; bottom: 0;
     padding: 22px 14px 12px;
@@ -2819,46 +2828,46 @@
     <p class="section-eyebrow">Autoridade reconhecida</p>
     <h2 class="section-title">Dany na mídia</h2>
     <div class="media-photos-grid">
-      <div class="media-photo-item">
+      <div class="media-photo-item mp-big">
         <picture>
-          <source srcset="assets/midia-band.avif" type="image/avif">
-          <img src="assets/midia-band.webp" alt="Dany Sakugawa — Band" loading="lazy" decoding="async">
+          <source srcset="assets/midia-milhao.avif" type="image/avif">
+          <img src="assets/midia-milhao.webp" alt="Dany Sakugawa — 1 milhão de livros vendidos" loading="lazy" decoding="async">
         </picture>
       </div>
-      <div class="media-photo-item">
-        <picture>
-          <source srcset="assets/midia-sbt.avif" type="image/avif">
-          <img src="assets/midia-sbt.webp" alt="Dany Sakugawa — SBT" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="media-photo-item">
+      <div class="media-photo-item mp-wide">
         <picture>
           <source srcset="assets/midia-hotmart.avif" type="image/avif">
           <img src="assets/midia-hotmart.webp" alt="Dany Sakugawa — Hotmart Festival" loading="lazy" decoding="async">
         </picture>
       </div>
-      <div class="media-photo-item">
-        <picture>
-          <source srcset="assets/midia-palestra.avif" type="image/avif">
-          <img src="assets/midia-palestra.webp" alt="Dany Sakugawa — Palco" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="media-photo-item">
-        <picture>
-          <source srcset="assets/midia-band2.avif" type="image/avif">
-          <img src="assets/midia-band2.webp" alt="Dany Sakugawa — Band Entrevista" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="media-photo-item">
+      <div class="media-photo-item ">
         <picture>
           <source srcset="assets/midia-goo.avif" type="image/avif">
           <img src="assets/midia-goo.webp" alt="Dany Sakugawa — goo Central" loading="lazy" decoding="async">
         </picture>
       </div>
-      <div class="media-photo-item">
+      <div class="media-photo-item ">
         <picture>
-          <source srcset="assets/midia-milhao.avif" type="image/avif">
-          <img src="assets/midia-milhao.webp" alt="Dany Sakugawa — 1 milhão de livros vendidos" loading="lazy" decoding="async">
+          <source srcset="assets/midia-band2.avif" type="image/avif">
+          <img src="assets/midia-band2.webp" alt="Dany Sakugawa — Band Entrevista" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item ">
+        <picture>
+          <source srcset="assets/midia-band.avif" type="image/avif">
+          <img src="assets/midia-band.webp" alt="Dany Sakugawa — Band" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item ">
+        <picture>
+          <source srcset="assets/midia-sbt.avif" type="image/avif">
+          <img src="assets/midia-sbt.webp" alt="Dany Sakugawa — SBT" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item mp-wide">
+        <picture>
+          <source srcset="assets/midia-palestra.avif" type="image/avif">
+          <img src="assets/midia-palestra.webp" alt="Dany Sakugawa — Palco" loading="lazy" decoding="async">
         </picture>
       </div>
     </div>
