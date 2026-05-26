@@ -1553,14 +1553,16 @@
   /* MEDIA GRID — seção separada */
   .media-grid-section { background: var(--bg); padding: 80px 0; }
   .media-photos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 14px;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 48px auto 0;
   }
-  @media (max-width: 700px) { .media-photos-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 700px) { .media-photos-grid { gap: 10px; } }
   .media-photo-item {
+    flex: 0 0 calc(25% - 11px);
     aspect-ratio: 4/3;
     background: var(--bg-card);
     border-radius: 12px;
@@ -1594,6 +1596,23 @@
     letter-spacing: 0.3px;
     line-height: 1.4;
   }
+  .media-photo-item { position: relative; }
+  .media-photo-item picture, .media-photo-item picture img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .media-photo-cap {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 22px 14px 12px;
+    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 55%, transparent 100%);
+    display: flex; flex-direction: column; gap: 1px; text-align: left;
+  }
+  .media-photo-cap .mp-name { color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
+  .media-photo-cap .mp-desc { color: rgba(255,255,255,0.78); font-size: 10.5px; line-height: 1.35; }
+  @media (max-width: 700px) {
+    .media-photo-item { flex: 0 0 calc(50% - 5px); }
+    .media-photo-cap .mp-desc { display: none; }
+  }
+
 
   /* BIO PULL QUOTES */
   .bio-pullquote {
@@ -2794,40 +2813,53 @@
     <h2 class="section-title">Dany na mídia</h2>
     <div class="media-photos-grid">
       <div class="media-photo-item">
-        <div class="media-photo-ph">
-          <div class="media-photo-name">EXAME</div>
-          <div class="media-photo-desc">Entrevista · mercado editorial</div>
-        </div>
+        <picture>
+          <source srcset="/assets/midia-band.avif" type="image/avif">
+          <img src="/assets/midia-band.webp" alt="Dany Sakugawa — Band" loading="lazy" decoding="async">
+        </picture>
+        <div class="media-photo-cap"><span class="mp-name">Band</span><span class="mp-desc">Entrevista ao vivo</span></div>
       </div>
       <div class="media-photo-item">
-        <div class="media-photo-ph">
-          <div class="media-photo-name">CBN</div>
-          <div class="media-photo-desc">Rádio · estratégia literária</div>
-        </div>
+        <picture>
+          <source srcset="/assets/midia-sbt.avif" type="image/avif">
+          <img src="/assets/midia-sbt.webp" alt="Dany Sakugawa — SBT" loading="lazy" decoding="async">
+        </picture>
+        <div class="media-photo-cap"><span class="mp-name">SBT</span><span class="mp-desc">Programa Chega Mais</span></div>
       </div>
       <div class="media-photo-item">
-        <div class="media-photo-ph">
-          <div class="media-photo-name">Você S/A</div>
-          <div class="media-photo-desc">Reportagem · autores empreendedores</div>
-        </div>
+        <picture>
+          <source srcset="/assets/midia-hotmart.avif" type="image/avif">
+          <img src="/assets/midia-hotmart.webp" alt="Dany Sakugawa — Hotmart Festival" loading="lazy" decoding="async">
+        </picture>
+        <div class="media-photo-cap"><span class="mp-name">Hotmart Festival</span><span class="mp-desc">Palestra de marketing literário</span></div>
       </div>
       <div class="media-photo-item">
-        <div class="media-photo-ph">
-          <div class="media-photo-name">Feira de Bolonha</div>
-          <div class="media-photo-desc">Cobertura · alunos premiados</div>
-        </div>
+        <picture>
+          <source srcset="/assets/midia-palestra.avif" type="image/avif">
+          <img src="/assets/midia-palestra.webp" alt="Dany Sakugawa — Palco" loading="lazy" decoding="async">
+        </picture>
+        <div class="media-photo-cap"><span class="mp-name">Palco</span><span class="mp-desc">Estratégia editorial</span></div>
       </div>
       <div class="media-photo-item">
-        <div class="media-photo-ph">
-          <div class="media-photo-name">O Globo</div>
-          <div class="media-photo-desc">Destaque · best-seller independente</div>
-        </div>
+        <picture>
+          <source srcset="/assets/midia-band2.avif" type="image/avif">
+          <img src="/assets/midia-band2.webp" alt="Dany Sakugawa — Band" loading="lazy" decoding="async">
+        </picture>
+        <div class="media-photo-cap"><span class="mp-name">Band</span><span class="mp-desc">Bastidores</span></div>
       </div>
       <div class="media-photo-item">
-        <div class="media-photo-ph">
-          <div class="media-photo-name">PublishNews</div>
-          <div class="media-photo-desc">Cobertura · lançamentos MTBB</div>
-        </div>
+        <picture>
+          <source srcset="/assets/midia-cultura.avif" type="image/avif">
+          <img src="/assets/midia-cultura.webp" alt="Dany Sakugawa — Rádio Cultura" loading="lazy" decoding="async">
+        </picture>
+        <div class="media-photo-cap"><span class="mp-name">Rádio Cultura</span><span class="mp-desc">Gamificação no mercado editorial</span></div>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="/assets/midia-g1.avif" type="image/avif">
+          <img src="/assets/midia-g1.webp" alt="Dany Sakugawa — G1" loading="lazy" decoding="async">
+        </picture>
+        <div class="media-photo-cap"><span class="mp-name">G1</span><span class="mp-desc">Prêmio Rio de Contos</span></div>
       </div>
     </div>
   </div>
