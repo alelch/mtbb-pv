@@ -1747,16 +1747,15 @@
 
   /* CREDENTIAL BADGES */
   .cred-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    margin-top: 40px;
-    padding-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px 32px;
+    margin: 44px auto 0;
+    padding-top: 30px;
     border-top: 1px solid var(--border);
+    max-width: 900px;
   }
   .cred-badge {
-    flex: 1 1 auto;
-    min-width: 130px;
     background: none;
     border: none;
     padding: 0;
@@ -1778,8 +1777,7 @@
     text-transform: uppercase;
   }
   @media (max-width: 600px) {
-    .cred-badges { gap: 24px; }
-    .cred-badge { min-width: 100%; }
+    .cred-badges { grid-template-columns: repeat(2, 1fr); gap: 22px 24px; }
   }
 
   /* BLOCO: ENCONTRO AO VIVO */
@@ -3017,20 +3015,20 @@
         <p>Depois de conduzir o lançamento de mais de 700 autores, Dany criou o Método The Book Business para levar aos autores independentes a lógica que antes ficava restrita às grandes editoras: como posicionar, lançar e fazer um livro chegar aos leitores certos.</p>
         <p>Hoje, mais de 4.400 alunos já passaram pelo método: autores de ficção, não-ficção, estreantes, independentes e profissionais que decidiram parar de tratar o livro como tentativa e começar a tratá-lo com estratégia.</p>
         <p>Aqui, você não aprende marketing genérico. Aprende <span class="bio-accent">marketing literário aplicado ao mercado real de livros</span>.</p>
-        <div class="cred-badges">
-          <div class="cred-badge">
-            <div class="cred-badge-text">+15 anos<span>nos bastidores do mercado editorial</span></div>
-          </div>
-          <div class="cred-badge">
-            <div class="cred-badge-text">+700 autores<span>lançados com estratégia</span></div>
-          </div>
-          <div class="cred-badge">
-            <div class="cred-badge-text">+4.400 alunos<span>formados no método</span></div>
-          </div>
-          <div class="cred-badge">
-            <div class="cred-badge-text">+10M livros<span>vendidos em projetos editoriais</span></div>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class="cred-badges">
+      <div class="cred-badge">
+        <div class="cred-badge-text">+15 anos<span>nos bastidores do mercado editorial</span></div>
+      </div>
+      <div class="cred-badge">
+        <div class="cred-badge-text">+700 autores<span>lançados com estratégia</span></div>
+      </div>
+      <div class="cred-badge">
+        <div class="cred-badge-text">+4.400 alunos<span>formados no método</span></div>
+      </div>
+      <div class="cred-badge">
+        <div class="cred-badge-text">+10M livros<span>vendidos em projetos editoriais</span></div>
       </div>
     </div>
   </div>
