@@ -1953,6 +1953,19 @@
     color: rgba(255,255,255,0.5);
     margin-top: 20px;
   }
+  .cta-trust {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 26px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-mute);
+  }
+  .cta-trust span { display: inline-flex; align-items: center; gap: 7px; letter-spacing: 0.02em; }
+  .cta-trust .ct-ico { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.85; }
+  .cta-trust--dark { color: rgba(255,255,255,0.6); }
 
   /* ERR GRID */
   .err-grid {
@@ -2110,7 +2123,7 @@
 <div style="text-align: center; padding: 0 24px 56px;">
   <p style="font-size:clamp(15px,1.8vw,18px); color:var(--text-soft); margin:0 auto 32px; max-width:520px; line-height:1.7;">Seu livro merece ser lido.</p>
   <a href="https://pay.hotmart.com/B73928367P?off=h0n7diwh&checkoutMode=10" class="btn-cta large">Quero ser um autor de sucesso →</a>
-  <p style="font-size: 13px; color: var(--text-mute); margin-top: 14px; letter-spacing: 0.02em;">🔒 Garantia de 15 dias · Acesso imediato</p>
+  <div class="cta-trust"><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12.5 2.4 2.4 4.7-5.3"/></svg>Garantia de 15 dias</span><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</span></div>
 </div>
 
 <!-- BLOCO 3 — NÚMEROS -->
@@ -2740,7 +2753,7 @@
     <p style="font-size:clamp(24px,3.4vw,36px); font-weight:700; color:white; letter-spacing:-0.5px; margin:64px auto 6px; max-width:560px; line-height:1.2;">Agora é a sua vez.</p>
     <p style="font-family:'Fraunces',serif; font-style:italic; font-size:clamp(18px,2.2vw,22px); color:var(--accent); margin:0 auto 40px; max-width:560px; line-height:1.3;">No seu livro, no seu contexto.</p>
     <a href="https://pay.hotmart.com/B73928367P?off=h0n7diwh&checkoutMode=10" class="btn-cta large">Quero o Método The Book Business →</a>
-    <p style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 16px; letter-spacing: 0.02em;">Garantia de 15 dias · Acesso imediato</p>
+    <div class="cta-trust cta-trust--dark"><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12.5 2.4 2.4 4.7-5.3"/></svg>Garantia de 15 dias</span><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</span></div>
   </div>
 </section>
 
@@ -2959,7 +2972,7 @@
 
       <p class="neutralizer"><strong>Mesmo sem editora</strong> · <strong>mesmo sem seguidores</strong> · <strong>mesmo que seja o seu primeiro livro</strong></p>
       <a href="https://pay.hotmart.com/B73928367P?off=h0n7diwh&checkoutMode=10" class="btn-cta large" style="width: 100%; box-sizing: border-box;">Quero ser um autor de sucesso →</a>
-      <p style="font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 16px;">Acesso imediato · Garantia de 15 dias</p>
+      <div class="cta-trust cta-trust--dark"><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12.5 2.4 2.4 4.7-5.3"/></svg>Garantia de 15 dias</span><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</span></div>
       <p class="urgency-strip">📅 Entre hoje e já participe do próximo encontro ao vivo com a Dany.</p>
     </div>
   </div>
@@ -3126,7 +3139,7 @@
     <h2>Você foi longe demais<br><span class="italic">pra deixar o livro encalhar.</span></h2>
     <p style="font-size:17px; color:rgba(255,255,255,0.65); line-height:1.6; max-width:480px; margin:0 auto 36px;">O método está aqui. O livro está pronto. O único passo que falta é o seu.</p>
     <a href="https://pay.hotmart.com/B73928367P?off=h0n7diwh&checkoutMode=10" class="btn-cta large">Quero ser um autor de sucesso →</a>
-    <p class="small-text">Pagamento em até 12x sem juros · Acesso imediato</p>
+    <div class="cta-trust cta-trust--dark"><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12.5 2.4 2.4 4.7-5.3"/></svg>Garantia de 15 dias</span><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</span></div>
   </div>
 </section>
 
