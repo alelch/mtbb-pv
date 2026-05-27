@@ -1184,12 +1184,26 @@
     flex-direction: column;
     gap: 22px;
   }
-  .forn-foot {
-    margin-top: 14px;
-    font-size: 12px;
+  .forn-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+  }
+  .forn-list li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13.5px;
     font-weight: 600;
-    color: var(--text-mute);
-    line-height: 1.4;
+    color: var(--text);
+  }
+  .forn-list li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 13px;
+    flex-shrink: 0;
   }
   .del-tags {
     display: flex;
@@ -2733,7 +2747,7 @@
           <div>
             <p class="del-eyebrow-tag">Comunidade</p>
             <h3>Você não lança mais sozinho</h3>
-            <p>Autores aplicando o método ao mesmo tempo que você. Capas evoluem antes de imprimir e parcerias de lançamento nascem aqui dentro.</p>
+            <p>O grupo onde você testa a capa antes da gráfica, encontra parceria de lançamento e tira dúvida com quem já está uns passos à frente.</p>
           </div>
         </div>
 
@@ -2741,11 +2755,17 @@
         <div class="del-card del-card-fornecedores">
           <div>
             <h3>Mapa de Fornecedores do Autor</h3>
-            <p>A parte chata da execução, resolvida — sem perder semanas procurando quem faz cada etapa:</p>
+            <p>A rede que os autores do método já usam pra resolver cada etapa do livro — sem perder semanas procurando quem faz o quê.</p>
           </div>
-          <div class="del-tags">
-            <span>Capistas</span><span>Gráficas</span><span>Designers</span><span>Diagramadores</span><span>Revisores</span><span>Tráfego</span><span>Assessoria</span>
-          </div>
+          <ul class="forn-list">
+            <li>Capistas</li>
+            <li>Gráficas</li>
+            <li>Designers</li>
+            <li>Diagramadores</li>
+            <li>Revisores</li>
+            <li>Tráfego</li>
+            <li>Assessoria</li>
+          </ul>
         </div>
 
       </div>
