@@ -618,7 +618,8 @@
   }
   .mx-in { transform: rotate(-45deg); display: flex; flex-direction: column; align-items: center; gap: 2px; }
   .mx-in span { font-size: 40px; font-weight: 800; color: var(--accent); line-height: 1; text-shadow: 0 0 22px rgba(250,171,0,0.35); transition: color .25s ease, text-shadow .25s ease; }
-  .mx-in b { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 700; }
+  .mx-in b { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.78); font-weight: 700; margin-top: 2px; }
+  .mx-in small { font-size: 8.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-top: 1px; }
   .mx-quad:hover {
     background: linear-gradient(150deg, rgba(250,171,0,0.24) 0%, rgba(250,171,0,0.06) 70%);
     border-color: var(--accent);
@@ -627,6 +628,21 @@
     z-index: 2;
   }
   .mx-quad:hover .mx-in span { color: #FFD36B; text-shadow: 0 0 30px rgba(250,171,0,0.7); }
+  .mx-quad.mx-active {
+    background: linear-gradient(150deg, rgba(250,171,0,0.24) 0%, rgba(250,171,0,0.06) 70%);
+    border-color: var(--accent);
+    transform: scale(1.09);
+    box-shadow: 0 0 50px rgba(250,171,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+    z-index: 2;
+  }
+  .mx-quad.mx-active .mx-in span { color: #FFD36B; text-shadow: 0 0 30px rgba(250,171,0,0.7); }
+  .matrix-list-item { border-radius: 10px; transition: background .2s ease; }
+  .matrix-list-item[data-k] { cursor: pointer; }
+  .matrix-list-letter { transition: box-shadow .2s ease, transform .2s ease; }
+  .matrix-list-text h4 { transition: color .2s ease; }
+  .matrix-list-item.mx-active { background: rgba(250,171,0,0.07); }
+  .matrix-list-item.mx-active .matrix-list-letter { box-shadow: 0 0 18px rgba(250,171,0,0.75); transform: scale(1.08); }
+  .matrix-list-item.mx-active .matrix-list-text h4 { color: var(--accent); }
   .mx-hub {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     width: 116px; height: 116px; border-radius: 50%;
@@ -638,6 +654,11 @@
   }
   .mx-hub span { font-size: 46px; font-weight: 800; line-height: 1; }
   .mx-hub b { font-size: 8.5px; letter-spacing: 1px; font-weight: 800; margin-top: 2px; }
+  .mx-dot { position: absolute; width: 13px; height: 13px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--bg-dark), 0 0 12px rgba(250,171,0,0.95); z-index: 4; }
+  .mx-dot-t { top: 0; left: 50%; transform: translate(-50%, -50%); }
+  .mx-dot-b { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+  .mx-dot-l { left: 0; top: 50%; transform: translate(-50%, -50%); }
+  .mx-dot-r { right: 0; top: 50%; transform: translate(50%, -50%); }
   .mx-hub::before {
     content: ''; position: absolute; inset: -16px; border-radius: 50%; z-index: -1;
     background: conic-gradient(from 0deg, rgba(250,171,0,0) 0deg, rgba(250,171,0,0.75) 55deg, rgba(250,171,0,0) 130deg, rgba(250,171,0,0) 360deg);
@@ -2392,12 +2413,12 @@
     <div class="matrix-body">
       <div class="matrix-diagram">
         <div class="mx-diamond">
-          <div class="mx-quad"><div class="mx-in"><span>A</span><b>Autor</b></div></div>
-          <div class="mx-quad"><div class="mx-in"><span>M</span><b>Mercado</b></div></div>
-          <div class="mx-quad"><div class="mx-in"><span>L</span><b>Leitor</b></div></div>
-          <div class="mx-quad"><div class="mx-in"><span>O</span><b>Obra</b></div></div>
+          <div class="mx-quad" data-k="A"><div class="mx-in"><span>A</span><b>Autor</b><small>Estratégico</small></div></div>
+          <div class="mx-quad" data-k="M"><div class="mx-in"><span>M</span><b>Mercado</b><small>Exponencial</small></div></div>
+          <div class="mx-quad" data-k="L"><div class="mx-in"><span>L</span><b>Leitor</b><small>Ideal</small></div></div>
+          <div class="mx-quad" data-k="O"><div class="mx-in"><span>O</span><b>Obra</b><small>Intencional</small></div></div>
         </div>
-        <div class="mx-hub"><span>F</span><b>FUNDAMENTOS</b></div>
+        <div class="mx-hub"><i class="mx-dot mx-dot-t"></i><i class="mx-dot mx-dot-r"></i><i class="mx-dot mx-dot-b"></i><i class="mx-dot mx-dot-l"></i><span>F</span><b>FUNDAMENTOS</b></div>
       </div>
 
       <ul class="matrix-list">
@@ -2408,28 +2429,28 @@
             <p>As regras do jogo editorial que o autor independente raramente acessa.</p>
           </div>
         </li>
-        <li class="matrix-list-item">
+        <li class="matrix-list-item" data-k="A">
           <div class="matrix-list-letter">A</div>
           <div class="matrix-list-text">
             <h4>Autor Estratégico</h4>
             <p>A engenharia de autoridade que liberta o autor de depender de um único lançamento.</p>
           </div>
         </li>
-        <li class="matrix-list-item">
+        <li class="matrix-list-item" data-k="M">
           <div class="matrix-list-letter">M</div>
           <div class="matrix-list-text">
             <h4>Mercado Exponencial</h4>
             <p>Sazonalidade, posicionamento, concorrência. Onde e quando seu livro tem chance.</p>
           </div>
         </li>
-        <li class="matrix-list-item">
+        <li class="matrix-list-item" data-k="O">
           <div class="matrix-list-letter">O</div>
           <div class="matrix-list-text">
             <h4>Obra Intencional</h4>
             <p>O livro não é passivo. É o seu atacante, e deve ser preparado como tal.</p>
           </div>
         </li>
-        <li class="matrix-list-item">
+        <li class="matrix-list-item" data-k="L">
           <div class="matrix-list-letter">L</div>
           <div class="matrix-list-text">
             <h4>Leitor Ideal</h4>
@@ -3437,5 +3458,20 @@
   })();
 </script>
 
+<script>
+(function(){
+  function init(){
+    document.querySelectorAll('.matrix-body').forEach(function(body){
+      function set(k,on){ body.querySelectorAll('[data-k="'+k+'"]').forEach(function(x){ x.classList.toggle('mx-active', on); }); }
+      body.querySelectorAll('[data-k]').forEach(function(el){
+        var k = el.getAttribute('data-k');
+        el.addEventListener('mouseenter', function(){ set(k, true); });
+        el.addEventListener('mouseleave', function(){ set(k, false); });
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
 </body>
 </html>
