@@ -113,6 +113,21 @@
   .hero-logo span { color: var(--accent); }
   .hero-logo img { height: 58px; width: auto; display: inline-block; }
   @media (max-width: 600px) { .hero-logo img { height: 46px; } }
+  .hero-social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 26px;
+  }
+  .hero-social-avatars { height: 40px; width: auto; display: block; }
+  .hero-social-text { font-size: 15px; color: var(--text-soft); }
+  .hero-social-text strong { color: var(--text); font-weight: 700; }
+  @media (max-width: 600px) {
+    .hero-social { gap: 9px; }
+    .hero-social-avatars { height: 34px; }
+    .hero-social-text { font-size: 13px; }
+  }
   .hero-badge {
     display: inline-block;
     background: var(--accent-soft);
@@ -2111,6 +2126,10 @@
 <section class="hero">
   <div class="container">
     <div class="hero-logo"><img src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business" width="111" height="60" fetchpriority="high"></div>
+    <div class="hero-social">
+      <img class="hero-social-avatars" src="assets/autores-avatares.webp" alt="Autores formados pelo Método The Book Business" width="180" height="40" loading="lazy" decoding="async">
+      <span class="hero-social-text"><strong>+4.8 mil Autores</strong> impactando vidas</span>
+    </div>
     <div class="hero-badge">Para autores prestes a lançar</div>
     <h1>Seu livro está pronto.<br><span style="font-family:'Fraunces',serif; font-style:italic; font-weight:500;">Mas os leitores sabem disso?</span></h1>
     <p class="hero-sub">
