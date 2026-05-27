@@ -2875,15 +2875,20 @@
 </section>
 <script>
 (function(){
-  var MON3=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
-  function lastTue(y,m){var d=new Date(y,m+1,0);d.setDate(d.getDate()-((d.getDay()-2+7)%7));return d;}
-  var now=new Date();
-  var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  var mt=lastTue(now.getFullYear(),now.getMonth());
-  if(today>mt){mt=lastTue(now.getFullYear(),now.getMonth()+1);}
-  var d=document.getElementById('liveDay'),m=document.getElementById('liveMon');
-  if(d){d.textContent=mt.getDate();}
-  if(m){m.textContent=MON3[mt.getMonth()];}
+  function fill(){
+    var MON3=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+    var MONF=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    function lastTue(y,m){var d=new Date(y,m+1,0);d.setDate(d.getDate()-((d.getDay()-2+7)%7));return d;}
+    var now=new Date();
+    var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    var mt=lastTue(now.getFullYear(),now.getMonth());
+    if(today>mt){mt=lastTue(now.getFullYear(),now.getMonth()+1);}
+    var d=document.getElementById('liveDay'),m=document.getElementById('liveMon'),u=document.getElementById('liveUrgency');
+    if(d){d.textContent=mt.getDate();}
+    if(m){m.textContent=MON3[mt.getMonth()];}
+    if(u){u.textContent=mt.getDate()+' de '+MONF[mt.getMonth()];}
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fill);}else{fill();}
 })();
 </script>
 

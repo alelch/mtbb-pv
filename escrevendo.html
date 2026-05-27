@@ -2882,15 +2882,20 @@
 </section>
 <script>
 (function(){
-  var MON3=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
-  function lastTue(y,m){var d=new Date(y,m+1,0);d.setDate(d.getDate()-((d.getDay()-2+7)%7));return d;}
-  var now=new Date();
-  var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  var mt=lastTue(now.getFullYear(),now.getMonth());
-  if(today>mt){mt=lastTue(now.getFullYear(),now.getMonth()+1);}
-  var d=document.getElementById('liveDay'),m=document.getElementById('liveMon');
-  if(d){d.textContent=mt.getDate();}
-  if(m){m.textContent=MON3[mt.getMonth()];}
+  function fill(){
+    var MON3=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+    var MONF=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    function lastTue(y,m){var d=new Date(y,m+1,0);d.setDate(d.getDate()-((d.getDay()-2+7)%7));return d;}
+    var now=new Date();
+    var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    var mt=lastTue(now.getFullYear(),now.getMonth());
+    if(today>mt){mt=lastTue(now.getFullYear(),now.getMonth()+1);}
+    var d=document.getElementById('liveDay'),m=document.getElementById('liveMon'),u=document.getElementById('liveUrgency');
+    if(d){d.textContent=mt.getDate();}
+    if(m){m.textContent=MON3[mt.getMonth()];}
+    if(u){u.textContent=mt.getDate()+' de '+MONF[mt.getMonth()];}
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fill);}else{fill();}
 })();
 </script>
 
@@ -2980,7 +2985,7 @@
       <p class="neutralizer"><strong>Mesmo sem editora</strong> · <strong>mesmo sem seguidores</strong> · <strong>mesmo que seja o seu primeiro livro</strong></p>
       <a href="https://pay.hotmart.com/B73928367P?off=h0n7diwh&checkoutMode=10" class="btn-cta large" style="width: 100%; box-sizing: border-box;">Quero ser um autor de sucesso →</a>
       <div class="cta-trust cta-trust--dark"><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12.5 2.4 2.4 4.7-5.3"/></svg>Garantia de 15 dias</span><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</span></div>
-      <p class="urgency-strip">📅 Entre hoje e já participe do próximo encontro ao vivo com a Dany.</p>
+      <p class="urgency-strip">📅 Entre hoje e já participe do próximo encontro ao vivo com a Dany, dia <strong id="liveUrgency">—</strong>.</p>
     </div>
   </div>
 </section>
