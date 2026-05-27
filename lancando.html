@@ -2026,13 +2026,35 @@
 
 <!-- BLOCO 2 — VSL -->
 <div class="vsl-wrap">
-  <div class="vsl-frame">
+  <div class="vsl-frame" id="vslFrame" role="button" tabindex="0" aria-label="Assistir a aula gratuita">
     <div class="vsl-play">
       <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
     </div>
     <div class="vsl-label">▶ Assistir aula gratuita · 57 min</div>
   </div>
 </div>
+<script>
+(function(){
+  var f = document.getElementById('vslFrame');
+  if (!f) return;
+  var loaded = false;
+  function load(){
+    if (loaded) return; loaded = true;
+    var ifr = document.createElement('iframe');
+    ifr.src = 'https://www.youtube-nocookie.com/embed/sVLzrUURJaw?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    ifr.title = 'Aula gratuita — Método The Book Business';
+    ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    ifr.setAttribute('allowfullscreen', '');
+    ifr.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+    f.innerHTML = '';
+    f.appendChild(ifr);
+    if (window.MTBB_TRACK) { try { window.MTBB_TRACK('vsl_play'); } catch(e){} }
+  }
+  f.style.cursor = 'pointer';
+  f.addEventListener('click', load);
+  f.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); } });
+})();
+</script>
 
 <!-- CTA PÓS-VÍDEO -->
 <div style="text-align: center; padding: 0 24px 56px;">
