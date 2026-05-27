@@ -889,8 +889,8 @@
       grid-template-columns: 1fr;
       gap: 32px;
     }
-    .quad-scene.reverse .quad-visual { order: 1; }
-    .quad-scene.reverse .quad-text { order: 2; }
+    .quad-scene .quad-text, .quad-scene.reverse .quad-text { order: 1; }
+    .quad-scene .quad-visual, .quad-scene.reverse .quad-visual { order: 2; }
   }
   .quad-mega-letter {
     font-family: 'Poppins', sans-serif;
@@ -1677,7 +1677,8 @@
     .bio-photo {
       aspect-ratio: 4 / 5;
       min-height: 0;
-      max-width: 360px;
+      width: 100%;
+      max-width: 300px;
       margin: 0 auto;
     }
   }
