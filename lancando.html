@@ -618,6 +618,10 @@
     transition: transform .3s cubic-bezier(.2,.7,.2,1.35), background .25s ease, border-color .25s ease, box-shadow .3s ease;
   }
   .mx-in { transform: rotate(-45deg); display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .mx-quad[data-k="A"] .mx-in { transform: translate(-14px, -14px) rotate(-45deg); }
+  .mx-quad[data-k="M"] .mx-in { transform: translate(14px, -14px) rotate(-45deg); }
+  .mx-quad[data-k="O"] .mx-in { transform: translate(14px, 14px) rotate(-45deg); }
+  .mx-quad[data-k="L"] .mx-in { transform: translate(-14px, 14px) rotate(-45deg); }
   .mx-in span { font-size: 40px; font-weight: 800; color: var(--accent); line-height: 1; text-shadow: 0 0 22px rgba(250,171,0,0.35); transition: color .25s ease, text-shadow .25s ease; }
   .mx-in b { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.78); font-weight: 700; margin-top: 2px; }
   .mx-in small { font-size: 8.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-top: 1px; }
