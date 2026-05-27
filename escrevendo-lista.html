@@ -594,8 +594,64 @@
     margin: 0 auto;
     aspect-ratio: 1;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
   }
-  .matrix-svg { width: 100%; height: 100%; }
+  .mx-diamond {
+    width: 70%;
+    aspect-ratio: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+    transform: rotate(45deg);
+  }
+  .mx-quad {
+    background: linear-gradient(150deg, #211e17 0%, #121212 62%);
+    border: 1px solid rgba(250,171,0,0.35);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    transition: transform .3s cubic-bezier(.2,.7,.2,1.35), background .25s ease, border-color .25s ease, box-shadow .3s ease;
+  }
+  .mx-in { transform: rotate(-45deg); display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .mx-in span { font-size: 40px; font-weight: 800; color: var(--accent); line-height: 1; text-shadow: 0 0 22px rgba(250,171,0,0.35); transition: color .25s ease, text-shadow .25s ease; }
+  .mx-in b { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 700; }
+  .mx-quad:hover {
+    background: linear-gradient(150deg, rgba(250,171,0,0.24) 0%, rgba(250,171,0,0.06) 70%);
+    border-color: var(--accent);
+    transform: scale(1.09);
+    box-shadow: 0 0 50px rgba(250,171,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+    z-index: 2;
+  }
+  .mx-quad:hover .mx-in span { color: #FFD36B; text-shadow: 0 0 30px rgba(250,171,0,0.7); }
+  .mx-hub {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 116px; height: 116px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 34%, #FFE491 0%, #FFC646 46%, #EE9F00 100%);
+    color: #1a1a1a;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 8px var(--bg-dark), 0 0 64px rgba(250,171,0,0.65);
+    z-index: 3; pointer-events: none;
+  }
+  .mx-hub span { font-size: 46px; font-weight: 800; line-height: 1; }
+  .mx-hub b { font-size: 8.5px; letter-spacing: 1px; font-weight: 800; margin-top: 2px; }
+  .mx-hub::before {
+    content: ''; position: absolute; inset: -16px; border-radius: 50%; z-index: -1;
+    background: conic-gradient(from 0deg, rgba(250,171,0,0) 0deg, rgba(250,171,0,0.75) 55deg, rgba(250,171,0,0) 130deg, rgba(250,171,0,0) 360deg);
+    -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+            mask: radial-gradient(closest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+    animation: mxSpin 3.4s linear infinite;
+  }
+  .mx-hub::after {
+    content: ''; position: absolute; inset: -8px; border-radius: 50%;
+    border: 1.5px solid rgba(250,171,0,0.45); animation: mxHubPulse 2.8s ease-out infinite;
+  }
+  @keyframes mxSpin { to { transform: rotate(360deg); } }
+  @keyframes mxHubPulse { 0% { transform: scale(1); opacity: .5; } 75%, 100% { transform: scale(1.55); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .mx-hub::before, .mx-hub::after { animation: none; } }
   .matrix-list {
     list-style: none;
     display: flex;
@@ -2342,34 +2398,13 @@
 
     <div class="matrix-body">
       <div class="matrix-diagram">
-        <svg class="matrix-svg" viewBox="0 0 400 400">
-          <g transform="translate(200, 200)">
-            <circle cx="0" cy="0" r="58" fill="#FAAB00" />
-            <text x="0" y="-2" text-anchor="middle" fill="#000" font-family="Poppins" font-weight="800" font-size="38">F</text>
-            <text x="0" y="22" text-anchor="middle" fill="#000" font-family="Poppins" font-weight="600" font-size="11" letter-spacing="1.5">FUNDAMENTOS</text>
-
-            <circle cx="0" cy="-140" r="44" fill="#141414" stroke="#FAAB00" stroke-width="1.5" />
-            <text x="0" y="-138" text-anchor="middle" fill="#FAAB00" font-family="Poppins" font-weight="700" font-size="26">A</text>
-            <text x="0" y="-120" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Poppins" font-weight="500" font-size="10" letter-spacing="1">AUTOR</text>
-
-            <circle cx="140" cy="0" r="44" fill="#141414" stroke="#FAAB00" stroke-width="1.5" />
-            <text x="140" y="2" text-anchor="middle" fill="#FAAB00" font-family="Poppins" font-weight="700" font-size="26">M</text>
-            <text x="140" y="20" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Poppins" font-weight="500" font-size="10" letter-spacing="1">MERCADO</text>
-
-            <circle cx="0" cy="140" r="44" fill="#141414" stroke="#FAAB00" stroke-width="1.5" />
-            <text x="0" y="142" text-anchor="middle" fill="#FAAB00" font-family="Poppins" font-weight="700" font-size="26">O</text>
-            <text x="0" y="160" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Poppins" font-weight="500" font-size="10" letter-spacing="1">OBRA</text>
-
-            <circle cx="-140" cy="0" r="44" fill="#141414" stroke="#FAAB00" stroke-width="1.5" />
-            <text x="-140" y="2" text-anchor="middle" fill="#FAAB00" font-family="Poppins" font-weight="700" font-size="26">L</text>
-            <text x="-140" y="20" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Poppins" font-weight="500" font-size="10" letter-spacing="1">LEITOR</text>
-
-            <line x1="0" y1="-58" x2="0" y2="-96" stroke="#FAAB00" stroke-width="1" stroke-dasharray="2,3" opacity="0.4"/>
-            <line x1="58" y1="0" x2="96" y2="0" stroke="#FAAB00" stroke-width="1" stroke-dasharray="2,3" opacity="0.4"/>
-            <line x1="0" y1="58" x2="0" y2="96" stroke="#FAAB00" stroke-width="1" stroke-dasharray="2,3" opacity="0.4"/>
-            <line x1="-58" y1="0" x2="-96" y2="0" stroke="#FAAB00" stroke-width="1" stroke-dasharray="2,3" opacity="0.4"/>
-          </g>
-        </svg>
+        <div class="mx-diamond">
+          <div class="mx-quad"><div class="mx-in"><span>A</span><b>Autor</b></div></div>
+          <div class="mx-quad"><div class="mx-in"><span>M</span><b>Mercado</b></div></div>
+          <div class="mx-quad"><div class="mx-in"><span>L</span><b>Leitor</b></div></div>
+          <div class="mx-quad"><div class="mx-in"><span>O</span><b>Obra</b></div></div>
+        </div>
+        <div class="mx-hub"><span>F</span><b>FUNDAMENTOS</b></div>
       </div>
 
       <ul class="matrix-list">
