@@ -1034,52 +1034,22 @@
     font-weight: 700;
   }
   .del-playbook-visual {
-    background: rgba(250,171,0,0.07);
-    border: 1px solid rgba(250,171,0,0.25);
-    border-radius: 14px;
-    padding: 28px 24px;
-    text-align: center;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  .pb-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    max-width: 250px;
-    margin: 0 auto 18px;
-  }
-  .pb-book {
-    height: 44px;
-    border-radius: 5px 7px 7px 5px;
-    display: flex;
     align-items: center;
-    padding-left: 22px;
-    position: relative;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.45);
-    background: #F4F0E8;
+    gap: 14px;
+    padding: 12px 0 4px;
   }
-  .pb-book:nth-child(2) { background: #ECE5D6; margin-left: 6px; }
-  .pb-book:nth-child(3) { background: #E0D8C6; margin-left: 12px; }
-  .pb-book::before {
-    content: '';
-    position: absolute;
-    left: 10px;
-    top: 7px;
-    bottom: 7px;
-    width: 3px;
-    background: var(--accent);
-    border-radius: 2px;
-  }
-  .pb-book span {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.3px;
-    color: #1A1A1A;
-    text-transform: uppercase;
+  .del-playbook-visual picture { display: block; width: 100%; }
+  .del-playbook-visual img {
+    width: 100%;
+    max-width: 330px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 20px 38px rgba(0,0,0,0.55));
   }
   .pb-caption {
     font-size: 10px;
@@ -1113,50 +1083,105 @@
     margin-bottom: 20px;
   }
 
-  /* LIVE — badge de data */
+  /* LIVE — card âmbar destaque, data dinâmica */
   .del-card-live {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-  .del-live-badge {
-    background: var(--accent);
-    color: #000;
-    border-radius: 14px;
-    padding: 14px 12px;
-    text-align: center;
-    flex-shrink: 0;
-    min-width: 60px;
+    background: linear-gradient(150deg, #FFCB4D 0%, var(--accent) 55%, #E89400 100%);
+    color: #1A1A1A;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 7px;
-  }
-  .dlb-pulse {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: #000;
+    gap: 12px;
     position: relative;
+    overflow: hidden;
+    box-shadow: 0 14px 34px rgba(232,148,0,0.38);
   }
-  .dlb-pulse::after {
+  .del-card-live::after {
     content: '';
     position: absolute;
-    inset: -5px;
-    border-radius: 50%;
-    border: 2px solid rgba(0,0,0,0.45);
-    animation: dlbpulse 1.8s ease-out infinite;
+    right: -40px; top: -40px;
+    width: 150px; height: 150px;
+    background: radial-gradient(circle, rgba(255,255,255,0.45), transparent 70%);
+    pointer-events: none;
   }
-  @keyframes dlbpulse {
-    0%   { transform: scale(0.5); opacity: 1; }
-    100% { transform: scale(1.5); opacity: 0; }
+  .live-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: relative;
   }
-  .dlb-text {
-    font-size: 13px;
+  .live-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #1A1A1A;
+    color: #fff;
+    font-size: 10px;
     font-weight: 800;
-    letter-spacing: 1px;
-    line-height: 1.05;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 11px 5px 9px;
+    border-radius: 100px;
   }
+  .live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #FF4D4D;
+    position: relative;
+  }
+  .live-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1.5px solid #FF4D4D;
+    animation: livepulse 1.6s ease-out infinite;
+  }
+  @keyframes livepulse {
+    0%   { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+  .live-recur {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: rgba(0,0,0,0.55);
+  }
+  .live-date {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    position: relative;
+  }
+  .live-day {
+    font-size: clamp(54px, 7vw, 78px);
+    font-weight: 800;
+    line-height: 0.82;
+    letter-spacing: -3px;
+  }
+  .live-dm { display: flex; flex-direction: column; line-height: 1.05; }
+  .live-mon {
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+  }
+  .live-wd {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.55);
+    letter-spacing: 0.3px;
+  }
+  .del-card-live h3 { color: #1A1A1A; position: relative; }
+  .del-card-live p { color: rgba(0,0,0,0.72); position: relative; }
+  .live-cta {
+    font-weight: 800 !important;
+    color: #1A1A1A !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .live-cta::before { content: '→'; font-weight: 800; }
 
   /* FORNECEDORES */
   .del-card-fornecedores { grid-column: 3; }
@@ -2645,11 +2670,10 @@
           </ul>
         </div>
         <div class="del-playbook-visual">
-          <div class="pb-stack">
-            <div class="pb-book"><span>I · Fundamentos</span></div>
-            <div class="pb-book"><span>II · Estratégia</span></div>
-            <div class="pb-book"><span>III · Execução</span></div>
-          </div>
+          <picture>
+            <source srcset="assets/playbooks.avif" type="image/avif">
+            <img src="assets/playbooks.webp" alt="Os 3 Playbooks físicos do Método The Book Business: Fundamentos, Estratégia e Ativações" loading="lazy" decoding="async">
+          </picture>
           <div class="pb-caption">3 volumes entregues na sua casa</div>
         </div>
       </div>
@@ -2674,15 +2698,20 @@
 
       <!-- ENCONTROS AO VIVO -->
       <div class="del-card del-card-live">
-        <div class="del-live-badge">
-          <span class="dlb-pulse"></span>
-          <div class="dlb-text">AO<br>VIVO</div>
+        <div class="live-top">
+          <span class="live-tag"><span class="live-dot"></span>AO VIVO</span>
+          <span class="live-recur">Toda última terça do mês</span>
         </div>
-        <div>
-          <p class="del-eyebrow-tag">Ao vivo · mensal</p>
-          <h3>Encontros ao Vivo com a Dany</h3>
-          <p>Antes de fechar a capa, antes de assinar com editora, antes de marcar a data — você valida cada decisão com quem já guiou 700 lançamentos.</p>
+        <div class="live-date">
+          <span class="live-day" id="liveDay">—</span>
+          <div class="live-dm">
+            <span class="live-mon" id="liveMon">—</span>
+            <span class="live-wd">terça-feira</span>
+          </div>
         </div>
+        <h3>Encontros ao Vivo com a Dany</h3>
+        <p>Você valida cada decisão — capa, editora, data de lançamento — com quem já guiou 700 lançamentos.</p>
+        <p class="live-cta">Entre hoje e já participe do próximo.</p>
       </div>
 
       <!-- FORNECEDORES — col 3 -->
@@ -2701,6 +2730,19 @@
 
   </div>
 </section>
+<script>
+(function(){
+  var MON3=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+  function lastTue(y,m){var d=new Date(y,m+1,0);d.setDate(d.getDate()-((d.getDay()-2+7)%7));return d;}
+  var now=new Date();
+  var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  var mt=lastTue(now.getFullYear(),now.getMonth());
+  if(today>mt){mt=lastTue(now.getFullYear(),now.getMonth()+1);}
+  var d=document.getElementById('liveDay'),m=document.getElementById('liveMon');
+  if(d){d.textContent=mt.getDate();}
+  if(m){m.textContent=MON3[mt.getMonth()];}
+})();
+</script>
 
 <!-- BLOCO 13 — CASES -->
 <section class="cases-section">
