@@ -1181,6 +1181,17 @@
     flex-direction: column;
     gap: 22px;
   }
+  .forn-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(250,171,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .forn-icon svg { width: 24px; height: 24px; }
   .forn-list {
     list-style: none;
     display: flex;
@@ -2750,8 +2761,15 @@
         <!-- FORNECEDORES -->
         <div class="del-card del-card-fornecedores">
           <div>
+            <div class="forn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FAAB00" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 4 3.5 6v14l5.5-2 6 2 5.5-2V4l-5.5 2-6-2Z"/>
+                <path d="M9 4v14M15 6v14"/>
+                <circle cx="12.2" cy="10.5" r="1.5" fill="#FAAB00" stroke="none"/>
+              </svg>
+            </div>
             <h3>Mapa de Fornecedores do Autor</h3>
-            <p>A rede que os autores do método já usam pra resolver cada etapa do livro — sem perder semanas procurando quem faz o quê.</p>
+            <p>Quem faz cada etapa, já mapeado pra você.</p>
           </div>
           <ul class="forn-list">
             <li>Capistas · Designers</li>
