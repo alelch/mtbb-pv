@@ -176,31 +176,26 @@
 
   /* BLOCO 3 — BARRA DE NÚMEROS */
   .numbers-bar {
-    background: #EBEBEB;
+    background: var(--bg);
     color: var(--text);
-    padding: 72px 0 64px;
+    padding: 72px 0 56px;
   }
   .numbers-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    max-width: 1020px;
+    gap: 32px;
+    text-align: center;
+    max-width: 1000px;
     margin: 0 auto;
   }
   @media (max-width: 700px) {
-    .numbers-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  .number-item {
-    background: #fff;
-    border-radius: 22px;
-    padding: 32px 26px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 44px; }
   }
   .number-item .num {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
-    font-size: clamp(40px, 4.4vw, 54px);
+    font-size: clamp(40px, 5vw, 56px);
     color: var(--accent);
     line-height: 1;
     letter-spacing: -2px;
@@ -208,11 +203,13 @@
   }
   .number-item .label {
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-mute);
-    font-weight: 700;
-    line-height: 1.45;
+    font-weight: 600;
+    line-height: 1.5;
+    max-width: 150px;
+    margin: 0 auto;
   }
 
   /* BLOCO 4 — LOGOS (cinza um pouco mais escuro pra hierarquia) */
