@@ -933,7 +933,7 @@
   /* LAYOUT — 3 colunas flex, alturas independentes */
   .deliverables-grid {
     display: flex;
-    align-items: stretch;
+    align-items: flex-start;
     gap: 12px;
     max-width: 1020px;
     margin: 0 auto;
@@ -943,13 +943,11 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 12px;
   }
   .del-col-center { flex: 2; }
-  .del-col-center .del-card-playbook { height: 100%; }
   @media (max-width: 860px) {
-    .deliverables-grid { flex-wrap: wrap; align-items: flex-start; }
+    .deliverables-grid { flex-wrap: wrap; }
     .del-col { flex: 1 1 100%; }
     .del-col-center { order: -1; }
   }
