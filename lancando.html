@@ -934,7 +934,7 @@
   .deliverables-grid {
     display: grid;
     grid-template-columns: 1fr 1.15fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto auto;
     gap: 12px;
     max-width: 1020px;
     margin: 0 auto;
@@ -1064,8 +1064,10 @@
   .del-card-community {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
+    gap: 24px;
   }
+  .del-stat-block .del-stat-label { margin-bottom: 0; }
   .del-stat {
     font-size: clamp(52px, 6vw, 72px);
     font-weight: 800;
@@ -1089,7 +1091,8 @@
     color: #1A1A1A;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    justify-content: space-between;
+    gap: 14px;
     position: relative;
     overflow: hidden;
     box-shadow: 0 14px 34px rgba(232,148,0,0.38);
@@ -1184,7 +1187,20 @@
   .live-cta::before { content: '→'; font-weight: 800; }
 
   /* FORNECEDORES */
-  .del-card-fornecedores { grid-column: 3; }
+  .del-card-fornecedores {
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 22px;
+  }
+  .forn-foot {
+    margin-top: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-mute);
+    line-height: 1.4;
+  }
   .del-tags {
     display: flex;
     flex-wrap: wrap;
@@ -1206,7 +1222,8 @@
     grid-column: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
+    gap: 24px;
   }
 
   /* Fechamento */
@@ -2680,20 +2697,31 @@
 
       <!-- TRILHA -->
       <div class="del-card del-card-trilha">
-        <div class="del-stat">+70</div>
-        <p class="del-stat-label">aulas no método</p>
-        <p class="del-eyebrow-tag">Conteúdo</p>
-        <h3>Trilha Completa do Método</h3>
-        <p>Do livro pronto ao livro lido. Construída pro mercado editorial brasileiro — não pra infoproduto, não pra e-commerce. Pra livros.</p>
+        <div class="del-stat-block">
+          <div class="del-stat">+70</div>
+          <p class="del-stat-label">aulas no método</p>
+        </div>
+        <div>
+          <p class="del-eyebrow-tag">Conteúdo</p>
+          <h3>Trilha Completa do Método</h3>
+          <p>Do livro pronto ao livro lido. Construída pro mercado editorial brasileiro — não pra infoproduto, não pra e-commerce. Pra livros.</p>
+          <div class="del-tags">
+            <span>Obra</span><span>Mercado</span><span>Leitor</span><span>Autoridade</span><span>Lançamento</span>
+          </div>
+        </div>
       </div>
 
       <!-- COMUNIDADE — col 3, spans 2 rows -->
       <div class="del-card del-card-community">
-        <div class="del-stat">+2.000</div>
-        <p class="del-stat-label">autores reunidos</p>
-        <p class="del-eyebrow-tag">Comunidade</p>
-        <h3>Comunidade de Autores Estratégicos</h3>
-        <p>Autores aplicando o método ao mesmo tempo que você. Onde capas evoluem antes de imprimir, parcerias de lançamento nascem, e você não lança mais sozinho.</p>
+        <div class="del-stat-block">
+          <div class="del-stat">+2.000</div>
+          <p class="del-stat-label">autores reunidos</p>
+        </div>
+        <div>
+          <p class="del-eyebrow-tag">Comunidade</p>
+          <h3>Comunidade de Autores Estratégicos</h3>
+          <p>Autores aplicando o método ao mesmo tempo que você. Onde capas evoluem antes de imprimir, parcerias de lançamento nascem, e você não lança mais sozinho.</p>
+        </div>
       </div>
 
       <!-- ENCONTROS AO VIVO -->
@@ -2716,11 +2744,16 @@
 
       <!-- FORNECEDORES — col 3 -->
       <div class="del-card del-card-fornecedores">
-        <p class="del-eyebrow-tag">Guia</p>
-        <h3>Mapa de Fornecedores do Autor</h3>
-        <p>Quem cuida da capa, onde imprimir, quem revisa, quem divulga. A rede que os autores do método já usam — sem perder tempo procurando.</p>
-        <div class="del-tags">
-          <span>Capistas</span><span>Gráficas</span><span>Designers</span><span>Assessoria</span>
+        <div>
+          <p class="del-eyebrow-tag">Guia</p>
+          <h3>Mapa de Fornecedores do Autor</h3>
+          <p>A parte chata da execução, resolvida: quem faz a capa, onde imprimir, quem revisa, quem diagrama e quem cuida da divulgação.</p>
+        </div>
+        <div class="forn-bottom">
+          <div class="del-tags">
+            <span>Capistas</span><span>Gráficas</span><span>Designers</span><span>Diagramadores</span><span>Revisores</span><span>Tráfego</span><span>Assessoria</span>
+          </div>
+          <p class="forn-foot">Tudo reunido num só lugar — você não perde semanas procurando.</p>
         </div>
       </div>
 
