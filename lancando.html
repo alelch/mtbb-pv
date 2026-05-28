@@ -1744,26 +1744,46 @@
   .hard-question .hq-text em { font-style: normal; color: inherit; }
   .hard-question .hq-text em.hq-white { color: #fff; }
   .hard-question .hq-text em.hq-risco { background: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20300%2018'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8'%20fill%3D'none'%20stroke%3D'%23fff'%20stroke-width%3D'6'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E") no-repeat; background-size: 100% 0.34em; background-position: 0 0.92em; padding-bottom: 0.14em; }
-  .cases-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+  .cases-marquee {
     margin-top: 48px;
-    max-width: 1080px;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
   }
-  @media (max-width: 900px) { .cases-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
-  @media (max-width: 480px) { .cases-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+  .cases-row {
+    display: flex;
+    gap: 18px;
+    width: max-content;
+    animation: cases-marquee 70s linear infinite;
+  }
+  .cases-row.reverse { animation-direction: reverse; }
+  .cases-marquee:hover .cases-row { animation-play-state: paused; }
+  @keyframes cases-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cases-row { animation: none; }
+    .cases-marquee { overflow-x: auto; }
+  }
   .case-card {
+    flex: 0 0 auto;
+    width: 240px;
     border-radius: 18px;
     overflow: hidden;
     background: var(--bg-card);
     box-shadow: 0 6px 22px rgba(0,0,0,0.09);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .case-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.16); }
-  .case-card picture, .case-card img { display: block; width: 100%; height: auto; }
+  .case-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,0.16); }
+  .case-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  @media (max-width: 700px) {
+    .case-card { width: 180px; }
+    .cases-row { animation-duration: 55s; }
+  }
 
   /* BLOCO 13 — BIO DANY */
   .bio-section { background: var(--bg); }
@@ -3118,56 +3138,48 @@
   <div class="container-wide">
     <p class="section-eyebrow">Histórias reais</p>
     <h2 class="section-title">O livro era incrível.<br>O método fez voar.</h2>
-    <p class="section-subtitle">8 autores. 8 nichos. Cada um começou onde você está agora.</p>
+    <p class="section-subtitle">18 autores. 18 nichos. Cada um começou onde você está agora.</p>
 
-    <div class="cases-grid">
-      <div class="case-card">
-        <picture>
-          <source srcset="assets/depoimento-lelo-apovian.avif" type="image/avif">
-          <img src="assets/depoimento-lelo-apovian.webp" alt="Depoimento — Lelo Apovian" loading="lazy" decoding="async">
-        </picture>
+    <div class="cases-marquee">
+      <div class="cases-row">
+        <div class="case-card"><img src="assets/caso-01.webp" alt="Caso de sucesso — autor 1" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-02.webp" alt="Caso de sucesso — autor 2" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-03.webp" alt="Caso de sucesso — autor 3" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-04.webp" alt="Caso de sucesso — autor 4" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-05.webp" alt="Caso de sucesso — autor 5" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-06.webp" alt="Caso de sucesso — autor 6" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-07.webp" alt="Caso de sucesso — autor 7" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-08.webp" alt="Caso de sucesso — autor 8" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-09.webp" alt="Caso de sucesso — autor 9" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-01.webp" alt="Caso de sucesso — autor 1" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-02.webp" alt="Caso de sucesso — autor 2" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-03.webp" alt="Caso de sucesso — autor 3" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-04.webp" alt="Caso de sucesso — autor 4" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-05.webp" alt="Caso de sucesso — autor 5" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-06.webp" alt="Caso de sucesso — autor 6" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-07.webp" alt="Caso de sucesso — autor 7" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-08.webp" alt="Caso de sucesso — autor 8" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-09.webp" alt="Caso de sucesso — autor 9" loading="lazy" decoding="async"></div>
       </div>
-      <div class="case-card">
-        <picture>
-          <source srcset="assets/depoimento-aure-aguiar.avif" type="image/avif">
-          <img src="assets/depoimento-aure-aguiar.webp" alt="Depoimento — Aurê Aguiar" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="case-card">
-        <picture>
-          <source srcset="assets/depoimento-profinho.avif" type="image/avif">
-          <img src="assets/depoimento-profinho.webp" alt="Depoimento — Profinho" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="case-card">
-        <picture>
-          <source srcset="assets/depoimento-cica-rocha.avif" type="image/avif">
-          <img src="assets/depoimento-cica-rocha.webp" alt="Depoimento — Ciça Rocha" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="case-card">
-        <picture>
-          <source srcset="assets/depoimento-cibele-laurentino.avif" type="image/avif">
-          <img src="assets/depoimento-cibele-laurentino.webp" alt="Depoimento — Cibele Laurentino" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="case-card">
-        <picture>
-          <source srcset="assets/depoimento-candice-pascoal.avif" type="image/avif">
-          <img src="assets/depoimento-candice-pascoal.webp" alt="Depoimento — Candice Pascoal" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="case-card">
-        <picture>
-          <source srcset="assets/depoimento-emilia-nunes.avif" type="image/avif">
-          <img src="assets/depoimento-emilia-nunes.webp" alt="Depoimento — Emília Nuñes" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="case-card">
-        <picture>
-          <source srcset="assets/depoimento-robson-leite.avif" type="image/avif">
-          <img src="assets/depoimento-robson-leite.webp" alt="Depoimento — Robson Leite" loading="lazy" decoding="async">
-        </picture>
+      <div class="cases-row reverse">
+        <div class="case-card"><img src="assets/caso-10.webp" alt="Caso de sucesso — autor 10" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-11.webp" alt="Caso de sucesso — autor 11" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-12.webp" alt="Caso de sucesso — autor 12" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-13.webp" alt="Caso de sucesso — autor 13" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-14.webp" alt="Caso de sucesso — autor 14" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-15.webp" alt="Caso de sucesso — autor 15" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-16.webp" alt="Caso de sucesso — autor 16" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-17.webp" alt="Caso de sucesso — autor 17" loading="lazy" decoding="async"></div>
+        <div class="case-card"><img src="assets/caso-18.webp" alt="Caso de sucesso — autor 18" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-10.webp" alt="Caso de sucesso — autor 10" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-11.webp" alt="Caso de sucesso — autor 11" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-12.webp" alt="Caso de sucesso — autor 12" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-13.webp" alt="Caso de sucesso — autor 13" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-14.webp" alt="Caso de sucesso — autor 14" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-15.webp" alt="Caso de sucesso — autor 15" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-16.webp" alt="Caso de sucesso — autor 16" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-17.webp" alt="Caso de sucesso — autor 17" loading="lazy" decoding="async"></div>
+        <div class="case-card" aria-hidden="true"><img src="assets/caso-18.webp" alt="Caso de sucesso — autor 18" loading="lazy" decoding="async"></div>
       </div>
     </div>
     <p class="cases-closing">Estes autores começaram <span class="hl-here-wrap"><span class="hl-here-marker"><svg class="hl-here-arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="#FAAB00" stroke-width="2.4" stroke-linecap="round"/><path d="M52,34 L66,40 L60,28" stroke="#FAAB00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Você está aqui.</span><span class="hl-grifo">lendo esta mesma página</span></span>.<br><strong>Você é o próximo.</strong></p>
