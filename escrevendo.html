@@ -1193,8 +1193,10 @@
     font-variant-numeric: tabular-nums;
   }
   .offer-price-block .op-save strong { color: var(--accent); font-weight: 700; }
-  .offer-price-block .op-installment { color: rgba(255,255,255,0.55); font-size: 14px; margin-top: 12px; }
-  .offer-price-block .op-installment strong { color: rgba(255,255,255,0.92); font-weight: 600; }
+  .offer-price-block .op-price-big .op-x { font-size: 0.42em; font-weight: 700; margin-right: 10px; vertical-align: middle; letter-spacing: -0.5px; line-height: 1; opacity: 0.95; }
+  .offer-price-block .op-price-big .op-cents { font-size: 0.5em; letter-spacing: -1px; vertical-align: text-top; line-height: 1.1; margin-left: 2px; }
+  .offer-price-block .op-cash { color: rgba(255,255,255,0.7); font-size: 15px; margin-top: 14px; }
+  .offer-price-block .op-cash strong { color: rgba(255,255,255,0.95); font-weight: 700; }
   .offer-card .btn-cta { white-space: nowrap; min-width: 0; }
   @media (max-width: 520px) { .offer-card .btn-cta { white-space: normal; } }
 
@@ -3252,9 +3254,9 @@
       <div class="offer-price-block">
         <div class="op-anchor"><s>De R$ 7.400</s></div>
         <span class="op-now-label">Hoje</span>
-        <div class="op-price-big"><span class="currency">R$</span>1.500</div>
+        <div class="op-price-big"><span class="op-x">12×</span><span class="currency">R$</span>149<span class="op-cents">,71</span></div>
+        <div class="op-cash">ou <strong>R$ 1.500</strong> à vista</div>
         <div class="op-save">você economiza <strong>R$ 5.900</strong> (80% off)</div>
-        <div class="op-installment">ou em até <strong>12× sem juros</strong> no cartão</div>
       </div>
 
       <p class="neutralizer"><strong>Mesmo sem editora</strong> · <strong>mesmo sem seguidores</strong> · <strong>mesmo que seja o seu primeiro livro</strong></p>
