@@ -1382,9 +1382,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    flex-shrink: 0;
   }
   .forn-icon svg { width: 24px; height: 24px; }
+  .forn-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .forn-head h3 { margin: 0; }
   .forn-list {
     list-style: none;
     display: flex;
@@ -2914,7 +2916,7 @@
 <section class="hard-question">
   <div class="container">
     <p class="hq-eyebrow">A pergunta que ninguém te faz</p>
-    <h2 class="hq-text">Você só lança seu livro <em class="hq-white">uma vez</em>. Se for sozinho e der errado, <em class="hq-risco">e aí?</em></h2>
+    <h2 class="hq-text">Você só lança seu livro <em class="hq-white">uma vez</em>.<br>Se for sozinho e der errado, <em class="hq-risco">e aí?</em></h2>
   </div>
 </section>
 
@@ -3005,14 +3007,16 @@
         <!-- FORNECEDORES -->
         <div class="del-card del-card-fornecedores">
           <div>
-            <div class="forn-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#FAAB00" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 4 3.5 6v14l5.5-2 6 2 5.5-2V4l-5.5 2-6-2Z"/>
-                <path d="M9 4v14M15 6v14"/>
-                <circle cx="12.2" cy="10.5" r="1.5" fill="#FAAB00" stroke="none"/>
-              </svg>
+            <div class="forn-head">
+              <div class="forn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FAAB00" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 4 3.5 6v14l5.5-2 6 2 5.5-2V4l-5.5 2-6-2Z"/>
+                  <path d="M9 4v14M15 6v14"/>
+                  <circle cx="12.2" cy="10.5" r="1.5" fill="#FAAB00" stroke="none"/>
+                </svg>
+              </div>
+              <h3>Mapa de Fornecedores do Autor</h3>
             </div>
-            <h3>Mapa de Fornecedores do Autor</h3>
             <p>Tenha acesso à <strong>indicação de profissionais confiáveis e testados</strong> do mercado que te ajudam em cada etapa.</p>
           </div>
           <ul class="forn-list">
