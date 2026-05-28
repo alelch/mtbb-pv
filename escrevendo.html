@@ -1135,6 +1135,54 @@
     filter: none;
   }
 
+  /* #6 OFFER STACK COM VALOR */
+  .offer-stack.offer-stack-priced li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .offer-stack.offer-stack-priced li:last-child { border-bottom: none; }
+  .offer-stack.offer-stack-priced .os-item { flex: 1; }
+  .offer-stack.offer-stack-priced .os-price {
+    flex-shrink: 0;
+    color: rgba(255,255,255,0.45);
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+  }
+  .offer-stack.offer-stack-priced .os-total {
+    margin-top: 6px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    font-weight: 700;
+  }
+  .offer-stack.offer-stack-priced .os-total .os-item { color: rgba(255,255,255,0.95); }
+  .offer-stack.offer-stack-priced .os-total .os-price { color: var(--accent); font-size: 17px; }
+  .offer-price-block { margin-top: 28px; text-align: center; }
+  .offer-price-block .op-anchor { color: rgba(255,255,255,0.4); font-size: 16px; margin-bottom: 4px; letter-spacing: 0.4px; }
+  .offer-price-block .op-now { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 14px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .offer-price-block .op-now .price { font-size: clamp(48px, 7vw, 72px); color: var(--accent); font-weight: 800; line-height: 1; letter-spacing: -2px; text-transform: none; }
+  .offer-price-block .op-now .price .currency { font-size: 0.5em; vertical-align: top; margin-right: 4px; font-weight: 600; letter-spacing: 0; }
+  .offer-price-block .op-save { color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 10px; }
+  .offer-price-block .op-save strong { color: var(--accent); font-weight: 700; }
+
+  /* #7 FUTURE PACING */
+  .fp-section { background: var(--bg); padding: 88px 24px; }
+  .fp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1080px; margin: 0 auto; }
+  @media (max-width: 760px) { .fp-grid { grid-template-columns: 1fr; } }
+  .fp-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
+  .fp-card-mid { border-color: rgba(250,171,0,0.4); background: #FFFDF5; transform: translateY(-8px); }
+  @media (max-width: 760px) { .fp-card-mid { transform: none; } }
+  .fp-when { font-size: 13px; letter-spacing: 0.18em; color: var(--text-mute); text-transform: uppercase; margin-bottom: 6px; }
+  .fp-when strong { color: var(--accent); font-weight: 700; font-size: 18px; letter-spacing: -0.5px; text-transform: none; }
+  .fp-headline { font-size: clamp(20px, 2vw, 22px); font-weight: 700; color: var(--text); letter-spacing: -0.5px; margin-bottom: 18px; }
+  .fp-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .fp-list li { color: var(--text); font-size: 15px; line-height: 1.5; padding-left: 22px; position: relative; }
+  .fp-list li::before { content: "✓"; position: absolute; left: 0; top: 1px; color: var(--accent); font-weight: 700; }
+  .fp-list li strong { font-weight: 700; color: var(--text); }
+
   /* DELIVERABLES — BENTO APPLE STYLE */
   .deliverables-section {
     background: #EBEBEB;
@@ -3168,6 +3216,45 @@
 </section>
 
 <!-- BLOCO 14 — OFERTA -->
+<!-- BLOCO 13.5 — FUTURE PACING -->
+<section class="fp-section">
+  <div class="container">
+    <p class="section-eyebrow" style="text-align:center;">O que vem depois</p>
+    <h2 class="section-title" style="color:var(--text);">Onde você vai estar.</h2>
+    <p class="section-subtitle" style="margin-bottom:48px;">Marcos concretos que cada autor estratégico atravessa.</p>
+
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-when">Em <strong>90 dias</strong></div>
+        <div class="fp-headline">A base pronta.</div>
+        <ul class="fp-list">
+          <li><strong>Posicionamento</strong> e <strong>Leitor Ideal</strong> mapeados</li>
+          <li>Cronograma editorial em mãos, mês a mês</li>
+          <li>Audiência <strong>aquecida</strong> antes do lançamento</li>
+        </ul>
+      </div>
+      <div class="fp-card fp-card-mid">
+        <div class="fp-when">Em <strong>6 meses</strong></div>
+        <div class="fp-headline">O livro chegando.</div>
+        <ul class="fp-list">
+          <li>Lançamento com <strong>estratégia</strong>, não improviso</li>
+          <li>Vendas iniciais consistentes (não só pra amigos)</li>
+          <li>Autoridade construída no <strong>seu nicho</strong></li>
+        </ul>
+      </div>
+      <div class="fp-card">
+        <div class="fp-when">Em <strong>12 meses</strong></div>
+        <div class="fp-headline">O livro permanecendo.</div>
+        <ul class="fp-list">
+          <li>Vendas <strong>recorrentes</strong> mensais</li>
+          <li>Vitrine das <strong>grandes livrarias</strong></li>
+          <li>Base de leitores fiéis pro próximo livro</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="offer-section">
   <div class="container">
     <p class="section-eyebrow">A oferta completa</p>
@@ -3176,19 +3263,21 @@
 
     <div class="offer-card">
       <div class="label">MÉTODO THE BOOK BUSINESS</div>
-      <div style="font-size:13px; color:rgba(255,255,255,0.35); text-decoration:line-through; margin-bottom:4px; letter-spacing:0.5px;">De R$ 2.997</div>
-      <div class="price"><span class="currency">R$</span>1.500</div>
-      <div class="installment">ou em até <strong>12x sem juros</strong> no cartão</div>
-
-      <ul class="offer-stack">
-        <li>3 Playbooks do Autor Estratégico (físicos)</li>
-        <li>Sessões mensais ao vivo com a Dany</li>
-        <li>A Comunidade dos Autores Estratégicos</li>
-        <li>Suporte direto via WhatsApp</li>
-        <li>Acesso ao método completo em vídeo · 2 anos</li>
-        <li>Templates, frameworks e planilhas</li>
-        <li>Atualizações contínuas inclusas</li>
+      <ul class="offer-stack offer-stack-priced">
+        <li><span class="os-item">Trilha completa do Método (vídeo · 2 anos)</span><span class="os-price">R$ 2.400</span></li>
+        <li><span class="os-item">3 Playbooks físicos do Autor Estratégico</span><span class="os-price">R$ 600</span></li>
+        <li><span class="os-item">Sessões mensais ao vivo com a Dany (12 meses)</span><span class="os-price">R$ 1.800</span></li>
+        <li><span class="os-item">A Comunidade dos Autores Estratégicos (12 meses)</span><span class="os-price">R$ 1.200</span></li>
+        <li><span class="os-item">Suporte direto via WhatsApp</span><span class="os-price">R$ 600</span></li>
+        <li><span class="os-item">Templates, frameworks e planilhas</span><span class="os-price">R$ 400</span></li>
+        <li><span class="os-item">Mapa de Fornecedores indicados</span><span class="os-price">R$ 400</span></li>
+        <li class="os-total"><span class="os-item">Valor total</span><span class="os-price">R$ 7.400</span></li>
       </ul>
+      <div class="offer-price-block">
+        <div class="op-anchor"><s>De R$ 7.400</s></div>
+        <div class="op-now">Hoje: <span class="price"><span class="currency">R$</span>1.500</span></div>
+        <div class="op-save">você economiza <strong>R$ 5.900</strong> · até <strong>12x sem juros</strong></div>
+      </div>
 
       <p class="neutralizer"><strong>Mesmo sem editora</strong> · <strong>mesmo sem seguidores</strong> · <strong>mesmo que seja o seu primeiro livro</strong></p>
       <a href="https://pay.hotmart.com/B73928367P?off=h0n7diwh&checkoutMode=10" class="btn-cta large" style="width: 100%; box-sizing: border-box;">Quero ser um autor de sucesso →</a>
