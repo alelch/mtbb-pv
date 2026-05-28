@@ -3542,5 +3542,49 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
+
+<script>
+(function(){
+  function init(){
+    var nums=document.querySelectorAll('.numbers-bar .num');
+    if(!nums.length) return;
+    var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    nums.forEach(function(el){
+      var t=el.textContent.trim();
+      var m=t.match(/^([+\-]?)([\d.]+)([A-Za-zÀ-ÿ]*)$/);
+      if(!m){ el.dataset.skip='1'; return; }
+      el.dataset.prefix=m[1]; el.dataset.suffix=m[3];
+      el.dataset.target=String(parseFloat(m[2].replace(/\./g,'')));
+      el.dataset.hasDot=m[2].indexOf('.')!==-1?'1':'0';
+      if(!reduced) el.textContent=m[1]+'0'+m[3];
+    });
+    var done=false;
+    function animate(){
+      if(done) return; done=true;
+      if(reduced){ nums.forEach(function(el){ if(el.dataset.skip) return; el.textContent=el.dataset.prefix+(el.dataset.hasDot==='1'?parseInt(el.dataset.target).toLocaleString('pt-BR'):el.dataset.target)+el.dataset.suffix; }); return; }
+      var DUR=1600, start=performance.now();
+      function tick(now){
+        var p=Math.min((now-start)/DUR,1);
+        var e=1-Math.pow(1-p,3);
+        nums.forEach(function(el){
+          if(el.dataset.skip) return;
+          var tgt=parseFloat(el.dataset.target);
+          var v=Math.round(tgt*e);
+          var s=el.dataset.hasDot==='1'?v.toLocaleString('pt-BR'):String(v);
+          el.textContent=el.dataset.prefix+s+el.dataset.suffix;
+        });
+        if(p<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    var bar=document.querySelector('.numbers-bar');
+    if('IntersectionObserver' in window && bar){
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ animate(); io.disconnect(); } }); }, {threshold:0.4});
+      io.observe(bar);
+    } else { animate(); }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
 </body>
 </html>
