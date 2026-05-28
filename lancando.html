@@ -1699,21 +1699,23 @@
   .cases-closing .hl-here-wrap { position: relative; display: inline-block; }
   .cases-closing .hl-here-marker {
     position: absolute;
-    bottom: 100%;
-    left: -8px;
-    margin-bottom: 2px;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
     font-family: 'Caveat', cursive;
     font-weight: 600;
     font-size: 22px;
     line-height: 1.1;
     color: var(--accent);
-    text-align: left;
-    transform: rotate(-4deg);
-    transform-origin: bottom left;
+    transform: rotate(3deg);
+    transform-origin: top right;
     pointer-events: none;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
-  .cases-closing .hl-here-arrow { display: block; width: 58px; height: 34px; margin: 2px 0 0 24px; }
+  .cases-closing .hl-here-arrow { width: 58px; height: 34px; transform: rotate(180deg); }
   @media (max-width: 760px) {
     .cases-closing .hl-here-marker { display: none; }
   }
@@ -3168,7 +3170,7 @@
         </picture>
       </div>
     </div>
-    <p class="cases-closing">Estes autores começaram <span class="hl-here-wrap"><span class="hl-here-marker">Você está aqui.<svg class="hl-here-arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="#FAAB00" stroke-width="2.4" stroke-linecap="round"/><path d="M52,34 L66,40 L60,28" stroke="#FAAB00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="hl-grifo">onde você está agora</span></span><br>lendo esta mesma página.<br><strong>Você é o próximo.</strong></p>
+    <p class="cases-closing">Estes autores começaram <span class="hl-here-wrap"><span class="hl-here-marker"><svg class="hl-here-arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="#FAAB00" stroke-width="2.4" stroke-linecap="round"/><path d="M52,34 L66,40 L60,28" stroke="#FAAB00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Você está aqui.</span><span class="hl-grifo">onde você está agora</span></span><br>lendo esta mesma página.<br><strong>Você é o próximo.</strong></p>
   </div>
 </section>
 
