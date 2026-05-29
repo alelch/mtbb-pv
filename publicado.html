@@ -1136,6 +1136,13 @@
   }
 
   /* #6 OFFER STACK COM VALOR */
+  .oc-accent-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 30%, #FFD580 50%, var(--accent) 70%, transparent 100%);
+    opacity: 0.85;
+  }
   .oc-brand {
     text-align: center;
     padding-bottom: 32px;
@@ -1187,46 +1194,85 @@
   .offer-stack.offer-stack-priced .os-total .os-item { color: rgba(255,255,255,0.96); }
   .offer-stack.offer-stack-priced .os-total .os-price { color: var(--accent); font-size: 20px; letter-spacing: -0.5px; }
 
-  .offer-price-block { margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
-  .offer-price-block .op-prefix {
-    font-size: 12px;
-    letter-spacing: 0.3em;
+  .offer-price-block {
+    position: relative;
+    margin-top: 36px;
+    padding-top: 40px;
+    text-align: center;
+  }
+  .offer-price-block::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  }
+  .offer-price-block .op-glow {
+    position: absolute;
+    top: 20%; left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 220px;
+    background: radial-gradient(ellipse 60% 60% at center, rgba(250,171,0,0.16), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .offer-price-block > * { position: relative; z-index: 1; }
+  .offer-price-block .op-prefix-pill {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-    font-weight: 600;
-    margin-bottom: 8px;
+    color: var(--accent);
+    font-weight: 700;
+    padding: 6px 16px;
+    background: rgba(250,171,0,0.12);
+    border: 1px solid rgba(250,171,0,0.34);
+    border-radius: 100px;
+    margin-bottom: 18px;
   }
   .offer-price-block .op-price {
-    font-size: clamp(56px, 8vw, 80px);
-    color: var(--accent);
+    font-size: clamp(60px, 8.5vw, 88px);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: -3px;
+    letter-spacing: -3.5px;
     font-variant-numeric: tabular-nums;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    background: linear-gradient(180deg, #FFE7A8 0%, var(--accent) 70%, #E89400 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 8px 30px rgba(250,171,0,0.28));
   }
-  .offer-price-block .op-meta { color: rgba(255,255,255,0.7); font-size: 15px; }
-  .offer-price-block .op-meta strong { color: rgba(255,255,255,0.95); font-weight: 700; }
+  .offer-price-block .op-meta { color: rgba(255,255,255,0.72); font-size: 15px; }
+  .offer-price-block .op-meta strong { color: rgba(255,255,255,0.96); font-weight: 700; }
+  .offer-price-block .op-deal-wrap {
+    margin-top: 32px;
+    margin-bottom: 8px;
+  }
   .offer-price-block .op-deal {
     display: inline-flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0 10px;
-    margin-top: 24px;
-    padding: 10px 22px;
-    background: rgba(250,171,0,0.13);
-    border: 1px solid rgba(250,171,0,0.4);
+    padding: 11px 22px;
+    background: linear-gradient(180deg, rgba(250,171,0,0.16), rgba(250,171,0,0.08));
+    border: 1px solid rgba(250,171,0,0.42);
     border-radius: 100px;
-    color: rgba(255,255,255,0.88);
+    color: rgba(255,255,255,0.9);
     font-size: 13.5px;
     letter-spacing: 0.2px;
     font-variant-numeric: tabular-nums;
+    box-shadow: 0 6px 20px rgba(250,171,0,0.12);
   }
-  .offer-price-block .op-deal .op-anchor { text-decoration: line-through; color: rgba(255,255,255,0.45); }
+  .offer-price-block .op-deal .op-anchor { text-decoration: line-through; color: rgba(255,255,255,0.5); }
   .offer-price-block .op-deal .op-save-text strong { color: var(--accent); font-weight: 700; }
-  .offer-price-block .op-deal .op-off { color: var(--accent); font-weight: 700; letter-spacing: 0.5px; }
+  .offer-price-block .op-deal .op-off { color: var(--accent); font-weight: 800; letter-spacing: 0.6px; }
   .offer-price-block .op-deal .op-dot { color: rgba(255,255,255,0.3); }
+  .offer-card .neutralizer { margin-top: 32px !important; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); }
   .offer-card .btn-cta { white-space: nowrap; min-width: 0; }
   @media (max-width: 520px) { .offer-card .btn-cta { white-space: normal; } }
 
@@ -1957,10 +2003,13 @@
   .offer-card {
     max-width: 560px;
     margin: 48px auto 0;
-    background: var(--bg-dark-soft);
-    border: 1px solid rgba(250,171,0,0.3);
-    border-radius: 20px;
-    padding: 44px 44px 40px;
+    background: linear-gradient(180deg, #1E1E1E 0%, #141414 100%);
+    border: 1px solid rgba(250,171,0,0.32);
+    border-radius: 22px;
+    padding: 48px 44px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
     text-align: center;
   }
   .offer-card .label {
@@ -3270,6 +3319,7 @@
     <p style="text-align:center; font-family:'Fraunces',serif; font-style:italic; font-size:clamp(18px,2.2vw,24px); color:rgba(255,255,255,0.75); margin-top:16px; margin-bottom:48px; letter-spacing:-0.3px;">Cada dia sem estratégia é um leitor a menos.</p>
 
     <div class="offer-card">
+      <div class="oc-accent-top" aria-hidden="true"></div>
       <div class="oc-brand">
         <img class="oc-brand-img" src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business" width="180" height="98">
       </div>
@@ -3283,15 +3333,18 @@
         <li class="os-total"><span class="os-item">Valor total</span><span class="os-price">R$ 6.800</span></li>
       </ul>
       <div class="offer-price-block">
-        <div class="op-prefix">Em 12× de</div>
+        <div class="op-glow" aria-hidden="true"></div>
+        <span class="op-prefix-pill">EM 12× DE</span>
         <div class="op-price">R$ 149,71</div>
         <div class="op-meta">ou <strong>R$ 1.500</strong> à vista · sem juros</div>
-        <div class="op-deal">
-          <span class="op-anchor">De R$ 6.800</span>
-          <span class="op-dot">·</span>
-          <span class="op-save-text">economiza <strong>R$ 5.300</strong></span>
-          <span class="op-dot">·</span>
-          <span class="op-off">78% OFF</span>
+        <div class="op-deal-wrap">
+          <div class="op-deal">
+            <span class="op-anchor">De R$ 6.800</span>
+            <span class="op-dot">·</span>
+            <span class="op-save-text">economiza <strong>R$ 5.300</strong></span>
+            <span class="op-dot">·</span>
+            <span class="op-off">78% OFF</span>
+          </div>
         </div>
       </div>
 
