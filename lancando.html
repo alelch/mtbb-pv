@@ -1136,6 +1136,19 @@
   }
 
   /* #6 OFFER STACK COM VALOR */
+  .oc-brand {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .oc-brand-img {
+    height: 64px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.96;
+    display: inline-block;
+  }
   .offer-stack.offer-stack-priced {
     margin: 0;
     padding: 0 0 8px;
@@ -1174,7 +1187,7 @@
   .offer-stack.offer-stack-priced .os-total .os-item { color: rgba(255,255,255,0.96); }
   .offer-stack.offer-stack-priced .os-total .os-price { color: var(--accent); font-size: 20px; letter-spacing: -0.5px; }
 
-  .offer-price-block { margin-top: 32px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+  .offer-price-block { margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
   .offer-price-block .op-prefix {
     font-size: 12px;
     letter-spacing: 0.3em;
@@ -1184,11 +1197,11 @@
     margin-bottom: 8px;
   }
   .offer-price-block .op-price {
-    font-size: clamp(68px, 9.5vw, 100px);
+    font-size: clamp(56px, 8vw, 80px);
     color: var(--accent);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: -3.5px;
+    letter-spacing: -3px;
     font-variant-numeric: tabular-nums;
     margin-bottom: 14px;
   }
@@ -1942,12 +1955,12 @@
     text-align: center;
   }
   .offer-card {
-    max-width: 540px;
+    max-width: 560px;
     margin: 48px auto 0;
     background: var(--bg-dark-soft);
     border: 1px solid rgba(250,171,0,0.3);
-    border-radius: 16px;
-    padding: 48px 40px;
+    border-radius: 20px;
+    padding: 44px 44px 40px;
     text-align: center;
   }
   .offer-card .label {
@@ -3250,6 +3263,9 @@
     <p style="text-align:center; font-family:'Fraunces',serif; font-style:italic; font-size:clamp(18px,2.2vw,24px); color:rgba(255,255,255,0.75); margin-top:16px; margin-bottom:48px; letter-spacing:-0.3px;">Cada dia sem estratégia é um leitor a menos.</p>
 
     <div class="offer-card">
+      <div class="oc-brand">
+        <img class="oc-brand-img" src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business" width="180" height="98">
+      </div>
       <ul class="offer-stack offer-stack-priced">
         <li><span class="os-item">Método The Book Business Completo (acesso por 2 anos)</span><span class="os-price">R$ 2.400</span></li>
         <li><span class="os-item">PlayBooks MTBB (enviados para sua residência)</span><span class="os-price">R$ 600</span></li>
