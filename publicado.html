@@ -1137,10 +1137,9 @@
 
   /* #6 OFFER STACK COM VALOR */
   .offer-stack.offer-stack-priced {
-    margin: 28px 0 0;
-    padding: 8px 0 24px;
-    border-top: 1px solid rgba(255,255,255,0.12);
-    border-bottom: none;
+    margin: 0;
+    padding: 0 0 8px;
+    border: none;
   }
   .offer-stack.offer-stack-priced li {
     display: flex;
@@ -1175,59 +1174,64 @@
   .offer-stack.offer-stack-priced .os-total .os-item { color: rgba(255,255,255,0.96); }
   .offer-stack.offer-stack-priced .os-total .os-price { color: var(--accent); font-size: 20px; letter-spacing: -0.5px; }
 
-  .offer-price-block { margin-top: 28px; text-align: center; }
-  .offer-price-block .op-anchor { color: rgba(255,255,255,0.42); font-size: 16px; margin-bottom: 18px; letter-spacing: 0.3px; font-variant-numeric: tabular-nums; }
-  .offer-price-block .op-now-label { display: block; font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 3px; font-weight: 600; margin-bottom: 4px; }
-  .offer-price-block .op-price-big {
+  .offer-price-block { margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+  .offer-price-block .op-anchor { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 24px; letter-spacing: 0.3px; font-variant-numeric: tabular-nums; }
+  .offer-price-block .op-prefix {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: rgba(255,255,255,0.55);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .offer-price-block .op-price {
     display: inline-flex;
-    align-items: flex-start;
+    align-items: baseline;
     justify-content: center;
-    gap: 4px;
-    font-size: clamp(52px, 8.5vw, 84px);
     color: var(--accent);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: -2.5px;
     font-variant-numeric: tabular-nums;
+    letter-spacing: -3px;
   }
-  .offer-price-block .op-price-big .op-prefix {
-    font-size: 0.42em;
-    align-self: center;
-    margin-right: 6px;
-    letter-spacing: -0.5px;
-    opacity: 0.95;
-  }
-  .offer-price-block .op-price-big .op-currency {
-    font-size: 0.4em;
-    align-self: flex-start;
-    margin-top: 0.18em;
-    letter-spacing: 0;
+  .offer-price-block .op-price .op-currency {
+    font-size: 30px;
     font-weight: 700;
+    letter-spacing: 0;
+    margin-right: 10px;
+    align-self: flex-start;
+    line-height: 1.4;
   }
-  .offer-price-block .op-price-big .op-num { line-height: 0.95; }
-  .offer-price-block .op-price-big .op-cents {
-    font-size: 0.5em;
-    vertical-align: top;
-    line-height: 1;
+  .offer-price-block .op-price .op-amount {
+    font-size: clamp(72px, 10vw, 100px);
+  }
+  .offer-price-block .op-price .op-cents {
+    font-size: clamp(28px, 4vw, 40px);
     letter-spacing: -1px;
+    align-self: flex-start;
+    line-height: 1.6;
     margin-left: 2px;
-    top: 0.2em;
   }
+  .offer-price-block .op-cash {
+    color: rgba(255,255,255,0.72);
+    font-size: 15px;
+    margin-top: 18px;
+  }
+  .offer-price-block .op-cash strong { color: rgba(255,255,255,0.96); font-weight: 700; }
+  .offer-price-block .op-save-wrap { margin-top: 24px; }
   .offer-price-block .op-save {
     display: inline-block;
-    margin-top: 16px;
-    padding: 8px 18px;
-    background: rgba(250,171,0,0.12);
-    border: 1px solid rgba(250,171,0,0.35);
+    padding: 10px 24px;
+    background: rgba(250,171,0,0.14);
+    border: 1px solid rgba(250,171,0,0.4);
     border-radius: 100px;
-    color: rgba(255,255,255,0.92);
-    font-size: 13.5px;
-    letter-spacing: 0.2px;
+    color: rgba(255,255,255,0.95);
+    font-size: 14px;
+    letter-spacing: 0.15px;
     font-variant-numeric: tabular-nums;
   }
   .offer-price-block .op-save strong { color: var(--accent); font-weight: 700; }
-  .offer-price-block .op-cash { color: rgba(255,255,255,0.7); font-size: 15px; margin-top: 14px; }
-  .offer-price-block .op-cash strong { color: rgba(255,255,255,0.95); font-weight: 700; }
   .offer-card .btn-cta { white-space: nowrap; min-width: 0; }
   @media (max-width: 520px) { .offer-card .btn-cta { white-space: normal; } }
 
@@ -3281,13 +3285,15 @@
         <li class="os-total"><span class="os-item">Valor total</span><span class="os-price">R$ 6.800</span></li>
       </ul>
       <div class="offer-price-block">
-        <div class="op-anchor"><s>De R$ 6.800</s></div>
-        <span class="op-now-label">Hoje</span>
-        <div class="op-price-big">
-          <span class="op-prefix">12×</span><span class="op-currency">R$</span><span class="op-num">149<sup class="op-cents">,71</sup></span>
+        <div class="op-anchor"><s>De R$ 6.800</s> · 78% off hoje</div>
+        <div class="op-prefix">Em 12× de</div>
+        <div class="op-price">
+          <span class="op-currency">R$</span><span class="op-amount">149</span><span class="op-cents">,71</span>
         </div>
         <div class="op-cash">ou <strong>R$ 1.500</strong> à vista</div>
-        <div class="op-save">você economiza <strong>R$ 5.300</strong> (78% off)</div>
+        <div class="op-save-wrap">
+          <span class="op-save">você economiza <strong>R$ 5.300</strong></span>
+        </div>
       </div>
 
       <p class="neutralizer"><strong>Mesmo sem editora</strong> · <strong>mesmo sem seguidores</strong> · <strong>mesmo que seja o seu primeiro livro</strong></p>
