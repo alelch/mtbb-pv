@@ -1226,19 +1226,20 @@
   }
   .offer-price-block .op-glow {
     position: absolute;
-    top: 15%; left: 50%;
+    top: 8%; left: 50%;
     transform: translateX(-50%);
-    width: 110%;
-    height: 280px;
-    background: radial-gradient(ellipse 50% 60% at center, rgba(250,171,0,0.22), transparent 70%);
+    width: 130%;
+    height: 360px;
+    background: radial-gradient(ellipse 55% 60% at center, rgba(250,171,0,0.34), transparent 72%);
     pointer-events: none;
     z-index: 0;
+    filter: blur(2px);
   }
   .offer-price-block > * { position: relative; z-index: 1; }
   .offer-price-block .op-anchor {
-    font-size: 14px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 6px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.62);
+    margin-bottom: 2px;
     letter-spacing: 0.2px;
     font-variant-numeric: tabular-nums;
   }
@@ -1468,19 +1469,20 @@
   .op-price-line {
     align-items: baseline !important;
     gap: 0 !important;
-    font-size: clamp(64px, 9vw, 88px) !important;
-    font-weight: 700 !important;
-    letter-spacing: -2px !important;
+    font-size: clamp(92px, 13vw, 128px) !important;
+    font-weight: 800 !important;
+    letter-spacing: -3px !important;
     font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
     font-variant-numeric: tabular-nums lining-nums;
     color: var(--accent);
-    margin: 4px 0 8px;
+    margin: 10px 0 10px;
     line-height: 1;
+    text-shadow: 0 2px 32px rgba(250,171,0,0.28);
   }
-  .op-price-line .op-x { font-size: 16px !important; margin-right: 10px !important; letter-spacing: 0; font-weight: 400 !important; align-self: baseline !important; color: rgba(255,255,255,0.72) !important; }
-  .op-price-line .op-currency { font-size: 0.42em !important; margin-right: 4px !important; letter-spacing: -0.5px !important; font-weight: 700; align-self: baseline !important; }
-  .op-price-line .op-amount { font-size: 1em !important; line-height: 1; letter-spacing: -3px; align-self: baseline !important; }
-  .op-price-line .op-cents { font-size: 0.42em !important; margin-left: 2px !important; letter-spacing: -1px; font-weight: 700; align-self: baseline !important; margin-top: 0 !important; }
+  .op-price-line .op-x { font-size: 17px !important; margin-right: 12px !important; letter-spacing: 0; font-weight: 400 !important; align-self: baseline !important; color: rgba(255,255,255,0.72) !important; text-shadow: none; }
+  .op-price-line .op-currency { font-size: 0.38em !important; margin-right: 6px !important; letter-spacing: -0.5px !important; font-weight: 800; align-self: baseline !important; }
+  .op-price-line .op-amount { font-size: 1em !important; line-height: 1; letter-spacing: -5px; align-self: baseline !important; font-weight: 800; }
+  .op-price-line .op-cents { font-size: 0.38em !important; margin-left: 3px !important; letter-spacing: -1.5px; font-weight: 800; align-self: baseline !important; margin-top: 0 !important; }
   .offer-price-block { padding-top: 14px !important; }
   .offer-price-block .op-meta { margin-top: 4px; font-size: 16px; }
   .offer-stack.offer-stack-priced { padding: 22px 0 8px; }
