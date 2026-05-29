@@ -1211,46 +1211,59 @@
   }
   .offer-price-block .op-glow {
     position: absolute;
-    top: 20%; left: 50%;
+    top: 15%; left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    height: 220px;
-    background: radial-gradient(ellipse 60% 60% at center, rgba(250,171,0,0.16), transparent 70%);
+    width: 110%;
+    height: 280px;
+    background: radial-gradient(ellipse 50% 60% at center, rgba(250,171,0,0.22), transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
   .offer-price-block > * { position: relative; z-index: 1; }
-  .offer-price-block .op-prefix-pill {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 700;
-    padding: 6px 16px;
-    background: rgba(250,171,0,0.12);
-    border: 1px solid rgba(250,171,0,0.34);
-    border-radius: 100px;
-    margin-bottom: 18px;
-  }
-  .offer-price-block .op-price {
-    font-size: clamp(60px, 8.5vw, 88px);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -3.5px;
+  .offer-price-block .op-anchor {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 6px;
+    letter-spacing: 0.2px;
     font-variant-numeric: tabular-nums;
-    margin-bottom: 16px;
-    background: linear-gradient(180deg, #FFE7A8 0%, var(--accent) 70%, #E89400 100%);
+  }
+  .offer-price-block .op-anchor s { color: #E15555; }
+  .offer-price-block .op-price {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 0.95;
+    font-weight: 800;
+    letter-spacing: -4px;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(180deg, #FFE7A8 0%, var(--accent) 65%, #E89400 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    filter: drop-shadow(0 8px 30px rgba(250,171,0,0.28));
+    filter: drop-shadow(0 10px 32px rgba(250,171,0,0.32));
+    margin: 4px 0 14px;
+  }
+  .offer-price-block .op-price .op-currency {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 700;
+    letter-spacing: 0;
+    margin: 0.42em 6px 0 0;
+    line-height: 1;
+  }
+  .offer-price-block .op-price .op-amount {
+    font-size: clamp(80px, 11vw, 116px);
+  }
+  .offer-price-block .op-price .op-cents {
+    font-size: clamp(28px, 4vw, 42px);
+    letter-spacing: -1px;
+    margin: 0.4em 0 0 2px;
+    line-height: 1;
   }
   .offer-price-block .op-meta { color: rgba(255,255,255,0.72); font-size: 15px; }
   .offer-price-block .op-meta strong { color: rgba(255,255,255,0.96); font-weight: 700; }
   .offer-price-block .op-deal-wrap {
-    margin-top: 32px;
-    margin-bottom: 8px;
+    margin-top: 24px;
+    margin-bottom: 6px;
   }
   .offer-price-block .op-deal {
     display: inline-flex;
@@ -1258,7 +1271,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 0 10px;
-    padding: 11px 22px;
+    padding: 10px 22px;
     background: linear-gradient(180deg, rgba(250,171,0,0.16), rgba(250,171,0,0.08));
     border: 1px solid rgba(250,171,0,0.42);
     border-radius: 100px;
@@ -1268,11 +1281,52 @@
     font-variant-numeric: tabular-nums;
     box-shadow: 0 6px 20px rgba(250,171,0,0.12);
   }
-  .offer-price-block .op-deal .op-anchor { text-decoration: line-through; color: rgba(255,255,255,0.5); }
   .offer-price-block .op-deal .op-save-text strong { color: var(--accent); font-weight: 700; }
   .offer-price-block .op-deal .op-off { color: var(--accent); font-weight: 800; letter-spacing: 0.6px; }
   .offer-price-block .op-deal .op-dot { color: rgba(255,255,255,0.3); }
   .offer-card .neutralizer { margin-top: 32px !important; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); }
+
+  /* Status badges (top of card) */
+  .oc-badges {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .oc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    background: rgba(250,171,0,0.10);
+    border: 1px solid rgba(250,171,0,0.32);
+    color: rgba(255,255,255,0.92);
+    font-size: 12.5px;
+    letter-spacing: 0.2px;
+    font-weight: 500;
+  }
+  .oc-badge strong { color: var(--accent); font-weight: 700; }
+  .oc-badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ADE80;
+    box-shadow: 0 0 8px rgba(74,222,128,0.7);
+    animation: ocBadgePulse 1.6s ease-in-out infinite;
+  }
+  @keyframes ocBadgePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  /* CTA button enhancement for offer card */
+  .offer-card .btn-cta {
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 14px 38px rgba(250,171,0,0.5), 0 0 60px rgba(250,171,0,0.2), inset 0 1px 0 rgba(255,255,255,0.5);
+  }
   .offer-card .btn-cta { white-space: nowrap; min-width: 0; }
   @media (max-width: 520px) { .offer-card .btn-cta { white-space: normal; } }
 
@@ -2002,14 +2056,19 @@
   }
   .offer-card {
     max-width: 560px;
-    margin: 48px auto 0;
+    margin: 80px auto 0;
     background: linear-gradient(180deg, #1E1E1E 0%, #141414 100%);
-    border: 1px solid rgba(250,171,0,0.32);
-    border-radius: 22px;
-    padding: 48px 44px 40px;
+    border: 1px solid rgba(250,171,0,0.36);
+    border-radius: 24px;
+    padding: 44px 44px 36px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+    box-shadow:
+      0 0 0 1px rgba(250,171,0,0.08),
+      0 0 60px rgba(250,171,0,0.18),
+      0 0 120px rgba(250,171,0,0.10),
+      0 28px 60px rgba(0,0,0,0.45),
+      inset 0 1px 0 rgba(255,255,255,0.05);
     text-align: center;
   }
   .offer-card .label {
@@ -3255,6 +3314,7 @@
     if(d){d.textContent=mt.getDate();}
     if(m){m.textContent=MON3[mt.getMonth()];}
     if(u){u.textContent=mt.getDate()+' de '+MONF[mt.getMonth()];}
+    var b=document.getElementById('liveBadge');if(b){b.textContent=mt.getDate()+'/'+MON3[mt.getMonth()].toLowerCase();}
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fill);}else{fill();}
 })();
@@ -3322,6 +3382,10 @@
       <div class="oc-accent-top" aria-hidden="true"></div>
       <div class="oc-brand">
         <img class="oc-brand-img" src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business" width="180" height="98">
+        <div class="oc-badges">
+          <span class="oc-badge"><span class="oc-badge-dot"></span>Acesso por 2 anos</span>
+          <span class="oc-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Próx. encontro: <strong id="liveBadge">—</strong></span>
+        </div>
       </div>
       <ul class="offer-stack offer-stack-priced">
         <li><span class="os-item">Método The Book Business Completo (acesso por 2 anos)</span><span class="os-price">R$ 2.400</span></li>
@@ -3334,13 +3398,13 @@
       </ul>
       <div class="offer-price-block">
         <div class="op-glow" aria-hidden="true"></div>
-        <span class="op-prefix-pill">EM 12× DE</span>
-        <div class="op-price">R$ 149,71</div>
-        <div class="op-meta">ou <strong>R$ 1.500</strong> à vista · sem juros</div>
+        <div class="op-anchor">De <s>R$ 6.800</s></div>
+        <div class="op-price">
+          <span class="op-currency">R$</span><span class="op-amount">149</span><span class="op-cents">,71</span>
+        </div>
+        <div class="op-meta">em <strong>12×</strong> sem juros · ou <strong>R$ 1.500</strong> à vista</div>
         <div class="op-deal-wrap">
           <div class="op-deal">
-            <span class="op-anchor">De R$ 6.800</span>
-            <span class="op-dot">·</span>
             <span class="op-save-text">economiza <strong>R$ 5.300</strong></span>
             <span class="op-dot">·</span>
             <span class="op-off">78% OFF</span>
