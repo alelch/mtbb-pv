@@ -1982,44 +1982,68 @@
 
   /* DANY NA MÍDIA */
   /* MEDIA GRID — seção separada */
-  .media-grid-section { background: var(--bg); padding: 80px 0; }
-  .media-photos-grid {
-    columns: 3;
-    column-gap: 14px;
-    max-width: 1080px;
-    margin: 48px auto 0;
+  .media-grid-section {
+    background: #0A0A0A;
+    padding: 64px 0 72px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
   }
-  @media (max-width: 760px) { .media-photos-grid { columns: 2; } }
-  @media (max-width: 460px) { .media-photos-grid { columns: 2; column-gap: 10px; } }
+  .media-grid-section .section-eyebrow { color: var(--accent); }
+  .media-grid-section .section-title { color: #fff; }
+  .media-photos-grid {
+    margin: 32px 0 0 !important;
+    max-width: none !important;
+    columns: auto !important;
+    position: relative;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  }
+  .media-photos-grid > .media-track {
+    display: flex;
+    gap: 18px;
+    width: max-content;
+    animation: midiaSlide 80s linear infinite;
+  }
+  .media-photos-grid > .media-track:hover { animation-play-state: paused; }
   .media-photo-item {
-    break-inside: avoid;
-    margin-bottom: 14px;
+    flex: 0 0 auto;
+    width: 220px;
+    height: 160px;
+    margin: 0;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: #111;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    break-inside: auto;
   }
   .media-photo-item:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+    border-color: rgba(250,171,0,0.5);
+    box-shadow: none;
   }
-  .media-photo-item picture { display: block; }
+  .media-photo-item picture { display: block; height: 100%; }
   .media-photo-item img,
-  .media-photo-item picture img { width: 100%; height: auto; display: block; }
-
-  .media-photo-cap {
-    position: absolute; left: 0; right: 0; bottom: 0;
-    padding: 22px 14px 12px;
-    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 55%, transparent 100%);
-    display: flex; flex-direction: column; gap: 1px; text-align: left;
+  .media-photo-item picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.92);
   }
-  .media-photo-cap .mp-name { color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
-  .media-photo-cap .mp-desc { color: rgba(255,255,255,0.78); font-size: 10.5px; line-height: 1.35; }
-  @media (max-width: 700px) {
-    .media-photo-item { flex: 0 0 calc(50% - 5px); }
-    .media-photo-cap .mp-desc { display: none; }
+  @keyframes midiaSlide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 9px)); }
+  }
+  @media (max-width: 760px) {
+    .media-photo-item { width: 180px; height: 130px; }
+    .media-photos-grid > .media-track { animation-duration: 60s; gap: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .media-photos-grid > .media-track { animation: none; }
   }
 
 
@@ -3271,6 +3295,7 @@
     <p class="section-eyebrow">Autoridade reconhecida</p>
     <h2 class="section-title">Dany na mídia</h2>
     <div class="media-photos-grid">
+      <div class="media-track">
       <div class="media-photo-item">
         <picture>
           <source srcset="assets/dany-sakugawa-band.avif" type="image/avif">
@@ -3342,6 +3367,79 @@
           <source srcset="assets/dany-sakugawa-seja-inesquecivel.avif" type="image/avif">
           <img src="assets/dany-sakugawa-seja-inesquecivel.webp" alt="Dany Sakugawa — Podcast Seja Inesquecível (Dalbosco)" loading="lazy" decoding="async">
         </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-band.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-band.webp" alt="Dany Sakugawa — Band" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-sbt.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-sbt.webp" alt="Dany Sakugawa — SBT" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-hotmart-festival.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-hotmart-festival.webp" alt="Dany Sakugawa — Hotmart Festival" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-palestra.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-palestra.webp" alt="Dany Sakugawa — Palco" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-goo-central.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-goo-central.webp" alt="Dany Sakugawa — goo Central" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-band-entrevista.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-band-entrevista.webp" alt="Dany Sakugawa — Band Entrevista" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-1-milhao-de-livros.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-1-milhao-de-livros.webp" alt="Dany Sakugawa — 1 milhão de livros vendidos" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-mauricio-de-sousa.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-mauricio-de-sousa.webp" alt="Dany Sakugawa — Dany com Maurício de Sousa" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-premio-publishnews.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-premio-publishnews.webp" alt="Dany Sakugawa — Prêmio PublishNews (O Poder da Ação)" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-bienal-do-livro.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-bienal-do-livro.webp" alt="Dany Sakugawa — Bienal do Livro" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-opera-mundi.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-opera-mundi.webp" alt="Dany Sakugawa — Entrevista na Opera Mundi" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="media-photo-item">
+        <picture>
+          <source srcset="assets/dany-sakugawa-seja-inesquecivel.avif" type="image/avif">
+          <img src="assets/dany-sakugawa-seja-inesquecivel.webp" alt="Dany Sakugawa — Podcast Seja Inesquecível (Dalbosco)" loading="lazy" decoding="async">
+        </picture>
+      </div>
       </div>
     </div>
   </div>
