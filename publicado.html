@@ -1172,6 +1172,24 @@
     font-size: 15px;
     line-height: 1.35;
   }
+  .offer-stack.offer-stack-priced .os-item::before {
+    content: "✓";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 12px;
+    text-align: center;
+    border-radius: 50%;
+    background: rgba(250,171,0,0.18);
+    border: 1px solid rgba(250,171,0,0.45);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 11px;
+    vertical-align: -2px;
+    flex-shrink: 0;
+  }
+  .offer-stack.offer-stack-priced .os-total .os-item::before { content: none; }
   .offer-stack.offer-stack-priced li::before { content: none; }
   .offer-stack.offer-stack-priced li:last-child { border-bottom: none; }
   .offer-stack.offer-stack-priced .os-item { flex: 1; letter-spacing: -0.1px; }
@@ -1284,7 +1302,7 @@
   .offer-price-block .op-deal .op-save-text strong { color: var(--accent); font-weight: 700; }
   .offer-price-block .op-deal .op-off { color: var(--accent); font-weight: 800; letter-spacing: 0.6px; }
   .offer-price-block .op-deal .op-dot { color: rgba(255,255,255,0.3); }
-  .offer-card .neutralizer { margin-top: 32px !important; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .offer-card .neutralizer { margin-top: 26px !important; padding-top: 0; border-top: none; }
 
   /* Status badges (top of card) */
   .oc-badges {
@@ -3403,13 +3421,6 @@
           <span class="op-currency">R$</span><span class="op-amount">149</span><span class="op-cents">,71</span>
         </div>
         <div class="op-meta">em <strong>12×</strong> sem juros · ou <strong>R$ 1.500</strong> à vista</div>
-        <div class="op-deal-wrap">
-          <div class="op-deal">
-            <span class="op-save-text">economiza <strong>R$ 5.300</strong></span>
-            <span class="op-dot">·</span>
-            <span class="op-off">78% OFF</span>
-          </div>
-        </div>
       </div>
 
       <p class="neutralizer"><strong>Mesmo sem editora</strong> · <strong>mesmo sem seguidores</strong> · <strong>mesmo que seja o seu primeiro livro</strong></p>
