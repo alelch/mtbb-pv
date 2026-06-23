@@ -357,50 +357,60 @@
     background: var(--bg-dark);
     color: white;
     text-align: center;
-    padding: 100px 0;
+    padding: 110px 0;
   }
+  .agitation > .container { max-width: 960px; }
   .agitation h2 {
-    font-size: clamp(26px, 3.8vw, 42px);
-    font-weight: 700;
+    font-size: clamp(32px, 4.4vw, 54px);
+    font-weight: 800;
     line-height: 1.18;
-    letter-spacing: -0.8px;
-    margin: 0 auto 16px;
+    letter-spacing: -1.2px;
+    margin: 0 auto 32px;
     color: #FFFFFF;
-    max-width: 900px;
+    max-width: 920px;
     text-wrap: balance;
   }
-  .agitation h2 .accent { color: var(--accent); }
-  .agitation .divider {
-    width: 60px; height: 2px;
-    background: var(--accent);
-    margin: 32px auto;
-    opacity: 0.6;
+  .agitation h2 .hl-grifo {
+    background-size: 100% 0.7em;
+    background-position: 0 0.48em;
   }
-  .agitation-card {
-    max-width: 560px;
-    margin: 32px auto 0;
-    padding: 32px 36px;
-    border: 1px solid rgba(250,171,0,0.32);
-    border-radius: 12px;
-    background: rgba(250,171,0,0.05);
+  .agitation .agi-sub {
+    font-size: clamp(18px, 1.9vw, 20px);
+    color: rgba(255,255,255,0.92);
+    margin-bottom: 64px;
+    line-height: 1.5;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .agitation .agi-sub .hl-risco {
+    background-size: 100% 0.34em;
+    background-position: 0 0.88em;
+  }
+  .agitation-quote {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(34px, 4.2vw, 50px);
+    color: var(--accent);
+    font-weight: 600;
+    line-height: 1.22;
+    margin: 0 auto 48px;
+    transform: rotate(-1.5deg);
+    max-width: 680px;
+    letter-spacing: 0.5px;
+  }
+  .agitation-closing {
+    color: rgba(255,255,255,0.62);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .agitation-closing .italic {
+    color: #FFFFFF;
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-weight: 500;
-    font-size: 20px;
-    color: rgba(255,255,255,0.95);
-    line-height: 1.5;
-    position: relative;
-  }
-  .agitation-card::before {
-    content: '"';
-    position: absolute;
-    top: 8px; left: 20px;
-    font-size: 48px;
-    color: var(--accent);
-    opacity: 0.45;
-    line-height: 1;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
+    font-size: 17px;
   }
 
   /* JORNADA — timeline */
@@ -2506,14 +2516,10 @@
 <!-- BLOCO 5 — AGITAÇÃO -->
 <section class="agitation">
   <div class="container">
-    <h2>Você pode estar escrevendo um livro<br><span class="accent">incrível</span>.</h2>
-    <p style="font-size: 18px; color: rgba(255,255,255,0.92); margin-bottom: 32px; max-width: 580px; margin-left: auto; margin-right: auto; margin-top: 28px;">
-      E ainda assim terminar sem <span style="color: var(--accent); font-weight: 600;">leitores esperando.</span>
-    </p>
-    <div class="agitation-card">
-      Ninguém espera um livro<br>que não conhece.
-    </div>
-    <p style="margin-top: 40px; font-size: 16px; color: rgba(255,255,255,0.72); line-height: 1.6; max-width: 480px; margin-left: auto; margin-right: auto;">Esperança não muda isso.<br><span style="color: rgba(255,255,255,0.9); font-family:'Fraunces',serif; font-style:italic;">Estratégia sim.</span></p>
+    <h2>Você pode estar escrevendo um livro <span class="hl-grifo">incrível</span>.</h2>
+    <p class="agi-sub">E ainda assim terminar sem <span class="hl-risco">leitores esperando</span>.</p>
+    <p class="agitation-quote">Ninguém espera um livro<br>que não conhece.</p>
+    <p class="agitation-closing">Esperança não muda isso.<br><span class="italic">Estratégia sim.</span></p>
   </div>
 </section>
 
