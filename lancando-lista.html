@@ -255,64 +255,38 @@
   .numbers-bar {
     background: var(--bg);
     color: var(--text);
-    padding: 64px 0;
+    padding: 72px 0 56px;
   }
   .numbers-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    max-width: 1020px;
+    gap: 32px;
+    text-align: center;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 24px;
   }
-  @media (max-width: 860px) {
-    .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 16px; }
+  @media (max-width: 700px) {
+    .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 44px; }
   }
-  .number-item {
-    background: #FFFFFF;
-    border-radius: 22px;
-    padding: 36px 28px 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    text-align: left;
-  }
-  .number-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.10);
-  }
-  /* Variant: amber filled — primeiro card destaque */
-  .number-item.amber {
-    background: linear-gradient(180deg, #FFC646 0%, var(--accent) 100%);
-    box-shadow: 0 12px 40px rgba(250,171,0,0.32), inset 0 1px 0 rgba(255,255,255,0.45);
-  }
-  .number-item.amber .num { color: #1A1A1A; }
-  .number-item.amber .label { color: #1A1A1A; opacity: 0.72; }
-  /* Variant: dark — último card */
-  .number-item.dark {
-    background: var(--bg-dark);
-    box-shadow: 0 10px 32px rgba(0,0,0,0.22);
-  }
-  .number-item.dark .num { color: var(--accent); }
-  .number-item.dark .label { color: rgba(255,255,255,0.68); }
   .number-item .num {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
-    font-size: clamp(44px, 5vw, 64px);
+    font-size: clamp(40px, 5vw, 56px);
     color: var(--accent);
     line-height: 1;
-    letter-spacing: -2.5px;
-    margin-bottom: 16px;
+    letter-spacing: -2px;
+    margin-bottom: 12px;
   }
   .number-item .label {
     font-size: 11px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-mute);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.5;
+    max-width: 150px;
+    margin: 0 auto;
   }
 
   /* BLOCO 4 — LOGOS (cinza um pouco mais escuro pra hierarquia) */
@@ -575,59 +549,39 @@
   .filter-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    max-width: 960px;
+    gap: 24px;
+    max-width: 900px;
     margin: 0 auto;
   }
-  @media (max-width: 760px) {
-    .filter-grid { grid-template-columns: 1fr; gap: 14px; }
+  @media (max-width: 700px) {
+    .filter-grid { grid-template-columns: 1fr; }
   }
   .filter-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 40px 36px 36px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .filter-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 36px rgba(0,0,0,0.10);
-  }
-  .filter-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent) 0%, rgba(250,171,0,0.15) 100%);
+    border-radius: 12px;
+    padding: 32px;
   }
   .filter-card h3 {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -0.4px;
-    margin-bottom: 22px;
-    padding-bottom: 0;
-    border-bottom: none;
-    line-height: 1.2;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
   }
   .filter-card.positive {
-    background: linear-gradient(180deg, #FFFDF5 0%, #FFFFFF 60%);
     border-color: rgba(250,171,0,0.4);
+    background: #FFFDF5;
   }
   .filter-card.negative {
-    background: linear-gradient(180deg, #FEF6F4 0%, #FFFFFF 60%);
     border-color: rgba(204,51,51,0.32);
-  }
-  .filter-card.negative::before {
-    background: linear-gradient(90deg, #CC3333 0%, rgba(204,51,51,0.15) 100%);
+    background: #FEF6F4;
   }
   .filter-card.positive h3 { color: var(--text); }
   .filter-card.negative h3 { color: #B23030; }
   .filter-card ul { list-style: none; }
   .filter-card li {
-    padding: 11px 0 11px 36px;
+    padding: 10px 0 10px 28px;
     font-size: 15px;
     color: var(--text);
     line-height: 1.5;
@@ -636,32 +590,16 @@
   .filter-card.positive li::before {
     content: '✓';
     position: absolute;
-    left: 0; top: 11px;
-    width: 22px; height: 22px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(250,171,0,0.18);
-    border: 1px solid rgba(250,171,0,0.55);
+    left: 0; top: 10px;
     color: var(--accent);
     font-weight: 700;
-    font-size: 12px;
   }
   .filter-card.negative li::before {
     content: '✕';
     position: absolute;
-    left: 0; top: 11px;
-    width: 22px; height: 22px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(204,51,51,0.10);
-    border: 1px solid rgba(204,51,51,0.45);
-    color: #B23030;
+    left: 0; top: 10px;
+    color: #CC3333;
     font-weight: 700;
-    font-size: 11px;
   }
   .filter-card.negative li { color: var(--text-soft); }
 
@@ -2565,7 +2503,7 @@
 <section class="numbers-bar">
   <div class="container-wide">
     <div class="numbers-grid">
-      <div class="number-item amber">
+      <div class="number-item">
         <div class="num">+10M</div>
         <div class="label">livros vendidos com estratégia</div>
       </div>
@@ -2577,7 +2515,7 @@
         <div class="num">+4.400</div>
         <div class="label">alunos formados</div>
       </div>
-      <div class="number-item dark">
+      <div class="number-item">
         <div class="num">+15</div>
         <div class="label">anos nos bastidores editoriais</div>
       </div>
