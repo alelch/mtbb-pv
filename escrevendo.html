@@ -1239,15 +1239,7 @@
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
   }
   .offer-price-block .op-glow {
-    position: absolute;
-    top: 8%; left: 50%;
-    transform: translateX(-50%);
-    width: 130%;
-    height: 360px;
-    background: radial-gradient(ellipse 55% 60% at center, rgba(250,171,0,0.34), transparent 72%);
-    pointer-events: none;
-    z-index: 0;
-    filter: blur(2px);
+    display: none;
   }
   .offer-price-block > * { position: relative; z-index: 1; }
   .offer-price-block .op-anchor {
@@ -1491,7 +1483,6 @@
     color: var(--accent);
     margin: 10px 0 10px;
     line-height: 1;
-    text-shadow: 0 2px 32px rgba(250,171,0,0.28);
   }
   .op-price-line .op-x { font-size: 17px !important; margin-right: 12px !important; letter-spacing: 0; font-weight: 400 !important; align-self: baseline !important; color: rgba(255,255,255,0.72) !important; text-shadow: none; }
   .op-price-line .op-currency { font-size: 0.38em !important; margin-right: 6px !important; letter-spacing: -0.5px !important; font-weight: 800; align-self: baseline !important; }
