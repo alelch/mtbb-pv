@@ -1,0 +1,4 @@
+project_id = "mtbb-pv"
+
+[functions.pv-lead]
+verify_jwt = false
