@@ -2286,49 +2286,32 @@
 
   /* BLOCO 13 — BIO DANY */
   .bio-section { background: var(--bg); }
-  .bio-card {
-    background: var(--bg-card);
-    border-radius: 28px;
-    padding: 48px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-    max-width: 1020px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-  }
-  .bio-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, var(--accent) 0%, rgba(250,171,0,0.2) 100%);
-  }
   .bio-wrap {
     display: grid;
     grid-template-columns: 360px 1fr;
-    gap: 48px;
+    gap: 56px;
     align-items: stretch;
+    max-width: 900px;
+    margin: 0 auto;
   }
   @media (max-width: 800px) {
-    .bio-card { padding: 36px 24px; }
     .bio-wrap {
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 32px;
       text-align: center;
     }
     .bio-photo {
       aspect-ratio: 4 / 5;
       min-height: 0;
       width: 100%;
-      max-width: 280px;
+      max-width: 300px;
       margin: 0 auto;
     }
-    .bio-stats { justify-content: center; }
   }
   .bio-photo {
-    border-radius: 18px;
+    border-radius: 16px;
     overflow: hidden;
-    min-height: 460px;
+    min-height: 480px;
     position: relative;
     background: linear-gradient(135deg, #FAAB00 0%, #6B4800 100%);
     display: flex;
@@ -2338,31 +2321,6 @@
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 24px;
-    box-shadow: 0 12px 32px rgba(250,171,0,0.18);
-  }
-  .bio-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 14px 0 22px;
-  }
-  .bio-stat {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 7px 13px;
-    background: rgba(250,171,0,0.08);
-    border: 1px solid rgba(250,171,0,0.28);
-    border-radius: 100px;
-    font-size: 12px;
-    color: var(--text);
-    font-weight: 600;
-    letter-spacing: 0.1px;
-    white-space: nowrap;
-  }
-  .bio-stat strong {
-    color: var(--accent);
-    font-weight: 800;
   }
   .bio-content .eyebrow {
     color: var(--accent);
@@ -2647,77 +2605,45 @@
   /* BLOCO 15 — GARANTIA */
   .guarantee-section { background: var(--bg); }
   .guarantee-wrap {
-    max-width: 720px; margin: 0 auto; text-align: center;
-    background: linear-gradient(180deg, #FFFDF5 0%, #FFFFFF 50%);
-    border-radius: 28px;
+    max-width: 680px; margin: 0 auto; text-align: center;
+    background: var(--bg-card);
+    border-radius: 24px;
     padding: 56px 52px;
-    box-shadow: 0 2px 14px rgba(0,0,0,0.05), 0 18px 48px rgba(250,171,0,0.10);
-    border: 1px solid rgba(250,171,0,0.22);
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
   }
-  .guarantee-wrap::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, var(--accent) 0%, rgba(250,171,0,0.2) 100%);
-  }
-  @media (max-width: 600px) { .guarantee-wrap { padding: 40px 24px; border-radius: 22px; } }
+  @media (max-width: 600px) { .guarantee-wrap { padding: 36px 24px; } }
   .guarantee-badge {
     display: inline-flex; align-items: center; gap: 10px;
-    background: linear-gradient(180deg, #FFC646 0%, var(--accent) 100%);
-    border: none;
-    border-radius: 100px; padding: 9px 22px;
-    font-size: 13px; font-weight: 800; color: #1A1A1A; margin-bottom: 24px;
-    box-shadow: 0 6px 18px rgba(250,171,0,0.32), inset 0 1px 0 rgba(255,255,255,0.4);
-    letter-spacing: 0.2px;
+    background: var(--accent-soft); border: 1px solid rgba(250,171,0,0.3);
+    border-radius: 100px; padding: 8px 20px;
+    font-size: 13px; font-weight: 700; color: #6B4800; margin-bottom: 28px;
   }
-  .guarantee-badge svg { width: 15px; height: 15px; fill: #1A1A1A; flex-shrink: 0; }
+  .guarantee-badge svg { width: 15px; height: 15px; fill: #6B4800; flex-shrink: 0; }
   .guarantee-headline {
-    font-size: clamp(28px, 3.6vw, 40px); font-weight: 800;
-    letter-spacing: -0.8px; line-height: 1.16; margin-bottom: 18px;
+    font-size: clamp(26px, 3.5vw, 38px); font-weight: 700;
+    letter-spacing: -0.6px; line-height: 1.18; margin-bottom: 20px;
   }
   .guarantee-body {
     font-size: 16px; color: var(--text-soft); line-height: 1.75;
-    max-width: 560px; margin: 0 auto 32px;
+    max-width: 560px; margin: 0 auto 28px;
   }
   .guarantee-list {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 12px; margin: 0 0 32px; text-align: left;
+    gap: 10px; margin: 0 0 28px; text-align: left;
   }
-  @media (max-width: 600px) { .guarantee-list { grid-template-columns: 1fr; gap: 10px; } }
+  @media (max-width: 600px) { .guarantee-list { grid-template-columns: 1fr; } }
   .guarantee-list-item {
-    display: flex; gap: 12px; align-items: flex-start;
-    background: var(--bg-card); border: 1px solid rgba(250,171,0,0.2);
-    border-radius: 14px; padding: 14px 18px;
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
     font-size: 14px; color: var(--text); line-height: 1.45;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
   }
-  .guarantee-list-item:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(250,171,0,0.10);
-  }
-  .guarantee-list-item::before {
-    content: '✓';
-    width: 22px; height: 22px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(250,171,0,0.18);
-    border: 1px solid rgba(250,171,0,0.55);
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 12px;
-    flex-shrink: 0;
-    margin-top: 0;
-  }
+  .guarantee-list-item::before { content: '✓'; color: var(--accent); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
   .guarantee-closing {
     font-size: 15px; color: var(--text-soft); line-height: 1.75;
-    max-width: 540px; margin: 0 auto;
-    padding-top: 28px; border-top: 1px solid rgba(250,171,0,0.18);
+    max-width: 520px; margin: 0 auto;
+    padding-top: 28px; border-top: 1px solid var(--border);
   }
   .guarantee-closing strong { color: var(--text); }
 
@@ -2761,50 +2687,33 @@
 
   /* BLOCO 17 — CTA FINAL */
   .final-cta {
-    background:
-      radial-gradient(ellipse 70% 60% at 50% 40%, rgba(250,171,0,0.12) 0%, transparent 65%),
-      linear-gradient(180deg, #120C04 0%, #0A0A0A 50%, #0A0A0A 100%);
+    background: var(--bg-dark);
     color: white;
     text-align: center;
-    padding: 110px 0;
-    position: relative;
-    overflow: hidden;
+    padding: 100px 0;
   }
-  .final-cta::before {
-    content: '';
-    position: absolute;
-    top: -10%; left: 50%;
-    transform: translateX(-50%);
-    width: 130%; height: 80%;
-    background: radial-gradient(ellipse 50% 40% at center, rgba(250,171,0,0.14) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .final-cta > .container { position: relative; z-index: 1; }
   .final-cta h2 {
-    font-size: clamp(34px, 4.6vw, 52px);
-    font-weight: 800;
-    line-height: 1.14;
-    letter-spacing: -1.2px;
+    font-size: clamp(32px, 4.5vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1px;
     margin-bottom: 20px;
-    max-width: 760px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 0 2px 24px rgba(0,0,0,0.4);
   }
   .final-cta h2 .italic {
     font-family: 'Fraunces', serif;
     font-style: italic;
     color: var(--accent);
     font-weight: 500;
-    text-shadow: 0 0 32px rgba(250,171,0,0.4);
   }
   .final-cta p {
-    color: rgba(255,255,255,0.88);
+    color: rgba(255,255,255,0.7);
     font-size: 17px;
     max-width: 580px;
     margin: 0 auto 36px;
-    line-height: 1.6;
+    line-height: 1.55;
   }
   .final-cta .small-text {
     font-size: 13px;
@@ -3844,25 +3753,17 @@
 <!-- BLOCO 12 — BIO DANY -->
 <section class="bio-section" style="padding: 80px 0;">
   <div class="container-wide">
-    <div class="bio-card">
-      <div class="bio-wrap">
-      <div class="bio-photo"><img src="assets/dany-sakugawa.webp" alt="Dany Sakugawa" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:18px;"></div>
+    <div class="bio-wrap">
+      <div class="bio-photo"><img src="assets/dany-sakugawa.webp" alt="Dany Sakugawa" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"></div>
       <div class="bio-content">
         <p class="eyebrow">Quem é a Dany</p>
         <h2>Dany Sakugawa</h2>
-        <div class="bio-stats">
-          <span class="bio-stat"><strong>+15</strong> anos nos bastidores</span>
-          <span class="bio-stat"><strong>+10M</strong> livros vendidos</span>
-          <span class="bio-stat"><strong>+800</strong> lançamentos</span>
-          <span class="bio-stat"><strong>+4.400</strong> alunos</span>
-        </div>
         <p>Por mais de 15 anos, Dany esteve nos bastidores de grandes editoras brasileiras, participando de lançamentos que somaram mais de 10 milhões de livros vendidos.</p>
         <p>Nesse período, viu de perto um padrão que poucos autores enxergam: livros excelentes desapareciam por falta de estratégia, enquanto livros bem posicionados ganhavam espaço, leitores e permanência.</p>
         <p>Depois de conduzir o lançamento de mais de 800 autores, Dany criou o Método The Book Business para levar aos autores independentes a lógica que antes ficava restrita às grandes editoras: como posicionar, lançar e fazer um livro chegar aos leitores certos.</p>
         <p>Hoje, mais de 4.400 alunos já passaram pelo método: autores de ficção, não-ficção, estreantes, independentes e profissionais que decidiram parar de tratar o livro como tentativa e começar a tratá-lo com estratégia.</p>
         <p>Aqui, você não aprende marketing genérico. Aprende <span class="bio-accent">marketing literário aplicado ao mercado real de livros</span>.</p>
       </div>
-    </div>
     </div>
   </div>
 </section>
@@ -4071,7 +3972,7 @@
 <section class="final-cta">
   <div class="container">
     <h2>Você foi longe demais<br><span class="italic">pra deixar o livro encalhar.</span></h2>
-    <p style="font-size:17px; color:rgba(255,255,255,0.88); line-height:1.6; max-width:480px; margin:0 auto 36px;">O método está aqui. O livro está pronto. O único passo que falta é o seu.</p>
+    <p style="font-size:17px; color:rgba(255,255,255,0.65); line-height:1.6; max-width:480px; margin:0 auto 36px;">O método está aqui. O livro está pronto. O único passo que falta é o seu.</p>
     <a href="#" class="btn-cta large open-modal" data-hotmart="https://pay.hotmart.com/B73928367P?off=h0n7diwh&checkoutMode=10">Quero ser um autor de sucesso →</a>
     <div class="cta-trust"><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12.5 2.4 2.4 4.7-5.3"/></svg>Garantia de 15 dias</span><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</span></div>
   </div>
