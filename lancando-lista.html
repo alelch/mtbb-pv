@@ -144,12 +144,17 @@
     line-height: 1.14;
     letter-spacing: -1.4px;
     margin-bottom: 20px;
-    max-width: 880px;
+    max-width: 920px;
     margin-left: auto;
     margin-right: auto;
+  }
+  .hero h1 .hero-italic {
+    font-size: 0.84em;
+    letter-spacing: -0.5px;
+    line-height: 1.16;
+    display: inline-block;
     text-wrap: balance;
   }
-  .hero h1 .hero-italic { font-size: 0.84em; letter-spacing: -0.5px; line-height: 1.16; }
   .hl-grifo { background: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20300%2060'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z'%20fill%3D'%23FAAB00'%20fill-opacity%3D'0.45'%2F%3E%3C%2Fsvg%3E") no-repeat; background-size: 100% 0.78em; background-position: 0 0.42em; -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 4px; }
   .hl-risco { background: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20300%2018'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8'%20fill%3D'none'%20stroke%3D'%23FAAB00'%20stroke-width%3D'6'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E") no-repeat; background-size: 100% 0.34em; background-position: 0 0.92em; padding-bottom: 0.14em; }
   .hero-sub {
@@ -346,48 +351,76 @@
 
   /* BLOCO 5 — AGITAÇÃO */
   .agitation {
-    background: var(--bg-dark);
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 30%, rgba(250,171,0,0.10) 0%, transparent 65%),
+      linear-gradient(180deg, #120C04 0%, #0A0A0A 50%, #0A0A0A 100%);
     color: white;
     text-align: center;
-    padding: 100px 0;
+    padding: 110px 0;
+    position: relative;
+    overflow: hidden;
   }
+  .agitation::before {
+    content: '';
+    position: absolute;
+    top: -20%; left: 50%;
+    transform: translateX(-50%);
+    width: 120%; height: 80%;
+    background: radial-gradient(ellipse 50% 40% at center, rgba(250,171,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .agitation > .container { position: relative; z-index: 1; }
   .agitation h2 {
-    font-size: clamp(28px, 4.2vw, 44px);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -1px;
+    font-size: clamp(30px, 4.4vw, 48px);
+    font-weight: 800;
+    line-height: 1.14;
+    letter-spacing: -1.2px;
     margin-bottom: 16px;
+    color: #FFFFFF;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.4);
   }
-  .agitation h2 .accent { color: var(--accent); }
+  .agitation h2 .accent {
+    color: var(--accent);
+    text-shadow: 0 0 32px rgba(250,171,0,0.45);
+  }
   .agitation .divider {
     width: 60px; height: 2px;
     background: var(--accent);
     margin: 32px auto;
-    opacity: 0.6;
+    opacity: 0.8;
+    box-shadow: 0 0 12px rgba(250,171,0,0.6);
   }
   .agitation-card {
-    max-width: 560px;
+    max-width: 580px;
     margin: 0 auto;
-    padding: 32px 36px;
-    border: 1px solid rgba(250,171,0,0.25);
-    border-radius: 12px;
-    background: rgba(250,171,0,0.04);
+    padding: 40px 44px;
+    border: 1px solid rgba(250,171,0,0.55);
+    border-radius: 14px;
+    background:
+      linear-gradient(180deg, rgba(250,171,0,0.12) 0%, rgba(250,171,0,0.04) 100%);
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-weight: 500;
-    font-size: 19px;
-    color: rgba(255,255,255,0.92);
+    font-size: 22px;
+    color: #FFFFFF;
     line-height: 1.5;
     position: relative;
+    box-shadow:
+      0 0 0 1px rgba(250,171,0,0.08),
+      0 20px 60px rgba(250,171,0,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.05);
   }
   .agitation-card::before {
     content: '"';
     position: absolute;
-    top: 8px; left: 20px;
-    font-size: 48px;
+    top: 6px; left: 24px;
+    font-size: 56px;
     color: var(--accent);
-    opacity: 0.4;
+    opacity: 0.7;
     line-height: 1;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
   }
 
   /* JORNADA — timeline */
@@ -2494,13 +2527,13 @@
 <section class="agitation">
   <div class="container">
     <h2>Você pode ter escrito um livro<br><span class="accent">incrível</span>.</h2>
-    <p style="font-size: 18px; color: rgba(255,255,255,0.75); margin-bottom: 32px; max-width: 580px; margin-left: auto; margin-right: auto; margin-top: 28px;">
+    <p style="font-size: 18px; color: rgba(255,255,255,0.92); margin-bottom: 32px; max-width: 580px; margin-left: auto; margin-right: auto; margin-top: 28px;">
       E ainda assim não chegar aos <span style="color: var(--accent); font-weight: 600;">leitores certos.</span>
     </p>
     <div class="agitation-card">
       Ninguém compra um livro<br>que não conhece.
     </div>
-    <p style="margin-top: 40px; font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 480px; margin-left: auto; margin-right: auto;">Esperança não muda isso.<br><span style="color: rgba(255,255,255,0.9); font-family:'Fraunces',serif; font-style:italic;">Estratégia sim.</span></p>
+    <p style="margin-top: 40px; font-size: 16px; color: rgba(255,255,255,0.72); line-height: 1.6; max-width: 480px; margin-left: auto; margin-right: auto;">Esperança não muda isso.<br><span style="color: rgba(255,255,255,0.9); font-family:'Fraunces',serif; font-style:italic;">Estratégia sim.</span></p>
   </div>
 </section>
 
