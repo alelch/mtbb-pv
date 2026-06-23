@@ -97,6 +97,19 @@
     .btn-cta { animation: none; }
   }
 
+  /* === MOBILE POLISH (480px and below) === */
+  @media (max-width: 480px) {
+    .btn-cta { font-size: 16px; padding: 18px 24px; letter-spacing: -0.1px; }
+    .btn-cta.large { font-size: 17px; padding: 20px 28px; }
+    .op-price-line { font-size: clamp(58px, 15vw, 92px) !important; letter-spacing: -1px !important; }
+    .op-price-line .op-x { font-size: 13px !important; margin-right: 8px !important; }
+    .op-price-line .op-currency { font-size: 0.36em !important; margin-right: 4px !important; }
+    .op-price-line .op-cents { font-size: 0.36em !important; margin-left: 2px !important; }
+    .offer-card { padding: 32px 24px !important; }
+    .offer-price-block .op-anchor { font-size: 14px; }
+    .offer-price-block .op-meta { font-size: 14px !important; }
+  }
+
   /* BLOCO 1 — HERO */
   .hero {
     background: var(--bg);
@@ -126,16 +139,17 @@
     text-transform: uppercase;
   }
   .hero h1 {
-    font-size: clamp(34px, 5.6vw, 56px);
+    font-size: clamp(28px, 5.4vw, 56px);
     font-weight: 700;
-    line-height: 1.12;
-    letter-spacing: -1.8px;
+    line-height: 1.14;
+    letter-spacing: -1.4px;
     margin-bottom: 20px;
     max-width: 880px;
     margin-left: auto;
     margin-right: auto;
+    text-wrap: balance;
   }
-  .hero h1 .hero-italic { font-size: 0.85em; letter-spacing: -1px; line-height: 1.12; }
+  .hero h1 .hero-italic { font-size: 0.84em; letter-spacing: -0.5px; line-height: 1.16; }
   .hl-grifo { background: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20300%2060'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z'%20fill%3D'%23FAAB00'%20fill-opacity%3D'0.45'%2F%3E%3C%2Fsvg%3E") no-repeat; background-size: 100% 0.78em; background-position: 0 0.42em; -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 4px; }
   .hl-risco { background: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20300%2018'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8'%20fill%3D'none'%20stroke%3D'%23FAAB00'%20stroke-width%3D'6'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E") no-repeat; background-size: 100% 0.34em; background-position: 0 0.92em; padding-bottom: 0.14em; }
   .hero-sub {
@@ -2396,7 +2410,7 @@
   <div class="container">
     <div class="hero-logo"><img src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business" width="111" height="60" fetchpriority="high"></div>
     <div class="hero-badge">Para autores escrevendo</div>
-    <h1>Você está escrevendo seu livro.<br><span class="hero-italic" style="font-family:'Poppins',sans-serif; font-style:normal; font-weight:700;"><span class="hl-grifo">Os próximos passos</span> decidem se<br>ele será lido… ou <span class="hl-risco">esquecido</span>.</span></h1>
+    <h1>Você está escrevendo seu livro.<br><span class="hero-italic" style="font-family:'Poppins',sans-serif; font-style:normal; font-weight:700;"><span class="hl-grifo">Os próximos passos</span> decidem se ele será lido… ou <span class="hl-risco">esquecido</span>.</span></h1>
     <p class="hero-sub">
       Publicar coloca seu livro no mundo.<br><span style="font-weight:600; color:var(--text);">Estratégia faz ele ser lido.</span>
     </p>
@@ -2447,7 +2461,7 @@
 <!-- CTA PÓS-VÍDEO -->
 <div style="text-align: center; padding: 0 24px 56px;">
   <p style="font-size:clamp(15px,1.8vw,18px); color:var(--text-soft); margin:0 auto 14px; max-width:520px; line-height:1.7;">Você está investindo demais nesse livro pra começar a estratégia depois.</p>
-  <a href="#" class="btn-cta large open-modal">Quero ser um autor de sucesso →</a>
+  <a href="#" class="btn-cta large open-modal">Quero ser um autor de sucesso →</a>
   <p style="font-size: 13px; color: var(--text-mute); margin-top: 14px; letter-spacing: 0.02em;">🔒 Garantia de 15 dias · Acesso imediato</p>
 </div>
 
@@ -3063,7 +3077,7 @@
   <div class="container">
     <p class="pc-eyebrow">A pergunta que ninguém te faz</p>
     <h2 class="pc-text">Você só lança seu livro <em>uma vez</em>.<br>Se for sozinho e der errado, <em class="hl-risco">e aí?</em></h2>
-    <a href="#" class="btn-cta btn-cta--dark large open-modal">Quero ser um autor de sucesso →</a>
+    <a href="#" class="btn-cta btn-cta--dark large open-modal">Quero ser um autor de sucesso →</a>
     <p style="font-size: 13px; color: rgba(0,0,0,0.55); margin-top: 16px; letter-spacing: 0.02em;">Garantia de 15 dias · Acesso imediato</p>
   </div>
 </section>
@@ -3272,7 +3286,7 @@
         <li>Aviso direto quando as vagas abrirem</li>
       </ul>
 
-      <a href="#" class="btn-cta large open-modal" style="width: 100%; box-sizing: border-box;">Quero ser um autor de sucesso →</a>
+      <a href="#" class="btn-cta large open-modal" style="width: 100%; box-sizing: border-box;">Quero ser um autor de sucesso →</a>
       <p style="font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 16px;">Sem compromisso · Você pode sair a qualquer momento</p>
     </div>
   </div>
@@ -3501,7 +3515,7 @@
   <div class="container">
     <h2>Você foi longe demais<br><span class="italic">pra terminar sem leitores.</span></h2>
     <p style="font-size:17px; color:rgba(255,255,255,0.65); line-height:1.6; max-width:480px; margin:0 auto 36px;">O método está aqui. O livro está vindo. O único passo que falta é o seu.</p>
-    <a href="#" class="btn-cta large open-modal">Quero ser um autor de sucesso →</a>
+    <a href="#" class="btn-cta large open-modal">Quero ser um autor de sucesso →</a>
     <p class="small-text">Pagamento em até 12x sem juros · Acesso imediato</p>
   </div>
 </section>
@@ -3536,7 +3550,7 @@
         <span>WhatsApp <em>(opcional)</em></span>
         <input type="tel" name="whatsapp" autocomplete="tel" placeholder="(11) 99999-9999">
       </label>
-      <button type="submit" class="wl-submit">Entrar na lista →</button>
+      <button type="submit" class="wl-submit">Entrar na lista →</button>
       <p class="wl-disclaimer">Seus dados ficam protegidos. Você pode sair da lista quando quiser.</p>
     </form>
   </div>
