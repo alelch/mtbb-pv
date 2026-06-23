@@ -362,9 +362,9 @@
   .agitation > .container { max-width: 960px; }
   .agitation h2 {
     font-size: clamp(32px, 4.4vw, 54px);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.18;
-    letter-spacing: -1.2px;
+    letter-spacing: -1px;
     margin: 0 auto 32px;
     color: #FFFFFF;
     max-width: 920px;
@@ -377,7 +377,7 @@
   .agitation .agi-sub {
     font-size: clamp(18px, 1.9vw, 20px);
     color: rgba(255,255,255,0.92);
-    margin-bottom: 64px;
+    margin-bottom: 72px;
     line-height: 1.5;
     max-width: 720px;
     margin-left: auto;
@@ -392,11 +392,35 @@
     font-size: clamp(34px, 4.2vw, 50px);
     color: var(--accent);
     font-weight: 600;
-    line-height: 1.22;
+    line-height: 1.28;
     margin: 0 auto 48px;
     transform: rotate(-1.5deg);
     max-width: 680px;
     letter-spacing: 0.5px;
+    display: inline-block;
+    position: relative;
+    /* underline hl-risco-style, draws as page scrolls */
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20300%2018'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8'%20fill%3D'none'%20stroke%3D'%23FAAB00'%20stroke-width%3D'4'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-size: 0% 0.18em;
+    background-position: 0 99%;
+    padding-bottom: 0.16em;
+    /* text reveal: wipe left → right via clip-path, sync with underline */
+    clip-path: inset(0 100% 0 0);
+    transition:
+      clip-path 1.8s cubic-bezier(0.5, 0.05, 0.2, 1) 0.15s,
+      background-size 1.9s cubic-bezier(0.5, 0.05, 0.2, 1) 0.3s;
+  }
+  .agitation-quote.in-view {
+    clip-path: inset(0 0% 0 0);
+    background-size: 100% 0.18em;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .agitation-quote {
+      clip-path: none;
+      background-size: 100% 0.18em;
+      transition: none;
+    }
   }
   .agitation-closing {
     color: rgba(255,255,255,0.62);
@@ -3820,6 +3844,23 @@
     } else { animate(); }
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+
+<script>
+(function() {
+  if (!('IntersectionObserver' in window)) return;
+  var quotes = document.querySelectorAll('.agitation-quote');
+  if (!quotes.length) return;
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.35 });
+  quotes.forEach(function(q) { io.observe(q); });
 })();
 </script>
 </body>
