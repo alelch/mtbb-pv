@@ -4367,6 +4367,8 @@
           } else if (phd) {
             params.push('phonenumber=' + encodeURIComponent(phd));
           }
+          // sck = atribuição que volta no postback do Hotmart (preserva sck externo, ex: natalia)
+          if (!utms.sck) params.push('sck=' + encodeURIComponent('preco-' + payload.stage));
           window.location.href = HOTMART_URL + sep + params.join('&');
         });
     });
