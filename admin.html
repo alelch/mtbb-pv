@@ -499,11 +499,11 @@
       return 'R$ ' + Number(n).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     }
 
-    function rate(n, d) { return d ? (n / d * 100) : 0; }
-    function aggPath(funnel, v) {
+    function rate(n, d) { return d ? Math.min(100, n / d * 100) : 0; }
+    function aggPath(funnel, variants) {
       var a = { clicksU: 0, forms: 0, wpp: 0, purch: 0 };
       (funnel || []).forEach(function (r) {
-        if (r.variant === v) {
+        if (variants.indexOf(r.variant) >= 0) {
           a.clicksU += Number(r.stage_clicks_unique) || 0;
           a.forms   += Number(r.form_submits) || 0;
           a.wpp     += Number(r.whatsapp_clicks) || 0;
@@ -518,10 +518,12 @@
       var vendasTot = Number(mv.total_n) || 0;
       var receita = Number(mv.receita) || 0;
       var quiz = Number(global.quiz_views_unique) || 0;
-      var preco = aggPath(funnel, 'preco');
-      var lista = aggPath(funnel, 'lista');
+      // caminho preço = stage_click (variant 'preco') + form_submit do checkout (variant 'checkout')
+      var preco = aggPath(funnel, ['preco', 'checkout']);
+      var lista = aggPath(funnel, ['lista']);
       var stageU = preco.clicksU + lista.clicksU;
-      var pvPct = rate(stageU, quiz);
+      var pvPct = Math.min(100, rate(stageU, quiz));
+      var lossPct = Math.max(0, 100 - pvPct);
 
       function bar(name, val, pctTop, meta) {
         return '<div class="fn-step">' +
@@ -541,7 +543,7 @@
         '<div class="fn">' +
           bar('Visitas no quiz', quiz, 100, '100% &middot; topo do funil') +
           bar('Entraram numa página de venda', stageU, pvPct,
-              pvPct.toFixed(1) + '% do quiz &middot; <span class="loss">perdeu ' + (quiz ? (100 - pvPct).toFixed(1) : '0') + '%</span>') +
+              pvPct.toFixed(1) + '% do quiz &middot; <span class="loss">perdeu ' + lossPct.toFixed(1) + '%</span>') +
         '</div>';
 
       h += '<div class="fn-split">' +
