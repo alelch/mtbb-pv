@@ -3706,40 +3706,150 @@
 <!-- BLOCO 15 — GARANTIA -->
 <section style="background:var(--bg)">
 <style>
-.g1{font-family:'Poppins',sans-serif;max-width:680px;margin:0 auto;padding:0 24px;box-sizing:border-box}
-.g1 *{box-sizing:border-box}
-.g1 .card{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:64px 56px 52px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.06);overflow:hidden}
-.g1 .card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#FFC646,#FAAB00)}
-.g1 .shield{width:104px;height:104px;margin:0 auto 26px;border-radius:28px;background:linear-gradient(135deg,#FFC646,#FAAB00);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(250,171,0,0.28)}
-.g1 .shield svg{width:56px;height:56px;fill:#1A1A1A}
-.g1 .badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#854F0B;background:rgba(250,171,0,0.12);border:1px solid rgba(250,171,0,0.35);padding:7px 16px;border-radius:999px;margin-bottom:22px;letter-spacing:.01em}
-.g1 .badge svg{width:15px;height:15px;fill:#FAAB00}
-.g1 h2{font-size:30px;line-height:1.18;font-weight:700;color:var(--text);margin:0 auto 16px;max-width:18ch}
-.g1 .lead{font-size:16.5px;line-height:1.6;color:var(--text-soft);margin:0 auto 34px;max-width:46ch}
-.g1 .list{list-style:none;padding:0;margin:0 auto 32px;max-width:480px;text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
-.g1 .list li{display:flex;align-items:flex-start;gap:11px;font-size:15px;line-height:1.45;color:var(--text)}
-.g1 .tick{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(250,171,0,0.18);border:1px solid rgba(250,171,0,0.55);display:flex;align-items:center;justify-content:center;margin-top:1px}
-.g1 .tick svg{width:12px;height:12px;fill:#854F0B}
-.g1 .close{font-size:16px;line-height:1.6;color:var(--text-soft);margin:0 auto;max-width:50ch;padding-top:30px;border-top:1px solid var(--border)}
-.g1 .close strong{color:var(--text);font-weight:600}
-.g1 .footnote{font-family:'Fraunces',serif;font-style:italic;font-size:16px;line-height:1.5;color:var(--text);margin:22px auto 0;max-width:48ch}
-@media(max-width:560px){.g1 .card{padding:48px 26px 40px}.g1 h2{font-size:24px}.g1 .list{grid-template-columns:1fr;gap:13px}}
+.gv3{--gv3-amber:#FAAB00;--gv3-amber-deep:#B87A00;--gv3-ink:#0A0A0A;--gv3-paper:#FFFDF8;font-family:'Poppins',system-ui,sans-serif;color:var(--text,#1A1A1A);box-sizing:border-box;padding:0 clamp(16px,4vw,40px);display:flex;justify-content:center;-webkit-font-smoothing:antialiased}
+.gv3 *,.gv3 *::before,.gv3 *::after{box-sizing:border-box}
+.gv3 .gv3-ticket{position:relative;width:100%;max-width:980px;display:grid;grid-template-columns:300px 1fr;background:var(--gv3-paper);border-radius:22px;box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 40px 80px -28px rgba(10,10,10,.32),0 14px 30px -16px rgba(184,122,0,.28);isolation:isolate}
+.gv3 .gv3-ticket::before{content:"";position:absolute;inset:9px;border:1.5px solid rgba(184,122,0,.32);border-radius:14px;pointer-events:none;z-index:4}
+.gv3 .gv3-ticket::after{content:"";position:absolute;inset:14px;border:1px dashed rgba(184,122,0,.28);border-radius:10px;pointer-events:none;z-index:4}
+
+.gv3 .gv3-stub{position:relative;background:var(--gv3-ink);background-image:repeating-linear-gradient(135deg,rgba(250,171,0,.045) 0 2px,transparent 2px 9px);border-radius:22px 0 0 22px;padding:40px 30px;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden}
+.gv3 .gv3-stub::before{content:"";position:absolute;inset:13px;border:1px solid rgba(250,171,0,.3);border-radius:13px;pointer-events:none}
+.gv3 .gv3-corner{position:absolute;width:24px;height:24px;border:1.5px solid var(--gv3-amber);opacity:.85;z-index:3}
+.gv3 .gv3-corner.tl{top:20px;left:20px;border-right:0;border-bottom:0;border-radius:6px 0 0 0}
+.gv3 .gv3-corner.tr{top:20px;right:20px;border-left:0;border-bottom:0;border-radius:0 6px 0 0}
+.gv3 .gv3-corner.bl{bottom:20px;left:20px;border-right:0;border-top:0;border-radius:0 0 0 6px}
+.gv3 .gv3-corner.br{bottom:20px;right:20px;border-left:0;border-top:0;border-radius:0 0 6px 0}
+
+.gv3 .gv3-medal{position:relative;width:118px;height:118px;display:grid;place-items:center;margin-bottom:24px}
+.gv3 .gv3-medal-ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--gv3-amber);background:radial-gradient(circle at 50% 38%,rgba(250,171,0,.16),transparent 62%)}
+.gv3 .gv3-medal-ring::before{content:"";position:absolute;inset:7px;border-radius:50%;border:1px dashed rgba(250,171,0,.55)}
+.gv3 .gv3-medal svg{width:50px;height:50px;position:relative;z-index:2}
+.gv3 .gv3-medal svg path{fill:var(--gv3-amber)}
+.gv3 .gv3-rays{position:absolute;inset:-2px;animation:none}
+.gv3 .gv3-rays line{stroke:var(--gv3-amber);stroke-width:2;stroke-linecap:round;opacity:.5}
+.gv3 .gv3-ribbon{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:1}
+.gv3 .gv3-ribbon span{display:block;width:13px;height:34px;background:var(--gv3-amber);opacity:.85;clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%)}
+.gv3 .gv3-ribbon span:last-child{transform:rotate(8deg);transform-origin:top}
+.gv3 .gv3-ribbon span:first-child{transform:rotate(-8deg);transform-origin:top}
+
+.gv3 .gv3-stamp{margin-top:30px;width:118px;height:118px;border:2px solid var(--gv3-amber);border-radius:50%;display:grid;place-items:center;position:relative;transform:rotate(-9deg);color:var(--gv3-amber);opacity:.96}
+.gv3 .gv3-stamp::before{content:"";position:absolute;inset:6px;border:1px solid rgba(250,171,0,.45);border-radius:50%}
+.gv3 .gv3-stamp .gv3-stamp-num{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:38px;line-height:.9;color:var(--gv3-amber)}
+.gv3 .gv3-stamp .gv3-stamp-sub{font-size:11px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:var(--gv3-amber);margin-top:2px;padding-left:.34em}
+.gv3 .gv3-stamp-arc{position:absolute;inset:0}
+.gv3 .gv3-stamp-arc text{fill:rgba(250,171,0,.7);font-family:'Poppins',sans-serif;font-size:7.3px;font-weight:600;letter-spacing:.08em}
+
+.gv3 .gv3-perf{position:absolute;top:0;bottom:0;left:300px;width:2px;transform:translateX(-50%);border-left:2px dashed rgba(184,122,0,.45);z-index:5}
+.gv3 .gv3-hole{position:absolute;left:300px;width:22px;height:22px;background:var(--bg,#F8F8F8);border-radius:50%;transform:translate(-50%,-50%);z-index:6;box-shadow:inset 0 1px 2px rgba(10,10,10,.18)}
+
+.gv3 .gv3-body{position:relative;padding:46px clamp(30px,4vw,52px) 42px}
+.gv3 .gv3-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gv3-amber-deep);background:rgba(250,171,0,.1);border:1px solid rgba(250,171,0,.4);padding:8px 15px;border-radius:100px}
+.gv3 .gv3-eyebrow svg{width:15px;height:15px}
+.gv3 .gv3-eyebrow svg path{fill:var(--gv3-amber-deep)}
+.gv3 h2.gv3-title{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:clamp(30px,4.4vw,46px);line-height:1.04;letter-spacing:-.015em;margin:22px 0 16px;color:var(--gv3-ink)}
+.gv3 h2.gv3-title .gv3-l2{display:block;color:var(--gv3-amber-deep)}
+.gv3 .gv3-lead{font-size:clamp(15px,1.7vw,17px);line-height:1.6;color:var(--text-soft,#555);max-width:46ch;margin:0 0 30px}
+
+.gv3 .gv3-coupons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 30px}
+.gv3 .gv3-coupon{position:relative;display:flex;align-items:center;gap:13px;background:#fff;border:1px solid rgba(184,122,0,.22);border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px -4px rgba(184,122,0,.25)}
+.gv3 .gv3-coupon::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;background:var(--gv3-amber);border-radius:0 3px 3px 0}
+.gv3 .gv3-cnum{flex:0 0 30px;height:30px;border-radius:8px;background:var(--gv3-ink);color:var(--gv3-amber);font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:16px;display:grid;place-items:center}
+.gv3 .gv3-ctext{font-size:13.5px;line-height:1.35;font-weight:500;color:var(--gv3-ink)}
+
+.gv3 .gv3-tear{display:flex;align-items:center;gap:14px;margin:0 0 22px;color:rgba(184,122,0,.5)}
+.gv3 .gv3-tear .gv3-dash{flex:1;height:0;border-top:1.5px dashed rgba(184,122,0,.45)}
+.gv3 .gv3-tear .gv3-scissor{font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--gv3-amber-deep)}
+
+.gv3 .gv3-close{font-size:15px;line-height:1.62;color:var(--text-soft,#555);margin:0}
+.gv3 .gv3-close b{font-weight:700;color:var(--gv3-ink)}
+.gv3 .gv3-sign{display:flex;align-items:flex-end;gap:16px;margin-top:30px;padding-top:24px;border-top:1px solid var(--border,rgba(0,0,0,.08))}
+.gv3 .gv3-sign-mark{font-family:'Caveat',cursive;font-size:42px;line-height:.8;color:var(--gv3-amber-deep);flex:0 0 auto}
+.gv3 .gv3-sign-text{font-family:'Fraunces',serif;font-style:italic;font-size:15px;line-height:1.5;color:var(--text-soft,#555)}
+
+@media (max-width:760px){
+ .gv3{padding:26px 14px}
+ .gv3 .gv3-ticket{grid-template-columns:1fr;border-radius:20px}
+ .gv3 .gv3-stub{border-radius:20px 20px 0 0;padding:38px 24px 44px;flex-direction:column}
+ .gv3 .gv3-perf{top:auto;bottom:auto;left:0;right:0;width:auto;height:2px;top:var(--gv3-seam,0);transform:none;border-left:0;border-top:2px dashed rgba(250,171,0,.5)}
+ .gv3 .gv3-hole{left:auto;right:-11px;top:var(--gv3-seam,0)}
+ .gv3 .gv3-hole.h-left{left:-11px;right:auto}
+ .gv3 .gv3-body{padding:40px 24px 36px}
+ .gv3 .gv3-coupons{grid-template-columns:1fr}
+ .gv3 .gv3-stamp{margin-top:34px}
+}
+@media (max-width:420px){
+ .gv3 h2.gv3-title{font-size:27px}
+ .gv3 .gv3-sign{flex-direction:row}
+}
 </style>
-<div class="g1">
-  <div class="card">
-    <div class="shield"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
-    <span class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Garantia incondicional · 15 dias</span>
-    <h2>Entre. Explore tudo.<br>Se não for pra você, devolvemos.</h2>
-    <p class="lead">Em 15 dias, você conhece o método por dentro. Decide se serve pro seu livro.</p>
-    <ul class="list">
-      <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Acessar a estrutura completa do método</li>
-      <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Participar da comunidade de autores</li>
-      <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Conhecer os templates e frameworks</li>
-      <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Participar da próxima sessão ao vivo disponível</li>
-    </ul>
-    <p class="close">Se depois de tudo isso não fizer sentido pra você: <strong>basta pedir. Devolvemos 100%. Sem perguntas. Sem burocracia.</strong></p>
-    <p class="footnote">A garantia existe porque a Dany tem certeza do que entrega. Não porque o risco é seu.</p>
-  </div>
+
+<div class="gv3">
+ <div class="gv3-ticket">
+
+  <aside class="gv3-stub">
+   <span class="gv3-corner tl"></span><span class="gv3-corner tr"></span>
+   <span class="gv3-corner bl"></span><span class="gv3-corner br"></span>
+
+   <div class="gv3-medal">
+    <div class="gv3-medal-ring"></div>
+    <svg class="gv3-rays" viewBox="0 0 118 118" aria-hidden="true">
+     <line x1="59" y1="2" x2="59" y2="11"/>
+     <line x1="59" y1="116" x2="59" y2="107"/>
+     <line x1="2" y1="59" x2="11" y2="59"/>
+     <line x1="116" y1="59" x2="107" y2="59"/>
+     <line x1="18" y1="18" x2="25" y2="25"/>
+     <line x1="100" y1="18" x2="93" y2="25"/>
+     <line x1="18" y1="100" x2="25" y2="93"/>
+     <line x1="100" y1="100" x2="93" y2="93"/>
+    </svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+    <div class="gv3-ribbon"><span></span><span></span></div>
+   </div>
+
+   <div class="gv3-stamp">
+    <svg class="gv3-stamp-arc" viewBox="0 0 118 118" aria-hidden="true">
+     <defs><path id="gv3arc" d="M 16 59 A 43 43 0 0 1 102 59" fill="none"/></defs>
+     <text><textPath href="#gv3arc" startOffset="50%" text-anchor="middle">GARANTIA INCONDICIONAL</textPath></text>
+    </svg>
+    <span class="gv3-stamp-num">15</span>
+    <span class="gv3-stamp-sub">dias</span>
+   </div>
+  </aside>
+
+  <div class="gv3-perf"></div>
+  <span class="gv3-hole" style="top:0"></span>
+  <span class="gv3-hole" style="top:100%"></span>
+  <span class="gv3-hole" style="top:25%"></span>
+  <span class="gv3-hole" style="top:50%"></span>
+  <span class="gv3-hole" style="top:75%"></span>
+
+  <section class="gv3-body">
+   <span class="gv3-eyebrow">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+    Garantia incondicional · 15 dias
+   </span>
+
+   <h2 class="gv3-title">Entre. Explore tudo.<span class="gv3-l2">Se não for pra você, devolvemos.</span></h2>
+   <p class="gv3-lead">Em 15 dias, você conhece o método por dentro. Decide se serve pro seu livro.</p>
+
+   <div class="gv3-coupons">
+    <div class="gv3-coupon"><span class="gv3-cnum">1</span><span class="gv3-ctext">Acessar a estrutura completa do método</span></div>
+    <div class="gv3-coupon"><span class="gv3-cnum">2</span><span class="gv3-ctext">Participar da comunidade de autores</span></div>
+    <div class="gv3-coupon"><span class="gv3-cnum">3</span><span class="gv3-ctext">Conhecer os templates e frameworks</span></div>
+    <div class="gv3-coupon"><span class="gv3-cnum">4</span><span class="gv3-ctext">Participar da próxima sessão ao vivo disponível</span></div>
+   </div>
+
+   <div class="gv3-tear"><span class="gv3-dash"></span><span class="gv3-scissor">15 dias</span><span class="gv3-dash"></span></div>
+
+   <p class="gv3-close">Se depois de tudo isso não fizer sentido pra você: basta pedir. <b>Devolvemos 100%. Sem perguntas. Sem burocracia.</b></p>
+
+   <div class="gv3-sign">
+    <span class="gv3-sign-mark">Dany</span>
+    <span class="gv3-sign-text">A garantia existe porque a Dany tem certeza do que entrega. Não porque o risco é seu.</span>
+   </div>
+  </section>
+
+ </div>
 </div>
 </section>
 
