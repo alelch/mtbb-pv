@@ -370,7 +370,15 @@
   </div>
 
   <script>
-    var SENHA = '6969';
+    // Senha NÃO fica no código: validada no Supabase. Guardada só na sessão após login.
+    function adminPw() { try { return sessionStorage.getItem('mtbb_admin_pw') || ''; } catch (e) { return ''; } }
+    function rpcAuth(fn, body) {
+      return fetch(SB_URL + '/rest/v1/rpc/' + fn, {
+        method: 'POST',
+        headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }).then(function (r) { return r.json(); });
+    }
     var STAGES = [
       { key: 'escrevendo', name: 'Escrevendo', desc: 'Autores ainda escrevendo o livro' },
       { key: 'lancando',   name: 'Lançando',   desc: 'Autores prestes a lançar' },
@@ -388,15 +396,25 @@
 
     function tryLogin() {
       var pwd = document.getElementById('pwd').value;
-      if (pwd === SENHA) {
-        document.getElementById('gate').style.display = 'none';
-        document.getElementById('panel').classList.add('show');
-        loadCurrentConfig();
-        setupTabs();
-      } else {
-        document.getElementById('err').textContent = 'Senha incorreta.';
-        document.getElementById('pwd').value = '';
-      }
+      var err = document.getElementById('err');
+      if (!pwd) { err.textContent = 'Digite a senha.'; return; }
+      err.textContent = 'Verificando…';
+      rpcAuth('mtbb_admin_ok', { p_pass: pwd })
+        .then(function (ok) {
+          if (ok === true) {
+            try { sessionStorage.setItem('mtbb_admin_pw', pwd); } catch (e) {}
+            err.textContent = '';
+            document.getElementById('gate').style.display = 'none';
+            document.getElementById('panel').classList.add('show');
+            loadCurrentConfig();
+            setupTabs();
+          } else {
+            err.textContent = 'Senha incorreta.';
+            document.getElementById('pwd').value = '';
+          }
+        })
+        .catch(function () { err.textContent = 'Erro ao validar. Tente de novo.'; });
+      return;
     }
 
     function setupTabs() {
@@ -461,10 +479,17 @@
       var box = document.getElementById('metrics-content');
       box.innerHTML = '<div class="loading-state">Carregando…</div>';
 
-      Promise.all([callRpc('mtbb_pv_global_get'), callRpc('mtbb_pv_funnel_get')])
-        .then(function (results) {
-          var global = (results[0] && results[0][0]) || {};
-          var funnel = results[1] || [];
+      var since = new Date(Date.now() - getActiveDays() * 86400000).toISOString();
+      rpcAuth('mtbb_admin_metrics', { p_pass: adminPw(), p_since: since })
+        .then(function (resp) {
+          if (!resp || resp.message || resp.code) {
+            box.innerHTML = '<div class="empty-state">Acesso negado. Saia e entre de novo.</div>';
+            renderObrigado(null);
+            return;
+          }
+          var global = resp.global || {};
+          var funnel = resp.funnel || [];
+          renderObrigado(resp.obrigado || []);
 
           if (!global.quiz_views && (!funnel || funnel.length === 0)) {
             box.innerHTML = '<div class="empty-state">Sem eventos no período selecionado. Os primeiros cliques vão aparecer aqui em ~10 segundos depois de chegarem no site.</div>';
@@ -506,56 +531,45 @@
         })
         .catch(function (err) {
           box.innerHTML = '<div class="empty-state">Erro carregando métricas: ' + (err.message || err) + '</div>';
+          renderObrigado(null);
         });
-
-      loadObrigado();
     }
 
     // === TESTE A/B/C — página de obrigado (carta/bento/conversa) ===
-    function loadObrigado() {
+    function renderObrigado(rows) {
       var box = document.getElementById('obrigado-content');
       if (!box) return;
-      box.innerHTML = '<div class="loading-state">Carregando teste A/B/C…</div>';
       var labels = {
         carta: 'Carta (pessoal da Dany)',
         bento: 'Bento (status + atalho)',
         conversa: 'Conversa (mockup WhatsApp)'
       };
-      callRpc('mtbb_pv_obrigado_get')
-        .then(function (rows) {
-          if (rows && !Array.isArray(rows) && (rows.code || rows.message)) {
-            throw new Error(rows.message || rows.code);
-          }
-          rows = rows || [];
-          var head = '<h2 style="font-size:21px;margin:0 0 4px;">Teste A/B/C <span class="italic">— página de obrigado (lista)</span></h2>' +
-            '<p class="sub" style="margin:0 0 16px;">Qual design da página de obrigado faz mais gente clicar no WhatsApp. Métrica: clique único por visitante (dedup por sessão).</p>';
-          if (!rows.length) {
-            box.innerHTML = head + '<div class="empty-state">Sem dados do teste ainda. Aparece assim que os primeiros leads passarem pela lista de espera.</div>';
-            return;
-          }
-          var ranked = rows.map(function (r) {
-            var views = Number(r.views) || 0, conv = Number(r.converters) || 0;
-            return { variant: r.variant, views: views, conv: conv, ctr: views ? conv / views : 0 };
-          }).sort(function (a, b) { return b.ctr - a.ctr; });
-          var html = head + '<table class="funnel"><thead><tr>' +
-            '<th>Variante</th><th>Viram</th><th>Clicaram no zap</th><th>Taxa de clique</th>' +
-          '</tr></thead><tbody>';
-          ranked.forEach(function (r, i) {
-            var leader = (i === 0 && r.views > 0 && r.conv > 0);
-            html += '<tr' + (leader ? ' style="background:rgba(250,171,0,0.08);"' : '') + '>' +
-              '<td><strong>' + (labels[r.variant] || r.variant) + '</strong>' + (leader ? ' <span class="badge preco">líder</span>' : '') + '</td>' +
-              '<td class="num">' + fmt(r.views) + '</td>' +
-              '<td class="num">' + fmt(r.conv) + '</td>' +
-              '<td class="num"><strong>' + (r.ctr * 100).toFixed(1) + '%</strong></td>' +
-            '</tr>';
-          });
-          html += '</tbody></table>';
-          box.innerHTML = html;
-        })
-        .catch(function () {
-          box.innerHTML = '<h2 style="font-size:21px;margin:0 0 4px;">Teste A/B/C <span class="italic">— página de obrigado</span></h2>' +
-            '<div class="empty-state">Falta criar a função no Supabase (<code>mtbb_pv_obrigado_get</code>). Rode o SQL de <code>supabase/mtbb_pv_obrigado_get.sql</code> no SQL Editor e recarregue.</div>';
-        });
+      var head = '<h2 style="font-size:21px;margin:0 0 4px;">Teste A/B/C <span class="italic">— página de obrigado (lista)</span></h2>' +
+        '<p class="sub" style="margin:0 0 16px;">Qual design da página de obrigado faz mais gente clicar no WhatsApp. Métrica: clique único por visitante (dedup por sessão).</p>';
+      if (rows === null) { box.innerHTML = ''; return; }
+      rows = rows || [];
+      if (!rows.length) {
+        box.innerHTML = head + '<div class="empty-state">Sem dados do teste ainda. Aparece assim que os primeiros leads passarem pela lista de espera.</div>';
+        return;
+      }
+      var ranked = rows.map(function (r) {
+        var views = Number(r.views) || 0, conv = Number(r.converters) || 0;
+        return { variant: r.variant, views: views, conv: conv, ctr: views ? conv / views : 0 };
+      }).sort(function (a, b) { return b.ctr - a.ctr; });
+      var html = head + '<table class="funnel"><thead><tr>' +
+        '<th>Variante</th><th>Viram</th><th>Clicaram no zap</th><th>Taxa de clique</th>' +
+      '</tr></thead><tbody>';
+      ranked.forEach(function (r, i) {
+        var leader = (i === 0 && r.views > 0 && r.conv > 0);
+        html += '<tr' + (leader ? ' style="background:rgba(250,171,0,0.08);"' : '') + '>' +
+          '<td><strong>' + (labels[r.variant] || r.variant) + '</strong>' + (leader ? ' <span class="badge preco">líder</span>' : '') + '</td>' +
+          '<td class="num">' + fmt(r.views) + '</td>' +
+          '<td class="num">' + fmt(r.conv) + '</td>' +
+          '<td class="num"><strong>' + (r.ctr * 100).toFixed(1) + '%</strong></td>' +
+        '</tr>';
+      });
+      html += '</tbody></table>';
+      box.innerHTML = html;
     }
     document.getElementById('pwd').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') tryLogin();
@@ -606,21 +620,12 @@
       btn.textContent = 'Salvando…';
       fb.textContent = '';
 
-      fetch(SB_URL + '/rest/v1/rpc/mtbb_pv_set_config', {
-        method: 'POST',
-        headers: {
-          'apikey': SB_KEY,
-          'Authorization': 'Bearer ' + SB_KEY,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          p_password: SENHA,
-          p_escrevendo: state.escrevendo,
-          p_lancando: state.lancando,
-          p_publicado: state.publicado
-        })
+      rpcAuth('mtbb_admin_set_config', {
+        p_pass: adminPw(),
+        p_escrevendo: state.escrevendo,
+        p_lancando: state.lancando,
+        p_publicado: state.publicado
       })
-      .then(function (r) { return r.json(); })
       .then(function (result) {
         btn.disabled = false;
         btn.textContent = originalText;
