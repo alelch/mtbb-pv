@@ -4156,12 +4156,21 @@
       <img class="wl-logo" src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business">
       <h2 id="wl-title" class="wl-head">Falta pouco para você se tornar um Autor de Sucesso.</h2>
       <p class="wl-sub">Preencha abaixo e garanta seu acesso.</p>
-      <form id="wl-form" class="wl-form">
-        <input type="text" name="nome" required autocomplete="name" placeholder="Nome completo">
-        <input type="email" name="email" required autocomplete="email" placeholder="Insira seu melhor e-mail">
-        <div class="wl-phone">
-          <span class="wl-ddi" aria-hidden="true"><span class="wl-flag">🇧🇷</span>+55</span>
-          <input type="tel" name="whatsapp" autocomplete="tel" placeholder="Seu WhatsApp">
+      <form id="wl-form" class="wl-form" novalidate>
+        <div class="wl-field">
+          <input type="text" name="nome" required autocomplete="name" placeholder="Nome completo">
+          <p class="wl-err" data-err="nome"></p>
+        </div>
+        <div class="wl-field">
+          <input type="email" name="email" required autocomplete="email" inputmode="email" placeholder="Insira seu melhor e-mail">
+          <p class="wl-err" data-err="email"></p>
+        </div>
+        <div class="wl-field">
+          <div class="wl-phone">
+            <span class="wl-ddi" aria-hidden="true"><span class="wl-flag">🇧🇷</span>+55</span>
+            <input type="tel" name="whatsapp" required autocomplete="tel" inputmode="numeric" maxlength="16" placeholder="(11) 99999-9999">
+          </div>
+          <p class="wl-err" data-err="whatsapp"></p>
         </div>
         <button type="submit" class="wl-submit">Quero fazer meu livro ser lido <span class="wl-arrow">&rarr;</span></button>
       </form>
@@ -4185,6 +4194,10 @@
   .wl-form input { width: 100%; height: 46px; padding: 12px 14px; font-family: inherit; font-size: 14px; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; outline: none; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
   .wl-form input::placeholder { color: var(--text-mute); }
   .wl-form input:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(250,171,0,0.15); }
+  .wl-field { display: flex; flex-direction: column; }
+  .wl-err { display: none; margin: 5px 2px 0; font-size: 11.5px; line-height: 1.3; color: #E5484D; text-align: left; font-weight: 500; }
+  .wl-form input.invalid { border-color: #E5484D; background: #fff; box-shadow: 0 0 0 3px rgba(229,72,77,0.13); }
+  .wl-form input.invalid:focus { box-shadow: 0 0 0 3px rgba(229,72,77,0.20); }
   .wl-phone { display: flex; align-items: stretch; gap: 8px; }
   .wl-ddi { flex: 0 0 auto; display: flex; align-items: center; gap: 5px; height: 46px; padding: 0 12px; font-size: 14px; font-weight: 500; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; white-space: nowrap; user-select: none; }
   .wl-ddi .wl-flag { font-size: 15px; line-height: 1; }
@@ -4220,6 +4233,60 @@
     var overlay = document.getElementById('waitlist-modal');
     var form = document.getElementById('wl-form');
     var submit = form.querySelector('.wl-submit');
+    // ---- Validação (email real, WhatsApp DDD+9, nome completo) ----
+    var fNome = form.nome, fEmail = form.email, fZap = form.whatsapp;
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    function onlyDigits(s) { return (s || '').replace(/\D/g, ''); }
+    function setErr(input, msg) {
+      input.classList.toggle('invalid', !!msg);
+      var box = input.closest('.wl-field') || form;
+      var el = box.querySelector('[data-err="' + input.name + '"]');
+      if (el) { el.textContent = msg || ''; el.style.display = msg ? 'block' : 'none'; }
+      return !msg;
+    }
+    function vNome() {
+      var v = fNome.value.trim().replace(/\s+/g, ' ');
+      var parts = v ? v.split(' ') : [];
+      if (!v) return setErr(fNome, 'Digite seu nome completo.');
+      if (parts.length < 2 || parts[parts.length - 1].length < 2) return setErr(fNome, 'Digite nome e sobrenome.');
+      if (!/[A-Za-z\u00C0-\u00FF]/.test(v)) return setErr(fNome, 'Nome inv\u00e1lido.');
+      return setErr(fNome, '');
+    }
+    function vEmail() {
+      var v = fEmail.value.trim();
+      if (!v) return setErr(fEmail, 'Digite seu e-mail.');
+      if (!EMAIL_RE.test(v)) return setErr(fEmail, 'E-mail inv\u00e1lido. Confira e tente de novo.');
+      return setErr(fEmail, '');
+    }
+    function vZap() {
+      var d = onlyDigits(fZap.value);
+      if (!d) return setErr(fZap, 'Digite seu WhatsApp com DDD.');
+      if (d.length < 11) return setErr(fZap, 'WhatsApp incompleto: DDD + 9 d\u00edgitos.');
+      if (d.length > 11) return setErr(fZap, 'WhatsApp inv\u00e1lido.');
+      if (d.charAt(2) !== '9') return setErr(fZap, 'Celular deve ter o 9 ap\u00f3s o DDD.');
+      return setErr(fZap, '');
+    }
+    function maskZap() {
+      var d = onlyDigits(fZap.value).slice(0, 11);
+      var out = d;
+      if (d.length > 7) out = '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7);
+      else if (d.length > 2) out = '(' + d.slice(0,2) + ') ' + d.slice(2);
+      else if (d.length > 0) out = '(' + d;
+      fZap.value = out;
+    }
+    fZap.addEventListener('input', function () { maskZap(); if (fZap.classList.contains('invalid')) vZap(); });
+    fNome.addEventListener('blur', vNome);
+    fEmail.addEventListener('blur', vEmail);
+    fZap.addEventListener('blur', vZap);
+    fNome.addEventListener('input', function () { if (fNome.classList.contains('invalid')) vNome(); });
+    fEmail.addEventListener('input', function () { if (fEmail.classList.contains('invalid')) vEmail(); });
+    function validateAll() {
+      var okN = vNome(), okE = vEmail(), okZ = vZap();
+      if (!okN) { fNome.focus(); return false; }
+      if (!okE) { fEmail.focus(); return false; }
+      if (!okZ) { fZap.focus(); return false; }
+      return true;
+    }
     var HOTMART_URL = 'https://pay.hotmart.com/B73928367P?off=h0n7diwh&checkoutMode=10';
 
     function open() {
@@ -4250,6 +4317,7 @@
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+      if (!validateAll()) return;
       submit.disabled = true;
       submit.textContent = 'Enviando...';
 
@@ -4257,7 +4325,7 @@
       var payload = {
         nome: form.nome.value.trim(),
         email: form.email.value.trim(),
-        whatsapp: form.whatsapp.value.trim(),
+        whatsapp: form.whatsapp.value.replace(/\D/g, ''),
         stage: 'lancando',
         variant: 'checkout'
       };
