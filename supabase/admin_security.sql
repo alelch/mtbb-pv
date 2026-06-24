@@ -83,7 +83,8 @@ begin
     where p.pronamespace = 'public'::regnamespace
       and p.proname in ('mtbb_pv_global_get', 'mtbb_pv_funnel_get', 'mtbb_pv_obrigado_get')
   loop
-    execute 'revoke execute on function ' || r.sig || ' from anon';
+    -- revoga de PUBLIC tambem (grant default do Postgres), senao anon mantem acesso
+    execute 'revoke execute on function ' || r.sig || ' from public, anon, authenticated';
   end loop;
 end $$;
 
