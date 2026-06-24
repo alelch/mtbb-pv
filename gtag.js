@@ -1,5 +1,5 @@
-// Google — GA4 (G-FB4Q08G55Z) + Google Ads (AW-10983945651). <head> das páginas públicas.
-// Eventos avançados (view_item / generate_lead / begin_checkout / contact) disparam pelo tracker.js.
+// Google Analytics 4 (G-FB4Q08G55Z). <head> das páginas públicas.
+// (Google Ads removido: não há campanha no Ads.) Eventos do funil disparam pelo tracker.js (GA4).
 (function () {
   var s = document.createElement('script');
   s.async = true;
@@ -9,5 +9,4 @@
   window.gtag = function () { dataLayer.push(arguments); };
   gtag('js', new Date());
   gtag('config', 'G-FB4Q08G55Z');
-  gtag('config', 'AW-10983945651');
 })();
