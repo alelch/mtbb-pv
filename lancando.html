@@ -3738,6 +3738,7 @@
 
 .gv9 .gv9-seal-row { display: flex; align-items: stretch; gap: 0; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; background: var(--bg-dark); color: #fff; max-width: 620px; }
 .gv9 .gv9-seal { flex: none; width: 132px; display: grid; place-items: center; padding: 24px 0; border-right: 1px solid rgba(255,255,255,0.1); position: relative; }
+.gv9 .gv9-seal-img { width: 108px; height: 108px; object-fit: contain; display: block; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.4)); }
 .gv9 .gv9-medal { width: 90px; height: 90px; position: relative; display: grid; place-items: center; }
 .gv9 .gv9-medal .gv9-ring { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid rgba(250,171,0,0.55); }
 .gv9 .gv9-medal .gv9-ring.gv9-r2 { inset: 7px; border-style: dashed; border-color: rgba(250,171,0,0.3); }
@@ -3803,11 +3804,7 @@
 
         <div class="gv9-seal-row">
           <div class="gv9-seal">
-            <div class="gv9-medal">
-              <span class="gv9-ring"></span>
-              <span class="gv9-ring gv9-r2"></span>
-              <span class="gv9-core"><span class="gv9-dim">15 dias</span></span>
-            </div>
+            <img class="gv9-seal-img" src="assets/selo-15-dias.webp" alt="Garantia 15 dias · 100% dinheiro de volta" width="108" height="108" loading="lazy" decoding="async">
           </div>
           <div class="gv9-seal-txt">
             <p class="gv9-fechamento">Se depois de tudo isso não fizer sentido pra você: basta pedir. Devolvemos 100%. <b>Sem perguntas. Sem burocracia.</b></p>
