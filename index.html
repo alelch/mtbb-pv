@@ -149,7 +149,7 @@
 </style>
 <script src="pixel.js"></script>
 <script src="gtag.js"></script>
-<script src="tracker.js?v=6" defer></script>
+<script src="tracker.js?v=7" defer></script>
 <link rel="canonical" href="https://metodo.thebookbusiness.com.br/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Dany Sakugawa">
@@ -170,15 +170,15 @@
     <h1>Em que momento está<br><span class="italic">o seu livro hoje?</span></h1>
 
     <div class="options">
-      <a class="option" data-stage="escrevendo" href="escrevendo.html">
+      <a class="option" data-stage="escrevendo" href="escrevendo">
         <div class="label">Ainda estou escrevendo</div>
         <span class="arrow"><span class="arrow-circle">→</span></span>
       </a>
-      <a class="option" data-stage="lancando" href="lancando.html">
+      <a class="option" data-stage="lancando" href="lancando">
         <div class="label">Estou prestes a lançar</div>
         <span class="arrow"><span class="arrow-circle">→</span></span>
       </a>
-      <a class="option" data-stage="publicado" href="publicado.html">
+      <a class="option" data-stage="publicado" href="publicado">
         <div class="label">Já lancei meu livro</div>
         <span class="arrow"><span class="arrow-circle">→</span></span>
       </a>
@@ -224,7 +224,7 @@
       }
 
       function buildHref(stage, variant) {
-        var base = (variant === 'lista') ? (stage + '-lista.html') : (stage + '.html');
+        var base = (variant === 'lista') ? (stage + '-lista') : (stage);
         var utms = (window.MTBB_UTMS && window.MTBB_UTMS()) || {};
         utms.utm_test = variant + '-' + stage;
         var parts = [];

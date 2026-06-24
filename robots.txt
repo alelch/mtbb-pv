@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 Disallow: /admin.html
+Disallow: /admin-preview
 Disallow: /admin-preview.html
 
-Sitemap: https://alelch.github.io/mtbb-pv/sitemap.xml
+Sitemap: https://metodo.thebookbusiness.com.br/sitemap.xml

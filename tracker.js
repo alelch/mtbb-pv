@@ -56,7 +56,7 @@
 
   function detectStageVariant() {
     var file = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    var m = file.match(/^(escrevendo|lancando|publicado)(-lista)?\.html$/);
+    var m = file.match(/^(escrevendo|lancando|publicado)(-lista)?(\.html)?$/);
     if (m) return { stage: m[1], variant: m[2] ? 'lista' : 'preco' };
     if (file.indexOf('obrigado-') === 0) {
       var params = new URLSearchParams(window.location.search);
@@ -137,14 +137,14 @@
   // Auto-fire: quiz_view no index
   function autoFire() {
     var file = (window.location.pathname.split('/').pop() || '').toLowerCase();
-    if (file === '' || file === 'index.html') {
+    if (file === '' || file === 'index.html' || file === 'index') {
       track('quiz_view');
     }
     if (window.MTBB_OBRIGADO_VARIANT) {
       track('obrigado_view');
     }
     // ViewContent nas páginas de venda (preço e lista)
-    if (/^(escrevendo|lancando|publicado)(-lista)?\.html$/.test(file)) {
+    if (/^(escrevendo|lancando|publicado)(-lista)?(\.html)?$/.test(file)) {
       if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent');
       if (typeof window.gtag === 'function') window.gtag('event', 'view_item');
     }
