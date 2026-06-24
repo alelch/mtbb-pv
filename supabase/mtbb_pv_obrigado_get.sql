@@ -28,4 +28,6 @@ as $$
   order by 1;
 $$;
 
-grant execute on function public.mtbb_pv_obrigado_get(timestamptz) to anon;
+-- NÃO conceder execute pro anon: esta RPC é chamada só internamente pelo wrapper
+-- SECURITY DEFINER mtbb_admin_metrics (roda como owner). O acesso anon foi revogado
+-- em admin_security.sql; manter o grant aqui reabriria o buraco ao reaplicar.
