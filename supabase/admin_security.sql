@@ -110,3 +110,19 @@ end $$;
 
 -- Observação: a tabela mtbb_pv_config continua legível por anon de propósito
 -- (o quiz público precisa das % de roteamento; elas não são sensíveis).
+
+-- 6) Zerar métricas do funil/teste A-B (gated). Apaga TODOS os eventos de
+--    tracking (mtbb_pv_events). NÃO toca em vendas (Hotmart). Usado pelo botão
+--    "Zerar métricas" do admin. Já deployada via Management API.
+create or replace function public.mtbb_admin_reset_metrics(p_pass text)
+returns json language plpgsql security definer set search_path = public as $$
+declare n bigint;
+begin
+  if not public.mtbb_admin_ok(p_pass) then
+    raise exception 'unauthorized' using errcode = '42501';
+  end if;
+  delete from public.mtbb_pv_events;
+  get diagnostics n = row_count;
+  return json_build_object('deleted', n);
+end $$;
+grant execute on function public.mtbb_admin_reset_metrics(text) to anon;

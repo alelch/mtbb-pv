@@ -319,6 +319,19 @@
   .fn-foot { margin-top: 14px; font-size: 12.5px; color: var(--text-soft); line-height: 1.6; }
   .fn-foot b { color: var(--text); }
   .fn-note { font-size: 11.5px; color: var(--text-mute); margin-top: 3px; }
+  /* Funil visual — barras decrescentes (estilo financeiro) */
+  .fnl-block { margin: 6px 0 22px; }
+  .fnl-head { font-size: 13px; font-weight: 700; color: var(--text); margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+  .fnl-head .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; color: var(--text-mute); }
+  .fnl-row { display: flex; align-items: center; gap: 16px; margin-bottom: 9px; }
+  .fnl-pct { flex: 0 0 50px; text-align: right; font-weight: 700; font-size: 17px; color: var(--text); }
+  .fnl-track { flex: 1; min-width: 0; }
+  .fnl-bar { height: 46px; border-radius: 10px; display: flex; align-items: center; padding: 0 18px; margin: 0 auto; min-width: 188px; box-shadow: 0 3px 10px -4px rgba(0,0,0,0.3); transition: width .55s cubic-bezier(.2,.8,.2,1); }
+  .fnl-bar span { color: #fff; font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .005em; }
+  .fnl-val { flex: 0 0 110px; text-align: right; font-weight: 700; font-size: 16px; color: var(--text); }
+  @media (max-width: 600px) { .fnl-pct { flex-basis: 38px; font-size: 14px; } .fnl-val { flex-basis: 78px; font-size: 14px; } .fnl-bar { height: 40px; padding: 0 12px; min-width: 132px; } .fnl-bar span { font-size: 12.5px; } }
+  .btn-danger { background: #fff; color: #C7252E; border: 1px solid #E7B6B8; }
+  .btn-danger:hover { background: #C7252E; color: #fff; border-color: #C7252E; }
 </style>
 <script src="tracker.js?v=2" defer></script>
 </head>
@@ -380,6 +393,7 @@
           <span class="period-btn" data-days="90">90 dias</span>
           <span class="period-btn" data-days="3650">Tudo</span>
           <button class="btn btn-secondary" style="margin-left:auto;padding:6px 14px;font-size:12px;" onclick="loadMetrics()">↻ Atualizar</button>
+          <button class="btn btn-danger" style="padding:6px 14px;font-size:12px;" onclick="resetMetrics()">🗑 Zerar métricas</button>
         </div>
 
         <div id="metrics-content">
@@ -402,6 +416,20 @@
         headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       }).then(function (r) { return r.json(); });
+    }
+    function resetMetrics() {
+      if (!confirm('Zerar TODAS as métricas do funil / teste A-B (eventos de tracking)?\n\nIsso apaga os eventos de mtbb_pv_events (visitas, cliques, forms, A/B/C) e NÃO dá pra desfazer.\n\nAs VENDAS do Hotmart NÃO são afetadas.')) return;
+      if (!confirm('Tem certeza? Vai zerar o funil pra começar do zero.')) return;
+      rpcAuth('mtbb_admin_reset_metrics', { p_pass: adminPw() })
+        .then(function (r) {
+          if (r && typeof r.deleted !== 'undefined') {
+            alert('Métricas zeradas: ' + r.deleted + ' eventos apagados.');
+            loadMetrics();
+          } else {
+            alert('Não consegui zerar (acesso?). Saia e entre de novo.');
+          }
+        })
+        .catch(function () { alert('Erro ao zerar métricas.'); });
     }
     var STAGES = [
       { key: 'escrevendo', name: 'Escrevendo', desc: 'Autores ainda escrevendo o livro' },
@@ -525,45 +553,40 @@
       var pvPct = Math.min(100, rate(stageU, quiz));
       var lossPct = Math.max(0, 100 - pvPct);
 
-      function bar(name, val, pctTop, meta) {
-        return '<div class="fn-step">' +
-          '<div class="fn-row"><span class="fn-name">' + name + '</span><span class="fn-val">' + fmt(val) + '</span></div>' +
-          '<div class="fn-bar"><i style="width:' + Math.max(2, Math.min(100, pctTop)).toFixed(0) + '%"></i></div>' +
-          (meta ? '<div class="fn-meta">' + meta + '</div>' : '') +
+      function frow(label, val, pctTop, color) {
+        var w = Math.max(0, Math.min(100, pctTop));
+        return '<div class="fnl-row">' +
+          '<div class="fnl-pct">' + w.toFixed(0) + '%</div>' +
+          '<div class="fnl-track"><div class="fnl-bar" style="width:' + w.toFixed(1) + '%;background:' + color + '"><span>' + label + '</span></div></div>' +
+          '<div class="fnl-val">' + fmt(val) + '</div>' +
         '</div>';
       }
-      function sub(lab, n, p) {
-        return '<div class="fn-sub"><span class="lab">' + lab + '</span><span class="rgt">' +
-          '<span class="n">' + fmt(n) + '</span>' + (p !== null ? '<span class="p">' + p.toFixed(1) + '%</span>' : '') +
-        '</span></div>';
+      function block(title, rows) {
+        return '<div class="fnl-block"><div class="fnl-head">' + title + '</div>' + rows.join('') + '</div>';
       }
 
       var h = '<h2 class="fn-title">Funil completo <span class="italic">— do clique no quiz à ação</span></h2>' +
-        '<p class="sub" style="margin:0 0 4px;">Onde você ganha e perde tráfego em cada etapa (respeita o período acima).</p>' +
-        '<div class="fn">' +
-          bar('Visitas no quiz', quiz, 100, '100% &middot; topo do funil') +
-          bar('Entraram numa página de venda', stageU, pvPct,
-              pvPct.toFixed(1) + '% do quiz &middot; <span class="loss">perdeu ' + lossPct.toFixed(1) + '%</span>') +
-        '</div>';
+        '<p class="sub" style="margin:0 0 18px;">% relativo ao topo de cada bloco. As barras encolhem onde você perde tráfego.</p>';
 
-      h += '<div class="fn-split">' +
-        '<div class="fn-col">' +
-          '<div class="fn-col-head"><span class="badge preco">preço</span> caminho do checkout</div>' +
-          sub('Entraram na PV', preco.clicksU, null) +
-          sub('Preencheram o checkout', preco.forms, rate(preco.forms, preco.clicksU)) +
-          sub('Compraram (atribuído)', compras, rate(compras, preco.forms)) +
-          '<div class="fn-foot">Conversão quiz &rarr; preencheu: <b>' + rate(preco.forms, quiz).toFixed(2) + '%</b>' +
-            (preco.forms ? ' &middot; preencheu &rarr; comprou: <b>' + rate(compras, preco.forms).toFixed(1) + '%</b>' : '') + '</div>' +
-          '<div class="fn-note">Método no Hotmart no período: <b>' + fmt(vendasTot) + '</b> vendas &middot; R$ ' + receita.toLocaleString('pt-BR', {maximumFractionDigits:0}) + '. Atribuídas a este funil (sck): ' + fmt(compras) + '.</div>' +
-        '</div>' +
-        '<div class="fn-col">' +
-          '<div class="fn-col-head"><span class="badge lista">lista</span> caminho da lista de espera</div>' +
-          sub('Entraram na PV', lista.clicksU, null) +
-          sub('Entraram na lista', lista.forms, rate(lista.forms, lista.clicksU)) +
-          sub('Clicaram no WhatsApp', lista.wpp, rate(lista.wpp, lista.forms)) +
-          '<div class="fn-foot">Conversão quiz &rarr; entrou na lista: <b>' + rate(lista.forms, quiz).toFixed(2) + '%</b></div>' +
-        '</div>' +
-      '</div>';
+      h += block('Geral <span class="italic">· quiz → página de venda</span>', [
+        frow('Visitas no quiz', quiz, 100, '#2B2B2B'),
+        frow('Entraram numa PV', stageU, pvPct, '#FAAB00')
+      ]);
+
+      var pB = preco.clicksU, lB = lista.clicksU;
+      h += block('<span class="badge preco">preço</span> caminho do checkout', [
+        frow('Entraram na PV', pB, 100, '#C77F2E'),
+        frow('Preencheram', preco.forms, rate(preco.forms, pB), '#FAAB00'),
+        frow('Compraram', compras, rate(compras, pB), '#2F8A4E')
+      ]);
+
+      h += block('<span class="badge lista">lista</span> caminho da lista de espera', [
+        frow('Entraram na PV', lB, 100, '#C77F2E'),
+        frow('Entraram na lista', lista.forms, rate(lista.forms, lB), '#FAAB00'),
+        frow('Clicou no WhatsApp', lista.wpp, rate(lista.wpp, lB), '#25D366')
+      ]);
+
+      h += '<div class="fn-note" style="margin-top:2px;">Método no Hotmart no período: <b>' + fmt(vendasTot) + '</b> vendas &middot; R$ ' + receita.toLocaleString('pt-BR', {maximumFractionDigits:0}) + '. Atribuídas a este funil (sck): ' + fmt(compras) + '.</div>';
 
       if (stageU > 0) {
         var pConv = rate(preco.forms, quiz), lConv = rate(lista.forms, quiz);
@@ -572,8 +595,7 @@
           : (lConv > pConv)
             ? 'Caminho da <b>lista</b> converte mais até o fundo: ' + lConv.toFixed(2) + '% vs ' + pConv.toFixed(2) + '% do preço.'
             : 'Os dois caminhos estão empatados na conversão do quiz.';
-        h += '<div class="fn-foot" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">' + msg +
-          '<span class="fn-note" style="display:block;">Metas diferentes (preço = venda; lista = captura): compare cada caminho com seu próprio objetivo.</span></div>';
+        h += '<div class="fn-foot" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">' + msg + '</div>';
       }
 
       h += '<div style="margin:30px 0 4px;border-top:1px solid var(--border);"></div>';
