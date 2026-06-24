@@ -336,12 +336,15 @@
   .dial-card { background: var(--bg-card, #fff); border: 1px solid var(--border, #eee); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; }
   .dial-head h3 { font-size: 17px; margin: 0 0 2px; }
   .dial-head p { font-size: 13px; color: var(--text-mute, #999); margin: 0 0 14px; }
-  .dial-opts { display: flex; flex-direction: column; gap: 10px; }
-  .dial-opt { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .dial-opts { display: flex; flex-direction: column; gap: 16px; }
+  .dial-opt { display: block; }
+  .dial-opt-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
   .dial-opt-name { font-size: 14px; font-weight: 500; }
-  .dial-opt-in { display: inline-flex; align-items: center; gap: 4px; color: var(--text-mute, #999); font-size: 13px; }
-  .dial-opt-in input { width: 64px; padding: 8px 10px; border: 1px solid var(--border, #ddd); border-radius: 8px; font: inherit; font-size: 15px; text-align: right; }
-  .dial-opt-in input:focus { outline: 2px solid var(--accent, #FAAB00); border-color: var(--accent, #FAAB00); }
+  .dial-opt-val { font-size: 15px; font-weight: 700; color: var(--accent, #FAAB00); font-variant-numeric: tabular-nums; }
+  .dial-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px; background: var(--border, #eee); outline: none; margin: 2px 0 0; cursor: pointer; }
+  .dial-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--accent, #FAAB00); border: 3px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.28); cursor: pointer; }
+  .dial-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--accent, #FAAB00); border: 3px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.28); cursor: pointer; }
+  .dial-slider:focus-visible { box-shadow: 0 0 0 3px rgba(250,171,0,0.35); }
   .dial-sum { margin-top: 14px; font-size: 13px; font-weight: 600; }
   .dial-sum.ok { color: #16A34A; }
   .dial-sum.bad { color: #C7252E; }
@@ -373,7 +376,7 @@
       <!-- VIEW: Roteamento -->
       <div class="view active" id="view-routing">
         <h1>Controle de <span class="italic">roteamento.</span></h1>
-        <p class="sub">Três diais de tráfego. Ao mudar um valor e sair do campo, os outros do mesmo bloco se reajustam proporcionalmente pra somar <strong>100%</strong>. Visitante é <strong>sticky</strong> (sempre vê a mesma versão). O estágio (escrevendo/lançando/publicado) vem da escolha do autor no quiz, não é dial.</p>
+        <p class="sub">Três diais de tráfego. Ao arrastar um slider, os outros do mesmo bloco se reajustam proporcionalmente pra somar <strong>100%</strong>. Visitante é <strong>sticky</strong> (sempre vê a mesma versão). O estágio (escrevendo/lançando/publicado) vem da escolha do autor no quiz, não é dial.</p>
 
         <div id="stages"></div>
 
@@ -858,39 +861,38 @@
     function syncDial(key) {
       var d = DIALS.filter(function (x) { return x.key === key; })[0];
       d.opts.forEach(function (o) {
+        var v = parseInt(router[key][o.k], 10) || 0;
         var inp = document.querySelector('#stages input[data-dial="' + key + '"][data-opt="' + o.k + '"]');
-        if (inp) inp.value = parseInt(router[key][o.k], 10) || 0;
+        if (inp && inp !== document.activeElement) inp.value = v; // não mexe no slider que está sendo arrastado
+        var lab = document.querySelector('[data-val="' + key + ':' + o.k + '"]');
+        if (lab) lab.textContent = v + '%';
       });
       var el = document.querySelector('[data-sum="' + key + '"]');
       if (el) { el.textContent = sumLabel(key); el.className = 'dial-sum ' + (dialSum(key) === 100 ? 'ok' : 'bad'); }
     }
     function renderDials() {
       var html = DIALS.map(function (d) {
-        var inputs = d.opts.map(function (o) {
-          return '<label class="dial-opt">' +
-            '<span class="dial-opt-name">' + o.label + '</span>' +
-            '<span class="dial-opt-in"><input type="number" min="0" max="100" step="1" value="' +
-              (parseInt(router[d.key][o.k], 10) || 0) + '" data-dial="' + d.key + '" data-opt="' + o.k + '">%</span>' +
-          '</label>';
+        var opts = d.opts.map(function (o) {
+          var v = parseInt(router[d.key][o.k], 10) || 0;
+          return '<div class="dial-opt">' +
+            '<div class="dial-opt-top">' +
+              '<span class="dial-opt-name">' + o.label + '</span>' +
+              '<span class="dial-opt-val" data-val="' + d.key + ':' + o.k + '">' + v + '%</span>' +
+            '</div>' +
+            '<input type="range" min="0" max="100" step="1" value="' + v + '" class="dial-slider" data-dial="' + d.key + '" data-opt="' + o.k + '">' +
+          '</div>';
         }).join('');
         return '<div class="dial-card">' +
           '<div class="dial-head"><h3>' + d.title + '</h3><p>' + d.desc + '</p></div>' +
-          '<div class="dial-opts">' + inputs + '</div>' +
+          '<div class="dial-opts">' + opts + '</div>' +
           '<div class="dial-sum ' + (dialSum(d.key) === 100 ? 'ok' : 'bad') + '" data-sum="' + d.key + '">' + sumLabel(d.key) + '</div>' +
         '</div>';
       }).join('');
       document.getElementById('stages').innerHTML = html;
 
+      // arrastar um slider rebalanceia os outros proporcionalmente, ao vivo, somando 100
       document.querySelectorAll('#stages input[data-dial]').forEach(function (inp) {
-        // ao vivo (enquanto digita): só atualiza o indicador de soma
         inp.addEventListener('input', function () {
-          var k = this.getAttribute('data-dial'), o = this.getAttribute('data-opt');
-          router[k][o] = Math.max(0, Math.min(100, parseInt(this.value, 10) || 0));
-          var el = document.querySelector('[data-sum="' + k + '"]');
-          if (el) { el.textContent = sumLabel(k); el.className = 'dial-sum ' + (dialSum(k) === 100 ? 'ok' : 'bad'); }
-        });
-        // ao sair do campo (commit): rebalanceia os outros proporcionalmente -> soma 100
-        inp.addEventListener('change', function () {
           rebalance(this.getAttribute('data-dial'), this.getAttribute('data-opt'), this.value);
           syncDial(this.getAttribute('data-dial'));
         });
