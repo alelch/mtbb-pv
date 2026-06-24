@@ -373,7 +373,7 @@
       <!-- VIEW: Roteamento -->
       <div class="view active" id="view-routing">
         <h1>Controle de <span class="italic">roteamento.</span></h1>
-        <p class="sub">Três diais de tráfego, cada um soma 100%. Visitante é <strong>sticky</strong> (sempre vê a mesma versão). O estágio (escrevendo/lançando/publicado) vem da escolha do autor no quiz, não é dial.</p>
+        <p class="sub">Três diais de tráfego. Ao mudar um valor e sair do campo, os outros do mesmo bloco se reajustam proporcionalmente pra somar <strong>100%</strong>. Visitante é <strong>sticky</strong> (sempre vê a mesma versão). O estágio (escrevendo/lançando/publicado) vem da escolha do autor no quiz, não é dial.</p>
 
         <div id="stages"></div>
 
@@ -833,7 +833,36 @@
 
     function sumLabel(key) {
       var sum = dialSum(key);
-      return 'soma: ' + sum + '%' + (sum === 100 ? ' ✓' : ' (precisa dar 100)');
+      return 'soma: ' + sum + '%' + (sum === 100 ? ' ✓' : ' (ajustando…)');
+    }
+    // Ao mudar um valor, os OUTROS desse dial se reajustam proporcionais ao que tinham,
+    // pra soma travar em 100. Usa maior-resto pra fechar exato em inteiros.
+    function rebalance(key, changedOpt, newVal) {
+      var d = DIALS.filter(function (x) { return x.key === key; })[0];
+      newVal = Math.max(0, Math.min(100, parseInt(newVal, 10) || 0));
+      router[key][changedOpt] = newVal;
+      var others = d.opts.map(function (o) { return o.k; }).filter(function (k) { return k !== changedOpt; });
+      if (!others.length) return;
+      var remaining = 100 - newVal;
+      var curSum = others.reduce(function (s, k) { return s + (parseInt(router[key][k], 10) || 0); }, 0);
+      var raw = (curSum <= 0)
+        ? others.map(function () { return remaining / others.length; })
+        : others.map(function (k) { return remaining * (parseInt(router[key][k], 10) || 0) / curSum; });
+      var floored = raw.map(function (v) { return Math.floor(v); });
+      var leftover = remaining - floored.reduce(function (a, b) { return a + b; }, 0);
+      var byFrac = raw.map(function (v, i) { return { i: i, frac: v - Math.floor(v) }; })
+        .sort(function (a, b) { return b.frac - a.frac; });
+      for (var j = 0; j < leftover; j++) { floored[byFrac[j % floored.length].i]++; }
+      others.forEach(function (k, i) { router[key][k] = floored[i]; });
+    }
+    function syncDial(key) {
+      var d = DIALS.filter(function (x) { return x.key === key; })[0];
+      d.opts.forEach(function (o) {
+        var inp = document.querySelector('#stages input[data-dial="' + key + '"][data-opt="' + o.k + '"]');
+        if (inp) inp.value = parseInt(router[key][o.k], 10) || 0;
+      });
+      var el = document.querySelector('[data-sum="' + key + '"]');
+      if (el) { el.textContent = sumLabel(key); el.className = 'dial-sum ' + (dialSum(key) === 100 ? 'ok' : 'bad'); }
     }
     function renderDials() {
       var html = DIALS.map(function (d) {
@@ -853,11 +882,17 @@
       document.getElementById('stages').innerHTML = html;
 
       document.querySelectorAll('#stages input[data-dial]').forEach(function (inp) {
+        // ao vivo (enquanto digita): só atualiza o indicador de soma
         inp.addEventListener('input', function () {
           var k = this.getAttribute('data-dial'), o = this.getAttribute('data-opt');
           router[k][o] = Math.max(0, Math.min(100, parseInt(this.value, 10) || 0));
           var el = document.querySelector('[data-sum="' + k + '"]');
           if (el) { el.textContent = sumLabel(k); el.className = 'dial-sum ' + (dialSum(k) === 100 ? 'ok' : 'bad'); }
+        });
+        // ao sair do campo (commit): rebalanceia os outros proporcionalmente -> soma 100
+        inp.addEventListener('change', function () {
+          rebalance(this.getAttribute('data-dial'), this.getAttribute('data-opt'), this.value);
+          syncDial(this.getAttribute('data-dial'));
         });
       });
     }
