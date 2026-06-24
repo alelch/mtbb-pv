@@ -58,7 +58,7 @@
     var file = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
     var m = file.match(/^(escrevendo|lancando|publicado)(-lista)?\.html$/);
     if (m) return { stage: m[1], variant: m[2] ? 'lista' : 'preco' };
-    if (file === 'lista-de-espera.html') {
+    if (file === 'lista-de-espera.html' || file.indexOf('obrigado-') === 0) {
       var params = new URLSearchParams(window.location.search);
       var ut = params.get('utm_test') || '';
       var um = ut.match(/^(preco|lista)-(escrevendo|lancando|publicado)$/);
@@ -71,6 +71,8 @@
     extra = extra || {};
     var utms = (window.MTBB_UTMS && window.MTBB_UTMS()) || {};
     var auto = detectStageVariant();
+    var meta = extra.meta || {};
+    if (window.MTBB_OBRIGADO_VARIANT && !meta.obrigado_variant) meta.obrigado_variant = window.MTBB_OBRIGADO_VARIANT;
     var payload = {
       event_type: eventType,
       stage: (extra.stage !== undefined) ? extra.stage : auto.stage,
@@ -88,7 +90,7 @@
       referrer: document.referrer || null,
       user_agent: (navigator.userAgent || '').substr(0, 240),
       page: window.location.pathname,
-      meta: extra.meta || {}
+      meta: meta
     };
     try {
       fetch(ENDPOINT, {
@@ -112,6 +114,9 @@
     var file = (window.location.pathname.split('/').pop() || '').toLowerCase();
     if (file === '' || file === 'index.html') {
       track('quiz_view');
+    }
+    if (window.MTBB_OBRIGADO_VARIANT) {
+      track('obrigado_view');
     }
   }
 

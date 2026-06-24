@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Você está na lista de espera · Método The Book Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F8F8;
+    --bg-dark:#0A0A0A;
+    --accent:#FAAB00;
+    --text:#1A1A1A;
+    --text-soft:#555;
+    --text-mute:#999;
+    --whatsapp:#25D366;
+    --whatsapp-deep:#128C7E;
+    --whatsapp-ink:#075E54;
+    --chat-bg:#E4DDD4;
+    --bubble-in:#FFFFFF;
+    --bubble-out:#DCF8C6;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  .em{
+    font-family:'Fraunces',Georgia,serif;
+    font-style:italic;
+    font-weight:500;
+  }
+
+  /* ===== TOP BAR ===== */
+  .topbar{
+    background:var(--whatsapp-ink);
+    color:#fff;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-size:.82rem;
+    letter-spacing:.02em;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .topbar .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:#4ade80;
+    box-shadow:0 0 0 0 rgba(74,222,128,.7);
+    animation:pulse 2s infinite;
+    flex-shrink:0;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(74,222,128,.6);}
+    70%{box-shadow:0 0 0 8px rgba(74,222,128,0);}
+    100%{box-shadow:0 0 0 0 rgba(74,222,128,0);}
+  }
+  .topbar strong{font-weight:600;}
+  .topbar .label{opacity:.85;font-weight:300;}
+
+  /* ===== HERO ===== */
+  .hero{
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(250,171,0,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(37,211,102,.10), transparent 55%),
+      var(--bg);
+    padding:64px 24px 40px;
+    position:relative;
+  }
+  .container{max-width:1080px;margin:0 auto;}
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:56px;
+    align-items:center;
+  }
+
+  .logo{
+    height:34px;width:auto;display:block;margin-bottom:38px;
+  }
+
+  .confirm-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    background:rgba(37,211,102,.12);
+    border:1px solid rgba(37,211,102,.35);
+    color:var(--whatsapp-deep);
+    padding:7px 15px 7px 11px;
+    border-radius:100px;
+    font-size:.78rem;
+    font-weight:600;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .confirm-badge svg{width:16px;height:16px;flex-shrink:0;}
+
+  .hero h1{
+    font-size:clamp(2.1rem,4.6vw,3.4rem);
+    line-height:1.08;
+    font-weight:600;
+    letter-spacing:-.02em;
+    margin-bottom:22px;
+  }
+  .hero h1 .em{color:var(--text);font-weight:500;}
+  .hero h1 .hl{color:var(--whatsapp-deep);}
+
+  .hero p.lead{
+    font-size:1.08rem;
+    color:var(--text-soft);
+    max-width:30em;
+    margin-bottom:14px;
+    font-weight:300;
+  }
+  .hero p.lead strong{color:var(--text);font-weight:600;}
+
+  .kicker{
+    font-size:.95rem;
+    color:var(--text);
+    font-weight:500;
+    margin-bottom:30px;
+    max-width:30em;
+  }
+  .kicker .em{color:var(--accent);}
+
+  /* ===== CTA BUTTON (hero) ===== */
+  .cta-wrap{display:flex;flex-direction:column;gap:12px;align-items:flex-start;}
+
+  .btn-whatsapp{
+    display:inline-flex;
+    align-items:center;
+    gap:13px;
+    background:var(--whatsapp);
+    color:#fff;
+    text-decoration:none;
+    padding:18px 30px;
+    border-radius:16px;
+    font-size:1.06rem;
+    font-weight:600;
+    letter-spacing:.01em;
+    box-shadow:0 12px 30px -8px rgba(37,211,102,.55), 0 2px 0 rgba(0,0,0,.04);
+    transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s ease, background .22s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .btn-whatsapp svg{width:26px;height:26px;flex-shrink:0;position:relative;z-index:1;}
+  .btn-whatsapp span{position:relative;z-index:1;}
+  .btn-whatsapp::after{
+    content:"";
+    position:absolute;
+    top:0;left:-120%;
+    width:60%;height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.32),transparent);
+    transform:skewX(-20deg);
+    transition:none;
+  }
+  .btn-whatsapp:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 40px -8px rgba(37,211,102,.65);
+    background:#22c35e;
+  }
+  .btn-whatsapp:hover::after{
+    animation:shine .85s ease;
+  }
+  @keyframes shine{to{left:140%;}}
+  .btn-whatsapp:active{transform:translateY(-1px);}
+
+  .cta-sub{
+    font-size:.82rem;
+    color:var(--text-mute);
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding-left:4px;
+  }
+  .cta-sub svg{width:14px;height:14px;color:var(--whatsapp-deep);}
+
+  /* ===== PHONE MOCKUP ===== */
+  .phone-stage{
+    display:flex;
+    justify-content:center;
+    perspective:1400px;
+  }
+  .phone{
+    width:330px;
+    max-width:100%;
+    background:#0c0c0c;
+    border-radius:42px;
+    padding:11px;
+    box-shadow:
+      0 40px 80px -24px rgba(0,0,0,.45),
+      0 10px 24px -12px rgba(0,0,0,.4),
+      inset 0 0 0 1.5px rgba(255,255,255,.06);
+    transform:rotateY(-9deg) rotateX(3deg) rotate(.5deg);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .phone:hover{transform:rotateY(-3deg) rotateX(1deg);}
+
+  .phone-screen{
+    background:var(--chat-bg);
+    background-image:
+      radial-gradient(rgba(0,0,0,.025) 1px, transparent 1px);
+    background-size:18px 18px;
+    border-radius:32px;
+    overflow:hidden;
+    position:relative;
+  }
+  .phone-notch{
+    position:absolute;
+    top:0;left:50%;transform:translateX(-50%);
+    width:120px;height:22px;
+    background:#0c0c0c;
+    border-radius:0 0 16px 16px;
+    z-index:6;
+  }
+
+  .chat-head{
+    background:var(--whatsapp-ink);
+    color:#fff;
+    padding:30px 16px 12px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+  }
+  .chat-avatar{
+    width:40px;height:40px;border-radius:50%;
+    background:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    flex-shrink:0;
+    border:1.5px solid rgba(255,255,255,.25);
+  }
+  .chat-avatar img{width:100%;height:100%;object-fit:cover;}
+  .chat-meta{display:flex;flex-direction:column;line-height:1.25;min-width:0;}
+  .chat-meta .name{font-weight:600;font-size:.92rem;display:flex;align-items:center;gap:5px;}
+  .chat-meta .name svg{width:13px;height:13px;color:#7fd2ff;flex-shrink:0;}
+  .chat-meta .status{font-size:.72rem;opacity:.8;font-weight:300;}
+  .chat-meta .status b{color:#7ee2a8;font-weight:500;}
+
+  .chat-body{
+    padding:18px 14px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    min-height:300px;
+  }
+  .day-sep{
+    align-self:center;
+    background:rgba(255,255,255,.7);
+    color:var(--text-soft);
+    font-size:.66rem;
+    font-weight:500;
+    padding:4px 11px;
+    border-radius:8px;
+    box-shadow:0 1px 1px rgba(0,0,0,.04);
+    margin-bottom:2px;
+  }
+  .bubble{
+    max-width:84%;
+    padding:9px 12px 8px;
+    border-radius:12px;
+    font-size:.82rem;
+    line-height:1.45;
+    position:relative;
+    box-shadow:0 1px 1.5px rgba(0,0,0,.08);
+    opacity:0;
+    transform:translateY(10px);
+    animation:bubbleIn .5s forwards;
+  }
+  .bubble .time{
+    display:block;
+    font-size:.6rem;
+    color:var(--text-mute);
+    text-align:right;
+    margin-top:3px;
+  }
+  .bubble.in{
+    background:var(--bubble-in);
+    align-self:flex-start;
+    border-top-left-radius:3px;
+  }
+  .bubble.out{
+    background:var(--bubble-out);
+    align-self:flex-end;
+    border-top-right-radius:3px;
+  }
+  .bubble.out .time{display:flex;align-items:center;justify-content:flex-end;gap:3px;}
+  .bubble.out .time svg{width:14px;height:9px;color:#34b7f1;}
+  .bubble strong{font-weight:600;}
+  .bubble .em{font-size:.84rem;}
+
+  .b1{animation-delay:.25s;}
+  .b2{animation-delay:.85s;}
+  .b3{animation-delay:1.55s;}
+  .b4{animation-delay:2.35s;}
+
+  @keyframes bubbleIn{
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  .typing{
+    align-self:flex-start;
+    background:var(--bubble-in);
+    border-radius:12px;
+    border-top-left-radius:3px;
+    padding:11px 14px;
+    display:flex;
+    gap:4px;
+    box-shadow:0 1px 1.5px rgba(0,0,0,.08);
+    opacity:0;
+    animation:bubbleIn .4s forwards;
+    animation-delay:1.95s;
+  }
+  .typing span{
+    width:7px;height:7px;border-radius:50%;
+    background:#b9b9b9;
+    animation:blink 1.3s infinite;
+  }
+  .typing span:nth-child(2){animation-delay:.2s;}
+  .typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes blink{0%,60%,100%{opacity:.35;transform:translateY(0);}30%{opacity:1;transform:translateY(-2px);}}
+
+  .chat-input{
+    background:#f0f0f0;
+    padding:9px 12px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .chat-input .field{
+    flex:1;
+    background:#fff;
+    border-radius:20px;
+    padding:9px 14px;
+    font-size:.78rem;
+    color:var(--text-mute);
+    box-shadow:0 1px 1px rgba(0,0,0,.05);
+  }
+  .chat-input .send{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--whatsapp);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    box-shadow:0 2px 6px rgba(37,211,102,.4);
+    transition:transform .2s ease;
+    animation:nudge 2.6s ease-in-out infinite;
+    animation-delay:3s;
+  }
+  .chat-input .send svg{width:18px;height:18px;color:#fff;}
+  @keyframes nudge{0%,88%,100%{transform:scale(1);}92%{transform:scale(1.12);}96%{transform:scale(.98);}}
+
+  /* ===== PROOF STRIP ===== */
+  .proof{
+    background:var(--bg-dark);
+    color:#fff;
+    padding:56px 24px;
+  }
+  .proof-head{
+    text-align:center;
+    margin-bottom:40px;
+  }
+  .proof-head .tag{
+    font-size:.74rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:500;
+    margin-bottom:12px;
+  }
+  .proof-head h2{
+    font-size:clamp(1.5rem,3vw,2.1rem);
+    font-weight:400;
+    line-height:1.25;
+    letter-spacing:-.01em;
+    max-width:18em;
+    margin:0 auto;
+  }
+  .proof-head h2 .em{color:var(--accent);}
+
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    max-width:920px;
+    margin:0 auto;
+  }
+  .stat{
+    text-align:center;
+    padding:26px 14px;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:18px;
+    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+    transition:transform .3s ease, border-color .3s ease, background .3s ease;
+  }
+  .stat:hover{
+    transform:translateY(-5px);
+    border-color:rgba(250,171,0,.45);
+    background:linear-gradient(180deg, rgba(250,171,0,.07), rgba(255,255,255,.01));
+  }
+  .stat .num{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.8rem,3.6vw,2.5rem);
+    color:var(--accent);
+    line-height:1;
+    margin-bottom:8px;
+  }
+  .stat .lbl{
+    font-size:.8rem;
+    color:#c9c9c9;
+    font-weight:300;
+    line-height:1.35;
+  }
+
+  /* ===== THESIS ===== */
+  .thesis{
+    background:var(--bg-dark);
+    color:#fff;
+    padding:8px 24px 64px;
+    text-align:center;
+  }
+  .thesis .line{
+    max-width:760px;margin:0 auto;
+    border-top:1px solid rgba(255,255,255,.1);
+    padding-top:48px;
+  }
+  .thesis p{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.4rem,3vw,2rem);
+    line-height:1.4;
+    color:#f0f0f0;
+  }
+  .thesis p .accent{color:var(--accent);}
+  .thesis .sub{
+    font-family:'Poppins',sans-serif;
+    font-style:normal;
+    font-size:.95rem;
+    color:var(--text-mute);
+    margin-top:18px;
+    font-weight:300;
+  }
+
+  /* ===== FINAL CTA ===== */
+  .final{
+    background:
+      radial-gradient(800px 400px at 50% -20%, rgba(37,211,102,.16), transparent 60%),
+      linear-gradient(180deg,#0d3b2e,#0a0a0a 90%);
+    color:#fff;
+    padding:72px 24px 80px;
+    text-align:center;
+  }
+  .final .mark{
+    font-family:'Caveat',cursive;
+    font-size:1.5rem;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  .final h2{
+    font-size:clamp(1.7rem,3.6vw,2.6rem);
+    font-weight:600;
+    line-height:1.12;
+    letter-spacing:-.02em;
+    max-width:16em;
+    margin:0 auto 18px;
+  }
+  .final h2 .em{font-weight:500;color:var(--accent);}
+  .final p{
+    color:#cfe8da;
+    font-weight:300;
+    max-width:34em;
+    margin:0 auto 34px;
+    font-size:1.04rem;
+  }
+  .final .btn-whatsapp{
+    font-size:1.12rem;
+    padding:20px 36px;
+  }
+  .final .cta-sub{
+    color:rgba(255,255,255,.6);
+    justify-content:center;
+    margin-top:16px;
+  }
+  .final .cta-sub svg{color:#7ee2a8;}
+
+  /* ===== STEPS ===== */
+  .steps{
+    display:flex;
+    justify-content:center;
+    gap:0;
+    flex-wrap:wrap;
+    max-width:760px;
+    margin:46px auto 0;
+  }
+  .step{
+    flex:1;
+    min-width:170px;
+    padding:0 18px;
+    position:relative;
+    text-align:center;
+  }
+  .step:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    top:18px;right:-2px;
+    width:2px;height:60px;
+    background:linear-gradient(180deg,rgba(255,255,255,.12),transparent);
+  }
+  .step .n{
+    width:38px;height:38px;border-radius:50%;
+    border:1.5px solid var(--accent);
+    color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-style:italic;font-weight:600;
+    font-size:1.05rem;
+    margin:0 auto 14px;
+  }
+  .step h4{font-size:.95rem;font-weight:600;margin-bottom:5px;color:#fff;}
+  .step p{font-size:.82rem;color:#b9cdc3;font-weight:300;margin:0;max-width:none;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    background:var(--bg-dark);
+    color:var(--text-mute);
+    padding:38px 24px 44px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.06);
+  }
+  footer .flogo{height:30px;width:auto;opacity:.95;margin-bottom:18px;}
+  footer p{font-size:.78rem;line-height:1.7;max-width:40em;margin:0 auto;font-weight:300;}
+  footer .sep{color:rgba(255,255,255,.18);margin:0 8px;}
+  footer a{color:var(--text-mute);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15);transition:color .2s;}
+  footer a:hover{color:var(--whatsapp);}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:880px){
+    .hero-grid{grid-template-columns:1fr;gap:48px;}
+    .hero{padding:48px 22px 36px;text-align:center;}
+    .logo{margin:0 auto 30px;}
+    .hero p.lead,.kicker{margin-left:auto;margin-right:auto;}
+    .cta-wrap{align-items:center;}
+    .phone-stage{order:-1;}
+    .phone{transform:none;}
+    .phone:hover{transform:none;}
+    .stats{grid-template-columns:repeat(2,1fr);gap:14px;}
+    .step:not(:last-child)::after{display:none;}
+    .steps{gap:30px;}
+  }
+  @media (max-width:480px){
+    .topbar{font-size:.72rem;padding:11px 14px;flex-wrap:wrap;text-align:center;}
+    .hero h1{font-size:2rem;}
+    .btn-whatsapp{width:100%;justify-content:center;}
+    .phone{width:300px;}
+    .stat{padding:20px 10px;}
+  }
+</style>
+<script>window.MTBB_OBRIGADO_VARIANT='conversa';</script>
+<style>a:focus-visible,button:focus-visible{outline:3px solid #FAAB00;outline-offset:3px;border-radius:4px}@media(max-width:480px){.chat-meta .name{font-size:.9rem;overflow-wrap:anywhere}}</style>
+<script src="tracker.js?v=3" defer></script>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <span class="dot"></span>
+    <span><strong>Inscrição confirmada.</strong> <span class="label">Você está na lista de espera do Método.</span></span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+
+        <div class="hero-copy">
+          <img class="logo" src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business">
+
+          <div class="confirm-badge">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Seu lugar está garantido
+          </div>
+
+          <h1>
+            Pronto. Você entrou.<br>
+            Agora <span class="em hl">não espere</span> a fila andar.
+          </h1>
+
+          <p class="lead">
+            A turma abre por vagas, e quem fala com o nosso time <strong>entra antes</strong> que as vagas acabem.
+          </p>
+
+          <p class="kicker">
+            Tem uma conversa <span class="em">aberta esperando você</span> no WhatsApp. Responder leva trinta segundos.
+          </p>
+
+          <div class="cta-wrap">
+            <a class="btn-whatsapp" href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener">
+              <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 4C9.93 4 4.98 8.95 4.98 15.06c0 1.96.51 3.86 1.49 5.55L4.9 27l6.54-1.52a11.02 11.02 0 0 0 4.6 1.01h.01c6.1 0 11.05-4.95 11.05-11.06C27.1 8.95 22.15 4 16.04 4Zm0 20.27h-.01a9.2 9.2 0 0 1-4.69-1.28l-.34-.2-3.88.9.83-3.78-.22-.35a9.16 9.16 0 0 1-1.41-4.91c0-5.08 4.13-9.21 9.22-9.21 2.46 0 4.78.96 6.52 2.7a9.16 9.16 0 0 1 2.7 6.52c0 5.08-4.14 9.21-9.22 9.21Zm5.05-6.9c-.28-.14-1.64-.81-1.89-.9-.25-.09-.43-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.83-.74-1.38-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.49.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.54-.45-.46-.62-.47l-.53-.01c-.18 0-.49.07-.74.35-.25.28-.97.95-.97 2.32 0 1.37 1 2.69 1.13 2.87.14.18 1.96 3 4.76 4.21.66.29 1.18.46 1.59.59.67.21 1.27.18 1.75.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33Z"/></svg>
+              <span>Quero furar a fila</span>
+            </a>
+            <span class="cta-sub">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Atendimento humano · sem compromisso
+            </span>
+          </div>
+        </div>
+
+        <!-- PHONE MOCKUP -->
+        <div class="phone-stage">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+
+              <div class="chat-head">
+                <div class="chat-avatar">
+                  <img src="assets/dany-sakugawa.webp" alt="Time The Book Business">
+                </div>
+                <div class="chat-meta">
+                  <span class="name">
+                    Time The Book Business
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+                  </span>
+                  <span class="status"><b>online</b> · normalmente responde na hora</span>
+                </div>
+              </div>
+
+              <div class="chat-body">
+                <div class="day-sep">HOJE</div>
+
+                <div class="bubble in b1">
+                  Oi! Recebemos sua entrada na lista de espera do Método. <strong>Bem-vindo(a).</strong> 👋
+                  <span class="time">agora</span>
+                </div>
+
+                <div class="bubble in b2">
+                  A próxima turma abre por número de vagas. Quem fala com a gente por aqui entra com <strong>prioridade</strong>, antes das vagas acabarem.
+                  <span class="time">agora</span>
+                </div>
+
+                <div class="typing">
+                  <span></span><span></span><span></span>
+                </div>
+
+                <div class="bubble in b3">
+                  Quer que eu garanta seu lugar entre os primeiros? <span class="em">É só responder.</span>
+                  <span class="time">agora</span>
+                </div>
+
+                <div class="bubble out b4">
+                  Quero prioridade para entrar no Método 🙋
+                  <span class="time">você
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z M16 7l-1.4-1.4L8.6 11.6 10 13z" opacity=".9"/></svg>
+                  </span>
+                </div>
+              </div>
+
+              <div class="chat-input">
+                <div class="field">Escreva uma mensagem</div>
+                <div class="send">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.4 20.4 21 12 3.4 3.6 3.39 10.1 15 12l-11.6 1.9z"/></svg>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="proof">
+    <div class="container">
+      <div class="proof-head">
+        <div class="tag">Por que vale entrar antes</div>
+        <h2>Você está prestes a falar com quem já fez isso <span class="em">milhões de vezes.</span></h2>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">+800</div>
+          <div class="lbl">autores lançados</div>
+        </div>
+        <div class="stat">
+          <div class="num">+10M</div>
+          <div class="lbl">livros vendidos</div>
+        </div>
+        <div class="stat">
+          <div class="num">+4.400</div>
+          <div class="lbl">alunos no método</div>
+        </div>
+        <div class="stat">
+          <div class="num">+15</div>
+          <div class="lbl">anos nos bastidores</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THESIS -->
+  <section class="thesis">
+    <div class="line">
+      <p>O maior risco que um autor corre <span class="accent">é ser esquecido.</span></p>
+      <p class="sub">A lista de espera te coloca no radar. A conversa te coloca na frente.</p>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="container">
+      <div class="mark">um passo. agora.</div>
+      <h2>Não deixe seu livro <span class="em">esperando</span> outra turma.</h2>
+      <p>
+        Abra a conversa que já está montada para você. O time confirma sua prioridade e te mostra o caminho para chegar aos leitores certos, de verdade.
+      </p>
+
+      <a class="btn-whatsapp" href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 4C9.93 4 4.98 8.95 4.98 15.06c0 1.96.51 3.86 1.49 5.55L4.9 27l6.54-1.52a11.02 11.02 0 0 0 4.6 1.01h.01c6.1 0 11.05-4.95 11.05-11.06C27.1 8.95 22.15 4 16.04 4Zm0 20.27h-.01a9.2 9.2 0 0 1-4.69-1.28l-.34-.2-3.88.9.83-3.78-.22-.35a9.16 9.16 0 0 1-1.41-4.91c0-5.08 4.13-9.21 9.22-9.21 2.46 0 4.78.96 6.52 2.7a9.16 9.16 0 0 1 2.7 6.52c0 5.08-4.14 9.21-9.22 9.21Zm5.05-6.9c-.28-.14-1.64-.81-1.89-.9-.25-.09-.43-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.83-.74-1.38-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.49.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.54-.45-.46-.62-.47l-.53-.01c-.18 0-.49.07-.74.35-.25.28-.97.95-.97 2.32 0 1.37 1 2.69 1.13 2.87.14.18 1.96 3 4.76 4.21.66.29 1.18.46 1.59.59.67.21 1.27.18 1.75.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33Z"/></svg>
+        <span>Falar com o time agora</span>
+      </a>
+      <span class="cta-sub">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sem compromisso. Conversa direta no seu WhatsApp.
+      </span>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <h4>Você abre a conversa</h4>
+          <p>A mensagem já está pronta. Um toque e ela vai.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h4>O time confirma</h4>
+          <p>O time prioriza seu lugar na próxima turma.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h4>Você sai da fila</h4>
+          <p>E começa o caminho para permanecer, não desaparecer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img class="flogo" src="assets/logo-metodo-the-book-business-amarelo-branco.webp" alt="Método The Book Business">
+    <p>
+      Método The Book Business · Dany Sakugawa
+      <span class="sep">·</span>
+      +15 anos transformando autores em autores lembrados.
+      <br>
+      Dúvidas? <a href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener">Fale com nosso time no WhatsApp</a>.
+    </p>
+  </footer>
+
+</body>
+</html>

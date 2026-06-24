@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Você entrou na lista. Um recado da Dany.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;0,9..144,500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F8F8;
+    --bg-dark:#0A0A0A;
+    --accent:#FAAB00;
+    --text:#1A1A1A;
+    --text-soft:#555;
+    --text-mute:#999;
+    --whatsapp:#25D366;
+    --paper:#FCFBF7;
+    --paper-edge:#F1EEE4;
+    --rule:#E7E2D4;
+    --ink:#23211C;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    background-image:
+      radial-gradient(1200px 600px at 50% -10%, rgba(250,171,0,0.07), transparent 60%),
+      radial-gradient(900px 500px at 90% 110%, rgba(10,10,10,0.04), transparent 60%);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    padding:clamp(20px,5vw,64px) 16px clamp(48px,7vw,96px);
+  }
+
+  .stage{max-width:760px;margin:0 auto;}
+
+  /* ---- Brand strip ---- */
+  .brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:clamp(22px,4vw,40px);
+  }
+  .brandbar img{height:34px;width:auto;opacity:.92;}
+  .brandbar .kicker{
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--text-mute);
+    font-weight:500;
+  }
+
+  /* ---- The letter / paper ---- */
+  .letter{
+    position:relative;
+    background:var(--paper);
+    border-radius:6px;
+    padding:clamp(28px,6vw,72px) clamp(22px,6vw,76px) clamp(34px,6vw,64px);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.8) inset,
+      0 28px 60px -28px rgba(20,18,10,.32),
+      0 8px 22px -16px rgba(20,18,10,.18);
+    border:1px solid var(--paper-edge);
+    overflow:hidden;
+  }
+  /* subtle paper grain + top tape accent */
+  .letter::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      repeating-linear-gradient(180deg, rgba(35,33,28,0.012) 0 1px, transparent 1px 28px);
+    pointer-events:none;
+  }
+  .letter::after{
+    content:"";
+    position:absolute;left:0;right:0;top:0;height:4px;
+    background:linear-gradient(90deg, var(--accent), #ffce5e 55%, var(--accent));
+    opacity:.9;
+  }
+
+  /* confirmation chip */
+  .confirm{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(250,171,0,.12);
+    border:1px solid rgba(250,171,0,.4);
+    color:#7a5400;
+    padding:8px 16px 8px 12px;
+    border-radius:100px;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.01em;
+    margin-bottom:clamp(20px,4vw,30px);
+  }
+  .confirm svg{width:18px;height:18px;flex:none;}
+
+  .salutation{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(22px,4.6vw,30px);
+    color:var(--ink);
+    line-height:1.25;
+    margin-bottom:clamp(18px,3.5vw,26px);
+  }
+
+  .letter p{
+    color:var(--text-soft);
+    font-size:clamp(15.5px,2.4vw,17.5px);
+    font-weight:300;
+    margin-bottom:1.05em;
+    max-width:58ch;
+  }
+  .letter p strong{
+    color:var(--ink);
+    font-weight:600;
+  }
+  .em{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .accent-word{color:#9c6f00;font-weight:500;}
+
+  .thesis{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(20px,3.6vw,25px);
+    line-height:1.4;
+    color:var(--ink);
+    margin:clamp(26px,4vw,34px) 0;
+    padding-left:clamp(16px,3vw,22px);
+    border-left:3px solid var(--accent);
+    max-width:46ch;
+  }
+
+  /* ---- CTA block ---- */
+  .invite{
+    margin-top:clamp(28px,5vw,40px);
+    padding-top:clamp(24px,4vw,32px);
+    border-top:1px dashed var(--rule);
+  }
+  .invite-lead{
+    font-family:'Caveat',cursive;
+    font-size:clamp(24px,4.6vw,30px);
+    color:#7a5400;
+    line-height:1.25;
+    margin-bottom:14px;
+    transform:rotate(-.5deg);
+  }
+  .invite-sub{
+    color:var(--text-soft);
+    font-size:clamp(14.5px,2.3vw,16px);
+    font-weight:300;
+    margin-bottom:22px;
+    max-width:52ch;
+  }
+
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    gap:13px;
+    background:var(--whatsapp);
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    font-size:clamp(15.5px,2.4vw,17.5px);
+    letter-spacing:.005em;
+    padding:17px 30px;
+    border-radius:100px;
+    box-shadow:
+      0 14px 30px -12px rgba(37,211,102,.6),
+      0 3px 8px -3px rgba(37,211,102,.5);
+    transition:transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease, filter .22s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .cta svg{width:24px;height:24px;flex:none;}
+  .cta::after{
+    content:"";
+    position:absolute;top:0;left:-130%;width:60%;height:100%;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.38), transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+  }
+  .cta:hover{
+    transform:translateY(-2px) scale(1.012);
+    box-shadow:
+      0 20px 40px -12px rgba(37,211,102,.65),
+      0 5px 12px -3px rgba(37,211,102,.5);
+    filter:saturate(1.05);
+  }
+  .cta:hover::after{left:140%;}
+  .cta:active{transform:translateY(0) scale(.995);}
+
+  .cta-fine{
+    margin-top:14px;
+    font-size:12.5px;
+    color:var(--text-mute);
+    font-weight:400;
+    display:flex;
+    align-items:center;
+    gap:7px;
+  }
+  .cta-fine svg{width:13px;height:13px;flex:none;opacity:.8;}
+
+  /* ---- Signature ---- */
+  .signoff{
+    margin-top:clamp(34px,5.5vw,46px);
+    display:flex;
+    align-items:center;
+    gap:clamp(16px,3vw,24px);
+  }
+  .signoff .portrait{
+    width:clamp(64px,12vw,82px);
+    height:clamp(64px,12vw,82px);
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #fff;
+    box-shadow:0 8px 22px -10px rgba(20,18,10,.4), 0 0 0 1px var(--paper-edge);
+    flex:none;
+  }
+  .sign-text .closing{
+    color:var(--text-soft);
+    font-size:14.5px;
+    font-weight:300;
+    margin-bottom:2px;
+  }
+  .sign-text .name{
+    font-family:'Caveat',cursive;
+    font-size:clamp(38px,7vw,52px);
+    line-height:.9;
+    color:var(--ink);
+    transform:rotate(-2deg);
+    transform-origin:left;
+    display:inline-block;
+  }
+  .sign-text .role{
+    margin-top:8px;
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--text-mute);
+    font-weight:500;
+  }
+
+  /* ---- Proof bar ---- */
+  .proof{
+    margin-top:clamp(30px,5vw,48px);
+    background:var(--bg-dark);
+    border-radius:14px;
+    padding:clamp(26px,4.5vw,38px) clamp(20px,4vw,40px);
+    color:#fff;
+    box-shadow:0 24px 50px -28px rgba(10,10,10,.6);
+    position:relative;
+    overflow:hidden;
+  }
+  .proof::before{
+    content:"";
+    position:absolute;inset:0;
+    background:radial-gradient(600px 220px at 15% -20%, rgba(250,171,0,.16), transparent 60%);
+    pointer-events:none;
+  }
+  .proof-cap{
+    position:relative;
+    text-align:center;
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.45);
+    margin-bottom:clamp(18px,3vw,26px);
+    font-weight:500;
+  }
+  .proof-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .stat{
+    text-align:center;
+    padding:6px 6px;
+    position:relative;
+  }
+  .stat:not(:last-child)::after{
+    content:"";
+    position:absolute;right:0;top:18%;height:64%;width:1px;
+    background:rgba(255,255,255,.12);
+  }
+  .stat .num{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(24px,5.2vw,38px);
+    color:var(--accent);
+    line-height:1;
+    letter-spacing:-.01em;
+  }
+  .stat .lbl{
+    margin-top:8px;
+    font-size:clamp(10.5px,1.9vw,12.5px);
+    color:rgba(255,255,255,.7);
+    font-weight:300;
+    line-height:1.3;
+  }
+
+  /* ---- Footer ---- */
+  footer{
+    max-width:760px;
+    margin:clamp(34px,5vw,52px) auto 0;
+    text-align:center;
+    color:var(--text-mute);
+    font-size:12px;
+    font-weight:300;
+    line-height:1.7;
+  }
+  footer img{height:22px;width:auto;opacity:.55;margin-bottom:12px;display:inline-block;}
+  footer .sep{opacity:.4;margin:0 8px;}
+
+  @media (max-width:560px){
+    .proof-grid{grid-template-columns:repeat(2,1fr);gap:18px 8px;}
+    .stat:nth-child(2)::after{display:none;}
+    .stat .lbl{min-height:2.2em;}
+    .signoff{gap:14px;}
+    .brandbar .kicker{display:none;}
+  }
+  @media (max-width:380px){
+    .letter{padding-left:18px;padding-right:18px;}
+  }
+</style>
+<script>window.MTBB_OBRIGADO_VARIANT='carta';</script>
+<style>a:focus-visible,button:focus-visible{outline:3px solid #FAAB00;outline-offset:3px;border-radius:4px}</style>
+<script src="tracker.js?v=3" defer></script>
+</head>
+<body>
+
+  <div class="stage">
+
+    <div class="brandbar">
+      <img src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business">
+      <span class="kicker">Lista de espera</span>
+    </div>
+
+    <main class="letter">
+
+      <span class="confirm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7a5400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+        Pronto, seu nome já está na lista
+      </span>
+
+      <h1 class="salutation">Oi, que bom ter você aqui.</h1>
+
+      <p>Eu sou a <strong>Dany Sakugawa</strong>, e fiz questão de escrever isto eu mesma. Você acabou de entrar na lista de espera do <strong>Método The Book Business</strong>, e isso já diz muito sobre o tipo de autor que você é: alguém que não quer deixar o próprio livro ao acaso.</p>
+
+      <p>Nos últimos <span class="accent-word">15 anos nos bastidores</span> da publicação, eu vi uma coisa se repetir de forma quase cruel. Não são os livros ruins que somem das prateleiras. São os bons, escritos por gente talentosa, que ninguém ensinou a chegar nos <span class="em">leitores certos</span>.</p>
+
+      <p class="thesis">O maior risco que um autor corre é ser esquecido.</p>
+
+      <p>É por isso que esse método existe. Não pra você publicar mais um livro, mas pra você construir uma obra que <span class="em">permanece</span>, que encontra quem precisa dela, que vende de verdade. Eu quero isso pro seu.</p>
+
+      <div class="invite">
+        <p class="invite-lead">Agora, um recado entre nós.</p>
+        <p class="invite-sub">A turma abre por etapas, e a lista costuma encher rápido. Mas se você não quer ficar esperando, me chama lá no WhatsApp. Meu time consegue antecipar a sua entrada e tirar suas dúvidas pessoalmente, antes de todo mundo.</p>
+
+        <a class="cta" href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener">
+          <svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true">
+            <path d="M16.04 4C9.93 4 4.97 8.96 4.97 15.07c0 2.13.6 4.13 1.65 5.83L4.8 27.2l6.45-1.79a11 11 0 0 0 4.79 1.1h.01c6.11 0 11.07-4.96 11.07-11.07 0-2.96-1.15-5.74-3.24-7.83A11 11 0 0 0 16.04 4Zm0 20.27h-.01a9.2 9.2 0 0 1-4.68-1.28l-.34-.2-3.83 1.06 1.02-3.73-.22-.35a9.18 9.18 0 1 1 8.06 4.5Zm5.05-6.88c-.28-.14-1.64-.81-1.9-.9-.25-.1-.43-.14-.62.14-.18.27-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.74-1.38-1.65-1.54-1.92-.16-.28-.02-.43.12-.57.12-.12.28-.32.41-.48.14-.16.18-.27.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47l-.53-.01c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.3 0 1.36.98 2.66 1.12 2.85.14.18 1.94 2.96 4.7 4.15.66.28 1.17.45 1.56.58.66.21 1.26.18 1.73.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.18-.53-.32Z"/>
+          </svg>
+          Quero falar com a Dany e furar a fila
+        </a>
+
+        <p class="cta-fine">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Atendimento humano · sem compromisso.
+        </p>
+      </div>
+
+      <div class="signoff">
+        <img class="portrait" src="assets/dany-sakugawa.webp" alt="Dany Sakugawa">
+        <div class="sign-text">
+          <div class="closing">Com carinho,</div>
+          <div class="name">Dany Sakugawa</div>
+          <div class="role">Criadora do Método The Book Business</div>
+        </div>
+      </div>
+
+    </main>
+
+    <section class="proof" aria-label="Resultados da marca">
+      <div class="proof-cap">O que já construímos juntos</div>
+      <div class="proof-grid">
+        <div class="stat">
+          <div class="num">+800</div>
+          <div class="lbl">autores lançados</div>
+        </div>
+        <div class="stat">
+          <div class="num">+10M</div>
+          <div class="lbl">livros vendidos</div>
+        </div>
+        <div class="stat">
+          <div class="num">+4.400</div>
+          <div class="lbl">alunos no método</div>
+        </div>
+        <div class="stat">
+          <div class="num">+15</div>
+          <div class="lbl">anos nos bastidores</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <img src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business"><br>
+    Método The Book Business
+    <span class="sep">·</span>
+    Você está nesta página porque entrou na lista de espera.
+  </footer>
+
+</body>
+</html>

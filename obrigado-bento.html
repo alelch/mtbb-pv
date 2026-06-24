@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Você está na lista · Método The Book Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F8F8;
+    --bg-dark:#0A0A0A;
+    --accent:#FAAB00;
+    --text:#1A1A1A;
+    --text-soft:#555;
+    --text-mute:#999;
+    --whatsapp:#25D366;
+    --card:#FFFFFF;
+    --line:rgba(10,10,10,.07);
+    --radius:24px;
+    --shadow-sm:0 1px 2px rgba(10,10,10,.04), 0 4px 16px rgba(10,10,10,.05);
+    --shadow-md:0 2px 4px rgba(10,10,10,.05), 0 12px 40px rgba(10,10,10,.08);
+    --shadow-hero:0 4px 12px rgba(250,171,0,.18), 0 24px 60px rgba(10,10,10,.18);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    background-image:
+      radial-gradient(1100px 540px at 88% -8%, rgba(250,171,0,.10), transparent 60%),
+      radial-gradient(900px 520px at 0% 100%, rgba(10,10,10,.035), transparent 55%);
+    background-attachment:fixed;
+  }
+  .em{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
+  .wrap{max-width:1120px;margin:0 auto;padding:32px 22px 64px}
+
+  /* Topbar */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:6px 4px 26px;
+  }
+  .topbar img{height:30px;width:auto;display:block}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12.5px;font-weight:500;color:var(--text-soft);
+    background:var(--card);border:1px solid var(--line);
+    padding:8px 14px;border-radius:999px;box-shadow:var(--shadow-sm);
+  }
+  .pill .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--whatsapp);
+    box-shadow:0 0 0 0 rgba(37,211,102,.5);
+    animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}
+    70%{box-shadow:0 0 0 8px rgba(37,211,102,0)}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+  }
+
+  /* Header line */
+  .head{padding:14px 4px 30px;max-width:760px}
+  .eyebrow{
+    font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px;
+  }
+  .head h1{
+    font-weight:600;font-size:clamp(30px,5.2vw,52px);line-height:1.08;
+    letter-spacing:-.02em;
+  }
+  .head h1 .em{font-weight:500}
+  .head p{
+    margin-top:16px;font-size:clamp(15px,1.7vw,18px);color:var(--text-soft);
+    font-weight:300;max-width:560px;
+  }
+
+  /* Bento grid */
+  .bento{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    grid-auto-rows:minmax(10px,auto);
+    gap:18px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px;
+    box-shadow:var(--shadow-sm);
+    position:relative;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(10,10,10,.12)}
+
+  .card-label{
+    display:flex;align-items:center;gap:9px;
+    font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--text-mute);margin-bottom:18px;
+  }
+  .card-label .ico{
+    width:24px;height:24px;border-radius:8px;display:grid;place-items:center;
+    background:rgba(10,10,10,.05);color:var(--text);flex:none;
+  }
+  .card-label .ico svg{width:14px;height:14px}
+
+  /* card spans */
+  .c-status{grid-column:span 5;grid-row:span 2;display:flex;flex-direction:column}
+  .c-hero{grid-column:span 7;grid-row:span 2}
+  .c-next{grid-column:span 7}
+  .c-author{grid-column:span 5}
+  .c-proof{grid-column:span 12}
+
+  /* Status card */
+  .c-status .ico{background:rgba(37,211,102,.14);color:var(--whatsapp)}
+  .status-mark{
+    width:64px;height:64px;border-radius:20px;flex:none;
+    display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--whatsapp),#1aa851);
+    box-shadow:0 8px 24px rgba(37,211,102,.32);
+    margin-bottom:22px;
+  }
+  .status-mark svg{width:32px;height:32px}
+  .c-status h2{
+    font-size:clamp(22px,2.6vw,28px);font-weight:600;letter-spacing:-.015em;line-height:1.15;
+  }
+  .c-status p{margin-top:12px;color:var(--text-soft);font-weight:300;font-size:15px}
+  .status-meta{
+    margin-top:auto;padding-top:24px;display:flex;flex-direction:column;gap:12px;
+  }
+  .meta-row{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:13px 16px;border-radius:14px;background:var(--bg);
+    border:1px solid var(--line);font-size:13.5px;
+  }
+  .meta-row .k{color:var(--text-mute);font-weight:500}
+  .meta-row .v{font-weight:600;color:var(--text);display:inline-flex;align-items:center;gap:7px}
+  .badge-ok{color:var(--whatsapp)}
+  .badge-ok::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--whatsapp);display:inline-block}
+
+  /* Hero card */
+  .c-hero{
+    background:var(--bg-dark);color:#fff;border-color:transparent;overflow:hidden;
+    display:flex;flex-direction:column;
+    box-shadow:var(--shadow-hero);
+  }
+  .c-hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(420px 280px at 86% 0%, rgba(250,171,0,.26), transparent 62%),
+      radial-gradient(360px 340px at 6% 110%, rgba(250,171,0,.10), transparent 60%);
+    pointer-events:none;
+  }
+  .c-hero>*{position:relative;z-index:1}
+  .c-hero .card-label{color:rgba(255,255,255,.55)}
+  .c-hero .card-label .ico{background:rgba(255,255,255,.08);color:var(--accent)}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+    font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);background:rgba(250,171,0,.12);
+    border:1px solid rgba(250,171,0,.28);padding:7px 13px;border-radius:999px;
+    margin-bottom:20px;
+  }
+  .c-hero h2{
+    font-size:clamp(25px,3.3vw,38px);font-weight:600;line-height:1.1;letter-spacing:-.02em;
+  }
+  .c-hero h2 .em{color:var(--accent)}
+  .c-hero .sub{
+    margin-top:16px;color:rgba(255,255,255,.7);font-weight:300;font-size:15.5px;max-width:480px;
+  }
+  .wa-btn{
+    margin-top:26px;
+    display:inline-flex;align-items:center;justify-content:center;gap:13px;
+    background:var(--whatsapp);color:#fff;text-decoration:none;
+    font-weight:600;font-size:16px;letter-spacing:-.01em;
+    padding:18px 30px;border-radius:16px;align-self:flex-start;
+    box-shadow:0 10px 26px rgba(37,211,102,.34);
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .wa-btn svg{width:23px;height:23px;flex:none}
+  .wa-btn:hover{transform:translateY(-2px);background:#2bdf70;box-shadow:0 16px 36px rgba(37,211,102,.46)}
+  .wa-btn:active{transform:translateY(0)}
+  .hero-foot{
+    margin-top:18px;font-size:12.5px;color:rgba(255,255,255,.42);
+    display:flex;align-items:center;gap:8px;
+  }
+  .hero-foot svg{width:14px;height:14px;flex:none;opacity:.8}
+
+  /* Next steps card */
+  .steps{list-style:none;display:flex;flex-direction:column;gap:4px}
+  .steps li{
+    display:flex;gap:16px;align-items:flex-start;padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .steps li:last-child{border-bottom:0;padding-bottom:2px}
+  .steps .n{
+    width:30px;height:30px;border-radius:10px;flex:none;
+    display:grid;place-items:center;font-weight:600;font-size:13.5px;
+    background:var(--bg);border:1px solid var(--line);color:var(--text);
+  }
+  .steps li.done .n{background:rgba(37,211,102,.14);border-color:transparent;color:var(--whatsapp)}
+  .steps li.active .n{background:var(--accent);border-color:transparent;color:#1A1A1A}
+  .steps .txt h4{font-size:15px;font-weight:600;letter-spacing:-.01em}
+  .steps .txt p{font-size:13.5px;color:var(--text-soft);font-weight:300;margin-top:3px}
+  .steps .tag{
+    margin-left:auto;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent);background:rgba(250,171,0,.12);padding:5px 10px;border-radius:999px;
+    white-space:nowrap;align-self:center;
+  }
+  .steps .tag.muted{color:var(--text-mute);background:var(--bg)}
+
+  /* Author card */
+  .c-author{display:flex;flex-direction:column}
+  .author-top{display:flex;gap:16px;align-items:center}
+  .author-top img{
+    width:62px;height:62px;border-radius:16px;object-fit:cover;flex:none;
+    border:1px solid var(--line);
+  }
+  .author-top .name{font-weight:600;font-size:16px;letter-spacing:-.01em}
+  .author-top .role{font-size:12.5px;color:var(--text-mute);margin-top:2px}
+  .author-quote{
+    margin-top:18px;font-family:'Fraunces',serif;font-style:italic;
+    font-size:clamp(17px,2vw,20px);line-height:1.4;color:var(--text);
+  }
+  .author-quote .hl{color:var(--accent)}
+
+  /* Proof card */
+  .c-proof{display:flex;flex-direction:column}
+  .proof-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:4px;
+  }
+  .stat{
+    border:1px solid var(--line);border-radius:18px;padding:22px 20px;background:var(--bg);
+    transition:border-color .3s ease, background .3s ease, transform .3s ease;
+  }
+  .stat:hover{border-color:rgba(250,171,0,.5);background:#fff;transform:translateY(-3px)}
+  .stat .num{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:600;
+    font-size:clamp(28px,3.6vw,40px);line-height:1;letter-spacing:-.01em;color:var(--text);
+  }
+  .stat .num span{color:var(--accent)}
+  .stat .lbl{margin-top:10px;font-size:12.5px;color:var(--text-soft);font-weight:400;line-height:1.35}
+
+  /* Footer */
+  footer{
+    margin-top:42px;padding-top:26px;border-top:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  footer img{height:22px;width:auto;opacity:.8}
+  footer p{font-size:12px;color:var(--text-mute)}
+
+  /* Responsive */
+  @media (max-width:860px){
+    .c-status,.c-hero,.c-next,.c-author{grid-column:span 12;grid-row:auto}
+    .proof-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:560px){
+    .wrap{padding:24px 16px 48px}
+    .card{padding:22px}
+    .topbar .pill{display:none}
+    .wa-btn{width:100%;align-self:stretch}
+    .steps .tag{display:none}
+    footer{justify-content:center;text-align:center}
+  }
+</style>
+<script>window.MTBB_OBRIGADO_VARIANT='bento';</script>
+<style>a:focus-visible,button:focus-visible{outline:3px solid #FAAB00;outline-offset:3px;border-radius:4px}</style>
+<script src="tracker.js?v=3" defer></script>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <img src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business">
+      <span class="pill"><span class="dot"></span>Inscrição confirmada</span>
+    </div>
+
+    <header class="head">
+      <div class="eyebrow">Lista de espera</div>
+      <h1>Pronto. Seu nome <span class="em">já está</span> na lista do Método.</h1>
+      <p>A partir de agora você não corre o risco de ficar de fora quando a turma abrir. E existe um caminho mais curto, se você quiser.</p>
+    </header>
+
+    <main class="bento">
+
+      <!-- STATUS -->
+      <section class="card c-status">
+        <div class="card-label">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          Status
+        </div>
+        <div class="status-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Você está na lista de espera.</h2>
+        <p>Guardamos seu lugar na fila. Assim que a próxima turma for liberada, você é avisado antes do público geral.</p>
+        <div class="status-meta">
+          <div class="meta-row"><span class="k">Inscrição</span><span class="v"><span class="badge-ok">Confirmada</span></span></div>
+          <div class="meta-row"><span class="k">Aviso de abertura</span><span class="v">Prioritário</span></div>
+        </div>
+      </section>
+
+      <!-- HERO: FURAR A FILA -->
+      <section class="card c-hero">
+        <span class="hero-tag">Atalho disponível</span>
+        <div class="card-label">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+          </span>
+          Falar com o time
+        </div>
+        <h2>Não precisa esperar a turma abrir. <span class="em">Fure a fila.</span></h2>
+        <p class="sub">Fale agora com o nosso time no WhatsApp e veja como antecipar sua entrada no Método, sem ficar refém da data da próxima abertura.</p>
+        <a class="wa-btn" href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener">
+          <svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.04 3.2c-7.1 0-12.86 5.76-12.86 12.86 0 2.27.6 4.49 1.73 6.44L3.07 28.8l6.5-1.7a12.82 12.82 0 0 0 6.46 1.74h.01c7.1 0 12.86-5.76 12.86-12.86 0-3.44-1.34-6.67-3.77-9.1a12.78 12.78 0 0 0-9.09-3.68zm0 23.55h-.01a10.66 10.66 0 0 1-5.43-1.49l-.39-.23-4.05 1.06 1.08-3.95-.25-.4a10.65 10.65 0 0 1-1.63-5.68c0-5.9 4.8-10.7 10.7-10.7 2.86 0 5.54 1.11 7.56 3.14a10.62 10.62 0 0 1 3.13 7.57c0 5.9-4.8 10.68-10.7 10.68zm5.87-8a73 73 0 0 0-2.13-1.01c-.29-.1-.5-.16-.7.16-.21.31-.81 1.01-.99 1.22-.18.21-.36.24-.67.08-.31-.16-1.31-.48-2.5-1.54-.92-.82-1.55-1.84-1.73-2.15-.18-.31-.02-.48.14-.63.14-.14.31-.36.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53l-.6-.01c-.21 0-.55.08-.83.39-.29.31-1.09 1.07-1.09 2.6 0 1.54 1.12 3.02 1.27 3.23.16.21 2.2 3.36 5.33 4.71.74.32 1.32.51 1.78.66.75.24 1.43.2 1.97.12.6-.09 1.85-.76 2.11-1.49.26-.73.26-1.36.18-1.49-.08-.13-.29-.21-.6-.37z"/></svg>
+          Quero furar a fila
+        </a>
+        <div class="hero-foot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Atendimento humano · sem compromisso.
+        </div>
+      </section>
+
+      <!-- NEXT STEPS -->
+      <section class="card c-next">
+        <div class="card-label">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </span>
+          Próximos passos
+        </div>
+        <ul class="steps">
+          <li class="done">
+            <span class="n">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <div class="txt"><h4>Entrou na lista de espera</h4><p>Feito. Seu lugar está reservado.</p></div>
+            <span class="tag muted">Concluído</span>
+          </li>
+          <li class="active">
+            <span class="n">2</span>
+            <div class="txt"><h4>Fale com o time no WhatsApp</h4><p>Veja se dá para antecipar a sua entrada agora, sem esperar a próxima abertura.</p></div>
+            <span class="tag">Faça agora</span>
+          </li>
+          <li>
+            <span class="n">3</span>
+            <div class="txt"><h4>Garanta sua vaga no Método</h4><p>Comece a colocar seu livro na frente dos leitores certos.</p></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- AUTHOR -->
+      <section class="card c-author">
+        <div class="card-label">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          Quem conduz o Método
+        </div>
+        <div class="author-top">
+          <img src="assets/dany-sakugawa.webp" alt="Dany Sakugawa">
+          <div>
+            <div class="name">Dany Sakugawa</div>
+            <div class="role">+15 anos nos bastidores do mercado editorial</div>
+          </div>
+        </div>
+        <p class="author-quote">"O maior risco que um autor corre é ser <span class="hl">esquecido</span>."</p>
+      </section>
+
+      <!-- PROOF -->
+      <section class="card c-proof">
+        <div class="card-label">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </span>
+          O Método em números
+        </div>
+        <div class="proof-grid">
+          <div class="stat"><div class="num"><span>+800</span></div><div class="lbl">autores lançados</div></div>
+          <div class="stat"><div class="num"><span>+10M</span></div><div class="lbl">livros vendidos</div></div>
+          <div class="stat"><div class="num"><span>+4.400</span></div><div class="lbl">alunos no método</div></div>
+          <div class="stat"><div class="num"><span>+15</span></div><div class="lbl">anos nos bastidores</div></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <img src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business">
+      <p>© The Book Business. Para que o seu livro permaneça, e chegue aos leitores certos.</p>
+    </footer>
+
+  </div>
+</body>
+</html>
