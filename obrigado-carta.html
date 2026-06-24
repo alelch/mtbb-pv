@@ -84,22 +84,20 @@
     opacity:.9;
   }
 
-  /* confirmation chip */
+  /* confirmation title */
   .confirm{
-    display:inline-flex;
+    display:flex;
     align-items:center;
-    gap:10px;
-    background:rgba(250,171,0,.12);
-    border:1px solid rgba(250,171,0,.4);
-    color:#7a5400;
-    padding:8px 16px 8px 12px;
-    border-radius:100px;
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:.01em;
-    margin-bottom:clamp(20px,4vw,30px);
+    gap:12px;
+    color:var(--ink);
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:clamp(20px,4vw,28px);
+    letter-spacing:-.01em;
+    line-height:1.2;
+    margin-bottom:clamp(12px,2.6vw,18px);
   }
-  .confirm svg{width:18px;height:18px;flex:none;}
+  .confirm svg{width:27px;height:27px;flex:none;stroke:var(--accent);}
 
   .salutation{
     font-family:'Fraunces',serif;
@@ -355,7 +353,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="#7a5400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M20 6 9 17l-5-5"/>
         </svg>
-        Pronto, seu nome já está na lista
+        Pronto, seu nome já está na lista.
       </span>
 
       <h1 class="salutation">Oi, que bom ter você aqui.</h1>
