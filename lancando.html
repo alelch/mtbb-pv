@@ -2842,27 +2842,46 @@
 
 <!-- BLOCO 3 — NÚMEROS -->
 
-<section class="numbers-bar">
-  <div class="container-wide">
-    <div class="numbers-grid">
-      <div class="number-item">
-        <div class="num">+10M</div>
-        <div class="label">livros vendidos com estratégia</div>
-      </div>
-      <div class="number-item">
-        <div class="num">+800</div>
-        <div class="label">lançamentos estruturados</div>
-      </div>
-      <div class="number-item">
-        <div class="num">+4.400</div>
-        <div class="label">alunos formados</div>
-      </div>
-      <div class="number-item">
-        <div class="num">+15</div>
-        <div class="label">anos nos bastidores editoriais</div>
-      </div>
+<section style="background:var(--bg);padding:64px 0;">
+<style>
+.n4{font-family:'Poppins',sans-serif;display:block;box-sizing:border-box;max-width:1020px;margin:0 auto;padding:0 24px}
+.n4 *{box-sizing:border-box}
+.n4 .grid{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto auto auto;gap:18px}
+.n4 .hero{grid-row:1 / span 3;background:linear-gradient(135deg,#FFC646,#FAAB00);border-radius:22px;padding:44px 38px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:transform .25s ease,box-shadow .25s ease}
+.n4 .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:rgba(26,26,26,0.22)}
+.n4 .hero:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.10)}
+.n4 .hero .num{font-size:84px;font-weight:800;line-height:.9;letter-spacing:-3px;color:#1A1A1A}
+.n4 .hero .label{margin-top:18px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.6px;line-height:1.5;color:#1A1A1A;opacity:.8;max-width:240px}
+.n4 .mini{position:relative;background:#FFFFFF;border:1px solid rgba(0,0,0,0.08);border-radius:22px;padding:24px 26px;display:flex;align-items:center;gap:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:transform .25s ease,box-shadow .25s ease;overflow:hidden}
+.n4 .mini::before{content:'';position:absolute;top:0;bottom:0;left:0;width:4px;background:#FAAB00}
+.n4 .mini:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.10)}
+.n4 .mini.dark{background:#0A0A0A;border-color:#0A0A0A}
+.n4 .mini .num{font-size:38px;font-weight:800;line-height:1;letter-spacing:-1.2px;color:#1A1A1A;flex:0 0 auto;min-width:104px}
+.n4 .mini.dark .num{color:#FAAB00}
+.n4 .mini .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.3px;line-height:1.45;color:#555}
+.n4 .mini.dark .label{color:#FFFFFF;opacity:.62}
+@media(max-width:760px){.n4 .grid{grid-template-columns:1fr;grid-template-rows:none}.n4 .hero{grid-row:auto;padding:34px 28px}.n4 .hero .num{font-size:64px}.n4 .mini .num{font-size:34px;min-width:92px}}
+</style>
+<div class="n4">
+  <div class="grid">
+    <div class="hero">
+      <div class="num">+800</div>
+      <div class="label">lançamentos estruturados</div>
+    </div>
+    <div class="mini">
+      <div class="num">+10M</div>
+      <div class="label">livros vendidos com estratégia</div>
+    </div>
+    <div class="mini dark">
+      <div class="num">+4.400</div>
+      <div class="label">alunos formados</div>
+    </div>
+    <div class="mini">
+      <div class="num">+15</div>
+      <div class="label">anos nos bastidores editoriais</div>
     </div>
   </div>
+</div>
 </section>
 
 <!-- BLOCO 5 — AGITAÇÃO -->
@@ -2945,37 +2964,72 @@
 </section>
 
 <!-- BLOCO 7 — PARA QUEM É -->
-<section class="filter-section">
-  <div class="container-wide">
-    <p class="section-eyebrow">Para quem é</p>
-    <h2 class="section-title">O MTBB é pra você?</h2>
-    <p class="section-subtitle">Fazer o livro chegar aos leitores certos exige estratégia.</p>
-
-    <div class="filter-grid">
-      <div class="filter-card positive">
-        <h3>É pra você se...</h3>
-        <ul>
-          <li>Você quer que seu livro nasça vendendo</li>
-          <li>Você quer aprender o caminho</li>
-          <li>Você entende que escrever bem importa, mas não basta</li>
-          <li>Você quer acesso aos bastidores editoriais</li>
-          <li>Você trata livro como arte E negócio</li>
-          <li>Você prefere método ao improviso</li>
-        </ul>
-      </div>
-      <div class="filter-card negative">
-        <h3>Não é pra você se...</h3>
-        <ul>
-          <li>Você deixa a estratégia pra depois</li>
-          <li>Você acha que livro bom vende sozinho</li>
-          <li>Você busca atalho ou bala de prata</li>
-          <li>Você duvida do próprio livro</li>
-          <li>Você prefere delegar o lançamento</li>
-          <li>Você espera ser descoberto pelo mercado</li>
-        </ul>
-      </div>
-    </div>
+<section style="background:var(--bg)">
+<style>
+.f2{font-family:'Poppins',sans-serif;color:var(--text);max-width:1100px;margin:0 auto;padding:72px 24px;box-sizing:border-box}
+.f2 *{box-sizing:border-box}
+.f2 .head{text-align:center;max-width:620px;margin:0 auto 48px}
+.f2 .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.f2 h2{font-size:clamp(30px,4.4vw,46px);font-weight:700;line-height:1.08;margin:0 0 16px;letter-spacing:-.02em}
+.f2 .sub{font-size:18px;line-height:1.55;color:var(--text-soft);margin:0}
+.f2 .stage{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--bg-card);border:1px solid var(--border);border-radius:26px;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden;transition:box-shadow .25s ease}
+.f2 .stage:hover{box-shadow:0 12px 32px rgba(0,0,0,.10)}
+.f2 .side{padding:46px 40px}
+.f2 .pos{background:linear-gradient(135deg,#FFC646,#FAAB00);clip-path:polygon(0 0,100% 0,calc(100% - 46px) 100%,0 100%)}
+.f2 .neg{background:var(--bg-dark);clip-path:polygon(46px 0,100% 0,100% 100%,0 100%);padding-left:64px}
+.f2 .ctitle{font-size:24px;font-weight:700;margin:0 0 28px;letter-spacing:-.01em}
+.f2 .pos .ctitle{color:#1A1A1A}
+.f2 .neg .ctitle{color:#fff}
+.f2 ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.f2 li{display:flex;align-items:flex-start;gap:13px;font-size:15.5px;line-height:1.45}
+.f2 .pos li{color:#2a1c00}
+.f2 .neg li{color:rgba(255,255,255,.82)}
+.f2 .mark{width:23px;height:23px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px}
+.f2 .pos .mark{background:rgba(26,26,26,.12);border:1px solid rgba(26,26,26,.30);color:#1A1A1A}
+.f2 .neg .mark{background:rgba(204,51,51,.20);border:1px solid rgba(204,51,51,.55);color:#ff7a7a}
+.f2 .vs{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:0 6px 20px rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;z-index:3}
+.f2 .vs span{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:24px;color:var(--accent)}
+@media(max-width:760px){
+  .f2{padding:52px 18px}
+  .f2 .stage{display:flex;flex-direction:column}
+  .f2 .pos{clip-path:none;order:1}
+  .f2 .neg{clip-path:none;padding-left:40px;order:3}
+  .f2 .vs{position:static;transform:none;order:2;margin:-26px auto;width:52px;height:52px}
+  .f2 .vs span{font-size:19px}
+}
+</style>
+<div class="f2">
+  <div class="head">
+    <span class="eyebrow">Para quem é</span>
+    <h2>O MTBB é pra você?</h2>
+    <p class="sub">Fazer o livro chegar aos leitores certos exige estratégia.</p>
   </div>
+  <div class="stage">
+    <div class="side pos">
+      <h3 class="ctitle">É pra você se...</h3>
+      <ul>
+        <li><span class="mark">✓</span>Você quer que seu livro nasça vendendo</li>
+        <li><span class="mark">✓</span>Você quer aprender o caminho</li>
+        <li><span class="mark">✓</span>Você entende que escrever bem importa, mas não basta</li>
+        <li><span class="mark">✓</span>Você quer acesso aos bastidores editoriais</li>
+        <li><span class="mark">✓</span>Você trata livro como arte E negócio</li>
+        <li><span class="mark">✓</span>Você prefere método ao improviso</li>
+      </ul>
+    </div>
+    <div class="side neg">
+      <h3 class="ctitle">Não é pra você se...</h3>
+      <ul>
+        <li><span class="mark">✗</span>Você deixa a estratégia pra depois</li>
+        <li><span class="mark">✗</span>Você acha que livro bom vende sozinho</li>
+        <li><span class="mark">✗</span>Você busca atalho ou bala de prata</li>
+        <li><span class="mark">✗</span>Você duvida do próprio livro</li>
+        <li><span class="mark">✗</span>Você prefere delegar o lançamento</li>
+        <li><span class="mark">✗</span>Você espera ser descoberto pelo mercado</li>
+      </ul>
+    </div>
+    <div class="vs"><span>vs</span></div>
+  </div>
+</div>
 </section>
 
 <!-- BLOCO PRINCÍPIO — A REGRA INVERTIDA (antes da Matriz) -->
@@ -3671,42 +3725,71 @@
 </section>
 
 <!-- BLOCO 15 — GARANTIA -->
-<section class="guarantee-section">
-  <div class="container">
-    <div class="guarantee-wrap">
-      <div class="guarantee-badge">
-        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-        Garantia incondicional · 15 dias
-      </div>
-      <h2 class="guarantee-headline">Entre. Explore tudo.<br>Se não for pra você, devolvemos.</h2>
-      <p class="guarantee-body">Em 15 dias, você conhece o método por dentro. Decide se serve pro seu livro.</p>
-      <div class="guarantee-list">
-        <div class="guarantee-list-item">Acessar a estrutura completa do método</div>
-        <div class="guarantee-list-item">Participar da comunidade de autores</div>
-        <div class="guarantee-list-item">Conhecer os templates e frameworks</div>
-        <div class="guarantee-list-item">Participar da próxima sessão ao vivo disponível</div>
-      </div>
-      <p class="guarantee-closing">Se depois de tudo isso não fizer sentido pra você: <strong>basta pedir. Devolvemos 100%. Sem perguntas. Sem burocracia.</strong><br><br>A garantia existe porque a Dany tem certeza do que entrega. Não porque o risco é seu.</p>
-    </div>
+<section style="background:var(--bg);padding:72px 0;">
+<style>
+.g1{font-family:'Poppins',sans-serif;max-width:680px;margin:0 auto;padding:0 24px;box-sizing:border-box}
+.g1 *{box-sizing:border-box}
+.g1 .card{position:relative;background:linear-gradient(180deg,#161616 0%,#0C0C0C 100%);border:1px solid rgba(250,171,0,0.20);border-radius:24px;padding:64px 56px 52px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,0.35);overflow:hidden}
+.g1 .card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#FFC646,#FAAB00)}
+.g1 .shield{width:104px;height:104px;margin:0 auto 26px;border-radius:28px;background:linear-gradient(135deg,#FFC646,#FAAB00);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(250,171,0,0.32)}
+.g1 .shield svg{width:56px;height:56px;fill:#1A1A1A}
+.g1 .badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#FAAB00;background:rgba(250,171,0,0.10);border:1px solid rgba(250,171,0,0.35);padding:7px 16px;border-radius:999px;margin-bottom:22px;letter-spacing:.01em}
+.g1 .badge svg{width:15px;height:15px;fill:#FAAB00}
+.g1 h2{font-size:30px;line-height:1.18;font-weight:700;color:#FFFFFF;margin:0 auto 16px;max-width:18ch}
+.g1 .lead{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,0.7);margin:0 auto 34px;max-width:46ch}
+.g1 .list{list-style:none;padding:0;margin:0 auto 32px;max-width:480px;text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.g1 .list li{display:flex;align-items:flex-start;gap:11px;font-size:15px;line-height:1.45;color:rgba(255,255,255,0.9)}
+.g1 .tick{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(250,171,0,0.18);border:1px solid rgba(250,171,0,0.55);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.g1 .tick svg{width:12px;height:12px;fill:#FAAB00}
+.g1 .close{font-size:16px;line-height:1.6;color:rgba(255,255,255,0.7);margin:0 auto;max-width:50ch;padding-top:30px;border-top:1px solid rgba(255,255,255,0.12)}
+.g1 .close strong{color:#FFFFFF;font-weight:600}
+.g1 .footnote{font-family:'Fraunces',serif;font-style:italic;font-size:16px;line-height:1.5;color:rgba(255,255,255,0.85);margin:22px auto 0;max-width:48ch}
+@media(max-width:560px){.g1 .card{padding:48px 26px 40px}.g1 h2{font-size:24px}.g1 .list{grid-template-columns:1fr;gap:13px}}
+</style>
+<div class="g1">
+  <div class="card">
+    <div class="shield"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+    <span class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Garantia incondicional · 15 dias</span>
+    <h2>Entre. Explore tudo.<br>Se não for pra você, devolvemos.</h2>
+    <p class="lead">Em 15 dias, você conhece o método por dentro. Decide se serve pro seu livro.</p>
+    <ul class="list">
+      <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Acessar a estrutura completa do método</li>
+      <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Participar da comunidade de autores</li>
+      <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Conhecer os templates e frameworks</li>
+      <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Participar da próxima sessão ao vivo disponível</li>
+    </ul>
+    <p class="close">Se depois de tudo isso não fizer sentido pra você: <strong>basta pedir. Devolvemos 100%. Sem perguntas. Sem burocracia.</strong></p>
+    <p class="footnote">A garantia existe porque a Dany tem certeza do que entrega. Não porque o risco é seu.</p>
   </div>
+</div>
 </section>
 
 <!-- BLOCO 12 — BIO DANY -->
-<section class="bio-section" style="padding: 80px 0;">
-  <div class="container-wide">
-    <div class="bio-wrap">
-      <div class="bio-photo"><img src="assets/dany-sakugawa.webp" alt="Dany Sakugawa" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"></div>
-      <div class="bio-content">
-        <p class="eyebrow">Quem é a Dany</p>
-        <h2>Dany Sakugawa</h2>
-        <p>Por mais de 15 anos, Dany esteve nos bastidores de grandes editoras brasileiras, participando de lançamentos que somaram mais de 10 milhões de livros vendidos.</p>
-        <p>Nesse período, viu de perto um padrão que poucos autores enxergam: livros excelentes desapareciam por falta de estratégia, enquanto livros bem posicionados ganhavam espaço, leitores e permanência.</p>
-        <p>Depois de conduzir o lançamento de mais de 800 autores, Dany criou o Método The Book Business para levar aos autores independentes a lógica que antes ficava restrita às grandes editoras: como posicionar, lançar e fazer um livro chegar aos leitores certos.</p>
-        <p>Hoje, mais de 4.400 alunos já passaram pelo método: autores de ficção, não-ficção, estreantes, independentes e profissionais que decidiram parar de tratar o livro como tentativa e começar a tratá-lo com estratégia.</p>
-        <p>Aqui, você não aprende marketing genérico. Aprende <span class="bio-accent">marketing literário aplicado ao mercado real de livros</span>.</p>
-      </div>
-    </div>
-  </div>
+<section style="background:var(--bg)">
+<style>
+.b2{font-family:'Poppins',sans-serif;color:var(--text);padding:80px 0;}
+.b2 *{box-sizing:border-box;}
+.b2 .b2-shell{max-width:1100px;margin:0 auto;padding:0 24px;}
+.b2 .b2-hero{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:transform .3s ease,box-shadow .3s ease;aspect-ratio:16/8;}
+.b2 .b2-hero:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.10);}
+.b2 .b2-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 28%;}
+.b2 .b2-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,0.82) 0%,rgba(10,10,10,0.55) 38%,rgba(10,10,10,0) 70%);}
+.b2 .b2-hero-text{position:absolute;left:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 44px;max-width:560px;}
+.b2 .b2-eyebrow{display:inline-block;align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#0A0A0A;background:var(--accent);padding:6px 13px;border-radius:999px;margin:0 0 14px;}
+.b2 .b2-hero-text h2{font-size:clamp(32px,4.4vw,52px);font-weight:800;line-height:0.98;letter-spacing:-1px;color:#fff;margin:0 0 18px;}
+.b2 .b2-creds{display:flex;flex-wrap:wrap;gap:8px 22px;}
+.b2 .b2-cred{display:flex;flex-direction:column;line-height:1.1;}
+.b2 .b2-cred b{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:24px;color:var(--accent);}
+.b2 .b2-cred span{font-size:11px;font-weight:600;letter-spacing:.4px;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-top:2px;}
+.b2 .b2-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;margin:30px 0 0;}
+.b2 .b2-cols p{font-size:15.5px;line-height:1.74;color:var(--text-soft);margin:0;}
+.b2 .b2-cols p+p{margin-top:14px;}
+.b2 .b2-fecho{grid-column:1 / -1;margin-top:14px;background:linear-gradient(135deg,#FFC646,var(--accent));border-radius:18px;padding:26px 32px;color:#1A1A1A;}
+.b2 .b2-fecho p{font-size:17px;line-height:1.6;margin:0;font-weight:500;color:#1A1A1A;}
+.b2 .b2-fecho em{font-family:'Fraunces',serif;font-style:italic;font-weight:700;}
+@media(max-width:760px){.b2 .b2-hero{aspect-ratio:3/4;}.b2 .b2-scrim{background:linear-gradient(180deg,rgba(10,10,10,0.15) 0%,rgba(10,10,10,0.35) 45%,rgba(10,10,10,0.9) 100%);}.b2 .b2-hero-text{max-width:none;padding:30px 26px;}.b2 .b2-cols{grid-template-columns:1fr;gap:14px;}.b2 .b2-fecho{padding:24px;}}
+</style>
+<div class="b2"><div class="b2-shell"><div class="b2-hero"><img src="assets/dany-sakugawa.webp" alt="Dany Sakugawa" loading="lazy" decoding="async"><div class="b2-scrim"></div><div class="b2-hero-text"><span class="b2-eyebrow">Quem é a Dany</span><h2>Dany Sakugawa</h2><div class="b2-creds"><div class="b2-cred"><b>+800</b><span>lançamentos</span></div><div class="b2-cred"><b>+10M</b><span>livros vendidos</span></div><div class="b2-cred"><b>+4.400</b><span>alunos</span></div><div class="b2-cred"><b>+15 anos</b><span>nos bastidores</span></div></div></div></div><div class="b2-cols"><p>Por mais de 15 anos, Dany esteve nos bastidores de grandes editoras brasileiras, participando de lançamentos que somaram mais de 10 milhões de livros vendidos.</p><p>Nesse período, viu de perto um padrão que poucos autores enxergam: livros excelentes desapareciam por falta de estratégia, enquanto livros bem posicionados ganhavam espaço, leitores e permanência.</p><p>Depois de conduzir o lançamento de mais de 800 autores, Dany criou o Método The Book Business para levar aos autores independentes a lógica que antes ficava restrita às grandes editoras: como posicionar, lançar e fazer um livro chegar aos leitores certos.</p><p>Hoje, mais de 4.400 alunos já passaram pelo método: autores de ficção, não-ficção, estreantes, independentes e profissionais que decidiram parar de tratar o livro como tentativa e começar a tratá-lo com estratégia.</p><div class="b2-fecho"><p>Aqui, você não aprende marketing genérico. Aprende <em>marketing literário aplicado ao mercado real de livros</em>.</p></div></div></div></div>
 </section>
 
 <!-- DANY NA MÍDIA -->
