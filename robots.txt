@@ -4,5 +4,6 @@ Disallow: /admin
 Disallow: /admin.html
 Disallow: /admin-preview
 Disallow: /admin-preview.html
+Disallow: /build/
 
 Sitemap: https://metodo.thebookbusiness.com.br/sitemap.xml
