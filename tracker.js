@@ -78,6 +78,17 @@
     }
   }
 
+  // Mapeia eventos do funil pro Google (GA4 + Ads via gtag.js)
+  function fireGtag(eventType, variant) {
+    if (typeof window.gtag !== 'function') return;
+    if (eventType === 'form_submit') {
+      window.gtag('event', 'generate_lead');
+      if (variant === 'checkout') window.gtag('event', 'begin_checkout');
+    } else if (eventType === 'whatsapp_click') {
+      window.gtag('event', 'contact');
+    }
+  }
+
   function track(eventType, extra) {
     extra = extra || {};
     var utms = (window.MTBB_UTMS && window.MTBB_UTMS()) || {};
@@ -104,6 +115,7 @@
       meta: meta
     };
     try { firePixel(eventType, payload.variant); } catch (e) {}
+    try { fireGtag(eventType, payload.variant); } catch (e) {}
     try {
       fetch(ENDPOINT, {
         method: 'POST',
@@ -131,8 +143,9 @@
       track('obrigado_view');
     }
     // ViewContent nas páginas de venda (preço e lista)
-    if (/^(escrevendo|lancando|publicado)(-lista)?\.html$/.test(file) && typeof window.fbq === 'function') {
-      window.fbq('track', 'ViewContent');
+    if (/^(escrevendo|lancando|publicado)(-lista)?\.html$/.test(file)) {
+      if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent');
+      if (typeof window.gtag === 'function') window.gtag('event', 'view_item');
     }
   }
 
