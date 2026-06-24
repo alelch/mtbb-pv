@@ -32,6 +32,28 @@
     } catch (e) { return 's_anon_' + Date.now(); }
   }
 
+  // Captura UTMs/click-ids da URL, persiste (sobrevive à navegação) e retorna sempre.
+  var UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_test','fbclid','gclid'];
+  function getUTMs() {
+    var stored = {};
+    try { stored = JSON.parse(localStorage.getItem('mtbb_utms') || '{}') || {}; } catch (e) {}
+    var params = new URLSearchParams(window.location.search);
+    var fromUrl = {}, hasAny = false;
+    UTM_KEYS.forEach(function (k) {
+      var v = params.get(k);
+      if (v) { fromUrl[k] = v; hasAny = true; }
+    });
+    if (hasAny) {
+      var merged = {};
+      UTM_KEYS.forEach(function (k) { if (stored[k]) merged[k] = stored[k]; });
+      UTM_KEYS.forEach(function (k) { if (fromUrl[k]) merged[k] = fromUrl[k]; });
+      try { localStorage.setItem('mtbb_utms', JSON.stringify(merged)); } catch (e) {}
+      return merged;
+    }
+    return stored;
+  }
+  window.MTBB_UTMS = getUTMs;
+
   function detectStageVariant() {
     var file = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
     var m = file.match(/^(escrevendo|lancando|publicado)(-lista)?\.html$/);
