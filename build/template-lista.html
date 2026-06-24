@@ -2440,6 +2440,17 @@
 <script src="pixel.js"></script>
 <script src="gtag.js"></script>
 <script src="tracker.js?v=8" defer></script>
+<script>
+  // config de tráfego (% das páginas de obrigado) — decidido no envio da lista
+  (function(){
+    window.MTBB_TRAFFIC = window.MTBB_TRAFFIC || {};
+    var K = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
+    fetch('https://jsqtpsxpaclslakafmvd.supabase.co/rest/v1/mtbb_traffic_config?select=key,dist', { headers: { apikey: K, Authorization: 'Bearer ' + K } })
+      .then(function(r){ return r.json(); })
+      .then(function(rows){ if (Array.isArray(rows)) rows.forEach(function(r){ window.MTBB_TRAFFIC[r.key] = r.dist; }); })
+      .catch(function(){});
+  })();
+</script>
 <script type="application/ld+json">{{LDJSON}}</script>
 </head>
 <body>
@@ -3783,7 +3794,10 @@
           var pick;
           try { pick = localStorage.getItem('mtbb_obrigado_ab'); } catch (e) {}
           if (AB.indexOf(pick) === -1) {
-            pick = AB[Math.floor(Math.random() * AB.length)];
+            var W = (window.MTBB_TRAFFIC && window.MTBB_TRAFFIC.obrigado) || { carta:34, bento:33, conversa:33 };
+            var tot = 0, i; for (i = 0; i < AB.length; i++) tot += Math.max(0, Number(W[AB[i]]) || 0);
+            if (tot <= 0) { pick = AB[Math.floor(Math.random() * AB.length)]; }
+            else { var rr = Math.random() * tot, ac = 0; for (i = 0; i < AB.length; i++) { ac += Math.max(0, Number(W[AB[i]]) || 0); if (rr < ac) { pick = AB[i]; break; } } if (AB.indexOf(pick) === -1) pick = AB[AB.length - 1]; }
             try { localStorage.setItem('mtbb_obrigado_ab', pick); } catch (e) {}
           }
           window.location.href = 'obrigado-' + pick + (qs ? '?' + qs : '');

@@ -332,6 +332,19 @@
   @media (max-width: 600px) { .fnl-pct { flex-basis: 38px; font-size: 14px; } .fnl-val { flex-basis: 78px; font-size: 14px; } .fnl-bar { height: 40px; padding: 0 12px; min-width: 132px; } .fnl-bar span { font-size: 12.5px; } }
   .btn-danger { background: #fff; color: #C7252E; border: 1px solid #E7B6B8; }
   .btn-danger:hover { background: #C7252E; color: #fff; border-color: #C7252E; }
+  /* Diais do roteador (quiz/pagina/obrigado) */
+  .dial-card { background: var(--bg-card, #fff); border: 1px solid var(--border, #eee); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; }
+  .dial-head h3 { font-size: 17px; margin: 0 0 2px; }
+  .dial-head p { font-size: 13px; color: var(--text-mute, #999); margin: 0 0 14px; }
+  .dial-opts { display: flex; flex-direction: column; gap: 10px; }
+  .dial-opt { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .dial-opt-name { font-size: 14px; font-weight: 500; }
+  .dial-opt-in { display: inline-flex; align-items: center; gap: 4px; color: var(--text-mute, #999); font-size: 13px; }
+  .dial-opt-in input { width: 64px; padding: 8px 10px; border: 1px solid var(--border, #ddd); border-radius: 8px; font: inherit; font-size: 15px; text-align: right; }
+  .dial-opt-in input:focus { outline: 2px solid var(--accent, #FAAB00); border-color: var(--accent, #FAAB00); }
+  .dial-sum { margin-top: 14px; font-size: 13px; font-weight: 600; }
+  .dial-sum.ok { color: #16A34A; }
+  .dial-sum.bad { color: #C7252E; }
 </style>
 <script src="tracker.js?v=8" defer></script>
 </head>
@@ -360,7 +373,7 @@
       <!-- VIEW: Roteamento -->
       <div class="view active" id="view-routing">
         <h1>Controle de <span class="italic">roteamento.</span></h1>
-        <p class="sub">Cada estágio do quiz tem um split percentual entre <strong>Preço</strong> e <strong>Lista de espera</strong>. Visitante é sticky (sempre vê a mesma versão).</p>
+        <p class="sub">Três diais de tráfego, cada um soma 100%. Visitante é <strong>sticky</strong> (sempre vê a mesma versão). O estágio (escrevendo/lançando/publicado) vem da escolha do autor no quiz, não é dial.</p>
 
         <div id="stages"></div>
 
@@ -433,19 +446,23 @@
         })
         .catch(function () { alert('Erro ao zerar métricas.'); });
     }
-    var STAGES = [
-      { key: 'escrevendo', name: 'Escrevendo', desc: 'Autores ainda escrevendo o livro' },
-      { key: 'lancando',   name: 'Lançando',   desc: 'Autores prestes a lançar' },
-      { key: 'publicado',  name: 'Publicado',  desc: 'Autores com livro lançado' }
+    // 3 diais de tráfego. Cada um soma 100%. Fonte: mtbb_traffic_config.
+    var DIALS = [
+      { key: 'quiz', title: 'Quiz — fundo da porta', desc: 'Qual fundo cada visitante vê na porta', opts: [
+        { k: 'a', label: 'A · Original (claro)' }, { k: 'b', label: 'B · Escurecido' }, { k: 'c', label: 'C · Amarelado' } ] },
+      { key: 'pagina', title: 'Página — preço vs lista', desc: 'Global: vale pros 3 estágios', opts: [
+        { k: 'preco', label: 'Preço (checkout Hotmart)' }, { k: 'lista', label: 'Lista de espera' } ] },
+      { key: 'obrigado', title: 'Página de obrigado', desc: 'Variante mostrada após entrar na lista', opts: [
+        { k: 'carta', label: 'Carta' }, { k: 'bento', label: 'Bento' }, { k: 'conversa', label: 'Conversa' } ] }
     ];
-    // % indo pra PREÇO. 100 - state[key] = % pra LISTA.
-    var state = { escrevendo: 100, lancando: 100, publicado: 100 };
-
-    function normalize(entry) {
-      if (!entry) return 100;
-      if (typeof entry === 'string') return entry === 'lista' ? 0 : 100;
-      if (typeof entry.preco === 'number') return entry.preco;
-      return 100;
+    var router = {
+      quiz:     { a: 34, b: 33, c: 33 },
+      pagina:   { preco: 50, lista: 50 },
+      obrigado: { carta: 34, bento: 33, conversa: 33 }
+    };
+    function dialSum(key) {
+      var d = DIALS.filter(function (x) { return x.key === key; })[0];
+      return d.opts.reduce(function (s, o) { return s + (parseInt(router[key][o.k], 10) || 0); }, 0);
     }
 
     function tryLogin() {
@@ -745,8 +762,7 @@
     function loadCurrentConfig() {
       var fb = document.getElementById('save-feedback');
       if (fb) fb.textContent = '';
-      // Le do Supabase (fonte da verdade); fallback config.json se Supabase falhar
-      fetch(SB_URL + '/rest/v1/mtbb_pv_config?select=stage,preco_pct,updated_at', {
+      fetch(SB_URL + '/rest/v1/mtbb_traffic_config?select=key,dist,updated_at', {
         headers: {
           'apikey': SB_KEY,
           'Authorization': 'Bearer ' + SB_KEY
@@ -757,41 +773,40 @@
         if (!Array.isArray(rows) || rows.length === 0) throw new Error('empty');
         var latest = '';
         rows.forEach(function (row) {
-          state[row.stage] = row.preco_pct;
+          if (router[row.key] && row.dist) router[row.key] = row.dist;
           if (!latest || row.updated_at > latest) latest = row.updated_at;
         });
-        renderStages();
+        renderDials();
         if (latest) {
           var d = new Date(latest);
           var lbl = document.getElementById('last-updated');
           if (lbl) lbl.textContent = 'Última alteração: ' + d.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
         }
       })
-      .catch(function () {
-        // fallback: tenta o config.json estático
-        fetch('config.json?v=' + Date.now())
-          .then(function (r) { return r.json(); })
-          .then(function (cfg) {
-            STAGES.forEach(function (s) { state[s.key] = normalize(cfg[s.key]); });
-            renderStages();
-          })
-          .catch(function () { renderStages(); });
-      });
+      .catch(function () { renderDials(); });
     }
 
     function saveConfig() {
       var btn = document.getElementById('save-btn');
       var fb = document.getElementById('save-feedback');
+
+      var bad = DIALS.filter(function (d) { return dialSum(d.key) !== 100; });
+      if (bad.length) {
+        fb.textContent = '✗ Cada bloco precisa somar 100%: ' + bad.map(function (d) { return d.title; }).join(', ');
+        fb.style.color = '#C7252E';
+        return;
+      }
+
       btn.disabled = true;
       var originalText = btn.textContent;
       btn.textContent = 'Salvando…';
       fb.textContent = '';
 
-      rpcAuth('mtbb_admin_set_config', {
+      rpcAuth('mtbb_admin_set_traffic', {
         p_pass: adminPw(),
-        p_escrevendo: state.escrevendo,
-        p_lancando: state.lancando,
-        p_publicado: state.publicado
+        p_quiz: router.quiz,
+        p_pagina: router.pagina,
+        p_obrigado: router.obrigado
       })
       .then(function (result) {
         btn.disabled = false;
@@ -816,78 +831,36 @@
       });
     }
 
-    function renderStages() {
-      var html = STAGES.map(function (s) {
-        var pPreco = state[s.key];
-        var pLista = 100 - pPreco;
-        return '' +
-          '<div class="stage-card" data-stage="' + s.key + '">' +
-            '<div class="stage-head">' +
-              '<div class="stage-info"><h3>' + s.name + '</h3><p>' + s.desc + '</p></div>' +
-              '<div class="stage-split">' +
-                '<span class="p-val">' + pPreco + '</span>% Preço · ' +
-                '<span class="l-val">' + pLista + '</span>% Lista' +
-              '</div>' +
-            '</div>' +
-            '<div class="slider-wrap">' +
-              '<div class="slider-row">' +
-                '<div class="slider-track" style="--p: ' + pPreco + '%"></div>' +
-                '<input type="range" min="0" max="100" step="5" value="' + pPreco + '" class="slider-input" data-stage="' + s.key + '">' +
-              '</div>' +
-              '<div class="slider-labels">' +
-                '<span class="preco-side">← 100% Preço</span>' +
-                '<span class="lista-side">100% Lista →</span>' +
-              '</div>' +
-              '<div class="presets" data-stage="' + s.key + '">' +
-                '<span class="preset" data-val="100">100/0</span>' +
-                '<span class="preset" data-val="75">75/25</span>' +
-                '<span class="preset" data-val="50">50/50</span>' +
-                '<span class="preset" data-val="25">25/75</span>' +
-                '<span class="preset" data-val="0">0/100</span>' +
-              '</div>' +
-            '</div>' +
-          '</div>';
+    function sumLabel(key) {
+      var sum = dialSum(key);
+      return 'soma: ' + sum + '%' + (sum === 100 ? ' ✓' : ' (precisa dar 100)');
+    }
+    function renderDials() {
+      var html = DIALS.map(function (d) {
+        var inputs = d.opts.map(function (o) {
+          return '<label class="dial-opt">' +
+            '<span class="dial-opt-name">' + o.label + '</span>' +
+            '<span class="dial-opt-in"><input type="number" min="0" max="100" step="1" value="' +
+              (parseInt(router[d.key][o.k], 10) || 0) + '" data-dial="' + d.key + '" data-opt="' + o.k + '">%</span>' +
+          '</label>';
+        }).join('');
+        return '<div class="dial-card">' +
+          '<div class="dial-head"><h3>' + d.title + '</h3><p>' + d.desc + '</p></div>' +
+          '<div class="dial-opts">' + inputs + '</div>' +
+          '<div class="dial-sum ' + (dialSum(d.key) === 100 ? 'ok' : 'bad') + '" data-sum="' + d.key + '">' + sumLabel(d.key) + '</div>' +
+        '</div>';
       }).join('');
       document.getElementById('stages').innerHTML = html;
 
-      // bind sliders
-      document.querySelectorAll('.slider-input').forEach(function (input) {
-        input.addEventListener('input', function () {
-          var stage = this.getAttribute('data-stage');
-          var val = parseInt(this.value, 10);
-          state[stage] = val;
-          updateStageVisual(stage);
-          updateOutput();
+      document.querySelectorAll('#stages input[data-dial]').forEach(function (inp) {
+        inp.addEventListener('input', function () {
+          var k = this.getAttribute('data-dial'), o = this.getAttribute('data-opt');
+          router[k][o] = Math.max(0, Math.min(100, parseInt(this.value, 10) || 0));
+          var el = document.querySelector('[data-sum="' + k + '"]');
+          if (el) { el.textContent = sumLabel(k); el.className = 'dial-sum ' + (dialSum(k) === 100 ? 'ok' : 'bad'); }
         });
       });
-      // bind presets
-      document.querySelectorAll('.preset').forEach(function (p) {
-        p.addEventListener('click', function () {
-          var stage = this.parentElement.getAttribute('data-stage');
-          var val = parseInt(this.getAttribute('data-val'), 10);
-          state[stage] = val;
-          var input = document.querySelector('.slider-input[data-stage="' + stage + '"]');
-          if (input) input.value = val;
-          updateStageVisual(stage);
-          updateOutput();
-        });
-      });
-
-      updateOutput();
     }
-
-    function updateStageVisual(stage) {
-      var card = document.querySelector('.stage-card[data-stage="' + stage + '"]');
-      if (!card) return;
-      var pPreco = state[stage];
-      var pLista = 100 - pPreco;
-      card.querySelector('.p-val').textContent = pPreco;
-      card.querySelector('.l-val').textContent = pLista;
-      card.querySelector('.slider-track').style.setProperty('--p', pPreco + '%');
-    }
-
-    // updateOutput é no-op agora que salvamos direto no Supabase
-    function updateOutput() {}
   </script>
 </body>
 </html>
