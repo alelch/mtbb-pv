@@ -33,7 +33,7 @@
   }
 
   // Captura UTMs/click-ids da URL, persiste (sobrevive à navegação) e retorna sempre.
-  var UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_test','fbclid','gclid'];
+  var UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_test','utm_id','fbclid','gclid','ttclid','xcod','sck'];
   function getUTMs() {
     var stored = {};
     try { stored = JSON.parse(localStorage.getItem('mtbb_utms') || '{}') || {}; } catch (e) {}
