@@ -357,7 +357,7 @@
     background: var(--bg-dark);
     color: white;
     text-align: center;
-    padding: 110px 0;
+    padding: 80px 0;
   }
   .agitation > .container { max-width: 960px; }
   .agitation h2 {
@@ -365,7 +365,7 @@
     font-weight: 700;
     line-height: 1.18;
     letter-spacing: -1px;
-    margin: 0 auto 32px;
+    margin: 0 auto 22px;
     color: #FFFFFF;
     max-width: 920px;
     text-wrap: balance;
@@ -377,7 +377,7 @@
   .agitation .agi-sub {
     font-size: clamp(18px, 1.9vw, 20px);
     color: rgba(255,255,255,0.92);
-    margin-bottom: 72px;
+    margin-bottom: 40px;
     line-height: 1.5;
     max-width: 720px;
     margin-left: auto;
@@ -392,8 +392,8 @@
     font-size: clamp(34px, 4.2vw, 50px);
     color: var(--accent);
     font-weight: 600;
-    line-height: 1.28;
-    margin: 0 auto 48px;
+    line-height: 1.05;
+    margin: 0 auto 36px;
     transform: rotate(-1.5deg);
     max-width: 680px;
     letter-spacing: 0.5px;
@@ -2514,31 +2514,6 @@
   <p style="font-size: 13px; color: var(--text-mute); margin-top: 14px; letter-spacing: 0.02em;">🔒 Garantia de 15 dias · Acesso imediato</p>
 </div>
 
-<!-- BLOCO 3 — NÚMEROS -->
-
-<section class="numbers-bar">
-  <div class="container-wide">
-    <div class="numbers-grid">
-      <div class="number-item">
-        <div class="num">+10M</div>
-        <div class="label">livros vendidos com estratégia</div>
-      </div>
-      <div class="number-item">
-        <div class="num">+800</div>
-        <div class="label">lançamentos estruturados</div>
-      </div>
-      <div class="number-item">
-        <div class="num">+4.400</div>
-        <div class="label">alunos formados</div>
-      </div>
-      <div class="number-item">
-        <div class="num">+15</div>
-        <div class="label">anos nos bastidores editoriais</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- BLOCO 5 — AGITAÇÃO -->
 <section class="agitation">
   <div class="container">
@@ -2626,37 +2601,91 @@
 </section>
 
 <!-- BLOCO 7 — PARA QUEM É -->
-<section class="filter-section">
-  <div class="container-wide">
-    <p class="section-eyebrow">Para quem é</p>
-    <h2 class="section-title">O MTBB é pra você?</h2>
-    <p class="section-subtitle">Construir leitores enquanto se escreve exige estratégia.</p>
-
-    <div class="filter-grid">
-      <div class="filter-card positive">
-        <h3>É pra você se...</h3>
-        <ul>
-          <li>Você quer terminar o livro com leitores esperando</li>
-          <li>Você quer aprender o caminho</li>
-          <li>Você entende que escrever bem importa, mas não basta</li>
-          <li>Você quer construir audiência enquanto escreve</li>
-          <li>Você trata livro como arte E negócio</li>
-          <li>Você prefere método ao improviso</li>
-        </ul>
-      </div>
-      <div class="filter-card negative">
-        <h3>Não é pra você se...</h3>
-        <ul>
-          <li>Você deixa a estratégia pra depois</li>
-          <li>Você acha que livro bom vende sozinho</li>
-          <li>Você busca atalho ou bala de prata</li>
-          <li>Você duvida do próprio livro</li>
-          <li>Você acha que estratégia atrapalha a arte</li>
-          <li>Você espera ser descoberto pelo mercado</li>
-        </ul>
-      </div>
+<section style="background:var(--bg)">
+<style>
+.pv4{box-sizing:border-box;font-family:'Poppins',sans-serif;color:var(--text);background:var(--bg);padding:0 24px;max-width:1180px;margin:0 auto;-webkit-font-smoothing:antialiased}
+.pv4 *{box-sizing:border-box}
+.pv4 .pv4-head{text-align:center;max-width:680px;margin:0 auto 56px}
+.pv4 .pv4-eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+.pv4 .pv4-h2{font-size:clamp(28px,4.4vw,46px);font-weight:800;line-height:1.08;letter-spacing:-.02em;margin:0 0 18px}
+.pv4 .pv4-sub{font-size:17px;line-height:1.55;color:var(--text-soft);margin:0;font-weight:400}
+.pv4 .pv4-stage{display:grid;grid-template-columns:1.34fr .82fr;gap:28px;align-items:center}
+.pv4 .pv4-card{position:relative;border-radius:22px;background:var(--bg-card);overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s ease}
+.pv4 .pv4-bar{position:absolute;top:0;left:0;right:0;height:4px}
+.pv4 .pv4-ctitle{display:flex;align-items:center;gap:12px;font-size:clamp(20px,2.5vw,26px);font-weight:800;letter-spacing:-.01em;line-height:1.1;margin:0}
+.pv4 .pv4-list{list-style:none;margin:0;padding:0}
+.pv4 .pv4-li{display:flex;align-items:flex-start;gap:14px;font-weight:500;line-height:1.4}
+.pv4 .pv4-pos{
+  padding:40px clamp(28px,3vw,44px) 42px;
+  border:1.5px solid rgba(250,171,0,.55);
+  background:linear-gradient(170deg,#FFFFFF 0%,#FFFDF6 60%,#FFF7E6 100%);
+  box-shadow:0 18px 48px rgba(250,171,0,.16),0 4px 16px rgba(0,0,0,.06);
+  z-index:2;
+}
+.pv4 .pv4-pos:hover{transform:translateY(-4px);box-shadow:0 26px 60px rgba(250,171,0,.22),0 6px 20px rgba(0,0,0,.08)}
+.pv4 .pv4-pos .pv4-bar{background:linear-gradient(90deg,#FFC646,#FAAB00)}
+.pv4 .pv4-pos .pv4-ctitle{margin-bottom:28px}
+.pv4 .pv4-crown{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#FFC646,#FAAB00);color:#1A1A1A;font-size:18px;font-weight:800;flex:none;box-shadow:0 2px 8px rgba(250,171,0,.4)}
+.pv4 .pv4-pos .pv4-li{font-size:16.5px;color:var(--text);padding:13px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.pv4 .pv4-pos .pv4-li:last-child{border-bottom:none}
+.pv4 .pv4-tick{flex:none;width:22px;height:22px;border-radius:50%;background:rgba(250,171,0,.18);border:1px solid rgba(250,171,0,.55);color:#9A6A00;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px}
+.pv4 .pv4-neg{
+  padding:30px clamp(22px,2.4vw,30px) 32px;
+  border:1px solid rgba(0,0,0,.07);
+  background:#F4F4F2;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+  transform:scale(.965);
+  opacity:.82;
+  filter:saturate(.7);
+  z-index:1;
+}
+.pv4 .pv4-neg:hover{opacity:1;filter:saturate(1);transform:scale(.985)}
+.pv4 .pv4-neg .pv4-bar{background:rgba(178,48,48,.45)}
+.pv4 .pv4-neg .pv4-ctitle{color:#7A7A75;font-size:clamp(17px,2vw,20px);font-weight:700;margin-bottom:20px}
+.pv4 .pv4-neg .pv4-li{font-size:14.5px;color:#73726D;font-weight:500;padding:10px 0}
+.pv4 .pv4-cross{flex:none;width:20px;height:20px;border-radius:50%;background:rgba(178,48,48,.1);border:1px solid rgba(178,48,48,.32);color:#B23030;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-top:1px}
+.pv4 .pv4-xicon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(178,48,48,.1);color:#B23030;font-size:15px;font-weight:800;flex:none}
+@media(max-width:860px){
+  .pv4{padding:0 18px}
+  .pv4 .pv4-stage{grid-template-columns:1fr;gap:20px}
+  .pv4 .pv4-neg{transform:none;opacity:.88}
+  .pv4 .pv4-neg:hover{transform:none}
+  .pv4 .pv4-pos:hover{transform:translateY(-2px)}
+}
+</style>
+<div class="pv4">
+  <div class="pv4-head">
+    <span class="pv4-eyebrow">Para quem é</span>
+    <h2 class="pv4-h2">O MTBB é pra você?</h2>
+    <p class="pv4-sub">Fazer o livro chegar aos leitores certos exige estratégia.</p>
+  </div>
+  <div class="pv4-stage">
+    <div class="pv4-card pv4-pos">
+      <span class="pv4-bar"></span>
+      <h3 class="pv4-ctitle"><span class="pv4-crown">✓</span>É pra você se...</h3>
+      <ul class="pv4-list">
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você quer que seu livro nasça vendendo</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você quer aprender o caminho</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você entende que escrever bem importa, mas não basta</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você quer acesso aos bastidores editoriais</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você trata livro como arte E negócio</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você prefere método ao improviso</li>
+      </ul>
+    </div>
+    <div class="pv4-card pv4-neg">
+      <span class="pv4-bar"></span>
+      <h3 class="pv4-ctitle"><span class="pv4-xicon">✕</span>Não é pra você se...</h3>
+      <ul class="pv4-list">
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você deixa a estratégia pra depois</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você acha que livro bom vende sozinho</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você busca atalho ou bala de prata</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você duvida do próprio livro</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você prefere delegar o lançamento</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você espera ser descoberto pelo mercado</li>
+      </ul>
     </div>
   </div>
+</div>
 </section>
 
 <!-- BLOCO PRINCÍPIO — A REGRA INVERTIDA (antes da Matriz) -->
@@ -3338,21 +3367,113 @@
 </section>
 
 <!-- BLOCO 12 — BIO DANY -->
-<section class="bio-section" style="padding: 80px 0;">
-  <div class="container-wide">
-    <div class="bio-wrap">
-      <div class="bio-photo"><img src="assets/dany-sakugawa.webp" alt="Dany Sakugawa" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"></div>
-      <div class="bio-content">
-        <p class="eyebrow">Quem é a Dany</p>
-        <h2>Dany Sakugawa</h2>
+<section style="background:var(--bg)">
+<style>
+.bv1{--bv-bg:#F8F8F8;--bv-card:#FFFFFF;--bv-accent:#FAAB00;--bv-text:#1A1A1A;--bv-soft:#555;--bv-mute:#999;--bv-border:rgba(0,0,0,.08);
+  background:var(--bv-bg);color:var(--bv-text);font-family:'Poppins',system-ui,sans-serif;
+  padding:0 clamp(16px,4vw,56px);box-sizing:border-box;width:100%;overflow:hidden;-webkit-font-smoothing:antialiased;}
+.bv1 *{box-sizing:border-box;}
+.bv1 .bv1-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+.bv1 .bv1-shell{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:clamp(28px,4vw,64px);align-items:stretch;}
+
+.bv1 .bv1-figure{position:relative;align-self:stretch;}
+.bv1 .bv1-frame{position:relative;height:100%;min-height:480px;border-radius:6px;overflow:hidden;
+  background:#0A0A0A;box-shadow:0 40px 80px -28px rgba(10,10,20,.55),0 8px 24px -8px rgba(10,10,20,.35);}
+.bv1 .bv1-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;
+  filter:contrast(1.04) saturate(1.02);}
+.bv1 .bv1-frame::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,10,20,0) 46%,rgba(10,10,20,.62) 100%);}
+.bv1 .bv1-issue{position:absolute;top:16px;left:16px;z-index:3;display:flex;align-items:center;gap:8px;
+  font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#fff;
+  background:rgba(10,10,20,.34);backdrop-filter:blur(3px);padding:7px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.18);}
+.bv1 .bv1-issue b{color:var(--bv-accent);font-weight:800;}
+.bv1 .bv1-issue span{width:5px;height:5px;border-radius:50%;background:var(--bv-accent);}
+.bv1 .bv1-cap{position:absolute;left:18px;bottom:16px;z-index:3;}
+.bv1 .bv1-cap-name{font-family:'Caveat',cursive;font-size:30px;line-height:.9;color:#fff;}
+.bv1 .bv1-cap-rule{width:46px;height:2px;background:var(--bv-accent);margin-top:6px;border-radius:2px;}
+.bv1 .bv1-figure::before{content:"";position:absolute;top:26px;bottom:26px;left:-9px;width:9px;border-radius:6px;
+  background:var(--bv-accent);box-shadow:0 14px 30px -8px rgba(250,171,0,.55);}
+
+.bv1 .bv1-body{display:flex;flex-direction:column;justify-content:center;min-width:0;}
+.bv1 .bv1-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--bv-soft);margin:0 0 18px;}
+.bv1 .bv1-eyebrow i{width:26px;height:1.5px;background:var(--bv-accent);display:inline-block;}
+.bv1 .bv1-name{font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+  font-size:clamp(40px,6.4vw,68px);line-height:.96;letter-spacing:-.01em;margin:0 0 4px;color:var(--bv-text);}
+.bv1 .bv1-name em{font-style:italic;color:var(--bv-text);}
+.bv1 .bv1-namebar{width:74px;height:4px;background:var(--bv-accent);border-radius:3px;margin:14px 0 26px;}
+
+.bv1 .bv1-rail{display:flex;flex-wrap:nowrap;gap:10px;margin:0 0 28px;}
+.bv1 .bv1-pill{display:flex;flex-direction:column;background:var(--bv-card);border:1px solid var(--bv-border);
+  border-radius:12px;padding:11px 13px 10px;box-shadow:0 10px 24px -16px rgba(10,10,20,.4);min-width:0;}
+.bv1 .bv1-pill b{font-family:'Poppins',sans-serif;font-weight:800;font-size:19px;line-height:1;color:var(--bv-text);}
+.bv1 .bv1-pill b u{text-decoration:none;color:var(--bv-accent);}
+.bv1 .bv1-pill small{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--bv-mute);margin-top:5px;}
+
+.bv1 .bv1-prose p{font-size:15.5px;line-height:1.72;color:var(--bv-soft);margin:0 0 16px;max-width:60ch;}
+.bv1 .bv1-prose p:first-of-type{color:var(--bv-text);}
+.bv1 .bv1-prose p:first-of-type::first-letter{font-family:'Fraunces',serif;font-style:italic;font-weight:700;
+  float:left;font-size:74px;line-height:.66;padding:8px 14px 0 0;color:var(--bv-accent);}
+
+.bv1 .bv1-quote{position:relative;margin:30px 0 0;padding:26px 0 0;border-top:1px solid var(--bv-border);}
+.bv1 .bv1-quote p{font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+  font-size:clamp(23px,3.1vw,32px);line-height:1.3;margin:0;color:var(--bv-text);max-width:24ch;}
+.bv1 .bv1-quote p u{text-decoration:none;color:var(--bv-accent);}
+.bv1 .bv1-quote .bv1-qmark{position:absolute;top:8px;left:-2px;font-family:'Fraunces',serif;font-style:italic;
+  font-size:62px;line-height:0;color:rgba(250,171,0,.22);pointer-events:none;}
+
+@media (max-width:820px){
+  .bv1{padding:30px 18px 40px;}
+  .bv1 .bv1-shell{grid-template-columns:1fr;gap:30px;}
+  .bv1 .bv1-figure{max-width:340px;margin:0 auto;width:100%;}
+  .bv1 .bv1-frame{min-height:0;aspect-ratio:4/5;height:auto;}
+  .bv1 .bv1-figure::before{top:auto;bottom:-9px;left:24px;right:24px;width:auto;height:9px;}
+  .bv1 .bv1-body{text-align:left;}
+  .bv1 .bv1-prose p:first-of-type::first-letter{font-size:62px;}
+}
+@media (max-width:420px){
+  .bv1 .bv1-pill{flex:1 1 0;}
+}
+@media(max-width:640px){.bv1 .bv1-rail{flex-wrap:wrap;}.bv1 .bv1-pill{flex:1 1 calc(50% - 5px);}}
+</style>
+<div class="bv1">
+  <h2 class="bv1-sr">Quem é a Dany Sakugawa — perfil editorial</h2>
+  <div class="bv1-shell">
+
+    <figure class="bv1-figure">
+      <div class="bv1-frame">
+        <div class="bv1-issue"><span></span>Quem é a <b>Dany</b></div>
+        <img src="assets/dany-sakugawa.webp" alt="Dany Sakugawa">
+              </div>
+    </figure>
+
+    <div class="bv1-body">
+      <p class="bv1-eyebrow"><i></i>Quem é a Dany</p>
+      <h3 class="bv1-name">Dany <em>Sakugawa</em></h3>
+      <div class="bv1-namebar"></div>
+
+      <div class="bv1-rail">
+        <div class="bv1-pill"><b><u>+800</u> autores</b><small>lançados</small></div>
+        <div class="bv1-pill"><b><u>+10M</u> livros</b><small>vendidos</small></div>
+        <div class="bv1-pill"><b><u>+4.400</u> alunos</b><small>no método</small></div>
+        <div class="bv1-pill"><b><u>+15</u> anos</b><small>nos bastidores</small></div>
+      </div>
+
+      <div class="bv1-prose">
         <p>Por mais de 15 anos, Dany esteve nos bastidores de grandes editoras brasileiras, participando de lançamentos que somaram mais de 10 milhões de livros vendidos.</p>
         <p>Nesse período, viu de perto um padrão que poucos autores enxergam: livros excelentes desapareciam por falta de estratégia, enquanto livros bem posicionados ganhavam espaço, leitores e permanência.</p>
         <p>Depois de conduzir o lançamento de mais de 800 autores, Dany criou o Método The Book Business para levar aos autores independentes a lógica que antes ficava restrita às grandes editoras: como posicionar, lançar e fazer um livro chegar aos leitores certos.</p>
         <p>Hoje, mais de 4.400 alunos já passaram pelo método: autores de ficção, não-ficção, estreantes, independentes e profissionais que decidiram parar de tratar o livro como tentativa e começar a tratá-lo com estratégia.</p>
-        <p>Aqui, você não aprende marketing genérico. Aprende <span class="bio-accent">marketing literário aplicado ao mercado real de livros</span>.</p>
       </div>
+
+      <blockquote class="bv1-quote">
+        <span class="bv1-qmark">“</span>
+        <p>O maior risco que um autor corre é <u>ser esquecido.</u></p>
+      </blockquote>
     </div>
+
   </div>
+</div>
 </section>
 
 <!-- DANY NA MÍDIA -->
@@ -3560,7 +3681,7 @@
   <div class="container">
     <h2>Você foi longe demais<br><span class="italic">pra terminar sem leitores.</span></h2>
     <p style="font-size:17px; color:rgba(255,255,255,0.65); line-height:1.6; max-width:480px; margin:0 auto 36px;">O método está aqui. O livro está vindo. O único passo que falta é o seu.</p>
-    <a href="#" class="btn-cta large open-modal">Quero ser um autor de sucesso →</a>
+    <a href="#" class="btn-cta large open-modal">Quero fazer meu livro ser lido →</a>
     <p class="small-text">Pagamento em até 12x sem juros · Acesso imediato</p>
   </div>
 </section>
@@ -3914,5 +4035,20 @@
   quotes.forEach(function(q) { io.observe(q); });
 })();
 </script>
+<style>
+/* === RITMO DE SEÇÕES NO MOBILE (consistente) === */
+@media (max-width: 768px) {
+  section { padding: 52px 0; }
+  .hero { padding: 28px 0 18px; }
+  .logos-section { padding: 12px 0 40px; }
+  .agitation, .journey-section, .principle-section, .matrix-section,
+  .quad-finale, .pergunta-cta, .deliverables-section, .cases-section,
+  .offer-section, .faq-section, .final-cta {
+    padding-top: 52px; padding-bottom: 52px;
+  }
+  .quads-section { padding-top: 52px !important; }
+  .media-grid-section { padding-top: 44px; padding-bottom: 52px; }
+}
+</style>
 </body>
 </html>
