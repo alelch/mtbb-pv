@@ -4291,7 +4291,15 @@
           });
           if (payload.nome) params.push('name=' + encodeURIComponent(payload.nome));
           if (payload.email) params.push('email=' + encodeURIComponent(payload.email));
-          if (payload.whatsapp) params.push('phonenumber=' + encodeURIComponent(payload.whatsapp));
+          // Hotmart separa telefone: phoneac (DDD) + phonenumber (numero sem DDD), so digitos, sem DDI 55
+          var phd = (payload.whatsapp || '').replace(/\D/g, '');
+          if (phd.length > 11 && phd.indexOf('55') === 0) phd = phd.slice(2);
+          if (phd.length >= 10) {
+            params.push('phoneac=' + encodeURIComponent(phd.slice(0, 2)));
+            params.push('phonenumber=' + encodeURIComponent(phd.slice(2)));
+          } else if (phd) {
+            params.push('phonenumber=' + encodeURIComponent(phd));
+          }
           window.location.href = HOTMART_URL + sep + params.join('&');
         });
     });
