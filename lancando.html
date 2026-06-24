@@ -2926,68 +2926,87 @@
 <!-- BLOCO 7 — PARA QUEM É -->
 <section style="background:var(--bg)">
 <style>
-.f2{font-family:'Poppins',sans-serif;color:var(--text);max-width:1100px;margin:0 auto;padding:0 24px;box-sizing:border-box}
-.f2 *{box-sizing:border-box}
-.f2 .head{text-align:center;max-width:620px;margin:0 auto 48px}
-.f2 .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
-.f2 h2{font-size:clamp(30px,4.4vw,46px);font-weight:700;line-height:1.08;margin:0 0 16px;letter-spacing:-.02em}
-.f2 .sub{font-size:18px;line-height:1.55;color:var(--text-soft);margin:0}
-.f2 .stage{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--bg-card);border:1px solid var(--border);border-radius:26px;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden;transition:box-shadow .25s ease}
-.f2 .stage:hover{box-shadow:0 12px 32px rgba(0,0,0,.10)}
-.f2 .side{padding:46px 40px}
-.f2 .pos{background:linear-gradient(135deg,#FFC646,#FAAB00);clip-path:polygon(0 0,100% 0,calc(100% - 46px) 100%,0 100%)}
-.f2 .neg{background:var(--bg-dark);clip-path:polygon(46px 0,100% 0,100% 100%,0 100%);padding-left:64px}
-.f2 .ctitle{font-size:24px;font-weight:700;margin:0 0 28px;letter-spacing:-.01em}
-.f2 .pos .ctitle{color:#1A1A1A}
-.f2 .neg .ctitle{color:#fff}
-.f2 ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.f2 li{display:flex;align-items:flex-start;gap:13px;font-size:15.5px;line-height:1.45}
-.f2 .pos li{color:#2a1c00}
-.f2 .neg li{color:rgba(255,255,255,.82)}
-.f2 .mark{width:23px;height:23px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px}
-.f2 .pos .mark{background:rgba(26,26,26,.12);border:1px solid rgba(26,26,26,.30);color:#1A1A1A}
-.f2 .neg .mark{background:rgba(204,51,51,.20);border:1px solid rgba(204,51,51,.55);color:#ff7a7a}
-.f2 .vs{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:0 6px 20px rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;z-index:3}
-.f2 .vs span{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:24px;color:var(--accent)}
-@media(max-width:760px){
-  .f2{padding:0 18px}
-  .f2 .stage{display:flex;flex-direction:column}
-  .f2 .pos{clip-path:none;order:1;padding:42px 36px 58px}
-  .f2 .vs{position:static;transform:none;order:2;margin:0 auto -26px;width:52px;height:52px;z-index:4}
-  .f2 .neg{order:3;padding:58px 36px 42px;clip-path:polygon(0 36px,100% 0,100% 100%,0 100%);margin-top:-34px}
-  .f2 .vs span{font-size:19px}
+.pv4{box-sizing:border-box;font-family:'Poppins',sans-serif;color:var(--text);background:var(--bg);padding:0 24px;max-width:1180px;margin:0 auto;-webkit-font-smoothing:antialiased}
+.pv4 *{box-sizing:border-box}
+.pv4 .pv4-head{text-align:center;max-width:680px;margin:0 auto 56px}
+.pv4 .pv4-eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+.pv4 .pv4-h2{font-size:clamp(28px,4.4vw,46px);font-weight:800;line-height:1.08;letter-spacing:-.02em;margin:0 0 18px}
+.pv4 .pv4-sub{font-size:17px;line-height:1.55;color:var(--text-soft);margin:0;font-weight:400}
+.pv4 .pv4-stage{display:grid;grid-template-columns:1.34fr .82fr;gap:28px;align-items:center}
+.pv4 .pv4-card{position:relative;border-radius:22px;background:var(--bg-card);overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s ease}
+.pv4 .pv4-bar{position:absolute;top:0;left:0;right:0;height:4px}
+.pv4 .pv4-ctitle{display:flex;align-items:center;gap:12px;font-size:clamp(20px,2.5vw,26px);font-weight:800;letter-spacing:-.01em;line-height:1.1;margin:0}
+.pv4 .pv4-list{list-style:none;margin:0;padding:0}
+.pv4 .pv4-li{display:flex;align-items:flex-start;gap:14px;font-weight:500;line-height:1.4}
+.pv4 .pv4-pos{
+  padding:40px clamp(28px,3vw,44px) 42px;
+  border:1.5px solid rgba(250,171,0,.55);
+  background:linear-gradient(170deg,#FFFFFF 0%,#FFFDF6 60%,#FFF7E6 100%);
+  box-shadow:0 18px 48px rgba(250,171,0,.16),0 4px 16px rgba(0,0,0,.06);
+  z-index:2;
+}
+.pv4 .pv4-pos:hover{transform:translateY(-4px);box-shadow:0 26px 60px rgba(250,171,0,.22),0 6px 20px rgba(0,0,0,.08)}
+.pv4 .pv4-pos .pv4-bar{background:linear-gradient(90deg,#FFC646,#FAAB00)}
+.pv4 .pv4-pos .pv4-ctitle{margin-bottom:28px}
+.pv4 .pv4-crown{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#FFC646,#FAAB00);color:#1A1A1A;font-size:18px;font-weight:800;flex:none;box-shadow:0 2px 8px rgba(250,171,0,.4)}
+.pv4 .pv4-pos .pv4-li{font-size:16.5px;color:var(--text);padding:13px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.pv4 .pv4-pos .pv4-li:last-child{border-bottom:none}
+.pv4 .pv4-tick{flex:none;width:22px;height:22px;border-radius:50%;background:rgba(250,171,0,.18);border:1px solid rgba(250,171,0,.55);color:#9A6A00;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px}
+.pv4 .pv4-neg{
+  padding:30px clamp(22px,2.4vw,30px) 32px;
+  border:1px solid rgba(0,0,0,.07);
+  background:#F4F4F2;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+  transform:scale(.965);
+  opacity:.82;
+  filter:saturate(.7);
+  z-index:1;
+}
+.pv4 .pv4-neg:hover{opacity:1;filter:saturate(1);transform:scale(.985)}
+.pv4 .pv4-neg .pv4-bar{background:rgba(178,48,48,.45)}
+.pv4 .pv4-neg .pv4-ctitle{color:#7A7A75;font-size:clamp(17px,2vw,20px);font-weight:700;margin-bottom:20px}
+.pv4 .pv4-neg .pv4-li{font-size:14.5px;color:#73726D;font-weight:500;padding:10px 0}
+.pv4 .pv4-cross{flex:none;width:20px;height:20px;border-radius:50%;background:rgba(178,48,48,.1);border:1px solid rgba(178,48,48,.32);color:#B23030;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-top:1px}
+.pv4 .pv4-xicon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(178,48,48,.1);color:#B23030;font-size:15px;font-weight:800;flex:none}
+@media(max-width:860px){
+  .pv4{padding:0 18px}
+  .pv4 .pv4-stage{grid-template-columns:1fr;gap:20px}
+  .pv4 .pv4-neg{transform:none;opacity:.88}
+  .pv4 .pv4-neg:hover{transform:none}
+  .pv4 .pv4-pos:hover{transform:translateY(-2px)}
 }
 </style>
-<div class="f2">
-  <div class="head">
-    <span class="eyebrow">Para quem é</span>
-    <h2>O MTBB é pra você?</h2>
-    <p class="sub">Fazer o livro chegar aos leitores certos exige estratégia.</p>
+<div class="pv4">
+  <div class="pv4-head">
+    <span class="pv4-eyebrow">Para quem é</span>
+    <h2 class="pv4-h2">O MTBB é pra você?</h2>
+    <p class="pv4-sub">Fazer o livro chegar aos leitores certos exige estratégia.</p>
   </div>
-  <div class="stage">
-    <div class="side pos">
-      <h3 class="ctitle">É pra você se...</h3>
-      <ul>
-        <li><span class="mark">✓</span>Você quer que seu livro nasça vendendo</li>
-        <li><span class="mark">✓</span>Você quer aprender o caminho</li>
-        <li><span class="mark">✓</span>Você entende que escrever bem importa, mas não basta</li>
-        <li><span class="mark">✓</span>Você quer acesso aos bastidores editoriais</li>
-        <li><span class="mark">✓</span>Você trata livro como arte E negócio</li>
-        <li><span class="mark">✓</span>Você prefere método ao improviso</li>
+  <div class="pv4-stage">
+    <div class="pv4-card pv4-pos">
+      <span class="pv4-bar"></span>
+      <h3 class="pv4-ctitle"><span class="pv4-crown">✓</span>É pra você se...</h3>
+      <ul class="pv4-list">
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você quer que seu livro nasça vendendo</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você quer aprender o caminho</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você entende que escrever bem importa, mas não basta</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você quer acesso aos bastidores editoriais</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você trata livro como arte E negócio</li>
+        <li class="pv4-li"><span class="pv4-tick">✓</span>Você prefere método ao improviso</li>
       </ul>
     </div>
-    <div class="side neg">
-      <h3 class="ctitle">Não é pra você se...</h3>
-      <ul>
-        <li><span class="mark">✗</span>Você deixa a estratégia pra depois</li>
-        <li><span class="mark">✗</span>Você acha que livro bom vende sozinho</li>
-        <li><span class="mark">✗</span>Você busca atalho ou bala de prata</li>
-        <li><span class="mark">✗</span>Você duvida do próprio livro</li>
-        <li><span class="mark">✗</span>Você prefere delegar o lançamento</li>
-        <li><span class="mark">✗</span>Você espera ser descoberto pelo mercado</li>
+    <div class="pv4-card pv4-neg">
+      <span class="pv4-bar"></span>
+      <h3 class="pv4-ctitle"><span class="pv4-xicon">✕</span>Não é pra você se...</h3>
+      <ul class="pv4-list">
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você deixa a estratégia pra depois</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você acha que livro bom vende sozinho</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você busca atalho ou bala de prata</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você duvida do próprio livro</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você prefere delegar o lançamento</li>
+        <li class="pv4-li"><span class="pv4-cross">✕</span>Você espera ser descoberto pelo mercado</li>
       </ul>
     </div>
-    <div class="vs"><span>vs</span></div>
   </div>
 </div>
 </section>
