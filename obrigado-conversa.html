@@ -7,7 +7,7 @@
 <title>Você está na lista de espera · Método The Book Business</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#F8F8F8;
@@ -77,22 +77,22 @@
   .hero{
     background:
       radial-gradient(1200px 600px at 80% -10%, rgba(250,171,0,.10), transparent 60%),
-      radial-gradient(900px 500px at -10% 110%, rgba(37,211,102,.10), transparent 55%),
+      radial-gradient(900px 500px at -10% 110%, rgba(37,211,102,.12), transparent 55%),
       var(--bg);
-    padding:64px 24px 40px;
+    padding:60px 24px 44px;
     position:relative;
   }
   .container{max-width:1080px;margin:0 auto;}
 
   .hero-grid{
     display:grid;
-    grid-template-columns:1.05fr .95fr;
+    grid-template-columns:1.08fr .92fr;
     gap:56px;
     align-items:center;
   }
 
   .logo{
-    height:34px;width:auto;display:block;margin-bottom:38px;
+    height:34px;width:auto;display:block;margin-bottom:30px;
   }
 
   .confirm-badge{
@@ -108,16 +108,16 @@
     font-weight:600;
     letter-spacing:.03em;
     text-transform:uppercase;
-    margin-bottom:24px;
+    margin-bottom:22px;
   }
   .confirm-badge svg{width:16px;height:16px;flex-shrink:0;}
 
   .hero h1{
     font-size:clamp(2.1rem,4.6vw,3.4rem);
-    line-height:1.08;
+    line-height:1.07;
     font-weight:600;
     letter-spacing:-.02em;
-    margin-bottom:22px;
+    margin-bottom:20px;
   }
   .hero h1 .em{color:var(--text);font-weight:500;}
   .hero h1 .hl{color:var(--whatsapp-deep);}
@@ -126,61 +126,86 @@
     font-size:1.08rem;
     color:var(--text-soft);
     max-width:30em;
-    margin-bottom:14px;
+    margin-bottom:26px;
     font-weight:300;
   }
   .hero p.lead strong{color:var(--text);font-weight:600;}
 
-  .kicker{
-    font-size:.95rem;
-    color:var(--text);
-    font-weight:500;
-    margin-bottom:30px;
-    max-width:30em;
-  }
-  .kicker .em{color:var(--accent);}
+  /* ===== HERO CTA = HERÓI ===== */
+  .cta-wrap{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
 
-  /* ===== CTA BUTTON (hero) ===== */
-  .cta-wrap{display:flex;flex-direction:column;gap:12px;align-items:flex-start;}
+  /* prévia da mensagem pronta, colada ao botão = zero fricção */
+  .msg-preview{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    background:var(--bubble-out);
+    border:1px solid rgba(18,140,126,.18);
+    color:#0c3b2e;
+    padding:9px 14px 9px 13px;
+    border-radius:14px 14px 14px 4px;
+    font-size:.84rem;
+    font-weight:400;
+    line-height:1.35;
+    max-width:30em;
+    box-shadow:0 4px 14px -8px rgba(7,94,84,.4);
+    position:relative;
+  }
+  .msg-preview .quill{
+    width:15px;height:15px;flex-shrink:0;color:var(--whatsapp-deep);opacity:.75;
+  }
+  .msg-preview b{font-weight:600;}
+  .msg-preview .tag-pre{
+    font-size:.62rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--whatsapp-deep);opacity:.7;display:block;margin-bottom:1px;
+  }
 
   .btn-whatsapp{
     display:inline-flex;
     align-items:center;
-    gap:13px;
-    background:var(--whatsapp);
+    justify-content:center;
+    gap:14px;
+    background:linear-gradient(180deg,#2ee36c,#22c35e);
     color:#fff;
     text-decoration:none;
-    padding:18px 30px;
-    border-radius:16px;
-    font-size:1.06rem;
+    padding:22px 38px;
+    border-radius:18px;
+    font-size:1.18rem;
     font-weight:600;
     letter-spacing:.01em;
-    box-shadow:0 12px 30px -8px rgba(37,211,102,.55), 0 2px 0 rgba(0,0,0,.04);
-    transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s ease, background .22s ease;
+    box-shadow:0 18px 42px -10px rgba(37,211,102,.62), 0 2px 0 rgba(0,0,0,.04), inset 0 1px 0 rgba(255,255,255,.25);
+    transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s ease, filter .22s ease;
     position:relative;
     overflow:hidden;
+    animation:ctaBreath 3.4s ease-in-out infinite;
   }
-  .btn-whatsapp svg{width:26px;height:26px;flex-shrink:0;position:relative;z-index:1;}
+  @keyframes ctaBreath{
+    0%,100%{box-shadow:0 18px 42px -10px rgba(37,211,102,.62), 0 2px 0 rgba(0,0,0,.04), inset 0 1px 0 rgba(255,255,255,.25);}
+    50%{box-shadow:0 22px 52px -10px rgba(37,211,102,.78), 0 2px 0 rgba(0,0,0,.04), inset 0 1px 0 rgba(255,255,255,.25);}
+  }
+  .btn-whatsapp svg{width:28px;height:28px;flex-shrink:0;position:relative;z-index:1;}
   .btn-whatsapp span{position:relative;z-index:1;}
   .btn-whatsapp::after{
     content:"";
     position:absolute;
     top:0;left:-120%;
     width:60%;height:100%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,.32),transparent);
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.38),transparent);
     transform:skewX(-20deg);
-    transition:none;
+    animation:shineLoop 4.2s ease-in-out infinite;
+  }
+  @keyframes shineLoop{
+    0%,70%{left:-120%;}
+    88%{left:140%;}
+    100%{left:140%;}
   }
   .btn-whatsapp:hover{
-    transform:translateY(-3px);
-    box-shadow:0 18px 40px -8px rgba(37,211,102,.65);
-    background:#22c35e;
+    transform:translateY(-3px) scale(1.015);
+    filter:brightness(1.04);
+    animation-play-state:paused;
+    box-shadow:0 26px 56px -10px rgba(37,211,102,.72);
   }
-  .btn-whatsapp:hover::after{
-    animation:shine .85s ease;
-  }
-  @keyframes shine{to{left:140%;}}
-  .btn-whatsapp:active{transform:translateY(-1px);}
+  .btn-whatsapp:active{transform:translateY(-1px) scale(1);}
 
   .cta-sub{
     font-size:.82rem;
@@ -188,9 +213,28 @@
     display:flex;
     align-items:center;
     gap:7px;
-    padding-left:4px;
+    padding-left:2px;
+    flex-wrap:wrap;
   }
-  .cta-sub svg{width:14px;height:14px;color:var(--whatsapp-deep);}
+  .cta-sub svg{width:14px;height:14px;color:var(--whatsapp-deep);flex-shrink:0;}
+  .cta-sub b{color:var(--text-soft);font-weight:500;}
+
+  /* escassez honesta */
+  .scarcity{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:22px;
+    font-size:.82rem;color:var(--text-soft);font-weight:300;
+    max-width:30em;
+  }
+  .scarcity .bar{
+    flex-shrink:0;width:96px;height:7px;border-radius:100px;
+    background:rgba(0,0,0,.07);overflow:hidden;position:relative;
+  }
+  .scarcity .bar i{
+    display:block;height:100%;width:82%;border-radius:100px;
+    background:linear-gradient(90deg,var(--accent),#e89400);
+  }
+  .scarcity b{color:var(--text);font-weight:600;}
 
   /* ===== PHONE MOCKUP ===== */
   .phone-stage{
@@ -259,7 +303,7 @@
     display:flex;
     flex-direction:column;
     gap:9px;
-    min-height:300px;
+    min-height:312px;
   }
   .day-sep{
     align-self:center;
@@ -337,20 +381,25 @@
   .typing span:nth-child(3){animation-delay:.4s;}
   @keyframes blink{0%,60%,100%{opacity:.35;transform:translateY(0);}30%{opacity:1;transform:translateY(-2px);}}
 
+  /* input do mockup vira CTA real: leva pro WhatsApp */
   .chat-input{
     background:#f0f0f0;
     padding:9px 12px;
     display:flex;
     align-items:center;
     gap:9px;
+    text-decoration:none;
+    transition:background .2s ease;
   }
+  .chat-input:hover{background:#e8e8e8;}
   .chat-input .field{
     flex:1;
     background:#fff;
     border-radius:20px;
     padding:9px 14px;
     font-size:.78rem;
-    color:var(--text-mute);
+    color:var(--whatsapp-deep);
+    font-weight:500;
     box-shadow:0 1px 1px rgba(0,0,0,.05);
   }
   .chat-input .send{
@@ -363,8 +412,19 @@
     animation:nudge 2.6s ease-in-out infinite;
     animation-delay:3s;
   }
+  .chat-input:hover .send{transform:scale(1.08);}
   .chat-input .send svg{width:18px;height:18px;color:#fff;}
-  @keyframes nudge{0%,88%,100%{transform:scale(1);}92%{transform:scale(1.12);}96%{transform:scale(.98);}}
+  @keyframes nudge{0%,86%,100%{transform:scale(1);}90%{transform:scale(1.14);}95%{transform:scale(.98);}}
+
+  /* legenda sob o mockup */
+  .phone-cap{
+    text-align:center;
+    font-size:.8rem;
+    color:var(--text-mute);
+    margin-top:18px;
+    font-weight:300;
+  }
+  .phone-cap .em{color:var(--whatsapp-deep);font-size:.86rem;}
 
   /* ===== PROOF STRIP ===== */
   .proof{
@@ -463,15 +523,15 @@
   /* ===== FINAL CTA ===== */
   .final{
     background:
-      radial-gradient(800px 400px at 50% -20%, rgba(37,211,102,.16), transparent 60%),
+      radial-gradient(800px 400px at 50% -20%, rgba(37,211,102,.18), transparent 60%),
       linear-gradient(180deg,#0d3b2e,#0a0a0a 90%);
     color:#fff;
-    padding:72px 24px 80px;
+    padding:72px 24px 96px;
     text-align:center;
   }
   .final .mark{
     font-family:'Caveat',cursive;
-    font-size:1.5rem;
+    font-size:1.6rem;
     color:var(--accent);
     margin-bottom:8px;
   }
@@ -492,15 +552,16 @@
     font-size:1.04rem;
   }
   .final .btn-whatsapp{
-    font-size:1.12rem;
-    padding:20px 36px;
+    font-size:1.22rem;
+    padding:24px 44px;
   }
   .final .cta-sub{
-    color:rgba(255,255,255,.6);
+    color:rgba(255,255,255,.62);
     justify-content:center;
     margin-top:16px;
   }
   .final .cta-sub svg{color:#7ee2a8;}
+  .final .cta-sub b{color:rgba(255,255,255,.85);}
 
   /* ===== STEPS ===== */
   .steps{
@@ -537,6 +598,37 @@
   .step h4{font-size:.95rem;font-weight:600;margin-bottom:5px;color:#fff;}
   .step p{font-size:.82rem;color:#b9cdc3;font-weight:300;margin:0;max-width:none;}
 
+  /* ===== STICKY MOBILE CTA BAR (anti-fricção) ===== */
+  .sticky-cta{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:60;
+    background:rgba(10,10,10,.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:11px 16px calc(11px + env(safe-area-inset-bottom,0px));
+    display:none;
+    align-items:center;
+    gap:12px;
+    transform:translateY(110%);
+    transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .sticky-cta.show{transform:translateY(0);}
+  .sticky-cta .sc-copy{flex:1;min-width:0;line-height:1.25;}
+  .sticky-cta .sc-copy .t{color:#fff;font-size:.82rem;font-weight:600;display:block;}
+  .sticky-cta .sc-copy .s{color:#9fb8ad;font-size:.7rem;font-weight:300;display:block;}
+  .sticky-cta a{
+    flex-shrink:0;
+    display:inline-flex;align-items:center;gap:9px;
+    background:linear-gradient(180deg,#2ee36c,#22c35e);
+    color:#fff;text-decoration:none;
+    padding:13px 20px;border-radius:13px;
+    font-size:.92rem;font-weight:600;
+    box-shadow:0 8px 22px -8px rgba(37,211,102,.7);
+  }
+  .sticky-cta a svg{width:20px;height:20px;}
+
   /* ===== FOOTER ===== */
   footer{
     background:var(--bg-dark);
@@ -553,24 +645,35 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width:880px){
-    .hero-grid{grid-template-columns:1fr;gap:48px;}
-    .hero{padding:48px 22px 36px;text-align:center;}
-    .logo{margin:0 auto 30px;}
-    .hero p.lead,.kicker{margin-left:auto;margin-right:auto;}
+    .hero-grid{grid-template-columns:1fr;gap:42px;}
+    .hero{padding:44px 22px 36px;text-align:center;}
+    .logo{margin:0 auto 26px;}
+    .hero p.lead,.scarcity{margin-left:auto;margin-right:auto;}
     .cta-wrap{align-items:center;}
+    .msg-preview{text-align:left;}
+    .scarcity{justify-content:center;}
     .phone-stage{order:-1;}
     .phone{transform:none;}
     .phone:hover{transform:none;}
     .stats{grid-template-columns:repeat(2,1fr);gap:14px;}
     .step:not(:last-child)::after{display:none;}
     .steps{gap:30px;}
+    .sticky-cta{display:flex;}
+    .final{padding-bottom:120px;}
   }
   @media (max-width:480px){
     .topbar{font-size:.72rem;padding:11px 14px;flex-wrap:wrap;text-align:center;}
     .hero h1{font-size:2rem;}
-    .btn-whatsapp{width:100%;justify-content:center;}
+    .btn-whatsapp{width:100%;}
+    .msg-preview{width:100%;max-width:100%;}
     .phone{width:300px;}
     .stat{padding:20px 10px;}
+    .sticky-cta .sc-copy .s{display:none;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important;animation-iteration-count:1 !important;}
+    .bubble,.typing{opacity:1;transform:none;}
   }
 </style>
 <script>window.MTBB_OBRIGADO_VARIANT='conversa';</script>
@@ -600,87 +703,96 @@
 
           <h1>
             Pronto. Você entrou.<br>
-            Agora <span class="em hl">não espere</span> a fila andar.
+            Agora <span class="em hl">fure a fila</span> em 1 toque.
           </h1>
 
           <p class="lead">
-            A turma abre por vagas, e quem fala com o nosso time <strong>entra antes</strong> que as vagas acabem.
+            A próxima turma abre por vagas. Quem fala com o time agora <strong>entra primeiro</strong>, antes das vagas acabarem.
           </p>
 
-          <p class="kicker">
-            Tem uma conversa <span class="em">aberta esperando você</span> no WhatsApp. Responder leva trinta segundos.
-          </p>
+          <div class="scarcity">
+            <span class="bar"><i></i></span>
+            <span>Vagas por turma são <b>limitadas</b>. A lista anda por ordem de conversa.</span>
+          </div>
 
           <div class="cta-wrap">
+            <div class="msg-preview">
+              <svg class="quill" viewBox="0 0 24 24" fill="none"><path d="M4 20s2-7 8-13c2.5-2.5 6-3 6-3s-.5 3.5-3 6c-6 6-11 10-11 10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 20l4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <span><span class="tag-pre">mensagem já escrita</span><b>"Quero prioridade para entrar no Método The Book Business"</b></span>
+            </div>
+
             <a class="btn-whatsapp" href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener">
               <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 4C9.93 4 4.98 8.95 4.98 15.06c0 1.96.51 3.86 1.49 5.55L4.9 27l6.54-1.52a11.02 11.02 0 0 0 4.6 1.01h.01c6.1 0 11.05-4.95 11.05-11.06C27.1 8.95 22.15 4 16.04 4Zm0 20.27h-.01a9.2 9.2 0 0 1-4.69-1.28l-.34-.2-3.88.9.83-3.78-.22-.35a9.16 9.16 0 0 1-1.41-4.91c0-5.08 4.13-9.21 9.22-9.21 2.46 0 4.78.96 6.52 2.7a9.16 9.16 0 0 1 2.7 6.52c0 5.08-4.14 9.21-9.22 9.21Zm5.05-6.9c-.28-.14-1.64-.81-1.89-.9-.25-.09-.43-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.83-.74-1.38-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.49.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.54-.45-.46-.62-.47l-.53-.01c-.18 0-.49.07-.74.35-.25.28-.97.95-.97 2.32 0 1.37 1 2.69 1.13 2.87.14.18 1.96 3 4.76 4.21.66.29 1.18.46 1.59.59.67.21 1.27.18 1.75.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33Z"/></svg>
-              <span>Quero furar a fila</span>
+              <span>Furar a fila no WhatsApp</span>
             </a>
             <span class="cta-sub">
               <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Atendimento humano · sem compromisso
+              <b>30 segundos</b> · time online e ativo agora · sem compromisso
             </span>
           </div>
         </div>
 
         <!-- PHONE MOCKUP -->
-        <div class="phone-stage">
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="phone-notch"></div>
+        <div>
+          <div class="phone-stage">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="phone-notch"></div>
 
-              <div class="chat-head">
-                <div class="chat-avatar">
-                  <img src="assets/dany-sakugawa.webp" alt="Time The Book Business">
+                <div class="chat-head">
+                  <div class="chat-avatar">
+                    <img src="assets/dany-sakugawa.webp" alt="Time The Book Business">
+                  </div>
+                  <div class="chat-meta">
+                    <span class="name">
+                      Time The Book Business
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+                    </span>
+                    <span class="status"><b>online e ativo agora</b> · respondendo na hora</span>
+                  </div>
                 </div>
-                <div class="chat-meta">
-                  <span class="name">
-                    Time The Book Business
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-                  </span>
-                  <span class="status"><b>online</b> · normalmente responde na hora</span>
+
+                <div class="chat-body">
+                  <div class="day-sep">HOJE</div>
+
+                  <div class="bubble in b1">
+                    Oi! Recebemos sua entrada na lista de espera do Método. <strong>Bem-vindo(a).</strong> 👋
+                    <span class="time">agora</span>
+                  </div>
+
+                  <div class="bubble in b2">
+                    A próxima turma abre por número de vagas. Quem fala com a gente por aqui entra com <strong>prioridade</strong>, antes das vagas acabarem.
+                    <span class="time">agora</span>
+                  </div>
+
+                  <div class="typing">
+                    <span></span><span></span><span></span>
+                  </div>
+
+                  <div class="bubble in b3">
+                    Quer que eu garanta seu lugar entre os primeiros? <span class="em">É só apertar enviar.</span>
+                    <span class="time">agora</span>
+                  </div>
+
+                  <div class="bubble out b4">
+                    Quero prioridade para entrar no Método 🙋
+                    <span class="time">você
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z M16 7l-1.4-1.4L8.6 11.6 10 13z" opacity=".9"/></svg>
+                    </span>
+                  </div>
                 </div>
+
+                <a class="chat-input" href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener" aria-label="Enviar mensagem no WhatsApp">
+                  <div class="field">Quero prioridade para entrar no Método</div>
+                  <div class="send">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.4 20.4 21 12 3.4 3.6 3.39 10.1 15 12l-11.6 1.9z"/></svg>
+                  </div>
+                </a>
+
               </div>
-
-              <div class="chat-body">
-                <div class="day-sep">HOJE</div>
-
-                <div class="bubble in b1">
-                  Oi! Recebemos sua entrada na lista de espera do Método. <strong>Bem-vindo(a).</strong> 👋
-                  <span class="time">agora</span>
-                </div>
-
-                <div class="bubble in b2">
-                  A próxima turma abre por número de vagas. Quem fala com a gente por aqui entra com <strong>prioridade</strong>, antes das vagas acabarem.
-                  <span class="time">agora</span>
-                </div>
-
-                <div class="typing">
-                  <span></span><span></span><span></span>
-                </div>
-
-                <div class="bubble in b3">
-                  Quer que eu garanta seu lugar entre os primeiros? <span class="em">É só responder.</span>
-                  <span class="time">agora</span>
-                </div>
-
-                <div class="bubble out b4">
-                  Quero prioridade para entrar no Método 🙋
-                  <span class="time">você
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z M16 7l-1.4-1.4L8.6 11.6 10 13z" opacity=".9"/></svg>
-                  </span>
-                </div>
-              </div>
-
-              <div class="chat-input">
-                <div class="field">Escreva uma mensagem</div>
-                <div class="send">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.4 20.4 21 12 3.4 3.6 3.39 10.1 15 12l-11.6 1.9z"/></svg>
-                </div>
-              </div>
-
             </div>
           </div>
+          <p class="phone-cap">A mensagem já está digitada. <span class="em">É só apertar enviar.</span></p>
         </div>
 
       </div>
@@ -691,8 +803,8 @@
   <section class="proof">
     <div class="container">
       <div class="proof-head">
-        <div class="tag">Por que vale entrar antes</div>
-        <h2>Você está prestes a falar com quem já fez isso <span class="em">milhões de vezes.</span></h2>
+        <div class="tag">Quem vai te atender</div>
+        <h2>Do outro lado da conversa, quem já fez isso <span class="em">milhões de vezes.</span></h2>
       </div>
       <div class="stats">
         <div class="stat">
@@ -726,25 +838,25 @@
   <!-- FINAL CTA -->
   <section class="final">
     <div class="container">
-      <div class="mark">um passo. agora.</div>
+      <div class="mark">um toque. agora.</div>
       <h2>Não deixe seu livro <span class="em">esperando</span> outra turma.</h2>
       <p>
-        Abra a conversa que já está montada para você. O time confirma sua prioridade e te mostra o caminho para chegar aos leitores certos, de verdade.
+        A conversa já está montada para você, com a mensagem escrita. Abra, aperte enviar e o time confirma sua prioridade na próxima turma.
       </p>
 
       <a class="btn-whatsapp" href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener">
         <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 4C9.93 4 4.98 8.95 4.98 15.06c0 1.96.51 3.86 1.49 5.55L4.9 27l6.54-1.52a11.02 11.02 0 0 0 4.6 1.01h.01c6.1 0 11.05-4.95 11.05-11.06C27.1 8.95 22.15 4 16.04 4Zm0 20.27h-.01a9.2 9.2 0 0 1-4.69-1.28l-.34-.2-3.88.9.83-3.78-.22-.35a9.16 9.16 0 0 1-1.41-4.91c0-5.08 4.13-9.21 9.22-9.21 2.46 0 4.78.96 6.52 2.7a9.16 9.16 0 0 1 2.7 6.52c0 5.08-4.14 9.21-9.22 9.21Zm5.05-6.9c-.28-.14-1.64-.81-1.89-.9-.25-.09-.43-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.83-.74-1.38-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.49.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.54-.45-.46-.62-.47l-.53-.01c-.18 0-.49.07-.74.35-.25.28-.97.95-.97 2.32 0 1.37 1 2.69 1.13 2.87.14.18 1.96 3 4.76 4.21.66.29 1.18.46 1.59.59.67.21 1.27.18 1.75.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33Z"/></svg>
-        <span>Falar com o time agora</span>
+        <span>Furar a fila agora</span>
       </a>
       <span class="cta-sub">
         <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Sem compromisso. Conversa direta no seu WhatsApp.
+        <b>Sem compromisso.</b> Conversa direta no seu WhatsApp.
       </span>
 
       <div class="steps">
         <div class="step">
           <div class="n">1</div>
-          <h4>Você abre a conversa</h4>
+          <h4>Você aperta enviar</h4>
           <p>A mensagem já está pronta. Um toque e ela vai.</p>
         </div>
         <div class="step">
@@ -761,6 +873,18 @@
     </div>
   </section>
 
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sc-copy">
+      <span class="t">Fure a fila agora</span>
+      <span class="s">Mensagem já escrita · time online agora</span>
+    </div>
+    <a href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 4C9.93 4 4.98 8.95 4.98 15.06c0 1.96.51 3.86 1.49 5.55L4.9 27l6.54-1.52a11.02 11.02 0 0 0 4.6 1.01h.01c6.1 0 11.05-4.95 11.05-11.06C27.1 8.95 22.15 4 16.04 4Zm0 20.27h-.01a9.2 9.2 0 0 1-4.69-1.28l-.34-.2-3.88.9.83-3.78-.22-.35a9.16 9.16 0 0 1-1.41-4.91c0-5.08 4.13-9.21 9.22-9.21 2.46 0 4.78.96 6.52 2.7a9.16 9.16 0 0 1 2.7 6.52c0 5.08-4.14 9.21-9.22 9.21Zm5.05-6.9c-.28-.14-1.64-.81-1.89-.9-.25-.09-.43-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.83-.74-1.38-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.49.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.54-.45-.46-.62-.47l-.53-.01c-.18 0-.49.07-.74.35-.25.28-.97.95-.97 2.32 0 1.37 1 2.69 1.13 2.87.14.18 1.96 3 4.76 4.21.66.29 1.18.46 1.59.59.67.21 1.27.18 1.75.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33Z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <img class="flogo" src="assets/logo-metodo-the-book-business-amarelo-branco.webp" alt="Método The Book Business">
@@ -772,6 +896,20 @@
       Dúvidas? <a href="https://api.whatsapp.com/send?phone=5511924693585&text=Quero%20prioridade%20para%20entrar%20no%20M%C3%A9todo%20The%20Book%20Business" target="_blank" rel="noopener">Fale com nosso time no WhatsApp</a>.
     </p>
   </footer>
+
+  <script>
+    (function(){
+      var bar=document.getElementById('stickyCta');
+      if(!bar) return;
+      var heroBtn=document.querySelector('.hero .btn-whatsapp');
+      function onScroll(){
+        var past = window.scrollY > (window.innerHeight*0.55);
+        if(past) bar.classList.add('show'); else bar.classList.remove('show');
+      }
+      window.addEventListener('scroll',onScroll,{passive:true});
+      onScroll();
+    })();
+  </script>
 
 </body>
 </html>
