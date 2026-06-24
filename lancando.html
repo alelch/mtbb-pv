@@ -344,7 +344,7 @@
     background: var(--bg-dark);
     color: white;
     text-align: center;
-    padding: 76px 0;
+    padding: 80px 0;
   }
   .agitation > .container { max-width: 960px; }
   .agitation h2 {
@@ -2926,7 +2926,7 @@
 <!-- BLOCO 7 — PARA QUEM É -->
 <section style="background:var(--bg)">
 <style>
-.f2{font-family:'Poppins',sans-serif;color:var(--text);max-width:1100px;margin:0 auto;padding:72px 24px;box-sizing:border-box}
+.f2{font-family:'Poppins',sans-serif;color:var(--text);max-width:1100px;margin:0 auto;padding:0 24px;box-sizing:border-box}
 .f2 *{box-sizing:border-box}
 .f2 .head{text-align:center;max-width:620px;margin:0 auto 48px}
 .f2 .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
@@ -2950,7 +2950,7 @@
 .f2 .vs{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:0 6px 20px rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;z-index:3}
 .f2 .vs span{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:24px;color:var(--accent)}
 @media(max-width:760px){
-  .f2{padding:52px 18px}
+  .f2{padding:0 18px}
   .f2 .stage{display:flex;flex-direction:column}
   .f2 .pos{clip-path:none;order:1;padding:42px 36px 58px}
   .f2 .vs{position:static;transform:none;order:2;margin:0 auto -26px;width:52px;height:52px;z-index:4}
@@ -3685,7 +3685,7 @@
 </section>
 
 <!-- BLOCO 15 — GARANTIA -->
-<section style="background:var(--bg);padding:72px 0;">
+<section style="background:var(--bg)">
 <style>
 .g1{font-family:'Poppins',sans-serif;max-width:680px;margin:0 auto;padding:0 24px;box-sizing:border-box}
 .g1 *{box-sizing:border-box}
@@ -3727,7 +3727,7 @@
 <!-- BLOCO 12 — BIO DANY -->
 <section style="background:var(--bg)">
 <style>
-.b2{font-family:'Poppins',sans-serif;color:var(--text);padding:80px 0;}
+.b2{font-family:'Poppins',sans-serif;color:var(--text);padding:0;}
 .b2 *{box-sizing:border-box;}
 .b2 .b2-shell{max-width:1100px;margin:0 auto;padding:0 24px;}
 .b2 .b2-hero{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:transform .3s ease,box-shadow .3s ease;aspect-ratio:16/8;}
@@ -4315,5 +4315,20 @@
   quotes.forEach(function(q) { io.observe(q); });
 })();
 </script>
+<style>
+/* === RITMO DE SEÇÕES NO MOBILE (consistente) === */
+@media (max-width: 768px) {
+  section { padding: 52px 0; }
+  .hero { padding: 28px 0 18px; }
+  .logos-section { padding: 12px 0 40px; }
+  .agitation, .journey-section, .principle-section, .matrix-section,
+  .quad-finale, .pergunta-cta, .deliverables-section, .cases-section,
+  .offer-section, .faq-section, .final-cta {
+    padding-top: 52px; padding-bottom: 52px;
+  }
+  .quads-section { padding-top: 52px !important; }
+  .media-grid-section { padding-top: 44px; padding-bottom: 52px; }
+}
+</style>
 </body>
 </html>
