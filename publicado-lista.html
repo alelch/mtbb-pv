@@ -3697,148 +3697,75 @@
 
 <!-- MODAL — Captura lista de espera -->
 <div id="waitlist-modal" class="wl-overlay" aria-hidden="true">
-  <div class="wl-modal" role="dialog" aria-labelledby="wl-title">
-    <button class="wl-close" aria-label="Fechar">×</button>
-    <p class="wl-eyebrow">Lista de espera</p>
-    <h3 id="wl-title" class="wl-title">Entre antes<br><span class="italic">de qualquer um.</span></h3>
-    <p class="wl-sub">Você é avisado quando a próxima turma abrir, com prioridade de inscrição.</p>
-
-    <form id="wl-form" class="wl-form">
-      <label class="wl-field">
-        <span>Nome</span>
-        <input type="text" name="nome" required autocomplete="name" placeholder="Como podemos te chamar?">
-      </label>
-      <label class="wl-field">
-        <span>Email</span>
-        <input type="email" name="email" required autocomplete="email" placeholder="seu@email.com">
-      </label>
-      <label class="wl-field">
-        <span>WhatsApp <em>(opcional)</em></span>
-        <input type="tel" name="whatsapp" autocomplete="tel" placeholder="(11) 99999-9999">
-      </label>
-      <button type="submit" class="wl-submit">Entrar na lista →</button>
-      <p class="wl-disclaimer">Seus dados ficam protegidos. Você pode sair da lista quando quiser.</p>
-    </form>
+  <div class="wl-box">
+    <div class="wl-modal" role="dialog" aria-labelledby="wl-title">
+      <button class="wl-close" aria-label="Fechar">&times;</button>
+      <img class="wl-logo" src="assets/logo-metodo-the-book-business.webp" alt="Método The Book Business">
+      <h2 id="wl-title" class="wl-head">Entre na lista antes de qualquer um.</h2>
+      <p class="wl-sub">Você é avisado quando a próxima turma abrir, com prioridade de inscrição.</p>
+      <form id="wl-form" class="wl-form">
+        <input type="text" name="nome" required autocomplete="name" placeholder="Nome completo">
+        <input type="email" name="email" required autocomplete="email" placeholder="Insira seu melhor e-mail">
+        <div class="wl-phone">
+          <span class="wl-ddi" aria-hidden="true"><span class="wl-flag">🇧🇷</span>+55</span>
+          <input type="tel" name="whatsapp" autocomplete="tel" placeholder="Seu WhatsApp">
+        </div>
+        <button type="submit" class="wl-submit">Entrar na lista de espera <span class="wl-arrow">&rarr;</span></button>
+      </form>
+    </div>
+    <div class="wl-trust">
+      <span class="wl-ti"><svg class="wl-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.26L21.6 9.27l-4.8 4.68 1.13 6.6L12 17.5l-5.93 3.05L7.2 13.95 2.4 9.27l6.7-1.01L12 2z"/></svg><span class="wl-rating">4,9/5</span></span>
+      <span class="wl-dot"></span>
+      <span class="wl-ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Dados protegidos</span>
+      <span class="wl-dot"></span>
+      <span class="wl-ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Entrada gratuita</span>
+    </div>
   </div>
 </div>
 
 <style>
-  .wl-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(10,10,10,0.78);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    padding: 24px;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-  }
+  .wl-overlay { position: fixed; inset: 0; background: rgba(10,10,10,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 24px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
   .wl-overlay.show { display: flex; animation: wlFade 0.25s ease; }
   @keyframes wlFade { from { opacity: 0; } to { opacity: 1; } }
-  .wl-modal {
-    background: #FFFFFF;
-    border-radius: 20px;
-    max-width: 480px;
-    width: 100%;
-    padding: 40px 36px 32px;
-    position: relative;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
-    animation: wlSlide 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
-    max-height: 92vh;
-    overflow-y: auto;
-  }
-  @keyframes wlSlide { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-  .wl-close {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #F1F1F1;
-    border: none;
-    font-size: 22px;
-    line-height: 1;
-    color: #555;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .wl-close:hover { background: #1A1A1A; color: white; }
-  .wl-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #FAAB00;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-  .wl-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 12px;
-    color: #1A1A1A;
-  }
-  .wl-title .italic {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-  }
-  .wl-sub {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 24px;
-    line-height: 1.55;
-  }
-  .wl-form { display: flex; flex-direction: column; gap: 14px; }
-  .wl-field { display: flex; flex-direction: column; gap: 6px; }
-  .wl-field span {
-    font-size: 12px;
-    font-weight: 600;
-    color: #1A1A1A;
-    letter-spacing: 0.02em;
-  }
-  .wl-field span em {
-    font-style: normal;
-    color: #999;
-    font-weight: 400;
-    margin-left: 4px;
-  }
-  .wl-field input {
-    padding: 13px 16px;
-    border: 1.5px solid #EEEEEE;
-    border-radius: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.2s;
-    color: #1A1A1A;
-  }
-  .wl-field input:focus { border-color: #FAAB00; }
-  .wl-submit {
-    margin-top: 8px;
-    padding: 16px;
-    background: #FAAB00;
-    color: #1A1A1A;
-    border: none;
-    border-radius: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .wl-submit:hover { filter: brightness(0.94); transform: translateY(-1px); }
+  .wl-box { width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; gap: 14px; animation: wlSlide 0.3s cubic-bezier(0.2,0.7,0.2,1); }
+  @keyframes wlSlide { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .wl-modal { position: relative; width: 100%; background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 32px; box-shadow: 0 14px 40px -16px rgba(10,10,10,0.3); display: flex; flex-direction: column; align-items: center; text-align: center; max-height: 92vh; overflow-y: auto; }
+  .wl-close { position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border: none; background: transparent; font-size: 22px; line-height: 1; color: #999; cursor: pointer; transition: color 0.2s; }
+  .wl-close:hover { color: #1A1A1A; }
+  .wl-logo { height: 38px; width: auto; margin-bottom: 16px; }
+  .wl-head { font-family: 'Poppins', sans-serif; font-size: 19px; line-height: 1.25; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 0; }
+  .wl-sub { font-size: 13px; line-height: 1.4; color: var(--text-soft); margin: 8px 0 0; max-width: 320px; }
+  .wl-form { width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+  .wl-form input { width: 100%; height: 46px; padding: 12px 14px; font-family: inherit; font-size: 14px; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; outline: none; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
+  .wl-form input::placeholder { color: var(--text-mute); }
+  .wl-form input:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(250,171,0,0.15); }
+  .wl-phone { display: flex; align-items: stretch; gap: 8px; }
+  .wl-ddi { flex: 0 0 auto; display: flex; align-items: center; gap: 5px; height: 46px; padding: 0 12px; font-size: 14px; font-weight: 500; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; white-space: nowrap; user-select: none; }
+  .wl-ddi .wl-flag { font-size: 15px; line-height: 1; }
+  .wl-phone input { flex: 1 1 auto; min-width: 0; }
+  .wl-submit { width: 100%; height: 50px; margin-top: 4px; font-family: inherit; font-size: 15px; font-weight: 700; color: var(--bg-dark); background: var(--accent); border: none; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 7px; transition: transform 0.12s ease, filter 0.15s ease, box-shadow 0.15s ease; box-shadow: 0 6px 16px -6px rgba(250,171,0,0.6); }
+  .wl-submit:hover { filter: brightness(1.04); transform: translateY(-1px); box-shadow: 0 9px 20px -7px rgba(250,171,0,0.7); }
+  .wl-submit:active { transform: translateY(0); }
   .wl-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-  .wl-disclaimer {
-    margin-top: 10px;
-    font-size: 11px;
-    color: #999;
-    text-align: center;
-    line-height: 1.5;
+  .wl-arrow { font-weight: 700; font-size: 16px; line-height: 1; }
+  .wl-disclaimer { font-size: 11px; color: var(--text-mute); margin: 12px 0 0; display: flex; align-items: center; gap: 5px; }
+  .wl-disclaimer svg { width: 11px; height: 11px; flex: 0 0 auto; opacity: 0.7; }
+  .wl-trust { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.92); }
+  .wl-trust .wl-ti { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+  .wl-trust svg { width: 13px; height: 13px; flex: 0 0 auto; }
+  .wl-trust .wl-star { color: var(--accent); }
+  .wl-trust .wl-rating { font-weight: 700; color: #fff; }
+  .wl-trust .wl-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.4); flex: 0 0 auto; }
+  @media (max-width: 420px) {
+    .wl-overlay { padding: 16px; }
+    .wl-modal { padding: 26px 22px; border-radius: 14px; }
+    .wl-logo { height: 34px; margin-bottom: 14px; }
+    .wl-head { font-size: 17px; }
+    .wl-sub { font-size: 12px; }
+    .wl-form { margin-top: 16px; }
+    .wl-ddi { padding: 0 9px; font-size: 13px; gap: 4px; }
+    .wl-trust { gap: 5px 10px; font-size: 11px; }
+    .wl-trust .wl-dot { display: none; }
   }
 </style>
 
