@@ -67,6 +67,17 @@
     return { stage: null, variant: null };
   }
 
+  // Mapeia eventos do funil pro Meta Pixel (pixel.js init os 2 IDs + PageView)
+  function firePixel(eventType, variant) {
+    if (typeof window.fbq !== 'function') return;
+    if (eventType === 'form_submit') {
+      window.fbq('track', 'Lead');
+      if (variant === 'checkout') window.fbq('track', 'InitiateCheckout');
+    } else if (eventType === 'whatsapp_click') {
+      window.fbq('track', 'Contact');
+    }
+  }
+
   function track(eventType, extra) {
     extra = extra || {};
     var utms = (window.MTBB_UTMS && window.MTBB_UTMS()) || {};
@@ -92,6 +103,7 @@
       page: window.location.pathname,
       meta: meta
     };
+    try { firePixel(eventType, payload.variant); } catch (e) {}
     try {
       fetch(ENDPOINT, {
         method: 'POST',
@@ -117,6 +129,10 @@
     }
     if (window.MTBB_OBRIGADO_VARIANT) {
       track('obrigado_view');
+    }
+    // ViewContent nas páginas de venda (preço e lista)
+    if (/^(escrevendo|lancando|publicado)(-lista)?\.html$/.test(file) && typeof window.fbq === 'function') {
+      window.fbq('track', 'ViewContent');
     }
   }
 
