@@ -71,8 +71,9 @@
   function firePixel(eventType, variant) {
     if (typeof window.fbq !== 'function') return;
     if (eventType === 'form_submit') {
-      window.fbq('track', 'Lead');
+      // página de venda não tem lead, só venda → InitiateCheckout; lista de espera = Lead
       if (variant === 'checkout') window.fbq('track', 'InitiateCheckout');
+      else window.fbq('track', 'Lead');
     } else if (eventType === 'whatsapp_click') {
       window.fbq('track', 'Contact');
     }
@@ -82,8 +83,8 @@
   function fireGtag(eventType, variant) {
     if (typeof window.gtag !== 'function') return;
     if (eventType === 'form_submit') {
-      window.gtag('event', 'generate_lead');
       if (variant === 'checkout') window.gtag('event', 'begin_checkout');
+      else window.gtag('event', 'generate_lead');
     } else if (eventType === 'whatsapp_click') {
       window.gtag('event', 'contact');
     }
