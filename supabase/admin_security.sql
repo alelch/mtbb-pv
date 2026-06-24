@@ -43,6 +43,23 @@ begin
     'global',   (select row_to_json(g) from public.mtbb_pv_global_get(p_since) g),
     'funnel',   (select coalesce(json_agg(f), '[]'::json) from public.mtbb_pv_funnel_get(p_since) f),
     'obrigado', (select coalesce(json_agg(o), '[]'::json) from public.mtbb_pv_obrigado_get(p_since) o),
+    -- Teste A/B/C da PORTA (quiz). views = pessoas que viram o quiz por variante;
+    -- converters = pessoas que avançaram (stage_click). Dedup por visitor_id.
+    -- KPI = converters/views (quantos passam pra próxima fase).
+    'quiz_ab', (
+      select coalesce(json_agg(row_to_json(q)), '[]'::json) from (
+        select
+          meta->>'quiz_variant' as variant,
+          count(distinct visitor_id) filter (where event_type = 'quiz_view')   as views,
+          count(distinct visitor_id) filter (where event_type = 'stage_click')  as converters
+        from public.mtbb_pv_events
+        where created_at >= p_since
+          and event_type in ('quiz_view', 'stage_click')
+          and meta->>'quiz_variant' in ('a', 'b', 'c')
+        group by meta->>'quiz_variant'
+        order by 1
+      ) q
+    ),
     'metodo_vendas', (
       -- Compras do Método (Hotmart) reaproveitando a tabela vendas (webhook existente).
       -- attr_n = vendas atribuídas ao funil via sck=preco-<estágio> (vem no payload_raw).

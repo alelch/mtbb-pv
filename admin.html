@@ -333,7 +333,7 @@
   .btn-danger { background: #fff; color: #C7252E; border: 1px solid #E7B6B8; }
   .btn-danger:hover { background: #C7252E; color: #fff; border-color: #C7252E; }
 </style>
-<script src="tracker.js?v=7" defer></script>
+<script src="tracker.js?v=8" defer></script>
 </head>
 <body>
   <div class="wrap">
@@ -399,6 +399,8 @@
         <div id="metrics-content">
           <div class="loading-state">Carregando…</div>
         </div>
+
+        <div id="quiz-content" style="margin-top:38px;padding-top:30px;border-top:1px solid var(--border);"></div>
 
         <div id="obrigado-content" style="margin-top:38px;padding-top:30px;border-top:1px solid var(--border);"></div>
       </div>
@@ -611,12 +613,13 @@
         .then(function (resp) {
           if (!resp || resp.message || resp.code) {
             box.innerHTML = '<div class="empty-state">Acesso negado. Saia e entre de novo.</div>';
-            renderObrigado(null);
+            renderObrigado(null); renderQuiz(null);
             return;
           }
           var global = resp.global || {};
           var funnel = resp.funnel || [];
           renderObrigado(resp.obrigado || []);
+          renderQuiz(resp.quiz_ab || []);
 
           if (!global.quiz_views && (!funnel || funnel.length === 0)) {
             box.innerHTML = '<div class="empty-state">Sem eventos no período selecionado. Os primeiros cliques vão aparecer aqui em ~10 segundos depois de chegarem no site.</div>';
@@ -658,7 +661,7 @@
         })
         .catch(function (err) {
           box.innerHTML = '<div class="empty-state">Erro carregando métricas: ' + (err.message || err) + '</div>';
-          renderObrigado(null);
+          renderObrigado(null); renderQuiz(null);
         });
     }
 
@@ -685,6 +688,43 @@
       }).sort(function (a, b) { return b.ctr - a.ctr; });
       var html = head + '<table class="funnel"><thead><tr>' +
         '<th>Variante</th><th>Viram</th><th>Clicaram no zap</th><th>Taxa de clique</th>' +
+      '</tr></thead><tbody>';
+      ranked.forEach(function (r, i) {
+        var leader = (i === 0 && r.views > 0 && r.conv > 0);
+        html += '<tr' + (leader ? ' style="background:rgba(250,171,0,0.08);"' : '') + '>' +
+          '<td><strong>' + (labels[r.variant] || r.variant) + '</strong>' + (leader ? ' <span class="badge preco">líder</span>' : '') + '</td>' +
+          '<td class="num">' + fmt(r.views) + '</td>' +
+          '<td class="num">' + fmt(r.conv) + '</td>' +
+          '<td class="num"><strong>' + (r.ctr * 100).toFixed(1) + '%</strong></td>' +
+        '</tr>';
+      });
+      html += '</tbody></table>';
+      box.innerHTML = html;
+    }
+
+    // === TESTE A/B/C — PORTA (quiz). KPI: quantos avançam pra próxima fase ===
+    function renderQuiz(rows) {
+      var box = document.getElementById('quiz-content');
+      if (!box) return;
+      var labels = {
+        a: 'A · Original (fundo claro)',
+        b: 'B · Fundo escurecido',
+        c: 'C · Fundo amarelado'
+      };
+      var head = '<h2 style="font-size:21px;margin:0 0 4px;">Teste A/B/C <span class="italic">— porta (quiz · fundo)</span></h2>' +
+        '<p class="sub" style="margin:0 0 16px;">Qual FUNDO da porta faz mais gente avançar pra página de venda. Métrica: <strong>taxa de avanço</strong> (quem clicou num card ÷ quem viu o quiz), por visitante único.</p>';
+      if (rows === null) { box.innerHTML = ''; return; }
+      rows = rows || [];
+      if (!rows.length) {
+        box.innerHTML = head + '<div class="empty-state">Sem dados do teste ainda. Aparece assim que os primeiros visitantes chegarem no quiz (precisa subir o index novo).</div>';
+        return;
+      }
+      var ranked = rows.map(function (r) {
+        var views = Number(r.views) || 0, conv = Number(r.converters) || 0;
+        return { variant: r.variant, views: views, conv: conv, ctr: views ? conv / views : 0 };
+      }).sort(function (a, b) { return b.ctr - a.ctr; });
+      var html = head + '<table class="funnel"><thead><tr>' +
+        '<th>Variante</th><th>Viram o quiz</th><th>Avançaram</th><th>Taxa de avanço</th>' +
       '</tr></thead><tbody>';
       ranked.forEach(function (r, i) {
         var leader = (i === 0 && r.views > 0 && r.conv > 0);

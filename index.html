@@ -3,6 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  // A/B/C da PORTA (quiz). Sorteia variante sticky e marca <html data-quiz> ANTES do paint (sem flash).
+  // KPI: quantos avançam (quiz_view -> stage_click). tracker.js anexa quiz_variant nos eventos.
+  (function () {
+    var KEY = 'mtbb_quiz_ab', AB = ['a', 'b', 'c'], v;
+    try { v = localStorage.getItem(KEY); } catch (e) {}
+    if (AB.indexOf(v) === -1) {
+      v = AB[Math.floor(Math.random() * AB.length)];
+      try { localStorage.setItem(KEY, v); } catch (e) {}
+    }
+    window.MTBB_QUIZ_VARIANT = v;
+    document.documentElement.setAttribute('data-quiz', v);
+  })();
+</script>
 <title>MTBB · Em que momento está o seu livro?</title>
 <meta name="description" content="Identifique o momento do seu livro e veja o caminho pra ele chegar aos leitores certos.">
 <meta property="og:type" content="website">
@@ -146,10 +160,15 @@
     text-align: center;
     line-height: 1.6;
   }
+  /* A/B/C da porta = FUNDO (mesma copy). a=original (claro), b=escurecido, c=amarelado */
+  html[data-quiz="b"] body { background: #E6E3DD; }
+  html[data-quiz="c"] body { background: #FBF0CF; }
+  /* sombra nos cards (3 versões) pra destacar um pouco mais */
+  .option { box-shadow: 0 10px 26px rgba(0,0,0,0.10); }
 </style>
 <script src="pixel.js"></script>
 <script src="gtag.js"></script>
-<script src="tracker.js?v=7" defer></script>
+<script src="tracker.js?v=8" defer></script>
 <link rel="canonical" href="https://metodo.thebookbusiness.com.br/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Dany Sakugawa">
