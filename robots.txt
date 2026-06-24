@@ -2,6 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /admin-preview.html
-Disallow: /lista-de-espera.html
 
 Sitemap: https://alelch.github.io/mtbb-pv/sitemap.xml

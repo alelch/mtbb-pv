@@ -58,7 +58,7 @@
     var file = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
     var m = file.match(/^(escrevendo|lancando|publicado)(-lista)?\.html$/);
     if (m) return { stage: m[1], variant: m[2] ? 'lista' : 'preco' };
-    if (file === 'lista-de-espera.html' || file.indexOf('obrigado-') === 0) {
+    if (file.indexOf('obrigado-') === 0) {
       var params = new URLSearchParams(window.location.search);
       var ut = params.get('utm_test') || '';
       var um = ut.match(/^(preco|lista)-(escrevendo|lancando|publicado)$/);
