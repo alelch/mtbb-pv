@@ -42,7 +42,27 @@ begin
   return json_build_object(
     'global',   (select row_to_json(g) from public.mtbb_pv_global_get(p_since) g),
     'funnel',   (select coalesce(json_agg(f), '[]'::json) from public.mtbb_pv_funnel_get(p_since) f),
-    'obrigado', (select coalesce(json_agg(o), '[]'::json) from public.mtbb_pv_obrigado_get(p_since) o)
+    'obrigado', (select coalesce(json_agg(o), '[]'::json) from public.mtbb_pv_obrigado_get(p_since) o),
+    'metodo_vendas', (
+      -- Compras do Método (Hotmart) reaproveitando a tabela vendas (webhook existente).
+      -- attr_n = vendas atribuídas ao funil via sck=preco-<estágio> (vem no payload_raw).
+      select json_build_object(
+        'attr_n',  count(*) filter (where sck ~ '^preco-(escrevendo|lancando|publicado)$'),
+        'total_n', count(*),
+        'receita', coalesce(sum(valor), 0)
+      )
+      from (
+        select valor, coalesce(
+          payload_raw->'data'->'purchase'->'tracking'->>'source_sck',
+          payload_raw->'data'->'purchase'->'tracking'->>'sck',
+          payload_raw->'data'->'purchase'->'tracking'->>'source'
+        ) as sck
+        from public.vendas
+        where produto_codigo = 'PPTO'
+          and created_at >= p_since
+          and upper(coalesce(status, '')) in ('APPROVED', 'COMPLETE', 'COMPLETED')
+      ) s
+    )
   );
 end $$;
 grant execute on function public.mtbb_admin_metrics(text, timestamptz) to anon;

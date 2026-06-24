@@ -512,7 +512,11 @@
       });
       return a;
     }
-    function buildFunnel(global, funnel) {
+    function buildFunnel(global, funnel, mv) {
+      mv = mv || {};
+      var compras = Number(mv.attr_n) || 0;
+      var vendasTot = Number(mv.total_n) || 0;
+      var receita = Number(mv.receita) || 0;
       var quiz = Number(global.quiz_views_unique) || 0;
       var preco = aggPath(funnel, 'preco');
       var lista = aggPath(funnel, 'lista');
@@ -545,9 +549,10 @@
           '<div class="fn-col-head"><span class="badge preco">preço</span> caminho do checkout</div>' +
           sub('Entraram na PV', preco.clicksU, null) +
           sub('Preencheram o checkout', preco.forms, rate(preco.forms, preco.clicksU)) +
-          sub('Compraram', preco.purch, rate(preco.purch, preco.forms)) +
-          '<div class="fn-foot">Conversão quiz &rarr; preencheu: <b>' + rate(preco.forms, quiz).toFixed(2) + '%</b></div>' +
-          '<div class="fn-note">Compra depende do webhook do Hotmart (ainda não plugado): fica 0 até lá.</div>' +
+          sub('Compraram (atribuído)', compras, rate(compras, preco.forms)) +
+          '<div class="fn-foot">Conversão quiz &rarr; preencheu: <b>' + rate(preco.forms, quiz).toFixed(2) + '%</b>' +
+            (preco.forms ? ' &middot; preencheu &rarr; comprou: <b>' + rate(compras, preco.forms).toFixed(1) + '%</b>' : '') + '</div>' +
+          '<div class="fn-note">Método no Hotmart no período: <b>' + fmt(vendasTot) + '</b> vendas &middot; R$ ' + receita.toLocaleString('pt-BR', {maximumFractionDigits:0}) + '. Atribuídas a este funil (sck): ' + fmt(compras) + '.</div>' +
         '</div>' +
         '<div class="fn-col">' +
           '<div class="fn-col-head"><span class="badge lista">lista</span> caminho da lista de espera</div>' +
@@ -594,7 +599,7 @@
             return;
           }
 
-          var html = buildFunnel(global, funnel) + '<div class="global-grid">' +
+          var html = buildFunnel(global, funnel, resp.metodo_vendas) + '<div class="global-grid">' +
             '<div class="metric-card"><div class="label">Visitas</div><div class="value">' + fmt(global.quiz_views) + '</div><div class="sub">' + fmt(global.quiz_views_unique) + ' únicos</div></div>' +
             '<div class="metric-card"><div class="label">Cliques no quiz</div><div class="value">' + fmt(global.total_stage_clicks) + '</div></div>' +
             '<div class="metric-card"><div class="label">Cliques no Hotmart</div><div class="value accent">' + fmt(global.total_hotmart_clicks) + '</div></div>' +
