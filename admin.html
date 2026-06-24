@@ -295,6 +295,30 @@
     font-size: 14px;
     background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);
   }
+  /* Funil completo (panorama) */
+  .fn-title { font-size: 21px; font-weight: 700; margin: 0 0 4px; }
+  .fn-title .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; }
+  .fn { display: flex; flex-direction: column; gap: 13px; margin: 16px 0 6px; }
+  .fn-step .fn-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .fn-name { font-weight: 600; font-size: 14px; color: var(--text); }
+  .fn-val { font-family: 'Fraunces', serif; font-style: italic; font-size: 22px; color: var(--text); }
+  .fn-bar { height: 12px; background: var(--border); border-radius: 7px; overflow: hidden; }
+  .fn-bar i { display: block; height: 100%; background: var(--accent); border-radius: 7px; transition: width .5s ease; }
+  .fn-meta { font-size: 12px; color: var(--text-mute); margin-top: 5px; }
+  .fn-meta .loss { color: #C7252E; font-weight: 600; }
+  .fn-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  @media (max-width: 640px) { .fn-split { grid-template-columns: 1fr; } }
+  .fn-col { border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; background: var(--bg-card); }
+  .fn-col-head { font-size: 13px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; color: var(--text-soft); }
+  .fn-sub { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px dashed var(--border); }
+  .fn-sub:last-child { border-bottom: none; }
+  .fn-sub .lab { font-size: 13px; color: var(--text); }
+  .fn-sub .rgt { text-align: right; white-space: nowrap; }
+  .fn-sub .n { font-weight: 700; font-size: 15px; }
+  .fn-sub .p { font-size: 12px; color: var(--text-soft); margin-left: 6px; }
+  .fn-foot { margin-top: 14px; font-size: 12.5px; color: var(--text-soft); line-height: 1.6; }
+  .fn-foot b { color: var(--text); }
+  .fn-note { font-size: 11.5px; color: var(--text-mute); margin-top: 3px; }
 </style>
 <script src="tracker.js?v=2" defer></script>
 </head>
@@ -475,6 +499,80 @@
       return 'R$ ' + Number(n).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     }
 
+    function rate(n, d) { return d ? (n / d * 100) : 0; }
+    function aggPath(funnel, v) {
+      var a = { clicksU: 0, forms: 0, wpp: 0, purch: 0 };
+      (funnel || []).forEach(function (r) {
+        if (r.variant === v) {
+          a.clicksU += Number(r.stage_clicks_unique) || 0;
+          a.forms   += Number(r.form_submits) || 0;
+          a.wpp     += Number(r.whatsapp_clicks) || 0;
+          a.purch   += Number(r.purchases) || 0;
+        }
+      });
+      return a;
+    }
+    function buildFunnel(global, funnel) {
+      var quiz = Number(global.quiz_views_unique) || 0;
+      var preco = aggPath(funnel, 'preco');
+      var lista = aggPath(funnel, 'lista');
+      var stageU = preco.clicksU + lista.clicksU;
+      var pvPct = rate(stageU, quiz);
+
+      function bar(name, val, pctTop, meta) {
+        return '<div class="fn-step">' +
+          '<div class="fn-row"><span class="fn-name">' + name + '</span><span class="fn-val">' + fmt(val) + '</span></div>' +
+          '<div class="fn-bar"><i style="width:' + Math.max(2, Math.min(100, pctTop)).toFixed(0) + '%"></i></div>' +
+          (meta ? '<div class="fn-meta">' + meta + '</div>' : '') +
+        '</div>';
+      }
+      function sub(lab, n, p) {
+        return '<div class="fn-sub"><span class="lab">' + lab + '</span><span class="rgt">' +
+          '<span class="n">' + fmt(n) + '</span>' + (p !== null ? '<span class="p">' + p.toFixed(1) + '%</span>' : '') +
+        '</span></div>';
+      }
+
+      var h = '<h2 class="fn-title">Funil completo <span class="italic">— do clique no quiz à ação</span></h2>' +
+        '<p class="sub" style="margin:0 0 4px;">Onde você ganha e perde tráfego em cada etapa (respeita o período acima).</p>' +
+        '<div class="fn">' +
+          bar('Visitas no quiz', quiz, 100, '100% &middot; topo do funil') +
+          bar('Entraram numa página de venda', stageU, pvPct,
+              pvPct.toFixed(1) + '% do quiz &middot; <span class="loss">perdeu ' + (quiz ? (100 - pvPct).toFixed(1) : '0') + '%</span>') +
+        '</div>';
+
+      h += '<div class="fn-split">' +
+        '<div class="fn-col">' +
+          '<div class="fn-col-head"><span class="badge preco">preço</span> caminho do checkout</div>' +
+          sub('Entraram na PV', preco.clicksU, null) +
+          sub('Preencheram o checkout', preco.forms, rate(preco.forms, preco.clicksU)) +
+          sub('Compraram', preco.purch, rate(preco.purch, preco.forms)) +
+          '<div class="fn-foot">Conversão quiz &rarr; preencheu: <b>' + rate(preco.forms, quiz).toFixed(2) + '%</b></div>' +
+          '<div class="fn-note">Compra depende do webhook do Hotmart (ainda não plugado): fica 0 até lá.</div>' +
+        '</div>' +
+        '<div class="fn-col">' +
+          '<div class="fn-col-head"><span class="badge lista">lista</span> caminho da lista de espera</div>' +
+          sub('Entraram na PV', lista.clicksU, null) +
+          sub('Entraram na lista', lista.forms, rate(lista.forms, lista.clicksU)) +
+          sub('Clicaram no WhatsApp', lista.wpp, rate(lista.wpp, lista.forms)) +
+          '<div class="fn-foot">Conversão quiz &rarr; entrou na lista: <b>' + rate(lista.forms, quiz).toFixed(2) + '%</b></div>' +
+        '</div>' +
+      '</div>';
+
+      if (stageU > 0) {
+        var pConv = rate(preco.forms, quiz), lConv = rate(lista.forms, quiz);
+        var msg = (pConv > lConv)
+          ? 'Caminho do <b>preço</b> converte mais até o fundo: ' + pConv.toFixed(2) + '% vs ' + lConv.toFixed(2) + '% da lista.'
+          : (lConv > pConv)
+            ? 'Caminho da <b>lista</b> converte mais até o fundo: ' + lConv.toFixed(2) + '% vs ' + pConv.toFixed(2) + '% do preço.'
+            : 'Os dois caminhos estão empatados na conversão do quiz.';
+        h += '<div class="fn-foot" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">' + msg +
+          '<span class="fn-note" style="display:block;">Metas diferentes (preço = venda; lista = captura): compare cada caminho com seu próprio objetivo.</span></div>';
+      }
+
+      h += '<div style="margin:30px 0 4px;border-top:1px solid var(--border);"></div>';
+      return h;
+    }
+
     function loadMetrics() {
       var box = document.getElementById('metrics-content');
       box.innerHTML = '<div class="loading-state">Carregando…</div>';
@@ -496,7 +594,7 @@
             return;
           }
 
-          var html = '<div class="global-grid">' +
+          var html = buildFunnel(global, funnel) + '<div class="global-grid">' +
             '<div class="metric-card"><div class="label">Visitas</div><div class="value">' + fmt(global.quiz_views) + '</div><div class="sub">' + fmt(global.quiz_views_unique) + ' únicos</div></div>' +
             '<div class="metric-card"><div class="label">Cliques no quiz</div><div class="value">' + fmt(global.total_stage_clicks) + '</div></div>' +
             '<div class="metric-card"><div class="label">Cliques no Hotmart</div><div class="value accent">' + fmt(global.total_hotmart_clicks) + '</div></div>' +
