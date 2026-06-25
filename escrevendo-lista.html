@@ -236,6 +236,11 @@
     .tese-quote .l1, .tese-quote .l2 { white-space: normal; }
     .tese-quote blockquote { font-size: 18px; line-height: 1.45; }
   }
+  /* Reveal dos passos da jornada ao rolar (fallback sem JS = visível; reduced-motion = sem anim) */
+  @media (prefers-reduced-motion: no-preference) {
+    .journey-steps.reveal-on .journey-step { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+    .journey-steps.reveal-on .journey-step.is-in { opacity: 1; transform: none; }
+  }
   .vsl-label {
     position: absolute;
     z-index: 2;
@@ -4027,5 +4032,21 @@
   .media-grid-section { padding-top: 44px; padding-bottom: 52px; }
 }
 </style>
+<script>
+(function(){
+  var steps = document.querySelectorAll('.journey-steps .journey-step');
+  if (!steps.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  steps[0].parentNode.classList.add('reveal-on');
+  var io = new IntersectionObserver(function(entries){
+    entries.filter(function(e){ return e.isIntersecting; }).forEach(function(e, i){
+      e.target.style.transitionDelay = (i * 90) + 'ms';
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  steps.forEach(function(s){ io.observe(s); });
+})();
+</script>
 </body>
 </html>
