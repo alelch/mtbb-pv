@@ -236,11 +236,6 @@
     .tese-quote .l1, .tese-quote .l2 { white-space: normal; }
     .tese-quote blockquote { font-size: 18px; line-height: 1.45; }
   }
-  /* Reveal dos passos da jornada ao rolar (fallback sem JS = visível; reduced-motion = sem anim) */
-  @media (prefers-reduced-motion: no-preference) {
-    .journey-steps.reveal-on .journey-step { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
-    .journey-steps.reveal-on .journey-step.is-in { opacity: 1; transform: none; }
-  }
   .vsl-label {
     position: absolute;
     z-index: 2;
@@ -436,101 +431,201 @@
     font-size: 17px;
   }
 
-  /* JORNADA — timeline */
-  .journey-section { background: var(--bg); padding: 80px 0; }
-  .journey-steps {
-    max-width: 640px;
-    margin: 0 auto;
-    position: relative;
+  /* JORNADA — timeline (design aprovado: zig-zag + spine + count-up) */
+  .journey-section {
+    background: var(--bg);
+    padding: 80px 0;
+    /* Gradiente de progresso: frio -> âmbar (7 passos) */
+    --g1:#7C8BA1; --g2:#8A8C9E; --g3:#A2879A; --g4:#BC8478;
+    --g5:#D69457; --g6:#EDA32C; --g7:#FAAB00;
   }
-  .journey-steps::before {
-    content: '';
-    position: absolute;
-    left: 17px;
-    top: 0; bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, rgba(250,171,0,0.15), var(--accent));
+  .journey-section .timeline { position: relative; max-width: 880px; margin: 0 auto; }
+
+  /* spine SVG central que se desenha */
+  .journey-section .spine {
+    position: absolute; top: 0; bottom: 0; left: 31px; width: 64px;
+    pointer-events: none; z-index: 0;
   }
-  .journey-steps::after {
-    content: '';
-    position: absolute;
-    left: 11px;
-    bottom: -14px;
-    width: 0;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-top: 11px solid var(--accent);
+  @media (min-width: 720px) { .journey-section .spine { left: calc(50% - 32px); } }
+  .journey-section .spine svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .journey-section .spine .track { stroke: var(--border); stroke-width: 2.4; fill: none; }
+  .journey-section .spine .draw {
+    stroke: url(#spineGrad); stroke-width: 2.6; fill: none; stroke-linecap: round;
   }
-  .journey-step:last-child .num {
-    box-shadow: 0 0 0 4px var(--bg), 0 0 16px rgba(250,171,0,0.35);
+
+  .journey-section .steps {
+    position: relative; z-index: 1; list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 26px;
   }
-  .journey-step {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-    padding: 0 0 36px 0;
-    position: relative;
+
+  .journey-section .step {
+    position: relative; padding-left: 78px; min-height: 64px;
+    --c: var(--g7); --c-glow: rgba(250,171,0,.16);
   }
-  .journey-step:last-child { padding-bottom: 0; }
-  .journey-step .num {
-    width: 36px; height: 36px;
-    background: var(--accent);
-    color: #000;
-    font-weight: 800;
-    font-size: 14px;
-    border-radius: 50%;
+  /* 7 cores por posição (NÃO inline no markup) */
+  .journey-section .step:nth-child(1) { --c: var(--g1); --c-glow: rgba(124,139,161,.16); }
+  .journey-section .step:nth-child(2) { --c: var(--g2); --c-glow: rgba(138,140,158,.16); }
+  .journey-section .step:nth-child(3) { --c: var(--g3); --c-glow: rgba(162,135,154,.16); }
+  .journey-section .step:nth-child(4) { --c: var(--g4); --c-glow: rgba(188,132,120,.16); }
+  .journey-section .step:nth-child(5) { --c: var(--g5); --c-glow: rgba(214,148,87,.16); }
+  .journey-section .step:nth-child(6) { --c: var(--g6); --c-glow: rgba(237,163,44,.16); }
+  .journey-section .step:nth-child(7) { --c: var(--g7); --c-glow: rgba(250,171,0,.16); }
+
+  @media (min-width: 720px) {
+    .journey-section .step { padding-left: 0; width: calc(50% - 52px); }
+    .journey-section .step:nth-child(odd) { margin-right: auto; text-align: right; }
+    .journey-section .step:nth-child(even) { margin-left: auto; text-align: left; }
+  }
+
+  /* number node */
+  .journey-section .step__node {
+    position: absolute; top: 2px; left: 0;
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #fff; border: 1.5px solid var(--border);
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 0 0 4px var(--bg);
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 24px; color: #bdb8ad;
+    z-index: 2;
   }
-  .journey-step:first-child .num {
-    background: var(--text);
-    color: var(--bg);
+  @media (min-width: 720px) {
+    .journey-section .step:nth-child(odd) .step__node { left: auto; right: -116px; }
+    .journey-section .step:nth-child(even) .step__node { left: -116px; }
   }
-  .journey-step:last-child .num {
-    background: var(--bg-dark);
-    color: var(--accent);
-    border: 2px solid var(--accent);
-  }
-  .journey-step .content { padding-top: 6px; }
-  .journey-step .content h4 {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-    line-height: 1.3;
-  }
-  .journey-step .content p {
-    font-size: 14.5px;
-    color: var(--text-soft);
-    line-height: 1.6;
-  }
-  .journey-step-marker {
-    position: absolute;
-    left: -188px;
-    top: -14px;
-    width: 175px;
-    text-align: right;
-    color: var(--accent);
+  .journey-section .step__node .tick { display: none; width: 26px; height: 26px; }
+  .journey-section .step__node .num { font-variant-numeric: tabular-nums; }
+
+  /* "Você está aqui" — manuscrito */
+  .journey-section .journey-step-marker {
+    position: absolute; z-index: 4;
     font-family: 'Caveat', cursive;
-    font-weight: 600;
-    font-size: 28px;
-    line-height: 1.1;
-    pointer-events: none;
+    font-size: 28px; font-weight: 600; line-height: 1.05;
+    color: var(--accent);
     transform: rotate(-4deg);
-    transform-origin: right center;
+    white-space: nowrap; pointer-events: none;
+    left: 84px; top: -46px;
   }
-  .journey-step-marker .arrow {
-    display: block;
-    width: 72px;
-    height: 44px;
-    margin: 8px -6px 0 auto;
+  .journey-section .journey-step-marker .arrow {
+    display: block; width: 62px; height: auto; margin: -2px 0 0 24px;
+  }
+  @media (min-width: 720px) {
+    .journey-section .journey-step-marker {
+      left: auto; right: -228px; top: -30px; text-align: left;
+    }
+    .journey-section .journey-step-marker .arrow { transform: scaleX(-1); margin: -2px 0 0 0; }
   }
   @media (max-width: 880px) {
-    .journey-step-marker { display: none; }
+    .journey-section .journey-step-marker { display: none; }
+  }
+
+  /* card */
+  .journey-section .card {
+    background: #fff; border: 1px solid var(--border); border-radius: 18px;
+    padding: 22px 24px; box-shadow: 0 1px 0 rgba(26,26,26,.02);
+    outline: none; position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* tira de cor do passo na borda do card */
+  .journey-section .card::before {
+    content: ""; position: absolute; top: 14px; bottom: 14px; left: 0; width: 3px; border-radius: 3px;
+    background: var(--c); opacity: .85;
+  }
+  @media (min-width: 720px) {
+    .journey-section .step:nth-child(odd) .card::before { left: auto; right: 0; }
+  }
+
+  .journey-section .card__title {
+    font-family: 'Poppins', sans-serif; margin: 0;
+    font-weight: 600; font-size: 17px; line-height: 1.32; letter-spacing: -.01em;
+    color: var(--text);
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  @media (min-width: 720px) {
+    .journey-section .step:nth-child(odd) .card__title { flex-direction: row-reverse; }
+  }
+  .journey-section .card__title .chev {
+    flex: 0 0 auto; margin-top: 2px; color: var(--c); width: 18px; height: 18px;
+    display: none;
+  }
+
+  .journey-section .card__desc {
+    font-size: 14.5px; line-height: 1.62; color: var(--text-soft); font-weight: 400;
+    margin: 13px 0 0;
+  }
+
+  /* ---- SEM-JS: descrições abertas e visíveis (default). Chevron escondido. ---- */
+
+  /* ---- COM-JS: colapsar + expandir no toque + animações ---- */
+  .journey-section .steps.js-on .step {
+    opacity: 0; transform: translateY(26px);
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+  }
+  .journey-section .steps.js-on .step.in { opacity: 1; transform: none; }
+
+  .journey-section .steps.js-on .step__node {
+    transition: transform .45s cubic-bezier(.34,1.56,.64,1), border-color .4s, color .4s, box-shadow .4s, background .4s;
+  }
+  .journey-section .steps.js-on .step.in .step__node {
+    border-color: var(--c); color: var(--c); box-shadow: 0 0 0 6px var(--c-glow);
+  }
+  .journey-section .steps.js-on .step.done .step__node {
+    background: var(--c); border-color: var(--c); color: #fff; box-shadow: 0 8px 18px -6px var(--c-glow);
+  }
+  .journey-section .steps.js-on .step.done .step__node .num { display: none; }
+  .journey-section .steps.js-on .step.done .step__node .tick { display: block; }
+
+  .journey-section .steps.js-on .journey-step-marker {
+    opacity: 0; transition: opacity .6s ease .25s;
+  }
+  .journey-section .steps.js-on .step.in .journey-step-marker { opacity: 1; }
+
+  .journey-section .steps.js-on .card {
+    cursor: pointer;
+    transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s, border-color .4s;
+  }
+  .journey-section .steps.js-on .card:hover,
+  .journey-section .steps.js-on .card:focus-visible {
+    transform: translateY(-4px); box-shadow: var(--shadow, 0 18px 40px -22px rgba(26,26,26,.28)); border-color: var(--c);
+  }
+  .journey-section .steps.js-on .card:focus-visible {
+    box-shadow: var(--shadow, 0 18px 40px -22px rgba(26,26,26,.28)), 0 0 0 3px var(--c-glow);
+  }
+  .journey-section .steps.js-on .card__title .chev {
+    display: block;
+    transition: transform .4s cubic-bezier(.22,1,.36,1);
+  }
+  .journey-section .steps.js-on .card.open .card__title .chev { transform: rotate(90deg); }
+
+  /* colapsar a descrição só sob JS */
+  .journey-section .steps.js-on .card__body {
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows .45s cubic-bezier(.22,1,.36,1), opacity .35s, margin-top .35s;
+    opacity: 0; margin-top: 0;
+  }
+  .journey-section .steps.js-on .card__body > div { overflow: hidden; }
+  .journey-section .steps.js-on .card.open .card__body { grid-template-rows: 1fr; opacity: 1; margin-top: 13px; }
+  .journey-section .steps.js-on .card__desc { margin-top: 0; }
+
+  /* final flourish */
+  .journey-section .steps.js-on ~ .journey-close { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+  .journey-section .journey-close.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .journey-section .steps.js-on .step,
+    .journey-section .journey-close,
+    .journey-section .steps.js-on .journey-step-marker {
+      opacity: 1 !important; transform: none !important; transition: none !important;
+    }
+    .journey-section .steps.js-on .journey-step-marker { transform: rotate(-4deg) !important; }
+    .journey-section .step__node { transition: none !important; }
+    .journey-section .spine .draw { stroke-dashoffset: 0 !important; transition: none !important; }
+    .journey-section .card, .journey-section .card__body { transition: none !important; }
+    /* fallback estático: cores certas mesmo sem JS marcar .in/.done */
+    .journey-section .steps.js-on .step .step__node {
+      border-color: var(--c); color: #fff; background: var(--c); box-shadow: 0 8px 18px -6px var(--c-glow);
+    }
+    .journey-section .steps.js-on .step .step__node .num { display: none; }
+    .journey-section .steps.js-on .step .step__node .tick { display: block; }
+    /* reduced-motion: descrições abertas mesmo com JS */
+    .journey-section .steps.js-on .card__body { grid-template-rows: 1fr !important; opacity: 1 !important; }
   }
 
   /* BLOCO 6 — PARA QUEM É */
@@ -2520,71 +2615,91 @@
 </section>
 
 <!-- BLOCO 6 — JORNADA -->
-<section class="journey-section">
+<section class="journey-section" aria-labelledby="jornada-title">
   <div class="container">
     <p class="section-eyebrow">A transformação completa</p>
-    <h2 class="section-title">Da escrita estratégica ao livro lido</h2>
+    <h2 class="section-title" id="jornada-title">Da escrita estratégica ao livro lido</h2>
     <p class="section-subtitle">Cada etapa existe por uma razão. Aproximar seu livro dos leitores certos.</p>
 
-    <div class="journey-steps">
-      <div class="journey-step">
-        <div class="journey-step-marker">
-          Você está aqui.
+    <div class="timeline">
+      <div class="spine" aria-hidden="true">
+        <svg id="spineSvg" preserveAspectRatio="none" viewBox="0 0 64 1000">
+          <defs>
+            <linearGradient id="spineGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0"     stop-color="#7C8BA1"/>
+              <stop offset="0.166" stop-color="#8A8C9E"/>
+              <stop offset="0.333" stop-color="#A2879A"/>
+              <stop offset="0.5"   stop-color="#BC8478"/>
+              <stop offset="0.666" stop-color="#D69457"/>
+              <stop offset="0.833" stop-color="#EDA32C"/>
+              <stop offset="1"     stop-color="#FAAB00"/>
+            </linearGradient>
+          </defs>
+          <path class="track" id="trackPath" d=""></path>
+          <path class="draw" id="drawPath" d=""></path>
+        </svg>
+      </div>
+
+      <ol class="steps" id="journeySteps">
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">1</span></div>
+        <div class="journey-step-marker" aria-hidden="true">Você está aqui.
           <svg class="arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
             <path d="M52,34 L66,40 L60,28" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="num">1</div>
-        <div class="content">
-          <h4>Parar de escrever sem pensar no leitor</h4>
-          <p>Capítulos avançando. Vontade enorme. E a sensação incômoda de que ninguém estará esperando quando o livro ficar pronto.</p>
+        <div class="card">
+          <h4 class="card__title"><span>Parar de escrever sem pensar no leitor</span></h4>
+          <div class="card__body"><div><p class="card__desc">Capítulos avançando. Vontade enorme. E a sensação incômoda de que ninguém estará esperando quando o livro ficar pronto.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">2</div>
-        <div class="content">
-          <h4>Diagnosticar a ideia do livro na Matriz do Autor Estratégico</h4>
-          <p>Antes de seguir escrevendo, ver com clareza onde o projeto está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">2</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Diagnosticar a ideia do livro na Matriz do Autor Estratégico</span></h4>
+          <div class="card__body"><div><p class="card__desc">Antes de seguir escrevendo, ver com clareza onde o projeto está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">3</div>
-        <div class="content">
-          <h4>Encontrar o leitor certo desde já</h4>
-          <p>E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">3</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Encontrar o leitor certo desde já</span></h4>
+          <div class="card__body"><div><p class="card__desc">E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">4</div>
-        <div class="content">
-          <h4>Montar o cronograma estratégico do livro</h4>
-          <p>Um plano claro do que fazer enquanto escreve, antes de publicar, e depois do livro sair. Sem improviso. Sem pular etapa.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">4</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Montar o cronograma estratégico do livro</span></h4>
+          <div class="card__body"><div><p class="card__desc">Um plano claro do que fazer enquanto escreve, antes de publicar, e depois do livro sair. Sem improviso. Sem pular etapa.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">5</div>
-        <div class="content">
-          <h4>Construir audiência enquanto o livro nasce</h4>
-          <p>Ciclos curtos de presença com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">5</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Construir audiência enquanto o livro nasce</span></h4>
+          <div class="card__body"><div><p class="card__desc">Ciclos curtos de presença com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">6</div>
-        <div class="content">
-          <h4>Lançar com leitores esperando</h4>
-          <p>Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">6</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Lançar com leitores esperando</span></h4>
+          <div class="card__body"><div><p class="card__desc">Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">7</div>
-        <div class="content">
-          <h4>Continuar vendendo depois do lançamento</h4>
-          <p>O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">7</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Continuar vendendo depois do lançamento</span></h4>
+          <div class="card__body"><div><p class="card__desc">O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p></div></div>
         </div>
-      </div>
+      </li>
+      </ol>
     </div>
-    <p style="text-align:center; margin-top:48px; font-family:'Fraunces',serif; font-style:italic; font-size:clamp(17px,2vw,21px); color:var(--text-soft); max-width:520px; margin-left:auto; margin-right:auto; line-height:1.5;">Seu livro já existe.<br><span style="color:var(--accent);">Este é o caminho.</span></p>
+
+    <p class="journey-close" style="text-align:center; margin-top:48px; font-family:'Fraunces',serif; font-style:italic; font-size:clamp(17px,2vw,21px); color:var(--text-soft); max-width:520px; margin-left:auto; margin-right:auto; line-height:1.5;">Seu livro já existe.<br><span style="color:var(--accent);">Este é o caminho.</span></p>
   </div>
 </section>
 
@@ -4033,19 +4148,198 @@
 }
 </style>
 <script>
+/* JORNADA — design aprovado (zig-zag + spine que se desenha + count-up).
+   Sem JS: descrições visíveis (HTML estático). Com JS: colapsa + anima. */
 (function(){
-  var steps = document.querySelectorAll('.journey-steps .journey-step');
-  if (!steps.length || !('IntersectionObserver' in window)) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  steps[0].parentNode.classList.add('reveal-on');
-  var io = new IntersectionObserver(function(entries){
-    entries.filter(function(e){ return e.isIntersecting; }).forEach(function(e, i){
-      e.target.style.transitionDelay = (i * 90) + 'ms';
-      e.target.classList.add('is-in');
-      io.unobserve(e.target);
+  var stepsEl = document.getElementById('journeySteps');
+  if(!stepsEl) return;
+  var stepNodes = Array.prototype.slice.call(stepsEl.querySelectorAll('.step'));
+  if(!stepNodes.length) return;
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* liga o modo JS (CSS de colapsar/animar só vale sob .js-on) */
+  stepsEl.classList.add('js-on');
+
+  /* injeta "check" em cada nó + chevron em cada título */
+  var TICK = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>';
+  var CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+
+  stepNodes.forEach(function(step, i){
+    step.dataset.idx = i;
+    var node = step.querySelector('.step__node');
+    if(node && !node.querySelector('.tick')) node.insertAdjacentHTML('beforeend', TICK);
+    var title = step.querySelector('.card__title');
+    if(title && !title.querySelector('.chev')) title.insertAdjacentHTML('afterbegin', CHEV);
+  });
+
+  /* indicador "Passo N de 7" (só com JS) */
+  var section = document.getElementById('jornada-title');
+  var metaNow=null, metaBar=null;
+  if(section){
+    var sub = section.parentNode.querySelector('.section-subtitle');
+    var meta = document.createElement('div');
+    meta.className = 'journey-meta';
+    meta.setAttribute('aria-hidden','true');
+    meta.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 40px;font-size:13px;color:var(--text-soft);font-weight:400';
+    meta.innerHTML = '<span>Passo <b id="jMetaNow" style="font-weight:600;color:var(--text);font-variant-numeric:tabular-nums">0</b> de 7</span>'+
+      '<span style="position:relative;display:inline-block;width:170px;height:4px;border-radius:100px;background:var(--border);overflow:hidden">'+
+      '<i id="jMetaBar" style="position:absolute;inset:0 auto 0 0;width:0;border-radius:100px;background:linear-gradient(90deg,#7C8BA1 0%,#8A8C9E 16.6%,#A2879A 33.3%,#BC8478 50%,#D69457 66.6%,#EDA32C 83.3%,#FAAB00 100%);transition:width .6s cubic-bezier(.22,1,.36,1)"></i></span>';
+    if(sub && sub.parentNode){ sub.parentNode.insertBefore(meta, sub.nextSibling); }
+    metaNow = document.getElementById('jMetaNow');
+    metaBar = document.getElementById('jMetaBar');
+  }
+
+  var closeEl = stepsEl.closest('.timeline').parentNode.querySelector('.journey-close');
+  var revealed = 0;
+  function updateMeta(){
+    if(metaNow) metaNow.textContent = revealed;
+    if(metaBar) metaBar.style.width = (revealed/7*100)+'%';
+  }
+
+  /* ---------- expand / collapse ---------- */
+  function toggleCard(card){
+    var open = card.classList.toggle('open');
+    card.setAttribute('aria-expanded', open ? 'true':'false');
+  }
+  stepNodes.forEach(function(step, i){
+    var card = step.querySelector('.card');
+    if(!card) return;
+    card.setAttribute('role','button');
+    card.setAttribute('tabindex','0');
+    card.setAttribute('aria-expanded','false');
+    card.addEventListener('click', function(){ toggleCard(card); });
+    card.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleCard(card); }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-  steps.forEach(function(s){ io.observe(s); });
+  });
+
+  /* ---------- spine path ---------- */
+  var svg = document.getElementById('spineSvg');
+  var track = document.getElementById('trackPath');
+  var drawEl = document.getElementById('drawPath');
+  var nodeCenters = [];
+
+  function segPath(fromIdx, toIdx){
+    if(toIdx < fromIdx) return '';
+    var dd = 'M '+nodeCenters[fromIdx].x.toFixed(1)+' '+nodeCenters[fromIdx].y.toFixed(1);
+    for(var i=fromIdx+1;i<=toIdx;i++){
+      var a = nodeCenters[i-1], b = nodeCenters[i];
+      var midY = (a.y+b.y)/2;
+      dd += ' C '+a.x.toFixed(1)+' '+midY.toFixed(1)+' '+b.x.toFixed(1)+' '+midY.toFixed(1)+' '+b.x.toFixed(1)+' '+b.y.toFixed(1);
+    }
+    return dd;
+  }
+  function buildPath(){
+    if(!svg||!track||!drawEl) return;
+    var spineRect = svg.getBoundingClientRect();
+    nodeCenters = stepNodes.map(function(s){
+      var nd = s.querySelector('.step__node').getBoundingClientRect();
+      return { x: nd.left + nd.width/2 - spineRect.left, y: nd.top + nd.height/2 - spineRect.top };
+    });
+    var H = spineRect.height || 1000, W = spineRect.width || 64;
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    var fullPath = segPath(0, nodeCenters.length-1);
+    track.setAttribute('d', fullPath);
+    drawEl.setAttribute('d', fullPath);
+    var len = drawEl.getTotalLength();
+    drawEl.style.strokeDasharray = len;
+    if(reduce){ drawEl.style.strokeDashoffset = 0; }
+    else{ drawEl.style.transition = 'none'; drawEl.style.strokeDashoffset = drawnOffset(); }
+  }
+  function drawnOffset(){
+    if(!drawEl) return 0;
+    var len = drawEl.getTotalLength();
+    if(!len) return 0;
+    if(revealed <= 0) return len;
+    if(revealed >= nodeCenters.length) return 0;
+    var reachedNode = revealed - 1;
+    var lenAt = lengthAtY(drawEl, nodeCenters[reachedNode].y);
+    return Math.max(0, len - lenAt);
+  }
+  function lengthAtY(el, y){
+    var len = el.getTotalLength(), lo=0, hi=len, mid=0;
+    for(var k=0;k<22;k++){ mid=(lo+hi)/2; var p=el.getPointAtLength(mid); if(p.y<y) lo=mid; else hi=mid; }
+    return mid;
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  function revealStep(step){
+    if(step.classList.contains('in')) return;
+    var idx = parseInt(step.dataset.idx,10);
+    step.classList.add('in');
+    revealed = Math.max(revealed, idx+1);
+    updateMeta();
+    if(!reduce && drawEl){
+      drawEl.style.transition = 'stroke-dashoffset .9s cubic-bezier(.45,.05,.25,1)';
+      requestAnimationFrame(function(){ drawEl.style.strokeDashoffset = drawnOffset(); });
+    }
+    countUp(step.querySelector('.num'), idx+1);
+    setTimeout(function(){ step.classList.add('done'); }, reduce?0:680);
+    if(idx === stepNodes.length-1 && closeEl){
+      setTimeout(function(){ closeEl.classList.add('in'); }, reduce?0:700);
+    }
+  }
+  function countUp(el, target){
+    if(reduce || !el){ return; }
+    var start=null, dur=520;
+    function frame(ts){
+      if(!start) start=ts;
+      var p=Math.min(1,(ts-start)/dur), eased=1-Math.pow(1-p,3);
+      el.textContent = Math.max(1, Math.round(eased*target));
+      if(p<1) requestAnimationFrame(frame); else el.textContent=target;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* fallback: revela passos já visíveis (caso o IO não dispare) */
+  function checkInView(){
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    stepNodes.forEach(function(s){
+      if(s.classList.contains('in')) return;
+      var r = s.getBoundingClientRect();
+      if(r.top < vh*0.85 && r.bottom > 0){ revealStep(s); }
+    });
+  }
+  function initObserver(){
+    if(reduce || !('IntersectionObserver' in window)){
+      stepNodes.forEach(revealStep);
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ revealStep(e.target); io.unobserve(e.target); }
+      });
+    }, { threshold:.35, rootMargin:'0px 0px -8% 0px' });
+    stepNodes.forEach(function(s){ io.observe(s); });
+    /* backstop: garante revelação em ambientes onde o IO não emite callbacks */
+    checkInView();
+    window.addEventListener('scroll', checkInView, { passive:true });
+  }
+
+  function boot(){ buildPath(); initObserver(); }
+
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(boot);
+    setTimeout(function(){ if(!nodeCenters.length) boot(); }, 600);
+  }else{
+    window.addEventListener('load', boot);
+  }
+
+  var rt;
+  window.addEventListener('resize', function(){
+    clearTimeout(rt);
+    rt=setTimeout(function(){
+      if(!drawEl) return;
+      var prev = drawEl.style.transition;
+      buildPath();
+      if(!reduce){
+        drawEl.style.transition='none';
+        drawEl.style.strokeDashoffset = drawnOffset();
+        requestAnimationFrame(function(){ drawEl.style.transition=prev; });
+      }
+    },180);
+  });
 })();
 </script>
 </body>

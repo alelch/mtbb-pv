@@ -53,62 +53,61 @@ PAGES = {
 
 """,
         "JOURNEY_TITLE": """Do livro lançado ao livro lido de verdade""",
-        "JOURNEY_STEPS": """      <div class="journey-step">
-        <div class="journey-step-marker">
-          Você está aqui.
+        "JOURNEY_STEPS": """      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">1</span></div>
+        <div class="journey-step-marker" aria-hidden="true">Você está aqui.
           <svg class="arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
             <path d="M52,34 L66,40 L60,28" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="num">1</div>
-        <div class="content">
-          <h4>Parar de aceitar que o livro perdeu força</h4>
-          <p>Livro publicado. Lançamento já passou. E a sensação incômoda de que ele parou antes de encontrar quem precisava ler.</p>
+        <div class="card">
+          <h4 class="card__title"><span>Parar de aceitar que o livro perdeu força</span></h4>
+          <div class="card__body"><div><p class="card__desc">Livro publicado. Lançamento já passou. E a sensação incômoda de que ele parou antes de encontrar quem precisava ler.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">2</div>
-        <div class="content">
-          <h4>Diagnosticar o livro na Matriz do Autor Estratégico</h4>
-          <p>Ver com clareza por que ele parou de circular: onde está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">2</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Diagnosticar o livro na Matriz do Autor Estratégico</span></h4>
+          <div class="card__body"><div><p class="card__desc">Ver com clareza por que ele parou de circular: onde está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">3</div>
-        <div class="content">
-          <h4>Reencontrar o leitor certo</h4>
-          <p>E onde ele está hoje. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem ainda vai desejar, comprar e recomendar.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">3</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Reencontrar o leitor certo</span></h4>
+          <div class="card__body"><div><p class="card__desc">E onde ele está hoje. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem ainda vai desejar, comprar e recomendar.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">4</div>
-        <div class="content">
-          <h4>Montar o plano de reativação do livro</h4>
-          <p>Um plano claro do que fazer pra colocar o livro de volta na rua. Sem improviso. Sem pular etapa.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">4</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Montar o plano de reativação do livro</span></h4>
+          <div class="card__body"><div><p class="card__desc">Um plano claro do que fazer pra colocar o livro de volta na rua. Sem improviso. Sem pular etapa.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">5</div>
-        <div class="content">
-          <h4>Reativar demanda em ciclos curtos</h4>
-          <p>Cada ciclo tem começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">5</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Reativar demanda em ciclos curtos</span></h4>
+          <div class="card__body"><div><p class="card__desc">Cada ciclo tem começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">6</div>
-        <div class="content">
-          <h4>Fazer o livro voltar a circular</h4>
-          <p>Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">6</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Fazer o livro voltar a circular</span></h4>
+          <div class="card__body"><div><p class="card__desc">Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">7</div>
-        <div class="content">
-          <h4>Sustentar o livro vivo no longo prazo</h4>
-          <p>O trabalho do autor nunca termina no lançamento. Continua aqui. Sem isso, o livro volta a apagar.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">7</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Sustentar o livro vivo no longo prazo</span></h4>
+          <div class="card__body"><div><p class="card__desc">O trabalho do autor nunca termina no lançamento. Continua aqui. Sem isso, o livro volta a apagar.</p></div></div>
         </div>
-      </div>""",
+      </li>""",
         "PC_TEXT": """Você lançou seu livro.<br>Se sozinho não foi o suficiente, <em class="hl-risco">e agora?</em>""",
         "MENTORIA": """Você valida cada decisão (reativar o livro, ajustar posicionamento ou planejar o próximo) com quem já guiou 800 lançamentos.""",
         "GARANTIA_CLOSE": """          </div>
@@ -199,62 +198,61 @@ PAGES = {
 
 """,
         "JOURNEY_TITLE": """Da escrita estratégica ao livro lido""",
-        "JOURNEY_STEPS": """      <div class="journey-step">
-        <div class="journey-step-marker">
-          Você está aqui.
+        "JOURNEY_STEPS": """      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">1</span></div>
+        <div class="journey-step-marker" aria-hidden="true">Você está aqui.
           <svg class="arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
             <path d="M52,34 L66,40 L60,28" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="num">1</div>
-        <div class="content">
-          <h4>Parar de escrever sem pensar no leitor</h4>
-          <p>Capítulos avançando. Vontade enorme. E a sensação incômoda de que ninguém estará esperando quando o livro ficar pronto.</p>
+        <div class="card">
+          <h4 class="card__title"><span>Parar de escrever sem pensar no leitor</span></h4>
+          <div class="card__body"><div><p class="card__desc">Capítulos avançando. Vontade enorme. E a sensação incômoda de que ninguém estará esperando quando o livro ficar pronto.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">2</div>
-        <div class="content">
-          <h4>Diagnosticar a ideia do livro na Matriz do Autor Estratégico</h4>
-          <p>Antes de seguir escrevendo, ver com clareza onde o projeto está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">2</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Diagnosticar a ideia do livro na Matriz do Autor Estratégico</span></h4>
+          <div class="card__body"><div><p class="card__desc">Antes de seguir escrevendo, ver com clareza onde o projeto está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">3</div>
-        <div class="content">
-          <h4>Encontrar o leitor certo desde já</h4>
-          <p>E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">3</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Encontrar o leitor certo desde já</span></h4>
+          <div class="card__body"><div><p class="card__desc">E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">4</div>
-        <div class="content">
-          <h4>Montar o cronograma estratégico do livro</h4>
-          <p>Um plano claro do que fazer enquanto escreve, antes de publicar, e depois do livro sair. Sem improviso. Sem pular etapa.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">4</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Montar o cronograma estratégico do livro</span></h4>
+          <div class="card__body"><div><p class="card__desc">Um plano claro do que fazer enquanto escreve, antes de publicar, e depois do livro sair. Sem improviso. Sem pular etapa.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">5</div>
-        <div class="content">
-          <h4>Construir audiência enquanto o livro nasce</h4>
-          <p>Ciclos curtos de presença com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">5</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Construir audiência enquanto o livro nasce</span></h4>
+          <div class="card__body"><div><p class="card__desc">Ciclos curtos de presença com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">6</div>
-        <div class="content">
-          <h4>Lançar com leitores esperando</h4>
-          <p>Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">6</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Lançar com leitores esperando</span></h4>
+          <div class="card__body"><div><p class="card__desc">Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">7</div>
-        <div class="content">
-          <h4>Continuar vendendo depois do lançamento</h4>
-          <p>O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">7</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Continuar vendendo depois do lançamento</span></h4>
+          <div class="card__body"><div><p class="card__desc">O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p></div></div>
         </div>
-      </div>""",
+      </li>""",
         "PC_TEXT": """Você só lança seu livro <em>uma vez</em>.<br>Se for sozinho e der errado, <em class="hl-risco">e aí?</em>""",
         "MENTORIA": """Você valida cada decisão (capa, editora, data de lançamento) com quem já guiou 800 lançamentos.""",
         "GARANTIA_CLOSE": """          </div>
@@ -338,62 +336,61 @@ PAGES = {
 
 """,
         "JOURNEY_TITLE": """Do livro pronto ao livro lido""",
-        "JOURNEY_STEPS": """      <div class="journey-step">
-        <div class="journey-step-marker">
-          Você está aqui.
+        "JOURNEY_STEPS": """      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">1</span></div>
+        <div class="journey-step-marker" aria-hidden="true">Você está aqui.
           <svg class="arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
             <path d="M52,34 L66,40 L60,28" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="num">1</div>
-        <div class="content">
-          <h4>Parar de tratar o lançamento como sorte</h4>
-          <p>Manuscrito pronto. Capa pronta. Vontade enorme. E a sensação incômoda de que, sem plano real, o livro vai sumir em silêncio.</p>
+        <div class="card">
+          <h4 class="card__title"><span>Parar de tratar o lançamento como sorte</span></h4>
+          <div class="card__body"><div><p class="card__desc">Manuscrito pronto. Capa pronta. Vontade enorme. E a sensação incômoda de que, sem plano real, o livro vai sumir em silêncio.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">2</div>
-        <div class="content">
-          <h4>Diagnosticar o livro na Matriz do Autor Estratégico</h4>
-          <p>Antes de lançar, ver com clareza onde o livro está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">2</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Diagnosticar o livro na Matriz do Autor Estratégico</span></h4>
+          <div class="card__body"><div><p class="card__desc">Antes de lançar, ver com clareza onde o livro está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">3</div>
-        <div class="content">
-          <h4>Encontrar o leitor certo</h4>
-          <p>E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">3</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Encontrar o leitor certo</span></h4>
+          <div class="card__body"><div><p class="card__desc">E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">4</div>
-        <div class="content">
-          <h4>Montar o cronograma estratégico do livro</h4>
-          <p>Um plano claro do que fazer 90 dias antes, durante e depois do lançamento. Sem improviso. Sem pular etapa.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">4</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Montar o cronograma estratégico do livro</span></h4>
+          <div class="card__body"><div><p class="card__desc">Um plano claro do que fazer 90 dias antes, durante e depois do lançamento. Sem improviso. Sem pular etapa.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">5</div>
-        <div class="content">
-          <h4>Construir demanda antes do livro sair</h4>
-          <p>Ciclos curtos de pré-venda com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">5</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Construir demanda antes do livro sair</span></h4>
+          <div class="card__body"><div><p class="card__desc">Ciclos curtos de pré-venda com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">6</div>
-        <div class="content">
-          <h4>Lançar com leitores esperando</h4>
-          <p>Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">6</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Lançar com leitores esperando</span></h4>
+          <div class="card__body"><div><p class="card__desc">Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">7</div>
-        <div class="content">
-          <h4>Continuar vendendo depois do lançamento</h4>
-          <p>O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">7</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Continuar vendendo depois do lançamento</span></h4>
+          <div class="card__body"><div><p class="card__desc">O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p></div></div>
         </div>
-      </div>""",
+      </li>""",
         "PC_TEXT": """Você só lança seu livro <em>uma vez</em>.<br>Se for sozinho e der errado, <em class="hl-risco">e aí?</em>""",
         "MENTORIA": """Você valida cada decisão (capa, editora, data de lançamento) com quem já guiou 800 lançamentos.""",
         "GARANTIA_CLOSE": """          </div>
@@ -488,62 +485,61 @@ PAGES = {
 
 """,
         "JOURNEY_TITLE": """Do livro lançado ao livro lido de verdade""",
-        "JOURNEY_STEPS": """      <div class="journey-step">
-        <div class="journey-step-marker">
-          Você está aqui.
+        "JOURNEY_STEPS": """      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">1</span></div>
+        <div class="journey-step-marker" aria-hidden="true">Você está aqui.
           <svg class="arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
             <path d="M52,34 L66,40 L60,28" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="num">1</div>
-        <div class="content">
-          <h4>Parar de aceitar que o livro perdeu força</h4>
-          <p>Livro publicado. Lançamento já passou. E a sensação incômoda de que ele parou antes de encontrar quem precisava ler.</p>
+        <div class="card">
+          <h4 class="card__title"><span>Parar de aceitar que o livro perdeu força</span></h4>
+          <div class="card__body"><div><p class="card__desc">Livro publicado. Lançamento já passou. E a sensação incômoda de que ele parou antes de encontrar quem precisava ler.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">2</div>
-        <div class="content">
-          <h4>Diagnosticar o livro na Matriz do Autor Estratégico</h4>
-          <p>Ver com clareza por que ele parou de circular: onde está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">2</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Diagnosticar o livro na Matriz do Autor Estratégico</span></h4>
+          <div class="card__body"><div><p class="card__desc">Ver com clareza por que ele parou de circular: onde está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">3</div>
-        <div class="content">
-          <h4>Reencontrar o leitor certo</h4>
-          <p>E onde ele está hoje. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem ainda vai desejar, comprar e recomendar.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">3</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Reencontrar o leitor certo</span></h4>
+          <div class="card__body"><div><p class="card__desc">E onde ele está hoje. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem ainda vai desejar, comprar e recomendar.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">4</div>
-        <div class="content">
-          <h4>Montar o plano de reativação do livro</h4>
-          <p>Um plano claro do que fazer pra colocar o livro de volta na rua. Sem improviso. Sem pular etapa.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">4</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Montar o plano de reativação do livro</span></h4>
+          <div class="card__body"><div><p class="card__desc">Um plano claro do que fazer pra colocar o livro de volta na rua. Sem improviso. Sem pular etapa.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">5</div>
-        <div class="content">
-          <h4>Reativar demanda em ciclos curtos</h4>
-          <p>Cada ciclo tem começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">5</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Reativar demanda em ciclos curtos</span></h4>
+          <div class="card__body"><div><p class="card__desc">Cada ciclo tem começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">6</div>
-        <div class="content">
-          <h4>Fazer o livro voltar a circular</h4>
-          <p>Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">6</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Fazer o livro voltar a circular</span></h4>
+          <div class="card__body"><div><p class="card__desc">Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">7</div>
-        <div class="content">
-          <h4>Sustentar o livro vivo no longo prazo</h4>
-          <p>O trabalho do autor nunca termina no lançamento. Continua aqui. Sem isso, o livro volta a apagar.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">7</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Sustentar o livro vivo no longo prazo</span></h4>
+          <div class="card__body"><div><p class="card__desc">O trabalho do autor nunca termina no lançamento. Continua aqui. Sem isso, o livro volta a apagar.</p></div></div>
         </div>
-      </div>""",
+      </li>""",
         "PC_TEXT": """Você lançou seu livro.<br>Se sozinho não foi o suficiente, <em class="hl-risco">e agora?</em>""",
         "MENTORIA": """Você valida cada decisão (reativar o livro, ajustar posicionamento ou planejar o próximo) com quem já guiou 800 lançamentos.""",
         "GARANTIA_CLOSE": """    </div>
@@ -630,62 +626,61 @@ PAGES = {
 
 """,
         "JOURNEY_TITLE": """Da escrita estratégica ao livro lido""",
-        "JOURNEY_STEPS": """      <div class="journey-step">
-        <div class="journey-step-marker">
-          Você está aqui.
+        "JOURNEY_STEPS": """      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">1</span></div>
+        <div class="journey-step-marker" aria-hidden="true">Você está aqui.
           <svg class="arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
             <path d="M52,34 L66,40 L60,28" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="num">1</div>
-        <div class="content">
-          <h4>Parar de escrever sem pensar no leitor</h4>
-          <p>Capítulos avançando. Vontade enorme. E a sensação incômoda de que ninguém estará esperando quando o livro ficar pronto.</p>
+        <div class="card">
+          <h4 class="card__title"><span>Parar de escrever sem pensar no leitor</span></h4>
+          <div class="card__body"><div><p class="card__desc">Capítulos avançando. Vontade enorme. E a sensação incômoda de que ninguém estará esperando quando o livro ficar pronto.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">2</div>
-        <div class="content">
-          <h4>Diagnosticar a ideia do livro na Matriz do Autor Estratégico</h4>
-          <p>Antes de seguir escrevendo, ver com clareza onde o projeto está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">2</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Diagnosticar a ideia do livro na Matriz do Autor Estratégico</span></h4>
+          <div class="card__body"><div><p class="card__desc">Antes de seguir escrevendo, ver com clareza onde o projeto está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">3</div>
-        <div class="content">
-          <h4>Encontrar o leitor certo desde já</h4>
-          <p>E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">3</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Encontrar o leitor certo desde já</span></h4>
+          <div class="card__body"><div><p class="card__desc">E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">4</div>
-        <div class="content">
-          <h4>Montar o cronograma estratégico do livro</h4>
-          <p>Um plano claro do que fazer enquanto escreve, antes de publicar, e depois do livro sair. Sem improviso. Sem pular etapa.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">4</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Montar o cronograma estratégico do livro</span></h4>
+          <div class="card__body"><div><p class="card__desc">Um plano claro do que fazer enquanto escreve, antes de publicar, e depois do livro sair. Sem improviso. Sem pular etapa.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">5</div>
-        <div class="content">
-          <h4>Construir audiência enquanto o livro nasce</h4>
-          <p>Ciclos curtos de presença com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">5</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Construir audiência enquanto o livro nasce</span></h4>
+          <div class="card__body"><div><p class="card__desc">Ciclos curtos de presença com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">6</div>
-        <div class="content">
-          <h4>Lançar com leitores esperando</h4>
-          <p>Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">6</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Lançar com leitores esperando</span></h4>
+          <div class="card__body"><div><p class="card__desc">Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">7</div>
-        <div class="content">
-          <h4>Continuar vendendo depois do lançamento</h4>
-          <p>O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">7</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Continuar vendendo depois do lançamento</span></h4>
+          <div class="card__body"><div><p class="card__desc">O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p></div></div>
         </div>
-      </div>""",
+      </li>""",
         "PC_TEXT": """Você só lança seu livro <em>uma vez</em>.<br>Se for sozinho e der errado, <em class="hl-risco">e aí?</em>""",
         "MENTORIA": """Você valida cada decisão (capa, editora, data de lançamento) com quem já guiou 800 lançamentos.""",
         "GARANTIA_CLOSE": """    </div>
@@ -761,62 +756,61 @@ PAGES = {
 
 """,
         "JOURNEY_TITLE": """Do livro pronto ao livro lido""",
-        "JOURNEY_STEPS": """      <div class="journey-step">
-        <div class="journey-step-marker">
-          Você está aqui.
+        "JOURNEY_STEPS": """      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">1</span></div>
+        <div class="journey-step-marker" aria-hidden="true">Você está aqui.
           <svg class="arrow" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6,6 Q20,2 38,16 Q54,26 64,38" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
             <path d="M52,34 L66,40 L60,28" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="num">1</div>
-        <div class="content">
-          <h4>Parar de tratar o lançamento como sorte</h4>
-          <p>Manuscrito pronto. Capa pronta. Vontade enorme. E a sensação incômoda de que, sem plano real, o livro vai sumir em silêncio.</p>
+        <div class="card">
+          <h4 class="card__title"><span>Parar de tratar o lançamento como sorte</span></h4>
+          <div class="card__body"><div><p class="card__desc">Manuscrito pronto. Capa pronta. Vontade enorme. E a sensação incômoda de que, sem plano real, o livro vai sumir em silêncio.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">2</div>
-        <div class="content">
-          <h4>Diagnosticar o livro na Matriz do Autor Estratégico</h4>
-          <p>Antes de lançar, ver com clareza onde o livro está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">2</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Diagnosticar o livro na Matriz do Autor Estratégico</span></h4>
+          <div class="card__body"><div><p class="card__desc">Antes de lançar, ver com clareza onde o livro está forte, onde está vulnerável, e o que ainda precisa de ajuste.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">3</div>
-        <div class="content">
-          <h4>Encontrar o leitor certo</h4>
-          <p>E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">3</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Encontrar o leitor certo</span></h4>
+          <div class="card__body"><div><p class="card__desc">E onde ele está. Sem postar em grupo aleatório. Sem implorar para influenciador. Sem chutar. É descobrir quem vai desejar, comprar e recomendar.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">4</div>
-        <div class="content">
-          <h4>Montar o cronograma estratégico do livro</h4>
-          <p>Um plano claro do que fazer 90 dias antes, durante e depois do lançamento. Sem improviso. Sem pular etapa.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">4</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Montar o cronograma estratégico do livro</span></h4>
+          <div class="card__body"><div><p class="card__desc">Um plano claro do que fazer 90 dias antes, durante e depois do lançamento. Sem improviso. Sem pular etapa.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">5</div>
-        <div class="content">
-          <h4>Construir demanda antes do livro sair</h4>
-          <p>Ciclos curtos de pré-venda com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">5</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Construir demanda antes do livro sair</span></h4>
+          <div class="card__body"><div><p class="card__desc">Ciclos curtos de pré-venda com começo, meio e fim. Cada um gera tração. E a tração não some, acumula.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">6</div>
-        <div class="content">
-          <h4>Lançar com leitores esperando</h4>
-          <p>Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">6</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Lançar com leitores esperando</span></h4>
+          <div class="card__body"><div><p class="card__desc">Sem silêncio. Sem improviso. Com plano, com demanda, com estratégia.</p></div></div>
         </div>
-      </div>
-      <div class="journey-step">
-        <div class="num">7</div>
-        <div class="content">
-          <h4>Continuar vendendo depois do lançamento</h4>
-          <p>O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p>
+      </li>
+      <li class="step">
+        <div class="step__node" aria-hidden="true"><span class="num">7</span></div>
+        <div class="card">
+          <h4 class="card__title"><span>Continuar vendendo depois do lançamento</span></h4>
+          <div class="card__body"><div><p class="card__desc">O trabalho do autor não termina no dia da publicação. Começa ali. Sem isso, o livro morre na segunda semana.</p></div></div>
         </div>
-      </div>""",
+      </li>""",
         "PC_TEXT": """Você só lança seu livro <em>uma vez</em>.<br>Se for sozinho e der errado, <em class="hl-risco">e aí?</em>""",
         "MENTORIA": """Você valida cada decisão (capa, editora, data de lançamento) com quem já guiou 800 lançamentos.""",
         "GARANTIA_CLOSE": """    </div>
