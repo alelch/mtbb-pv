@@ -40,12 +40,16 @@ PAGES = {
   </div>
 </section>
 
-<!-- TESE — pull quote stage-específico -->
-<div style="background: var(--bg); padding: 72px 24px 24px; text-align: center;">
-  <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(20px, 2.6vw, 28px); line-height: 1.45; max-width: 740px; margin: 0 auto; color: var(--text);">
-    Seu livro não precisa nascer de novo.<br><span style="color: var(--accent);">Precisa voltar a ser encontrado.</span>
-  </p>
-</div>
+<!-- TESE — citação (blockquote) -->
+<section class="tese-faixa">
+  <figure class="tese-quote">
+    <blockquote>
+      <span class="l1"><span class="qm">&ldquo;</span>Seu livro não precisa nascer de novo.</span>
+      <span class="l2">Precisa voltar a ser encontrado.</span>
+    </blockquote>
+    <cite>— Dany Sakugawa</cite>
+  </figure>
+</section>
 
 """,
         "JOURNEY_TITLE": """Do livro lançado ao livro lido de verdade""",
@@ -182,12 +186,16 @@ PAGES = {
   </div>
 </section>
 
-<!-- TESE — pull quote stage-específico -->
-<div style="background: var(--bg); padding: 72px 24px 24px; text-align: center;">
-  <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(20px, 2.6vw, 28px); line-height: 1.45; max-width: 740px; margin: 0 auto; color: var(--text);">
-    O lançamento não começa quando o livro fica pronto.<br><span style="color: var(--accent);">Começa nas decisões que você toma enquanto escreve.</span>
-  </p>
-</div>
+<!-- TESE — citação (blockquote) -->
+<section class="tese-faixa">
+  <figure class="tese-quote">
+    <blockquote>
+      <span class="l1"><span class="qm">&ldquo;</span>O lançamento não começa quando o livro fica pronto.</span>
+      <span class="l2">Começa nas decisões que você toma enquanto escreve.</span>
+    </blockquote>
+    <cite>— Dany Sakugawa</cite>
+  </figure>
+</section>
 
 """,
         "JOURNEY_TITLE": """Da escrita estratégica ao livro lido""",
@@ -467,12 +475,16 @@ PAGES = {
   </div>
 </section>
 
-<!-- TESE — pull quote stage-específico -->
-<div style="background: var(--bg); padding: 72px 24px 24px; text-align: center;">
-  <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(20px, 2.6vw, 28px); line-height: 1.45; max-width: 740px; margin: 0 auto; color: var(--text);">
-    Seu livro não precisa nascer de novo.<br><span style="color: var(--accent);">Precisa voltar a ser encontrado.</span>
-  </p>
-</div>
+<!-- TESE — citação (blockquote) -->
+<section class="tese-faixa">
+  <figure class="tese-quote">
+    <blockquote>
+      <span class="l1"><span class="qm">&ldquo;</span>Seu livro não precisa nascer de novo.</span>
+      <span class="l2">Precisa voltar a ser encontrado.</span>
+    </blockquote>
+    <cite>— Dany Sakugawa</cite>
+  </figure>
+</section>
 
 """,
         "JOURNEY_TITLE": """Do livro lançado ao livro lido de verdade""",
@@ -605,12 +617,16 @@ PAGES = {
   </div>
 </section>
 
-<!-- TESE — pull quote stage-específico -->
-<div style="background: var(--bg); padding: 72px 24px 24px; text-align: center;">
-  <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(20px, 2.6vw, 28px); line-height: 1.45; max-width: 740px; margin: 0 auto; color: var(--text);">
-    O lançamento não começa quando o livro fica pronto.<br><span style="color: var(--accent);">Começa nas decisões que você toma enquanto escreve.</span>
-  </p>
-</div>
+<!-- TESE — citação (blockquote) -->
+<section class="tese-faixa">
+  <figure class="tese-quote">
+    <blockquote>
+      <span class="l1"><span class="qm">&ldquo;</span>O lançamento não começa quando o livro fica pronto.</span>
+      <span class="l2">Começa nas decisões que você toma enquanto escreve.</span>
+    </blockquote>
+    <cite>— Dany Sakugawa</cite>
+  </figure>
+</section>
 
 """,
         "JOURNEY_TITLE": """Da escrita estratégica ao livro lido""",
