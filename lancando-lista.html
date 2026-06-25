@@ -4252,22 +4252,34 @@
     return mid;
   }
 
-  /* ---------- reveal on scroll ---------- */
-  function revealStep(step){
-    if(step.classList.contains('in')) return;
-    var idx = parseInt(step.dataset.idx,10);
-    step.classList.add('in');
-    revealed = Math.max(revealed, idx+1);
+  /* ---------- reveal/desfaz no scroll (bidirecional, passo a passo) ---------- */
+  function recomputeRevealed(){
+    var maxIn = -1;
+    stepNodes.forEach(function(s){ if(s.classList.contains('in')){ var i=parseInt(s.dataset.idx,10); if(i>maxIn) maxIn=i; } });
+    revealed = maxIn + 1;
     updateMeta();
     if(!reduce && drawEl){
       drawEl.style.transition = 'stroke-dashoffset .9s cubic-bezier(.45,.05,.25,1)';
       requestAnimationFrame(function(){ drawEl.style.strokeDashoffset = drawnOffset(); });
     }
-    countUp(step.querySelector('.num'), idx+1);
-    setTimeout(function(){ step.classList.add('done'); }, reduce?0:680);
-    if(idx === stepNodes.length-1 && closeEl){
-      setTimeout(function(){ closeEl.classList.add('in'); }, reduce?0:700);
+  }
+  function setStep(step, on){
+    if(on === step.classList.contains('in')) return;
+    var idx = parseInt(step.dataset.idx,10);
+    if(step._doneT){ clearTimeout(step._doneT); step._doneT = null; }
+    if(on){
+      step.classList.add('in');
+      step._doneT = setTimeout(function(){ step.classList.add('done'); }, reduce?0:680);
+      countUp(step.querySelector('.num'), idx+1);
+      if(idx === stepNodes.length-1 && closeEl){
+        if(step._closeT) clearTimeout(step._closeT);
+        step._closeT = setTimeout(function(){ closeEl.classList.add('in'); }, reduce?0:700);
+      }
+    }else{
+      step.classList.remove('in','done');
+      if(idx === stepNodes.length-1 && closeEl){ if(step._closeT) clearTimeout(step._closeT); closeEl.classList.remove('in'); }
     }
+    recomputeRevealed();
   }
   function countUp(el, target){
     if(reduce || !el){ return; }
@@ -4280,30 +4292,28 @@
     }
     requestAnimationFrame(frame);
   }
-
-  /* fallback: revela passos já visíveis (caso o IO não dispare) */
+  /* fallback p/ ambientes sem IntersectionObserver: toggle por scroll */
   function checkInView(){
     var vh = window.innerHeight || document.documentElement.clientHeight;
     stepNodes.forEach(function(s){
-      if(s.classList.contains('in')) return;
       var r = s.getBoundingClientRect();
-      if(r.top < vh*0.85 && r.bottom > 0){ revealStep(s); }
+      setStep(s, r.top < vh*0.85 && r.bottom > vh*0.06);
     });
   }
   function initObserver(){
-    if(reduce || !('IntersectionObserver' in window)){
-      stepNodes.forEach(revealStep);
+    if(reduce){
+      stepNodes.forEach(function(s){ setStep(s, true); });
+      return;
+    }
+    if(!('IntersectionObserver' in window)){
+      checkInView();
+      window.addEventListener('scroll', checkInView, { passive:true });
       return;
     }
     var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ revealStep(e.target); io.unobserve(e.target); }
-      });
+      entries.forEach(function(e){ setStep(e.target, e.isIntersecting); });
     }, { threshold:.35, rootMargin:'0px 0px -8% 0px' });
     stepNodes.forEach(function(s){ io.observe(s); });
-    /* backstop: garante revelação em ambientes onde o IO não emite callbacks */
-    checkInView();
-    window.addEventListener('scroll', checkInView, { passive:true });
   }
 
   function boot(){ buildPath(); initObserver(); }
