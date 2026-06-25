@@ -200,13 +200,13 @@
     border: 0;
   }
   /* TESE — citação (blockquote barra âmbar à esquerda) */
-  .tese-faixa { background: #fff; padding: clamp(56px, 9vw, 104px) 24px; display: flex; justify-content: center; }
-  .tese-quote { max-width: 860px; width: 100%; position: relative; padding-left: 30px; text-align: left; }
-  .tese-quote::before { content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 3px; background: var(--accent); border-radius: 3px; }
+  .tese-faixa { background: var(--bg); padding: clamp(56px, 9vw, 104px) 24px; display: flex; justify-content: center; }
+  .tese-quote { max-width: 860px; width: 100%; text-align: center; }
+  .tese-quote::before { content: "\201C"; display: block; color: var(--accent); font-family: 'Fraunces', serif; font-size: clamp(58px, 8vw, 88px); line-height: 0.78; margin: 0 auto 4px; }
   .tese-quote blockquote { font-family: 'Poppins', sans-serif; font-size: clamp(18px, 2.4vw, 27px); line-height: 1.5; letter-spacing: -0.01em; }
   .tese-quote .l1 { display: block; white-space: nowrap; font-weight: 400; color: var(--text-soft); }
   .tese-quote .l2 { display: block; white-space: nowrap; font-weight: 600; color: var(--text); margin-top: 2px; }
-  .tese-quote .qm { color: var(--accent); }
+  .tese-quote .qm { display: none; }
   .tese-quote cite { display: block; margin-top: 22px; font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--text-mute); }
   @media (max-width: 760px) {
     .tese-quote .l1, .tese-quote .l2 { white-space: normal; }
