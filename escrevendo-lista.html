@@ -216,34 +216,13 @@
       0 40px 88px rgba(250,171,0,0.06),
       0 10px 30px rgba(0,0,0,0.28);
   }
-  .vsl-thumb {
+  .vsl-frame iframe {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    z-index: 0;
+    border: 0;
   }
-  .vsl-frame::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.2));
-  }
-  .vsl-play {
-    position: relative;
-    z-index: 2;
-    width: 96px; height: 96px;
-    border-radius: 50%;
-    background: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.45);
-  }
-  .vsl-play:hover { transform: scale(1.08); }
-  .vsl-play svg { width: 38px; height: 38px; fill: #000; margin-left: 5px; }
   .vsl-label {
     position: absolute;
     z-index: 2;
@@ -2481,35 +2460,10 @@
 
 <!-- BLOCO 2 — VSL -->
 <div class="vsl-wrap">
-  <div class="vsl-frame" id="vslFrame" role="button" tabindex="0" aria-label="Assistir a aula gratuita">
-    <img class="vsl-thumb" src="assets/aula-metodo-the-book-business.webp" alt="Assista à aula gratuita do Método The Book Business com Dany Sakugawa" width="1280" height="720" fetchpriority="high" decoding="async">
-    <div class="vsl-play">
-      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-    </div>
+  <div class="vsl-frame">
+    <iframe src="https://www.youtube-nocookie.com/embed/sVLzrUURJaw?rel=0&modestbranding=1&playsinline=1" title="Aula gratuita — Método The Book Business" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div>
 </div>
-<script>
-(function(){
-  var f = document.getElementById('vslFrame');
-  if (!f) return;
-  var loaded = false;
-  function load(){
-    if (loaded) return; loaded = true;
-    var ifr = document.createElement('iframe');
-    ifr.src = 'https://www.youtube-nocookie.com/embed/sVLzrUURJaw?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-    ifr.title = 'Aula gratuita — Método The Book Business';
-    ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    ifr.setAttribute('allowfullscreen', '');
-    ifr.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
-    f.innerHTML = '';
-    f.appendChild(ifr);
-    if (window.MTBB_TRACK) { try { window.MTBB_TRACK('vsl_play'); } catch(e){} }
-  }
-  f.style.cursor = 'pointer';
-  f.addEventListener('click', load);
-  f.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); } });
-})();
-</script>
 
 <!-- BLOCO 4 — LOGOS -->
 <section class="logos-section">
