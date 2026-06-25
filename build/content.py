@@ -177,7 +177,7 @@ PAGES = {
   <div class="container">
     <h2>Você pode estar escrevendo um livro <span class="hl-grifo">incrível</span>.</h2>
     <p class="agi-sub">E ainda assim terminar sem <span class="hl-risco">leitores esperando</span>.</p>
-    <p class="agitation-quote"><span class="hw-line">Ninguém espera um livro</span><span class="hw-line">que não conhece.</span></p>
+    <p class="agitation-quote"><span class="hw-line">Ninguém compra um livro</span><span class="hw-line">que não conhece.</span></p>
     <p class="agitation-closing">Esperança não muda isso.<br><span class="italic">Estratégia sim.</span></p>
   </div>
 </section>
@@ -600,7 +600,7 @@ PAGES = {
   <div class="container">
     <h2>Você pode estar escrevendo um livro <span class="hl-grifo">incrível</span>.</h2>
     <p class="agi-sub">E ainda assim terminar sem <span class="hl-risco">leitores esperando</span>.</p>
-    <p class="agitation-quote"><span class="hw-line">Ninguém espera um livro</span><span class="hw-line">que não conhece.</span></p>
+    <p class="agitation-quote"><span class="hw-line">Ninguém compra um livro</span><span class="hw-line">que não conhece.</span></p>
     <p class="agitation-closing">Esperança não muda isso.<br><span class="italic">Estratégia sim.</span></p>
   </div>
 </section>
