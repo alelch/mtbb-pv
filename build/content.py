@@ -170,7 +170,7 @@ PAGES = {
         "HERO_BADGE_H1": """    <div class="hero-badge">Para autores escrevendo</div>
     <h1>Você está escrevendo seu livro.<br><span class="hero-italic" style="font-family:'Poppins',sans-serif; font-style:normal; font-weight:700;"><span class="hl-grifo">Os próximos passos</span> decidem se ele será lido… ou <span class="hl-risco">esquecido</span>.</span></h1>""",
         "HERO_WATCH": """Assista à aula abaixo e veja como atrair seus leitores.""",
-        "CTA_POSVIDEO": """Você está investindo demais nesse livro pra começar a estratégia depois.""",
+        "CTA_POSVIDEO": """Seu livro merece ser lido.""",
         "AGITATION_BLOCK": """
 <!-- BLOCO 5 — AGITAÇÃO -->
 <section class="agitation">
@@ -593,7 +593,7 @@ PAGES = {
         "HERO_BADGE_H1": """    <div class="hero-badge">Para autores escrevendo</div>
     <h1>Você está escrevendo seu livro.<br><span class="hero-italic" style="font-family:'Poppins',sans-serif; font-style:normal; font-weight:700;"><span class="hl-grifo">Os próximos passos</span> decidem se ele será lido… ou <span class="hl-risco">esquecido</span>.</span></h1>""",
         "HERO_WATCH": """Assista à aula abaixo e veja como atrair seus leitores.""",
-        "CTA_POSVIDEO": """Você está investindo demais nesse livro pra começar a estratégia depois.""",
+        "CTA_POSVIDEO": """Seu livro merece ser lido.""",
         "AGITATION_BLOCK": """
 <!-- BLOCO 5 — AGITAÇÃO -->
 <section class="agitation">
