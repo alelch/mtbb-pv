@@ -807,10 +807,10 @@
   .matrix-list-item { border-radius: 10px; transition: background .2s ease; }
   .matrix-list-item[data-k] { cursor: pointer; }
   .matrix-list-letter { transition: box-shadow .2s ease, transform .2s ease; }
-  .matrix-list-text h4 { transition: color .2s ease; }
+  .matrix-list-text h3 { transition: color .2s ease; }
   .matrix-list-item.mx-active { background: rgba(250,171,0,0.07); }
   .matrix-list-item.mx-active .matrix-list-letter { box-shadow: 0 0 18px rgba(250,171,0,0.75); transform: scale(1.08); }
-  .matrix-list-item.mx-active .matrix-list-text h4 { color: var(--accent); }
+  .matrix-list-item.mx-active .matrix-list-text h3 { color: var(--accent); }
   .mx-hub {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     width: 116px; height: 116px; border-radius: 50%;
@@ -871,7 +871,7 @@
     color: var(--accent);
     border: 1px solid rgba(250,171,0,0.3);
   }
-  .matrix-list-text h4 {
+  .matrix-list-text h3 {
     font-size: 15px;
     font-weight: 600;
     color: white;
@@ -2736,6 +2736,7 @@
 <script type="application/ld+json">{{LDJSON}}</script>
 </head>
 <body>
+<main>
 
 <!-- BLOCO 1 — HERO -->
 <section class="hero">
@@ -2949,35 +2950,35 @@
         <li class="matrix-list-item center">
           <div class="matrix-list-letter">F</div>
           <div class="matrix-list-text">
-            <h4>Fundamentos Editoriais</h4>
+            <h3>Fundamentos Editoriais</h3>
             <p>As regras do mercado editorial que o autor independente raramente acessa.</p>
           </div>
         </li>
         <li class="matrix-list-item" data-k="M">
           <div class="matrix-list-letter">M</div>
           <div class="matrix-list-text">
-            <h4>Mercado Exponencial</h4>
+            <h3>Mercado Exponencial</h3>
             <p>Sazonalidade, posicionamento, concorrência. Onde e quando seu livro tem chance.</p>
           </div>
         </li>
         <li class="matrix-list-item" data-k="L">
           <div class="matrix-list-letter">L</div>
           <div class="matrix-list-text">
-            <h4>Leitor Ideal</h4>
+            <h3>Leitor Ideal</h3>
             <p>Como transformar desconhecido em fã.</p>
           </div>
         </li>
         <li class="matrix-list-item" data-k="O">
           <div class="matrix-list-letter">O</div>
           <div class="matrix-list-text">
-            <h4>Obra Intencional</h4>
+            <h3>Obra Intencional</h3>
             <p>O livro não é passivo. É o seu atacante, e deve ser preparado como tal.</p>
           </div>
         </li>
         <li class="matrix-list-item" data-k="A">
           <div class="matrix-list-letter">A</div>
           <div class="matrix-list-text">
-            <h4>Autor Estratégico</h4>
+            <h3>Autor Estratégico</h3>
             <p>A engenharia de autoridade que liberta o autor de depender de um único lançamento.</p>
           </div>
         </li>
@@ -3238,12 +3239,16 @@
     margin-top:clamp(16px,2.2vw,22px);
   }
   .fmloa-dot{
-    width:8px;height:8px;border-radius:50%;
-    background:var(--border);border:0;padding:0;cursor:pointer;
+    width:24px;height:24px;border-radius:50%;
+    background:transparent;border:0;padding:0;cursor:pointer;position:relative;flex:0 0 auto;
     -webkit-tap-highlight-color:transparent;
+  }
+  .fmloa-dot::before{
+    content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:8px;height:8px;border-radius:50%;background:var(--border);
     transition:background .3s ease, width .3s ease, border-radius .3s ease;
   }
-  .fmloa-dot.is-active{background:var(--accent);width:22px;border-radius:5px;}
+  .fmloa-dot.is-active::before{background:var(--accent);width:22px;border-radius:5px;}
   .fmloa-dot:focus-visible{outline:none;box-shadow:0 0 0 3px var(--accent-soft);}
 
   /* sr-only */
@@ -4862,6 +4867,7 @@
 </script>
 
 <!-- FOOTER -->
+</main>
 <footer>
   <div class="container">
     <p><strong style="color: rgba(255,255,255,0.7);">MTBB</strong> · Método The Book Business</p>
