@@ -2856,23 +2856,419 @@
   </div>
 </section>
 
-<!-- BLOCO 9 — QUADRANTES SEXY (5 CENAS) -->
-<section class="quads-section" style="padding: 80px 0 0 0;">
+<!-- BLOCO 9 — FMLOA explicacao (carrossel 03b) -->
+<style>
+/* === FMLOA 03b (carrossel) === */
+.fmloa-live{
+    font-family:"Poppins",system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding:clamp(44px,6vw,96px) clamp(16px,5vw,64px);
+    -webkit-font-smoothing:antialiased;
+  }
+  .fmloa-inner{
+    max-width:1080px;
+    margin:0 auto;
+  }
 
-  <!-- CENA F -->
-  <div class="quad-scene">
-    <div class="quad-scene-inner">
-      <div class="quad-text">
-        <div class="quad-mega-letter">F</div>
-        <div class="quad-mega-name">Fundamentos Editoriais</div>
-        <h3 class="quad-mega-tagline">99% dos autores não conhecem o mercado editorial. E por isso ficam invisíveis.</h3>
-        <p class="quad-mega-body">
-          É aqui que você muda a chave. Aprende a <strong>lógica de atração</strong> que transforma desconhecidos em fãs, os fatores que separam um livro amador de um profissional, e por que a divulgação começa muito antes da última página.
-        </p>
-        <span class="quad-concept-tag">Arte e negócio não são opostos</span>
-      </div>
-      <div class="quad-visual">
-        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  /* ---------- Eyebrow ---------- */
+  .fmloa-eyebrow{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:0 0 clamp(24px,3vw,38px);
+  }
+  .fmloa-eyebrow .line{
+    height:1px;width:40px;background:var(--accent);flex:0 0 auto;
+  }
+  .fmloa-eyebrow .label{
+    font-size:12px;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--text-mute);
+  }
+  .fmloa-eyebrow .label b{color:var(--text);font-weight:700;}
+
+  /* =========================================================
+     CONTROLS — hidden by default (no-JS fallback). Shown only
+     when JS adds .js-on to the section.
+     ========================================================= */
+  .fmloa-chips,
+  .fmloa-rail-wrap,
+  .fmloa-footer{display:none;}
+
+  .js-on .fmloa-chips{display:flex;}
+  .js-on .fmloa-rail-wrap{display:flex;}
+  .js-on .fmloa-footer{display:flex;}
+
+  /* ---------- Chips (tabs) ---------- */
+  .fmloa-chips{
+    gap:clamp(7px,1vw,12px);
+    margin-bottom:clamp(12px,1.6vw,18px);
+  }
+  .fmloa-chip{
+    position:relative;
+    flex:1 1 0;
+    min-width:0;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px 14px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--bg-card);
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+    color:var(--text);
+    overflow:hidden;
+    transition:border-color .35s ease, box-shadow .35s ease, transform .35s ease, background .35s ease;
+  }
+  .fmloa-chip:hover{
+    border-color:#E2C98A;
+    transform:translateY(-2px);
+    box-shadow:0 12px 26px -18px rgba(20,20,20,.35);
+  }
+  .fmloa-chip:focus-visible{
+    outline:none;
+    box-shadow:0 0 0 3px var(--accent-soft), 0 0 0 4px var(--accent);
+  }
+  .fmloa-chip .chip-letter{
+    font-size:20px;font-weight:800;line-height:1;
+    width:30px;height:30px;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:9px;
+    background:var(--bg);color:var(--text-mute);
+    transition:background .35s ease, color .35s ease;
+  }
+  .fmloa-chip .chip-name{
+    font-size:12px;font-weight:600;color:var(--text-soft);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    transition:color .35s ease;
+  }
+  .fmloa-chip[aria-selected="true"]{
+    background:var(--bg-dark);border-color:var(--bg-dark);
+  }
+  .fmloa-chip[aria-selected="true"] .chip-letter{
+    background:var(--accent);color:var(--bg-dark);
+  }
+  .fmloa-chip[aria-selected="true"] .chip-name{color:#FFFFFF;}
+  .fmloa-chip[aria-selected="true"]:hover{transform:none;}
+
+  /* per-chip stories progress segment */
+  .fmloa-chip .chip-prog{
+    position:absolute;
+    left:0;bottom:0;height:3px;width:100%;
+    background:transparent;
+    overflow:hidden;
+  }
+  .fmloa-chip .chip-prog::after{
+    content:"";
+    position:absolute;inset:0 100% 0 0;
+    background:var(--accent);
+  }
+  /* completed (already-seen) chips: full bar, muted */
+  .fmloa-chip.is-done .chip-prog::after{
+    right:0;background:#E2C98A;
+  }
+  /* active chip animates fill when autoplaying */
+  .fmloa-chip.is-active.is-playing .chip-prog::after{
+    animation:chipFill var(--autoplay) linear forwards;
+  }
+  .fmloa-chip.is-active:not(.is-playing) .chip-prog::after{
+    right:0;background:var(--accent);
+  }
+  @keyframes chipFill{from{right:100%;}to{right:0;}}
+
+  /* ---------- Single rail under chips ---------- */
+  .fmloa-rail-wrap{
+    align-items:center;
+    gap:16px;
+    margin:clamp(8px,1.4vw,14px) 2px clamp(18px,2.2vw,26px);
+  }
+  .fmloa-rail{
+    position:relative;flex:1 1 auto;height:3px;border-radius:3px;
+    background:var(--border);overflow:hidden;
+  }
+  .fmloa-rail .fill{
+    position:absolute;inset:0 auto 0 0;width:20%;
+    background:var(--accent);border-radius:3px;
+    transition:width .5s cubic-bezier(.22,.61,.36,1);
+  }
+  .fmloa-counter{
+    font-size:12px;font-weight:600;letter-spacing:.04em;
+    color:var(--text-mute);flex:0 0 auto;white-space:nowrap;
+  }
+  .fmloa-counter b{color:var(--text);font-weight:700;}
+
+  /* =========================================================
+     STAGE + PANELS
+     ========================================================= */
+  .fmloa-stage{
+    position:relative;
+    border-radius:26px;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+  }
+  .js-on .fmloa-stage{
+    box-shadow:0 40px 80px -56px rgba(20,20,20,.45);
+    overflow:hidden;
+  }
+
+  /* NO-JS fallback: panels stacked & separated */
+  .fmloa-panel{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:clamp(26px,4vw,54px);
+    align-items:center;
+    padding:clamp(28px,4.2vw,60px);
+  }
+  .fmloa-panel + .fmloa-panel{
+    border-top:1px solid var(--border);
+  }
+
+  /* JS mode: only active panel shows, no separators */
+  .js-on .fmloa-panel + .fmloa-panel{border-top:none;}
+  .js-on .fmloa-panel[hidden]{display:none;}
+
+  /* slide-in transition (JS only) */
+  .js-on .fmloa-panel.is-entering .panel-text{
+    animation:fmloaUp .42s cubic-bezier(.22,.61,.36,1) both;
+  }
+  .js-on .fmloa-panel.is-entering .panel-visual{
+    animation:fmloaSlide .42s cubic-bezier(.22,.61,.36,1) both;
+    animation-delay:.05s;
+  }
+  /* direction-aware: .from-right slides svg in from right, .from-left from left */
+  .js-on .fmloa-panel.is-entering.from-left .panel-visual{
+    animation-name:fmloaSlideL;
+  }
+  @keyframes fmloaUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fmloaSlide{from{opacity:0;transform:translateX(44px);}to{opacity:1;transform:translateX(0);}}
+  @keyframes fmloaSlideL{from{opacity:0;transform:translateX(-44px);}to{opacity:1;transform:translateX(0);}}
+
+  /* text side */
+  .panel-text{min-width:0;}
+  .panel-head{
+    display:flex;align-items:flex-start;gap:18px;
+    margin-bottom:clamp(16px,2.2vw,24px);
+  }
+  .panel-letter{
+    font-size:clamp(58px,8.5vw,98px);
+    font-weight:800;line-height:.82;letter-spacing:-.03em;
+    color:var(--accent);flex:0 0 auto;
+  }
+  .panel-namewrap{padding-top:6px;}
+  .panel-step{
+    font-size:11px;font-weight:700;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--text-mute);margin-bottom:6px;
+  }
+  .panel-name{
+    font-size:clamp(19px,2.4vw,26px);
+    font-weight:700;line-height:1.12;letter-spacing:-.01em;color:var(--text);
+  }
+  .panel-tagline{
+    font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:500;
+    font-size:clamp(20px,2.5vw,27px);line-height:1.3;color:var(--text);
+    margin:0 0 clamp(15px,1.9vw,21px);
+  }
+  .panel-tagline strong{font-weight:500;color:var(--accent);font-style:italic;}
+  .panel-body{
+    font-size:clamp(15px,1.1vw,16.5px);line-height:1.72;color:var(--text-soft);
+    margin:0 0 clamp(18px,2.2vw,26px);max-width:46ch;
+  }
+  .panel-body strong{font-weight:600;color:var(--text);}
+  .panel-tag{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:9px 16px;border-radius:999px;
+    background:var(--accent-soft);color:#7a5200;
+    font-size:12.5px;font-weight:600;letter-spacing:.01em;
+  }
+  .panel-tag::before{
+    content:"";width:7px;height:7px;border-radius:50%;
+    background:var(--accent);flex:0 0 auto;
+  }
+
+  /* visual side */
+  .panel-visual{min-width:0;}
+  .visual-card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:clamp(12px,1.8vw,24px);
+    box-shadow:0 24px 50px -40px rgba(20,20,20,.5);
+  }
+  .visual-card svg{
+    display:block;width:100%;height:auto;
+    max-height:min(46vh,420px);
+  }
+
+  /* =========================================================
+     FOOTER NAV (JS only)
+     ========================================================= */
+  .fmloa-footer{
+    align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    border-top:1px solid var(--border);
+    padding:clamp(16px,2.2vw,22px) clamp(24px,4vw,48px);
+    background:var(--bg);
+  }
+  .fmloa-prev{
+    display:inline-flex;align-items:center;gap:9px;
+    background:none;border:none;cursor:pointer;font-family:inherit;
+    font-size:13px;font-weight:600;color:var(--text-mute);padding:8px 4px;
+    transition:color .3s ease, transform .3s ease;
+  }
+  .fmloa-prev:hover{color:var(--text);transform:translateX(-3px);}
+  .fmloa-prev:disabled{opacity:0;pointer-events:none;}
+  .fmloa-prev:focus-visible{outline:none;color:var(--text);text-decoration:underline;}
+
+  .fmloa-next{
+    display:inline-flex;align-items:center;gap:14px;
+    background:var(--bg-dark);border:1px solid var(--bg-dark);border-radius:14px;
+    cursor:pointer;font-family:inherit;padding:11px 16px 11px 20px;color:#fff;
+    text-align:left;max-width:100%;
+    transition:background .3s ease, transform .3s ease, box-shadow .3s ease;
+  }
+  .fmloa-next:hover{transform:translateY(-2px);box-shadow:0 16px 34px -20px rgba(250,171,0,.7);}
+  .fmloa-next:focus-visible{outline:none;box-shadow:0 0 0 3px var(--accent-soft), 0 0 0 4px var(--accent);}
+  .fmloa-next .next-copy{display:flex;flex-direction:column;gap:3px;min-width:0;}
+  .fmloa-next .next-kicker{
+    font-size:10px;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent);
+  }
+  .fmloa-next .next-bridge{
+    font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:500;
+    font-size:14px;line-height:1.25;color:#fff;
+  }
+  .fmloa-next .next-arrow{
+    flex:0 0 auto;width:36px;height:36px;border-radius:50%;
+    background:var(--accent);color:var(--bg-dark);
+    display:flex;align-items:center;justify-content:center;
+    font-size:17px;font-weight:800;transition:transform .3s ease;
+  }
+  .fmloa-next:hover .next-arrow{transform:translateX(3px);}
+  .fmloa-next.is-restart{background:var(--bg-card);border-color:var(--border);}
+  .fmloa-next.is-restart .next-bridge{color:var(--text);}
+  .fmloa-next.is-restart .next-kicker{color:var(--text-mute);}
+  .fmloa-next.is-restart .next-arrow{background:var(--bg);color:var(--text);border:1px solid var(--border);}
+
+  /* =========================================================
+     SIDE ARROWS (JS only, desktop) overlay on stage
+     ========================================================= */
+  .fmloa-side{
+    display:none;
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:42px;height:42px;border-radius:50%;
+    background:var(--bg-card);border:1px solid var(--border);
+    color:var(--text);cursor:pointer;
+    align-items:center;justify-content:center;
+    font-size:20px;line-height:1;z-index:3;
+    box-shadow:0 10px 24px -14px rgba(20,20,20,.5);
+    transition:background .25s ease, transform .25s ease, color .25s ease;
+  }
+  .js-on .fmloa-side{display:flex;}
+  .fmloa-side:hover{background:var(--bg-dark);color:var(--accent);}
+  .fmloa-side:focus-visible{outline:none;box-shadow:0 0 0 3px var(--accent-soft),0 0 0 4px var(--accent);}
+  .fmloa-side.prev{left:10px;}
+  .fmloa-side.next{right:10px;}
+  .fmloa-side:disabled{opacity:0;pointer-events:none;}
+
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+  @media (max-width:840px){
+    .fmloa-panel{grid-template-columns:1fr;gap:clamp(22px,5vw,32px);}
+    .panel-visual{order:2;}
+    .panel-text{order:1;}
+    .visual-card{max-width:420px;margin:0 auto;}
+    .visual-card svg{max-height:none;}
+    .fmloa-side{display:none !important;} /* swipe + chips instead */
+  }
+  @media (max-width:560px){
+    .fmloa-chips{gap:6px;}
+    .fmloa-chip{
+      flex-direction:column;align-items:center;gap:6px;
+      padding:10px 4px 12px;text-align:center;
+    }
+    .fmloa-chip .chip-name{display:none;}
+    .fmloa-chip .chip-letter{width:38px;height:38px;font-size:21px;}
+    .fmloa-footer{justify-content:center;}
+    .fmloa-next{flex:1 1 100%;justify-content:space-between;}
+    .panel-head{gap:13px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .fmloa-chip,.fmloa-next,.fmloa-prev,.fmloa-side,.fmloa-rail .fill,.next-arrow{transition:none;}
+    .js-on .fmloa-panel.is-entering .panel-text,
+    .js-on .fmloa-panel.is-entering .panel-visual{animation:none;}
+    .fmloa-chip.is-active.is-playing .chip-prog::after{animation:none;right:0;}
+    .fmloa-chip:hover,.fmloa-next:hover,.fmloa-prev:hover,.fmloa-side:hover{transform:none;}
+  }
+</style>
+<section class="fmloa-live" id="fmloa" aria-label="As cinco peças do método FMLOA" aria-roledescription="carrossel">
+  <div class="fmloa-inner">
+
+    <div class="fmloa-eyebrow">
+      <span class="line" aria-hidden="true"></span>
+      <span class="label">O fundamento <b>F</b> &amp; as quatro peças <b>M&nbsp;L&nbsp;O&nbsp;A</b>, peça por peça</span>
+    </div>
+
+    <!-- CHIPS / TABS (JS only) -->
+    <div class="fmloa-chips" role="tablist" aria-label="Navegação entre as peças">
+      <button class="fmloa-chip" role="tab" id="chip-F" aria-controls="panel-F" aria-selected="true" data-i="0" type="button">
+        <span class="chip-letter" aria-hidden="true">F</span>
+        <span class="chip-name">Fundamentos Editoriais</span>
+        <span class="chip-prog" aria-hidden="true"></span>
+      </button>
+      <button class="fmloa-chip" role="tab" id="chip-M" aria-controls="panel-M" aria-selected="false" tabindex="-1" data-i="1" type="button">
+        <span class="chip-letter" aria-hidden="true">M</span>
+        <span class="chip-name">Mercado Exponencial</span>
+        <span class="chip-prog" aria-hidden="true"></span>
+      </button>
+      <button class="fmloa-chip" role="tab" id="chip-L" aria-controls="panel-L" aria-selected="false" tabindex="-1" data-i="2" type="button">
+        <span class="chip-letter" aria-hidden="true">L</span>
+        <span class="chip-name">Leitor Ideal</span>
+        <span class="chip-prog" aria-hidden="true"></span>
+      </button>
+      <button class="fmloa-chip" role="tab" id="chip-O" aria-controls="panel-O" aria-selected="false" tabindex="-1" data-i="3" type="button">
+        <span class="chip-letter" aria-hidden="true">O</span>
+        <span class="chip-name">Obra Intencional</span>
+        <span class="chip-prog" aria-hidden="true"></span>
+      </button>
+      <button class="fmloa-chip" role="tab" id="chip-A" aria-controls="panel-A" aria-selected="false" tabindex="-1" data-i="4" type="button">
+        <span class="chip-letter" aria-hidden="true">A</span>
+        <span class="chip-name">Autor Estratégico</span>
+        <span class="chip-prog" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <!-- RAIL (JS only) -->
+    <div class="fmloa-rail-wrap">
+      <div class="fmloa-rail" aria-hidden="true"><span class="fill" id="railFill"></span></div>
+      <div class="fmloa-counter"><b id="counterNow">1</b> / 5</div>
+    </div>
+
+    <!-- STAGE -->
+    <div class="fmloa-stage" id="stage">
+
+      <button class="fmloa-side prev" id="sidePrev" type="button" aria-label="Peça anterior">&lsaquo;</button>
+      <button class="fmloa-side next" id="sideNext" type="button" aria-label="Próxima peça">&rsaquo;</button>
+
+      <!-- ===== PANEL F ===== -->
+      <div class="fmloa-panel is-entering" role="tabpanel" id="panel-F" aria-labelledby="chip-F" tabindex="0" data-i="0">
+        <div class="panel-text">
+          <div class="panel-head">
+            <div class="panel-letter" aria-hidden="true">F</div>
+            <div class="panel-namewrap">
+              <div class="panel-step">Fundamento</div>
+              <div class="panel-name">Fundamentos Editoriais</div>
+            </div>
+          </div>
+          <h3 class="panel-tagline">99% dos autores não conhecem o mercado editorial. E por isso ficam invisíveis.</h3>
+          <p class="panel-body">É aqui que você muda a chave. Aprende a <strong>lógica de atração</strong> que transforma desconhecidos em fãs, os fatores que separam um livro amador de um profissional, e por que a divulgação começa muito antes da última página.</p>
+          <span class="panel-tag">Arte e negócio não são opostos</span>
+        </div>
+        <div class="panel-visual">
+          <div class="visual-card">
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="bookPageGrad" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stop-color="#FFFFFF"/>
@@ -2967,20 +3363,27 @@
           <!-- Bottom label -->
           <text x="200" y="370" text-anchor="middle" fill="#666" font-family="Fraunces" font-style="italic" font-size="12">A engenharia que separa um livro amador de um profissional.</text>
         </svg>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- BRIDGE F → M -->
-  <div class="quad-bridge-line">
-    <p class="quad-bridge-text">Sabidos os fundamentos, falta entender o terreno.</p>
-  </div>
-
-  <!-- CENA M (REVERSE) -->
-  <div class="quad-scene reverse">
-    <div class="quad-scene-inner">
-      <div class="quad-visual">
-        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <!-- ===== PANEL M ===== -->
+      <div class="fmloa-panel" role="tabpanel" id="panel-M" aria-labelledby="chip-M" tabindex="0" data-i="1">
+        <div class="panel-text">
+          <div class="panel-head">
+            <div class="panel-letter" aria-hidden="true">M</div>
+            <div class="panel-namewrap">
+              <div class="panel-step">Peça 01</div>
+              <div class="panel-name">Mercado Exponencial</div>
+            </div>
+          </div>
+          <h3 class="panel-tagline">Num mercado que lança 2.000 livros por mês, ineditismo não é diferencial.</h3>
+          <p class="panel-body">Pra se diferenciar, seu livro precisa ser lançado <strong>na hora certa, no lugar certo, da maneira certa.</strong> Você desenvolve o ciclo de vida do livro, a teoria dos chapéus (a ótica do leitor, do livreiro e do editor) e a sazonalidade editorial: por que as grandes editoras lançam em só 9 dos 12 meses do ano.</p>
+          <span class="panel-tag">Sazonalidade Editorial</span>
+        </div>
+        <div class="panel-visual">
+          <div class="visual-card">
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
           <!-- 2000 livros visualization - barras representing months -->
           <g transform="translate(40, 40)">
             <text x="160" y="30" text-anchor="middle" fill="#1A1A1A" font-family="Poppins" font-weight="700" font-size="42">2.000</text>
@@ -3038,38 +3441,27 @@
             </g>
           </g>
         </svg>
+          </div>
+        </div>
       </div>
-      <div class="quad-text">
-        <div class="quad-mega-letter">M</div>
-        <div class="quad-mega-name">Mercado Exponencial</div>
-        <h3 class="quad-mega-tagline">Num mercado que lança 2.000 livros por mês, ineditismo não é diferencial.</h3>
-        <p class="quad-mega-body">
-          Pra se diferenciar, seu livro precisa ser lançado <strong>na hora certa, no lugar certo, da maneira certa.</strong> Você desenvolve o ciclo de vida do livro, a teoria dos chapéus (a ótica do leitor, do livreiro e do editor) e a sazonalidade editorial: por que as grandes editoras lançam em só 9 dos 12 meses do ano.
-        </p>
-        <span class="quad-concept-tag">Sazonalidade Editorial</span>
-      </div>
-    </div>
-  </div>
 
-  <!-- BRIDGE M → L -->
-  <div class="quad-bridge-line">
-    <p class="quad-bridge-text">Mapeado o terreno, falta saber quem está nele.</p>
-  </div>
-
-  <!-- CENA L -->
-  <div class="quad-scene">
-    <div class="quad-scene-inner">
-      <div class="quad-text">
-        <div class="quad-mega-letter">L</div>
-        <div class="quad-mega-name">Leitor Ideal</div>
-        <h3 class="quad-mega-tagline">O seu leitor é o seu melhor vendedor.</h3>
-        <p class="quad-mega-body">
-          Nenhuma estratégia de marketing é mais poderosa do que o efeito boca-a-boca. Mas pra ter fãs que recomendam, primeiro você precisa subir o seu público nos níveis de consciência, sem pular etapas. <strong>Desconhecido → Conhecido → Interessado → Leitor → Fã.</strong>
-        </p>
-        <span class="quad-concept-tag">Pirâmide do Nível de Consciência</span>
-      </div>
-      <div class="quad-visual">
-        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <!-- ===== PANEL L ===== -->
+      <div class="fmloa-panel" role="tabpanel" id="panel-L" aria-labelledby="chip-L" tabindex="0" data-i="2">
+        <div class="panel-text">
+          <div class="panel-head">
+            <div class="panel-letter" aria-hidden="true">L</div>
+            <div class="panel-namewrap">
+              <div class="panel-step">Peça 02</div>
+              <div class="panel-name">Leitor Ideal</div>
+            </div>
+          </div>
+          <h3 class="panel-tagline">O seu leitor é o seu melhor vendedor.</h3>
+          <p class="panel-body">Nenhuma estratégia de marketing é mais poderosa do que o efeito boca-a-boca. Mas pra ter fãs que recomendam, primeiro você precisa subir o seu público nos níveis de consciência, sem pular etapas. <strong>Desconhecido → Conhecido → Interessado → Leitor → Fã.</strong></p>
+          <span class="panel-tag">Pirâmide do Nível de Consciência</span>
+        </div>
+        <div class="panel-visual">
+          <div class="visual-card">
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(200, 200)">
             <!-- Pyramid layers, from bottom to top -->
             <!-- Desconhecido (base) -->
@@ -3103,20 +3495,27 @@
             <polygon points="-5,-50 0,-60 5,-50" fill="#FAAB00"/>
           </g>
         </svg>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- BRIDGE L → O -->
-  <div class="quad-bridge-line">
-    <p class="quad-bridge-text">Conhecido o leitor, falta a obra à altura dele.</p>
-  </div>
-
-  <!-- CENA O (REVERSE) -->
-  <div class="quad-scene reverse">
-    <div class="quad-scene-inner">
-      <div class="quad-visual">
-        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <!-- ===== PANEL O ===== -->
+      <div class="fmloa-panel" role="tabpanel" id="panel-O" aria-labelledby="chip-O" tabindex="0" data-i="3">
+        <div class="panel-text">
+          <div class="panel-head">
+            <div class="panel-letter" aria-hidden="true">O</div>
+            <div class="panel-namewrap">
+              <div class="panel-step">Peça 03</div>
+              <div class="panel-name">Obra Intencional</div>
+            </div>
+          </div>
+          <h3 class="panel-tagline">Um livro não nasce no lançamento. Nasce numa gestação.</h3>
+          <p class="panel-body">A maioria divide o cronograma em "antes" e "depois", e improvisa nos dois. O resultado é o que você conhece: vendas pra amigos e família, um pico curto, queda brusca. O método entrega o <strong>CGCE</strong>: cinco fases que substituem o lançamento improvisado.</p>
+          <span class="panel-tag">CGCE · 5 Fases</span>
+        </div>
+        <div class="panel-visual">
+          <div class="visual-card">
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
           <!-- Two curves comparison: improvisation vs CGCE -->
           <g transform="translate(40, 60)">
             <!-- Title -->
@@ -3156,38 +3555,27 @@
             </g>
           </g>
         </svg>
+          </div>
+        </div>
       </div>
-      <div class="quad-text">
-        <div class="quad-mega-letter">O</div>
-        <div class="quad-mega-name">Obra Intencional</div>
-        <h3 class="quad-mega-tagline">Um livro não nasce no lançamento. Nasce numa gestação.</h3>
-        <p class="quad-mega-body">
-          A maioria divide o cronograma em "antes" e "depois", e improvisa nos dois. O resultado é o que você conhece: vendas pra amigos e família, um pico curto, queda brusca. O método entrega o <strong>CGCE</strong>: cinco fases que substituem o lançamento improvisado.
-        </p>
-        <span class="quad-concept-tag">CGCE · 5 Fases</span>
-      </div>
-    </div>
-  </div>
 
-  <!-- BRIDGE O → A -->
-  <div class="quad-bridge-line">
-    <p class="quad-bridge-text">Tudo no lugar. Falta o último elo: você.</p>
-  </div>
-
-  <!-- CENA A -->
-  <div class="quad-scene">
-    <div class="quad-scene-inner">
-      <div class="quad-text">
-        <div class="quad-mega-letter">A</div>
-        <div class="quad-mega-name">Autor Estratégico</div>
-        <h3 class="quad-mega-tagline">Autoridade não nasce do algoritmo. Nasce da interseção.</h3>
-        <p class="quad-mega-body">
-          Sem método, o autor persegue a rede social do momento, gasta tempo e dinheiro, e recomeça a cada algoritmo novo. Aqui você descobre a sua <strong>Zona de Influência</strong>: onde seus pontos fortes encontram o que o <strong>Leitor Ideal</strong> quer. Uma posição que cresce com o tempo, não com o algoritmo da semana.
-        </p>
-        <span class="quad-concept-tag">Zona de Influência</span>
-      </div>
-      <div class="quad-visual">
-        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <!-- ===== PANEL A ===== -->
+      <div class="fmloa-panel" role="tabpanel" id="panel-A" aria-labelledby="chip-A" tabindex="0" data-i="4">
+        <div class="panel-text">
+          <div class="panel-head">
+            <div class="panel-letter" aria-hidden="true">A</div>
+            <div class="panel-namewrap">
+              <div class="panel-step">Peça 04</div>
+              <div class="panel-name">Autor Estratégico</div>
+            </div>
+          </div>
+          <h3 class="panel-tagline">Autoridade não nasce do algoritmo. Nasce da interseção.</h3>
+          <p class="panel-body">Sem método, o autor persegue a rede social do momento, gasta tempo e dinheiro, e recomeça a cada algoritmo novo. Aqui você descobre a sua <strong>Zona de Influência</strong>: onde seus pontos fortes encontram o que o <strong>Leitor Ideal</strong> quer. Uma posição que cresce com o tempo, não com o algoritmo da semana.</p>
+          <span class="panel-tag">Zona de Influência</span>
+        </div>
+        <div class="panel-visual">
+          <div class="visual-card">
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
           <!-- Venn diagram: Pontos fortes ∩ Interesse do leitor = Zona de Influência -->
           <g transform="translate(200, 200)">
             <!-- Left circle: Pontos fortes -->
@@ -3216,13 +3604,250 @@
           <!-- Result text -->
           <text x="200" y="370" text-anchor="middle" fill="#666" font-family="Fraunces" font-style="italic" font-size="13">A interseção é onde a autoridade nasce.</text>
         </svg>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!-- FOOTER NAV (JS only) -->
+      <div class="fmloa-footer">
+        <button class="fmloa-prev" id="btnPrev" type="button" disabled>
+          <span aria-hidden="true">&larr;</span> Voltar
+        </button>
+        <button class="fmloa-next" id="btnNext" type="button">
+          <span class="next-copy">
+            <span class="next-kicker" id="nextKicker">A seguir</span>
+            <span class="next-bridge" id="nextBridge">Sabidos os fundamentos, falta entender o terreno.</span>
+          </span>
+          <span class="next-arrow" id="nextArrow" aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
+
+    </div><!-- /stage -->
+
+    <!-- ARIA live region for screen-reader announcements -->
+    <p class="sr-only" aria-live="polite" id="liveRegion" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;"></p>
   </div>
-
 </section>
+<script>
+(function(){
+  var section  = document.getElementById('fmloa');
+  var stage    = document.getElementById('stage');
+  var chips    = Array.prototype.slice.call(document.querySelectorAll('.fmloa-chip'));
+  var panels   = Array.prototype.slice.call(document.querySelectorAll('.fmloa-panel'));
+  var railFill   = document.getElementById('railFill');
+  var counterNow = document.getElementById('counterNow');
+  var btnPrev    = document.getElementById('btnPrev');
+  var btnNext    = document.getElementById('btnNext');
+  var sidePrev   = document.getElementById('sidePrev');
+  var sideNext   = document.getElementById('sideNext');
+  var nextKicker = document.getElementById('nextKicker');
+  var nextBridge = document.getElementById('nextBridge');
+  var nextArrow  = document.getElementById('nextArrow');
+  var liveRegion = document.getElementById('liveRegion');
 
-<!-- FECHAMENTO DA SEÇÃO -->
+  var N = chips.length; // 5
+  var AUTOPLAY_MS = 7000;
+
+  // Bridges in order F→M, M→L, L→O, O→A
+  var bridges = [
+    "Sabidos os fundamentos, falta entender o terreno.",
+    "Mapeado o terreno, falta saber quem está nele.",
+    "Conhecido o leitor, falta a obra à altura dele.",
+    "Tudo no lugar. Falta o último elo: você."
+  ];
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Activate JS mode (this hides inactive panels, reveals chips/rail/footer)
+  section.classList.add('js-on');
+
+  var current   = 0;
+  var prevIndex = 0;
+  var manual    = reduceMotion;   // reduced motion -> start manual (no autoplay)
+  var visible   = false;
+  var hovering  = false;
+  var timer     = null;
+
+  function clearTimer(){ if(timer){ clearTimeout(timer); timer = null; } }
+
+  function autoplayEnabled(){
+    return !manual && !reduceMotion && visible && !hovering;
+  }
+
+  function scheduleNext(){
+    clearTimer();
+    if(!autoplayEnabled()) return;
+    timer = setTimeout(function(){
+      go((current + 1) % N, false);  // loop A -> F
+    }, AUTOPLAY_MS);
+  }
+
+  function paintChips(){
+    var playing = autoplayEnabled();
+    chips.forEach(function(c, idx){
+      c.classList.remove('is-active','is-playing','is-done');
+      // restart the CSS keyframe by reflow when needed
+      if(idx < current){ c.classList.add('is-done'); }
+      if(idx === current){
+        c.classList.add('is-active');
+        if(playing){
+          void c.offsetWidth; // reflow to restart fill animation
+          c.classList.add('is-playing');
+        }
+      }
+    });
+  }
+
+  function go(i, isManual){
+    if(i < 0) i = 0;
+    if(i > N-1) i = N-1;
+    prevIndex = current;
+    current = i;
+
+    if(isManual){ manual = true; }
+
+    var dir = (current >= prevIndex) ? 'from-right' : 'from-left';
+
+    chips.forEach(function(c, idx){
+      var on = idx === i;
+      c.setAttribute('aria-selected', on ? 'true' : 'false');
+      c.tabIndex = on ? 0 : -1;
+    });
+
+    panels.forEach(function(p, idx){
+      var on = idx === i;
+      p.classList.remove('is-entering','from-right','from-left');
+      if(on){
+        p.hidden = false;
+        if(!reduceMotion){
+          void p.offsetWidth;
+          p.classList.add('is-entering', dir);
+        }
+      } else {
+        p.hidden = true;
+      }
+    });
+
+    railFill.style.width = ((i+1)/N*100) + '%';
+    counterNow.textContent = (i+1);
+
+    btnPrev.disabled = (i === 0);
+    sidePrev.disabled = (i === 0);
+
+    if(i < N-1){
+      btnNext.classList.remove('is-restart');
+      nextKicker.textContent = 'A seguir';
+      nextBridge.textContent = bridges[i];
+      nextArrow.innerHTML = '&rarr;';
+    } else {
+      btnNext.classList.add('is-restart');
+      nextKicker.textContent = 'Revisar';
+      nextBridge.textContent = 'Voltar ao começo do método.';
+      nextArrow.innerHTML = '&#8635;';
+    }
+
+    paintChips();
+    scheduleNext();
+
+    if(liveRegion){
+      var nm = chips[i].querySelector('.chip-name');
+      liveRegion.textContent = 'Peça ' + (i+1) + ' de ' + N + (nm ? ': ' + nm.textContent : '');
+    }
+  }
+
+  // --- chip clicks (manual) ---
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){ go(parseInt(c.dataset.i,10), true); });
+  });
+
+  // --- roving tablist keyboard nav ---
+  var chiplist = document.querySelector('.fmloa-chips');
+  chiplist.addEventListener('keydown', function(e){
+    var idx = current, handled = true;
+    switch(e.key){
+      case 'ArrowRight':
+      case 'ArrowDown': idx = (current+1)%N; break;
+      case 'ArrowLeft':
+      case 'ArrowUp':   idx = (current-1+N)%N; break;
+      case 'Home': idx = 0; break;
+      case 'End':  idx = N-1; break;
+      default: handled = false;
+    }
+    if(handled){
+      e.preventDefault();
+      go(idx, true);
+      chips[idx].focus();
+    }
+  });
+
+  // --- footer + side controls (manual) ---
+  btnPrev.addEventListener('click', function(){ go(current-1, true); });
+  sidePrev.addEventListener('click', function(){ go(current-1, true); });
+  btnNext.addEventListener('click', function(){
+    go(current < N-1 ? current+1 : 0, true);
+  });
+  sideNext.addEventListener('click', function(){
+    go(current < N-1 ? current+1 : 0, true);
+  });
+
+  // --- keyboard arrows when section/stage focused ---
+  stage.addEventListener('keydown', function(e){
+    if(e.target.closest('.fmloa-chips')) return; // tablist handles its own
+    if(e.key === 'ArrowRight'){ e.preventDefault(); go(current < N-1 ? current+1 : 0, true); }
+    else if(e.key === 'ArrowLeft'){ e.preventDefault(); go(current > 0 ? current-1 : 0, true); }
+  });
+
+  // --- pause on hover / focus within section ---
+  function onEnter(){ hovering = true; clearTimer(); paintChips(); }
+  function onLeave(){ hovering = false; paintChips(); scheduleNext(); }
+  section.addEventListener('mouseenter', onEnter);
+  section.addEventListener('mouseleave', onLeave);
+  section.addEventListener('focusin', onEnter);
+  section.addEventListener('focusout', function(e){
+    if(!section.contains(e.relatedTarget)){ onLeave(); }
+  });
+
+  // --- swipe on touch ---
+  var tStartX = 0, tStartY = 0, tracking = false;
+  stage.addEventListener('touchstart', function(e){
+    if(e.touches.length !== 1) return;
+    tracking = true;
+    tStartX = e.touches[0].clientX;
+    tStartY = e.touches[0].clientY;
+  }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    if(!tracking) return;
+    tracking = false;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - tStartX;
+    var dy = t.clientY - tStartY;
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)*1.4){
+      if(dx < 0){ go(current < N-1 ? current+1 : 0, true); }
+      else { go(current > 0 ? current-1 : current, true); }
+    }
+  }, {passive:true});
+
+  // --- IntersectionObserver: autoplay only while visible ---
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        visible = en.isIntersecting && en.intersectionRatio >= 0.4;
+        paintChips();
+        if(visible) scheduleNext();
+        else clearTimer();
+      });
+    }, {threshold:[0,0.4,0.75]});
+    io.observe(section);
+  } else {
+    visible = true;
+    scheduleNext();
+  }
+
+  // init
+  go(0, false);
+})();
+</script>
+
 <section class="quad-finale">
   <div class="quad-finale-inner">
     <p class="finale-eyebrow">A soma do fundamento e das 4 peças</p>
