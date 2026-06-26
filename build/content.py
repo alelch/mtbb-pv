@@ -542,8 +542,7 @@ PAGES = {
       </li>""",
         "PC_TEXT": """Você lançou seu livro.<br>Se sozinho não foi o suficiente, <em class="hl-risco">e agora?</em>""",
         "MENTORIA": """Você valida cada decisão (reativar o livro, ajustar posicionamento ou planejar o próximo) com quem já guiou 800 lançamentos.""",
-        "GARANTIA_CLOSE": """    </div>
-  </div>
+        "GARANTIA_CLOSE": """  </div>
 </section>
 
 """,
@@ -683,8 +682,7 @@ PAGES = {
       </li>""",
         "PC_TEXT": """Você só lança seu livro <em>uma vez</em>.<br>Se for sozinho e der errado, <em class="hl-risco">e aí?</em>""",
         "MENTORIA": """Você valida cada decisão (capa, editora, data de lançamento) com quem já guiou 800 lançamentos.""",
-        "GARANTIA_CLOSE": """    </div>
-  </div>
+        "GARANTIA_CLOSE": """  </div>
 </section>
 
 """,
@@ -813,8 +811,7 @@ PAGES = {
       </li>""",
         "PC_TEXT": """Você só lança seu livro <em>uma vez</em>.<br>Se for sozinho e der errado, <em class="hl-risco">e aí?</em>""",
         "MENTORIA": """Você valida cada decisão (capa, editora, data de lançamento) com quem já guiou 800 lançamentos.""",
-        "GARANTIA_CLOSE": """    </div>
-  </div>
+        "GARANTIA_CLOSE": """  </div>
 </section>
 
 """,
