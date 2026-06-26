@@ -2720,6 +2720,18 @@
     color: rgba(255,255,255,0.3);
     line-height: 1.5;
   }
+
+  /* ===== Quebra de linha amigavel (evita orfas / 2 linhas feias, sobretudo no mobile) ===== */
+  h1, h2, h3, h4,
+  .section-title, .pergunta-cta .pc-text, .finale-headline,
+  .panel-name, .panel-tagline, .quad-finale .finale-headline,
+  blockquote, .gv9-foot-txt { text-wrap: balance; }
+  p, .section-subtitle, .agi-sub, .hero-sub, .card__desc, .pc-eyebrow { text-wrap: pretty; }
+  @media (max-width: 560px) {
+    .btn-cta { font-size: 16px; padding: 17px 24px; letter-spacing: -0.3px; display: block; text-wrap: balance; }
+    .pergunta-cta { padding: 64px 20px; }
+  }
+
 </style>
 <script src="pixel.js"></script>
 <script src="gtag.js"></script>
