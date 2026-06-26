@@ -3064,7 +3064,7 @@
 
   .js-on .fmloa-chips{display:flex;}
   .js-on .fmloa-rail-wrap{display:flex;}
-  .js-on .fmloa-footer{display:flex;}
+  .js-on .fmloa-footer{display:none;}
 
   /* ---------- Chips (tabs) ---------- */
   .fmloa-chips{
@@ -3837,7 +3837,7 @@
   var current   = 0;
   var prevIndex = 0;
   var manual    = reduceMotion;   // reduced motion -> start manual (no autoplay)
-  var visible   = false;
+  var visible   = true;
   var hovering  = false;
   var timer     = null;
 
@@ -3973,8 +3973,7 @@
   // --- pause on hover / focus within section ---
   function onEnter(){ hovering = true; clearTimer(); paintChips(); }
   function onLeave(){ hovering = false; paintChips(); scheduleNext(); }
-  section.addEventListener('mouseenter', onEnter);
-  section.addEventListener('mouseleave', onLeave);
+  /* hover nao pausa mais: autoplay continuo ate o usuario interagir */
   section.addEventListener('focusin', onEnter);
   section.addEventListener('focusout', function(e){
     if(!section.contains(e.relatedTarget)){ onLeave(); }
@@ -4004,12 +4003,12 @@
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        visible = en.isIntersecting && en.intersectionRatio >= 0.4;
+        visible = en.isIntersecting && en.intersectionRatio >= 0.25;
         paintChips();
         if(visible) scheduleNext();
         else clearTimer();
       });
-    }, {threshold:[0,0.4,0.75]});
+    }, {threshold:[0,0.25,0.6]});
     io.observe(section);
   } else {
     visible = true;
