@@ -47,7 +47,7 @@ PAGES = {
       <span class="l1"><span class="qm">&ldquo;</span>Seu livro não precisa nascer de novo.</span>
       <span class="l2">Precisa voltar a ser encontrado.</span>
     </blockquote>
-    <cite>— Dany Sakugawa</cite>
+    <cite>Dany Sakugawa</cite>
   </figure>
 </section>
 
@@ -192,7 +192,7 @@ PAGES = {
       <span class="l1"><span class="qm">&ldquo;</span>O lançamento não começa quando o livro fica pronto.</span>
       <span class="l2">Começa nas decisões que você toma enquanto escreve.</span>
     </blockquote>
-    <cite>— Dany Sakugawa</cite>
+    <cite>Dany Sakugawa</cite>
   </figure>
 </section>
 
@@ -479,7 +479,7 @@ PAGES = {
       <span class="l1"><span class="qm">&ldquo;</span>Seu livro não precisa nascer de novo.</span>
       <span class="l2">Precisa voltar a ser encontrado.</span>
     </blockquote>
-    <cite>— Dany Sakugawa</cite>
+    <cite>Dany Sakugawa</cite>
   </figure>
 </section>
 
@@ -620,7 +620,7 @@ PAGES = {
       <span class="l1"><span class="qm">&ldquo;</span>O lançamento não começa quando o livro fica pronto.</span>
       <span class="l2">Começa nas decisões que você toma enquanto escreve.</span>
     </blockquote>
-    <cite>— Dany Sakugawa</cite>
+    <cite>Dany Sakugawa</cite>
   </figure>
 </section>
 

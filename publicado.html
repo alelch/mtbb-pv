@@ -997,166 +997,7 @@
     line-height: 1.55;
   }
 
-  /* BLOCO 9 — QUADRANTES SEXY */
-  .quads-section {
-    background: var(--bg);
-    padding: 100px 0;
-  }
-  .quads-intro {
-    text-align: center;
-    max-width: 720px;
-    margin: 0 auto 80px;
-    padding: 0 24px;
-  }
-  .quad-scene {
-    max-width: 1000px;
-    margin: 0 auto 120px;
-    padding: 0 24px;
-  }
-  .quad-scene:last-of-type { margin-bottom: 80px; }
-  .quad-scene-inner {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 60px;
-    align-items: center;
-  }
-  .quad-scene.reverse .quad-scene-inner {
-    grid-template-columns: 1.2fr 1fr;
-  }
-  .quad-scene.reverse .quad-visual { order: 2; }
-  .quad-scene.reverse .quad-text { order: 1; }
-  @media (max-width: 800px) {
-    .quad-scene-inner,
-    .quad-scene.reverse .quad-scene-inner {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .quad-scene .quad-text, .quad-scene.reverse .quad-text { order: 1; }
-    .quad-scene .quad-visual, .quad-scene.reverse .quad-visual { order: 2; }
-  }
-  .quad-mega-letter {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: clamp(60px, 8vw, 96px);
-    color: var(--accent);
-    line-height: 1;
-    letter-spacing: -4px;
-    margin-bottom: 4px;
-  }
-  .quad-mega-name {
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-mute);
-    font-weight: 600;
-    margin-bottom: 28px;
-  }
-  .quad-mega-tagline {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: clamp(22px, 2.6vw, 30px);
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-    color: var(--text);
-    margin-bottom: 24px;
-  }
-  .quad-mega-body {
-    color: var(--text-soft);
-    font-size: 16px;
-    line-height: 1.7;
-    margin-bottom: 24px;
-  }
-  .quad-mega-body strong { color: var(--text); font-weight: 600; }
-  .quad-concept-tag {
-    display: inline-block;
-    background: #000;
-    color: var(--accent);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 8px 16px;
-    border-radius: 6px;
-  }
-  .quad-visual {
-    aspect-ratio: 1;
-    background: var(--bg-card);
-    border-radius: 20px;
-    padding: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-    border: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-  .quad-visual svg { width: 100%; height: 100%; }
-
-  /* Bridge entre quadrantes */
-  .quad-bridge-line {
-    max-width: 1000px;
-    margin: -60px auto 60px;
-    padding: 0 24px;
-    text-align: center;
-    position: relative;
-  }
-  .quad-bridge-line::before {
-    content: '';
-    display: block;
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(180deg, transparent, var(--accent));
-    margin: 0 auto 16px;
-  }
-  .quad-bridge-text {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: var(--text-mute);
-    max-width: 480px;
-    margin: 0 auto;
-  }
-  .quad-bridge-line::after {
-    content: '';
-    display: block;
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(180deg, var(--accent), transparent);
-    margin: 16px auto 0;
-  }
-
-  /* Variant: dark scene */
-  .quad-scene.dark { background: var(--bg-dark); padding: 80px 0; margin-bottom: 0; max-width: none; }
-  .quad-scene.dark .quad-scene-inner { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-  .quad-scene.dark .quad-mega-name { color: rgba(255,255,255,0.5); }
-  .quad-scene.dark .quad-mega-tagline { color: white; }
-  .quad-scene.dark .quad-mega-body { color: rgba(255,255,255,0.7); }
-  .quad-scene.dark .quad-mega-body strong { color: white; }
-  .quad-scene.dark .quad-visual {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(250,171,0,0.15);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  }
-  .quad-scene.dark .quad-concept-tag {
-    background: var(--accent);
-    color: #000;
-  }
-  .quad-bridge-line.on-dark::before,
-  .quad-bridge-line.on-dark::after {
-    opacity: 0.4;
-  }
-  .quad-bridge-line.on-dark .quad-bridge-text {
-    color: rgba(255,255,255,0.5);
-  }
-  .quad-bridge-line.on-dark {
-    background: var(--bg-dark);
-    margin: 0;
-    padding: 40px 24px;
-    max-width: none;
-  }
+  /* BLOCO 9 explicacao FMLOA: ver secao .fmloa-live (CSS junto da secao) */
 
   /* FECHAMENTO */
   .quad-finale {
@@ -2925,7 +2766,7 @@
       <span class="l1"><span class="qm">&ldquo;</span>Seu livro não precisa nascer de novo.</span>
       <span class="l2">Precisa voltar a ser encontrado.</span>
     </blockquote>
-    <cite>— Dany Sakugawa</cite>
+    <cite>Dany Sakugawa</cite>
   </figure>
 </section>
 
@@ -3972,7 +3813,7 @@
   var liveRegion = document.getElementById('liveRegion');
 
   var N = chips.length; // 5
-  var AUTOPLAY_MS = 7000;
+  var AUTOPLAY_MS = 4500;
 
   // Bridges in order F→M, M→L, L→O, O→A
   var bridges = [
@@ -4232,9 +4073,9 @@
             <span class="live-recur">Toda última terça do mês</span>
           </div>
           <div class="live-date">
-            <span class="live-day" id="liveDay">—</span>
+            <span class="live-day" id="liveDay"></span>
             <div class="live-dm">
-              <span class="live-mon" id="liveMon">—</span>
+              <span class="live-mon" id="liveMon"></span>
               <span class="live-wd">terça-feira</span>
             </div>
           </div>
@@ -4418,7 +4259,7 @@
 
       <a href="#" class="btn-cta large open-modal" data-hotmart="https://pay.hotmart.com/B73928367P?off=h0n7diwh&checkoutMode=10" style="width: 100%; box-sizing: border-box;">Quero ser um autor de sucesso →</a>
       <div class="cta-trust"><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12.5 2.4 2.4 4.7-5.3"/></svg>Garantia de 15 dias</span><span><svg class="ct-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Compra segura</span></div>
-      <p class="urgency-strip"><svg class="us-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="us-text">Entre hoje e já participe do próximo encontro ao vivo com a Dany, dia <strong id="liveUrgency">—</strong>.</span></p>
+      <p class="urgency-strip"><svg class="us-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="us-text">Entre hoje e já participe do próximo encontro ao vivo com a Dany, dia <strong id="liveUrgency"></strong>.</span></p>
     </div>
   </div>
 </section>
@@ -5226,7 +5067,6 @@
   .offer-section, .faq-section, .final-cta {
     padding-top: 52px; padding-bottom: 52px;
   }
-  .quads-section { padding-top: 52px !important; }
   .media-grid-section { padding-top: 44px; padding-bottom: 52px; }
 }
 </style>
