@@ -213,6 +213,19 @@
     height: 100%;
     border: 0;
   }
+  .vsl-facade {
+    position:absolute; inset:0; width:100%; height:100%;
+    border:0; padding:0; margin:0; cursor:pointer; display:block; background:var(--bg-dark);
+  }
+  .vsl-thumb { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .vsl-play {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:clamp(58px,8vw,84px); height:clamp(58px,8vw,84px); border-radius:50%;
+    background:rgba(250,171,0,0.95); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 34px rgba(0,0,0,0.45); transition:transform .2s ease, background .2s ease; z-index:2;
+  }
+  .vsl-facade:hover .vsl-play, .vsl-facade:focus-visible .vsl-play { transform:translate(-50%,-50%) scale(1.06); background:#FAAB00; }
+  .vsl-play svg { width:38%; height:38%; margin-left:8%; fill:#0A0A0A; display:block; }
   /* TESE — citação (blockquote barra âmbar à esquerda) */
   .tese-faixa { background: var(--bg); padding: clamp(56px, 9vw, 104px) 24px; display: flex; justify-content: center; }
   .tese-quote { max-width: 860px; width: 100%; text-align: center; }
@@ -2404,8 +2417,25 @@
 <!-- BLOCO 2 — VSL -->
 <div class="vsl-wrap">
   <div class="vsl-frame">
-    <iframe src="https://www.youtube-nocookie.com/embed/sVLzrUURJaw?rel=0&modestbranding=1&playsinline=1" title="Aula gratuita — Método The Book Business" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <button class="vsl-facade" type="button" data-yt="sVLzrUURJaw" aria-label="Assistir à aula gratuita do Método The Book Business">
+      <img class="vsl-thumb" src="assets/aula-metodo-the-book-business.webp" alt="Aula gratuita do Método The Book Business" width="1280" height="720" fetchpriority="high" decoding="async">
+      <span class="vsl-play" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg></span>
+    </button>
   </div>
+  <script>
+  (function(){
+    var f=document.querySelector('.vsl-facade'); if(!f) return;
+    f.addEventListener('click', function(){
+      var id=f.getAttribute('data-yt');
+      var i=document.createElement('iframe');
+      i.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      i.title='Aula gratuita do Método The Book Business';
+      i.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      i.setAttribute('allowfullscreen','');
+      var fr=f.closest('.vsl-frame'); fr.innerHTML=''; fr.appendChild(i);
+    });
+  })();
+  </script>
 </div>
 
 <!-- BLOCO 4 — LOGOS -->
