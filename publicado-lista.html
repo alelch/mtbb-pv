@@ -2784,12 +2784,10 @@
     box-shadow:0 0 0 3px var(--accent-soft), 0 0 0 4px var(--accent);
   }
   .fmloa-chip .chip-letter{
-    font-size:20px;font-weight:800;line-height:1;
-    width:30px;height:30px;flex:0 0 auto;
-    display:flex;align-items:center;justify-content:center;
-    border-radius:9px;
-    background:var(--bg);color:var(--text-mute);
-    transition:background .35s ease, color .35s ease;
+    font-size:21px;font-weight:800;line-height:1;
+    flex:0 0 auto;
+    color:var(--text-mute);
+    transition:color .35s ease;
   }
   .fmloa-chip .chip-name{
     font-size:12px;font-weight:600;color:var(--text-soft);
@@ -2800,7 +2798,7 @@
     background:var(--bg-dark);border-color:var(--bg-dark);
   }
   .fmloa-chip[aria-selected="true"] .chip-letter{
-    background:var(--accent);color:var(--bg-dark);
+    color:var(--accent);
   }
   .fmloa-chip[aria-selected="true"] .chip-name{color:#FFFFFF;}
   .fmloa-chip[aria-selected="true"]:hover{transform:none;}
@@ -3027,24 +3025,32 @@
      RESPONSIVE
      ========================================================= */
   @media (max-width:840px){
-    .fmloa-panel{grid-template-columns:1fr;gap:clamp(22px,5vw,32px);}
+    .fmloa-panel{grid-template-columns:1fr;gap:clamp(18px,4vw,26px);padding:clamp(22px,4vw,34px);}
     .panel-visual{order:2;}
     .panel-text{order:1;}
-    .visual-card{max-width:420px;margin:0 auto;}
-    .visual-card svg{max-height:none;}
+    .visual-card{max-width:380px;margin:0 auto;}
+    .visual-card svg{max-height:min(42vh,330px);}
     .fmloa-side{display:none !important;} /* swipe + chips instead */
   }
   @media (max-width:560px){
+    .fmloa-eyebrow{display:none;}
     .fmloa-chips{gap:6px;}
     .fmloa-chip{
-      flex-direction:column;align-items:center;gap:6px;
-      padding:10px 4px 12px;text-align:center;
+      flex-direction:column;align-items:center;gap:4px;
+      padding:7px 3px 9px;text-align:center;
     }
     .fmloa-chip .chip-name{display:none;}
-    .fmloa-chip .chip-letter{width:38px;height:38px;font-size:21px;}
+    .fmloa-chip .chip-letter{font-size:19px;}
     .fmloa-footer{justify-content:center;}
     .fmloa-next{flex:1 1 100%;justify-content:space-between;}
-    .panel-head{gap:13px;}
+    .panel-head{gap:12px;}
+    .panel-letter{font-size:clamp(44px,12vw,56px);}
+    .panel-name{font-size:19px;}
+    .panel-tagline{font-size:20px;line-height:1.28;margin-bottom:12px;}
+    .panel-body{font-size:14.5px;line-height:1.6;margin-bottom:14px;}
+    .fmloa-panel{padding:18px 16px;gap:14px;}
+    .visual-card{max-width:288px;padding:11px;}
+    .visual-card svg{max-height:min(34vh,220px);}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -3498,7 +3504,7 @@
   var liveRegion = document.getElementById('liveRegion');
 
   var N = chips.length; // 5
-  var AUTOPLAY_MS = 4500;
+  var AUTOPLAY_MS = 3000;
 
   // Bridges in order F→M, M→L, L→O, O→A
   var bridges = [
