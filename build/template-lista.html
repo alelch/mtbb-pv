@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23FAAB00'/%3E%3Ctext x='16' y='23' font-size='19' font-weight='800' text-anchor='middle' font-family='Arial,sans-serif' fill='%230A0A0A'%3ET%3C/text%3E%3C/svg%3E">
 {{SEO_HEAD}}
 <meta property="og:site_name" content="Método The Book Business">
 <meta property="og:locale" content="pt_BR">
@@ -2937,23 +2938,23 @@
 
     <!-- CHIPS / TABS (JS only) -->
     <div class="fmloa-chips" role="tablist" aria-label="Navegação entre as peças">
-      <button class="fmloa-chip" role="tab" id="chip-F" aria-controls="slide-F" aria-selected="true" data-i="0" type="button">
+      <button class="fmloa-chip" role="tab" id="chip-F" aria-controls="slide-F" aria-selected="true" data-i="0" type="button" aria-label="Fundamentos Editoriais">
         <span class="chip-letter" aria-hidden="true">F</span>
         <span class="chip-name">Fundamentos Editoriais</span>
       </button>
-      <button class="fmloa-chip" role="tab" id="chip-M" aria-controls="slide-M" aria-selected="false" tabindex="-1" data-i="1" type="button">
+      <button class="fmloa-chip" role="tab" id="chip-M" aria-controls="slide-M" aria-selected="false" tabindex="-1" data-i="1" type="button" aria-label="Mercado Exponencial">
         <span class="chip-letter" aria-hidden="true">M</span>
         <span class="chip-name">Mercado Exponencial</span>
       </button>
-      <button class="fmloa-chip" role="tab" id="chip-L" aria-controls="slide-L" aria-selected="false" tabindex="-1" data-i="2" type="button">
+      <button class="fmloa-chip" role="tab" id="chip-L" aria-controls="slide-L" aria-selected="false" tabindex="-1" data-i="2" type="button" aria-label="Leitor Ideal">
         <span class="chip-letter" aria-hidden="true">L</span>
         <span class="chip-name">Leitor Ideal</span>
       </button>
-      <button class="fmloa-chip" role="tab" id="chip-O" aria-controls="slide-O" aria-selected="false" tabindex="-1" data-i="3" type="button">
+      <button class="fmloa-chip" role="tab" id="chip-O" aria-controls="slide-O" aria-selected="false" tabindex="-1" data-i="3" type="button" aria-label="Obra Intencional">
         <span class="chip-letter" aria-hidden="true">O</span>
         <span class="chip-name">Obra Intencional</span>
       </button>
-      <button class="fmloa-chip" role="tab" id="chip-A" aria-controls="slide-A" aria-selected="false" tabindex="-1" data-i="4" type="button">
+      <button class="fmloa-chip" role="tab" id="chip-A" aria-controls="slide-A" aria-selected="false" tabindex="-1" data-i="4" type="button" aria-label="Autor Estratégico">
         <span class="chip-letter" aria-hidden="true">A</span>
         <span class="chip-name">Autor Estratégico</span>
       </button>
@@ -2971,7 +2972,7 @@
       <button class="fmloa-side prev" id="sidePrev" type="button" aria-label="Peça anterior">&lsaquo;</button>
       <button class="fmloa-side next" id="sideNext" type="button" aria-label="Próxima peça">&rsaquo;</button>
 
-      <div class="fmloa-track" id="track" tabindex="0" aria-label="Carrossel das cinco peças, deslize para o lado">
+      <div class="fmloa-track" id="track" role="group" tabindex="0" aria-label="Carrossel das cinco peças, deslize para o lado">
 
         <!-- ===== SLIDE F ===== -->
         <div class="fmloa-slide" role="tabpanel" aria-roledescription="slide" id="slide-F" aria-labelledby="chip-F" data-i="0" data-name="Fundamentos Editoriais">
@@ -3353,7 +3354,7 @@
     </div><!-- /viewport -->
 
     <!-- DOTS (JS only) -->
-    <div class="fmloa-dotswrap" id="dots" aria-hidden="true">
+    <div class="fmloa-dotswrap" id="dots">
       <button class="fmloa-dot is-active" type="button" data-i="0" aria-label="Ir para a peça 1"></button>
       <button class="fmloa-dot" type="button" data-i="1" aria-label="Ir para a peça 2"></button>
       <button class="fmloa-dot" type="button" data-i="2" aria-label="Ir para a peça 3"></button>
