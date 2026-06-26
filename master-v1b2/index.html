@@ -54,22 +54,29 @@
 
 
 
-  <!-- Meta Pixel Code - disparo imediato do PageView para medição correta (connect rate) -->
+  <!-- Meta Pixel Code - stub sincrono; fbevents.js carregado no idle/1a interacao (perf) -->
   <script>
-    function loadFBPixel() {
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1665265050801984');
-      fbq('init', '617884976680212');
-      fbq('track', 'PageView');
-    }
-    loadFBPixel();
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document,'script');
+    fbq('init', '1665265050801984');
+    fbq('init', '617884976680212');
+    fbq('track', 'PageView');
+    (function () {
+      var loaded = false;
+      function loadFbevents() {
+        if (loaded) return; loaded = true;
+        var t = document.createElement('script'); t.async = true;
+        t.src = 'https://connect.facebook.net/en_US/fbevents.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      }
+      if ('requestIdleCallback' in window) requestIdleCallback(loadFbevents, { timeout: 2500 });
+      else setTimeout(loadFbevents, 2000);
+      ['scroll', 'click', 'touchstart', 'keydown', 'mousemove'].forEach(function (ev) {
+        document.addEventListener(ev, loadFbevents, { once: true, passive: true });
+      });
+    })();
   </script>
   <!-- End Meta Pixel Code -->
 
