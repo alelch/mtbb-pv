@@ -86,7 +86,8 @@
   <!-- End Meta Pixel Code -->
 
   <!-- A/B Test framework (master-v1b2) — multi-teste: pagina (headline) + checkout -->
-  <style>html.ab-pending [data-ab-el="headline"]{visibility:hidden!important}</style>
+  <style>html.ab-pending [data-ab-el="headline"]{visibility:hidden!important}
+  @media(max-width:639px){#sticky-cta a.btn-primary{white-space:nowrap;font-size:12.5px;letter-spacing:-.01em;padding-left:14px;padding-right:14px}#sticky-cta a.btn-primary svg{width:14px;height:14px;flex:0 0 auto}}</style>
   <script>
   (function(){
     var SB="https://jsqtpsxpaclslakafmvd.supabase.co";
@@ -103,12 +104,12 @@
       var els=document.querySelectorAll('[data-ab-el="headline"]');
       if(window.innerWidth>=640){ for(var x=0;x<els.length;x++){ els[x].style.fontSize=''; els[x].style.lineHeight=''; } return; }
       requestAnimationFrame(function(){ try{
-        var target=Math.round(window.innerHeight*0.34), MINF=24, MAXF=44, MAXLINES=3;
+        var MINF=28, MAXF=44, MAXLINES=3; // piso 28 = tamanho original (headline longa fica no original, não estica)
+        function nlines(el){ var r=document.createRange(); r.selectNodeContents(el); var rs=r.getClientRects(), tops={}, n=0;
+          for(var k=0;k<rs.length;k++){ if(rs[k].width<1||rs[k].height<1) continue; var t=Math.round(rs[k].top); if(!(t in tops)){ tops[t]=1; n++; } } return n; }
         for(var i=0;i<els.length;i++){ var el=els[i]; if(el.offsetParent===null) continue;
           el.style.lineHeight='1.1'; var f=MAXF;
-          while(f>MINF){ el.style.fontSize=f+'px';
-            if(el.scrollHeight<=target && Math.round(el.scrollHeight/(f*1.1))<=MAXLINES) break;
-            f-=1; }
+          while(f>MINF){ el.style.fontSize=f+'px'; if(nlines(el)<=MAXLINES) break; f-=1; }
           el.style.fontSize=f+'px'; }
       }catch(e){} });
     }catch(e){} }
