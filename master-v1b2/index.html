@@ -85,13 +85,13 @@
   </script>
   <!-- End Meta Pixel Code -->
 
-  <!-- A/B Test framework (master-v1b2) -->
+  <!-- A/B Test framework (master-v1b2) — multi-teste: pagina (headline) + checkout -->
   <style>html.ab-pending [data-ab-el="headline"]{visibility:hidden!important}</style>
   <script>
   (function(){
     var SB="https://jsqtpsxpaclslakafmvd.supabase.co";
     var AK="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc";
-    var SLUG="master-v1b2-headline";
+    var PAGINA="master-v1b2";
     var H=document.documentElement;
     function ck(n,v,d){ if(v===undefined){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return m?decodeURIComponent(m[2]):null;}
       var e=new Date(); e.setTime(e.getTime()+d*864e5); document.cookie=n+"="+encodeURIComponent(v)+";expires="+e.toUTCString()+";path=/;SameSite=Lax"; }
@@ -99,35 +99,42 @@
     function pick(vs){ var t=0,i; for(i=0;i<vs.length;i++)t+=(vs[i].peso||1); var r=Math.random()*t,a=0; for(i=0;i<vs.length;i++){a+=(vs[i].peso||1); if(r<=a)return vs[i].id;} return vs[0].id; }
     function reveal(){ H.classList.remove('ab-pending'); }
     function applyHeadline(txt){ if(txt==null)return; var els=document.querySelectorAll('[data-ab-el="headline"]'); for(var i=0;i<els.length;i++){ if(/[<&]/.test(txt))els[i].innerHTML=txt; else els[i].textContent=txt; } }
-    window.__abTrack=function(ev,extra){ var ab=window.__AB; if(!ab)return; try{ var b={teste_slug:ab.slug,variante:ab.variant,evento:ev,visitor_id:vid()}; if(extra)for(var k in extra)b[k]=extra[k];
+    window.__ABTESTS=[]; window.__ABCK=null; window.__ABREADY=false;
+    window.__abTrack=function(slug,variant,ev,extra){ try{ var b={teste_slug:slug,variante:variant,evento:ev,visitor_id:vid()}; if(extra)for(var k in extra)b[k]=extra[k];
         fetch(SB+"/rest/v1/ab_eventos",{method:"POST",keepalive:true,headers:{apikey:AK,Authorization:"Bearer "+AK,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(b)}); }catch(e){} };
-    setTimeout(reveal,1500); // failsafe: nunca deixar a headline escondida
-    // visita repetida: aplica do cache sem flash
-    var cached=null; try{cached=JSON.parse(localStorage.getItem('ab_cfg_'+SLUG)||'null');}catch(e){}
-    var cookieV=ck('ab_'+SLUG);
-    if(cached&&cached.active&&cookieV&&cached.variants&&cached.variants[cookieV]){
-      H.classList.add('ab-pending'); window.__AB={slug:SLUG,variant:cookieV};
-      var ah=function(){ applyHeadline(cached.variants[cookieV].headline); reveal(); };
-      if(document.readyState!=='loading')ah(); else document.addEventListener('DOMContentLoaded',ah);
+    function assign(tests){ var out=[], needHide=false; window.__ABCK=null;
+      (tests||[]).forEach(function(t){ var vs=t.variantes||[]; if(!vs.length)return;
+        var variant=t.vencedor||ck('ab_'+t.slug);
+        if(!variant||!vs.some(function(v){return v.id===variant;})) variant=t.vencedor||pick(vs);
+        if(!t.vencedor) ck('ab_'+t.slug,variant,30);
+        var ov=(vs.filter(function(v){return v.id===variant;})[0]||{}).overrides||{};
+        out.push({slug:t.slug,variant:variant,sck_tag:t.sck_tag,escopo:t.escopo,ov:ov});
+        if(ov.headline!=null) needHide=true;
+        if(ov.checkout) window.__ABCK=ov.checkout; });
+      window.__ABTESTS=out; return needHide; }
+    function applyAll(){
+      window.__ABTESTS.forEach(function(t){ if(t.ov.headline!=null) applyHeadline(t.ov.headline); });
+      window.__ABREADY=true;
+      if(typeof window.__abReprocess==='function') window.__abReprocess(); // reescreve checkout + tags nos links
+      reveal();
+      window.__ABTESTS.forEach(function(t){ var seen=null; try{seen=localStorage.getItem('ab_seen_'+t.slug);}catch(e){}
+        if(seen!==t.variant){ try{localStorage.setItem('ab_seen_'+t.slug,t.variant);}catch(e){} window.__abTrack(t.slug,t.variant,'view'); } });
     }
+    setTimeout(function(){ window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); },1500); // failsafe
+    // visita repetida: aplica do cache (sem flash)
+    var cached=null; try{cached=JSON.parse(localStorage.getItem('ab_cfg_'+PAGINA)||'null');}catch(e){}
+    if(cached&&cached.length){ if(assign(cached))H.classList.add('ab-pending');
+      if(document.readyState!=='loading')applyAll(); else document.addEventListener('DOMContentLoaded',applyAll); }
     // config fresca (controle ao vivo)
-    fetch(SB+"/rest/v1/ab_testes?slug=eq."+SLUG+"&select=slug,ativo,vencedor,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
+    fetch(SB+"/rest/v1/ab_testes?pagina=eq."+PAGINA+"&ativo=eq.true&select=slug,escopo,sck_tag,vencedor,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
       .then(function(r){return r.json();})
-      .then(function(rows){
-        var c=rows&&rows[0];
-        if(!c||!c.ativo){ window.__AB=null; reveal(); return; }
-        var vmap={}; (c.variantes||[]).forEach(function(v){ vmap[v.id]=v.overrides||{}; });
-        var variant=c.vencedor||ck('ab_'+SLUG);
-        if(!variant||!vmap[variant]) variant=c.vencedor||pick(c.variantes);
-        if(!c.vencedor) ck('ab_'+SLUG,variant,30);
-        window.__AB={slug:c.slug,variant:variant};
-        try{localStorage.setItem('ab_cfg_'+SLUG,JSON.stringify({slug:c.slug,active:c.ativo,variants:vmap}));}catch(e){}
-        var done=function(){ applyHeadline(vmap[variant]&&vmap[variant].headline); reveal();
-          var seen=null; try{seen=localStorage.getItem('ab_seen_'+c.slug);}catch(e){}
-          if(seen!==variant){ try{localStorage.setItem('ab_seen_'+c.slug,variant);}catch(e){} window.__abTrack('view'); } };
-        if(document.readyState!=='loading')done(); else document.addEventListener('DOMContentLoaded',done);
+      .then(function(rows){ rows=rows||[];
+        try{localStorage.setItem('ab_cfg_'+PAGINA,JSON.stringify(rows));}catch(e){}
+        if(!rows.length){ window.__ABTESTS=[]; window.__ABCK=null; window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); return; }
+        if(assign(rows)&&!cached)H.classList.add('ab-pending');
+        if(document.readyState!=='loading')applyAll(); else document.addEventListener('DOMContentLoaded',applyAll);
       })
-      .catch(function(){ reveal(); });
+      .catch(function(){ window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); });
   })();
   </script>
   <!-- End A/B Test -->
@@ -177,15 +184,20 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
         function appendParams(link) {
           for (var j = 0; j < prefix.length; j++) {
             if (link.href.indexOf(prefix[j]) !== -1) {
+              if (link.getAttribute("data-ab-final")) return;
+              if (!window.__ABREADY) return; // espera o A/B resolver (evita link sem variante)
+              // A/B checkout: troca a base do link pela variante escolhida
+              if (window.__ABCK) link.href = window.__ABCK;
               var searchParams = new URLSearchParams(window.location.search).toString();
-              if (!searchParams) return;
-              // Evita duplicar parâmetros
-              if (link.href.indexOf("utm_source") !== -1) return;
-              var utms = getUTMParams();
-              var sck = "master-v1b2|" + utms.source + "|" + utms.medium + "|" + utms.campaign + "|" + utms.term + "|" + utms.content;
-              if (window.__AB && window.__AB.variant) sck += "|pg" + window.__AB.variant;
-              var separator = link.href.indexOf("?") === -1 ? "?" : "&";
-              link.href += separator + searchParams + "&src=" + sck + "&sck=" + sck;
+              if (searchParams && link.href.indexOf("utm_source") === -1) {
+                var utms = getUTMParams();
+                var sck = "master-v1b2|" + utms.source + "|" + utms.medium + "|" + utms.campaign + "|" + utms.term + "|" + utms.content;
+                var ts = window.__ABTESTS || [];
+                for (var t = 0; t < ts.length; t++) { if (ts[t].sck_tag && ts[t].variant) sck += "|" + ts[t].sck_tag + ts[t].variant; }
+                var separator = link.href.indexOf("?") === -1 ? "?" : "&";
+                link.href += separator + searchParams + "&src=" + sck + "&sck=" + sck;
+              }
+              link.setAttribute("data-ab-final", "1");
             }
           }
         }
@@ -196,6 +208,7 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
             appendParams(links[i]);
           }
         }
+        window.__abReprocess = processLinks; // o A/B chama isto após resolver a config
 
         // Processa apenas links dentro de um nó (mais barato que varrer o documento inteiro)
         function processLinksIn(node) {
@@ -208,12 +221,17 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
         // Garante que o parâmetro seja aplicado no clique (fallback) — sempre ativo
         document.addEventListener("click", function (e) {
           var el = e.target.closest && e.target.closest("a");
-          if (el) {
+          if (!el) return;
+          if (el.href && el.href.indexOf("hotmart.com") !== -1) {
+            if (!window.__ABREADY) window.__ABREADY = true; // fallback: nunca perder o clique
             appendParams(el);
-            if (window.__AB && window.__abTrack && el.href && el.href.indexOf("hotmart.com") !== -1) {
+            var ts = window.__ABTESTS || [];
+            if (ts.length && window.__abTrack) {
               var s = ""; try { s = new URL(el.href).searchParams.get("sck") || ""; } catch (_) {}
-              window.__abTrack("initiate", { sck: s });
+              for (var t = 0; t < ts.length; t++) window.__abTrack(ts[t].slug, ts[t].variant, "initiate", { sck: s });
             }
+          } else {
+            appendParams(el);
           }
         }, true);
 
