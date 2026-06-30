@@ -100,7 +100,7 @@
     function reveal(){ H.classList.remove('ab-pending'); }
     function applyHeadline(txt){ if(txt==null)return; var els=document.querySelectorAll('[data-ab-el="headline"]'); for(var i=0;i<els.length;i++){ if(/[<&]/.test(txt))els[i].innerHTML=txt; else els[i].textContent=txt; } }
     window.__ABTESTS=[]; window.__ABCK=null; window.__ABREADY=false;
-    window.__abTrack=function(slug,variant,ev,extra){ try{ var b={teste_slug:slug,variante:variant,evento:ev,visitor_id:vid()}; if(extra)for(var k in extra)b[k]=extra[k];
+    window.__abTrack=function(slug,variant,ev,extra){ if(window.__ABPREVIEW)return; try{ var b={teste_slug:slug,variante:variant,evento:ev,visitor_id:vid()}; if(extra)for(var k in extra)b[k]=extra[k];
         fetch(SB+"/rest/v1/ab_eventos",{method:"POST",keepalive:true,headers:{apikey:AK,Authorization:"Bearer "+AK,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(b)}); }catch(e){} };
     function assign(tests){ var out=[], needHide=false; window.__ABCK=null;
       (tests||[]).forEach(function(t){ var vs=t.variantes||[]; if(!vs.length)return;
@@ -121,6 +121,27 @@
         if(seen!==t.variant){ try{localStorage.setItem('ab_seen_'+t.slug,t.variant);}catch(e){} window.__abTrack(t.slug,t.variant,'view'); } });
     }
     setTimeout(function(){ window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); },1500); // failsafe
+    // MODO PREVIEW: ?ver=B (headline), ?ver=ckA (checkout), ?ver=pgB,ckA — força variante, sem logar evento nem grudar cookie, mesmo com teste OFF
+    var PREVIEW=(new URLSearchParams(location.search).get('ver')||'').trim();
+    if(PREVIEW){
+      window.__ABPREVIEW=true;
+      var force={};
+      PREVIEW.split(',').forEach(function(tok){ tok=tok.trim(); if(!tok)return;
+        if(tok.length<=1) force['_pag']=tok.toUpperCase(); else force[tok.slice(0,-1)]=tok.slice(-1).toUpperCase(); });
+      fetch(SB+"/rest/v1/ab_testes?pagina=eq."+PAGINA+"&select=slug,escopo,sck_tag,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
+        .then(function(r){return r.json();})
+        .then(function(rows){ var out=[];
+          (rows||[]).forEach(function(t){ var vs=t.variantes||[]; var fv=force[t.sck_tag]||(t.escopo==='pagina'?force['_pag']:null); if(!fv)return;
+            var ov=(vs.filter(function(v){return v.id===fv;})[0]||{}).overrides||{};
+            out.push({slug:t.slug,variant:fv,sck_tag:t.sck_tag,escopo:t.escopo,ov:ov}); if(ov.checkout)window.__ABCK=ov.checkout; });
+          window.__ABTESTS=out;
+          if(out.some(function(t){return t.ov.headline!=null;})) H.classList.add('ab-pending');
+          var pa=function(){ out.forEach(function(t){ if(t.ov.headline!=null)applyHeadline(t.ov.headline); }); window.__ABREADY=true; if(typeof window.__abReprocess==='function')window.__abReprocess(); reveal(); };
+          if(document.readyState!=='loading')pa(); else document.addEventListener('DOMContentLoaded',pa);
+        })
+        .catch(function(){ window.__ABREADY=true; reveal(); });
+      return; // preview não roda o fluxo normal
+    }
     // visita repetida: aplica do cache (sem flash)
     var cached=null; try{cached=JSON.parse(localStorage.getItem('ab_cfg_'+PAGINA)||'null');}catch(e){}
     if(cached&&cached.length){ if(assign(cached))H.classList.add('ab-pending');
