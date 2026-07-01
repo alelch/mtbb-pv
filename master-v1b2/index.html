@@ -102,15 +102,30 @@
     function applyHeadline(txt){ if(txt==null)return; var els=document.querySelectorAll('[data-ab-el="headline"]'); for(var i=0;i<els.length;i++){ if(/[<&]/.test(txt))els[i].innerHTML=txt; else els[i].textContent=txt; } }
     function abFitHeadline(){ try{
       var els=document.querySelectorAll('[data-ab-el="headline"]');
-      if(window.innerWidth>=640){ for(var x=0;x<els.length;x++){ els[x].style.fontSize=''; els[x].style.lineHeight=''; } return; }
+      var desktop=window.innerWidth>=640;
       requestAnimationFrame(function(){ try{
-        var MINF=28, MAXF=44, MAXLINES=3; // piso 28 = tamanho original (headline longa fica no original, não estica)
         function nlines(el){ var r=document.createRange(); r.selectNodeContents(el); var rs=r.getClientRects(), tops={}, n=0;
           for(var k=0;k<rs.length;k++){ if(rs[k].width<1||rs[k].height<1) continue; var t=Math.round(rs[k].top); if(!(t in tops)){ tops[t]=1; n++; } } return n; }
         for(var i=0;i<els.length;i++){ var el=els[i]; if(el.offsetParent===null) continue;
-          el.style.lineHeight='1.1'; var f=MAXF;
-          while(f>MINF){ el.style.fontSize=f+'px'; if(nlines(el)<=MAXLINES) break; f-=1; }
-          el.style.fontSize=f+'px'; }
+          if(desktop){
+            // desktop: só AMPLIA headline curta (<=2 linhas) até encher, sem virar 3ª linha (mais chamativo).
+            // Headline longa (A, 3+ linhas) fica no tamanho original da classe.
+            el.style.fontSize=''; el.style.lineHeight='';
+            var base=nlines(el);
+            if(base>0 && base<=2){
+              el.style.lineHeight='1.1';
+              var g=parseFloat(getComputedStyle(el).fontSize)||44;
+              while(g<64){ el.style.fontSize=(g+1)+'px'; if(nlines(el)>2) break; g++; }
+              el.style.fontSize=g+'px';
+            }
+          } else {
+            // mobile: piso 28 (= original) até 44px, máximo 3 linhas
+            var MINF=28, MAXF=44, MAXLINES=3;
+            el.style.lineHeight='1.1'; var f=MAXF;
+            while(f>MINF){ el.style.fontSize=f+'px'; if(nlines(el)<=MAXLINES) break; f-=1; }
+            el.style.fontSize=f+'px';
+          }
+        }
       }catch(e){} });
     }catch(e){} }
     window.__ABTESTS=[]; window.__ABCK=null; window.__ABREADY=false;
