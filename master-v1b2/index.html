@@ -242,14 +242,20 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
               if (!window.__ABREADY) return; // espera o A/B resolver (evita link sem variante)
               // A/B checkout: troca a base do link pela variante escolhida
               if (window.__ABCK) link.href = window.__ABCK;
-              var searchParams = new URLSearchParams(window.location.search).toString();
-              if (searchParams && link.href.indexOf("utm_source") === -1) {
+              var incoming = new URLSearchParams(window.location.search);
+              if (incoming.toString() && link.href.indexOf("utm_source") === -1) {
                 var utms = getUTMParams();
+                // sck do teste A/B = master-v1b2 + utms + marcador de variante de cada teste ativo (|pgB, |ckA...)
                 var sck = "master-v1b2|" + utms.source + "|" + utms.medium + "|" + utms.campaign + "|" + utms.term + "|" + utms.content;
                 var ts = window.__ABTESTS || [];
                 for (var t = 0; t < ts.length; t++) { if (ts[t].sck_tag && ts[t].variant) sck += "|" + ts[t].sck_tag + ts[t].variant; }
+                // src = o do anúncio (cliente lê por src na Hotmart); sck = variante do teste.
+                // Remove src/sck que vieram do anúncio p/ NÃO duplicar (Hotmart pega o primeiro e a variante nunca venceria).
+                var adSrc = incoming.get("src") || sck;
+                incoming.delete("src"); incoming.delete("sck");
+                var rest = incoming.toString();
                 var separator = link.href.indexOf("?") === -1 ? "?" : "&";
-                link.href += separator + searchParams + "&src=" + sck + "&sck=" + sck;
+                link.href += separator + (rest ? rest + "&" : "") + "src=" + encodeURIComponent(adSrc) + "&sck=" + sck;
               }
               link.setAttribute("data-ab-final", "1");
             }
