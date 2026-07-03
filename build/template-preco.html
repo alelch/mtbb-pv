@@ -2750,6 +2750,15 @@
 <script src="gtag.js" defer></script>
 <script src="tracker.js?v=8" defer></script>
 <script type="application/ld+json">{{LDJSON}}</script>
+<!-- VTurb preload -->
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6a47c9c19c6df2bec191f73b/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/6a47c99aa63e151eb8ef0c44/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://license.vturb.com">
 </head>
 <body>
 <main>
@@ -2769,25 +2778,9 @@
 <!-- BLOCO 2 — VSL -->
 <div class="vsl-wrap">
   <div class="vsl-frame">
-    <button class="vsl-facade" type="button" data-yt="sVLzrUURJaw" aria-label="Assistir à aula gratuita do Método The Book Business">
-      <img class="vsl-thumb" src="assets/aula-metodo-the-book-business.webp" alt="Aula gratuita do Método The Book Business" width="1280" height="720" fetchpriority="high" decoding="async">
-      <span class="vsl-play" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg></span>
-    </button>
+    <vturb-smartplayer id="vid-6a47c9c19c6df2bec191f73b" style="display:block;margin:0 auto;width:100%;"><div class="vturb-player-placeholder" style="position:relative;width:100%;padding:56.25% 0 0;z-index:0;background-color:black;"></div></vturb-smartplayer>
   </div>
-  <script>
-  (function(){
-    var f=document.querySelector('.vsl-facade'); if(!f) return;
-    f.addEventListener('click', function(){
-      var id=f.getAttribute('data-yt');
-      var i=document.createElement('iframe');
-      i.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-      i.title='Aula gratuita do Método The Book Business';
-      i.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      i.setAttribute('allowfullscreen','');
-      var fr=f.closest('.vsl-frame'); fr.innerHTML=''; fr.appendChild(i);
-    });
-  })();
-  </script>
+  <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6a47c9c19c6df2bec191f73b/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
 </div>
 
 <!-- BLOCO 4 — LOGOS -->
