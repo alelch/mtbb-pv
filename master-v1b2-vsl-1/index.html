@@ -102,12 +102,14 @@
     var SB="https://jsqtpsxpaclslakafmvd.supabase.co";
     var AK="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc";
     var PAGINA="master-v1b2";
+    var FIXED_HEADLINE='Você só lança seu livro uma vez. <br class="sm:hidden"><span class="text-gradient">Se der errado,</span> <span class="text-muted-foreground">e aí?</span>';
     var H=document.documentElement;
+    H.classList.add('ab-pending');
     function ck(n,v,d){ if(v===undefined){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return m?decodeURIComponent(m[2]):null;}
       var e=new Date(); e.setTime(e.getTime()+d*864e5); document.cookie=n+"="+encodeURIComponent(v)+";expires="+e.toUTCString()+";path=/;SameSite=Lax"; }
     function vid(){ var k="ab_vid",v=null; try{v=localStorage.getItem(k);}catch(e){} if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8); try{localStorage.setItem(k,v);}catch(e){}} return v; }
     function pick(vs){ var t=0,i; for(i=0;i<vs.length;i++)t+=(vs[i].peso||1); var r=Math.random()*t,a=0; for(i=0;i<vs.length;i++){a+=(vs[i].peso||1); if(r<=a)return vs[i].id;} return vs[0].id; }
-    function reveal(){ H.classList.remove('ab-pending'); }
+    function reveal(){ try{applyHeadline(FIXED_HEADLINE);}catch(e){} H.classList.remove('ab-pending'); }
     function applyHeadline(txt){ if(txt==null)return; var els=document.querySelectorAll('[data-ab-el="headline"]'); for(var i=0;i<els.length;i++){ if(/[<&]/.test(txt))els[i].innerHTML=txt; else els[i].textContent=txt; } }
     function abFitHeadline(){ try{
       var els=document.querySelectorAll('[data-ab-el="headline"]');
