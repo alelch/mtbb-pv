@@ -3,8 +3,9 @@
    Ordem: eyebrow -> título -> subs -> VÍDEO vertical -> como visto em.
    Sem foto no topo, sem botão/barra/badges no head. 1 player só (sem id duplicado). */
 (function(){
-  var PLAYER_HOST='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/';
-  var VIDID='6a4979919663a03956fef748';   // <<< 1 variável por página (VSL-1/2/3)
+  // player A/B do Vturb: ele roda o teste entre os vídeos e rastreia as vendas dos vídeos
+  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a4a8f5edfd648bdcc486bcc/player.js';
+  var PLAYER_ID='ab-6a4a8f5edfd648bdcc486bcc';
   var loaded=false, styled=false, barsSet=false;
 
   // barras fixas (topo "AO VIVO" + inferior CTA) só a partir da seção "Como será o dia"
@@ -61,7 +62,7 @@
 
   function videoHTML(){
     return '<div class="vsl-video" style="max-width:290px;margin:0 auto">'
-      +'<vturb-smartplayer id="vid-'+VIDID+'" style="display:block;margin:0 auto;width:100%;max-width:300px;border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5)"><div style="position:relative;width:100%;padding:177.77777777777777% 0 0;background:#000"></div></vturb-smartplayer>'
+      +'<vturb-smartplayer id="'+PLAYER_ID+'" style="display:block;margin:0 auto;width:100%;max-width:300px;border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5)"><div style="position:relative;width:100%;padding:177.77777777777777% 0 0;background:#000"></div></vturb-smartplayer>'
       +'</div>';
   }
 
@@ -97,8 +98,8 @@
     // respiro no topo (a foto dava esse espaço)
     if(getComputedStyle(sec).paddingTop==='0px') sec.style.paddingTop='40px';
 
-    // carrega o player vturb (1 só)
-    if(!loaded){ loaded=true; var s=document.createElement('script'); s.src=PLAYER_HOST+VIDID+'/v4/player.js'; s.async=true; document.head.appendChild(s); }
+    // carrega o player A/B do vturb (1 só)
+    if(!loaded){ loaded=true; var s=document.createElement('script'); s.src=PLAYER_SRC; s.async=true; document.head.appendChild(s); }
     return true;
   }
 

@@ -137,6 +137,7 @@
         if(!variant||!vs.some(function(v){return v.id===variant;})) variant=t.vencedor||pick(vs);
         if(!t.vencedor) ck('ab_'+t.slug,variant,30);
         var ov=(vs.filter(function(v){return v.id===variant;})[0]||{}).overrides||{};
+        if(ov.redirect){var _tp=(''+ov.redirect).replace(/^https?:\/\/[^\/]+/,'').replace(/[?#].*$/,'').replace(/\/+$/,'');if(location.pathname.replace(/\/+$/,'')!==_tp){location.replace(ov.redirect+location.search+location.hash);return;}}
         out.push({slug:t.slug,variant:variant,sck_tag:t.sck_tag,escopo:t.escopo,ov:ov});
         if(ov.headline!=null) needHide=true;
         if(ov.checkout) window.__ABCK=ov.checkout; });
