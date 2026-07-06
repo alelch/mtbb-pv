@@ -4,6 +4,8 @@
 // Exposed: window.MTBB_TRACK(eventType, extra)
 
 (function () {
+  // Preview do dashboard (?preview=1): não registra nada, pra não poluir as métricas do A/B.
+  try { if (new URLSearchParams(location.search).get('preview')) { window.MTBB_TRACK = function () {}; return; } } catch (e) {}
   var SUPABASE_URL = 'https://jsqtpsxpaclslakafmvd.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
   var ENDPOINT = SUPABASE_URL + '/rest/v1/mtbb_pv_events';
