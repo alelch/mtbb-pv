@@ -47,6 +47,12 @@
       '[data-vsl] > p{font-size:13.5px!important;line-height:1.34!important;margin:0!important}',
       /* fix: títulos de seção com whitespace-nowrap vazam -> deixa quebrar linha */
       'main h1.whitespace-nowrap,main h2.whitespace-nowrap,main h3.whitespace-nowrap{white-space:normal!important;text-wrap:balance}',
+      /* MOBILE (<640px): vídeo FULL-WIDTH edge-to-edge (igual à referência), sem borda/sombra; libera o overflow do hero p/ o break-out não ser cortado */
+      '@media(max-width:639px){'
+        +'main section,[data-vsl-hero],[data-vsl]{overflow:visible!important}'
+        +'.vsl-video{width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important}'
+        +'.vsl-video vturb-smartplayer{width:100%!important;max-width:100%!important;border-radius:0!important;box-shadow:none!important}'
+      +'}',
       /* DESKTOP (>=640px): centraliza o hero numa coluna estreita; título/subs/vídeo/eyebrow maiores */
       '@media(min-width:640px){'
         +'[data-vsl-hero]{max-width:640px;margin-left:auto;margin-right:auto}'
@@ -54,7 +60,8 @@
         +'[data-vsl] > div:first-child *{font-size:12px!important}'
         +'[data-vsl] h1{font-size:34px!important;line-height:1.12!important}'
         +'[data-vsl] > p{font-size:16px!important;line-height:1.4!important}'
-        +'.vsl-video{max-width:380px!important}.vsl-video vturb-smartplayer{max-width:380px!important}'
+        +'.vsl-video{width:auto!important;max-width:380px!important;margin-left:auto!important;margin-right:auto!important}'
+        +'.vsl-video vturb-smartplayer{max-width:380px!important;border-radius:14px!important;box-shadow:0 12px 40px rgba(0,0,0,.5)!important}'
       +'}'
     ].join('\n');
     document.head.appendChild(st);
