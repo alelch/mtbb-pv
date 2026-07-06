@@ -4,8 +4,8 @@
    Sem foto no topo, sem botão/barra/badges no head. 1 player só (sem id duplicado). */
 (function(){
   // player A/B do Vturb: ele roda o teste entre os vídeos e rastreia as vendas dos vídeos
-  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a4a8f5edfd648bdcc486bcc/player.js';
-  var PLAYER_ID='ab-6a4a8f5edfd648bdcc486bcc';
+  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a4bed073a92058baf58758c/player.js';
+  var PLAYER_ID='ab-6a4bed073a92058baf58758c';
   var loaded=false, styled=false, barsSet=false;
 
   // barras fixas (topo "AO VIVO" + inferior CTA) só a partir da seção "Como será o dia"
