@@ -47,10 +47,11 @@
       '[data-vsl] > p{font-size:13.5px!important;line-height:1.34!important;margin:0!important}',
       /* fix: títulos de seção com whitespace-nowrap vazam -> deixa quebrar linha */
       'main h1.whitespace-nowrap,main h2.whitespace-nowrap,main h3.whitespace-nowrap{white-space:normal!important;text-wrap:balance}',
-      /* MOBILE (<640px): vídeo FULL-WIDTH edge-to-edge (igual à referência), sem borda/sombra; libera o overflow do hero p/ o break-out não ser cortado */
+      /* MOBILE (<640px): vídeo FULL-WIDTH sem 100vw/break-out (à prova de overflow): zera o padding lateral do container e devolve só pro texto */
       '@media(max-width:639px){'
-        +'main section,[data-vsl-hero],[data-vsl]{overflow:visible!important}'
-        +'.vsl-video{width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important}'
+        +'[data-vsl]{padding-left:0!important;padding-right:0!important}'
+        +'[data-vsl] > div:first-child,[data-vsl] > h1,[data-vsl] > p{padding-left:20px!important;padding-right:20px!important}'
+        +'.vsl-video{width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important}'
         +'.vsl-video vturb-smartplayer{width:100%!important;max-width:100%!important;border-radius:0!important;box-shadow:none!important}'
       +'}',
       /* DESKTOP (>=640px): centraliza o hero numa coluna estreita; título/subs/vídeo/eyebrow maiores */
