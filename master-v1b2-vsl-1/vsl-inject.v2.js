@@ -8,6 +8,22 @@
   var PLAYER_ID='ab-6a4bed073a92058baf58758c';
   var loaded=false, styled=false, barsSet=false;
 
+  /* ATRIBUIÇÃO: esta página VSL só é servida pra variante B do teste de página.
+     O botão do player VTurb é criado async e não recebe o marcador |pv do appendParams.
+     No clique, garante |pvB no sck/src de qualquer link Hotmart (não duplica se já tiver |pv). */
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="hotmart.com"]') : null;
+    if(!a) return;
+    try{
+      var u = new URL(a.href, location.href), ch = false;
+      ['sck','src'].forEach(function(k){
+        var v = u.searchParams.get(k);
+        if(v && v.indexOf('master-v1b2') === 0 && v.indexOf('|pv') < 0){ u.searchParams.set(k, v + '|pvB'); ch = true; }
+      });
+      if(ch) a.setAttribute('href', u.toString());
+    }catch(err){}
+  }, true);
+
   // barras fixas (topo "AO VIVO" + inferior CTA) só a partir da seção "Como será o dia"
   function setupBars(){
     if(barsSet) return;
