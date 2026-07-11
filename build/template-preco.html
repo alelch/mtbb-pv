@@ -4844,6 +4844,16 @@
       }
 
       // sync ActiveCampaign via Supabase Edge Function
+      // Atribuição: grava a origem (arm + etapa) keyed por telefone, pra Natália recuperar no fecho do WhatsApp
+      try {
+        var _ORIG_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
+        if (payload.whatsapp) fetch('https://jsqtpsxpaclslakafmvd.supabase.co/rest/v1/rpc/mtbb_pv_origem_set', {
+          method: 'POST', keepalive: true,
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ORIG_ANON, 'apikey': _ORIG_ANON },
+          body: JSON.stringify({ p_phone: payload.whatsapp, p_sck: 'preco-' + payload.stage, p_stage: payload.stage, p_arm: 'preco' })
+        }).catch(function () {});
+      } catch (e) {}
+
       fetch('https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/pv-lead', {
         method: 'POST',
         headers: {
