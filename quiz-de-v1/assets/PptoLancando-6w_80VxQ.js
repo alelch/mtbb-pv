@@ -1,1 +1,0 @@
-import{j as o}from"./index-DprvHpfa.js";import{P as t}from"./PptoPage-m7ksXkfW.js";import"./matriz-black-BL0fdqNU.js";import"./arrow-up-right-U8pCmzc2.js";import"./check-BOYB9Bkf.js";import"./shield-check-Brab0lb5.js";import"./chevron-down-DHtL6vuO.js";function s(){return o.jsx(t,{segment:"lancando"})}export{s as default};
