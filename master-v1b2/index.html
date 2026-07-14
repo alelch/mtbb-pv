@@ -146,6 +146,7 @@
       window.__ABTESTS=out; return needHide; }
     function applyAll(){
       window.__ABTESTS.forEach(function(t){ if(t.ov.headline!=null) applyHeadline(t.ov.headline); });
+      window.__ABGEN=(window.__ABGEN||0)+1; // config nova -> reprocessa os links (data-ab-gen)
       window.__ABREADY=true;
       if(typeof window.__abReprocess==='function') window.__abReprocess(); // reescreve checkout + tags nos links
       reveal(); abFitHeadline();
@@ -168,7 +169,7 @@
             out.push({slug:t.slug,variant:fv,sck_tag:t.sck_tag,escopo:t.escopo,ov:ov}); if(ov.checkout)window.__ABCK=ov.checkout; });
           window.__ABTESTS=out;
           if(out.some(function(t){return t.ov.headline!=null;})) H.classList.add('ab-pending');
-          var pa=function(){ out.forEach(function(t){ if(t.ov.headline!=null)applyHeadline(t.ov.headline); }); window.__ABREADY=true; if(typeof window.__abReprocess==='function')window.__abReprocess(); reveal(); abFitHeadline(); };
+          var pa=function(){ out.forEach(function(t){ if(t.ov.headline!=null)applyHeadline(t.ov.headline); }); window.__ABGEN=(window.__ABGEN||0)+1; window.__ABREADY=true; if(typeof window.__abReprocess==='function')window.__abReprocess(); reveal(); abFitHeadline(); };
           if(document.readyState!=='loading')pa(); else document.addEventListener('DOMContentLoaded',pa);
         })
         .catch(function(){ window.__ABREADY=true; reveal(); });
@@ -183,7 +184,7 @@
       .then(function(r){return r.json();})
       .then(function(rows){ rows=rows||[];
         try{localStorage.setItem('ab_cfg_'+PAGINA,JSON.stringify(rows));}catch(e){}
-        if(!rows.length){ window.__ABTESTS=[]; window.__ABCK=null; window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); return; }
+        if(!rows.length){ window.__ABTESTS=[]; window.__ABCK=null; window.__ABGEN=(window.__ABGEN||0)+1; window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); return; }
         if(assign(rows)&&!cached)H.classList.add('ab-pending');
         if(document.readyState!=='loading')applyAll(); else document.addEventListener('DOMContentLoaded',applyAll);
       })
@@ -241,12 +242,17 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
         function appendParams(link) {
           for (var j = 0; j < prefix.length; j++) {
             if (link.href.indexOf(prefix[j]) !== -1) {
-              if (link.getAttribute("data-ab-final")) return;
               if (!window.__ABREADY) return; // espera o A/B resolver (evita link sem variante)
-              // A/B checkout: troca a base do link pela variante escolhida
-              if (window.__ABCK) link.href = window.__ABCK;
+              // Reprocessável: se a config do A/B chegar DEPOIS do failsafe, os links são
+              // reconstruídos a partir da URL original (data-ab-orig) com a geração nova.
+              // (Antes: data-ab-final congelava o link sem variante pra sempre — em 4G/in-app
+              // browser a config perde a corrida do failsafe de 1.5s com frequência.)
+              var gen = String(window.__ABGEN || 0);
+              if (link.getAttribute("data-ab-gen") === gen) return;
+              if (!link.getAttribute("data-ab-orig")) link.setAttribute("data-ab-orig", link.href);
+              var base = window.__ABCK || link.getAttribute("data-ab-orig");
               var incoming = new URLSearchParams(window.location.search);
-              if (incoming.toString() && link.href.indexOf("utm_source") === -1) {
+              if (incoming.toString()) {
                 var utms = getUTMParams();
                 // sck do teste A/B = master-v1b2 + utms + marcador de variante de cada teste ativo (|pgB, |ckA...)
                 var sck = "master-v1b2|" + utms.source + "|" + utms.medium + "|" + utms.campaign + "|" + utms.term + "|" + utms.content;
@@ -257,10 +263,12 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
                 var adSrc = incoming.get("src") || sck;
                 incoming.delete("src"); incoming.delete("sck");
                 var rest = incoming.toString();
-                var separator = link.href.indexOf("?") === -1 ? "?" : "&";
-                link.href += separator + (rest ? rest + "&" : "") + "src=" + encodeURIComponent(adSrc) + "&sck=" + sck;
+                var separator = base.indexOf("?") === -1 ? "?" : "&";
+                link.href = base + separator + (rest ? rest + "&" : "") + "src=" + encodeURIComponent(adSrc) + "&sck=" + sck;
+              } else {
+                link.href = base;
               }
-              link.setAttribute("data-ab-final", "1");
+              link.setAttribute("data-ab-gen", gen);
             }
           }
         }
