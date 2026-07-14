@@ -261,6 +261,19 @@
             if (window.MTBB_TRACK) window.MTBB_TRACK('stage_click', { stage: stage, variant: pagina });
           });
         });
+
+        // Vindo do quiz DE (objeção de preço): já sabemos o estágio → pula a escolha
+        // e vai direto pra PV do estágio certo, mantendo o roteamento preço/lista.
+        try {
+          var qEstagio = new URLSearchParams(location.search).get('estagio');
+          if (['escrevendo', 'lancando', 'publicado'].indexOf(qEstagio) !== -1) {
+            var opt = document.querySelector('.option[data-stage="' + qEstagio + '"]');
+            if (opt) {
+              if (window.MTBB_TRACK) window.MTBB_TRACK('stage_click', { stage: qEstagio, variant: pagina, meta: { from: 'quiz_de' } });
+              window.location.href = opt.getAttribute('href');
+            }
+          }
+        } catch (e) {}
       }
 
       var DEFAULTS = { quiz: { a:34, b:33, c:33 }, pagina: { preco:50, lista:50 }, obrigado: { carta:34, bento:33, conversa:33 } };
