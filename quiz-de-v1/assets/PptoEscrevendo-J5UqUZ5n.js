@@ -1,0 +1,1 @@
+import{j as o}from"./index-D04bBLRr.js";import{P as t}from"./PptoPage-Ca-UzGXk.js";import"./matriz-black-BL0fdqNU.js";import"./arrow-up-right-ByTe72hb.js";import"./check-BbqzVgYF.js";import"./shield-check-BQ0UTdU-.js";import"./chevron-down-DcxjhkK2.js";function a(){return o.jsx(t,{segment:"escrevendo"})}export{a as default};
