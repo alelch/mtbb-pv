@@ -322,7 +322,7 @@ O objetivo não é publicar por você. É te dar estrutura para que você publiq
         }
       })();
     </script>
-<div id="sticky-cta" class="sm:hidden" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top, rgba(13,13,13,.97), rgba(13,13,13,.9));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid hsl(43 96% 56% / .3)"><div class="lancamento-theme" style="background:transparent;min-height:0;padding:0"><a href="https://pay.hotmart.com/D104614574Y?off=yaskbrlp&amp;checkoutMode=10" target="_blank" rel="noopener noreferrer" class="btn-gold w-full text-[13px] whitespace-nowrap" style="padding:13px 10px">Comprar Ingresso | Lote Especial<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-5 h-5 shrink-0"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a></div></div>
+<div id="sticky-cta" class="sm:hidden" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;padding:8px 16px calc(8px + env(safe-area-inset-bottom));background:rgba(13,13,13,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid hsl(0 0% 18% / .5)"><div class="lancamento-theme" style="background:transparent;min-height:0;padding:0"><p style="font-size:11px;text-align:center;color:hsl(40 5% 60%);margin:0 0 6px">72% dos ingressos vendidos por R$ 29,00</p><a href="https://pay.hotmart.com/D104614574Y?off=yaskbrlp&amp;checkoutMode=10" target="_blank" rel="noopener noreferrer" class="btn-gold w-full whitespace-nowrap" style="font-size:12.5px;letter-spacing:-.01em;padding:10px 14px">Comprar Ingresso | Lote Especial<svg style="width:14px;height:14px;flex:0 0 auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-5 h-5 shrink-0"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a></div></div>
 <script>
 (function(){
   var INI=new Date('2026-07-26T08:00:00-03:00'), FIM=new Date('2026-07-26T12:00:00-03:00');
@@ -373,6 +373,7 @@ O objetivo não é publicar por você. É te dar estrutura para que você publiq
   function fitButtons(){
     if(window.innerWidth>=640) return;
     document.querySelectorAll('a.btn-gold.w-full').forEach(function(a){
+      if(a.closest('#sticky-cta')) return;
       a.style.fontSize=''; a.style.paddingLeft='10px'; a.style.paddingRight='10px';
       var f=parseFloat(getComputedStyle(a).fontSize)||13, best=f;
       for(var t=f; t<=17; t+=0.5){ a.style.fontSize=t+'px'; if(a.scrollWidth>a.clientWidth+1) break; best=t; }
