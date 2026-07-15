@@ -239,6 +239,24 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
           return { source: source, medium: medium, campaign: campaign, term: term, content: content };
         }
 
+        // vid curto + contexto do clique -> Edge Function pv-click (CAPI Purchase com fbc/fbp/ip/ua)
+        function __lvVid() {
+          var v = null; try { v = localStorage.getItem("ab_vid"); } catch (e) {}
+          if (!v) { v = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); try { localStorage.setItem("ab_vid", v); } catch (e) {} }
+          return String(v).toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 16);
+        }
+        var __lvCtxSent = 0;
+        function __lvSendCtx() {
+          try {
+            var now = Date.now(); if (now - __lvCtxSent < 30000) return; __lvCtxSent = now;
+            var vid = __lvVid(); if (!vid) return;
+            var fbp = (document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/) || [])[1] || null;
+            var fbc = (document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/) || [])[1] || null;
+            if (!fbc) { var fbclid = new URLSearchParams(location.search).get("fbclid"); if (fbclid) fbc = "fb.1." + Date.now() + "." + fbclid; }
+            fetch("https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/pv-click", { method: "POST", keepalive: true, body: JSON.stringify({ vid: vid, fbc: fbc, fbp: fbp }) });
+          } catch (e) {}
+        }
+
         function appendParams(link) {
           for (var j = 0; j < prefix.length; j++) {
             if (link.href.indexOf(prefix[j]) !== -1) {
@@ -258,6 +276,7 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
                 var sck = "master-v1b2|" + utms.source + "|" + utms.medium + "|" + utms.campaign + "|" + utms.term + "|" + utms.content;
                 var ts = window.__ABTESTS || [];
                 for (var t = 0; t < ts.length; t++) { if (ts[t].sck_tag && ts[t].variant) sck += "|" + ts[t].sck_tag + ts[t].variant; }
+                var _lvid = __lvVid(); if (_lvid) sck += "|v" + _lvid; // id curto p/ contexto do clique (fbc/fbp/ip/ua no CAPI)
                 // src = o do anúncio (cliente lê por src na Hotmart); sck = variante do teste.
                 // Remove src/sck que vieram do anúncio p/ NÃO duplicar (Hotmart pega o primeiro e a variante nunca venceria).
                 var adSrc = incoming.get("src") || sck;
@@ -294,6 +313,7 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
           var el = e.target.closest && e.target.closest("a");
           if (!el) return;
           if (el.href && el.href.indexOf("hotmart.com") !== -1) {
+            __lvSendCtx();
             if (!window.__ABREADY) window.__ABREADY = true; // fallback: nunca perder o clique
             appendParams(el);
             var ts = window.__ABTESTS || [];
