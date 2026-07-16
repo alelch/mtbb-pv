@@ -71,6 +71,13 @@
     var SB="https://jsqtpsxpaclslakafmvd.supabase.co";
     var AK="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc";
     var PAGINA="lancamento-v1";
+    // FALLBACK: espelho do ab_testes ao vivo. Visitante NOVO (sem cache) aplica isto no 1o paint
+    // p/ view + marcador |ck + oferta acontecerem mesmo se o fetch da config falhar (resiliência
+    // ao apagão de tracking em pico/4G). O fetch fresco sobrescreve. ⚠️ ATUALIZAR se o teste mudar
+    // (slug/sck_tag/vencedor/URLs das ofertas).
+    var FALLBACK=[{slug:"lancamento-v1-checkout",escopo:"checkout",sck_tag:"ck",vencedor:"A",variantes:[
+      {id:"A",peso:50,overrides:{checkout:"https://pay.hotmart.com/D104614574Y?off=yaskbrlp&checkoutMode=10"}},
+      {id:"B",peso:50,overrides:{checkout:"https://pay.hotmart.com/D104614574Y?off=urz2moj1&checkoutMode=10"}}]}];
     var FIXED_HEADLINE=null;
     var H=document.documentElement;
     H.classList.add('ab-pending');
@@ -123,13 +130,14 @@
         if(ov.checkout) window.__ABCK=ov.checkout; });
       window.__ABTESTS=out; return needHide; }
     function applyAll(){
-      window.__ABTESTS.forEach(function(t){ if(t.ov.headline!=null) applyHeadline(t.ov.headline); });
       window.__ABGEN=(window.__ABGEN||0)+1; // config nova -> reprocessa os links (data-ab-gen)
       window.__ABREADY=true;
-      if(typeof window.__abReprocess==='function') window.__abReprocess(); // reescreve checkout + tags nos links
-      reveal(); abFitHeadline();
+      window.__ABTESTS.forEach(function(t){ if(t.ov.headline!=null) applyHeadline(t.ov.headline); });
+      // view logging PRIMEIRO e isolado: não pode ser bloqueado por erro no reprocess/reveal/fit
       window.__ABTESTS.forEach(function(t){ var seen=null; try{seen=localStorage.getItem('ab_seen_'+t.slug);}catch(e){}
         if(seen!==t.variant){ try{localStorage.setItem('ab_seen_'+t.slug,t.variant);}catch(e){} window.__abTrack(t.slug,t.variant,'view'); } });
+      try{ if(typeof window.__abReprocess==='function') window.__abReprocess(); }catch(e){} // reescreve checkout + tags nos links
+      try{ reveal(); abFitHeadline(); }catch(e){}
     }
     setTimeout(function(){ window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); },1500); // failsafe
     // MODO PREVIEW: ?ver=B (headline), ?ver=ckA (checkout), ?ver=pgB,ckA — força variante, sem logar evento nem grudar cookie, mesmo com teste OFF
@@ -153,9 +161,11 @@
         .catch(function(){ window.__ABREADY=true; reveal(); });
       return; // preview não roda o fluxo normal
     }
-    // visita repetida: aplica do cache (sem flash)
+    // visita repetida: aplica do cache (sem flash). Visitante NOVO sem cache: usa FALLBACK
+    // (mesma coisa que o cache faria) p/ view + marcador + oferta valerem sem depender do fetch.
     var cached=null; try{cached=JSON.parse(localStorage.getItem('ab_cfg_'+PAGINA)||'null');}catch(e){}
-    if(cached&&cached.length){ if(assign(cached))H.classList.add('ab-pending');
+    var seed=(cached&&cached.length)?cached:FALLBACK;
+    if(seed&&seed.length){ if(assign(seed))H.classList.add('ab-pending');
       if(document.readyState!=='loading')applyAll(); else document.addEventListener('DOMContentLoaded',applyAll); }
     // config fresca (controle ao vivo)
     fetch(SB+"/rest/v1/ab_testes?pagina=eq."+PAGINA+"&ativo=eq.true&select=slug,escopo,sck_tag,vencedor,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
