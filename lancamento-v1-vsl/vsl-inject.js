@@ -8,8 +8,9 @@
   var loaded=false, styled=false;
 
   /* ATRIBUIÇÃO: esta página VSL só é servida pra variante B do teste de página (sck_tag pv).
-     O botão do player VTurb é criado async e não recebe o marcador do appendParams.
-     No clique, garante |pvB no sck/src de qualquer link Hotmart (não duplica se já tiver |pv). */
+     O botão do player VTurb é criado async e NÃO recebe o marcador do appendParams — e ainda
+     manda um sck curto próprio ("26E12-LAL2_VD11", que NÃO começa com lancamento-v1).
+     No clique, garante |pvB em QUALQUER link Hotmart desta página (é sempre B) que ainda não tenha |pv. */
   document.addEventListener('click', function(e){
     var a = e.target && e.target.closest ? e.target.closest('a[href*="hotmart.com"]') : null;
     if(!a) return;
@@ -17,7 +18,7 @@
       var u = new URL(a.href, location.href), ch = false;
       ['sck','src'].forEach(function(k){
         var v = u.searchParams.get(k);
-        if(v && v.indexOf('lancamento-v1') === 0 && v.indexOf('|pv') < 0){ u.searchParams.set(k, v + '|pvB'); ch = true; }
+        if(v && v.indexOf('|pv') < 0){ u.searchParams.set(k, v + '|pvB'); ch = true; }  // qualquer sck sem marcador -> B
       });
       if(ch) a.setAttribute('href', u.toString());
     }catch(err){}
