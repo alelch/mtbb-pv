@@ -58,6 +58,28 @@
     document.head.appendChild(st);
   }
 
+  /* Barra amarela fixa do topo: escondida na 1ª dobra (vídeo manda), aparece ao rolar
+     até "Como será o dia" — mesmo comportamento do master-v1b2-vsl-1 (setupBars). */
+  var barsSet=false;
+  function setupTopBar(){
+    if(barsSet) return;
+    var bar=document.querySelector('div.fixed.top-0'); if(!bar) return;
+    var sec=[].slice.call(document.querySelectorAll('h1,h2,h3,h4')).filter(function(e){return /como ser[áa].*dia/i.test((e.textContent||''));})[0];
+    barsSet=true;
+    var st=document.createElement('style');
+    st.textContent='.vsl-topbar{transition:opacity .3s ease,transform .3s ease!important}'
+      +'html:not(.vsl-topbar-on) .vsl-topbar{opacity:0!important;pointer-events:none!important;transform:translateY(-100%)!important}';
+    document.head.appendChild(st);
+    bar.classList.add('vsl-topbar');
+    function upd(){
+      var top=sec?(sec.getBoundingClientRect().top+window.scrollY):800;
+      document.documentElement.classList.toggle('vsl-topbar-on', window.scrollY >= (top - window.innerHeight*0.5));
+    }
+    window.addEventListener('scroll',upd,{passive:true});
+    window.addEventListener('resize',upd);
+    upd();
+  }
+
   function videoHTML(){
     return '<div class="vsl-video" style="max-width:300px;margin:0 auto">'
       +'<vturb-smartplayer id="'+PLAYER_ID+'" style="display:block;margin:0 auto;width:100%;max-width:300px;border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.55)"><div style="position:relative;width:100%;padding:177.77777777777777% 0 0;background:#000"></div></vturb-smartplayer>'
@@ -68,6 +90,8 @@
     var mob=document.querySelector('main > .sm\\:hidden'); if(!mob) return false;   // hero empilhado (mobile)
     var h1=mob.querySelector('h1'); if(!h1) return false;
     injectCSS();
+    setupTopBar();
+    mob.style.paddingTop='0';   // sem a barra amarela no topo, some o respiro reservado pra ela (pt-[48px])
 
     var par=h1.parentElement;                                              // bloco de conteúdo (px-6 pb-6 -mt-8)
     par.setAttribute('data-vsl','1');
