@@ -18,7 +18,9 @@
       var u = new URL(a.href, location.href), ch = false;
       ['sck','src'].forEach(function(k){
         var v = u.searchParams.get(k);
-        if(v && v.indexOf('|pv') < 0){ u.searchParams.set(k, v + '|pvB'); ch = true; }  // qualquer sck sem marcador -> B
+        if(!v || v.indexOf('|pv') >= 0) return;                        // vazio ou já marcado
+        if(v.indexOf('lancamento-v1') !== 0) v = 'lancamento-v1|' + v; // sck curto da VTurb (ex "26E12-LAL2_VD11") -> vira sck da página
+        u.searchParams.set(k, v + '|pvB'); ch = true;                  // a trigger ancora no slug 'lancamento-v1' e acha o |pvB
       });
       if(ch) a.setAttribute('href', u.toString());
     }catch(err){}
