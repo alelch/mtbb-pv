@@ -4530,7 +4530,7 @@
           var qs = Object.keys(utms).map(function (k) {
             return encodeURIComponent(k) + '=' + encodeURIComponent(utms[k]);
           }).join('&');
-          var AB = ['carta','bento','conversa'];
+          var AB = ['carta','bento','conversa','classica'];
           var W = (window.MTBB_TRAFFIC && window.MTBB_TRAFFIC.obrigado) || { carta:0, bento:0, conversa:100 };
           var pick;
           try { pick = localStorage.getItem('mtbb_obrigado_ab'); } catch (e) {}
