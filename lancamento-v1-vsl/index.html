@@ -75,9 +75,9 @@
     // p/ view + marcador |ck + oferta acontecerem mesmo se o fetch da config falhar (resiliência
     // ao apagão de tracking em pico/4G). O fetch fresco sobrescreve. ⚠️ ATUALIZAR se o teste mudar
     // (slug/sck_tag/vencedor/URLs das ofertas).
-    var FALLBACK=[{slug:"lancamento-v1-checkout",escopo:"checkout",sck_tag:"ck",vencedor:"A",variantes:[
-      {id:"A",peso:50,overrides:{checkout:"https://pay.hotmart.com/D104614574Y?off=yaskbrlp&checkoutMode=10"}},
-      {id:"B",peso:50,overrides:{checkout:"https://pay.hotmart.com/D104614574Y?off=urz2moj1&checkoutMode=10"}}]}];
+    var FALLBACK=[{slug:"lancamento-v1-pagina-vsl",escopo:"pagina",sck_tag:"pv",vencedor:null,variantes:[
+      {id:"A",peso:50,overrides:{redirect:"/lancamento-v1/"}},
+      {id:"B",peso:50,overrides:{redirect:"/lancamento-v1-vsl/"}}]}];
     var FIXED_HEADLINE=null;
     var H=document.documentElement;
     H.classList.add('ab-pending');
