@@ -23,6 +23,23 @@
     document.documentElement.setAttribute('data-quiz', v);
   })();
 </script>
+<script>
+  // A/B de COPY do quiz (atual x D). Pre-paint, sticky, honra peso 0. Default = D pausado (0%).
+  (function () {
+    function wpick(keys, w){var t=0,i;for(i=0;i<keys.length;i++)t+=Math.max(0,Number(w[keys[i]])||0);if(t<=0)return keys[0];var r=Math.random()*t,a=0;for(i=0;i<keys.length;i++){a+=Math.max(0,Number(w[keys[i]])||0);if(r<a)return keys[i];}return keys[keys.length-1];}
+    var KEY='mtbb_quiz_copy_ab', OPTS=['atual','d'], v;
+    try { var _q=new URLSearchParams(location.search).get('copy'); if(OPTS.indexOf(_q)!==-1) v=_q; } catch(e){}
+    if (OPTS.indexOf(v)===-1) {
+      var w={ atual:100, d:0 };
+      try { var c=JSON.parse(localStorage.getItem('mtbb_cfg_quiz_copy')||'null'); if(c&&typeof c==='object') w=c; } catch(e){}
+      var saved=null; try { saved=localStorage.getItem(KEY); } catch(e){}
+      if (OPTS.indexOf(saved)!==-1 && (Number(w[saved])||0)>0) { v=saved; }
+      else { v=wpick(OPTS,w); try{ localStorage.setItem(KEY,v); }catch(e){} }
+    }
+    window.MTBB_QUIZ_COPY=v;
+    document.documentElement.setAttribute('data-copy', v);
+  })();
+</script>
 <title>MTBB · Em que momento está o seu livro?</title>
 <meta name="description" content="Identifique o momento do seu livro e veja o caminho pra ele chegar aos leitores certos.">
 <meta property="og:type" content="website">
@@ -32,6 +49,7 @@
 <link rel="dns-prefetch" href="//jsqtpsxpaclslakafmvd.supabase.co">
 <link rel="preconnect" href="https://jsqtpsxpaclslakafmvd.supabase.co" crossorigin>
 <style>
+@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url('assets/fonts/poppins-300.woff2') format('woff2');}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/poppins-400.woff2') format('woff2');}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/poppins-500.woff2') format('woff2');}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/poppins-600.woff2') format('woff2');}
@@ -175,6 +193,14 @@
   html[data-quiz="c"] body { background: #FBF0CF; }
   /* sombra nos cards (3 versões) pra destacar um pouco mais */
   .option { box-shadow: 0 10px 26px rgba(0,0,0,0.10); }
+  .cv-d,.cv-d-only{display:none}
+  html[data-copy="d"] .cv-a{display:none}
+  html[data-copy="d"] .cv-d{display:inline}
+  html[data-copy="d"] .cv-d-only{display:block}
+  html[data-copy="d"] .option .label{margin-bottom:0}
+  .quiz-sub{font-family:'Poppins',sans-serif;font-size:13px;color:#B8B8B8;font-weight:300;text-align:center;margin:-32px auto 32px;letter-spacing:0}
+  .option .opt-mc{font-size:14px;color:#555;font-weight:500;margin-top:5px;line-height:1.35}
+  .quiz-trust{font-size:12px;color:#9a9a9a;text-align:center;margin-top:26px;line-height:1.6}
 </style>
 <script src="pixel.js"></script>
 <script src="gtag.js"></script>
@@ -196,23 +222,28 @@
   <div class="wrap">
     <div class="logo">MTBB<span>.</span></div>
 
-    <h1>Em que momento está<br><span class="italic">o seu livro hoje?</span></h1>
+    <h1><span class="cv-a">Em que momento está<br><span class="italic">o seu livro hoje?</span></span><span class="cv-d">Qual o próximo passo<br><span class="italic">do seu livro?</span></span></h1>
+    <p class="quiz-sub cv-d-only">toque na sua etapa</p>
 
     <div class="options">
       <a class="option" data-stage="escrevendo" href="escrevendo">
         <div class="label">Ainda estou escrevendo</div>
+        <div class="opt-mc cv-d-only">Quero que ele já nasça vendendo.</div>
         <span class="arrow"><span class="arrow-circle">→</span></span>
       </a>
       <a class="option" data-stage="lancando" href="lancando">
         <div class="label">Estou prestes a lançar</div>
+        <div class="opt-mc cv-d-only">Quero lançar vendendo forte.</div>
         <span class="arrow"><span class="arrow-circle">→</span></span>
       </a>
       <a class="option" data-stage="publicado" href="publicado">
         <div class="label">Já lancei meu livro</div>
+        <div class="opt-mc cv-d-only">Quero que ele venda de verdade.</div>
         <span class="arrow"><span class="arrow-circle">→</span></span>
       </a>
     </div>
 
+    <div class="quiz-trust cv-d-only">+800 autores lançados · +10M livros vendidos</div>
     <footer>© The Book Business</footer>
   </div>
 
@@ -255,6 +286,7 @@
       function apply(dists) {
         // cacheia o % do quiz pro head script da próxima visita (decisão pré-paint, sem flash)
         try { if (dists.quiz) localStorage.setItem('mtbb_cfg_quiz', JSON.stringify(dists.quiz)); } catch (e) {}
+        try { if (dists.quiz_copy) localStorage.setItem('mtbb_cfg_quiz_copy', JSON.stringify(dists.quiz_copy)); } catch (e) {}
         var pagina = getStickyPagina(dists.pagina);
         document.querySelectorAll('.option[data-stage]').forEach(function(el) {
           var stage = el.getAttribute('data-stage');
@@ -278,7 +310,7 @@
         } catch (e) {}
       }
 
-      var DEFAULTS = { quiz: { a:100, b:0, c:0 }, pagina: { preco:50, lista:50 }, obrigado: { carta:0, bento:0, conversa:100 } };
+      var DEFAULTS = { quiz: { a:100, b:0, c:0 }, pagina: { preco:50, lista:50 }, obrigado: { carta:0, bento:0, conversa:100 }, quiz_copy: { atual:100, d:0 } };
       fetch(SB_URL + '/rest/v1/mtbb_traffic_config?select=key,dist', {
         headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
       })

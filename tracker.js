@@ -99,6 +99,7 @@
     var meta = extra.meta || {};
     if (window.MTBB_OBRIGADO_VARIANT && !meta.obrigado_variant) meta.obrigado_variant = window.MTBB_OBRIGADO_VARIANT;
     if (window.MTBB_QUIZ_VARIANT && !meta.quiz_variant) meta.quiz_variant = window.MTBB_QUIZ_VARIANT;
+    if (window.MTBB_QUIZ_COPY && !meta.quiz_copy) meta.quiz_copy = window.MTBB_QUIZ_COPY;
     var payload = {
       event_type: eventType,
       stage: (extra.stage !== undefined) ? extra.stage : auto.stage,
