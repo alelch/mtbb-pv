@@ -142,7 +142,15 @@
   function autoFire() {
     var file = (window.location.pathname.split('/').pop() || '').toLowerCase();
     if (file === '' || file === 'index.html' || file === 'index') {
-      track('quiz_view');
+      // Se o head adiou a decisão de copy (visitante novo sem config), espera o footer
+      // finalizar antes de contar o quiz_view, senao o evento sai com o copy provisorio.
+      var fireQV = function () { if (!window.__mtbbQVfired) { window.__mtbbQVfired = 1; track('quiz_view'); } };
+      if (window.MTBB_QUIZ_COPY_DEFER) {
+        window.MTBB_QUIZVIEW_READY = fireQV;
+        setTimeout(fireQV, 3000);
+      } else {
+        fireQV();
+      }
     }
     if (window.MTBB_OBRIGADO_VARIANT) {
       track('obrigado_view');
