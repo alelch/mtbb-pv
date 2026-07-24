@@ -4,6 +4,12 @@
     <link rel="icon" type="image/webp" href="favicon.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Teste de página CONCLUÍDO: variante B (VSL) venceu -> promove a VSL como destino.
+         Redirect SÍNCRONO antes do paint (mata o flash da versão A), preservando utms/hash.
+         O teste segue existindo no banco; a página VSL carimba |pvB normalmente.
+         Pra REABRIR o teste A/B (voltar a dividir A/B), REMOVER este bloco. -->
+    <script>(function(){try{location.replace('/lancamento-v1-vsl/'+location.search+location.hash);}catch(e){}})();</script>
+
     <!-- Preconnect para recursos externos críticos -->
     <link rel="preconnect" href="https://connect.facebook.net">
     <link rel="dns-prefetch" href="https://www.facebook.com">
