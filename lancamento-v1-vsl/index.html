@@ -11,8 +11,6 @@
     <link rel="dns-prefetch" href="https://payment.hotmart.com">
 
     <!-- Hero responsivo: cada device pré-carrega SÓ a sua imagem -->
-    <link rel="preload" as="image" href="hero/hero-author-mobile.webp" fetchpriority="high" media="(max-width: 639px)">
-    <link rel="preload" as="image" href="hero/hero-lancamento-desktop.webp" fetchpriority="high" media="(min-width: 640px)">
 
     <!-- Fontes auto-hospedadas (ver assets/fonts.css) -->
     <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9mXg.woff2">
@@ -196,6 +194,16 @@
   <link rel="dns-prefetch" href="https://m3u8.vturb.net">
   <link rel="dns-prefetch" href="https://license.vturb.com">
 
+  <!-- Pré-hide estático: primeira pintura JÁ no layout final da VSL (mata o CLS do rework via JS).
+       Espelha o que o vsl-inject faz, mas em CSS puro no head. -->
+  <style>
+    main > .sm\:hidden{display:block!important;padding-top:0!important}
+    main > .sm\:hidden > div.relative.w-full:first-child{display:none!important}   /* foto do hero */
+    main > .hidden.sm\:block{display:none!important}                               /* hero 2 colunas (desktop) */
+    main > .sm\:hidden > div.px-6.pb-10{display:none!important}                    /* stats +800/+10M/+4.400 */
+    main > .sm\:hidden .space-y-4,main > .sm\:hidden .grid.grid-cols-3,main > .sm\:hidden .lqv-cd{display:none!important} /* CTA/progresso/infos/countdown do hero */
+    main > .sm\:hidden > div.relative.px-6{margin-top:0!important;padding-top:32px!important}
+  </style>
   <link rel="stylesheet" href="assets/index.css">
 <style>
 /* Countdown do evento (26/07 08h) */
