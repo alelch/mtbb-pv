@@ -8,7 +8,7 @@
          Redirect SÍNCRONO antes do paint (mata o flash da versão A), preservando utms/hash.
          O teste segue existindo no banco; a página VSL carimba |pvB normalmente.
          Pra REABRIR o teste A/B (voltar a dividir A/B), REMOVER este bloco. -->
-    <script>(function(){try{location.replace('/lancamento-v1-vsl/'+location.search+location.hash);}catch(e){}})();</script>
+    <script>(function(){try{document.cookie='ab_lancamento-v1-pagina-vsl=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';localStorage.removeItem('ab_cfg_lancamento-v1');}catch(e){}try{location.replace('/lancamento-v1-vsl/'+location.search+location.hash);}catch(e){}})();</script>
 
     <!-- Preconnect para recursos externos críticos -->
     <link rel="preconnect" href="https://connect.facebook.net">
@@ -81,7 +81,7 @@
     // p/ view + marcador |ck + oferta acontecerem mesmo se o fetch da config falhar (resiliência
     // ao apagão de tracking em pico/4G). O fetch fresco sobrescreve. ⚠️ ATUALIZAR se o teste mudar
     // (slug/sck_tag/vencedor/URLs das ofertas).
-    var FALLBACK=[{slug:"lancamento-v1-pagina-vsl",escopo:"pagina",sck_tag:"pv",vencedor:null,variantes:[
+    var FALLBACK=[{slug:"lancamento-v1-pagina-vsl",escopo:"pagina",sck_tag:"pv",vencedor:"B",variantes:[
       {id:"A",peso:50,overrides:{redirect:"/lancamento-v1/"}},
       {id:"B",peso:50,overrides:{redirect:"/lancamento-v1-vsl/"}}]}];
     var FIXED_HEADLINE=null;
