@@ -3,8 +3,8 @@
    respeitando o tema escuro/dourado. Sem foto, sem botão/progresso/stats no head. 1 player só.
    Usa o hero empilhado (mobile) em TODAS as larguras (esconde o hero de 2 colunas do desktop). */
 (function(){
-  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a5f899f0838949bf910d5e5/player.js';
-  var PLAYER_ID='ab-6a5f899f0838949bf910d5e5';
+  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6a5f7822551c549be7ce3ea7/v4/player.js';
+  var PLAYER_ID='vid-6a5f7822551c549be7ce3ea7';
   var loaded=false, styled=false;
 
   /* ATRIBUIÇÃO: esta página VSL só é servida pra variante B do teste de página (sck_tag pv).
