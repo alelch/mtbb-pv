@@ -74,7 +74,7 @@
     if (typeof window.fbq !== 'function') return;
     if (eventType === 'form_submit') {
       // página de venda não tem lead, só venda → InitiateCheckout; lista de espera = Lead
-      if (variant === 'checkout') window.fbq('track', 'InitiateCheckout');
+      if (variant === 'checkout') window.fbq('track', 'InitiateCheckout', { content_type: 'product', content_ids: ['PPTO'], currency: 'BRL', value: 2500 });
       else window.fbq('track', 'Lead');
     } else if (eventType === 'whatsapp_click') {
       window.fbq('track', 'Contact');
