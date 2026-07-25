@@ -76,28 +76,30 @@ a{color:inherit}
 
 /* ---- comparativo de oferta ---- */
 .of-wrap{display:flex;gap:10px;align-items:flex-start;max-width:980px;margin:0 auto}
-.of-card{border-radius:20px;padding:20px;text-align:center}
+.of-card{border-radius:20px;padding:26px;text-align:left}
 .of-normal{background:#fff;color:#000;flex:0 1 49.7%}
 .of-esp{background:var(--ink);border:3px solid var(--pink);box-shadow:0 0 31px 8px rgba(255,0,103,.31);flex:0 1 50.3%;margin-top:70px;padding-top:0}
-.of-tag{font-size:25px;font-weight:700;line-height:1;margin:20px 0;color:#000}
-.of-item{font-size:15px;font-weight:400}
+.of-tag{font-size:25px;font-weight:700;line-height:1;margin:20px 0 30px;color:#000;text-align:center}
+.of-item{font-size:16px;font-weight:400}
 .of-item.b{font-weight:700}
 .of-normal .of-item,.of-normal .of-sub{color:var(--gray);font-weight:400}
 .of-normal .of-item.b{font-weight:700}
-.of-item.mt{margin-top:18px}
-.of-sub{font-size:14px;line-height:1.5}
+.of-item.mt{margin-top:26px}
+.of-sub{font-size:15px;line-height:1.6;margin-top:2px}
 .of-sub.w{color:#fff}
-.of-hoje{background:var(--pink);border:1px solid #FF5151;font-size:16px;font-weight:600;line-height:1.5;margin:-2px -21px 0;padding:7px 0;border-radius:0 0 0 0}
-.of-esp-head{display:flex;align-items:center;justify-content:center;gap:7px;padding:20px 0}
+.strike{text-decoration:line-through}
+.of-hoje{background:var(--pink);border:1px solid #FF5151;font-size:18px;font-weight:600;line-height:1.5;margin:0 -29px;padding:8px 0;position:relative;top:-16px;text-align:center;color:#fff}
+.of-esp-head{display:flex;align-items:center;justify-content:center;gap:7px;padding:6px 0 26px}
 .of-esp-head svg{width:22px;height:22px;fill:#000;background:var(--gold);border-radius:35px;padding:6px}
 .of-esp-head h3{font-size:22px;font-weight:700;line-height:1}
 .of-hr{border:0;border-top:1px solid rgba(255,255,255,.35);margin:14px 0}
+.of-price-wrap{text-align:center}
 .of-price{display:inline-block;font-size:25px;font-weight:700;line-height:1.3;border-radius:20px;padding:16px 35px;margin-top:14px;word-spacing:7px}
 .of-price-n{background:#F1F1F1;color:#000}
 .of-price-e{background:#303030;color:var(--lime)}
-.of-avista{font-size:15px;margin-top:10px;color:#000}
-.of-avista.w{color:#fff}
-.of-bonus{font-size:15px;margin-top:12px;color:var(--gray)}
+.of-avista{font-size:15px;margin-top:10px;color:#000;text-align:center}
+.of-avista.w{color:var(--gold)}
+.of-bonus{font-size:15px;margin-top:12px;color:var(--gray);text-align:center}
 .of-bonus.gold{color:var(--gold)}
 @media(max-width:820px){.of-wrap{flex-direction:column;gap:0}.of-card{width:100%;flex:1 1 auto}.of-esp{margin-top:26px}}
 
@@ -121,7 +123,8 @@ a{color:inherit}
 .dl-title{font-weight:700;font-size:32px;line-height:1.1;margin-bottom:14px}
 .dim{color:rgba(255,255,255,.77)}
 .dl-txt p+p{margin-top:14px}
-.dl-row{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;max-width:980px;margin:34px auto 0}
+.dl-row{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;max-width:980px;margin:44px auto 0}
+.dl-img img{border:1px solid var(--gold);border-radius:16px}
 .dl-txt{font-size:18px;font-weight:500;line-height:1.4;letter-spacing:.2px}
 @media(max-width:820px){.h-agora{font-size:25px;line-height:1.4;letter-spacing:.2px;margin:10px 0 24px}.pb-card{grid-template-columns:1fr;background-size:350% auto}.dl-row{grid-template-columns:1fr;gap:6px;margin-top:26px}.dl-title{font-size:24px}.dl-txt{font-size:14px;letter-spacing:0}.pb-txt{font-size:14px}}
 
@@ -195,9 +198,9 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
 .cgce-box svg,.cgce-box img{flex:0 0 30px}
 .cgce-box p{font-size:18px;line-height:1.45}
 @media(max-width:760px){.h-matriz{font-size:30px}.h-jeito{font-size:25px;padding:60px 0}.h-cgce{font-size:25px}.tx-cgce,.tx-resultado,.cgce-box p{font-size:15px;line-height:1.4;letter-spacing:-.5px}}
-.mod-row{display:flex;align-items:flex-start;gap:10px;background:#F1F1F1;color:#54595F;border:2px solid var(--gold);border-radius:12px;padding:16px 18px;margin-top:18px}
-.mod-ic{flex:0 0 26px;padding-top:4px}
-.mod-ic svg{width:20px;height:20px;fill:var(--gold)}
+.mod-row{display:flex;align-items:flex-start;gap:16px;background:#F1F1F1;color:#54595F;border-radius:16px;padding:30px 34px;margin-top:44px}
+.mod-ic{flex:0 0 30px;padding-top:2px}
+.mod-ic svg{width:26px;height:26px;fill:var(--gold)}
 .mod-tx{font-size:15px;line-height:1.5;letter-spacing:-.2px}
 .mod-tx strong{color:#222}
 .mod-tx ul{margin:6px 0 0 20px}
@@ -287,7 +290,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
       <span class="plus">+</span>
       <img src="assets/MTBB-capa-comunidade.webp" alt="Comunidade The Book Business" width="500" height="731" loading="lazy">
     </div>
-    <p class="playbig"><p><span style="color: #faab00;">+ <strong>🔥 </strong>Playbooks MTBB<br/>+ Inúmeros</span> Bônus Incríveis</p></p>
+    <div class="playbig"><p><span style="color: #faab00;">+ <strong>🔥 </strong>Playbooks MTBB<br/>+ Inúmeros</span> Bônus Incríveis</p></div>
     <div class="divider div-gold"><span>OFERTA ATIVA</span></div>
     <div class="of-wrap">
   <div class="of-card of-normal">
@@ -301,7 +304,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <p class="of-item b mt">Comunidade de Escritores The Book Business</p>
     <p class="of-sub">Incluso Primeiro Ano (R$ 500,00 por ano)</p>
     <div class="divider div-dark"><span>Total</span></div>
-    <span class="of-price of-price-n">12x de R$149,71</span>
+    <div class="of-price-wrap"><span class="of-price of-price-n">12x de R$149,71</span></div>
     <p class="of-avista">ou R$ 1.500,00 à vista</p>
     <p class="of-bonus"><strong>Bônus:</strong> Nada</p>
   </div>
@@ -309,17 +312,17 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <p class="of-hoje">DISPONÍVEL SOMENTE HOJE</p>
     <div class="of-esp-head"><svg class="i-star" viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg><h3>OFERTA ESPECIAL</h3></div>
     <p class="of-item b">Método The Book Business – Marketing de Sucesso para Autores</p>
-    <p class="of-sub w">R$ 1.500,00</p>
+    <p class="of-sub w strike">R$ 1.500,00</p>
     <hr class="of-hr">
     <p class="of-item b">Encontro mensal AO VIVO com os alunos</p>
     <p class="of-sub w">(incluso)</p>
     <p class="of-item b mt">Gravação de 100% das LIVES já feitas</p>
     <p class="of-sub w">(incluso)</p>
     <p class="of-item mt">Assinatura <span class="gold"><u>vitalícia</u></span><br><strong>Comunidade de Escritores The Book Business</strong></p>
-    <p class="of-sub w">R$ 500,00 por ano</p>
+    <p class="of-sub w strike">R$ 500,00 por ano</p>
     <hr class="of-hr">
     <p class="of-item"><strong><span class="gold">+ (NOVO)</span> </strong>Autoridade Digital Para Escritores</p>
-    <p class="of-sub w">R$ 1.500,00</p>
+    <p class="of-sub w strike">R$ 1.500,00</p>
     <hr class="of-hr">
     <p class="of-item"><strong><span class="gold">+ (NOVO) 🔥 </span><strong>PLAYBOOK MTBB Físico</strong></strong></p>
     <p class="of-sub w">Entregue na casa dos 100 primeiros</p>
@@ -334,7 +337,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <p class="of-item b mt"><span class="gold">+</span> WorkShop PLANEJAMENTO ANUAL</p>
     <p class="of-sub w">Bônus exclusivo</p>
     <div class="divider div-white"><span>Total</span></div>
-    <span class="of-price of-price-e">12x de R$149,71</span>
+    <div class="of-price-wrap"><span class="of-price of-price-e">12x de R$149,71</span></div>
     <p class="of-avista w">ou R$ 1.500,00 à vista</p>
     <p class="of-bonus gold"><strong>Bônus:</strong> Inúmeros</p>
   </div></div>
@@ -345,7 +348,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
 
 <section class="sec-entrega">
   <div class="caret-big"><svg class="i-caret" viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg></div>
-  <p class="h-agora"><p>Quem aproveitar essa oferta <span style="color: #faab00;">AGORA vai levar</span>:</p></p>
+  <div class="h-agora"><p>Quem aproveitar essa oferta <span style="color: #faab00;">AGORA vai levar</span>:</p></div>
 
   <div class="pb-card">
     <img src="assets/livros-MTBB-26.webp" alt="Playbooks MTBB" width="683" height="592" loading="lazy">
@@ -386,27 +389,27 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
   <div class="cta-wrap"><a class="btn-cta" href="https://pay.hotmart.com/Q88264426A?off=zo0opggz&src=PV-Liberada" target="_blank" rel="noopener">Clique para garantir sua vaga</a>
   <img class="payments" src="assets/payments.webp" alt="Formas de pagamento" width="547" height="37" loading="lazy"></div>
 
-  <h2 class="h-estrategia"><p>A estratégia que mais transforma <span style="color: #faab00;">autores comuns em Best-Sellers de verdade</span> no mercado literário nacional.</p></h2>
-  <p class="estat"><p><span style="color: #faab00;"><strong>+</strong></span> 4.400 autores já passaram pelo Método The Book Business<br/><span style="color: #faab00;"><strong>+</strong> </span>800 lançamentos planejados<br/><span style="color: #faab00;"><strong>+</strong></span> 10 milhões de livros vendidos pelos autores</p></p>
+  <div class="h-estrategia" role="heading" aria-level="2"><p>A estratégia que mais transforma <span style="color: #faab00;">autores comuns em Best-Sellers de verdade</span> no mercado literário nacional.</p></div>
+  <div class="estat"><p><span style="color: #faab00;"><strong>+</strong></span> 4.400 autores já passaram pelo Método The Book Business<br/><span style="color: #faab00;"><strong>+</strong> </span>800 lançamentos planejados<br/><span style="color: #faab00;"><strong>+</strong></span> 10 milhões de livros vendidos pelos autores</p></div>
   <p class="h-agir">Esses autores estavam exatamente onde você está agora.</p>
 
   <div class="dp-wrap">
     <button class="dp-arrow dp-prev" aria-label="Anterior">‹</button>
     <div class="dp-track" id="dpTrack">
-<div class="dp-slide" data-video="MVWV1r5AFqM" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-1.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="ffBPbjjEWd4" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-3.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="bOgr78gqu5w" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-4.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="FKATT3aFxOM" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-5.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="dwfYj5r0-Gs" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-7.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="hW7NjsY2WrA" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-8.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="6Zpwi9VAtMg" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-9.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="RGlPbXowLWw" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-10.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="2jrXvu11h78" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-11.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="0wa0Zg28OUw" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-12.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="MVWV1r5AFqM" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-1.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="ffBPbjjEWd4" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-3.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="bOgr78gqu5w" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-4.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="FKATT3aFxOM" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-5.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="dwfYj5r0-Gs" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-7.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="hW7NjsY2WrA" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-8.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="6Zpwi9VAtMg" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-9.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="RGlPbXowLWw" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-10.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="2jrXvu11h78" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-11.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="0wa0Zg28OUw" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-12.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
 <div class="dp-slide"><img src="assets/depo-13.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"></div>
 <div class="dp-slide"><img src="assets/depo-14.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"></div>
-<div class="dp-slide" data-video="E8K6Bd2A12w" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-15.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
-<div class="dp-slide" data-video="8vlXq0HOO6Q" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-16.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="54" height="54"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.55)"/><path d="M9.5 7.5v9l8-4.5z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="E8K6Bd2A12w" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-15.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
+<div class="dp-slide" data-video="8vlXq0HOO6Q" role="button" tabindex="0" aria-label="Assistir depoimento"><img src="assets/depo-16.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"><span class="dp-play"><svg viewBox="0 0 24 24" width="84" height="84"><circle cx="12" cy="12" r="10.5" fill="rgba(0,0,0,.25)" stroke="#FAAB00" stroke-width="1.6"/><path d="M9.8 7.8v8.4l7.4-4.2z" fill="#FAAB00"/></svg></span></div>
 <div class="dp-slide"><img src="assets/depo-17.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"></div>
 <div class="dp-slide"><img src="assets/depo-18.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"></div>
 <div class="dp-slide"><img src="assets/depo-6.webp" alt="Depoimento de aluno" loading="lazy" width="576" height="720"></div>
@@ -446,7 +449,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <p class="of-item b mt">Comunidade de Escritores The Book Business</p>
     <p class="of-sub">Incluso Primeiro Ano (R$ 500,00 por ano)</p>
     <div class="divider div-dark"><span>Total</span></div>
-    <span class="of-price of-price-n">12x de R$149,71</span>
+    <div class="of-price-wrap"><span class="of-price of-price-n">12x de R$149,71</span></div>
     <p class="of-avista">ou R$ 1.500,00 à vista</p>
     <p class="of-bonus"><strong>Bônus:</strong> Nada</p>
   </div>
@@ -454,17 +457,17 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <p class="of-hoje">DISPONÍVEL SOMENTE HOJE</p>
     <div class="of-esp-head"><svg class="i-star" viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg><h3>OFERTA ESPECIAL</h3></div>
     <p class="of-item b">Método The Book Business – Marketing de Sucesso para Autores</p>
-    <p class="of-sub w">R$ 1.500,00</p>
+    <p class="of-sub w strike">R$ 1.500,00</p>
     <hr class="of-hr">
     <p class="of-item b">Encontro mensal AO VIVO com os alunos</p>
     <p class="of-sub w">(incluso)</p>
     <p class="of-item b mt">Gravação de 100% das LIVES já feitas</p>
     <p class="of-sub w">(incluso)</p>
     <p class="of-item mt">Assinatura <span class="gold"><u>vitalícia</u></span><br><strong>Comunidade de Escritores The Book Business</strong></p>
-    <p class="of-sub w">R$ 500,00 por ano</p>
+    <p class="of-sub w strike">R$ 500,00 por ano</p>
     <hr class="of-hr">
     <p class="of-item"><strong><span class="gold">+ (NOVO)</span> </strong>Autoridade Digital Para Escritores</p>
-    <p class="of-sub w">R$ 1.500,00</p>
+    <p class="of-sub w strike">R$ 1.500,00</p>
     <hr class="of-hr">
     <p class="of-item"><strong><span class="gold">+ (NOVO) 🔥 </span><strong>PLAYBOOK MTBB Físico</strong></strong></p>
     <p class="of-sub w">Entregue na casa dos 100 primeiros</p>
@@ -479,7 +482,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <p class="of-item b mt"><span class="gold">+</span> WorkShop PLANEJAMENTO ANUAL</p>
     <p class="of-sub w">Bônus exclusivo</p>
     <div class="divider div-white"><span>Total</span></div>
-    <span class="of-price of-price-e">12x de R$149,71</span>
+    <div class="of-price-wrap"><span class="of-price of-price-e">12x de R$149,71</span></div>
     <p class="of-avista w">ou R$ 1.500,00 à vista</p>
     <p class="of-bonus gold"><strong>Bônus:</strong> Inúmeros</p>
   </div></div>
@@ -491,7 +494,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
 <section class="sec-final">
   <div class="wrap">
     <h3 class="h-anim">&#8217;&#8217;A fundamental diferença entre os autores que vendem milhares de livros e os esquecidos é a <span class="dyn">falta de estratégia.&#8217;&#8217;</span></h3>
-    <p class="p-99">99% dos autores dedicam 100% da sua energia ao conteúdo do seu livro, <strong>menos de 1% é considerado um autor de sucesso…</strong> Poucos sabem que a lógica da venda é invertida no mercado editorial. Não ensinamos vender o seu livro correndo atrás do cliente. Ensinamos como cuidar do seu jardim para que o cliente corra atrás do seu livro.</p>
+    <div class="p-99">99% dos autores dedicam 100% da sua energia ao conteúdo do seu livro, <strong>menos de 1% é considerado um autor de sucesso…</strong> Poucos sabem que a lógica da venda é invertida no mercado editorial. Não ensinamos vender o seu livro correndo atrás do cliente. Ensinamos como cuidar do seu jardim para que o cliente corra atrás do seu livro.</div>
     <blockquote>
       <p>"O segredo é não cuidar das borboletas e sim cuidar do jardim para que elas venham até você."</p>
       <cite>Mário Quintana</cite>
@@ -525,7 +528,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <h2 class="h-cgce">Cronograma de Gestação e Crescimento Estruturado (CGCE)</h2>
     <div class="tx-cgce"><p>Para a grande maioria dos autores, o ciclo de vida de um livro geralmente é dividido entre o ANTES e o DEPOIS do lançamento. Pouquíssimos sabem que o cronograma de um livro é muito mais parecido com uma gestação</p> <p>Através do <span>Cronograma de Gestação e Crescimento Estruturado (CGCE)</span> você poderá identificar rapidamente quais micro-ciclos* são indicadas para o seu momento atual.</p></div>
     <img class="img-vendas" src="assets/vendas-com-o-metodo.webp" alt="Curva de vendas com o método" width="1024" height="659" loading="lazy">
-    <p class="tx-resultado"><span style="color: #faab00;"><b>Resultado:</b> </span>Acúmulo de vendas na fase da pré-venda, uma curva crescente e constante nas vendas após o lançamento e a consolidação do escritor como referência em sua área</p>
+    <div class="tx-resultado"><span style="color: #faab00;"><b>Resultado:</b> </span>Acúmulo de vendas na fase da pré-venda, uma curva crescente e constante nas vendas após o lançamento e a consolidação do escritor como referência em sua área</div>
 
     <div class="cgce-box">
       <svg viewBox="0 0 512 512" width="30" height="30" fill="#fff"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/></svg>
@@ -617,7 +620,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <p class="of-item b mt">Comunidade de Escritores The Book Business</p>
     <p class="of-sub">Incluso Primeiro Ano (R$ 500,00 por ano)</p>
     <div class="divider div-dark"><span>Total</span></div>
-    <span class="of-price of-price-n">12x de R$149,71</span>
+    <div class="of-price-wrap"><span class="of-price of-price-n">12x de R$149,71</span></div>
     <p class="of-avista">ou R$ 1.500,00 à vista</p>
     <p class="of-bonus"><strong>Bônus:</strong> Nada</p>
   </div>
@@ -625,17 +628,17 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <p class="of-hoje">DISPONÍVEL SOMENTE HOJE</p>
     <div class="of-esp-head"><svg class="i-star" viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg><h3>OFERTA ESPECIAL</h3></div>
     <p class="of-item b">Método The Book Business – Marketing de Sucesso para Autores</p>
-    <p class="of-sub w">R$ 1.500,00</p>
+    <p class="of-sub w strike">R$ 1.500,00</p>
     <hr class="of-hr">
     <p class="of-item b">Encontro mensal AO VIVO com os alunos</p>
     <p class="of-sub w">(incluso)</p>
     <p class="of-item b mt">Gravação de 100% das LIVES já feitas</p>
     <p class="of-sub w">(incluso)</p>
     <p class="of-item mt">Assinatura <span class="gold"><u>vitalícia</u></span><br><strong>Comunidade de Escritores The Book Business</strong></p>
-    <p class="of-sub w">R$ 500,00 por ano</p>
+    <p class="of-sub w strike">R$ 500,00 por ano</p>
     <hr class="of-hr">
     <p class="of-item"><strong><span class="gold">+ (NOVO)</span> </strong>Autoridade Digital Para Escritores</p>
-    <p class="of-sub w">R$ 1.500,00</p>
+    <p class="of-sub w strike">R$ 1.500,00</p>
     <hr class="of-hr">
     <p class="of-item"><strong><span class="gold">+ (NOVO) 🔥 </span><strong>PLAYBOOK MTBB Físico</strong></strong></p>
     <p class="of-sub w">Entregue na casa dos 100 primeiros</p>
@@ -650,7 +653,7 @@ blockquote cite{display:block;font-size:13px;margin-top:8px;font-style:normal;op
     <p class="of-item b mt"><span class="gold">+</span> WorkShop PLANEJAMENTO ANUAL</p>
     <p class="of-sub w">Bônus exclusivo</p>
     <div class="divider div-white"><span>Total</span></div>
-    <span class="of-price of-price-e">12x de R$149,71</span>
+    <div class="of-price-wrap"><span class="of-price of-price-e">12x de R$149,71</span></div>
     <p class="of-avista w">ou R$ 1.500,00 à vista</p>
     <p class="of-bonus gold"><strong>Bônus:</strong> Inúmeros</p>
   </div></div>
