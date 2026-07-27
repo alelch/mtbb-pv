@@ -110,8 +110,9 @@
     // insere o VÍDEO (único) logo depois dos subs
     var v=document.createElement('div');
     v.style.cssText='margin:12px auto 4px';
-    v.innerHTML=videoHTML();
+    v.innerHTML=videoHTML()+_e13barHTML()+_e13cdHTML();
     subs.parentNode.insertBefore(v, subs.nextSibling);
+    _e13scarcity(); _e13cdTick();
 
     // deleta tudo depois do vídeo no bloco: botão + barra "72%" + infos + badges (fica eyebrow->título->subs->vídeo)
     var sib=v.nextElementSibling;
@@ -128,19 +129,57 @@
   }
 
   /* ===== 26-E13: ESCASSEZ DINÂMICA — % de ingressos sobe dia a dia até 100% no dia do evento (08/08) ===== */
-  var EVENT_E13=new Date('2026-08-08T20:00:00-03:00');   // dia da aula ao vivo (ajustável)
+  var EVENT_E13=new Date('2026-08-08T08:00:00-03:00');   // aula ao vivo: 08/08 às 8h
   var RAMP_DAYS=21, START_PCT=80;                        // START_PCT (RAMP_DAYS antes) -> 100% no evento
   function _e13now(){ try{ var q=new URLSearchParams(location.search).get('cdnow'); if(q){ var d=new Date(q); if(!isNaN(d)) return d; } }catch(e){} return new Date(); }
   function _e13pct(){ var now=_e13now().getTime(), ev=EVENT_E13.getTime(), ini=ev-RAMP_DAYS*864e5;
     var f=Math.max(0,Math.min(1,(now-ini)/(ev-ini))); return Math.round(START_PCT+(100-START_PCT)*f); }
+  function _e13barHTML(){
+    return '<div class="e13-bar" style="max-width:340px;margin:12px auto 0">'
+      +'<div style="height:8px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden">'
+        +'<div data-e13-fill style="height:100%;width:80%;border-radius:999px;background:#FAAB00;transition:width .7s ease"></div>'
+      +'</div>'
+      +'<p data-e13-txt style="text-align:center;font-size:12px;margin:6px 0 0;color:rgba(255,255,255,.78)">80% dos ingressos vendidos por R$ 29,00</p>'
+    +'</div>';
+  }
   function _e13scarcity(){ var pct=_e13pct();
+    /* barra injetada (visível na página B, abaixo do vídeo) */
+    var bf=document.querySelector('.e13-bar [data-e13-fill]'); if(bf) bf.style.width=pct+'%';
+    var bt=document.querySelector('.e13-bar [data-e13-txt]'); if(bt) bt.textContent=pct+'% dos ingressos vendidos por R$ 29,00';
+    /* barra(s) original(is) da página (fallback; ficam ocultas no layout VSL) */
     [].forEach.call(document.querySelectorAll('p'),function(p){
+      if(p.hasAttribute('data-e13-txt')) return;
       if(!/dos ingressos vendidos/i.test(p.textContent||'')) return;
       p.textContent=pct+'% dos ingressos vendidos por R$ 29,00';
       var tr=p.previousElementSibling, fill=tr&&tr.querySelector?tr.querySelector('[style*="width"]'):null;
       if(fill) fill.style.width=pct+'%';
     }); }
   _e13scarcity(); setTimeout(_e13scarcity,1200); setTimeout(_e13scarcity,3000); setInterval(_e13scarcity,300000);
+
+  /* ===== 26-E13: CONTAGEM REGRESSIVA — aparece só nos últimos dias, abaixo do vídeo ===== */
+  var CD_SHOW_DAYS=7;
+  function _e13cdHTML(){
+    var box=function(k,l){ return '<span style="display:inline-flex;flex-direction:column;align-items:center;min-width:34px"><b data-e13-'+k+' style="font-size:20px;font-weight:800;font-variant-numeric:tabular-nums">00</b><small style="font-size:8px;letter-spacing:.06em;text-transform:uppercase;opacity:.75">'+l+'</small></span>'; };
+    var sep='<span style="font-size:16px;opacity:.5;margin-top:2px">:</span>';
+    return '<div class="e13-cd" style="display:none;margin:14px auto 0;max-width:340px;text-align:center;background:rgba(250,171,0,.08);border:1px solid rgba(250,171,0,.35);border-radius:12px;padding:10px 12px">'
+      +'<div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#FAAB00;font-weight:700">Aula ao vivo · 8 de agosto, 8h</div>'
+      +'<div class="e13-cd-boxes" style="display:none;gap:6px;justify-content:center;align-items:flex-start;margin-top:6px;color:#fff">'+box('d','dias')+sep+box('h','h')+sep+box('m','min')+sep+box('s','s')+'</div>'
+      +'<div class="e13-cd-live" style="display:none;font-size:15px;font-weight:800;color:#FAAB00;margin-top:2px">🔴 AO VIVO AGORA</div>'
+    +'</div>';
+  }
+  function _e13cdTick(){
+    var el=document.querySelector('.e13-cd'); if(!el) return;
+    var t=_e13now().getTime(), ev=EVENT_E13.getTime(), fim=ev+4*36e5, de=ev-CD_SHOW_DAYS*864e5;
+    var bx=el.querySelector('.e13-cd-boxes'), lv=el.querySelector('.e13-cd-live');
+    if(t<de || t>=fim){ el.style.display='none'; return; }
+    el.style.display='';
+    if(t>=ev){ bx.style.display='none'; lv.style.display=''; return; }
+    bx.style.display='flex'; lv.style.display='none';
+    var r=Math.max(0,ev-t), d=Math.floor(r/864e5), h=Math.floor(r%864e5/36e5), mi=Math.floor(r%36e5/6e4), s=Math.floor(r%6e4/1e3);
+    var set=function(k,v){ var e=el.querySelector('[data-e13-'+k+']'); if(e) e.textContent=(v<10?'0':'')+v; };
+    set('d',d); set('h',h); set('m',mi); set('s',s);
+  }
+  setInterval(_e13cdTick,1000);
 
   var n=0, iv=setInterval(function(){ n++; go(); if(n>40) clearInterval(iv); },250);
 })();
