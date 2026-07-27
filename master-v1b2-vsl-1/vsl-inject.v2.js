@@ -127,5 +127,20 @@
     return true;
   }
 
+  /* ===== 26-E13: ESCASSEZ DINÂMICA — % de ingressos sobe dia a dia até 100% no dia do evento (08/08) ===== */
+  var EVENT_E13=new Date('2026-08-08T20:00:00-03:00');   // dia da aula ao vivo (ajustável)
+  var RAMP_DAYS=21, START_PCT=80;                        // START_PCT (RAMP_DAYS antes) -> 100% no evento
+  function _e13now(){ try{ var q=new URLSearchParams(location.search).get('cdnow'); if(q){ var d=new Date(q); if(!isNaN(d)) return d; } }catch(e){} return new Date(); }
+  function _e13pct(){ var now=_e13now().getTime(), ev=EVENT_E13.getTime(), ini=ev-RAMP_DAYS*864e5;
+    var f=Math.max(0,Math.min(1,(now-ini)/(ev-ini))); return Math.round(START_PCT+(100-START_PCT)*f); }
+  function _e13scarcity(){ var pct=_e13pct();
+    [].forEach.call(document.querySelectorAll('p'),function(p){
+      if(!/dos ingressos vendidos/i.test(p.textContent||'')) return;
+      p.textContent=pct+'% dos ingressos vendidos por R$ 29,00';
+      var tr=p.previousElementSibling, fill=tr&&tr.querySelector?tr.querySelector('[style*="width"]'):null;
+      if(fill) fill.style.width=pct+'%';
+    }); }
+  _e13scarcity(); setTimeout(_e13scarcity,1200); setTimeout(_e13scarcity,3000); setInterval(_e13scarcity,300000);
+
   var n=0, iv=setInterval(function(){ n++; go(); if(n>40) clearInterval(iv); },250);
 })();
