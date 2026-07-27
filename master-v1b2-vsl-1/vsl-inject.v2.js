@@ -130,16 +130,16 @@
 
   /* ===== 26-E13: ESCASSEZ DINÂMICA — % de ingressos sobe dia a dia até 100% no dia do evento (08/08) ===== */
   var EVENT_E13=new Date('2026-08-08T08:00:00-03:00');   // aula ao vivo: 08/08 às 8h
-  var RAMP_DAYS=21, START_PCT=80;                        // START_PCT (RAMP_DAYS antes) -> 100% no evento
+  var RAMP_DAYS=12, START_PCT=72;                        // começa hoje (~12 dias antes) em 72% -> 100% no evento
   function _e13now(){ try{ var q=new URLSearchParams(location.search).get('cdnow'); if(q){ var d=new Date(q); if(!isNaN(d)) return d; } }catch(e){} return new Date(); }
   function _e13pct(){ var now=_e13now().getTime(), ev=EVENT_E13.getTime(), ini=ev-RAMP_DAYS*864e5;
     var f=Math.max(0,Math.min(1,(now-ini)/(ev-ini))); return Math.round(START_PCT+(100-START_PCT)*f); }
   function _e13barHTML(){
     return '<div class="e13-bar" style="max-width:340px;margin:12px auto 0">'
       +'<div style="height:8px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden">'
-        +'<div data-e13-fill style="height:100%;width:80%;border-radius:999px;background:#FAAB00;transition:width .7s ease"></div>'
+        +'<div data-e13-fill style="height:100%;width:72%;border-radius:999px;background:#FAAB00;transition:width .7s ease"></div>'
       +'</div>'
-      +'<p data-e13-txt style="text-align:center;font-size:12px;margin:6px 0 0;color:rgba(255,255,255,.78)">80% dos ingressos vendidos por R$ 29,00</p>'
+      +'<p data-e13-txt style="text-align:center;font-size:12px;margin:6px 0 0;color:rgba(255,255,255,.78)">72% dos ingressos vendidos por R$ 29,00</p>'
     +'</div>';
   }
   function _e13scarcity(){ var pct=_e13pct();
