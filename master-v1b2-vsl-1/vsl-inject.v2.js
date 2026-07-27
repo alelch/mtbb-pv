@@ -110,9 +110,9 @@
     // insere o VÍDEO (único) logo depois dos subs
     var v=document.createElement('div');
     v.style.cssText='margin:12px auto 4px';
-    v.innerHTML=videoHTML()+_e13barHTML()+_e13cdHTML();
+    v.innerHTML=videoHTML()+_e13cdHTML();
     subs.parentNode.insertBefore(v, subs.nextSibling);
-    _e13scarcity(); _e13cdTick();
+    _e13cdTick();
 
     // deleta tudo depois do vídeo no bloco: botão + barra "72%" + infos + badges (fica eyebrow->título->subs->vídeo)
     var sib=v.nextElementSibling;
@@ -134,21 +134,11 @@
   function _e13now(){ try{ var q=new URLSearchParams(location.search).get('cdnow'); if(q){ var d=new Date(q); if(!isNaN(d)) return d; } }catch(e){} return new Date(); }
   function _e13pct(){ var now=_e13now().getTime(), ev=EVENT_E13.getTime(), ini=ev-RAMP_DAYS*864e5;
     var f=Math.max(0,Math.min(1,(now-ini)/(ev-ini))); return Math.round(START_PCT+(100-START_PCT)*f); }
-  function _e13barHTML(){
-    return '<div class="e13-bar" style="max-width:340px;margin:12px auto 0">'
-      +'<div style="height:8px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden">'
-        +'<div data-e13-fill style="height:100%;width:72%;border-radius:999px;background:#FAAB00;transition:width .7s ease"></div>'
-      +'</div>'
-      +'<p data-e13-txt style="text-align:center;font-size:12px;margin:6px 0 0;color:rgba(255,255,255,.78)">72% dos ingressos vendidos por R$ 29,00</p>'
-    +'</div>';
-  }
+  /* NÃO injeta barra de escassez embaixo do vídeo (o cliente não quer). Só mantém dinâmicas as
+     menções "% dos ingressos vendidos" que já existem no resto da página (as do 1º fold ficam
+     ocultas no layout VSL). */
   function _e13scarcity(){ var pct=_e13pct();
-    /* barra injetada (visível na página B, abaixo do vídeo) */
-    var bf=document.querySelector('.e13-bar [data-e13-fill]'); if(bf) bf.style.width=pct+'%';
-    var bt=document.querySelector('.e13-bar [data-e13-txt]'); if(bt) bt.textContent=pct+'% dos ingressos vendidos por R$ 29,00';
-    /* barra(s) original(is) da página (fallback; ficam ocultas no layout VSL) */
     [].forEach.call(document.querySelectorAll('p'),function(p){
-      if(p.hasAttribute('data-e13-txt')) return;
       if(!/dos ingressos vendidos/i.test(p.textContent||'')) return;
       p.textContent=pct+'% dos ingressos vendidos por R$ 29,00';
       var tr=p.previousElementSibling, fill=tr&&tr.querySelector?tr.querySelector('[style*="width"]'):null;
