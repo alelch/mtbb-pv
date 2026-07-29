@@ -63,6 +63,8 @@
       '[data-vsl] > p{font-size:13.5px!important;line-height:1.34!important;margin:0!important}',
       /* fix: títulos de seção com whitespace-nowrap vazam -> deixa quebrar linha */
       'main h1.whitespace-nowrap,main h2.whitespace-nowrap,main h3.whitespace-nowrap{white-space:normal!important;text-wrap:balance}',
+      /* aproxima a faixa "Como visto em" do vídeo (menos respiro entre vídeo e prova social) */
+      'main section.border-y{padding-top:8px!important;margin-top:-10px!important}',
       /* MOBILE (<640px): vídeo FULL-WIDTH sem 100vw/break-out (à prova de overflow): zera o padding lateral do container e devolve só pro texto */
       '@media(max-width:639px){'
         +'[data-vsl]{padding-left:0!important;padding-right:0!important}'
