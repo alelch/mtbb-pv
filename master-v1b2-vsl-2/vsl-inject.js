@@ -183,7 +183,10 @@
       [].forEach.call(document.querySelectorAll('.hide'),function(el){ el.classList.remove('hide'); el.style.display=''; }); }
     function lock(){
       var sec=document.querySelector('main section'); if(!sec){ return setTimeout(lock,50); }
-      var sib=sec.nextElementSibling; while(sib){ sib.classList.add('hide'); sib=sib.nextElementSibling; }  // seções + barra fixa inferior
+      // a faixa "Como visto em" (prova social) FICA visível logo abaixo do vídeo; o resto trava
+      function keepVisible(el){ return /como visto|visto em/i.test(el.textContent||'')
+        || !!el.querySelector('img[src*="radio-senado"],img[src*="band-news"],img[src*="cbn"],img[src*="valor-economico"]'); }
+      var sib=sec.nextElementSibling; while(sib){ if(!keepVisible(sib)) sib.classList.add('hide'); sib=sib.nextElementSibling; }  // seções + barra fixa inferior
       var top=sec.previousElementSibling; if(top) top.classList.add('hide');                                 // barra fixa superior
       var sticky=document.getElementById('sticky-cta'); if(sticky) sticky.classList.add('hide');
       // reveal OFICIAL da VTurb (espera o player existir/ficar pronto)
