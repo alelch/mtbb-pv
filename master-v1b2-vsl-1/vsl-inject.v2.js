@@ -18,7 +18,10 @@
       var u = new URL(a.href, location.href), ch = false;
       ['sck','src'].forEach(function(k){
         var v = u.searchParams.get(k);
-        if(v && v.indexOf('master-v1b2') === 0 && v.indexOf('|pv') < 0){ u.searchParams.set(k, v + '|pvB'); ch = true; }
+        if(v && v.indexOf('|pv') >= 0) return;                    // já marcado
+        if(v){ if(v.indexOf('master-v1b2') !== 0) return; }       // sck de outra origem: não mexe
+        else { if(k !== 'sck') return; v = 'master-v1b2|vsl'; }   // botão do VÍDEO abre checkout SEM sck -> cria do zero
+        u.searchParams.set(k, v + '|pvB'); ch = true;
       });
       if(ch) a.setAttribute('href', u.toString());
     }catch(err){}
