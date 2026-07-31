@@ -96,6 +96,7 @@
 
   <!-- A/B Test framework (master-v1b2) — multi-teste: pagina (headline) + checkout -->
   <style>html.ab-pending [data-ab-el="headline"]{visibility:hidden!important}
+  html.vsl-cloak main .sm\:hidden, html.vsl-cloak main .hidden.sm\:block{visibility:hidden!important} /* anti-flash: esconde o hero original até o vsl-inject montar o vídeo */
   @media(max-width:639px){#sticky-cta a.btn-primary{white-space:nowrap;font-size:12.5px;letter-spacing:-.01em;padding-left:14px;padding-right:14px}#sticky-cta a.btn-primary svg{width:14px;height:14px;flex:0 0 auto}}</style>
   <script>
   (function(){
@@ -105,6 +106,7 @@
     var FIXED_HEADLINE='Você só lança seu livro <br class="sm:hidden">uma vez. <br><span class="text-gradient">Se der errado,</span> <span class="text-muted-foreground">e aí?</span>';
     var H=document.documentElement;
     H.classList.add('ab-pending');
+    H.classList.add('vsl-cloak'); setTimeout(function(){ H.classList.remove('vsl-cloak'); },1800); // anti-flash: failsafe caso o vsl-inject demore/falhe
     function ck(n,v,d){ if(v===undefined){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return m?decodeURIComponent(m[2]):null;}
       var e=new Date(); e.setTime(e.getTime()+d*864e5); document.cookie=n+"="+encodeURIComponent(v)+";expires="+e.toUTCString()+";path=/;SameSite=Lax"; }
     function vid(){ var k="ab_vid",v=null; try{v=localStorage.getItem(k);}catch(e){} if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8); try{localStorage.setItem(k,v);}catch(e){}} return v; }

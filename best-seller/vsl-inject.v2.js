@@ -111,7 +111,7 @@
     par.setAttribute('data-vsl','1');                                     // idempotente (marca p/ CSS)
     mob.setAttribute('data-vsl-hero','1');                                // força visível + centraliza
     var desk=sec.querySelector('.hidden.sm\\:block'); if(desk) desk.setAttribute('data-vsl-hide','1'); // esconde hero 2 colunas
-    if(mob.querySelector('.vsl-video')) return true;   // vídeo já injetado (robusto contra re-render)
+    if(mob.querySelector('.vsl-video')){ document.documentElement.classList.remove('vsl-cloak'); return true; }   // vídeo já injetado (robusto contra re-render)
 
     // subs = primeiro <p> depois do título
     var subs=h1, k=h1;
@@ -135,6 +135,7 @@
 
     // carrega o player A/B do vturb (1 só)
     if(!loaded){ loaded=true; var s=document.createElement('script'); s.src=PLAYER_SRC; s.async=true; document.head.appendChild(s); }
+    document.documentElement.classList.remove('vsl-cloak');   // anti-flash: hero já virou vídeo, pode revelar
     return true;
   }
 
