@@ -296,7 +296,7 @@ svg.board{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
     <div class="tk-val" id="tkVal">R$ 24,90</div>
     <div class="tk-was" id="tkWas">no lugar de <s>R$ 29</s></div>
     <div class="tk-cut"></div>
-    <div class="timer" id="tkTimer">Ingresso reservado por <b id="clock">15:00</b></div>
+    <div class="timer" id="tkTimer">Ingresso reservado por <b id="clock">5:00</b></div>
     <div class="acoes">
       <a class="btn sec" id="cta" href="#">Garantir meu ingresso</a>
       <button class="btn pri aceso" id="again">Quero girar de novo</button>
@@ -364,7 +364,7 @@ var CFG = {
   fatias: ['09','24','19','24','09','19','24','19'],
   chances: 3,
   chanceDePularPro990: 0.55,   // no 2º giro. o resto ganha no 3º. nunca no 1º.
-  minutosDeReserva: 15,
+  minutosDeReserva: 5,
   produto: 'M98923280L',
   ofertaNormal: '',
   precoCheio: 'R$ 29',
@@ -517,7 +517,9 @@ function girar(){
     disc.style.setProperty('--r',rot+'deg'); disc.classList.add('settle');
     S.giros++; S.nivel=nivel;
     S.fechado = !!premio.max || S.giros>=CFG.chances;
-    if(!S.prazo) S.prazo=Date.now()+CFG.minutosDeReserva*60000;
+    // o relógio só começa quando não dá mais pra melhorar o preço: senão alguém
+    // que demora entre os giros perderia o prêmio antes de decidir
+    if(S.fechado && !S.prazo) S.prazo=Date.now()+CFG.minutosDeReserva*60000;
     save(); mostrar(premio,true);
   },DUR+60);
 }
@@ -555,6 +557,11 @@ function mostrar(premio,animar){
   again.style.display=S.fechado?'none':'block';
   again.disabled=false;
 
+  document.getElementById('tkTimer').style.display=S.fechado?'block':'none';
+  document.getElementById('tkFine').textContent = S.fechado
+    ? 'Quando o tempo zerar o preço volta pra '+CFG.precoCheio+'. Vale só nesta página.'
+    : 'Você não perde o preço que já tirou. Girar de novo só pode melhorar.';
+
   if(S.fechado){
     cta.className='btn pri';
     cta.style.display='block';
@@ -571,7 +578,7 @@ function mostrar(premio,animar){
         : falta+' giros restantes, e o preço só cai')+'</span>';
   }
   ticket.classList.add('show');
-  relogio();
+  if(S.fechado) relogio();
   px('trackSingleCustom','RoletaPremio',{value:premio.num,currency:'BRL',content_name:premio.label,giro:S.giros});
   if(animar) setTimeout(function(){ ticket.scrollIntoView({behavior:'smooth',block:'center'}); },260);
 }
