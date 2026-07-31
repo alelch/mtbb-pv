@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Redirecionando…</title>
+<script>
+/* Ponte de checkout do botão do vídeo (VTurb).
+   O botão do vídeo abre uma URL fixa (/r/); aqui lemos o cookie 'mv_checkout' que a página
+   master-v1b2 gravou com o checkout da VARIANTE do visitante (A/B) + sck + utms, e redirecionamos.
+   Assim o botão do vídeo respeita o teste A/B de checkout e rastreia igual ao botão da página. */
+(function(){
+  function ck(n){ var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)'); return m?decodeURIComponent(m[2]):null; }
+  var url = ck('mv_checkout');
+  if(!url || url.indexOf('hotmart.com') < 0){
+    // fallback (cookie ausente): checkout A "com orderbumps", marcado p/ atribuir mesmo assim
+    url = 'https://pay.hotmart.com/M98923280L?checkoutMode=10&src=master-v1b2%7Cvturb%7C%7C%7C%7C%7CckA&sck=master-v1b2|vturb|||||ckA';
+  }
+  location.replace(url);
+})();
+</script>
+</head>
+<body style="margin:0;background:#0f0f10;color:#c9c9c9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh">
+  <div style="text-align:center">
+    <div style="width:34px;height:34px;border:3px solid #333;border-top-color:#7bd321;border-radius:50%;margin:0 auto 14px;animation:spin .8s linear infinite"></div>
+    Levando você pro checkout…
+  </div>
+  <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+  <noscript><meta http-equiv="refresh" content="0;url=https://pay.hotmart.com/M98923280L?checkoutMode=10"></noscript>
+</body>
+</html>

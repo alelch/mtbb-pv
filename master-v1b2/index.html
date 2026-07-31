@@ -290,6 +290,8 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
               } else {
                 link.href = base;
               }
+              // guarda o checkout final (variante + sck) num cookie: a ponte /r/ (botão do vídeo VTurb) lê e redireciona pra cá
+              try{ if(link.href.indexOf("pay.hotmart.com")>=0) document.cookie="mv_checkout="+encodeURIComponent(link.href)+";path=/;max-age=86400;SameSite=Lax"; }catch(e){}
               link.setAttribute("data-ab-gen", gen);
             }
           }
