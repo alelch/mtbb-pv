@@ -237,7 +237,7 @@ svg.board{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   <p class="kicker">Você está concorrendo ao maior desconto na história da</p>
   <h1>MasterClass <em><span class="nw">Best-Seller</span> de Verdade</em></h1>
   <p class="sub">Você pode girar até <b>3 vezes</b> e pagar só <b>R$ 9,90</b> no ingresso.
-     A cada giro o preço cai, nunca sobe.</p>
+     Cada giro é uma chance nova.</p>
 
   <div class="chances" id="chances"></div>
 
@@ -538,7 +538,7 @@ function mostrar(premio,animar){
     if(animar){ fanfarra(); confete(); }
   }else if(S.giros===1){
     msg.innerHTML='<div class="t">Parou em <span>R$ 24,90</span>. Já é seu.</div>'+
-                  '<small>E encostou no R$ 9,90. Você ainda tem '+falta+' giros, e daqui o preço só cai.</small>';
+                  '<small>E encostou no R$ 9,90. Ainda restam '+falta+' giros pra chegar lá.</small>';
     hub.textContent='DE NOVO';
   }else{
     msg.innerHTML='<div class="t">Caiu pra <span>R$ 19,90</span>.</div>'+
@@ -560,7 +560,7 @@ function mostrar(premio,animar){
   document.getElementById('tkTimer').style.display=S.fechado?'block':'none';
   document.getElementById('tkFine').textContent = S.fechado
     ? 'Quando o tempo zerar o preço volta pra '+CFG.precoCheio+'. Vale só nesta página.'
-    : 'Você não perde o preço que já tirou. Girar de novo só pode melhorar.';
+    : 'O preço que você já tirou fica guardado enquanto você gira.';
 
   if(S.fechado){
     cta.className='btn pri';
@@ -574,8 +574,8 @@ function mostrar(premio,animar){
     again.className='btn pri aceso';
     again.innerHTML=(falta===1?'Quero meu último giro':'Quero girar de novo')+
       '<span class="k">'+(falta===1
-        ? 'última chance de pagar R$ 9,90'
-        : falta+' giros restantes, e o preço só cai')+'</span>';
+        ? 'última chance de tirar o R$ 9,90'
+        : 'o R$ 9,90 ainda está na roleta')+'</span>';
   }
   ticket.classList.add('show');
   if(S.fechado) relogio();
