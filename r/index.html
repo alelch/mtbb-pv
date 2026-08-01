@@ -14,8 +14,13 @@
   function ck(n){ var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)'); return m?decodeURIComponent(m[2]):null; }
   var url = ck('mv_checkout');
   if(!url || url.indexOf('hotmart.com') < 0){
-    // fallback (cookie ausente): checkout A "com orderbumps", marcado p/ atribuir mesmo assim
-    url = 'https://pay.hotmart.com/M98923280L?checkoutMode=10&src=master-v1b2%7Cvturb%7C%7C%7C%7C%7CckA&sck=master-v1b2|vturb|||||ckA';
+    // fallback (cookie mv_checkout ausente): usa a VARIANTE real do visitante (cookie sticky do teste);
+    // se nem isso existir, sorteia 50/50 — nunca enviesa pra um lado.
+    var v = ck('ab_master-v1b2-checkout');
+    if(v !== 'A' && v !== 'B') v = (Math.random() < 0.5 ? 'A' : 'B');
+    var base = (v === 'B') ? 'https://pay.hotmart.com/M98923280L?off=log82p18&checkoutMode=10'
+                           : 'https://pay.hotmart.com/M98923280L?checkoutMode=10';
+    url = base + '&src=master-v1b2%7Cvturb%7C%7C%7C%7C%7Cck' + v + '&sck=master-v1b2|vturb|||||ck' + v;
   }
   location.replace(url);
 })();
