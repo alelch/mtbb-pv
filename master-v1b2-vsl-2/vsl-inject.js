@@ -162,27 +162,34 @@
     +'</div>';
   }
   function _e13cdPlace(){
-    if(document.querySelector('.e13-cd')) return true;                 // já colocado
-    var sec=document.getElementById('inscricao'); if(!sec) return false;
-    var host=null, ch=sec.children;                                     // pula a decoração de fundo (absolute)
-    for(var i=0;i<ch.length;i++){ if((''+(ch[i].className||'')).indexOf('absolute')<0){ host=ch[i]; break; } }
-    host=host||sec;
-    var tmp=document.createElement('div'); tmp.innerHTML=_e13cdHTML();
-    var cd=tmp.firstChild; cd.style.marginBottom='18px';
-    host.insertBefore(cd, host.firstChild);                             // topo do conteúdo da oferta
-    return true;
+    // cola um countdown logo abaixo de CADA botão de compra (forma unidade com o botão)
+    var btns=[].slice.call(document.querySelectorAll('a[href*="hotmart"]'));
+    var placed=false;
+    btns.forEach(function(a){
+      if(a.offsetParent===null) return;                                   // botão invisível
+      if(a.closest('vturb-smartplayer')) return;                          // botão do player, ignora
+      var nx=a.nextElementSibling;
+      if(nx && nx.classList && nx.classList.contains('e13-cd')) return;    // já colocado
+      var tmp=document.createElement('div'); tmp.innerHTML=_e13cdHTML();
+      var cd=tmp.firstChild; cd.style.margin='12px auto 0';
+      a.insertAdjacentElement('afterend', cd);
+      placed=true;
+    });
+    return placed;
   }
   function _e13cdTick(){
-    var el=document.querySelector('.e13-cd'); if(!el) return;
+    var els=document.querySelectorAll('.e13-cd'); if(!els.length) return;
     var t=_e13now().getTime(), ev=EVENT_E13.getTime(), fim=ev+4*36e5, de=ev-CD_SHOW_DAYS*864e5;
-    var bx=el.querySelector('.e13-cd-boxes'), lv=el.querySelector('.e13-cd-live');
-    if(t<de || t>=fim){ el.style.display='none'; return; }
-    el.style.display='';
-    if(t>=ev){ bx.style.display='none'; lv.style.display=''; return; }
-    bx.style.display='flex'; lv.style.display='none';
     var r=Math.max(0,ev-t), d=Math.floor(r/864e5), h=Math.floor(r%864e5/36e5), mi=Math.floor(r%36e5/6e4), s=Math.floor(r%6e4/1e3);
-    var set=function(k,v){ var e=el.querySelector('[data-e13-'+k+']'); if(e) e.textContent=(v<10?'0':'')+v; };
-    set('d',d); set('h',h); set('m',mi); set('s',s);
+    [].forEach.call(els,function(el){
+      var bx=el.querySelector('.e13-cd-boxes'), lv=el.querySelector('.e13-cd-live');
+      if(t<de || t>=fim){ el.style.display='none'; return; }
+      el.style.display='';
+      if(t>=ev){ bx.style.display='none'; lv.style.display=''; return; }
+      bx.style.display='flex'; lv.style.display='none';
+      var set=function(k,v){ var e=el.querySelector('[data-e13-'+k+']'); if(e) e.textContent=(v<10?'0':'')+v; };
+      set('d',d); set('h',h); set('m',mi); set('s',s);
+    });
   }
   _e13cdPlace(); setInterval(function(){ _e13cdPlace(); _e13cdTick(); },1000);
 
