@@ -168,6 +168,7 @@
     btns.forEach(function(a){
       if(a.offsetParent===null) return;                                   // botão invisível
       if(a.closest('vturb-smartplayer')) return;                          // botão do player, ignora
+      if(a.closest('.fixed') || a.closest('#sticky-cta')) return;          // CTA fixo/sticky, não colar aqui
       var nx=a.nextElementSibling;
       if(nx && nx.classList && nx.classList.contains('e13-cd')) return;    // já colocado
       var tmp=document.createElement('div'); tmp.innerHTML=_e13cdHTML();
