@@ -168,7 +168,7 @@
     +'</div>';
   }
   function _e13cdPlace(){
-    // cola um countdown logo abaixo de CADA botão de compra (forma unidade com o botão)
+    // cola um countdown no FIM DO BLOCO de cada botão de compra (abaixo de tudo, não entre botão e info)
     var btns=[].slice.call(document.querySelectorAll('a[href*="hotmart"]'));
     var placed=false;
     btns.forEach(function(a){
@@ -177,11 +177,11 @@
       if(a.closest('.fixed') || a.closest('#sticky-cta')) return;          // CTA fixo/sticky, não colar aqui
       if(a.closest('section') === document.querySelector('main section')) return; // botão do hero (escondido pelo go), não colar
       var _r=a.getBoundingClientRect(); if(_r.height<10) return;                       // botão sem altura real (fantasma do hero era 0x0)
-      var nx=a.nextElementSibling;
-      if(nx && nx.classList && nx.classList.contains('e13-cd')) return;    // já colocado
+      var bloco=a.parentElement;
+      if(bloco.querySelector(':scope > .e13-cd')) return;                  // bloco já tem countdown
       var tmp=document.createElement('div'); tmp.innerHTML=_e13cdHTML();
-      var cd=tmp.firstChild; cd.style.margin='12px auto 0';
-      a.insertAdjacentElement('afterend', cd);
+      var cd=tmp.firstChild; cd.style.margin='16px auto 0';
+      bloco.appendChild(cd);                                              // countdown no FIM do bloco do botão
       placed=true;
     });
     return placed;
