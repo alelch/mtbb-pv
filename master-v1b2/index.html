@@ -260,6 +260,9 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
           } catch (e) {}
         }
 
+        // anexa o xcod da VTurb (cookie mv_xcod, capturado pelo player) num link de checkout,
+        // pra a VTurb marcar conversão TAMBÉM nas vendas pelo botão da página (era assim antes do /r/).
+        function _withXcod(u){ try{ var x=ck('mv_xcod'); if(x && u.indexOf('pay.hotmart.com')>=0 && u.indexOf('xcod=')<0){ u += (u.indexOf('?')<0?'?':'&') + 'xcod=' + encodeURIComponent(x); } }catch(e){} return u; }
         function appendParams(link) {
           for (var j = 0; j < prefix.length; j++) {
             if (link.href.indexOf(prefix[j]) !== -1) {
@@ -290,6 +293,8 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
               } else {
                 link.href = base;
               }
+              // xcod da VTurb também nos botões da página (era assim até 31/07; some quando reconstruímos o href)
+              link.href = _withXcod(link.href);
               // guarda o checkout final (variante + sck) num cookie: a ponte /r/ (botão do vídeo VTurb) lê e redireciona pra cá
               try{ if(link.href.indexOf("pay.hotmart.com")>=0) document.cookie="mv_checkout="+encodeURIComponent(link.href)+";path=/;max-age=86400;SameSite=Lax"; }catch(e){}
               link.setAttribute("data-ab-gen", gen);
@@ -321,6 +326,7 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
             __lvSendCtx();
             if (!window.__ABREADY) window.__ABREADY = true; // fallback: nunca perder o clique
             appendParams(el);
+            el.href = _withXcod(el.href); // xcod no clique (freshest): mv_xcod já foi capturado pelo player
             var ts = window.__ABTESTS || [];
             if (ts.length && window.__abTrack) {
               var s = ""; try { s = new URL(el.href).searchParams.get("sck") || ""; } catch (_) {}
