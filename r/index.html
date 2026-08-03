@@ -22,6 +22,9 @@
                            : 'https://pay.hotmart.com/M98923280L?checkoutMode=10';
     url = base + '&src=master-v1b2%7Cvturb%7C%7C%7C%7C%7Cck' + v + '&sck=master-v1b2|vturb|||||ck' + v;
   }
+  // anexa o xcod da VTurb (capturado pela página) p/ a VTurb continuar marcando a conversão do vídeo
+  var xcod = ck('mv_xcod');
+  if(xcod && url.indexOf('xcod=') < 0){ url += (url.indexOf('?') < 0 ? '?' : '&') + 'xcod=' + encodeURIComponent(xcod); }
   location.replace(url);
 })();
 </script>

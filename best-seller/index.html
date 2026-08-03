@@ -374,4 +374,7 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
   
 
 <script src="assets/interactions.js" defer=""></script><script src="vsl-inject.v2.js?v=8"></script>
+<script>/* captura o xcod da VTurb num cookie (mv_xcod) p/ a ponte /r/ do botão do vídeo anexar no checkout -> VTurb segue marcando conversão */
+(function(){var n=0;function grab(){n++;try{var sp=window.smartplayer,i=sp&&sp.instances&&sp.instances[0]&&sp.instances[0].instance;
+if(i&&typeof i.urlUpdater==='function'){Promise.resolve(i.urlUpdater('https://pay.hotmart.com/x')).then(function(u){var m=String(u).match(/[?&]xcod=([^&]+)/);if(m&&m[1])document.cookie='mv_xcod='+encodeURIComponent(m[1])+';path=/;max-age=86400;SameSite=Lax';if(n<25)setTimeout(grab,3000);}).catch(function(){if(n<25)setTimeout(grab,2000);});return;}}catch(e){}if(n<25)setTimeout(grab,1500);}grab();})();</script>
 </body></html>
