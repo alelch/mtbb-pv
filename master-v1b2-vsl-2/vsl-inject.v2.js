@@ -115,7 +115,7 @@
     // insere o VÍDEO (único) logo depois dos subs
     var v=document.createElement('div');
     v.style.cssText='margin:12px auto 4px';
-    v.innerHTML=videoHTML()+_e13cdHTML();
+    v.innerHTML=videoHTML();
     subs.parentNode.insertBefore(v, subs.nextSibling);
     _e13cdTick();
 
