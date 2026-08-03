@@ -4,22 +4,30 @@
    Sem foto no topo, sem botão/barra/badges no head. 1 player só (sem id duplicado). */
 (function(){
   // player A/B do Vturb: ele roda o teste entre os vídeos e rastreia as vendas dos vídeos
-  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a67c49a147c16c129a2779e/player.js';
-  var PLAYER_ID='ab-6a67c49a147c16c129a2779e';
+  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a707699f1adbd702af91ce0/player.js';
+  var PLAYER_ID='ab-6a707699f1adbd702af91ce0';
   var loaded=false, styled=false, barsSet=false;
 
-  /* ATRIBUIÇÃO: esta página VSL só é servida pra variante B do teste de página.
-     O botão do player VTurb é criado async e não recebe o marcador |pv do appendParams.
-     No clique, garante |pvB no sck/src de qualquer link Hotmart (não duplica se já tiver |pv). */
+  /* ATRIBUIÇÃO (página best-seller): esta é a página vencedora (B) com URL limpa; roda o TESTE DE CHECKOUT.
+     Os links normais o framework (appendParams) já reescreve (checkout do teste + |ck<variante>).
+     O botão do player VTurb é criado async e escapa disso E abre o checkout SEM sck -> fallback no clique:
+     aponta pro checkout da variante ativa (__ABCK) e carimba os tags dos testes ativos (|ck<variante>). */
   document.addEventListener('click', function(e){
     var a = e.target && e.target.closest ? e.target.closest('a[href*="hotmart.com"]') : null;
     if(!a) return;
     try{
       var u = new URL(a.href, location.href), ch = false;
-      ['sck','src'].forEach(function(k){
-        var v = u.searchParams.get(k);
-        if(v && v.indexOf('master-v1b2') === 0 && v.indexOf('|pv') < 0){ u.searchParams.set(k, v + '|pvB'); ch = true; }
-      });
+      // 1) troca pro checkout da variante ativa do teste (se houver), preservando o sck atual
+      if(window.__ABCK){
+        var ov = new URL(window.__ABCK, location.href);
+        ['sck','src'].forEach(function(k){ var cur=u.searchParams.get(k); if(cur && !ov.searchParams.get(k)) ov.searchParams.set(k,cur); });
+        if(ov.toString()!==u.toString()){ u=ov; ch=true; }
+      }
+      // 2) garante sck e carimba os tags dos testes ativos (ex.: |ckA / |ckB) sem duplicar
+      var v = u.searchParams.get('sck');
+      if(!v){ v='best-seller|vsl'; ch=true; }
+      (window.__ABTESTS||[]).forEach(function(t){ if(t.sck_tag && t.variant && v.indexOf('|'+t.sck_tag+t.variant)<0){ v+='|'+t.sck_tag+t.variant; ch=true; } });
+      u.searchParams.set('sck', v);
       if(ch) a.setAttribute('href', u.toString());
     }catch(err){}
   }, true);
@@ -103,7 +111,7 @@
     par.setAttribute('data-vsl','1');                                     // idempotente (marca p/ CSS)
     mob.setAttribute('data-vsl-hero','1');                                // força visível + centraliza
     var desk=sec.querySelector('.hidden.sm\\:block'); if(desk) desk.setAttribute('data-vsl-hide','1'); // esconde hero 2 colunas
-    if(mob.querySelector('.vsl-video')) return true;   // vídeo já injetado (robusto contra re-render)
+    if(mob.querySelector('.vsl-video')){ document.documentElement.classList.remove('vsl-cloak'); return true; }   // vídeo já injetado (robusto contra re-render)
 
     // subs = primeiro <p> depois do título
     var subs=h1, k=h1;
@@ -112,9 +120,8 @@
     // insere o VÍDEO (único) logo depois dos subs
     var v=document.createElement('div');
     v.style.cssText='margin:12px auto 4px';
-    v.innerHTML=videoHTML()+_e13cdHTML();
+    v.innerHTML=videoHTML();
     subs.parentNode.insertBefore(v, subs.nextSibling);
-    _e13cdTick();
 
     // deleta tudo depois do vídeo no bloco: botão + barra "72%" + infos + badges (fica eyebrow->título->subs->vídeo)
     var sib=v.nextElementSibling;
@@ -127,6 +134,7 @@
 
     // carrega o player A/B do vturb (1 só)
     if(!loaded){ loaded=true; var s=document.createElement('script'); s.src=PLAYER_SRC; s.async=true; document.head.appendChild(s); }
+    document.documentElement.classList.remove('vsl-cloak');   // anti-flash: hero já virou vídeo, pode revelar
     return true;
   }
 
@@ -159,6 +167,17 @@
       +'<div class="e13-cd-live" style="display:none;font-size:15px;font-weight:800;color:#FAAB00;margin-top:2px">🔴 AO VIVO AGORA</div>'
     +'</div>';
   }
+  function _e13cdPlace(){
+    if(document.querySelector('.e13-cd')) return true;
+    var sec=document.getElementById('inscricao'); if(!sec) return false;
+    var host=null, ch=sec.children;
+    for(var i=0;i<ch.length;i++){ if((''+(ch[i].className||'')).indexOf('absolute')<0){ host=ch[i]; break; } }
+    host=host||sec;
+    var tmp=document.createElement('div'); tmp.innerHTML=_e13cdHTML();
+    var cd=tmp.firstChild; cd.style.marginBottom='18px';
+    host.insertBefore(cd, host.firstChild);
+    return true;
+  }
   function _e13cdTick(){
     var el=document.querySelector('.e13-cd'); if(!el) return;
     var t=_e13now().getTime(), ev=EVENT_E13.getTime(), fim=ev+4*36e5, de=ev-CD_SHOW_DAYS*864e5;
@@ -171,7 +190,7 @@
     var set=function(k,v){ var e=el.querySelector('[data-e13-'+k+']'); if(e) e.textContent=(v<10?'0':'')+v; };
     set('d',d); set('h',h); set('m',mi); set('s',s);
   }
-  setInterval(_e13cdTick,1000);
+  _e13cdPlace(); setInterval(function(){ _e13cdPlace(); _e13cdTick(); },1000);
 
   var n=0, iv=setInterval(function(){ n++; go(); if(n>40) clearInterval(iv); },250);
 })();

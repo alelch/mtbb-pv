@@ -4,8 +4,8 @@
    Sem foto no topo, sem botão/barra/badges no head. 1 player só (sem id duplicado). */
 (function(){
   // player A/B do Vturb: ele roda o teste entre os vídeos e rastreia as vendas dos vídeos
-  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a67c49a147c16c129a2779e/player.js';
-  var PLAYER_ID='ab-6a67c49a147c16c129a2779e';
+  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a707699f1adbd702af91ce0/player.js';
+  var PLAYER_ID='ab-6a707699f1adbd702af91ce0';
   var loaded=false, styled=false, barsSet=false;
 
   /* ATRIBUIÇÃO (página best-seller): esta é a página vencedora (B) com URL limpa; roda o TESTE DE CHECKOUT.
@@ -120,9 +120,8 @@
     // insere o VÍDEO (único) logo depois dos subs
     var v=document.createElement('div');
     v.style.cssText='margin:12px auto 4px';
-    v.innerHTML=videoHTML()+_e13cdHTML();
+    v.innerHTML=videoHTML();
     subs.parentNode.insertBefore(v, subs.nextSibling);
-    _e13cdTick();
 
     // deleta tudo depois do vídeo no bloco: botão + barra "72%" + infos + badges (fica eyebrow->título->subs->vídeo)
     var sib=v.nextElementSibling;
@@ -168,6 +167,17 @@
       +'<div class="e13-cd-live" style="display:none;font-size:15px;font-weight:800;color:#FAAB00;margin-top:2px">🔴 AO VIVO AGORA</div>'
     +'</div>';
   }
+  function _e13cdPlace(){
+    if(document.querySelector('.e13-cd')) return true;
+    var sec=document.getElementById('inscricao'); if(!sec) return false;
+    var host=null, ch=sec.children;
+    for(var i=0;i<ch.length;i++){ if((''+(ch[i].className||'')).indexOf('absolute')<0){ host=ch[i]; break; } }
+    host=host||sec;
+    var tmp=document.createElement('div'); tmp.innerHTML=_e13cdHTML();
+    var cd=tmp.firstChild; cd.style.marginBottom='18px';
+    host.insertBefore(cd, host.firstChild);
+    return true;
+  }
   function _e13cdTick(){
     var el=document.querySelector('.e13-cd'); if(!el) return;
     var t=_e13now().getTime(), ev=EVENT_E13.getTime(), fim=ev+4*36e5, de=ev-CD_SHOW_DAYS*864e5;
@@ -180,7 +190,7 @@
     var set=function(k,v){ var e=el.querySelector('[data-e13-'+k+']'); if(e) e.textContent=(v<10?'0':'')+v; };
     set('d',d); set('h',h); set('m',mi); set('s',s);
   }
-  setInterval(_e13cdTick,1000);
+  _e13cdPlace(); setInterval(function(){ _e13cdPlace(); _e13cdTick(); },1000);
 
   var n=0, iv=setInterval(function(){ n++; go(); if(n>40) clearInterval(iv); },250);
 })();
