@@ -176,7 +176,7 @@
       if(a.closest('vturb-smartplayer')) return;                          // botão do player, ignora
       if(a.closest('.fixed') || a.closest('#sticky-cta')) return;          // CTA fixo/sticky, não colar aqui
       if(a.closest('section') === document.querySelector('main section')) return; // botão do hero (escondido pelo go), não colar
-      var _r=a.getBoundingClientRect(); if(_r.width<10 || _r.height<10) return;      // botão sem tamanho real
+      var _r=a.getBoundingClientRect(); if(_r.height<10) return;                       // botão sem altura real (fantasma do hero era 0x0)
       var nx=a.nextElementSibling;
       if(nx && nx.classList && nx.classList.contains('e13-cd')) return;    // já colocado
       var tmp=document.createElement('div'); tmp.innerHTML=_e13cdHTML();
