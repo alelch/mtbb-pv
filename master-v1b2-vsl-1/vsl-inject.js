@@ -162,20 +162,28 @@
     +'</div>';
   }
   function _e13cdPlace(){
-    // cola um countdown no FIM DO BLOCO de cada botão de compra (abaixo de tudo, não entre botão e info)
-    var btns=[].slice.call(document.querySelectorAll('a[href*="hotmart"]'));
+    // countdown no FIM DO BLOCO, só na OFERTA (#inscricao) e no ÚLTIMO botão da página
+    var first=document.querySelector('main section');
+    var btns=[].slice.call(document.querySelectorAll('a[href*="hotmart"]')).filter(function(a){
+      if(a.offsetParent===null) return false;                          // invisível
+      if(a.closest('vturb-smartplayer')) return false;                 // botão do player
+      if(a.closest('.fixed')||a.closest('#sticky-cta')) return false;  // CTA fixo/sticky
+      if(a.closest('section')===first) return false;                   // botão do hero
+      return a.getBoundingClientRect().height>=10;                     // sem altura real -> fora
+    });
+    if(!btns.length) return false;
+    var alvos=[];
+    var oferta=btns.filter(function(a){return !!a.closest('#inscricao');})[0];
+    if(oferta) alvos.push(oferta);
+    var ultimo=btns[btns.length-1];
+    if(ultimo && alvos.indexOf(ultimo)<0) alvos.push(ultimo);
     var placed=false;
-    btns.forEach(function(a){
-      if(a.offsetParent===null) return;                                   // botão invisível
-      if(a.closest('vturb-smartplayer')) return;                          // botão do player, ignora
-      if(a.closest('.fixed') || a.closest('#sticky-cta')) return;          // CTA fixo/sticky, não colar aqui
-      if(a.closest('section') === document.querySelector('main section')) return; // botão do hero (escondido pelo go), não colar
-      var _r=a.getBoundingClientRect(); if(_r.height<10) return;                       // botão sem altura real (fantasma do hero era 0x0)
+    alvos.forEach(function(a){
       var bloco=a.parentElement;
-      if(bloco.querySelector(':scope > .e13-cd')) return;                  // bloco já tem countdown
+      if(bloco.querySelector(':scope > .e13-cd')) return;              // bloco já tem countdown
       var tmp=document.createElement('div'); tmp.innerHTML=_e13cdHTML();
       var cd=tmp.firstChild; cd.style.margin='16px auto 0';
-      bloco.appendChild(cd);                                              // countdown no FIM do bloco do botão
+      bloco.appendChild(cd);                                           // fim do bloco (abaixo de tudo)
       placed=true;
     });
     return placed;
@@ -194,7 +202,8 @@
       set('d',d); set('h',h); set('m',mi); set('s',s);
     });
   }
-  _e13cdPlace(); setInterval(function(){ _e13cdPlace(); _e13cdTick(); },1000);
+  var _pn=0,_pmax=0,_piv=setInterval(function(){ _pmax++; var did=_e13cdPlace(); _pn=did?0:_pn+1; if(_pn>=3||_pmax>30) clearInterval(_piv); },500);
+  setInterval(_e13cdTick,1000);
 
   var n=0, iv=setInterval(function(){ n++; go(); if(n>40) clearInterval(iv); },250);
 })();
