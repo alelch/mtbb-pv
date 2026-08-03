@@ -301,7 +301,6 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
               } else {
                 link.href = base;
               }
-              link.href = _withXcod(link.href); // xcod da VTurb também nos botões da página (era assim até 31/07)
               link.setAttribute("data-ab-gen", gen);
             }
           }
@@ -331,11 +330,19 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
             __lvSendCtx();
             if (!window.__ABREADY) window.__ABREADY = true; // fallback: nunca perder o clique
             appendParams(el);
-            el.href = _withXcod(el.href); // xcod no clique (freshest): mv_xcod já foi capturado pelo player
+            var _fin = _withXcod(el.href); el.href = _fin; // URL final: checkout da variante + xcod da VTurb
             var ts = window.__ABTESTS || [];
             if (ts.length && window.__abTrack) {
-              var s = ""; try { s = new URL(el.href).searchParams.get("sck") || ""; } catch (_) {}
+              var s = ""; try { s = new URL(_fin).searchParams.get("sck") || ""; } catch (_) {}
               for (var t = 0; t < ts.length; t++) window.__abTrack(ts[t].slug, ts[t].variant, "initiate", { sck: s });
+            }
+            // O checkout da Hotmart é aberto por um snapshot (SDK/prefetch) que ignora a alteração tardia
+            // do href e descarta o xcod. Havendo xcod a preservar, assumimos a navegação nós mesmos
+            // (mesma tática do /r/); sem xcod capturado, o fluxo normal segue intacto.
+            if (ck('mv_xcod') && _fin.indexOf('xcod=') >= 0) {
+              e.preventDefault(); e.stopPropagation();
+              setTimeout(function(){ location.assign(_fin); }, 30);
+              return;
             }
           } else {
             appendParams(el);
