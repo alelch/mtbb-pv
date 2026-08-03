@@ -4,8 +4,8 @@
    Sem foto no topo, sem botão/barra/badges no head. 1 player só (sem id duplicado). */
 (function(){
   // player A/B do Vturb: ele roda o teste entre os vídeos e rastreia as vendas dos vídeos
-  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a67c49a147c16c129a2779e/player.js';
-  var PLAYER_ID='ab-6a67c49a147c16c129a2779e';
+  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a707699f1adbd702af91ce0/player.js';
+  var PLAYER_ID='ab-6a707699f1adbd702af91ce0';
   var loaded=false, styled=false, barsSet=false;
 
   /* ATRIBUIÇÃO: esta página VSL só é servida pra variante B do teste de página.
@@ -18,7 +18,10 @@
       var u = new URL(a.href, location.href), ch = false;
       ['sck','src'].forEach(function(k){
         var v = u.searchParams.get(k);
-        if(v && v.indexOf('master-v1b2') === 0 && v.indexOf('|pv') < 0){ u.searchParams.set(k, v + '|pvB'); ch = true; }
+        if(v && v.indexOf('|pv') >= 0) return;                    // já marcado
+        if(v){ if(v.indexOf('master-v1b2') !== 0) return; }       // sck de outra origem: não mexe
+        else { if(k !== 'sck') return; v = 'master-v1b2|vsl'; }   // botão do VÍDEO abre checkout SEM sck -> cria do zero
+        u.searchParams.set(k, v + '|pvB'); ch = true;
       });
       if(ch) a.setAttribute('href', u.toString());
     }catch(err){}

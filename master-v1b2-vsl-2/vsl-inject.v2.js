@@ -4,8 +4,8 @@
    Hero: eyebrow -> título -> subs -> VÍDEO. Carimbo de atribuição = |pvC. */
 (function(){
   // player A/B do Vturb: ele roda o teste entre os vídeos e rastreia as vendas dos vídeos
-  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a67c49a147c16c129a2779e/player.js';
-  var PLAYER_ID='ab-6a67c49a147c16c129a2779e';
+  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a707699f1adbd702af91ce0/player.js';
+  var PLAYER_ID='ab-6a707699f1adbd702af91ce0';
   var loaded=false, styled=false, barsSet=false;
 
   /* ATRIBUIÇÃO: esta página VSL só é servida pra variante C do teste de página.
@@ -182,7 +182,7 @@
      chegar no preço (3:52 = 232s). A VTurb revela via displayHiddenElements (tempo de vídeo
      assistido, respeita pausa, persist p/ quem já assistiu e volta). Roda já no parse. ===== */
   (function(){
-    var PRICE_SECONDS=232, revealed=false;
+    var PRICE_SECONDS=229, revealed=false;
     var st=document.createElement('style'); st.textContent='.hide{display:none}'; (document.head||document.documentElement).appendChild(st);
     function reveal(){ if(revealed) return; revealed=true;
       [].forEach.call(document.querySelectorAll('.hide'),function(el){ el.classList.remove('hide'); el.style.display=''; }); }
