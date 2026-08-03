@@ -117,7 +117,6 @@
     v.style.cssText='margin:12px auto 4px';
     v.innerHTML=videoHTML();
     subs.parentNode.insertBefore(v, subs.nextSibling);
-    _e13cdTick();
 
     // deleta tudo depois do vídeo no bloco: botão + barra "72%" + infos + badges (fica eyebrow->título->subs->vídeo)
     var sib=v.nextElementSibling;
@@ -162,6 +161,17 @@
       +'<div class="e13-cd-live" style="display:none;font-size:15px;font-weight:800;color:#FAAB00;margin-top:2px">🔴 AO VIVO AGORA</div>'
     +'</div>';
   }
+  function _e13cdPlace(){
+    if(document.querySelector('.e13-cd')) return true;                 // já colocado
+    var sec=document.getElementById('inscricao'); if(!sec) return false;
+    var host=null, ch=sec.children;                                     // pula a decoração de fundo (absolute)
+    for(var i=0;i<ch.length;i++){ if((''+(ch[i].className||'')).indexOf('absolute')<0){ host=ch[i]; break; } }
+    host=host||sec;
+    var tmp=document.createElement('div'); tmp.innerHTML=_e13cdHTML();
+    var cd=tmp.firstChild; cd.style.marginBottom='18px';
+    host.insertBefore(cd, host.firstChild);                             // topo do conteúdo da oferta
+    return true;
+  }
   function _e13cdTick(){
     var el=document.querySelector('.e13-cd'); if(!el) return;
     var t=_e13now().getTime(), ev=EVENT_E13.getTime(), fim=ev+4*36e5, de=ev-CD_SHOW_DAYS*864e5;
@@ -174,7 +184,7 @@
     var set=function(k,v){ var e=el.querySelector('[data-e13-'+k+']'); if(e) e.textContent=(v<10?'0':'')+v; };
     set('d',d); set('h',h); set('m',mi); set('s',s);
   }
-  setInterval(_e13cdTick,1000);
+  _e13cdPlace(); setInterval(function(){ _e13cdPlace(); _e13cdTick(); },1000);
 
   var n=0, iv=setInterval(function(){ n++; go(); if(n>40) clearInterval(iv); },250);
 
