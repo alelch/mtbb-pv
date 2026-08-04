@@ -4,8 +4,8 @@
    Sem foto no topo, sem botão/barra/badges no head. 1 player só (sem id duplicado). */
 (function(){
   // player A/B do Vturb: ele roda o teste entre os vídeos e rastreia as vendas dos vídeos
-  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a707699f1adbd702af91ce0/player.js';
-  var PLAYER_ID='ab-6a707699f1adbd702af91ce0';
+  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a70e5541534153a07bee48b/player.js';
+  var PLAYER_ID='ab-6a70e5541534153a07bee48b';
   var loaded=false, styled=false, barsSet=false;
 
   /* ATRIBUIÇÃO: esta página VSL só é servida pra variante B do teste de página.
