@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estante · Método The Book Business</title>
+<meta name="description" content="Livros escritos e publicados por alunos do Método The Book Business.">
+<link rel="icon" href="favicon.webp" type="image/webp">
+<style>@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url('../assets/fonts/poppins-400.woff2') format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url('../assets/fonts/poppins-500.woff2') format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url('../assets/fonts/poppins-600.woff2') format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url('../assets/fonts/poppins-700.woff2') format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url('../assets/fonts/poppins-800.woff2') format('woff2')}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500;font-display:swap;src:url('../assets/fonts/fraunces-italic-500.woff2') format('woff2')}
+@font-face{font-family:'Caveat';font-style:normal;font-weight:600;font-display:swap;src:url('../assets/fonts/caveat.woff2') format('woff2')}
+  :root{
+    --bg:#F8F8F8; --card:#FFFFFF; --line:#EAE8E3; --fg:#1A1A1A; --soft:#55534E; --muted:#96938C;
+    --accent:#FAAB00; --accent-dark:#C97F00; --accent-deep:#6B4800; --accent-soft:#FFF4D6;
+    --shadow:0 1px 3px rgba(26,20,0,.05);
+    --body:'Poppins',system-ui,-apple-system,sans-serif;
+    --serif:'Fraunces',Georgia,serif; --hand:'Caveat',cursive;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#131211; --card:#1C1B19; --line:#2C2A27; --fg:#F5F2EC; --soft:#B8B4AC; --muted:#8A867E;
+          --accent:#FFBB29; --accent-dark:#FFC44D; --accent-deep:#FFD98A; --accent-soft:rgba(250,171,0,.13);
+          --shadow:0 1px 3px rgba(0,0,0,.4)}
+  }
+  :root[data-theme="dark"]{--bg:#131211; --card:#1C1B19; --line:#2C2A27; --fg:#F5F2EC; --soft:#B8B4AC; --muted:#8A867E;
+    --accent:#FFBB29; --accent-dark:#FFC44D; --accent-deep:#FFD98A; --accent-soft:rgba(250,171,0,.13);
+    --shadow:0 1px 3px rgba(0,0,0,.4)}
+  :root[data-theme="light"]{--bg:#F8F8F8; --card:#FFFFFF; --line:#EAE8E3; --fg:#1A1A1A; --soft:#55534E; --muted:#96938C;
+    --accent:#FAAB00; --accent-dark:#C97F00; --accent-deep:#6B4800; --accent-soft:#FFF4D6;
+    --shadow:0 1px 3px rgba(26,20,0,.05)}
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+  body{background:var(--bg);color:var(--fg);font-family:var(--body);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--accent);color:#1A1A1A}
+  img{max-width:100%}
+  button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--accent-dark);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:1220px;margin:0 auto;padding:0 24px}
+  .destaque-frase{font-family:var(--serif);font-style:italic;font-weight:500}
+
+  .topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:66px}
+  .marca{display:flex;align-items:center;gap:14px}
+  .logo-img{height:38px;width:auto;display:block}
+  :root[data-theme="dark"] .logo-img,
+  .marca .logo-img{border-radius:2px}
+  @media (prefers-color-scheme:dark){.logo-img{background:#fff;padding:4px 6px;border-radius:6px}}
+  :root[data-theme="dark"] .logo-img{background:#fff;padding:4px 6px;border-radius:6px}
+  :root[data-theme="light"] .logo-img{background:none;padding:0}
+  .nome-proj{font-weight:700;font-size:15px;letter-spacing:-.2px;padding-left:14px;border-left:1px solid var(--line)}
+  .nome-proj span{color:var(--accent-dark)}
+
+  .hero{padding:60px 0 30px;background:radial-gradient(680px 300px at 84% -100px,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)}
+  .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:14px}
+  h1{font-weight:800;font-size:clamp(29px,4.3vw,50px);line-height:1.1;letter-spacing:-1.6px;max-width:900px;text-wrap:balance}
+  h1 em{font-family:var(--serif);font-style:italic;font-weight:500;letter-spacing:-.5px;
+    background:linear-gradient(180deg,transparent 62%,color-mix(in srgb,var(--accent) 48%,transparent) 62%);padding:0 3px}
+  .sub{margin-top:18px;max-width:62ch;color:var(--soft);font-size:16px}
+  .stats{display:flex;flex-wrap:wrap;align-items:center;margin-top:26px}
+  .stat{display:flex;align-items:baseline;gap:6px;font-size:12.5px;color:var(--muted);padding:2px 18px;
+    border-left:1px solid var(--line);font-variant-numeric:tabular-nums}
+  .stat:first-child{padding-left:0;border-left:none}
+  .stat b{font-weight:700;font-size:16px;color:var(--fg)}
+  .stat.live b{color:var(--accent-dark)}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:32px}
+  .search{flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;padding:11px 16px;box-shadow:var(--shadow)}
+  .search:focus-within{border-color:var(--accent)}
+  .search svg{opacity:.45;flex:none}
+  .search input{background:none;border:none;outline:none;width:100%;font-family:var(--body);font-size:14px;color:var(--fg)}
+  .search input::placeholder{color:var(--muted)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-size:12.5px;font-weight:600;padding:8px 15px;border-radius:100px;cursor:pointer;color:var(--soft);
+    background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);transition:.15s}
+  .chip:hover{color:var(--fg);border-color:var(--muted)}
+  .chip.on{color:var(--bg);background:var(--fg);border-color:var(--fg)}
+  .aviso{display:flex;gap:10px;align-items:flex-start;background:var(--accent-soft);
+    border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);border-radius:12px;padding:13px 16px;
+    margin-top:20px;font-size:12.5px;color:var(--accent-deep);line-height:1.55}
+  .aviso b{font-weight:700}
+
+  .shelf{padding:30px 0 10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;display:flex;flex-direction:column;
+    box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(26,20,0,.13)}
+  .cover-zone{display:flex;justify-content:center;padding:26px 18px 4px;perspective:900px}
+  .cover{width:150px;aspect-ratio:2/3;border-radius:4px 8px 8px 4px;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:space-between;padding:15px 13px;
+    border:1px solid rgba(0,0,0,.08);box-shadow:0 10px 22px rgba(26,20,0,.22);
+    transition:transform .25s,box-shadow .25s}
+  .card:hover .cover{transform:rotateY(-9deg) translateY(-3px);box-shadow:0 16px 30px rgba(26,20,0,.28)}
+  .cover::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg,rgba(0,0,0,.38),rgba(0,0,0,0) 14%,rgba(255,255,255,.1) 15%,rgba(255,255,255,0) 20%)}
+  .cover::after{content:"";position:absolute;top:2px;bottom:2px;right:0;width:3px;opacity:.9;border-radius:0 6px 6px 0;
+    background:repeating-linear-gradient(180deg,#e8e4d8 0 2px,#cfcbc0 2px 3px)}
+  .cover .k{font-size:8px;letter-spacing:.18em;text-transform:uppercase;opacity:.72;font-weight:600;line-height:1.5}
+  .cover .t{font-size:17px;line-height:1.15;font-weight:700}
+  .cover .a{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;font-weight:600}
+  .cover.serif .t{font-family:var(--serif);font-style:italic;font-weight:500;font-size:19px}
+  .cover.grot .t{font-weight:800;text-transform:uppercase;font-size:14.5px;letter-spacing:-.2px}
+  .cover .pend{position:absolute;bottom:32px;left:13px;right:13px;text-align:center;font-size:7px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;opacity:.5;padding-top:6px;border-top:1px dashed currentColor}
+  .c1{background:linear-gradient(160deg,#16233c,#2c4a6e);color:#f2f6ff}
+  .c2{background:linear-gradient(160deg,#8f2f4a,#c25462);color:#fff6f4}
+  .c3{background:linear-gradient(165deg,#0f4c46,#177563);color:#eafff8}
+  .c4{background:linear-gradient(160deg,#15161a,#2a2c33);color:#f5f5f2}
+  .c5{background:linear-gradient(160deg,#dfecc4,#f4e6ae);color:#3a4a26}
+  .c6{background:linear-gradient(160deg,#eddcc8,#e0bfb0);color:#5a3a35}
+  .c7{background:linear-gradient(160deg,#25317d,#6a3fb8);color:#f1eeff}
+  .c8{background:linear-gradient(165deg,#2c1b4d,#4a2a78);color:#f3ecff}
+  .c9{background:linear-gradient(160deg,#e3ebdc,#c7d6bf);color:#2e4a35}
+  .c10{background:linear-gradient(160deg,#123b2a,#1d5c3d);color:#f2ffe9}
+  .c11{background:linear-gradient(160deg,#23272e,#3b414c);color:#efe9da}
+  .c12{background:linear-gradient(160deg,#5d6673,#8a93a1);color:#f4f6f8}
+
+  .card-body{padding:14px 18px 0}
+  .area{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:6px}
+  .livro-t{font-size:16.5px;font-weight:700;line-height:1.3;letter-spacing:-.4px;text-wrap:balance}
+  .por{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12.5px;color:var(--muted)}
+  .por b{color:var(--fg);font-weight:600}
+  .avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--line)}
+  .destaque{display:inline-block;margin-top:11px;font-size:11.5px;font-weight:600;color:var(--accent-deep);
+    background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);
+    border-radius:100px;padding:5px 11px;line-height:1.45}
+  .actions{margin-top:auto;display:flex;gap:8px;padding:16px 18px 18px}
+  .btn-amazon{flex:1;font-weight:700;font-size:11.5px;background:var(--fg);color:var(--bg);border:none;
+    border-radius:10px;padding:11px 6px;cursor:pointer;white-space:nowrap;transition:.15s}
+  .btn-amazon:hover{opacity:.85}
+  .btn-autor{flex:1;font-weight:600;font-size:11.5px;background:transparent;color:var(--fg);
+    border:1px solid var(--line);border-radius:10px;padding:11px 6px;cursor:pointer;white-space:nowrap;transition:.15s}
+  .btn-autor:hover{border-color:var(--fg)}
+  .empty{display:none;text-align:center;color:var(--muted);padding:60px 0;font-size:15px}
+
+  .autor-view{display:none;padding-top:44px;padding-bottom:70px}
+  .voltar{display:inline-block;font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer;
+    background:none;border:none;margin-bottom:28px;padding:4px 0}
+  .voltar:hover{color:var(--fg)}
+  .autor-top{display:grid;grid-template-columns:210px 1fr;gap:34px;align-items:start}
+  .autor-foto{width:100%;aspect-ratio:1;object-fit:cover;border-radius:18px;box-shadow:0 10px 26px rgba(26,20,0,.16)}
+  .badge-aluno{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent-deep);background:var(--accent-soft);
+    border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);border-radius:100px;padding:5px 12px;margin-bottom:12px}
+  .autor-top h2{font-weight:800;font-size:clamp(27px,3.4vw,40px);letter-spacing:-1.4px;line-height:1.08}
+  .autor-area{font-size:13.5px;color:var(--muted);margin-top:8px}
+  .autor-story{font-family:var(--serif);font-style:italic;font-weight:500;font-size:19px;line-height:1.45;
+    margin-top:20px;max-width:60ch;letter-spacing:-.2px}
+  .conquistas{margin-top:22px;padding:0;list-style:none;display:grid;gap:9px;max-width:60ch}
+  .conquistas li{display:flex;gap:10px;font-size:14px;color:var(--soft);line-height:1.5}
+  .conquistas li span{flex:none;color:var(--accent-dark);font-weight:700}
+  .ler-mais{display:inline-block;margin-top:20px;font-size:13.5px;font-weight:600;color:var(--accent-dark);
+    background:none;border:none;border-bottom:1px dotted currentColor;cursor:pointer;padding:2px 0}
+  .autor-livro{margin-top:42px;padding-top:32px;border-top:1px solid var(--line)}
+  .autor-livro h3{font-weight:700;font-size:19px;letter-spacing:-.5px;margin-bottom:16px}
+  .livro-box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;
+    max-width:60ch;box-shadow:var(--shadow)}
+  .livro-box .t{font-family:var(--serif);font-style:italic;font-weight:500;font-size:23px;letter-spacing:-.3px;line-height:1.25}
+  .livro-box .s{font-size:13.5px;color:var(--muted);margin-top:6px}
+  .livro-box .btn-amazon{margin-top:18px;padding:11px 24px;flex:none;display:inline-block;font-size:12.5px}
+  .autor-next{margin-top:44px;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);
+    border-radius:18px;padding:24px 26px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .autor-next p{font-size:14.5px;color:var(--accent-deep);font-weight:600}
+
+  .cta{margin:40px 0 70px;position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);
+    border-radius:24px;padding:54px 28px;text-align:center;box-shadow:var(--shadow)}
+  .cta::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(460px 200px at 50% -70px,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%)}
+  .cta h2{font-weight:800;font-size:clamp(24px,3.2vw,36px);letter-spacing:-1.2px;text-wrap:balance}
+  .cta h2 em{font-family:var(--serif);font-style:italic;font-weight:500;letter-spacing:-.4px;
+    background:linear-gradient(180deg,transparent 62%,color-mix(in srgb,var(--accent) 48%,transparent) 62%);padding:0 3px}
+  .cta p{max-width:58ch;margin:14px auto 4px;color:var(--soft);font-size:15.5px}
+  .hand{font-family:var(--hand);font-weight:600;font-size:26px;color:var(--accent-dark);display:block;
+    margin:8px auto 18px;transform:rotate(-2deg)}
+  .btn-primary{display:inline-block;font-weight:800;font-size:16.5px;letter-spacing:-.2px;color:#1A1A1A;border:none;
+    border-radius:14px;padding:18px 40px;cursor:pointer;
+    background:linear-gradient(180deg,#FFC646 0%,#FAAB00 52%,#EFA000 100%);
+    box-shadow:0 10px 26px rgba(250,171,0,.42),inset 0 1px 0 rgba(255,255,255,.45);transition:transform .18s,box-shadow .18s}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(250,171,0,.5),inset 0 1px 0 rgba(255,255,255,.45)}
+  .btn-mini{font-weight:700;font-size:13px;color:#1A1A1A;border:none;border-radius:100px;padding:11px 22px;cursor:pointer;
+    background:linear-gradient(180deg,#FFC646 0%,#FAAB00 52%,#EFA000 100%);
+    box-shadow:0 4px 14px rgba(250,171,0,.35),inset 0 1px 0 rgba(255,255,255,.45)}
+
+  footer{border-top:1px solid var(--line);padding:26px 0 36px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  footer p{font-size:12.5px;color:var(--muted)}
+
+  .overlay{position:fixed;inset:0;z-index:100;display:none;background:rgba(26,20,10,.5);backdrop-filter:blur(6px);
+    align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 16px}
+  .overlay.open{display:flex}
+  .modal{width:100%;max-width:530px;background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:32px 30px;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.35)}
+  .modal .close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);
+    font-size:24px;cursor:pointer;line-height:1;padding:4px 8px}
+  .modal h3{font-weight:800;font-size:21px;letter-spacing:-.7px;margin-bottom:6px}
+  .modal .hint{font-size:13px;color:var(--muted);margin-bottom:22px}
+  .field{margin-bottom:15px}
+  .field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:6px;color:var(--soft)}
+  .field label small{color:var(--muted);font-weight:400}
+  .field input,.field select,.field textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;
+    padding:11px 14px;font-family:var(--body);font-size:14px;color:var(--fg);outline:none;transition:.15s}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+  .field textarea{resize:vertical;min-height:76px}
+  .upload{border:1.5px dashed var(--line);border-radius:12px;padding:20px;text-align:center;color:var(--muted);
+    font-size:13px;cursor:pointer}
+  .upload:hover{border-color:var(--accent);color:var(--fg)}
+  .upload b{color:var(--accent-dark);font-weight:600}
+  .modal .btn-primary{width:100%;margin-top:8px;padding:15px;font-size:15.5px}
+  .aprovacao{display:flex;gap:10px;align-items:flex-start;margin-top:15px;background:var(--accent-soft);
+    border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);border-radius:10px;padding:12px 14px;
+    font-size:12.5px;color:var(--accent-deep);line-height:1.5}
+  .sucesso{display:none;text-align:center;padding:32px 6px 20px}
+  .sucesso .ic{width:62px;height:62px;border-radius:50%;margin:0 auto 18px;background:var(--accent-soft);
+    border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);display:flex;align-items:center;
+    justify-content:center;color:var(--accent-dark);font-size:26px}
+  .sucesso h4{font-weight:800;font-size:19px;letter-spacing:-.5px;margin-bottom:10px}
+  .sucesso p{font-size:13.5px;color:var(--soft)}
+
+  .selo{position:fixed;bottom:14px;left:14px;z-index:200;font-size:9.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);background:var(--card);border:1px solid var(--line);
+    border-radius:100px;padding:7px 14px;pointer-events:none;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+
+  @media (max-width:700px){
+    .autor-top{grid-template-columns:1fr;gap:20px}
+    .autor-foto{max-width:190px}
+    .nome-proj{padding-left:12px}
+  }
+  @media (max-width:560px){
+    .hero{padding:44px 0 26px}
+    h1{letter-spacing:-1px}
+    .stat{padding:2px 12px}
+    .cover{width:140px}
+  }
+
+  .btn-embreve{flex:1;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:11.5px;
+    color:var(--muted);background:transparent;border:1px dashed var(--line);border-radius:10px;padding:11px 6px;
+    white-space:nowrap;cursor:default;user-select:none}
+  .livro-box .btn-embreve{display:inline-flex;margin-top:18px;padding:11px 22px;flex:none;font-size:12.5px}
+  .selo{display:none}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="marca">
+      <a href="/"><img class="logo-img" src="../assets/logo-metodo-the-book-business.webp" alt="Método The Book Business" width="111" height="60"></a>
+      <span class="nome-proj">Est<span>ante</span></span>
+    </div>
+    <span class="nome-proj" style="border:none;padding:0;font-weight:600;color:var(--muted);font-size:13px">Livros dos nossos alunos</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Estante dos alunos do Método</p>
+    <h1>O maior risco de um autor é ser esquecido.<br>Esta estante prova que existe <em>outro caminho</em>.</h1>
+    <p class="sub">Livros escritos e publicados por alunos do Método, hoje nas mãos dos leitores certos. Conheça o autor por trás de cada um e leve um pra sua estante.</p>
+    <div class="stats">
+      <p class="stat live"><b id="total">0</b> livros nesta estante</p>
+      <p class="stat"><b>+800</b> autores lançados</p>
+      <p class="stat"><b>+10M</b> livros vendidos</p>
+      <p class="stat"><b>+4.400</b> alunos no método</p>
+    </div>
+    <div class="toolbar">
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="busca" type="text" placeholder="Buscar por livro, autor ou área..." aria-label="Buscar na estante" oninput="filtrar()">
+      </div>
+      <div class="chips">
+          <button type="button" class="chip on" data-g="todos" onclick="setGrupo(this)">Todos</button>
+          <button type="button" class="chip" data-g="negocios" onclick="setGrupo(this)">Negócios e Liderança</button>
+          <button type="button" class="chip" data-g="infantil" onclick="setGrupo(this)">Infantil e Juvenil</button>
+          <button type="button" class="chip" data-g="ficcao" onclick="setGrupo(this)">Ficção e Fantasia</button>
+          <button type="button" class="chip" data-g="romance" onclick="setGrupo(this)">Romance e Poesia</button>
+          <button type="button" class="chip" data-g="autoajuda" onclick="setGrupo(this)">Autoajuda</button>
+          <button type="button" class="chip" data-g="saude" onclick="setGrupo(this)">Saúde e Biografia</button>
+          <button type="button" class="chip" data-g="naoficcao" onclick="setGrupo(this)">Não-ficção</button>
+      </div>
+    </div>
+    <p class="aviso"><span aria-hidden="true">&#9432;</span>
+      <span>Estamos montando esta estante. As <b>capas definitivas</b> e os <b>links de compra</b> entram conforme cada autor envia os dados (mostrando <span id="conta">0</span> livros agora).</span>
+    </p>
+  </div>
+</section>
+
+<section class="shelf">
+  <div class="wrap">
+    <div class="grid" id="grid">
+      <article class="card" data-g="negocios" data-busca="candice pascoal seu sonho tem futuro negocios e empreendedorismo empreendedorismo negocios">
+        <div class="cover-zone">
+          <div class="cover serif c1">
+            <span class="k">Negócios e empreendedorismo</span>
+            <span class="t">Seu Sonho Tem Futuro</span>
+            <span class="a">Candice Pascoal</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Negócios e empreendedorismo</p>
+          <h3 class="livro-t">Seu Sonho Tem Futuro</h3>
+          <p class="por"><img class="avatar" src="fotos/candice-pascoal-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Candice Pascoal</b></span></p>
+          <p class="destaque">Best-Seller #1 na Lista dos livros mais vendidos da Revista Veja</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="negocios naoficcao" data-busca="vinicius profinho o guia da redacao nota 1000 educacao carreira nao ficcao">
+        <div class="cover-zone">
+          <div class="cover serif c2">
+            <span class="k">Educação</span>
+            <span class="t">O Guia da Redação Nota 1000</span>
+            <span class="a">Vinicius Profinho</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Educação</p>
+          <h3 class="livro-t">O Guia da Redação Nota 1000</h3>
+          <p class="por"><img class="avatar" src="fotos/vinicius-profinho-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Vinicius Profinho</b></span></p>
+          <p class="destaque">8 mil cópias vendidas</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="negocios" data-busca="susana arbex sua marca pessoal revele sua autenticidade fortaleca seu posicionamento profissional com uma comunicacao autentica e memoravel usando o metodo fly negocios negocios">
+        <div class="cover-zone">
+          <div class="cover grot c3">
+            <span class="k">Negócios</span>
+            <span class="t">Sua Marca Pessoal</span>
+            <span class="a">Susana Arbex</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Negócios</p>
+          <h3 class="livro-t">Sua Marca Pessoal</h3>
+          <p class="por"><img class="avatar" src="fotos/susana-arbex-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Susana Arbex</b></span></p>
+          <p class="destaque">1º lugar no Brasil na categoria de negócios pela PublishNews</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="autoajuda saude" data-busca="arnoni caldart ative sua mente saude e longevidade autoajuda saude">
+        <div class="cover-zone">
+          <div class="cover grot c4">
+            <span class="k">Saúde e Longevidade</span>
+            <span class="t">Ative Sua Mente</span>
+            <span class="a">Arnoni Caldart</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Saúde e Longevidade</p>
+          <h3 class="livro-t">Ative Sua Mente</h3>
+          <p class="por"><img class="avatar" src="fotos/arnoni-caldart-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Arnoni Caldart</b></span></p>
+          <p class="destaque">Entrou na lista dos mais vendidos da VEJA</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="negocios" data-busca="tonia casarin lideranca exponencial a transformacao humana e o motor dos lideres do futuro lideranca gestao lideranca">
+        <div class="cover-zone">
+          <div class="cover serif c5">
+            <span class="k">Liderança</span>
+            <span class="t">Liderança Exponencial</span>
+            <span class="a">Tonia Casarin</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Liderança</p>
+          <h3 class="livro-t">Liderança Exponencial</h3>
+          <p class="por"><img class="avatar" src="fotos/tonia-casarin-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Tonia Casarin</b></span></p>
+          <p class="destaque">Best-Seller PublishNews</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="negocios" data-busca="lelo apovian muito acima da media gestao de performance e desenvolvimento de liderancas lideranca">
+        <div class="cover-zone">
+          <div class="cover serif c6">
+            <span class="k">Gestão de performance e desenv</span>
+            <span class="t">Muito Acima da Média</span>
+            <span class="a">Lelo Apovian</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Gestão de performance e desenvolvimento de lideranças</p>
+          <h3 class="livro-t">Muito Acima da Média</h3>
+          <p class="por"><img class="avatar" src="fotos/lelo-apovian-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Lelo Apovian</b></span></p>
+          <p class="destaque">Best-seller na Revista Veja</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="autoajuda" data-busca="jose julio cerquetane de menezes o fim da depressao autoajuda autoajuda">
+        <div class="cover-zone">
+          <div class="cover grot c7">
+            <span class="k">Autoajuda</span>
+            <span class="t">O fim da depressão</span>
+            <span class="a">José Julio Cerquetane de Menezes</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Autoajuda</p>
+          <h3 class="livro-t">O fim da depressão</h3>
+          <p class="por"><img class="avatar" src="fotos/jose-julio-cerquetane-de-menezes-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>José Julio Cerquetane de Menezes</b></span></p>
+          <p class="destaque">Best Seller na Infobook</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="infantil" data-busca="emilia nunez capaz literatura infantil infantil">
+        <div class="cover-zone">
+          <div class="cover grot c8">
+            <span class="k">Literatura Infantil</span>
+            <span class="t">Capaz</span>
+            <span class="a">Emília Nunez</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Literatura Infantil</p>
+          <h3 class="livro-t">Capaz</h3>
+          <p class="por"><img class="avatar" src="fotos/emilia-nunez-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Emília Nunez</b></span></p>
+          <p class="destaque">1º lugar nos lançamentos da Amazon com o livro Capaz</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="negocios" data-busca="nei santa barbara improve  um metodo pratico que vai mudar para sempre sua forma de gerenciar pessoas e processos lideranca processos e gestao gestao negocios">
+        <div class="cover-zone">
+          <div class="cover serif c9">
+            <span class="k">Liderança, Processos e Gestão</span>
+            <span class="t">IMPROVE</span>
+            <span class="a">Nei Santa Bárbara</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Liderança, Processos e Gestão</p>
+          <h3 class="livro-t">IMPROVE</h3>
+          <p class="por"><img class="avatar" src="fotos/nei-santa-barbara-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Nei Santa Bárbara</b></span></p>
+          <p class="destaque">Primeira edição quase esgotada</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="autoajuda" data-busca="celia alves cardoso os recomecos de deus uma nova esperanca a cada amanhecer espiritualidade catolica autoajuda">
+        <div class="cover-zone">
+          <div class="cover serif c10">
+            <span class="k">Espiritualidade católica</span>
+            <span class="t">Os recomeços de Deus</span>
+            <span class="a">Célia Alves Cardoso</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Espiritualidade católica</p>
+          <h3 class="livro-t">Os recomeços de Deus</h3>
+          <p class="por"><img class="avatar" src="fotos/celia-alves-cardoso-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Célia Alves Cardoso</b></span></p>
+          <p class="destaque">Se reinventou profissionalmente após anos como professora</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="naoficcao" data-busca="tom orgado baque auto ficcao nao ficcao">
+        <div class="cover-zone">
+          <div class="cover grot c11">
+            <span class="k">Auto ficção</span>
+            <span class="t">Baque</span>
+            <span class="a">Tom Orgado</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Auto ficção</p>
+          <h3 class="livro-t">Baque</h3>
+          <p class="por"><img class="avatar" src="fotos/tom-orgado-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Tom Orgado</b></span></p>
+          <p class="destaque">Destaque de vendas na Bienal do Livro do Rio 2023</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="romance naoficcao" data-busca="ingrid azevedo o caminho do despertar um convite ao acolhimento e a autonomia espiritual nao ficcao nao ficcao romance">
+        <div class="cover-zone">
+          <div class="cover grot c12">
+            <span class="k">Não ficção</span>
+            <span class="t">O caminho do despertar</span>
+            <span class="a">Ingrid Azevedo</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Não ficção</p>
+          <h3 class="livro-t">O caminho do despertar</h3>
+          <p class="por"><img class="avatar" src="fotos/ingrid-azevedo-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Ingrid Azevedo</b></span></p>
+          <p class="destaque">Quase 600 exemplares vendidos na pré-venda</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="ficcao" data-busca="bruno de deus vieira serra o papo do vovo contato desconhecido e trem de louco misterio ficcao misterio">
+        <div class="cover-zone">
+          <div class="cover serif c1">
+            <span class="k">Mistério</span>
+            <span class="t">Serra o papo do vovô, Contato desconhecido e Trem de Louco</span>
+            <span class="a">Bruno de Deus Vieira</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Mistério</p>
+          <h3 class="livro-t">Serra o papo do vovô, Contato desconhecido e Trem de Louco</h3>
+          <p class="por"><img class="avatar" src="fotos/bruno-de-deus-vieira-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Bruno de Deus Vieira</b></span></p>
+          <p class="destaque">Finalista no Prêmio Ecos da Literatura na categoria de melhor livro digital de 2023</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="negocios" data-busca="simone simon faca ser facil negocie e obtenha resultados extraordinarios na vida na carreira e nos negocios negociacao e gestao gestao negocios">
+        <div class="cover-zone">
+          <div class="cover serif c2">
+            <span class="k">Negociação e Gestão</span>
+            <span class="t">Faça Ser Fácil</span>
+            <span class="a">Simone Simon</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Negociação e Gestão</p>
+          <h3 class="livro-t">Faça Ser Fácil</h3>
+          <p class="por"><img class="avatar" src="fotos/simone-simon-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Simone Simon</b></span></p>
+          <p class="destaque">Best-Seller e Long-Seller</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="infantil romance" data-busca="patricia guimaraes putz serio que fiz isso romance juvenil romance">
+        <div class="cover-zone">
+          <div class="cover grot c3">
+            <span class="k">Romance</span>
+            <span class="t">Putz, sério que fiz isso?</span>
+            <span class="a">Patrícia Guimarães</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Romance</p>
+          <h3 class="livro-t">Putz, sério que fiz isso?</h3>
+          <p class="por"><img class="avatar" src="fotos/patricia-guimaraes-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Patrícia Guimarães</b></span></p>
+          <p class="destaque">Lançado no Brasil e Estados Unidos</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="saude naoficcao" data-busca="ricky ribeiro movido pela mente biografia biografia nao ficcao saude">
+        <div class="cover-zone">
+          <div class="cover grot c4">
+            <span class="k">Biografia</span>
+            <span class="t">Movido pela Mente</span>
+            <span class="a">Ricky Ribeiro</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Biografia</p>
+          <h3 class="livro-t">Movido pela Mente</h3>
+          <p class="por"><img class="avatar" src="fotos/ricky-ribeiro-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Ricky Ribeiro</b></span></p>
+          <p class="destaque">Segunda edição lançada com eventos especiais em grandes instituições</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="romance" data-busca="cibele lauretino cactos nobelina todas em mim e eu inutil poesia e romance poesia romance">
+        <div class="cover-zone">
+          <div class="cover serif c5">
+            <span class="k">Poesia e Romance</span>
+            <span class="t">Cactos, Nobelina, Todas em Mim e Eu Inútil</span>
+            <span class="a">Cibele Lauretino</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Poesia e Romance</p>
+          <h3 class="livro-t">Cactos, Nobelina, Todas em Mim e Eu Inútil</h3>
+          <p class="por"><img class="avatar" src="fotos/cibele-lauretino-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Cibele Lauretino</b></span></p>
+          <p class="destaque">4 livros publicados</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="infantil" data-busca="ana michelucci o novo morador literatura infantil infantil">
+        <div class="cover-zone">
+          <div class="cover serif c6">
+            <span class="k">Literatura Infantil</span>
+            <span class="t">O novo morador</span>
+            <span class="a">Ana Michelucci</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Literatura Infantil</p>
+          <h3 class="livro-t">O novo morador</h3>
+          <p class="por"><img class="avatar" src="fotos/ana-michelucci-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Ana Michelucci</b></span></p>
+          <p class="destaque">Conquistou autoridade como autora, além da sua profissão como dentista</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="naoficcao" data-busca="edinete dos santos a nobreza e os desafios de ser mulher nao ficcao nao ficcao">
+        <div class="cover-zone">
+          <div class="cover grot c7">
+            <span class="k">Não ficção</span>
+            <span class="t">A nobreza e os desafios de ser mulher</span>
+            <span class="a">Edinete dos Santos</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Não ficção</p>
+          <h3 class="livro-t">A nobreza e os desafios de ser mulher</h3>
+          <p class="por"><img class="avatar" src="fotos/edinete-dos-santos-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Edinete dos Santos</b></span></p>
+          <p class="destaque">Conquistou o 2º lugar no Prêmio Ecos de Literatura na categoria Biografia</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="negocios" data-busca="claudio maguchi alem das solucoes de problemas complexos educacao e desenvolvimento humano lideranca">
+        <div class="cover-zone">
+          <div class="cover grot c8">
+            <span class="k">Educação e Desenvolvimento Hum</span>
+            <span class="t">Além das soluções de problemas complexos</span>
+            <span class="a">Cláudio Maguchi</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Educação e Desenvolvimento Humano</p>
+          <h3 class="livro-t">Além das soluções de problemas complexos</h3>
+          <p class="por"><img class="avatar" src="fotos/claudio-maguchi-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Cláudio Maguchi</b></span></p>
+          <p class="destaque">Conseguiu alinhar seu livro com o universo corporativo</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="naoficcao" data-busca="fernanda pompeu escriba errante ficcao contemporanea nao ficcao">
+        <div class="cover-zone">
+          <div class="cover serif c9">
+            <span class="k">Ficção contemporânea</span>
+            <span class="t">Escriba Errante</span>
+            <span class="a">Fernanda Pompeu</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Ficção contemporânea</p>
+          <h3 class="livro-t">Escriba Errante</h3>
+          <p class="por"><img class="avatar" src="fotos/fernanda-pompeu-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Fernanda Pompeu</b></span></p>
+          <p class="destaque">Publicação do livro por editora tradicional</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="autoajuda" data-busca="luciana barbosa o que voce quer de verdade desenvolvimento pessoal autoajuda">
+        <div class="cover-zone">
+          <div class="cover serif c10">
+            <span class="k">Desenvolvimento pessoal</span>
+            <span class="t">O que você quer de verdade?</span>
+            <span class="a">Luciana Barbosa</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Desenvolvimento pessoal</p>
+          <h3 class="livro-t">O que você quer de verdade?</h3>
+          <p class="por"><img class="avatar" src="fotos/luciana-barbosa-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Luciana Barbosa</b></span></p>
+          <p class="destaque">Livro escrito e publicado em 1 ano</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="infantil ficcao naoficcao" data-busca="maria gravina ogata as bambinas e os samurais brasileiros uma saga migratoria geografia infantil e literatura aventura infantil nao ficcao">
+        <div class="cover-zone">
+          <div class="cover grot c11">
+            <span class="k">Geografia, infantil e literatu</span>
+            <span class="t">As bambinas e os samurais brasileiros</span>
+            <span class="a">Maria Gravina Ogata</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Geografia, infantil e literatura</p>
+          <h3 class="livro-t">As bambinas e os samurais brasileiros</h3>
+          <p class="por"><img class="avatar" src="fotos/maria-gravina-ogata-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Maria Gravina Ogata</b></span></p>
+          <p class="destaque">Livro publicado internacionalmente</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="negocios autoajuda" data-busca="larissa cruvinel a serenidade da renuncia uma bussola para mulheres corajosas decidirem autenticamente por serem ou nao maes desenvolvimento pessoal e estudos femininos autoajuda carreira">
+        <div class="cover-zone">
+          <div class="cover grot c12">
+            <span class="k">Desenvolvimento Pessoal e Estu</span>
+            <span class="t">A Serenidade da Renúncia</span>
+            <span class="a">Larissa Cruvinel</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Desenvolvimento Pessoal e Estudos Femininos</p>
+          <h3 class="livro-t">A Serenidade da Renúncia</h3>
+          <p class="por"><img class="avatar" src="fotos/larissa-cruvinel-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Larissa Cruvinel</b></span></p>
+          <p class="destaque">Livro traduzido</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="infantil ficcao" data-busca="leo dicker clara e guto os segredos de londres literatura juvenil aventura juvenil">
+        <div class="cover-zone">
+          <div class="cover serif c1">
+            <span class="k">Literatura juvenil</span>
+            <span class="t">Clara e Guto, os segredos de Londres</span>
+            <span class="a">Léo Dicker</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Literatura juvenil</p>
+          <h3 class="livro-t">Clara e Guto, os segredos de Londres</h3>
+          <p class="por"><img class="avatar" src="fotos/leo-dicker-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Léo Dicker</b></span></p>
+          <p class="destaque">Livro traduzido para o inglês</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="ficcao" data-busca="silvio serrano o reencontro em galathus ficcao cientifica ficcao">
+        <div class="cover-zone">
+          <div class="cover serif c2">
+            <span class="k">Ficção Científica</span>
+            <span class="t">O Reencontro em Galathus</span>
+            <span class="a">Silvio Serrano</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Ficção Científica</p>
+          <h3 class="livro-t">O Reencontro em Galathus</h3>
+          <p class="por"><img class="avatar" src="fotos/silvio-serrano-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Silvio Serrano</b></span></p>
+          <p class="destaque">Lançou seu primeiro livro com segurança e estratégia</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="infantil" data-busca="sonia maria wilke de souza chapeuzinho vermelho e a busca pela verdadeira seguranca infantil infantil juvenil">
+        <div class="cover-zone">
+          <div class="cover grot c3">
+            <span class="k">Infantil</span>
+            <span class="t">Chapeuzinho Vermelho e a Busca pela Verdadeira Segurança</span>
+            <span class="a">Sônia Maria Wilke de Souza</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Infantil</p>
+          <h3 class="livro-t">Chapeuzinho Vermelho e a Busca pela Verdadeira Segurança</h3>
+          <p class="por"><img class="avatar" src="fotos/sonia-maria-wilke-de-souza-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Sônia Maria Wilke de Souza</b></span></p>
+          <p class="destaque">Destaque em veículos de mídia como jornais e revistas locais</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="ficcao" data-busca="bernardo stamato saga a era do abismo fantasia fantasia ficcao">
+        <div class="cover-zone">
+          <div class="cover grot c4">
+            <span class="k">Fantasia</span>
+            <span class="t">Saga A Era do Abismo</span>
+            <span class="a">Bernardo Stamato</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Fantasia</p>
+          <h3 class="livro-t">Saga A Era do Abismo</h3>
+          <p class="por"><img class="avatar" src="fotos/bernardo-stamato-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Bernardo Stamato</b></span></p>
+          <p class="destaque">Meta de vendas batida em evento literário</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="saude" data-busca="viviane camerano as asas perdidas biografia biografia">
+        <div class="cover-zone">
+          <div class="cover serif c5">
+            <span class="k">Biografia</span>
+            <span class="t">As asas perdidas</span>
+            <span class="a">Viviane Camerano</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Biografia</p>
+          <h3 class="livro-t">As asas perdidas</h3>
+          <p class="por"><img class="avatar" src="fotos/viviane-camerano-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Viviane Camerano</b></span></p>
+          <p class="destaque">Livro em venda na livraria Atlântico</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="romance" data-busca="cicero santos cartas para o futuro o amor nunca morre romance e prosa poetica poesia romance">
+        <div class="cover-zone">
+          <div class="cover serif c6">
+            <span class="k">Romance e Prosa Poética</span>
+            <span class="t">Cartas para o Futuro</span>
+            <span class="a">Cícero Santos</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Romance e Prosa Poética</p>
+          <h3 class="livro-t">Cartas para o Futuro</h3>
+          <p class="por"><img class="avatar" src="fotos/cicero-santos-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Cícero Santos</b></span></p>
+          <p class="destaque">Participou de 3 Bienais</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="negocios" data-busca="robson leite estrategias e lideranca em tempos de profundas mudancas lideranca e gestao publica gestao lideranca">
+        <div class="cover-zone">
+          <div class="cover grot c7">
+            <span class="k">Liderança e Gestão Pública</span>
+            <span class="t">Estratégias e Liderança em tempos de profundas mudanças</span>
+            <span class="a">Robson Leite</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Liderança e Gestão Pública</p>
+          <h3 class="livro-t">Estratégias e Liderança em tempos de profundas mudanças</h3>
+          <p class="por"><img class="avatar" src="fotos/robson-leite-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Robson Leite</b></span></p>
+          <p class="destaque">Se tornou referência no mercado e na sua área</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="infantil" data-busca="marcela gomes de mendonca o senhor das montanhas infanto juvenil infantil juvenil">
+        <div class="cover-zone">
+          <div class="cover grot c8">
+            <span class="k">Infanto Juvenil</span>
+            <span class="t">O senhor das montanhas</span>
+            <span class="a">Marcela Gomes de Mendonça</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Infanto Juvenil</p>
+          <h3 class="livro-t">O senhor das montanhas</h3>
+          <p class="por"><img class="avatar" src="fotos/marcela-gomes-de-mendonca-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Marcela Gomes de Mendonça</b></span></p>
+          <p class="destaque">Participação em podcast internacional</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="ficcao" data-busca="maira metelo se ninguem soubesse quem sou ficcao contemporanea feminina ficcao">
+        <div class="cover-zone">
+          <div class="cover serif c9">
+            <span class="k">Ficção Contemporânea Feminina</span>
+            <span class="t">Se Ninguém Soubesse Quem Sou</span>
+            <span class="a">Maíra Metelo</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Ficção Contemporânea Feminina</p>
+          <h3 class="livro-t">Se Ninguém Soubesse Quem Sou</h3>
+          <p class="por"><img class="avatar" src="fotos/maira-metelo-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Maíra Metelo</b></span></p>
+          <p class="destaque">6º lugar na lista dos mais vendidos da Amazon</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="autoajuda" data-busca="maria angelica as asas da borboleta saindo da dor para o renascer romance autoajuda">
+        <div class="cover-zone">
+          <div class="cover serif c10">
+            <span class="k">Romance</span>
+            <span class="t">As Asas da Borboleta</span>
+            <span class="a">Maria Angélica</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Romance</p>
+          <h3 class="livro-t">As Asas da Borboleta</h3>
+          <p class="por"><img class="avatar" src="fotos/maria-angelica-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Maria Angélica</b></span></p>
+          <p class="destaque">Criou seu Instagram e em 6 meses atingiu mil seguidores</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="ficcao romance" data-busca="ladyce west a meia voz poesia ficcao poesia">
+        <div class="cover-zone">
+          <div class="cover grot c11">
+            <span class="k">Poesia</span>
+            <span class="t">À meia voz</span>
+            <span class="a">Ladyce West</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Poesia</p>
+          <h3 class="livro-t">À meia voz</h3>
+          <p class="por"><img class="avatar" src="fotos/ladyce-west-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Ladyce West</b></span></p>
+          <p class="destaque">Autoridade em sua área de atuação</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="autoajuda" data-busca="ricardo machado o poder da conexao auto ajuda autoajuda">
+        <div class="cover-zone">
+          <div class="cover grot c12">
+            <span class="k">Auto Ajuda</span>
+            <span class="t">O poder da conexão</span>
+            <span class="a">Ricardo Machado</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Auto Ajuda</p>
+          <h3 class="livro-t">O poder da conexão</h3>
+          <p class="por"><img class="avatar" src="fotos/ricardo-machado-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Ricardo Machado</b></span></p>
+          <p class="destaque">Livro publicado por editora</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="ficcao" data-busca="ingrid gomes rpg  guia de imersao para narradores e rpg  guia de imersao para jogadores rpg e livros de referencia aventura fantasia">
+        <div class="cover-zone">
+          <div class="cover serif c1">
+            <span class="k">RPG e Livros de referência</span>
+            <span class="t">RPG</span>
+            <span class="a">Ingrid Gomes</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">RPG e Livros de referência</p>
+          <h3 class="livro-t">RPG</h3>
+          <p class="por"><img class="avatar" src="fotos/ingrid-gomes-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Ingrid Gomes</b></span></p>
+          <p class="destaque">5 estrelas Amazon</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+
+      <article class="card" data-g="ficcao" data-busca="rodrigo guedes allison identidade programada hupgrade livro 1 fantasia ficcao">
+        <div class="cover-zone">
+          <div class="cover serif c2">
+            <span class="k">Fantasia</span>
+            <span class="t">Allison</span>
+            <span class="a">Rodrigo Guedes</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="area">Fantasia</p>
+          <h3 class="livro-t">Allison</h3>
+          <p class="por"><img class="avatar" src="fotos/rodrigo-guedes-mini.jpg" alt="" width="26" height="26" loading="lazy"><span>por <b>Rodrigo Guedes</b></span></p>
+          <p class="destaque">5 estrelas na Amazon</p>
+        </div>
+        <div class="actions">
+          <span class="btn-embreve" title="O autor ainda não enviou o link de compra">Link em breve</span>
+          <button type="button" class="btn-autor" onclick="abrirAutor(this)">Ver o autor</button>
+        </div>
+      </article>
+    </div>
+    <p class="empty" id="empty">Nenhum livro encontrado com esse filtro. Limpe a busca e tente de novo.</p>
+  </div>
+</section>
+
+<section class="autor-view wrap" id="autorView">
+  <button type="button" class="voltar" onclick="fecharAutor()">&larr; Voltar pra estante</button>
+  <div class="autor-top">
+    <img class="autor-foto" id="aFoto" src="" alt="" width="420" height="420">
+    <div>
+      <p class="badge-aluno">Aluno(a) do Método</p>
+      <h2 id="aNome"></h2>
+      <p class="autor-area" id="aArea"></p>
+      <p class="autor-story" id="aStory"></p>
+      <ul class="conquistas" id="aConquistas"></ul>
+      <button type="button" class="ler-mais" id="aLink">Ler a história completa &rarr;</button>
+    </div>
+  </div>
+  <div class="autor-livro">
+    <h3>O livro</h3>
+    <div class="livro-box">
+      <p class="t" id="aLivroT"></p>
+      <p class="s" id="aLivroS"></p>
+      <span class="btn-embreve">Link de compra em breve</span>
+    </div>
+  </div>
+  <div class="autor-next">
+    <p>O próximo autor desta estante pode ser você.</p>
+    <a class="btn-mini" href="/escrevendo">Quero conhecer o Método</a>
+  </div>
+</section>
+
+<section class="wrap" id="ctaSec">
+  <div class="cta">
+    <h2>O seu livro ainda é <em>invisível</em>?</h2>
+    <p>Todo autor desta estante já teve um manuscrito parado na gaveta. O Método existe pra tirar o seu do anonimato e colocar O SEU LIVRO nas mãos dos leitores certos.</p>
+    <span class="hand">o próximo pode ser o seu &darr;</span>
+    <a class="btn-primary" href="/escrevendo">Quero conhecer o Método</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Estante &middot; Método The Book Business</p>
+    <p><a href="https://thebookbusiness.com.br">thebookbusiness.com.br</a></p>
+  </div>
+</footer>
+
+<script>
+  var grupoAtivo='todos';
+  var AUTORES={"Candice Pascoal": {"area": "Negócios e empreendedorismo", "titulo": "Seu Sonho Tem Futuro", "subtitulo": "", "slug": "candice-pascoal", "cats": ["Empreendedorismo", "Negócios"], "conquistas": ["Best-Seller #1 na Lista dos livros mais vendidos da Revista Veja", "Best-seller Amazon e Publish News", "Convites para palestras e entrevistas em grandes veículos de comunicação"], "headline": "Empresária vende mais de 50 mil cópias e se torna best-seller", "link": "https://resultados.thebookbusiness.com.br/realizei-o-meu-sonho-de-lancar-o-meu-livro-e-me-tornei-best-seller-com-a-ajuda-da-dany/"}, "Vinicius Profinho": {"area": "Educação", "titulo": "O Guia da Redação Nota 1000", "subtitulo": "", "slug": "vinicius-profinho", "cats": ["Carreira", "Não Ficção"], "conquistas": ["8 mil cópias vendidas", "Bestseller em Educação na Amazon", "Livro entre os 10 mais vendidos da categoria há mais de 1 ano", "Convite da editora para novo projeto", "Resultado financeiro direto com royalties", "Livro impulsionando outros produtos da empresa"], "headline": "Professor conquista selo de best-Seller e vende 8 mil cópias de livro educacional com estratégias orgânicas", "link": "https://resultados.thebookbusiness.com.br/professor-conquista-selo-de-best-seller-e-vende-8-mil-copias-de-livro-educacional-com-estrategias-organicas/"}, "Susana Arbex": {"area": "Negócios", "titulo": "Sua Marca Pessoal", "subtitulo": "Revele sua autenticidade: Fortaleça seu posicionamento profissional com uma comunicação autêntica e memorável usando o método FLY", "slug": "susana-arbex", "cats": ["Negócios"], "conquistas": ["1º lugar no Brasil na categoria de negócios pela PublishNews", "Destaque no Valor Econômico", "Destaque no O Globo", "Destaque na CNN", "Destaque na Jovem Pan"], "headline": "Empresárias têm destaque em vários veículos de mídia e conquistam 1º lugar na PublishNews", "link": "https://resultados.thebookbusiness.com.br/empresarias-tem-destaque-em-varios-veiculos-de-midia-e-conquistam-1o-lugar-na-publishnews-com-lancamento-do-seu-livro/"}, "Arnoni Caldart": {"area": "Saúde e Longevidade", "titulo": "Ative Sua Mente", "subtitulo": "", "slug": "arnoni-caldart", "cats": ["Autoajuda", "Saúde"], "conquistas": ["Entrou na lista dos mais vendidos da VEJA", "Entrou no ranking dos livros mais vendidos do Publishnews", "Primeiro lugar na lista de mais vendidos da Amazon", "Destaque em canais como Rádio Jovem Pan e Podcast Ativamente"], "headline": "Médico entrou para a lista dos mais vendidos da Veja, Amazon e Publishnews", "link": "https://resultados.thebookbusiness.com.br/medico-fez-o-curso-e-entrou-para-a-lista-dos-mais-vendidos-da-veja-amazon-e-publishnews/"}, "Tonia Casarin": {"area": "Liderança", "titulo": "Liderança Exponencial", "subtitulo": "A transformação humana é o motor dos líderes do futuro", "slug": "tonia-casarin", "cats": ["Gestão", "Liderança"], "conquistas": ["Best-Seller PublishNews", "Best-seller de liderança na pré-venda", "Mencionado em canais como Época Negócios, Exame, HSM, Infomoney, entre outros", "Indicado em uma das maiores revistas de gestão do Brasil, a Gestão e Negócios da editora Escala", "Uma das únicas autoras autopublicadas a conquistar a lista dos livros mais vendidos do Publish News"], "headline": "Especialista em liderança supera expectativas na pré-venda e alcança nº 1 lugar na Amazon e PublishNews", "link": "https://resultados.thebookbusiness.com.br/especialista-em-lideranca-e-desenvolvimento-pessoal-conquistou-a-atencao-do-publico-e-foi-numero-1-na-lista-da-amazon-e-best-seller-publish-news/"}, "Lelo Apovian": {"area": "Gestão de performance e desenvolvimento de lideranças", "titulo": "Muito Acima da Média", "subtitulo": "", "slug": "lelo-apovian", "cats": ["Liderança"], "conquistas": ["Best-seller na Revista Veja", "Best-seller na Amazon", "Best-seller na PublishNews", "Tríplice Coroa do mercado editorial"], "headline": "Empresário e ex-atleta olímpico conquista tríplice coroa com livro best-seller usando o Método The Book Business", "link": "https://resultados.thebookbusiness.com.br/empresario-e-ex-atleta-olimpico-conquista-triplice-coroa-com-livro-best-seller-usando-o-metodo-the-book-business/"}, "José Julio Cerquetane de Menezes": {"area": "Autoajuda", "titulo": "O fim da depressão", "subtitulo": "", "slug": "jose-julio-cerquetane-de-menezes", "cats": ["Autoajuda"], "conquistas": ["Best Seller na Infobook", "Best Seller na Publishnews", "Destaque no jornal “O Globo”", "5 estrelas na Amazon"], "headline": "Empresário lança livro sobre depressão, se torna best seller e recebe cinco estrelas na Amazon", "link": "https://resultados.thebookbusiness.com.br/empresario-lanca-livro-sobre-depressao-se-torna-best-seller-e-recebe-cinco-estrelas-na-amazon/"}, "Emília Nunez": {"area": "Literatura Infantil", "titulo": "Capaz", "subtitulo": "", "slug": "emilia-nunez", "cats": ["Infantil"], "conquistas": ["1º lugar nos lançamentos da Amazon com o livro Capaz", "Expansão da editora própria (Tib) para livrarias e grandes canais de venda", "Implementação de estratégias de “achabilidade” e metadados", "Contratação de responsável exclusivo para o comercial", "Mentorias com Dany que abriram novas possibilidades de negócio"], "headline": "Escritora premiada transforma a distribuição de seus livros e conquista 1º lugar na Amazon", "link": "https://resultados.thebookbusiness.com.br/escritora-premiada-transforma-a-distribuicao-de-seus-livros-e-conquista-1o-lugar-na-amazon/"}, "Nei Santa Bárbara": {"area": "Liderança, Processos e Gestão", "titulo": "IMPROVE", "subtitulo": "Um método prático que vai mudar para sempre sua forma de gerenciar pessoas e processos", "slug": "nei-santa-barbara", "cats": ["Gestão", "Negócios"], "conquistas": ["Primeira edição quase esgotada", "Segunda edição já em produção", "Traduções para o inglês e espanhol com 300 unidades encomendadas em cada idioma", "Capas personalizadas para grandes empresas e clientes corporativos", "Livro gerando contratos reais para sua consultoria", "Patrocínio conquistado para a produção"], "headline": "De sonho antigo a ferramenta estratégica: autor transforma livro técnico em ponte para novos negócios", "link": "https://resultados.thebookbusiness.com.br/de-sonho-antigo-a-ferramenta-estrategica-autor-transforma-livro-tecnico-em-ponte-para-novos-negocios/"}, "Célia Alves Cardoso": {"area": "Espiritualidade católica", "titulo": "Os recomeços de Deus", "subtitulo": "Uma nova esperança a cada amanhecer", "slug": "celia-alves-cardoso", "cats": ["Autoajuda"], "conquistas": ["Se reinventou profissionalmente após anos como professora", "Publicou 4 livros por uma grande editora tradicional (Ave-Maria)", "Em 2025, lançará mais dois livros por outras editoras tradicionais", "Aprendeu a construir visibilidade e comunicar melhor sua mensagem", "Aplicou técnicas do curso para escrever sinopses que vendem", "Recebeu mensagens de leitores desconhecidos tocados por sua obra"], "headline": "Professora se reinventa como escritora e lança 6 livros com apoio do método The Book Business", "link": "https://resultados.thebookbusiness.com.br/professora-se-reinventa-como-escritora-e-lanca-6-livros-com-apoio-do-metodo-the-book-business/"}, "Tom Orgado": {"area": "Auto ficção", "titulo": "Baque", "subtitulo": "", "slug": "tom-orgado", "cats": ["Não Ficção"], "conquistas": ["Destaque de vendas na Bienal do Livro do Rio 2023", "Livro quase esgotado após relançamento", "Lançamento marcado com apoio da Embaixada de Israel", "Livro saiu na Globo"], "headline": "Jornalista e músico israelense transforma seu livro esquecido em destaque de vendas na Bienal do Livro no Rio", "link": "https://resultados.thebookbusiness.com.br/jornalista-e-musico-israelense-transforma-seu-livro-esquecido-em-destaque-de-vendas-na-bienal-do-livro-no-rio/"}, "Ingrid Azevedo": {"area": "Não ficção", "titulo": "O caminho do despertar", "subtitulo": "um convite ao acolhimento e à autonomia espiritual", "slug": "ingrid-azevedo", "cats": ["Não Ficção", "Romance"], "conquistas": ["Quase 600 exemplares vendidos na pré-venda", "Estoque esgotado na Amazon em 10 dias", "Lançamentos presenciais em São Paulo e Natal", "Dobrou a tiragem inicial do livro"], "headline": "Escritora de não-ficção supera expectativas com quase 600 livros vendidos na pré-venda", "link": "https://resultados.thebookbusiness.com.br/escritora-de-nao-ficcao-supera-expectativas-com-quase-600-livros-vendidos-na-pre-venda/"}, "Bruno de Deus Vieira": {"area": "Mistério", "titulo": "Serra o papo do vovô, Contato desconhecido e Trem de Louco", "subtitulo": "", "slug": "bruno-de-deus-vieira", "cats": ["Ficção", "Mistério"], "conquistas": ["Finalista no Prêmio Ecos da Literatura na categoria de melhor livro digital de 2023", "Livro selecionado para feiras na Europa", "Plataforma própria e diversificação de ganhos além dos royalties dos livros"], "headline": "Escritor supera a meta de vendas no pré-lançamento, é finalista em prêmios e tem livro em feiras na Europa", "link": "https://resultados.thebookbusiness.com.br/empreendedor-supera-a-meta-de-vendas-no-pre-lancamento-e-finalista-em-premios-e-tem-livro-em-feiras-na-europa/"}, "Simone Simon": {"area": "Negociação e Gestão", "titulo": "Faça Ser Fácil", "subtitulo": "Negocie e Obtenha Resultados Extraordinários na Vida, na Carreira e nos Negócios", "slug": "simone-simon", "cats": ["Gestão", "Negócios"], "conquistas": ["Best-Seller e Long-Seller", "Autoridade no nicho", "Convites para palestras e entrevistas"], "headline": "Especialista em negócios é sucesso de vendas e se torna long seller", "link": "https://resultados.thebookbusiness.com.br/especialista-em-negocios-apostou-no-metodo-tbb-e-hoje-tem-um-livro-long-seller/"}, "Patrícia Guimarães": {"area": "Romance", "titulo": "Putz, sério que fiz isso?", "subtitulo": "", "slug": "patricia-guimaraes", "cats": ["Juvenil", "Romance"], "conquistas": ["Lançado no Brasil e Estados Unidos", "Best-seller Amazon na categoria “Romance para jovens e adolescentes”"], "headline": "Escritora lança seu primeiro livro e recebe feedbacks inimagináveis de seus leitores", "link": "https://resultados.thebookbusiness.com.br/escritora-lanca-seu-primeiro-livro-e-recebe-feedbacks-inimaginaveis-de-seus-leitores/"}, "Ricky Ribeiro": {"area": "Biografia", "titulo": "Movido pela Mente", "subtitulo": "", "slug": "ricky-ribeiro", "cats": ["Biografia", "Não Ficção", "Saúde"], "conquistas": ["Segunda edição lançada com eventos especiais em grandes instituições", "Livro relançado com novos capítulos, fotos e reflexões sobre acessibilidade", "Ganhou site próprio, blog e agenda de palestras", "Parceira com editora nacional e profissionais premiados", "Tornou-se palestrante, professor e radialista, mesmo sem fala e movimentos", "Leitor da primeira edição tornou-se braço direito no projeto"], "headline": "Autor amplia impacto de livro sobre ELA com nova edição e transforma sua história em voz ativa e inspiradora", "link": "https://resultados.thebookbusiness.com.br/autor-amplia-impacto-de-livro-sobre-ela-com-nova-edicao-e-transforma-sua-historia-em-voz-ativa-e-inspiradora/"}, "Cibele Lauretino": {"area": "Poesia e Romance", "titulo": "Cactos, Nobelina, Todas em Mim e Eu Inútil", "subtitulo": "", "slug": "cibele-lauretino", "cats": ["Poesia", "Romance"], "conquistas": ["4 livros publicados", "Prêmio em Portugal", "Prêmio Estadual na Paraíba", "Livro traduzido para espanhol com vendas na Argentina", "5 estrelas na Amazon"], "headline": "Escritora e poeta tem leitores no exterior e suas obras colecionam vários prêmios", "link": "https://resultados.thebookbusiness.com.br/escritora-e-poeta-tem-leitores-no-exterior-e-suas-obras-colecionam-varios-premios/"}, "Ana Michelucci": {"area": "Literatura Infantil", "titulo": "O novo morador", "subtitulo": "", "slug": "ana-michelucci", "cats": ["Infantil"], "conquistas": ["Conquistou autoridade como autora, além da sua profissão como dentista", "Passou a ser reconhecida como escritora em ambientes sociais e profissionais", "Recebeu convites para divulgar a importância da literatura infantil", "Usa seus próprios livros como ferramenta lúdica no consultório"], "headline": "Dentista conquista autoridade como escritora infantil e se destaca no mercado literário", "link": "https://resultados.thebookbusiness.com.br/dentista-conquista-autoridade-como-escritora-infantil-e-se-destaca-no-mercado-literario/"}, "Edinete dos Santos": {"area": "Não ficção", "titulo": "A nobreza e os desafios de ser mulher", "subtitulo": "", "slug": "edinete-dos-santos", "cats": ["Não Ficção"], "conquistas": ["Conquistou o 2º lugar no Prêmio Ecos de Literatura na categoria Biografia", "Aprendeu a negociar com editoras com mais segurança", "Superou a timidez e passou a apresentar sua obra com confiança em eventos", "Compreendeu o papel ativo do autor no marketing do livro"], "headline": "Escritora de não ficção vence a timidez, se posiciona no mercado e conquista prata em prêmio nacional", "link": "https://resultados.thebookbusiness.com.br/escritora-de-nao-ficcao-vence-a-timidez-se-posiciona-no-mercado-e-conquista-prata-em-premio-nacional/"}, "Cláudio Maguchi": {"area": "Educação e Desenvolvimento Humano", "titulo": "Além das soluções de problemas complexos", "subtitulo": "", "slug": "claudio-maguchi", "cats": ["Liderança"], "conquistas": ["Conseguiu alinhar seu livro com o universo corporativo", "Venceu o bloqueio e concluiu a publicação", "Recebeu feedbacks de leitores reconhecendo sua voz na obra", "Sentiu-se confiante para escrever e lançar novos livros"], "headline": "Educador escreve, lança e se surpreende com o alcance da sua obra", "link": "https://resultados.thebookbusiness.com.br/educador-escreve-lanca-e-se-surpreende-com-o-alcance-da-sua-obra/"}, "Fernanda Pompeu": {"area": "Ficção contemporânea", "titulo": "Escriba Errante", "subtitulo": "", "slug": "fernanda-pompeu", "cats": ["Não Ficção"], "conquistas": ["Publicação do livro por editora tradicional", "Livro transformado em audiobook", "Aprendeu a criar visibilidade e se posicionar como autora", "Superou a crença de que “escrever é suficiente” e entendeu o papel do marketing"], "headline": "De escritora frustrada à obra lida: como Fernanda fez seu livro acontecer de verdade", "link": "https://resultados.thebookbusiness.com.br/de-escritora-frustrado-a-obra-lida-como-fernanda-fez-seu-livro-acontecer-de-verdade/"}, "Luciana Barbosa": {"area": "Desenvolvimento pessoal", "titulo": "O que você quer de verdade?", "subtitulo": "", "slug": "luciana-barbosa", "cats": ["Autoajuda"], "conquistas": ["Livro escrito e publicado em 1 ano", "Lançamento realizado no dia do próprio aniversário", "Leitores emocionados — incluindo pessoas que nunca haviam lido um livro", "Superou a insegurança e aprendeu a divulgar sua obra com confiança"], "headline": "Empresária escreve seu primeiro livro e transforma vidas com sua história", "link": "https://resultados.thebookbusiness.com.br/empresaria-escreve-seu-primeiro-livro-aos-52-anos-e-transforma-vidas-com-sua-historia/"}, "Maria Gravina Ogata": {"area": "Geografia, infantil e literatura", "titulo": "As bambinas e os samurais brasileiros", "subtitulo": "uma saga migratória", "slug": "maria-gravina-ogata", "cats": ["Aventura", "Infantil", "Não Ficção"], "conquistas": ["Livro publicado internacionalmente", "Livro traduzido para outros idiomas", "Sua livro conquistou até o momento 8 prêmios literários", "5 estrelas na Amazon"], "headline": "Geógrafa aposentada e autora de 4 livros se encontra dentro das estratégias e marketing editorial.", "link": "https://resultados.thebookbusiness.com.br/autora-tem-livro-ganhador-de-8-premios-literarios-com-as-estrategias-do-metodo/"}, "Larissa Cruvinel": {"area": "Desenvolvimento Pessoal e Estudos Femininos", "titulo": "A Serenidade da Renúncia", "subtitulo": "Uma bússola para mulheres corajosas decidirem autenticamente por serem (ou não) mães", "slug": "larissa-cruvinel", "cats": ["Autoajuda", "Carreira"], "conquistas": ["Livro traduzido", "Leitores em 7 países", "Entrevista na Band TV", "Demanda por palestras"], "headline": "Consultora empresarial tem seu livro em mais de 5 países e é entrevistada pela Band TV", "link": "https://resultados.thebookbusiness.com.br/consultora-empresarial-tem-seu-livro-em-mais-de-5-paises/"}, "Léo Dicker": {"area": "Literatura juvenil", "titulo": "Clara e Guto, os segredos de Londres", "subtitulo": "", "slug": "leo-dicker", "cats": ["Aventura", "Juvenil"], "conquistas": ["Livro traduzido para o inglês", "Prefácio do escritor Zé Godói (apresentador do programa Fim do Expediente)", "Livro adotado por escolas em MG", "Lançado pela editora tradicional Miguilim"], "headline": "Empresário de tecnologia tem livro adotado por escolas e lança livros em outros países", "link": "https://resultados.thebookbusiness.com.br/empresario-de-tecnologia-se-aventura-na-escrita-e-hoje-seu-livro-e-adotado-por-escolas/"}, "Silvio Serrano": {"area": "Ficção Científica", "titulo": "O Reencontro em Galathus", "subtitulo": "", "slug": "silvio-serrano", "cats": ["Ficção"], "conquistas": ["Lançou seu primeiro livro com segurança e estratégia", "Estruturou toda a divulgação com base no método", "Evitou erros comuns mesmo já tendo experiência com marketing"], "headline": "Escritor de ficção científica transforma sua divulgação com o Método The Book Business", "link": "https://resultados.thebookbusiness.com.br/escritor-de-ficcao-cientifica-organiza-lancamento-com-seguranca-e-alcanca-mais-leitores-com-o-metodo-the-book-business/"}, "Sônia Maria Wilke de Souza": {"area": "Infantil", "titulo": "Chapeuzinho Vermelho e a Busca pela Verdadeira Segurança", "subtitulo": "", "slug": "sonia-maria-wilke-de-souza", "cats": ["Infantil", "Juvenil"], "conquistas": ["Destaque em veículos de mídia como jornais e revistas locais", "Cria conteúdo de atração nas suas redes sociais", "Livro sendo vendido por livrarias"], "headline": "Psicóloga familiar supera medo de divulgação e destaca seu livro infantil na mídia e livrarias", "link": "https://resultados.thebookbusiness.com.br/psicologa-familiar-supera-medo-de-divulgacao-e-destaca-seu-livro-infantil-na-midia-e-livrarias/"}, "Bernardo Stamato": {"area": "Fantasia", "titulo": "Saga A Era do Abismo", "subtitulo": "", "slug": "bernardo-stamato", "cats": ["Fantasia", "Ficção"], "conquistas": ["Meta de vendas batida em evento literário", "Participou de bienais", "5 estrelas na Amazon"], "headline": "Autor com 20 mil seguidores, não conseguia vender seu livro e hoje envia inúmeros pedidos semanalmente", "link": "https://resultados.thebookbusiness.com.br/mesmo-com-20-mil-seguidores-autor-nao-conseguia-converter-como-desejava-e-agora-vai-semanalmente-aos-correios-com-muitos-envios/"}, "Viviane Camerano": {"area": "Biografia", "titulo": "As asas perdidas", "subtitulo": "", "slug": "viviane-camerano", "cats": ["Biografia"], "conquistas": ["Livro em venda na livraria Atlântico", "Destaque em reportagem local", "5 estrelas na Amazon"], "headline": "Escritora lança seu primeiro livro com 5 estrelas na Amazon", "link": "https://resultados.thebookbusiness.com.br/escritora-lanca-seu-primeiro-livro-e-e-5-estrelas-na-amazon/"}, "Cícero Santos": {"area": "Romance e Prosa Poética", "titulo": "Cartas para o Futuro", "subtitulo": "O Amor Nunca Morre", "slug": "cicero-santos", "cats": ["Poesia", "Romance"], "conquistas": ["Participou de 3 Bienais", "Autor é referência na área da Educação", "Convites para entrevistas em rádios e programas de tv"], "headline": "Após poucas vendas no primeiro livro, professor participa de 3 bienais e lança seu 3º livro por editora", "link": "https://resultados.thebookbusiness.com.br/apos-o-fracasso-do-primeiro-livro-professor-tem-livro-publicado-por-editora/"}, "Robson Leite": {"area": "Liderança e Gestão Pública", "titulo": "Estratégias e Liderança em tempos de profundas mudanças", "subtitulo": "", "slug": "robson-leite", "cats": ["Gestão", "Liderança"], "conquistas": ["Se tornou referência no mercado e na sua área", "Livro destaque na Folha de São Paulo", "Convites para palestras"], "headline": "Professor e Mestre em administração vira referência na área em que atua", "link": "https://resultados.thebookbusiness.com.br/investir-no-metodo-da-dany-valeu-cada-centavo/"}, "Marcela Gomes de Mendonça": {"area": "Infanto Juvenil", "titulo": "O senhor das montanhas", "subtitulo": "", "slug": "marcela-gomes-de-mendonca", "cats": ["Infantil", "Juvenil"], "conquistas": ["Participação em podcast internacional", "Participação em feiras regionais"], "headline": "Pastora tinha seus livros infantis empacados desde a pandemia, e hoje recebe convites para podcasts e feiras", "link": "https://resultados.thebookbusiness.com.br/pastora-tinha-seus-livros-infantis-empacados-desde-a-pandemia-e-hoje-recebe-convites-para-podcasts-e-feiras/"}, "Maíra Metelo": {"area": "Ficção Contemporânea Feminina", "titulo": "Se Ninguém Soubesse Quem Sou", "subtitulo": "", "slug": "maira-metelo", "cats": ["Ficção"], "conquistas": ["6º lugar na lista dos mais vendidos da Amazon", "Livro traduzido para o inglês"], "headline": "Arquiteta lança livro de ficção contemporânea e conquista sexto lugar na lista dos mais vendidos da Amazon", "link": "https://resultados.thebookbusiness.com.br/arquiteta-lanca-livro-de-ficcao-contemporanea-e-conquista-sexto-lugar-na-lista-dos-mais-vendidos-da-amazon/"}, "Maria Angélica": {"area": "Romance", "titulo": "As Asas da Borboleta", "subtitulo": "Saindo Da Dor Para o Renascer", "slug": "maria-angelica", "cats": ["Autoajuda"], "conquistas": ["Criou seu Instagram e em 6 meses atingiu mil seguidores", "Participou de 5 concursos literários"], "headline": "Depois do fracassado no primeiro livro, o Método The Book Business acordou a escritora em mim", "link": "https://resultados.thebookbusiness.com.br/depois-do-fracassado-no-primeiro-livro-o-metodo-the-book-business-acordou-a-escritora-em-mim/"}, "Ladyce West": {"area": "Poesia", "titulo": "À meia voz", "subtitulo": "", "slug": "ladyce-west", "cats": ["Ficção", "Poesia"], "conquistas": ["Autoridade em sua área de atuação", "5 estrelas na Amazon"], "headline": "Professora lança livro de poesias e diz que o curso a ajudou a superar um processo de luto", "link": "https://resultados.thebookbusiness.com.br/professora-lanca-livro-de-poesias-e-diz-que-o-curso-a-ajudou-a-superar-um-processo-de-luto/"}, "Ricardo Machado": {"area": "Auto Ajuda", "titulo": "O poder da conexão", "subtitulo": "", "slug": "ricardo-machado", "cats": ["Autoajuda"], "conquistas": ["Livro publicado por editora", "O livro está impactando a vida de muitas pessoas"], "headline": "Empresário do ramo de sapatos diz que o método tem ensinado a seguir seu propósito como escritor", "link": "https://resultados.thebookbusiness.com.br/empresario-do-ramo-de-sapatos-diz-que-o-metodo-tem-ensinado-a-seguir-seu-proposito-como-escritor/"}, "Ingrid Gomes": {"area": "RPG e Livros de referência", "titulo": "RPG", "subtitulo": "Guia de imersão para narradores” e “RPG – Guia de imersão para jogadores", "slug": "ingrid-gomes", "cats": ["Aventura", "Fantasia"], "conquistas": ["5 estrelas Amazon", "Na lista dos Mais Vendidos da Amazon"], "headline": "Narradora de RPG lança livro e entra na lista de mais vendidos da Amazon", "link": "https://resultados.thebookbusiness.com.br/narradora-de-rpg-lanca-livro-e-entra-na-lista-de-mais-vendidos-da-amazon/"}, "Rodrigo Guedes": {"area": "Fantasia", "titulo": "Allison", "subtitulo": "Identidade Programada (HUPGrade Livro 1)", "slug": "rodrigo-guedes", "cats": ["Ficção"], "conquistas": ["5 estrelas na Amazon"], "headline": "Ex-publicitário tem livro 5 estrelas na amazon, e constrói canal no YouTube com 10 mil inscritos", "link": "https://resultados.thebookbusiness.com.br/ex-publicitario-se-torna-escritor-depois-de-aplicar-as-estrategias-do-metodo-e-comeca-a-construir-sua-autoridade-digital-com-10-mil-inscritos-em-seu-canal-do-youtube/"}};
+
+  function setGrupo(b){
+    document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});
+    b.classList.add('on'); grupoAtivo=b.dataset.g; filtrar();
+  }
+  function filtrar(){
+    var q=document.getElementById('busca').value.toLowerCase().trim(), n=0;
+    document.querySelectorAll('.card').forEach(function(c){
+      var okG=(grupoAtivo==='todos')||(' '+c.dataset.g+' ').indexOf(' '+grupoAtivo+' ')!==-1;
+      var okQ=!q||c.dataset.busca.indexOf(q)!==-1;
+      var ok=okG&&okQ; c.style.display=ok?'':'none'; if(ok)n++;
+    });
+    document.getElementById('conta').textContent=n;
+    document.getElementById('empty').style.display=n?'none':'block';
+  }
+  function abrirAutor(btn){
+    var nome=btn.closest('.card').querySelector('.por b').textContent, a=AUTORES[nome];
+    if(!a)return;
+    document.getElementById('aFoto').src='fotos/'+a.slug+'.jpg';
+    document.getElementById('aFoto').alt='Foto de '+nome;
+    document.getElementById('aNome').textContent=nome;
+    document.getElementById('aArea').textContent=[a.area,a.cats.join(' \u00b7 ')].filter(Boolean).join(' \u2014 ');
+    document.getElementById('aStory').textContent=a.headline;
+    document.getElementById('aLivroT').textContent=a.titulo;
+    var s=document.getElementById('aLivroS');
+    s.textContent=a.subtitulo||''; s.style.display=a.subtitulo?'':'none';
+    document.getElementById('aLink').onclick=function(){window.open(a.link,'_blank','noopener')};
+    var ul=document.getElementById('aConquistas'); ul.innerHTML='';
+    a.conquistas.forEach(function(c){
+      var li=document.createElement('li'), sp=document.createElement('span');
+      sp.textContent='\u2713'; li.appendChild(sp);
+      li.appendChild(document.createTextNode(c)); ul.appendChild(li);
+    });
+    document.querySelector('.hero').style.display='none';
+    document.querySelector('.shelf').style.display='none';
+    document.getElementById('ctaSec').style.display='none';
+    document.getElementById('autorView').style.display='block';
+    window.scrollTo(0,0);
+  }
+  function fecharAutor(){
+    document.getElementById('autorView').style.display='none';
+    document.querySelector('.hero').style.display='';
+    document.querySelector('.shelf').style.display='';
+    document.getElementById('ctaSec').style.display='';
+    window.scrollTo(0,0);
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      if(document.getElementById('autorView').style.display==='block')fecharAutor();
+    }
+  });
+  document.getElementById('total').textContent=document.querySelectorAll('.card').length;
+  filtrar();
+  // cadastro entra via link privado por email (etapa seguinte)
+</script>
+</body>
+</html>
