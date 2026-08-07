@@ -25,7 +25,7 @@
       }
       // 2) garante sck e carimba os tags dos testes ativos (ex.: |ckA / |ckB) sem duplicar
       var v = u.searchParams.get('sck');
-      if(!v){ v='best-seller|vsl'; ch=true; }
+      if(!v){ v='master-v1b2|vsl'; ch=true; }
       (window.__ABTESTS||[]).forEach(function(t){ if(t.sck_tag && t.variant && v.indexOf('|'+t.sck_tag+t.variant)<0){ v+='|'+t.sck_tag+t.variant; ch=true; } });
       u.searchParams.set('sck', v);
       if(ch) a.setAttribute('href', u.toString());
