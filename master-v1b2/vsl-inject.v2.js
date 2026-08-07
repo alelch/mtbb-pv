@@ -8,6 +8,26 @@
   var PLAYER_ID='ab-6a70e5541534153a07bee48b';
   var loaded=false, styled=false, barsSet=false;
 
+  // origem do tráfego quando NÃO vem UTM (referrer + fbclid/gclid) -> "source|medium"
+  function _origem(){
+    try{
+      var q=location.search||'';
+      if(/[?&]fbclid=/i.test(q)) return 'meta|fbclid';
+      if(/[?&]gclid=/i.test(q)) return 'google|gads';
+      var r=document.referrer||''; if(!r) return 'direto|direto';
+      var h; try{ h=new URL(r).hostname.replace(/^www\./,'').toLowerCase(); }catch(e){ return 'direto|direto'; }
+      if(h.indexOf('instagram')>=0) return 'instagram|organico';
+      if(h.indexOf('facebook')>=0||h==='fb.com'||h==='fb.me') return 'facebook|organico';
+      if(h.indexOf('google')>=0) return 'google|organico';
+      if(h.indexOf('youtube')>=0) return 'youtube|organico';
+      if(h.indexOf('bing')>=0) return 'bing|organico';
+      if(h.indexOf('tiktok')>=0) return 'tiktok|organico';
+      if(h==='t.co'||h.indexOf('twitter')>=0||h==='x.com') return 'twitter|organico';
+      if(h.indexOf('thebookbusiness')>=0||h.indexOf('metodo')>=0) return 'interno|interno';
+      return 'ref|'+h.replace(/[^a-z0-9.]/g,'').slice(0,24);
+    }catch(e){ return 'direto|direto'; }
+  }
+
   /* ATRIBUIÇÃO (página best-seller): esta é a página vencedora (B) com URL limpa; roda o TESTE DE CHECKOUT.
      Os links normais o framework (appendParams) já reescreve (checkout do teste + |ck<variante>).
      O botão do player VTurb é criado async e escapa disso E abre o checkout SEM sck -> fallback no clique:
@@ -25,7 +45,7 @@
       }
       // 2) garante sck e carimba os tags dos testes ativos (ex.: |ckA / |ckB) sem duplicar
       var v = u.searchParams.get('sck');
-      if(!v){ v='master-v1b2|vsl'; ch=true; }
+      if(!v){ v='master-v1b2|'+_origem(); ch=true; }
       (window.__ABTESTS||[]).forEach(function(t){ if(t.sck_tag && t.variant && v.indexOf('|'+t.sck_tag+t.variant)<0){ v+='|'+t.sck_tag+t.variant; ch=true; } });
       u.searchParams.set('sck', v);
       if(ch) a.setAttribute('href', u.toString());

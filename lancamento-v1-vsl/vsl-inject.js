@@ -7,6 +7,26 @@
   var PLAYER_ID='vid-6a5f7822551c549be7ce3ea7';
   var loaded=false, styled=false;
 
+  // origem do tráfego quando NÃO vem UTM (referrer + fbclid/gclid) -> "source|medium"
+  function _origem(){
+    try{
+      var q=location.search||'';
+      if(/[?&]fbclid=/i.test(q)) return 'meta|fbclid';
+      if(/[?&]gclid=/i.test(q)) return 'google|gads';
+      var r=document.referrer||''; if(!r) return 'direto|direto';
+      var h; try{ h=new URL(r).hostname.replace(/^www\./,'').toLowerCase(); }catch(e){ return 'direto|direto'; }
+      if(h.indexOf('instagram')>=0) return 'instagram|organico';
+      if(h.indexOf('facebook')>=0||h==='fb.com'||h==='fb.me') return 'facebook|organico';
+      if(h.indexOf('google')>=0) return 'google|organico';
+      if(h.indexOf('youtube')>=0) return 'youtube|organico';
+      if(h.indexOf('bing')>=0) return 'bing|organico';
+      if(h.indexOf('tiktok')>=0) return 'tiktok|organico';
+      if(h==='t.co'||h.indexOf('twitter')>=0||h==='x.com') return 'twitter|organico';
+      if(h.indexOf('thebookbusiness')>=0||h.indexOf('metodo')>=0) return 'interno|interno';
+      return 'ref|'+h.replace(/[^a-z0-9.]/g,'').slice(0,24);
+    }catch(e){ return 'direto|direto'; }
+  }
+
   /* ATRIBUIÇÃO: esta página VSL só é servida pra variante B do teste de página (sck_tag pv).
      O botão do player VTurb é criado async e NÃO recebe o marcador do appendParams — e ainda
      manda um sck curto próprio ("26E12-LAL2_VD11", que NÃO começa com lancamento-v1).
@@ -18,8 +38,9 @@
       var u = new URL(a.href, location.href), ch = false;
       ['sck','src'].forEach(function(k){
         var v = u.searchParams.get(k);
-        if(!v || v.indexOf('|pv') >= 0) return;                        // vazio ou já marcado
-        if(v.indexOf('lancamento-v1') !== 0) v = 'lancamento-v1|' + v; // sck curto da VTurb (ex "26E12-LAL2_VD11") -> vira sck da página
+        if(v && v.indexOf('|pv') >= 0) return;                         // já marcado
+        if(!v){ v = 'lancamento-v1|' + _origem(); }                    // sem UTM -> carimba a origem (referrer/fbclid)
+        else if(v.indexOf('lancamento-v1') !== 0) v = 'lancamento-v1|' + v; // sck curto da VTurb (ex "26E12-LAL2_VD11") -> vira sck da página
         u.searchParams.set(k, v + '|pvB'); ch = true;                  // a trigger ancora no slug 'lancamento-v1' e acha o |pvB
       });
       if(ch) a.setAttribute('href', u.toString());
