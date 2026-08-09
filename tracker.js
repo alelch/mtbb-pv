@@ -36,6 +36,27 @@
 
   // Captura UTMs/click-ids da URL, persiste (sobrevive à navegação) e retorna sempre.
   var UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_test','utm_id','fbclid','gclid','ttclid','xcod','sck','src'];
+  // Origem do tráfego SEM UTM (mesma ideia do evento especial): 1º toque sem src/utm_source
+  // ganha um src derivado do referrer/click-id, que viaja pro PV, form e checkout.
+  // fbclid sem UTM = anúncio Meta que perdeu o carimbo → 'meta-fbclid' (sinal de PAGO).
+  function deriveOrigem(fbclid, gclid) {
+    if (fbclid) return 'meta-fbclid';
+    if (gclid) return 'google-gads';
+    try {
+      var r = document.referrer || '';
+      if (!r) return 'org-direto';
+      var h = new URL(r).hostname.replace(/^www\./, '').toLowerCase();
+      if (h.indexOf('metodo.thebookbusiness') >= 0) return '';      // navegação interna: não carimba
+      if (h.indexOf('instagram') >= 0) return 'org-instagram';
+      if (h.indexOf('facebook') >= 0 || h === 'fb.com' || h === 'fb.me') return 'org-facebook';
+      if (h.indexOf('google') >= 0) return 'org-google';
+      if (h.indexOf('youtube') >= 0) return 'org-youtube';
+      if (h.indexOf('tiktok') >= 0) return 'org-tiktok';
+      if (h === 't.co' || h.indexOf('twitter') >= 0 || h === 'x.com') return 'org-twitter';
+      if (h.indexOf('thebookbusiness') >= 0) return 'org-site';     // site/blog principal
+      return 'org-ref-' + h.replace(/[^a-z0-9.]/g, '').slice(0, 20);
+    } catch (e) { return 'org-direto'; }
+  }
   function getUTMs() {
     var stored = {};
     try { stored = JSON.parse(localStorage.getItem('mtbb_utms') || '{}') || {}; } catch (e) {}
@@ -45,14 +66,19 @@
       var v = params.get(k);
       if (v) { fromUrl[k] = v; hasAny = true; }
     });
+    var merged = stored;
     if (hasAny) {
-      var merged = {};
+      merged = {};
       UTM_KEYS.forEach(function (k) { if (stored[k]) merged[k] = stored[k]; });
       UTM_KEYS.forEach(function (k) { if (fromUrl[k]) merged[k] = fromUrl[k]; });
-      try { localStorage.setItem('mtbb_utms', JSON.stringify(merged)); } catch (e) {}
-      return merged;
     }
-    return stored;
+    // sem src e sem utm_source (nem agora nem guardado) → carimba a origem no 1º toque
+    if (!merged.src && !merged.utm_source) {
+      var org = deriveOrigem(merged.fbclid, merged.gclid);
+      if (org) { merged.src = org; hasAny = true; }
+    }
+    if (hasAny) { try { localStorage.setItem('mtbb_utms', JSON.stringify(merged)); } catch (e) {} }
+    return merged;
   }
   window.MTBB_UTMS = getUTMs;
 
