@@ -72,17 +72,20 @@
     // FALLBACK: espelho do ab_testes ao vivo. Visitante NOVO (sem cache) aplica isto no 1o paint
     // p/ view + marcador |ck + oferta acontecerem mesmo se o fetch da config falhar (resiliência
     // ao apagão de tracking em pico/4G). O fetch fresco sobrescreve. ⚠️ ATUALIZAR se o teste mudar
-    // (slug/sck_tag/vencedor/URLs das ofertas). Só listar testes ATIVOS: entrada aqui = teste rodando.
+    // (slug/sck_tag/vencedor/URLs). Só listar testes ATIVOS: entrada aqui = teste rodando de verdade.
     //
-    // ⚠️⚠️ TESTE DE CHECKOUT 23/08 (3 bumps × 1 bump) — está PAUSADO no banco, por isso NÃO está aqui.
-    // Ao ATIVAR no dash, é OBRIGATÓRIO descomentar o bloco abaixo e dar push (senão os ~9% de
-    // visitantes com Supabase bloqueado ficam fora do split e não carimbam |ck). Ao pausar, comentar de volta.
-    //   {slug:"lancamento-v1-checkout",escopo:"checkout",sck_tag:"ck",vencedor:null,variantes:[
-    //     {id:"A",peso:50,overrides:{checkout:"https://pay.hotmart.com/D104614574Y?off=yaskbrlp&checkoutMode=10"}},
-    //     {id:"B",peso:50,overrides:{checkout:"https://pay.hotmart.com/D104614574Y?off=urz2moj1&checkoutMode=10"}}]},
-    var FALLBACK=[{slug:"lancamento-v1-pagina-vsl",escopo:"pagina",sck_tag:"pv",vencedor:"B",variantes:[
-      {id:"A",peso:50,overrides:{redirect:"/lancamento-v1/"}},
-      {id:"B",peso:50,overrides:{redirect:"/lancamento-v1-vsl/"}}]}];
+    // VAZIO de propósito (10/08): o teste de página de julho foi ARQUIVADO e o de checkout está PAUSADO.
+    // ⚠️ O entry velho (lancamento-v1-pagina-vsl → /lancamento-v1-vsl/) FOI REMOVIDO porque o branch de
+    // redirect voltou a existir nesta página: deixá-lo aqui mandaria todo visitante com Supabase
+    // bloqueado pra página errada.
+    //
+    // ⚠️⚠️ AO ATIVAR o teste de checkout 23/08 no dash, é OBRIGATÓRIO descomentar o bloco abaixo e dar
+    // push (senão os ~9% com Supabase bloqueado ficam fora do split, sem redirect e sem |ck).
+    // Ao pausar, comentar de volta. O bloco espelha ab_testes: escopo=pagina, redirect por variante.
+    //   {slug:"lancamento-v1-checkout",escopo:"pagina",sck_tag:"ck",vencedor:null,variantes:[
+    //     {id:"A",peso:50,overrides:{redirect:"/lancamento-v1/"}},
+    //     {id:"B",peso:50,overrides:{redirect:"/lancamento-v1-b/"}}]},
+    var FALLBACK=[];
     var FIXED_HEADLINE=null;
     var H=document.documentElement;
     H.classList.add('ab-pending');
@@ -129,7 +132,12 @@
         if(!variant||!vs.some(function(v){return v.id===variant;})) variant=t.vencedor||pick(vs);
         if(!t.vencedor) ck('ab_'+t.slug,variant,30);
         var ov=(vs.filter(function(v){return v.id===variant;})[0]||{}).overrides||{};
-        /* redirect de teste DESATIVADO nesta página: ela é o destino final (a base /lancamento-v1/ redireciona pra cá); redirecionar daqui = loop garantido */
+        /* REDIRECT DE TESTE — habilitado SÓ nesta página (A / base). Teste de checkout 23/08 = 2 páginas
+           distintas, cada uma com o checkout FIXO no HTML (nada é trocado em runtime, então o xcod da
+           VTurb nunca é apagado). Variante A = esta página (o guard de pathname não redireciona);
+           variante B = /lancamento-v1-b/. ⚠️ A página de DESTINO (-b) NÃO pode ter este branch:
+           redirect nas duas = loop por construção (incidente de 23/07). */
+        if(ov.redirect){var _tp=(''+ov.redirect).replace(/^https?:\/\/[^\/]+/,'').replace(/[?#].*$/,'').replace(/\/+$/,'');if(location.pathname.replace(/\/+$/,'')!==_tp){window.__ABREDIR=true;location.replace(ov.redirect+location.search+location.hash);return;}}
         out.push({slug:t.slug,variant:variant,sck_tag:t.sck_tag,escopo:t.escopo,ov:ov});
         if(ov.headline!=null) needHide=true;
         if(ov.checkout) window.__ABCK=ov.checkout; });
@@ -313,10 +321,6 @@ O objetivo não é publicar por você. É te dar estrutura para que você publiq
               } else {
                 link.href = base;
               }
-              // guarda o checkout final (variante + sck) num cookie: a ponte /ri/ (botão do vídeo VTurb) lê e redireciona pra cá.
-              // ⚠️ Nome PRÓPRIO da Imersão (lqv_*), NÃO reusar o mv_checkout da master: o visitante que passa pelas 2
-              // páginas sobrescreveria o cookie e o botão do vídeo mandaria pro produto ERRADO.
-              try{ if(link.href.indexOf("pay.hotmart.com")>=0) document.cookie="lqv_checkout="+encodeURIComponent(link.href)+";path=/;max-age=86400;SameSite=Lax"; }catch(e){}
               link.setAttribute("data-ab-gen", gen);
             }
           }
@@ -477,8 +481,4 @@ O objetivo não é publicar por você. É te dar estrutura para que você publiq
 </script>
 <script src="assets/interactions.js" defer></script>
 <script src="vsl-inject.js?v=1" defer></script>
-<script>/* captura o xcod da VTurb num cookie (lqv_xcod) p/ a ponte /ri/ do botão do vídeo anexar no checkout -> VTurb segue marcando conversão
-   mesmo com o teste de checkout trocando a URL do botão (foi isso que apagou o xcod da master em 01/08). Cookie lqv_* = escopo Imersão. */
-(function(){var n=0;function grab(){n++;try{var sp=window.smartplayer,i=sp&&sp.instances&&sp.instances[0]&&sp.instances[0].instance;
-if(i&&typeof i.urlUpdater==='function'){Promise.resolve(i.urlUpdater('https://pay.hotmart.com/x')).then(function(u){var m=String(u).match(/[?&]xcod=([^&]+)/);if(m&&m[1])document.cookie='lqv_xcod='+encodeURIComponent(m[1])+';path=/;max-age=86400;SameSite=Lax';if(n<25)setTimeout(grab,3000);}).catch(function(){if(n<25)setTimeout(grab,2000);});return;}}catch(e){}if(n<25)setTimeout(grab,1500);}grab();})();</script>
 </body></html>
