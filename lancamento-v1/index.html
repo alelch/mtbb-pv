@@ -82,10 +82,10 @@
     // ⚠️⚠️ AO ATIVAR o teste de checkout 23/08 no dash, é OBRIGATÓRIO descomentar o bloco abaixo e dar
     // push (senão os ~9% com Supabase bloqueado ficam fora do split, sem redirect e sem |ck).
     // Ao pausar, comentar de volta. O bloco espelha ab_testes: escopo=pagina, redirect por variante.
-    //   {slug:"lancamento-v1-checkout",escopo:"pagina",sck_tag:"ck",vencedor:null,variantes:[
-    //     {id:"A",peso:50,overrides:{redirect:"/lancamento-v1/"}},
-    //     {id:"B",peso:50,overrides:{redirect:"/lancamento-v1-b/"}}]},
-    var FALLBACK=[];
+    // ✅ ATIVO desde 10/08 (cliente ligou no dash) — este bloco espelha o ab_testes ao vivo.
+    var FALLBACK=[{slug:"lancamento-v1-checkout",escopo:"pagina",sck_tag:"ck",vencedor:null,variantes:[
+      {id:"A",peso:50,overrides:{redirect:"/lancamento-v1/"}},
+      {id:"B",peso:50,overrides:{redirect:"/lancamento-v1-b/"}}]}];
     var FIXED_HEADLINE=null;
     var H=document.documentElement;
     H.classList.add('ab-pending');

@@ -82,10 +82,11 @@
     // ⚠️⚠️ AO ATIVAR o teste de checkout 23/08 no dash, é OBRIGATÓRIO descomentar o bloco abaixo e dar
     // push (senão os ~9% com Supabase bloqueado ficam fora do split, sem redirect e sem |ck).
     // Ao pausar, comentar de volta. O bloco espelha ab_testes: escopo=pagina, redirect por variante.
-    //   NA PÁGINA B o FALLBACK serve só pro carimbo |ckB (ela nunca redireciona).
-    //   {slug:"lancamento-v1-checkout",escopo:"pagina",sck_tag:"ck",vencedor:null,variantes:[
-    //     {id:"A",peso:50,overrides:{}},{id:"B",peso:50,overrides:{}}]},
-    var FALLBACK=[];
+    // ✅ ATIVO desde 10/08. NA PÁGINA B o FALLBACK serve SÓ pro carimbo |ckB: sem override de
+    // redirect (ela é o destino) e com peso 0/100 pra o sorteio NUNCA marcar ckA em quem está
+    // vendo a oferta B (visitante que cai direto aqui, sem cookie, seria marcado errado).
+    var FALLBACK=[{slug:"lancamento-v1-checkout",escopo:"pagina",sck_tag:"ck",vencedor:null,variantes:[
+      {id:"A",peso:0,overrides:{}},{id:"B",peso:100,overrides:{}}]}];
     var FIXED_HEADLINE=null;
     var H=document.documentElement;
     H.classList.add('ab-pending');
