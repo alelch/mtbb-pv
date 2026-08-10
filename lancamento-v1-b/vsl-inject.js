@@ -3,8 +3,8 @@
    respeitando o tema escuro/dourado. Sem foto, sem botão/progresso/stats no head. 1 player só.
    Usa o hero empilhado (mobile) em TODAS as larguras (esconde o hero de 2 colunas do desktop). */
 (function(){
-  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6a5f7822551c549be7ce3ea7/v4/player.js';
-  var PLAYER_ID='vid-6a5f7822551c549be7ce3ea7';
+  var PLAYER_SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6a7a5d491a4a66c6f35cd7ca/v4/player.js';
+  var PLAYER_ID='vid-6a7a5d491a4a66c6f35cd7ca';
   var loaded=false, styled=false;
 
   // origem do tráfego quando NÃO vem UTM (referrer + fbclid/gclid) -> "source|medium"
