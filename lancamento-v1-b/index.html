@@ -131,6 +131,11 @@
       (tests||[]).forEach(function(t){ var vs=t.variantes||[]; if(!vs.length)return;
         var variant=t.vencedor||ck('ab_'+t.slug);
         if(!variant||!vs.some(function(v){return v.id===variant;})) variant=t.vencedor||pick(vs);
+        /* Esta página SERVE a oferta B (off=urz2moj1 fixo no HTML), então a variante aqui é B por
+           definição. Sem isto, quem entra DIRETO nesta URL sem cookie (link compartilhado, cookie
+           expirado, indexação) cairia no sorteio 50/50 e poderia ser carimbado |ckA vendo a oferta B,
+           poluindo o braço A com venda que não é dele. */
+        if(t.slug==='lancamento-v1-checkout' && vs.some(function(v){return v.id==='B';})) variant='B';
         if(!t.vencedor) ck('ab_'+t.slug,variant,30);
         var ov=(vs.filter(function(v){return v.id===variant;})[0]||{}).overrides||{};
         /* REDIRECT DESATIVADO: esta é a página de DESTINO (variante B do teste de checkout 23/08).
