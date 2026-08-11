@@ -27,21 +27,31 @@
     }catch(e){ return 'direto|direto'; }
   }
 
-  /* ATRIBUIÇÃO: esta página VSL só é servida pra variante B do teste de página (sck_tag pv).
-     O botão do player VTurb é criado async e NÃO recebe o marcador do appendParams — e ainda
-     manda um sck curto próprio ("26E12-LAL2_VD11", que NÃO começa com lancamento-v1).
-     No clique, garante |pvB em QUALQUER link Hotmart desta página (é sempre B) que ainda não tenha |pv. */
+  /* ATRIBUIÇÃO no clique. O botão do player VTurb é criado async e NÃO recebe o marcador do
+     appendParams — e ainda pode mandar um sck curto próprio ("26E12-LAL2_VD11", que NÃO começa
+     com lancamento-v1). Este guard normaliza o sck e garante os marcadores dos testes ATIVOS.
+
+     ⚠️ BUG CORRIGIDO 11/08: aqui era `|pvB` HARDCODED (resíduo do teste de página de julho, já
+     arquivado). Resultado: venda de visitante SEM UTM (fbclid/orgânico/direto) saía com
+     `lancamento-v1|meta|fbclid|pvB`, sem `|ck`, e o dash do A/B NÃO contabilizava a venda.
+     Agora os marcadores vêm de window.__ABTESTS (ex "|ckA"), então acompanham o teste que está
+     no ar em vez de um rótulo fixo. */
+  function _marcadores(){
+    var t = window.__ABTESTS || [], s = '';
+    for (var i = 0; i < t.length; i++) if (t[i].sck_tag && t[i].variant) s += '|' + t[i].sck_tag + t[i].variant;
+    return s;
+  }
   document.addEventListener('click', function(e){
     var a = e.target && e.target.closest ? e.target.closest('a[href*="hotmart.com"]') : null;
     if(!a) return;
     try{
-      var u = new URL(a.href, location.href), ch = false;
+      var u = new URL(a.href, location.href), ch = false, MK = _marcadores();
       ['sck','src'].forEach(function(k){
         var v = u.searchParams.get(k);
-        if(v && v.indexOf('|pv') >= 0) return;                         // já marcado
+        if(MK && v && v.indexOf(MK) >= 0) return;                      // já tem os marcadores atuais
         if(!v){ v = 'lancamento-v1|' + _origem(); }                    // sem UTM -> carimba a origem (referrer/fbclid)
-        else if(v.indexOf('lancamento-v1') !== 0) v = 'lancamento-v1|' + v; // sck curto da VTurb (ex "26E12-LAL2_VD11") -> vira sck da página
-        u.searchParams.set(k, v + '|pvB'); ch = true;                  // a trigger ancora no slug 'lancamento-v1' e acha o |pvB
+        else if(v.indexOf('lancamento-v1') !== 0) v = 'lancamento-v1|' + v; // sck curto da VTurb -> vira sck da página
+        u.searchParams.set(k, v + MK); ch = true;                      // a trigger ancora no slug e acha o marcador
       });
       if(ch) a.setAttribute('href', u.toString());
     }catch(err){}
