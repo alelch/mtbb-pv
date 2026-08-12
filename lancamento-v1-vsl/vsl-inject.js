@@ -161,3 +161,28 @@
   var n=0, iv=setInterval(function(){ n++; if(go()||n>40) clearInterval(iv); },200);
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
+
+/* CLICK-TO-PLAY do vídeo (pro teste de header): registra no A/B quem realmente engajou.
+   O player VTurb roda um <video> comum, então escutamos os eventos DOM na fase de captura
+   (o 'play' não borbulha). 3 marcos, 1× por visitante:
+     play    = vídeo começou (num player com autoplay mudo, dispara sozinho — use unmute)
+     unmute  = tirou o mudo = INTENÇÃO REAL de assistir (a métrica do teste de header)
+     watch30 = passou de 30s assistindo (engajou de verdade) */
+(function(){
+  var sent={};
+  function trk(ev){
+    if(sent[ev]) return; sent[ev]=1;
+    try{ (window.__ABTESTS||[]).forEach(function(t){
+      if(t.slug && t.variant && window.__abTrack) window.__abTrack(t.slug, t.variant, ev);
+    }); }catch(e){}
+  }
+  document.addEventListener('play', function(e){
+    if(e.target && e.target.tagName==='VIDEO') trk('play');
+  }, true);
+  document.addEventListener('volumechange', function(e){
+    var v=e.target; if(v && v.tagName==='VIDEO' && !v.muted && v.volume>0) trk('unmute');
+  }, true);
+  document.addEventListener('timeupdate', function(e){
+    var v=e.target; if(v && v.tagName==='VIDEO' && v.currentTime>=30) trk('watch30');
+  }, true);
+})();
