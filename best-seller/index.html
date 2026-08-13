@@ -112,7 +112,11 @@
     function vid(){ var k="ab_vid",v=null; try{v=localStorage.getItem(k);}catch(e){} if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8); try{localStorage.setItem(k,v);}catch(e){}} return v; }
     function pick(vs){ var t=0,i; for(i=0;i<vs.length;i++)t+=(vs[i].peso||1); var r=Math.random()*t,a=0; for(i=0;i<vs.length;i++){a+=(vs[i].peso||1); if(r<=a)return vs[i].id;} return vs[0].id; }
     function reveal(){ try{applyHeadline(FIXED_HEADLINE);}catch(e){} H.classList.remove('ab-pending'); }
-    function applyHeadline(txt){ if(txt==null)return; var els=document.querySelectorAll('[data-ab-el="headline"]'); for(var i=0;i<els.length;i++){ if(/[<&]/.test(txt))els[i].innerHTML=txt; else els[i].textContent=txt; } }
+    // guarda a headline nativa do HTML na 1ª troca, pra conseguir DESFAZER quando o teste acabar
+    var _ORIG_HL=null;
+    function _snapHeadline(){ if(_ORIG_HL!==null)return; var e=document.querySelector('[data-ab-el="headline"]'); if(e)_ORIG_HL=e.innerHTML; }
+    function restoreHeadline(){ if(_ORIG_HL==null)return; var els=document.querySelectorAll('[data-ab-el="headline"]'); for(var i=0;i<els.length;i++)els[i].innerHTML=_ORIG_HL; }
+    function applyHeadline(txt){ if(txt==null)return; _snapHeadline(); var els=document.querySelectorAll('[data-ab-el="headline"]'); for(var i=0;i<els.length;i++){ if(/[<&]/.test(txt))els[i].innerHTML=txt; else els[i].textContent=txt; } }
     function abFitHeadline(){ try{
       var els=document.querySelectorAll('[data-ab-el="headline"]');
       var desktop=window.innerWidth>=640;
@@ -195,7 +199,9 @@
       .then(function(r){return r.json();})
       .then(function(rows){ rows=rows||[];
         try{localStorage.setItem('ab_cfg_'+PAGINA,JSON.stringify(rows));}catch(e){}
-        if(!rows.length){ window.__ABTESTS=[]; window.__ABCK=null; window.__ABGEN=(window.__ABGEN||0)+1; window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); return; }
+        // teste acabou: desfaz o que o CACHE local aplicou (senão quem participou do teste continua
+        // vendo a variante dele por mais uma visita — bug real visto ao encerrar o teste de header)
+        if(!rows.length){ restoreHeadline(); window.__ABTESTS=[]; window.__ABCK=null; window.__ABGEN=(window.__ABGEN||0)+1; window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); return; }
         if(assign(rows)&&!cached)H.classList.add('ab-pending');
         if(document.readyState!=='loading')applyAll(); else document.addEventListener('DOMContentLoaded',applyAll);
       })
