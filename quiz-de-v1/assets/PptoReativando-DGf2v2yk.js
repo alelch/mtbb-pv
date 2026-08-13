@@ -1,0 +1,1 @@
+import{j as t}from"./index-Cz7pRKoM.js";import{P as o}from"./PptoPage-Bua8WZmb.js";import"./matriz-black-BL0fdqNU.js";import"./arrow-up-right-D4toM0Yv.js";import"./check-V2TZxhaN.js";import"./shield-check-C6bfE5vS.js";import"./chevron-down-CAWg9yNY.js";function s(){return t.jsx(o,{segment:"reativando"})}export{s as default};
