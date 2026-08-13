@@ -162,12 +162,13 @@
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
 
-/* CLICK-TO-PLAY do vídeo (pro teste de header): registra no A/B quem realmente engajou.
-   O player VTurb roda um <video> comum, então escutamos os eventos DOM na fase de captura
-   (o 'play' não borbulha). 3 marcos, 1× por visitante:
-     play    = vídeo começou (num player com autoplay mudo, dispara sozinho — use unmute)
-     unmute  = tirou o mudo = INTENÇÃO REAL de assistir (a métrica do teste de header)
-     watch30 = passou de 30s assistindo (engajou de verdade) */
+/* ENGAJAMENTO COM O VÍDEO (base do teste de header).
+   ⚠️ Testado no player real (13/08): o VTurb NÃO expõe o estado de mudo — não existe <video>
+   acessível, `volumechange` nunca dispara e o clique do usuário não passa por unmute().
+   O que É mensurável e vale como sinal de intenção:
+     player_click = clicou no vídeo (no autoplay mudo, é assim que se ativa o som) → MÉTRICA DO TESTE
+     v30 / v60 / v120 = seguiu na página com o vídeo rodando (permanência = interesse real)
+   O `play` sozinho não serve: com autoplay ele dispara pra todo mundo. */
 (function(){
   var sent={};
   function trk(ev){
@@ -176,13 +177,21 @@
       if(t.slug && t.variant && window.__abTrack) window.__abTrack(t.slug, t.variant, ev);
     }); }catch(e){}
   }
-  document.addEventListener('play', function(e){
-    if(e.target && e.target.tagName==='VIDEO') trk('play');
+  // 1) clique no player (delegado: o elemento é criado async pelo inject)
+  document.addEventListener('click', function(e){
+    var el=e.target && e.target.closest ? e.target.closest('vturb-smartplayer') : null;
+    if(el) trk('player_click');
   }, true);
-  document.addEventListener('volumechange', function(e){
-    var v=e.target; if(v && v.tagName==='VIDEO' && !v.muted && v.volume>0) trk('unmute');
-  }, true);
-  document.addEventListener('timeupdate', function(e){
-    var v=e.target; if(v && v.tagName==='VIDEO' && v.currentTime>=30) trk('watch30');
-  }, true);
+  // 2) marcos de tempo assistido (lê o relógio do próprio player)
+  var n=0, iv=setInterval(function(){
+    n++;
+    try{
+      var i=window.smartplayer && window.smartplayer.instances && window.smartplayer.instances[0];
+      var t=i && i.video && +i.video.currentTime || 0;
+      if(t>=30) trk('v30');
+      if(t>=60) trk('v60');
+      if(t>=120){ trk('v120'); clearInterval(iv); }
+    }catch(e){}
+    if(n>600) clearInterval(iv);   // ~20min e para
+  }, 2000);
 })();
