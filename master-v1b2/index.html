@@ -182,9 +182,17 @@
     var cached=null; try{cached=JSON.parse(localStorage.getItem('ab_cfg_'+PAGINA)||'null');}catch(e){}
     if(cached&&cached.length){ if(assign(cached))H.classList.add('ab-pending');
       if(document.readyState!=='loading')applyAll(); else document.addEventListener('DOMContentLoaded',applyAll); }
-    // config fresca (controle ao vivo)
-    fetch(SB+"/rest/v1/ab_testes?pagina=eq."+PAGINA+"&ativo=eq.true&select=slug,escopo,sck_tag,vencedor,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
-      .then(function(r){return r.json();})
+    // config fresca (controle ao vivo). 1º tenta o PRÓPRIO domínio (/ab-config): bloqueador de
+    // anúncio derruba *.supabase.co, e era isso que obrigava a manter o FALLBACK do HTML em dia
+    // (em 12/08 ele ficou desatualizado e mandou tráfego pro teste antigo). Supabase vira reserva.
+    fetch("/ab-config?pagina="+encodeURIComponent(PAGINA))
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(rows){ if(!rows||!rows.length) throw 0; return rows; })
+      .catch(function(){
+        return fetch(SB+"/rest/v1/ab_testes?pagina=eq."+PAGINA+"&ativo=eq.true&select=slug,escopo,sck_tag,vencedor,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
+          .then(function(r){return r.json();});
+      })
+      .then(function(r){return r;})
       .then(function(rows){ rows=rows||[];
         try{localStorage.setItem('ab_cfg_'+PAGINA,JSON.stringify(rows));}catch(e){}
         if(!rows.length){ window.__ABTESTS=[]; window.__ABCK=null; window.__ABGEN=(window.__ABGEN||0)+1; window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); return; }
