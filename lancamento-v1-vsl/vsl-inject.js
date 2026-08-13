@@ -161,37 +161,3 @@
   var n=0, iv=setInterval(function(){ n++; if(go()||n>40) clearInterval(iv); },200);
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
-
-/* ENGAJAMENTO COM O VÍDEO (base do teste de header).
-   ⚠️ Testado no player real (13/08): o VTurb NÃO expõe o estado de mudo — não existe <video>
-   acessível, `volumechange` nunca dispara e o clique do usuário não passa por unmute().
-   O que É mensurável e vale como sinal de intenção:
-     player_click = clicou no vídeo (no autoplay mudo, é assim que se ativa o som) → MÉTRICA DO TESTE
-     v30 / v60 / v120 = seguiu na página com o vídeo rodando (permanência = interesse real)
-   O `play` sozinho não serve: com autoplay ele dispara pra todo mundo. */
-(function(){
-  var sent={};
-  function trk(ev){
-    if(sent[ev]) return; sent[ev]=1;
-    try{ (window.__ABTESTS||[]).forEach(function(t){
-      if(t.slug && t.variant && window.__abTrack) window.__abTrack(t.slug, t.variant, ev);
-    }); }catch(e){}
-  }
-  // 1) clique no player (delegado: o elemento é criado async pelo inject)
-  document.addEventListener('click', function(e){
-    var el=e.target && e.target.closest ? e.target.closest('vturb-smartplayer') : null;
-    if(el) trk('player_click');
-  }, true);
-  // 2) marcos de tempo assistido (lê o relógio do próprio player)
-  var n=0, iv=setInterval(function(){
-    n++;
-    try{
-      var i=window.smartplayer && window.smartplayer.instances && window.smartplayer.instances[0];
-      var t=i && i.video && +i.video.currentTime || 0;
-      if(t>=30) trk('v30');
-      if(t>=60) trk('v60');
-      if(t>=120){ trk('v120'); clearInterval(iv); }
-    }catch(e){}
-    if(n>600) clearInterval(iv);   // ~20min e para
-  }, 2000);
-})();
