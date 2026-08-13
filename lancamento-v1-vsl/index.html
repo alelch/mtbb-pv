@@ -85,10 +85,7 @@
     // ✅ ATIVO desde 10/08. Pesos espelhados do ab_testes: A=80 B=20 (cliente mudou 11/08).
     // ⚠️ MUDOU PESO NO DASH? Tem que atualizar aqui e dar push, senao os ~9% com Supabase
     // bloqueado continuam no split antigo.
-    var FALLBACK=[{slug:"lancamento-v1-header",escopo:"pagina",sck_tag:"hd",vencedor:null,variantes:[
-      {id:"A",peso:50,overrides:{headline:null}},
-      {id:"B",peso:25,overrides:{headline:'Acumule leitores e <br class="sm:hidden"><span class="text-gradient-gold">lance vendendo</span> <br class="sm:hidden">desde o primeiro dia.'}},
-      {id:"C",peso:25,overrides:{headline:'Venda o seu livro<br><span class="text-gradient-gold">antes mesmo de lançar</span>.'}}]}];
+    var FALLBACK=[];   // nenhum teste ativo nesta página (header decidido: venceu A = headline original)
     var FIXED_HEADLINE=null;
     var H=document.documentElement;
     H.classList.add('ab-pending');
