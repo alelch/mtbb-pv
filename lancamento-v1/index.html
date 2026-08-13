@@ -85,9 +85,13 @@
     // ✅ ATIVO desde 10/08. Pesos espelhados do ab_testes: A=80 B=20 (cliente mudou 11/08).
     // ⚠️ MUDOU PESO NO DASH? Tem que atualizar aqui e dar push, senao os ~9% com Supabase
     // bloqueado continuam no split antigo.
-    var FALLBACK=[{slug:"lancamento-v1-checkout",escopo:"pagina",sck_tag:"ck",vencedor:null,variantes:[
-      {id:"A",peso:80,overrides:{redirect:"/lancamento-v1/"}},
-      {id:"B",peso:20,overrides:{redirect:"/lancamento-v1-b/"}}]}];
+    var FALLBACK=[{slug:"lancamento-v1-checkout",escopo:"pagina",sck_tag:"ck",vencedor:"A",variantes:[
+      {id:"A",peso:100,overrides:{redirect:"/lancamento-v1/"}},
+      {id:"B",peso:0,overrides:{redirect:"/lancamento-v1-b/"}}]},
+      {slug:"lancamento-v1-header",escopo:"pagina",sck_tag:"hd",vencedor:null,variantes:[
+      {id:"A",peso:33,overrides:{headline:null}},
+      {id:"B",peso:33,overrides:{headline:'Acumule leitores e <br class="sm:hidden"><span class="text-gradient-gold">lance vendendo</span> <br class="sm:hidden">desde o primeiro dia.'}},
+      {id:"C",peso:34,overrides:{headline:'Venda o seu livro<br><span class="text-gradient-gold">antes mesmo de lançar</span>.'}}]}];
     var FIXED_HEADLINE=null;
     var H=document.documentElement;
     H.classList.add('ab-pending');
