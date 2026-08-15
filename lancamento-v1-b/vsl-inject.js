@@ -39,8 +39,13 @@
     try{
       var p = new URLSearchParams(location.search);
       var g = function(k){ return p.get(k) || ''; };
-      if(g('utm_source')||g('utm_medium')||g('utm_campaign')||g('utm_term')||g('utm_content')){
-        return g('utm_source')+'|'+g('utm_medium')+'|'+g('utm_campaign')+'|'+g('utm_term')+'|'+g('utm_content');
+      if(g('utm_source')||g('utm_medium')||g('utm_campaign')||g('utm_term')||g('utm_content')||g('utm_id')){
+        // mesmo criterio do getUTMParams da pagina: o id do conjunto (2o componente do utm_id)
+        // ocupa o slot do utm_term quando for id de verdade
+        var t = g('utm_term');
+        var aid = (g('utm_id').split('|')[1] || '');
+        if(/^\d{15,}$/.test(aid)) t = aid;
+        return g('utm_source')+'|'+g('utm_medium')+'|'+g('utm_campaign')+'|'+t+'|'+g('utm_content');
       }
     }catch(e){}
     return _origem();

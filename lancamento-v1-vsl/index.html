@@ -276,6 +276,15 @@ O objetivo não é publicar por você. É te dar estrutura para que você publiq
           var campaign = url.searchParams.get("utm_campaign") || "";
           var term = url.searchParams.get("utm_term") || "";
           var content = url.searchParams.get("utm_content") || "";
+          // O anuncio manda utm_id={{campaign.id}}|{{adset.id}}|{{ad.id}}, mas a Hotmart so
+          // persiste sck/src/xcod: o utm_id chegava ao checkout e morria la (0 de 113 vendas do
+          // E14 o guardaram). Sem o id do CONJUNTO no rastro o dash nao casa de forma exata --
+          // 76% no E12 contra 0% no E14. Ocupa o slot do utm_term, que carrega {{placement}} e
+          // nao e lido por ninguem (0 usos no app.js do dash, 1 na RPC e so como coluna).
+          // So substitui se for id de verdade: macro nao expandida chega literal, e ai o
+          // placement e preservado.
+          var adsetId = (url.searchParams.get("utm_id") || "").split("|")[1] || "";
+          if (/^\d{15,}$/.test(adsetId)) term = adsetId;
           return { source: source, medium: medium, campaign: campaign, term: term, content: content };
         }
 
