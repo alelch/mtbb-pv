@@ -27,6 +27,25 @@
     }catch(e){ return 'direto|direto'; }
   }
 
+  /* Rastro do clique quando o link chega SEM sck (botão async do player VTurb, ou clique antes
+     de __ABREADY resolver). Antes daqui saía só _origem(), que NÃO lê as UTMs e devolve
+     'meta|fbclid' — campanha e criativo do anúncio eram descartados mesmo estando na URL.
+     Foi assim que 21 vendas do E14 (18%) entraram sem atribuição entre 13/08 e 15/08.
+     Agora monta o MESMO formato de 6 campos do appendParams da página
+     (pagina|source|medium|campaign|term|content); _origem() só entra quando não há UTM alguma.
+     Sem o |v<vid> de propósito: no appendParams ele vem DEPOIS dos marcadores, e aqui os
+     marcadores são concatenados na linha do set() — incluí-lo trocaria a ordem dos campos. */
+  function _rastro(){
+    try{
+      var p = new URLSearchParams(location.search);
+      var g = function(k){ return p.get(k) || ''; };
+      if(g('utm_source')||g('utm_medium')||g('utm_campaign')||g('utm_term')||g('utm_content')){
+        return g('utm_source')+'|'+g('utm_medium')+'|'+g('utm_campaign')+'|'+g('utm_term')+'|'+g('utm_content');
+      }
+    }catch(e){}
+    return _origem();
+  }
+
   /* ATRIBUIÇÃO no clique. O botão do player VTurb é criado async e NÃO recebe o marcador do
      appendParams — e ainda pode mandar um sck curto próprio ("26E12-LAL2_VD11", que NÃO começa
      com lancamento-v1). Este guard normaliza o sck e garante os marcadores dos testes ATIVOS.
@@ -49,7 +68,7 @@
       ['sck','src'].forEach(function(k){
         var v = u.searchParams.get(k);
         if(MK && v && v.indexOf(MK) >= 0) return;                      // já tem os marcadores atuais
-        if(!v){ v = 'lancamento-v1|' + _origem(); }                    // sem UTM -> carimba a origem (referrer/fbclid)
+        if(!v){ v = 'lancamento-v1|' + _rastro(); }                    // reaproveita as UTMs da URL; origem só se não houver nenhuma
         else if(v.indexOf('lancamento-v1') !== 0) v = 'lancamento-v1|' + v; // sck curto da VTurb -> vira sck da página
         u.searchParams.set(k, v + MK); ch = true;                      // a trigger ancora no slug e acha o marcador
       });
