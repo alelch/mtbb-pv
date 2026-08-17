@@ -4975,7 +4975,7 @@
         if (payload.whatsapp) fetch('https://jsqtpsxpaclslakafmvd.supabase.co/rest/v1/rpc/mtbb_pv_origem_set', {
           method: 'POST', keepalive: true,
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ORIG_ANON, 'apikey': _ORIG_ANON },
-          body: JSON.stringify({ p_phone: payload.whatsapp, p_sck: 'preco-' + payload.stage, p_stage: payload.stage, p_arm: 'preco', p_ad_src: payload.src || '' })
+          body: JSON.stringify({ p_phone: payload.whatsapp, p_sck: 'preco-' + payload.stage, p_stage: payload.stage, p_arm: 'preco', p_ad_src: payload.src || '', p_email: payload.email || '' })
         }).catch(function () {});
       } catch (e) {}
 
