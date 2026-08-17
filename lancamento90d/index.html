@@ -6,7 +6,7 @@
 <link rel="icon" type="image/webp" href="favicon.webp">
 
 <title>Lançamento 90D | The Book Business</title>
-<meta name="description" content="O plano de 90 dias que faz o seu livro entrar no mercado vendendo. Os Três Atos: desejo, antecipação e venda. Com Dany Sakugawa.">
+<meta name="description" content="O plano de 90 dias que faz o seu livro entrar no mercado vendendo. Os Três Motores: desejo, antecipação e venda. Com Dany Sakugawa.">
 <meta name="author" content="The Book Business">
 <!-- ⚠️ REMOVER NO LANÇAMENTO: enquanto o checkout for placeholder, a página não pode ser indexada -->
 <meta name="robots" content="noindex,nofollow">
@@ -263,29 +263,23 @@ p{margin:0 0 1.05em}
 .btn.block{display:flex;width:100%}
 .btn-note{font-size:.82rem;color:var(--mute);margin-top:12px}
 
-/* ---------- hero (VSL primeiro) ----------
-   Desktop: 2 colunas, o player entra na dobra ao lado do texto.
-   Mobile: o player sobe pra logo abaixo do título, antes de tudo o mais. */
-.hero{background:var(--card);padding:96px 0 52px;border-bottom:1px solid var(--border)}
-.hero-grid{display:grid;grid-template-columns:1fr 1.04fr;gap:clamp(28px,4vw,52px);align-items:center}
-.hero h1{max-width:15ch;font-size:clamp(1.85rem,3.6vw,3.1rem)}
+/* ---------- hero (VSL centrada) ----------
+   Mesma ordem da Imersão hoje: eyebrow, título, subtítulo, vídeo, botão.
+   Tudo centrado numa coluna estreita. O player é 9:16, então a largura é travada. */
+.hero{background:var(--card);padding:92px 0 52px;border-bottom:1px solid var(--border);text-align:center}
+.hero .wrap>*{margin-left:auto;margin-right:auto}
+.hero h1{max-width:19ch;font-size:clamp(1.8rem,3.4vw,2.9rem)}
 .hero h1 em{font-style:normal;color:var(--accent-ink)}
-.hero .sub{margin-top:18px;max-width:48ch;font-size:clamp(.98rem,1.5vw,1.12rem);color:var(--soft);line-height:1.55}
+.hero .sub{margin-top:18px;max-width:46ch;font-size:clamp(.98rem,1.5vw,1.12rem);color:var(--soft);line-height:1.55}
 .hero-cta{margin-top:26px}
-@media(max-width:960px){
-  .hero{padding-top:86px}
-  .hero-grid{grid-template-columns:1fr;gap:0}
-  .hero-txt{display:contents}
-  .hero .brand{order:1}.hero .eyebrow{order:2}.hero h1{order:3;max-width:none}
-  .player{order:4}.hero-cta{order:5}.hero .sub{order:6;margin-top:22px;max-width:none}
-  .stats{order:7}
-  .hero-cta .btn{width:100%}
-}
+@media(max-width:600px){.hero{padding-top:82px}.hero-cta .btn{width:100%}}
 
-/* player */
-.player{border-radius:16px;overflow:hidden;background:#0E0E0E;box-shadow:var(--shadow-lg)}
-@media(max-width:960px){.player{margin-top:26px}}
-.player .slot{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+/* player 9:16 (medido no VTurb: 400x711) */
+.player{margin:30px auto 0;width:100%;max-width:392px;border-radius:16px;overflow:hidden;
+  background:#0E0E0E;box-shadow:0 26px 54px -28px rgba(0,0,0,.72)}
+.player .slot{aspect-ratio:9/16;display:flex;align-items:center;justify-content:center}
+.player vturb-smartplayer{display:block;width:100%}
+.stats{text-align:left}
 .player .ph{text-align:center;padding:26px;color:#8A8A8A;font-size:.9rem;max-width:44ch}
 .player .ph b{display:block;color:#D8D8D8;font-family:'Space Grotesk',sans-serif;font-size:1.05rem;margin-bottom:8px}
 .player iframe,.player video{width:100%;height:100%;border:0;display:block}
@@ -315,106 +309,51 @@ p{margin:0 0 1.05em}
 }
 
 /* ============================================================
-   O SISTEMA DOS TRÊS ATOS  (diagrama)
-   Um grid de 3 colunas alinha trilho, cards, transformação e eixo.
+   OS TRÊS MOTORES (diagrama)
+   Motor liga e NÃO desliga. Eles se sobrepõem e o conjunto é cíclico.
+   Por isso é faixa acumulando, não caixa em sequência.
    ============================================================ */
-.sistema{margin-top:44px}
-.diag{display:grid;grid-template-columns:repeat(3,1fr);gap:0 22px;position:relative}
-
-/* trilho com os nós */
-.rail{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:0 22px;margin-bottom:26px}
-.rail .n{position:relative;display:flex;align-items:center;justify-content:center;height:46px}
-.rail .n:before,.rail .n:after{content:"";position:absolute;top:50%;height:2px;background:var(--accent);opacity:.3}
-.rail .n:before{left:-11px;right:50%;margin-right:23px}
-.rail .n:after{left:50%;right:-11px;margin-left:23px}
-.rail .n:first-child:before{display:none}
-.rail .n:last-child:after{
-  background:none;border-top:2px dashed var(--accent);opacity:.45;height:0
+.motores{margin-top:40px}
+.reg{display:grid;grid-template-columns:repeat(12,1fr);gap:0 4px;align-items:center}
+.reg .eixo{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:0 4px;
+  font-size:.72rem;color:var(--mute);font-weight:700;margin-bottom:10px}
+.reg .eixo span{grid-column:span 4;text-align:center}
+.faixa{
+  height:56px;border-radius:999px;display:flex;align-items:center;gap:12px;padding:0 20px;margin-bottom:10px;
+  color:#1A1A1A;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.98rem;white-space:nowrap;overflow:hidden
 }
-.rail .dot{
-  width:46px;height:46px;border-radius:50%;background:var(--card);border:2px solid var(--accent);
-  display:flex;align-items:center;justify-content:center;position:relative;z-index:2;
-  font-family:Georgia,serif;font-size:1.12rem;color:var(--accent-ink);font-weight:700;
-  box-shadow:0 0 0 6px var(--bg)
+.faixa i{
+  flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.14);
+  display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.78rem
 }
-.white .rail .dot{box-shadow:0 0 0 6px var(--card)}
-
-/* cards dos atos */
-.ato{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:26px 24px;box-shadow:var(--shadow)
+.faixa em{font-style:normal;font-weight:400;font-family:'DM Sans',sans-serif;font-size:.88rem;opacity:.72}
+.f1{grid-column:1/13;background:#FFE7AE}
+.f2{grid-column:5/13;background:#FFD277}
+.f3{grid-column:9/13;background:var(--accent)}
+.ciclo{
+  grid-column:1/-1;margin-top:14px;padding-top:16px;border-top:1px dashed var(--line);
+  display:flex;align-items:center;gap:12px;color:var(--soft);font-size:.94rem
 }
-.ato .mes{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:700;margin-bottom:8px}
-.ato h3{font-size:1.34rem;margin-bottom:12px}
-.ato p{color:var(--soft);font-size:.97rem;margin:0;line-height:1.55}
-
-/* trilha da transformação */
-.voce{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:0 22px;margin-top:22px}
-.voce .st{position:relative;text-align:center;padding:16px 6px 0}
-.voce .st:before{
-  content:"";position:absolute;top:0;left:-11px;right:-11px;height:1px;background:var(--line)
+.ciclo b{
+  flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:2px solid var(--accent);color:var(--accent-ink);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem
 }
-.voce .st span{
-  display:inline-block;background:var(--accent-soft);color:var(--accent-ink);
-  border-radius:999px;padding:7px 16px;font-weight:700;font-size:.92rem;
-  font-family:'Space Grotesk',sans-serif;position:relative;z-index:2
-}
-.voce .st small{display:block;font-size:.72rem;color:var(--mute);margin-bottom:8px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
-.voce .st:not(:last-child):after{
-  content:"→";position:absolute;right:-16px;top:52px;color:var(--accent);font-size:1.1rem;z-index:3
-}
-
-/* eixo de tempo */
-.eixo{
-  grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:0 22px;margin-top:30px;
-  border-top:2px solid var(--line);padding-top:0;position:relative
-}
-.eixo .seg{position:relative;text-align:center;padding-top:14px;font-size:.78rem;color:var(--mute)}
-.eixo .seg:before{content:"";position:absolute;top:-2px;left:50%;width:1px;height:9px;background:var(--line)}
-
-/* epílogo: a tracejada do trilho desce e entra aqui */
-.epi{
-  margin-top:34px;border:1px dashed var(--line);border-radius:var(--r);
-  padding:20px 24px;display:flex;gap:16px;align-items:center;background:transparent;position:relative
-}
-@media(min-width:861px){
-  .epi:before{
-    content:"";position:absolute;right:56px;top:-34px;width:2px;height:34px;
-    border-left:2px dashed var(--accent);opacity:.45
-  }
-  .epi:after{
-    content:"";position:absolute;right:51px;top:-4px;width:0;height:0;
-    border:5px solid transparent;border-top-color:var(--accent);opacity:.55
-  }
-}
-.epi .tag{
-  flex:0 0 auto;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.78rem;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--mute)
-}
-.epi p{margin:0;color:var(--soft);font-size:.95rem}
-
-.arc-label{text-align:center;margin-top:40px}
-.arc-label b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.45rem,3.4vw,2.2rem);letter-spacing:-.03em}
-.arc-label span{display:block;color:var(--soft);margin-top:8px}
-
-/* diagrama no mobile: vira coluna com trilho à esquerda */
+.motor-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
 @media(max-width:860px){
-  .diag{grid-template-columns:1fr;gap:0}
-  .rail,.voce,.eixo{display:none}
-  .ato{position:relative;padding-left:64px;margin-bottom:14px}
-  .ato:before{
-    content:attr(data-n);position:absolute;left:16px;top:24px;width:34px;height:34px;border-radius:50%;
-    border:2px solid var(--accent);color:var(--accent-ink);font-family:Georgia,serif;font-weight:700;
-    display:flex;align-items:center;justify-content:center;background:var(--card);z-index:2;font-size:.95rem
-  }
-  .ato:after{content:"";position:absolute;left:32px;top:58px;bottom:-14px;width:2px;background:var(--accent);opacity:.25}
-  .ato:last-of-type:after{display:none}
-  .ato .voce-m{
-    display:block;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);
-    font-size:.95rem;color:var(--accent-ink);font-weight:600
-  }
+  .motor-cards{grid-template-columns:1fr}
+  .reg{display:block}
+  .reg .eixo{display:none}
+  .faixa{width:100%!important;height:auto;padding:14px 18px;border-radius:14px;white-space:normal}
+  .f1,.f2,.f3{grid-column:auto}
 }
-@media(min-width:861px){.ato .voce-m{display:none}}
+.mcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 22px;box-shadow:var(--shadow)}
+.mcard h3{font-size:1.24rem;margin-bottom:10px}
+.mcard p{color:var(--soft);font-size:.95rem;margin:0 0 16px;line-height:1.55}
+.mcard .voce{border-top:1px dashed var(--line);padding-top:13px;margin:0;font-size:.95rem;color:var(--accent-ink);font-weight:600}
+.arc-label{text-align:center;margin-top:40px;padding-top:32px;border-top:1px solid var(--border)}
+.arc-label b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(1.45rem,3.4vw,2.2rem);letter-spacing:-.03em}
+.arc-label span{display:block;color:var(--soft);margin-top:10px}
 
 /* ---------- listas ---------- */
 .checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
@@ -560,23 +499,20 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
 <!-- ============ HERO ============ -->
 <header class="hero">
   <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-txt">
-        <p class="brand">The Book Business</p>
-        <p class="eyebrow">Lançamento 90D</p>
-        <h1 data-ab-el="headline">Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
-        <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo, mesmo sem editora ou milhares de seguidores.</p>
-        <div class="hero-cta">
-          <a href="#oferta" class="btn" data-cta="hero">Quero o plano de 90 dias</a>
-          <div class="btn-note">Acesso imediato · 12 meses · Garantia de 7 dias</div>
-        </div>
-      </div>
+    <p class="brand">The Book Business</p>
+    <p class="eyebrow">Lançamento 90D</p>
+    <h1 data-ab-el="headline">Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+    <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo, mesmo sem editora ou milhares de seguidores.</p>
 
-      <div class="player" id="vsl">
-        <div class="slot" id="vslSlot">
-          <div class="ph"><b>Espaço da VSL</b>Cole aqui o embed do VTurb. Enquanto ele não existir, a página funciona normalmente sem o vídeo.</div>
-        </div>
+    <div class="player" id="vsl">
+      <div class="slot" id="vslSlot">
+        <div class="ph"><b>Espaço da VSL</b>Cole aqui o embed do VTurb (9:16). Enquanto ele não existir, a página funciona normalmente sem o vídeo.</div>
       </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#oferta" class="btn" data-cta="hero">Quero o plano de 90 dias</a>
+      <div class="btn-note">Acesso imediato · 12 meses · Garantia de 7 dias</div>
     </div>
 
     <div class="stats">
@@ -620,62 +556,43 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
   <div class="wrap">
     <div class="narrow rv" style="margin:0 auto;text-align:center">
       <p class="eyebrow">O método</p>
-      <h2>Os Três Atos</h2>
-      <p class="lead" style="margin-top:14px">Não precisa ser assim. Lançar não é um dia, é um sistema com três atos que acontecem nessa ordem, cada um preparando o seguinte.</p>
+      <h2>Os Três Motores</h2>
+      <p class="lead" style="margin-top:14px">Não precisa ser assim. Lançar não é um dia, e também não é uma fila de etapas. São três motores que você liga em sequência e que, a partir daí, giram juntos.</p>
     </div>
 
-    <div class="sistema rv">
-      <div class="diag">
-
-        <div class="rail">
-          <div class="n"><div class="dot">I</div></div>
-          <div class="n"><div class="dot">II</div></div>
-          <div class="n"><div class="dot">III</div></div>
+    <div class="motores rv">
+      <div class="reg">
+        <div class="eixo"><span>dia 0 a 30</span><span>dia 30 a 60</span><span>dia 60 a 90</span></div>
+        <div class="faixa f1"><i>1</i>Desejo <em>liga primeiro e nunca desliga</em></div>
+        <div class="faixa f2"><i>2</i>Antecipação <em>entra por cima do desejo</em></div>
+        <div class="faixa f3"><i>3</i>Venda</div>
+        <div class="ciclo">
+          <b>&#8635;</b>
+          <span>No fim dos 90 dias os três estão girando ao mesmo tempo. E aí o ciclo recomeça, com os motores já quentes.</span>
         </div>
-
-        <article class="ato" data-n="I">
-          <div class="mes">Mês 1</div>
-          <h3>Desejo</h3>
-          <p>O leitor compra primeiro o autor, depois o livro. Quem é ele, com quem você conta, e como a obra vai existir no mundo.</p>
-          <span class="voce-m">Você deixa de ser invisível</span>
-        </article>
-
-        <article class="ato" data-n="II">
-          <div class="mes">Mês 2</div>
-          <h3>Antecipação</h3>
-          <p>Livro que estreia vendendo começou a vender semanas antes, quando ainda nem existia nas lojas. Revelar, mobilizar a rede, desenhar a pré-venda.</p>
-          <span class="voce-m">Você passa a ser esperado</span>
-        </article>
-
-        <article class="ato" data-n="III">
-          <div class="mes">Mês 3</div>
-          <h3>Venda</h3>
-          <p>Pré-venda aberta, rede mobilizada, pedidos concentrados na primeira semana. E o roteiro dos trinta dias seguintes, para o livro não morrer.</p>
-          <span class="voce-m">Você é lido</span>
-        </article>
-
-        <div class="voce">
-          <div class="st"><small>e você</small><span>invisível</span></div>
-          <div class="st"><small>e você</small><span>esperado</span></div>
-          <div class="st"><small>e você</small><span>lido</span></div>
-        </div>
-
-        <div class="eixo">
-          <div class="seg">dia 30</div>
-          <div class="seg">dia 60</div>
-          <div class="seg">dia 90</div>
-        </div>
-
       </div>
 
-      <div class="epi">
-        <span class="tag">Epílogo</span>
-        <p>Depois dos três atos vem manter o livro vivo o ano inteiro. Mas isso é assunto para quando o lançamento estiver feito.</p>
+      <div class="motor-cards">
+        <div class="mcard">
+          <h3>1 · Desejo</h3>
+          <p>O leitor compra primeiro o autor, depois o livro. Quem é ele, com quem você conta, e como a obra vai existir no mundo.</p>
+          <p class="voce">Você deixa de ser invisível</p>
+        </div>
+        <div class="mcard">
+          <h3>2 · Antecipação</h3>
+          <p>Livro que estreia vendendo começou a vender semanas antes, quando ainda nem existia nas lojas. Revelar, mobilizar a rede, desenhar a pré-venda.</p>
+          <p class="voce">Você passa a ser esperado</p>
+        </div>
+        <div class="mcard">
+          <h3>3 · Venda</h3>
+          <p>Pré-venda aberta, rede mobilizada, pedidos concentrados na primeira semana. E o roteiro dos trinta dias seguintes, para o livro não morrer.</p>
+          <p class="voce">Você é lido</p>
+        </div>
       </div>
 
       <div class="arc-label">
         <b>De invisível a lido. Em noventa dias.</b>
-        <span>É esse o caminho, e ele cabe num plano com data.</span>
+        <span>E depois de novo, a cada ciclo, com os três motores já ligados.</span>
       </div>
     </div>
   </div>
@@ -737,7 +654,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
         <li><b>Os seus primeiros cem compradores mapeados</b>, em planilha guiada</li>
         <li><b>O plano de pré-venda</b>, para estrear vendendo desde o primeiro dia</li>
         <li><b>O roteiro do pós-lançamento</b>, para o livro não morrer em trinta dias</li>
-        <li><b>Checklist de cada ato</b>, com prazos</li>
+        <li><b>Checklist de cada motor</b>, com prazos</li>
         <li><b>Marcos nos dias 15, 45 e 90</b>, para saber se você está no ritmo</li>
         <li><b>12 meses de acesso</b>, para usar neste livro e no próximo</li>
       </ul>
@@ -841,7 +758,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
         </ul>
       </div>
       <div class="path good rv">
-        <h3>Com os Três Atos</h3>
+        <h3>Com os Três Motores</h3>
         <ul>
           <li>Chega no dia da estreia com gente esperando</li>
           <li>Lança com meta e com cronograma</li>
@@ -894,7 +811,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
     <h2>Antes de decidir</h2>
     <div class="faq">
       <details><summary>Já publiquei o meu livro. Ainda serve?</summary><div class="a">Serve. O plano funciona igual para relançamento, que é uma das estratégias mais usadas para trazer um livro parado de volta a vender.</div></details>
-      <details><summary>Ainda estou escrevendo. É cedo demais?</summary><div class="a">Melhor ainda. Quem cria desejo enquanto escreve chega na estreia vendendo. O Ato 1 começa antes de o livro existir.</div></details>
+      <details><summary>Ainda estou escrevendo. É cedo demais?</summary><div class="a">Melhor ainda. Quem cria desejo enquanto escreve chega na estreia vendendo. O Motor 1 começa a girar antes de o livro existir.</div></details>
       <details><summary>Preciso ter muitos seguidores?</summary><div class="a">Não. O plano começa por quem já está perto de você, e boa parte dele acontece fora das redes sociais.</div></details>
       <details><summary>Serve para ficção?</summary><div class="a">Serve. Ficção, não ficção, poesia, infantil e técnico. O que muda é o leitor e o tom, não a estrutura do lançamento.</div></details>
       <details><summary>Vou publicar por editora. Ainda faz sentido?</summary><div class="a">Faz. Do ponto de vista de marketing, toda publicação é uma autopublicação: a editora distribui, mas quem leva o leitor até o livro é você.</div></details>
