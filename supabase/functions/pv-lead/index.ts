@@ -142,11 +142,34 @@ serve(async (req) => {
     utm_term: sanitize(payload.utm_term, 100),
   };
 
+  // 4) Origem: marca "veio de anúncio" pra segmentar no AC (find-or-create da tag; nunca quebra o lead)
+  const src = sanitize(payload.src, 200);
+  const isPaid = /^ppto-/i.test(src) || /(facebook|meta)/i.test(utms.utm_source) || /(cpc|paid|ads)/i.test(utms.utm_medium);
+  let paidTagOk: boolean | null = null;
+  if (isPaid) {
+    try {
+      const TAG_NAME = "MTBB - Tráfego pago";
+      let adTagId: number | null = null;
+      const found = await acFetch("/tags?search=" + encodeURIComponent(TAG_NAME));
+      if (found.ok) { const t = (found.data?.tags || []).find((x: any) => x.tag === TAG_NAME); if (t) adTagId = Number(t.id); }
+      if (!adTagId) {
+        const created = await acFetch("/tags", { method: "POST", body: JSON.stringify({ tag: { tag: TAG_NAME, tagType: "contact", description: "Lead que veio de anúncio (Meta) — perpétuo" } }) });
+        adTagId = created.data?.tag?.id ? Number(created.data.tag.id) : null;
+      }
+      if (adTagId) {
+        const r = await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: Number(contactId), tag: adTagId } }) });
+        paidTagOk = r.ok || r.status === 422;
+      }
+    } catch { /* nunca quebra o lead */ }
+  }
+
   return json({
     ok: true,
     contact_id: contactId,
     list_added: listOk,
     tag_applied: tagOk,
+    paid: isPaid,
+    paid_tag: paidTagOk,
     variant,
     stage,
     utms,
