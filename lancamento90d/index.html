@@ -493,48 +493,6 @@ html.js .onda.in i{transform:scaleY(1);
 @media(prefers-reduced-motion:reduce){.onda i{transform:none!important}}
 
 
-/* ============================================================
-   A TRILHA DA PÁGINA
-   O som conta a história: pico alto no começo, silêncio, e a partir
-   do método ele volta baixinho e cresce até o fim.
-   Duas camadas somadas:
-     1. base por posição  (--nv)  → cada divisor nasce maior que o anterior
-     2. volume por scroll (--amp) → tudo cresce enquanto a pessoa desce
-   A cor vem do --ac da etapa, então som e cor crescem juntos.
-   ============================================================ */
-:root{ --amp:0 }
-.trilha{display:flex;align-items:center;justify-content:center;gap:4px;
-  padding:clamp(26px,4vw,44px) 0;overflow:hidden}
-.trilha i{
-  width:4px;border-radius:99px;background:var(--ac);flex:0 0 auto;height:52px;
-  transform-origin:center;
-  /* altura final = perfil da barra × nível do divisor × volume do scroll */
-  transform:scaleY(calc(var(--h) * var(--nv) * (.34 + .66 * var(--amp))));
-  transition:transform .18s linear
-}
-.trilha.q i{opacity:.55}
-@media(prefers-reduced-motion:reduce){
-  .trilha i{transform:scaleY(calc(var(--h) * var(--nv) * .8));transition:none}
-}
-@media(max-width:700px){.trilha{gap:3px}.trilha i{width:3px}}
-
-
-/* ============================================================
-   EQUALIZADOR FIXO NO RODAPÉ
-   Barras coladas na base da janela, crescendo conforme a página desce.
-   A 50% de opacidade o texto passa por cima e continua legível sem
-   precisar de truque nenhum.
-   ============================================================ */
-@media(min-width:901px){footer{padding-bottom:calc(var(--eqh,238px) + 20px)}}
-.eqfix{position:fixed;left:0;right:0;bottom:0;height:var(--eqh,238px);z-index:35;pointer-events:none;overflow:hidden;
-  opacity:0;transition:opacity .5s ease}
-.eqfix .bars{position:absolute;inset:0}
-.eqfix .bars i{position:absolute;bottom:0;background:var(--accent);opacity:.5;border-radius:5px 5px 0 0;
-  transform-origin:bottom center;
-  transform:scaleY(calc(.12 + .88*var(--amp)));transition:transform .12s linear}
-@media(max-width:900px){.eqfix{display:none}}
-@media(prefers-reduced-motion:reduce){.eqfix .bars i{transition:none}}
-
 /* ---------- listas ---------- */
 .checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
 .checks li{position:relative;padding-left:30px;line-height:1.55}
@@ -1225,28 +1183,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     ev.preventDefault(); comprar(a.getAttribute('data-cta'));
   });
 
-  /* ---- volume da trilha: cresce conforme a pessoa desce ----
-     Uma variável CSS só, atualizada em rAF. Todas as barras leem dela,
-     então é um write por frame em vez de um por elemento. */
-  var raiz = document.documentElement, pedido = false;
-  var seccaoMetodo = document.getElementById('metodo');
-  function volume(){
-    pedido = false;
-    /* A faixa NÃO existe nas duas primeiras seções: o começo da página é o
-       silêncio, e o som só liga junto com o método. Por isso o volume conta
-       a partir do #metodo, não do topo. */
-    var inicio = seccaoMetodo ? seccaoMetodo.offsetTop - innerHeight * 0.55 : 0;
-    var fim = (document.body.scrollHeight - innerHeight) || 1;
-    var p = Math.min(Math.max((scrollY - inicio) / Math.max(1, fim - inicio), 0), 1);
-    raiz.style.setProperty('--amp', p.toFixed(3));
-    var faixaEq = document.querySelector('.eqfix');
-    if (faixaEq) faixaEq.style.opacity = p <= 0 ? '0' : String(Math.min(p * 6, 1).toFixed(2));
-  }
-  function pedirVolume(){ if (!pedido){ pedido = true; requestAnimationFrame(volume); } }
-  addEventListener('scroll', pedirVolume, {passive:true});
-  addEventListener('resize', pedirVolume);
-  volume();
-
   /* ---- topbar + barra fixa ---- */
   var sticky = document.getElementById('sticky'), oferta = document.getElementById('oferta');
   function onScroll(){
@@ -1333,41 +1269,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
      Barras coladas na base da janela, crescendo com o scroll. A inversão do
      texto por cima foi testada e descartada: não deu certo visualmente e
      custava um clone do conteúdo inteiro no DOM. Sem ela a faixa fica leve. */
-  (function(){
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var N = 34, GAP = 0.7, BW = (100 - (N-1)*GAP) / N;
-    /* envelope curvo CRESCENTE + irregularidade.
-       t^1.6 dá a subida acelerando no fim. A textura é um hash determinístico
-       (mesma cara em todo carregamento) e NÃO some pra direita: o topo tem que
-       ser bagunçado igual ao resto, senão vira rampa arrumada. Só a última é
-       forçada pro alto, pra curva fechar no pico. */
-    function ruidinho(i){ var x = Math.sin(i * 12.9898) * 43758.5453; return x - Math.floor(x); }
-    var alturas = [];
-    for (var i = 0; i < N; i++){
-      var t = i / (N - 1);
-      var env = 0.03 + 0.97 * Math.pow(t, 1.5);
-      var tex = 0.62 + 0.38 * ruidinho(i);
-      var h = env * tex * 100;
-      if (i === N - 1) h = 100;
-      alturas.push(Math.max(4, Math.round(h)));
-    }
-
-    var faixa = document.createElement('div');
-    faixa.className = 'eqfix'; faixa.setAttribute('aria-hidden','true');
-    var bars = document.createElement('div'); bars.className = 'bars';
-    for (var k = 0; k < N; k++){
-      var left = k * (BW + GAP);
-      bars.insertAdjacentHTML('beforeend',
-        '<i style="left:'+left.toFixed(3)+'%;width:'+BW.toFixed(3)+'%;height:'+alturas[k]+'%"></i>');
-    }
-    faixa.appendChild(bars);
-    document.body.appendChild(faixa);
-
-    /* só sobe a barra de compra onde a faixa realmente existe */
-    var sticky = document.getElementById('sticky');
-    if (sticky && innerWidth > 900) sticky.style.bottom = 'calc(var(--eqh,238px) - 6px)';
-  })();
-
   /* ---- FAQ: um aberto por vez ---- */
   var ds = document.querySelectorAll('.faq details');
   ds.forEach(function(d){ d.addEventListener('toggle', function(){
