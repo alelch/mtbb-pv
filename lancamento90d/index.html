@@ -534,6 +534,28 @@ html.js .onda.in i{transform:scaleY(1);
 }
 @media(prefers-reduced-motion:reduce){.espinha b{transition:none}}
 
+
+/* ============================================================
+   EQUALIZADOR COM TEXTO INVERTIDO
+   Quatro momentos, cada um mais alto que o anterior. Altura FIXA por
+   seção: se as barras mudassem de altura no scroll, a máscara teria que
+   ser recalculada junto (16 escritas por frame) e travaria no celular.
+   Fixo por seção conta a mesma história e custa zero por frame.
+   A inversão é feita com DUAS camadas do mesmo texto — a de cima é um
+   clone recortado no formato das barras. mix-blend-mode:difference não
+   serve: sobre o coral daria azul, cor fora da paleta.
+   ============================================================ */
+[data-eq]{position:relative;overflow:hidden}
+[data-eq]>*{position:relative;z-index:3}
+.eqbars{position:absolute;inset:0;z-index:1;pointer-events:none}
+.eqbars i{position:absolute;bottom:0;background:var(--accent);border-radius:6px 6px 0 0}
+.eq-inv{position:absolute;inset:0;z-index:4;pointer-events:none;color:#fff}
+.eq-inv *{color:#fff!important;border-color:#fff!important}
+[data-eq-escura] .eq-inv,[data-eq-escura] .eq-inv *{color:var(--ink)!important;border-color:var(--ink)!important}
+/* o clone é decorativo: nunca deve virar alvo de clique nem ser lido 2x */
+.eq-inv a,.eq-inv button{pointer-events:none}
+@media(max-width:700px){.eqbars i{border-radius:4px 4px 0 0}}
+
 /* ---------- listas ---------- */
 .checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
 .checks li{position:relative;padding-left:30px;line-height:1.55}
@@ -794,8 +816,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </div>
 
 <!-- ============ AGITAÇÃO ============ -->
-<section class="agit" data-etapa="1">
-  <div class="wrap rv">
+<section class="agit" data-etapa="1" data-eq="1" data-eq-escura>
+  <div class="wrap rv" data-eq-txt>
     <p class="eyebrow">O ponto de virada</p>
     <p class="big">Você pode passar <i>anos</i> escrevendo um livro.<br>Mas é o lançamento que define se ele será lido, ou <i>esquecido</i>.</p>
     <p class="lead">São cerca de dois mil lançamentos por mês no Brasil. Quase todos seguem o mesmo roteiro: o livro sai, faz uma semana de barulho entre amigos e família, e some em quinze dias.</p>
@@ -856,8 +878,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ PARA QUEM É ============ -->
-<section data-etapa="3">
-  <div class="wrap narrow rv">
+<section data-etapa="3" data-eq="2">
+  <div class="wrap narrow rv" data-eq-txt>
     <p class="eyebrow">Para quem é</p>
     <h2>Esse plano é seu se</h2>
     <ul class="checks">
@@ -1025,9 +1047,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ DOIS CAMINHOS ============ -->
-<section class="white">
+<section class="white" data-eq="3">
   <div class="wrap">
-    <div class="narrow rv">
+    <div class="narrow rv" data-eq-txt>
       <p class="eyebrow">Dois caminhos</p>
       <h2>Você vai continuar esperando, ou vai agir?</h2>
       <p class="lead" style="margin-top:14px">Todo autor chega nesse ponto. A diferença está em quem decide fazer diferente.</p>
@@ -1058,9 +1080,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ OFERTA ============ -->
-<section class="offer" id="oferta" data-etapa="5">
+<section class="offer" id="oferta" data-etapa="5" data-eq="4">
   <div class="wrap">
-    <div class="narrow rv" style="text-align:center;margin:0 auto">
+    <div class="narrow rv" style="text-align:center;margin:0 auto" data-eq-txt>
       <p class="eyebrow">Inscrição</p>
       <h2>O lançamento do seu livro vai acontecer.<br>A diferença é se ele vai vender, ou não.</h2>
     </div>
@@ -1324,6 +1346,57 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     setTimeout(acordarHero, 60);
     requestAnimationFrame(function(){ requestAnimationFrame(acordarHero); });
   }
+
+
+  /* ---- equalizador com texto invertido ----
+     Uma fonte só do texto: o clone é gerado aqui, então as duas camadas
+     nunca divergem. Sem JS, a página perde a inversão e nada mais. */
+  (function(){
+    var N = 16, GAP = 1.1, BW = (100 - (N-1)*GAP) / N;
+    var perfis = {                       /* altura por nível, em % da seção */
+      1:[6,9,7,11,8,6,10,7,9,6,8,11,7,9,6,8],
+      2:[18,26,21,34,24,17,30,22,28,19,25,33,20,27,18,23],
+      3:[34,52,40,63,46,33,58,42,54,37,49,61,38,51,35,44],
+      4:[52,78,61,94,70,50,88,64,82,56,74,92,58,77,53,67]
+    };
+    document.querySelectorAll('[data-eq]').forEach(function(sec){
+      var h = perfis[sec.getAttribute('data-eq')] || perfis[1];
+
+      var box = document.createElement('div'); box.className = 'eqbars'; box.setAttribute('aria-hidden','true');
+      var imgs = [], sizes = [], poss = [];
+      for (var i = 0; i < N; i++){
+        var left = i * (BW + GAP);
+        box.insertAdjacentHTML('beforeend',
+          '<i style="left:' + left.toFixed(3) + '%;width:' + BW.toFixed(3) + '%;height:' + h[i] + '%"></i>');
+        imgs.push('linear-gradient(#000,#000)');
+        sizes.push(BW.toFixed(3) + '% ' + h[i] + '%');
+        /* mask-position em % mede (container - máscara), daí a conversão */
+        poss.push((left / (100 - BW) * 100).toFixed(3) + '% 100%');
+      }
+      sec.insertBefore(box, sec.firstChild);
+
+      var fonte = sec.querySelector('[data-eq-txt]');
+      if (!fonte) return;
+      var clone = fonte.cloneNode(true);
+      clone.classList.add('eq-inv');
+      clone.setAttribute('aria-hidden','true');
+      clone.removeAttribute('data-eq-txt');
+      clone.querySelectorAll('[id]').forEach(function(n){ n.removeAttribute('id'); });   /* nada de id duplicado */
+      /* o clone NÃO pode depender do observador: ele não está na lista dele, então
+         ficaria invisível até a rede de segurança de 4s. Tira as classes de animação. */
+      clone.classList.remove('rv','in');
+      clone.querySelectorAll('.rv').forEach(function(n){ n.classList.remove('rv','in'); });
+      clone.querySelectorAll('[data-cta],[data-ab-el],[data-n]').forEach(function(n){
+        n.removeAttribute('data-cta'); n.removeAttribute('data-ab-el'); n.removeAttribute('data-n');
+      });
+      var st = clone.style;
+      st.webkitMaskImage = st.maskImage = imgs.join(',');
+      st.webkitMaskSize  = st.maskSize  = sizes.join(',');
+      st.webkitMaskPosition = st.maskPosition = poss.join(',');
+      st.webkitMaskRepeat = st.maskRepeat = 'no-repeat';
+      fonte.parentNode.insertBefore(clone, fonte.nextSibling);
+    });
+  })();
 
   /* ---- FAQ: um aberto por vez ---- */
   var ds = document.querySelectorAll('.faq details');
