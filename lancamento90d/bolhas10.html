@@ -1,0 +1,546 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bolhas · 10 variações</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{
+  --accent:#FC783C; --ink:#3A3A38; --soft:#7C7A76; --bg:#F8F8F8; --card:#FFFFFF;
+  --border:#E6E4E0; --cinza:#A8A5A0; --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk','DM Sans',sans-serif;margin:0;letter-spacing:-.03em;line-height:1.1}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+/* ---- moldura de avaliação ---- */
+.rotulo{position:sticky;top:0;z-index:50;background:#303030;color:#fff;padding:11px 28px;
+  font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.rotulo em{font-style:normal;font-weight:400;letter-spacing:.02em;text-transform:none;opacity:.62;margin-left:12px;font-size:12.5px}
+.cena{background:var(--card);border-bottom:1px solid var(--border)}
+.cena.alt{background:var(--bg)}
+
+/* ---- tipografia compartilhada dos passos ---- */
+.chapeu{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--cinza);margin:0 0 10px;transition:color .5s var(--ease)}
+.on .chapeu,.passo.on .chapeu{color:var(--accent)}
+.passo h3{font-size:30px;font-weight:700;margin:0 0 14px}
+.passo p{font-size:16px;line-height:1.55;color:var(--soft);margin:0 0 14px;max-width:44ch}
+.passo{opacity:.26;transition:opacity .55s var(--ease);}
+.passo.on{opacity:1}
+
+/* ---- palco sticky padrão ---- */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.palco{position:sticky;top:46px;height:calc(100vh - 46px);display:flex;align-items:center;justify-content:center}
+.trilho .passo{min-height:76vh;display:flex;flex-direction:column;justify-content:center}
+.fecho{padding:70px 0 88px;text-align:center;border-top:1px solid var(--border)}
+.fecho p{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;letter-spacing:-.03em;margin:0}
+.fecho span{display:block;margin-top:10px;color:var(--soft);font-size:15px}
+
+/* ============ V1 concêntrica ============ */
+.v1 svg{width:100%;max-width:520px;overflow:visible}
+.v1 .bol ellipse{fill:none;stroke:var(--border);stroke-width:1.6;
+  transition:stroke .55s var(--ease),fill .55s var(--ease),stroke-width .55s var(--ease)}
+.v1 .bol text{font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;fill:var(--cinza);transition:fill .55s var(--ease)}
+.v1 .bol.feito ellipse{stroke:rgba(252,120,60,.32);fill:rgba(252,120,60,.05)}
+.v1 .bol.on ellipse{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.09)}
+.v1 .bol.on text{fill:var(--ink)}
+
+/* ============ V2 enchendo ============ */
+.v2 svg{width:100%;max-width:520px;overflow:visible}
+.v2 .base ellipse{fill:none;stroke:var(--border);stroke-width:1.6}
+.v2 .cheio ellipse{fill:rgba(252,120,60,.85);stroke:none}
+.v2 .rot{font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;fill:var(--cinza)}
+.v2 .nivel{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;fill:var(--ink)}
+
+/* ============ V3 câmera afasta ============ */
+.v3 .palco{overflow:hidden}
+.v3 svg{width:100%;max-width:560px;overflow:visible}
+.v3 .cam{transition:transform 1s var(--ease);transform-origin:150px 200px}
+.v3 ellipse{fill:none;stroke:var(--border);stroke-width:1.6;vector-effect:non-scaling-stroke;
+  transition:stroke .6s var(--ease),fill .6s var(--ease),opacity .6s var(--ease)}
+.v3 .viva ellipse{stroke:var(--accent);stroke-width:2.4;fill:rgba(252,120,60,.09)}
+.v3 .viva text{fill:var(--ink)}
+.v3 g[data-oculto="1"]{opacity:0}
+.v3 text{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;fill:var(--cinza);transition:opacity .6s var(--ease)}
+
+/* ============ V4 furo ============ */
+.v4 svg{width:100%;max-width:520px;overflow:visible}
+.v4 ellipse{fill:none;stroke:var(--cinza);stroke-width:1.8;
+  stroke-dasharray:6 5;transition:stroke .6s var(--ease),stroke-dasharray 1.1s var(--ease),opacity .6s var(--ease)}
+.v4 .furada ellipse{stroke:rgba(252,120,60,.55);stroke-dasharray:16 22}
+.v4 .agora ellipse{stroke:var(--accent);stroke-width:2.6;stroke-dasharray:6 5}
+.v4 .pt{fill:var(--accent);opacity:0;transition:opacity .8s var(--ease),transform 1.2s var(--ease)}
+.v4 .furada .pt,.v4 .agora .pt{opacity:.85}
+.v4 text{font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;fill:var(--cinza)}
+
+/* ============ V5 três cards ============ */
+.v5 .grade{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:76px 0}
+.v5 .cartao{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px 24px 28px}
+.v5 .cartao.destaque{border-color:rgba(252,120,60,.45);box-shadow:0 12px 34px rgba(252,120,60,.10)}
+.v5 .mini{width:100%;height:104px;margin-bottom:20px}
+.v5 .mini ellipse{fill:none;stroke:var(--border);stroke-width:1.5}
+.v5 .mini .viva{stroke:var(--accent);stroke-width:2.4;fill:rgba(252,120,60,.10)}
+.v5 h3{font-size:20px;margin:0 0 10px}
+.v5 p{font-size:14.5px;line-height:1.55;color:var(--soft);margin:0}
+.v5 .num{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.16em;color:var(--cinza);display:block;margin-bottom:12px}
+.v5 .destaque .num{color:var(--accent)}
+
+/* ============ V6 escala numérica ============ */
+.v6 svg{width:100%;max-width:520px;overflow:visible}
+.v6 circle{fill:none;stroke:var(--border);stroke-width:1.6;transition:stroke .55s var(--ease),fill .55s var(--ease)}
+.v6 .on circle{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.08)}
+.v6 .feito circle{stroke:rgba(252,120,60,.3);fill:rgba(252,120,60,.04)}
+.v6 .n{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  fill:var(--cinza);text-anchor:middle;transition:fill .55s var(--ease)}
+.v6 .on .n{fill:var(--accent)}
+.v6 .lb{font-family:'Space Grotesk',sans-serif;font-size:9.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;fill:var(--cinza);text-anchor:middle}
+
+/* ============ V7 mapa 90D ============ */
+.v7 .mapa{padding:76px 0 84px}
+.v7 .linha{display:grid;grid-template-columns:132px 1fr;gap:0}
+.v7 .rail{position:relative}
+.v7 .rail::before{content:'';position:absolute;left:33px;top:0;bottom:0;width:2px;background:var(--border)}
+.v7 .rail i{position:absolute;left:33px;top:0;width:2px;background:var(--accent);
+  height:calc(var(--p,0)*100%);transition:height .25s linear}
+.v7 .etapa{position:relative;padding:0 0 62px 0;min-height:150px}
+.v7 .bola{position:absolute;left:-99px;top:2px;width:68px;height:68px;border-radius:50%;
+  border:1.8px solid var(--border);background:var(--card);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--cinza);
+  transition:all .55s var(--ease)}
+.v7 .on .bola{border-color:var(--accent);color:var(--accent);background:rgba(252,120,60,.07);
+  transform:scale(1.08);box-shadow:0 0 0 7px rgba(252,120,60,.07)}
+.v7 .etapa h3{font-size:23px;margin:0 0 9px}
+.v7 .etapa p{font-size:15.5px;line-height:1.55;color:var(--soft);margin:0;max-width:46ch}
+.v7 .dias{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--cinza);display:block;margin-bottom:7px}
+.v7 .on .dias{color:var(--accent)}
+
+/* ============ V8 partículas ============ */
+.v8 svg{width:100%;max-width:540px;overflow:visible}
+.v8 ellipse{fill:none;stroke:var(--border);stroke-width:1.4;transition:stroke .6s var(--ease)}
+.v8 .on ellipse{stroke:var(--accent);stroke-width:2.2}
+.v8 circle{fill:var(--cinza);opacity:0;transition:opacity .7s var(--ease)}
+.v8 .on circle,.v8 .feito circle{opacity:1;fill:var(--accent)}
+.v8 .feito circle{opacity:.4}
+.v8 text{font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;fill:var(--cinza)}
+
+/* ============ V9 campo full-bleed ============ */
+.v9{position:relative;background:var(--card)}
+.v9 .campo{position:sticky;top:46px;height:calc(100vh - 46px);overflow:hidden;
+  display:flex;align-items:center;justify-content:center}
+.v9 .disco{width:34vmin;height:34vmin;border-radius:50%;background:var(--accent);
+  transform:scale(var(--z,1));transition:transform 1.1s var(--ease);will-change:transform}
+.v9 .textos{position:relative;margin-top:calc(-100vh + 46px)}
+.v9 .bloco{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.v9 .bloco .cx{max-width:520px;padding:0 28px;transition:color .6s var(--ease)}
+.v9 .bloco h3{font-size:34px;margin:0 0 14px}
+.v9 .bloco p{font-size:17px;line-height:1.55;margin:0}
+.v9 .bloco.dentro .cx{color:#fff}
+.v9 .bloco.dentro h3{color:#fff}
+.v9 .bloco.dentro .chapeu{color:rgba(255,255,255,.72)}
+
+/* ============ V10 barra 99% ============ */
+.v10 .barrasec{padding:82px 0 88px}
+.v10 .titulo{text-align:center;max-width:640px;margin:0 auto 44px}
+.v10 .titulo h3{font-size:30px;margin:0 0 12px}
+.v10 .titulo p{color:var(--soft);font-size:16px;line-height:1.55;margin:0}
+.v10 .barra{display:flex;height:78px;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--card)}
+.v10 .seg{position:relative;display:flex;align-items:center;justify-content:center;
+  transition:flex-grow 1.1s var(--ease),background .6s var(--ease)}
+.v10 .s1{flex-grow:var(--g1,34);background:rgba(252,120,60,.14)}
+.v10 .s2{flex-grow:var(--g2,33);background:rgba(252,120,60,.5);border-left:1px solid #fff}
+.v10 .s3{flex-grow:var(--g3,33);background:var(--accent);border-left:1px solid #fff}
+.v10 .seg{overflow:hidden;min-width:0;flex-basis:0}
+.v10 .seg b{transition:opacity .5s var(--ease)}
+.v10 .colapsou .s2 b,.v10 .colapsou .s3 b{opacity:0}
+.v10 .fora{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:11px}
+.v10 .fora span{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--cinza);opacity:0;transition:opacity .6s var(--ease)}
+.v10 .colapsou ~ .fora span{opacity:1}
+.v10 .seg b{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.v10 .s1 b{color:var(--ink)} .v10 .s2 b,.v10 .s3 b{color:#fff}
+.v10 .legendas{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+.v10 .lg{padding-top:16px;border-top:2px solid var(--border);transition:border-color .5s var(--ease)}
+.v10 .lg.on{border-color:var(--accent)}
+.v10 .lg h4{font-family:'Space Grotesk',sans-serif;font-size:16px;margin:0 0 7px;letter-spacing:-.02em}
+.v10 .lg p{font-size:14.5px;line-height:1.55;color:var(--soft);margin:0}
+
+@media(max-width:860px){
+  .duo{grid-template-columns:1fr;gap:0}
+  .palco{position:relative;height:auto;padding:38px 0}
+  .trilho .passo{min-height:auto;padding:0 0 46px}
+  .v5 .grade,.v10 .legendas{grid-template-columns:1fr}
+  .v7 .linha{grid-template-columns:1fr}
+}
+</style></head><body>
+
+<!-- ══════════ V1 ══════════ -->
+<div class="rotulo">Variação 1 · Concêntrica sticky <em>o diagrama fica parado, o texto passa e acende a bolha da vez</em></div>
+<section class="cena v1" data-cena><div class="wrap"><div class="duo">
+  <div class="palco">
+    <svg viewBox="0 0 560 400">
+      <g class="bol" id="v1b3"><ellipse cx="238" cy="200" rx="268" ry="192"/><text x="440" y="205" text-anchor="middle">Boca a boca</text></g>
+      <g class="bol" id="v1b2"><ellipse cx="186" cy="200" rx="188" ry="150"/><text x="312" y="205" text-anchor="middle">Desconhecidos</text></g>
+      <g class="bol" id="v1b1"><ellipse cx="128" cy="200" rx="122" ry="98"/><text x="128" y="205" text-anchor="middle">Amigos e família</text></g>
+    </svg>
+  </div>
+  <div class="trilho">
+    <div class="passo"><span class="chapeu">Bolha 1</span><h3>Amigos e família</h3>
+      <p>Quem já te conhece compra por afeto, não por interesse. Vende trinta, cinquenta exemplares e para. É aqui que 99% dos livros ficam presos.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 2</span><h3>Desconhecidos</h3>
+      <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Furar essa bolha é o que separa um livro publicado de um livro lido.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 3</span><h3>Boca a boca</h3>
+      <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito algo por ele.</p></div>
+  </div>
+</div></div>
+<div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<!-- ══════════ V2 ══════════ -->
+<div class="rotulo">Variação 2 · Enchendo <em>as bolhas são recipientes; o laranja sobe conforme você desce</em></div>
+<section class="cena alt v2" data-cena><div class="wrap"><div class="duo">
+  <div class="palco">
+    <svg viewBox="0 0 560 400">
+      <defs><clipPath id="corte"><ellipse id="niv" cx="128" cy="200" rx="0" ry="0"/></clipPath></defs>
+      <g class="cheio" clip-path="url(#corte)">
+        <ellipse cx="238" cy="200" rx="268" ry="192" opacity=".18"/>
+        <ellipse cx="186" cy="200" rx="188" ry="150" opacity=".3"/>
+        <ellipse cx="128" cy="200" rx="122" ry="98" opacity=".55"/>
+      </g>
+      <g class="base">
+        <ellipse cx="238" cy="200" rx="268" ry="192"/>
+        <ellipse cx="186" cy="200" rx="188" ry="150"/>
+        <ellipse cx="128" cy="200" rx="122" ry="98"/>
+      </g>
+      <text class="rot" x="440" y="205" text-anchor="middle">Boca a boca</text>
+      <text class="rot" x="312" y="205" text-anchor="middle">Desconhecidos</text>
+      <text class="rot" x="128" y="205" text-anchor="middle">Amigos e família</text>
+      <text class="nivel" id="v2n" x="-118" y="382">0% de alcance</text>
+    </svg>
+  </div>
+  <div class="trilho">
+    <div class="passo"><span class="chapeu">Bolha 1</span><h3>Amigos e família</h3>
+      <p>Quem já te conhece compra por afeto, não por interesse. Vende trinta, cinquenta exemplares e para. É aqui que 99% dos livros ficam presos.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 2</span><h3>Desconhecidos</h3>
+      <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Furar essa bolha é o que separa um livro publicado de um livro lido.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 3</span><h3>Boca a boca</h3>
+      <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito algo por ele.</p></div>
+  </div>
+</div></div>
+<div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<!-- ══════════ V3 ══════════ -->
+<div class="rotulo">Variação 3 · Câmera afasta <em>começa dentro da bolha 1; o zoom sai e revela que existia mundo lá fora</em></div>
+<section class="cena v3" data-cena><div class="wrap"><div class="duo">
+  <div class="palco">
+    <svg viewBox="0 0 560 400"><g class="cam" id="v3cam">
+      <g class="b3" data-oculto="1"><ellipse cx="238" cy="200" rx="268" ry="192"/><text x="440" y="205" text-anchor="middle">Boca a boca</text></g>
+      <g class="b2" data-oculto="1"><ellipse cx="186" cy="200" rx="188" ry="150"/><text x="312" y="205" text-anchor="middle">Desconhecidos</text></g>
+      <g class="b1"><ellipse cx="128" cy="200" rx="122" ry="98"/><text x="128" y="205" text-anchor="middle">Amigos e família</text></g>
+    </g></svg>
+  </div>
+  <div class="trilho">
+    <div class="passo"><span class="chapeu">Bolha 1</span><h3>Amigos e família</h3>
+      <p>Do lado de dentro parece que o livro está indo bem. Todo mundo elogia. O problema é que todo mundo já te conhecia antes do livro existir.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 2</span><h3>Desconhecidos</h3>
+      <p>Aí a câmera afasta e aparece o que sempre esteve ali: gente que nunca ouviu falar de você e mesmo assim compraria.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 3</span><h3>Boca a boca</h3>
+      <p>E mais longe ainda, a bolha que você não alcança sozinho. Quem chega nela foi levado por um leitor, não por um anúncio.</p></div>
+  </div>
+</div></div>
+<div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<!-- ══════════ V4 ══════════ -->
+<div class="rotulo">Variação 4 · Furo <em>a borda é tracejada e se rompe; os leitores escapam para a bolha seguinte</em></div>
+<section class="cena alt v4" data-cena><div class="wrap"><div class="duo">
+  <div class="palco"><svg viewBox="0 0 560 400" id="v4svg">
+      <g class="b" id="v4b3"><ellipse cx="238" cy="200" rx="268" ry="192"/><text x="440" y="205" text-anchor="middle">Boca a boca</text></g>
+      <g class="b" id="v4b2"><ellipse cx="186" cy="200" rx="188" ry="150"/><text x="312" y="205" text-anchor="middle">Desconhecidos</text></g>
+      <g class="b" id="v4b1"><ellipse cx="128" cy="200" rx="122" ry="98"/><text x="128" y="205" text-anchor="middle">Amigos e família</text></g>
+  </svg></div>
+  <div class="trilho">
+    <div class="passo"><span class="chapeu">Bolha 1</span><h3>Amigos e família</h3>
+      <p>A borda dessa bolha é fina, mas fechada. O livro circula ali dentro e nunca atravessa. Vende trinta, cinquenta exemplares e para.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 2</span><h3>Desconhecidos</h3>
+      <p>Furar quer dizer isso: alguém que não te devia nada leu a primeira página e continuou. É o que separa um livro publicado de um livro lido.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 3</span><h3>Boca a boca</h3>
+      <p>A última bolha não se fura de fora. Ela se abre por dentro, quando o leitor termina e conta pra alguém.</p></div>
+  </div>
+</div></div>
+<div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<!-- ══════════ V5 ══════════ -->
+<div class="rotulo">Variação 5 · Três cartões <em>sem rolagem: escaneável, entra e sai em cinco segundos</em></div>
+<section class="cena v5"><div class="wrap"><div class="grade">
+  <div class="cartao destaque"><svg class="mini" viewBox="0 0 200 104">
+      <ellipse cx="86" cy="52" rx="94" ry="48"/><ellipse cx="68" cy="52" rx="66" ry="37"/>
+      <ellipse class="viva" cx="46" cy="52" rx="43" ry="26"/></svg>
+    <span class="num">Bolha 1</span><h3>Amigos e família</h3>
+    <p>Quem já te conhece compra por afeto, não por interesse. Vende trinta, cinquenta exemplares e para. É aqui que 99% dos livros ficam presos.</p></div>
+  <div class="cartao"><svg class="mini" viewBox="0 0 200 104">
+      <ellipse cx="86" cy="52" rx="94" ry="48"/><ellipse class="viva" cx="68" cy="52" rx="66" ry="37"/>
+      <ellipse cx="46" cy="52" rx="43" ry="26"/></svg>
+    <span class="num">Bolha 2</span><h3>Desconhecidos</h3>
+    <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Furar essa bolha é o que separa um livro publicado de um livro lido.</p></div>
+  <div class="cartao"><svg class="mini" viewBox="0 0 200 104">
+      <ellipse class="viva" cx="86" cy="52" rx="94" ry="48"/><ellipse cx="68" cy="52" rx="66" ry="37"/>
+      <ellipse cx="46" cy="52" rx="43" ry="26"/></svg>
+    <span class="num">Bolha 3</span><h3>Boca a boca</h3>
+    <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito algo por ele.</p></div>
+</div></div>
+<div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<!-- ══════════ V6 ══════════ -->
+<div class="rotulo">Variação 6 · Escala de leitores <em>o diagrama vira tamanho: o número dentro de cada bolha sobe</em></div>
+<section class="cena alt v6" data-cena><div class="wrap"><div class="duo">
+  <div class="palco"><svg viewBox="0 0 560 400">
+      <g id="v6b3"><circle cx="280" cy="200" r="190"/>
+        <text class="n" x="280" y="52" style="font-size:19px">30.000</text><text class="lb" x="280" y="70">Boca a boca</text></g>
+      <g id="v6b2"><circle cx="280" cy="228" r="126"/>
+        <text class="n" x="280" y="132" style="font-size:17px">3.000</text><text class="lb" x="280" y="149">Desconhecidos</text></g>
+      <g id="v6b1"><circle cx="280" cy="288" r="60"/>
+        <text class="n" x="280" y="286" style="font-size:16px">40</text><text class="lb" x="280" y="303">Amigos</text></g>
+  </svg></div>
+  <div class="trilho">
+    <div class="passo"><span class="chapeu">Bolha 1</span><h3>40 leitores</h3>
+      <p>É o teto de quem já te conhece. Compram por afeto, não por interesse. É aqui que 99% dos livros ficam presos.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 2</span><h3>3.000 leitores</h3>
+      <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Não é uma bolha maior, é outra ordem de grandeza.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 3</span><h3>30.000 leitores</h3>
+      <p>A única bolha que cresce sozinha: cada leitor que termina traz o próximo. Você não paga por esse alcance, você merece ele.</p></div>
+  </div>
+</div></div>
+<div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<!-- ══════════ V7 ══════════ -->
+<div class="rotulo">Variação 7 · Mapa dos 90 dias <em>as bolhas viram calendário: cada uma tem uma janela de tempo</em></div>
+<section class="cena v7" data-cena><div class="wrap"><div class="mapa"><div class="linha">
+  <div class="rail"><i id="v7fill"></i></div>
+  <div>
+    <div class="etapa"><div class="bola">1 a 30</div><span class="dias">Dias 1 a 30</span>
+      <h3>Sair da bolha dos amigos</h3>
+      <p>Quem já te conhece compra por afeto, não por interesse. Vende trinta, cinquenta exemplares e para. O primeiro mês é para parar de contar com eles.</p></div>
+    <div class="etapa"><div class="bola">31 a 60</div><span class="dias">Dias 31 a 60</span>
+      <h3>Chegar nos desconhecidos</h3>
+      <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Furar essa bolha é o que separa um livro publicado de um livro lido.</p></div>
+    <div class="etapa"><div class="bola">61 a 90</div><span class="dias">Dias 61 a 90</span>
+      <h3>Acender o boca a boca</h3>
+      <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito algo por ele.</p></div>
+  </div>
+</div></div></div>
+<div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<!-- ══════════ V8 ══════════ -->
+<div class="rotulo">Variação 8 · População <em>cada ponto é um leitor; a bolha enche de gente quando é a vez dela</em></div>
+<section class="cena alt v8" data-cena><div class="wrap"><div class="duo">
+  <div class="palco"><svg viewBox="0 0 560 400" id="v8svg">
+      <g id="v8b3"><ellipse cx="238" cy="200" rx="268" ry="192"/><text x="446" y="205" text-anchor="middle">Boca a boca</text></g>
+      <g id="v8b2"><ellipse cx="186" cy="200" rx="188" ry="150"/><text x="316" y="205" text-anchor="middle">Desconhecidos</text></g>
+      <g id="v8b1"><ellipse cx="128" cy="200" rx="122" ry="98"/><text x="128" y="360" text-anchor="middle">Amigos e família</text></g>
+  </svg></div>
+  <div class="trilho">
+    <div class="passo"><span class="chapeu">Bolha 1</span><h3>Amigos e família</h3>
+      <p>Dá pra contar nos dedos. Quem já te conhece compra por afeto, não por interesse. É aqui que 99% dos livros ficam presos.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 2</span><h3>Desconhecidos</h3>
+      <p>Aqui não dá mais pra contar. Gente que nunca ouviu falar de você e mesmo assim decide comprar.</p></div>
+    <div class="passo"><span class="chapeu">Bolha 3</span><h3>Boca a boca</h3>
+      <p>E cada um desses pontos pode trazer outro. É a única bolha que cresce sem você empurrar.</p></div>
+  </div>
+</div></div>
+<div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<!-- ══════════ V9 ══════════ -->
+<div class="rotulo">Variação 9 · Campo cheio <em>a bolha ocupa a tela e cresce por baixo do texto; imersivo, sem diagrama</em></div>
+<section class="cena v9" data-cena>
+  <div class="campo"><div class="disco" id="v9disco"></div></div>
+  <div class="textos">
+    <div class="bloco"><div class="cx"><span class="chapeu">Bolha 1</span><h3>Amigos e família</h3>
+      <p>Quem já te conhece compra por afeto, não por interesse. Vende trinta, cinquenta exemplares e para. É aqui que 99% dos livros ficam presos.</p></div></div>
+    <div class="bloco"><div class="cx"><span class="chapeu">Bolha 2</span><h3>Desconhecidos</h3>
+      <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Furar essa bolha é o que separa um livro publicado de um livro lido.</p></div></div>
+    <div class="bloco"><div class="cx"><span class="chapeu">Bolha 3</span><h3>Boca a boca</h3>
+      <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito algo por ele.</p></div></div>
+  </div>
+  <div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<!-- ══════════ V10 ══════════ -->
+<div class="rotulo">Variação 10 · A barra dos 99% <em>abandona o círculo: o argumento vira proporção, o número lidera</em></div>
+<section class="cena alt v10" data-cena><div class="wrap"><div class="barrasec">
+  <div class="titulo"><h3>99% dos livros nunca saem da primeira bolha</h3>
+    <p>Não porque são ruins. Porque ninguém além de quem já conhecia o autor chegou até eles.</p></div>
+  <div class="barra" id="v10barra">
+    <div class="seg s1"><b>Amigos e família</b></div>
+    <div class="seg s2"><b>Desconhecidos</b></div>
+    <div class="seg s3"><b>Boca a boca</b></div>
+  </div>
+  <div class="fora"><span>99% param aqui</span><span>&nbsp;</span><span>&nbsp;</span></div>
+  <div class="legendas">
+    <div class="lg" id="v10l1"><h4>Bolha 1 · Amigos e família</h4><p>Compram por afeto, não por interesse. Trinta, cinquenta exemplares, e para.</p></div>
+    <div class="lg" id="v10l2"><h4>Bolha 2 · Desconhecidos</h4><p>Nunca ouviram falar de você e mesmo assim compram. É onde o livro vira livro.</p></div>
+    <div class="lg" id="v10l3"><h4>Bolha 3 · Boca a boca</h4><p>A única que cresce sozinha: o leitor termina e recomenda.</p></div>
+  </div>
+</div></div>
+<div class="wrap fecho"><p>De invisível a lido é isso: furar as três bolhas.</p><span>E o plano de 90 dias é a ordem em que elas se furam.</span></div>
+</section>
+
+<script>
+/* ---------- ruído determinístico (mesmo hash usado no equalizador) ---------- */
+function ruidinho(i){ var x = Math.sin(i * 12.9898) * 43758.5453; return x - Math.floor(x); }
+
+/* ---------- pontos das variações 4 e 8 ---------- */
+(function semear(){
+  var NS = 'http://www.w3.org/2000/svg';
+  function dentro(cx, cy, rx, ry, n, semente, raio, alvo){
+    for (var i = 0; i < n; i++){
+      var a = ruidinho(semente + i) * Math.PI * 2;
+      var d = Math.sqrt(ruidinho(semente + i + 500));      /* sqrt = distribuição uniforme na área */
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', (cx + Math.cos(a) * rx * d * .82).toFixed(1));
+      c.setAttribute('cy', (cy + Math.sin(a) * ry * d * .82).toFixed(1));
+      c.setAttribute('r', raio);
+      alvo.appendChild(c);
+    }
+  }
+  /* V8: 9 pontos / 90 / 420 */
+  dentro(128, 200, 122, 98, 9,   10, 3.4, document.getElementById('v8b1'));
+  dentro(186, 200, 188, 150, 90, 900, 2.4, document.getElementById('v8b2'));
+  dentro(238, 200, 268, 192, 420, 3000, 1.7, document.getElementById('v8b3'));
+  /* V4: poucos pontos por anel, marcando quem escapou */
+  [['v4b1',128,200,122,98,6,40],['v4b2',186,200,188,150,14,700],['v4b3',238,200,268,192,22,2100]]
+    .forEach(function(o){
+      var g = document.getElementById(o[0]), NSg = document.createElementNS(NS,'g');
+      NSg.setAttribute('class','pts'); g.appendChild(NSg);
+      dentro(o[1],o[2],o[3],o[4],o[5],o[6],2.6,NSg);
+      [].forEach.call(NSg.children, function(c){ c.setAttribute('class','pt'); });
+    });
+})();
+
+/* ---------- motor de rolagem: um só handler para todas as cenas ---------- */
+(function(){
+  var pedido = false;
+
+  function progresso(sec){
+    /* 0 quando o topo da cena chega ao topo da tela, 1 quando o fim sai */
+    var r = sec.getBoundingClientRect();
+    var total = r.height - innerHeight;
+    if (total <= 0) return r.top < innerHeight * .5 ? 1 : 0;
+    return Math.min(Math.max(-r.top / total, 0), 1);
+  }
+
+  function passoAtivo(passos){
+    var meio = innerHeight / 2, melhor = 0, dist = Infinity;
+    passos.forEach(function(p, i){
+      var r = p.getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - meio);
+      if (d < dist){ dist = d; melhor = i; }
+    });
+    return melhor;
+  }
+
+  function marcar(passos, grupos, i){
+    passos.forEach(function(p, k){ p.classList.toggle('on', k === i); });
+    grupos.forEach(function(g, k){
+      if (!g) return;
+      g.classList.toggle('on', k === i);
+      g.classList.toggle('feito', k < i);
+    });
+  }
+
+  var cenas = [].slice.call(document.querySelectorAll('[data-cena]'));
+  var ids = {v1:['v1b1','v1b2','v1b3'], v6:['v6b1','v6b2','v6b3'], v8:['v8b1','v8b2','v8b3']};
+
+  function tick(){
+    pedido = false;
+    cenas.forEach(function(sec){
+      var passos = [].slice.call(sec.querySelectorAll('.passo'));
+      var i = passos.length ? passoAtivo(passos) : 0;
+      var p = progresso(sec);
+
+      if (sec.classList.contains('v1')) marcar(passos, ids.v1.map(byId), i);
+      if (sec.classList.contains('v6')) marcar(passos, ids.v6.map(byId), i);
+      if (sec.classList.contains('v8')) marcar(passos, ids.v8.map(byId), i);
+
+      if (sec.classList.contains('v2')){
+        marcar(passos, [], i);
+        /* o alcance se expande do centro pra fora, acompanhando o formato das bolhas */
+        var e = byId('niv');
+        e.setAttribute('cx', (128 + p * 110).toFixed(1));
+        e.setAttribute('rx', (p * 272).toFixed(1));
+        e.setAttribute('ry', (p * 196).toFixed(1));
+        byId('v2n').textContent = Math.round(p * 100) + '% de alcance';
+      }
+
+      if (sec.classList.contains('v3')){
+        marcar(passos, [], i);
+        var z = [3.1, 1.75, 1][i];
+        byId('v3cam').style.transform = 'scale(' + z + ')';
+        /* DOM está de fora pra dentro (b3, b2, b1): reordeno pra raciocinar por bolha */
+        var ordem3 = [sec.querySelector('.b1'), sec.querySelector('.b2'), sec.querySelector('.b3')];
+        ordem3.forEach(function(g, k){
+          g.classList.toggle('viva', k === i);
+          if (g.hasAttribute('data-oculto')) g.setAttribute('data-oculto', k > i ? '1' : '0');
+        });
+      }
+
+      if (sec.classList.contains('v4')){
+        marcar(passos, [], i);
+        [byId('v4b1'), byId('v4b2'), byId('v4b3')].forEach(function(g, k){
+          g.classList.toggle('agora', k === i);
+          g.classList.toggle('furada', k < i);
+        });
+      }
+
+      if (sec.classList.contains('v7')){
+        var etapas = [].slice.call(sec.querySelectorAll('.etapa'));
+        var j = passoAtivo(etapas);
+        etapas.forEach(function(e, k){ e.classList.toggle('on', k === j); });
+        sec.style.setProperty('--p', ((j + 1) / etapas.length).toFixed(3));
+      }
+
+      if (sec.classList.contains('v9')){
+        var blocos = [].slice.call(sec.querySelectorAll('.bloco'));
+        var j2 = passoAtivo(blocos);
+        var zz = [1, 3.4, 9][j2];
+        byId('v9disco').style.transform = 'scale(' + zz + ')';
+        blocos.forEach(function(b, k){ b.classList.toggle('dentro', k >= 1 && k === j2); });
+      }
+
+      if (sec.classList.contains('v10')){
+        var visivel = sec.getBoundingClientRect().top < innerHeight * .7;
+        var b = byId('v10barra');
+        /* começa em terços (o que o autor imagina) e COLAPSA pro real quando entra em tela */
+        b.style.setProperty('--g1', visivel ? 99 : 34);
+        b.style.setProperty('--g2', visivel ? .7 : 33);
+        b.style.setProperty('--g3', visivel ? .3 : 33);
+        b.classList.toggle('colapsou', visivel);
+        ['v10l1','v10l2','v10l3'].forEach(function(id){ byId(id).classList.toggle('on', visivel); });
+      }
+    });
+  }
+  function byId(x){ return document.getElementById(x); }
+  function pedir(){ if (!pedido){ pedido = true; requestAnimationFrame(tick); } }
+  addEventListener('scroll', pedir, {passive:true});
+  addEventListener('resize', pedir);
+  tick();
+  window.__tick = tick;
+})();
+</script>
+</body></html>
