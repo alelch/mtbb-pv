@@ -547,10 +547,12 @@ html.js .onda.in i{transform:scaleY(1);
    Só transform muda por frame — nada de recalcular máscara.
    ============================================================ */
 @media(min-width:901px){footer{padding-bottom:calc(var(--eqh,132px) + 20px)}}
-.eqfix{position:fixed;left:0;right:0;bottom:0;height:var(--eqh,132px);z-index:35;pointer-events:none;overflow:hidden}
+.eqfix{position:fixed;left:0;right:0;bottom:0;height:var(--eqh,132px);z-index:35;pointer-events:none;overflow:hidden;
+  opacity:0;transition:opacity .5s ease}
 .eqfix .bars{position:absolute;inset:0}
-.eqfix .bars i{position:absolute;bottom:0;background:var(--accent);border-radius:5px 5px 0 0;
-  transform-origin:bottom center;transform:scaleY(calc(.14 + .86*var(--amp)));transition:transform .12s linear}
+.eqfix .bars i{position:absolute;bottom:0;background:var(--accent);opacity:.7;border-radius:5px 5px 0 0;
+  transform-origin:bottom center;
+  transform:scaleY(calc(.10 + .90*var(--amp)));transition:transform .12s linear}
 /* cópia do conteúdo, em branco, recortada nas barras */
 .eqfix .eco{position:absolute;left:0;top:0;width:100%;will-change:transform}
 .eqfix .eco *{color:#fff!important;background:transparent!important;border-color:transparent!important;
@@ -1250,11 +1252,18 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   var esp = document.querySelector('.espinha');
   var barras = esp ? esp.querySelectorAll('b') : [];
   var marca = esp ? esp.querySelector('.marca') : null;
+  var seccaoMetodo = document.getElementById('metodo');
   function volume(){
     pedido = false;
-    var alc = (document.body.scrollHeight - innerHeight) || 1;
-    var p = Math.min(Math.max(scrollY / alc, 0), 1);
+    /* A faixa NÃO existe nas duas primeiras seções: o começo da página é o
+       silêncio, e o som só liga junto com o método. Por isso o volume conta
+       a partir do #metodo, não do topo. */
+    var inicio = seccaoMetodo ? seccaoMetodo.offsetTop - innerHeight * 0.55 : 0;
+    var fim = (document.body.scrollHeight - innerHeight) || 1;
+    var p = Math.min(Math.max((scrollY - inicio) / Math.max(1, fim - inicio), 0), 1);
     raiz.style.setProperty('--amp', p.toFixed(3));
+    var faixaEq = document.querySelector('.eqfix');
+    if (faixaEq) faixaEq.style.opacity = p <= 0 ? '0' : String(Math.min(p * 6, 1).toFixed(2));
     if (!barras.length) return;
     /* acende as barras já percorridas e move o marcador */
     var ate = Math.round(p * barras.length);
@@ -1363,8 +1372,16 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   (function(){
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var N = 34, GAP = 0.7, BW = (100 - (N-1)*GAP) / N;
+    /* envelope curvo: sobe na esquerda e desce até a direita.
+       cos^1.7 dá a curva (rampa reta ficava mecânica); o seno por cima
+       devolve a textura de equalizador pra não virar um triângulo. */
     var alturas = [];
-    for (var i = 0; i < N; i++) alturas.push(26 + Math.round(Math.abs(Math.sin(i*1.7))*72));
+    for (var i = 0; i < N; i++){
+      var t = i / (N - 1);
+      var env = Math.pow(Math.cos(t * Math.PI / 2), 1.7);
+      var tex = 0.72 + 0.28 * Math.abs(Math.sin(i * 1.9));
+      alturas.push(Math.max(6, Math.round(env * tex * 100)));
+    }
 
     var faixa = document.createElement('div');
     faixa.className = 'eqfix'; faixa.setAttribute('aria-hidden','true');
