@@ -478,30 +478,17 @@ html.js .onda.in i{transform:scaleY(1);
 
 /* ============================================================
    EQUALIZADOR FIXO NO RODAPÉ
-   Barras coladas na base da janela, sempre visíveis, crescendo
-   conforme a página desce. O conteúdo passa POR CIMA delas e o texto
-   que cai na faixa inverte de cor.
-   A inversão usa um clone do conteúdo, deslocado pelo scroll e
-   recortado no formato das barras. mix-blend-mode não serve: difference
-   sobre o coral daria azul, cor fora da paleta.
-   Só transform muda por frame — nada de recalcular máscara.
+   Barras coladas na base da janela, crescendo conforme a página desce.
+   A 50% de opacidade o texto passa por cima e continua legível sem
+   precisar de truque nenhum.
    ============================================================ */
-@media(min-width:901px){footer{padding-bottom:calc(var(--eqh,172px) + 20px)}}
-.eqfix{position:fixed;left:0;right:0;bottom:0;height:var(--eqh,172px);z-index:35;pointer-events:none;overflow:hidden;
+@media(min-width:901px){footer{padding-bottom:calc(var(--eqh,238px) + 20px)}}
+.eqfix{position:fixed;left:0;right:0;bottom:0;height:var(--eqh,238px);z-index:35;pointer-events:none;overflow:hidden;
   opacity:0;transition:opacity .5s ease}
 .eqfix .bars{position:absolute;inset:0}
-.eqfix .bars i{position:absolute;bottom:0;background:var(--accent);opacity:.7;border-radius:5px 5px 0 0;
+.eqfix .bars i{position:absolute;bottom:0;background:var(--accent);opacity:.5;border-radius:5px 5px 0 0;
   transform-origin:bottom center;
-  transform:scaleY(calc(.14 + .86*var(--amp)));transition:transform .12s linear}
-/* cópia do conteúdo, em branco, recortada nas barras */
-.eqfix .eco{position:absolute;left:0;top:0;width:100%;will-change:transform}
-.eqfix .eco *{color:#fff!important;background:transparent!important;border-color:transparent!important;
-  box-shadow:none!important;opacity:1!important;transform:none!important;visibility:visible!important}
-.eqfix .eco img,.eqfix .eco svg,.eqfix .eco iframe,.eqfix .eco vturb-smartplayer,
-.eqfix .eco .marquee,.eqfix .eco .player,.eqfix .eco .onda{display:none!important}
-/* No celular a faixa disputa os mesmos ~100px com a barra fixa de compra,
-   e o texto invertido vira respingo branco no vão entre as duas. Entre um
-   efeito e um CTA, fica o CTA. Desktop only. */
+  transform:scaleY(calc(.12 + .88*var(--amp)));transition:transform .12s linear}
 @media(max-width:900px){.eqfix{display:none}}
 @media(prefers-reduced-motion:reduce){.eqfix .bars i{transition:none}}
 
@@ -1281,10 +1268,10 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 
 
 
-  /* ---- equalizador fixo no rodapé, com o texto invertendo em cima ----
-     A faixa é fixa; quem se move é o CLONE do conteúdo, deslocado pelo
-     scroll. Assim a letra branca cai exatamente sobre a letra escura.
-     Um transform por frame, nada de recalcular máscara. */
+  /* ---- equalizador fixo no rodapé ----
+     Barras coladas na base da janela, crescendo com o scroll. A inversão do
+     texto por cima foi testada e descartada: não deu certo visualmente e
+     custava um clone do conteúdo inteiro no DOM. Sem ela a faixa fica leve. */
   (function(){
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var N = 34, GAP = 0.7, BW = (100 - (N-1)*GAP) / N;
@@ -1297,8 +1284,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     var alturas = [];
     for (var i = 0; i < N; i++){
       var t = i / (N - 1);
-      var env = 0.04 + 0.96 * Math.pow(t, 1.6);
-      var tex = 0.58 + 0.42 * ruidinho(i);
+      var env = 0.03 + 0.97 * Math.pow(t, 1.5);
+      var tex = 0.62 + 0.38 * ruidinho(i);
       var h = env * tex * 100;
       if (i === N - 1) h = 100;
       alturas.push(Math.max(4, Math.round(h)));
@@ -1307,56 +1294,17 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     var faixa = document.createElement('div');
     faixa.className = 'eqfix'; faixa.setAttribute('aria-hidden','true');
     var bars = document.createElement('div'); bars.className = 'bars';
-    var imgs = [], sizes = [], poss = [];
     for (var k = 0; k < N; k++){
       var left = k * (BW + GAP);
       bars.insertAdjacentHTML('beforeend',
         '<i style="left:'+left.toFixed(3)+'%;width:'+BW.toFixed(3)+'%;height:'+alturas[k]+'%"></i>');
-      imgs.push('linear-gradient(#000,#000)');
-      sizes.push(BW.toFixed(3)+'% '+alturas[k]+'%');
-      poss.push((left/(100-BW)*100).toFixed(3)+'% 100%');
     }
     faixa.appendChild(bars);
-
-    /* clone do conteúdo: só texto, sem mídia nem elementos fixos */
-    var eco = document.createElement('div'); eco.className = 'eco';
-    Array.prototype.forEach.call(document.body.children, function(n){
-      if (n.classList && (n.classList.contains('sticky') ||
-           n.classList.contains('eqfix'))) return;
-      if (n.tagName === 'SCRIPT') return;
-      var c = n.cloneNode(true);
-      c.querySelectorAll('[id]').forEach(function(x){ x.removeAttribute('id'); });
-      /* tira mídia DE VERDADE: display:none não impede o download, e o clone
-         estava puxando 42 imagens repetidas. Só interessa o texto. */
-      c.querySelectorAll('img,svg,picture,video,iframe,vturb-smartplayer,.marquee,.player,.onda,.eqbars')
-       .forEach(function(x){ x.remove(); });
-      eco.appendChild(c);
-    });
-    var st = eco.style;
-    st.webkitMaskImage = st.maskImage = imgs.join(',');
-    st.webkitMaskSize  = st.maskSize  = sizes.join(',');
-    st.webkitMaskPosition = st.maskPosition = poss.join(',');
-    st.webkitMaskRepeat = st.maskRepeat = 'no-repeat';
-    faixa.appendChild(eco);
     document.body.appendChild(faixa);
 
-    /* alinha o clone com o conteúdo real: o topo da faixa está em
-       scrollY + innerHeight - altura da faixa */
-    var alt = 0;
-    function medir(){ alt = faixa.getBoundingClientRect().height; }
-    function alinhar(){ eco.style.transform = 'translate3d(0,' + (-(scrollY + innerHeight - alt)) + 'px,0)'; }
-    medir(); alinhar();
-    addEventListener('resize', function(){ medir(); alinhar(); });
-    var pend = false;
-    addEventListener('scroll', function(){
-      if (pend) return; pend = true;
-      requestAnimationFrame(function(){ pend = false; alinhar(); });
-    }, {passive:true});
-
-    /* a barra fixa do celular fica acima da faixa pra não brigar */
     /* só sobe a barra de compra onde a faixa realmente existe */
     var sticky = document.getElementById('sticky');
-    if (sticky && innerWidth > 900) sticky.style.bottom = 'calc(var(--eqh,172px) - 6px)';
+    if (sticky && innerWidth > 900) sticky.style.bottom = 'calc(var(--eqh,238px) - 6px)';
   })();
 
   /* ---- FAQ: um aberto por vez ---- */
