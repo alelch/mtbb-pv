@@ -496,6 +496,44 @@ html.js .onda.in i{transform:scaleY(1);
 }
 @media(max-width:700px){.trilha{gap:3px}.trilha i{width:3px}}
 
+
+/* ============================================================
+   A ESPINHA
+   UMA peça só, fixa na lateral, presente do começo ao fim.
+   Ela é a página inteira vista de lado: cada barra é um trecho,
+   e o comprimento cresce de cima pra baixo — o som subindo.
+   As barras que você já passou ficam acesas; as de baixo, apagadas.
+   Divisor espalhado não passava a ideia: seis enfeites, não um som.
+   ============================================================ */
+.espinha{
+  position:fixed;left:0;top:0;bottom:0;width:52px;z-index:40;pointer-events:none;
+  display:flex;flex-direction:column;justify-content:space-between;   /* ocupa a ALTURA TODA */
+  padding:16px 0 16px 8px
+}
+.espinha b{
+  display:block;height:2px;border-radius:99px;background:var(--accent);
+  width:calc(5px + var(--w) * 32px);
+  opacity:.14;transform-origin:left center;
+  transition:opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1)
+}
+.espinha b.on{opacity:.9;transform:scaleX(1.1)}
+.espinha .marca{
+  position:absolute;left:0;width:3px;height:22px;border-radius:99px;background:var(--accent);
+  transition:top .16s linear
+}
+/* no celular vira um fio de 14px: some do caminho da leitura mas o conceito continua */
+@media(max-width:1180px){
+  .espinha{width:14px;padding:12px 0 12px 4px}
+  .espinha b{width:calc(3px + var(--w) * 8px);height:2px}
+  .espinha .rot{display:none}
+}
+.espinha .rot{
+  position:absolute;left:10px;bottom:26px;transform-origin:left bottom;transform:rotate(-90deg);
+  font-family:'Space Grotesk',sans-serif;font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--mute);white-space:nowrap;opacity:.7
+}
+@media(prefers-reduced-motion:reduce){.espinha b{transition:none}}
+
 /* ---------- listas ---------- */
 .checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
 .checks li{position:relative;padding-left:30px;line-height:1.55}
@@ -710,6 +748,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   </div>
 </div>
 
+<div class="espinha" aria-hidden="true"><span class="marca" style="top:0"></span><span class="rot">o som do seu livro</span><b style="--w:0.042"></b><b style="--w:0.041"></b><b style="--w:0.063"></b><b style="--w:0.050"></b><b style="--w:0.078"></b><b style="--w:0.080"></b><b style="--w:0.072"></b><b style="--w:0.110"></b><b style="--w:0.089"></b><b style="--w:0.130"></b><b style="--w:0.111"></b><b style="--w:0.124"></b><b style="--w:0.169"></b><b style="--w:0.228"></b><b style="--w:0.162"></b><b style="--w:0.187"></b><b style="--w:0.256"></b><b style="--w:0.321"></b><b style="--w:0.283"></b><b style="--w:0.271"></b><b style="--w:0.390"></b><b style="--w:0.238"></b><b style="--w:0.412"></b><b style="--w:0.316"></b><b style="--w:0.300"></b><b style="--w:0.309"></b><b style="--w:0.370"></b><b style="--w:0.515"></b><b style="--w:0.370"></b><b style="--w:0.497"></b><b style="--w:0.534"></b><b style="--w:0.477"></b><b style="--w:0.550"></b><b style="--w:0.415"></b><b style="--w:0.430"></b><b style="--w:0.496"></b><b style="--w:0.685"></b><b style="--w:0.614"></b><b style="--w:0.591"></b><b style="--w:0.719"></b><b style="--w:0.688"></b><b style="--w:0.645"></b><b style="--w:0.881"></b><b style="--w:0.865"></b></div>
+
 <!-- ============ HERO ============ -->
 <header class="hero" data-etapa="1">
   <div class="wrap">
@@ -815,8 +855,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   </div>
 </section>
 
-<div class="trilha q" style="--nv:0.26" aria-hidden="true"><i style="--h:0.10"></i><i style="--h:0.10"></i><i style="--h:0.26"></i><i style="--h:0.30"></i><i style="--h:0.36"></i><i style="--h:0.30"></i><i style="--h:0.37"></i><i style="--h:0.60"></i><i style="--h:0.61"></i><i style="--h:0.36"></i><i style="--h:0.38"></i><i style="--h:0.29"></i><i style="--h:0.69"></i><i style="--h:0.29"></i><i style="--h:0.70"></i><i style="--h:0.89"></i><i style="--h:0.84"></i><i style="--h:0.54"></i><i style="--h:0.84"></i><i style="--h:0.39"></i><i style="--h:0.83"></i><i style="--h:0.43"></i><i style="--h:0.78"></i><i style="--h:0.32"></i><i style="--h:0.65"></i><i style="--h:0.94"></i><i style="--h:0.44"></i><i style="--h:0.36"></i><i style="--h:0.57"></i><i style="--h:0.29"></i><i style="--h:0.33"></i><i style="--h:0.68"></i><i style="--h:0.86"></i><i style="--h:0.83"></i><i style="--h:0.70"></i><i style="--h:0.47"></i><i style="--h:0.63"></i><i style="--h:0.57"></i><i style="--h:0.55"></i><i style="--h:0.38"></i><i style="--h:0.45"></i><i style="--h:0.26"></i><i style="--h:0.21"></i><i style="--h:0.15"></i><i style="--h:0.14"></i><i style="--h:0.10"></i></div>
-
 <!-- ============ PARA QUEM É ============ -->
 <section data-etapa="3">
   <div class="wrap narrow rv">
@@ -831,8 +869,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     </ul>
   </div>
 </section>
-
-<div class="trilha q" style="--nv:0.40" aria-hidden="true"><i style="--h:0.10"></i><i style="--h:0.23"></i><i style="--h:0.23"></i><i style="--h:0.25"></i><i style="--h:0.47"></i><i style="--h:0.50"></i><i style="--h:0.20"></i><i style="--h:0.35"></i><i style="--h:0.55"></i><i style="--h:0.44"></i><i style="--h:0.76"></i><i style="--h:0.66"></i><i style="--h:0.80"></i><i style="--h:0.68"></i><i style="--h:0.39"></i><i style="--h:0.31"></i><i style="--h:0.55"></i><i style="--h:0.40"></i><i style="--h:0.67"></i><i style="--h:0.82"></i><i style="--h:0.69"></i><i style="--h:0.79"></i><i style="--h:0.39"></i><i style="--h:0.99"></i><i style="--h:0.99"></i><i style="--h:0.51"></i><i style="--h:0.76"></i><i style="--h:0.76"></i><i style="--h:0.71"></i><i style="--h:0.47"></i><i style="--h:0.52"></i><i style="--h:0.49"></i><i style="--h:0.45"></i><i style="--h:0.77"></i><i style="--h:0.64"></i><i style="--h:0.58"></i><i style="--h:0.22"></i><i style="--h:0.27"></i><i style="--h:0.42"></i><i style="--h:0.49"></i><i style="--h:0.32"></i><i style="--h:0.42"></i><i style="--h:0.17"></i><i style="--h:0.28"></i><i style="--h:0.24"></i><i style="--h:0.12"></i></div>
 
 <!-- ============ O QUE VOCÊ CONSTRÓI ============ -->
 <section class="white">
@@ -863,8 +899,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   </div>
 </section>
 
-<div class="trilha" style="--nv:0.56" aria-hidden="true"><i style="--h:0.10"></i><i style="--h:0.10"></i><i style="--h:0.18"></i><i style="--h:0.24"></i><i style="--h:0.15"></i><i style="--h:0.28"></i><i style="--h:0.58"></i><i style="--h:0.39"></i><i style="--h:0.58"></i><i style="--h:0.32"></i><i style="--h:0.32"></i><i style="--h:0.29"></i><i style="--h:0.47"></i><i style="--h:0.78"></i><i style="--h:0.73"></i><i style="--h:0.38"></i><i style="--h:0.53"></i><i style="--h:0.43"></i><i style="--h:0.57"></i><i style="--h:0.62"></i><i style="--h:0.90"></i><i style="--h:0.34"></i><i style="--h:0.72"></i><i style="--h:0.57"></i><i style="--h:0.76"></i><i style="--h:0.89"></i><i style="--h:0.47"></i><i style="--h:0.61"></i><i style="--h:0.92"></i><i style="--h:0.70"></i><i style="--h:0.59"></i><i style="--h:0.47"></i><i style="--h:0.62"></i><i style="--h:0.64"></i><i style="--h:0.52"></i><i style="--h:0.37"></i><i style="--h:0.42"></i><i style="--h:0.27"></i><i style="--h:0.35"></i><i style="--h:0.48"></i><i style="--h:0.51"></i><i style="--h:0.27"></i><i style="--h:0.23"></i><i style="--h:0.26"></i><i style="--h:0.23"></i><i style="--h:0.10"></i></div>
-
 <!-- ============ O QUE VOCÊ LEVA ============ -->
 <section class="deliver" data-etapa="4">
   <div class="wrap narrow">
@@ -889,8 +923,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 <section class="cut" data-etapa="5">
   <div class="wrap"><p class="rv">Vender algumas cópias qualquer um consegue. Difícil é fazer o livro <i>continuar vendendo</i> depois do lançamento.</p></div>
 </section>
-
-<div class="trilha" style="--nv:0.72" aria-hidden="true"><i style="--h:0.13"></i><i style="--h:0.10"></i><i style="--h:0.30"></i><i style="--h:0.17"></i><i style="--h:0.32"></i><i style="--h:0.24"></i><i style="--h:0.49"></i><i style="--h:0.27"></i><i style="--h:0.46"></i><i style="--h:0.29"></i><i style="--h:0.36"></i><i style="--h:0.44"></i><i style="--h:0.55"></i><i style="--h:0.53"></i><i style="--h:0.79"></i><i style="--h:0.38"></i><i style="--h:0.69"></i><i style="--h:0.30"></i><i style="--h:0.62"></i><i style="--h:0.64"></i><i style="--h:0.87"></i><i style="--h:0.52"></i><i style="--h:0.47"></i><i style="--h:0.33"></i><i style="--h:0.82"></i><i style="--h:0.89"></i><i style="--h:0.48"></i><i style="--h:0.63"></i><i style="--h:0.61"></i><i style="--h:0.49"></i><i style="--h:0.84"></i><i style="--h:0.57"></i><i style="--h:0.45"></i><i style="--h:0.66"></i><i style="--h:0.67"></i><i style="--h:0.65"></i><i style="--h:0.66"></i><i style="--h:0.23"></i><i style="--h:0.38"></i><i style="--h:0.23"></i><i style="--h:0.32"></i><i style="--h:0.34"></i><i style="--h:0.42"></i><i style="--h:0.30"></i><i style="--h:0.17"></i><i style="--h:0.10"></i></div>
 
 <!-- ============ CASOS ============
      ⚠️ PENDENTE DE VALIDAÇÃO DA DANY: números e citação nominal.
@@ -972,8 +1004,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   </div>
 </section>
 
-<div class="trilha" style="--nv:0.86" aria-hidden="true"><i style="--h:0.11"></i><i style="--h:0.23"></i><i style="--h:0.25"></i><i style="--h:0.13"></i><i style="--h:0.41"></i><i style="--h:0.44"></i><i style="--h:0.47"></i><i style="--h:0.45"></i><i style="--h:0.68"></i><i style="--h:0.62"></i><i style="--h:0.57"></i><i style="--h:0.33"></i><i style="--h:0.42"></i><i style="--h:0.81"></i><i style="--h:0.51"></i><i style="--h:0.41"></i><i style="--h:0.68"></i><i style="--h:0.44"></i><i style="--h:0.73"></i><i style="--h:0.42"></i><i style="--h:0.40"></i><i style="--h:0.45"></i><i style="--h:0.68"></i><i style="--h:0.94"></i><i style="--h:0.32"></i><i style="--h:0.92"></i><i style="--h:0.36"></i><i style="--h:0.68"></i><i style="--h:0.77"></i><i style="--h:0.49"></i><i style="--h:0.33"></i><i style="--h:0.87"></i><i style="--h:0.81"></i><i style="--h:0.39"></i><i style="--h:0.38"></i><i style="--h:0.44"></i><i style="--h:0.23"></i><i style="--h:0.50"></i><i style="--h:0.63"></i><i style="--h:0.45"></i><i style="--h:0.47"></i><i style="--h:0.32"></i><i style="--h:0.13"></i><i style="--h:0.31"></i><i style="--h:0.14"></i><i style="--h:0.10"></i></div>
-
 <!-- ============ DANY ============ -->
 <section class="dany" data-etapa="5">
   <div class="dany-foto" role="img" aria-label="Dany Sakugawa"></div>
@@ -1026,8 +1056,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     </div>
   </div>
 </section>
-
-<div class="trilha" style="--nv:1.00" aria-hidden="true"><i style="--h:0.10"></i><i style="--h:0.16"></i><i style="--h:0.13"></i><i style="--h:0.33"></i><i style="--h:0.47"></i><i style="--h:0.20"></i><i style="--h:0.22"></i><i style="--h:0.20"></i><i style="--h:0.42"></i><i style="--h:0.47"></i><i style="--h:0.62"></i><i style="--h:0.75"></i><i style="--h:0.41"></i><i style="--h:0.79"></i><i style="--h:0.74"></i><i style="--h:0.43"></i><i style="--h:0.72"></i><i style="--h:0.80"></i><i style="--h:0.59"></i><i style="--h:0.71"></i><i style="--h:0.50"></i><i style="--h:0.99"></i><i style="--h:0.33"></i><i style="--h:0.68"></i><i style="--h:0.85"></i><i style="--h:0.96"></i><i style="--h:0.38"></i><i style="--h:0.88"></i><i style="--h:0.79"></i><i style="--h:0.32"></i><i style="--h:0.54"></i><i style="--h:0.31"></i><i style="--h:0.47"></i><i style="--h:0.84"></i><i style="--h:0.56"></i><i style="--h:0.43"></i><i style="--h:0.72"></i><i style="--h:0.70"></i><i style="--h:0.30"></i><i style="--h:0.46"></i><i style="--h:0.43"></i><i style="--h:0.46"></i><i style="--h:0.14"></i><i style="--h:0.29"></i><i style="--h:0.13"></i><i style="--h:0.10"></i></div>
 
 <!-- ============ OFERTA ============ -->
 <section class="offer" id="oferta" data-etapa="5">
@@ -1190,11 +1218,25 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
      Uma variável CSS só, atualizada em rAF. Todas as barras leem dela,
      então é um write por frame em vez de um por elemento. */
   var raiz = document.documentElement, pedido = false;
+  var esp = document.querySelector('.espinha');
+  var barras = esp ? esp.querySelectorAll('b') : [];
+  var marca = esp ? esp.querySelector('.marca') : null;
   function volume(){
     pedido = false;
     var alc = (document.body.scrollHeight - innerHeight) || 1;
     var p = Math.min(Math.max(scrollY / alc, 0), 1);
     raiz.style.setProperty('--amp', p.toFixed(3));
+    if (!barras.length) return;
+    /* acende as barras já percorridas e move o marcador */
+    var ate = Math.round(p * barras.length);
+    for (var i = 0; i < barras.length; i++){
+      var acesa = i < ate;
+      if (barras[i]._on !== acesa){ barras[i].classList.toggle('on', acesa); barras[i]._on = acesa; }
+    }
+    if (marca){
+      var r = esp.getBoundingClientRect();
+      marca.style.top = (16 + p * (r.height - 32 - 22)) + 'px';
+    }
   }
   function pedirVolume(){ if (!pedido){ pedido = true; requestAnimationFrame(volume); } }
   addEventListener('scroll', pedirVolume, {passive:true});
