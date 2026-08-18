@@ -430,6 +430,46 @@ p{margin:0 0 1.05em}
 /* OFERTA: o preço é o maior número da página */
 .offer-box .price .val{font-size:clamp(4rem,12vw,6.4rem)}
 
+
+/* ============================================================
+   CONCEITO 01 · A PÁGINA SAI DA INVISIBILIDADE
+   O laranja não muda de cor: ele muda de PRESENÇA. Cada seção
+   mistura o MESMO #FC783C com cinza, de 15% no topo a 100% no fim.
+   Assim a página atravessa a promessa em vez de descrevê-la.
+   O botão de compra é exceção: laranja cheio desde o primeiro pixel.
+   ============================================================ */
+:root{ --ac:var(--accent) }                      /* fallback: sem color-mix, tudo cheio */
+@supports (color: color-mix(in oklab, red, blue)){
+  [data-etapa="1"]{--ac:color-mix(in oklab, var(--accent) 15%, #A8A5A0)}
+  [data-etapa="2"]{--ac:color-mix(in oklab, var(--accent) 38%, #A8A5A0)}
+  [data-etapa="3"]{--ac:color-mix(in oklab, var(--accent) 62%, #A8A5A0)}
+  [data-etapa="4"]{--ac:color-mix(in oklab, var(--accent) 82%, #A8A5A0)}
+  [data-etapa="5"]{--ac:var(--accent)}
+}
+[data-etapa] .eyebrow{color:var(--ac)}
+[data-etapa] h1 em,[data-etapa] .big i{color:var(--ac)}
+[data-etapa] .checks li:before{background:var(--ac)}
+[data-etapa] .checks li:after{border-color:var(--ac)}
+[data-etapa] .card li:before{background:var(--ac)}
+[data-etapa] .kicker{border-left-color:var(--ac)}
+/* o CTA nunca desbota */
+.btn{background:var(--accent)!important}
+
+/* ============================================================
+   CONCEITO 05 · O SILÊNCIO E O BARULHO
+   A onda sobe, cai e vira pontinho: é o livro que faz uma semana
+   de barulho e some. Depois ela reaparece sustentada, com os Atos.
+   ============================================================ */
+.onda{display:flex;align-items:center;gap:4px;height:76px;margin:0 0 30px}
+.onda i{width:5px;border-radius:99px;background:var(--ac);flex:0 0 auto;
+  transform-origin:center;transform:scaleY(.12)}
+html.js .onda.in i{transform:scaleY(1);
+  transition:transform .7s cubic-bezier(.34,1.4,.64,1) calc(var(--k,0)*34ms)}
+.onda.viva i{background:var(--accent)}
+.onda-leg{display:flex;justify-content:space-between;font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--mute);font-weight:700;margin-top:-18px;margin-bottom:28px;max-width:520px}
+@media(prefers-reduced-motion:reduce){.onda i{transform:none!important}}
+
 /* ---------- listas ---------- */
 .checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
 .checks li{position:relative;padding-left:30px;line-height:1.55}
@@ -645,7 +685,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </div>
 
 <!-- ============ HERO ============ -->
-<header class="hero">
+<header class="hero" data-etapa="1">
   <div class="wrap">
     <img class="hero-logo" src="assets/logo-90d.png" alt="Lançamento 90D" width="490" height="125">
     <h1 data-ab-el="headline">Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
@@ -671,7 +711,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   </div>
 </header>
 
-<div class="press">
+<div class="press" data-etapa="1">
   <div class="wrap">
     <p>Como visto em</p>
     <div class="press-row">
@@ -688,18 +728,20 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </div>
 
 <!-- ============ AGITAÇÃO ============ -->
-<section class="agit">
+<section class="agit" data-etapa="1">
   <div class="wrap rv">
     <p class="eyebrow">O ponto de virada</p>
     <p class="big">Você pode passar <i>anos</i> escrevendo um livro.<br>Mas é o lançamento que define se ele será lido, ou <i>esquecido</i>.</p>
     <p class="lead">São cerca de dois mil lançamentos por mês no Brasil. Quase todos seguem o mesmo roteiro: o livro sai, faz uma semana de barulho entre amigos e família, e some em quinze dias.</p>
+    <div class="onda rv"><i style="height:28%;--k:0"></i><i style="height:55%;--k:1"></i><i style="height:85%;--k:2"></i><i style="height:100%;--k:3"></i><i style="height:85%;--k:4"></i><i style="height:55%;--k:5"></i><i style="height:28%;--k:6"></i><i style="height:14%;--k:7"></i><i style="height:9%;--k:8"></i><i style="height:8%;--k:9"></i><i style="height:5%;--k:10"></i><i style="height:5%;--k:11"></i><i style="height:5%;--k:12"></i><i style="height:5%;--k:13"></i><i style="height:5%;--k:14"></i><i style="height:5%;--k:15"></i><i style="height:5%;--k:16"></i><i style="height:5%;--k:17"></i><i style="height:5%;--k:18"></i><i style="height:5%;--k:19"></i><i style="height:5%;--k:20"></i><i style="height:5%;--k:21"></i><i style="height:5%;--k:22"></i><i style="height:5%;--k:23"></i><i style="height:5%;--k:24"></i><i style="height:5%;--k:25"></i><i style="height:5%;--k:26"></i><i style="height:5%;--k:27"></i><i style="height:5%;--k:28"></i><i style="height:5%;--k:29"></i></div>
+    <div class="onda-leg"><span>semana do lançamento</span><span>onze meses depois</span></div>
     <p class="lead">Uma semana de barulho. Onze meses de silêncio.</p>
     <p class="kicker">É exatamente nessa hora que a maioria dos autores improvisa.</p>
   </div>
 </section>
 
 <!-- ============ O SISTEMA DOS TRÊS ATOS ============ -->
-<section class="white" id="metodo">
+<section class="white" id="metodo" data-etapa="2">
   <div class="wrap">
     <div class="narrow rv" style="margin:0 auto;text-align:center">
       <p class="eyebrow">O método</p>
@@ -737,6 +779,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
         </div>
       </div>
 
+      <div class="onda viva rv"><i style="height:26%;--k:0"></i><i style="height:51%;--k:1"></i><i style="height:79%;--k:2"></i><i style="height:92%;--k:3"></i><i style="height:79%;--k:4"></i><i style="height:51%;--k:5"></i><i style="height:26%;--k:6"></i><i style="height:13%;--k:7"></i><i style="height:48%;--k:8"></i><i style="height:51%;--k:9"></i><i style="height:41%;--k:10"></i><i style="height:25%;--k:11"></i><i style="height:16%;--k:12"></i><i style="height:20%;--k:13"></i><i style="height:34%;--k:14"></i><i style="height:48%;--k:15"></i><i style="height:51%;--k:16"></i><i style="height:41%;--k:17"></i><i style="height:25%;--k:18"></i><i style="height:16%;--k:19"></i><i style="height:20%;--k:20"></i><i style="height:34%;--k:21"></i><i style="height:48%;--k:22"></i><i style="height:51%;--k:23"></i><i style="height:40%;--k:24"></i><i style="height:25%;--k:25"></i><i style="height:16%;--k:26"></i><i style="height:20%;--k:27"></i><i style="height:35%;--k:28"></i><i style="height:48%;--k:29"></i></div>
+      <div class="onda-leg"><span>dia 0</span><span>e continua</span></div>
       <div class="arc-label">
         <b>De invisível a lido. Em noventa dias.</b>
         <span>E depois de novo, a cada ciclo, com os três atos já em movimento.</span>
@@ -746,7 +790,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ PARA QUEM É ============ -->
-<section>
+<section data-etapa="3">
   <div class="wrap narrow rv">
     <p class="eyebrow">Para quem é</p>
     <h2>Esse plano é seu se</h2>
@@ -790,7 +834,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ O QUE VOCÊ LEVA ============ -->
-<section class="deliver">
+<section class="deliver" data-etapa="4">
   <div class="wrap narrow">
     <div class="box rv">
       <p class="eyebrow">O que você leva</p>
@@ -810,7 +854,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ CORTE ============ -->
-<section class="cut">
+<section class="cut" data-etapa="5">
   <div class="wrap"><p class="rv">Vender algumas cópias qualquer um consegue. Difícil é fazer o livro <i>continuar vendendo</i> depois do lançamento.</p></div>
 </section>
 
@@ -819,7 +863,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
      Texto espelha o beat 6 do roteiro v4 da VSL, para manter congruência
      entre anúncio, vídeo e página. Se um caso não puder ser citado, tirar o
      card inteiro em vez de trocar o número. -->
-<section>
+<section data-etapa="4">
   <div class="wrap">
     <div class="narrow rv">
       <p class="eyebrow">Três pontos de partida</p>
@@ -895,7 +939,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ DANY ============ -->
-<section class="dany">
+<section class="dany" data-etapa="5">
   <div class="dany-foto" role="img" aria-label="Dany Sakugawa"></div>
   <div class="wrap">
     <div class="txt rv">
@@ -948,7 +992,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ OFERTA ============ -->
-<section class="offer" id="oferta">
+<section class="offer" id="oferta" data-etapa="5">
   <div class="wrap">
     <div class="narrow rv" style="text-align:center;margin:0 auto">
       <p class="eyebrow">Inscrição</p>
@@ -981,7 +1025,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ FAQ ============ -->
-<section>
+<section data-etapa="4">
   <div class="wrap narrow rv">
     <p class="eyebrow">Perguntas</p>
     <h2>Antes de decidir</h2>
@@ -999,7 +1043,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </section>
 
 <!-- ============ FECHO ============ -->
-<section class="final">
+<section class="final" data-etapa="5">
   <div class="wrap">
     <div class="rv">
       <h2>Você só lança esse livro uma vez.</h2>
@@ -1120,7 +1164,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
      Só liga a animação se o navegador provar que consegue revelar de volta.
      Rede de segurança em 4s: nenhuma seção pode sumir por causa de animação.
      ============================================================ */
-  var alvos = document.querySelectorAll('.rv, .reg, [data-stg]');
+  var alvos = document.querySelectorAll('.rv, .reg, .onda, [data-stg]');
 
   if ('IntersectionObserver' in window) {
     document.documentElement.classList.add('js');
