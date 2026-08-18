@@ -249,6 +249,9 @@ p{margin:0 0 1.05em}
 }
 
 
+.vsl-aviso{max-width:392px;margin:10px auto 0;font-size:.72rem;letter-spacing:.04em;
+  color:var(--mute);text-align:center;border:1px dashed var(--line);border-radius:8px;padding:6px 10px}
+
 /* ---------- logo (arquivo oficial: coral #FC783C + escuro #303030) ---------- */
 .mark-img{height:21px;width:auto;display:block}
 .mark-img.foot{height:19px;opacity:.85}
@@ -285,7 +288,8 @@ p{margin:0 0 1.05em}
 .player{margin:30px auto 0;width:100%;max-width:392px;border-radius:16px;overflow:hidden;
   background:#303030;box-shadow:0 26px 54px -28px rgba(0,0,0,.72)}
 .player .slot{aspect-ratio:9/16;display:flex;align-items:center;justify-content:center}
-.player vturb-smartplayer{display:block;width:100%}
+.player vturb-smartplayer{display:block;width:100%;height:100%}
+.player .slot>*{width:100%;height:100%}
 .stats{text-align:left}
 .player .ph{text-align:center;padding:26px;color:#8A8A8A;font-size:.9rem;max-width:44ch}
 .player .ph b{display:block;color:#D8D8D8;font-family:'Space Grotesk',sans-serif;font-size:1.05rem;margin-bottom:8px}
@@ -934,11 +938,34 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   var CHECKOUT = 'https://pay.hotmart.com/SUBSTITUIR?off=SUBSTITUIR&checkoutMode=10';
 
   /* Embed da VSL do VTurb. Vazio = a página esconde o player e não fica buraco. */
-  var VSL_EMBED = '';
+  /* ============================================================
+     ⚠️ TEMPORÁRIO — VSL DE TEMPLATE, SÓ PRA VER O LAYOUT
+     Este é o vídeo da IMERSÃO (outro produto: fala em evento ao vivo,
+     domingo, Zoom e R$29). Está aqui só pra avaliar a dobra com um player
+     de verdade em vez de um retângulo.
+     AO GRAVAR A VSL DO 90D: trocar PLAYER_SRC e PLAYER_ID pelos novos e
+     apagar este aviso. Deixar vazio volta ao placeholder.
+     ============================================================ */
+  var VSL = {
+    src: 'https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6a5f7822551c549be7ce3ea7/v4/player.js',
+    id:  'vid-6a5f7822551c549be7ce3ea7',
+    temporaria: true
+  };
 
   var vsl = document.getElementById('vsl'), slot = document.getElementById('vslSlot');
-  if (VSL_EMBED) { slot.innerHTML = VSL_EMBED; }
-  else if (!/[?&](preview|dev)=1/.test(location.search)) { vsl.style.display = 'none'; }
+  if (VSL && VSL.id && VSL.src) {
+    slot.innerHTML = '<vturb-smartplayer id="' + VSL.id + '" style="display:block;width:100%"></vturb-smartplayer>';
+    var pv = document.createElement('script'); pv.src = VSL.src; pv.async = true;
+    document.head.appendChild(pv);
+    if (VSL.temporaria) {
+      var av = document.createElement('div');
+      av.className = 'vsl-aviso';
+      av.textContent = 'Vídeo da Imersão, provisório, só para teste de layout';
+      vsl.insertAdjacentElement('afterend', av);
+    }
+  } else if (!/[?&](preview|dev)=1/.test(location.search)) {
+    vsl.style.display = 'none';
+  }
 
   /* ---- checkout com repasse de origem ---- */
   var PASS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id',
