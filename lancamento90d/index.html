@@ -470,6 +470,32 @@ html.js .onda.in i{transform:scaleY(1);
   text-transform:uppercase;color:var(--mute);font-weight:700;margin-top:-18px;margin-bottom:28px;max-width:520px}
 @media(prefers-reduced-motion:reduce){.onda i{transform:none!important}}
 
+
+/* ============================================================
+   A TRILHA DA PÁGINA
+   O som conta a história: pico alto no começo, silêncio, e a partir
+   do método ele volta baixinho e cresce até o fim.
+   Duas camadas somadas:
+     1. base por posição  (--nv)  → cada divisor nasce maior que o anterior
+     2. volume por scroll (--amp) → tudo cresce enquanto a pessoa desce
+   A cor vem do --ac da etapa, então som e cor crescem juntos.
+   ============================================================ */
+:root{ --amp:0 }
+.trilha{display:flex;align-items:center;justify-content:center;gap:4px;
+  padding:clamp(26px,4vw,44px) 0;overflow:hidden}
+.trilha i{
+  width:4px;border-radius:99px;background:var(--ac);flex:0 0 auto;height:52px;
+  transform-origin:center;
+  /* altura final = perfil da barra × nível do divisor × volume do scroll */
+  transform:scaleY(calc(var(--h) * var(--nv) * (.34 + .66 * var(--amp))));
+  transition:transform .18s linear
+}
+.trilha.q i{opacity:.55}
+@media(prefers-reduced-motion:reduce){
+  .trilha i{transform:scaleY(calc(var(--h) * var(--nv) * .8));transition:none}
+}
+@media(max-width:700px){.trilha{gap:3px}.trilha i{width:3px}}
+
 /* ---------- listas ---------- */
 .checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
 .checks li{position:relative;padding-left:30px;line-height:1.55}
@@ -789,6 +815,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   </div>
 </section>
 
+<div class="trilha q" style="--nv:0.26" aria-hidden="true"><i style="--h:0.10"></i><i style="--h:0.10"></i><i style="--h:0.26"></i><i style="--h:0.30"></i><i style="--h:0.36"></i><i style="--h:0.30"></i><i style="--h:0.37"></i><i style="--h:0.60"></i><i style="--h:0.61"></i><i style="--h:0.36"></i><i style="--h:0.38"></i><i style="--h:0.29"></i><i style="--h:0.69"></i><i style="--h:0.29"></i><i style="--h:0.70"></i><i style="--h:0.89"></i><i style="--h:0.84"></i><i style="--h:0.54"></i><i style="--h:0.84"></i><i style="--h:0.39"></i><i style="--h:0.83"></i><i style="--h:0.43"></i><i style="--h:0.78"></i><i style="--h:0.32"></i><i style="--h:0.65"></i><i style="--h:0.94"></i><i style="--h:0.44"></i><i style="--h:0.36"></i><i style="--h:0.57"></i><i style="--h:0.29"></i><i style="--h:0.33"></i><i style="--h:0.68"></i><i style="--h:0.86"></i><i style="--h:0.83"></i><i style="--h:0.70"></i><i style="--h:0.47"></i><i style="--h:0.63"></i><i style="--h:0.57"></i><i style="--h:0.55"></i><i style="--h:0.38"></i><i style="--h:0.45"></i><i style="--h:0.26"></i><i style="--h:0.21"></i><i style="--h:0.15"></i><i style="--h:0.14"></i><i style="--h:0.10"></i></div>
+
 <!-- ============ PARA QUEM É ============ -->
 <section data-etapa="3">
   <div class="wrap narrow rv">
@@ -803,6 +831,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     </ul>
   </div>
 </section>
+
+<div class="trilha q" style="--nv:0.40" aria-hidden="true"><i style="--h:0.10"></i><i style="--h:0.23"></i><i style="--h:0.23"></i><i style="--h:0.25"></i><i style="--h:0.47"></i><i style="--h:0.50"></i><i style="--h:0.20"></i><i style="--h:0.35"></i><i style="--h:0.55"></i><i style="--h:0.44"></i><i style="--h:0.76"></i><i style="--h:0.66"></i><i style="--h:0.80"></i><i style="--h:0.68"></i><i style="--h:0.39"></i><i style="--h:0.31"></i><i style="--h:0.55"></i><i style="--h:0.40"></i><i style="--h:0.67"></i><i style="--h:0.82"></i><i style="--h:0.69"></i><i style="--h:0.79"></i><i style="--h:0.39"></i><i style="--h:0.99"></i><i style="--h:0.99"></i><i style="--h:0.51"></i><i style="--h:0.76"></i><i style="--h:0.76"></i><i style="--h:0.71"></i><i style="--h:0.47"></i><i style="--h:0.52"></i><i style="--h:0.49"></i><i style="--h:0.45"></i><i style="--h:0.77"></i><i style="--h:0.64"></i><i style="--h:0.58"></i><i style="--h:0.22"></i><i style="--h:0.27"></i><i style="--h:0.42"></i><i style="--h:0.49"></i><i style="--h:0.32"></i><i style="--h:0.42"></i><i style="--h:0.17"></i><i style="--h:0.28"></i><i style="--h:0.24"></i><i style="--h:0.12"></i></div>
 
 <!-- ============ O QUE VOCÊ CONSTRÓI ============ -->
 <section class="white">
@@ -833,6 +863,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   </div>
 </section>
 
+<div class="trilha" style="--nv:0.56" aria-hidden="true"><i style="--h:0.10"></i><i style="--h:0.10"></i><i style="--h:0.18"></i><i style="--h:0.24"></i><i style="--h:0.15"></i><i style="--h:0.28"></i><i style="--h:0.58"></i><i style="--h:0.39"></i><i style="--h:0.58"></i><i style="--h:0.32"></i><i style="--h:0.32"></i><i style="--h:0.29"></i><i style="--h:0.47"></i><i style="--h:0.78"></i><i style="--h:0.73"></i><i style="--h:0.38"></i><i style="--h:0.53"></i><i style="--h:0.43"></i><i style="--h:0.57"></i><i style="--h:0.62"></i><i style="--h:0.90"></i><i style="--h:0.34"></i><i style="--h:0.72"></i><i style="--h:0.57"></i><i style="--h:0.76"></i><i style="--h:0.89"></i><i style="--h:0.47"></i><i style="--h:0.61"></i><i style="--h:0.92"></i><i style="--h:0.70"></i><i style="--h:0.59"></i><i style="--h:0.47"></i><i style="--h:0.62"></i><i style="--h:0.64"></i><i style="--h:0.52"></i><i style="--h:0.37"></i><i style="--h:0.42"></i><i style="--h:0.27"></i><i style="--h:0.35"></i><i style="--h:0.48"></i><i style="--h:0.51"></i><i style="--h:0.27"></i><i style="--h:0.23"></i><i style="--h:0.26"></i><i style="--h:0.23"></i><i style="--h:0.10"></i></div>
+
 <!-- ============ O QUE VOCÊ LEVA ============ -->
 <section class="deliver" data-etapa="4">
   <div class="wrap narrow">
@@ -857,6 +889,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 <section class="cut" data-etapa="5">
   <div class="wrap"><p class="rv">Vender algumas cópias qualquer um consegue. Difícil é fazer o livro <i>continuar vendendo</i> depois do lançamento.</p></div>
 </section>
+
+<div class="trilha" style="--nv:0.72" aria-hidden="true"><i style="--h:0.13"></i><i style="--h:0.10"></i><i style="--h:0.30"></i><i style="--h:0.17"></i><i style="--h:0.32"></i><i style="--h:0.24"></i><i style="--h:0.49"></i><i style="--h:0.27"></i><i style="--h:0.46"></i><i style="--h:0.29"></i><i style="--h:0.36"></i><i style="--h:0.44"></i><i style="--h:0.55"></i><i style="--h:0.53"></i><i style="--h:0.79"></i><i style="--h:0.38"></i><i style="--h:0.69"></i><i style="--h:0.30"></i><i style="--h:0.62"></i><i style="--h:0.64"></i><i style="--h:0.87"></i><i style="--h:0.52"></i><i style="--h:0.47"></i><i style="--h:0.33"></i><i style="--h:0.82"></i><i style="--h:0.89"></i><i style="--h:0.48"></i><i style="--h:0.63"></i><i style="--h:0.61"></i><i style="--h:0.49"></i><i style="--h:0.84"></i><i style="--h:0.57"></i><i style="--h:0.45"></i><i style="--h:0.66"></i><i style="--h:0.67"></i><i style="--h:0.65"></i><i style="--h:0.66"></i><i style="--h:0.23"></i><i style="--h:0.38"></i><i style="--h:0.23"></i><i style="--h:0.32"></i><i style="--h:0.34"></i><i style="--h:0.42"></i><i style="--h:0.30"></i><i style="--h:0.17"></i><i style="--h:0.10"></i></div>
 
 <!-- ============ CASOS ============
      ⚠️ PENDENTE DE VALIDAÇÃO DA DANY: números e citação nominal.
@@ -938,6 +972,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   </div>
 </section>
 
+<div class="trilha" style="--nv:0.86" aria-hidden="true"><i style="--h:0.11"></i><i style="--h:0.23"></i><i style="--h:0.25"></i><i style="--h:0.13"></i><i style="--h:0.41"></i><i style="--h:0.44"></i><i style="--h:0.47"></i><i style="--h:0.45"></i><i style="--h:0.68"></i><i style="--h:0.62"></i><i style="--h:0.57"></i><i style="--h:0.33"></i><i style="--h:0.42"></i><i style="--h:0.81"></i><i style="--h:0.51"></i><i style="--h:0.41"></i><i style="--h:0.68"></i><i style="--h:0.44"></i><i style="--h:0.73"></i><i style="--h:0.42"></i><i style="--h:0.40"></i><i style="--h:0.45"></i><i style="--h:0.68"></i><i style="--h:0.94"></i><i style="--h:0.32"></i><i style="--h:0.92"></i><i style="--h:0.36"></i><i style="--h:0.68"></i><i style="--h:0.77"></i><i style="--h:0.49"></i><i style="--h:0.33"></i><i style="--h:0.87"></i><i style="--h:0.81"></i><i style="--h:0.39"></i><i style="--h:0.38"></i><i style="--h:0.44"></i><i style="--h:0.23"></i><i style="--h:0.50"></i><i style="--h:0.63"></i><i style="--h:0.45"></i><i style="--h:0.47"></i><i style="--h:0.32"></i><i style="--h:0.13"></i><i style="--h:0.31"></i><i style="--h:0.14"></i><i style="--h:0.10"></i></div>
+
 <!-- ============ DANY ============ -->
 <section class="dany" data-etapa="5">
   <div class="dany-foto" role="img" aria-label="Dany Sakugawa"></div>
@@ -990,6 +1026,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     </div>
   </div>
 </section>
+
+<div class="trilha" style="--nv:1.00" aria-hidden="true"><i style="--h:0.10"></i><i style="--h:0.16"></i><i style="--h:0.13"></i><i style="--h:0.33"></i><i style="--h:0.47"></i><i style="--h:0.20"></i><i style="--h:0.22"></i><i style="--h:0.20"></i><i style="--h:0.42"></i><i style="--h:0.47"></i><i style="--h:0.62"></i><i style="--h:0.75"></i><i style="--h:0.41"></i><i style="--h:0.79"></i><i style="--h:0.74"></i><i style="--h:0.43"></i><i style="--h:0.72"></i><i style="--h:0.80"></i><i style="--h:0.59"></i><i style="--h:0.71"></i><i style="--h:0.50"></i><i style="--h:0.99"></i><i style="--h:0.33"></i><i style="--h:0.68"></i><i style="--h:0.85"></i><i style="--h:0.96"></i><i style="--h:0.38"></i><i style="--h:0.88"></i><i style="--h:0.79"></i><i style="--h:0.32"></i><i style="--h:0.54"></i><i style="--h:0.31"></i><i style="--h:0.47"></i><i style="--h:0.84"></i><i style="--h:0.56"></i><i style="--h:0.43"></i><i style="--h:0.72"></i><i style="--h:0.70"></i><i style="--h:0.30"></i><i style="--h:0.46"></i><i style="--h:0.43"></i><i style="--h:0.46"></i><i style="--h:0.14"></i><i style="--h:0.29"></i><i style="--h:0.13"></i><i style="--h:0.10"></i></div>
 
 <!-- ============ OFERTA ============ -->
 <section class="offer" id="oferta" data-etapa="5">
@@ -1147,6 +1185,21 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     if (a.getAttribute('href') === '#oferta') return;   /* âncoras rolam, não compram */
     ev.preventDefault(); comprar(a.getAttribute('data-cta'));
   });
+
+  /* ---- volume da trilha: cresce conforme a pessoa desce ----
+     Uma variável CSS só, atualizada em rAF. Todas as barras leem dela,
+     então é um write por frame em vez de um por elemento. */
+  var raiz = document.documentElement, pedido = false;
+  function volume(){
+    pedido = false;
+    var alc = (document.body.scrollHeight - innerHeight) || 1;
+    var p = Math.min(Math.max(scrollY / alc, 0), 1);
+    raiz.style.setProperty('--amp', p.toFixed(3));
+  }
+  function pedirVolume(){ if (!pedido){ pedido = true; requestAnimationFrame(volume); } }
+  addEventListener('scroll', pedirVolume, {passive:true});
+  addEventListener('resize', pedirVolume);
+  volume();
 
   /* ---- topbar + barra fixa ---- */
   var top = document.getElementById('top'), sticky = document.getElementById('sticky'),
