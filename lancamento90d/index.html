@@ -233,8 +233,6 @@ p{margin:0 0 1.05em}
 /* ---------- logo (arquivo oficial: coral #FC783C + escuro #303030) ---------- */
 .mark-img{height:21px;width:auto;display:block}
 .mark-img.foot{height:19px;opacity:.85}
-.hero-logo{height:46px;width:auto;margin:0 auto 22px;display:block}
-@media(max-width:600px){.hero-logo{height:34px}}
 
 /* ---------- botão ---------- */
 .btn{
@@ -251,16 +249,26 @@ p{margin:0 0 1.05em}
 .btn.block{display:flex;width:100%}
 .btn-note{font-size:.82rem;color:var(--mute);margin-top:12px}
 
-/* ---------- hero (VSL centrada) ----------
-   Mesma ordem da Imersão hoje: eyebrow, título, subtítulo, vídeo, botão.
-   Tudo centrado numa coluna estreita. O player é 9:16, então a largura é travada. */
-.hero{background:var(--card);padding:92px 0 52px;border-bottom:1px solid var(--border);text-align:center}
+/* ---------- hero ----------
+   Tipografia medida na lancamento-v1, que é a página provada:
+   H1 36px / entrelinha 1.12 / tracking -0.9px / largura máx 552px
+   sub 16px / entrelinha 1.4 / largura máx 372px
+   Sem logo e sem botão: o CTA da primeira dobra é o do próprio player. */
+.hero{background:var(--card);padding:64px 0 52px;border-bottom:1px solid var(--border);text-align:center}
 .hero .wrap>*{margin-left:auto;margin-right:auto}
-.hero h1{max-width:19ch;font-size:clamp(1.8rem,3.4vw,2.9rem)}
+.chapeu{
+  font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;line-height:1.12;
+  letter-spacing:-.9px;max-width:552px;color:var(--ink)}
 .hero h1 em{font-style:normal;color:var(--accent)}
-.hero .sub{margin-top:18px;max-width:46ch;font-size:clamp(.98rem,1.5vw,1.12rem);color:var(--soft);line-height:1.55}
-.hero-cta{margin-top:26px}
-@media(max-width:600px){.hero{padding-top:82px}.hero-cta .btn{width:100%}}
+.hero .sub{
+  margin-top:14px;max-width:372px;font-size:16px;line-height:1.4;color:var(--soft)}
+@media(max-width:600px){
+  .hero{padding-top:52px}
+  .hero h1{font-size:30px;letter-spacing:-.6px}
+}
 
 /* player 9:16 (medido no VTurb: 400x711) */
 .player{margin:30px auto 0;width:100%;max-width:392px;border-radius:16px;overflow:hidden;
@@ -283,8 +291,13 @@ p{margin:0 0 1.05em}
 .press{background:var(--bg);padding:26px 0;border-bottom:1px solid var(--border)}
 .press p{text-align:center;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:0 0 16px;font-weight:700}
 .press-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(16px,4vw,42px)}
-.press-row img{height:24px;width:auto;opacity:.42;filter:grayscale(1)}
-@media(max-width:600px){.press-row img{height:19px}}
+/* logos nas cores originais, como o cliente pediu.
+   Exceção: o arquivo da Record é BRANCO puro (veio da lancamento-v1, que é
+   escura) e sumiria no fundo claro. Invertido ele fica preto, coerente com
+   os outros, até chegar o original colorido. */
+.press-row img{height:30px;width:auto}
+.press-row img.inverter{filter:invert(1)}
+@media(max-width:600px){.press-row img{height:22px}}
 
 /* ---------- agitação ---------- */
 .agit .big{
@@ -650,15 +663,15 @@ html.js .reg.in .ciclo b{opacity:1;transform:none;
   transition:opacity .6s var(--ease) 1.1s, transform 1.1s var(--ease) 1.1s}
 
 /* hero entra na carga, sem esperar scroll */
-html.js .hero-logo,html.js .hero h1,html.js .hero .sub,
-html.js .hero .player,html.js .hero-cta,html.js .stats{
+html.js .hero .chapeu,html.js .hero h1,html.js .hero .sub,
+html.js .hero .player,html.js .stats{
   opacity:0;transform:translate3d(0,20px,0)}
-html.js body.ready .hero-logo,html.js body.ready .hero h1,html.js body.ready .hero .sub,
-html.js body.ready .hero .player,html.js body.ready .hero-cta,html.js body.ready .stats{
+html.js body.ready .hero .chapeu,html.js body.ready .hero h1,html.js body.ready .hero .sub,
+html.js body.ready .hero .player,html.js body.ready .stats{
   opacity:1;transform:none;
   transition:opacity 1s var(--ease) var(--d), transform 1s var(--ease) var(--d)}
-.hero-logo{--d:.05s}.hero h1{--d:.15s}.hero .sub{--d:.28s}
-.hero .player{--d:.4s}.hero-cta{--d:.54s}.stats{--d:.66s}
+.hero .chapeu{--d:.05s}.hero h1{--d:.15s}.hero .sub{--d:.26s}
+.hero .player{--d:.4s}.stats{--d:.66s}
 
 /* o player ganha profundidade no hover */
 .player{transition:transform .9s var(--ease), box-shadow .9s var(--ease)}
@@ -681,16 +694,16 @@ html.js body.ready .hero .player,html.js body.ready .hero-cta,html.js body.ready
 html.js.sem-motion .rv,html.js.sem-motion .rv.in,
 html.js.sem-motion [data-stg]>*,html.js.sem-motion [data-stg].in>*,
 html.js.sem-motion .faixa,html.js.sem-motion .faixa i,html.js.sem-motion .ciclo b,
-html.js.sem-motion .hero-logo,html.js.sem-motion .hero h1,html.js.sem-motion .hero .sub,
-html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion .stats{
+html.js.sem-motion .hero .chapeu,html.js.sem-motion .hero h1,html.js.sem-motion .hero .sub,
+html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
 
 @media(prefers-reduced-motion:reduce){
   html.js .rv,html.js .rv.in,html.js [data-stg]>*,html.js [data-stg].in>*,
   html.js .faixa,html.js .reg.in .faixa,html.js .faixa i,html.js .reg.in .faixa i,
   html.js .ciclo b,html.js .reg.in .ciclo b,
-  html.js .hero-logo,html.js .hero h1,html.js .hero .sub,html.js .hero .player,
-  html.js .hero-cta,html.js .stats{
+  html.js .hero .chapeu,html.js .hero h1,html.js .hero .sub,html.js .hero .player,
+  html.js .stats{
     opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
 }
 
@@ -703,8 +716,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 <!-- ============ HERO ============ -->
 <header class="hero" data-etapa="1">
   <div class="wrap">
-    <img class="hero-logo" src="assets/logo-90d.png" alt="Lançamento 90D" width="490" height="125">
-    <h1 data-ab-el="headline">Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+    <p class="chapeu">O lançamento decide o destino do seu livro.</p>
+    <h1 data-ab-el="headline">Crie desejo.<br>Gere antecipação.<br>Lance <em>vendendo</em><br>desde o primeiro dia.</h1>
     <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo, mesmo sem editora ou milhares de seguidores.</p>
 
     <div class="player" id="vsl">
@@ -713,16 +726,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
       </div>
     </div>
 
-    <div class="hero-cta">
-      <a href="#oferta" class="btn" data-cta="hero">Quero o plano de 90 dias</a>
-      <div class="btn-note">Acesso imediato e vitalício · Garantia de 7 dias</div>
-    </div>
-
-    <div class="stats">
-      <div><b data-n="800" data-pre="+">+800</b><span>autores lançados</span></div>
-      <div><b data-n="10" data-pre="+" data-pos="M">+10M</b><span>livros vendidos</span></div>
-      <div><b data-n="4400" data-pre="+">+4.400</b><span>alunos</span></div>
-      <div><b data-n="15" data-pre="+">+15</b><span>anos nos bastidores</span></div>
     </div>
   </div>
 </header>
@@ -734,7 +737,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
       <img src="assets/cbn-DQPrTLvx.webp" alt="CBN" loading="lazy">
       <img src="assets/band-news-DFdMzy7_.webp" alt="Band News" loading="lazy">
       <img src="assets/band-DzrsFJN4.webp" alt="Band" loading="lazy">
-      <img src="assets/record-tv-CTFv1JX2.webp" alt="Record TV" loading="lazy">
+      <img src="assets/record-tv-CTFv1JX2.webp" alt="Record TV" loading="lazy" class="inverter">
       <img src="assets/valor-economico-BCIBElmV.webp" alt="Valor Econômico" loading="lazy">
       <img src="assets/publish-news-CG1B5ySC.webp" alt="PublishNews" loading="lazy">
       <img src="assets/radio-senado-CiVYEkPp.webp" alt="Rádio Senado" loading="lazy">
