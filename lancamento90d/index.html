@@ -6,7 +6,7 @@
 <link rel="icon" type="image/webp" href="favicon.webp">
 
 <title>Lançamento 90D | The Book Business</title>
-<meta name="description" content="O plano de 90 dias que faz o seu livro entrar no mercado vendendo. Os Três Motores: desejo, antecipação e venda. Com Dany Sakugawa.">
+<meta name="description" content="O plano de 90 dias que faz o seu livro entrar no mercado vendendo. Os Três Atos: desejo, antecipação e venda. Com Dany Sakugawa.">
 <meta name="author" content="The Book Business">
 <!-- ⚠️ REMOVER NO LANÇAMENTO: enquanto o checkout for placeholder, a página não pode ser indexada -->
 <meta name="robots" content="noindex,nofollow">
@@ -190,14 +190,14 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 :root{
   --bg:#F8F8F8;
   --card:#FFFFFF;
-  --ink:#1A1A1A;
+  --ink:#3A3A38;
   --soft:#555555;
   --mute:#999999;
   --border:#EEEEEE;
   --line:#E4E4E4;
-  --accent:#FAAB00;          /* fundo, linhas, marcadores */
-  --accent-ink:#8A5A00;      /* âmbar em TEXTO (contraste ok no claro) */
-  --accent-soft:#FFF4D6;
+  --accent:#FC783C;          /* fundo, linhas, marcadores */
+  --accent-ink:#C2501A;      /* âmbar em TEXTO (contraste ok no claro) */
+  --accent-soft:#FFEDE4;
   --shadow:0 1px 3px rgba(0,0,0,.04);
   --shadow-lg:0 18px 40px -28px rgba(0,0,0,.35);
   --maxw:1120px;
@@ -248,16 +248,23 @@ p{margin:0 0 1.05em}
   text-transform:uppercase;color:var(--mute);margin:0 0 22px
 }
 
+
+/* ---------- logo (arquivo oficial: coral #FC783C + escuro #303030) ---------- */
+.mark-img{height:21px;width:auto;display:block}
+.mark-img.foot{height:19px;opacity:.85}
+.hero-logo{height:46px;width:auto;margin:0 auto 22px;display:block}
+@media(max-width:600px){.hero-logo{height:34px}}
+
 /* ---------- botão ---------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  background:var(--accent);color:#1A1A1A;text-decoration:none;font-weight:700;
+  background:var(--accent);color:#303030;text-decoration:none;font-weight:700;
   font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em;
   padding:17px 32px;border-radius:999px;border:0;cursor:pointer;font-size:1.04rem;line-height:1;
-  box-shadow:0 10px 24px -14px rgba(250,171,0,.9);
+  box-shadow:0 10px 24px -14px rgba(252,120,60,.9);
   transition:transform .16s ease,box-shadow .16s ease,background .16s ease
 }
-.btn:hover{background:#E89C00;transform:translateY(-1px);box-shadow:0 16px 30px -14px rgba(250,171,0,1)}
+.btn:hover{background:#E89C00;transform:translateY(-1px);box-shadow:0 16px 30px -14px rgba(252,120,60,1)}
 .btn:active{transform:translateY(0)}
 .btn.sm{padding:11px 20px;font-size:.88rem}
 .btn.block{display:flex;width:100%}
@@ -276,7 +283,7 @@ p{margin:0 0 1.05em}
 
 /* player 9:16 (medido no VTurb: 400x711) */
 .player{margin:30px auto 0;width:100%;max-width:392px;border-radius:16px;overflow:hidden;
-  background:#0E0E0E;box-shadow:0 26px 54px -28px rgba(0,0,0,.72)}
+  background:#303030;box-shadow:0 26px 54px -28px rgba(0,0,0,.72)}
 .player .slot{aspect-ratio:9/16;display:flex;align-items:center;justify-content:center}
 .player vturb-smartplayer{display:block;width:100%}
 .stats{text-align:left}
@@ -309,26 +316,26 @@ p{margin:0 0 1.05em}
 }
 
 /* ============================================================
-   OS TRÊS MOTORES (diagrama)
-   Motor liga e NÃO desliga. Eles se sobrepõem e o conjunto é cíclico.
+   OS TRÊS ATOS (diagrama)
+   Os atos se sobrepõem: o primeiro não termina quando o segundo começa.
    Por isso é faixa acumulando, não caixa em sequência.
    ============================================================ */
-.motores{margin-top:40px}
+.atos{margin-top:40px}
 .reg{display:grid;grid-template-columns:repeat(12,1fr);gap:0 4px;align-items:center}
 .reg .eixo{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:0 4px;
   font-size:.72rem;color:var(--mute);font-weight:700;margin-bottom:10px}
 .reg .eixo span{grid-column:span 4;text-align:center}
 .faixa{
   height:56px;border-radius:999px;display:flex;align-items:center;gap:12px;padding:0 20px;margin-bottom:10px;
-  color:#1A1A1A;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.98rem;white-space:nowrap;overflow:hidden
+  color:#303030;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.98rem;white-space:nowrap;overflow:hidden
 }
 .faixa i{
   flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.14);
   display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.78rem
 }
 .faixa em{font-style:normal;font-weight:400;font-family:'DM Sans',sans-serif;font-size:.88rem;opacity:.72}
-.f1{grid-column:1/13;background:#FFE7AE}
-.f2{grid-column:5/13;background:#FFD277}
+.f1{grid-column:1/13;background:#FFD9C6}
+.f2{grid-column:5/13;background:#FCA97F}
 .f3{grid-column:9/13;background:var(--accent)}
 .ciclo{
   grid-column:1/-1;margin-top:14px;padding-top:16px;border-top:1px dashed var(--line);
@@ -338,9 +345,9 @@ p{margin:0 0 1.05em}
   flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:2px solid var(--accent);color:var(--accent-ink);
   display:flex;align-items:center;justify-content:center;font-size:1.1rem
 }
-.motor-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.ato-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
 @media(max-width:860px){
-  .motor-cards{grid-template-columns:1fr}
+  .ato-cards{grid-template-columns:1fr}
   .reg{display:block}
   .reg .eixo{display:none}
   .faixa{width:100%!important;height:auto;padding:14px 18px;border-radius:14px;white-space:normal}
@@ -490,7 +497,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
 
 <div class="top" id="top">
   <div class="wrap">
-    <span class="mark">Lançamento <i>90D</i></span>
+    <img class="mark-img" src="assets/logo-90d.png" alt="Lançamento 90D" width="490" height="125">
     <span class="mini">De invisível a lido, em 90 dias</span>
     <a href="#oferta" class="btn sm" data-cta="topbar">Quero o plano</a>
   </div>
@@ -499,8 +506,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
 <!-- ============ HERO ============ -->
 <header class="hero">
   <div class="wrap">
-    <p class="brand">The Book Business</p>
-    <p class="eyebrow">Lançamento 90D</p>
+    <img class="hero-logo" src="assets/logo-90d.png" alt="Lançamento 90D" width="490" height="125">
     <h1 data-ab-el="headline">Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
     <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo, mesmo sem editora ou milhares de seguidores.</p>
 
@@ -556,35 +562,35 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
   <div class="wrap">
     <div class="narrow rv" style="margin:0 auto;text-align:center">
       <p class="eyebrow">O método</p>
-      <h2>Os Três Motores</h2>
-      <p class="lead" style="margin-top:14px">Não precisa ser assim. Lançar não é um dia, e também não é uma fila de etapas. São três motores que você liga em sequência e que, a partir daí, giram juntos.</p>
+      <h2>Os Três Atos</h2>
+      <p class="lead" style="margin-top:14px">Não precisa ser assim. Lançar não é um dia, e também não é uma fila de etapas. São três atos que começam em momentos diferentes e que, a partir daí, correm juntos.</p>
     </div>
 
-    <div class="motores rv">
+    <div class="atos rv">
       <div class="reg">
         <div class="eixo"><span>dia 0 a 30</span><span>dia 30 a 60</span><span>dia 60 a 90</span></div>
-        <div class="faixa f1"><i>1</i>Desejo <em>liga primeiro e nunca desliga</em></div>
-        <div class="faixa f2"><i>2</i>Antecipação <em>entra por cima do desejo</em></div>
+        <div class="faixa f1"><i>1</i>Desejo <em>começa primeiro e não para</em></div>
+        <div class="faixa f2"><i>2</i>Antecipação <em>entra por cima, sem substituir</em></div>
         <div class="faixa f3"><i>3</i>Venda</div>
         <div class="ciclo">
           <b>&#8635;</b>
-          <span>No fim dos 90 dias os três estão girando ao mesmo tempo. E aí o ciclo recomeça, com os motores já quentes.</span>
+          <span>No fim dos 90 dias os três estão girando ao mesmo tempo. E aí o ciclo recomeça, com os três já em movimento.</span>
         </div>
       </div>
 
-      <div class="motor-cards">
+      <div class="ato-cards">
         <div class="mcard">
-          <h3>1 · Desejo</h3>
+          <h3>Ato 1 · Desejo</h3>
           <p>O leitor compra primeiro o autor, depois o livro. Quem é ele, com quem você conta, e como a obra vai existir no mundo.</p>
           <p class="voce">Você deixa de ser invisível</p>
         </div>
         <div class="mcard">
-          <h3>2 · Antecipação</h3>
+          <h3>Ato 2 · Antecipação</h3>
           <p>Livro que estreia vendendo começou a vender semanas antes, quando ainda nem existia nas lojas. Revelar, mobilizar a rede, desenhar a pré-venda.</p>
           <p class="voce">Você passa a ser esperado</p>
         </div>
         <div class="mcard">
-          <h3>3 · Venda</h3>
+          <h3>Ato 3 · Venda</h3>
           <p>Pré-venda aberta, rede mobilizada, pedidos concentrados na primeira semana. E o roteiro dos trinta dias seguintes, para o livro não morrer.</p>
           <p class="voce">Você é lido</p>
         </div>
@@ -592,7 +598,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
 
       <div class="arc-label">
         <b>De invisível a lido. Em noventa dias.</b>
-        <span>E depois de novo, a cada ciclo, com os três motores já ligados.</span>
+        <span>E depois de novo, a cada ciclo, com os três atos já em movimento.</span>
       </div>
     </div>
   </div>
@@ -654,7 +660,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
         <li><b>Os seus primeiros cem compradores mapeados</b>, em planilha guiada</li>
         <li><b>O plano de pré-venda</b>, para estrear vendendo desde o primeiro dia</li>
         <li><b>O roteiro do pós-lançamento</b>, para o livro não morrer em trinta dias</li>
-        <li><b>Checklist de cada motor</b>, com prazos</li>
+        <li><b>Checklist de cada ato</b>, com prazos</li>
         <li><b>Marcos nos dias 15, 45 e 90</b>, para saber se você está no ritmo</li>
         <li><b>12 meses de acesso</b>, para usar neste livro e no próximo</li>
       </ul>
@@ -758,7 +764,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
         </ul>
       </div>
       <div class="path good rv">
-        <h3>Com os Três Motores</h3>
+        <h3>Com os Três Atos</h3>
         <ul>
           <li>Chega no dia da estreia com gente esperando</li>
           <li>Lança com meta e com cronograma</li>
@@ -811,7 +817,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
     <h2>Antes de decidir</h2>
     <div class="faq">
       <details><summary>Já publiquei o meu livro. Ainda serve?</summary><div class="a">Serve. O plano funciona igual para relançamento, que é uma das estratégias mais usadas para trazer um livro parado de volta a vender.</div></details>
-      <details><summary>Ainda estou escrevendo. É cedo demais?</summary><div class="a">Melhor ainda. Quem cria desejo enquanto escreve chega na estreia vendendo. O Motor 1 começa a girar antes de o livro existir.</div></details>
+      <details><summary>Ainda estou escrevendo. É cedo demais?</summary><div class="a">Melhor ainda. Quem cria desejo enquanto escreve chega na estreia vendendo. O Ato 1 começa antes de o livro existir.</div></details>
       <details><summary>Preciso ter muitos seguidores?</summary><div class="a">Não. O plano começa por quem já está perto de você, e boa parte dele acontece fora das redes sociais.</div></details>
       <details><summary>Serve para ficção?</summary><div class="a">Serve. Ficção, não ficção, poesia, infantil e técnico. O que muda é o leitor e o tom, não a estrutura do lançamento.</div></details>
       <details><summary>Vou publicar por editora. Ainda faz sentido?</summary><div class="a">Faz. Do ponto de vista de marketing, toda publicação é uma autopublicação: a editora distribui, mas quem leva o leitor até o livro é você.</div></details>
@@ -835,7 +841,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
 
 <footer>
   <div class="wrap">
-    <span class="mark">Lançamento <i>90D</i></span>
+    <img class="mark-img" src="assets/logo-90d.png" alt="Lançamento 90D" width="490" height="125">
     <span>© The Book Business · Todos os direitos reservados</span>
   </div>
 </footer>
