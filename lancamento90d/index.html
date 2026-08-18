@@ -366,6 +366,71 @@ p{margin:0 0 1.05em}
   font-size:clamp(1.45rem,3.4vw,2.2rem);letter-spacing:-.03em}
 .arc-label span{display:block;color:var(--soft);margin-top:10px}
 
+
+/* ============================================================
+   RITMO
+   O problema não era cor, era todas as seções terem a mesma
+   composição e a mesma largura. Aqui entram: largura variável,
+   blocos que sangram a página inteira e um momento em coral.
+   ============================================================ */
+.tight{max-width:640px;margin-left:auto;margin-right:auto}
+.bleed{width:100%;max-width:none;padding:0}
+
+/* AGITAÇÃO: escura, sangrada, tipo grande. Primeiro contraste forte da página. */
+.agit{background:var(--ink);color:#EFEDEA;padding:clamp(72px,10vw,132px) 0}
+.agit .eyebrow{color:var(--accent)}
+.agit .big{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.9rem,5vw,3.6rem);line-height:1.08;margin:0 0 34px;color:#fff;max-width:18ch}
+.agit .big i{font-style:normal;color:var(--accent)}
+.agit .lead{color:#B4B0AB;max-width:52ch}
+.agit .kicker{
+  margin-top:38px;padding-left:22px;border-left:3px solid var(--accent);
+  font-size:clamp(1.05rem,2.2vw,1.35rem);color:#fff;max-width:40ch}
+
+/* CORTE: a única seção coral da página inteira. Serve de respiro e de marca. */
+.cut{background:var(--accent);color:#fff;padding:clamp(64px,8vw,104px) 0;text-align:center}
+.cut p{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.5rem,4.2vw,3rem);line-height:1.12;max-width:20ch;margin:0 auto;color:#fff}
+.cut p i{font-style:normal;color:#3A2415}
+
+/* DEPOIMENTOS: marquee que sangra. Quebra a coluna e traz movimento contínuo. */
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.marquee+.marquee{margin-top:16px}
+.mrow{display:flex;gap:16px;width:max-content;animation:desliza 62s linear infinite}
+.marquee.rev .mrow{animation-direction:reverse;animation-duration:74s}
+.marquee:hover .mrow{animation-play-state:paused}
+.mrow img{height:230px;width:auto;border-radius:12px;border:1px solid var(--border);flex:0 0 auto}
+@keyframes desliza{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media(max-width:700px){.mrow img{height:170px}}
+@media(prefers-reduced-motion:reduce){.mrow{animation:none}}
+
+/* DANY: foto sangra a largura toda, texto entra por cima no desktop */
+.dany{position:relative;background:var(--ink);color:#EFEDEA;overflow:hidden}
+.dany-foto{position:absolute;inset:0;background:url(assets/dany-bio-B0X57zHq.webp) center 28%/cover;opacity:.5}
+.dany:after{content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,var(--ink) 34%,rgba(58,58,56,.72) 58%,rgba(58,58,56,.25))}
+.dany .wrap{position:relative;z-index:2;padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)}
+.dany .txt{max-width:47ch}
+.dany h2{color:#fff;font-size:clamp(1.9rem,4vw,2.9rem)}
+.dany .lead{color:#CFCBC6}
+.dany .lead strong{color:#fff}
+.dany .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px;max-width:640px}
+.dany .nums div{border-top:1px solid rgba(255,255,255,.22);padding-top:12px}
+.dany .nums b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.3rem;color:#fff}
+.dany .nums span{font-size:.76rem;color:#A9A5A0}
+@media(max-width:700px){.dany .nums{grid-template-columns:repeat(2,1fr)}.dany-foto{opacity:.28}}
+
+/* CASOS: o resultado vira o elemento visual, não mais três cards iguais */
+.caso .res{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.15rem,2.3vw,1.5rem);line-height:1.15;color:var(--accent-ink)}
+
+/* OFERTA: o preço é o maior número da página */
+.offer-box .price .val{font-size:clamp(4rem,12vw,6.4rem)}
+
 /* ---------- listas ---------- */
 .checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
 .checks li{position:relative;padding-left:30px;line-height:1.55}
@@ -625,7 +690,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 
 <!-- ============ AGITAÇÃO ============ -->
 <section class="agit">
-  <div class="wrap narrow rv">
+  <div class="wrap rv">
     <p class="eyebrow">O ponto de virada</p>
     <p class="big">Você pode passar <i>anos</i> escrevendo um livro.<br>Mas é o lançamento que define se ele será lido, ou <i>esquecido</i>.</p>
     <p class="lead">São cerca de dois mil lançamentos por mês no Brasil. Quase todos seguem o mesmo roteiro: o livro sai, faz uma semana de barulho entre amigos e família, e some em quinze dias.</p>
@@ -784,38 +849,67 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 
 <!-- ============ DEPOIMENTOS ============ -->
 <section class="white">
-  <div class="wrap">
-    <div class="narrow rv"><p class="eyebrow">Quem já lançou assim</p><h2>Não é sorte. É estratégia.</h2></div>
-    <div class="depos rv" data-stg>
-      <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de aluno" loading="lazy">
-      <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de aluno" loading="lazy">
-      <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de aluno" loading="lazy">
-      <img src="assets/depo-cica-D691szGu.webp" alt="Depoimento de aluno" loading="lazy">
-      <img src="assets/depo-emilia-CArLNDco.webp" alt="Depoimento de aluno" loading="lazy">
-      <img src="assets/depo-lelo-B1NBFXKe.webp" alt="Depoimento de aluno" loading="lazy">
-      <img src="assets/depo-profinho-Bom5B61T.webp" alt="Depoimento de aluno" loading="lazy">
-      <img src="assets/depo-robson-CNrUIBuZ.webp" alt="Depoimento de aluno" loading="lazy">
+  <div class="wrap"><div class="tight rv" style="text-align:center">
+    <p class="eyebrow">Quem já lançou assim</p>
+    <h2>Não é sorte. É estratégia.</h2>
+  </div></div>
+  <div class="marquee" style="margin-top:38px">
+    <div class="mrow">
+        <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-cica-D691szGu.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-emilia-CArLNDco.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-profinho-Bom5B61T.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-cica-D691szGu.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-emilia-CArLNDco.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-profinho-Bom5B61T.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="Depoimento de aluno" loading="lazy">
+    </div>
+  </div>
+  <div class="marquee rev">
+    <div class="mrow">
+        <img src="assets/depo-emilia-CArLNDco.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-profinho-Bom5B61T.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-cica-D691szGu.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-emilia-CArLNDco.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-profinho-Bom5B61T.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de aluno" loading="lazy">
+        <img src="assets/depo-cica-D691szGu.webp" alt="Depoimento de aluno" loading="lazy">
     </div>
   </div>
 </section>
 
 <!-- ============ DANY ============ -->
-<section>
+<section class="dany">
+  <div class="dany-foto" role="img" aria-label="Dany Sakugawa"></div>
   <div class="wrap">
-    <div class="bio rv">
-      <img src="assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa" loading="lazy">
-      <div>
-        <p class="eyebrow">Quem está do outro lado</p>
-        <h2>Dany Sakugawa</h2>
-        <p class="lead" style="margin-top:16px">Dany esteve à frente do lançamento de mais de <strong>800 autores</strong>, somando mais de <strong>10 milhões de livros vendidos</strong>.</p>
-        <p class="lead">Depois de anos nos bastidores das grandes editoras, passou a ensinar autores independentes a fazer o que o mercado raramente explica: lançar com estratégia, metas e estrutura.</p>
-        <p class="lead">Criadora do Método The Book Business, já ajudou mais de <strong>4.400 alunos</strong> a sair do improviso e entrar no mercado com plano.</p>
-        <div class="nums">
-          <div><b data-n="15" data-pre="+" data-pos=" anos">+15 anos</b><span>no mercado literário</span></div>
-          <div><b data-n="800" data-pre="+">+800</b><span>autores lançados</span></div>
-          <div><b data-n="4400" data-pre="+">+4.400</b><span>alunos</span></div>
-          <div><b data-n="10" data-pre="+" data-pos="M">+10M</b><span>livros vendidos</span></div>
-        </div>
+    <div class="txt rv">
+      <p class="eyebrow" style="color:var(--accent)">Quem está do outro lado</p>
+      <h2>Dany Sakugawa</h2>
+      <p class="lead" style="margin-top:16px">Esteve à frente do lançamento de mais de <strong>800 autores</strong>, somando mais de <strong>10 milhões de livros vendidos</strong>.</p>
+      <p class="lead">Depois de anos nos bastidores das grandes editoras, passou a ensinar autores independentes a fazer o que o mercado raramente explica: lançar com estratégia, metas e estrutura.</p>
+      <p class="lead">Criadora do Método The Book Business, já ajudou mais de <strong>4.400 alunos</strong> a sair do improviso e entrar no mercado com plano.</p>
+      <div class="nums">
+        <div><b data-n="15" data-pre="+" data-pos=" anos">+15 anos</b><span>no mercado literário</span></div>
+        <div><b data-n="800" data-pre="+">+800</b><span>autores lançados</span></div>
+        <div><b data-n="4400" data-pre="+">+4.400</b><span>alunos</span></div>
+        <div><b data-n="10" data-pre="+" data-pos="M">+10M</b><span>livros vendidos</span></div>
       </div>
     </div>
   </div>
@@ -1038,20 +1132,29 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     });
     document.querySelectorAll('.reg .faixa').forEach(function(f,i){ f.style.setProperty('--i', i); });
 
-    /* os números contam em vez de aparecer prontos */
+    /* os números contam em vez de aparecer prontos.
+       ⚠️ NUNCA pode deixar valor errado na tela: se o rAF travar (aba oculta,
+       renderer ocupado), o número ficaria parado no 0 e a página passaria a
+       afirmar "+0 autores lançados". Por isso: não começa com a aba oculta,
+       e um timeout crava o valor final de qualquer jeito. */
     function contar(el){
-      var fim = parseFloat(el.getAttribute('data-n')),
-          pre = el.getAttribute('data-pre') || '',
-          pos = el.getAttribute('data-pos') || '',
-          t0 = null, dur = 1500;
+      if (el.dataset.contou) return;
+      var alvo = parseFloat(el.getAttribute('data-n')),
+          pre  = el.getAttribute('data-pre') || '',
+          pos  = el.getAttribute('data-pos') || '',
+          fim  = pre + alvo.toLocaleString('pt-BR') + pos;
+      function cravar(){ el.dataset.contou = '1'; el.textContent = fim; }
+      if (document.hidden) { cravar(); return; }      /* aba oculta: já entrega pronto */
+      var t0 = null, dur = 1500;
       function passo(t){
+        if (el.dataset.contou) return;
         if (!t0) t0 = t;
         var p = Math.min((t - t0) / dur, 1);
-        var e = 1 - Math.pow(1 - p, 4);
-        el.textContent = pre + Math.round(fim * e).toLocaleString('pt-BR') + pos;
-        if (p < 1) requestAnimationFrame(passo);
+        el.textContent = pre + Math.round(alvo * (1 - Math.pow(1 - p, 4))).toLocaleString('pt-BR') + pos;
+        if (p < 1) requestAnimationFrame(passo); else cravar();
       }
       requestAnimationFrame(passo);
+      setTimeout(cravar, dur + 400);                  /* rede: valor certo mesmo se travar */
     }
 
     var io = new IntersectionObserver(function(es){
