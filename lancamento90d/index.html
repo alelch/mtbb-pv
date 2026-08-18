@@ -230,27 +230,6 @@ p{margin:0 0 1.05em}
 .lead{font-size:clamp(1.02rem,2vw,1.24rem);color:var(--soft);line-height:1.6}
 .hl{background:linear-gradient(transparent 62%,var(--accent-soft) 62%);padding:0 2px}
 
-/* ---------- topbar ---------- */
-.top{
-  position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(255,255,255,.94);
-  backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid transparent;
-  transform:translateY(-102%);transition:transform .32s cubic-bezier(.2,.7,.3,1),border-color .32s
-}
-.top.on{transform:none;border-bottom-color:var(--border)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
-.top .mini{font-size:.85rem;color:var(--mute);display:none}
-@media(min-width:900px){.top .mini{display:block}}
-.mark{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;font-size:1rem;white-space:nowrap}
-.mark i{font-style:normal;color:var(--accent)}
-.brand{
-  font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--mute);margin:0 0 22px
-}
-
-
-.vsl-aviso{max-width:392px;margin:10px auto 0;font-size:.72rem;letter-spacing:.04em;
-  color:var(--mute);text-align:center;border:1px dashed var(--line);border-radius:8px;padding:6px 10px}
-
 /* ---------- logo (arquivo oficial: coral #FC783C + escuro #303030) ---------- */
 .mark-img{height:21px;width:auto;display:block}
 .mark-img.foot{height:19px;opacity:.85}
@@ -498,45 +477,6 @@ html.js .onda.in i{transform:scaleY(1);
 
 
 /* ============================================================
-   A ESPINHA
-   UMA peça só, fixa na lateral, presente do começo ao fim.
-   Ela é a página inteira vista de lado: cada barra é um trecho,
-   e o comprimento cresce de cima pra baixo — o som subindo.
-   As barras que você já passou ficam acesas; as de baixo, apagadas.
-   Divisor espalhado não passava a ideia: seis enfeites, não um som.
-   ============================================================ */
-.espinha{
-  position:fixed;left:0;top:0;bottom:0;width:52px;z-index:40;pointer-events:none;
-  display:flex;flex-direction:column;justify-content:space-between;   /* ocupa a ALTURA TODA */
-  padding:16px 0 16px 8px
-}
-.espinha b{
-  display:block;height:2px;border-radius:99px;background:var(--accent);
-  width:calc(5px + var(--w) * 32px);
-  opacity:.14;transform-origin:left center;
-  transition:opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1)
-}
-.espinha b.on{opacity:.9;transform:scaleX(1.1)}
-.espinha .marca{
-  position:absolute;left:0;width:3px;height:22px;border-radius:99px;background:var(--accent);
-  transition:top .16s linear
-}
-/* no celular vira um fio de 14px: some do caminho da leitura mas o conceito continua */
-@media(max-width:1180px){
-  .espinha{width:14px;padding:12px 0 12px 4px}
-  .espinha b{width:calc(3px + var(--w) * 8px);height:2px}
-  .espinha .rot{display:none}
-}
-.espinha .rot{
-  position:absolute;left:10px;bottom:26px;transform-origin:left bottom;transform:rotate(-90deg);
-  font-family:'Space Grotesk',sans-serif;font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--mute);white-space:nowrap;opacity:.7
-}
-@media(prefers-reduced-motion:reduce){.espinha b{transition:none}}
-
-
-
-/* ============================================================
    EQUALIZADOR FIXO NO RODAPÉ
    Barras coladas na base da janela, sempre visíveis, crescendo
    conforme a página desce. O conteúdo passa POR CIMA delas e o texto
@@ -558,7 +498,7 @@ html.js .onda.in i{transform:scaleY(1);
 .eqfix .eco *{color:#fff!important;background:transparent!important;border-color:transparent!important;
   box-shadow:none!important;opacity:1!important;transform:none!important;visibility:visible!important}
 .eqfix .eco img,.eqfix .eco svg,.eqfix .eco iframe,.eqfix .eco vturb-smartplayer,
-.eqfix .eco .espinha,.eqfix .eco .marquee,.eqfix .eco .player,.eqfix .eco .onda{display:none!important}
+.eqfix .eco .marquee,.eqfix .eco .player,.eqfix .eco .onda{display:none!important}
 /* No celular a faixa disputa os mesmos ~100px com a barra fixa de compra,
    e o texto invertido vira respingo branco no vão entre as duas. Entre um
    efeito e um CTA, fica o CTA. Desktop only. */
@@ -771,15 +711,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 </head>
 <body>
 
-<div class="top" id="top">
-  <div class="wrap">
-    <img class="mark-img" src="assets/logo-90d.png" alt="Lançamento 90D" width="490" height="125">
-    <span class="mini">De invisível a lido, em 90 dias</span>
-    <a href="#oferta" class="btn sm" data-cta="topbar">Quero o plano</a>
-  </div>
-</div>
 
-<div class="espinha" aria-hidden="true"><span class="marca" style="top:0"></span><span class="rot">o som do seu livro</span><b style="--w:0.042"></b><b style="--w:0.041"></b><b style="--w:0.063"></b><b style="--w:0.050"></b><b style="--w:0.078"></b><b style="--w:0.080"></b><b style="--w:0.072"></b><b style="--w:0.110"></b><b style="--w:0.089"></b><b style="--w:0.130"></b><b style="--w:0.111"></b><b style="--w:0.124"></b><b style="--w:0.169"></b><b style="--w:0.228"></b><b style="--w:0.162"></b><b style="--w:0.187"></b><b style="--w:0.256"></b><b style="--w:0.321"></b><b style="--w:0.283"></b><b style="--w:0.271"></b><b style="--w:0.390"></b><b style="--w:0.238"></b><b style="--w:0.412"></b><b style="--w:0.316"></b><b style="--w:0.300"></b><b style="--w:0.309"></b><b style="--w:0.370"></b><b style="--w:0.515"></b><b style="--w:0.370"></b><b style="--w:0.497"></b><b style="--w:0.534"></b><b style="--w:0.477"></b><b style="--w:0.550"></b><b style="--w:0.415"></b><b style="--w:0.430"></b><b style="--w:0.496"></b><b style="--w:0.685"></b><b style="--w:0.614"></b><b style="--w:0.591"></b><b style="--w:0.719"></b><b style="--w:0.688"></b><b style="--w:0.645"></b><b style="--w:0.881"></b><b style="--w:0.865"></b></div>
 
 <!-- ============ HERO ============ -->
 <header class="hero" data-etapa="1">
@@ -796,7 +728,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
 
     <div class="hero-cta">
       <a href="#oferta" class="btn" data-cta="hero">Quero o plano de 90 dias</a>
-      <div class="btn-note">Acesso imediato · 12 meses · Garantia de 7 dias</div>
+      <div class="btn-note">Acesso imediato e vitalício · Garantia de 7 dias</div>
     </div>
 
     <div class="stats">
@@ -944,7 +876,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
         <li><b>O roteiro do pós-lançamento</b>, para o livro não morrer em trinta dias</li>
         <li><b>Checklist de cada ato</b>, com prazos</li>
         <li><b>Marcos nos dias 15, 45 e 90</b>, para saber se você está no ritmo</li>
-        <li><b>12 meses de acesso</b>, para usar neste livro e no próximo</li>
+        <li><b>Acesso vitalício</b>, para usar neste livro e em todos os próximos</li>
       </ul>
     </div>
   </div>
@@ -1105,7 +1037,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
         <li>Seus primeiros cem compradores mapeados</li>
         <li>Plano de pré-venda e roteiro do pós-lançamento</li>
         <li>Checklists e marcos dos dias 15, 45 e 90</li>
-        <li>12 meses de acesso</li>
+        <li>Acesso imediato e vitalício</li>
       </ul>
       <a href="#" class="btn block" id="ctaMain" data-cta="oferta">Quero o plano de 90 dias</a>
       <div class="seals"><span>Pagamento seguro</span><span>Acesso imediato</span></div>
@@ -1132,7 +1064,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
       <details><summary>Preciso ter muitos seguidores?</summary><div class="a">Não. O plano começa por quem já está perto de você, e boa parte dele acontece fora das redes sociais.</div></details>
       <details><summary>Serve para ficção?</summary><div class="a">Serve. Ficção, não ficção, poesia, infantil e técnico. O que muda é o leitor e o tom, não a estrutura do lançamento.</div></details>
       <details><summary>Vou publicar por editora. Ainda faz sentido?</summary><div class="a">Faz. Do ponto de vista de marketing, toda publicação é uma autopublicação: a editora distribui, mas quem leva o leitor até o livro é você.</div></details>
-      <details><summary>É ao vivo?</summary><div class="a">Não. É gravado. Você assiste no seu ritmo e executa no seu calendário, com doze meses de acesso.</div></details>
+      <details><summary>É ao vivo?</summary><div class="a">Não. É gravado. Você assiste no seu ritmo e executa no seu calendário, e o acesso é vitalício.</div></details>
       <details><summary>Quanto tempo por dia?</summary><div class="a">O cronograma foi desenhado para caber na rotina de quem tem outro trabalho. Ele distribui as tarefas ao longo dos três meses em vez de concentrar tudo na semana da estreia.</div></details>
       <details><summary>E se não for para mim?</summary><div class="a">Garantia incondicional de sete dias. Você entra, olha o plano inteiro, e se não fizer sentido é só pedir o reembolso. Devolvemos cem por cento, sem perguntas.</div></details>
     </div>
@@ -1249,9 +1181,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
      Uma variável CSS só, atualizada em rAF. Todas as barras leem dela,
      então é um write por frame em vez de um por elemento. */
   var raiz = document.documentElement, pedido = false;
-  var esp = document.querySelector('.espinha');
-  var barras = esp ? esp.querySelectorAll('b') : [];
-  var marca = esp ? esp.querySelector('.marca') : null;
   var seccaoMetodo = document.getElementById('metodo');
   function volume(){
     pedido = false;
@@ -1264,17 +1193,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     raiz.style.setProperty('--amp', p.toFixed(3));
     var faixaEq = document.querySelector('.eqfix');
     if (faixaEq) faixaEq.style.opacity = p <= 0 ? '0' : String(Math.min(p * 6, 1).toFixed(2));
-    if (!barras.length) return;
-    /* acende as barras já percorridas e move o marcador */
-    var ate = Math.round(p * barras.length);
-    for (var i = 0; i < barras.length; i++){
-      var acesa = i < ate;
-      if (barras[i]._on !== acesa){ barras[i].classList.toggle('on', acesa); barras[i]._on = acesa; }
-    }
-    if (marca){
-      var r = esp.getBoundingClientRect();
-      marca.style.top = (16 + p * (r.height - 32 - 22)) + 'px';
-    }
   }
   function pedirVolume(){ if (!pedido){ pedido = true; requestAnimationFrame(volume); } }
   addEventListener('scroll', pedirVolume, {passive:true});
@@ -1282,11 +1200,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   volume();
 
   /* ---- topbar + barra fixa ---- */
-  var top = document.getElementById('top'), sticky = document.getElementById('sticky'),
-      oferta = document.getElementById('oferta');
+  var sticky = document.getElementById('sticky'), oferta = document.getElementById('oferta');
   function onScroll(){
     var y = window.scrollY, r = oferta.getBoundingClientRect();
-    top.classList.toggle('on', y > 560);
     sticky.classList.toggle('on', y > 560 && !(r.top < innerHeight && r.bottom > 0));
   }
   addEventListener('scroll', onScroll, {passive:true}); onScroll();
@@ -1372,18 +1288,20 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
   (function(){
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var N = 34, GAP = 0.7, BW = (100 - (N-1)*GAP) / N;
-    /* envelope curvo CRESCENTE: começa raso na esquerda e sobe até a direita.
-       t^1.55 dá curva acelerando no fim (rampa reta ficava mecânica), e o
-       seno por cima devolve textura de equalizador pra não virar triângulo. */
+    /* envelope curvo CRESCENTE + irregularidade.
+       t^1.6 dá a subida acelerando no fim. A textura é um hash determinístico
+       (mesma cara em todo carregamento) e NÃO some pra direita: o topo tem que
+       ser bagunçado igual ao resto, senão vira rampa arrumada. Só a última é
+       forçada pro alto, pra curva fechar no pico. */
+    function ruidinho(i){ var x = Math.sin(i * 12.9898) * 43758.5453; return x - Math.floor(x); }
     var alturas = [];
     for (var i = 0; i < N; i++){
       var t = i / (N - 1);
-      var env = 0.035 + 0.965 * Math.pow(t, 1.75);
-      /* a textura vai sumindo pra direita: senão o seno derruba justo a
-         última barra e a ponta do crescimento perde o pico. */
-      var tex = 0.80 + 0.20 * Math.abs(Math.sin(i * 1.9));
-      tex = 1 - (1 - tex) * (1 - Math.pow(t, 2));
-      alturas.push(Math.max(4, Math.round(env * tex * 100)));
+      var env = 0.04 + 0.96 * Math.pow(t, 1.6);
+      var tex = 0.58 + 0.42 * ruidinho(i);
+      var h = env * tex * 100;
+      if (i === N - 1) h = 100;
+      alturas.push(Math.max(4, Math.round(h)));
     }
 
     var faixa = document.createElement('div');
@@ -1403,8 +1321,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     /* clone do conteúdo: só texto, sem mídia nem elementos fixos */
     var eco = document.createElement('div'); eco.className = 'eco';
     Array.prototype.forEach.call(document.body.children, function(n){
-      if (n.classList && (n.classList.contains('top') || n.classList.contains('sticky') ||
-          n.classList.contains('espinha') || n.classList.contains('eqfix'))) return;
+      if (n.classList && (n.classList.contains('sticky') ||
+           n.classList.contains('eqfix'))) return;
       if (n.tagName === 'SCRIPT') return;
       var c = n.cloneNode(true);
       c.querySelectorAll('[id]').forEach(function(x){ x.removeAttribute('id'); });
