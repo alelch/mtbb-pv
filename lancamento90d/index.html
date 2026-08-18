@@ -292,11 +292,9 @@ p{margin:0 0 1.05em}
 .press p{text-align:center;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:0 0 16px;font-weight:700}
 .press-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(16px,4vw,42px)}
 /* logos nas cores originais, como o cliente pediu.
-   Exceção: o arquivo da Record é BRANCO puro (veio da lancamento-v1, que é
-   escura) e sumiria no fundo claro. Invertido ele fica preto, coerente com
-   os outros, até chegar o original colorido. */
+   Os arquivos coloridos estavam em /assets na raiz do repo o tempo todo; os
+   da lancamento-v1 eram as versões monocromáticas feitas pra página escura. */
 .press-row img{height:30px;width:auto}
-.press-row img.inverter{filter:invert(1)}
 @media(max-width:600px){.press-row img{height:22px}}
 
 /* ---------- agitação ---------- */
@@ -737,14 +735,14 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <p>Como visto em</p>
     <div class="press-row">
-      <img src="assets/cbn-DQPrTLvx.webp" alt="CBN" loading="lazy">
-      <img src="assets/band-news-DFdMzy7_.webp" alt="Band News" loading="lazy">
-      <img src="assets/band-DzrsFJN4.webp" alt="Band" loading="lazy">
-      <img src="assets/record-tv-CTFv1JX2.webp" alt="Record TV" loading="lazy" class="inverter">
-      <img src="assets/valor-economico-BCIBElmV.webp" alt="Valor Econômico" loading="lazy">
-      <img src="assets/publish-news-CG1B5ySC.webp" alt="PublishNews" loading="lazy">
-      <img src="assets/radio-senado-CiVYEkPp.webp" alt="Rádio Senado" loading="lazy">
-      <img src="assets/vida-simples-CQ6ErG-k.webp" alt="Vida Simples" loading="lazy">
+      <img src="assets/logo-cbn.webp" alt="CBN" loading="lazy">
+      <img src="assets/logo-band-news.webp" alt="Band News" loading="lazy">
+      <img src="assets/logo-band.webp" alt="Band" loading="lazy">
+      <img src="assets/logo-record-tv.webp" alt="Record TV" loading="lazy">
+      <img src="assets/logo-valor-economico.webp" alt="Valor Econômico" loading="lazy">
+      <img src="assets/logo-publishnews.webp" alt="PublishNews" loading="lazy">
+      <img src="assets/logo-radio-senado.webp" alt="Rádio Senado" loading="lazy">
+      <img src="assets/logo-vida-simples.webp" alt="Vida Simples" loading="lazy">
     </div>
   </div>
 </div>
