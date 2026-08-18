@@ -439,7 +439,10 @@ p{margin:0 0 1.05em}
   [data-etapa="5"]{--ac:var(--accent)}
 }
 [data-etapa] .eyebrow{color:var(--ac)}
-[data-etapa] h1 em,[data-etapa] .big i{color:var(--ac)}
+[data-etapa] .big i{color:var(--ac)}
+/* o destaque do H1 é exceção à saturação progressiva, como o botão de compra:
+   é a palavra que carrega a promessa e não pode nascer apagada. */
+[data-etapa] h1 em{color:var(--accent)}
 [data-etapa] .checks li:before{background:var(--ac)}
 [data-etapa] .checks li:after{border-color:var(--ac)}
 [data-etapa] .card li:before{background:var(--ac)}
