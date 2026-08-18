@@ -546,13 +546,13 @@ html.js .onda.in i{transform:scaleY(1);
    sobre o coral daria azul, cor fora da paleta.
    Só transform muda por frame — nada de recalcular máscara.
    ============================================================ */
-@media(min-width:901px){footer{padding-bottom:calc(var(--eqh,132px) + 20px)}}
-.eqfix{position:fixed;left:0;right:0;bottom:0;height:var(--eqh,132px);z-index:35;pointer-events:none;overflow:hidden;
+@media(min-width:901px){footer{padding-bottom:calc(var(--eqh,172px) + 20px)}}
+.eqfix{position:fixed;left:0;right:0;bottom:0;height:var(--eqh,172px);z-index:35;pointer-events:none;overflow:hidden;
   opacity:0;transition:opacity .5s ease}
 .eqfix .bars{position:absolute;inset:0}
 .eqfix .bars i{position:absolute;bottom:0;background:var(--accent);opacity:.7;border-radius:5px 5px 0 0;
   transform-origin:bottom center;
-  transform:scaleY(calc(.16 + .84*var(--amp)));transition:transform .12s linear}
+  transform:scaleY(calc(.14 + .86*var(--amp)));transition:transform .12s linear}
 /* cópia do conteúdo, em branco, recortada nas barras */
 .eqfix .eco{position:absolute;left:0;top:0;width:100%;will-change:transform}
 .eqfix .eco *{color:#fff!important;background:transparent!important;border-color:transparent!important;
@@ -1378,9 +1378,12 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     var alturas = [];
     for (var i = 0; i < N; i++){
       var t = i / (N - 1);
-      var env = 0.05 + 0.95 * Math.pow(t, 1.55);
-      var tex = 0.76 + 0.24 * Math.abs(Math.sin(i * 1.9));
-      alturas.push(Math.max(5, Math.round(env * tex * 100)));
+      var env = 0.035 + 0.965 * Math.pow(t, 1.75);
+      /* a textura vai sumindo pra direita: senão o seno derruba justo a
+         última barra e a ponta do crescimento perde o pico. */
+      var tex = 0.80 + 0.20 * Math.abs(Math.sin(i * 1.9));
+      tex = 1 - (1 - tex) * (1 - Math.pow(t, 2));
+      alturas.push(Math.max(4, Math.round(env * tex * 100)));
     }
 
     var faixa = document.createElement('div');
@@ -1435,7 +1438,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion
     /* a barra fixa do celular fica acima da faixa pra não brigar */
     /* só sobe a barra de compra onde a faixa realmente existe */
     var sticky = document.getElementById('sticky');
-    if (sticky && innerWidth > 900) sticky.style.bottom = 'calc(var(--eqh,132px) - 6px)';
+    if (sticky && innerWidth > 900) sticky.style.bottom = 'calc(var(--eqh,172px) - 6px)';
   })();
 
   /* ---- FAQ: um aberto por vez ---- */
