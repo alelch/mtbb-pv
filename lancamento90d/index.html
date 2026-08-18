@@ -486,11 +486,84 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
 .sticky .btn{flex:1;padding:14px 16px;font-size:.94rem}
 @media(max-width:760px){.sticky{display:flex}}
 
-/* ---------- reveal (à prova de falha) ----------
-   Sem JS, sem IntersectionObserver ou com erro, tudo fica VISÍVEL. */
-html.js .rv{opacity:0;transform:translateY(14px)}
-html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
-@media(prefers-reduced-motion:reduce){html.js .rv,html.js .rv.in{opacity:1;transform:none;transition:none}}
+/* ============================================================
+   MOVIMENTO
+   Curva única (expo-out longa) pra tudo. Nada aparece de repente:
+   entra subindo, em sequência, e o que é dado CRESCE no lugar.
+   À prova de falha: só esconde se o JS provar que consegue revelar.
+   ============================================================ */
+:root{ --ease:cubic-bezier(.16,1,.3,1); --dur:.9s }
+
+html.js .rv{opacity:0;transform:translate3d(0,22px,0) scale(.985);will-change:opacity,transform}
+html.js .rv.in{opacity:1;transform:none;
+  transition:opacity var(--dur) var(--ease), transform var(--dur) var(--ease)}
+
+/* filhos entram em cascata: o índice vem do JS */
+html.js [data-stg]>*{opacity:0;transform:translate3d(0,18px,0)}
+html.js [data-stg].in>*{opacity:1;transform:none;
+  transition:opacity .8s var(--ease) calc(var(--i,0)*90ms),
+             transform .8s var(--ease) calc(var(--i,0)*90ms)}
+
+/* as faixas dos atos NASCEM da esquerda, uma depois da outra.
+   clip-path em vez de scaleX pra não deformar o texto de dentro. */
+html.js .faixa{clip-path:inset(0 100% 0 0)}
+html.js .reg.in .faixa{clip-path:inset(0 0 0 0);
+  transition:clip-path 1.15s var(--ease) calc(var(--i,0)*220ms)}
+html.js .faixa i{opacity:0;transform:scale(.4)}
+html.js .reg.in .faixa i{opacity:1;transform:none;
+  transition:opacity .5s var(--ease) calc(var(--i,0)*220ms + .5s),
+             transform .6s cubic-bezier(.34,1.56,.64,1) calc(var(--i,0)*220ms + .5s)}
+
+/* o selo do ciclo dá uma volta ao entrar */
+html.js .ciclo b{opacity:0;transform:rotate(-140deg)}
+html.js .reg.in .ciclo b{opacity:1;transform:none;
+  transition:opacity .6s var(--ease) 1.1s, transform 1.1s var(--ease) 1.1s}
+
+/* hero entra na carga, sem esperar scroll */
+html.js .hero-logo,html.js .hero h1,html.js .hero .sub,
+html.js .hero .player,html.js .hero-cta,html.js .stats{
+  opacity:0;transform:translate3d(0,20px,0)}
+html.js body.ready .hero-logo,html.js body.ready .hero h1,html.js body.ready .hero .sub,
+html.js body.ready .hero .player,html.js body.ready .hero-cta,html.js body.ready .stats{
+  opacity:1;transform:none;
+  transition:opacity 1s var(--ease) var(--d), transform 1s var(--ease) var(--d)}
+.hero-logo{--d:.05s}.hero h1{--d:.15s}.hero .sub{--d:.28s}
+.hero .player{--d:.4s}.hero-cta{--d:.54s}.stats{--d:.66s}
+
+/* o player ganha profundidade no hover */
+.player{transition:transform .9s var(--ease), box-shadow .9s var(--ease)}
+.player:hover{transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(0,0,0,.8)}
+
+/* cards levantam */
+.card,.mcard,.caso{transition:transform .5s var(--ease), box-shadow .5s var(--ease)}
+.card:hover,.mcard:hover,.caso:hover{transform:translateY(-3px);
+  box-shadow:0 18px 40px -26px rgba(48,48,48,.5)}
+
+/* botão com resposta física */
+.btn{transition:transform .35s var(--ease), background .3s var(--ease), box-shadow .35s var(--ease)}
+.btn:active{transform:scale(.97)}
+
+/* números contam sem pular o layout */
+.stats b{font-variant-numeric:tabular-nums}
+
+/* trava de emergência: se em 4s algo não animou, o conteúdo aparece de qualquer jeito.
+   Mesma lista da regra de movimento reduzido. */
+html.js.sem-motion .rv,html.js.sem-motion .rv.in,
+html.js.sem-motion [data-stg]>*,html.js.sem-motion [data-stg].in>*,
+html.js.sem-motion .faixa,html.js.sem-motion .faixa i,html.js.sem-motion .ciclo b,
+html.js.sem-motion .hero-logo,html.js.sem-motion .hero h1,html.js.sem-motion .hero .sub,
+html.js.sem-motion .hero .player,html.js.sem-motion .hero-cta,html.js.sem-motion .stats{
+  opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
+
+@media(prefers-reduced-motion:reduce){
+  html.js .rv,html.js .rv.in,html.js [data-stg]>*,html.js [data-stg].in>*,
+  html.js .faixa,html.js .reg.in .faixa,html.js .faixa i,html.js .reg.in .faixa i,
+  html.js .ciclo b,html.js .reg.in .ciclo b,
+  html.js .hero-logo,html.js .hero h1,html.js .hero .sub,html.js .hero .player,
+  html.js .hero-cta,html.js .stats{
+    opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -522,10 +595,10 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
     </div>
 
     <div class="stats">
-      <div><b>+800</b><span>autores lançados</span></div>
-      <div><b>+10M</b><span>livros vendidos</span></div>
-      <div><b>+4.400</b><span>alunos</span></div>
-      <div><b>+15</b><span>anos nos bastidores</span></div>
+      <div><b data-n="800" data-pre="+">+800</b><span>autores lançados</span></div>
+      <div><b data-n="10" data-pre="+" data-pos="M">+10M</b><span>livros vendidos</span></div>
+      <div><b data-n="4400" data-pre="+">+4.400</b><span>alunos</span></div>
+      <div><b data-n="15" data-pre="+">+15</b><span>anos nos bastidores</span></div>
     </div>
   </div>
 </header>
@@ -578,7 +651,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
         </div>
       </div>
 
-      <div class="ato-cards">
+      <div class="ato-cards" data-stg>
         <div class="mcard">
           <h3>Ato 1 · Desejo</h3>
           <p>O leitor compra primeiro o autor, depois o livro. Quem é ele, com quem você conta, e como a obra vai existir no mundo.</p>
@@ -627,7 +700,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
       <h2>Você não vai assistir. Você vai construir.</h2>
       <p class="lead" style="margin-top:14px">Com o seu livro e as suas datas na frente, do primeiro dia ao nonagésimo.</p>
     </div>
-    <div class="grid4">
+    <div class="grid4" data-stg>
       <div class="card rv">
         <h3>Plano de lançamento personalizado</h3>
         <ul><li>Cronograma estratégico de 90 dias</li><li>Metas reais de venda</li><li>Clareza para decidir entre editora ou publicação independente</li></ul>
@@ -685,7 +758,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
       <h2>O mesmo método, em situações diferentes</h2>
       <p class="lead" style="margin-top:14px">Não é sobre já ter audiência, nem sobre o livro ser novo.</p>
     </div>
-    <div class="casos rv">
+    <div class="casos rv" data-stg>
       <div class="caso">
         <div class="q">Nunca tinha lançado nada</div>
         <p><b>Ingrid</b> veio dos artigos científicos, sem nenhuma experiência com o mercado editorial.</p>
@@ -709,7 +782,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
 <section class="white">
   <div class="wrap">
     <div class="narrow rv"><p class="eyebrow">Quem já lançou assim</p><h2>Não é sorte. É estratégia.</h2></div>
-    <div class="depos rv">
+    <div class="depos rv" data-stg>
       <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de aluno" loading="lazy">
       <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de aluno" loading="lazy">
       <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de aluno" loading="lazy">
@@ -734,10 +807,10 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
         <p class="lead">Depois de anos nos bastidores das grandes editoras, passou a ensinar autores independentes a fazer o que o mercado raramente explica: lançar com estratégia, metas e estrutura.</p>
         <p class="lead">Criadora do Método The Book Business, já ajudou mais de <strong>4.400 alunos</strong> a sair do improviso e entrar no mercado com plano.</p>
         <div class="nums">
-          <div><b>+15 anos</b><span>no mercado literário</span></div>
-          <div><b>+800</b><span>autores lançados</span></div>
-          <div><b>+4.400</b><span>alunos</span></div>
-          <div><b>+10M</b><span>livros vendidos</span></div>
+          <div><b data-n="15" data-pre="+" data-pos=" anos">+15 anos</b><span>no mercado literário</span></div>
+          <div><b data-n="800" data-pre="+">+800</b><span>autores lançados</span></div>
+          <div><b data-n="4400" data-pre="+">+4.400</b><span>alunos</span></div>
+          <div><b data-n="10" data-pre="+" data-pos="M">+10M</b><span>livros vendidos</span></div>
         </div>
       </div>
     </div>
@@ -922,14 +995,66 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6
   addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
   /* ---- reveal: só anima se conseguir revelar de volta; rede de segurança em 4s ---- */
-  var alvos = document.querySelectorAll('.rv');
+  /* ============================================================
+     MOVIMENTO
+     Só liga a animação se o navegador provar que consegue revelar de volta.
+     Rede de segurança em 4s: nenhuma seção pode sumir por causa de animação.
+     ============================================================ */
+  var alvos = document.querySelectorAll('.rv, .reg, [data-stg]');
+
   if ('IntersectionObserver' in window) {
     document.documentElement.classList.add('js');
+
+    /* cascata: cada filho recebe seu índice, e cada faixa o seu */
+    document.querySelectorAll('[data-stg]').forEach(function(p){
+      [].forEach.call(p.children, function(c,i){ c.style.setProperty('--i', i); });
+    });
+    document.querySelectorAll('.reg .faixa').forEach(function(f,i){ f.style.setProperty('--i', i); });
+
+    /* os números contam em vez de aparecer prontos */
+    function contar(el){
+      var fim = parseFloat(el.getAttribute('data-n')),
+          pre = el.getAttribute('data-pre') || '',
+          pos = el.getAttribute('data-pos') || '',
+          t0 = null, dur = 1500;
+      function passo(t){
+        if (!t0) t0 = t;
+        var p = Math.min((t - t0) / dur, 1);
+        var e = 1 - Math.pow(1 - p, 4);
+        el.textContent = pre + Math.round(fim * e).toLocaleString('pt-BR') + pos;
+        if (p < 1) requestAnimationFrame(passo);
+      }
+      requestAnimationFrame(passo);
+    }
+
     var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        e.target.querySelectorAll('[data-n]').forEach(contar);
+        io.unobserve(e.target);
+      });
     }, {rootMargin:'0px 0px -8% 0px', threshold:.05});
     alvos.forEach(function(el){ io.observe(el); });
-    setTimeout(function(){ alvos.forEach(function(el){ el.classList.add('in'); }); }, 4000);
+    setTimeout(function(){
+      alvos.forEach(function(el){ el.classList.add('in'); });
+      document.body.classList.add('ready');
+      /* não basta pôr a classe: se a transição não rodou, o elemento fica no
+         estado inicial. Aqui a gente desliga a animação e trava no estado final. */
+      document.documentElement.classList.add('sem-motion');
+    }, 4000);
+
+    /* hero entra na carga, sem depender de scroll.
+       NÃO usar só requestAnimationFrame: em aba oculta ele não dispara, e a
+       dobra ficaria invisível até a pessoa focar a aba. O setTimeout garante. */
+    var heroPronto = false;
+    function acordarHero(){
+      if (heroPronto) return; heroPronto = true;
+      document.body.classList.add('ready');
+      document.querySelectorAll('.stats [data-n]').forEach(contar);
+    }
+    setTimeout(acordarHero, 60);
+    requestAnimationFrame(function(){ requestAnimationFrame(acordarHero); });
   }
 
   /* ---- FAQ: um aberto por vez ---- */
