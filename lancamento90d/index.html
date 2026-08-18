@@ -313,23 +313,9 @@ p{margin:0 0 1.05em}
    Os atos se sobrepõem: o primeiro não termina quando o segundo começa.
    Por isso é faixa acumulando, não caixa em sequência.
    ============================================================ */
-.atos{margin-top:40px}
-.ciclo-nota{max-width:58ch;margin:30px auto 0;text-align:center;color:var(--soft);
-  font-size:.98rem;line-height:1.6;padding-top:26px;border-top:1px solid var(--border)}
-.ato-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
-@media(max-width:860px){
-  .ato-cards{grid-template-columns:1fr}
-  .reg{display:block}
-  .reg .eixo{display:none}
-  .faixa{width:100%!important;height:auto;padding:14px 18px;border-radius:14px;white-space:normal}
-  .f1,.f2,.f3{grid-column:auto}
-}
-.mcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 22px;box-shadow:var(--shadow)}
-.mcard .alvo{display:block;font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--ac,var(--accent));margin-bottom:9px}
-.mcard h3{font-size:1.24rem;margin-bottom:10px}
-.mcard p{color:var(--soft);font-size:.95rem;margin:0 0 16px;line-height:1.55}
-.mcard .voce{border-top:1px dashed var(--line);padding-top:13px;margin:0;font-size:.95rem;color:var(--ink);font-weight:600}
+/* a nota do ciclo sobreviveu à fusão e agora fecha a faixa de tempo */
+.ciclo-nota{max-width:58ch;margin:26px auto 0;text-align:center;color:var(--soft);
+  font-size:.98rem;line-height:1.6}
 /* ============ AS TRÊS BOLHAS ============
    A bolha acesa usa o laranja CHEIO, fora da rampa de saturação: é o objeto
    focal da seção e um diagrama dessaturado lê como quebrado, não como sistema. */
@@ -369,6 +355,39 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .bb-mini ellipse{fill:none;stroke:var(--border);stroke-width:1.6}
 .bb-mini .viva{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.10)}
 .bb-mini .feita{stroke:rgba(252,120,60,.34);fill:rgba(252,120,60,.05)}
+/* o ato que fura a bolha, dentro do próprio passo: causa colada no efeito */
+.motor{margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.motor .kick{display:block;font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:#A8A5A0;margin-bottom:7px;
+  transition:color .6s var(--ease)}
+.bb-passo.viva .motor .kick{color:var(--accent)}
+.motor b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.025em;font-size:1.12rem;color:var(--ink);margin-bottom:8px}
+.motor p{color:var(--soft);font-size:.97rem;line-height:1.55;margin:0 0 10px;max-width:44ch}
+.motor .quando{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:.74rem;
+  font-weight:700;letter-spacing:.04em;color:var(--ink);
+  background:rgba(252,120,60,.12);border-radius:99px;padding:5px 12px}
+
+/* A FAIXA DOS 90 DIAS
+   Fica aqui porque é a única coisa que o desenho das bolhas não consegue
+   dizer: que os atos não são uma fila, eles se sobrepõem. */
+.coda90{margin-top:8px;padding-top:44px;border-top:1px solid var(--border)}
+.coda-t{max-width:56ch;margin:0 auto 28px;text-align:center;color:var(--soft);
+  font-size:1.02rem;line-height:1.6}
+.reg90{display:grid;grid-template-columns:repeat(12,1fr);gap:8px 4px}
+.eixo90{grid-column:1/-1;display:flex;justify-content:space-between;margin-bottom:4px;
+  font-family:'Space Grotesk',sans-serif;font-size:.64rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:#A8A5A0}
+.fx{display:flex;align-items:center;gap:10px;height:48px;padding:0 16px;border-radius:12px;
+  background:var(--accent);color:#fff;font-family:'Space Grotesk',sans-serif;
+  font-weight:700;font-size:.96rem;letter-spacing:-.02em;white-space:nowrap;overflow:hidden}
+.fx i{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;font-size:.72rem;font-style:normal}
+.fx em{font-style:normal;font-weight:400;font-family:'DM Sans',sans-serif;
+  font-size:.85rem;opacity:.78;margin-left:2px}
+.f1{grid-column:1/-1}
+.f2{grid-column:5/-1}
+.f3{grid-column:9/-1}
 .bb-fecho{text-align:center;margin-top:34px;padding-top:34px;border-top:1px solid var(--border)}
 .bb-fecho b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
   letter-spacing:-.03em;font-size:clamp(1.35rem,3.4vw,2.05rem);color:var(--ink)}
@@ -380,6 +399,11 @@ html.js .bb-passo:not(.viva){opacity:.26}
   .bb-palco{display:none}
   .bb-trilho{padding:0}
   .bb-mini{display:block}
+  /* No estreito a sobreposição não cabe em colunas: cada faixa ocupa a linha
+     inteira e o "entra no 30" carrega a informação que o offset dava. */
+  .f1,.f2,.f3{grid-column:1/-1}
+  .eixo90{display:none}
+  .fx{white-space:normal;height:auto;padding:12px 16px}
   .bb-passo{min-height:auto;padding:0 0 40px}
   html.js .bb-passo:not(.viva){opacity:1}
 }
@@ -651,8 +675,8 @@ html.js body.ready .hero .player,html.js body.ready .stats{
 .player:hover{transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(0,0,0,.8)}
 
 /* cards levantam */
-.card,.mcard,.caso{transition:transform .5s var(--ease), box-shadow .5s var(--ease)}
-.card:hover,.mcard:hover,.caso:hover{transform:translateY(-3px);
+.card,.caso{transition:transform .5s var(--ease), box-shadow .5s var(--ease)}
+.card:hover,.caso:hover{transform:translateY(-3px);
   box-shadow:0 18px 40px -26px rgba(48,48,48,.5)}
 
 /* botão com resposta física */
@@ -757,69 +781,57 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       <div class="bb-trilho">
         <div class="bb-passo viva">
           <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="" cx="86" cy="52" rx="94" ry="48"/><ellipse class="" cx="68" cy="52" rx="66" ry="37"/><ellipse class="viva" cx="46" cy="52" rx="43" ry="26"/></svg>
-          <p class="eyebrow">Bolha 1</p>
+          <p class="eyebrow">Bolha 1 · você é invisível</p>
           <h3>Amigos e família</h3>
           <p>Quem já te conhece compra por afeto, não por interesse. Vende trinta, cinquenta exemplares, faz uma semana de barulho e para. É onde a esmagadora maioria dos livros termina.</p>
-          <p class="vira">Aqui você é invisível</p>
+          <div class="motor">
+            <span class="kick">O que tira você daqui</span>
+            <b>Ato 1 · Desejo</b>
+            <p>O leitor compra primeiro o autor, depois o livro. Quem é ele, com quem você conta, e como a obra vai existir no mundo.</p>
+            <span class="quando">Começa no dia 0 e não para até o fim</span>
+          </div>
         </div>
         <div class="bb-passo">
           <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="" cx="86" cy="52" rx="94" ry="48"/><ellipse class="viva" cx="68" cy="52" rx="66" ry="37"/><ellipse class="feita" cx="46" cy="52" rx="43" ry="26"/></svg>
-          <p class="eyebrow">Bolha 2</p>
+          <p class="eyebrow">Bolha 2 · você passa a ser esperado</p>
           <h3>Desconhecidos</h3>
           <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Não acontece por acaso: acontece quando existe desejo antes de existir livro na prateleira.</p>
-          <p class="vira">Aqui você passa a ser esperado</p>
+          <div class="motor">
+            <span class="kick">O que enche essa bolha</span>
+            <b>Ato 2 · Antecipação</b>
+            <p>Livro que estreia vendendo começou a vender semanas antes, quando ainda nem existia nas lojas. Revelar, mobilizar a rede, desenhar a pré-venda.</p>
+            <span class="quando">Entra no dia 30, por cima do primeiro</span>
+          </div>
         </div>
         <div class="bb-passo">
           <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="viva" cx="86" cy="52" rx="94" ry="48"/><ellipse class="feita" cx="68" cy="52" rx="66" ry="37"/><ellipse class="feita" cx="46" cy="52" rx="43" ry="26"/></svg>
-          <p class="eyebrow">Bolha 3</p>
+          <p class="eyebrow">Bolha 3 · você é lido</p>
           <h3>Boca a boca</h3>
           <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito alguma coisa por ele.</p>
-          <p class="vira">Aqui você é lido</p>
+          <div class="motor">
+            <span class="kick">O que acende essa bolha</span>
+            <b>Ato 3 · Venda</b>
+            <p>Pré-venda aberta, rede mobilizada, pedidos concentrados na primeira semana. E o roteiro dos trinta dias seguintes, para o livro não morrer.</p>
+            <span class="quando">Dia 60 ao 90, e os trinta dias seguintes</span>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="coda90 rv">
+      <p class="coda-t">Os três atos não são uma fila. Cada um entra num momento e, a partir daí, todos correm juntos.</p>
+      <div class="reg90">
+        <div class="eixo90"><span>dia 0</span><span>30</span><span>60</span><span>90</span></div>
+        <div class="fx f1"><i>1</i>Desejo <em>e não para</em></div>
+        <div class="fx f2"><i>2</i>Antecipação <em>entra no 30</em></div>
+        <div class="fx f3"><i>3</i>Venda <em>entra no 60</em></div>
+      </div>
+      <p class="ciclo-nota">No fim dos noventa dias os três estão girando ao mesmo tempo. E aí o ciclo recomeça, com os três já em movimento.</p>
     </div>
 
     <div class="bb-fecho rv">
       <b>De invisível a lido. Em noventa dias.</b>
-      <span>O plano é a ordem em que as três bolhas se furam.</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ O SISTEMA DOS TRÊS ATOS ============ -->
-<section class="white" id="metodo" data-etapa="2">
-  <div class="wrap">
-    <div class="narrow rv" style="margin:0 auto;text-align:center">
-      <p class="eyebrow">O plano</p>
-      <h2>Os Três Atos</h2>
-      <p class="lead" style="margin-top:14px">Cada bolha se fura de um jeito. Lançar não é um dia, e também não é uma fila de etapas: são três atos que começam em momentos diferentes e, a partir daí, correm juntos até o fim dos noventa dias.</p>
-    </div>
-
-    <div class="atos rv">
-      <div class="ato-cards" data-stg>
-        <div class="mcard">
-          <span class="alvo">Fura a bolha 1</span>
-          <h3>Ato 1 · Desejo</h3>
-          <p>O leitor compra primeiro o autor, depois o livro. Quem é ele, com quem você conta, e como a obra vai existir no mundo.</p>
-          <p class="voce">Dia 0 ao 90 · começa primeiro e não para</p>
-        </div>
-        <div class="mcard">
-          <span class="alvo">Fura a bolha 2</span>
-          <h3>Ato 2 · Antecipação</h3>
-          <p>Livro que estreia vendendo começou a vender semanas antes, quando ainda nem existia nas lojas. Revelar, mobilizar a rede, desenhar a pré-venda.</p>
-          <p class="voce">Dia 30 ao 90 · entra por cima, sem substituir</p>
-        </div>
-        <div class="mcard">
-          <span class="alvo">Acende a bolha 3</span>
-          <h3>Ato 3 · Venda</h3>
-          <p>Pré-venda aberta, rede mobilizada, pedidos concentrados na primeira semana. E o roteiro dos trinta dias seguintes, para o livro não morrer.</p>
-          <p class="voce">Dia 60 ao 90 · e os trinta dias seguintes</p>
-        </div>
-      </div>
-
-      <div class="onda viva rv"><i style="height:26%;--k:0"></i><i style="height:51%;--k:1"></i><i style="height:79%;--k:2"></i><i style="height:92%;--k:3"></i><i style="height:79%;--k:4"></i><i style="height:51%;--k:5"></i><i style="height:26%;--k:6"></i><i style="height:13%;--k:7"></i><i style="height:48%;--k:8"></i><i style="height:51%;--k:9"></i><i style="height:41%;--k:10"></i><i style="height:25%;--k:11"></i><i style="height:16%;--k:12"></i><i style="height:20%;--k:13"></i><i style="height:34%;--k:14"></i><i style="height:48%;--k:15"></i><i style="height:51%;--k:16"></i><i style="height:41%;--k:17"></i><i style="height:25%;--k:18"></i><i style="height:16%;--k:19"></i><i style="height:20%;--k:20"></i><i style="height:34%;--k:21"></i><i style="height:48%;--k:22"></i><i style="height:51%;--k:23"></i><i style="height:40%;--k:24"></i><i style="height:25%;--k:25"></i><i style="height:16%;--k:26"></i><i style="height:20%;--k:27"></i><i style="height:35%;--k:28"></i><i style="height:48%;--k:29"></i></div>
-      <div class="onda-leg"><span>dia 0</span><span>e continua</span></div>
-      <p class="ciclo-nota">No fim dos noventa dias os três atos estão girando ao mesmo tempo. E aí o ciclo recomeça, com os três já em movimento.</p>
+      <span>Uma bolha de cada vez, um ato de cada vez.</span>
     </div>
   </div>
 </section>
