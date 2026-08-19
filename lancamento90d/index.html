@@ -437,11 +437,25 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
    potencializar. A linha tracejada mostra o que acontece sem plano. */
 .curva{margin-top:clamp(34px,4.4vw,54px)}
 .curva svg{width:100%;height:auto;overflow:visible}
-.curva .linha{stroke:#fff;stroke-width:3.5;stroke-linecap:round}
+.curva .linha{stroke-width:3.5;stroke-linecap:round;fill:none}
+/* uma cor por ato, subindo de intensidade: o ultimo e' o branco, que e' o
+   maior contraste possivel sobre esse verde. Todos passam de 3:1. */
+.curva .l1{stroke:#7FD4AE}   /* crie desejo      5,17:1 */
+.curva .l2{stroke:#22C07B}   /* gere antecipacao 3,86:1 */
+.curva .l3{stroke:#FFFFFF}   /* lance vendendo   9,11:1 */
+.curva .ar{stroke:none}
+.curva .a1{fill:rgba(127,212,174,.12)}
+.curva .a2{fill:rgba(34,192,123,.15)}
+.curva .a3{fill:rgba(255,255,255,.10)}
+.curva .n1{stroke:#7FD4AE}.curva .n2{stroke:#22C07B}.curva .n3{stroke:#FFFFFF}
+.curva .t1{fill:#7FD4AE}.curva .t2{fill:#22C07B}.curva .t3{fill:#FFFFFF}
 .curva .plana{stroke:rgba(255,255,255,.30);stroke-width:2;stroke-linecap:round}
-.curva .no{fill:var(--verde);stroke:#fff;stroke-width:3.5}
+.curva .no{fill:var(--verde);stroke-width:3.5;
+  opacity:0;transition:opacity .45s var(--ease)}
+html:not(.js) .curva .no,html:not(.js) .curva .cato{opacity:1}
 .curva text{font-family:'Space Grotesk',sans-serif}
-.curva .cato{font-size:17px;font-weight:700;letter-spacing:-.02em;fill:#fff}
+.curva .cato{font-size:17px;font-weight:700;letter-spacing:-.02em;fill:#fff;
+  opacity:0;transition:opacity .45s var(--ease)}
 .curva .cdia{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.45)}
 .curva .ceixo{font-size:11px;font-weight:700;letter-spacing:.16em;
   text-transform:uppercase;fill:rgba(255,255,255,.45)}
@@ -451,7 +465,9 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
 /* a matematica: multiplicacao E' potencializacao, e o zero prova a frase */
 .conta{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;
   font-size:clamp(1.05rem,2.5vw,1.5rem);color:#fff;margin:16px 0 0}
-.conta em{font-style:normal;color:#22C07B;margin:0 .18em}
+.conta em{font-style:normal;color:rgba(255,255,255,.5);margin:0 .18em;font-weight:400}
+.conta b{font-weight:700}
+.conta .c1{color:#7FD4AE}.conta .c2{color:#22C07B}.conta .c3{color:#fff}
 .zero{font-size:.98rem;line-height:1.5;color:rgba(255,255,255,.66);margin:8px 0 0}
 .desfecho{margin-top:22px!important}
 
@@ -488,6 +504,8 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
   .curva .cdia,.curva .ceixo{font-size:17px}
   .curva .csem{font-size:17px}
   .curva-leg{display:grid;gap:10px;list-style:none;margin:20px 0 0;padding:0;text-align:left}
+  .curva-leg i{width:10px;height:10px;border-radius:50%;flex:0 0 auto;align-self:center}
+  .curva-leg .p1{background:#7FD4AE}.curva-leg .p2{background:#22C07B}.curva-leg .p3{background:#fff}
   .curva-leg li{display:flex;align-items:baseline;gap:9px;
     font-family:'Space Grotesk',sans-serif;font-size:1.02rem;color:#fff}
   .curva-leg b{font-weight:700;letter-spacing:-.02em}
@@ -977,18 +995,29 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
            aria-label="Curva de quem conhece o seu livro ao longo de noventa dias, ficando mais íngreme a cada ato que entra">
         <text class="ceixo" x="46" y="24">quem conhece o seu livro</text>
 
+        <defs>
+          <clipPath id="revela"><rect id="revelaR" x="0" y="0" width="900" height="350"/></clipPath>
+          <clipPath id="s1"><rect x="0"   y="0" width="331" height="350"/></clipPath>
+          <clipPath id="s2"><rect x="330" y="0" width="271" height="350"/></clipPath>
+          <clipPath id="s3"><rect x="600" y="0" width="300" height="350"/></clipPath>
+        </defs>
+
         <path class="plana" d="M60,306 L862,298" stroke-dasharray="5 7"/>
         <text class="csem" x="700" y="322">sem plano</text>
 
-        <path class="linha" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44"/>
+        <g clip-path="url(#revela)">
+          <g clip-path="url(#s1)"><path class="ar a1" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44 L862,306 L60,306 Z"/><path class="linha l1" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44"/></g>
+          <g clip-path="url(#s2)"><path class="ar a2" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44 L862,306 L60,306 Z"/><path class="linha l2" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44"/></g>
+          <g clip-path="url(#s3)"><path class="ar a3" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44 L862,306 L60,306 Z"/><path class="linha l3" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44"/></g>
+        </g>
 
-        <circle class="no" cx="60" cy="300" r="7"/>
-        <circle class="no" cx="330" cy="274" r="7"/>
-        <circle class="no" cx="600" cy="197" r="7"/>
+        <circle class="no n1" data-x="60"  cx="60"  cy="300" r="7"/>
+        <circle class="no n2" data-x="330" cx="330" cy="274" r="7"/>
+        <circle class="no n3" data-x="600" cx="600" cy="197" r="7"/>
 
-        <text class="cato" x="74"  y="274">Crie desejo</text>
-        <text class="cato" x="316" y="248" text-anchor="end">Gere antecipação</text>
-        <text class="cato" x="586" y="171" text-anchor="end">Lance vendendo</text>
+        <text class="cato t1" data-x="60"  x="74"  y="274">Crie desejo</text>
+        <text class="cato t2" data-x="330" x="316" y="248" text-anchor="end">Gere antecipação</text>
+        <text class="cato t3" data-x="600" x="586" y="171" text-anchor="end">Lance vendendo</text>
 
         <text class="cdia" x="60"  y="344">DIA 0</text>
         <text class="cdia" x="330" y="344">30</text>
@@ -996,15 +1025,15 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         <text class="cdia" x="862" y="344" text-anchor="end">90</text>
       </svg>
       <ul class="curva-leg">
-        <li><b>Crie desejo</b><span>dia 0</span></li>
-        <li><b>Gere antecipação</b><span>dia 30</span></li>
-        <li><b>Lance vendendo</b><span>dia 60</span></li>
+        <li><i class="p1"></i><b>Crie desejo</b><span>dia 0</span></li>
+        <li><i class="p2"></i><b>Gere antecipação</b><span>dia 30</span></li>
+        <li><i class="p3"></i><b>Lance vendendo</b><span>dia 60</span></li>
       </ul>
     </div>
 
     <div class="remate rv">
       <p class="causa">Um potencializa o outro.</p>
-      <p class="conta">Desejo <em>×</em> Antecipação <em>=</em> Lance vendendo</p>
+      <p class="conta"><b class="c1">Desejo</b> <em>×</em> <b class="c2">Antecipação</b> <em>=</em> <b class="c3">Lance vendendo</b></p>
       <p class="zero">Se qualquer um for zero, o resultado é zero.</p>
       <p class="desfecho">Em noventa dias, o seu livro passa de <span class="serifa">invisível a lido</span>.</p>
     </div>
@@ -1649,6 +1678,45 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     }, t);
   });
   window.__conta=medir;
+})();
+</script>
+<script>
+/* A CURVA SE DESENHA COM A ROLAGEM
+   Um retangulo de recorte cresce da esquerda pra direita e vai revelando a
+   linha e a area juntas. Os pontos e os rotulos acendem quando o desenho
+   passa por eles. Uma variavel de progresso so', em rAF.
+   O markup nasce com o recorte ABERTO, entao sem JS o grafico aparece
+   inteiro em vez de vazio. */
+(function(){
+  var alvo=document.querySelector('.curva'), rev=document.getElementById('revelaR');
+  if(!alvo||!rev) return;
+  var marcas=[].slice.call(document.querySelectorAll('.curva [data-x]'));
+  var X0=60,X1=862,pedido=false,pronto=false;
+  function medir(){
+    pedido=false;
+    var t=alvo.getBoundingClientRect().top;
+    var ini=innerHeight*0.90, fim=innerHeight*0.34;
+    var p=Math.min(Math.max((ini-t)/(ini-fim),0),1);
+    var x=X0+(X1-X0)*p;
+    rev.setAttribute('width', (x+14).toFixed(1));
+    marcas.forEach(function(e){
+      e.style.opacity = (+e.getAttribute('data-x') <= x+2) ? '1' : '0';
+    });
+    if(p>=1) pronto=true;
+  }
+  function pedir(){ if(!pedido){pedido=true;requestAnimationFrame(medir);} }
+  addEventListener('scroll',pedir,{passive:true}); addEventListener('resize',pedir);
+  medir();
+  /* rede propria: o contador e a curva NAO entram na trava global de 4s, que
+     dispara sempre. So' age se a secao ja' esta em tela e mesmo assim parou. */
+  [5000,9000].forEach(function(ms){ setTimeout(function(){
+    if(pronto) return;
+    if(alvo.getBoundingClientRect().top < innerHeight*0.5){
+      rev.setAttribute('width','900');
+      marcas.forEach(function(e){ e.style.opacity='1'; });
+    }
+  }, ms); });
+  window.__curva=medir;
 })();
 </script>
 </body>
