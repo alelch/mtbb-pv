@@ -1,0 +1,73 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Curva · branco, amarelo, vermelho</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{--verde:#14523E}
+*{box-sizing:border-box}
+body{margin:0;background:#0d0d0d;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.rot{background:#fff;color:#3A3A38;padding:11px 22px;font-family:'Space Grotesk',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.rot em{font-style:normal;font-weight:400;letter-spacing:.02em;text-transform:none;opacity:.6;margin-left:12px;font-size:12.5px}
+.v{background:var(--verde);padding:50px 0 38px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+svg{width:100%;height:auto;overflow:visible;display:block}
+text{font-family:'Space Grotesk',sans-serif}
+.cdia,.ceixo{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.45)}
+.csem{font-size:12px;fill:rgba(255,255,255,.42)}
+.cato{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.marco{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.62)}
+.plana{stroke:rgba(255,255,255,.28);stroke-width:2;stroke-dasharray:5 7;fill:none}
+.no{fill:var(--verde);stroke-width:3.5}
+</style></head><body><div id="t"></div>
+<script>
+var W=900,H=350,X0=60,X1=862,Y0=300,Y1=44;
+/* traçado suave desenhado a mao, sem as dobras do modelo */
+var D='M60,300 C170,297 265,290 366,271 C470,251 545,224 618,190 C706,149 792,108 862,44';
+var A=D+' L862,306 L60,306 Z';
+function px(d){return X0+(X1-X0)*(d/90)}
+/* pontos medidos sobre o proprio traçado */
+var P={desejo:[60,300], antec:[452,247], prev:px(68), lance:[862,44]};
+
+function bloco(id,paradas,nota){
+  var stops=paradas.map(function(s){return '<stop offset="'+s[0]+'" stop-color="'+s[1]+'"/>'}).join('');
+  var stopsA=paradas.map(function(s){return '<stop offset="'+s[0]+'" stop-color="'+s[1]+'" stop-opacity="'+s[2]+'"/>'}).join('');
+  return '<svg viewBox="0 0 '+W+' '+H+'" fill="none"><defs>'+
+    '<linearGradient id="L'+id+'" x1="'+X0+'" y1="0" x2="'+X1+'" y2="0" gradientUnits="userSpaceOnUse">'+stops+'</linearGradient>'+
+    '<linearGradient id="A'+id+'" x1="'+X0+'" y1="0" x2="'+X1+'" y2="0" gradientUnits="userSpaceOnUse">'+stopsA+'</linearGradient>'+
+    '<linearGradient id="F'+id+'" x1="0" y1="'+Y1+'" x2="0" y2="'+Y0+'" gradientUnits="userSpaceOnUse">'+
+      '<stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'+
+    '<mask id="M'+id+'"><rect x="0" y="0" width="900" height="350" fill="url(#F'+id+')"/></mask>'+
+    '</defs>'+
+    '<text class="ceixo" x="46" y="20">quem conhece o seu livro</text>'+
+    '<path class="plana" d="M'+X0+',306 L'+X1+',298"/>'+
+    '<text class="csem" x="690" y="322">sem plano</text>'+
+    '<g mask="url(#M'+id+')"><path d="'+A+'" fill="url(#A'+id+')"/></g>'+
+    /* pre-venda: tracejada vertical entre antecipacao e lancamento */
+    '<line x1="'+P.prev+'" y1="34" x2="'+P.prev+'" y2="306" stroke="rgba(255,255,255,.45)" stroke-width="1.5" stroke-dasharray="6 6"/>'+
+    '<text class="marco" x="'+(P.prev-12)+'" y="132" text-anchor="end">PRÉ-VENDA</text>'+
+    '<path d="'+D+'" stroke="url(#L'+id+')" stroke-width="4" stroke-linecap="round"/>'+
+    '<circle class="no" cx="'+P.desejo[0]+'" cy="'+P.desejo[1]+'" r="7" stroke="'+paradas[0][1]+'"/>'+
+    '<circle class="no" cx="'+P.antec[0]+'" cy="'+P.antec[1]+'" r="7" stroke="'+paradas[1][1]+'"/>'+
+    '<circle cx="'+P.lance[0]+'" cy="'+P.lance[1]+'" r="9" fill="'+paradas[2][1]+'" stroke="'+paradas[2][1]+'" stroke-width="3.5"/>'+
+    '<text class="cato" x="74" y="274" fill="'+paradas[0][1]+'">Crie desejo</text>'+
+    '<text class="cato" x="'+(P.antec[0]-14)+'" y="'+(P.antec[1]-24)+'" text-anchor="end" fill="'+paradas[1][1]+'">Gere antecipação</text>'+
+    '<text class="cato" x="'+(X1-16)+'" y="'+(Y1-16)+'" text-anchor="end" fill="'+paradas[2][1]+'">Lance vendendo</text>'+
+    '<text class="cdia" x="'+X0+'" y="336">DIA 0</text><text class="cdia" x="'+px(30)+'" y="336">30</text>'+
+    '<text class="cdia" x="'+px(60)+'" y="336">60</text><text class="cdia" x="'+X1+'" y="336" text-anchor="end">90</text></svg>';
+}
+var Vs=[
+ ['Branco · amarelo da casa · vermelho','o amarelo #FAAB00 e o mesmo dos grifos da PV oficial',
+  [[0,'#FFFFFF',.34],[.55,'#FAAB00',.30],[1,'#E8402A',.26]]],
+ ['Branco · âmbar · vermelho tomate','transicao mais quente e menos saturada no meio',
+  [[0,'#FFFFFF',.32],[.55,'#FFC24B',.30],[1,'#FF5334',.26]]],
+ ['Branco · amarelo · vermelho escuro','o fim puxa pro vinho, mais proximo da paleta da casa',
+  [[0,'#FFFFFF',.32],[.55,'#F5B32B',.28],[1,'#C0341C',.28]]],
+ ['Branco · amarelo · laranja da marca','sem vermelho novo: termina no laranja que a pagina ja tem',
+  [[0,'#FFFFFF',.32],[.55,'#FFC24B',.28],[1,'#FC783C',.28]]]
+];
+document.getElementById('t').innerHTML = Vs.map(function(v,i){
+  return '<div class="rot">Opção '+(i+1)+' · '+v[0]+' <em>'+v[1]+'</em></div>'+
+    '<section class="v"><div class="wrap">'+bloco(i,v[2])+'</div></section>';
+}).join('');
+</script></body></html>
