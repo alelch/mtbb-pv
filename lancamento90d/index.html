@@ -330,7 +330,16 @@ p{margin:0 0 1.05em}
 /* ============ AS TRÊS BOLHAS ============
    A bolha acesa usa o laranja CHEIO, fora da rampa de saturação: é o objeto
    focal da seção e um diagrama dessaturado lê como quebrado, não como sistema. */
-.bolhas{background:var(--bg);padding-bottom:clamp(40px,6vw,90px)}
+.bolhas{background:var(--bg);padding-bottom:clamp(40px,6vw,90px);position:relative}
+/* O V DA VIRADA: a fronteira entre o claro e o verde deixa de ser reta. Um
+   triangulo da cor do fundo desce por cima do verde, entao a propria quebra
+   de secao aponta pra baixo. Feito com borda, nao com clip-path, pra nao
+   correr risco de cortar conteudo em tela curta. */
+.bolhas:after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);
+  width:0;height:0;z-index:2;
+  border-left:clamp(42px,6vw,72px) solid transparent;
+  border-right:clamp(42px,6vw,72px) solid transparent;
+  border-top:clamp(30px,4vw,50px) solid var(--bg)}
 .bolhas .wrap{max-width:1240px}
 .bolhas .abre{max-width:640px;margin:0 auto;text-align:center}
 .bolhas .abre h2{font-size:clamp(1.7rem,4.2vw,2.5rem)}
@@ -375,20 +384,13 @@ html.js .bb-passo:not(.viva){opacity:.26}
   letter-spacing:-.035em;color:var(--ink);
   font-size:clamp(1.4rem,3.6vw,2.35rem);line-height:1.22;max-width:none;margin:0 auto}
 
-/* A SETA da virada: mesma mao do grifo e do risco, igual a do 'Voce esta
-   aqui' da PV oficial. Fica no lado CLARO, apontando pro verde, porque
-   laranja e' a cor do problema e nao pode entrar na secao da saida. */
-.seta{display:flex;justify-content:center;margin-top:clamp(36px,5vw,58px)}
-.seta svg{width:clamp(38px,4.4vw,52px);height:auto;animation:descer 2s ease-in-out infinite}
-@keyframes descer{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-@media(prefers-reduced-motion:reduce){.seta svg{animation:none}}
-
 /* ══ A VIRADA ══
    A UNICA secao verde da pagina, de proposito: ela e' o 1%, entao a raridade
    da cor e' o proprio recado. Gramatica de cor da pagina agora:
    escuro = o risco · laranja = os 99% · verde = o 1%.
    Por isso NAO entra laranja aqui dentro: laranja e' a cor do problema. */
-.virada{background:var(--verde);color:#fff;padding:clamp(72px,9vw,116px) 0;text-align:center}
+.virada{background:var(--verde);color:#fff;text-align:center;
+  padding:clamp(96px,10vw,140px) 0 clamp(72px,9vw,116px)}
 .virada .eyebrow{color:rgba(255,255,255,.62)}
 .virada .eyebrow.forte{color:#fff;font-size:.86rem;letter-spacing:.2em;margin-bottom:16px}
 .virada h2{color:#fff;font-size:clamp(1.8rem,4.6vw,3rem);max-width:18ch;margin:0 auto}
@@ -540,14 +542,14 @@ html.js.sem-motion .mao .ch{opacity:1!important;transition:none!important}
 .noventa p strong{font-weight:700;color:#fff}
 /* cem livros, um por marca: o numero deixa de ser abstrato e vira contagem */
 .cem{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:520px;margin:0 auto 30px}
-.cem i{width:9px;height:26px;border-radius:2px;background:var(--morto);
+.cem i{width:9px;height:26px;border-radius:2px;background:rgba(110,26,18,.5);
   /* opacity fora de 0..1 e' cortada pelo navegador, entao a conta ja' e' o
      proprio degrade: a marca i aparece quando --p passa de i/100. */
   opacity:calc(var(--p,1) * 100 - var(--i,0))}
 html.js .cem{--p:0}
 html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 @media(prefers-reduced-motion:reduce){.cem{--p:1!important}}
-.cem i.viva{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.24)}
+.cem i.viva{background:var(--verde);box-shadow:0 0 0 3px rgba(255,255,255,.30)}
 @media(max-width:820px){.cem{max-width:320px;gap:4px}.cem i{width:8px;height:22px}}
 
 /* CORTE: o segundo respiro coral da página. */
@@ -919,12 +921,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       <b>O pior erro do autor<br>é esperar o livro <span class="risco">ficar pronto</span><br>para começar a divulgar.</b>
     </div>
 
-    <div class="seta rv" aria-hidden="true">
-      <svg viewBox="0 0 40 62" fill="none">
-        <path d="M20,3 Q16,17 21,29 Q24,40 20,49" stroke="var(--accent)" stroke-width="3.2" stroke-linecap="round"/>
-        <path d="M11,40 L20,52 L29,40" stroke="var(--accent)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
   </div>
 </section>
 
