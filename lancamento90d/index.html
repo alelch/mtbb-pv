@@ -361,6 +361,14 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .bb-mini ellipse{fill:none;stroke:var(--border);stroke-width:1.6}
 .bb-mini .viva{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.10)}
 .bb-mini .feita{stroke:rgba(252,120,60,.34);fill:rgba(252,120,60,.05)}
+/* O ERRO fecha as bolhas: elas dizem ONDE o livro trava, essa diz QUANDO o
+   autor erra, e a virada logo abaixo comeca no dia 0. */
+.erro{text-align:center;margin:clamp(48px,7vw,84px) auto 0;padding-top:clamp(40px,5vw,60px);
+  border-top:1px solid var(--border);max-width:900px}
+.erro b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.035em;color:var(--ink);
+  font-size:clamp(1.4rem,3.6vw,2.35rem);line-height:1.2;max-width:24ch;margin:0 auto}
+
 /* ══ A VIRADA ══
    A UNICA secao verde da pagina, de proposito: ela e' o 1%, entao a raridade
    da cor e' o proprio recado. Gramatica de cor da pagina agora:
@@ -370,6 +378,7 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .virada .eyebrow{color:rgba(255,255,255,.62)}
 .virada .eyebrow.forte{color:#fff;font-size:.86rem;letter-spacing:.2em;margin-bottom:16px}
 .virada h2{color:#fff;font-size:clamp(1.8rem,4.6vw,3rem);max-width:18ch;margin:0 auto}
+.virada h2 em{font-style:normal;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap}
 .virada .lead{color:rgba(255,255,255,.82);max-width:52ch;margin-left:auto;margin-right:auto}
 
 /* a linha do tempo: e' o unico jeito de dizer que os atos se sobrepoem */
@@ -867,6 +876,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       </div>
     </div>
 
+    <p class="erro rv"><b>O maior erro do autor é esperar o livro <span class="risco">ficar pronto</span> para começar a divulgar.</b></p>
   </div>
 </section>
 
@@ -875,7 +885,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="narrow rv" style="margin:0 auto;text-align:center">
       <p class="eyebrow forte">Seja a exceção</p>
-      <h2>O 1% que vende no lançamento</h2>
+      <h2>O 1% que vende <em>de verdade</em> no lançamento</h2>
     </div>
 
     <div class="reg90 rv">
