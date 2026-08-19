@@ -333,6 +333,17 @@ p{margin:0 0 1.05em}
 .bolhas .wrap{max-width:1240px}
 .bolhas .abre{max-width:640px;margin:0 auto;text-align:center}
 .bolhas .abre h2{font-size:clamp(1.7rem,4.2vw,2.5rem)}
+/* O JOGUINHO: a pergunta deixa de ser retorica. Quem responde e' o leitor, e
+   o diagrama responde de volta. O palpite manda no desenho ate' a rolagem
+   entrar no primeiro passo; dali pra frente quem manda e' o scroll. */
+.quanto{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px auto 0}
+.quanto button{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;
+  letter-spacing:-.01em;color:var(--ink);background:var(--card);cursor:pointer;
+  border:1.5px solid var(--border);border-radius:99px;padding:10px 20px;
+  transition:border-color .25s var(--ease),background .25s var(--ease),color .25s var(--ease)}
+.quanto button:hover{border-color:rgba(252,120,60,.5)}
+.quanto button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+#veredito b{font-weight:700;color:var(--accent)}
 .bolhas .abre .pergunta{font-family:'Space Grotesk',sans-serif;font-weight:400;
   letter-spacing:-.025em;font-size:clamp(1.15rem,2.7vw,1.55rem);line-height:1.3;
   color:var(--ink);margin:20px auto 0;max-width:none}
@@ -854,7 +865,14 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="abre rv">
       <h2>Quantos leitores conhecem o seu livro hoje?</h2>
-      <p class="pergunta">Isso define em qual bolha o seu livro vai ficar preso.</p>
+      <div class="quanto" role="group" aria-label="Quantos leitores conhecem o seu livro hoje">
+        <button type="button" data-b="1" aria-pressed="false">10</button>
+        <button type="button" data-b="1" aria-pressed="false">60</button>
+        <button type="button" data-b="1" aria-pressed="false">200</button>
+        <button type="button" data-b="2" aria-pressed="false">500</button>
+        <button type="button" data-b="2" aria-pressed="false">+1.000</button>
+      </div>
+      <p class="pergunta" id="veredito" aria-live="polite">Isso define em qual bolha o seu livro vai ficar preso.</p>
     </div>
 
     <div class="bb">
@@ -1388,36 +1406,71 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 })();
 </script>
 <script>
-/* AS TRÊS BOLHAS: acende a bolha do passo cujo centro está mais perto do centro da tela.
-   Proximidade em vez de IntersectionObserver com faixa percentual, que somia em viewport curta. */
+/* AS TRÊS BOLHAS
+   Acende a bolha do passo cujo centro está mais perto do centro da tela.
+   Proximidade em vez de IntersectionObserver com faixa percentual, que sumia
+   em viewport curta.
+   O JOGUINHO entra no MESMO estado: enquanto o primeiro passo não chegou ao
+   centro, quem manda é o palpite do leitor; dali pra frente, a rolagem. */
 (function(){
-  var trilho = document.querySelectorAll('#bolhas .bb-passo');
-  if (!trilho.length) return;
-  var passos = [].slice.call(trilho);
+  var passos = [].slice.call(document.querySelectorAll('#bolhas .bb-passo'));
+  if (!passos.length) return;
   var bolhas = ['bol1','bol2','bol3'].map(function(id){ return document.getElementById(id); });
-  var atual = 0, pedido = false;
+  var atual = -1, pedido = false, resposta = null;
 
-  function medir(){
-    pedido = false;
+  function acender(i){
+    if (i === atual) return;
+    atual = i;
+    passos.forEach(function(p, k){ p.classList.toggle('viva', k === i); });
+    bolhas.forEach(function(g, k){
+      g.classList.toggle('viva', k === i);
+      g.classList.toggle('furada', k < i);
+    });
+  }
+  function maisPerto(){
     var meio = innerHeight / 2, melhor = 0, dist = Infinity;
     passos.forEach(function(p, i){
       var r = p.getBoundingClientRect();
       var d = Math.abs(r.top + r.height / 2 - meio);
       if (d < dist){ dist = d; melhor = i; }
     });
-    if (melhor === atual) return;
-    atual = melhor;
-    passos.forEach(function(p, i){ p.classList.toggle('viva', i === melhor); });
-    bolhas.forEach(function(g, i){
-      g.classList.toggle('viva', i === melhor);
-      g.classList.toggle('furada', i < melhor);
-    });
+    return melhor;
+  }
+  function antesDosPassos(){
+    var r = passos[0].getBoundingClientRect();
+    return (r.top + r.height / 2) > innerHeight / 2;
+  }
+  function medir(){
+    pedido = false;
+    acender(resposta !== null && antesDosPassos() ? resposta : maisPerto());
   }
   function pedir(){ if (!pedido){ pedido = true; requestAnimationFrame(medir); } }
   addEventListener('scroll', pedir, {passive:true});
   addEventListener('resize', pedir);
+
+  var FALAS = {
+    '10':     ['Bolha 1.', 'São os seus. E os seus acabam.'],
+    '60':     ['Bolha 1.', 'Esse é o teto de quem já te conhecia.'],
+    '200':    ['Bolha 1.', 'Parece muito, mas ainda cabe dentro da sua rede.'],
+    '500':    ['Bolha 2.', 'Você furou a primeira. A segunda é onde o livro vira livro.'],
+    '+1.000': ['Bolha 2.', 'Já tem gente que não te conhecia. Falta virar boca a boca.']
+  };
+  var veredito = document.getElementById('veredito');
+  var botoes = [].slice.call(document.querySelectorAll('.quanto button'));
+  botoes.forEach(function(b){
+    b.addEventListener('click', function(){
+      botoes.forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      resposta = parseInt(b.getAttribute('data-b'), 10) - 1;
+      var f = FALAS[b.textContent.trim()];
+      if (f && veredito) veredito.innerHTML = '<b>' + f[0] + '</b> ' + f[1];
+      medir();
+    });
+  });
+
   medir();
   window.__bolhas = medir;
+  window.__responder = function(n){ if(botoes[n]) botoes[n].click(); };
 })();
 </script>
 <script>
