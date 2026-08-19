@@ -333,17 +333,29 @@ p{margin:0 0 1.05em}
 .bolhas .wrap{max-width:1240px}
 .bolhas .abre{max-width:640px;margin:0 auto;text-align:center}
 .bolhas .abre h2{font-size:clamp(1.7rem,4.2vw,2.5rem)}
-/* O JOGUINHO: a pergunta deixa de ser retorica. Quem responde e' o leitor, e
-   o diagrama responde de volta. O palpite manda no desenho ate' a rolagem
-   entrar no primeiro passo; dali pra frente quem manda e' o scroll. */
-.quanto{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px auto 0}
-.quanto button{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;
-  letter-spacing:-.01em;color:var(--ink);background:var(--card);cursor:pointer;
-  border:1.5px solid var(--border);border-radius:99px;padding:10px 20px;
-  transition:border-color .25s var(--ease),background .25s var(--ease),color .25s var(--ease)}
-.quanto button:hover{border-color:rgba(252,120,60,.5)}
-.quanto button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-#veredito b{font-weight:700;color:var(--accent)}
+/* O JOGUINHO vem DEPOIS das tres bolhas, quando o leitor ja sabe o que elas
+   sao. Antes delas ele entregava a resposta antes do diagrama merecer.
+   Sem pilula de filtro: o numero escolhido ganha o grifo da casa, como quem
+   marca a resposta no papel. */
+.jogo{text-align:center;margin:clamp(44px,6vw,72px) auto 0;max-width:760px}
+.jogo-q{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.15rem,2.6vw,1.5rem);color:var(--ink);margin:0}
+.quanto{display:flex;flex-wrap:wrap;gap:clamp(14px,3vw,34px);justify-content:center;margin:20px auto 0}
+.quanto button{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(1.4rem,3.4vw,2.1rem);letter-spacing:-.035em;
+  color:#A8A5A0;background-color:transparent;border:0;padding:2px 8px;cursor:pointer;
+  transition:color .25s var(--ease)}
+.quanto button:hover{color:var(--ink)}
+.quanto button[aria-pressed="true"]{color:var(--ink)}
+.jogo-res{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:22px;
+  flex-wrap:wrap}
+.jogo-mini{width:150px;height:auto;flex:0 0 auto}
+.jogo-mini ellipse{fill:none;stroke:var(--border);stroke-width:1.6;
+  transition:stroke .45s var(--ease),fill .45s var(--ease),stroke-width .45s var(--ease)}
+.jogo-mini ellipse.viva{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.10)}
+.jogo-mini ellipse.feita{stroke:rgba(252,120,60,.34);fill:rgba(252,120,60,.05)}
+.veredito{margin:0;max-width:34ch;text-align:left;font-size:1.02rem;line-height:1.55;color:var(--soft)}
+.veredito b{font-weight:700;color:var(--accent)}
 .bolhas .abre .pergunta{font-family:'Space Grotesk',sans-serif;font-weight:400;
   letter-spacing:-.025em;font-size:clamp(1.15rem,2.7vw,1.55rem);line-height:1.3;
   color:var(--ink);margin:20px auto 0;max-width:none}
@@ -865,14 +877,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="abre rv">
       <h2>Quantos leitores conhecem o seu livro hoje?</h2>
-      <div class="quanto" role="group" aria-label="Quantos leitores conhecem o seu livro hoje">
-        <button type="button" data-b="1" aria-pressed="false">10</button>
-        <button type="button" data-b="1" aria-pressed="false">60</button>
-        <button type="button" data-b="1" aria-pressed="false">200</button>
-        <button type="button" data-b="2" aria-pressed="false">500</button>
-        <button type="button" data-b="2" aria-pressed="false">+1.000</button>
-      </div>
-      <p class="pergunta" id="veredito" aria-live="polite">Isso define em qual bolha o seu livro vai ficar preso.</p>
+      <p class="pergunta">Isso define em qual bolha o seu livro vai ficar preso.</p>
     </div>
 
     <div class="bb">
@@ -899,6 +904,25 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
           <p class="eyebrow">Bolha 3 · você é lido</p>
           <h3>Boca a boca</h3>
           <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito alguma coisa por ele.</p>        </div>
+      </div>
+    </div>
+
+    <div class="jogo rv">
+      <p class="jogo-q">Quantos leitores hoje?</p>
+      <div class="quanto" role="group" aria-label="Quantos leitores conhecem o seu livro hoje">
+        <button type="button" data-b="1" aria-pressed="false">10</button>
+        <button type="button" data-b="1" aria-pressed="false">60</button>
+        <button type="button" data-b="1" aria-pressed="false">200</button>
+        <button type="button" data-b="2" aria-pressed="false">500</button>
+        <button type="button" data-b="2" aria-pressed="false">+1.000</button>
+      </div>
+      <div class="jogo-res">
+        <svg class="jogo-mini" viewBox="0 0 200 104" aria-hidden="true">
+          <ellipse id="jm3" cx="86" cy="52" rx="94" ry="48"/>
+          <ellipse id="jm2" cx="68" cy="52" rx="66" ry="37"/>
+          <ellipse id="jm1" cx="46" cy="52" rx="43" ry="26"/>
+        </svg>
+        <p class="veredito" id="veredito" aria-live="polite">Escolha o número mais próximo e veja onde o seu livro está.</p>
       </div>
     </div>
 
@@ -1436,13 +1460,15 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     });
     return melhor;
   }
-  function antesDosPassos(){
-    var r = passos[0].getBoundingClientRect();
-    return (r.top + r.height / 2) > innerHeight / 2;
+  /* o jogo fica DEPOIS dos tres passos, entao o palpite so' manda quando a
+     rolagem ja' passou deles. Subindo de volta, o scroll retoma o comando. */
+  function depoisDosPassos(){
+    var r = passos[passos.length - 1].getBoundingClientRect();
+    return (r.top + r.height / 2) < innerHeight / 2;
   }
   function medir(){
     pedido = false;
-    acender(resposta !== null && antesDosPassos() ? resposta : maisPerto());
+    acender(resposta !== null && depoisDosPassos() ? resposta : maisPerto());
   }
   function pedir(){ if (!pedido){ pedido = true; requestAnimationFrame(medir); } }
   addEventListener('scroll', pedir, {passive:true});
@@ -1459,11 +1485,16 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   var botoes = [].slice.call(document.querySelectorAll('.quanto button'));
   botoes.forEach(function(b){
     b.addEventListener('click', function(){
-      botoes.forEach(function(o){ o.setAttribute('aria-pressed','false'); });
-      b.setAttribute('aria-pressed','true');
+      botoes.forEach(function(o){ o.setAttribute('aria-pressed','false'); o.classList.remove('grifo'); });
+      b.setAttribute('aria-pressed','true'); b.classList.add('grifo');
       resposta = parseInt(b.getAttribute('data-b'), 10) - 1;
       var f = FALAS[b.textContent.trim()];
       if (f && veredito) veredito.innerHTML = '<b>' + f[0] + '</b> ' + f[1];
+      ['jm1','jm2','jm3'].forEach(function(id, k){
+        var e = document.getElementById(id); if(!e) return;
+        e.classList.toggle('viva', k === resposta);
+        e.classList.toggle('feita', k < resposta);
+      });
       medir();
     });
   });
