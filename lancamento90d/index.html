@@ -412,6 +412,24 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
 }
 .virada .lead{color:rgba(255,255,255,.82);max-width:52ch;margin-left:auto;margin-right:auto}
 
+/* A NARRATIVA DA VIRADA
+   1. voce tem que ser o 1%   2. ninguem compra o que nao conhece
+   3. entao como?             4. tres atos
+   5. um POTENCIALIZA o outro 6. em 90 dias, de invisivel a lido
+   O passo 5 e' o aha: ate aqui a pagina so' dizia que os atos correm juntos,
+   que e' calendario. Potencializar e' causa, e causa e' o que explica. */
+.premissa{text-align:center;margin:clamp(34px,4.4vw,52px) auto 0;max-width:40ch}
+.afirma{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.3rem,3.2vw,2rem);line-height:1.14;color:#fff;margin:0}
+.pergunta-v{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
+  font-size:clamp(1.02rem,2.3vw,1.32rem);color:rgba(255,255,255,.72);margin:12px 0 0}
+.remate{text-align:center;margin:clamp(40px,5vw,62px) auto 0;padding-top:clamp(30px,3.6vw,42px);
+  border-top:1px solid rgba(255,255,255,.16);max-width:46ch}
+.causa{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.35rem,3.4vw,2.1rem);line-height:1.12;color:#fff;margin:0}
+.desfecho{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
+  font-size:clamp(1.05rem,2.4vw,1.4rem);line-height:1.32;color:rgba(255,255,255,.82);margin:12px 0 0}
+
 /* A ESCADA DOS TRES ATOS
    O texto E' o grafico: cada verbo comeca mais a direita que o anterior, e a
    regua sai dele ate' o fim dos noventa dias. A indentacao diz QUANDO comeca
@@ -456,8 +474,6 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
   .provas-trilho{animation:none}
   .pcard[aria-hidden]{display:none}
 }
-.virada-fecho{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
-  font-size:clamp(1.05rem,2.4vw,1.4rem);color:rgba(255,255,255,.82);margin:16px auto 0}
 
 
 @media(max-width:820px){
@@ -945,7 +961,11 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     <div class="narrow rv" style="margin:0 auto;text-align:center">
       <p class="eyebrow forte">Seja a exceção</p>
       <h2 class="conta" id="cabeca">O <span class="pct" id="pct">1%</span><span class="resto" id="resto"> que vende <em>de verdade</em> no lançamento</span></h2>
-      <p class="virada-fecho">De invisível a lido. <span class="serifa">Em noventa dias.</span></p>
+    </div>
+
+    <div class="premissa rv">
+      <p class="afirma">Ninguém compra um livro que não conhece.</p>
+      <p class="pergunta-v">Então como fazer conhecerem o seu?</p>
     </div>
 
     <div class="escada rv">
@@ -965,7 +985,10 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       </div>
     </div>
 
-    <p class="ciclo-nota">No fim dos noventa dias os três estão girando ao mesmo tempo. E aí o ciclo recomeça, já em movimento.</p>
+    <div class="remate rv">
+      <p class="causa">Um potencializa o outro.</p>
+      <p class="desfecho">Em noventa dias, o seu livro passa de <span class="serifa">invisível a lido</span>.</p>
+    </div>
 
     <div class="provas rv">
       <div class="provas-trilho">
