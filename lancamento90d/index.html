@@ -290,12 +290,15 @@ p{margin:0 0 1.05em}
 /* ---------- imprensa ---------- */
 .press{background:var(--card);padding:8px 0 30px}
 .press p{text-align:center;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:0 0 16px;font-weight:700}
-.press-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(16px,4vw,42px)}
+.press-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(14px,3vw,32px)}
 /* logos nas cores originais, como o cliente pediu.
    Os arquivos coloridos estavam em /assets na raiz do repo o tempo todo; os
    da lancamento-v1 eram as versões monocromáticas feitas pra página escura. */
-.press-row img{height:30px;width:auto}
-@media(max-width:600px){.press-row img{height:22px}}
+/* Altura igual pra todos deixava a massa visual 5x diferente entre o logo
+   quadrado e o lettering comprido. Cada um leva a sua altura ótica em --h,
+   calculada a partir da proporção depois de aparar a sobra transparente. */
+.press-row img{height:calc(var(--h,30) * 1px);width:auto}
+@media(max-width:600px){.press-row img{height:calc(var(--h,30) * .74px)}}
 
 /* ---------- agitação ---------- */
 .agit .big{
@@ -714,14 +717,16 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <p>Como visto em</p>
     <div class="press-row">
-      <img src="assets/logo-cbn.webp" alt="CBN" loading="lazy">
-      <img src="assets/logo-band-news.webp" alt="Band News" loading="lazy">
-      <img src="assets/logo-band.webp" alt="Band" loading="lazy">
-      <img src="assets/logo-record-tv.webp" alt="Record TV" loading="lazy">
-      <img src="assets/logo-valor-economico.webp" alt="Valor Econômico" loading="lazy">
-      <img src="assets/logo-publishnews.webp" alt="PublishNews" loading="lazy">
-      <img src="assets/logo-radio-senado.webp" alt="Rádio Senado" loading="lazy">
-      <img src="assets/logo-vida-simples.webp" alt="Vida Simples" loading="lazy">
+      <img src="assets/imprensa/logo-g1.webp" alt="G1" loading="lazy" style="--h:40">
+      <img src="assets/imprensa/logo-cbn.webp" alt="CBN" loading="lazy" style="--h:30">
+      <img src="assets/imprensa/logo-band-news.webp" alt="Band News" loading="lazy" style="--h:32">
+      <img src="assets/imprensa/logo-band.webp" alt="Band" loading="lazy" style="--h:40">
+      <img src="assets/imprensa/logo-tv-cultura.webp" alt="TV Cultura" loading="lazy" style="--h:40">
+      <img src="assets/imprensa/logo-record-tv.webp" alt="Record TV" loading="lazy" style="--h:40">
+      <img src="assets/imprensa/logo-valor-economico.webp" alt="Valor Econômico" loading="lazy" style="--h:28">
+      <img src="assets/imprensa/logo-publishnews.webp" alt="PublishNews" loading="lazy" style="--h:25">
+      <img src="assets/imprensa/logo-radio-senado.webp" alt="Rádio Senado" loading="lazy" style="--h:25">
+      <img src="assets/imprensa/logo-vida-simples.webp" alt="Vida Simples" loading="lazy" style="--h:24">
     </div>
   </div>
 </div>
