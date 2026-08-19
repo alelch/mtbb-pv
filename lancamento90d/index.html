@@ -443,14 +443,28 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
 
 .virada .ciclo-nota{color:rgba(255,255,255,.68);border-top:1px solid rgba(255,255,255,.16);
   padding-top:26px;margin-top:44px}
-/* a prova: ate aqui a pagina so' afirmava. Uma linha com numero converte
-   retroativamente todo o argumento anterior de opiniao em demonstracao. */
-.prova{max-width:44ch;margin:40px auto 0;padding:24px 28px;border-radius:var(--r);
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
-.prova p{margin:0;font-size:.98rem;line-height:1.55;color:rgba(255,255,255,.78)}
-.prova p b{color:#fff;font-weight:700}
-.prova .num{margin-top:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;
-  letter-spacing:-.02em;font-size:1.14rem;color:#fff}
+/* AS PROVAS: ate' aqui a pagina so' afirmava. Nove casos reais correndo em
+   pista, cada um com nome e resultado, convertem retroativamente o argumento
+   de opiniao em demonstracao. Mesma mecanica da pista dos logos: duas copias
+   identicas e margin-right em vez de gap, senao o -50% pula meio intervalo. */
+.provas{margin:clamp(36px,5vw,56px) -22px 0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.provas-trilho{display:flex;width:max-content;animation:desfila 92s linear infinite}
+.provas:hover .provas-trilho{animation-play-state:paused}
+.pcard{flex:0 0 auto;width:320px;margin-right:20px;text-align:left;
+  padding:20px 22px;border-radius:var(--r);
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
+.pcard .quem{display:block;font-family:'Space Grotesk',sans-serif;font-size:.7rem;
+  font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);margin-bottom:9px}
+.pcard p{margin:0;font-size:.95rem;line-height:1.5;color:rgba(255,255,255,.78)}
+.pcard p b{color:#fff;font-weight:700}
+@media(prefers-reduced-motion:reduce){
+  .provas{-webkit-mask-image:none;mask-image:none;overflow-x:auto}
+  .provas-trilho{animation:none}
+  .pcard[aria-hidden]{display:none}
+}
 .virada-fecho{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
   font-size:clamp(1.05rem,2.4vw,1.4rem);color:rgba(255,255,255,.82);margin:16px auto 0}
 
@@ -956,9 +970,27 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
     <p class="ciclo-nota">No fim dos noventa dias os três estão girando ao mesmo tempo. E aí o ciclo recomeça, já em movimento.</p>
 
-    <div class="prova rv">
-      <p>A <b>Ingrid</b> veio dos artigos científicos, sem nenhuma experiência com o mercado editorial.</p>
-      <p class="num">Vendeu quase 600 livros ainda na pré-venda.</p>
+    <div class="provas rv">
+      <div class="provas-trilho">
+        <div class="pcard"><span class="quem">Ingrid</span><p>Veio dos artigos científicos e vendeu <b>quase 600 livros ainda na pré-venda</b>.</p></div>
+        <div class="pcard"><span class="quem">Aurê Aguiar</span><p>Escritora de prosa poética e <b>best-seller Publish News por dois anos consecutivos</b>.</p></div>
+        <div class="pcard"><span class="quem">Candice Pascoal</span><p>Mais de 50 mil pessoas impactadas e <b>#1 na revista Veja</b>.</p></div>
+        <div class="pcard"><span class="quem">Cibele Laurentino</span><p>Escritora premiada e <b>lançada internacionalmente</b>.</p></div>
+        <div class="pcard"><span class="quem">Ciça Rocha</span><p>Best-seller BookInfo e Publish News, e <b>colunista na Bebê Abril</b>.</p></div>
+        <div class="pcard"><span class="quem">Emilia Nuñes</span><p>18 livros infantis publicados e <b>vencedora do Prêmio Jabuti</b>.</p></div>
+        <div class="pcard"><span class="quem">Lelo Apovian</span><p>Long-seller e <b>best-seller na revista Veja e no Publish News</b>.</p></div>
+        <div class="pcard"><span class="quem">Profinho</span><p>Vendeu 8 mil livros no orgânico e <b>virou best-seller</b>.</p></div>
+        <div class="pcard"><span class="quem">Tonia Casarin</span><p>Best-seller de liderança na pré-venda e <b>destaque em grandes canais</b>.</p></div>
+        <div class="pcard" aria-hidden="true"><span class="quem">Ingrid</span><p>Veio dos artigos científicos e vendeu <b>quase 600 livros ainda na pré-venda</b>.</p></div>
+        <div class="pcard" aria-hidden="true"><span class="quem">Aurê Aguiar</span><p>Escritora de prosa poética e <b>best-seller Publish News por dois anos consecutivos</b>.</p></div>
+        <div class="pcard" aria-hidden="true"><span class="quem">Candice Pascoal</span><p>Mais de 50 mil pessoas impactadas e <b>#1 na revista Veja</b>.</p></div>
+        <div class="pcard" aria-hidden="true"><span class="quem">Cibele Laurentino</span><p>Escritora premiada e <b>lançada internacionalmente</b>.</p></div>
+        <div class="pcard" aria-hidden="true"><span class="quem">Ciça Rocha</span><p>Best-seller BookInfo e Publish News, e <b>colunista na Bebê Abril</b>.</p></div>
+        <div class="pcard" aria-hidden="true"><span class="quem">Emilia Nuñes</span><p>18 livros infantis publicados e <b>vencedora do Prêmio Jabuti</b>.</p></div>
+        <div class="pcard" aria-hidden="true"><span class="quem">Lelo Apovian</span><p>Long-seller e <b>best-seller na revista Veja e no Publish News</b>.</p></div>
+        <div class="pcard" aria-hidden="true"><span class="quem">Profinho</span><p>Vendeu 8 mil livros no orgânico e <b>virou best-seller</b>.</p></div>
+        <div class="pcard" aria-hidden="true"><span class="quem">Tonia Casarin</span><p>Best-seller de liderança na pré-venda e <b>destaque em grandes canais</b>.</p></div>
+      </div>
     </div>
 
   </div>
