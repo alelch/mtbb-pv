@@ -1,0 +1,220 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Gráfico interativo · 3 protótipos</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{--verde:#14523E;--vivo:#22C07B;--accent:#FC783C;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}
+body{margin:0;background:#0d0d0d;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+.rot{position:sticky;top:0;z-index:20;background:#fff;color:#3A3A38;padding:12px 22px;
+  font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.rot em{font-style:normal;font-weight:400;letter-spacing:.02em;text-transform:none;opacity:.6;margin-left:12px;font-size:12.5px}
+.v{background:var(--verde);color:#fff;padding:clamp(54px,7vw,86px) 0}
+h2{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.3rem,3vw,1.9rem);margin:0 0 6px;text-align:center}
+.dica{text-align:center;color:rgba(255,255,255,.6);font-size:.95rem;margin:0 0 30px}
+svg{width:100%;height:auto;overflow:visible;display:block}
+.linha{stroke:#fff;stroke-width:3.5;stroke-linecap:round;fill:none;
+  transition:d .6s var(--ease)}
+.plana{stroke:rgba(255,255,255,.28);stroke-width:2;stroke-dasharray:5 7;fill:none}
+.no{fill:var(--verde);stroke:#fff;stroke-width:3.5;transition:opacity .4s var(--ease)}
+.no.off{opacity:.22}
+text{font-family:'Space Grotesk',sans-serif}
+.cato{font-size:17px;font-weight:700;fill:#fff;transition:opacity .4s var(--ease)}
+.cato.off{opacity:.3}
+.cdia,.ceixo{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.45)}
+.csem{font-size:12px;fill:rgba(255,255,255,.42)}
+.area{fill:rgba(34,192,123,.14);transition:d .6s var(--ease)}
+
+.ctrl{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:26px 0 0}
+.ctrl button{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.96rem;
+  color:#fff;background:rgba(255,255,255,.10);border:1.5px solid rgba(255,255,255,.28);
+  border-radius:99px;padding:11px 20px;cursor:pointer;display:flex;align-items:center;gap:9px;
+  transition:all .25s var(--ease)}
+.ctrl button .pt{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .25s}
+.ctrl button[aria-pressed="true"]{background:var(--vivo);border-color:var(--vivo);color:#0b2d22}
+.ctrl button[aria-pressed="true"]{color:#0b2d22}
+.ctrl button[aria-pressed="true"] .pt{background:#0b2d22}
+.saida{text-align:center;margin:24px auto 0;max-width:52ch;min-height:3.2em}
+.saida b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(1.1rem,2.6vw,1.55rem);color:#fff;letter-spacing:-.03em}
+.saida span{display:block;margin-top:7px;color:rgba(255,255,255,.72);font-size:.98rem;line-height:1.5}
+.slider{max-width:620px;margin:28px auto 0}
+.slider input{width:100%;accent-color:var(--vivo)}
+.slider .leg{display:flex;justify-content:space-between;font-family:'Space Grotesk',sans-serif;
+  font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);margin-top:8px}
+.num{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.04em;
+  font-size:clamp(2rem,5vw,3.2rem);color:var(--vivo);line-height:1}
+</style></head><body>
+
+<div class="rot">Protótipo A · Ligar e desligar <em>o leitor prova sozinho que um depende do outro</em></div>
+<section class="v"><div class="wrap">
+  <h2>Desligue um e veja o que sobra</h2>
+  <p class="dica">Toque nos três para entender por que a ordem importa.</p>
+  <div id="ga"></div>
+  <div class="ctrl" id="ca"></div>
+  <div class="saida" id="sa"></div>
+</div></section>
+
+<div class="rot">Protótipo B · Quando você começa <em>arraste e veja o custo de esperar o livro ficar pronto</em></div>
+<section class="v"><div class="wrap">
+  <h2>Arraste o dia em que você começa</h2>
+  <p class="dica">O plano tem noventa dias. Começar tarde não atrasa: encolhe.</p>
+  <div id="gb"></div>
+  <div class="slider">
+    <input type="range" id="sb" min="0" max="75" value="0" step="1" aria-label="dia em que você começa">
+    <div class="leg"><span>começa no dia 0</span><span>começa no dia 75</span></div>
+  </div>
+  <div class="saida" id="ob"></div>
+</div></section>
+
+<div class="rot">Protótipo C · Construir clicando <em>a curva não existe até o leitor montar ela</em></div>
+<section class="v"><div class="wrap">
+  <h2>Monte o seu lançamento</h2>
+  <p class="dica">Adicione um ato de cada vez.</p>
+  <div id="gc"></div>
+  <div class="ctrl" id="cc"></div>
+  <div class="saida" id="sc"></div>
+</div></section>
+
+<script>
+var W=900,H=340,X0=60,X1=862,Y0=300,Y1=40;
+var ATOS=[{n:'Crie desejo',d:0,k:0.9},{n:'Gere antecipação',d:30,k:1.6},{n:'Lance vendendo',d:60,k:3.2}];
+function px(dia){return X0+(X1-X0)*(dia/90)}
+function py(v,max){return Y0-(Y0-Y1)*Math.min(v/max,1)}
+
+/* modelo multiplicativo: cada ato ligado multiplica o crescimento a partir do
+   seu dia. Ato desligado nao zera de verdade, mas some do produto, entao a
+   curva desaba, que e' exatamente o que a frase do zero diz. */
+function valor(dia,ligados,inicio){
+  var v=1;
+  ATOS.forEach(function(a,i){
+    if(!ligados[i]) return;
+    var d0=a.d+(inicio||0);
+    if(dia<=d0) return;
+    v *= 1 + a.k*((dia-d0)/90);
+  });
+  return v;
+}
+function maxV(){return valor(90,[1,1,1],0)}
+function caminho(ligados,inicio){
+  var p='',m=maxV();
+  for(var d=0;d<=90;d+=1.5){
+    p += (d?' L':'M')+px(d).toFixed(1)+','+py(valor(d,ligados,inicio),m).toFixed(1);
+  }
+  return p;
+}
+function areaSob(ligados,inicio){
+  return caminho(ligados,inicio)+' L'+px(90).toFixed(1)+','+Y0+' L'+px(0).toFixed(1)+','+Y0+' Z';
+}
+function svgBase(id){
+  return '<svg viewBox="0 0 '+W+' '+H+'" fill="none">'+
+    '<text class="ceixo" x="46" y="22">quem conhece o seu livro</text>'+
+    '<path class="plana" d="M'+X0+','+(Y0+6)+' L'+X1+','+(Y0-2)+'"/>'+
+    '<text class="csem" x="700" y="322">sem plano</text>'+
+    '<path class="area" id="'+id+'-ar" d=""/>'+
+    '<path class="linha" id="'+id+'-ln" d=""/>'+
+    ATOS.map(function(a,i){return '<circle class="no" id="'+id+'-n'+i+'" r="7"/>'}).join('')+
+    ATOS.map(function(a,i){return '<text class="cato" id="'+id+'-t'+i+'"'+
+      (i?' text-anchor="end"':'')+'>'+a.n+'</text>'}).join('')+
+    '<text class="cdia" x="'+X0+'" y="334">DIA 0</text>'+
+    '<text class="cdia" x="'+px(30)+'" y="334">30</text>'+
+    '<text class="cdia" x="'+px(60)+'" y="334">60</text>'+
+    '<text class="cdia" x="'+X1+'" y="334" text-anchor="end">90</text></svg>';
+}
+function pinta(id,ligados,inicio){
+  var m=maxV();
+  document.getElementById(id+'-ln').setAttribute('d',caminho(ligados,inicio));
+  document.getElementById(id+'-ar').setAttribute('d',areaSob(ligados,inicio));
+  ATOS.forEach(function(a,i){
+    var d0=a.d+(inicio||0);
+    var fora = d0>90;
+    var x=px(Math.min(d0,90)), y=py(valor(Math.min(d0,90),ligados,inicio),m);
+    var no=document.getElementById(id+'-n'+i), tx=document.getElementById(id+'-t'+i);
+    no.setAttribute('cx',x); no.setAttribute('cy',y);
+    tx.setAttribute('x', i? x-14 : x+14); tx.setAttribute('y', y-16);
+    var apagado = !ligados[i] || fora;
+    no.classList.toggle('off',apagado); tx.classList.toggle('off',apagado);
+  });
+}
+function botoes(el,rotulos,onclick){
+  el.innerHTML=rotulos.map(function(r,i){
+    return '<button type="button" data-i="'+i+'" aria-pressed="false"><span class="pt"></span>'+r+'</button>';
+  }).join('');
+  [].forEach.call(el.querySelectorAll('button'),function(b){
+    b.addEventListener('click',function(){ onclick(+b.getAttribute('data-i'),b); });
+  });
+}
+
+/* ── A: ligar e desligar ── */
+(function(){
+  var id='a', lig=[1,1,1];
+  document.getElementById('ga').innerHTML=svgBase(id);
+  var FALAS={
+    '111':['O plano inteiro.','Cada ato multiplica o anterior, e o lançamento chega em cima de uma base que já existe.'],
+    '011':['Sem desejo.','Você tem o que anunciar, mas não tem para quem. A antecipação cai no vazio.'],
+    '101':['Sem antecipação.','O livro estreia frio. Quem te conhecia compra na primeira semana, e acaba.'],
+    '110':['Sem lançamento.','Você construiu a plateia e não abriu a porta. Desejo sem pedido não vira venda.'],
+    '001':['Só o lançamento.','É o que 99% fazem: aparecer no dia. Vende para amigos e família.'],
+    '010':['Só antecipação.','Anunciar para quem nunca ouviu falar de você é falar sozinho.'],
+    '100':['Só desejo.','Você virou conhecido e não pediu nada. O livro não entra na conta de ninguém.'],
+    '000':['Nada.','O livro sai e o mercado não fica sabendo. É a linha tracejada.']
+  };
+  function upd(){
+    pinta(id,lig,0);
+    var f=FALAS[lig.join('')];
+    document.getElementById('sa').innerHTML='<b>'+f[0]+'</b><span>'+f[1]+'</span>';
+    [].forEach.call(document.querySelectorAll('#ca button'),function(b,i){
+      b.setAttribute('aria-pressed', lig[i]?'true':'false');});
+  }
+  botoes(document.getElementById('ca'),ATOS.map(function(a){return a.n}),function(i){
+    lig[i]=lig[i]?0:1; upd();});
+  upd();
+})();
+
+/* ── B: quando voce comeca ── */
+(function(){
+  var id='b';
+  document.getElementById('gb').innerHTML=svgBase(id);
+  var sl=document.getElementById('sb'), out=document.getElementById('ob');
+  function upd(){
+    var ini=+sl.value;
+    pinta(id,[1,1,1],ini);
+    var cheio=valor(90,[1,1,1],0), agora=valor(90,[1,1,1],ini);
+    var perc=Math.round((agora/cheio)*100);
+    out.innerHTML='<div class="num">'+perc+'%</div>'+
+      '<span>do alcance que o mesmo plano daria começando no dia 0'+
+      (ini?'. Você começou '+ini+' dias depois.':'. Você começou no primeiro dia.')+'</span>';
+  }
+  sl.addEventListener('input',upd); upd();
+})();
+
+/* ── C: construir clicando ── */
+(function(){
+  var id='c', lig=[0,0,0];
+  document.getElementById('gc').innerHTML=svgBase(id);
+  var PASSOS=[
+    ['Comece pelo desejo.','O leitor compra o autor antes de comprar o livro.'],
+    ['Agora a antecipação.','Quem estreia vendendo começou a vender semanas antes.'],
+    ['E aí o lançamento.','Pedidos concentrados na primeira semana. E os trinta dias seguintes.']
+  ];
+  function upd(){
+    pinta(id,lig,0);
+    var n=lig.reduce(function(a,b){return a+b},0);
+    var f = n===0 ? ['Nada ainda.','Adicione o primeiro ato.'] :
+            n===3 ? ['Os três juntos.','Um potencializa o outro. Se qualquer um for zero, o resultado é zero.'] :
+            PASSOS[n-1];
+    document.getElementById('sc').innerHTML='<b>'+f[0]+'</b><span>'+f[1]+'</span>';
+    [].forEach.call(document.querySelectorAll('#cc button'),function(b,i){
+      b.setAttribute('aria-pressed', lig[i]?'true':'false');
+      b.disabled = i>0 && !lig[i-1];
+      b.style.opacity = b.disabled?'.4':'1';});
+  }
+  botoes(document.getElementById('cc'),ATOS.map(function(a){return '+ '+a.n}),function(i){
+    lig[i]=lig[i]?0:1; if(!lig[i]) for(var j=i+1;j<3;j++) lig[j]=0; upd();});
+  upd();
+})();
+</script>
+</body></html>
