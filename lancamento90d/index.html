@@ -197,6 +197,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   --line:#E4E4E4;
   --accent:#FC783C;          /* fundo, linhas, marcadores */
   --accent-soft:rgba(252,120,60,.12);
+  --verde:#14523E;   /* a UNICA cor da virada: ela e' o 1% */
   --shadow:0 1px 3px rgba(0,0,0,.04);
   --shadow-lg:0 18px 40px -28px rgba(0,0,0,.35);
   --maxw:1120px;
@@ -360,28 +361,57 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .bb-mini ellipse{fill:none;stroke:var(--border);stroke-width:1.6}
 .bb-mini .viva{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.10)}
 .bb-mini .feita{stroke:rgba(252,120,60,.34);fill:rgba(252,120,60,.05)}
-/* A FAIXA DOS 90 DIAS
-   Fica aqui porque é a única coisa que o desenho das bolhas não consegue
-   dizer: que os atos não são uma fila, eles se sobrepõem. */
-.coda90{margin-top:8px;padding-top:44px;border-top:1px solid var(--border)}
-.coda90 .eyebrow{text-align:center;margin-bottom:10px}
-.coda-h{text-align:center;font-size:clamp(1.5rem,3.4vw,2.1rem);margin:0 auto}
-.coda-t{max-width:56ch;margin:14px auto 28px;text-align:center;color:var(--soft);
-  font-size:1.02rem;line-height:1.6}
-.reg90{display:grid;grid-template-columns:repeat(12,1fr);gap:8px 4px}
+/* ══ A VIRADA ══
+   A UNICA secao verde da pagina, de proposito: ela e' o 1%, entao a raridade
+   da cor e' o proprio recado. Gramatica de cor da pagina agora:
+   escuro = o risco · laranja = os 99% · verde = o 1%.
+   Por isso NAO entra laranja aqui dentro: laranja e' a cor do problema. */
+.virada{background:var(--verde);color:#fff;padding:clamp(72px,9vw,116px) 0;text-align:center}
+.virada .eyebrow{color:rgba(255,255,255,.62)}
+.virada h2{color:#fff;font-size:clamp(1.8rem,4.6vw,3rem);max-width:18ch;margin:0 auto}
+.virada .lead{color:rgba(255,255,255,.82);max-width:52ch;margin-left:auto;margin-right:auto}
+
+/* a linha do tempo: e' o unico jeito de dizer que os atos se sobrepoem */
+.reg90{display:grid;grid-template-columns:repeat(12,1fr);gap:8px 4px;margin-top:44px}
 .eixo90{grid-column:1/-1;display:flex;justify-content:space-between;margin-bottom:4px;
   font-family:'Space Grotesk',sans-serif;font-size:.64rem;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:#A8A5A0}
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 .fx{display:flex;align-items:center;gap:10px;height:48px;padding:0 16px;border-radius:12px;
-  background:var(--accent);color:#fff;font-family:'Space Grotesk',sans-serif;
-  font-weight:700;font-size:.96rem;letter-spacing:-.02em;white-space:nowrap;overflow:hidden}
-.fx i{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.22);
+  background:rgba(255,255,255,.94);color:var(--verde);font-family:'Space Grotesk',sans-serif;
+  font-weight:700;font-size:.96rem;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;
+  min-width:0;flex-basis:0}
+.fx i{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(20,82,62,.14);
   display:flex;align-items:center;justify-content:center;font-size:.72rem;font-style:normal}
 .fx em{font-style:normal;font-weight:400;font-family:'DM Sans',sans-serif;
-  font-size:.85rem;opacity:.78;margin-left:2px}
+  font-size:.85rem;opacity:.66;margin-left:2px}
 .f1{grid-column:1/-1}
 .f2{grid-column:5/-1}
 .f3{grid-column:9/-1}
+
+/* o que cada ato e': legenda da linha do tempo, nao um segundo diagrama */
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px;text-align:left}
+.tres .n{display:flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:50%;border:1.5px solid rgba(255,255,255,.42);
+  font-family:'Space Grotesk',sans-serif;font-size:.76rem;font-weight:700;
+  color:rgba(255,255,255,.85);margin-bottom:12px}
+.tres h3{color:#fff;font-size:1.16rem;margin:0 0 8px}
+.tres p{color:rgba(255,255,255,.78);font-size:.96rem;line-height:1.55;margin:0}
+
+.virada .ciclo-nota{color:rgba(255,255,255,.68);border-top:1px solid rgba(255,255,255,.16);
+  padding-top:26px;margin-top:44px}
+.virada-fecho{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.35rem,3.4vw,2.05rem);color:#fff;margin:34px auto 0;max-width:none}
+
+/* ponte: as bolhas entregam o leitor perguntando */
+.bb-ponte{text-align:center;margin:34px auto 0;font-family:'Space Grotesk',sans-serif;
+  font-weight:700;letter-spacing:-.03em;font-size:clamp(1.2rem,2.8vw,1.6rem);color:var(--soft)}
+
+@media(max-width:820px){
+  .tres{grid-template-columns:1fr;gap:22px}
+  .f1,.f2,.f3{grid-column:1/-1}
+  .eixo90{display:none}
+  .fx{white-space:normal;height:auto;padding:12px 16px}
+}
 .bb-fecho{text-align:center;margin-top:34px;padding-top:34px;border-top:1px solid var(--border)}
 .bb-fecho b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
   letter-spacing:-.03em;font-size:clamp(1.35rem,3.4vw,2.05rem);color:var(--ink)}
@@ -838,23 +868,47 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       </div>
     </div>
 
-    <div class="coda90 rv">
-      <p class="eyebrow">O plano</p>
-      <h3 class="coda-h">Os Três Atos</h3>
-      <p class="coda-t">Furar as três bolhas leva noventa dias e três atos. Eles não são uma fila: cada um entra num momento e, a partir daí, todos correm juntos.</p>
-      <div class="reg90">
-        <div class="eixo90"><span>dia 0</span><span>30</span><span>60</span><span>90</span></div>
-        <div class="fx f1"><i>1</i>Desejo <em>e não para</em></div>
-        <div class="fx f2"><i>2</i>Antecipação <em>entra no 30</em></div>
-        <div class="fx f3"><i>3</i>Venda <em>entra no 60</em></div>
-      </div>
-      <p class="ciclo-nota">No fim dos noventa dias os três estão girando ao mesmo tempo. E aí o ciclo recomeça, com os três já em movimento.</p>
+    <p class="bb-ponte rv">E como se fura as três?</p>
+  </div>
+</section>
+
+<!-- ============ A VIRADA ============ -->
+<section class="virada">
+  <div class="wrap">
+    <div class="narrow rv" style="margin:0 auto;text-align:center">
+      <p class="eyebrow">A exceção</p>
+      <h2>Seja o 1% que vende no lançamento</h2>
+      <p class="lead" style="margin-top:14px">Furar as três bolhas leva noventa dias e três atos. Eles não são uma fila: cada um entra num momento e, a partir daí, todos correm juntos.</p>
     </div>
 
-    <div class="bb-fecho rv">
-      <b>De invisível a lido. Em noventa dias.</b>
-      <span class="serifa">Uma bolha de cada vez.</span>
+    <div class="reg90 rv">
+      <div class="eixo90"><span>dia 0</span><span>30</span><span>60</span><span>90</span></div>
+      <div class="fx f1"><i>1</i>Crie desejo <em>e não para</em></div>
+      <div class="fx f2"><i>2</i>Gere antecipação <em>entra no 30</em></div>
+      <div class="fx f3"><i>3</i>Lance vendendo <em>entra no 60</em></div>
     </div>
+
+    <div class="tres rv" data-stg>
+      <div>
+        <span class="n">1</span>
+        <h3>Crie desejo</h3>
+        <p>O leitor compra primeiro o autor, depois o livro. Quem é ele, com quem você conta, e como a obra vai existir no mundo.</p>
+      </div>
+      <div>
+        <span class="n">2</span>
+        <h3>Gere antecipação</h3>
+        <p>Livro que estreia vendendo começou a vender semanas antes, quando ainda nem existia nas lojas. Revelar, mobilizar a rede, desenhar a pré-venda.</p>
+      </div>
+      <div>
+        <span class="n">3</span>
+        <h3>Lance vendendo</h3>
+        <p>Pré-venda aberta, rede mobilizada, pedidos concentrados na primeira semana. E o roteiro dos trinta dias seguintes, para o livro não morrer.</p>
+      </div>
+    </div>
+
+    <p class="ciclo-nota">No fim dos noventa dias os três estão girando ao mesmo tempo. E aí o ciclo recomeça, com os três já em movimento.</p>
+
+    <p class="virada-fecho rv">De invisível a lido. <span class="serifa">Em noventa dias.</span></p>
   </div>
 </section>
 
