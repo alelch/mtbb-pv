@@ -365,6 +365,8 @@ html.js .bb-passo:not(.viva){opacity:.26}
    autor erra, e a virada logo abaixo comeca no dia 0. */
 .erro{text-align:center;margin:clamp(48px,7vw,84px) auto 0;padding-top:clamp(40px,5vw,60px);
   border-top:1px solid var(--border);max-width:900px}
+.erro .antes{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.02em;
+  font-size:clamp(1.02rem,2.2vw,1.28rem);color:var(--soft);margin:0 0 14px}
 .erro b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
   letter-spacing:-.035em;color:var(--ink);
   font-size:clamp(1.4rem,3.6vw,2.35rem);line-height:1.22;max-width:none;margin:0 auto}
@@ -409,6 +411,14 @@ html.js .bb-passo:not(.viva){opacity:.26}
 
 .virada .ciclo-nota{color:rgba(255,255,255,.68);border-top:1px solid rgba(255,255,255,.16);
   padding-top:26px;margin-top:44px}
+/* a prova: ate aqui a pagina so' afirmava. Uma linha com numero converte
+   retroativamente todo o argumento anterior de opiniao em demonstracao. */
+.prova{max-width:44ch;margin:40px auto 0;padding:24px 28px;border-radius:var(--r);
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
+.prova p{margin:0;font-size:.98rem;line-height:1.55;color:rgba(255,255,255,.78)}
+.prova p b{color:#fff;font-weight:700}
+.prova .num{margin-top:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.02em;font-size:1.14rem;color:#fff}
 .virada-fecho{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
   font-size:clamp(1.35rem,3.4vw,2.05rem);color:#fff;margin:34px auto 0;max-width:none}
 
@@ -862,7 +872,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
           <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="" cx="86" cy="52" rx="94" ry="48"/><ellipse class="" cx="68" cy="52" rx="66" ry="37"/><ellipse class="viva" cx="46" cy="52" rx="43" ry="26"/></svg>
           <p class="eyebrow">Bolha 1 · você é invisível</p>
           <h3>Amigos e família</h3>
-          <p>Quem já te conhece compra por afeto, não por interesse. Vende trinta, cinquenta exemplares, faz uma semana de barulho e acaba. Quase nenhum livro fica preso aqui por ser ruim. Fica porque não chegou em mais ninguém.</p>        </div>
+          <p>Eles compram rápido e elogiam. É a bolha que engana: a primeira semana parece sucesso, o livro vende trinta, cinquenta exemplares, e aí para. O que parecia começo era o teto.</p>        </div>
         <div class="bb-passo">
           <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="" cx="86" cy="52" rx="94" ry="48"/><ellipse class="viva" cx="68" cy="52" rx="66" ry="37"/><ellipse class="feita" cx="46" cy="52" rx="43" ry="26"/></svg>
           <p class="eyebrow">Bolha 2 · você passa a ser esperado</p>
@@ -876,7 +886,10 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       </div>
     </div>
 
-    <p class="erro rv"><b>O pior erro do autor<br>é esperar o livro <span class="risco">ficar pronto</span><br>para começar a divulgar.</b></p>
+    <div class="erro rv">
+      <p class="antes">Nenhuma das três se fura no dia do lançamento.</p>
+      <b>O pior erro do autor<br>é esperar o livro <span class="risco">ficar pronto</span><br>para começar a divulgar.</b>
+    </div>
   </div>
 </section>
 
@@ -914,6 +927,11 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     </div>
 
     <p class="ciclo-nota">No fim dos noventa dias os três estão girando ao mesmo tempo. E aí o ciclo recomeça, com os três já em movimento.</p>
+
+    <div class="prova rv">
+      <p>A <b>Ingrid</b> veio dos artigos científicos, sem nenhuma experiência com o mercado editorial.</p>
+      <p class="num">Vendeu quase 600 livros ainda na pré-venda.</p>
+    </div>
 
     <p class="virada-fecho rv">De invisível a lido. <span class="serifa">Em noventa dias.</span></p>
   </div>
