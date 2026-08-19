@@ -418,7 +418,12 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .agit .eyebrow{color:var(--accent)}
 .agit .big{
   font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
-  font-size:clamp(1.9rem,5vw,3.6rem);line-height:1.08;margin:0 auto;color:#fff;max-width:18ch}
+  font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.08;margin:0 auto;color:#fff;max-width:20ch}
+/* A premissa desce de tom e de tamanho, e o fio faz o trabalho que o "Mas" fazia.
+   Ele fica no laranja CHEIO, fora da rampa: a 15% um traço de 1px sumiria no escuro. */
+.agit .pre{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
+  font-size:clamp(1.2rem,2.7vw,1.75rem);line-height:1.25;color:#B4B0AB;margin:0 auto;max-width:22ch}
+.agit .fio{display:block;width:1px;height:64px;background:var(--accent);margin:26px auto}
 .agit .big i{font-style:normal;color:var(--accent)}
 /* CORTE: a única seção coral da página inteira. Serve de respiro e de marca. */
 .cut{background:var(--accent);color:#fff;padding:clamp(64px,8vw,104px) 0;text-align:center}
@@ -726,7 +731,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <section class="agit" data-etapa="1">
   <div class="wrap rv">
     <p class="eyebrow">O ponto de virada</p>
-    <p class="big">Você pode passar <i>anos</i> escrevendo um livro.<br>Mas é o lançamento que define se ele será lido, ou <i>esquecido</i>.</p>
+    <p class="pre">Você pode passar anos escrevendo um livro.</p>
+    <span class="fio" aria-hidden="true"></span>
+    <p class="big">É o lançamento que define se ele será lido, ou <i>esquecido</i>.</p>
   </div>
 </section>
 
