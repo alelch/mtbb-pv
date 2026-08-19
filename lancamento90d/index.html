@@ -423,12 +423,37 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .agit .fio{display:block;width:1px;height:64px;background:var(--accent);margin:26px auto}
 .agit .big i{font-style:normal;color:var(--accent)}
 /* ══ MARCAS DA CASA ══
-   Grifo e risco desenhados a mao, os mesmos da PV oficial do MTBB. La' a tinta
-   e' amarelo #FAAB00; aqui usam o laranja unico da 90D (e branco sobre laranja). */
+   Grifo, risco, manuscrita e serifa: os mesmos dispositivos da PV oficial do
+   MTBB, que e' o que faz aquela pagina ter voz. La' a tinta e' amarelo #FAAB00;
+   aqui e' o laranja unico da 90D, com a variante .claro pra fundo laranja.
+   REGRA: grifo marca PROMESSA, risco marca AMEAÇA, no maximo um por seção. */
+@font-face{font-family:'Caveat';font-style:normal;font-weight:600;font-display:swap;
+  src:url(assets/fonts/caveat.woff2) format('woff2')}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500;font-display:swap;
+  src:url(assets/fonts/fraunces-italic-500.woff2) format('woff2')}
+.grifo{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20fill%3D%27%23FC783C%27%20fill-opacity%3D%270.42%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .78em;background-position:0 .42em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 4px}
+.grifo.claro{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20fill%3D%27%23ffffff%27%20fill-opacity%3D%270.32%27%2F%3E%3C%2Fsvg%3E")}
 .risco{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23FC783C%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .34em;background-position:0 .92em;
   padding-bottom:.14em}
-.grifo{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20fill%3D%27%23ffffff%27%20fill-opacity%3D%270.32%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .78em;background-position:0 .42em;
-  -webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 4px}
+.risco.claro{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E")}
+/* a contravoz: serifa italica, baixinha, do lado da frase de marketing */
+.serifa{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
+/* a letra da Dany: se escreve sozinha e o traco cresce junto */
+.mao{font-family:'Caveat',cursive;font-weight:600;font-size:clamp(26px,3.4vw,38px);
+  line-height:1.08;letter-spacing:.5px;color:var(--accent);transform:rotate(-1.5deg);
+  display:inline-block;position:relative;margin:26px 0 0;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23FC783C%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-size:0% .14em;
+  background-position:0 99%;padding-bottom:.16em;
+  transition:background-size 2.2s cubic-bezier(.5,.05,.2,1)}
+.mao.escreveu{background-size:100% .14em}
+.mao .pal{white-space:nowrap}
+.mao .ch{opacity:0;display:inline-block;transition:opacity .14s ease-out}
+.mao.escreveu .ch{opacity:1}
+html:not(.js) .mao{background-size:100% .14em}
+html:not(.js) .mao .ch{opacity:1}
+html.js.sem-motion .mao{background-size:100% .14em}
+html.js.sem-motion .mao .ch{opacity:1!important;transition:none!important}
 
 /* OS 99%: o numero ganha um outdoor so' pra ele, antes do diagrama. */
 .noventa{background:var(--accent);color:#fff;padding:clamp(60px,7.5vw,98px) 0;text-align:center}
@@ -437,20 +462,12 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .noventa p{margin:18px auto 0;max-width:46ch;font-size:1.06rem;line-height:1.55;
   color:rgba(255,255,255,.88)}
 /* cem livros, um por marca: o numero deixa de ser abstrato e vira contagem */
-.noventa .legenda{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);
-  max-width:none;margin:0 auto 20px}
 .cem{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:520px;margin:0 auto 30px}
 .cem i{width:9px;height:26px;border-radius:2px;background:rgba(255,255,255,.34)}
 .cem i.viva{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.24)}
 @media(max-width:820px){.cem{max-width:320px;gap:4px}.cem i{width:8px;height:22px}}
 
 /* CORTE: o segundo respiro coral da página. */
-.cut{background:var(--accent);color:#fff;padding:clamp(64px,8vw,104px) 0;text-align:center}
-.cut p{
-  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
-  font-size:clamp(1.5rem,4.2vw,3rem);line-height:1.12;max-width:20ch;margin:0 auto;color:#fff}
-.cut p i{font-style:normal;color:#303030}
 
 /* DEPOIMENTOS: marquee que sangra. Quebra a coluna e traz movimento contínuo. */
 .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
@@ -541,7 +558,7 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .deliver .box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:clamp(26px,4vw,40px);box-shadow:var(--shadow)}
 
 /* ---------- corte ---------- */
-.cut{background:var(--accent-soft);text-align:center;padding:60px 0}
+.cut{background:var(--accent-soft);color:var(--ink);text-align:center;padding:60px 0}
 .cut p{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;font-size:clamp(1.35rem,3.4vw,2.15rem);line-height:1.2;max-width:24ch;margin:0 auto}
 .cut p i{font-style:normal;color:#303030}
 
@@ -761,9 +778,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <!-- ============ OS 99% ============ -->
 <section class="noventa">
   <div class="wrap rv">
-    <p class="legenda">Cem livros lançados este mês</p>
     <div class="cem" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="viva"></i></div>
-    <h2>99% dos livros <span class="grifo">só vendem para amigos e família</span></h2>
+    <h2>99% dos livros <span class="grifo claro">só vendem para amigos e família</span></h2>
     <p>Não porque são ruins. Mas porque ninguém conhecia o seu livro.</p>
   </div>
 </section>
@@ -837,7 +853,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
     <div class="bb-fecho rv">
       <b>De invisível a lido. Em noventa dias.</b>
-      <span>Uma bolha de cada vez, um ato de cada vez.</span>
+      <span class="serifa">Uma bolha de cada vez, um ato de cada vez.</span>
     </div>
   </div>
 </section>
@@ -862,7 +878,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="narrow rv">
       <p class="eyebrow">O que você constrói</p>
-      <h2>Você não vai assistir. Você vai construir.</h2>
+      <h2>Você não vai assistir. Você vai <span class="grifo">construir</span>.</h2>
       <p class="lead" style="margin-top:14px">Com o seu livro e as suas datas na frente, do primeiro dia ao nonagésimo.</p>
     </div>
     <div class="grid4" data-stg>
@@ -908,7 +924,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
 <!-- ============ CORTE ============ -->
 <section class="cut" data-etapa="5">
-  <div class="wrap"><p class="rv">Vender algumas cópias qualquer um consegue. Difícil é fazer o livro <i>continuar vendendo</i> depois do lançamento.</p></div>
+  <div class="wrap"><p class="rv">Vender algumas cópias qualquer um consegue. Difícil é fazer o livro <span class="grifo">continuar vendendo</span> depois do lançamento.</p></div>
 </section>
 
 <!-- ============ CASOS ============
@@ -947,7 +963,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <section class="white">
   <div class="wrap"><div class="tight rv" style="text-align:center">
     <p class="eyebrow">Quem já lançou assim</p>
-    <h2>Não é sorte. É estratégia.</h2>
+    <h2>Não é sorte. <span class="serifa">É estratégia.</span></h2>
   </div></div>
   <div class="marquee" style="margin-top:38px">
     <div class="mrow">
@@ -1001,6 +1017,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       <p class="lead" style="margin-top:16px">Esteve à frente do lançamento de mais de <strong>800 autores</strong>, somando mais de <strong>10 milhões de livros vendidos</strong>.</p>
       <p class="lead">Depois de anos nos bastidores das grandes editoras, passou a ensinar autores independentes a fazer o que o mercado raramente explica: lançar com estratégia, metas e estrutura.</p>
       <p class="lead">Criadora do Método The Book Business, já ajudou mais de <strong>4.400 alunos</strong> a sair do improviso e entrar no mercado com plano.</p>
+      <p class="mao"><span class="lin">O maior risco que um autor corre é ser esquecido.</span></p>
       <div class="nums">
         <div><b data-n="15" data-pre="+" data-pos=" anos">+15 anos</b><span>no mercado literário</span></div>
         <div><b data-n="800" data-pre="+">+800</b><span>autores lançados</span></div>
@@ -1016,7 +1033,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="narrow rv">
       <p class="eyebrow">Dois caminhos</p>
-      <h2>Você vai continuar esperando, ou vai agir?</h2>
+      <h2>Você vai continuar <span class="risco">esperando</span>, ou vai <span class="grifo">agir</span>?</h2>
       <p class="lead" style="margin-top:14px">Todo autor chega nesse ponto. A diferença está em quem decide fazer diferente.</p>
     </div>
     <div class="paths">
@@ -1049,7 +1066,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="narrow rv" style="text-align:center;margin:0 auto">
       <p class="eyebrow">Inscrição</p>
-      <h2>O lançamento do seu livro vai acontecer.<br>A diferença é se ele vai vender, ou não.</h2>
+      <h2>O lançamento do seu livro vai acontecer.<br>A diferença é se ele vai vender, ou <span class="risco">não</span>.</h2>
     </div>
     <div class="offer-box rv">
       <div class="name">Lançamento 90D</div>
@@ -1099,7 +1116,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <section class="final" data-etapa="5">
   <div class="wrap">
     <div class="rv">
-      <h2>Você só lança esse livro uma vez.</h2>
+      <h2>Você só lança esse livro <span class="grifo">uma vez</span>.</h2>
       <span class="sub">Você passou meses, talvez anos, escrevendo ele. Não deixa ele invisível.</span>
       <a href="#oferta" class="btn" data-cta="final">Quero o plano de 90 dias</a>
     </div>
@@ -1325,6 +1342,37 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   addEventListener('resize', pedir);
   medir();
   window.__bolhas = medir;
+})();
+</script>
+<script>
+/* A LETRA DA DANY: cada caractere entra em sequencia e o traco cresce junto.
+   Sem JS ou com movimento desligado, o CSS ja' deixa tudo no estado final. */
+(function(){
+  var maos=[].slice.call(document.querySelectorAll('.mao'));
+  if(!maos.length) return;
+  maos.forEach(function(m){
+    m.querySelectorAll('.lin').forEach(function(l){
+      var palavras=l.textContent.split(' '); l.textContent='';
+      palavras.forEach(function(pal,k){
+        var w=document.createElement('span'); w.className='pal';
+        for(var i=0;i<pal.length;i++){ var c=document.createElement('span');
+          c.className='ch'; c.textContent=pal.charAt(i); w.appendChild(c); }
+        l.appendChild(w);
+        if(k<palavras.length-1){ var esp=document.createElement('span');
+          esp.className='ch'; esp.textContent='\u00A0'; l.appendChild(esp); }
+      });
+    });
+  });
+  function escrever(m){
+    if(m.dataset.feito) return; m.dataset.feito='1';
+    var d=0; m.querySelectorAll('.ch').forEach(function(c){ c.style.transitionDelay=d+'ms'; d+=26; });
+    m.classList.add('escreveu');
+  }
+  if(!('IntersectionObserver' in window)){ maos.forEach(escrever); return; }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){ escrever(e.target); io.unobserve(e.target); }});},{threshold:.5});
+  maos.forEach(function(m){io.observe(m);});
+  window.__escrever=function(){maos.forEach(escrever);};
 })();
 </script>
 </body>
