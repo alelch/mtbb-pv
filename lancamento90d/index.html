@@ -1218,7 +1218,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         <li>Checklists e marcos dos dias 15, 45 e 90</li>
         <li>Acesso imediato e vitalício</li>
       </ul>
-      <a href="#" class="btn block" id="ctaMain" data-cta="oferta">Quero o plano de 90 dias</a>
+      <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn block" id="ctaMain" data-cta="oferta">Quero o plano de 90 dias</a>
       <div class="seals"><span>Pagamento seguro</span><span>Acesso imediato</span></div>
     </div>
 
@@ -1336,6 +1336,11 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   }
   /* o framework chama isto depois de resolver o teste; como monto a URL no clique, é só um hook */
   window.__abReprocess = function(){};
+  /* mantém o href do botão em dia com o CHECKOUT atual. O href existe pra
+     quem está sem JS, pro clique do meio e pro "copiar endereço do link"; o
+     clique normal continua remontando a URL na hora. */
+  (function(){ var b = document.getElementById('ctaMain');
+    if (b && !/SUBSTITUIR/.test(CHECKOUT)) b.setAttribute('href', checkoutUrl()); })();
   function comprar(origem){
     /* trava de segurança: enquanto o checkout for placeholder, não joga ninguém
        num link quebrado da Hotmart. Some sozinha quando CHECKOUT for o real. */
