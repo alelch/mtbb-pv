@@ -447,7 +447,10 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
 .curva .a1{fill:rgba(127,212,174,.12)}
 .curva .a2{fill:rgba(34,192,123,.15)}
 .curva .a3{fill:rgba(255,255,255,.10)}
-.curva .n1{stroke:#7FD4AE}.curva .n2{stroke:#22C07B}.curva .n3{stroke:#FFFFFF}
+.curva .n1{stroke:#7FD4AE}.curva .n2{stroke:#22C07B}
+/* o ponto do resultado e' cheio: os fatores sao marcas de partida, esse e' chegada */
+.curva .n3{stroke:#FFFFFF}
+.curva .topo{fill:#FFFFFF}
 .curva .t1{fill:#7FD4AE}.curva .t2{fill:#22C07B}.curva .t3{fill:#FFFFFF}
 .curva .plana{stroke:rgba(255,255,255,.30);stroke-width:2;stroke-linecap:round}
 .curva .no{fill:var(--verde);stroke-width:3.5;
@@ -1013,11 +1016,11 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
         <circle class="no n1" data-x="60"  cx="60"  cy="300" r="7"/>
         <circle class="no n2" data-x="330" cx="330" cy="274" r="7"/>
-        <circle class="no n3" data-x="600" cx="600" cy="197" r="7"/>
+        <circle class="no n3 topo" data-x="856" cx="862" cy="44" r="9"/>
 
         <text class="cato t1" data-x="60"  x="74"  y="274">Crie desejo</text>
         <text class="cato t2" data-x="330" x="316" y="248" text-anchor="end">Gere antecipação</text>
-        <text class="cato t3" data-x="600" x="586" y="171" text-anchor="end">Lance vendendo</text>
+        <text class="cato t3" data-x="856" x="846" y="28" text-anchor="end">Lance vendendo</text>
 
         <text class="cdia" x="60"  y="344">DIA 0</text>
         <text class="cdia" x="330" y="344">30</text>
