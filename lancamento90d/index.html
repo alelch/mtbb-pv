@@ -374,6 +374,14 @@ html.js .bb-passo:not(.viva){opacity:.26}
   letter-spacing:-.035em;color:var(--ink);
   font-size:clamp(1.4rem,3.6vw,2.35rem);line-height:1.22;max-width:none;margin:0 auto}
 
+/* A SETA da virada: mesma mao do grifo e do risco, igual a do 'Voce esta
+   aqui' da PV oficial. Fica no lado CLARO, apontando pro verde, porque
+   laranja e' a cor do problema e nao pode entrar na secao da saida. */
+.seta{display:flex;justify-content:center;margin-top:clamp(36px,5vw,58px)}
+.seta svg{width:clamp(38px,4.4vw,52px);height:auto;animation:descer 2s ease-in-out infinite}
+@keyframes descer{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@media(prefers-reduced-motion:reduce){.seta svg{animation:none}}
+
 /* ══ A VIRADA ══
    A UNICA secao verde da pagina, de proposito: ela e' o 1%, entao a raridade
    da cor e' o proprio recado. Gramatica de cor da pagina agora:
@@ -385,6 +393,16 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .virada h2{color:#fff;font-size:clamp(1.8rem,4.6vw,3rem);max-width:18ch;margin:0 auto}
 .virada h2 em{font-style:normal;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap}
 .virada .lead{color:rgba(255,255,255,.82);max-width:52ch;margin-left:auto;margin-right:auto}
+
+/* OS CEM, DE VOLTA. No laranja eles ENCHEM ate' 100; aqui ESVAZIAM ate' 1.
+   Mesma tecnica (uma variavel CSS, conta por indice), sinal invertido. */
+.cem-um{margin:34px auto 0}
+.cem-um i{background:rgba(255,255,255,.30)}
+.cem-um i.viva{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.22)}
+html.js .cem-um i{opacity:calc(1.15 - var(--p,0) * 1.15)}
+html.js .cem-um i.viva{opacity:1;transform:scaleY(calc(1 + var(--p,0) * .55))}
+html.js.sem-motion .cem-um,html:not(.js) .cem-um{--p:1}
+@media(prefers-reduced-motion:reduce){.cem-um{--p:1!important}}
 
 /* a linha do tempo: e' o unico jeito de dizer que os atos se sobrepoem */
 .reg90{display:grid;grid-template-columns:repeat(12,1fr);gap:8px 4px;margin-top:44px}
@@ -848,7 +866,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <!-- ============ OS 99% ============ -->
 <section class="noventa">
   <div class="wrap rv">
-    <div class="cem" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i><i style="--i:30"></i><i style="--i:31"></i><i style="--i:32"></i><i style="--i:33"></i><i style="--i:34"></i><i style="--i:35"></i><i style="--i:36"></i><i style="--i:37"></i><i style="--i:38"></i><i style="--i:39"></i><i style="--i:40"></i><i style="--i:41"></i><i style="--i:42"></i><i style="--i:43"></i><i style="--i:44"></i><i style="--i:45"></i><i style="--i:46"></i><i style="--i:47"></i><i style="--i:48"></i><i style="--i:49"></i><i style="--i:50"></i><i style="--i:51"></i><i style="--i:52"></i><i style="--i:53"></i><i style="--i:54"></i><i style="--i:55"></i><i style="--i:56"></i><i style="--i:57"></i><i style="--i:58"></i><i style="--i:59"></i><i style="--i:60"></i><i style="--i:61"></i><i style="--i:62"></i><i style="--i:63"></i><i style="--i:64"></i><i style="--i:65"></i><i style="--i:66"></i><i style="--i:67"></i><i style="--i:68"></i><i style="--i:69"></i><i style="--i:70"></i><i style="--i:71"></i><i style="--i:72"></i><i style="--i:73"></i><i style="--i:74"></i><i style="--i:75"></i><i style="--i:76"></i><i style="--i:77"></i><i style="--i:78"></i><i style="--i:79"></i><i style="--i:80"></i><i style="--i:81"></i><i style="--i:82"></i><i style="--i:83"></i><i style="--i:84"></i><i style="--i:85"></i><i style="--i:86"></i><i style="--i:87"></i><i style="--i:88"></i><i style="--i:89"></i><i style="--i:90"></i><i style="--i:91"></i><i style="--i:92"></i><i style="--i:93"></i><i style="--i:94"></i><i style="--i:95"></i><i style="--i:96"></i><i style="--i:97"></i><i style="--i:98"></i><i style="--i:99" class="viva"></i></div>
+    <div class="cem" data-sec=".noventa" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i><i style="--i:30"></i><i style="--i:31"></i><i style="--i:32"></i><i style="--i:33"></i><i style="--i:34"></i><i style="--i:35"></i><i style="--i:36"></i><i style="--i:37"></i><i style="--i:38"></i><i style="--i:39"></i><i style="--i:40"></i><i style="--i:41"></i><i style="--i:42"></i><i style="--i:43"></i><i style="--i:44"></i><i style="--i:45"></i><i style="--i:46"></i><i style="--i:47"></i><i style="--i:48"></i><i style="--i:49"></i><i style="--i:50"></i><i style="--i:51"></i><i style="--i:52"></i><i style="--i:53"></i><i style="--i:54"></i><i style="--i:55"></i><i style="--i:56"></i><i style="--i:57"></i><i style="--i:58"></i><i style="--i:59"></i><i style="--i:60"></i><i style="--i:61"></i><i style="--i:62"></i><i style="--i:63"></i><i style="--i:64"></i><i style="--i:65"></i><i style="--i:66"></i><i style="--i:67"></i><i style="--i:68"></i><i style="--i:69"></i><i style="--i:70"></i><i style="--i:71"></i><i style="--i:72"></i><i style="--i:73"></i><i style="--i:74"></i><i style="--i:75"></i><i style="--i:76"></i><i style="--i:77"></i><i style="--i:78"></i><i style="--i:79"></i><i style="--i:80"></i><i style="--i:81"></i><i style="--i:82"></i><i style="--i:83"></i><i style="--i:84"></i><i style="--i:85"></i><i style="--i:86"></i><i style="--i:87"></i><i style="--i:88"></i><i style="--i:89"></i><i style="--i:90"></i><i style="--i:91"></i><i style="--i:92"></i><i style="--i:93"></i><i style="--i:94"></i><i style="--i:95"></i><i style="--i:96"></i><i style="--i:97"></i><i style="--i:98"></i><i style="--i:99" class="viva"></i></div>
     <h2>99% dos livros ficam presos na <span class="grifo claro">primeira bolha</span>: só vendem para amigos e família</h2>
     <p>Não porque são ruins.<br><strong>Mas porque ninguém conhecia o seu livro.</strong></p>
   </div>
@@ -893,6 +911,13 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     <div class="erro rv">
       <b>O pior erro do autor<br>é esperar o livro <span class="risco">ficar pronto</span><br>para começar a divulgar.</b>
     </div>
+
+    <div class="seta rv" aria-hidden="true">
+      <svg viewBox="0 0 40 62" fill="none">
+        <path d="M20,3 Q16,17 21,29 Q24,40 20,49" stroke="var(--accent)" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M11,40 L20,52 L29,40" stroke="var(--accent)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
   </div>
 </section>
 
@@ -902,6 +927,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     <div class="narrow rv" style="margin:0 auto;text-align:center">
       <p class="eyebrow forte">Seja a exceção</p>
       <h2>O 1% que vende <em>de verdade</em> no lançamento</h2>
+      <div class="cem cem-um" data-sec=".virada" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i><i style="--i:30"></i><i style="--i:31"></i><i style="--i:32"></i><i style="--i:33"></i><i style="--i:34"></i><i style="--i:35"></i><i style="--i:36"></i><i style="--i:37"></i><i style="--i:38"></i><i style="--i:39"></i><i style="--i:40"></i><i style="--i:41"></i><i style="--i:42"></i><i style="--i:43"></i><i style="--i:44"></i><i style="--i:45"></i><i style="--i:46"></i><i style="--i:47"></i><i style="--i:48"></i><i style="--i:49"></i><i style="--i:50"></i><i style="--i:51"></i><i style="--i:52"></i><i style="--i:53"></i><i style="--i:54"></i><i style="--i:55"></i><i style="--i:56"></i><i style="--i:57"></i><i style="--i:58"></i><i style="--i:59"></i><i style="--i:60"></i><i style="--i:61"></i><i style="--i:62"></i><i style="--i:63"></i><i style="--i:64"></i><i style="--i:65"></i><i style="--i:66"></i><i style="--i:67"></i><i style="--i:68"></i><i style="--i:69"></i><i style="--i:70"></i><i style="--i:71"></i><i style="--i:72"></i><i style="--i:73"></i><i style="--i:74"></i><i style="--i:75"></i><i style="--i:76"></i><i style="--i:77"></i><i style="--i:78"></i><i style="--i:79"></i><i style="--i:80"></i><i style="--i:81"></i><i style="--i:82"></i><i style="--i:83"></i><i style="--i:84"></i><i style="--i:85"></i><i style="--i:86"></i><i style="--i:87"></i><i style="--i:88"></i><i style="--i:89"></i><i style="--i:90"></i><i style="--i:91"></i><i style="--i:92"></i><i style="--i:93"></i><i style="--i:94"></i><i style="--i:95"></i><i style="--i:96"></i><i style="--i:97"></i><i style="--i:98"></i><i style="--i:99" class="viva"></i></div>
     </div>
 
     <div class="reg90 rv">
@@ -1470,14 +1496,19 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
    atualizada em rAF; as 100 marcas leem dela sozinhas. O ultimo a acender e'
    justamente o unico aceso. */
 (function(){
-  var cem=document.querySelector('.cem'); if(!cem) return;
-  var sec=document.querySelector('.noventa'), pedido=false;
+  var grupos=[].slice.call(document.querySelectorAll('.cem')).map(function(c){
+    return { cem:c, sec:document.querySelector(c.getAttribute('data-sec')||'.noventa') };
+  }).filter(function(g){ return g.sec; });
+  if(!grupos.length) return;
+  var pedido=false;
   function medir(){
     pedido=false;
-    var t=sec.getBoundingClientRect().top;
-    var ini=innerHeight*0.92, fim=innerHeight*0.30;
-    var p=(ini-t)/(ini-fim);
-    cem.style.setProperty('--p', Math.min(Math.max(p,0),1).toFixed(3));
+    grupos.forEach(function(g){
+      var t=g.sec.getBoundingClientRect().top;
+      var ini=innerHeight*0.92, fim=innerHeight*0.30;
+      var p=(ini-t)/(ini-fim);
+      g.cem.style.setProperty('--p', Math.min(Math.max(p,0),1).toFixed(3));
+    });
   }
   function pedir(){ if(!pedido){pedido=true;requestAnimationFrame(medir);} }
   addEventListener('scroll',pedir,{passive:true}); addEventListener('resize',pedir);
