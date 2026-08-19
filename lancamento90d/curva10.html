@@ -1,0 +1,124 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>A curva · 10 gradientes</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{--verde:#14523E;--claro:#7FD4AE;--vivo:#22C07B}
+*{box-sizing:border-box}
+body{margin:0;background:#0d0d0d;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.rot{background:#fff;color:#3A3A38;padding:11px 22px;font-family:'Space Grotesk',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.rot em{font-style:normal;font-weight:400;letter-spacing:.02em;text-transform:none;opacity:.6;margin-left:12px;font-size:12.5px}
+.v{background:var(--verde);padding:44px 0 34px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+svg{width:100%;height:auto;overflow:visible;display:block}
+text{font-family:'Space Grotesk',sans-serif}
+.cdia,.ceixo{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.45)}
+.csem{font-size:12px;fill:rgba(255,255,255,.42)}
+.cato{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.plana{stroke:rgba(255,255,255,.28);stroke-width:2;stroke-dasharray:5 7;fill:none}
+.no{fill:var(--verde);stroke-width:3.5}
+</style></head><body>
+<div id="tudo"></div>
+<script>
+var W=900,H=340,X0=60,X1=862,Y0=300,Y1=44;
+var ATOS=[{n:'Crie desejo',d:0,k:0.9,c:'#7FD4AE'},
+          {n:'Gere antecipação',d:30,k:1.6,c:'#22C07B'},
+          {n:'Lance vendendo',d:60,k:3.2,c:'#FFFFFF'}];
+function px(d){return X0+(X1-X0)*(d/90)}
+function val(dia,ate){var v=1;ATOS.forEach(function(a,i){
+  if(ate!==undefined&&i>ate)return; if(dia<=a.d)return; v*=1+a.k*((dia-a.d)/90);});return v}
+var MAX=val(90);
+function py(v){return Y0-(Y0-Y1)*Math.min(v/MAX,1)}
+function curva(ate){var p='';for(var d=0;d<=90;d+=1.5){
+  p+=(d?' L':'M')+px(d).toFixed(1)+','+py(val(d,ate)).toFixed(1);}return p}
+function area(ate){return curva(ate)+' L'+px(90).toFixed(1)+','+Y0+' L'+X0+','+Y0+' Z'}
+function faixa(de,ate){ /* banda entre duas curvas */
+  var a='',b=[];
+  for(var d=0;d<=90;d+=1.5){a+=(d?' L':'M')+px(d).toFixed(1)+','+py(val(d,ate)).toFixed(1);}
+  for(var d=90;d>=0;d-=1.5){b.push(px(d).toFixed(1)+','+py(de===null?1:val(d,de)).toFixed(1));}
+  return a+' L'+b.join(' L')+' Z';
+}
+function base(defs,miolo,pontos){
+  return '<svg viewBox="0 0 '+W+' '+H+'" fill="none"><defs>'+defs+'</defs>'+
+   '<text class="ceixo" x="46" y="22">quem conhece o seu livro</text>'+
+   '<path class="plana" d="M'+X0+',306 L'+X1+',298"/>'+
+   '<text class="csem" x="700" y="322">sem plano</text>'+
+   miolo+
+   (pontos===false?'':
+     '<circle class="no" cx="'+X0+'" cy="'+py(val(0)).toFixed(1)+'" r="7" stroke="#7FD4AE"/>'+
+     '<circle class="no" cx="'+px(30)+'" cy="'+py(val(30)).toFixed(1)+'" r="7" stroke="#22C07B"/>'+
+     '<circle class="no" cx="'+X1+'" cy="'+Y1+'" r="9" stroke="#fff" fill="#fff"/>')+
+   '<text class="cato" x="74" y="'+(py(val(0))-26).toFixed(1)+'" fill="#7FD4AE">Crie desejo</text>'+
+   '<text class="cato" x="'+(px(30)-14)+'" y="'+(py(val(30))-26).toFixed(1)+'" text-anchor="end" fill="#22C07B">Gere antecipação</text>'+
+   '<text class="cato" x="'+(X1-16)+'" y="'+(Y1-16)+'" text-anchor="end" fill="#fff">Lance vendendo</text>'+
+   '<text class="cdia" x="'+X0+'" y="334">DIA 0</text><text class="cdia" x="'+px(30)+'" y="334">30</text>'+
+   '<text class="cdia" x="'+px(60)+'" y="334">60</text><text class="cdia" x="'+X1+'" y="334" text-anchor="end">90</text></svg>';
+}
+var D=curva(), A=area();
+function lin(id,stops,x1,y1,x2,y2){
+  return '<linearGradient id="'+id+'" x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" gradientUnits="userSpaceOnUse">'+
+    stops.map(function(s){return '<stop offset="'+s[0]+'" stop-color="'+s[1]+'" stop-opacity="'+(s[2]===undefined?1:s[2])+'"/>'}).join('')+
+    '</linearGradient>';
+}
+var Vs=[
+ ['Linha em gradiente','a cor corre ao longo do tempo, sem corte entre os atos',
+  lin('g1',[[0,'#7FD4AE'],[.55,'#22C07B'],[1,'#FFFFFF']],X0,0,X1,0)+
+  lin('g1a',[[0,'#22C07B',.22],[1,'#22C07B',.02]],0,Y1,0,Y0),
+  '<path d="'+A+'" fill="url(#g1a)"/><path d="'+D+'" stroke="url(#g1)" stroke-width="3.5" stroke-linecap="round"/>'],
+
+ ['Área forte na base','o preenchimento pesa embaixo e some pra cima',
+  lin('g2',[[0,'#22C07B',.05],[1,'#22C07B',.42]],0,Y1,0,Y0),
+  '<path d="'+A+'" fill="url(#g2)"/><path d="'+D+'" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>'],
+
+ ['Área forte no topo','o preenchimento acende junto da linha e desbota pra baixo',
+  lin('g3',[[0,'#22C07B',.5],[1,'#22C07B',.02]],0,Y1,0,Y0),
+  '<path d="'+A+'" fill="url(#g3)"/><path d="'+D+'" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>'],
+
+ ['Três camadas empilhadas','cada ato e a sua contribuicao: o grafico honesto de acumulo',
+  '',
+  '<path d="'+faixa(null,0)+'" fill="rgba(127,212,174,.30)"/>'+
+  '<path d="'+faixa(0,1)+'" fill="rgba(34,192,123,.34)"/>'+
+  '<path d="'+faixa(1,2)+'" fill="rgba(255,255,255,.22)"/>'+
+  '<path d="'+D+'" stroke="#fff" stroke-width="3" stroke-linecap="round"/>'],
+
+ ['Gradiente com halo no topo','luz saindo do ponto de chegada',
+  lin('g5',[[0,'#22C07B',.34],[1,'#22C07B',.02]],0,Y1,0,Y0)+
+  '<radialGradient id="h5" cx="'+X1+'" cy="'+Y1+'" r="150" gradientUnits="userSpaceOnUse">'+
+  '<stop offset="0" stop-color="#fff" stop-opacity=".34"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>',
+  '<path d="'+A+'" fill="url(#g5)"/><circle cx="'+X1+'" cy="'+Y1+'" r="150" fill="url(#h5)"/>'+
+  '<path d="'+D+'" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>'],
+
+ ['Linha grossa, área discreta','a linha manda e o preenchimento so acompanha',
+  lin('g6',[[0,'#22C07B',.16],[1,'#22C07B',0]],0,Y1,0,Y0),
+  '<path d="'+A+'" fill="url(#g6)"/><path d="'+D+'" stroke="#fff" stroke-width="6" stroke-linecap="round"/>'],
+
+ ['Gradiente horizontal na área','a area muda de cor no tempo, junto com os atos',
+  lin('g7',[[0,'#7FD4AE',.30],[.5,'#22C07B',.34],[1,'#FFFFFF',.26]],X0,0,X1,0),
+  '<path d="'+A+'" fill="url(#g7)"/><path d="'+D+'" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>'],
+
+ ['Comparação preenchida','o vazio entre o com plano e o sem plano vira a mensagem',
+  lin('g8',[[0,'#22C07B',.42],[1,'#22C07B',.06]],0,Y1,0,Y0),
+  '<path d="M'+X0+',300 L'+X1+',292 L'+X1+','+Y0+' L'+X0+','+Y0+' Z" fill="rgba(255,255,255,.07)"/>'+
+  '<path d="'+A+'" fill="url(#g8)"/><path d="'+D+'" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>'],
+
+ ['Gradiente com guias','faixas fantasma marcam onde cada ato entra',
+  lin('g9',[[0,'#22C07B',.34],[1,'#22C07B',.03]],0,Y1,0,Y0),
+  '<rect x="'+px(30)+'" y="20" width="1.5" height="286" fill="rgba(255,255,255,.14)"/>'+
+  '<rect x="'+px(60)+'" y="20" width="1.5" height="286" fill="rgba(255,255,255,.14)"/>'+
+  '<path d="'+A+'" fill="url(#g9)"/><path d="'+D+'" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>'],
+
+ ['Tudo em gradiente','linha, area e halo, sem nenhuma borda dura',
+  lin('gA',[[0,'#7FD4AE'],[.5,'#22C07B'],[1,'#FFFFFF']],X0,0,X1,0)+
+  lin('gAa',[[0,'#22C07B',.38],[1,'#22C07B',.02]],0,Y1,0,Y0)+
+  '<radialGradient id="hA" cx="'+X1+'" cy="'+Y1+'" r="170" gradientUnits="userSpaceOnUse">'+
+  '<stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>',
+  '<path d="'+A+'" fill="url(#gAa)"/><circle cx="'+X1+'" cy="'+Y1+'" r="170" fill="url(#hA)"/>'+
+  '<path d="'+D+'" stroke="url(#gA)" stroke-width="4" stroke-linecap="round"/>']
+];
+document.getElementById('tudo').innerHTML = Vs.map(function(v,i){
+  return '<div class="rot">Versão '+(i+1)+' · '+v[0]+' <em>'+v[1]+'</em></div>'+
+    '<section class="v"><div class="wrap">'+base(v[2],v[3])+'</div></section>';
+}).join('');
+</script>
+</body></html>
