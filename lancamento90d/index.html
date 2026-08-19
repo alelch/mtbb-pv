@@ -392,7 +392,8 @@ html.js .bb-passo:not(.viva){opacity:.26}
   padding:clamp(96px,10vw,140px) 0 clamp(72px,9vw,116px)}
 .virada .eyebrow{color:rgba(255,255,255,.62)}
 .virada .eyebrow.forte{color:#fff;font-size:.86rem;letter-spacing:.2em;margin-bottom:16px}
-.virada h2{color:#fff;font-size:clamp(1.8rem,4.6vw,3rem);max-width:18ch;margin:0 auto}
+.virada h2{color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.02em;font-size:clamp(1.8rem,4.6vw,3rem);max-width:18ch;margin:0 auto}
 .virada h2 em{font-style:normal;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap}
 /* O TITULO CONTA: comeca em 100% e desce ate 1% conforme a tela desce. O
    numero CRESCE enquanto encolhe (relacao inversa = drama), fica laranja ao
@@ -437,40 +438,41 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
    potencializar. A linha tracejada mostra o que acontece sem plano. */
 .curva{margin-top:clamp(34px,4.4vw,54px)}
 .curva svg{width:100%;height:auto;overflow:visible}
-.curva .linha{stroke-width:3.5;stroke-linecap:round;fill:none}
-/* uma cor por ato, subindo de intensidade: o ultimo e' o branco, que e' o
-   maior contraste possivel sobre esse verde. Todos passam de 3:1. */
-.curva .l1{stroke:#7FD4AE}   /* crie desejo      5,17:1 */
-.curva .l2{stroke:#22C07B}   /* gere antecipacao 3,86:1 */
-.curva .l3{stroke:#FFFFFF}   /* lance vendendo   9,11:1 */
+.curva .linha{stroke-width:4;stroke-linecap:round;fill:none}
+/* Gradiente de calor: branco, amarelo da casa, vermelho. Sem borda dura entre
+   os atos, porque eles se sobrepoem e nao se sucedem.
+   Contraste sobre o verde: branco 9,11:1 · #FAAB00 4,72:1 · #FF7A5C 3,55:1.
+   Por isso os rotulos vao a 19px NEGRITO, que e' o limiar de texto grande,
+   onde 3:1 basta. A 17px o vermelho reprovaria. */
 .curva .ar{stroke:none}
-.curva .a1{fill:rgba(127,212,174,.12)}
-.curva .a2{fill:rgba(34,192,123,.15)}
-.curva .a3{fill:rgba(255,255,255,.10)}
-.curva .n1{stroke:#7FD4AE}.curva .n2{stroke:#22C07B}
-/* o ponto do resultado e' cheio: os fatores sao marcas de partida, esse e' chegada */
-.curva .n3{stroke:#FFFFFF}
-.curva .topo{fill:#FFFFFF}
-.curva .t1{fill:#7FD4AE}.curva .t2{fill:#22C07B}.curva .t3{fill:#FFFFFF}
-.curva .plana{stroke:rgba(255,255,255,.30);stroke-width:2;stroke-linecap:round}
+.curva .plana{stroke:rgba(255,255,255,.45);stroke-width:1.5;fill:none}
+.curva .prev{stroke:rgba(255,255,255,.5);stroke-width:1.5;stroke-dasharray:6 6;
+  opacity:0;transition:opacity .45s var(--ease)}
+.curva .marco{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.62);
+  opacity:0;transition:opacity .45s var(--ease)}
+.curva .n1{stroke:#FFFFFF}.curva .n2{stroke:#FAAB00}.curva .n3{stroke:#FF7A5C}
+.curva .topo{fill:#FF7A5C}
+.curva .t1{fill:#FFFFFF}.curva .t2{fill:#FAAB00}.curva .t3{fill:#FF7A5C}
 .curva .no{fill:var(--verde);stroke-width:3.5;
   opacity:0;transition:opacity .45s var(--ease)}
-html:not(.js) .curva .no,html:not(.js) .curva .cato{opacity:1}
+html:not(.js) .curva .no,html:not(.js) .curva .cato,
+html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .curva text{font-family:'Space Grotesk',sans-serif}
-.curva .cato{font-size:17px;font-weight:700;letter-spacing:-.02em;fill:#fff;
+.curva .cato{font-size:19px;font-weight:700;letter-spacing:-.02em;
   opacity:0;transition:opacity .45s var(--ease)}
 .curva .cdia{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.45)}
 .curva .ceixo{font-size:11px;font-weight:700;letter-spacing:.16em;
   text-transform:uppercase;fill:rgba(255,255,255,.45)}
-.curva .csem{font-size:12px;font-weight:400;fill:rgba(255,255,255,.42)}
-.curva-leg{display:none}
+.curva .csem{font-size:13px;font-weight:400;fill:rgba(255,255,255,.62)}
+.curva-leg,.curva-eixo,.curva-nota{display:none}
 
 /* a matematica: multiplicacao E' potencializacao, e o zero prova a frase */
-.conta{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;
-  font-size:clamp(1.05rem,2.5vw,1.5rem);color:#fff;margin:16px 0 0}
-.conta em{font-style:normal;color:rgba(255,255,255,.5);margin:0 .18em;font-weight:400}
-.conta b{font-weight:700}
-.conta .c1{color:#7FD4AE}.conta .c2{color:#22C07B}.conta .c3{color:#fff}
+.mult{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.18rem,2.5vw,1.5rem);color:#fff;margin:16px 0 0}
+.mult b{white-space:nowrap}
+.mult em{font-style:normal;color:rgba(255,255,255,.5);margin:0 .18em;font-weight:400}
+.mult b{font-weight:700}
+.mult .c1{color:#fff}.mult .c2{color:#FAAB00}.mult .c3{color:#FF7A5C}
 .desfecho{margin-top:20px!important}
 
 .virada .ciclo-nota{color:rgba(255,255,255,.68);border-top:1px solid rgba(255,255,255,.16);
@@ -502,12 +504,16 @@ html:not(.js) .curva .no,html:not(.js) .curva .cato{opacity:1}
 @media(max-width:820px){
   /* No estreito o SVG encolhe e os rotulos de dentro colidem entre si. A
      curva vira desenho puro e os nomes saem pra uma legenda embaixo. */
-  .curva .cato{display:none}
-  .curva .cdia,.curva .ceixo{font-size:17px}
-  .curva .csem{font-size:17px}
+  .curva .cato,.curva .cdia,.curva .ceixo,.curva .csem,.curva .marco{display:none}
+  .curva-eixo{display:block;margin:0 0 6px;font-family:'Space Grotesk',sans-serif;
+    font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(255,255,255,.62);text-align:left}
+  .curva-nota{display:block;margin:14px 0 0;font-size:.86rem;line-height:1.5;
+    color:rgba(255,255,255,.62);text-align:left}
+  .curva-nota b{font-weight:600;color:rgba(255,255,255,.86)}
   .curva-leg{display:grid;gap:10px;list-style:none;margin:20px 0 0;padding:0;text-align:left}
   .curva-leg i{width:10px;height:10px;border-radius:50%;flex:0 0 auto;align-self:center}
-  .curva-leg .p1{background:#7FD4AE}.curva-leg .p2{background:#22C07B}.curva-leg .p3{background:#fff}
+  .curva-leg .p1{background:#fff}.curva-leg .p2{background:#FAAB00}.curva-leg .p3{background:#FF7A5C}
   .curva-leg li{display:flex;align-items:baseline;gap:9px;
     font-family:'Space Grotesk',sans-serif;font-size:1.02rem;color:#fff}
   .curva-leg b{font-weight:700;letter-spacing:-.02em}
@@ -984,7 +990,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="narrow rv" style="margin:0 auto;text-align:center">
       <p class="eyebrow forte">Seja a exceção</p>
-      <h2 class="conta" id="cabeca">O <span class="pct" id="pct">1%</span><span class="resto" id="resto"> que vende <em>de verdade</em> no lançamento</span></h2>
+      <h2 id="cabeca">O <span class="pct" id="pct">1%</span><span class="resto" id="resto"> que vende <em>de verdade</em> no lançamento</span></h2>
     </div>
 
     <div class="premissa rv">
@@ -993,49 +999,63 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     </div>
 
     <div class="curva rv">
+      <p class="curva-eixo">quem conhece o seu livro</p>
       <svg viewBox="0 0 900 350" fill="none" role="img"
-           aria-label="Curva de quem conhece o seu livro ao longo de noventa dias, ficando mais íngreme a cada ato que entra">
-        <text class="ceixo" x="46" y="24">quem conhece o seu livro</text>
-
+           aria-label="Curva de quem conhece o seu livro ao longo de noventa dias, esquentando a cada ato">
         <defs>
           <clipPath id="revela"><rect id="revelaR" x="0" y="0" width="900" height="350"/></clipPath>
-          <clipPath id="s1"><rect x="0"   y="0" width="331" height="350"/></clipPath>
-          <clipPath id="s2"><rect x="330" y="0" width="271" height="350"/></clipPath>
-          <clipPath id="s3"><rect x="600" y="0" width="300" height="350"/></clipPath>
+          <linearGradient id="gLinha" x1="60" y1="0" x2="862" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#FAAB00"/><stop offset="1" stop-color="#FF7A5C"/>
+          </linearGradient>
+          <linearGradient id="gArea" x1="60" y1="0" x2="862" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#FFFFFF" stop-opacity=".30"/>
+            <stop offset=".55" stop-color="#FAAB00" stop-opacity=".28"/>
+            <stop offset="1" stop-color="#FF7A5C" stop-opacity=".26"/>
+          </linearGradient>
+          <linearGradient id="gFade" x1="0" y1="44" x2="0" y2="300" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <mask id="mFade"><rect x="0" y="0" width="900" height="350" fill="url(#gFade)"/></mask>
         </defs>
 
-        <path class="plana" d="M60,306 L862,298" stroke-dasharray="5 7"/>
-        <text class="csem" x="700" y="322">sem plano</text>
+        <text class="ceixo" x="46" y="20">quem conhece o seu livro</text>
+
+        <path class="plana" d="M60,302 L862,294" stroke-dasharray="5 7"/>
+        <text class="csem" x="856" y="318" text-anchor="end">o mesmo livro, sem plano</text>
 
         <g clip-path="url(#revela)">
-          <g clip-path="url(#s1)"><path class="ar a1" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44 L862,306 L60,306 Z"/><path class="linha l1" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44"/></g>
-          <g clip-path="url(#s2)"><path class="ar a2" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44 L862,306 L60,306 Z"/><path class="linha l2" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44"/></g>
-          <g clip-path="url(#s3)"><path class="ar a3" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44 L862,306 L60,306 Z"/><path class="linha l3" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44"/></g>
+          <g mask="url(#mFade)"><path class="ar" d="M60,300 C170,297 265,290 366,271 C470,251 545,224 618,190 C706,149 792,108 862,44 L862,306 L60,306 Z" fill="url(#gArea)"/></g>
+          <path class="linha" d="M60,300 C170,297 265,290 366,271 C470,251 545,224 618,190 C706,149 792,108 862,44" stroke="url(#gLinha)"/>
         </g>
 
+        <line class="prev" data-x="666" x1="666.0" y1="34" x2="666.0" y2="306"/>
+        <text class="marco" data-x="666" x="654.0" y="132" text-anchor="end">PRÉ-VENDA</text>
+
         <circle class="no n1" data-x="60"  cx="60"  cy="300" r="7"/>
-        <circle class="no n2" data-x="330" cx="330" cy="274" r="7"/>
+        <circle class="no n2" data-x="452" cx="452" cy="247" r="7"/>
         <circle class="no n3 topo" data-x="856" cx="862" cy="44" r="9"/>
 
         <text class="cato t1" data-x="60"  x="74"  y="274">Crie desejo</text>
-        <text class="cato t2" data-x="330" x="316" y="248" text-anchor="end">Gere antecipação</text>
+        <text class="cato t2" data-x="452" x="438" y="223" text-anchor="end">Gere antecipação</text>
         <text class="cato t3" data-x="856" x="846" y="28" text-anchor="end">Lance vendendo</text>
 
-        <text class="cdia" x="60"  y="344">DIA 0</text>
-        <text class="cdia" x="330" y="344">30</text>
-        <text class="cdia" x="600" y="344">60</text>
-        <text class="cdia" x="862" y="344" text-anchor="end">90</text>
+        <text class="cdia" x="60"  y="336">DIA 0</text>
+        <text class="cdia" x="327.3" y="336">30</text>
+        <text class="cdia" x="594.7" y="336">60</text>
+        <text class="cdia" x="862" y="336" text-anchor="end">90</text>
       </svg>
       <ul class="curva-leg">
         <li><i class="p1"></i><b>Crie desejo</b><span>dia 0</span></li>
-        <li><i class="p2"></i><b>Gere antecipação</b><span>dia 30</span></li>
-        <li><i class="p3"></i><b>Lance vendendo</b><span>dia 60</span></li>
+        <li><i class="p2"></i><b>Gere antecipação</b><span>dia 45</span></li>
+        <li><i class="p3"></i><b>Lance vendendo</b><span>dia 90</span></li>
       </ul>
+      <p class="curva-nota">O tracejado vertical é a pré-venda.
+        A linha clara embaixo é <b>o mesmo livro, sem plano.</b></p>
     </div>
 
     <div class="remate rv">
       <p class="causa">Um potencializa o outro.</p>
-      <p class="conta"><b class="c1">Desejo</b> <em>×</em> <b class="c2">Antecipação</b> <em>=</em> <b class="c3">Lance vendendo</b></p>
+      <p class="mult"><b class="c1">Desejo</b> <em>×</em> <b class="c2">Antecipação</b> <em>=</em> <b class="c3">Lance vendendo</b></p>
       <p class="desfecho">Em noventa dias, o seu livro passa de <span class="serifa">invisível a lido</span>.</p>
     </div>
 
