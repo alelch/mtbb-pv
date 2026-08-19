@@ -491,6 +491,11 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .provas{margin:clamp(36px,5vw,56px) -22px 0;overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.acao{text-align:center;background:var(--bg);padding:clamp(52px,7vw,82px) 20px 0}
+.btn.verde{background:#22C07B;color:#14332A;padding:20px 44px;font-size:1.12rem;
+  box-shadow:0 14px 30px -14px rgba(34,192,123,.85)}
+.btn.verde:hover{background:#1FB273;filter:none;transform:translateY(-2px);
+  box-shadow:0 22px 40px -14px rgba(34,192,123,1)}
 .provas-trilho{display:flex;width:max-content;animation:desfila 92s linear infinite}
 .provas:hover .provas-trilho{animation-play-state:paused}
 .pcard{flex:0 0 auto;width:320px;margin-right:20px;text-align:left;
@@ -693,8 +698,8 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 [data-etapa] .checks li:before{background:var(--ac)}
 [data-etapa] .checks li:after{border-color:var(--ac)}
 [data-etapa] .card li:before{background:var(--ac)}
-/* o CTA nunca desbota */
-.btn{background:var(--accent)!important}
+/* o CTA nunca desbota. O :not e' pra regra nao atropelar as variantes. */
+.btn:not(.verde){background:var(--accent)!important}
 
 /* ============================================================
    CONCEITO 05 · O SILÊNCIO E O BARULHO
@@ -847,16 +852,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
 .sticky .p small{display:block;font-weight:400;font-size:.68rem;color:var(--mute)}
 .sticky .btn{flex:1;padding:14px 16px;font-size:.94rem}
 @media(max-width:760px){.sticky{display:flex}}
-@media(min-width:761px){
-  .sticky{display:flex;justify-content:space-between;
-    left:50%;right:auto;bottom:22px;transform:translate(-50%,160%);
-    width:min(560px,calc(100vw - 40px));padding:10px 10px 10px 22px;
-    border:1px solid var(--border);border-radius:999px;
-    box-shadow:0 18px 40px -22px rgba(0,0,0,.45)}
-  .sticky.on{transform:translate(-50%,0)}
-  .sticky .p{font-size:1.12rem}
-  .sticky .btn{flex:0 0 auto;border-radius:999px;padding:13px 28px}
-}
 
 /* ============================================================
    MOVIMENTO
@@ -1134,6 +1129,10 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
   </div>
 </section>
+
+<div class="acao rv">
+  <a href="#oferta" class="btn verde" data-cta="meio">Acesso Imediato e Vitalício</a>
+</div>
 
 <!-- ============ PARA QUEM É ============ -->
 <!-- ============ PROVA ============
