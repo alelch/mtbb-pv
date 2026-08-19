@@ -422,12 +422,28 @@ html.js .bb-passo:not(.viva){opacity:.26}
   font-size:clamp(1.2rem,2.7vw,1.75rem);line-height:1.25;color:#B4B0AB;margin:0 auto;max-width:22ch}
 .agit .fio{display:block;width:1px;height:64px;background:var(--accent);margin:26px auto}
 .agit .big i{font-style:normal;color:var(--accent)}
+/* ══ MARCAS DA CASA ══
+   Grifo e risco desenhados a mao, os mesmos da PV oficial do MTBB. La' a tinta
+   e' amarelo #FAAB00; aqui usam o laranja unico da 90D (e branco sobre laranja). */
+.risco{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23FC783C%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .34em;background-position:0 .92em;
+  padding-bottom:.14em}
+.grifo{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20fill%3D%27%23ffffff%27%20fill-opacity%3D%270.32%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .78em;background-position:0 .42em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 4px}
+
 /* OS 99%: o numero ganha um outdoor so' pra ele, antes do diagrama. */
 .noventa{background:var(--accent);color:#fff;padding:clamp(60px,7.5vw,98px) 0;text-align:center}
 .noventa h2{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
   font-size:clamp(1.8rem,4.6vw,3rem);line-height:1.1;color:#fff;max-width:20ch;margin:0 auto}
 .noventa p{margin:18px auto 0;max-width:46ch;font-size:1.06rem;line-height:1.55;
   color:rgba(255,255,255,.88)}
+/* cem livros, um por marca: o numero deixa de ser abstrato e vira contagem */
+.noventa .legenda{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);
+  max-width:none;margin:0 auto 20px}
+.cem{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:520px;margin:0 auto 30px}
+.cem i{width:9px;height:26px;border-radius:2px;background:rgba(255,255,255,.34)}
+.cem i.viva{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.24)}
+@media(max-width:820px){.cem{max-width:320px;gap:4px}.cem i{width:8px;height:22px}}
 
 /* CORTE: o segundo respiro coral da página. */
 .cut{background:var(--accent);color:#fff;padding:clamp(64px,8vw,104px) 0;text-align:center}
@@ -738,14 +754,16 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap rv">
     <p class="pre">Você pode passar anos escrevendo um livro.</p>
     <span class="fio" aria-hidden="true"></span>
-    <p class="big">É o lançamento que define se ele será lido, ou <i>esquecido</i>.</p>
+    <p class="big">É o lançamento que define se ele será lido, ou <span class="risco">esquecido</span>.</p>
   </div>
 </section>
 
 <!-- ============ OS 99% ============ -->
 <section class="noventa">
   <div class="wrap rv">
-    <h2>99% dos livros só vendem para amigos e família</h2>
+    <p class="legenda">Cem livros lançados este mês</p>
+    <div class="cem" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="viva"></i></div>
+    <h2>99% dos livros <span class="grifo">só vendem para amigos e família</span></h2>
     <p>Não porque são ruins. Mas porque ninguém conhecia o seu livro.</p>
   </div>
 </section>
