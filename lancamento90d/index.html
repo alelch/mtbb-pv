@@ -781,17 +781,26 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .path.good li:before{content:"→";color:var(--accent)}
 
 /* ---------- oferta ---------- */
-.relogio{background:var(--morto);color:#fff;text-align:center;
-  padding:clamp(64px,8vw,104px) 0}
-.relogio .eyebrow{color:rgba(255,255,255,.6)}
-.relogio h2{color:#fff;max-width:21ch;margin:0 auto}
-.relogio .lead{color:rgba(255,255,255,.78);max-width:46ch;margin:18px auto 0}
-.relogio .veredito{font-family:'Space Grotesk',sans-serif;font-weight:400;
-  letter-spacing:-.025em;line-height:1.32;color:rgba(255,255,255,.72);
-  font-size:clamp(1.12rem,2.6vw,1.5rem);max-width:28ch;
-  margin:clamp(30px,4vw,44px) auto 0;padding-top:clamp(26px,3.4vw,34px);
-  border-top:1px solid rgba(255,255,255,.18);text-wrap:balance}
-.relogio .veredito b{display:block;font-weight:700;color:#fff;margin-top:7px}
+/* QUANDO COMECAR. O fundo e' #C04B14 e nao o laranja da marca porque branco
+   sobre #FC783C da' 2,68:1, e a secao entraria na divida de contraste que a
+   pagina ja' tem. Nesse tom da' 4,96:1, e e' o MESMO valor proposto pro
+   laranja-de-texto: se aquela decisao entrar, a pagina fica com dois laranjas
+   coerentes em vez de dois problemas.
+   Contrapartida assumida: sobre ele so' passa branco quase puro, entao aqui a
+   hierarquia e' feita por tamanho e peso, nunca por opacidade. */
+.cedo{background:#C04B14;color:#fff;text-align:center;padding:clamp(64px,8vw,104px) 0}
+.cedo .eyebrow{color:#fff}
+.cedo h2{color:#fff;max-width:24ch;margin:0 auto;text-wrap:balance}
+.cedo .lead{color:#fff;max-width:48ch;margin:20px auto 0}
+.cedo .pq{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.16rem,2.6vw,1.5rem);color:#fff;margin:clamp(26px,3.2vw,34px) 0 0}
+.cedo .batismo{font-family:'Space Grotesk',sans-serif;font-weight:400;
+  letter-spacing:-.025em;line-height:1.34;color:#fff;max-width:27ch;
+  font-size:clamp(1.24rem,3vw,1.72rem);
+  margin:clamp(32px,4vw,46px) auto 0;padding-top:clamp(28px,3.4vw,36px);
+  border-top:1px solid rgba(255,255,255,.34)}
+.cedo .batismo b{font-weight:700;white-space:nowrap}
+.cedo .batismo .serifa{display:block;margin-top:8px}
 
 .offer{background:var(--bg)}
 .offer-box{
@@ -1218,14 +1227,17 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
      ficar pronto, entao a unica variavel que o leitor controla e' a data de
      comecar. Substitui a tabela "Dois caminhos", que era a pagina inteira
      resumida e era onde moravam as duas frases repetidas. -->
-<section class="relogio" data-etapa="5">
+<section class="cedo" data-etapa="5">
   <div class="wrap narrow rv">
     <p class="eyebrow">Quando começar</p>
-    <h2>O plano leva noventa dias. Você só decide quando eles começam.</h2>
-    <p class="lead">Criar desejo não se comprime. O que precisa de três meses de antecedência não cabe
-      na semana da estreia, por mais trabalho que você jogue nele.</p>
-    <p class="veredito">Quem começa hoje escolhe a data da estreia.
-      <b>Quem espera recebe a data que <span class="risco claro">sobrar</span>.</b></p>
+    <h2>O quanto antes, melhor.</h2>
+    <p class="lead">Muitos autores esperam demais para começar a falar do próprio livro.
+      Acham que, antes de ele ficar pronto, não existe nada para dizer.</p>
+    <p class="pq">Por quê?</p>
+    <p class="lead">Porque quanto mais cedo você começa, menos vendedor você precisa parecer.
+      Sobra tempo para falar do livro aos poucos, do jeito natural. E é esse jeito que traz volume.</p>
+    <p class="batismo">Essa etapa eu chamo de <b>soft-marketing</b>.
+      <span class="serifa">Vender sem vender.</span></p>
   </div>
 </section>
 
