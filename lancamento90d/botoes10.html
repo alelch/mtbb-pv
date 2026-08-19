@@ -1,0 +1,214 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>10 botões · Lançamento 90D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8F8F8;--ink:#3A3A38;--soft:#555;--mute:#999;--border:#EEE;
+  --accent:#FC783C;--verde:#14523E;--tinta:#2A2A28}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+header{max-width:900px;margin:0 auto;padding:56px 24px 8px}
+header h1{font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:-.03em;margin:0}
+header p{color:var(--soft);line-height:1.6;max-width:62ch;margin:14px 0 0}
+header code{background:#fff;border:1px solid var(--border);border-radius:5px;padding:1px 6px;font-size:.88em}
+.item{max-width:900px;margin:0 auto;padding:40px 24px 44px;border-top:1px solid var(--border)}
+.cab{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.n{font-weight:700;font-size:.78rem;letter-spacing:.14em;color:#C04B14}
+.nome{font-weight:700;font-size:1.14rem;letter-spacing:-.02em}
+.por{color:var(--soft);font-size:.95rem;line-height:1.55;max-width:64ch;margin:0 0 26px}
+.ct{font-size:.76rem;color:#4B7A5E;font-weight:700;letter-spacing:.04em}
+.palco{background:var(--bg);border:1px solid var(--border);border-radius:16px;
+  padding:clamp(38px,6vw,62px) 20px;text-align:center}
+.palco.esc{background:var(--verde);border-color:transparent}
+.nota{margin:14px 0 0;font-size:.82rem;color:var(--mute)}
+.palco.esc .nota{color:rgba(255,255,255,.6)}
+
+/* base comum: e' a mesma tipografia do .btn da pagina */
+.b{display:inline-flex;align-items:center;justify-content:center;gap:11px;
+  text-decoration:none;font-weight:700;font-family:'Space Grotesk',sans-serif;
+  letter-spacing:-.01em;font-size:1.06rem;line-height:1;padding:18px 34px;
+  border-radius:999px;border:0;cursor:pointer;color:var(--tinta);
+  transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s ease,
+             filter .18s ease,background .18s ease}
+.b:active{transform:translateY(1px) scale(.995)}
+.b svg{flex:0 0 auto}
+
+/* 1 · ambar luminoso */
+.b1{background:#FFB020;box-shadow:0 12px 26px -14px rgba(255,176,32,.95)}
+.b1:hover{transform:translateY(-2px);box-shadow:0 20px 34px -14px rgba(255,176,32,1)}
+
+/* 2 · gradiente sol: claro em cima, laranja da casa embaixo */
+.b2{background:linear-gradient(180deg,#FFC24A 0%,#FC783C 100%);
+  box-shadow:0 12px 26px -14px rgba(252,120,60,.9)}
+.b2:hover{transform:translateY(-2px);filter:saturate(1.08) brightness(1.03);
+  box-shadow:0 20px 36px -14px rgba(252,120,60,1)}
+
+/* 3 · halo: o laranja da casa com luz difusa em volta */
+.b3{background:var(--accent);
+  box-shadow:0 0 0 8px rgba(252,120,60,.14),0 0 46px 6px rgba(252,120,60,.42),
+             0 14px 28px -16px rgba(252,120,60,.9)}
+.b3:hover{transform:translateY(-2px);
+  box-shadow:0 0 0 12px rgba(252,120,60,.18),0 0 62px 10px rgba(252,120,60,.55),
+             0 20px 34px -16px rgba(252,120,60,1)}
+
+/* 4 · creme com anel: a leitura literal de "cor clara" */
+.b4{background:#FFF3EC;color:#B8460F;border:2px solid #FC783C;padding:16px 32px;
+  box-shadow:0 10px 22px -16px rgba(252,120,60,.7)}
+.b4:hover{background:#FFE7DA;transform:translateY(-2px);
+  box-shadow:0 16px 28px -16px rgba(252,120,60,.85)}
+
+/* 5 · branco elevado, sombra colorida em vez de cinza */
+.b5{background:#fff;box-shadow:0 2px 0 rgba(252,120,60,.18),
+  0 16px 34px -18px rgba(252,120,60,.8),0 0 0 1px rgba(252,120,60,.22)}
+.b5:hover{transform:translateY(-2px);
+  box-shadow:0 2px 0 rgba(252,120,60,.24),0 24px 42px -18px rgba(252,120,60,.95),
+             0 0 0 1px rgba(252,120,60,.34)}
+
+/* 6 · verde vivo: e' a cor do livro que sobrevive nos 100 */
+.b6{background:#22C07B;box-shadow:0 12px 26px -14px rgba(34,192,123,.95)}
+.b6:hover{transform:translateY(-2px);box-shadow:0 20px 34px -14px rgba(34,192,123,1)}
+
+/* 7 · brilho que atravessa de tempos em tempos */
+.b7{background:var(--accent);position:relative;overflow:hidden;
+  box-shadow:0 12px 26px -14px rgba(252,120,60,.9)}
+.b7:after{content:"";position:absolute;top:-60%;left:-40%;width:32%;height:220%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.62),transparent);
+  transform:rotate(18deg);animation:varre 3.4s ease-in-out infinite}
+@keyframes varre{0%,62%{left:-40%}86%,100%{left:118%}}
+.b7:hover{transform:translateY(-2px);box-shadow:0 20px 34px -14px rgba(252,120,60,1)}
+
+/* 8 · relevo: luz interna em cima, borda escura embaixo = tecla */
+.b8{background:linear-gradient(180deg,#FF9A63 0%,#FC783C 52%,#EE6524 100%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(150,52,10,.4),
+             0 5px 0 #BE4E14,0 14px 22px -12px rgba(190,78,20,.7)}
+.b8:hover{transform:translateY(-2px);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.6),inset 0 -2px 0 rgba(150,52,10,.4),
+             0 7px 0 #BE4E14,0 20px 28px -12px rgba(190,78,20,.8)}
+.b8:active{transform:translateY(3px);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.4),0 2px 0 #BE4E14}
+
+/* 9 · orbita: pilula solida dentro de um anel claro que respira */
+.b9{background:var(--accent);position:relative;z-index:1}
+.b9:before{content:"";position:absolute;inset:-9px;border-radius:999px;z-index:-1;
+  border:2px solid rgba(252,120,60,.42);animation:pulsa 2.8s ease-in-out infinite}
+@keyframes pulsa{0%,100%{inset:-9px;opacity:1}50%{inset:-15px;opacity:.42}}
+.b9:hover{transform:translateY(-2px)}
+
+/* 10 · pessego claro solido: quente e realmente claro */
+.b10{background:#FFAE8A;box-shadow:0 12px 26px -14px rgba(255,174,138,1),
+  inset 0 1px 0 rgba(255,255,255,.5)}
+.b10:hover{background:#FFA079;transform:translateY(-2px);
+  box-shadow:0 20px 34px -14px rgba(255,150,110,1),inset 0 1px 0 rgba(255,255,255,.5)}
+
+@media(prefers-reduced-motion:reduce){
+  .b7:after,.b9:before{animation:none}
+  .b{transition:none}
+}
+</style></head><body>
+
+<header>
+  <h1>10 botões para o meio da página</h1>
+  <p>A frase é só marcador: o que importa aqui é o desenho e o comprimento.
+     Todos usam <strong>tinta escura</strong> (<code>#2A2A28</code>), que é o que
+     deixa a cor clara e o texto legível ao mesmo tempo. Cada um traz o contraste medido.
+     Passa o mouse para ver o hover.</p>
+</header>
+
+<div class="item">
+  <div class="cab"><span class="n">01</span><span class="nome">Âmbar luminoso</span><span class="ct">7,86:1</span></div>
+  <p class="por">Mais claro e mais amarelo que o laranja da marca, então salta sem competir com ele.
+     É o mais próximo de "cor clara" sem sair da família quente.</p>
+  <div class="palco"><a href="#" class="b b1">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="n">02</span><span class="nome">Gradiente sol</span><span class="ct">7,86 a 5,40:1</span></div>
+  <p class="por">Claro em cima, laranja da casa embaixo. Dá volume sem parecer botão 3D antigo,
+     e conecta a cor nova com a cor que a página já usa.</p>
+  <div class="palco"><a href="#" class="b b2">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="n">03</span><span class="nome">Halo</span><span class="ct">5,40:1</span></div>
+  <p class="por">O laranja da marca, intacto, com luz difusa em volta. A cor não muda,
+     muda a quantidade de luz. O mais fácil de aprovar porque não introduz cor nova.</p>
+  <div class="palco"><a href="#" class="b b3">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="n">04</span><span class="nome">Creme com anel</span><span class="ct">6,52:1</span></div>
+  <p class="por">A leitura literal de "cor clara": fundo quase branco, texto e borda laranja.
+     Elegante, mas é o menos gritante dos dez. Bom se o botão do meio não deve
+     roubar o do checkout.</p>
+  <div class="palco"><a href="#" class="b b4">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="n">05</span><span class="nome">Branco elevado</span><span class="ct">14,38:1</span></div>
+  <p class="por">Branco puro com sombra <em>colorida</em> em vez de cinza. Lê como caro.
+     O risco é sumir num fundo claro, por isso o anel de 1px.</p>
+  <div class="palco"><a href="#" class="b b5">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="n">06</span><span class="nome">Verde vivo</span><span class="ct">6,09:1</span></div>
+  <p class="por">Não é cor nova: é exatamente o verde do único livro que sobrevive entre os cem.
+     Semanticamente é o botão de "ser o 1%". Contra: rouba do verde da virada.</p>
+  <div class="palco"><a href="#" class="b b6">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="n">07</span><span class="nome">Brilho que atravessa</span><span class="ct">5,40:1</span></div>
+  <p class="por">Mesma cor da casa, com um reflexo cruzando a cada 3,4 segundos.
+     Chama o olho de longe. Some com <code>prefers-reduced-motion</code>.</p>
+  <div class="palco"><a href="#" class="b b7">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="n">08</span><span class="nome">Relevo</span><span class="ct">5,40:1</span></div>
+  <p class="por">Luz interna no topo, aresta escura embaixo: vira tecla física, e afunda no clique.
+     É o que mais parece clicável dos dez.</p>
+  <div class="palco"><a href="#" class="b b8">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="n">09</span><span class="nome">Órbita</span><span class="ct">5,40:1</span></div>
+  <p class="por">Pílula sólida dentro de um anel que respira devagar. Movimento mínimo,
+     sem brilho nem troca de cor. O mais discreto entre os animados.</p>
+  <div class="palco"><a href="#" class="b b9">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="n">10</span><span class="nome">Pêssego</span><span class="ct">7,99:1</span></div>
+  <p class="por">Sólido, quente e realmente claro. Suaviza a página num ponto em que ela
+     acabou de sair do verde. O mais gentil dos dez.</p>
+  <div class="palco"><a href="#" class="b b10">Acesso Imediato e Vitalício</a>
+    <p class="nota">R$297 à vista, ou 12x · 7 dias de garantia</p></div>
+</div>
+
+<div class="item">
+  <div class="cab"><span class="nome">Os quatro mais claros, lado a lado no verde</span></div>
+  <p class="por">Se o botão for ficar <em>dentro</em> da seção verde em vez de depois dela,
+     a leitura muda. Aqui só os que continuam funcionando sobre escuro.</p>
+  <div class="palco esc">
+    <a href="#" class="b b1" style="margin:8px">Âmbar</a>
+    <a href="#" class="b b10" style="margin:8px">Pêssego</a>
+    <a href="#" class="b b5" style="margin:8px">Branco</a>
+    <a href="#" class="b b2" style="margin:8px">Gradiente</a>
+    <p class="nota">Sobre o verde, o anel do 04 e o halo do 03 perdem quase todo o efeito.</p>
+  </div>
+</div>
+
+</body></html>
