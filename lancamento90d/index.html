@@ -422,7 +422,14 @@ html.js .bb-passo:not(.viva){opacity:.26}
   font-size:clamp(1.2rem,2.7vw,1.75rem);line-height:1.25;color:#B4B0AB;margin:0 auto;max-width:22ch}
 .agit .fio{display:block;width:1px;height:64px;background:var(--accent);margin:26px auto}
 .agit .big i{font-style:normal;color:var(--accent)}
-/* CORTE: a única seção coral da página inteira. Serve de respiro e de marca. */
+/* OS 99%: o numero ganha um outdoor so' pra ele, antes do diagrama. */
+.noventa{background:var(--accent);color:#fff;padding:clamp(60px,7.5vw,98px) 0;text-align:center}
+.noventa h2{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.8rem,4.6vw,3rem);line-height:1.1;color:#fff;max-width:20ch;margin:0 auto}
+.noventa p{margin:18px auto 0;max-width:46ch;font-size:1.06rem;line-height:1.55;
+  color:rgba(255,255,255,.88)}
+
+/* CORTE: o segundo respiro coral da página. */
 .cut{background:var(--accent);color:#fff;padding:clamp(64px,8vw,104px) 0;text-align:center}
 .cut p{
   font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
@@ -735,12 +742,20 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   </div>
 </section>
 
+<!-- ============ OS 99% ============ -->
+<section class="noventa">
+  <div class="wrap rv">
+    <h2>99% dos livros só vendem para amigos e família</h2>
+    <p>Não porque são ruins. Mas porque ninguém conhecia o seu livro.</p>
+  </div>
+</section>
+
 <!-- ============ AS TRÊS BOLHAS ============ -->
 <section class="bolhas" id="bolhas" data-etapa="2">
   <div class="wrap">
     <div class="abre rv">
-      <h2>99% dos livros só vendem para amigos e família</h2>
-      <p class="pergunta">Quantos leitores conhecem o seu livro hoje?</p>
+      <h2>Quantos leitores conhecem o seu livro hoje?</h2>
+      <p class="pergunta">Isso vai definir em que bolha você ficará preso.</p>
     </div>
 
     <div class="bb">
