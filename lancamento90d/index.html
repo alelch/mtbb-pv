@@ -320,15 +320,10 @@ p{margin:0 0 1.05em}
 .bolhas{background:var(--bg)}
 .bolhas .abre{max-width:640px;margin:0 auto;text-align:center}
 .bolhas .abre h2{font-size:clamp(1.7rem,4.2vw,2.5rem)}
-.bolhas .abre .lead{margin-top:14px}
-.espelho{max-width:620px;margin:0 auto;text-align:center;padding-top:52px;position:relative}
-.espelho:before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:34px;height:2px;background:var(--accent)}
-.espelho b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
-  letter-spacing:-.035em;font-size:clamp(1.35rem,3.4vw,1.95rem);line-height:1.22;color:var(--ink)}
-.espelho p{margin:16px 0 0;color:var(--soft);font-size:1.05rem;line-height:1.6}
-.espelho p.sobra{margin-top:12px;color:var(--ink);font-weight:600}
-.bb{display:grid;grid-template-columns:1.12fr 1fr;gap:52px;align-items:start;margin-top:40px}
+.bolhas .abre .pergunta{font-family:'Space Grotesk',sans-serif;font-weight:400;
+  letter-spacing:-.025em;font-size:clamp(1.15rem,2.7vw,1.55rem);line-height:1.3;
+  color:var(--ink);margin:20px auto 0;max-width:36ch}
+.bb{display:grid;grid-template-columns:1.12fr 1fr;gap:52px;align-items:start;margin-top:20px}
 .bb-palco{position:sticky;top:calc(50vh - 200px);height:400px;
   display:flex;align-items:center;justify-content:center}
 .bb-palco svg{width:100%;max-width:560px;overflow:visible}
@@ -744,15 +739,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <section class="bolhas" id="bolhas" data-etapa="2">
   <div class="wrap">
     <div class="abre rv">
-      <p class="eyebrow">A primeira bolha</p>
       <h2>99% dos livros só vendem para amigos e família</h2>
-      <p class="lead">Não porque são ruins. Mas porque ninguém conhecia o seu livro.</p>
-    </div>
-
-    <div class="espelho rv" style="margin-top:56px">
-      <b>Quantos leitores conhecem o seu livro hoje?</b>
-      <p>Agora tire da conta todo mundo que já te conhecia antes de ele existir.</p>
-      <p class="sobra">O que sobrou é o tamanho real do seu lançamento.</p>
+      <p class="pergunta">Quantos leitores conhecem o seu livro hoje?</p>
     </div>
 
     <div class="bb">
