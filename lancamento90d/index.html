@@ -430,25 +430,31 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
 .desfecho{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
   font-size:clamp(1.05rem,2.4vw,1.4rem);line-height:1.32;color:rgba(255,255,255,.82);margin:12px 0 0}
 
-/* A ESCADA DOS TRES ATOS
-   O texto E' o grafico: cada verbo comeca mais a direita que o anterior, e a
-   regua sai dele ate' o fim dos noventa dias. A indentacao diz QUANDO comeca
-   e o comprimento da regua diz QUANTO dura, sem precisar de um segundo
-   desenho ao lado. Grade de 12 colunas, entao dia 30 e dia 60 caem exatos. */
-.escada{display:grid;grid-template-columns:repeat(12,1fr);
-  row-gap:clamp(26px,3.4vw,44px);margin-top:clamp(38px,5vw,58px);text-align:left}
-.escada .eixo{grid-column:1/-1;display:flex;justify-content:space-between;margin:0 0 -10px;
-  font-family:'Space Grotesk',sans-serif;font-size:.64rem;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45)}
-.degrau h3{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.04em;
-  font-size:clamp(1.5rem,3.9vw,2.6rem);line-height:1.02;color:#fff;
-  white-space:nowrap;margin:0 0 12px}
-.degrau .risca{display:block;height:2px;border-radius:2px;
-  background:linear-gradient(90deg,#fff,rgba(255,255,255,.28));margin:0 0 12px}
-.degrau p{color:rgba(255,255,255,.72);font-size:1rem;line-height:1.5;margin:0;max-width:44ch}
-.g1{grid-column:1/-1}
-.g2{grid-column:5/-1}
-.g3{grid-column:9/-1}
+/* A CURVA DOS TRES ATOS
+   O eixo Y e' 'quem conhece o seu livro', que e' exatamente a premissa duas
+   linhas acima: sem esse rotulo a curva seria abstrata. Cada ato entra num
+   ponto e a curva fica mais ingreme dali pra frente, que e' o desenho de
+   potencializar. A linha tracejada mostra o que acontece sem plano. */
+.curva{margin-top:clamp(34px,4.4vw,54px)}
+.curva svg{width:100%;height:auto;overflow:visible}
+.curva .linha{stroke:#fff;stroke-width:3.5;stroke-linecap:round}
+.curva .plana{stroke:rgba(255,255,255,.30);stroke-width:2;stroke-linecap:round}
+.curva .no{fill:var(--verde);stroke:#fff;stroke-width:3.5}
+.curva text{font-family:'Space Grotesk',sans-serif}
+.curva .cato{font-size:17px;font-weight:700;letter-spacing:-.02em;fill:#fff}
+.curva .cx{fill:#22C07B;font-size:19px}
+.curva .cdia{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.45)}
+.curva .ceixo{font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;fill:rgba(255,255,255,.45)}
+.curva .csem{font-size:12px;font-weight:400;fill:rgba(255,255,255,.42)}
+.curva-leg{display:none}
+
+/* a matematica: multiplicacao E' potencializacao, e o zero prova a frase */
+.conta{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.05rem,2.5vw,1.5rem);color:#fff;margin:16px 0 0}
+.conta em{font-style:normal;color:#22C07B;margin:0 .18em}
+.zero{font-size:.98rem;line-height:1.5;color:rgba(255,255,255,.66);margin:8px 0 0}
+.desfecho{margin-top:22px!important}
 
 .virada .ciclo-nota{color:rgba(255,255,255,.68);border-top:1px solid rgba(255,255,255,.16);
   padding-top:26px;margin-top:44px}
@@ -477,18 +483,18 @@ html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
 
 
 @media(max-width:820px){
-  /* no estreito a escada nao cabe: cada degrau ocupa a linha toda e a janela
-     de dias, que a indentacao dava, passa a ser dita em texto */
-  .escada{row-gap:26px}
-  .escada .eixo{display:none}
-  .g1,.g2,.g3{grid-column:1/-1}
-  .degrau h3{white-space:normal;font-size:clamp(1.4rem,7vw,1.9rem)}
-  .degrau h3:after{display:block;font-family:'DM Sans',sans-serif;font-weight:400;
-    font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
-    color:rgba(255,255,255,.55);margin-top:6px}
-  .g1 h3:after{content:'dia 0 ao 90'}
-  .g2 h3:after{content:'dia 30 ao 90'}
-  .g3 h3:after{content:'dia 60 ao 90'}
+  /* No estreito o SVG encolhe e os rotulos de dentro colidem entre si. A
+     curva vira desenho puro e os nomes saem pra uma legenda embaixo. */
+  .curva .cato{display:none}
+  .curva .cdia,.curva .ceixo{font-size:17px}
+  .curva .csem{font-size:17px}
+  .curva-leg{display:grid;gap:10px;list-style:none;margin:20px 0 0;padding:0;text-align:left}
+  .curva-leg li{display:flex;align-items:baseline;gap:9px;
+    font-family:'Space Grotesk',sans-serif;font-size:1.02rem;color:#fff}
+  .curva-leg em{font-style:normal;color:#22C07B;font-weight:700}
+  .curva-leg b{font-weight:700;letter-spacing:-.02em}
+  .curva-leg span{margin-left:auto;font-size:.72rem;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:rgba(255,255,255,.5)}
 }
 .bb-fecho{text-align:center;margin-top:34px;padding-top:34px;border-top:1px solid var(--border)}
 .bb-fecho b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
@@ -968,25 +974,40 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       <p class="pergunta-v">Então como fazer conhecerem o seu?</p>
     </div>
 
-    <div class="escada rv">
-      <p class="eixo"><span>dia 0</span><span>30</span><span>60</span><span>90</span></p>
+    <div class="curva rv">
+      <svg viewBox="0 0 900 350" fill="none" role="img"
+           aria-label="Curva de quem conhece o seu livro ao longo de noventa dias, ficando mais íngreme a cada ato que entra">
+        <text class="ceixo" x="46" y="24">quem conhece o seu livro</text>
 
-      <div class="degrau g1">
-        <h3>Crie desejo</h3><span class="risca"></span>
-        <p>O leitor compra o autor antes de comprar o livro.</p>
-      </div>
-      <div class="degrau g2">
-        <h3>Gere antecipação</h3><span class="risca"></span>
-        <p>Quem estreia vendendo começou a vender semanas antes.</p>
-      </div>
-      <div class="degrau g3">
-        <h3>Lance vendendo</h3><span class="risca"></span>
-        <p>Pedidos concentrados na primeira semana. E os trinta dias seguintes.</p>
-      </div>
+        <path class="plana" d="M60,306 L862,298" stroke-dasharray="5 7"/>
+        <text class="csem" x="700" y="322">sem plano</text>
+
+        <path class="linha" d="M60,300 C150,296 240,289 330,274 C440,254 520,229 600,197 C700,157 790,110 862,44"/>
+
+        <circle class="no" cx="60" cy="300" r="7"/>
+        <circle class="no" cx="330" cy="274" r="7"/>
+        <circle class="no" cx="600" cy="197" r="7"/>
+
+        <text class="cato" x="74"  y="274">Crie desejo <tspan class="cx">×</tspan></text>
+        <text class="cato" x="316" y="248" text-anchor="end">Gere antecipação <tspan class="cx">×</tspan></text>
+        <text class="cato" x="586" y="171" text-anchor="end">Lance vendendo <tspan class="cx">×</tspan></text>
+
+        <text class="cdia" x="60"  y="344">DIA 0</text>
+        <text class="cdia" x="330" y="344">30</text>
+        <text class="cdia" x="600" y="344">60</text>
+        <text class="cdia" x="862" y="344" text-anchor="end">90</text>
+      </svg>
+      <ul class="curva-leg">
+        <li><em>×</em><b>Crie desejo</b><span>dia 0</span></li>
+        <li><em>×</em><b>Gere antecipação</b><span>dia 30</span></li>
+        <li><em>×</em><b>Lance vendendo</b><span>dia 60</span></li>
+      </ul>
     </div>
 
     <div class="remate rv">
       <p class="causa">Um potencializa o outro.</p>
+      <p class="conta">Desejo <em>×</em> Antecipação <em>×</em> Venda</p>
+      <p class="zero">Se qualquer um for zero, o resultado é zero.</p>
       <p class="desfecho">Em noventa dias, o seu livro passa de <span class="serifa">invisível a lido</span>.</p>
     </div>
 
