@@ -288,17 +288,28 @@ p{margin:0 0 1.05em}
 @media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr);gap:20px 12px}}
 
 /* ---------- imprensa ---------- */
-.press{background:var(--card);padding:8px 0 30px}
-.press p{text-align:center;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:0 0 16px;font-weight:700}
-.press-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(14px,3vw,32px)}
-/* logos nas cores originais, como o cliente pediu.
-   Os arquivos coloridos estavam em /assets na raiz do repo o tempo todo; os
-   da lancamento-v1 eram as versões monocromáticas feitas pra página escura. */
-/* Altura igual pra todos deixava a massa visual 5x diferente entre o logo
-   quadrado e o lettering comprido. Cada um leva a sua altura ótica em --h,
-   calculada a partir da proporção depois de aparar a sobra transparente. */
-.press-row img{height:calc(var(--h,30) * 1px);width:auto}
-@media(max-width:600px){.press-row img{height:calc(var(--h,30) * .74px)}}
+.press{background:var(--card);padding:32px 0}
+/* rotulo com a mesma medida do lancamento-v1: 12px, peso 700, 2.4px de tracking */
+.press p{text-align:center;font-size:12px;font-weight:700;letter-spacing:2.4px;
+  text-transform:uppercase;color:var(--mute);margin:0 0 24px}
+/* PISTA INFINITA: duas copias identicas rolando -50%; no fim da primeira a
+   segunda esta' exatamente no lugar dela, entao o laco nao tem emenda.
+   Rolar tirou a restricao de largura, e' por isso que os logos crescem 25%. */
+.press-pista{overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.press-trilho{display:flex;align-items:center;width:max-content;
+  animation:desfila 42s linear infinite}
+.press-trilho:hover{animation-play-state:paused}
+.press-trilho img{height:calc(var(--h,40) * 1px);width:auto;flex:0 0 auto;margin-right:56px}
+@keyframes desfila{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media(prefers-reduced-motion:reduce){
+  .press-trilho{animation:none;flex-wrap:wrap;justify-content:center;width:auto;gap:28px}
+  .press-trilho img{margin-right:0}
+  .press-trilho img[aria-hidden]{display:none}
+  .press-pista{-webkit-mask-image:none;mask-image:none}
+}
+@media(max-width:600px){.press-trilho img{height:calc(var(--h,40) * .8px);margin-right:38px}}
 
 /* ---------- agitação ---------- */
 .agit .big{
@@ -348,24 +359,13 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .bb-mini ellipse{fill:none;stroke:var(--border);stroke-width:1.6}
 .bb-mini .viva{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.10)}
 .bb-mini .feita{stroke:rgba(252,120,60,.34);fill:rgba(252,120,60,.05)}
-/* o ato que fura a bolha, dentro do próprio passo: causa colada no efeito */
-.motor{margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
-.motor .kick{display:block;font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:#A8A5A0;margin-bottom:7px;
-  transition:color .6s var(--ease)}
-.bb-passo.viva .motor .kick{color:var(--accent)}
-.motor b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
-  letter-spacing:-.025em;font-size:1.12rem;color:var(--ink);margin-bottom:8px}
-.motor p{color:var(--soft);font-size:.97rem;line-height:1.55;margin:0 0 10px;max-width:44ch}
-.motor .quando{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:.74rem;
-  font-weight:700;letter-spacing:.04em;color:var(--ink);
-  background:rgba(252,120,60,.12);border-radius:99px;padding:5px 12px}
-
 /* A FAIXA DOS 90 DIAS
    Fica aqui porque é a única coisa que o desenho das bolhas não consegue
    dizer: que os atos não são uma fila, eles se sobrepõem. */
 .coda90{margin-top:8px;padding-top:44px;border-top:1px solid var(--border)}
-.coda-t{max-width:56ch;margin:0 auto 28px;text-align:center;color:var(--soft);
+.coda90 .eyebrow{text-align:center;margin-bottom:10px}
+.coda-h{text-align:center;font-size:clamp(1.5rem,3.4vw,2.1rem);margin:0 auto}
+.coda-t{max-width:56ch;margin:14px auto 28px;text-align:center;color:var(--soft);
   font-size:1.02rem;line-height:1.6}
 .reg90{display:grid;grid-template-columns:repeat(12,1fr);gap:8px 4px}
 .eixo90{grid-column:1/-1;display:flex;justify-content:space-between;margin-bottom:4px;
@@ -751,17 +751,29 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <div class="press" data-etapa="1">
   <div class="wrap">
     <p>Como visto em</p>
-    <div class="press-row">
-      <img src="assets/imprensa/logo-cbn.webp" alt="CBN" loading="lazy" style="--h:30">
-      <img src="assets/imprensa/logo-g1.webp" alt="G1" loading="lazy" style="--h:40">
-      <img src="assets/imprensa/logo-vida-simples.webp" alt="Vida Simples" loading="lazy" style="--h:24">
-      <img src="assets/imprensa/logo-band.webp" alt="Band" loading="lazy" style="--h:40">
-      <img src="assets/imprensa/logo-publishnews.webp" alt="PublishNews" loading="lazy" style="--h:25">
-      <img src="assets/imprensa/logo-band-news.webp" alt="Band News" loading="lazy" style="--h:32">
-      <img src="assets/imprensa/logo-record-tv.webp" alt="Record TV" loading="lazy" style="--h:40">
-      <img src="assets/imprensa/logo-radio-senado.webp" alt="Rádio Senado" loading="lazy" style="--h:25">
-      <img src="assets/imprensa/logo-tv-cultura.webp" alt="TV Cultura" loading="lazy" style="--h:40">
-      <img src="assets/imprensa/logo-valor-economico.webp" alt="Valor Econômico" loading="lazy" style="--h:28">
+    <div class="press-pista">
+      <div class="press-trilho">
+        <img src="assets/imprensa/logo-cbn.webp" alt="CBN" loading="lazy" style="--h:38">
+        <img src="assets/imprensa/logo-g1.webp" alt="G1" loading="lazy" style="--h:50">
+        <img src="assets/imprensa/logo-vida-simples.webp" alt="Vida Simples" loading="lazy" style="--h:30">
+        <img src="assets/imprensa/logo-band.webp" alt="Band" loading="lazy" style="--h:50">
+        <img src="assets/imprensa/logo-publishnews.webp" alt="PublishNews" loading="lazy" style="--h:31">
+        <img src="assets/imprensa/logo-band-news.webp" alt="Band News" loading="lazy" style="--h:40">
+        <img src="assets/imprensa/logo-record-tv.webp" alt="Record TV" loading="lazy" style="--h:50">
+        <img src="assets/imprensa/logo-radio-senado.webp" alt="Rádio Senado" loading="lazy" style="--h:31">
+        <img src="assets/imprensa/logo-tv-cultura.webp" alt="TV Cultura" loading="lazy" style="--h:50">
+        <img src="assets/imprensa/logo-valor-economico.webp" alt="Valor Econômico" loading="lazy" style="--h:35">
+        <img src="assets/imprensa/logo-cbn.webp" alt="" loading="lazy" style="--h:38" aria-hidden="true">
+        <img src="assets/imprensa/logo-g1.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true">
+        <img src="assets/imprensa/logo-vida-simples.webp" alt="" loading="lazy" style="--h:30" aria-hidden="true">
+        <img src="assets/imprensa/logo-band.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true">
+        <img src="assets/imprensa/logo-publishnews.webp" alt="" loading="lazy" style="--h:31" aria-hidden="true">
+        <img src="assets/imprensa/logo-band-news.webp" alt="" loading="lazy" style="--h:40" aria-hidden="true">
+        <img src="assets/imprensa/logo-record-tv.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true">
+        <img src="assets/imprensa/logo-radio-senado.webp" alt="" loading="lazy" style="--h:31" aria-hidden="true">
+        <img src="assets/imprensa/logo-tv-cultura.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true">
+        <img src="assets/imprensa/logo-valor-economico.webp" alt="" loading="lazy" style="--h:35" aria-hidden="true">
+      </div>
     </div>
   </div>
 </div>
@@ -805,43 +817,24 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
           <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="" cx="86" cy="52" rx="94" ry="48"/><ellipse class="" cx="68" cy="52" rx="66" ry="37"/><ellipse class="viva" cx="46" cy="52" rx="43" ry="26"/></svg>
           <p class="eyebrow">Bolha 1 · você é invisível</p>
           <h3>Amigos e família</h3>
-          <p>Quem já te conhece compra por afeto, não por interesse. Vende trinta, cinquenta exemplares, faz uma semana de barulho e acaba. Quase nenhum livro fica preso aqui por ser ruim. Fica porque não chegou em mais ninguém.</p>
-          <div class="motor">
-            <span class="kick">O que tira você daqui</span>
-            <b>Ato 1 · Desejo</b>
-            <p>O leitor compra primeiro o autor, depois o livro. Quem é ele, com quem você conta, e como a obra vai existir no mundo.</p>
-            <span class="quando">Começa no dia 0 e não para até o fim</span>
-          </div>
-        </div>
+          <p>Quem já te conhece compra por afeto, não por interesse. Vende trinta, cinquenta exemplares, faz uma semana de barulho e acaba. Quase nenhum livro fica preso aqui por ser ruim. Fica porque não chegou em mais ninguém.</p>        </div>
         <div class="bb-passo">
           <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="" cx="86" cy="52" rx="94" ry="48"/><ellipse class="viva" cx="68" cy="52" rx="66" ry="37"/><ellipse class="feita" cx="46" cy="52" rx="43" ry="26"/></svg>
           <p class="eyebrow">Bolha 2 · você passa a ser esperado</p>
           <h3>Desconhecidos</h3>
-          <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Não acontece por acaso: acontece quando existe desejo antes de existir livro na prateleira.</p>
-          <div class="motor">
-            <span class="kick">O que enche essa bolha</span>
-            <b>Ato 2 · Antecipação</b>
-            <p>Livro que estreia vendendo começou a vender semanas antes, quando ainda nem existia nas lojas. Revelar, mobilizar a rede, desenhar a pré-venda.</p>
-            <span class="quando">Entra no dia 30, por cima do primeiro</span>
-          </div>
-        </div>
+          <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Não acontece por acaso: acontece quando existe desejo antes de existir livro na prateleira.</p>        </div>
         <div class="bb-passo">
           <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="viva" cx="86" cy="52" rx="94" ry="48"/><ellipse class="feita" cx="68" cy="52" rx="66" ry="37"/><ellipse class="feita" cx="46" cy="52" rx="43" ry="26"/></svg>
           <p class="eyebrow">Bolha 3 · você é lido</p>
           <h3>Boca a boca</h3>
-          <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito alguma coisa por ele.</p>
-          <div class="motor">
-            <span class="kick">O que acende essa bolha</span>
-            <b>Ato 3 · Venda</b>
-            <p>Pré-venda aberta, rede mobilizada, pedidos concentrados na primeira semana. E o roteiro dos trinta dias seguintes, para o livro não morrer.</p>
-            <span class="quando">Dia 60 ao 90, e os trinta dias seguintes</span>
-          </div>
-        </div>
+          <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito alguma coisa por ele.</p>        </div>
       </div>
     </div>
 
     <div class="coda90 rv">
-      <p class="coda-t">Os três atos não são uma fila. Cada um entra num momento e, a partir daí, todos correm juntos.</p>
+      <p class="eyebrow">O plano</p>
+      <h3 class="coda-h">Os Três Atos</h3>
+      <p class="coda-t">Furar as três bolhas leva noventa dias e três atos. Eles não são uma fila: cada um entra num momento e, a partir daí, todos correm juntos.</p>
       <div class="reg90">
         <div class="eixo90"><span>dia 0</span><span>30</span><span>60</span><span>90</span></div>
         <div class="fx f1"><i>1</i>Desejo <em>e não para</em></div>
@@ -853,7 +846,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
     <div class="bb-fecho rv">
       <b>De invisível a lido. Em noventa dias.</b>
-      <span class="serifa">Uma bolha de cada vez, um ato de cada vez.</span>
+      <span class="serifa">Uma bolha de cada vez.</span>
     </div>
   </div>
 </section>
