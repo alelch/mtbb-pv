@@ -241,13 +241,13 @@ p{margin:0 0 1.05em}
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   background:var(--accent);color:#303030;text-decoration:none;font-weight:700;
   font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em;
-  padding:17px 32px;border-radius:999px;border:0;cursor:pointer;font-size:1.04rem;line-height:1;
+  padding:21px 40px;border-radius:999px;border:0;cursor:pointer;font-size:1.1rem;line-height:1;
   box-shadow:0 10px 24px -14px rgba(252,120,60,.9);
   transition:transform .16s ease,box-shadow .16s ease,background .16s ease
 }
 .btn:hover{filter:brightness(.93);transform:translateY(-1px);box-shadow:0 16px 30px -14px rgba(252,120,60,1)}
 .btn:active{transform:translateY(0)}
-.btn.sm{padding:11px 20px;font-size:.88rem}
+.btn.sm{padding:13px 24px;font-size:.92rem}
 .btn.block{display:flex;width:100%}
 .btn-note{font-size:.82rem;color:var(--mute);margin-top:12px}
 
@@ -492,7 +492,9 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .acao{text-align:center;margin-top:clamp(44px,5.8vw,70px)}
-.btn.claro{background:#fff;color:var(--verde);padding:20px 44px;font-size:1.12rem;
+.btn.claro{background:#fff;color:var(--verde);
+  padding:clamp(19px,2.3vw,25px) clamp(28px,4.3vw,54px);
+  font-size:clamp(1.02rem,2.1vw,1.22rem);
   box-shadow:0 3px 0 rgba(0,0,0,.16),0 18px 36px -16px rgba(0,0,0,.55)}
 .btn.claro:hover{background:#fff;filter:none;transform:translateY(-2px);
   box-shadow:0 3px 0 rgba(0,0,0,.18),0 26px 46px -16px rgba(0,0,0,.65)}
@@ -787,17 +789,15 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .path.good li:before{content:"→";color:var(--accent)}
 
 /* ---------- oferta ---------- */
-/* QUANDO COMECAR. O fundo e' #C04B14 e nao o laranja da marca porque branco
-   sobre #FC783C da' 2,68:1, e a secao entraria na divida de contraste que a
-   pagina ja' tem. Nesse tom da' 4,96:1, e e' o MESMO valor proposto pro
-   laranja-de-texto: se aquela decisao entrar, a pagina fica com dois laranjas
-   coerentes em vez de dois problemas.
-   Contrapartida assumida: sobre ele so' passa branco quase puro, entao aqui a
-   hierarquia e' feita por tamanho e peso, nunca por opacidade. */
-.cedo{background:#C04B14;color:#fff;text-align:center;padding:clamp(64px,8vw,104px) 0}
+/* QUANDO COMECAR. Mesmo laranja e mesmo tratamento da faixa dos 99%: a pagina
+   tem UM laranja so'. Isso reabre a divida de contraste que ja' existe la'
+   (branco sobre --accent = 2,68:1) e agora ela cobre as DUAS faixas. O
+   conserto de um movimento so', quando o cliente decidir, e' trocar o texto
+   das duas por tinta escura, que da' 5,0:1 e e' o que os botoes ja' fazem. */
+.cedo{background:var(--accent);color:#fff;text-align:center;padding:clamp(64px,8vw,104px) 0}
 .cedo .eyebrow{color:#fff}
 .cedo h2{color:#fff;max-width:24ch;margin:0 auto;text-wrap:balance}
-.cedo .lead{color:#fff;max-width:48ch;margin:20px auto 0}
+.cedo .lead{color:rgba(255,255,255,.88);max-width:48ch;margin:20px auto 0}
 .cedo .pq{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;
   font-size:clamp(1.16rem,2.6vw,1.5rem);color:#fff;margin:clamp(26px,3.2vw,34px) 0 0}
 .cedo .batismo{font-family:'Space Grotesk',sans-serif;font-weight:400;
@@ -850,7 +850,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
 .sticky.on{transform:none}
 .sticky .p{flex:0 0 auto;font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.1}
 .sticky .p small{display:block;font-weight:400;font-size:.68rem;color:var(--mute)}
-.sticky .btn{flex:1;padding:14px 16px;font-size:.94rem}
+.sticky .btn{flex:1;padding:17px 20px;font-size:1rem}
 @media(max-width:760px){.sticky{display:flex}}
 
 /* ============================================================
