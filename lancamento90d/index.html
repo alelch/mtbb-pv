@@ -721,29 +721,33 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 @media(prefers-reduced-motion:reduce){.mrow{animation:none}}
 
 /* DANY: foto sangra a largura toda, texto entra por cima no desktop */
-.dany{position:relative;background:var(--ink);color:#EFEDEA;overflow:hidden}
-.dany-foto{position:absolute;inset:0;background:url(assets/dany-bio-B0X57zHq.webp) center 28%/cover;opacity:.5}
-.dany:after{content:"";position:absolute;inset:0;
-  background:linear-gradient(100deg,var(--ink) 34%,rgba(58,58,56,.72) 58%,rgba(58,58,56,.25))}
-.dany .wrap{position:relative;z-index:2;padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)}
-.dany .txt{max-width:52ch}
-.dany h2{color:#fff;font-size:clamp(1.9rem,4vw,2.9rem)}
-.dany .lead{color:#CFCBC6}
-.dany .lead strong{color:#fff}
-.dany .ouco{margin:clamp(26px,3.4vw,36px) 0 0;
-  padding:0 0 0 clamp(16px,2vw,24px);border-left:3px solid var(--accent)}
-.dany .ouco p{margin:0}
-.dany .ouco .fala{font-size:clamp(1.24rem,2.9vw,1.7rem);line-height:1.28;
-  letter-spacing:-.01em;color:#fff}
-.dany .ouco .cont{margin-top:14px;color:#CFCBC6;font-size:1.02rem;line-height:1.62}
-.dany .ouco .peso{margin-top:14px;color:#fff;font-weight:600;font-size:1.06rem;
+.dany{background:var(--ink);color:#EFEDEA}
+.dany .wrap{padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)}
+.bio{display:grid;grid-template-columns:.68fr 1fr;gap:clamp(28px,4vw,46px);align-items:center}
+.bio > img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 16%;
+  border-radius:14px;display:block}
+.dany .eyebrow{color:var(--accent)}
+/* a citacao e' a manchete da secao, entao ela toma o lugar que o h2 tinha */
+.dany .fala{margin:8px 0 0;color:#fff;letter-spacing:-.01em;
+  font-size:clamp(1.34rem,2.7vw,2.05rem);line-height:1.2}
+.dany .cont{margin:16px 0 0;color:#CFCBC6;font-size:1.02rem;line-height:1.64}
+.dany .peso{margin:14px 0 0;color:#fff;font-weight:600;font-size:1.06rem;
   line-height:1.5;text-wrap:balance}
-.dany .mao{font-size:clamp(26px,3.2vw,34px)}
-.dany .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px;max-width:640px}
+.dany .mao{font-size:clamp(24px,2.8vw,31px);margin-top:24px}
+/* o nome chega no FIM, como assinatura */
+.dany .assina{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.22)}
+.dany .assina h2{color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.03em;font-size:1.34rem;margin:0 0 6px}
+.dany .assina span{display:block;color:#CFCBC6;font-size:.94rem;line-height:1.58}
+.dany .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
 .dany .nums div{border-top:1px solid rgba(255,255,255,.22);padding-top:12px}
 .dany .nums b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.3rem;color:#fff}
 .dany .nums span{font-size:.76rem;color:#A9A5A0}
-@media(max-width:700px){.dany .nums{grid-template-columns:repeat(2,1fr)}.dany-foto{opacity:.28}}
+@media(max-width:860px){
+  .bio{grid-template-columns:1fr}
+  .bio > img{max-width:340px;margin:0 auto}
+}
+@media(max-width:700px){.dany .nums{grid-template-columns:repeat(2,1fr)}}
 
 
 /* ============================================================
@@ -841,13 +845,6 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .depos img{border-radius:10px;border:1px solid var(--border);width:100%;height:auto;background:var(--card)}
 
 /* ---------- dany ---------- */
-.bio{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,5vw,54px);align-items:center}
-@media(max-width:860px){.bio{grid-template-columns:1fr}}
-.bio img{border-radius:var(--r);width:100%}
-.bio .nums{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
-.bio .nums div{border-top:1px solid var(--border);padding-top:11px}
-.bio .nums b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.2rem}
-.bio .nums span{font-size:.78rem;color:var(--mute)}
 
 /* ---------- dois caminhos ---------- */
 .paths{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
@@ -1306,28 +1303,38 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <!-- ============ DANY ============
      Encolhida de tres paragrafos pra um: a VSL apresenta a Dany falando, e o
      que o video nao fixa sao os quatro numeros e a tese, que ficam. -->
+<!-- ============ DANY (variação C) ============
+     A citação ABRE e o nome vira assinatura no fim: o leitor ouve a frase
+     antes de saber de quem ela e', e e' isso que faz ela pesar.
+     A foto sai de papel de parede (50% de opacidade sob um gradiente, onde ela
+     nao provava nada) e vira retrato recortado ao lado. O fundo escuro fica,
+     porque e' o unico bloco escuro da metade de baixo e e' ele que da' o
+     respiro antes da oferta.
+     A credencial encurtou: "mais de 800 autores, somando mais de 10 milhoes"
+     era exatamente o que os quatro numeros logo abaixo ja' diziam. -->
 <section class="dany" data-etapa="4">
-  <div class="dany-foto" role="img" aria-label="Dany Sakugawa"></div>
   <div class="wrap">
-    <div class="txt rv">
-      <p class="eyebrow" style="color:var(--accent)">Quem está do outro lado</p>
-      <h2>Dany Sakugawa</h2>
-      <p class="lead" style="margin-top:16px">Esteve à frente do lançamento de mais de <strong>800 autores</strong>,
-        somando mais de <strong>10 milhões de livros vendidos</strong>. Depois de anos nos bastidores das grandes
-        editoras, passou a ensinar autores independentes a fazer o que o mercado raramente explica.</p>
-      <blockquote class="ouco">
+    <div class="bio rv">
+      <img src="assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa" loading="lazy">
+      <div class="txt">
+        <p class="eyebrow">Quem está do outro lado</p>
         <p class="fala serifa">“Dany, queria ter te conhecido antes.”</p>
         <p class="cont">É a frase que eu mais ouço. Já ouvi de autora com caixas do próprio
           livro debaixo da cama. De autor que doou o estoque inteiro para não precisar mais
           olhar para ele. De gente que nunca escreveu o segundo porque o primeiro não vendeu.</p>
         <p class="peso">Nenhum deles escreveu um livro ruim. Todos começaram tarde demais.</p>
-      </blockquote>
-      <p class="mao"><span class="lin">O maior risco que um autor corre é ser esquecido.</span></p>
-      <div class="nums">
-        <div><b data-n="15" data-pre="+" data-pos=" anos">+15 anos</b><span>no mercado literário</span></div>
-        <div><b data-n="800" data-pre="+">+800</b><span>autores lançados</span></div>
-        <div><b data-n="4400" data-pre="+">+4.400</b><span>alunos</span></div>
-        <div><b data-n="10" data-pre="+" data-pos="M">+10M</b><span>livros vendidos</span></div>
+        <p class="mao"><span class="lin">O maior risco que um autor corre é ser esquecido.</span></p>
+        <div class="assina">
+          <h2>Dany Sakugawa</h2>
+          <span>Depois de anos nos bastidores das grandes editoras, passou a ensinar autores
+            independentes a fazer o que o mercado raramente explica.</span>
+        </div>
+        <div class="nums">
+          <div><b data-n="15" data-pre="+" data-pos=" anos">+15 anos</b><span>no mercado literário</span></div>
+          <div><b data-n="800" data-pre="+">+800</b><span>autores lançados</span></div>
+          <div><b data-n="4400" data-pre="+">+4.400</b><span>alunos</span></div>
+          <div><b data-n="10" data-pre="+" data-pos="M">+10M</b><span>livros vendidos</span></div>
+        </div>
       </div>
     </div>
   </div>
