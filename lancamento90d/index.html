@@ -710,7 +710,6 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .bio{display:grid;grid-template-columns:.68fr 1fr;gap:clamp(28px,4vw,46px);align-items:center}
 .bio > img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;
   object-position:center 16%;border-radius:14px;display:block}
-.dany .eyebrow{color:var(--accent)}
 /* a citacao e' a manchete da secao, entao ela toma o lugar que o h2 tinha */
 .dany .fala{margin:8px 0 0;color:#fff;letter-spacing:-.01em;
   font-size:clamp(1.34rem,2.7vw,2.05rem);line-height:1.2}
@@ -807,26 +806,38 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 /* ---------- oferta ---------- */
 
 .offer{background:var(--bg)}
+/* O CARD DA OFERTA É VERDE INTEIRO.
+   Na gramática da página o verde é a cor do 1%, e o card é justamente o que
+   faz o leitor virar o 1%: comprar é comprar o verde. A faixa verde no topo
+   já existia, então isto é a extensão dela, não cor nova.
+   Contraste sobre --verde: branco 8,99:1 · lista a 86% 7,14:1 ·
+   selos a 70% 5,30:1 · o botão dourado 5,32:1.
+   Os ticks foram de var(--accent) pra branco: laranja sobre o verde dá
+   3,36:1, que passa raspando como objeto gráfico, e branco dá 8,99:1. */
 .offer-box{
-  --pad:clamp(28px,5vw,42px);
-  max-width:660px;margin:38px auto 0;background:var(--card);border:1px solid var(--border);
-  border-radius:20px;padding:var(--pad);padding-top:0;text-align:center;overflow:hidden;
-  box-shadow:0 34px 76px -36px rgba(0,0,0,.5)
+  max-width:660px;margin:38px auto 0;background:var(--verde);color:#fff;
+  border:0;border-radius:20px;padding:clamp(32px,5vw,44px);text-align:center;
+  box-shadow:0 34px 76px -36px rgba(0,0,0,.55)
 }
-.offer-box .name{background:var(--verde);color:#fff;
-  margin:0 calc(var(--pad) * -1) var(--pad);padding:19px 20px;
-  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:.01em}
-.offer-box .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:16px 0 2px}
-.offer-box .price .cur{font-size:1.15rem;color:var(--soft)}
-.offer-box .price .ast{font-size:1.15rem;color:var(--soft);align-self:flex-start;margin-left:-4px}
+.offer-box .name{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:1.1rem;letter-spacing:.01em;color:rgba(255,255,255,.78);margin-bottom:2px}
+.offer-box .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:10px 0 2px}
+.offer-box .price .cur{font-size:1.15rem;color:rgba(255,255,255,.82)}
+.offer-box .price .ast{font-size:1.15rem;color:rgba(255,255,255,.82);align-self:flex-start;margin-left:-4px}
 /* o preço é o maior número da página */
-.offer-box .price .val{font-family:'Space Grotesk',sans-serif;font-size:clamp(3.4rem,10vw,5.6rem);font-weight:700;line-height:1;letter-spacing:-.045em}
-.offer-box .inst{color:var(--soft);font-size:.98rem;margin-bottom:24px}
-.offer-box .incl{list-style:none;padding:0;margin:0 0 26px;text-align:left;display:grid;gap:10px}
-.offer-box .incl li{position:relative;padding-left:28px;font-size:.96rem;color:var(--soft);line-height:1.5}
-.offer-box .incl li:before{content:"";position:absolute;left:5px;top:.36em;width:7px;height:13px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(40deg)}
-.nota-juros{margin:14px 0 0;font-size:.76rem;color:var(--soft)}
-.seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:18px;font-size:.78rem;color:var(--mute)}
+.offer-box .price .val{font-family:'Space Grotesk',sans-serif;font-size:clamp(3.4rem,10vw,5.6rem);
+  font-weight:700;line-height:1;letter-spacing:-.045em;color:#fff}
+.offer-box .inst{color:rgba(255,255,255,.82);font-size:.98rem;margin-bottom:26px}
+.offer-box .inst b{color:#fff}
+.offer-box .incl{list-style:none;padding:0;margin:0 0 28px;text-align:left;display:grid;gap:10px}
+.offer-box .incl li{position:relative;padding-left:28px;font-size:.96rem;
+  color:rgba(255,255,255,.86);line-height:1.5}
+.offer-box .incl li b{color:#fff}
+.offer-box .incl li:before{content:"";position:absolute;left:5px;top:.36em;width:7px;height:13px;
+  border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(40deg)}
+.nota-juros{margin:14px 0 0;font-size:.76rem;color:rgba(255,255,255,.7)}
+.seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:18px;
+  font-size:.78rem;color:rgba(255,255,255,.7)}
 
 /* ---------- faq ---------- */
 .faq{border-top:1px solid var(--border);margin-top:32px}
