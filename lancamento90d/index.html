@@ -192,7 +192,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   --card:#FFFFFF;
   --ink:#3A3A38;
   --soft:#555555;
-  --mute:#999999;
+  --mute:#707070;
   --border:#EEEEEE;
   --line:#E4E4E4;
   --accent:#FC783C;          /* fundo, linhas, marcadores */
@@ -225,7 +225,7 @@ h3{font-size:1.14rem;font-weight:700;letter-spacing:-.02em}
 p{margin:0 0 1.05em}
 
 .eyebrow{
-  font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;
+  font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;
   letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 16px
 }
 .lead{font-size:clamp(1.02rem,2vw,1.24rem);color:var(--soft);line-height:1.6}
@@ -338,7 +338,7 @@ p{margin:0 0 1.05em}
 /* numeros retoricos: o leitor se mede de cabeca antes de ver o diagrama */
 .bolhas .abre .numeros{font-family:'Space Grotesk',sans-serif;font-weight:700;
   letter-spacing:.02em;font-size:clamp(1.3rem,3.2vw,1.95rem);line-height:1.2;
-  color:#A8A5A0;margin:16px 0 0}
+  color:#757168;margin:16px 0 0}
 .bolhas .abre .pergunta{font-family:'Space Grotesk',sans-serif;font-weight:400;
   letter-spacing:-.025em;font-size:clamp(1.15rem,2.7vw,1.55rem);line-height:1.3;
   color:var(--ink);margin:14px auto 0;max-width:none}
@@ -468,7 +468,7 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .mult{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;
   font-size:clamp(1.18rem,2.5vw,1.5rem);color:#fff;margin:16px 0 0}
 .mult b{white-space:nowrap}
-.mult em{font-style:normal;color:rgba(255,255,255,.5);margin:0 .18em;font-weight:400}
+.mult em{font-style:normal;color:rgba(255,255,255,.68);margin:0 .18em;font-weight:400}
 .mult b{font-weight:700}
 .mult .c1{color:#fff}.mult .c2{color:#FAAB00}.mult .c3{color:#FF7A5C}
 .desfecho{margin-top:20px!important}
@@ -514,7 +514,7 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   background:var(--verde);border-radius:12px;padding:28px 26px;
   display:flex;flex-direction:column;justify-content:center;
   box-shadow:0 12px 26px -18px rgba(0,0,0,.45)}
-.mrow .mc .q{font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+.mrow .mc .q{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;
   color:rgba(255,255,255,.62);font-weight:700;margin-bottom:14px}
 .mrow .mc .r{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
   font-size:1.42rem;line-height:1.13;color:#fff;margin-bottom:14px}
@@ -567,9 +567,9 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .pcard{flex:0 0 auto;width:320px;margin-right:20px;text-align:left;
   padding:20px 22px;border-radius:var(--r);
   background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
-.pcard .quem{display:block;font-family:'Space Grotesk',sans-serif;font-size:.7rem;
+.pcard .quem{display:block;font-family:'Space Grotesk',sans-serif;font-size:.76rem;
   font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(255,255,255,.6);margin-bottom:9px}
+  color:rgba(255,255,255,.68);margin-bottom:9px}
 .pcard p{margin:0;font-size:.95rem;line-height:1.5;color:rgba(255,255,255,.78)}
 .pcard p b{color:#fff;font-weight:700}
 @media(prefers-reduced-motion:reduce){
@@ -584,7 +584,7 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
      curva vira desenho puro e os nomes saem pra uma legenda embaixo. */
   .curva .cato,.curva .cdia,.curva .ceixo,.curva .marco{display:none}
   .curva-eixo{display:block;margin:0 0 6px;font-family:'Space Grotesk',sans-serif;
-    font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
     color:rgba(255,255,255,.62);text-align:left}
   .curva-nota{display:block;margin:14px 0 0;font-size:.86rem;line-height:1.5;
     color:rgba(255,255,255,.62);text-align:left}
@@ -595,8 +595,8 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   .curva-leg li{display:flex;align-items:baseline;gap:9px;
     font-family:'Space Grotesk',sans-serif;font-size:1.02rem;color:#fff}
   .curva-leg b{font-weight:700;letter-spacing:-.02em}
-  .curva-leg span{margin-left:auto;font-size:.72rem;font-weight:700;letter-spacing:.12em;
-    text-transform:uppercase;color:rgba(255,255,255,.5)}
+  .curva-leg span{margin-left:auto;font-size:.76rem;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:rgba(255,255,255,.68)}
 }
 @media(max-width:860px){
   .bb{grid-template-columns:1fr;gap:0;margin-top:34px}
@@ -798,7 +798,7 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .garantia .disco{fill:var(--verde)}
 .garantia .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:60px;
   letter-spacing:-.05em;fill:#fff}
-.garantia .dias{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;
+.garantia .dias{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;
   letter-spacing:.13em;fill:rgba(255,255,255,.82)}
 .garantia h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.03em;
   font-size:clamp(1.24rem,2.8vw,1.7rem);margin:0 0 14px;line-height:1.16;color:var(--ink)}
@@ -884,7 +884,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
 }
 .sticky.on{transform:none}
 .sticky .p{flex:0 0 auto;font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.1}
-.sticky .p small{display:block;font-weight:400;font-size:.68rem;color:var(--mute)}
+.sticky .p small{display:block;font-weight:400;font-size:.75rem;color:var(--mute)}
 .sticky .btn{flex:1;padding:17px 20px;font-size:1rem}
 .sticky .btn.ouro{padding:16px 10px;font-size:.78rem;letter-spacing:.02em}
 .sticky .p{font-size:.95rem}
