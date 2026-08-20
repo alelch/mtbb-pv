@@ -1,0 +1,36 @@
+<!doctype html><meta charset="utf-8">
+<style>
+body{margin:0;background:#111;font:11px 'Helvetica Neue',sans-serif;color:#fff}
+.cel{position:relative;width:640px;height:410px;overflow:hidden;float:left;
+  border:1px solid #000;box-sizing:content-box}
+.cel iframe{border:0;width:1280px;height:820px;transform:scale(.5);transform-origin:0 0}
+.tag{position:absolute;left:0;top:0;z-index:9;background:#FC783C;color:#fff;
+  padding:3px 9px;font-weight:700;letter-spacing:.06em}
+</style><body>
+<div id="g"></div>
+<script>
+var q=new URLSearchParams(location.search);
+var lista=(q.get('v')||'1,2,3,4,5,6,7,8,9,10').split(',');
+var pos={ '1':['.v1',900],'2':['.v2',900],'3':['.v3',900],'4':['.v4',900],'5':['.v5',-40],
+          '6':['.v6',900],'7':['.v7',-30],'8':['.v8',900],'9':['.v9',900],'10':['.v10',-30],
+          'a':['#bolhas',-10],'b':['#bolhas',760],'c':['#bolhas',1380],'d':['#bolhas',2060],'e':['#metodo',420] };
+var g=document.getElementById('g'), prontos=0;
+lista.forEach(function(n){
+  var d=document.createElement('div'); d.className='cel';
+  d.innerHTML='<span class="tag">V'+n+'</span>';
+  var f=document.createElement('iframe'); f.src=(q.get('u')||'bolhas10.html');
+  f.onload=function(){
+    var w=f.contentWindow, doc=f.contentDocument;
+    var s=doc.createElement('style');
+    s.textContent='html{scroll-behavior:auto!important}*{transition:none!important;animation:none!important}';
+    doc.head.appendChild(s);
+    setTimeout(function(){
+      var el=doc.querySelector(pos[n][0]);
+      w.scrollTo(0, w.scrollY+el.getBoundingClientRect().top+pos[n][1]);
+      w.__tick&&w.__tick(); w.__bolhas&&w.__bolhas(); w.__bolhas&&w.__bolhas();
+      if(++prontos===lista.length) document.title='pronto';
+    },400);
+  };
+  d.appendChild(f); g.appendChild(d);
+});
+</script></body>

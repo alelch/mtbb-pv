@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;background:#111">
+<div id="g"></div><script>
+var escolhas=[null,0,3];
+escolhas.forEach(function(n){
+  var d=document.createElement('div');
+  d.style.cssText='position:relative;width:640px;height:415px;overflow:hidden;float:left;border:1px solid #000';
+  var f=document.createElement('iframe');
+  f.src='index.html?v=93'; f.style.cssText='border:0;width:1280px;height:830px;transform:scale(.5);transform-origin:0 0';
+  f.onload=function(){ var w=f.contentWindow, doc=f.contentDocument;
+    var s=doc.createElement('style');
+    s.textContent='html{scroll-behavior:auto!important}*{transition:none!important}';
+    doc.head.appendChild(s);
+    setTimeout(function(){
+      var sec=doc.querySelector('#bolhas');
+      var jg=doc.querySelector('.jogo'); w.scrollTo(0, jg.getBoundingClientRect().top+w.scrollY-260);
+      if(n!==null) w.__responder(n);
+      w.__bolhas&&w.__bolhas();
+      document.title='pronto';
+    },900); };
+  d.appendChild(f); document.getElementById('g').appendChild(d);
+});
+</script></body>

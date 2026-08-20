@@ -1,0 +1,19 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:14px ui-monospace;white-space:pre;padding:10px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){
+  var d=this.contentDocument,L=[];
+  setTimeout(function(){
+    L.push('styleSheets.length = '+d.styleSheets.length);
+    L.push('tags <style> = '+d.querySelectorAll('style').length);
+    for(var i=0;i<d.styleSheets.length;i++){
+      var ss=d.styleSheets[i], n='?';
+      try{ n=ss.cssRules.length }catch(e){ n='BLOQUEADA: '+e.name }
+      L.push('  folha '+i+': '+n+' regras  href='+(ss.href||'inline'));
+    }
+    document.getElementById('o').textContent=L.join('\n');
+  },2600);
+};
+</script>

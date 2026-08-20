@@ -1,0 +1,30 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace;white-space:pre">
+<iframe id="a" src="../lancamento-v1/index.html" style="border:0;width:1280px;height:900px;position:absolute;left:-9999px"></iframe>
+<div id="o">medindo...</div>
+<script>
+document.getElementById('a').onload=function(){ setTimeout(function(){
+ var d=this.contentDocument,w=this.contentWindow,L=[];
+ function linha(e,rot){
+   if(!e){L.push(rot+': -');return;}
+   var c=getComputedStyle(e), r=e.getBoundingClientRect();
+   L.push(rot.padEnd(20)+'topo='+String(Math.round(r.top+w.scrollY)).padStart(5)+
+     ' alt='+String(Math.round(r.height)).padStart(4)+
+     ' fonte='+c.fontSize.padStart(6)+' mar='+c.marginTop+'/'+c.marginBottom+
+     ' pad='+c.paddingTop+'/'+c.paddingBottom);
+ }
+ // tudo que esta' acima da faixa de imprensa, na ordem
+ var alvos=[].slice.call(d.querySelectorAll('h1,h2,p,video,iframe,img,div'))
+   .filter(function(e){ var r=e.getBoundingClientRect();
+     return r.top+w.scrollY < 1060 && r.height>18 && r.width>200; });
+ var vistos=[];
+ alvos.forEach(function(e){
+   var r=e.getBoundingClientRect(), y=Math.round(r.top+w.scrollY), h=Math.round(r.height);
+   var chave=y+'x'+h; if(vistos.indexOf(chave)>=0) return; vistos.push(chave);
+   var txt=(e.textContent||'').trim().replace(/\s+/g,' ').slice(0,30);
+   if(vistos.length>16) return;
+   L.push(String(y).padStart(5)+'  alt='+String(h).padStart(4)+'  <'+e.tagName.toLowerCase()+'> '+
+     getComputedStyle(e).paddingTop+'/'+getComputedStyle(e).paddingBottom+'  '+txt);
+ });
+ document.getElementById('o').textContent=L.join('\n'); document.title='pronto';
+}.bind(this),1500)};
+</script></body>

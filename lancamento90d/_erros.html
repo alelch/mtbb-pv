@@ -1,0 +1,33 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace;white-space:pre">
+<iframe id="f" src="index.html" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe>
+<div id="o">rodando...</div>
+<script>
+var erros=[], f=document.getElementById('f');
+f.onload=function(){
+  var w=f.contentWindow, d=f.contentDocument;
+  w.addEventListener('error', function(e){ erros.push('ERRO: '+e.message+' @'+e.filename+':'+e.lineno); });
+  w.onerror=function(m,src,l){ erros.push('ERRO: '+m+' @'+l); };
+  var st=d.createElement('style'); st.textContent='html{scroll-behavior:auto!important}'; d.head.appendChild(st);
+  setTimeout(function(){
+    var H=d.body.scrollHeight, L=[];
+    for(var y=0;y<H;y+=300){ w.scrollTo(0,y); w.__bolhas&&w.__bolhas(); }
+    w.scrollTo(0,0);
+    // overflow horizontal
+    var largos=[].filter.call(d.querySelectorAll('body *'), function(e){
+      return e.getBoundingClientRect().right > d.documentElement.clientWidth+2; });
+    L.push('altura da pagina = '+H);
+    L.push('elementos estourando a largura = '+largos.length+
+           (largos.length?' -> '+[].slice.call(largos,0,4).map(function(e){return e.className||e.tagName}).join(' | '):''));
+    L.push('passos das bolhas = '+d.querySelectorAll('#bolhas .bb-passo').length);
+    L.push('minis = '+d.querySelectorAll('.bb-mini').length);
+    L.push('motores (ato dentro do passo) = '+d.querySelectorAll('#bolhas .motor').length);
+    L.push('faixas dos 90 dias = '+d.querySelectorAll('#bolhas .fx').length);
+    L.push('secao separada dos atos = '+(d.querySelector('#metodo')?'AINDA EXISTE':'absorvida'));
+    L.push('checkout = '+(d.querySelector('a[href*="pay.hotmart"]')||{href:'NAO ACHOU'}).href);
+    L.push('');
+    L.push(erros.length? erros.join('\n') : 'nenhum erro de JS');
+    document.getElementById('o').textContent=L.join('\n');
+    document.title='pronto';
+  },2500);
+};
+</script></body>

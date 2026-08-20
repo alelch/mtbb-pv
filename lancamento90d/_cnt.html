@@ -1,0 +1,23 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html" style="width:1280px"></iframe><div id=o>...</div>
+<script>
+var f=document.getElementById('f'),L=[],W=[1440,1280,1024,768,390],i=0;
+f.onload=function(){var d=f.contentDocument;
+setTimeout(function(){(function passo(){
+  if(i>=W.length){document.getElementById('o').textContent=L.join('\n');return}
+  f.style.width=W[i]+'px';
+  setTimeout(function(){
+    var m=d.querySelector('.marquee'), im=m.querySelector('img');
+    var r=m.getBoundingClientRect(), ri=im.getBoundingClientRect();
+    var cs=getComputedStyle(im), gap=parseFloat(cs.marginRight);
+    var util=r.width-parseFloat(getComputedStyle(m).paddingLeft)*2;
+    L.push('vp '+String(W[i]).padStart(4)+'  fileira '+Math.round(r.width)+
+      'px  card '+Math.round(ri.width)+'x'+Math.round(ri.height)+
+      '  cabem '+(util/(ri.width+gap)).toFixed(1)+' cards'+
+      '  (alvo do print: 4,4)');
+    i++;passo();
+  },320);
+})();},2600)};
+</script>

@@ -1,0 +1,28 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:12px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,L=[];
+setTimeout(function(){
+  var v=d.querySelector('.virada');
+  L.push('SEÇÃO VERDE, na ordem, com o tamanho de cada beat:');
+  var sel='.eyebrow,h2,h3,p,li,figcaption,.mult,.causa,.desfecho,.curva-fecho';
+  var vistos=[];
+  [].forEach.call(v.querySelectorAll(sel),function(e){
+    if(e.closest('.provas'))return;              // carrossel tratado a parte
+    if(getComputedStyle(e).display==='none')return;
+    if(vistos.some(function(p){return p.contains(e)}))return;
+    vistos.push(e);
+    var c=getComputedStyle(e), t=e.textContent.replace(/\s+/g,' ').trim();
+    if(!t)return;
+    L.push('  '+String(Math.round(parseFloat(c.fontSize))).padStart(3)+'px w'+c.fontWeight+
+           '  '+t.slice(0,58));
+  });
+  var pc=v.querySelectorAll('.provas .pcard:not([aria-hidden])');
+  L.push('  [carrossel de provas: '+pc.length+' casos]');
+  L.push('');L.push('altura da seção verde = '+Math.round(v.getBoundingClientRect().height)+'px');
+  L.push('altura da página = '+d.documentElement.scrollHeight);
+  document.getElementById('o').textContent=L.join('\n');
+},2600)};
+</script>

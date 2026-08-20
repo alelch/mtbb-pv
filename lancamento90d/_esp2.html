@@ -1,0 +1,51 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace;white-space:pre">
+<iframe id="a" src="../lancamento-v1/index.html" style="border:0;width:1280px;height:900px;position:absolute;left:-9999px"></iframe>
+<div id="o">medindo...</div>
+<script>
+document.getElementById('a').onload=function(){ setTimeout(function(){
+ var d=this.contentDocument,w=this.contentWindow,L=[];
+ // acha o rotulo "como visto em" pelo texto
+ var rot=null;
+ [].forEach.call(d.querySelectorAll('p,span,div,h2,h3'),function(e){
+   if(rot) return;
+   var t=(e.textContent||'').trim().toUpperCase();
+   if(t.length<26 && t.indexOf('VISTO EM')>=0 && e.children.length===0) rot=e;
+ });
+ if(!rot){ L.push('rotulo nao encontrado'); }
+ else{
+   var cr=getComputedStyle(rot), rr=rot.getBoundingClientRect();
+   L.push('ROTULO  "'+rot.textContent.trim()+'"');
+   L.push('  topo='+Math.round(rr.top+w.scrollY)+' alt='+Math.round(rr.height)+
+          ' fonte='+cr.fontSize+' peso='+cr.fontWeight+' track='+cr.letterSpacing+
+          ' cor='+cr.color);
+   L.push('  margens='+cr.marginTop+'/'+cr.marginBottom);
+   // sobe ate' o container da faixa
+   var faixa=rot.parentElement, cf=getComputedStyle(faixa), rf=faixa.getBoundingClientRect();
+   L.push('CONTAINER da faixa  topo='+Math.round(rf.top+w.scrollY)+' alt='+Math.round(rf.height)+
+          ' pad='+cf.paddingTop+'/'+cf.paddingBottom+' mar='+cf.marginTop+'/'+cf.marginBottom+
+          ' bg='+cf.backgroundColor);
+   var pai=faixa.parentElement, cp=getComputedStyle(pai), rp=pai.getBoundingClientRect();
+   L.push('PAI                 topo='+Math.round(rp.top+w.scrollY)+' alt='+Math.round(rp.height)+
+          ' pad='+cp.paddingTop+'/'+cp.paddingBottom+' bg='+cp.backgroundColor);
+   // logos: primeiras imagens depois do rotulo
+   var imgs=[].slice.call(faixa.querySelectorAll('img')).concat([].slice.call(pai.querySelectorAll('img')));
+   var vistos={};
+   imgs.slice(0,4).forEach(function(im,i){
+     var ci=getComputedStyle(im), ri=im.getBoundingClientRect();
+     var k=im.getAttribute('src')||''; if(vistos[k])return; vistos[k]=1;
+     L.push('  img'+i+' altura='+ci.height+' larg='+ci.width+' topo='+Math.round(ri.top+w.scrollY));
+   });
+   var linha=imgs.length?imgs[0].parentElement:null;
+   if(linha){var cl=getComputedStyle(linha);
+     L.push('  linha dos logos: display='+cl.display+' gap='+cl.gap+' pad='+cl.paddingTop+'/'+cl.paddingBottom);}
+   // o que vem imediatamente antes
+   var ant=pai.previousElementSibling;
+   if(ant){var ca=getComputedStyle(ant), ra=ant.getBoundingClientRect();
+     L.push('ANTES DA FAIXA      alt='+Math.round(ra.height)+' fim='+Math.round(ra.bottom+w.scrollY)+
+            ' pad='+ca.paddingTop+'/'+ca.paddingBottom);
+     L.push('  >> respiro entre o fim do bloco anterior e o topo da faixa = '+
+            Math.round(rp.top-ra.bottom)+'px');}
+ }
+ document.getElementById('o').textContent=L.join('\n'); document.title='pronto';
+}.bind(this),1500)};
+</script></body>

@@ -1,0 +1,37 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:11.5px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){var w=this.contentWindow,L=[];
+setTimeout(function(){
+  var e=w.performance.getEntriesByType('resource');
+  var porTipo={}, total=0, terceiros=[];
+  e.forEach(function(r){
+    var t=r.initiatorType||'?';
+    var kb=(r.transferSize||r.encodedBodySize||0);
+    porTipo[t]=porTipo[t]||{n:0,b:0}; porTipo[t].n++; porTipo[t].b+=kb; total+=kb;
+    if(r.name.indexOf(location.origin)!==0) terceiros.push([kb, r.name]);
+  });
+  var nav=w.performance.getEntriesByType('navigation')[0]||{};
+  L.push('requisicoes: '+e.length+'   ·   transferido: '+(total/1024).toFixed(0)+' KB');
+  L.push('DOMContentLoaded: '+Math.round(nav.domContentLoadedEventEnd||0)+'ms   ·   load: '+Math.round(nav.loadEventEnd||0)+'ms');
+  var lcp=w.performance.getEntriesByType('largest-contentful-paint');
+  var fcp=w.performance.getEntriesByName('first-contentful-paint')[0];
+  L.push('FCP: '+(fcp?Math.round(fcp.startTime)+'ms':'-')+'   ·   LCP: '+(lcp.length?Math.round(lcp[lcp.length-1].startTime)+'ms':'-'));
+  L.push('');
+  Object.keys(porTipo).sort(function(a,b){return porTipo[b].b-porTipo[a].b}).forEach(function(t){
+    L.push('  '+t.padEnd(12)+String(porTipo[t].n).padStart(3)+' req   '+(porTipo[t].b/1024).toFixed(0).padStart(5)+' KB');
+  });
+  L.push('');L.push('TERCEIROS ('+terceiros.length+'):');
+  terceiros.sort(function(a,b){return b[0]-a[0]}).slice(0,10).forEach(function(x){
+    L.push('  '+(x[0]/1024).toFixed(0).padStart(5)+' KB  '+x[1].replace(/^https?:\/\//,'').slice(0,86));
+  });
+  L.push('');L.push('10 MAIORES:');
+  e.map(function(r){return [(r.transferSize||r.encodedBodySize||0), r.name]})
+   .sort(function(a,b){return b[0]-a[0]}).slice(0,10).forEach(function(x){
+    L.push('  '+(x[0]/1024).toFixed(0).padStart(5)+' KB  '+x[1].split('/').slice(-2).join('/').slice(0,70));
+  });
+  document.getElementById('o').textContent=L.join('\n');
+},6000)};
+</script>

@@ -1,0 +1,19 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace;white-space:pre">
+<iframe id="f" src="index.html?v=100" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe><div id="o"></div>
+<script>document.getElementById('f').onload=function(){setTimeout(function(){
+var d=this.contentDocument,w=this.contentWindow,L=[];
+var st=d.createElement('style'); st.textContent='html{scroll-behavior:auto!important}*{transition:none!important}';
+d.head.appendChild(st);
+var sec=d.querySelector('.virada'), cem=d.querySelector('.cem-um');
+var top=Math.round(sec.getBoundingClientRect().top+w.scrollY);
+L.push('secao verde no y='+top+'  (altura '+Math.round(sec.getBoundingClientRect().height)+')');
+L.push('');
+[-700,-500,-350,-250,-150,0].forEach(function(off){
+  var y=top+off; w.scrollTo(0,y); w.__cem&&w.__cem();
+  var p=parseFloat(getComputedStyle(cem).getPropertyValue('--p'))||0;
+  var visiveis=0;
+  [].forEach.call(cem.children,function(e){ if(parseFloat(getComputedStyle(e).opacity)>0.5) visiveis++; });
+  L.push('y='+String(y).padStart(5)+'  --p='+p.toFixed(3)+'  livros visiveis = '+String(visiveis).padStart(3)+
+         '   aceso? '+(parseFloat(getComputedStyle(cem.lastElementChild).opacity)>0.5?'SIM':'nao'));
+});
+document.getElementById('o').textContent=L.join('\n');document.title='pronto';}.bind(this),1500)};</script></body>

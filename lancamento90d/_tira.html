@@ -1,0 +1,30 @@
+<!doctype html><meta charset="utf-8">
+<style>body{margin:0;background:#111;font:11px monospace;color:#fff}
+.cel{position:relative;width:640px;height:415px;overflow:hidden;float:left;border:1px solid #000}
+.cel iframe{border:0;width:1280px;height:830px;transform:scale(.5);transform-origin:0 0}
+.tag{position:absolute;left:0;top:0;z-index:9;background:#FC783C;padding:3px 8px;font-weight:700}</style>
+<body><div id="g"></div><script>
+var q=new URLSearchParams(location.search);
+var ys=(q.get('y')||'0').split(',').map(Number);
+var arq=q.get('u')||'index.html', W=+(q.get('w')||1280), H=+(q.get('h')||830);
+var g=document.getElementById('g'), n=0;
+ys.forEach(function(y){
+  var d=document.createElement('div'); d.className='cel';
+  d.style.width=(W/2)+'px'; d.style.height=(H/2)+'px';
+  d.innerHTML='<span class="tag">y '+y+'</span>';
+  var f=document.createElement('iframe'); f.src=arq;
+  f.style.width=W+'px'; f.style.height=H+'px';
+  f.onload=function(){
+    var w=f.contentWindow, doc=f.contentDocument;
+    var st=doc.createElement('style');
+    st.textContent='html{scroll-behavior:auto!important}*{transition:none!important;animation:none!important}';
+    doc.head.appendChild(st);
+    setTimeout(function(){
+      w.scrollTo(0,y);
+      [w.__bolhas,w.__tick,w.__escrever,w.__cem].forEach(function(fn){ fn&&fn(); fn&&fn(); });
+      if(++n===ys.length) document.title='pronto';
+    },1200);
+  };
+  d.appendChild(f); g.appendChild(d);
+});
+</script></body>

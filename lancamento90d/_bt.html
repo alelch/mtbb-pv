@@ -1,0 +1,26 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+function ln(c){c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function L(a){return .2126*ln(a[0])+.7152*ln(a[1])+.0722*ln(a[2])}
+function rg(s){var m=String(s).match(/[\d.]+/g);return m?m.slice(0,3).map(Number):[0,0,0]}
+function rz(f,b){var x=L(f),y=L(b);return ((Math.max(x,y)+.05)/(Math.min(x,y)+.05)).toFixed(2)}
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,O=[];
+setTimeout(function(){
+  var H=d.documentElement.scrollHeight;
+  O.push('altura = '+H);
+  O.push('');O.push('TODOS os CTAs e onde estao:');
+  [].forEach.call(d.querySelectorAll('a.btn,button.btn'),function(e){
+    var c=getComputedStyle(e), y=Math.round(e.getBoundingClientRect().top+w.scrollY);
+    var vis=c.display!=='none' && e.offsetParent!==null;
+    O.push('  y='+String(y).padStart(6)+' ('+String(Math.round(y/H*100)).padStart(2)+'%)  '+
+      'fundo '+c.backgroundColor+'  tinta '+c.color+'  = '+rz(rg(c.color),rg(c.backgroundColor))+':1'+
+      (vis?'':'  [oculto]')+'   "'+e.textContent.trim().slice(0,30)+'"');
+  });
+  var st=d.getElementById('sticky');
+  O.push('');O.push('barra fixa no desktop (1280px): display='+getComputedStyle(st).display);
+  document.getElementById('o').textContent=O.join('\n');
+},2600)};
+</script>

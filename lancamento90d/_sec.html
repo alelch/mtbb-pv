@@ -1,0 +1,8 @@
+<!doctype html><meta charset=utf-8><style>html,body{margin:0}iframe{border:0;display:block}</style>
+<iframe id=f src="index.html" style="width:1280px;height:1900px"></iframe>
+<script>document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow;
+var st=d.createElement('style');st.textContent='html{scroll-behavior:auto!important}*{transition:none!important;animation:none!important}';d.head.appendChild(st);
+setTimeout(function(){var e=d.querySelector('.casos').closest('section');
+w.scrollTo(0,e.getBoundingClientRect().top+w.scrollY-40);
+Object.keys(w).filter(function(k){return k.indexOf('__')===0&&typeof w[k]==='function'}).forEach(function(k){try{w[k]();w[k]()}catch(x){}});
+document.title='ok'},1600)};</script>

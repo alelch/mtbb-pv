@@ -1,0 +1,28 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace;white-space:pre">
+<iframe id="f" src="index.html?v=40" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe>
+<div id="o"></div>
+<script>
+var f=document.getElementById('f');
+f.onload=function(){ setTimeout(function(){
+ var d=f.contentDocument,w=f.contentWindow,L=[];
+ var _s=d.createElement('style');_s.textContent='html{scroll-behavior:auto!important}';d.head.appendChild(_s);
+ var ps=[].slice.call(d.querySelectorAll('#bolhas .bb-passo'));
+ var __BB__=Math.round(d.querySelector('#bolhas .bb').getBoundingClientRect().top+w.scrollY);
+ L.push('innerHeight='+w.innerHeight);
+ ps.forEach(function(p,i){var r=p.getBoundingClientRect();
+   L.push('passo'+(i+1)+' topo='+Math.round(r.top+w.scrollY)+' alt='+Math.round(r.height)+
+          ' centro='+Math.round(r.top+w.scrollY+r.height/2));});
+ var bb=d.querySelector('#bolhas .bb').getBoundingClientRect();
+ L.push('bb topo='+Math.round(bb.top+w.scrollY)+' alt='+Math.round(bb.height)+
+        ' sticky ate='+Math.round(bb.top+w.scrollY+bb.height-w.innerHeight));
+ L.push('');
+ [__BB__-200,__BB__,__BB__+200,__BB__+357,__BB__+600,__BB__+872,__BB__+1000].forEach(function(y){
+   w.scrollTo(0,y); w.__bolhas&&w.__bolhas();
+   var at=ps.map(function(p){return p.classList.contains('viva')?1:0}).join('');
+   var bl=['bol1','bol2','bol3'].map(function(id){var g=d.getElementById(id);
+     return g.classList.contains('viva')?'ON':(g.classList.contains('furada')?'ok':'-')}).join(',');
+   L.push('y='+y+'  passo '+at+'  bolhas '+bl);
+ });
+ document.getElementById('o').textContent=L.join('\n'); document.title='pronto';
+},1600)};
+</script></body>

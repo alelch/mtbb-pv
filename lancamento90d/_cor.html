@@ -1,0 +1,28 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){
+  var d=this.contentDocument,L=[];
+  setTimeout(function(){
+    L.push('--accent no :root = '+getComputedStyle(d.documentElement).getPropertyValue('--accent').trim());
+    L.push('');
+    var alvos=[['.fp2','Você é o próximo.'],['.fp-aqui','a seta'],
+               ['.fecho-prova .mao','anotacao a mao'],['.caso .res','resultado dos casos'],
+               ['.offer .eyebrow','eyebrow INSCRICAO']];
+    alvos.forEach(function(par){
+      var e=d.querySelector(par[0]);
+      if(!e){L.push(par[1]+': NAO ACHEI'); return}
+      var c=getComputedStyle(e);
+      L.push(par[1].padEnd(22)+' color='+c.color.padEnd(20)+
+             ' filter='+c.filter+' opacity='+c.opacity);
+    });
+    var sec=d.querySelector('.fecho-prova').closest('[data-etapa]');
+    L.push('');
+    L.push('secao pai data-etapa = '+(sec?sec.getAttribute('data-etapa'):'nenhuma'));
+    if(sec) L.push('--ac herdado = '+getComputedStyle(sec).getPropertyValue('--ac').trim());
+    document.getElementById('o').textContent=L.join('\n');
+  },2600);
+};
+</script>

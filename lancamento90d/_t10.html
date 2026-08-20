@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8">
+<style>body{margin:0;background:#111}
+.cel{position:relative;width:640px;height:415px;overflow:hidden;float:left;border:1px solid #000}
+.cel iframe{border:0;width:1280px;height:830px;transform:scale(.5);transform-origin:0 0}</style>
+<body><div id="g"></div><script>
+var q=new URLSearchParams(location.search), ys=(q.get('y')||'0').split(',').map(Number), n=0;
+ys.forEach(function(y){
+  var d=document.createElement('div'); d.className='cel';
+  var f=document.createElement('iframe'); f.src='virada10.html';
+  f.onload=function(){ var w=f.contentWindow, doc=f.contentDocument;
+    var s=doc.createElement('style'); s.textContent='html{scroll-behavior:auto!important}*{transition:none!important;animation:none!important}';
+    doc.head.appendChild(s);
+    setTimeout(function(){ w.scrollTo(0,y); if(++n===ys.length) document.title='pronto'; },600); };
+  d.appendChild(f); document.getElementById('g').appendChild(d);
+});
+</script></body>

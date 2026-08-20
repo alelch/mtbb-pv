@@ -1,0 +1,29 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,L=[];
+setTimeout(function(){
+  L.push('elementos com class contendo "conta": ');
+  [].forEach.call(d.querySelectorAll('[class~="conta"]'),function(e){
+    var c=getComputedStyle(e);
+    L.push('  <'+e.tagName+'> "'+e.textContent.trim().slice(0,42)+'"  fs='+c.fontSize+'  w='+c.fontWeight);
+  });
+  var em=d.querySelector('#resto em');
+  if(em){var c=getComputedStyle(em);
+    L.push('');L.push('<em>de verdade</em>:');
+    ['fontSize','fontWeight','fontStyle','color','textTransform','letterSpacing','fontFamily','backgroundImage']
+      .forEach(function(k){L.push('  '+k+' = '+String(c[k]).slice(0,60))});
+    // quais regras batem
+    var hits=[];
+    [].forEach.call(d.styleSheets,function(ss){try{[].forEach.call(ss.cssRules,function(r){
+      if(r.selectorText){try{if(em.matches(r.selectorText))hits.push(r.selectorText)}catch(e){}}
+      if(r.cssRules)[].forEach.call(r.cssRules,function(r2){
+        if(r2.selectorText){try{if(em.matches(r2.selectorText))hits.push('@ '+r2.selectorText)}catch(e){}}});
+    })}catch(e){}});
+    L.push('');L.push('regras que batem no <em>: '+hits.join('  |  '));
+  } else L.push('SEM #resto em');
+  document.getElementById('o').textContent=L.join('\n');
+},2500)};
+</script>

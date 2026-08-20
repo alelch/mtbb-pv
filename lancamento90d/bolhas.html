@@ -1,0 +1,132 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>As três bolhas</title><link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{--bg:#F8F8F8;--card:#FFF;--ink:#3A3A38;--soft:#555;--mute:#999;--bd:#EEE;--co:#FC783C}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0;letter-spacing:-.035em;line-height:1.08}
+p{margin:0 0 1em}
+.wrap{max-width:1120px;margin:0 auto;padding:0 40px}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.18em;
+ text-transform:uppercase;color:var(--co);margin:0 0 14px}
+.intro{padding:90px 0 10px;text-align:center}
+.intro h2{font-size:clamp(1.9rem,4vw,2.9rem);max-width:20ch;margin:0 auto}
+.intro .lead{color:var(--soft);max-width:52ch;margin:16px auto 0}
+
+/* ── palco: desenho grudado à esquerda, texto rolando à direita ── */
+.palco{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.desenho{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center}
+.desenho svg{width:100%;max-width:520px;overflow:visible}
+.bolha ellipse{fill:none;stroke:#D8D5D0;stroke-width:2.5;transition:stroke .6s ease,fill .6s ease,stroke-width .6s ease}
+.bolha text{font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.09em;
+ fill:#B4B0AB;text-transform:uppercase;transition:fill .6s ease}
+.bolha.on ellipse{stroke:var(--co);stroke-width:3.5;fill:rgba(252,120,60,.07)}
+.bolha.on text{fill:var(--ink)}
+.bolha.done ellipse{stroke:rgba(252,120,60,.45)}
+.bolha.done text{fill:#8A8A8A}
+
+.passos{padding:14vh 0}
+.passo{min-height:78vh;display:flex;flex-direction:column;justify-content:center;
+ opacity:.25;transition:opacity .5s ease}
+.passo.on{opacity:1}
+.passo .n{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.18em;
+ text-transform:uppercase;color:var(--co);margin-bottom:12px}
+.passo h3{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:14px}
+.passo p{color:var(--soft);max-width:44ch}
+.passo .como{margin-top:22px;padding-top:16px;border-top:1px solid var(--bd);max-width:44ch}
+.passo .como b{display:block;font-family:'Space Grotesk',sans-serif;font-size:.7rem;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.passo .como span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.02rem;color:var(--ink)}
+.fecho{padding:80px 0 120px;text-align:center;border-top:1px solid var(--bd)}
+.fecho b{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,3.4vw,2.3rem);letter-spacing:-.03em;display:block}
+.fecho span{color:var(--soft);display:block;margin-top:10px}
+@media(max-width:900px){
+  .palco{grid-template-columns:1fr;gap:0}
+  .desenho{height:44vh;top:0;background:var(--bg);z-index:2}
+  .passo{min-height:auto;padding:34px 0;opacity:1}
+}
+</style></head><body>
+
+<section class="intro"><div class="wrap">
+  <p class="eyebrow">O que trava 99% dos livros</p>
+  <h2>Quase todo livro morre dentro da primeira bolha.</h2>
+  <p class="lead">Não por falta de qualidade. Muitos desses livros são bons e mereciam leitores. Eles só nunca saíram do círculo de quem já conhecia o autor.</p>
+</div></section>
+
+<div class="wrap"><div class="palco">
+  <div class="desenho">
+    <svg viewBox="0 0 560 400" aria-hidden="true">
+      <g class="bolha" id="b3"><ellipse cx="238" cy="200" rx="268" ry="192"/><text x="440" y="205" text-anchor="middle">Boca a boca</text></g>
+      <g class="bolha" id="b2"><ellipse cx="186" cy="200" rx="188" ry="150"/><text x="312" y="205" text-anchor="middle">Desconhecidos</text></g>
+      <g class="bolha" id="b1"><ellipse cx="128" cy="200" rx="122" ry="98"/><text x="128" y="205" text-anchor="middle">Amigos e família</text></g>
+    </svg>
+  </div>
+
+  <div class="passos">
+    <div class="passo" data-b="b1">
+      <div class="n">Bolha 1</div>
+      <h3>Amigos e família</h3>
+      <p>Todo livro começa aqui, e essa parte funciona: a mãe compra, três amigas compram, o grupo do WhatsApp comemora. Parece lançamento.</p>
+      <p>Só que essa bolha tem tamanho fixo. Quando ela se esgota, e ela se esgota em duas semanas, as vendas param. É o "uma semana de barulho, onze meses de silêncio".</p>
+      <div class="como"><b>Como se sai dela</b><span>Ato 1 · Desejo</span></div>
+    </div>
+
+    <div class="passo" data-b="b2">
+      <div class="n">Bolha 2</div>
+      <h3>Desconhecidos</h3>
+      <p>Gente que nunca ouviu falar de você comprando o seu livro. É aqui que o livro deixa de depender de quem te ama e passa a depender do que ele promete.</p>
+      <p>Isso não acontece por sorte. Acontece quando o livro está achável, quando a vitrine convence, e quando existe um motivo pra abrir hoje e não algum dia.</p>
+      <div class="como"><b>Como se chega</b><span>Ato 2 · Antecipação e Ato 3 · Venda</span></div>
+    </div>
+
+    <div class="passo" data-b="b3">
+      <div class="n">Bolha 3</div>
+      <h3>Boca a boca</h3>
+      <p>A última bolha é a única que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito algo por ele.</p>
+      <p>São três os motivos que fazem alguém recomendar um livro: ele ensinou uma habilidade nova, criou um hábito novo, ou mudou a forma de ver o mundo.</p>
+      <div class="como"><b>O que sustenta</b><span>Os 3 vetores do boca a boca</span></div>
+    </div>
+  </div>
+</div></div>
+
+<section class="fecho"><div class="wrap">
+  <b>De invisível a lido é isso: furar as três bolhas.</b>
+  <span>E o plano de 90 dias é a ordem em que elas se furam.</span>
+</div></section>
+
+<script>
+/* Qual bolha acende: a do passo cujo CENTRO está mais perto do centro da tela.
+   Troquei o IntersectionObserver com rootMargin percentual por isso porque a
+   faixa fina era frágil (em viewport curta ela some) e não dava pra testar. */
+(function(){
+  var passos = [].slice.call(document.querySelectorAll('.passo'));
+  var ordem = ['b1','b2','b3'];
+  var atual = -1, pedido = false;
+
+  function medir(){
+    pedido = false;
+    var meio = scrollY + innerHeight / 2, melhor = 0, dist = Infinity;
+    passos.forEach(function(p, i){
+      var r = p.getBoundingClientRect();
+      var c = scrollY + r.top + r.height / 2;
+      var d = Math.abs(c - meio);
+      if (d < dist){ dist = d; melhor = i; }
+    });
+    if (melhor === atual) return;
+    atual = melhor;
+    passos.forEach(function(p, i){ p.classList.toggle('on', i === melhor); });
+    ordem.forEach(function(id, k){
+      var g = document.getElementById(id);
+      g.classList.toggle('on', k === melhor);
+      g.classList.toggle('done', k < melhor);
+    });
+  }
+  function pedir(){ if (!pedido){ pedido = true; requestAnimationFrame(medir); } }
+  addEventListener('scroll', pedir, {passive:true});
+  addEventListener('resize', pedir);
+  medir();
+  window.__medirBolhas = medir;      /* pra conseguir testar sem depender de evento */
+})();
+</script>
+</body></html>

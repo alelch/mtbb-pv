@@ -1,0 +1,30 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace;white-space:pre">
+<iframe id="f" src="index.html?v=80" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe><div id="o"></div>
+<script>document.getElementById('f').onload=function(){setTimeout(function(){
+var d=this.contentDocument,w=this.contentWindow,L=[];
+var st=d.createElement('style'); st.textContent='html{scroll-behavior:auto!important}*{transition:none!important}';
+d.head.appendChild(st);
+var bb=d.querySelector('#bolhas .bb'), sec=d.querySelector('#bolhas');
+var svg=d.querySelector('.bb-palco svg'), palco=d.querySelector('.bb-palco');
+var rs=sec.getBoundingClientRect(), rb=bb.getBoundingClientRect();
+L.push('secao #bolhas: topo='+Math.round(rs.top+w.scrollY)+' base='+Math.round(rs.bottom+w.scrollY));
+L.push('grade .bb:    topo='+Math.round(rb.top+w.scrollY)+' base='+Math.round(rb.bottom+w.scrollY));
+L.push('palco (caixa): altura='+Math.round(palco.getBoundingClientRect().height));
+L.push('svg (desenho): altura='+Math.round(svg.getBoundingClientRect().height));
+L.push('   >> transborda '+Math.round((svg.getBoundingClientRect().height-palco.getBoundingClientRect().height)/2)+'px pra cada lado');
+L.push('');
+// nos extremos do grude, onde o desenho pode invadir
+var passos=[].slice.call(d.querySelectorAll('#bolhas .bb-passo'));
+[[passos[0],'primeiro'],[passos[2],'ultimo']].forEach(function(par){
+  var p=par[0], c=p.getBoundingClientRect().top+w.scrollY+p.getBoundingClientRect().height/2;
+  [c-415-260, c-415, c-415+260].forEach(function(y){
+    w.scrollTo(0,Math.round(y)); w.__bolhas&&w.__bolhas();
+    var r=svg.getBoundingClientRect();
+    var topoSec=sec.getBoundingClientRect().top, baseSec=sec.getBoundingClientRect().bottom;
+    var acima=Math.round(topoSec-r.top), abaixo=Math.round(r.bottom-baseSec);
+    L.push('y='+Math.round(y)+' ('+par[1]+')  desenho '+Math.round(r.top)+'..'+Math.round(r.bottom)+
+      '   sai por CIMA da secao: '+(acima>0?acima+'px':'nao')+
+      '   por BAIXO: '+(abaixo>0?abaixo+'px':'nao'));
+  });
+});
+document.getElementById('o').textContent=L.join('\n');document.title='pronto';}.bind(this),1500)};</script></body>

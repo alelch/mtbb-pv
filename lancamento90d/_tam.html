@@ -1,0 +1,25 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html" style="width:1280px"></iframe><div id=o>...</div>
+<script>
+var f=document.getElementById('f'),L=[],W=[1280,390],i=0;
+f.onload=function(){var d=f.contentDocument;
+setTimeout(function(){(function passo(){
+  if(i>=W.length){document.getElementById('o').textContent=L.join('\n');return}
+  f.style.width=W[i]+'px';
+  setTimeout(function(){
+    L.push('=== viewport '+W[i]+'px ===');
+    var vw=d.documentElement.clientWidth;
+    [].forEach.call(d.querySelectorAll('a.btn,button.btn'),function(e){
+      var r=e.getBoundingClientRect(), c=getComputedStyle(e);
+      var estoura = r.width>vw-8 ? '  ESTOURA' : '';
+      L.push('  '+Math.round(r.width)+' x '+Math.round(r.height)+'px'+
+        '  fonte '+Math.round(parseFloat(c.fontSize))+'px'+
+        (r.height>=44?'  toque ok':'  TOQUE PEQUENO')+estoura+
+        '   "'+e.textContent.trim().slice(0,28)+'"');
+    });
+    i++;passo();
+  },350);
+})();},2600)};
+</script>

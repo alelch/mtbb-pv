@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:13px monospace;white-space:pre">
+<iframe id="f" src="index.html?v=110" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe><div id="o"></div>
+<script>document.getElementById('f').onload=function(){setTimeout(function(){
+var d=this.contentDocument,w=this.contentWindow,L=[];
+var st=d.createElement('style'); st.textContent='html{scroll-behavior:auto!important}*{transition:none!important}';
+d.head.appendChild(st);
+var sec=d.querySelector('.virada'), top=Math.round(sec.getBoundingClientRect().top+w.scrollY);
+L.push('secao verde y='+top);
+[-780,-620,-480,-380,-300,-200,0].forEach(function(off){
+  w.scrollTo(0,top+off); w.__conta&&w.__conta();
+  var pct=d.getElementById('pct'), cab=d.getElementById('cabeca');
+  var w1=d.querySelector('#resto .w');
+  L.push('y='+(top+off)+'  numero='+pct.textContent.padStart(5)+
+    '  laranja? '+(cab.classList.contains('chegou')?'SIM':'nao')+
+    '  resto visivel? '+(getComputedStyle(w1).opacity>0.5?'SIM':'nao')+
+    '  corpo do numero='+getComputedStyle(pct).fontSize);
+});
+document.getElementById('o').textContent=L.join('\n');document.title='pronto';}.bind(this),1500)};</script></body>

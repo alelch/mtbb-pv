@@ -635,10 +635,15 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
    MTBB, que e' o que faz aquela pagina ter voz. La' a tinta e' amarelo #FAAB00;
    aqui e' o laranja unico da 90D, com a variante .claro pra fundo laranja.
    REGRA: grifo marca PROMESSA, risco marca AMEAÇA, no maximo um por seção. */
+/* Fontes decorativas com subset EXATO dos glifos que a página usa:
+   Caveat 74,9 -> 11,8 KB · Fraunces 22,9 -> 5,3 KB. Juntas, -80,7 KB.
+   ⚠️ Se a copy do .mao ou do .serifa ganhar uma letra nova, ela cai no
+   fallback e aparece torta na hora. Pra regerar: python3 tools/subset-fontes.py
+   (os arquivos completos continuam em assets/fonts/, são a fonte da verdade). */
 @font-face{font-family:'Caveat';font-style:normal;font-weight:600;font-display:swap;
-  src:url(assets/fonts/caveat.woff2) format('woff2')}
+  src:url(assets/fonts/caveat-sub.woff2) format('woff2')}
 @font-face{font-family:'Fraunces';font-style:italic;font-weight:500;font-display:swap;
-  src:url(assets/fonts/fraunces-italic-500.woff2) format('woff2')}
+  src:url(assets/fonts/fraunces-italic-500-sub.woff2) format('woff2')}
 .grifo{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20fill%3D%27%23FC783C%27%20fill-opacity%3D%270.42%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .78em;background-position:0 .42em;
   -webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 4px}
 .grifo.claro{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20fill%3D%27%23ffffff%27%20fill-opacity%3D%270.32%27%2F%3E%3C%2Fsvg%3E")}
@@ -703,8 +708,8 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .dany{background:var(--ink);color:#EFEDEA}
 .dany .wrap{padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)}
 .bio{display:grid;grid-template-columns:.68fr 1fr;gap:clamp(28px,4vw,46px);align-items:center}
-.bio > img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 16%;
-  border-radius:14px;display:block}
+.bio > img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;
+  object-position:center 16%;border-radius:14px;display:block}
 .dany .eyebrow{color:var(--accent)}
 /* a citacao e' a manchete da secao, entao ela toma o lugar que o h2 tinha */
 .dany .fala{margin:8px 0 0;color:#fff;letter-spacing:-.01em;
@@ -960,26 +965,26 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     <p>Como visto em</p>
     <div class="press-pista">
       <div class="press-trilho">
-        <img src="assets/imprensa/logo-cbn.webp" alt="CBN" loading="lazy" style="--h:38">
-        <img src="assets/imprensa/logo-g1.webp" alt="G1" loading="lazy" style="--h:50">
-        <img src="assets/imprensa/logo-vida-simples.webp" alt="Vida Simples" loading="lazy" style="--h:30">
-        <img src="assets/imprensa/logo-band.webp" alt="Band" loading="lazy" style="--h:50">
-        <img src="assets/imprensa/logo-publishnews.webp" alt="PublishNews" loading="lazy" style="--h:31">
-        <img src="assets/imprensa/logo-band-news.webp" alt="Band News" loading="lazy" style="--h:40">
-        <img src="assets/imprensa/logo-record-tv.webp" alt="Record TV" loading="lazy" style="--h:50">
-        <img src="assets/imprensa/logo-radio-senado.webp" alt="Rádio Senado" loading="lazy" style="--h:31">
-        <img src="assets/imprensa/logo-tv-cultura.webp" alt="TV Cultura" loading="lazy" style="--h:50">
-        <img src="assets/imprensa/logo-valor-economico.webp" alt="Valor Econômico" loading="lazy" style="--h:35">
-        <img src="assets/imprensa/logo-cbn.webp" alt="" loading="lazy" style="--h:38" aria-hidden="true">
-        <img src="assets/imprensa/logo-g1.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true">
-        <img src="assets/imprensa/logo-vida-simples.webp" alt="" loading="lazy" style="--h:30" aria-hidden="true">
-        <img src="assets/imprensa/logo-band.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true">
-        <img src="assets/imprensa/logo-publishnews.webp" alt="" loading="lazy" style="--h:31" aria-hidden="true">
-        <img src="assets/imprensa/logo-band-news.webp" alt="" loading="lazy" style="--h:40" aria-hidden="true">
-        <img src="assets/imprensa/logo-record-tv.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true">
-        <img src="assets/imprensa/logo-radio-senado.webp" alt="" loading="lazy" style="--h:31" aria-hidden="true">
-        <img src="assets/imprensa/logo-tv-cultura.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true">
-        <img src="assets/imprensa/logo-valor-economico.webp" alt="" loading="lazy" style="--h:35" aria-hidden="true">
+        <img src="assets/imprensa/logo-cbn.webp" alt="CBN" style="--h:38" width="241" height="100">
+        <img src="assets/imprensa/logo-g1.webp" alt="G1" style="--h:50" width="120" height="120">
+        <img src="assets/imprensa/logo-vida-simples.webp" alt="Vida Simples" style="--h:30" width="604" height="120">
+        <img src="assets/imprensa/logo-band.webp" alt="Band" style="--h:50" width="120" height="102">
+        <img src="assets/imprensa/logo-publishnews.webp" alt="PublishNews" style="--h:31" width="184" height="52">
+        <img src="assets/imprensa/logo-band-news.webp" alt="Band News" style="--h:40" width="251" height="120">
+        <img src="assets/imprensa/logo-record-tv.webp" alt="Record TV" style="--h:50" width="112" height="113">
+        <img src="assets/imprensa/logo-radio-senado.webp" alt="Rádio Senado" style="--h:31" width="440" height="120">
+        <img src="assets/imprensa/logo-tv-cultura.webp" alt="TV Cultura" style="--h:50" width="184" height="160">
+        <img src="assets/imprensa/logo-valor-economico.webp" alt="Valor Econômico" style="--h:35" width="346" height="120">
+        <img src="assets/imprensa/logo-cbn.webp" alt="" loading="lazy" style="--h:38" aria-hidden="true" width="241" height="100">
+        <img src="assets/imprensa/logo-g1.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true" width="120" height="120">
+        <img src="assets/imprensa/logo-vida-simples.webp" alt="" loading="lazy" style="--h:30" aria-hidden="true" width="604" height="120">
+        <img src="assets/imprensa/logo-band.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true" width="120" height="102">
+        <img src="assets/imprensa/logo-publishnews.webp" alt="" loading="lazy" style="--h:31" aria-hidden="true" width="184" height="52">
+        <img src="assets/imprensa/logo-band-news.webp" alt="" loading="lazy" style="--h:40" aria-hidden="true" width="251" height="120">
+        <img src="assets/imprensa/logo-record-tv.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true" width="112" height="113">
+        <img src="assets/imprensa/logo-radio-senado.webp" alt="" loading="lazy" style="--h:31" aria-hidden="true" width="440" height="120">
+        <img src="assets/imprensa/logo-tv-cultura.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true" width="184" height="160">
+        <img src="assets/imprensa/logo-valor-economico.webp" alt="" loading="lazy" style="--h:35" aria-hidden="true" width="346" height="120">
       </div>
     </div>
   </div>
@@ -1174,52 +1179,52 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
        de tela ouve os 8 nomes e os 3 casos duas vezes -->
   <div class="marquee prova">
     <div class="mrow">
-        <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de Aurê Aguiar" loading="lazy">
+        <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de Aurê Aguiar" loading="lazy" width="540" height="675">
         <div class="mc">
           <div class="q">Nunca tinha lançado nada</div>
           <div class="r">Quase 600 livros<br>na pré-venda</div>
           <p>Ingrid, que veio dos artigos científicos</p>
         </div>
-        <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de Candice Pascoal" loading="lazy">
-        <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de Cibele Laurentino" loading="lazy">
+        <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de Candice Pascoal" loading="lazy" width="540" height="675">
+        <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de Cibele Laurentino" loading="lazy" width="540" height="675">
         <div class="mc">
           <div class="q">Tinha audiência e não vendia</div>
           <div class="r">Vai aos correios<br>toda semana</div>
           <p>Bernardo, que tinha vinte mil seguidores e não vendia</p>
         </div>
-        <img src="assets/depo-cica-D691szGu.webp" alt="Depoimento de Ciça Rocha" loading="lazy">
-        <img src="assets/depo-emilia-CArLNDco.webp" alt="Depoimento de Emilia Nuñes" loading="lazy">
-        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="Depoimento de Lelo Apovian" loading="lazy">
+        <img src="assets/depo-cica-D691szGu.webp" alt="Depoimento de Ciça Rocha" loading="lazy" width="540" height="675">
+        <img src="assets/depo-emilia-CArLNDco.webp" alt="Depoimento de Emilia Nuñes" loading="lazy" width="540" height="675">
+        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="Depoimento de Lelo Apovian" loading="lazy" width="540" height="675">
         <div class="mc">
           <div class="q">O livro já tinha parado</div>
           <div class="r">Destaque de vendas<br>na Bienal do Rio</div>
           <p>Tom, que pegou um livro que já tinha parado</p>
         </div>
-        <img src="assets/depo-profinho-Bom5B61T.webp" alt="Depoimento de Profinho" loading="lazy">
-        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="Depoimento de Tonia Casarin" loading="lazy">
-        <img src="assets/depo-aure-CDA-iL-b.webp" alt="" aria-hidden="true" loading="lazy">
+        <img src="assets/depo-profinho-Bom5B61T.webp" alt="Depoimento de Profinho" loading="lazy" width="540" height="675">
+        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="Depoimento de Tonia Casarin" loading="lazy" width="540" height="675">
+        <img src="assets/depo-aure-CDA-iL-b.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
         <div class="mc" aria-hidden="true">
           <div class="q">Nunca tinha lançado nada</div>
           <div class="r">Quase 600 livros<br>na pré-venda</div>
           <p>Ingrid, que veio dos artigos científicos</p>
         </div>
-        <img src="assets/depo-candice-C67mx_NI.webp" alt="" aria-hidden="true" loading="lazy">
-        <img src="assets/depo-cibele-Du9iudjC.webp" alt="" aria-hidden="true" loading="lazy">
+        <img src="assets/depo-candice-C67mx_NI.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <img src="assets/depo-cibele-Du9iudjC.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
         <div class="mc" aria-hidden="true">
           <div class="q">Tinha audiência e não vendia</div>
           <div class="r">Vai aos correios<br>toda semana</div>
           <p>Bernardo, que tinha vinte mil seguidores e não vendia</p>
         </div>
-        <img src="assets/depo-cica-D691szGu.webp" alt="" aria-hidden="true" loading="lazy">
-        <img src="assets/depo-emilia-CArLNDco.webp" alt="" aria-hidden="true" loading="lazy">
-        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="" aria-hidden="true" loading="lazy">
+        <img src="assets/depo-cica-D691szGu.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <img src="assets/depo-emilia-CArLNDco.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
         <div class="mc" aria-hidden="true">
           <div class="q">O livro já tinha parado</div>
           <div class="r">Destaque de vendas<br>na Bienal do Rio</div>
           <p>Tom, que pegou um livro que já tinha parado</p>
         </div>
-        <img src="assets/depo-profinho-Bom5B61T.webp" alt="" aria-hidden="true" loading="lazy">
-        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="" aria-hidden="true" loading="lazy">
+        <img src="assets/depo-profinho-Bom5B61T.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
     </div>
   </div>
   <div class="wrap">
@@ -1251,7 +1256,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <section class="dany" data-etapa="4">
   <div class="wrap">
     <div class="bio rv">
-      <img src="assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa" loading="lazy">
+      <img src="assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa" loading="lazy" width="800" height="1000">
       <div class="txt">
         <p class="eyebrow">Quem está do outro lado</p>
         <p class="fala serifa">“Dany, queria ter te conhecido antes.”</p>

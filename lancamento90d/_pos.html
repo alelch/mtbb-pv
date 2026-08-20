@@ -1,0 +1,19 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,L=[];
+setTimeout(function(){
+  var H=d.documentElement.scrollHeight;
+  L.push('altura da página = '+H+'   meio = '+Math.round(H/2));
+  L.push('');
+  [].forEach.call(d.querySelectorAll('body > section, body > footer'),function(s){
+    var r=s.getBoundingClientRect(), y=Math.round(r.top+w.scrollY);
+    var eb=s.querySelector('.eyebrow'), h=s.querySelector('h2');
+    var nome=(eb?eb.textContent.trim():'')||(h?h.textContent.trim():s.className||'?');
+    L.push('topo '+String(y).padStart(6)+'  ('+String(Math.round(y/H*100)).padStart(3)+'% da página)  '+nome.slice(0,34));
+  });
+  document.getElementById('o').textContent=L.join('\n');
+},2600)};
+</script>

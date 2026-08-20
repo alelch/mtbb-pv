@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Variações de head e 2ª seção · Lançamento 90D</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+/* ============================================================
+   10 composições para a head + 2ª seção.
+   O player REAL é 9:16 (medido no VTurb da Imersão: 400 x 711).
+   Todas partem dessa forma, não de um 16:9.
+   ============================================================ */
+:root{
+  --bg:#F8F8F8;--card:#FFF;--ink:#1A1A1A;--soft:#555;--mute:#999;--border:#EEE;
+  --accent:#FAAB00;--accent-ink:#8A5A00;--accent-soft:#FFF4D6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#E4E4E4;color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.6}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:'Space Grotesk','DM Sans',sans-serif;margin:0;letter-spacing:-.03em;line-height:1.06}
+p{margin:0 0 1em}
+.wrap{max-width:1120px;margin:0 auto;padding:0 44px}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#1A1A1A;
+  text-decoration:none;font-weight:700;font-family:'Space Grotesk',sans-serif;padding:15px 28px;border-radius:999px;
+  font-size:.96rem;line-height:1;box-shadow:0 10px 24px -14px rgba(250,171,0,.9)}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent-ink);margin:0 0 14px}
+.brand{font-family:'Space Grotesk',sans-serif;font-size:.64rem;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--mute);margin:0 0 18px}
+.sub{color:var(--soft);font-size:1rem;max-width:44ch}
+
+/* O PLAYER: 9:16, largura travada como no VTurb real */
+.p{width:100%;max-width:380px;aspect-ratio:9/16;background:#0E0E0E;border-radius:16px;overflow:hidden;
+   box-shadow:0 24px 50px -26px rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;
+   color:#6E6E6E;font-size:.76rem;text-align:center;padding:16px;flex:0 0 auto}
+.p vturb-smartplayer{display:block;width:100%}
+
+.lab{max-width:1120px;margin:52px auto 0;padding:0 44px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.lab b{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;color:#B4B4B4;letter-spacing:-.04em}
+.lab span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.02rem}
+.lab i{color:#7E7E7E;font-style:normal;font-size:.88rem}
+.v{max-width:1120px;margin:14px auto 0;background:var(--bg);border-radius:16px;overflow:hidden;
+   box-shadow:0 24px 50px -34px rgba(0,0,0,.5)}
+.v .sec2{padding:52px 0}
+
+/* ══ 01 · DUAS COLUNAS JUSTAS ══ */
+.v1 .hero{background:var(--card);padding:56px 0}
+.v1 .g{display:flex;gap:52px;align-items:center}
+.v1 h1{font-size:2.5rem;max-width:13ch}
+.v1 h1 em{font-style:normal;color:var(--accent-ink)}
+.v1 .list{list-style:none;padding:0;margin:24px 0 26px;display:grid;gap:10px;font-size:.95rem;color:var(--soft)}
+.v1 .list li{padding-left:20px;position:relative}
+.v1 .list li:before{content:"";position:absolute;left:0;top:.6em;width:8px;height:2px;background:var(--accent)}
+.v1 .sec2{background:var(--bg);border-top:1px solid var(--border)}
+.v1 .sec2 h2{font-size:1.9rem;max-width:20ch}
+
+/* ══ 02 · PLAYER TRANSBORDANDO ══ */
+.v2 .hero{background:var(--ink);padding:52px 0 0;color:#EDEAE4}
+.v2 .brand{color:#7A7A7A}
+.v2 h1{color:#fff;font-size:2.4rem;max-width:15ch}
+.v2 h1 em{font-style:normal;color:var(--accent)}
+.v2 .g{display:flex;gap:48px;align-items:flex-end}
+.v2 .col{padding-bottom:52px}
+.v2 .p{margin-bottom:-120px;position:relative;z-index:3}
+.v2 .sub{color:#B9B5AE}
+.v2 .sec2{background:var(--card);padding-top:150px}
+.v2 .sec2 h2{font-size:1.9rem;max-width:18ch}
+
+/* ══ 03 · TÍTULO ATRÁS DO PLAYER ══ */
+.v3 .hero{background:var(--card);padding:44px 0;position:relative;overflow:hidden}
+.v3 .bg{position:absolute;left:44px;right:0;top:78px;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:7.4rem;line-height:.86;letter-spacing:-.06em;color:#F0F0F0;pointer-events:none;user-select:none}
+.v3 .g{position:relative;display:flex;gap:44px;align-items:center}
+.v3 h1{font-size:2.1rem;max-width:14ch}
+.v3 h1 em{font-style:normal;color:var(--accent-ink)}
+.v3 .sec2{background:var(--ink);color:#EDEAE4}
+.v3 .sec2 h2{color:#fff;font-size:1.9rem;max-width:19ch}
+.v3 .sec2 p{color:#B9B5AE;margin-top:14px}
+
+/* ══ 04 · FAIXA COM A DANY ══ */
+.v4 .hero{background:var(--card);padding:0}
+.v4 .faixa{height:230px;background:#111 url(assets/dany-bio-B0X57zHq.webp) center 22%/cover}
+.v4 .g{display:flex;gap:46px;align-items:flex-start;margin-top:-140px;padding-bottom:52px;position:relative}
+.v4 .col{padding-top:160px}
+.v4 h1{font-size:2.3rem;max-width:14ch}
+.v4 h1 em{font-style:normal;color:var(--accent-ink)}
+.v4 .sec2{background:var(--bg);border-top:1px solid var(--border)}
+.v4 .sec2 h2{font-size:1.85rem;max-width:20ch}
+
+/* ══ 05 · SEM PLAYER NA DOBRA ══ */
+.v5 .hero{background:var(--card);padding:74px 0 62px;text-align:center}
+.v5 h1{font-size:3rem;max-width:16ch;margin:0 auto}
+.v5 h1 em{font-style:normal;color:var(--accent-ink)}
+.v5 .sub{margin:20px auto 26px;text-align:center}
+.v5 .sec2{background:var(--ink);color:#EDEAE4;padding:52px 0}
+.v5 .sec2 .g{display:flex;gap:48px;align-items:center}
+.v5 .sec2 h2{color:#fff;font-size:1.8rem;max-width:16ch}
+.v5 .sec2 p{color:#B9B5AE}
+.v5 .sec2 .eyebrow{color:var(--accent)}
+
+/* ══ 06 · MARGEM DE REVISTA ══ */
+.v6 .hero{background:var(--card);padding:52px 0}
+.v6 .g{display:flex;gap:44px;align-items:flex-start}
+.v6 .corpo{column-count:2;column-gap:34px;margin-top:22px}
+.v6 .corpo p{font-size:.92rem;color:var(--soft);break-inside:avoid}
+.v6 h1{font-size:2.6rem;max-width:16ch;margin-bottom:6px}
+.v6 h1 em{font-style:italic;font-family:Georgia,serif;font-weight:400;color:var(--accent-ink)}
+.v6 .p{max-width:290px}
+.v6 .fig{font-size:.72rem;color:var(--mute);margin-top:10px;max-width:290px;line-height:1.4}
+.v6 .sec2{background:var(--card);border-top:3px solid var(--ink)}
+.v6 .sec2 h2{font-size:1.8rem;max-width:22ch}
+
+/* ══ 07 · CARD ALTO ESCURO ══ */
+.v7 .hero{background:var(--bg);padding:36px 0}
+.v7 .card{background:var(--ink);border-radius:24px;padding:40px;color:#EDEAE4;overflow:hidden;position:relative}
+.v7 .card:before{content:"";position:absolute;inset:-50% -20% auto 30%;height:90%;
+  background:radial-gradient(50% 60% at 50% 0,rgba(250,171,0,.2),transparent 70%)}
+.v7 .g{display:flex;gap:44px;align-items:center;position:relative}
+.v7 .brand{color:#7A7A7A}
+.v7 h1{color:#fff;font-size:2.3rem;max-width:14ch}
+.v7 h1 em{font-style:normal;color:var(--accent)}
+.v7 .sub{color:#B9B5AE}
+.v7 .sec2{background:var(--bg)}
+.v7 .sec2 h2{font-size:1.85rem;max-width:20ch}
+
+/* ══ 08 · PLAYER + OS TRÊS ATOS ══ */
+.v8 .hero{background:var(--card);padding:52px 0}
+.v8 .g{display:flex;gap:48px;align-items:center}
+.v8 h1{font-size:2.1rem;max-width:15ch;margin-bottom:26px}
+.v8 h1 em{font-style:normal;color:var(--accent-ink)}
+.v8 .ato{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--border)}
+.v8 .ato i{flex:0 0 auto;width:32px;height:32px;border-radius:50%;border:2px solid var(--accent);
+  font-style:normal;font-family:Georgia,serif;font-weight:700;color:var(--accent-ink);
+  display:flex;align-items:center;justify-content:center;font-size:.82rem}
+.v8 .ato b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1rem}
+.v8 .ato span{font-size:.86rem;color:var(--soft)}
+.v8 .sec2{background:var(--bg);border-top:1px solid var(--border)}
+.v8 .sec2 h2{font-size:1.85rem;max-width:20ch}
+
+/* ══ 09 · LIVRO ABERTO ══ */
+.v9 .hero{background:#EFEBE3;padding:44px 0}
+.v9 .book{display:flex;background:var(--card);border-radius:6px;overflow:hidden;
+  box-shadow:0 30px 60px -34px rgba(0,0,0,.6);position:relative}
+.v9 .book:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:26px;transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.09),transparent);pointer-events:none;z-index:2}
+.v9 .pg{flex:1;padding:44px 40px}
+.v9 .pg.r{display:flex;align-items:center;justify-content:center;background:#FAF8F4}
+.v9 h1{font-family:Georgia,serif;font-weight:400;font-size:2.1rem;line-height:1.2;max-width:15ch}
+.v9 h1 em{font-style:italic;color:var(--accent-ink)}
+.v9 .sec2{background:#EFEBE3}
+.v9 .sec2 h2{font-family:Georgia,serif;font-weight:400;font-size:1.8rem;max-width:22ch}
+
+/* ══ 10 · VSL PURA, CENTRADA ══ */
+.v10 .hero{background:var(--ink);padding:48px 0 52px;color:#EDEAE4;text-align:center}
+.v10 .brand{color:#7A7A7A}
+.v10 h1{color:#fff;font-size:2.2rem;max-width:19ch;margin:0 auto 22px}
+.v10 h1 em{font-style:normal;color:var(--accent)}
+.v10 .p{max-width:420px;margin:0 auto 26px}
+.v10 .sub{color:#B9B5AE;margin:0 auto 22px;text-align:center;max-width:40ch}
+.v10 .sec2{background:var(--card);text-align:center}
+.v10 .sec2 h2{font-size:1.85rem;max-width:20ch;margin:0 auto}
+
+@media(max-width:900px){
+  .wrap{padding:0 20px}
+  .v1 .g,.v2 .g,.v3 .g,.v4 .g,.v5 .sec2 .g,.v6 .g,.v7 .g,.v8 .g{display:block}
+  .v6 .corpo{column-count:1}
+  .v9 .book{display:block}
+  .p{margin:26px auto 0}
+  .v2 .p{margin-bottom:-80px}.v2 .sec2{padding-top:110px}
+  .v4 .g{margin-top:-90px}.v4 .col{padding-top:110px}
+  .v3 .bg{font-size:3.6rem;top:56px}
+}
+</style>
+</head>
+<body>
+
+<div class="lab" style="margin-top:34px"><b>—</b><span>10 composições, agora com o player 9:16 de verdade</span><i>medido no VTurb da Imersão: 400 × 711</i></div>
+
+<div class="lab"><b>01</b><span>Duas colunas justas</span><i>o player alto sustenta uma lista longa ao lado. Denso e direto.</i></div>
+<div class="v v1"><div class="hero"><div class="wrap"><div class="g">
+  <div>
+    <p class="eyebrow">Lançamento 90D</p>
+    <h1>Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+    <ul class="list">
+      <li>O cronograma dos 90 dias, com as suas datas</li>
+      <li>Os seus primeiros cem compradores mapeados</li>
+      <li>O plano de pré-venda e o roteiro do pós</li>
+      <li>Doze meses de acesso, garantia de sete dias</li>
+    </ul>
+    <a class="btn" href="#">Quero o plano de 90 dias</a>
+  </div>
+  <div class="p" data-vsl>VSL 9:16</div>
+</div></div></div>
+<div class="sec2"><div class="wrap"><h2>Dois mil livros por mês. Quase todos somem em quinze dias.</h2></div></div></div>
+
+<div class="lab"><b>02</b><span>Player transbordando</span><i>o vídeo atravessa a emenda entre a head escura e a seção clara.</i></div>
+<div class="v v2"><div class="hero"><div class="wrap"><div class="g">
+  <div class="col">
+    <p class="brand">The Book Business</p>
+    <h1>Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+    <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo.</p>
+    <a class="btn" href="#">Quero o plano de 90 dias</a>
+  </div>
+  <div class="p" data-vsl>VSL 9:16</div>
+</div></div></div>
+<div class="sec2"><div class="wrap"><h2>Uma semana de barulho. Onze meses de silêncio.</h2></div></div></div>
+
+<div class="lab"><b>03</b><span>Título atrás do player</span><i>tipo gigante como camada de fundo, o vídeo recorta ele.</i></div>
+<div class="v v3"><div class="hero">
+  <div class="bg">LANCE<br>VENDENDO</div>
+  <div class="wrap"><div class="g">
+    <div>
+      <p class="eyebrow">Lançamento 90D</p>
+      <h1>Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+      <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo.</p>
+      <a class="btn" href="#">Quero o plano de 90 dias</a>
+    </div>
+    <div class="p" data-vsl>VSL 9:16</div>
+  </div></div>
+</div>
+<div class="sec2"><div class="wrap"><h2>É o lançamento que decide, não a escrita.</h2>
+<p>Quem vendia não era quem escrevia melhor. Era quem lançava melhor.</p></div></div></div>
+
+<div class="lab"><b>04</b><span>Faixa com a Dany</span><i>foto sangrando no topo, o player sobe por cima da emenda.</i></div>
+<div class="v v4"><div class="hero">
+  <div class="faixa"></div>
+  <div class="wrap"><div class="g">
+    <div class="col">
+      <p class="eyebrow">Lançamento 90D</p>
+      <h1>Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+      <p class="sub">Com quem esteve à frente de mais de 800 lançamentos e 10 milhões de livros vendidos.</p>
+      <a class="btn" href="#">Quero o plano de 90 dias</a>
+    </div>
+    <div class="p" data-vsl>VSL 9:16</div>
+  </div></div>
+</div>
+<div class="sec2"><div class="wrap"><h2>Você pode passar anos escrevendo um livro. Mas é o lançamento que define se ele será lido, ou esquecido.</h2></div></div></div>
+
+<div class="lab"><b>05</b><span>Sem player na dobra</span><i>o texto abre sozinho e grande. O vídeo só aparece na segunda seção.</i></div>
+<div class="v v5"><div class="hero"><div class="wrap">
+  <p class="eyebrow">Lançamento 90D</p>
+  <h1>Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+  <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo, mesmo sem editora ou milhares de seguidores.</p>
+  <a class="btn" href="#">Quero o plano de 90 dias</a>
+</div></div>
+<div class="sec2"><div class="wrap"><div class="g">
+  <div class="p" data-vsl>VSL 9:16</div>
+  <div>
+    <p class="eyebrow">Assista antes de decidir</p>
+    <h2>Em sete minutos eu te mostro o plano inteiro.</h2>
+    <p>O que fazer em cada um dos três meses, em que ordem, e por que quase todo livro morre em quinze dias.</p>
+  </div>
+</div></div></div></div>
+
+<div class="lab"><b>06</b><span>Margem de revista</span><i>o vídeo é figura lateral e o texto é o corpo, em duas colunas.</i></div>
+<div class="v v6"><div class="hero"><div class="wrap"><div class="g">
+  <div>
+    <div class="p" data-vsl>VSL 9:16</div>
+    <p class="fig">Dany Sakugawa explica os três atos de um lançamento que vende.</p>
+  </div>
+  <div>
+    <p class="eyebrow">Lançamento 90D</p>
+    <h1>Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+    <div class="corpo">
+      <p>São cerca de dois mil lançamentos por mês no Brasil. Quase todos seguem o mesmo roteiro: o livro sai, faz uma semana de barulho entre amigos e família, e some em quinze dias.</p>
+      <p>Não é por falta de qualidade. É que nesse volume, livro sem estratégia de lançamento desaparece na pilha.</p>
+    </div>
+    <p style="margin-top:20px"><a class="btn" href="#">Quero o plano de 90 dias</a></p>
+  </div>
+</div></div></div>
+<div class="sec2"><div class="wrap"><h2>Uma semana de barulho. Onze meses de silêncio.</h2></div></div></div>
+
+<div class="lab"><b>07</b><span>Card alto escuro</span><i>a dobra inteira é um card sobre a página clara, player dentro.</i></div>
+<div class="v v7"><div class="hero"><div class="wrap"><div class="card"><div class="g">
+  <div>
+    <p class="brand">The Book Business</p>
+    <h1>Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+    <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo.</p>
+    <a class="btn" href="#">Quero o plano de 90 dias</a>
+  </div>
+  <div class="p" data-vsl>VSL 9:16</div>
+</div></div></div></div>
+<div class="sec2"><div class="wrap"><h2>É exatamente nessa hora que a maioria dos autores improvisa.</h2></div></div></div>
+
+<div class="lab"><b>08</b><span>Player + os três atos</span><i>o método ocupa o lugar do texto de venda. Vende o sistema na dobra.</i></div>
+<div class="v v8"><div class="hero"><div class="wrap"><div class="g">
+  <div class="p" data-vsl>VSL 9:16</div>
+  <div style="flex:1">
+    <p class="eyebrow">Lançamento 90D</p>
+    <h1>Lançar não é um dia. <em>É um sistema com três atos.</em></h1>
+    <div class="ato"><i>I</i><div><b>Desejo</b><span>Você deixa de ser invisível</span></div></div>
+    <div class="ato"><i>II</i><div><b>Antecipação</b><span>Você passa a ser esperado</span></div></div>
+    <div class="ato"><i>III</i><div><b>Venda</b><span>Você é lido</span></div></div>
+    <p style="margin-top:24px"><a class="btn" href="#">Quero o plano de 90 dias</a></p>
+  </div>
+</div></div></div>
+<div class="sec2"><div class="wrap"><h2>De invisível a lido. Em noventa dias.</h2></div></div></div>
+
+<div class="lab"><b>09</b><span>Livro aberto</span><i>duas páginas com vinco no meio. O vídeo é a página da direita.</i></div>
+<div class="v v9"><div class="hero"><div class="wrap"><div class="book">
+  <div class="pg">
+    <p class="eyebrow">Lançamento 90D</p>
+    <h1>Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+    <p class="sub" style="margin-top:18px">O plano de 90 dias que faz o seu livro entrar no mercado vendendo.</p>
+    <a class="btn" href="#">Quero o plano de 90 dias</a>
+  </div>
+  <div class="pg r"><div class="p" data-vsl>VSL 9:16</div></div>
+</div></div></div>
+<div class="sec2"><div class="wrap"><h2>Você pode passar anos escrevendo um livro. Mas é o lançamento que define se ele será lido, ou esquecido.</h2></div></div></div>
+
+<div class="lab"><b>10</b><span>VSL pura, centrada</span><i>coluna estreita, vídeo grande no meio. O padrão clássico de VSL.</i></div>
+<div class="v v10"><div class="hero"><div class="wrap">
+  <p class="brand">The Book Business</p>
+  <h1>Crie desejo. Gere antecipação. <em>Lance vendendo desde o primeiro dia.</em></h1>
+  <div class="p" data-vsl>VSL 9:16</div>
+  <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo.</p>
+  <a class="btn" href="#">Quero o plano de 90 dias</a>
+</div></div>
+<div class="sec2"><div class="wrap"><h2>Dois mil livros por mês. Quase todos somem em quinze dias.</h2></div></div></div>
+
+<div style="height:70px"></div>
+
+<script>
+/* ?v=N mostra só uma variação. ?nop=1 desliga o player (folha de contato). */
+(function(){
+  var q=new URLSearchParams(location.search), n=q.get('v');
+  if(n){
+    var alvo=document.querySelector('.v'+n);
+    if(alvo){
+      document.querySelectorAll('.v,.lab').forEach(function(el){el.style.display='none'});
+      alvo.style.display='';
+      var lab=alvo.previousElementSibling;
+      if(lab&&lab.classList.contains('lab'))lab.style.display='';
+    }
+  }
+  if(q.get('nop'))return;
+
+  /* TESTE DE LAYOUT: VSL da Imersão, só pra avaliar o desenho com player de verdade.
+     NÃO vai pra produção do Lançamento 90D, o vídeo é de outro produto. */
+  var SRC='https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6a5f7822551c549be7ce3ea7/v4/player.js';
+  var ID='vid-6a5f7822551c549be7ce3ea7';
+  document.querySelectorAll('[data-vsl]').forEach(function(el,i){
+    el.textContent='';
+    el.innerHTML='<vturb-smartplayer id="'+ID+(i?'-'+i:'')+'" style="display:block;width:100%"></vturb-smartplayer>';
+  });
+  var sc=document.createElement('script');sc.src=SRC;sc.async=true;document.head.appendChild(sc);
+})();
+</script>
+</body>
+</html>

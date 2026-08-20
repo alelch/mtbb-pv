@@ -1,0 +1,38 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+function lin(c){c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function L(r,g,b){return .2126*lin(r)+.7152*lin(g)+.0722*lin(b)}
+function rgb(s){var m=s.match(/[\d.]+/g);return m?m.map(Number):[0,0,0]}
+function razao(f,b){var a=L(f[0],f[1],f[2]),c=L(b[0],b[1],b[2]);return ((Math.max(a,c)+.05)/(Math.min(a,c)+.05)).toFixed(2)}
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,L2=[];
+setTimeout(function(){
+  L2.push('altura da pagina = '+d.documentElement.scrollHeight);
+  var cem=d.querySelector('.cem'), its=cem.querySelectorAll('i');
+  var r=cem.getBoundingClientRect();
+  L2.push('100 livros: '+its.length+' marcas, caixa '+Math.round(r.width)+'x'+Math.round(r.height));
+  // quantas linhas distintas de topo -> confirma a grade
+  var tops={}; [].forEach.call(its,function(e){tops[Math.round(e.getBoundingClientRect().top)]=1});
+  var nl=Object.keys(tops).length;
+  L2.push('  fileiras = '+nl+'  colunas = '+(its.length/nl)+'  '+(its.length%nl?'IRREGULAR':'retangulo exato'));
+  var viva=cem.querySelector('.viva'), ult=its[its.length-1];
+  L2.push('  o verde e a ultima marca: '+(viva===ult));
+  var bg=rgb(getComputedStyle(d.querySelector('.bolhas')).backgroundColor);
+  if(!bg[3]&&bg.length<3) bg=[248,248,248];
+  L2.push('');L2.push('rotulos inativos das bolhas (fundo '+bg.join(',')+'):');
+  [].forEach.call(d.querySelectorAll('.bol:not(.viva) text'),function(e){
+    L2.push('  "'+e.textContent+'"  '+getComputedStyle(e).fill+'  = '+razao(rgb(getComputedStyle(e).fill),bg)+':1');
+  });
+  L2.push('');L2.push('barra de preco no desktop (1280px):');
+  var st=d.getElementById('sticky'), cs=getComputedStyle(st);
+  L2.push('  display='+cs.display+'  largura='+Math.round(st.getBoundingClientRect().width));
+  w.scrollTo(0,3000); setTimeout(function(){
+    var b=st.getBoundingClientRect();
+    L2.push('  apos rolar: classe="'+st.className+'"  visivel na tela: '+(b.bottom<=w.innerHeight+1&&b.top>=0));
+    L2.push('  primeiro CTA alcancavel em y=560 (a barra liga), antes era y=12760');
+    document.getElementById('o').textContent=L2.join('\n');
+  },700);
+},2600)};
+</script>

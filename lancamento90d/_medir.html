@@ -1,0 +1,20 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0">
+<iframe id="f" src="index.html" style="border:0;display:block"></iframe>
+<pre id="o" style="font:12px monospace;padding:10px"></pre>
+<script>
+var q=new URLSearchParams(location.search), W=+(q.get('w')||1280);
+var f=document.getElementById('f'); f.width=W; f.height=900;
+f.onload=function(){ setTimeout(function(){
+  var d=f.contentDocument, cw=d.documentElement.clientWidth;
+  var fora=[].filter.call(d.querySelectorAll('body *'),function(el){
+    var r=el.getBoundingClientRect(); return r.width>0 && r.right>cw+1 && !el.closest('.marquee');
+  });
+  document.getElementById('o').textContent = JSON.stringify({
+    largura: cw,
+    scrollW: d.documentElement.scrollWidth,
+    rolaLateral: d.documentElement.scrollWidth > cw+1,
+    estouramSemMarquee: fora.length,
+    quais: fora.slice(0,5).map(function(e){return e.tagName+'.'+String(e.className).slice(0,26)})
+  }, null, 1);
+},2200); };
+</script></body>

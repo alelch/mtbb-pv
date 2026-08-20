@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:13px monospace;white-space:pre">
+<iframe id="f" src="index.html?v=200" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe><div id="o"></div>
+<script>document.getElementById('f').onload=function(){setTimeout(function(){
+var d=this.contentDocument,t=d.querySelectorAll('.press-trilho,.mrow,.provas-trilho')[Number(new URLSearchParams(location.search).get('i')||0)],L=[];
+var imgs=[].slice.call(t.children), n=imgs.length;
+function larg(e){var r=e.getBoundingClientRect();return r.width+parseFloat(getComputedStyle(e).marginRight);}
+var a=0,b=0;
+imgs.forEach(function(e,i){ (i<n/2? (a+=larg(e)) : (b+=larg(e))); });
+L.push('itens = '+n);
+L.push('1a metade = '+a.toFixed(1)+'px');
+L.push('2a metade = '+b.toFixed(1)+'px');
+L.push('diferenca = '+Math.abs(a-b).toFixed(2)+'px  (0 = laco sem emenda)');
+L.push('pista total = '+t.getBoundingClientRect().width.toFixed(1)+'px');
+L.push('velocidade = '+(t.getBoundingClientRect().width/2/parseFloat(getComputedStyle(t).animationDuration)).toFixed(1)+' px/s');
+document.getElementById('o').textContent=L.join('\n');document.title='pronto';}.bind(this),1400)};</script></body>

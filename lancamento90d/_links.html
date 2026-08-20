@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace;white-space:pre">
+<iframe id="f" src="index.html" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe>
+<div id="o"></div>
+<script>
+document.getElementById('f').onload=function(){ setTimeout(function(){
+ var d=this.contentDocument,L=[];
+ [].forEach.call(d.querySelectorAll('a[href*="hotmart"]'),function(a,i){
+   L.push(i+') '+(a.textContent||'').trim().slice(0,28)+'  ->  '+a.getAttribute('href'));});
+ L.push('total = '+d.querySelectorAll('a[href*="hotmart"]').length);
+ document.getElementById('o').textContent=L.join('\n'); document.title='pronto';
+}.bind(this),2500)};
+</script></body>

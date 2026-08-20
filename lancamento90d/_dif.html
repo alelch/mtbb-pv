@@ -1,0 +1,32 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}iframe{position:fixed;left:-3000px;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:10px}</style>
+<iframe id=a src="_antes.html"></iframe><iframe id=b src="index.html"></iframe><div id=o>...</div>
+<script>
+var pronto=0, R={};
+function medir(qual,fr){
+  var d=fr.contentDocument, w=fr.contentWindow, o={};
+  o.pagina=d.documentElement.scrollHeight;
+  ['.press-trilho','.dany','.bio > img','.mrow','.hero'].forEach(function(s){
+    var e=d.querySelector(s); o[s]= e? Math.round(e.getBoundingClientRect().height) : null;
+  });
+  var l=d.querySelector('.press-trilho img');
+  o['logo img']= l? Math.round(l.getBoundingClientRect().height)+'x'+Math.round(l.getBoundingClientRect().width) : null;
+  R[qual]=o;
+}
+function fim(){
+  if(++pronto<2) return;
+  setTimeout(function(){
+    medir('antes',document.getElementById('a')); medir('depois',document.getElementById('b'));
+    var L=['                          ANTES      DEPOIS    delta'];
+    Object.keys(R.antes).forEach(function(k){
+      var a=R.antes[k], b=R.depois[k];
+      var d=(typeof a==='number'&&typeof b==='number')?(b-a):'';
+      if(d===0)d='—';
+      L.push('  '+k.padEnd(22)+String(a).padStart(8)+String(b).padStart(11)+'   '+d);
+    });
+    document.getElementById('o').textContent=L.join('\n');
+  },2600);
+}
+document.getElementById('a').onload=fim; document.getElementById('b').onload=fim;
+</script>

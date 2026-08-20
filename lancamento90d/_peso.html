@@ -1,0 +1,29 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:12px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,O=[];
+setTimeout(function(){
+  var H=d.documentElement.scrollHeight;
+  var verde=d.querySelector('.virada');
+  var vb=verde.getBoundingClientRect().bottom+w.scrollY;
+  O.push('página inteira = '+H+'px    abaixo do verde = '+Math.round(H-vb)+'px ('+Math.round((H-vb)/H*100)+'%)');
+  O.push('');
+  O.push(' altura   %baixo  seção                          conteúdo');
+  var tot=H-vb;
+  [].forEach.call(d.querySelectorAll('body > section, body > footer, body > div.cut'),function(s){
+    var r=s.getBoundingClientRect(), y=r.top+w.scrollY;
+    if(y < vb-5) return;
+    var eb=s.querySelector('.eyebrow'), h=s.querySelector('h2');
+    var nome=(eb?eb.textContent.trim():'')||(h?h.textContent.trim():s.className);
+    var li=s.querySelectorAll('li').length, im=s.querySelectorAll('img').length,
+        dt=s.querySelectorAll('details').length, cd=s.querySelectorAll('.card,.pcard,.cardx').length;
+    var det=[]; if(li)det.push(li+' bullets'); if(im)det.push(im+' imgs');
+    if(dt)det.push(dt+' perguntas'); if(cd)det.push(cd+' cards');
+    O.push(String(Math.round(r.height)).padStart(6)+'px '+String(Math.round(r.height/tot*100)).padStart(5)+'%  '+
+           (s.className.split(' ')[0]||'?').padEnd(12)+' '+nome.slice(0,26).padEnd(28)+det.join(', '));
+  });
+  document.getElementById('o').textContent=O.join('\n');
+},2600)};
+</script>

@@ -1,0 +1,25 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;background:#111">
+<div id="g"></div><script>
+var op=[['#22C07B','anel branco cheio','0 0 0 3px #fff'],
+        ['#2FD98C','mais claro','0 0 0 3px #fff'],
+        ['#19A566','mais fechado','0 0 0 3px #fff']];
+op.forEach(function(par){
+  var d=document.createElement('div');
+  d.style.cssText='position:relative;width:642px;height:210px;overflow:hidden;float:left;border:1px solid #000';
+  d.innerHTML='<span style="position:absolute;left:0;top:0;z-index:9;background:#111;color:#fff;'+
+    'font:11px monospace;padding:3px 8px">'+par[0]+' · '+par[1]+'</span>';
+  var f=document.createElement('iframe');
+  f.src='index.html?v=130'; f.style.cssText='border:0;width:1284px;height:420px;transform:scale(.5);transform-origin:0 0';
+  f.onload=function(){ var w=f.contentWindow, doc=f.contentDocument;
+    var s=doc.createElement('style');
+    s.textContent='html{scroll-behavior:auto!important}*{transition:none!important}'+
+      '.cem i.viva{background:'+par[0]+' !important;box-shadow:'+par[2]+' !important}';
+    doc.head.appendChild(s);
+    setTimeout(function(){
+      var sec=doc.querySelector('.noventa');
+      w.scrollTo(0, sec.getBoundingClientRect().top+w.scrollY+60);
+      w.__cem&&w.__cem(); document.title='pronto';
+    },900); };
+  d.appendChild(f); document.getElementById('g').appendChild(d);
+});
+</script></body>

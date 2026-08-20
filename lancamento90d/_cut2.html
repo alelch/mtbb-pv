@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:13px monospace;white-space:pre">
+<iframe id="f" src="index.html?v=4" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe><div id="o"></div>
+<script>document.getElementById('f').onload=function(){setTimeout(function(){
+var d=this.contentDocument,L=[],sec=d.querySelector('.cut'),p=sec.querySelector('p');
+L.push('section.cut color   = '+getComputedStyle(sec).color);
+L.push('section.cut bg      = '+getComputedStyle(sec).backgroundColor);
+L.push('p color             = '+getComputedStyle(p).color);
+L.push('p classes           = '+p.className);
+L.push('p tem style inline? = '+(p.getAttribute('style')||'nao'));
+L.push('--ink               = '+getComputedStyle(d.documentElement).getPropertyValue('--ink'));
+L.push('markup do .cut      = '+sec.outerHTML.slice(0,150));
+document.getElementById('o').textContent=L.join('\n');document.title='pronto';}.bind(this),1300)};</script></body>

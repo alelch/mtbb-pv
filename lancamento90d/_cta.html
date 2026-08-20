@@ -1,0 +1,25 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,L=[];
+setTimeout(function(){
+  var verde=d.querySelector('.virada').getBoundingClientRect().top+w.scrollY;
+  L.push('topo da secao verde no doc = '+Math.round(verde));
+  L.push('');L.push('CTAs (a.btn / button) e onde estao:');
+  [].forEach.call(d.querySelectorAll('a.btn, a[data-cta], button.btn, .barra a'),function(e){
+    var r=e.getBoundingClientRect(), y=Math.round(r.top+w.scrollY), c=getComputedStyle(e);
+    L.push('  y='+String(y).padStart(6)+'  '+(y<verde?'ANTES ':'depois')+
+      '  pos='+getComputedStyle(e.closest('[style],div')||e).position+
+      '  vis='+c.display+'  "'+e.textContent.trim().slice(0,32)+'"');
+  });
+  var bar=d.querySelector('.barra,.sticky,.fixa,#barra');
+  L.push('');L.push('barra fixa: '+(bar?bar.className+'  position='+getComputedStyle(bar).position+'  display='+getComputedStyle(bar).display:'NAO ACHEI'));
+  // contraste dos rotulos inativos da bolha
+  var lab=d.querySelectorAll('.bb-palco text, .bb-palco .rot, .bb-rot');
+  L.push('');L.push('rotulos da bolha achados: '+lab.length);
+  [].forEach.call(lab,function(e){L.push('   "'+e.textContent.trim()+'" fill/color='+(getComputedStyle(e).fill||getComputedStyle(e).color))});
+  document.getElementById('o').textContent=L.join('\n');
+},2600)};
+</script>

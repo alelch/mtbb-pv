@@ -1,0 +1,50 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:12px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+var L=[];
+function anda(rules, saco){
+  for (var i=0;i<rules.length;i++){
+    var r=rules[i];
+    if (r.cssRules && r.cssRules.length) { anda(r.cssRules, saco); continue; }
+    if (!r.selectorText) continue;
+    var partes=r.selectorText.split(',');
+    for (var j=0;j<partes.length;j++){
+      var sel=partes[j].trim();
+      if (sel) saco.push(sel);
+    }
+  }
+}
+document.getElementById('f').onload=function(){
+  var d=this.contentDocument;
+  setTimeout(function(){
+    try{
+      var ESTADO=/\.(in|viva|furada|escreveu|chegou|on|sem-motion|js|no-js|ab-pending|larga|topo|rev|open|block|sm|claro|ouro|nota)\b/;
+      var saco=[];
+      for (var i=0;i<d.styleSheets.length;i++){
+        var rs=null;
+        try{ rs=d.styleSheets[i].cssRules }catch(e){ continue }
+        if(rs) anda(rs, saco);
+      }
+      var vistos={}, mortos=[];
+      for (var k=0;k<saco.length;k++){
+        var sel=saco[k];
+        if (vistos[sel]) continue; vistos[sel]=1;
+        var teste=sel.replace(/::?(before|after|hover|active|focus-visible|focus|placeholder|selection|marker|first-child|last-child|first-of-type|last-of-type)/g,'');
+        teste=teste.replace(/\s+/g,' ').trim();
+        if (!teste || teste==='*' || teste.indexOf('@')===0) continue;
+        var achou=false;
+        try{ achou = !!d.querySelector(teste) }catch(e){ continue }
+        if (achou) continue;
+        if (ESTADO.test(sel)) continue;
+        mortos.push(sel);
+      }
+      L.push('seletores únicos: '+Object.keys(vistos).length+'   ·   SEM DONO NO DOM: '+mortos.length);
+      L.push('');
+      for (var m=0;m<mortos.length;m++) L.push('  '+mortos[m]);
+    }catch(err){ L.push('ERRO: '+err.name+' '+err.message); }
+    document.getElementById('o').textContent=L.join('\n');
+  },2800);
+};
+</script>

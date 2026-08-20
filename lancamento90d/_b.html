@@ -1,0 +1,32 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:12px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+function ln(c){c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function L(a){return .2126*ln(a[0])+.7152*ln(a[1])+.0722*ln(a[2])}
+function rg(s){var m=String(s).match(/[\d.]+/g);return m?m.slice(0,3).map(Number):null}
+function rz(f,b){var x=L(f),y=L(b);return ((Math.max(x,y)+.05)/(Math.min(x,y)+.05)).toFixed(2)}
+function fundo(e,d){while(e&&e!==d.documentElement){var c=rg(getComputedStyle(e).backgroundColor);
+  var a=String(getComputedStyle(e).backgroundColor).match(/[\d.]+/g);
+  if(c&&(!a||a.length<4||+a[3]>.85))return c; e=e.parentElement} return [255,255,255]}
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,O=[];
+setTimeout(function(){
+  O.push('CONTRASTE, metade de baixo (só o que reprova):');
+  var alvos=d.querySelectorAll('.dany p,.dany li,.dany .num,.dany .lab,.offer *,.faq summary,.faq .a,.final p,.cut p,.compare li,.deliver li,.build li,.cases p,.who li,.sticky *');
+  var vistos=new Set(), maus=0;
+  [].forEach.call(alvos,function(e){
+    if(!e.textContent.trim()||e.children.length)return;
+    var c=getComputedStyle(e); if(c.display==='none')return;
+    var fs=parseFloat(c.fontSize), bold=+c.fontWeight>=700;
+    var grande=fs>=24||(fs>=18.66&&bold);
+    var r=rz(rg(c.color),fundo(e,d)), min=grande?3:4.5;
+    if(+r<min){maus++; var k=e.textContent.trim().slice(0,44);
+      if(!vistos.has(k)){vistos.add(k);
+      O.push('  '+r+':1  (min '+min+')  '+Math.round(fs)+'px  '+k)}}
+  });
+  if(!maus)O.push('  nenhum');
+  O.push('');O.push('total de elementos reprovando: '+maus);
+  document.getElementById('o').textContent=O.join('\n');
+},2600)};
+</script>

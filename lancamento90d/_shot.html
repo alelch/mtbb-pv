@@ -1,0 +1,21 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;background:#fff">
+<iframe id="f" style="border:0;display:block"></iframe>
+<script>
+var q=new URLSearchParams(location.search);
+var W=+(q.get('w')||1280), H=+(q.get('h')||820);
+var f=document.getElementById('f'); f.style.width=W+'px'; f.style.height=H+'px';
+f.src=q.get('u');
+f.onload=function(){
+  var w=f.contentWindow,d=f.contentDocument;
+  var s=d.createElement('style');
+  s.textContent='html{scroll-behavior:auto!important}*{transition:none!important;animation:none!important}';
+  d.head.appendChild(s);
+  setTimeout(function(){
+    var alvo=q.get('sel');
+    var y=+(q.get('y')||0);
+    if(alvo){ var el=d.querySelector(alvo); if(el){ y=w.scrollY+el.getBoundingClientRect().top + (+(q.get('off')||0)); } }
+    w.scrollTo(0,y); Object.keys(w).filter(function(k){return k.indexOf('__')===0&&typeof w[k]==='function'}).forEach(function(k){try{w[k]();w[k]()}catch(e){}});
+    document.title='pronto';
+  },1300);
+};
+</script></body>

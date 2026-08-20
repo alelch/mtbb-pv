@@ -1,0 +1,14 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:14px monospace;white-space:pre">
+<iframe id="f" src="index.html?v=2" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe><div id="o"></div>
+<script>document.getElementById('f').onload=function(){setTimeout(function(){
+var d=this.contentDocument,L=[],sec=d.querySelector('.cut'),p=sec.querySelector('p');
+L.push('fundo  = '+getComputedStyle(sec).backgroundColor);
+L.push('texto  = '+getComputedStyle(p).color);
+function lum(c){var m=c.match(/[\d.]+/g).map(Number);
+  var a=m.length>3?m[3]:1, r=m[0]*a+255*(1-a),g=m[1]*a+255*(1-a),b=m[2]*a+255*(1-a);
+  var f=[r,g,b].map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});
+  return .2126*f[0]+.7152*f[1]+.0722*f[2];}
+var lf=lum(getComputedStyle(sec).backgroundColor), lt=lum(getComputedStyle(p).color);
+var razao=(Math.max(lf,lt)+.05)/(Math.min(lf,lt)+.05);
+L.push('contraste = '+razao.toFixed(2)+':1   (WCAG AA texto grande pede 3:1)');
+document.getElementById('o').textContent=L.join('\n');document.title='pronto';}.bind(this),1300)};</script></body>

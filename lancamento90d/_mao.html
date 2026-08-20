@@ -1,0 +1,25 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html" style="width:1280px"></iframe><div id=o>...</div>
+<script>
+var f=document.getElementById('f'),L=[],W=[1440,1280,1100,1000,900,768,600,390],i=0;
+f.onload=function(){var d=f.contentDocument;
+setTimeout(function(){
+  (function passo(){
+    if(i>=W.length){document.getElementById('o').textContent=L.join('\n');return}
+    f.style.width=W[i]+'px';
+    setTimeout(function(){
+      var m=d.querySelector('.dany .mao'), t=d.querySelector('.dany .txt');
+      var c=getComputedStyle(m), r=m.getBoundingClientRect();
+      var lh=parseFloat(c.lineHeight)||parseFloat(c.fontSize)*1.08;
+      var n=Math.round((r.height-parseFloat(c.paddingBottom))/lh);
+      L.push('vp '+String(W[i]).padStart(4)+'  fonte '+Math.round(parseFloat(c.fontSize))+
+             'px  coluna '+Math.round(t.getBoundingClientRect().width)+
+             'px  frase '+Math.round(r.width)+'px  termina em x='+Math.round(r.right)+
+             '  LINHAS='+n+(n===1?'  ok':'  <<<'));
+      i++;passo();
+    },300);
+  })();
+},2600)};
+</script>

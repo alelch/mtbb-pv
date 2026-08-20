@@ -1,0 +1,33 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace;white-space:pre">
+<iframe id="f" src="index.html?v=50" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe><div id="o"></div>
+<script>document.getElementById('f').onload=function(){setTimeout(function(){
+var d=this.contentDocument,w=this.contentWindow,L=[];
+var st=d.createElement('style'); st.textContent='html{scroll-behavior:auto!important}*{transition:none!important}';
+d.head.appendChild(st);
+var bb=d.querySelector('#bolhas .bb'), bbTop=Math.round(bb.getBoundingClientRect().top+w.scrollY);
+var ps=[].slice.call(d.querySelectorAll('#bolhas .bb-passo'));
+L.push('bb topo='+bbTop+' altura='+Math.round(bb.getBoundingClientRect().height));
+L.push('');
+ps.forEach(function(p,i){
+  var centro=p.getBoundingClientRect().top+w.scrollY+p.getBoundingClientRect().height/2;
+  var y=Math.round(centro-415);
+  w.scrollTo(0,y); w.__bolhas&&w.__bolhas();
+  // acha o topo e a base do conteudo realmente visivel
+  var topo=1e9, base=-1e9, quem='', quemB='';
+  [].forEach.call(d.querySelectorAll('#bolhas *'),function(e){
+    if(e.children.length && e.tagName!=='SVG') return;
+    var r=e.getBoundingClientRect();
+    if(r.height<3||r.width<3) return;
+    if(r.bottom<0||r.top>830) return;
+    if(r.top<topo){topo=r.top; quem=e.tagName+'.'+(e.className.baseVal||e.className||'').toString().slice(0,18);}
+    if(r.bottom>base){base=r.bottom; quemB=e.tagName+'.'+(e.className.baseVal||e.className||'').toString().slice(0,18);}
+  });
+  L.push('passo '+(i+1)+' centralizado em y='+y);
+  L.push('   vazio no TOPO   = '+Math.round(Math.max(0,topo))+'px   (1o conteudo: '+quem+')');
+  L.push('   vazio na BASE   = '+Math.round(Math.max(0,830-base))+'px   (ultimo: '+quemB+')');
+  var pal=d.querySelector('.bb-palco').getBoundingClientRect();
+  var txt=p.getBoundingClientRect();
+  L.push('   diagrama: topo='+Math.round(pal.top)+' base='+Math.round(pal.bottom)+' centro='+Math.round(pal.top+pal.height/2));
+  L.push('   texto:    altura real do conteudo = '+Math.round(p.scrollHeight)+'px  em caixa de '+Math.round(txt.height)+'px');
+});
+document.getElementById('o').textContent=L.join('\n');document.title='pronto';}.bind(this),1500)};</script></body>

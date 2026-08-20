@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace">
+<iframe id="f" src="bolhas.html" style="border:0;width:1280px;height:780px"></iframe>
+<pre id="o" style="padding:10px"></pre>
+<script>
+var f=document.getElementById('f');
+f.onload=function(){ setTimeout(function(){
+ var w=f.contentWindow,d=f.contentDocument,out=[];
+ [0.15,0.45,0.78].forEach(function(p){
+   w.scrollTo(0,(d.body.scrollHeight-w.innerHeight)*p);
+   w.__medirBolhas && w.__medirBolhas();
+   out.push('scroll '+Math.round(p*100)+'% → passo '+
+     [].map.call(d.querySelectorAll('.passo'),x=>x.classList.contains('on')?1:0).join('')+
+     ' | bolhas '+['b1','b2','b3'].map(function(id){var g=d.getElementById(id);
+       return g.classList.contains('on')?'ON':(g.classList.contains('done')?'ok':'-')}).join(','));
+ });
+ document.getElementById('o').textContent=out.join('\n');
+},1200)};
+</script></body>

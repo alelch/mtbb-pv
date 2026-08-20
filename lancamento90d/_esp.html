@@ -1,0 +1,39 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace;white-space:pre">
+<iframe id="a" src="../lancamento-v1/index.html" style="border:0;width:1280px;height:900px;position:absolute;left:-9999px"></iframe>
+<iframe id="b" src="index.html?v=9" style="border:0;width:1280px;height:900px;position:absolute;left:-9999px"></iframe>
+<div id="o">medindo...</div>
+<script>
+var prontos=0;
+function medir(){
+ if(++prontos<2) return;
+ setTimeout(function(){
+  var L=[];
+  ['a','b'].forEach(function(id){
+    var f=document.getElementById(id), d=f.contentDocument, w=f.contentWindow;
+    L.push('════ '+(id==='a'?'lancamento-v1':'lancamento90d')+' ════');
+    function box(sel,rot){
+      var e=d.querySelector(sel); if(!e){L.push('  '+rot+': (nao existe)');return null;}
+      var c=getComputedStyle(e), r=e.getBoundingClientRect();
+      L.push('  '+rot.padEnd(16)+' topo='+String(Math.round(r.top+w.scrollY)).padStart(5)+
+             ' alt='+String(Math.round(r.height)).padStart(4)+
+             ' pad='+c.paddingTop+'/'+c.paddingBottom+
+             ' mar='+c.marginTop+'/'+c.marginBottom);
+      return e;
+    }
+    box('header, .hero','hero');
+    box('.hero h1','h1');
+    box('.hero .sub, .hero .lead','sub');
+    box('.player, #vslSlot, .vsl','player');
+    box('.press','press');
+    box('.press p','rotulo');
+    box('.press-row','fileira');
+    var img=d.querySelector('.press-row img');
+    if(img){var ci=getComputedStyle(img);
+      L.push('  logo 1'.padEnd(18)+' altura='+ci.height+'  gap fileira='+getComputedStyle(d.querySelector('.press-row')).gap);}
+    L.push('');
+  });
+  document.getElementById('o').textContent=L.join('\n'); document.title='pronto';
+ },900);
+}
+document.getElementById('a').onload=medir; document.getElementById('b').onload=medir;
+</script></body>

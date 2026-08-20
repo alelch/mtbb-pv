@@ -1,0 +1,8 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:13px monospace;white-space:pre">
+<iframe id="f" src="dobra5.html" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe><div id="o"></div>
+<script>document.getElementById('f').onload=function(){setTimeout(function(){
+var d=this.contentDocument,w=this.contentWindow,L=[];
+[].forEach.call(d.querySelectorAll('.rot'),function(e,i){
+  L.push('rotulo'+(i+1)+' y='+Math.round(e.getBoundingClientRect().top+w.scrollY));});
+L.push('altura='+d.body.scrollHeight);
+document.getElementById('o').textContent=L.join('\n');document.title='pronto';}.bind(this),1000)};</script></body>

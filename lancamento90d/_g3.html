@@ -1,0 +1,21 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;background:#111">
+<div id="g"></div><script>
+var casos=[[0,null],[0,'a1'],[0,'a2'],[1,null],[1,'b40'],[2,'c1']];
+casos.forEach(function(c){
+  var d=document.createElement('div');
+  d.style.cssText='position:relative;width:640px;height:415px;overflow:hidden;float:left;border:1px solid #000';
+  var f=document.createElement('iframe');
+  f.src='grafico3.html'; f.style.cssText='border:0;width:1280px;height:830px;transform:scale(.5);transform-origin:0 0';
+  f.onload=function(){ var w=f.contentWindow, doc=f.contentDocument;
+    setTimeout(function(){
+      var secs=doc.querySelectorAll('section');
+      if(c[1]==='a1'){ doc.querySelectorAll('#ca button')[0].click(); }
+      if(c[1]==='a2'){ doc.querySelectorAll('#ca button')[1].click(); }
+      if(c[1]==='b40'){ var s=doc.getElementById('sb'); s.value=40; s.dispatchEvent(new Event('input')); }
+      if(c[1]==='c1'){ doc.querySelectorAll('#cc button')[0].click(); }
+      w.scrollTo(0, secs[c[0]].getBoundingClientRect().top+w.scrollY-46);
+      document.title='pronto';
+    },700); };
+  d.appendChild(f); document.getElementById('g').appendChild(d);
+});
+</script></body>

@@ -1,0 +1,32 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){var d=this.contentDocument,L=[];
+setTimeout(function(){
+  var m=d.querySelector('.marquee.prova'), tr=m.querySelector('.mrow');
+  var it=[].slice.call(tr.children);
+  L.push('itens no trilho: '+it.length+'  (esperado 22 = 11 x2)');
+  var n=it.length/2, a=0,b=0;
+  it.forEach(function(e,i){
+    var r=e.getBoundingClientRect(), w=r.width+parseFloat(getComputedStyle(e).marginRight);
+    if(i<n)a+=w; else b+=w;
+  });
+  L.push('metade 1 = '+a.toFixed(1)+'px');
+  L.push('metade 2 = '+b.toFixed(1)+'px');
+  L.push('diferenca = '+Math.abs(a-b).toFixed(2)+'px   '+(Math.abs(a-b)<0.5?'EMENDA OK':'<<< PULA'));
+  L.push('');
+  L.push('alturas (foto x card devem bater):');
+  var alt={};
+  it.slice(0,n).forEach(function(e){var h=Math.round(e.getBoundingClientRect().height);alt[e.tagName+' '+h]=1});
+  L.push('  '+Object.keys(alt).join('   '));
+  L.push('');
+  var vaza=it.slice(0,n).filter(function(e){
+    if(e.tagName!=='DIV')return false;
+    return e.scrollHeight>e.clientHeight+1;
+  });
+  L.push('cards com texto vazando: '+vaza.length+(vaza.length?'  <<<':'  ok'));
+  document.getElementById('o').textContent=L.join('\n');
+},2600)};
+</script>

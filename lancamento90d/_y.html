@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:16px monospace">
+<iframe id="f" src="index.html?v=70" style="border:0;width:1280px;height:830px;position:absolute;left:-9999px"></iframe><div id="o"></div>
+<script>document.getElementById('f').onload=function(){setTimeout(function(){
+var d=this.contentDocument,w=this.contentWindow,r=d.querySelector('.virada').getBoundingClientRect();
+document.getElementById('o').textContent='virada topo='+Math.round(r.top+w.scrollY)+' alt='+Math.round(r.height);
+document.title='pronto';}.bind(this),1200)};</script></body>
