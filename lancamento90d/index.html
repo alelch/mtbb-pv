@@ -510,25 +510,28 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 }
 /* PROVA: o carrossel com os cards de texto ENTRANDO no meio das fotos.
    Antes eram dois blocos separados, e as 8 pessoas da parede sao as MESMAS 8
-   do carrossel da secao verde: a parede chegava como segunda vez. Aqui rosto e
-   narrativa andam juntos no mesmo trilho, entao nao ha' um bloco "que eu ja'
-   vi". Uma fileira so': em duas, os tres casos apareceriam repetidos.
-   O card tem a MESMA altura da foto pra fila ficar reta, e e' mais largo
-   porque foto e' retrato e texto precisa de linha. */
-.mrow .mc{width:330px;height:300px;flex:0 0 auto;margin-right:18px;
-  background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:24px 22px;display:flex;flex-direction:column;justify-content:center;
-  box-shadow:0 12px 26px -18px rgba(0,0,0,.4)}
-.mrow .mc .q{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
-  color:#757168;font-weight:700;margin-bottom:10px}
+   do carrossel da secao verde: a parede chegava como segunda vez.
+   Duas coisas que o card PRECISA respeitar num trilho que anda:
+   1) ser glanceavel. Paragrafo nao da' tempo de ler antes de sair da tela,
+      entao o card e' rotulo + resultado grande + uma linha de contexto.
+   2) ter o mesmo peso visual da foto. Card branco sobre fundo quase branco
+      virava buraco entre duas fotos escuras. Ele e' escuro, e verde porque na
+      gramatica da pagina o verde e' a cor do 1%: o card diz que essas pessoas
+      sao o 1% sem precisar escrever isso.
+   Contraste sobre --verde: branco 8,99:1 · 78% 7,55:1 · 62% 5,02:1. */
+.mrow .mc{width:300px;height:300px;flex:0 0 auto;margin-right:18px;
+  background:var(--verde);border-radius:12px;padding:28px 26px;
+  display:flex;flex-direction:column;justify-content:center;
+  box-shadow:0 12px 26px -18px rgba(0,0,0,.45)}
+.mrow .mc .q{font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.62);font-weight:700;margin-bottom:14px}
 .mrow .mc .r{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
-  font-size:1.2rem;line-height:1.16;margin-bottom:10px}
-.mrow .mc p{color:var(--soft);font-size:.89rem;line-height:1.5;margin:0}
-.mrow .mc p b{color:var(--ink)}
+  font-size:1.42rem;line-height:1.13;color:#fff;margin-bottom:14px}
+.mrow .mc p{color:rgba(255,255,255,.78);font-size:.88rem;line-height:1.45;margin:0}
 @media(max-width:700px){
-  .mrow .mc{width:262px;height:240px;padding:18px 16px;margin-right:12px}
-  .mrow .mc .r{font-size:1.02rem}
-  .mrow .mc p{font-size:.82rem;line-height:1.45}
+  .mrow .mc{width:250px;height:240px;padding:22px 20px;margin-right:12px}
+  .mrow .mc .r{font-size:1.18rem}
+  .mrow .mc p{font-size:.82rem}
 }
 .acao{text-align:center;margin-top:clamp(44px,5.8vw,70px)}
 .acao-nota{margin:16px 0 0;font-size:.98rem;color:rgba(255,255,255,.78)}
@@ -1232,51 +1235,53 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   </div>
   <!-- as copias existem so' pra emenda do carrossel: aria-hidden inteiras,
        senao o leitor de tela ouve os 8 nomes e os 3 casos duas vezes -->
+  <!-- as copias existem so' pra emenda: aria-hidden inteiras, senao o leitor
+       de tela ouve os 8 nomes e os 3 casos duas vezes -->
   <div class="marquee prova">
     <div class="mrow">
         <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de Aurê Aguiar" loading="lazy">
         <div class="mc">
           <div class="q">Nunca tinha lançado nada</div>
-          <div class="r">Quase 600 livros vendidos ainda na pré-venda</div>
-          <p><b>Ingrid</b> veio dos artigos científicos, sem experiência com o mercado editorial.</p>
+          <div class="r">Quase 600 livros<br>na pré-venda</div>
+          <p>Ingrid, que veio dos artigos científicos</p>
         </div>
         <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de Candice Pascoal" loading="lazy">
         <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de Cibele Laurentino" loading="lazy">
         <div class="mc">
           <div class="q">Tinha audiência e não vendia</div>
-          <div class="r">Hoje vai aos correios toda semana despachar pedidos</div>
-          <p><b>Bernardo</b> tinha vinte mil seguidores e o livro não saía. O problema nunca foi audiência.</p>
+          <div class="r">Vai aos correios<br>toda semana</div>
+          <p>Bernardo, que tinha vinte mil seguidores e não vendia</p>
         </div>
         <img src="assets/depo-cica-D691szGu.webp" alt="Depoimento de Ciça Rocha" loading="lazy">
         <img src="assets/depo-emilia-CArLNDco.webp" alt="Depoimento de Emilia Nuñes" loading="lazy">
         <img src="assets/depo-lelo-B1NBFXKe.webp" alt="Depoimento de Lelo Apovian" loading="lazy">
         <div class="mc">
           <div class="q">O livro já tinha parado</div>
-          <div class="r">Virou destaque de vendas na Bienal do Rio</div>
-          <p><b>Tom</b> pegou um livro já lançado e parado de vender. Livro parado não precisa nascer de novo, precisa voltar a ser encontrado.</p>
+          <div class="r">Destaque de vendas<br>na Bienal do Rio</div>
+          <p>Tom, que pegou um livro que já tinha parado</p>
         </div>
         <img src="assets/depo-profinho-Bom5B61T.webp" alt="Depoimento de Profinho" loading="lazy">
         <img src="assets/depo-robson-CNrUIBuZ.webp" alt="Depoimento de Tonia Casarin" loading="lazy">
         <img src="assets/depo-aure-CDA-iL-b.webp" alt="" aria-hidden="true" loading="lazy">
         <div class="mc" aria-hidden="true">
           <div class="q">Nunca tinha lançado nada</div>
-          <div class="r">Quase 600 livros vendidos ainda na pré-venda</div>
-          <p><b>Ingrid</b> veio dos artigos científicos, sem experiência com o mercado editorial.</p>
+          <div class="r">Quase 600 livros<br>na pré-venda</div>
+          <p>Ingrid, que veio dos artigos científicos</p>
         </div>
         <img src="assets/depo-candice-C67mx_NI.webp" alt="" aria-hidden="true" loading="lazy">
         <img src="assets/depo-cibele-Du9iudjC.webp" alt="" aria-hidden="true" loading="lazy">
         <div class="mc" aria-hidden="true">
           <div class="q">Tinha audiência e não vendia</div>
-          <div class="r">Hoje vai aos correios toda semana despachar pedidos</div>
-          <p><b>Bernardo</b> tinha vinte mil seguidores e o livro não saía. O problema nunca foi audiência.</p>
+          <div class="r">Vai aos correios<br>toda semana</div>
+          <p>Bernardo, que tinha vinte mil seguidores e não vendia</p>
         </div>
         <img src="assets/depo-cica-D691szGu.webp" alt="" aria-hidden="true" loading="lazy">
         <img src="assets/depo-emilia-CArLNDco.webp" alt="" aria-hidden="true" loading="lazy">
         <img src="assets/depo-lelo-B1NBFXKe.webp" alt="" aria-hidden="true" loading="lazy">
         <div class="mc" aria-hidden="true">
           <div class="q">O livro já tinha parado</div>
-          <div class="r">Virou destaque de vendas na Bienal do Rio</div>
-          <p><b>Tom</b> pegou um livro já lançado e parado de vender. Livro parado não precisa nascer de novo, precisa voltar a ser encontrado.</p>
+          <div class="r">Destaque de vendas<br>na Bienal do Rio</div>
+          <p>Tom, que pegou um livro que já tinha parado</p>
         </div>
         <img src="assets/depo-profinho-Bom5B61T.webp" alt="" aria-hidden="true" loading="lazy">
         <img src="assets/depo-robson-CNrUIBuZ.webp" alt="" aria-hidden="true" loading="lazy">
