@@ -492,12 +492,42 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .acao{text-align:center;margin-top:clamp(44px,5.8vw,70px)}
-.btn.claro{background:#fff;color:var(--verde);
-  padding:clamp(19px,2.3vw,25px) clamp(28px,4.3vw,54px);
-  font-size:clamp(1.02rem,2.1vw,1.22rem);
-  box-shadow:0 3px 0 rgba(0,0,0,.16),0 18px 36px -16px rgba(0,0,0,.55)}
-.btn.claro:hover{background:#fff;filter:none;transform:translateY(-2px);
-  box-shadow:0 3px 0 rgba(0,0,0,.18),0 26px 46px -16px rgba(0,0,0,.65)}
+/* O BOTAO DO MEIO, na tecnica do .btn-gold da lancamento-v1.
+   O angulo do gradiente e' uma custom property REGISTRADA (@property), que e'
+   o que permite anima-lo: sem o registro o navegador nao sabe interpolar
+   angulo e a animacao nao roda. O :before e' a borda: um gradiente recortado
+   pelo mask-composite, sobrando so' 1,5px de moldura.
+   Dourado sobre o verde da secao = 5,32:1. Tinta #0D0D0D sobre o dourado =
+   11,5:1. */
+@property --ga{syntax:"<angle>";initial-value:135deg;inherits:false}
+@keyframes gira-grad{0%{--ga:0deg}100%{--ga:360deg}}
+@keyframes brilha{
+  0%,100%{box-shadow:0 0 10px rgba(251,189,35,.42),0 0 30px rgba(251,189,35,.16),
+          inset 0 0 8px rgba(251,189,35,.10)}
+  50%{box-shadow:0 0 20px rgba(251,189,35,.62),0 0 56px rgba(255,149,0,.26),
+      inset 0 0 12px rgba(251,189,35,.16)}}
+.btn.ouro{position:relative;overflow:hidden;isolation:isolate;
+  color:#0D0D0D;text-transform:uppercase;letter-spacing:.05em;
+  padding:clamp(19px,2.3vw,25px) clamp(26px,4vw,50px);
+  font-size:clamp(.94rem,1.9vw,1.12rem);
+  border:1.5px solid hsl(43 96% 56% / .5);
+  background:linear-gradient(var(--ga),hsl(48 100% 60%),hsl(43 96% 50%),
+             hsl(35 90% 42%),hsl(43 96% 56%));
+  background-size:300% 300%;
+  animation:gira-grad 3s linear infinite,brilha 2.5s ease-in-out infinite;
+  transition:transform .3s ease,filter .3s ease;will-change:transform}
+.btn.ouro:before{content:"";position:absolute;inset:-1px;border-radius:inherit;
+  padding:1.5px;pointer-events:none;
+  background:linear-gradient(var(--ga),hsl(48 100% 70%),hsl(43 96% 56% / .3),
+             hsl(35 100% 65%),hsl(43 96% 56% / .3));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;animation:gira-grad 3s linear infinite}
+.btn.ouro:hover{transform:translateY(-2px) scale(1.02);filter:brightness(1.1)}
+@media(prefers-reduced-motion:reduce){
+  .btn.ouro,.btn.ouro:before{animation:none}
+  .btn.ouro{box-shadow:0 0 18px rgba(251,189,35,.5)}
+}
 .provas-trilho{display:flex;width:max-content;animation:desfila 92s linear infinite}
 .provas:hover .provas-trilho{animation-play-state:paused}
 .pcard{flex:0 0 auto;width:320px;margin-right:20px;text-align:left;
@@ -701,7 +731,7 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 [data-etapa] .checks li:after{border-color:var(--ac)}
 [data-etapa] .card li:before{background:var(--ac)}
 /* o CTA nunca desbota. O :not e' pra regra nao atropelar as variantes. */
-.btn:not(.claro){background:var(--accent)!important}
+.btn:not(.ouro){background:var(--accent)!important}
 
 /* ============================================================
    CONCEITO 05 · O SILÊNCIO E O BARULHO
@@ -1128,7 +1158,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     </div>
 
     <div class="acao rv">
-      <a href="#oferta" class="btn claro" data-cta="meio">Acesso Imediato e Vitalício</a>
+      <a href="#oferta" class="btn ouro" data-cta="meio">Acesso Imediato e Vitalício</a>
     </div>
 
   </div>
