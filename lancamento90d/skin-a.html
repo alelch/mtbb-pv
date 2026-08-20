@@ -1,0 +1,77 @@
+<!doctype html><html lang=pt-BR><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noindex"><title>Skin marfim/carvão/dourado</title>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9mXg.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/V8mDoQDjQSkFtoMM3T6r8E7mPbF4C_k3HqU.woff2">
+<link rel="stylesheet" href="assets/fonts.css"><style>@font-face{font-family:'Caveat';font-style:normal;font-weight:600;font-display:swap;
+  src:url(assets/fonts/caveat.woff2) format('woff2')}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500;font-display:swap;
+  src:url(assets/fonts/fraunces-italic-500.woff2) format('woff2')}
+:root{
+  --carvao:#292927; --marfim:#F3F0E8; --ouro:#EAB82D;
+  --carvao-soft:rgba(41,41,39,.62); --marfim-soft:rgba(243,240,232,.72);
+  --linha:rgba(41,41,39,.14); --linha-esc:rgba(243,240,232,.16);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--marfim);color:var(--carvao);
+  font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.lab{max-width:1120px;margin:0 auto;padding:16px 24px 4px;color:var(--carvao-soft);font-size:.82rem;
+  letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+section{padding:clamp(56px,8vw,104px) 24px}
+.wrap{max-width:1120px;margin:0 auto}
+.eb{font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;margin:0 0 16px}
+h1,h2{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;line-height:1.08;margin:0}
+.serif{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
+/* ouro como sublinhado, nunca como texto sobre marfim (1,5:1) */
+.mk{background:linear-gradient(transparent 62%, rgba(234,184,45,.55) 62%)}
+
+/* ---- HERO (marfim) ---- */
+.hero{text-align:center}
+.hero .eb{color:var(--carvao-soft)}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem)}
+.hero h1 em{font-style:normal;position:relative}
+.hero h1 em:after{content:'';position:absolute;left:-2px;right:-2px;bottom:.06em;height:.32em;
+  background:var(--ouro);z-index:-1;opacity:.9}
+.hero .sub{color:var(--carvao-soft);font-size:1.1rem;line-height:1.55;max-width:44ch;margin:20px auto 34px}
+.hero .frame{max-width:300px;margin:0 auto;aspect-ratio:9/16;border-radius:22px;
+  background:#ddd8cc;border:1px solid var(--linha);display:flex;align-items:center;justify-content:center;
+  color:var(--carvao-soft);font-size:.85rem}
+
+/* ---- O 1% (carvão: o dourado brilha aqui) ---- */
+.um{background:var(--carvao);color:var(--marfim);text-align:center}
+.um .eb{color:var(--ouro)}
+.um h2{color:var(--marfim);font-size:clamp(2rem,5vw,3.2rem);max-width:20ch;margin:0 auto}
+.um .pct{color:var(--ouro)}
+.um .serif{color:var(--marfim)}
+.um p{color:var(--marfim-soft);font-size:1.12rem;line-height:1.5;margin:22px auto 0;max-width:40ch}
+.um .cem{display:grid;grid-template-columns:repeat(25,10px);gap:5px;justify-content:center;
+  width:fit-content;margin:34px auto 0}
+.um .cem i{width:10px;height:28px;border-radius:2px;background:rgba(243,240,232,.16)}
+.um .cem i.viva{background:var(--ouro);box-shadow:0 0 0 3px var(--carvao),0 0 16px rgba(234,184,45,.6)}
+
+/* ---- OFERTA (card carvão sobre marfim) ---- */
+.oferta{text-align:center}
+.oferta .eb{color:var(--carvao-soft)}
+.oferta > .wrap > h2{font-size:clamp(1.5rem,3.4vw,2.2rem);max-width:22ch;margin:0 auto 34px}
+.card{max-width:560px;margin:0 auto;background:var(--carvao);color:var(--marfim);
+  border-radius:22px;padding:clamp(30px,5vw,46px);text-align:center;
+  box-shadow:0 40px 80px -40px rgba(41,41,39,.6)}
+.card .nome{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;font-size:.8rem;color:var(--ouro);margin-bottom:14px}
+.card .preco{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.045em;
+  font-size:clamp(3rem,9vw,4.6rem);line-height:1;color:var(--marfim)}
+.card .preco small{font-size:1.1rem;color:var(--marfim-soft);letter-spacing:0}
+.card .avista{color:var(--marfim-soft);font-size:.98rem;margin:4px 0 22px}
+.card .promessa{font-family:'Fraunces',serif;font-style:italic;font-size:1.34rem;color:var(--ouro);
+  padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--linha-esc)}
+.card ul{list-style:none;padding:0;margin:0 0 28px;text-align:left;display:grid;gap:12px}
+.card li{position:relative;padding-left:30px;color:var(--marfim-soft);font-size:1rem;line-height:1.4}
+.card li b{color:var(--marfim);font-weight:700}
+.card li:before{content:'';position:absolute;left:6px;top:.36em;width:7px;height:13px;
+  border-right:2px solid var(--ouro);border-bottom:2px solid var(--ouro);transform:rotate(40deg)}
+.btn{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  background:var(--ouro);color:var(--carvao);border-radius:999px;padding:21px 40px;font-size:1.05rem;
+  text-decoration:none;box-shadow:0 0 30px rgba(234,184,45,.4)}
+.card .selos{display:flex;justify-content:center;gap:16px;margin-top:16px;
+  font-size:.78rem;color:var(--marfim-soft)}
+</style></head><body><div class="lab">Preview · paleta marfim / carvão / dourado · 70 / 25 / 5</div><section class="hero"><div class="wrap"><p class="eb">O lançamento decide o destino do seu livro.</p><h1>Crie desejo.<br>Gere antecipação.<br>Lance <em>vendendo</em><br>desde o primeiro dia.</h1><p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo, mesmo sem editora ou milhares de seguidores.</p><div class="frame">vídeo (9:16)</div></div></section><section class="um"><div class="wrap"><p class="eb">Seja a exceção</p><h2>O <span class="pct">1%</span> que vende <span class="serif">de verdade</span> no lançamento</h2><p>Ninguém compra um livro que não conhece. Então como fazer conhecerem o seu?</p><div class="cem"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="viva"></i></div></div></section><section class="oferta"><div class="wrap"><p class="eb">Inscrição</p><h2>O lançamento do seu livro vai acontecer.<br><span class="serif">Mas ele vai vender?</span></h2><div class="card"><div class="nome">Lançamento 90D</div><div class="preco"><small>12x de R$</small> 29,64</div><p class="avista">ou R$ 297,00 à vista</p><p class="promessa">De invisível a lido em 90 dias.</p><ul><li><b>Cem compradores mapeados</b> antes do livro existir</li><li><b>Desconhecidos descobrindo o livro</b> sem você parecer vendedor</li><li><b>Uma estreia com fila</b>, não com silêncio</li><li><b>Vendas na primeira semana</b>, não só elogios</li></ul><a href="#" class="btn">Acesso Imediato e Vitalício</a><div class="selos"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div></div></div></section></body></html>
