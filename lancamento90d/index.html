@@ -363,7 +363,7 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .bb-passo h3{font-size:clamp(1.4rem,3.4vw,1.95rem);margin-bottom:12px}
 .bb-passo p{color:var(--soft);font-size:1.02rem;line-height:1.6;margin:0;max-width:44ch}
 .bb-mini{display:none;width:100%;max-width:210px;margin:0 0 20px}
-.bb-mini ellipse{fill:none;stroke:var(--border);stroke-width:1.6}
+.bb-mini circle{fill:none;stroke:var(--border);stroke-width:1.6}
 .bb-mini .viva{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.10)}
 .bb-mini .feita{stroke:rgba(252,120,60,.34);fill:rgba(252,120,60,.05)}
 /* O ERRO fecha as bolhas: elas dizem ONDE o livro trava, essa diz QUANDO o
@@ -490,7 +490,7 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 @media(max-width:820px){
   .fp1{display:block}
   .fp-aqui{position:static;transform:none;justify-content:center;margin-top:6px}
-  .fp-aqui svg{transform:rotate(-28deg)}
+  .fp-aqui svg{transform:rotate(74deg);width:38px;margin-bottom:-4px}
 }
 /* PROVA: o carrossel com os cards de texto ENTRANDO no meio das fotos.
    Antes eram dois blocos separados, e as 8 pessoas da parede sao as MESMAS 8
@@ -1039,17 +1039,17 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       </div>
       <div class="bb-trilho">
         <div class="bb-passo viva">
-          <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="" cx="86" cy="52" rx="94" ry="48"/><ellipse class="" cx="68" cy="52" rx="66" ry="37"/><ellipse class="viva" cx="46" cy="52" rx="43" ry="26"/></svg>
+          <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="" cx="62" cy="60" r="56"/><circle class="" cx="48" cy="60" r="42"/><circle class="viva" cx="34" cy="60" r="28"/></svg>
           <p class="eyebrow">Bolha 1 · fora dela, ninguém sabe</p>
           <h3>Amigos e família</h3>
           <p>Eles compram rápido e elogiam. É a bolha que engana: a primeira semana parece sucesso, o livro vende trinta, cinquenta exemplares, e aí para. O que parecia começo era o teto.</p>        </div>
         <div class="bb-passo">
-          <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="" cx="86" cy="52" rx="94" ry="48"/><ellipse class="viva" cx="68" cy="52" rx="66" ry="37"/><ellipse class="feita" cx="46" cy="52" rx="43" ry="26"/></svg>
+          <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="" cx="62" cy="60" r="56"/><circle class="viva" cx="48" cy="60" r="42"/><circle class="feita" cx="34" cy="60" r="28"/></svg>
           <p class="eyebrow">Bolha 2 · você passa a ser esperado</p>
           <h3>Desconhecidos</h3>
           <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Não acontece por acaso: acontece quando existe desejo antes de existir livro na prateleira.</p>        </div>
         <div class="bb-passo">
-          <svg class="bb-mini" viewBox="0 0 200 104" aria-hidden="true"><ellipse class="viva" cx="86" cy="52" rx="94" ry="48"/><ellipse class="feita" cx="68" cy="52" rx="66" ry="37"/><ellipse class="feita" cx="46" cy="52" rx="43" ry="26"/></svg>
+          <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="viva" cx="62" cy="60" r="56"/><circle class="feita" cx="48" cy="60" r="42"/><circle class="feita" cx="34" cy="60" r="28"/></svg>
           <p class="eyebrow">Bolha 3 · você é lido</p>
           <h3>Boca a boca</h3>
           <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito alguma coisa por ele.</p>        </div>
@@ -1472,9 +1472,19 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
   /* ---- topbar + barra fixa ---- */
   var sticky = document.getElementById('sticky'), oferta = document.getElementById('oferta');
+  var ctasFixos = [].slice.call(document.querySelectorAll('a.btn')).filter(function(b){
+    return !b.closest('.sticky');
+  });
+  function naTela(e, folga){
+    var r = e.getBoundingClientRect();
+    return r.bottom > -folga && r.top < innerHeight + folga;
+  }
   function onScroll(){
-    var y = window.scrollY, r = oferta.getBoundingClientRect();
-    sticky.classList.toggle('on', y > 560 && !(r.top < innerHeight && r.bottom > 0));
+    var y = window.scrollY;
+    // a barra some perto de qualquer CTA visível, não só da seção da oferta:
+    // dois botões dourados iguais na mesma tela leem como bug, não como opção
+    var jaTemBotao = ctasFixos.some(function(b){ return naTela(b, 80); });
+    sticky.classList.toggle('on', y > 560 && !jaTemBotao);
   }
   addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
