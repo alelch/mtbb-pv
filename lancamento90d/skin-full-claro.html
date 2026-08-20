@@ -42,7 +42,48 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 
 <!-- A/B Test framework (lancamento90d) — copiado verbatim de lancamento-v1, só o slug muda — multi-teste: pagina (headline) + checkout -->
   <style>html.ab-pending [data-ab-el="headline"]{visibility:hidden!important}
-  </style>
+  
+/* ===== CONSERTOS DE LEGIBILIDADE + BOLHAS DOURADAS ===== */
+/* 99% (marfim): título e sub em carvão */
+.noventa h2{color:#292927 !important}
+.noventa p{color:#57544D !important}
+.noventa p strong{color:#292927 !important}
+/* FECHO (carvão): estava preto-no-preto */
+.final h2,.final .sub,.final p{color:#F3F0E8 !important}
+.final .grifo{background:linear-gradient(transparent 58%,rgba(234,184,45,.5) 58%) !important}
+footer,footer *{color:rgba(243,240,232,.55) !important}
+footer a{color:rgba(243,240,232,.8) !important}
+/* eyebrow do 'O que vem junto' um tom mais escuro */
+.vemjunto .tit{color:#57544D !important}
+
+/* ===== BOLHAS EM CARVÃO COM DOURADO (como no dark) ===== */
+.bolhas{background:#242320 !important}
+.bolhas .abre h2{color:#F3F0E8 !important}
+.bolhas .abre .pergunta{color:#F3F0E8 !important}
+.bolhas .abre .opcoes{color:#C9B77E !important}
+/* anéis: apagados em marfim, ativo dourado com fill âmbar */
+.bol ellipse{stroke:rgba(243,240,232,.18) !important}
+.bol.furada ellipse{stroke:rgba(234,184,45,.32) !important;fill:rgba(234,184,45,.05) !important}
+.bol.viva ellipse{stroke:#EAB82D !important;fill:rgba(234,184,45,.10) !important}
+.bol text{fill:rgba(243,240,232,.5) !important}
+.bol.viva text{fill:#F3F0E8 !important}
+.bb-mini ellipse{stroke:rgba(243,240,232,.18) !important}
+.bb-mini .viva{stroke:#EAB82D !important;fill:rgba(234,184,45,.10) !important}
+.bb-mini .feita{stroke:rgba(234,184,45,.32) !important;fill:rgba(234,184,45,.05) !important}
+/* passos: texto em marfim, eyebrow dourado */
+.bb-passo .eyebrow{color:#EAB82D !important}
+.bb-passo .eyebrow span{color:rgba(234,184,45,.6) !important}
+.bb-passo h3{color:#F3F0E8 !important}
+.bb-passo p{color:rgba(243,240,232,.72) !important}
+.bb-passo p b{color:#F3F0E8 !important}
+.bb-passo .vira{color:#F3F0E8 !important;border-top-color:rgba(243,240,232,.16) !important}
+.bb-passo:not(.viva){opacity:.32}
+/* a acusação "o pior erro" (fica dentro/depois das bolhas) em marfim */
+.erro,.erro *{color:#F3F0E8 !important}
+.erro .risco{background:linear-gradient(transparent 60%,rgba(234,184,45,.6) 60%) !important}
+/* o V entre bolhas(carvão) e virada(carvão): seamless, mesma cor */
+.bolhas:after{background:#242320 !important}
+</style>
   <script>
   (function(){
     var SB="https://jsqtpsxpaclslakafmvd.supabase.co";
@@ -1807,7 +1848,17 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 body{background:#F3F0E8;color:#292927}
 /* seções de peso em carvao, o resto herda o marfim dos tokens */
 .agit,.dany,.virada,.final{background:#242320 !important}
-.noventa{background:#242320 !important;color:#F3F0E8 !important}
+/* o 99% volta pro MARFIM: agitacao(carvao) -> 99%(marfim) restaura o
+   contraste escuro->claro. Duas seções de peso nunca vizinhas. */
+.noventa{background:#F3F0E8 !important;color:#292927 !important;
+  border-top:1px solid rgba(41,41,39,.1)}
+.noventa .hl,.noventa .sl b{color:#292927 !important}
+.noventa .sl{color:#57544D !important}
+/* os 100 livros: escuros apagados sobre o marfim, vivo dourado */
+.noventa .cem i{background:rgba(41,41,39,.22) !important}
+.noventa .cem i.viva{background:#EAB82D !important;box-shadow:0 0 0 3px #F3F0E8,0 0 14px rgba(234,184,45,.55) !important}
+/* o grifo do 99% (era claro sobre laranja) vira dourado translucido sobre marfim */
+.noventa .grifo,.noventa .grifo.claro{background:linear-gradient(transparent 58%,rgba(234,184,45,.5) 58%) !important}
 .press{background:#FBFAF6 !important}
 .bolhas,.offer{background:#F3F0E8 !important}
 /* nas seções ESCURAS o dourado volta a poder ser texto/acento */
@@ -1852,6 +1903,46 @@ body{background:#F3F0E8;color:#292927}
 .curva .cato,.curva .cdia,.curva .ceixo{fill:rgba(243,240,232,.6) !important}
 /* mosaico de provas e bolhas: eyebrows em carvao suave sobre marfim */
 .bb-passo .eyebrow{color:#6E6B63 !important}
+/* ===== CONSERTOS DE LEGIBILIDADE + BOLHAS DOURADAS ===== */
+/* 99% (marfim): título e sub em carvão */
+.noventa h2{color:#292927 !important}
+.noventa p{color:#57544D !important}
+.noventa p strong{color:#292927 !important}
+/* FECHO (carvão): estava preto-no-preto */
+.final h2,.final .sub,.final p{color:#F3F0E8 !important}
+.final .grifo{background:linear-gradient(transparent 58%,rgba(234,184,45,.5) 58%) !important}
+footer,footer *{color:rgba(243,240,232,.55) !important}
+footer a{color:rgba(243,240,232,.8) !important}
+/* eyebrow do 'O que vem junto' um tom mais escuro */
+.vemjunto .tit{color:#57544D !important}
+
+/* ===== BOLHAS EM CARVÃO COM DOURADO (como no dark) ===== */
+.bolhas{background:#242320 !important}
+.bolhas .abre h2{color:#F3F0E8 !important}
+.bolhas .abre .pergunta{color:#F3F0E8 !important}
+.bolhas .abre .opcoes{color:#C9B77E !important}
+/* anéis: apagados em marfim, ativo dourado com fill âmbar */
+.bol ellipse{stroke:rgba(243,240,232,.18) !important}
+.bol.furada ellipse{stroke:rgba(234,184,45,.32) !important;fill:rgba(234,184,45,.05) !important}
+.bol.viva ellipse{stroke:#EAB82D !important;fill:rgba(234,184,45,.10) !important}
+.bol text{fill:rgba(243,240,232,.5) !important}
+.bol.viva text{fill:#F3F0E8 !important}
+.bb-mini ellipse{stroke:rgba(243,240,232,.18) !important}
+.bb-mini .viva{stroke:#EAB82D !important;fill:rgba(234,184,45,.10) !important}
+.bb-mini .feita{stroke:rgba(234,184,45,.32) !important;fill:rgba(234,184,45,.05) !important}
+/* passos: texto em marfim, eyebrow dourado */
+.bb-passo .eyebrow{color:#EAB82D !important}
+.bb-passo .eyebrow span{color:rgba(234,184,45,.6) !important}
+.bb-passo h3{color:#F3F0E8 !important}
+.bb-passo p{color:rgba(243,240,232,.72) !important}
+.bb-passo p b{color:#F3F0E8 !important}
+.bb-passo .vira{color:#F3F0E8 !important;border-top-color:rgba(243,240,232,.16) !important}
+.bb-passo:not(.viva){opacity:.32}
+/* a acusação "o pior erro" (fica dentro/depois das bolhas) em marfim */
+.erro,.erro *{color:#F3F0E8 !important}
+.erro .risco{background:linear-gradient(transparent 60%,rgba(234,184,45,.6) 60%) !important}
+/* o V entre bolhas(carvão) e virada(carvão): seamless, mesma cor */
+.bolhas:after{background:#242320 !important}
 </style>
 </body>
 </html>
