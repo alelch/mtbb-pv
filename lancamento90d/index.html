@@ -663,13 +663,15 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 /* CORTE: o segundo respiro coral da página. */
 
 /* DEPOIMENTOS: marquee que sangra. Quebra a coluna e traz movimento contínuo. */
-.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+.marquee{width:calc(100% - 44px);max-width:calc(var(--maxw) - 44px);margin-left:auto;margin-right:auto;
+  padding:14px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.marquee+.marquee{margin-top:16px}
+.marquee+.marquee{margin-top:-12px}
 .mrow{display:flex;width:max-content;animation:desliza 62s linear infinite}
 .marquee.rev .mrow{animation-direction:reverse;animation-duration:74s}
 .marquee:hover .mrow{animation-play-state:paused}
-.mrow img{height:300px;width:auto;flex:0 0 auto;margin-right:18px;object-fit:cover}
+.mrow img{height:300px;width:auto;flex:0 0 auto;margin-right:18px;object-fit:cover;
+  border-radius:14px;box-shadow:0 12px 26px -16px rgba(0,0,0,.4)}
 @keyframes desliza{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 @media(max-width:700px){.mrow img{height:170px}}
 @media(prefers-reduced-motion:reduce){.mrow{animation:none}}
