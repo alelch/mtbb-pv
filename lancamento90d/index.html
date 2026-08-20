@@ -20,9 +20,9 @@
 
 <link rel="preconnect" href="https://connect.facebook.net">
 <link rel="dns-prefetch" href="https://pay.hotmart.com">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9mXg.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/V8mDoQDjQSkFtoMM3T6r8E7mPbF4C_k3HqU.woff2">
-<link rel="stylesheet" href="assets/fonts.css">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/dmsans-sub.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/grotesk-sub.woff2">
+
 
 <!-- Meta Pixel: PageView imediato por beacon (preserva connect rate), fbevents no idle -->
 <script>
@@ -362,6 +362,11 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .bb-passo.viva .eyebrow{color:var(--accent)}
 .bb-passo h3{font-size:clamp(1.4rem,3.4vw,1.95rem);margin-bottom:12px}
 .bb-passo p{color:var(--soft);font-size:1.02rem;line-height:1.6;margin:0;max-width:44ch}
+/* a linha do mecanismo: separada do diagnóstico por um fio, porque ela não
+   descreve a bolha, ela diz como se sai dela */
+.bb-passo .vira{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);
+  color:var(--ink);font-weight:500;font-size:.99rem;line-height:1.55}
+.bb-passo .vira b{font-weight:700}
 .bb-mini{display:none;width:100%;max-width:210px;margin:0 0 20px}
 .bb-mini circle{fill:none;stroke:var(--border);stroke-width:1.6}
 .bb-mini .viva{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.10)}
@@ -613,6 +618,20 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
    MTBB, que e' o que faz aquela pagina ter voz. La' a tinta e' amarelo #FAAB00;
    aqui e' o laranja unico da 90D, com a variante .claro pra fundo laranja.
    REGRA: grifo marca PROMESSA, risco marca AMEAÇA, no maximo um por seção. */
+/* Corpo e títulos: 7 faces alcançáveis, inline.
+   Eram 20 numa folha externa. As outras 13 são inalcançáveis nesta página:
+   latin-ext (zero caracteres da copy caem naquela faixa) e itálico de
+   DM Sans (o itálico daqui é Fraunces). São fontes VARIÁVEIS, então um
+   arquivo por família cobre todos os pesos.
+   Subset pt-BR de 143 glifos: a copy usa 88, sobra de 55. */
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/grotesk-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/grotesk-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/grotesk-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/grotesk-sub.woff2) format('woff2')}
+
 /* Fontes decorativas com subset EXATO dos glifos que a página usa:
    Caveat 74,9 -> 11,8 KB · Fraunces 22,9 -> 5,3 KB. Juntas, -80,7 KB.
    ⚠️ Se a copy do .mao ou do .serifa ganhar uma letra nova, ela cai no
@@ -851,6 +870,7 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .vemjunto ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 26px}
 .vemjunto li{position:relative;padding-left:22px;font-size:.92rem;color:var(--soft);line-height:1.5}
 .vemjunto li b{color:var(--ink);font-weight:600}
+.vemjunto li:last-child:nth-child(odd){grid-column:1/-1}
 .vemjunto li:before{content:"";position:absolute;left:2px;top:.42em;width:5px;height:10px;
   border-right:2px solid var(--verde);border-bottom:2px solid var(--verde);transform:rotate(40deg)}
 @media(max-width:640px){.vemjunto ul{grid-template-columns:1fr}}
@@ -1040,17 +1060,20 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
           <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="" cx="62" cy="60" r="56"/><circle class="" cx="48" cy="60" r="42"/><circle class="viva" cx="34" cy="60" r="28"/></svg>
           <p class="eyebrow">Bolha 1 · fora dela, ninguém sabe</p>
           <h3>Amigos e família</h3>
-          <p>Eles compram rápido e elogiam. É a bolha que engana: a primeira semana parece sucesso, o livro vende trinta, cinquenta exemplares, e aí para. O que parecia começo era o teto.</p>        </div>
+          <p>Eles compram rápido e elogiam. É a bolha que engana: a primeira semana parece sucesso, o livro vende trinta, cinquenta exemplares, e aí para. O que parecia começo era o teto.</p>
+          <p class="vira"><b>É aqui que 99% dos livros ficam presos.</b> E o autor conclui que o problema era o livro.</p>        </div>
         <div class="bb-passo">
           <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="" cx="62" cy="60" r="56"/><circle class="viva" cx="48" cy="60" r="42"/><circle class="feita" cx="34" cy="60" r="28"/></svg>
           <p class="eyebrow">Bolha 2 · você passa a ser esperado</p>
           <h3>Desconhecidos</h3>
-          <p>Gente que nunca ouviu falar de você e mesmo assim decide comprar. Não acontece por acaso: acontece quando existe desejo antes de existir livro na prateleira.</p>        </div>
+          <p>O que faz alguém que não te conhece parar no seu livro? Nunca é acaso. Avaliação, estrela, exemplar presenteado, conversa: tudo isso sai da bolha 1.</p>
+          <p class="vira"><b>Soft-marketing é a estratégia que leva isso para fora do seu círculo.</b> Sem virar vendedor, e com o que você já sabe fazer.</p>        </div>
         <div class="bb-passo">
           <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="viva" cx="62" cy="60" r="56"/><circle class="feita" cx="48" cy="60" r="42"/><circle class="feita" cx="34" cy="60" r="28"/></svg>
           <p class="eyebrow">Bolha 3 · você é lido</p>
           <h3>Boca a boca</h3>
-          <p>A única bolha que cresce sozinha: o leitor termina e recomenda. Não é sorte, é consequência de o livro ter feito alguma coisa por ele.</p>        </div>
+          <p>A única bolha que cresce sozinha: o leitor termina e recomenda.</p>
+          <p class="vira"><b>Só chega aqui o livro que muda alguma coisa em quem leu.</b> Nenhuma estratégia inventa isso.</p>        </div>
       </div>
     </div>
 
@@ -1304,6 +1327,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         <li><b>A planilha guiada</b> dos seus primeiros cem compradores</li>
         <li><b>O plano de pré-venda</b>, para estrear vendendo</li>
         <li><b>O roteiro do pós-lançamento</b>, para não morrer em trinta dias</li>
+        <li><b>O soft-marketing</b>, para chegar em quem não te conhece</li>
         <li><b>Checklist de cada etapa</b>, com prazos</li>
         <li><b>Marcos nos dias 15, 45 e 90</b>, para saber se você está no ritmo</li>
         <li><b>Acesso vitalício</b>, para usar neste livro e em todos os próximos</li>
