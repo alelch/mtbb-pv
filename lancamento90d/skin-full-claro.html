@@ -1,0 +1,1857 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/webp" href="favicon.webp">
+
+<title>Lançamento 90D | The Book Business</title>
+<meta name="description" content="O plano de 90 dias que faz o seu livro entrar no mercado vendendo: crie desejo, gere antecipação e lance vendendo. Com Dany Sakugawa.">
+<meta name="author" content="The Book Business">
+<!-- ⚠️ REMOVER NO LANÇAMENTO: enquanto o checkout for placeholder, a página não pode ser indexada -->
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://metodo.thebookbusiness.com.br/lancamento90d/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lançamento 90D | The Book Business">
+<meta property="og:description" content="De invisível a lido. O plano de 90 dias que faz o seu livro entrar no mercado vendendo.">
+<meta property="og:url" content="https://metodo.thebookbusiness.com.br/lancamento90d/">
+<meta property="og:image" content="https://metodo.thebookbusiness.com.br/lancamento90d/assets/dany-bio-B0X57zHq.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://pay.hotmart.com">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/dmsans-sub.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/grotesk-sub.woff2">
+
+
+<!-- Meta Pixel: PageView imediato por beacon (preserva connect rate), fbevents no idle -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document,'script');
+fbq('init','1665265050801984'); fbq('init','617884976680212');
+(function(){try{['1665265050801984','617884976680212'].forEach(function(id){
+new Image().src='https://www.facebook.com/tr?id='+id+'&ev=PageView&noscript=1';});}catch(e){}})();
+(function(){var l=false;function go(){if(l)return;l=true;var t=document.createElement('script');
+t.async=true;t.src='https://connect.facebook.net/en_US/fbevents.js';
+var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(t,s);}
+if('requestIdleCallback' in window)requestIdleCallback(go,{timeout:2500});else setTimeout(go,2000);
+['scroll','click','touchstart','keydown','mousemove'].forEach(function(ev){
+document.addEventListener(ev,go,{once:true,passive:true});});})();
+</script>
+
+<!-- A/B Test framework (lancamento90d) — copiado verbatim de lancamento-v1, só o slug muda — multi-teste: pagina (headline) + checkout -->
+  <style>html.ab-pending [data-ab-el="headline"]{visibility:hidden!important}
+  </style>
+  <script>
+  (function(){
+    var SB="https://jsqtpsxpaclslakafmvd.supabase.co";
+    var AK="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc";
+    var PAGINA="lancamento90d";
+    // FALLBACK: espelho do ab_testes ao vivo. Visitante NOVO (sem cache) aplica isto no 1o paint
+    // p/ view + marcador |ck + oferta acontecerem mesmo se o fetch da config falhar (resiliência
+    // ao apagão de tracking em pico/4G). O fetch fresco sobrescreve. ⚠️ ATUALIZAR se o teste mudar
+    // (slug/sck_tag/vencedor/URLs). Só listar testes ATIVOS: entrada aqui = teste rodando de verdade.
+    //
+    // VAZIO de propósito (10/08): o teste de página de julho foi ARQUIVADO e o de checkout está PAUSADO.
+    // ⚠️ O entry velho (lancamento-v1-pagina-vsl → /lancamento-v1-vsl/) FOI REMOVIDO porque o branch de
+    // redirect voltou a existir nesta página: deixá-lo aqui mandaria todo visitante com Supabase
+    // bloqueado pra página errada.
+    //
+    // ⚠️⚠️ AO ATIVAR o teste de checkout 23/08 no dash, é OBRIGATÓRIO descomentar o bloco abaixo e dar
+    // push (senão os ~9% com Supabase bloqueado ficam fora do split, sem redirect e sem |ck).
+    // Ao pausar, comentar de volta. O bloco espelha ab_testes: escopo=pagina, redirect por variante.
+    // ✅ ATIVO desde 10/08. Pesos espelhados do ab_testes: A=80 B=20 (cliente mudou 11/08).
+    // ⚠️ MUDOU PESO NO DASH? Tem que atualizar aqui e dar push, senao os ~9% com Supabase
+    // bloqueado continuam no split antigo.
+    var FALLBACK=[];   // nenhum teste ativo nesta página (header decidido: venceu A = headline original)
+    var FIXED_HEADLINE=null;
+    var H=document.documentElement;
+    H.classList.add('ab-pending');
+    function ck(n,v,d){ if(v===undefined){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return m?decodeURIComponent(m[2]):null;}
+      var e=new Date(); e.setTime(e.getTime()+d*864e5); document.cookie=n+"="+encodeURIComponent(v)+";expires="+e.toUTCString()+";path=/;SameSite=Lax"; }
+    function vid(){ var k="ab_vid",v=null; try{v=localStorage.getItem(k);}catch(e){} if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8); try{localStorage.setItem(k,v);}catch(e){}} return v; }
+    function pick(vs){ var t=0,i; for(i=0;i<vs.length;i++)t+=(vs[i].peso||1); var r=Math.random()*t,a=0; for(i=0;i<vs.length;i++){a+=(vs[i].peso||1); if(r<=a)return vs[i].id;} return vs[0].id; }
+    function reveal(){ try{applyHeadline(FIXED_HEADLINE);}catch(e){} H.classList.remove('ab-pending'); }
+    // guarda a headline nativa do HTML na 1ª troca, pra conseguir DESFAZER quando o teste acabar
+    var _ORIG_HL=null;
+    function _snapHeadline(){ if(_ORIG_HL!==null)return; var e=document.querySelector('[data-ab-el="headline"]'); if(e)_ORIG_HL=e.innerHTML; }
+    function restoreHeadline(){ if(_ORIG_HL==null)return; var els=document.querySelectorAll('[data-ab-el="headline"]'); for(var i=0;i<els.length;i++)els[i].innerHTML=_ORIG_HL; }
+    function applyHeadline(txt){ if(txt==null)return; _snapHeadline(); var els=document.querySelectorAll('[data-ab-el="headline"]'); for(var i=0;i<els.length;i++){ if(/[<&]/.test(txt))els[i].innerHTML=txt; else els[i].textContent=txt; } }
+    function abFitHeadline(){ try{
+      var els=document.querySelectorAll('[data-ab-el="headline"]');
+      var desktop=window.innerWidth>=640;
+      requestAnimationFrame(function(){ try{
+        function nlines(el){ var r=document.createRange(); r.selectNodeContents(el); var rs=r.getClientRects(), tops={}, n=0;
+          for(var k=0;k<rs.length;k++){ if(rs[k].width<1||rs[k].height<1) continue; var t=Math.round(rs[k].top); if(!(t in tops)){ tops[t]=1; n++; } } return n; }
+        for(var i=0;i<els.length;i++){ var el=els[i]; if(el.offsetParent===null) continue;
+          if(desktop){
+            // desktop: só AMPLIA headline curta (<=2 linhas) até encher, sem virar 3ª linha (mais chamativo).
+            // Headline longa (A, 3+ linhas) fica no tamanho original da classe.
+            el.style.fontSize=''; el.style.lineHeight='';
+            var base=nlines(el);
+            if(base>0 && base<=2){
+              el.style.lineHeight='1.1';
+              var g=parseFloat(getComputedStyle(el).fontSize)||44;
+              while(g<54){ el.style.fontSize=(g+1)+'px'; if(nlines(el)>2) break; g++; }
+              el.style.fontSize=g+'px';
+            }
+          } else {
+            // mobile: piso 28 (= original) até 44px, máximo 3 linhas
+            var MINF=28, MAXF=44, MAXLINES=3;
+            el.style.lineHeight='1.1'; var f=MAXF;
+            while(f>MINF){ el.style.fontSize=f+'px'; if(nlines(el)<=MAXLINES) break; f-=1; }
+            el.style.fontSize=f+'px';
+          }
+        }
+      }catch(e){} });
+    }catch(e){} }
+    window.__ABTESTS=[]; window.__ABCK=null; window.__ABREADY=false;
+    window.__abTrack=function(slug,variant,ev,extra){ if(window.__ABPREVIEW)return; try{ var b={teste_slug:slug,variante:variant,evento:ev,visitor_id:vid()}; if(extra)for(var k in extra)b[k]=extra[k];
+        fetch(SB+"/rest/v1/ab_eventos",{method:"POST",keepalive:true,headers:{apikey:AK,Authorization:"Bearer "+AK,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(b)}); }catch(e){} };
+    function assign(tests){ var out=[], needHide=false; window.__ABCK=null;
+      (tests||[]).forEach(function(t){ var vs=t.variantes||[]; if(!vs.length)return;
+        var variant=t.vencedor||ck('ab_'+t.slug);
+        if(!variant||!vs.some(function(v){return v.id===variant;})) variant=t.vencedor||pick(vs);
+        if(!t.vencedor) ck('ab_'+t.slug,variant,30);
+        var ov=(vs.filter(function(v){return v.id===variant;})[0]||{}).overrides||{};
+        /* REDIRECT DE TESTE — habilitado SÓ nesta página (A / base). Teste de checkout 23/08 = 2 páginas
+           distintas, cada uma com o checkout FIXO no HTML (nada é trocado em runtime, então o xcod da
+           VTurb nunca é apagado). Variante A = esta página (o guard de pathname não redireciona);
+           variante B = /lancamento-v1-b/. ⚠️ A página de DESTINO (-b) NÃO pode ter este branch:
+           redirect nas duas = loop por construção (incidente de 23/07). */
+        if(ov.redirect){var _tp=(''+ov.redirect).replace(/^https?:\/\/[^\/]+/,'').replace(/[?#].*$/,'').replace(/\/+$/,'');if(location.pathname.replace(/\/+$/,'')!==_tp){window.__ABREDIR=true;location.replace(ov.redirect+location.search+location.hash);return;}}
+        out.push({slug:t.slug,variant:variant,sck_tag:t.sck_tag,escopo:t.escopo,ov:ov});
+        if(ov.headline!=null) needHide=true;
+        if(ov.checkout) window.__ABCK=ov.checkout; });
+      window.__ABTESTS=out; return needHide; }
+    function applyAll(){
+      window.__ABGEN=(window.__ABGEN||0)+1; // config nova -> reprocessa os links (data-ab-gen)
+      window.__ABREADY=true;
+      window.__ABTESTS.forEach(function(t){ if(t.ov.headline!=null) applyHeadline(t.ov.headline); });
+      // view logging PRIMEIRO e isolado: não pode ser bloqueado por erro no reprocess/reveal/fit
+      window.__ABTESTS.forEach(function(t){ var seen=null; try{seen=localStorage.getItem('ab_seen_'+t.slug);}catch(e){}
+        if(seen!==t.variant){ try{localStorage.setItem('ab_seen_'+t.slug,t.variant);}catch(e){} window.__abTrack(t.slug,t.variant,'view'); } });
+      try{ if(typeof window.__abReprocess==='function') window.__abReprocess(); }catch(e){} // reescreve checkout + tags nos links
+      try{ reveal(); abFitHeadline(); }catch(e){}
+    }
+    setTimeout(function(){ window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); },1500); // failsafe
+    // MODO PREVIEW: ?ver=B (headline), ?ver=ckA (checkout), ?ver=pgB,ckA — força variante, sem logar evento nem grudar cookie, mesmo com teste OFF
+    var PREVIEW=(new URLSearchParams(location.search).get('ver')||'').trim();
+    if(PREVIEW){
+      window.__ABPREVIEW=true;
+      var force={};
+      PREVIEW.split(',').forEach(function(tok){ tok=tok.trim(); if(!tok)return;
+        if(tok.length<=1) force['_pag']=tok.toUpperCase(); else force[tok.slice(0,-1)]=tok.slice(-1).toUpperCase(); });
+      fetch(SB+"/rest/v1/ab_testes?pagina=eq."+PAGINA+"&select=slug,escopo,sck_tag,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
+        .then(function(r){return r.json();})
+        .then(function(rows){ var out=[];
+          (rows||[]).forEach(function(t){ var vs=t.variantes||[]; var fv=force[t.sck_tag]||(t.escopo==='pagina'?force['_pag']:null); if(!fv)return;
+            var ov=(vs.filter(function(v){return v.id===fv;})[0]||{}).overrides||{};
+            out.push({slug:t.slug,variant:fv,sck_tag:t.sck_tag,escopo:t.escopo,ov:ov}); if(ov.checkout)window.__ABCK=ov.checkout; });
+          window.__ABTESTS=out;
+          if(out.some(function(t){return t.ov.headline!=null;})) H.classList.add('ab-pending');
+          var pa=function(){ out.forEach(function(t){ if(t.ov.headline!=null)applyHeadline(t.ov.headline); }); window.__ABGEN=(window.__ABGEN||0)+1; window.__ABREADY=true; if(typeof window.__abReprocess==='function')window.__abReprocess(); reveal(); abFitHeadline(); };
+          if(document.readyState!=='loading')pa(); else document.addEventListener('DOMContentLoaded',pa);
+        })
+        .catch(function(){ window.__ABREADY=true; reveal(); });
+      return; // preview não roda o fluxo normal
+    }
+    // visita repetida: aplica do cache (sem flash). Visitante NOVO sem cache: usa FALLBACK
+    // (mesma coisa que o cache faria) p/ view + marcador + oferta valerem sem depender do fetch.
+    var cached=null; try{cached=JSON.parse(localStorage.getItem('ab_cfg_'+PAGINA)||'null');}catch(e){}
+    var seed=(cached&&cached.length)?cached:FALLBACK;
+    if(seed&&seed.length){ if(assign(seed))H.classList.add('ab-pending');
+      if(document.readyState!=='loading')applyAll(); else document.addEventListener('DOMContentLoaded',applyAll); }
+    // config fresca (controle ao vivo)
+    fetch(SB+"/rest/v1/ab_testes?pagina=eq."+PAGINA+"&ativo=eq.true&select=slug,escopo,sck_tag,vencedor,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
+      .then(function(r){return r.json();})
+      .then(function(rows){ rows=rows||[];
+        try{localStorage.setItem('ab_cfg_'+PAGINA,JSON.stringify(rows));}catch(e){}
+        // teste acabou: desfaz o que o CACHE local aplicou (senão quem participou do teste continua
+        // vendo a variante dele por mais uma visita — bug real visto ao encerrar o teste de header)
+        if(!rows.length){ restoreHeadline(); window.__ABTESTS=[]; window.__ABCK=null; window.__ABGEN=(window.__ABGEN||0)+1; window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); return; }
+        if(assign(rows)&&!cached)H.classList.add('ab-pending');
+        if(document.readyState!=='loading')applyAll(); else document.addEventListener('DOMContentLoaded',applyAll);
+      })
+      .catch(function(){ window.__ABREADY=true; reveal(); if(typeof window.__abReprocess==='function')window.__abReprocess(); });
+    // auto-ajuste do tamanho da headline no mobile (sempre, mesmo com teste OFF; recalcula no resize)
+    var _fitT; function _fitGo(){ clearTimeout(_fitT); _fitT=setTimeout(abFitHeadline,60); }
+    if(document.readyState!=='loading')_fitGo(); else document.addEventListener('DOMContentLoaded',_fitGo);
+    window.addEventListener('resize',_fitGo); window.addEventListener('orientationchange',_fitGo);
+  })();
+  </script>
+
+<style>
+/* ============================================================
+   Lançamento 90D — The Book Business
+   Paleta da casa (mesma das PVs do Método): claro, cards brancos, âmbar.
+   ============================================================ */
+:root{
+  --bg:#F8F8F8;
+  --card:#FFFFFF;
+  --ink:#3A3A38;
+  --soft:#555555;
+  --mute:#707070;
+  --border:#EEEEEE;
+  --line:#E4E4E4;
+  --accent:#FC783C;          /* fundo, linhas, marcadores */
+  --accent-soft:rgba(252,120,60,.12);
+  --verde:#14523E;   /* a UNICA cor da virada: ela e' o 1% */
+  --morto:#6E1A12;   /* os 99 que nao saem da primeira bolha */
+  --shadow:0 1px 3px rgba(0,0,0,.04);
+  --shadow-lg:0 18px 40px -28px rgba(0,0,0,.35);
+  --maxw:1120px;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);overflow-x:hidden;
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;
+  font-size:17px;line-height:1.65;letter-spacing:-.005em;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.narrow{max-width:760px}
+section{padding:80px 0}
+@media(max-width:760px){section{padding:54px 0}body{font-size:16px}}
+
+h1,h2,h3{font-family:'Space Grotesk','DM Sans',sans-serif;line-height:1.1;letter-spacing:-.03em;margin:0;color:var(--ink)}
+h1{font-size:clamp(2rem,5.2vw,3.7rem);font-weight:700}
+h2{font-size:clamp(1.62rem,3.8vw,2.7rem);font-weight:700}
+h3{font-size:1.14rem;font-weight:700;letter-spacing:-.02em}
+p{margin:0 0 1.05em}
+
+.eyebrow{
+  font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 16px
+}
+.lead{font-size:clamp(1.02rem,2vw,1.24rem);color:var(--soft);line-height:1.6}
+
+/* ---------- logo (arquivo oficial: coral #FC783C + escuro #303030) ---------- */
+.mark-img{height:21px;width:auto;display:block}
+
+/* ---------- botão ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--accent);color:#303030;text-decoration:none;font-weight:700;
+  font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em;
+  padding:21px 40px;border-radius:999px;border:0;cursor:pointer;font-size:1.1rem;line-height:1;
+  box-shadow:0 10px 24px -14px rgba(252,120,60,.9);
+  transition:transform .16s ease,box-shadow .16s ease,background .16s ease
+}
+.btn:hover{filter:brightness(.93);transform:translateY(-1px);box-shadow:0 16px 30px -14px rgba(252,120,60,1)}
+.btn:active{transform:translateY(0)}
+.btn.block{display:flex;width:100%}
+
+/* ---------- hero ----------
+   Tipografia medida na lancamento-v1, que é a página provada:
+   H1 36px / entrelinha 1.12 / tracking -0.9px / largura máx 552px
+   sub 16px / entrelinha 1.4 / largura máx 372px
+   Sem logo e sem botão: o CTA da primeira dobra é o do próprio player. */
+.hero{background:var(--card);padding:64px 0 44px;text-align:center}
+.hero .wrap>*{margin-left:auto;margin-right:auto}
+.chapeu{
+  font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;line-height:1.12;
+  letter-spacing:-.9px;max-width:552px;color:var(--ink)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .sub{
+  margin-top:14px;max-width:372px;font-size:16px;line-height:1.4;color:var(--soft)}
+@media(max-width:600px){
+  .hero{padding-top:52px}
+  .hero h1{font-size:30px;letter-spacing:-.6px}
+}
+
+/* player 9:16 (medido no VTurb: 400x711) */
+.player{margin:30px auto 0;width:100%;max-width:392px;border-radius:16px;overflow:hidden;
+  background:#303030;box-shadow:0 26px 54px -28px rgba(0,0,0,.72)}
+.player .slot{aspect-ratio:9/16;display:flex;align-items:center;justify-content:center}
+.player vturb-smartplayer{display:block;width:100%;height:100%}
+.player .slot>*{width:100%;height:100%}
+.stats{text-align:left}
+.player .ph{text-align:center;padding:26px;color:#8A8A8A;font-size:.9rem;max-width:44ch}
+.player .ph b{display:block;color:#D8D8D8;font-family:'Space Grotesk',sans-serif;font-size:1.05rem;margin-bottom:8px}
+.player iframe,.player video{width:100%;height:100%;border:0;display:block}
+
+/* números */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;border-top:1px solid var(--border);padding-top:24px}
+.stats b{display:block;font-family:'Space Grotesk',sans-serif;font-size:clamp(1.2rem,2.8vw,1.7rem);font-weight:700;letter-spacing:-.03em}
+.stats span{font-size:.78rem;color:var(--mute);display:block;margin-top:2px;line-height:1.35}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr);gap:20px 12px}}
+
+/* ---------- imprensa ---------- */
+.press{background:var(--card);padding:32px 0}
+/* rotulo com a mesma medida do lancamento-v1: 12px, peso 700, 2.4px de tracking */
+.press p{text-align:center;font-size:12px;font-weight:700;letter-spacing:2.4px;
+  text-transform:uppercase;color:var(--mute);margin:0 0 24px}
+/* PISTA INFINITA: duas copias identicas rolando -50%; no fim da primeira a
+   segunda esta' exatamente no lugar dela, entao o laco nao tem emenda.
+   Rolar tirou a restricao de largura, e' por isso que os logos crescem 25%. */
+.press-pista{overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.press-trilho{display:flex;align-items:center;width:max-content;
+  animation:desfila 42s linear infinite}
+.press-trilho:hover{animation-play-state:paused}
+.press-trilho img{height:calc(var(--h,40) * 1px);width:auto;flex:0 0 auto;margin-right:56px}
+@keyframes desfila{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media(prefers-reduced-motion:reduce){
+  .press-trilho{animation:none;flex-wrap:wrap;justify-content:center;width:auto;gap:28px}
+  .press-trilho img{margin-right:0}
+  .press-trilho img[aria-hidden]{display:none}
+  .press-pista{-webkit-mask-image:none;mask-image:none}
+}
+@media(max-width:600px){.press-trilho img{height:calc(var(--h,40) * .8px);margin-right:38px}}
+
+/* ---------- agitação ---------- */
+.agit .big{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.55rem,3.8vw,2.5rem);line-height:1.17;margin:0 0 24px
+}
+.agit .big i{font-style:normal;color:var(--accent)}
+/* ============================================================
+   OS TRÊS ATOS (diagrama)
+   Os atos se sobrepõem: o primeiro não termina quando o segundo começa.
+   Por isso é faixa acumulando, não caixa em sequência.
+   ============================================================ */
+/* a nota do ciclo sobreviveu à fusão e agora fecha a faixa de tempo */
+/* ============ AS TRÊS BOLHAS ============
+   A bolha acesa usa o laranja CHEIO, fora da rampa de saturação: é o objeto
+   focal da seção e um diagrama dessaturado lê como quebrado, não como sistema. */
+.bolhas{background:var(--bg);padding-bottom:clamp(18px,2.4vw,38px);position:relative}
+/* O V DA VIRADA: a fronteira entre o claro e o verde deixa de ser reta. Um
+   triangulo da cor do fundo desce por cima do verde, entao a propria quebra
+   de secao aponta pra baixo. Feito com borda, nao com clip-path, pra nao
+   correr risco de cortar conteudo em tela curta. */
+.bolhas:after{content:'';position:absolute;left:0;right:0;top:100%;z-index:2;
+  height:clamp(40px,6vw,90px);background:var(--bg);
+  -webkit-clip-path:polygon(0 0, 50% 100%, 100% 0);
+  clip-path:polygon(0 0, 50% 100%, 100% 0)}
+.bolhas .wrap{max-width:1240px}
+.bolhas .abre{max-width:660px;margin:0 auto;text-align:center}
+.bolhas .abre h2{font-size:clamp(1.7rem,4.2vw,2.5rem)}
+/* a segunda pergunta é a que dói: ganha corpo próprio e a marca de ameaça */
+.bolhas .abre .opcoes{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:.01em;color:#757168;font-size:clamp(1.2rem,2.8vw,1.7rem);margin:16px 0 0}
+.bolhas .abre .pergunta{color:var(--soft);font-size:1.06rem;line-height:1.5;
+  margin:10px auto 0;max-width:40ch}
+.bolhas .abre h2 .risco{white-space:nowrap}
+.bb{display:grid;grid-template-columns:1.3fr 1fr;gap:52px;align-items:start;margin-top:36px}
+.bb-palco{position:sticky;top:calc(50vh - min(22vw, 31vh));height:min(44vw, 62vh);
+  display:flex;align-items:center;justify-content:center}
+.bb-palco svg{height:100%;width:auto;max-width:100%;overflow:visible}
+.bol ellipse{fill:none;stroke:var(--border);stroke-width:1.6;
+  transition:stroke .6s var(--ease),fill .6s var(--ease),stroke-width .6s var(--ease)}
+.bol text{font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;fill:#757168;transition:fill .6s var(--ease)}
+.bol.furada ellipse{stroke:rgba(252,120,60,.32);fill:rgba(252,120,60,.05)}
+.bol.viva ellipse{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.09)}
+.bol.viva text{fill:var(--ink)}
+.bb-trilho{padding:0}
+.bb-passo{min-height:76vh;display:flex;flex-direction:column;justify-content:center;
+  transition:opacity .6s var(--ease)}
+html.js .bb-passo:not(.viva){opacity:.26}
+.bb-passo .eyebrow{color:#A8A5A0;transition:color .6s var(--ease)}
+/* sempre em duas linhas: etiqueta em cima, estado embaixo */
+.bb-passo .eyebrow span{display:block;opacity:.72;margin-bottom:2px}
+.bb-passo.viva .eyebrow{color:var(--accent)}
+.bb-passo h3{font-size:clamp(1.4rem,3.4vw,1.95rem);margin-bottom:12px}
+.bb-passo p{color:var(--soft);font-size:1.02rem;line-height:1.6;margin:0;max-width:44ch}
+/* a linha do mecanismo: separada do diagnóstico por um fio, porque ela não
+   descreve a bolha, ela diz como se sai dela */
+.bb-passo .vira{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);
+  color:var(--ink);font-weight:500;font-size:.99rem;line-height:1.55}
+.bb-passo .vira b{font-weight:700}
+.bb-mini{display:none;width:100%;max-width:210px;margin:0 0 20px}
+.bb-mini circle{fill:none;stroke:var(--border);stroke-width:1.6}
+.bb-mini .viva{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.10)}
+.bb-mini .feita{stroke:rgba(252,120,60,.34);fill:rgba(252,120,60,.05)}
+/* O ERRO fecha as bolhas: elas dizem ONDE o livro trava, essa diz QUANDO o
+   autor erra, e a virada logo abaixo comeca no dia 0. */
+.erro{text-align:center;margin:clamp(48px,7vw,84px) auto 0;padding-top:clamp(40px,5vw,60px);
+  border-top:1px solid var(--border);max-width:900px}
+.erro b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.035em;color:var(--ink);
+  font-size:clamp(1.4rem,3.6vw,2.35rem);line-height:1.22;max-width:none;margin:0 auto}
+
+/* ══ A VIRADA ══
+   A UNICA secao verde da pagina, de proposito: ela e' o 1%, entao a raridade
+   da cor e' o proprio recado. Gramatica de cor da pagina agora:
+   escuro = o risco · laranja = os 99% · verde = o 1%.
+   Por isso NAO entra laranja aqui dentro: laranja e' a cor do problema. */
+.virada{background:var(--verde);color:#fff;text-align:center;
+  padding:clamp(96px,10vw,140px) 0 clamp(72px,9vw,116px)}
+.virada .eyebrow{color:rgba(255,255,255,.62)}
+.virada .eyebrow.forte{color:#fff;font-size:.86rem;letter-spacing:.2em;margin-bottom:16px}
+.virada h2{color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.02em;font-size:clamp(1.8rem,4.6vw,3rem);max-width:18ch;margin:0 auto}
+.virada h2 em{font-style:normal;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap}
+/* O TITULO CONTA: comeca em 100% e desce ate 1% conforme a tela desce. O
+   numero CRESCE enquanto encolhe (relacao inversa = drama), fica laranja ao
+   chegar em 1% e so' entao o resto da frase se escreve.
+   Laranja aqui passa no contraste porque e' texto grande em negrito (3,42:1
+   contra os 3:1 exigidos); no chapeu pequeno nao passaria. */
+.virada h2 .pct{display:inline-block;font-size:calc(1em + var(--k,0) * .5em);
+  transition:color .45s var(--ease)}
+.virada h2.chegou .pct{color:var(--accent)}
+.virada h2 .resto .w{display:inline-block;opacity:0;transform:translateY(10px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.virada h2.chegou .resto .w{opacity:1;transform:none}
+html:not(.js) .virada h2 .resto .w{opacity:1!important;transform:none!important}
+@media(prefers-reduced-motion:reduce){
+  .virada h2 .resto .w{opacity:1!important;transform:none!important}
+  .virada h2 .pct{font-size:1em}
+}
+.virada .lead{color:rgba(255,255,255,.82);max-width:52ch;margin-left:auto;margin-right:auto}
+
+/* A NARRATIVA DA VIRADA
+   1. voce tem que ser o 1%   2. ninguem compra o que nao conhece
+   3. entao como?             4. tres atos
+   5. um POTENCIALIZA o outro 6. em 90 dias, de invisivel a lido
+   O passo 5 e' o aha: ate aqui a pagina so' dizia que os atos correm juntos,
+   que e' calendario. Potencializar e' causa, e causa e' o que explica. */
+.premissa{text-align:center;margin:clamp(34px,4.4vw,52px) auto 0;max-width:40ch}
+.afirma{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.3rem,3.2vw,2rem);line-height:1.14;color:#fff;margin:0}
+.pergunta-v{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
+  font-size:clamp(1.02rem,2.3vw,1.32rem);color:rgba(255,255,255,.72);margin:12px 0 0}
+.remate{text-align:center;margin:clamp(40px,5vw,62px) auto 0;padding-top:clamp(30px,3.6vw,42px);
+  border-top:1px solid rgba(255,255,255,.16);max-width:46ch}
+.causa{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.35rem,3.4vw,2.1rem);line-height:1.12;color:#fff;margin:0}
+.desfecho{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
+  font-size:clamp(1.05rem,2.4vw,1.4rem);line-height:1.32;color:rgba(255,255,255,.82);margin:12px 0 0}
+
+/* A CURVA DOS TRES ATOS
+   O eixo Y e' 'quem conhece o seu livro', que e' exatamente a premissa duas
+   linhas acima: sem esse rotulo a curva seria abstrata. O eixo Y e' quanta
+   gente pode virar leitor. Cada ato entra num ponto e a curva fica mais
+   ingreme dali pra frente, que e' o desenho de potencializar. */
+.curva{margin-top:clamp(34px,4.4vw,54px)}
+.curva svg{width:100%;height:auto;overflow:visible}
+.curva .linha{stroke-width:4;stroke-linecap:round;fill:none}
+/* Gradiente de calor: branco, amarelo da casa, vermelho. Sem borda dura entre
+   os atos, porque eles se sobrepoem e nao se sucedem.
+   Contraste sobre o verde: branco 9,11:1 · #FAAB00 4,72:1 · #FF7A5C 3,55:1.
+   Por isso os rotulos vao a 19px NEGRITO, que e' o limiar de texto grande,
+   onde 3:1 basta. A 17px o vermelho reprovaria. */
+.curva .ar{stroke:none}
+.curva .base{stroke:rgba(255,255,255,.45);stroke-width:1.5;fill:none}
+.curva .prev{stroke:rgba(255,255,255,.5);stroke-width:1.5;stroke-dasharray:6 6;
+  opacity:0;transition:opacity .45s var(--ease)}
+.curva .marco{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.62);
+  opacity:0;transition:opacity .45s var(--ease)}
+.curva .n1{stroke:#FFFFFF}.curva .n2{stroke:#FAAB00}.curva .n3{stroke:#FF7A5C}
+.curva .topo{fill:#FF7A5C}
+.curva .t1{fill:#FFFFFF}.curva .t2{fill:#FAAB00}.curva .t3{fill:#FF7A5C}
+.curva .no{fill:var(--verde);stroke-width:3.5;
+  opacity:0;transition:opacity .45s var(--ease)}
+html:not(.js) .curva .no,html:not(.js) .curva .cato,
+html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
+.curva text{font-family:'Space Grotesk',sans-serif}
+.curva .cato{font-size:19px;font-weight:700;letter-spacing:-.02em;
+  opacity:0;transition:opacity .45s var(--ease)}
+.curva .cdia{font-size:11px;font-weight:700;letter-spacing:.16em;fill:rgba(255,255,255,.45)}
+.curva .ceixo{font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;fill:rgba(255,255,255,.45)}
+.curva-leg,.curva-eixo,.curva-nota{display:none}
+/* a recompensa do desenho: sem ela o leitor ve a curva subir e ninguem diz
+   pra que serve chegar la'. Fica colada no grafico, nao no remate. */
+.curva-fecho{text-align:center;margin:clamp(26px,3.4vw,40px) auto 0;
+  max-width:min(620px,100%);font-size:clamp(.98rem,2vw,1.14rem);
+  line-height:1.4;color:rgba(255,255,255,.7)}
+.curva-fecho b{display:block;margin-top:7px;font-weight:700;color:#fff;
+  letter-spacing:-.03em;line-height:1.16;font-size:clamp(1.5rem,3.9vw,2.4rem);
+  text-wrap:balance}
+
+/* a matematica: multiplicacao E' potencializacao, e o zero prova a frase */
+.mult{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.18rem,2.5vw,1.5rem);color:#fff;margin:16px 0 0}
+.mult b{white-space:nowrap}
+.mult em{font-style:normal;color:rgba(255,255,255,.68);margin:0 .18em;font-weight:400}
+.mult b{font-weight:700}
+.mult .c1{color:#fff}.mult .c2{color:#FAAB00}.mult .c3{color:#FF7A5C}
+.desfecho{margin-top:20px!important}
+
+/* fecho da parede de prova: a seta a mao encurta a distancia entre o leitor
+   e os rostos. A anotacao usa o mesmo motor de escrita da frase da Dany
+   (.mao), so' que sem o traco embaixo e menor. */
+.fecho-prova{text-align:center;margin-top:clamp(40px,5vw,60px)}
+.fp1{position:relative;display:inline-block;margin:0;
+  font-size:clamp(1.06rem,2.3vw,1.34rem);color:var(--soft)}
+.fp2{display:block;margin:10px 0 0;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.5rem,3.4vw,2.1rem);color:var(--accent)}
+.fp-aqui{position:absolute;left:calc(100% + 8px);top:50%;transform:translateY(-42%);
+  display:flex;align-items:center;gap:2px;white-space:nowrap;color:var(--accent)}
+.fp-aqui svg{width:clamp(46px,4.6vw,64px);height:auto;flex:0 0 auto}
+.mao.nota{font-size:clamp(17px,2vw,22px);background-image:none;padding-bottom:0;
+  transform:rotate(-3deg);letter-spacing:0;margin:0}
+@media(max-width:820px){
+  .fp1{display:block}
+  .fp-aqui{position:static;transform:none;justify-content:center;margin-top:6px}
+  .fp-aqui svg{transform:rotate(74deg);width:38px;margin-bottom:-4px}
+}
+/* PROVA: o carrossel com os cards de texto ENTRANDO no meio das fotos.
+   Antes eram dois blocos separados, e as 8 pessoas da parede sao as MESMAS 8
+   do carrossel da secao verde: a parede chegava como segunda vez.
+   Duas coisas que o card PRECISA respeitar num trilho que anda:
+   1) ser glanceavel. Paragrafo nao da' tempo de ler antes de sair da tela,
+      entao o card e' rotulo + resultado grande + uma linha de contexto.
+   2) ter o mesmo peso visual da foto. Card branco sobre fundo quase branco
+      virava buraco entre duas fotos escuras. Ele e' escuro, e verde porque na
+      gramatica da pagina o verde e' a cor do 1%: o card diz que essas pessoas
+      sao o 1% sem precisar escrever isso.
+   Contraste sobre --verde: branco 8,99:1 · 78% 7,55:1 · 62% 5,02:1. */
+.mrow .mc{width:378px;height:380px;flex:0 0 auto;margin-right:18px;
+  background:var(--verde);border-radius:12px;padding:28px 26px;
+  display:flex;flex-direction:column;justify-content:center;
+  box-shadow:0 12px 26px -18px rgba(0,0,0,.45)}
+.mrow .mc .q{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.62);font-weight:700;margin-bottom:14px}
+.mrow .mc .r{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  font-size:1.62rem;line-height:1.12;color:#fff;margin-bottom:16px}
+.mrow .mc p{color:rgba(255,255,255,.78);font-size:.88rem;line-height:1.45;margin:0}
+@media(max-width:700px){
+  .mrow .mc{width:268px;height:270px;padding:22px 20px;margin-right:12px}
+  .mrow .mc .r{font-size:1.18rem}
+  .mrow .mc p{font-size:.82rem}
+}
+.acao{text-align:center;margin-top:clamp(44px,5.8vw,70px)}
+.acao-nota{margin:16px 0 0;font-size:.98rem;color:rgba(255,255,255,.78)}
+/* O BOTAO DO MEIO, na tecnica do .btn-gold da lancamento-v1.
+   O angulo do gradiente e' uma custom property REGISTRADA (@property), que e'
+   o que permite anima-lo: sem o registro o navegador nao sabe interpolar
+   angulo e a animacao nao roda. O :before e' a borda: um gradiente recortado
+   pelo mask-composite, sobrando so' 1,5px de moldura.
+   Dourado sobre o verde da secao = 5,32:1. Tinta #0D0D0D sobre o dourado =
+   11,5:1. */
+@property --ga{syntax:"<angle>";initial-value:135deg;inherits:false}
+@keyframes gira-grad{0%{--ga:0deg}100%{--ga:360deg}}
+@keyframes brilha{
+  0%,100%{box-shadow:0 0 10px rgba(251,189,35,.42),0 0 30px rgba(251,189,35,.16),
+          inset 0 0 8px rgba(251,189,35,.10)}
+  50%{box-shadow:0 0 20px rgba(251,189,35,.62),0 0 56px rgba(255,149,0,.26),
+      inset 0 0 12px rgba(251,189,35,.16)}}
+.btn.ouro{position:relative;overflow:hidden;isolation:isolate;
+  color:#0D0D0D;text-transform:uppercase;letter-spacing:.05em;
+  padding:clamp(19px,2.3vw,25px) clamp(26px,4vw,50px);
+  font-size:clamp(.94rem,1.9vw,1.12rem);
+  border:1.5px solid hsl(43 96% 56% / .5);
+  background:linear-gradient(var(--ga),hsl(48 100% 60%),hsl(43 96% 50%),
+             hsl(35 90% 42%),hsl(43 96% 56%));
+  background-size:300% 300%;
+  animation:gira-grad 3s linear infinite,brilha 2.5s ease-in-out infinite;
+  transition:transform .3s ease,filter .3s ease;will-change:transform}
+.btn.ouro:before{content:"";position:absolute;inset:-1px;border-radius:inherit;
+  padding:1.5px;pointer-events:none;
+  background:linear-gradient(var(--ga),hsl(48 100% 70%),hsl(43 96% 56% / .3),
+             hsl(35 100% 65%),hsl(43 96% 56% / .3));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;animation:gira-grad 3s linear infinite}
+.btn.ouro:hover{transform:translateY(-2px) scale(1.02);filter:brightness(1.1)}
+@media(prefers-reduced-motion:reduce){
+  .btn.ouro,.btn.ouro:before{animation:none}
+  .btn.ouro{box-shadow:0 0 18px rgba(251,189,35,.5)}
+}
+
+
+@media(max-width:820px){
+  /* No estreito o SVG encolhe e os rotulos de dentro colidem entre si. A
+     curva vira desenho puro e os nomes saem pra uma legenda embaixo. */
+  .curva .cato,.curva .cdia,.curva .ceixo,.curva .marco{display:none}
+  .curva-eixo{display:block;margin:0 0 6px;font-family:'Space Grotesk',sans-serif;
+    font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(255,255,255,.62);text-align:left}
+  .curva-nota{display:block;margin:14px 0 0;font-size:.86rem;line-height:1.5;
+    color:rgba(255,255,255,.62);text-align:left}
+  .curva-nota b{font-weight:600;color:rgba(255,255,255,.86)}
+  .curva-leg{display:grid;gap:10px;list-style:none;margin:20px 0 0;padding:0;text-align:left}
+  .curva-leg i{width:10px;height:10px;border-radius:50%;flex:0 0 auto;align-self:center}
+  .curva-leg .p1{background:#fff}.curva-leg .p2{background:#FAAB00}.curva-leg .p3{background:#FF7A5C}
+  .curva-leg li{display:flex;align-items:baseline;gap:9px;
+    font-family:'Space Grotesk',sans-serif;font-size:1.02rem;color:#fff}
+  .curva-leg b{font-weight:700;letter-spacing:-.02em}
+  .curva-leg span{margin-left:auto;font-size:.76rem;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:rgba(255,255,255,.68)}
+}
+@media(max-width:860px){
+  .bb{grid-template-columns:1fr;gap:0;margin-top:34px}
+  /* O desenho compartilhado não sobrevive ao estreito: anéis de 1px e rótulos
+     empilhados. Cada passo ganha o seu próprio diagrama pequeno. */
+  .bb-palco{display:none}
+  .bb-trilho{padding:0}
+  .bb-mini{display:block}
+  /* No estreito a sobreposição não cabe em colunas: cada faixa ocupa a linha
+     inteira e o "entra no 30" carrega a informação que o offset dava. */
+  .bb-passo{min-height:auto;padding:0 0 40px}
+  html.js .bb-passo:not(.viva){opacity:1}
+}
+
+
+/* ============================================================
+   RITMO
+   O problema não era cor, era todas as seções terem a mesma
+   composição e a mesma largura. Aqui entram: largura variável,
+   blocos que sangram a página inteira e um momento em coral.
+   ============================================================ */
+
+/* AGITAÇÃO: escura, sangrada, tipo grande. Primeiro contraste forte da página. */
+.agit{background:var(--ink);color:#EFEDEA;padding:clamp(72px,10vw,132px) 0;text-align:center}
+.agit .big{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.08;margin:0 auto;color:#fff;max-width:20ch}
+/* A premissa desce de tom e de tamanho, e o fio faz o trabalho que o "Mas" fazia.
+   Ele fica no laranja CHEIO, fora da rampa: a 15% um traço de 1px sumiria no escuro. */
+.agit .pre{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
+  font-size:clamp(1.2rem,2.7vw,1.75rem);line-height:1.25;color:#B4B0AB;margin:0 auto;max-width:22ch}
+.agit .fio{display:block;width:1px;height:64px;background:var(--accent);margin:26px auto}
+.agit .big i{font-style:normal;color:var(--accent)}
+/* ══ MARCAS DA CASA ══
+   Grifo, risco, manuscrita e serifa: os mesmos dispositivos da PV oficial do
+   MTBB, que e' o que faz aquela pagina ter voz. La' a tinta e' amarelo #FAAB00;
+   aqui e' o laranja unico da 90D, com a variante .claro pra fundo laranja.
+   REGRA: grifo marca PROMESSA, risco marca AMEAÇA, no maximo um por seção. */
+/* Corpo e títulos: 7 faces alcançáveis, inline.
+   Eram 20 numa folha externa. As outras 13 são inalcançáveis nesta página:
+   latin-ext (zero caracteres da copy caem naquela faixa) e itálico de
+   DM Sans (o itálico daqui é Fraunces). São fontes VARIÁVEIS, então um
+   arquivo por família cobre todos os pesos.
+   Subset pt-BR de 143 glifos: a copy usa 88, sobra de 55. */
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/grotesk-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/grotesk-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/grotesk-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/grotesk-sub.woff2) format('woff2')}
+
+/* Fontes decorativas com subset EXATO dos glifos que a página usa:
+   Caveat 74,9 -> 11,8 KB · Fraunces 22,9 -> 5,3 KB. Juntas, -80,7 KB.
+   ⚠️ Se a copy do .mao ou do .serifa ganhar uma letra nova, ela cai no
+   fallback e aparece torta na hora. Pra regerar: python3 tools/subset-fontes.py
+   (os arquivos completos continuam em assets/fonts/, são a fonte da verdade). */
+@font-face{font-family:'Caveat';font-style:normal;font-weight:600;font-display:swap;
+  src:url(assets/fonts/caveat-sub.woff2) format('woff2')}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500;font-display:swap;
+  src:url(assets/fonts/fraunces-italic-500-sub.woff2) format('woff2')}
+.grifo{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20fill%3D%27%23FC783C%27%20fill-opacity%3D%270.42%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .78em;background-position:0 .42em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 4px}
+.grifo.claro{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20fill%3D%27%23ffffff%27%20fill-opacity%3D%270.32%27%2F%3E%3C%2Fsvg%3E")}
+.risco{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23FC783C%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .34em;background-position:0 .92em;
+  padding-bottom:.14em}
+.risco.claro{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E")}
+/* a contravoz: serifa italica, baixinha, do lado da frase de marketing */
+.serifa{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
+/* a letra da Dany: se escreve sozinha e o traco cresce junto */
+.mao{font-family:'Caveat',cursive;font-weight:600;font-size:clamp(26px,3.4vw,38px);
+  line-height:1.08;letter-spacing:.5px;color:var(--accent);transform:rotate(-1.5deg);
+  display:inline-block;position:relative;margin:26px 0 0;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23FC783C%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-size:0% .14em;
+  background-position:0 99%;padding-bottom:.16em;
+  transition:background-size 2.2s cubic-bezier(.5,.05,.2,1)}
+.mao.escreveu{background-size:100% .14em}
+.mao .pal{white-space:nowrap}
+.mao .ch{opacity:0;display:inline-block;transition:opacity .14s ease-out}
+.mao.escreveu .ch{opacity:1}
+html:not(.js) .mao{background-size:100% .14em}
+html:not(.js) .mao .ch{opacity:1}
+html.js.sem-motion .mao{background-size:100% .14em}
+html.js.sem-motion .mao .ch{opacity:1!important;transition:none!important}
+
+/* OS 99%: o numero ganha um outdoor so' pra ele, antes do diagrama. */
+.noventa{background:var(--accent);color:#fff;padding:clamp(60px,7.5vw,98px) 0;text-align:center}
+.noventa h2{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(1.65rem,4.1vw,2.7rem);line-height:1.12;color:#fff;max-width:26ch;margin:0 auto}
+.noventa p{margin:18px auto 0;max-width:46ch;font-size:1.06rem;line-height:1.55;
+  color:rgba(255,255,255,.88)}
+.noventa p strong{font-weight:700;color:#fff}
+/* cem livros, um por marca: o numero deixa de ser abstrato e vira contagem */
+.cem{display:grid;grid-template-columns:repeat(25,9px);gap:5px;
+  justify-content:center;width:-moz-fit-content;width:fit-content;margin:0 auto 30px}
+.cem i{width:9px;height:26px;border-radius:2px;background:rgba(110,26,18,.5);
+  /* opacity fora de 0..1 e' cortada pelo navegador, entao a conta ja' e' o
+     proprio degrade: a marca i aparece quando --p passa de i/100. */
+  opacity:calc(var(--p,1) * 100 - var(--i,0))}
+html.js .cem{--p:0}
+html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
+@media(prefers-reduced-motion:reduce){.cem{--p:1!important}}
+.cem i.viva{background:#22C07B;box-shadow:0 0 0 3px #fff}
+@media(max-width:820px){.cem{grid-template-columns:repeat(20,8px);gap:4px}
+  .cem i{width:8px;height:22px}}
+
+/* CORTE: o segundo respiro coral da página. */
+
+/* DEPOIMENTOS: marquee que sangra. Quebra a coluna e traz movimento contínuo. */
+.marquee{width:calc(100% - 44px);max-width:calc(var(--maxw) - 44px);margin-left:auto;margin-right:auto;
+  padding:14px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.marquee+.marquee{margin-top:-12px}
+.mrow{display:flex;width:max-content;animation:desliza 62s linear infinite}
+.marquee:hover .mrow{animation-play-state:paused}
+.mrow img{height:380px;width:auto;flex:0 0 auto;margin-right:18px;object-fit:cover;
+  border-radius:14px;box-shadow:0 12px 26px -16px rgba(0,0,0,.4)}
+@keyframes desliza{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media(max-width:700px){.mrow img{height:270px;margin-right:12px}}
+@media(prefers-reduced-motion:reduce){.mrow{animation:none}}
+
+/* DANY: foto sangra a largura toda, texto entra por cima no desktop */
+.dany{background:var(--ink);color:#EFEDEA}
+.dany .wrap{padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)}
+.bio{display:grid;grid-template-columns:.68fr 1fr;gap:clamp(28px,4vw,46px);align-items:center}
+.bio > img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;
+  object-position:center 16%;border-radius:14px;display:block}
+/* a citacao e' a manchete da secao, entao ela toma o lugar que o h2 tinha */
+.dany .fala{margin:8px 0 0;color:#fff;letter-spacing:-.01em;
+  font-size:clamp(1.34rem,2.7vw,2.05rem);line-height:1.2}
+.dany .cont{margin:16px 0 0;color:#CFCBC6;font-size:1.02rem;line-height:1.64}
+.dany .peso{margin:14px 0 0;color:#fff;font-weight:600;font-size:1.06rem;
+  line-height:1.5;text-wrap:balance}
+.dany .mao{font-size:clamp(24px,2.8vw,31px);margin-top:24px}
+/* o nome chega no FIM, como assinatura */
+.dany .assina{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.22)}
+.dany .assina h2{color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.03em;font-size:1.34rem;margin:0 0 6px}
+.dany .assina span{display:block;color:#CFCBC6;font-size:.94rem;line-height:1.58}
+.dany .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+.dany .nums div{border-top:1px solid rgba(255,255,255,.22);padding-top:12px}
+.dany .nums b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.3rem;color:#fff}
+.dany .nums span{font-size:.76rem;color:#A9A5A0}
+@media(max-width:860px){
+  .bio{grid-template-columns:1fr}
+  .bio > img{max-width:340px;margin:0 auto}
+}
+@media(max-width:700px){.dany .nums{grid-template-columns:repeat(2,1fr)}}
+
+
+/* ============================================================
+   CONCEITO 01 · A PÁGINA SAI DA INVISIBILIDADE
+   O laranja não muda de cor: ele muda de PRESENÇA. Cada seção
+   mistura o MESMO #FC783C com cinza, de 15% no topo a 100% no fim.
+   Assim a página atravessa a promessa em vez de descrevê-la.
+   O botão de compra é exceção: laranja cheio desde o primeiro pixel.
+   ============================================================ */
+:root{ --ac:var(--accent) }                      /* fallback: sem color-mix, tudo cheio */
+@supports (color: color-mix(in oklab, red, blue)){
+  [data-etapa="1"]{--ac:color-mix(in oklab, var(--accent) 15%, #A8A5A0)}
+  [data-etapa="2"]{--ac:color-mix(in oklab, var(--accent) 38%, #A8A5A0)}
+  [data-etapa="3"]{--ac:color-mix(in oklab, var(--accent) 62%, #A8A5A0)}
+  [data-etapa="4"]{--ac:color-mix(in oklab, var(--accent) 82%, #A8A5A0)}
+  [data-etapa="5"]{--ac:var(--accent)}
+}
+[data-etapa] .eyebrow{color:var(--ac)}
+[data-etapa] .big i{color:var(--ac)}
+/* o destaque do H1 é exceção à saturação progressiva, como o botão de compra:
+   é a palavra que carrega a promessa e não pode nascer apagada. */
+[data-etapa] h1 em{color:var(--accent)}
+/* o CTA nunca desbota. O :not e' pra regra nao atropelar as variantes. */
+.btn:not(.ouro){background:var(--accent)!important}
+
+/* ============================================================
+   CONCEITO 05 · O SILÊNCIO E O BARULHO
+   A onda sobe, cai e vira pontinho: é o livro que faz uma semana
+   de barulho e some. Depois ela reaparece sustentada, com os Atos.
+   ============================================================ */
+
+
+/* ---------- listas ---------- */
+
+/* ---------- cards ---------- */
+@media(max-width:800px){.grid4{grid-template-columns:1fr}}
+
+/* ---------- entregáveis ---------- */
+
+/* ---------- corte ---------- */
+
+/* ---------- casos ---------- */
+@media(max-width:860px){.casos{grid-template-columns:1fr}}
+/* CASOS: o resultado é o elemento visual do card, não uma nota de rodapé.
+   Isso já estava decidido e comentado no CSS, mas uma segunda regra .caso .res
+   mais abaixo no arquivo derrubava calada: 1,5rem virava 1rem.
+   Quem carrega o peso aqui é o TAMANHO e não a cor: em var(--accent) daria
+   2,52:1 sobre o fundo claro e reprovaria até no limiar de texto grande. */
+
+/* ---------- garantia ----------
+   Versão 02: selo grande centralizado, texto embaixo.
+   O disco é verde, a mesma cor do card da oferta logo acima, então os dois
+   leem como um bloco só. Branco sobre --verde = 8,99:1.
+   O anel gira em 26s e para em prefers-reduced-motion. textLength trava o
+   texto na circunferência exata (578px): sem isso ele passa do fim do
+   caminho e se sobrepõe na base. */
+.garantia{max-width:640px;margin:clamp(52px,6.5vw,84px) auto 0;text-align:center}
+.garantia .selo{max-width:230px;margin:0 auto 24px}
+.garantia .selo svg{width:100%;height:auto;display:block}
+.garantia .volta{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:.14em;fill:#757168;
+  transform-origin:110px 110px;animation:gira-selo 26s linear infinite}
+@keyframes gira-selo{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.garantia .volta{animation:none}}
+.garantia .disco{fill:var(--verde)}
+.garantia .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:60px;
+  letter-spacing:-.05em;fill:#fff}
+.garantia .dias{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;
+  letter-spacing:.13em;fill:rgba(255,255,255,.82)}
+.garantia h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.03em;
+  font-size:clamp(1.24rem,2.8vw,1.7rem);margin:0 0 14px;line-height:1.16;color:var(--ink)}
+.garantia p{margin:0 0 14px;color:var(--soft);font-size:.98rem;line-height:1.62}
+.garantia .lei b{color:var(--ink);font-weight:700}
+/* a lista fica centrada como BLOCO mas alinhada à esquerda por dentro:
+   marcador solto no meio fica ilegível */
+.garantia .passos{list-style:none;padding:0;margin:0 auto 16px;display:inline-grid;
+  gap:8px;text-align:left}
+.garantia .passos li{position:relative;padding-left:26px;color:var(--soft);font-size:.96rem}
+.garantia .passos li:before{content:"";position:absolute;left:4px;top:.4em;width:6px;height:11px;
+  border-right:2px solid var(--verde);border-bottom:2px solid var(--verde);transform:rotate(40deg)}
+.garantia .fecho{margin:0;color:var(--ink);font-weight:600;font-size:1.02rem}
+@media(max-width:560px){.garantia .selo{max-width:180px}}
+
+/* ---------- depoimentos ---------- */
+@media(max-width:900px){.depos{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- dany ---------- */
+
+/* ---------- dois caminhos ---------- */
+@media(max-width:800px){.paths{grid-template-columns:1fr}}
+
+/* ---------- oferta ---------- */
+
+.offer{background:var(--bg)}
+/* O CARD DA OFERTA É VERDE INTEIRO.
+   Na gramática da página o verde é a cor do 1%, e o card é justamente o que
+   faz o leitor virar o 1%: comprar é comprar o verde. A faixa verde no topo
+   já existia, então isto é a extensão dela, não cor nova.
+   Contraste sobre --verde: branco 8,99:1 · lista a 86% 7,14:1 ·
+   selos a 70% 5,30:1 · o botão dourado 5,32:1.
+   Os ticks foram de var(--accent) pra branco: laranja sobre o verde dá
+   3,36:1, que passa raspando como objeto gráfico, e branco dá 8,99:1. */
+.offer-box{
+  max-width:660px;margin:38px auto 0;background:var(--verde);color:#fff;
+  border:0;border-radius:20px;padding:clamp(32px,5vw,44px);text-align:center;
+  box-shadow:0 34px 76px -36px rgba(0,0,0,.55)
+}
+.offer-box .marca{height:clamp(30px,4vw,40px);width:auto;display:block;margin:0 auto 6px;
+  filter:brightness(0) invert(1)}
+.offer-box .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:10px 0 2px}
+.offer-box .price .cur{font-size:1.15rem;color:rgba(255,255,255,.82)}
+.offer-box .price .ast{font-size:1.15rem;color:rgba(255,255,255,.82);align-self:flex-start;margin-left:-4px}
+/* o preço é o maior número da página */
+.offer-box .price .val{font-family:'Space Grotesk',sans-serif;font-size:clamp(3.4rem,10vw,5.6rem);
+  font-weight:700;line-height:1;letter-spacing:-.045em;color:#fff}
+.offer-box .inst{color:rgba(255,255,255,.82);font-size:.98rem;margin-bottom:26px}
+.offer-box .inst b{color:#fff}
+/* O CARD VENDE CONQUISTA, NÃO ENTREGÁVEL.
+   Antes ele listava nove substantivos ("o cronograma", "a planilha"), que é
+   linguagem de estoque: descreve o que chega na caixa, não o que muda pra
+   pessoa. Agora a lista de dentro são VERBOS, o que o leitor passa a saber
+   fazer, e a lista de materiais desceu pra fora do card.
+   A promessa entra logo abaixo do preço porque é o que o número compra. */
+.offer-box .promessa{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.03em;font-size:clamp(1.18rem,2.5vw,1.5rem);line-height:1.2;
+  color:#fff;margin:0 0 24px;padding-bottom:22px;
+  border-bottom:1px solid rgba(255,255,255,.22)}
+.offer-box .conquistas{list-style:none;padding:0;margin:0 0 28px;text-align:left;display:grid;gap:12px}
+.offer-box .conquistas li{position:relative;padding-left:30px;font-size:1rem;
+  color:rgba(255,255,255,.82);line-height:1.45}
+.offer-box .conquistas li b{color:#fff;font-weight:700}
+.offer-box .conquistas li:before{content:"";position:absolute;left:5px;top:.34em;width:7px;height:13px;
+  border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(40deg)}
+
+/* os materiais saem do card e viram nota de rodapé da oferta: quem já decidiu
+   não precisa deles, e quem quer conferir encontra sem esforço */
+.vemjunto{max-width:660px;margin:24px auto 0;text-align:left}
+.vemjunto .tit{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.16em;text-transform:uppercase;color:#757168;margin:0 0 14px;text-align:center}
+.vemjunto ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 26px}
+.vemjunto li{position:relative;padding-left:22px;font-size:.92rem;color:var(--soft);line-height:1.5}
+.vemjunto li b{color:var(--ink);font-weight:600}
+.vemjunto li:last-child:nth-child(odd){grid-column:1/-1}
+.vemjunto li:before{content:"";position:absolute;left:2px;top:.42em;width:5px;height:10px;
+  border-right:2px solid var(--verde);border-bottom:2px solid var(--verde);transform:rotate(40deg)}
+@media(max-width:640px){.vemjunto ul{grid-template-columns:1fr}}
+.nota-juros{margin:14px 0 0;font-size:.76rem;color:rgba(255,255,255,.7)}
+.seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:18px;
+  font-size:.78rem;color:rgba(255,255,255,.7)}
+
+/* ---------- faq ---------- */
+.faq{border-top:1px solid var(--border);margin-top:32px}
+.faq details{border-bottom:1px solid var(--border)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;position:relative;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.02rem;letter-spacing:-.02em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"";position:absolute;right:8px;top:27px;width:9px;height:9px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .22s}
+.faq details[open] summary:after{transform:rotate(-135deg);top:31px}
+.faq .a{padding:0 0 20px;color:var(--soft);max-width:64ch}
+
+/* ---------- fecho ---------- */
+.final{background:var(--card);text-align:center;border-top:1px solid var(--border)}
+.final h2{max-width:18ch;margin:0 auto 18px}
+.final .sub{color:var(--soft);max-width:46ch;margin:0 auto 30px;display:block;font-size:1.06rem}
+
+footer{padding-bottom:44px;background:var(--bg);color:var(--mute);padding:38px 0;font-size:.8rem;border-top:1px solid var(--border)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+
+/* ---------- barra fixa mobile ---------- */
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);
+  display:none;align-items:center;gap:12px;transform:translateY(105%);transition:transform .3s cubic-bezier(.2,.7,.3,1);
+  box-shadow:0 -8px 24px -18px rgba(0,0,0,.5)
+}
+.sticky.on{transform:none}
+.sticky .p{flex:0 0 auto;font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.1}
+.sticky .p small{display:block;font-weight:400;font-size:.75rem;color:var(--mute)}
+.sticky .btn{flex:1;padding:17px 20px;font-size:1rem}
+.sticky .btn.ouro{padding:16px 10px;font-size:.78rem;letter-spacing:.02em}
+.sticky .p{font-size:.95rem}
+@media(max-width:760px){.sticky{display:flex}}
+
+/* ============================================================
+   MOVIMENTO
+   Curva única (expo-out longa) pra tudo. Nada aparece de repente:
+   entra subindo, em sequência, e o que é dado CRESCE no lugar.
+   À prova de falha: só esconde se o JS provar que consegue revelar.
+   ============================================================ */
+:root{ --ease:cubic-bezier(.16,1,.3,1); --dur:.9s }
+
+html.js .rv{opacity:0;transform:translate3d(0,22px,0) scale(.985);will-change:opacity,transform}
+html.js .rv.in{opacity:1;transform:none;
+  transition:opacity var(--dur) var(--ease), transform var(--dur) var(--ease)}
+
+/* filhos entram em cascata: o índice vem do JS */
+html.js [data-stg]>*{opacity:0;transform:translate3d(0,18px,0)}
+html.js [data-stg].in>*{opacity:1;transform:none;
+  transition:opacity .8s var(--ease) calc(var(--i,0)*90ms),
+             transform .8s var(--ease) calc(var(--i,0)*90ms)}
+
+/* hero entra na carga, sem esperar scroll */
+html.js .hero .chapeu,html.js .hero h1,html.js .hero .sub,
+html.js .hero .player,html.js .stats{
+  opacity:0;transform:translate3d(0,20px,0)}
+html.js body.ready .hero .chapeu,html.js body.ready .hero h1,html.js body.ready .hero .sub,
+html.js body.ready .hero .player,html.js body.ready .stats{
+  opacity:1;transform:none;
+  transition:opacity 1s var(--ease) var(--d), transform 1s var(--ease) var(--d)}
+.hero .chapeu{--d:.05s}.hero h1{--d:.15s}.hero .sub{--d:.26s}
+.hero .player{--d:.4s}.stats{--d:.66s}
+
+/* o player ganha profundidade no hover */
+.player{transition:transform .9s var(--ease), box-shadow .9s var(--ease)}
+.player:hover{transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(0,0,0,.8)}
+
+/* cards levantam */
+
+/* botão com resposta física */
+.btn{transition:transform .35s var(--ease), background .3s var(--ease), box-shadow .35s var(--ease)}
+.btn:active{transform:scale(.97)}
+
+/* números contam sem pular o layout */
+.stats b{font-variant-numeric:tabular-nums}
+
+/* trava de emergência: se em 4s algo não animou, o conteúdo aparece de qualquer jeito.
+   Mesma lista da regra de movimento reduzido. */
+html.js.sem-motion .rv,html.js.sem-motion .rv.in,
+html.js.sem-motion [data-stg]>*,html.js.sem-motion [data-stg].in>*,
+html.js.sem-motion .bb-passo:not(.viva),
+html.js.sem-motion .hero .chapeu,html.js.sem-motion .hero h1,html.js.sem-motion .hero .sub,
+html.js.sem-motion .hero .player,html.js.sem-motion .stats{
+  opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
+
+@media(prefers-reduced-motion:reduce){
+  html.js .rv,html.js .rv.in,html.js [data-stg]>*,html.js [data-stg].in>*,
+  html.js .bb-passo:not(.viva),
+  html.js .hero .chapeu,html.js .hero h1,html.js .hero .sub,html.js .hero .player,
+  html.js .stats{
+    opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
+}
+
+</style>
+</head>
+<body>
+
+
+
+<!-- ============ HERO ============ -->
+<header class="hero" data-etapa="1">
+  <div class="wrap">
+    <p class="chapeu">O lançamento decide o destino do seu livro.</p>
+    <h1 data-ab-el="headline">Crie desejo.<br>Gere antecipação.<br>Lance <em>vendendo</em><br>desde o primeiro dia.</h1>
+    <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo, mesmo sem editora ou milhares de seguidores.</p>
+
+    <div class="player" id="vsl">
+      <div class="slot" id="vslSlot">
+        <div class="ph"><b>Espaço da VSL</b>Cole aqui o embed do VTurb (9:16). Enquanto ele não existir, a página funciona normalmente sem o vídeo.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="press" data-etapa="1">
+  <div class="wrap">
+    <p>Como visto em</p>
+    <div class="press-pista">
+      <div class="press-trilho">
+        <img src="assets/imprensa/logo-cbn.webp" alt="CBN" style="--h:38" width="241" height="100">
+        <img src="assets/imprensa/logo-g1.webp" alt="G1" style="--h:50" width="120" height="120">
+        <img src="assets/imprensa/logo-vida-simples.webp" alt="Vida Simples" style="--h:30" width="604" height="120">
+        <img src="assets/imprensa/logo-band.webp" alt="Band" style="--h:50" width="120" height="102">
+        <img src="assets/imprensa/logo-publishnews.webp" alt="PublishNews" style="--h:31" width="184" height="52">
+        <img src="assets/imprensa/logo-band-news.webp" alt="Band News" style="--h:40" width="251" height="120">
+        <img src="assets/imprensa/logo-record-tv.webp" alt="Record TV" style="--h:50" width="112" height="113">
+        <img src="assets/imprensa/logo-radio-senado.webp" alt="Rádio Senado" style="--h:31" width="440" height="120">
+        <img src="assets/imprensa/logo-tv-cultura.webp" alt="TV Cultura" style="--h:50" width="184" height="160">
+        <img src="assets/imprensa/logo-valor-economico.webp" alt="Valor Econômico" style="--h:35" width="346" height="120">
+        <img src="assets/imprensa/logo-cbn.webp" alt="" loading="lazy" style="--h:38" aria-hidden="true" width="241" height="100">
+        <img src="assets/imprensa/logo-g1.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true" width="120" height="120">
+        <img src="assets/imprensa/logo-vida-simples.webp" alt="" loading="lazy" style="--h:30" aria-hidden="true" width="604" height="120">
+        <img src="assets/imprensa/logo-band.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true" width="120" height="102">
+        <img src="assets/imprensa/logo-publishnews.webp" alt="" loading="lazy" style="--h:31" aria-hidden="true" width="184" height="52">
+        <img src="assets/imprensa/logo-band-news.webp" alt="" loading="lazy" style="--h:40" aria-hidden="true" width="251" height="120">
+        <img src="assets/imprensa/logo-record-tv.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true" width="112" height="113">
+        <img src="assets/imprensa/logo-radio-senado.webp" alt="" loading="lazy" style="--h:31" aria-hidden="true" width="440" height="120">
+        <img src="assets/imprensa/logo-tv-cultura.webp" alt="" loading="lazy" style="--h:50" aria-hidden="true" width="184" height="160">
+        <img src="assets/imprensa/logo-valor-economico.webp" alt="" loading="lazy" style="--h:35" aria-hidden="true" width="346" height="120">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ AGITAÇÃO ============ -->
+<section class="agit" data-etapa="1">
+  <div class="wrap rv">
+    <p class="pre">Você pode passar anos escrevendo um livro.</p>
+    <span class="fio" aria-hidden="true"></span>
+    <p class="big">É o lançamento que define se ele será lido, ou <span class="risco">esquecido</span>.</p>
+  </div>
+</section>
+
+<!-- ============ OS 99% ============ -->
+<section class="noventa">
+  <div class="wrap rv">
+    <div class="cem" data-sec=".noventa" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i><i style="--i:30"></i><i style="--i:31"></i><i style="--i:32"></i><i style="--i:33"></i><i style="--i:34"></i><i style="--i:35"></i><i style="--i:36"></i><i style="--i:37"></i><i style="--i:38"></i><i style="--i:39"></i><i style="--i:40"></i><i style="--i:41"></i><i style="--i:42"></i><i style="--i:43"></i><i style="--i:44"></i><i style="--i:45"></i><i style="--i:46"></i><i style="--i:47"></i><i style="--i:48"></i><i style="--i:49"></i><i style="--i:50"></i><i style="--i:51"></i><i style="--i:52"></i><i style="--i:53"></i><i style="--i:54"></i><i style="--i:55"></i><i style="--i:56"></i><i style="--i:57"></i><i style="--i:58"></i><i style="--i:59"></i><i style="--i:60"></i><i style="--i:61"></i><i style="--i:62"></i><i style="--i:63"></i><i style="--i:64"></i><i style="--i:65"></i><i style="--i:66"></i><i style="--i:67"></i><i style="--i:68"></i><i style="--i:69"></i><i style="--i:70"></i><i style="--i:71"></i><i style="--i:72"></i><i style="--i:73"></i><i style="--i:74"></i><i style="--i:75"></i><i style="--i:76"></i><i style="--i:77"></i><i style="--i:78"></i><i style="--i:79"></i><i style="--i:80"></i><i style="--i:81"></i><i style="--i:82"></i><i style="--i:83"></i><i style="--i:84"></i><i style="--i:85"></i><i style="--i:86"></i><i style="--i:87"></i><i style="--i:88"></i><i style="--i:89"></i><i style="--i:90"></i><i style="--i:91"></i><i style="--i:92"></i><i style="--i:93"></i><i style="--i:94"></i><i style="--i:95"></i><i style="--i:96"></i><i style="--i:97"></i><i style="--i:98"></i><i style="--i:99" class="viva"></i></div>
+    <h2>99% dos livros ficam presos na <span class="grifo claro">primeira bolha</span>: só vendem para amigos e família</h2>
+    <p>Não porque são ruins.<br><strong>Mas porque ninguém conhecia o seu livro.</strong></p>
+  </div>
+</section>
+
+<!-- ============ AS TRÊS BOLHAS ============ -->
+<section class="bolhas" id="bolhas" data-etapa="2">
+  <div class="wrap">
+    <div class="abre rv">
+      <h2>Quantos leitores estão descobrindo o seu livro <span class="risco">a cada dia</span>?</h2>
+      <p class="opcoes">Dez? Sessenta? Nenhum?</p>
+      <p class="pergunta">A resposta diz em qual bolha você está.</p>
+    </div>
+
+    <div class="bb">
+      <div class="bb-palco">
+        <svg viewBox="-40 0 586 520" aria-hidden="true">
+          <g class="bol" id="bol3"><ellipse cx="238" cy="260" rx="268" ry="250"/><text x="440" y="267" text-anchor="middle">Boca a boca</text></g>
+          <g class="bol" id="bol2"><ellipse cx="186" cy="260" rx="188" ry="195"/><text x="312" y="267" text-anchor="middle">Desconhecidos</text></g>
+          <g class="bol viva" id="bol1"><ellipse cx="128" cy="260" rx="122" ry="127"/><text x="128" y="267" text-anchor="middle">Amigos e família</text></g>
+        </svg>
+      </div>
+      <div class="bb-trilho">
+        <div class="bb-passo viva">
+          <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="" cx="62" cy="60" r="56"/><circle class="" cx="48" cy="60" r="42"/><circle class="viva" cx="34" cy="60" r="28"/></svg>
+          <p class="eyebrow"><span>Primeira bolha</span>Autor sem leitores</p>
+          <h3>Amigos e família</h3>
+          <p>Eles compram rápido e elogiam. É a bolha que engana: a primeira semana parece sucesso, o livro vende trinta, cinquenta exemplares, e aí para. O que parecia começo era o teto.</p>
+          <p class="vira"><b>É aqui que 99% dos livros ficam presos.</b> Será que o seu vai ficar também?</p>        </div>
+        <div class="bb-passo">
+          <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="" cx="62" cy="60" r="56"/><circle class="viva" cx="48" cy="60" r="42"/><circle class="feita" cx="34" cy="60" r="28"/></svg>
+          <p class="eyebrow"><span>Segunda bolha</span>Autor lido</p>
+          <h3>Desconhecidos compram o seu livro</h3>
+          <p><b>Não por sorte. Por estratégia.</b> Avaliação, estrela, exemplar presenteado, conversa: tudo isso sai da primeira bolha, e é o que faz alguém que não te conhece parar no seu livro.</p>
+          <p class="vira"><b>Soft-marketing é vender sem vender:</b> leva isso para fora do seu círculo usando os seus pontos fortes, sem depender dos fracos.</p>        </div>
+        <div class="bb-passo">
+          <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="viva" cx="62" cy="60" r="56"/><circle class="feita" cx="48" cy="60" r="42"/><circle class="feita" cx="34" cy="60" r="28"/></svg>
+          <p class="eyebrow"><span>Terceira bolha</span>Autor recomendado</p>
+          <h3>Boca a boca</h3>
+          <p>A única bolha que cresce sozinha: o leitor termina e recomenda.</p>
+          <p class="vira"><b>Só chega aqui o livro que muda alguma coisa em quem leu.</b> Nenhuma estratégia inventa isso. Mas sem estratégia, é impossível chegar lá.</p>        </div>
+      </div>
+    </div>
+
+    <div class="erro rv">
+      <b>O pior erro do autor<br>é esperar o livro <span class="risco">ficar pronto</span><br>para começar a divulgar.</b>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ A VIRADA ============ -->
+<section class="virada">
+  <div class="wrap">
+    <div class="narrow rv" style="margin:0 auto;text-align:center">
+      <p class="eyebrow forte">Seja a exceção</p>
+      <h2 id="cabeca">O <span class="pct" id="pct">1%</span><span class="resto" id="resto"> que vende <em>de verdade</em> no lançamento</span></h2>
+    </div>
+
+    <div class="premissa rv">
+      <p class="afirma">Ninguém compra um livro que não conhece.</p>
+      <p class="pergunta-v">Então como fazer conhecerem o seu?</p>
+    </div>
+
+    <div class="curva rv">
+      <p class="curva-eixo">possíveis leitores do seu livro</p>
+      <svg viewBox="0 0 900 350" fill="none" role="img"
+           aria-label="Curva de possíveis leitores do seu livro ao longo de noventa dias, subindo a cada ato">
+        <defs>
+          <clipPath id="revela"><rect id="revelaR" x="0" y="0" width="900" height="350"/></clipPath>
+          <linearGradient id="gLinha" x1="60" y1="0" x2="862" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#FAAB00"/><stop offset="1" stop-color="#FF7A5C"/>
+          </linearGradient>
+          <linearGradient id="gArea" x1="60" y1="0" x2="862" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#FFFFFF" stop-opacity=".30"/>
+            <stop offset=".55" stop-color="#FAAB00" stop-opacity=".28"/>
+            <stop offset="1" stop-color="#FF7A5C" stop-opacity=".26"/>
+          </linearGradient>
+          <linearGradient id="gFade" x1="0" y1="44" x2="0" y2="300" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <mask id="mFade"><rect x="0" y="0" width="900" height="350" fill="url(#gFade)"/></mask>
+        </defs>
+
+        <text class="ceixo" x="46" y="20">possíveis leitores do seu livro</text>
+        <path class="base" d="M60,306 L862,306" stroke-dasharray="5 7"/>
+
+
+        <g clip-path="url(#revela)">
+          <g mask="url(#mFade)"><path class="ar" d="M60,300 C170,297 265,290 366,271 C470,251 545,224 618,190 C706,149 792,108 862,44 L862,306 L60,306 Z" fill="url(#gArea)"/></g>
+          <path class="linha" d="M60,300 C170,297 265,290 366,271 C470,251 545,224 618,190 C706,149 792,108 862,44" stroke="url(#gLinha)"/>
+        </g>
+
+        <line class="prev" data-x="666" x1="666.0" y1="34" x2="666.0" y2="306"/>
+        <text class="marco" data-x="666" x="654.0" y="250" text-anchor="end">PRÉ-VENDA</text>
+        <line class="prev" data-x="856" x1="862" y1="34" x2="862" y2="306"/>
+        <text class="marco" data-x="856" x="850" y="250" text-anchor="end">LANÇAMENTO</text>
+
+        <circle class="no n1" data-x="60"  cx="60"  cy="300" r="7"/>
+        <circle class="no n2" data-x="452" cx="452" cy="247" r="7"/>
+        <circle class="no n3 topo" data-x="856" cx="862" cy="44" r="9"/>
+
+        <text class="cato t1" data-x="60"  x="74"  y="274">Crie desejo</text>
+        <text class="cato t2" data-x="452" x="438" y="223" text-anchor="end">Gere antecipação</text>
+        <text class="cato t3" data-x="856" x="846" y="28" text-anchor="end">Lance vendendo</text>
+
+        <text class="cdia" x="60"  y="336">DIA 0</text>
+        <text class="cdia" x="327.3" y="336">30</text>
+        <text class="cdia" x="594.7" y="336">60</text>
+        <text class="cdia" x="862" y="336" text-anchor="end">90</text>
+      </svg>
+      <ul class="curva-leg">
+        <li><i class="p1"></i><b>Crie desejo</b><span>dia 0</span></li>
+        <li><i class="p2"></i><b>Gere antecipação</b><span>dia 45</span></li>
+        <li><i class="p3"></i><b>Lance vendendo</b><span>dia 90</span></li>
+      </ul>
+      <p class="curva-nota">Os tracejados verticais marcam a pré-venda e o lançamento.</p>
+      <p class="curva-fecho rv">No dia do lançamento, <b>já tem fila de leitores esperando o seu livro.</b></p>
+    </div>
+
+    <div class="remate rv">
+      <p class="causa">Três atos. Um potencializa o outro.</p>
+      <p class="mult"><b class="c1">Desejo</b> <em>×</em> <b class="c2">Antecipação</b> <em>=</em> <b class="c3">Lance vendendo</b></p>
+      <p class="desfecho">Em noventa dias, o seu livro passa de <span class="serifa">invisível a lido</span>.</p>
+    </div>
+
+    <div class="acao rv">
+      <a href="#oferta" class="btn ouro" data-cta="meio">Acesso Imediato e Vitalício</a>
+      <p class="acao-nota">Quanto antes começar, mais você vende no lançamento.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ PARA QUEM É ============ -->
+<!-- ============ PROVA ============
+     Depois do AHA a pergunta do leitor e' "funciona pra mim?". Uma secao so',
+     com os dois registros da mesma prova: tres casos com NOME e resultado
+     (responde por situacao) e a fileira de depoimentos (responde por volume).
+     Antes eram duas secoes e 1.524px; a VSL ja' faz o convencimento, aqui
+     basta conferir. -->
+<section data-etapa="3">
+  <div class="wrap">
+    <div class="narrow rv">
+      <p class="eyebrow">Quem já lançou assim</p>
+      <h2>Nenhum deles teve sorte.<br><span class="serifa">Todos aplicaram o passo a passo.</span></h2>
+      <p class="lead" style="margin-top:14px">Não é sobre já ter audiência, nem sobre o livro ser novo.
+        É sobre estratégia.</p>
+    </div>
+  </div>
+  <!-- as copias existem so' pra emenda do carrossel: aria-hidden inteiras,
+       senao o leitor de tela ouve os 8 nomes e os 3 casos duas vezes -->
+  <!-- as copias existem so' pra emenda: aria-hidden inteiras, senao o leitor
+       de tela ouve os 8 nomes e os 3 casos duas vezes -->
+  <div class="marquee prova">
+    <div class="mrow">
+        <img src="assets/depo-aure-CDA-iL-b.webp" alt="Depoimento de Aurê Aguiar" loading="lazy" width="540" height="675">
+        <div class="mc">
+          <div class="q">Nunca tinha lançado nada</div>
+          <div class="r">Quase 600 livros<br>na pré-venda</div>
+          <p>Ingrid, que veio dos artigos científicos</p>
+        </div>
+        <img src="assets/depo-candice-C67mx_NI.webp" alt="Depoimento de Candice Pascoal" loading="lazy" width="540" height="675">
+        <img src="assets/depo-cibele-Du9iudjC.webp" alt="Depoimento de Cibele Laurentino" loading="lazy" width="540" height="675">
+        <div class="mc">
+          <div class="q">Tinha audiência e não vendia</div>
+          <div class="r">Vai aos correios<br>toda semana</div>
+          <p>Bernardo, que tinha vinte mil seguidores e não vendia</p>
+        </div>
+        <img src="assets/depo-cica-D691szGu.webp" alt="Depoimento de Ciça Rocha" loading="lazy" width="540" height="675">
+        <img src="assets/depo-emilia-CArLNDco.webp" alt="Depoimento de Emilia Nuñes" loading="lazy" width="540" height="675">
+        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="Depoimento de Lelo Apovian" loading="lazy" width="540" height="675">
+        <div class="mc">
+          <div class="q">O livro já tinha parado</div>
+          <div class="r">Destaque de vendas<br>na Bienal do Rio</div>
+          <p>Tom, que pegou um livro que já tinha parado</p>
+        </div>
+        <img src="assets/depo-profinho-Bom5B61T.webp" alt="Depoimento de Profinho" loading="lazy" width="540" height="675">
+        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="Depoimento de Tonia Casarin" loading="lazy" width="540" height="675">
+        <img src="assets/depo-aure-CDA-iL-b.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <div class="mc" aria-hidden="true">
+          <div class="q">Nunca tinha lançado nada</div>
+          <div class="r">Quase 600 livros<br>na pré-venda</div>
+          <p>Ingrid, que veio dos artigos científicos</p>
+        </div>
+        <img src="assets/depo-candice-C67mx_NI.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <img src="assets/depo-cibele-Du9iudjC.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <div class="mc" aria-hidden="true">
+          <div class="q">Tinha audiência e não vendia</div>
+          <div class="r">Vai aos correios<br>toda semana</div>
+          <p>Bernardo, que tinha vinte mil seguidores e não vendia</p>
+        </div>
+        <img src="assets/depo-cica-D691szGu.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <img src="assets/depo-emilia-CArLNDco.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <img src="assets/depo-lelo-B1NBFXKe.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <div class="mc" aria-hidden="true">
+          <div class="q">O livro já tinha parado</div>
+          <div class="r">Destaque de vendas<br>na Bienal do Rio</div>
+          <p>Tom, que pegou um livro que já tinha parado</p>
+        </div>
+        <img src="assets/depo-profinho-Bom5B61T.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+        <img src="assets/depo-robson-CNrUIBuZ.webp" alt="" aria-hidden="true" loading="lazy" width="540" height="675">
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="fecho-prova rv">
+      <p class="fp1">Todos começaram <span class="grifo">onde você está agora</span>.<span class="fp-aqui">
+        <svg viewBox="0 0 80 34" fill="none" aria-hidden="true">
+          <path d="M76,9 C58,4 34,9 14,20" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M13,20 L25,18 M13,20 L20,29" stroke="currentColor" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="mao nota">Você está aqui.</span></span></p>
+      <p class="fp2">Você é o próximo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DANY ============
+     Encolhida de tres paragrafos pra um: a VSL apresenta a Dany falando, e o
+     que o video nao fixa sao os quatro numeros e a tese, que ficam. -->
+<!-- ============ DANY (variação C) ============
+     A citação ABRE e o nome vira assinatura no fim: o leitor ouve a frase
+     antes de saber de quem ela e', e e' isso que faz ela pesar.
+     A foto sai de papel de parede (50% de opacidade sob um gradiente, onde ela
+     nao provava nada) e vira retrato recortado ao lado. O fundo escuro fica,
+     porque e' o unico bloco escuro da metade de baixo e e' ele que da' o
+     respiro antes da oferta.
+     A credencial encurtou: "mais de 800 autores, somando mais de 10 milhoes"
+     era exatamente o que os quatro numeros logo abaixo ja' diziam. -->
+<section class="dany" data-etapa="4">
+  <div class="wrap">
+    <div class="bio rv">
+      <img src="assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa" loading="lazy" width="800" height="1000">
+      <div class="txt">
+        <p class="eyebrow">Quem está do outro lado</p>
+        <p class="fala serifa">“Dany, queria ter te conhecido antes.”</p>
+        <p class="cont">É a frase que eu mais ouço. Já ouvi de autora com caixas do próprio
+          livro debaixo da cama. De autor que doou o estoque inteiro para não precisar mais
+          olhar para ele. De gente que nunca escreveu o segundo porque o primeiro não vendeu.</p>
+        <p class="peso">Nenhum deles escreveu um livro ruim. Todos começaram tarde demais.</p>
+        <p class="mao"><span class="lin">O maior risco que um autor corre é ser esquecido.</span></p>
+        <div class="assina">
+          <h2>Dany Sakugawa</h2>
+          <span>Passou anos do outro lado, como diretora da editora que mais emplacava best-sellers
+            do país. E uma coisa ficou clara: a maioria dos autores que chegava lá era desconhecida.
+            O que separava quem vendia de quem não vendia não era talento.</span>
+        </div>
+        <div class="nums">
+          <div><b data-n="15" data-pre="+" data-pos=" anos">+15 anos</b><span>no mercado literário</span></div>
+          <div><b data-n="800" data-pre="+">+800</b><span>autores lançados</span></div>
+          <div><b data-n="4400" data-pre="+">+4.400</b><span>alunos</span></div>
+          <div><b data-n="10" data-pre="+" data-pos="M">+10M</b><span>livros vendidos</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ============ OFERTA ============ -->
+<section class="offer" id="oferta" data-etapa="5">
+  <div class="wrap">
+    <div class="narrow rv" style="text-align:center;margin:0 auto">
+      <p class="eyebrow">Inscrição</p>
+      <h2>O lançamento do seu livro vai acontecer.<br><span class="serifa">Mas ele vai vender?</span></h2>
+    </div>
+    <div class="offer-box rv">
+      <img class="marca" src="assets/logo-90d.png" alt="Lançamento 90D" width="490" height="125">
+      <div class="price"><span class="cur">12x de R$</span><span class="val">29,64</span><span class="ast">*</span></div>
+      <p class="inst">ou <b>R$ 297,00 à vista</b></p>
+      <p class="promessa">De invisível a lido em 90 dias.</p>
+      <ul class="conquistas">
+        <li><b>Cem compradores mapeados</b> antes do livro existir</li>
+        <li><b>Desconhecidos descobrindo o livro</b> sem você parecer vendedor</li>
+        <li><b>Uma pré-venda que já vende</b>, não um pedido de apoio</li>
+        <li><b>Uma estreia com fila</b>, não com silêncio</li>
+        <li><b>Vendas na primeira semana</b>, não só elogios</li>
+        <li><b>Um livro que não morre</b> em trinta dias</li>
+      </ul>
+      <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn ouro block" id="ctaMain" data-cta="oferta">Acesso Imediato e Vitalício</a>
+      <div class="seals"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div>
+      <p class="nota-juros">* Parcelado no cartão, com juros.</p>
+    </div>
+
+    <div class="vemjunto rv">
+      <p class="tit">O que vem junto</p>
+      <ul>
+        <li><b>O treinamento completo</b>, gravado, para assistir no seu ritmo</li>
+        <li><b>O cronograma de 90 dias preenchível</b>, com as suas datas</li>
+        <li><b>A planilha guiada</b> dos seus primeiros cem compradores</li>
+        <li><b>O plano de pré-venda</b>, para estrear vendendo</li>
+        <li><b>O roteiro do pós-lançamento</b>, para não morrer em trinta dias</li>
+        <li><b>O soft-marketing</b>, para chegar em quem não te conhece</li>
+        <li><b>Checklist de cada etapa</b>, com prazos</li>
+        <li><b>Marcos nos dias 15, 45 e 90</b>, para saber se você está no ritmo</li>
+        <li><b>Acesso vitalício</b>, para usar neste livro e em todos os próximos</li>
+      </ul>
+    </div>
+
+    <div class="garantia rv">
+      <div class="selo" role="img" aria-label="Quinze dias de garantia, satisfação garantida">
+        <svg viewBox="0 0 220 220" aria-hidden="true">
+          <defs><path id="anel" d="M110,110 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>
+          <text class="volta"><textPath href="#anel" startOffset="0"
+            textLength="578" lengthAdjust="spacing">ZERO RISCO · SATISFAÇÃO GARANTIDA · REEMBOLSO EM 15 DIAS ·</textPath></text>
+          <circle class="disco" cx="110" cy="110" r="74"/>
+          <text class="num" x="110" y="118" text-anchor="middle">15</text>
+          <text class="dias" x="110" y="146" text-anchor="middle">DIAS DE GARANTIA</text>
+        </svg>
+      </div>
+      <div class="txt">
+        <h3>Quer olhar por dentro antes de decidir?</h3>
+        <p class="lei">A lei exige sete dias. A gente dá <b>quinze</b>, porque sete não dá tempo
+          de olhar um plano de noventa.</p>
+        <p>Entre, assista ao treinamento, baixe o cronograma e monte as suas datas.
+          Se em quinze dias você achar que não é para você:</p>
+        <ul class="passos">
+          <li>Pede o reembolso por e-mail</li>
+          <li>Recebe cem por cento de volta</li>
+          <li>Sem perguntas, e sem precisar justificar</li>
+        </ul>
+        <p class="fecho">O risco é nosso. É a sua vez agora.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section data-etapa="5">
+  <div class="wrap narrow rv">
+    <p class="eyebrow">Perguntas</p>
+    <h2>Antes de decidir</h2>
+    <div class="faq">
+      <details><summary>Já publiquei o meu livro. Ainda serve?</summary><div class="a">Serve. O plano funciona igual para relançamento, que é uma das estratégias mais usadas para trazer um livro parado de volta a vender.</div></details>
+      <details><summary>Ainda estou escrevendo. É cedo demais?</summary><div class="a">Melhor ainda. Quem cria desejo enquanto escreve chega na estreia vendendo. Criar desejo começa antes de o livro existir.</div></details>
+      <details><summary>Preciso ter muitos seguidores?</summary><div class="a">Não. O plano começa por quem já está perto de você, e boa parte dele acontece fora das redes sociais.</div></details>
+      <details><summary>Preciso aparecer e gravar vídeo?</summary><div class="a">Não. O que faz o lançamento funcionar é preparo, não exposição. Boa parte do plano acontece antes de o livro existir e longe de câmera. O soft-marketing existe exatamente para isso: falar do livro sem virar vitrine.</div></details>
+      <details><summary>Serve para ficção?</summary><div class="a">Serve. Ficção, não ficção, poesia, infantil e técnico. O que muda é o leitor e o tom, não a estrutura do lançamento.</div></details>
+      <details><summary>Vou publicar por editora. Ainda faz sentido?</summary><div class="a">Faz. Do ponto de vista de marketing, toda publicação é uma autopublicação: a editora distribui, mas quem leva o leitor até o livro é você.</div></details>
+      <details><summary>É ao vivo?</summary><div class="a">Não. É gravado. Você assiste no seu ritmo e executa no seu calendário, e o acesso é vitalício.</div></details>
+      <details><summary>Quanto tempo por dia?</summary><div class="a">O cronograma foi desenhado para caber na rotina de quem tem outro trabalho. Ele distribui as tarefas ao longo dos três meses em vez de concentrar tudo na semana da estreia.</div></details>
+      <details><summary>E se não for para mim?</summary><div class="a">Garantia incondicional de quinze dias. Você entra, olha o plano inteiro, e se não fizer sentido é só pedir o reembolso. Devolvemos cem por cento, sem perguntas.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FECHO ============ -->
+<section class="final" data-etapa="5">
+  <div class="wrap">
+    <div class="rv">
+      <h2>Você só lança o seu livro <span class="grifo">uma vez</span>.</h2>
+      <span class="sub">Não jogue fora essa chance.</span>
+      <a href="#oferta" class="btn ouro" data-cta="final">Acesso Imediato e Vitalício</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="mark-img" src="assets/logo-90d.png" alt="Lançamento 90D" width="490" height="125" loading="lazy">
+    <span>© The Book Business · Todos os direitos reservados</span>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <div class="p">12x R$29,64<small>ou R$297 à vista</small></div>
+  <a href="#oferta" class="btn ouro" data-cta="sticky">Acesso Imediato e Vitalício</a>
+</div>
+
+<script src="../tracker.js" defer></script>
+<script>
+(function(){
+  /* ============================================================
+     ⚠️ TROCAR QUANDO O PRODUTO EXISTIR NA HOTMART
+     Formato: https://pay.hotmart.com/<PRODUTO>?off=<OFERTA>&checkoutMode=10
+     ============================================================ */
+  var CHECKOUT = 'https://pay.hotmart.com/F107221310T?off=xpzf016q';
+
+  /* Embed da VSL do VTurb. Vazio = a página esconde o player e não fica buraco. */
+  /* ============================================================
+     ⚠️ TEMPORÁRIO — VSL DE TEMPLATE, SÓ PRA VER O LAYOUT
+     Este é o vídeo da IMERSÃO (outro produto: fala em evento ao vivo,
+     domingo, Zoom e R$29). Está aqui só pra avaliar a dobra com um player
+     de verdade em vez de um retângulo.
+     AO GRAVAR A VSL DO 90D: trocar PLAYER_SRC e PLAYER_ID pelos novos e
+     apagar este aviso. Deixar vazio volta ao placeholder.
+     ============================================================ */
+  var VSL = {
+    src: 'https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6a5f7822551c549be7ce3ea7/v4/player.js',
+    id:  'vid-6a5f7822551c549be7ce3ea7',
+    temporaria: true
+  };
+
+  var vsl = document.getElementById('vsl'), slot = document.getElementById('vslSlot');
+  if (VSL && VSL.id && VSL.src) {
+    slot.innerHTML = '<vturb-smartplayer id="' + VSL.id + '" style="display:block;width:100%"></vturb-smartplayer>';
+    var pv = document.createElement('script'); pv.src = VSL.src; pv.async = true;
+    document.head.appendChild(pv);
+    if (VSL.temporaria) {
+      var av = document.createElement('div');
+      av.className = 'vsl-aviso';
+      av.textContent = 'Vídeo da Imersão, provisório, só para teste de layout';
+      vsl.insertAdjacentElement('afterend', av);
+    }
+  } else if (!/[?&](preview|dev)=1/.test(location.search)) {
+    vsl.style.display = 'none';
+  }
+
+  /* ---- checkout com repasse de origem ---- */
+  var PASS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id',
+              'src','sck','xcod','fbclid','gclid','ttclid'];
+  /* Integração com o framework de A/B:
+     __ABCK  = URL de checkout da variante (escopo checkout)
+     __ABTESTS = testes ativos; o sck_tag|variante vai no sck pra atribuir a venda
+     Leio no CLIQUE em vez de reescrever os links, então não preciso esperar o fetch. */
+  function checkoutUrl(){
+    var base = (window.__ABCK || CHECKOUT);
+    var u; try { u = new URL(base); } catch(e) { return base; }
+    var here = new URLSearchParams(location.search), stored = {};
+    try { stored = JSON.parse(localStorage.getItem('mtbb_utms') || '{}') || {}; } catch(e) {}
+    PASS.forEach(function(k){
+      var v = here.get(k) || stored[k];
+      if (v && !u.searchParams.get(k)) u.searchParams.set(k, v);
+    });
+    if (!u.searchParams.get('src')) u.searchParams.set('src','L90D-organico');
+    var marca = (window.__ABTESTS || []).filter(function(t){ return t.sck_tag; })
+                 .map(function(t){ return t.sck_tag + '|' + t.variant; }).join('|');
+    if (marca) u.searchParams.set('sck', (u.searchParams.get('sck') ? u.searchParams.get('sck') + '|' : '') + marca);
+    return u.toString();
+  }
+  /* o framework chama isto depois de resolver o teste; como monto a URL no clique, é só um hook */
+  window.__abReprocess = function(){};
+  /* mantém o href do botão em dia com o CHECKOUT atual. O href existe pra
+     quem está sem JS, pro clique do meio e pro "copiar endereço do link"; o
+     clique normal continua remontando a URL na hora. */
+  (function(){ var b = document.getElementById('ctaMain');
+    if (b && !/SUBSTITUIR/.test(CHECKOUT)) b.setAttribute('href', checkoutUrl()); })();
+  function comprar(origem){
+    /* trava de segurança: enquanto o checkout for placeholder, não joga ninguém
+       num link quebrado da Hotmart. Some sozinha quando CHECKOUT for o real. */
+    if (/SUBSTITUIR/.test(CHECKOUT) && !window.__ABCK) {
+      var b = document.getElementById('ctaMain');
+      if (b) { b.textContent = 'As inscrições ainda não abriram'; b.style.pointerEvents = 'none'; b.style.opacity = '.6';
+               b.scrollIntoView({behavior:'smooth',block:'center'}); }
+      return;
+    }
+    try { if (window.fbq) fbq('track','InitiateCheckout',
+      {content_ids:['L90D'],content_type:'product',currency:'BRL',value:297}); } catch(e){}
+    try { if (window.MTBB_TRACK) MTBB_TRACK('hotmart_click',{cta:origem,produto:'L90D'}); } catch(e){}
+    window.location.href = checkoutUrl();
+  }
+  document.addEventListener('click', function(ev){
+    var a = ev.target.closest('[data-cta]'); if (!a) return;
+    if (a.getAttribute('href') === '#oferta') return;   /* âncoras rolam, não compram */
+    ev.preventDefault(); comprar(a.getAttribute('data-cta'));
+  });
+
+  /* ---- topbar + barra fixa ---- */
+  var sticky = document.getElementById('sticky'), oferta = document.getElementById('oferta');
+  var ctasFixos = [].slice.call(document.querySelectorAll('a.btn')).filter(function(b){
+    return !b.closest('.sticky');
+  });
+  function naTela(e, folga){
+    var r = e.getBoundingClientRect();
+    return r.bottom > -folga && r.top < innerHeight + folga;
+  }
+  function onScroll(){
+    var y = window.scrollY;
+    // a barra some perto de qualquer CTA visível, não só da seção da oferta:
+    // dois botões dourados iguais na mesma tela leem como bug, não como opção
+    var jaTemBotao = ctasFixos.some(function(b){ return naTela(b, 80); });
+    sticky.classList.toggle('on', y > 560 && !jaTemBotao);
+  }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* ---- reveal: só anima se conseguir revelar de volta; rede de segurança em 4s ---- */
+  /* ============================================================
+     MOVIMENTO
+     Só liga a animação se o navegador provar que consegue revelar de volta.
+     Rede de segurança em 4s: nenhuma seção pode sumir por causa de animação.
+     ============================================================ */
+  var alvos = document.querySelectorAll('.rv, [data-stg]');
+
+  if ('IntersectionObserver' in window) {
+    document.documentElement.classList.add('js');
+
+    /* cascata: cada filho recebe seu índice, e cada faixa o seu */
+    document.querySelectorAll('[data-stg]').forEach(function(p){
+      [].forEach.call(p.children, function(c,i){ c.style.setProperty('--i', i); });
+    });
+    document.querySelectorAll('.reg .faixa').forEach(function(f,i){ f.style.setProperty('--i', i); });
+
+    /* os números contam em vez de aparecer prontos.
+       ⚠️ NUNCA pode deixar valor errado na tela: se o rAF travar (aba oculta,
+       renderer ocupado), o número ficaria parado no 0 e a página passaria a
+       afirmar "+0 autores lançados". Por isso: não começa com a aba oculta,
+       e um timeout crava o valor final de qualquer jeito. */
+    function contar(el){
+      if (el.dataset.contou) return;
+      var alvo = parseFloat(el.getAttribute('data-n')),
+          pre  = el.getAttribute('data-pre') || '',
+          pos  = el.getAttribute('data-pos') || '',
+          fim  = pre + alvo.toLocaleString('pt-BR') + pos;
+      function cravar(){ el.dataset.contou = '1'; el.textContent = fim; }
+      if (document.hidden) { cravar(); return; }      /* aba oculta: já entrega pronto */
+      var t0 = null, dur = 1500;
+      function passo(t){
+        if (el.dataset.contou) return;
+        if (!t0) t0 = t;
+        var p = Math.min((t - t0) / dur, 1);
+        el.textContent = pre + Math.round(alvo * (1 - Math.pow(1 - p, 4))).toLocaleString('pt-BR') + pos;
+        if (p < 1) requestAnimationFrame(passo); else cravar();
+      }
+      requestAnimationFrame(passo);
+      setTimeout(cravar, dur + 400);                  /* rede: valor certo mesmo se travar */
+    }
+
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        e.target.querySelectorAll('[data-n]').forEach(contar);
+        io.unobserve(e.target);
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.05});
+    alvos.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){
+      alvos.forEach(function(el){ el.classList.add('in'); });
+      document.body.classList.add('ready');
+      /* não basta pôr a classe: se a transição não rodou, o elemento fica no
+         estado inicial. Aqui a gente desliga a animação e trava no estado final. */
+      document.documentElement.classList.add('sem-motion');
+    }, 4000);
+
+    /* hero entra na carga, sem depender de scroll.
+       NÃO usar só requestAnimationFrame: em aba oculta ele não dispara, e a
+       dobra ficaria invisível até a pessoa focar a aba. O setTimeout garante. */
+    var heroPronto = false;
+    function acordarHero(){
+      if (heroPronto) return; heroPronto = true;
+      document.body.classList.add('ready');
+      document.querySelectorAll('.stats [data-n]').forEach(contar);
+    }
+    setTimeout(acordarHero, 60);
+    requestAnimationFrame(function(){ requestAnimationFrame(acordarHero); });
+  }
+
+
+
+  /* ---- equalizador fixo no rodapé ----
+     Barras coladas na base da janela, crescendo com o scroll. A inversão do
+     texto por cima foi testada e descartada: não deu certo visualmente e
+     custava um clone do conteúdo inteiro no DOM. Sem ela a faixa fica leve. */
+  /* ---- FAQ: um aberto por vez ---- */
+  var ds = document.querySelectorAll('.faq details');
+  ds.forEach(function(d){ d.addEventListener('toggle', function(){
+    if (d.open) ds.forEach(function(o){ if (o !== d) o.open = false; });
+  });});
+})();
+</script>
+<script>
+/* AS TRÊS BOLHAS
+   Acende a bolha do passo cujo centro está mais perto do centro da tela.
+   Proximidade em vez de IntersectionObserver com faixa percentual, que sumia
+   em viewport curta. */
+(function(){
+  var passos = [].slice.call(document.querySelectorAll('#bolhas .bb-passo'));
+  if (!passos.length) return;
+  var bolhas = ['bol1','bol2','bol3'].map(function(id){ return document.getElementById(id); });
+  var atual = -1, pedido = false, resposta = null;
+
+  function acender(i){
+    if (i === atual) return;
+    atual = i;
+    passos.forEach(function(p, k){ p.classList.toggle('viva', k === i); });
+    bolhas.forEach(function(g, k){
+      g.classList.toggle('viva', k === i);
+      g.classList.toggle('furada', k < i);
+    });
+  }
+  function maisPerto(){
+    var meio = innerHeight / 2, melhor = 0, dist = Infinity;
+    passos.forEach(function(p, i){
+      var r = p.getBoundingClientRect();
+      var d = Math.abs(r.top + r.height / 2 - meio);
+      if (d < dist){ dist = d; melhor = i; }
+    });
+    return melhor;
+  }
+  function medir(){
+    pedido = false;
+    acender(maisPerto());
+  }
+  function pedir(){ if (!pedido){ pedido = true; requestAnimationFrame(medir); } }
+  addEventListener('scroll', pedir, {passive:true});
+  addEventListener('resize', pedir);
+
+  medir();
+  window.__bolhas = medir;
+})();
+</script>
+<script>
+/* A LETRA DA DANY: cada caractere entra em sequencia e o traco cresce junto.
+   Sem JS ou com movimento desligado, o CSS ja' deixa tudo no estado final. */
+(function(){
+  var maos=[].slice.call(document.querySelectorAll('.mao'));
+  if(!maos.length) return;
+  maos.forEach(function(m){
+    m.querySelectorAll('.lin').forEach(function(l){
+      var palavras=l.textContent.split(' '); l.textContent='';
+      palavras.forEach(function(pal,k){
+        var w=document.createElement('span'); w.className='pal';
+        for(var i=0;i<pal.length;i++){ var c=document.createElement('span');
+          c.className='ch'; c.textContent=pal.charAt(i); w.appendChild(c); }
+        l.appendChild(w);
+        if(k<palavras.length-1){ var esp=document.createElement('span');
+          esp.className='ch'; esp.textContent='\u00A0'; l.appendChild(esp); }
+      });
+    });
+  });
+  function escrever(m){
+    if(m.dataset.feito) return; m.dataset.feito='1';
+    var d=0; m.querySelectorAll('.ch').forEach(function(c){ c.style.transitionDelay=d+'ms'; d+=26; });
+    m.classList.add('escreveu');
+  }
+  if(!('IntersectionObserver' in window)){ maos.forEach(escrever); return; }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){ escrever(e.target); io.unobserve(e.target); }});},{threshold:.5});
+  maos.forEach(function(m){io.observe(m);});
+  window.__escrever=function(){maos.forEach(escrever);};
+})();
+</script>
+<script>
+/* OS CEM LIVROS: enchem conforme a secao sobe na tela. Uma variavel CSS so',
+   atualizada em rAF; as 100 marcas leem dela sozinhas. O ultimo a acender e'
+   justamente o unico aceso. */
+(function(){
+  var grupos=[].slice.call(document.querySelectorAll('.cem')).map(function(c){
+    return { cem:c, sec:document.querySelector(c.getAttribute('data-sec')||'.noventa') };
+  }).filter(function(g){ return g.sec; });
+  if(!grupos.length) return;
+  var pedido=false;
+  function medir(){
+    pedido=false;
+    grupos.forEach(function(g){
+      var t=g.sec.getBoundingClientRect().top;
+      var ini=innerHeight*0.92, fim=innerHeight*0.30;
+      var p=(ini-t)/(ini-fim);
+      g.cem.style.setProperty('--p', Math.min(Math.max(p,0),1).toFixed(3));
+    });
+  }
+  function pedir(){ if(!pedido){pedido=true;requestAnimationFrame(medir);} }
+  addEventListener('scroll',pedir,{passive:true}); addEventListener('resize',pedir);
+  medir();
+  window.__cem=medir;
+})();
+</script>
+<script>
+/* A CONTAGEM DA VIRADA
+   O titulo comeca em 100% e desce ate 1% conforme a secao sobe na tela. Ao
+   cravar 1% o numero fica laranja e o resto da frase se escreve, palavra a
+   palavra. O markup ja' nasce com '1%' e o resto visivel, entao sem JS a
+   pagina mostra o estado final em vez de um titulo pela metade. */
+(function(){
+  var cab=document.getElementById('cabeca'), pct=document.getElementById('pct'),
+      resto=document.getElementById('resto'), sec=document.querySelector('.virada');
+  if(!cab||!pct||!resto||!sec) return;
+
+  var palavras=resto.textContent.split(' ');
+  resto.innerHTML='';
+  var emVerdade=resto.textContent;
+  /* refaz preservando o <em> de "de verdade" */
+  resto.innerHTML=' que vende <em>de verdade</em> no lançamento';
+  (function envolver(no){
+    [].slice.call(no.childNodes).forEach(function(f){
+      if(f.nodeType===3){
+        var frag=document.createDocumentFragment();
+        f.textContent.split(/(\s+)/).forEach(function(t){
+          if(!t) return;
+          if(/^\s+$/.test(t)){ frag.appendChild(document.createTextNode(t)); return; }
+          var w=document.createElement('span'); w.className='w'; w.textContent=t;
+          frag.appendChild(w);
+        });
+        no.replaceChild(frag,f);
+      } else if(f.nodeType===1){ envolver(f); }
+    });
+  })(resto);
+  var ws=[].slice.call(resto.querySelectorAll('.w'));
+  ws.forEach(function(w,i){ w.style.transitionDelay=(i*55)+'ms'; });
+
+  var pedido=false;
+  function medir(){
+    pedido=false;
+    var t=sec.getBoundingClientRect().top;
+    var ini=innerHeight*0.95, fim=innerHeight*0.42;
+    var p=Math.min(Math.max((ini-t)/(ini-fim),0),1);
+    var n=Math.max(1, Math.round(100 - p*99));
+    pct.textContent=n+'%';
+    cab.style.setProperty('--k', p.toFixed(3));
+    cab.classList.toggle('chegou', n===1);
+  }
+  function pedir(){ if(!pedido){pedido=true;requestAnimationFrame(medir);} }
+  addEventListener('scroll',pedir,{passive:true}); addEventListener('resize',pedir);
+  medir();
+  /* Rede propria, porque o contador NAO entra na trava global de 4s (ela
+     dispara sempre e mataria o efeito pra quem demora a chegar aqui).
+     So' age se a secao ja' esta' em tela e mesmo assim nao resolveu. */
+  [5000, 9000].forEach(function(t){
+    setTimeout(function(){
+      if (cab.classList.contains('chegou')) return;
+      if (sec.getBoundingClientRect().top < innerHeight * 0.5){
+        pct.textContent = '1%'; cab.classList.add('chegou');
+      }
+    }, t);
+  });
+  window.__conta=medir;
+})();
+</script>
+<script>
+/* A CURVA SE DESENHA COM A ROLAGEM
+   Um retangulo de recorte cresce da esquerda pra direita e vai revelando a
+   linha e a area juntas. Os pontos e os rotulos acendem quando o desenho
+   passa por eles. Uma variavel de progresso so', em rAF.
+   O markup nasce com o recorte ABERTO, entao sem JS o grafico aparece
+   inteiro em vez de vazio. */
+(function(){
+  var alvo=document.querySelector('.curva'), rev=document.getElementById('revelaR');
+  if(!alvo||!rev) return;
+  var marcas=[].slice.call(document.querySelectorAll('.curva [data-x]'));
+  var X0=60,X1=862,pedido=false,pronto=false;
+  function medir(){
+    pedido=false;
+    var t=alvo.getBoundingClientRect().top;
+    var ini=innerHeight*0.90, fim=innerHeight*0.34;
+    var p=Math.min(Math.max((ini-t)/(ini-fim),0),1);
+    var x=X0+(X1-X0)*p;
+    rev.setAttribute('width', (x+14).toFixed(1));
+    marcas.forEach(function(e){
+      e.style.opacity = (+e.getAttribute('data-x') <= x+2) ? '1' : '0';
+    });
+    if(p>=1) pronto=true;
+  }
+  function pedir(){ if(!pedido){pedido=true;requestAnimationFrame(medir);} }
+  addEventListener('scroll',pedir,{passive:true}); addEventListener('resize',pedir);
+  medir();
+  /* rede propria: o contador e a curva NAO entram na trava global de 4s, que
+     dispara sempre. So' age se a secao ja' esta em tela e mesmo assim parou. */
+  [5000,9000].forEach(function(ms){ setTimeout(function(){
+    if(pronto) return;
+    if(alvo.getBoundingClientRect().top < innerHeight*0.5){
+      rev.setAttribute('width','900');
+      marcas.forEach(function(e){ e.style.opacity='1'; });
+    }
+  }, ms); });
+  window.__curva=medir;
+})();
+</script>
+
+<style id="skin-claro">
+/* SKIN CLARO — marfim/carvao/dourado, 70/25/5. override no fim do body. */
+:root{
+  --bg:#F3F0E8; --card:#FBFAF6; --ink:#292927;
+  --soft:#57544D; --mute:#6E6B63;
+  --border:rgba(41,41,39,.12); --line:rgba(41,41,39,.14);
+  --accent:#292927;            /* na maioria (marfim) o acento e' o carvao */
+  --accent-soft:rgba(41,41,39,.06);
+  --verde:#242320;             /* virada e oferta viram CARVAO */
+  --ink-on-dark:#F3F0E8;
+}
+body{background:#F3F0E8;color:#292927}
+/* seções de peso em carvao, o resto herda o marfim dos tokens */
+.agit,.dany,.virada,.final{background:#242320 !important}
+.noventa{background:#242320 !important;color:#F3F0E8 !important}
+.press{background:#FBFAF6 !important}
+.bolhas,.offer{background:#F3F0E8 !important}
+/* nas seções ESCURAS o dourado volta a poder ser texto/acento */
+.agit .eyebrow,.dany .eyebrow,.virada .eyebrow,.noventa .eyebrow,
+.um .pct,.virada .pct,.mult .c1,.mult .c2,.mult .c3{color:#EAB82D !important}
+.agit,.agit *,.dany .txt,.dany .txt *,.virada,.virada *,.noventa,.noventa *{}
+.agit,.dany,.virada{color:#F3F0E8}
+.virada h2,.virada .desfecho,.virada .causa,.noventa .hl,.noventa .sl,.noventa .sl b{color:#F3F0E8 !important}
+.agit .fio{background:#EAB82D !important}
+/* 100 livros: apagados em marfim, vivo dourado (sobre a faixa carvao) */
+.cem i{background:rgba(243,240,232,.16) !important}
+.cem i.viva{background:#EAB82D !important;box-shadow:0 0 0 3px #242320,0 0 14px rgba(234,184,45,.5) !important}
+/* grifo/risco: sobre marfim, translucido escuro; sobre carvao, dourado */
+.grifo{background-image:none !important;background:linear-gradient(transparent 58%,rgba(41,41,39,.14) 58%) !important;padding:0 2px}
+.risco{background-image:none !important}
+.serifa{color:inherit}
+.agit .grifo,.dany .grifo,.virada .grifo,.noventa .grifo{background:linear-gradient(transparent 58%,rgba(234,184,45,.5) 58%) !important}
+/* hero: o grifo da palavra vira dourado (unico dourado sobre marfim, como fundo) */
+.hero h1 em,h1 em{background:linear-gradient(transparent 60%,rgba(234,184,45,.85) 60%);color:#292927}
+/* CTA: dourado solido, tinta carvao — o unico preenchimento cheio */
+.btn:not(.ouro){background:#EAB82D !important;color:#242320 !important}
+.btn.ouro{background:#EAB82D !important;color:#242320 !important;box-shadow:0 0 26px rgba(234,184,45,.4) !important}
+/* card de oferta: CARVAO sobre marfim (o momento escuro dentro do claro) */
+.offer-box{background:#242320 !important;border:0 !important;color:#F3F0E8 !important}
+.offer-box .promessa,.offer-box .conquistas li b,.offer-box .name{color:#F3F0E8 !important}
+.offer-box .conquistas li{color:rgba(243,240,232,.72) !important}
+.offer-box .conquistas li:before{border-color:#EAB82D !important}
+.offer-box .promessa{color:#EAB82D !important}
+.offer-box .price .val,.offer-box .price .cur,.offer-box .inst,.offer-box .inst b{color:#F3F0E8 !important}
+.offer-box .marca{filter:brightness(0) invert(1)}
+/* garantia selo: disco carvao com dourado */
+.garantia .disco{fill:#242320}
+.garantia .num{fill:#EAB82D}
+.garantia .dias{fill:rgba(243,240,232,.8)}
+.garantia .volta{fill:#6E6B63}
+/* curva (fica na .virada, carvao): dourado mono */
+.curva .linha{stroke:#EAB82D !important}
+.curva .ar{fill:#EAB82D !important;opacity:.14}
+.curva .n1,.curva .n2,.curva .n3{stroke:#EAB82D !important}
+.curva .t1,.curva .t2,.curva .t3,.curva .topo{fill:#EAB82D !important}
+.curva .base,.curva .prev{stroke:rgba(243,240,232,.4) !important}
+.curva .cato,.curva .cdia,.curva .ceixo{fill:rgba(243,240,232,.6) !important}
+/* mosaico de provas e bolhas: eyebrows em carvao suave sobre marfim */
+.bb-passo .eyebrow{color:#6E6B63 !important}
+</style>
+</body>
+</html>
