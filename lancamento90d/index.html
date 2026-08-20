@@ -333,16 +333,13 @@ p{margin:0 0 1.05em}
   -webkit-clip-path:polygon(0 0, 50% 100%, 100% 0);
   clip-path:polygon(0 0, 50% 100%, 100% 0)}
 .bolhas .wrap{max-width:1240px}
-.bolhas .abre{max-width:640px;margin:0 auto;text-align:center}
+.bolhas .abre{max-width:660px;margin:0 auto;text-align:center}
 .bolhas .abre h2{font-size:clamp(1.7rem,4.2vw,2.5rem)}
-/* numeros retoricos: o leitor se mede de cabeca antes de ver o diagrama */
-.bolhas .abre .numeros{font-family:'Space Grotesk',sans-serif;font-weight:700;
-  letter-spacing:.02em;font-size:clamp(1.3rem,3.2vw,1.95rem);line-height:1.2;
-  color:#757168;margin:16px 0 0}
-.bolhas .abre .pergunta{font-family:'Space Grotesk',sans-serif;font-weight:400;
-  letter-spacing:-.025em;font-size:clamp(1.15rem,2.7vw,1.55rem);line-height:1.3;
-  color:var(--ink);margin:14px auto 0;max-width:none}
-.bolhas .abre .pergunta b{font-weight:700}
+/* a segunda pergunta é a que dói: ganha corpo próprio e a marca de ameaça */
+.bolhas .abre .pergunta{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.03em;line-height:1.18;color:var(--ink);
+  font-size:clamp(1.3rem,3.2vw,1.95rem);margin:18px 0 0;text-wrap:balance}
+.bolhas .abre .pergunta .risco{white-space:nowrap}
 .bb{display:grid;grid-template-columns:1.3fr 1fr;gap:52px;align-items:start;margin-top:36px}
 .bb-palco{position:sticky;top:calc(50vh - min(22vw, 31vh));height:min(44vw, 62vh);
   display:flex;align-items:center;justify-content:center}
@@ -1045,8 +1042,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="abre rv">
       <h2>Quantos leitores conhecem o seu livro hoje?</h2>
-      <p class="numeros" aria-hidden="true">10, 60, 200, 3.000</p>
-      <p class="pergunta">A resposta não é o número.<br>É em qual das <b>três bolhas</b> o seu livro está.</p>
+      <p class="pergunta">E quantos estão descobrindo ele <span class="risco">a cada dia</span>?</p>
     </div>
 
     <div class="bb">
