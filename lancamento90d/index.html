@@ -826,12 +826,34 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
   font-weight:700;line-height:1;letter-spacing:-.045em;color:#fff}
 .offer-box .inst{color:rgba(255,255,255,.82);font-size:.98rem;margin-bottom:26px}
 .offer-box .inst b{color:#fff}
-.offer-box .incl{list-style:none;padding:0;margin:0 0 28px;text-align:left;display:grid;gap:10px}
-.offer-box .incl li{position:relative;padding-left:28px;font-size:.96rem;
-  color:rgba(255,255,255,.86);line-height:1.5}
-.offer-box .incl li b{color:#fff}
-.offer-box .incl li:before{content:"";position:absolute;left:5px;top:.36em;width:7px;height:13px;
+/* O CARD VENDE CONQUISTA, NÃO ENTREGÁVEL.
+   Antes ele listava nove substantivos ("o cronograma", "a planilha"), que é
+   linguagem de estoque: descreve o que chega na caixa, não o que muda pra
+   pessoa. Agora a lista de dentro são VERBOS, o que o leitor passa a saber
+   fazer, e a lista de materiais desceu pra fora do card.
+   A promessa entra logo abaixo do preço porque é o que o número compra. */
+.offer-box .promessa{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.03em;font-size:clamp(1.18rem,2.5vw,1.5rem);line-height:1.2;
+  color:#fff;margin:0 0 24px;padding-bottom:22px;
+  border-bottom:1px solid rgba(255,255,255,.22)}
+.offer-box .conquistas{list-style:none;padding:0;margin:0 0 28px;text-align:left;display:grid;gap:12px}
+.offer-box .conquistas li{position:relative;padding-left:30px;font-size:1rem;
+  color:rgba(255,255,255,.82);line-height:1.45}
+.offer-box .conquistas li b{color:#fff;font-weight:700}
+.offer-box .conquistas li:before{content:"";position:absolute;left:5px;top:.34em;width:7px;height:13px;
   border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(40deg)}
+
+/* os materiais saem do card e viram nota de rodapé da oferta: quem já decidiu
+   não precisa deles, e quem quer conferir encontra sem esforço */
+.vemjunto{max-width:660px;margin:24px auto 0;text-align:left}
+.vemjunto .tit{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.16em;text-transform:uppercase;color:#757168;margin:0 0 14px;text-align:center}
+.vemjunto ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 26px}
+.vemjunto li{position:relative;padding-left:22px;font-size:.92rem;color:var(--soft);line-height:1.5}
+.vemjunto li b{color:var(--ink);font-weight:600}
+.vemjunto li:before{content:"";position:absolute;left:2px;top:.42em;width:5px;height:10px;
+  border-right:2px solid var(--verde);border-bottom:2px solid var(--verde);transform:rotate(40deg)}
+@media(max-width:640px){.vemjunto ul{grid-template-columns:1fr}}
 .nota-juros{margin:14px 0 0;font-size:.76rem;color:rgba(255,255,255,.7)}
 .seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:18px;
   font-size:.78rem;color:rgba(255,255,255,.7)}
@@ -1262,20 +1284,32 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       <img class="marca" src="assets/logo-90d.png" alt="Lançamento 90D" width="490" height="125">
       <div class="price"><span class="cur">12x de R$</span><span class="val">29,64</span><span class="ast">*</span></div>
       <p class="inst">ou <b>R$ 297,00 à vista</b></p>
-      <ul class="incl">
-        <li><b>O treinamento completo</b>, gravado, para assistir no seu ritmo</li>
-        <li><b>O cronograma de 90 dias preenchível</b>, com as suas datas</li>
-        <li><b>Os seus primeiros cem compradores mapeados</b>, em planilha guiada</li>
-        <li><b>O plano de pré-venda</b>, para estrear vendendo desde o primeiro dia</li>
-        <li><b>O soft-marketing</b>, para falar do livro sem parecer que está vendendo</li>
-        <li><b>O roteiro do pós-lançamento</b>, para o livro não morrer em trinta dias</li>
-        <li><b>Checklist de cada etapa</b>, com prazos</li>
-        <li><b>Marcos nos dias 15, 45 e 90</b>, para saber se você está no ritmo</li>
-        <li><b>Acesso vitalício</b>, para usar neste livro e em todos os próximos</li>
+      <p class="promessa">De invisível a lido em 90 dias.</p>
+      <ul class="conquistas">
+        <li><b>Crie desejo</b> antes do livro existir</li>
+        <li><b>Gere antecipação</b> até o dia da estreia</li>
+        <li><b>Fale do livro sem vender</b>, o soft-marketing</li>
+        <li><b>Monte a lista</b> dos seus primeiros cem compradores</li>
+        <li><b>Lance vendendo</b> desde o primeiro dia</li>
+        <li><b>Não pare em trinta dias</b>, faça o livro continuar</li>
       </ul>
       <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn ouro block" id="ctaMain" data-cta="oferta">Acesso Imediato e Vitalício</a>
       <div class="seals"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div>
       <p class="nota-juros">* Parcelado no cartão, com juros.</p>
+    </div>
+
+    <div class="vemjunto rv">
+      <p class="tit">O que vem junto</p>
+      <ul>
+        <li><b>O treinamento completo</b>, gravado, para assistir no seu ritmo</li>
+        <li><b>O cronograma de 90 dias preenchível</b>, com as suas datas</li>
+        <li><b>A planilha guiada</b> dos seus primeiros cem compradores</li>
+        <li><b>O plano de pré-venda</b>, para estrear vendendo</li>
+        <li><b>O roteiro do pós-lançamento</b>, para não morrer em trinta dias</li>
+        <li><b>Checklist de cada etapa</b>, com prazos</li>
+        <li><b>Marcos nos dias 15, 45 e 90</b>, para saber se você está no ritmo</li>
+        <li><b>Acesso vitalício</b>, para usar neste livro e em todos os próximos</li>
+      </ul>
     </div>
 
     <div class="garantia rv">
