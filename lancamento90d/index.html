@@ -336,10 +336,11 @@ p{margin:0 0 1.05em}
 .bolhas .abre{max-width:660px;margin:0 auto;text-align:center}
 .bolhas .abre h2{font-size:clamp(1.7rem,4.2vw,2.5rem)}
 /* a segunda pergunta é a que dói: ganha corpo próprio e a marca de ameaça */
-.bolhas .abre .pergunta{font-family:'Space Grotesk',sans-serif;font-weight:700;
-  letter-spacing:-.03em;line-height:1.18;color:var(--ink);
-  font-size:clamp(1.3rem,3.2vw,1.95rem);margin:18px 0 0;text-wrap:balance}
-.bolhas .abre .pergunta .risco{white-space:nowrap}
+.bolhas .abre .opcoes{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:.01em;color:#757168;font-size:clamp(1.2rem,2.8vw,1.7rem);margin:16px 0 0}
+.bolhas .abre .pergunta{color:var(--soft);font-size:1.06rem;line-height:1.5;
+  margin:10px auto 0;max-width:40ch}
+.bolhas .abre h2 .risco{white-space:nowrap}
 .bb{display:grid;grid-template-columns:1.3fr 1fr;gap:52px;align-items:start;margin-top:36px}
 .bb-palco{position:sticky;top:calc(50vh - min(22vw, 31vh));height:min(44vw, 62vh);
   display:flex;align-items:center;justify-content:center}
@@ -1041,8 +1042,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <section class="bolhas" id="bolhas" data-etapa="2">
   <div class="wrap">
     <div class="abre rv">
-      <h2>Quantos leitores conhecem o seu livro hoje?</h2>
-      <p class="pergunta">E quantos estão descobrindo ele <span class="risco">a cada dia</span>?</p>
+      <h2>Quantos leitores estão descobrindo o seu livro <span class="risco">a cada dia</span>?</h2>
+      <p class="opcoes">Dez? Sessenta? Nenhum?</p>
+      <p class="pergunta">A resposta diz em qual bolha você está.</p>
     </div>
 
     <div class="bb">
