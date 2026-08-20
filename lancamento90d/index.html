@@ -845,12 +845,14 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 }
 .offer-box .name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.15rem}
 .offer-box .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:16px 0 2px}
-.offer-box .price .cur{font-size:1.15rem;color:var(--mute)}
+.offer-box .price .cur{font-size:1.15rem;color:var(--soft)}
+.offer-box .price .ast{font-size:1.15rem;color:var(--soft);align-self:flex-start;margin-left:-4px}
 .offer-box .price .val{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,8.5vw,4.4rem);font-weight:700;line-height:1;letter-spacing:-.04em}
 .offer-box .inst{color:var(--soft);font-size:.98rem;margin-bottom:24px}
 .offer-box .incl{list-style:none;padding:0;margin:0 0 26px;text-align:left;display:grid;gap:10px}
 .offer-box .incl li{position:relative;padding-left:28px;font-size:.96rem;color:var(--soft);line-height:1.5}
 .offer-box .incl li:before{content:"";position:absolute;left:5px;top:.36em;width:7px;height:13px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(40deg)}
+.nota-juros{margin:14px 0 0;font-size:.76rem;color:var(--soft)}
 .seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:18px;font-size:.78rem;color:var(--mute)}
 
 /* ---------- faq ---------- */
@@ -1280,8 +1282,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     </div>
     <div class="offer-box rv">
       <div class="name">Lançamento 90D</div>
-      <div class="price"><span class="cur">R$</span><span class="val">297</span></div>
-      <p class="inst">à vista, ou <b>12x de menos de R$ 30</b></p>
+      <div class="price"><span class="cur">12x de R$</span><span class="val">29,64</span><span class="ast">*</span></div>
+      <p class="inst">ou <b>R$ 297,00 à vista</b></p>
       <ul class="incl">
         <li><b>O treinamento completo</b>, gravado, para assistir no seu ritmo</li>
         <li><b>O cronograma de 90 dias preenchível</b>, com as suas datas</li>
@@ -1294,6 +1296,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       </ul>
       <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn ouro block" id="ctaMain" data-cta="oferta">Quero o plano de 90 dias</a>
       <div class="seals"><span>Pagamento seguro</span><span>Acesso imediato</span></div>
+      <p class="nota-juros">* Parcelado no cartão, com juros.</p>
     </div>
 
     <div class="garantia rv">
@@ -1343,7 +1346,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 </footer>
 
 <div class="sticky" id="sticky">
-  <div class="p">R$297<small>ou 12x</small></div>
+  <div class="p">12x R$29,64<small>ou R$297 à vista</small></div>
   <a href="#oferta" class="btn ouro" data-cta="sticky">Quero o plano</a>
 </div>
 
