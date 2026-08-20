@@ -495,18 +495,20 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
    e os rostos. A anotacao usa o mesmo motor de escrita da frase da Dany
    (.mao), so' que sem o traco embaixo e menor. */
 .fecho-prova{text-align:center;margin-top:clamp(40px,5vw,60px)}
-.fp1{margin:0;font-size:clamp(1.06rem,2.3vw,1.34rem);color:var(--soft)}
-.fp2{position:relative;display:inline-block;margin:10px 0 0;
+.fp1{position:relative;display:inline-block;margin:0;
+  font-size:clamp(1.06rem,2.3vw,1.34rem);color:var(--soft)}
+.fp2{display:block;margin:10px 0 0;
   font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
   font-size:clamp(1.5rem,3.4vw,2.1rem);color:var(--accent)}
-.fp-aqui{position:absolute;left:calc(100% + 10px);bottom:-2px;
-  display:flex;align-items:flex-end;gap:2px;white-space:nowrap;color:var(--accent)}
-.fp-aqui svg{width:clamp(48px,5vw,68px);height:auto;flex:0 0 auto;margin-bottom:4px}
+.fp-aqui{position:absolute;left:calc(100% + 8px);top:50%;transform:translateY(-42%);
+  display:flex;align-items:center;gap:2px;white-space:nowrap;color:var(--accent)}
+.fp-aqui svg{width:clamp(46px,4.6vw,64px);height:auto;flex:0 0 auto}
 .mao.nota{font-size:clamp(17px,2vw,22px);background-image:none;padding-bottom:0;
   transform:rotate(-3deg);letter-spacing:0;margin:0}
 @media(max-width:820px){
-  .fp-aqui{position:static;justify-content:center;margin-top:4px}
-  .fp-aqui svg{transform:rotate(-24deg)}
+  .fp1{display:block}
+  .fp-aqui{position:static;transform:none;justify-content:center;margin-top:6px}
+  .fp-aqui svg{transform:rotate(-28deg)}
 }
 /* PROVA: o carrossel com os cards de texto ENTRANDO no meio das fotos.
    Antes eram dois blocos separados, e as 8 pessoas da parede sao as MESMAS 8
@@ -1289,14 +1291,14 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   </div>
   <div class="wrap">
     <div class="fecho-prova rv">
-      <p class="fp1">Todos começaram <span class="grifo">onde você está agora</span>.</p>
-      <p class="fp2">Você é o próximo.<span class="fp-aqui">
-        <svg viewBox="0 0 80 40" fill="none" aria-hidden="true">
-          <path d="M75,32 C57,36 31,31 14,13" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-          <path d="M13,12 L14,24 M13,12 L25,14" stroke="currentColor" stroke-width="2.6"
+      <p class="fp1">Todos começaram <span class="grifo">onde você está agora</span>.<span class="fp-aqui">
+        <svg viewBox="0 0 80 34" fill="none" aria-hidden="true">
+          <path d="M76,9 C58,4 34,9 14,20" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M13,20 L25,18 M13,20 L20,29" stroke="currentColor" stroke-width="2.6"
                 stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <span class="mao nota">Você está aqui.</span></span></p>
+      <p class="fp2">Você é o próximo.</p>
     </div>
   </div>
 </section>
