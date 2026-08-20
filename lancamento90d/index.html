@@ -216,7 +216,6 @@ a{color:inherit}
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
 .narrow{max-width:760px}
 section{padding:80px 0}
-.white{background:var(--card)}
 @media(max-width:760px){section{padding:54px 0}body{font-size:16px}}
 
 h1,h2,h3{font-family:'Space Grotesk','DM Sans',sans-serif;line-height:1.1;letter-spacing:-.03em;margin:0;color:var(--ink)}
@@ -230,11 +229,9 @@ p{margin:0 0 1.05em}
   letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 16px
 }
 .lead{font-size:clamp(1.02rem,2vw,1.24rem);color:var(--soft);line-height:1.6}
-.hl{background:linear-gradient(transparent 62%,var(--accent-soft) 62%);padding:0 2px}
 
 /* ---------- logo (arquivo oficial: coral #FC783C + escuro #303030) ---------- */
 .mark-img{height:21px;width:auto;display:block}
-.mark-img.foot{height:19px;opacity:.85}
 
 /* ---------- botão ---------- */
 .btn{
@@ -247,9 +244,7 @@ p{margin:0 0 1.05em}
 }
 .btn:hover{filter:brightness(.93);transform:translateY(-1px);box-shadow:0 16px 30px -14px rgba(252,120,60,1)}
 .btn:active{transform:translateY(0)}
-.btn.sm{padding:13px 24px;font-size:.92rem}
 .btn.block{display:flex;width:100%}
-.btn-note{font-size:.82rem;color:var(--mute);margin-top:12px}
 
 /* ---------- hero ----------
    Tipografia medida na lancamento-v1, que é a página provada:
@@ -325,8 +320,6 @@ p{margin:0 0 1.05em}
    Por isso é faixa acumulando, não caixa em sequência.
    ============================================================ */
 /* a nota do ciclo sobreviveu à fusão e agora fecha a faixa de tempo */
-.ciclo-nota{max-width:58ch;margin:26px auto 0;text-align:center;color:var(--soft);
-  font-size:.98rem;line-height:1.6}
 /* ============ AS TRÊS BOLHAS ============
    A bolha acesa usa o laranja CHEIO, fora da rampa de saturação: é o objeto
    focal da seção e um diagrama dessaturado lê como quebrado, não como sistema. */
@@ -369,8 +362,6 @@ html.js .bb-passo:not(.viva){opacity:.26}
 .bb-passo.viva .eyebrow{color:var(--accent)}
 .bb-passo h3{font-size:clamp(1.4rem,3.4vw,1.95rem);margin-bottom:12px}
 .bb-passo p{color:var(--soft);font-size:1.02rem;line-height:1.6;margin:0;max-width:44ch}
-.bb-passo .vira{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line);
-  color:var(--ink);font-weight:600;font-size:.98rem;max-width:44ch}
 .bb-mini{display:none;width:100%;max-width:210px;margin:0 0 20px}
 .bb-mini ellipse{fill:none;stroke:var(--border);stroke-width:1.6}
 .bb-mini .viva{stroke:var(--accent);stroke-width:2.6;fill:rgba(252,120,60,.10)}
@@ -482,8 +473,6 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .mult .c1{color:#fff}.mult .c2{color:#FAAB00}.mult .c3{color:#FF7A5C}
 .desfecho{margin-top:20px!important}
 
-.virada .ciclo-nota{color:rgba(255,255,255,.68);border-top:1px solid rgba(255,255,255,.16);
-  padding-top:26px;margin-top:44px}
 /* AS PROVAS: ate' aqui a pagina so' afirmava. Nove casos reais correndo em
    pista, cada um com nome e resultado, convertem retroativamente o argumento
    de opiniao em demonstracao. Mesma mecanica da pista dos logos: duas copias
@@ -609,10 +598,6 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   .curva-leg span{margin-left:auto;font-size:.72rem;font-weight:700;letter-spacing:.12em;
     text-transform:uppercase;color:rgba(255,255,255,.5)}
 }
-.bb-fecho{text-align:center;margin-top:34px;padding-top:34px;border-top:1px solid var(--border)}
-.bb-fecho b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;
-  letter-spacing:-.03em;font-size:clamp(1.35rem,3.4vw,2.05rem);color:var(--ink)}
-.bb-fecho span{display:block;color:var(--soft);margin-top:10px}
 @media(max-width:860px){
   .bb{grid-template-columns:1fr;gap:0;margin-top:34px}
   /* O desenho compartilhado não sobrevive ao estreito: anéis de 1px e rótulos
@@ -622,9 +607,6 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   .bb-mini{display:block}
   /* No estreito a sobreposição não cabe em colunas: cada faixa ocupa a linha
      inteira e o "entra no 30" carrega a informação que o offset dava. */
-  .f1,.f2,.f3{grid-column:1/-1}
-  .eixo90{display:none}
-  .fx{white-space:normal;height:auto;padding:12px 16px}
   .bb-passo{min-height:auto;padding:0 0 40px}
   html.js .bb-passo:not(.viva){opacity:1}
 }
@@ -636,8 +618,6 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
    composição e a mesma largura. Aqui entram: largura variável,
    blocos que sangram a página inteira e um momento em coral.
    ============================================================ */
-.tight{max-width:640px;margin-left:auto;margin-right:auto}
-.bleed{width:100%;max-width:none;padding:0}
 
 /* AGITAÇÃO: escura, sangrada, tipo grande. Primeiro contraste forte da página. */
 .agit{background:var(--ink);color:#EFEDEA;padding:clamp(72px,10vw,132px) 0;text-align:center}
@@ -712,7 +692,6 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .marquee+.marquee{margin-top:-12px}
 .mrow{display:flex;width:max-content;animation:desliza 62s linear infinite}
-.marquee.rev .mrow{animation-direction:reverse;animation-duration:74s}
 .marquee:hover .mrow{animation-play-state:paused}
 .mrow img{height:300px;width:auto;flex:0 0 auto;margin-right:18px;object-fit:cover;
   border-radius:14px;box-shadow:0 12px 26px -16px rgba(0,0,0,.4)}
@@ -770,9 +749,6 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 /* o destaque do H1 é exceção à saturação progressiva, como o botão de compra:
    é a palavra que carrega a promessa e não pode nascer apagada. */
 [data-etapa] h1 em{color:var(--accent)}
-[data-etapa] .checks li:before{background:var(--ac)}
-[data-etapa] .checks li:after{border-color:var(--ac)}
-[data-etapa] .card li:before{background:var(--ac)}
 /* o CTA nunca desbota. O :not e' pra regra nao atropelar as variantes. */
 .btn:not(.ouro){background:var(--accent)!important}
 
@@ -784,45 +760,21 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 
 
 /* ---------- listas ---------- */
-.checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
-.checks li{position:relative;padding-left:30px;line-height:1.55}
-.checks li:before{content:"";position:absolute;left:0;top:.36em;width:18px;height:18px;border-radius:50%;background:var(--accent-soft)}
-.checks li:after{content:"";position:absolute;left:5px;top:.66em;width:7px;height:3.5px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
 
 /* ---------- cards ---------- */
-.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:36px}
 @media(max-width:800px){.grid4{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px 24px;box-shadow:var(--shadow)}
-.card h3{margin-bottom:14px}
-.card ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
-.card li{position:relative;padding-left:18px;color:var(--soft);font-size:.95rem;line-height:1.5}
-.card li:before{content:"";position:absolute;left:0;top:.62em;width:7px;height:2px;background:var(--accent)}
 
 /* ---------- entregáveis ---------- */
-.deliver .box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:clamp(26px,4vw,40px);box-shadow:var(--shadow)}
 
 /* ---------- corte ---------- */
-.cut{background:var(--accent-soft);color:var(--ink);text-align:center;padding:60px 0}
-.cut p{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;font-size:clamp(1.35rem,3.4vw,2.15rem);line-height:1.2;max-width:24ch;margin:0 auto}
-.cut p i{font-style:normal;color:#303030}
 
 /* ---------- casos ---------- */
-.casos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
 @media(max-width:860px){.casos{grid-template-columns:1fr}}
-.caso{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column}
-.caso .q{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#757168;font-weight:700;margin-bottom:12px}
-.caso p{color:var(--soft);font-size:.97rem;line-height:1.55;flex:1;margin:0 0 18px}
-.caso p b{color:var(--ink)}
 /* CASOS: o resultado é o elemento visual do card, não uma nota de rodapé.
    Isso já estava decidido e comentado no CSS, mas uma segunda regra .caso .res
    mais abaixo no arquivo derrubava calada: 1,5rem virava 1rem.
    Quem carrega o peso aqui é o TAMANHO e não a cor: em var(--accent) daria
    2,52:1 sobre o fundo claro e reprovaria até no limiar de texto grande. */
-.caso .res{
-  border-top:1px solid var(--border);padding-top:16px;
-  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
-  color:var(--ink);font-size:clamp(1.14rem,2.2vw,1.42rem);line-height:1.18
-}
 
 /* ---------- garantia ---------- */
 .garantia{
@@ -840,25 +792,12 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .garantia p{margin:0;color:var(--soft);font-size:.93rem;line-height:1.5}
 
 /* ---------- depoimentos ---------- */
-.depos{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
 @media(max-width:900px){.depos{grid-template-columns:repeat(2,1fr)}}
-.depos img{border-radius:10px;border:1px solid var(--border);width:100%;height:auto;background:var(--card)}
 
 /* ---------- dany ---------- */
 
 /* ---------- dois caminhos ---------- */
-.paths{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
 @media(max-width:800px){.paths{grid-template-columns:1fr}}
-.path{border-radius:var(--r);padding:28px 24px;border:1px solid var(--border);background:var(--card)}
-.path.good{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-soft),var(--card) 60%)}
-.path h3{margin-bottom:16px;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
-.path.good h3{color:var(--accent)}
-.path ul{list-style:none;padding:0;margin:0;display:grid;gap:11px}
-.path li{padding-left:26px;position:relative;line-height:1.5;font-size:.97rem;color:var(--soft)}
-.path.good li{color:var(--ink)}
-.path li:before{position:absolute;left:0;top:0;font-weight:700}
-.path.bad li:before{content:"×";color:var(--mute);font-size:1.05rem}
-.path.good li:before{content:"→";color:var(--accent)}
 
 /* ---------- oferta ---------- */
 /* QUANDO COMECAR. Mesmo laranja e mesmo tratamento da faixa dos 99%: a pagina
@@ -968,9 +907,6 @@ html.js body.ready .hero .player,html.js body.ready .stats{
 .player:hover{transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(0,0,0,.8)}
 
 /* cards levantam */
-.card,.caso{transition:transform .5s var(--ease), box-shadow .5s var(--ease)}
-.card:hover,.caso:hover{transform:translateY(-3px);
-  box-shadow:0 18px 40px -26px rgba(48,48,48,.5)}
 
 /* botão com resposta física */
 .btn{transition:transform .35s var(--ease), background .3s var(--ease), box-shadow .35s var(--ease)}
@@ -1354,9 +1290,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     <h2>O quanto antes, melhor.</h2>
     <p class="lead">Muitos autores esperam demais para começar a falar do próprio livro.
       Acham que, antes de ele ficar pronto, não existe nada para dizer.</p>
-    <p class="pq">Por quê?</p>
-    <p class="lead">Porque quanto mais cedo você começa, menos vendedor você precisa parecer.
-      Sobra tempo para falar do livro aos poucos, do jeito natural. E é esse jeito que traz volume.</p>
+    <p class="pq">Começar cedo é mais fácil, não mais difícil.</p>
+    <p class="lead">Quanto mais cedo você começa, menos vendedor você precisa parecer.
+      Sobra tempo para falar do livro aos poucos, do jeito natural, sem nunca precisar empurrar.</p>
     <p class="batismo">Essa etapa eu chamo de <b>soft-marketing</b>.
       <span class="serifa">Vender sem vender.</span></p>
   </div>
