@@ -1848,20 +1848,12 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 body{background:#F3F0E8;color:#292927}
 /* seções de peso em carvao, o resto herda o marfim dos tokens */
 .agit,.dany,.virada,.final{background:#242320 !important}
-/* o 99% vira o BILLBOARD DOURADO da página: quebra a zebra marfim/carvão
-   com o terceiro fundo, e está cercado de carvão dos dois lados
-   (agit -> DOURADO -> bolhas), então explode. Era laranja no original;
-   o dourado devolve essa energia de billboard. Texto carvão (5:1). */
-.noventa{background:#EAB82D !important;color:#292927 !important;border:0}
-.noventa h2{color:#292927 !important}
-.noventa p{color:#403d38 !important}
-.noventa p strong{color:#292927 !important}
-/* grifo sobre dourado: destaque translucido ESCURO (o dourado sobre dourado some) */
-.noventa .grifo,.noventa .grifo.claro{background:linear-gradient(transparent 58%,rgba(41,41,39,.18) 58%) !important}
-/* 100 livros no campo dourado: 99 carvão sólido (dark = alto contraste no
-   dourado), o sobrevivente carvão com HALO branco = holofote no único. */
-.noventa .cem i{background:#2b2925 !important;opacity:1 !important}
-.noventa .cem i.viva{background:#2b2925 !important;box-shadow:0 0 0 3px #EAB82D,0 0 0 6px #FFFFFF !important}
+/* o 99% volta pro MARFIM: agitacao(carvao) -> 99%(marfim) restaura o
+   contraste escuro->claro. Duas seções de peso nunca vizinhas. */
+.noventa{background:#F3F0E8 !important;color:#292927 !important;
+  border-top:1px solid rgba(41,41,39,.1)}
+.noventa .hl,.noventa .sl b{color:#292927 !important}
+.noventa .sl{color:#57544D !important}
 /* os 100 livros: escuros apagados sobre o marfim, vivo dourado */
 .noventa .cem i{background:rgba(41,41,39,.22) !important}
 .noventa .cem i.viva{background:#EAB82D !important;box-shadow:0 0 0 3px #F3F0E8,0 0 14px rgba(234,184,45,.55) !important}
@@ -1983,11 +1975,6 @@ footer{background:#242320 !important}
 .dany .nums b{color:#292927 !important}
 .dany .nums span{color:#57544D !important}
 .dany .nums div{border-top-color:rgba(41,41,39,.16) !important}
-
-/* livros do 99% dourado — REGRA FINAL (vence os blocos anteriores) */
-.noventa .cem i{background:#2b2925 !important;opacity:1 !important;box-shadow:none !important}
-.noventa .cem i.viva{background:#2b2925 !important;
-  box-shadow:0 0 0 3px #EAB82D,0 0 0 6px #FFFFFF !important}
 </style>
 </body>
 </html>
