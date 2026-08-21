@@ -1,0 +1,49 @@
+<!doctype html><html lang=pt-BR><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noindex><title>Moldura + glow</title>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9mXg.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/V8mDoQDjQSkFtoMM3T6r8E7mPbF4C_k3HqU.woff2">
+<link rel="stylesheet" href="assets/fonts.css"><style>@font-face{font-family:'Caveat';font-style:normal;font-weight:600;font-display:swap;
+  src:url(assets/fonts/caveat.woff2) format('woff2')}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500;font-display:swap;
+  src:url(assets/fonts/fraunces-italic-500.woff2) format('woff2')}
+@property --ga{syntax:"<angle>";initial-value:135deg;inherits:false}
+@keyframes gira{to{--ga:360deg}}
+:root{--carvao:#242320;--marfim:#F3F0E8;--ouro:#EAB82D;--ms:rgba(243,240,232,.72);--le:rgba(243,240,232,.16)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--marfim);color:var(--carvao);font-family:'DM Sans',system-ui,sans-serif}
+.grade{max-width:1240px;margin:0 auto;padding:44px 24px;display:grid;grid-template-columns:1fr 1fr;gap:44px 40px}
+.rot{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.16rem;letter-spacing:-.02em}
+.rot b{color:#B8860B;margin-right:8px}
+.pq{color:rgba(41,41,39,.6);font-size:.86rem;line-height:1.5;margin:6px 0 18px;min-height:38px}
+/* base do card */
+.card{position:relative;border-radius:22px;background:var(--carvao);color:var(--marfim)}
+.inner{padding:36px 30px;text-align:center;position:relative;z-index:2}
+/* conteúdo */
+.marca{height:34px;filter:brightness(0) invert(1);display:block;margin:0 auto 10px}
+.pr{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0 2px}
+.cur,.ast{font-size:1.05rem;color:var(--ms)}.ast{align-self:flex-start}
+.val{font-family:'Space Grotesk',sans-serif;font-size:3.6rem;font-weight:700;line-height:1;letter-spacing:-.045em;color:#fff}
+.val.gold{color:var(--ouro)}
+.av{color:var(--ms);font-size:.96rem;margin:0 0 20px}.av b{color:#fff}
+.prom{font-family:'Fraunces',serif;font-style:italic;font-size:1.24rem;color:var(--ouro);padding-bottom:20px;margin:0 0 20px;border-bottom:1px solid var(--le)}
+.incl{list-style:none;padding:0;margin:22px 0 24px;text-align:left;display:grid;gap:11px}
+.incl li{position:relative;padding-left:28px;color:var(--ms);font-size:.95rem;line-height:1.4}.incl li b{color:#fff}
+.incl li:before{content:'';position:absolute;left:5px;top:.34em;width:7px;height:13px;border-right:2px solid var(--ouro);border-bottom:2px solid var(--ouro);transform:rotate(40deg)}
+.btn{display:flex;width:100%;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:var(--ouro);color:#241f10;border-radius:999px;padding:19px 28px;font-size:.98rem;text-decoration:none;box-shadow:0 0 24px rgba(234,184,45,.4)}
+.seals{display:flex;justify-content:center;gap:14px;margin-top:14px;font-size:.74rem;color:var(--ms)}
+
+/* F1 · hairline + glow */
+.f1{border:1px solid rgba(234,184,45,.55);
+  box-shadow:0 0 0 1px rgba(234,184,45,.15),0 0 60px -6px rgba(234,184,45,.32),0 34px 70px -40px rgba(41,41,39,.6)}
+/* F2/F3 · borda de gradiente via pseudo (mask-composite) */
+.f2,.f3{box-shadow:0 0 60px -6px rgba(234,184,45,.3),0 34px 70px -40px rgba(41,41,39,.6)}
+.grad{position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:1;
+  background:linear-gradient(var(--ga),#F5CE4B,#EAB82D,#9C6F12,#EAB82D);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude}
+.grad.anim{animation:gira 6s linear infinite}
+/* F4 · passe-partout: fio afastado da borda */
+.f4{border:1px solid rgba(234,184,45,.28);
+  box-shadow:0 0 56px -8px rgba(234,184,45,.28),0 34px 70px -40px rgba(41,41,39,.6)}
+.f4 .inner{margin:10px;border:1px solid rgba(234,184,45,.5);border-radius:14px;padding:30px 26px}
+@media(max-width:800px){.grade{grid-template-columns:1fr}}
+</style></head><body><div class="grade"><div class="col"><div class="rot"><b>A</b> Hairline + glow suave</div><p class="pq">Fio dourado fino na borda + halo dourado difuso. Discreto e premium.</p><div class="card f1"><div class="inner"><img class="marca" src="assets/logo-90d.png" alt=""><div class="pr"><span class="cur">12x de R$</span><span class="val gold">29,64</span><span class="ast">*</span></div><p class="av">ou <b>R$ 297,00 à vista</b></p><p class="prom">De invisível a lido em 90 dias.</p><ul class="incl"><li><b>Cem compradores mapeados</b> antes do livro existir</li><li><b>Uma estreia com fila</b>, não com silêncio</li><li><b>Vendas na primeira semana</b>, não só elogios</li></ul><a href="#" class="btn">Acesso Imediato e Vitalício</a><div class="seals"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div></div></div></div><div class="col"><div class="rot"><b>B</b> Borda em gradiente dourado</div><p class="pq">Moldura de gradiente dourado (fina) + glow. Estática.</p><div class="card f2"><span class="grad"></span><div class="inner"><img class="marca" src="assets/logo-90d.png" alt=""><div class="pr"><span class="cur">12x de R$</span><span class="val gold">29,64</span><span class="ast">*</span></div><p class="av">ou <b>R$ 297,00 à vista</b></p><p class="prom">De invisível a lido em 90 dias.</p><ul class="incl"><li><b>Cem compradores mapeados</b> antes do livro existir</li><li><b>Uma estreia com fila</b>, não com silêncio</li><li><b>Vendas na primeira semana</b>, não só elogios</li></ul><a href="#" class="btn">Acesso Imediato e Vitalício</a><div class="seals"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div></div></div></div><div class="col"><div class="rot"><b>C</b> Moldura girando + glow</div><p class="pq">A técnica do botão da casa: gradiente dourado girando na borda + glow. Viva.</p><div class="card f3"><span class="grad anim"></span><div class="inner"><img class="marca" src="assets/logo-90d.png" alt=""><div class="pr"><span class="cur">12x de R$</span><span class="val gold">29,64</span><span class="ast">*</span></div><p class="av">ou <b>R$ 297,00 à vista</b></p><p class="prom">De invisível a lido em 90 dias.</p><ul class="incl"><li><b>Cem compradores mapeados</b> antes do livro existir</li><li><b>Uma estreia com fila</b>, não com silêncio</li><li><b>Vendas na primeira semana</b>, não só elogios</li></ul><a href="#" class="btn">Acesso Imediato e Vitalício</a><div class="seals"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div></div></div></div><div class="col"><div class="rot"><b>D</b> Passe-partout dourado</div><p class="pq">Fio dourado afastado da borda (moldura dupla) + glow. Ar de certificado.</p><div class="card f4"><div class="inner"><img class="marca" src="assets/logo-90d.png" alt=""><div class="pr"><span class="cur">12x de R$</span><span class="val gold">29,64</span><span class="ast">*</span></div><p class="av">ou <b>R$ 297,00 à vista</b></p><p class="prom">De invisível a lido em 90 dias.</p><ul class="incl"><li><b>Cem compradores mapeados</b> antes do livro existir</li><li><b>Uma estreia com fila</b>, não com silêncio</li><li><b>Vendas na primeira semana</b>, não só elogios</li></ul><a href="#" class="btn">Acesso Imediato e Vitalício</a><div class="seals"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div></div></div></div></div></body></html>
