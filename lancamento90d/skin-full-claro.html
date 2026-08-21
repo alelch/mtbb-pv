@@ -1950,6 +1950,31 @@ footer{background:#242320 !important}
 /* eyebrows das bolhas em dourado um tom mais claro pra passar 4,5:1 */
 .bb-passo .eyebrow{color:#F0C959 !important}
 .bb-passo .eyebrow span{color:rgba(240,201,89,.62) !important}
+
+/* ===== QUEBRA A CORRENTE bolhas->virada->dany ===== */
+/* 1) o V da transição sai: fronteira de cor chapada já basta e é mais limpa */
+.bolhas:after{display:none !important}
+/* 2) 'o pior erro' vira faixa MARFIM full-bleed: separa bolhas(carvão) de virada(carvão) */
+.erro{background:#F3F0E8 !important;max-width:100vw !important;width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;margin-right:calc(50% - 50vw) !important;
+  border-top:0 !important;padding:clamp(56px,8vw,96px) 24px !important}
+.erro,.erro *{color:#292927 !important}
+.erro .risco{background:linear-gradient(transparent 60%,rgba(234,184,45,.6) 60%) !important}
+/* 3) DANY volta pro MARFIM: separa virada(carvão) de dany, e alterna o ritmo */
+.dany{background:#F3F0E8 !important}
+.dany .eyebrow{color:#57544D !important}
+.dany .fala,.dany .fala *{color:#292927 !important}
+.dany .cont{color:#57544D !important}
+.dany .peso,.dany .peso *{color:#292927 !important}
+.dany .assina h2{color:#292927 !important}
+.dany .assina span{color:#57544D !important}
+.dany .assina{border-top-color:rgba(41,41,39,.14) !important}
+.dany .mao,.dany .mao *{color:#292927 !important}
+.dany .mao{background-image:linear-gradient(transparent 80%,rgba(234,184,45,.75) 80%) !important;
+  background-size:100% 100% !important;background-position:0 0 !important}
+.dany .nums b{color:#292927 !important}
+.dany .nums span{color:#57544D !important}
+.dany .nums div{border-top-color:rgba(41,41,39,.16) !important}
 </style>
 </body>
 </html>
