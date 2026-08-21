@@ -828,8 +828,19 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .offer-box{
   max-width:660px;margin:38px auto 0;background:var(--verde);color:#fff;
   border:0;border-radius:20px;padding:clamp(32px,5vw,44px);text-align:center;
-  box-shadow:0 34px 76px -36px rgba(0,0,0,.55)
+  box-shadow:0 0 60px -6px rgba(234,184,45,.3),0 34px 76px -36px rgba(0,0,0,.55)
 }
+/* ===== card do preço: moldura girando + glow + número dourado (opção C) ===== */
+.offer-box{position:relative;overflow:visible}
+.offer-box:before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.5px;
+  pointer-events:none;z-index:2;
+  background:linear-gradient(var(--ga),#F5CE4B,#EAB82D,#9C6F12,#EAB82D);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;animation:gira-moldura 6s linear infinite}
+@keyframes gira-moldura{to{--ga:360deg}}
+@media(prefers-reduced-motion:reduce){.offer-box:before{animation:none}}
+
 .offer-box .marca{height:clamp(30px,4vw,40px);width:auto;display:block;margin:0 auto 6px;
   filter:brightness(0) invert(1)}
 .offer-box .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:10px 0 2px}
@@ -837,7 +848,7 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .offer-box .price .ast{font-size:1.15rem;color:rgba(255,255,255,.82);align-self:flex-start;margin-left:-4px}
 /* o preço é o maior número da página */
 .offer-box .price .val{font-family:'Space Grotesk',sans-serif;font-size:clamp(3.4rem,10vw,5.6rem);
-  font-weight:700;line-height:1;letter-spacing:-.045em;color:#fff}
+  font-weight:700;line-height:1;letter-spacing:-.045em;color:#EAB82D}
 .offer-box .inst{color:rgba(255,255,255,.82);font-size:.98rem;margin-bottom:26px}
 .offer-box .inst b{color:#fff}
 /* O CARD VENDE CONQUISTA, NÃO ENTREGÁVEL.

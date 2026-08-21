@@ -1987,6 +1987,19 @@ footer{background:#242320 !important}
 .virada .eyebrow{color:#EAB82D !important}
 .virada .pct,.virada .mult .c1,.virada .mult .c2,.virada .mult .c3{color:#EAB82D !important}
 .virada .serifa{color:#F3F0E8 !important}
+
+/* card do preço: moldura girando + glow + número dourado (opção C) */
+.offer-box{position:relative !important;overflow:visible !important;
+  box-shadow:0 0 60px -6px rgba(234,184,45,.3),0 34px 76px -36px rgba(41,41,39,.55) !important}
+.offer-box:before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.5px;
+  pointer-events:none;z-index:2;
+  background:linear-gradient(var(--ga),#F5CE4B,#EAB82D,#9C6F12,#EAB82D);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;animation:gira-moldura 6s linear infinite}
+@keyframes gira-moldura{to{--ga:360deg}}
+@media(prefers-reduced-motion:reduce){.offer-box:before{animation:none}}
+.offer-box .price .val{color:#EAB82D !important}
 </style>
 </body>
 </html>
