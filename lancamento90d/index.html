@@ -542,15 +542,15 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   padding:clamp(19px,2.3vw,25px) clamp(26px,4vw,50px);
   font-size:clamp(.94rem,1.9vw,1.12rem);
   border:1.5px solid hsl(40 100% 54% / .5);
-  background:linear-gradient(var(--ga),hsl(43 100% 58%),hsl(40 100% 50%),
-             hsl(34 100% 42%),hsl(40 100% 54%));
+  background:linear-gradient(var(--ga),hsl(48 100% 60%),hsl(43 96% 50%),
+             hsl(35 90% 42%),hsl(43 96% 56%));
   background-size:300% 300%;
   animation:gira-grad 3s linear infinite,brilha 2.5s ease-in-out infinite;
   transition:transform .3s ease,filter .3s ease;will-change:transform}
 .btn.ouro:before{content:"";position:absolute;inset:-1px;border-radius:inherit;
   padding:1.5px;pointer-events:none;
-  background:linear-gradient(var(--ga),hsl(44 100% 66%),hsl(40 100% 54% / .3),
-             hsl(34 100% 60%),hsl(40 100% 54% / .3));
+  background:linear-gradient(var(--ga),hsl(48 100% 70%),hsl(40 100% 54% / .3),
+             hsl(35 100% 65%),hsl(40 100% 54% / .3));
   -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   mask-composite:exclude;animation:gira-grad 3s linear infinite}
@@ -828,13 +828,13 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .offer-box{
   max-width:660px;margin:38px auto 0;background:var(--verde);color:#fff;
   border:0;border-radius:20px;padding:clamp(40px,6vw,56px);text-align:center;
-  box-shadow:0 0 60px -6px rgba(255,172,0,.3),0 34px 76px -36px rgba(0,0,0,.55)
+  box-shadow:0 0 60px -6px rgba(234,184,45,.3),0 34px 76px -36px rgba(0,0,0,.55)
 }
 /* ===== card do preço: moldura girando + glow + número dourado (opção C) ===== */
 .offer-box{position:relative;overflow:visible}
 .offer-box:before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.5px;
   pointer-events:none;z-index:2;
-  background:linear-gradient(var(--ga),#FFC24D,#FFAC00,#B87400,#FFAC00);
+  background:linear-gradient(var(--ga),#F0C959,#EAB82D,#9C6F12,#EAB82D);
   -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   mask-composite:exclude;animation:gira-moldura 6s linear infinite}
@@ -847,7 +847,7 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .offer-box .price .ast{font-size:1.15rem;color:rgba(255,255,255,.82);align-self:flex-start;margin-left:-4px}
 /* o preço é o maior número da página */
 .offer-box .price .val{font-family:'Space Grotesk',sans-serif;font-size:clamp(3.4rem,10vw,5.6rem);
-  font-weight:700;line-height:1;letter-spacing:-.045em;color:#FFAC00}
+  font-weight:700;line-height:1;letter-spacing:-.045em;color:#EAB82D}
 .offer-box .inst{color:rgba(255,255,255,.82);font-size:.98rem;margin-bottom:34px}
 .offer-box .inst b{color:#fff}
 /* O CARD VENDE CONQUISTA, NÃO ENTREGÁVEL.
@@ -1343,9 +1343,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     <div class="garantia rv">
       <div class="selo" role="img" aria-label="Quinze dias de garantia, satisfação garantida">
         <svg viewBox="0 0 220 220" aria-hidden="true">
-          <defs><path id="anel" d="M110,110 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>
+          <defs><path id="anel" d="M110,110 m-85,0 a85,85 0 1,1 170,0 a85,85 0 1,1 -170,0"/></defs>
           <text class="volta"><textPath href="#anel" startOffset="0"
-            textLength="578" lengthAdjust="spacing">ZERO RISCO · SATISFAÇÃO GARANTIDA · REEMBOLSO EM 15 DIAS ·</textPath></text>
+            textLength="534" lengthAdjust="spacing">ZERO RISCO · SATISFAÇÃO GARANTIDA · REEMBOLSO EM 15 DIAS ·</textPath></text>
           <circle class="disco" cx="110" cy="110" r="74"/>
           <text class="num" x="110" y="118" text-anchor="middle">15</text>
           <text class="dias" x="110" y="146" text-anchor="middle">DIAS DE GARANTIA</text>

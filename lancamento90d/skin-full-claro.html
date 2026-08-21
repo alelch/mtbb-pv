@@ -49,7 +49,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 .noventa p strong{color:#292927 !important}
 /* FECHO (carvão): estava preto-no-preto */
 .final h2,.final .sub,.final p{color:#F3F0E8 !important}
-.final .grifo{background:linear-gradient(transparent 58%,rgba(255,172,0,.5) 58%) !important}
+.final .grifo{background:linear-gradient(transparent 58%,rgba(234,184,45,.5) 58%) !important}
 footer,footer *{color:rgba(243,240,232,.55) !important}
 footer a{color:rgba(243,240,232,.8) !important}
 /* eyebrow do 'O que vem junto' um tom mais escuro */
@@ -59,19 +59,19 @@ footer a{color:rgba(243,240,232,.8) !important}
 .bolhas{background:#242320 !important}
 .bolhas .abre h2{color:#F3F0E8 !important}
 .bolhas .abre .pergunta{color:#F3F0E8 !important}
-.bolhas .abre .opcoes{color:#E0B96A !important}
+.bolhas .abre .opcoes{color:#C9B77E !important}
 /* anéis: apagados em marfim, ativo dourado com fill âmbar */
 .bol ellipse{stroke:rgba(243,240,232,.18) !important}
-.bol.furada ellipse{stroke:rgba(255,172,0,.32) !important;fill:rgba(255,172,0,.05) !important}
-.bol.viva ellipse{stroke:#FFAC00 !important;fill:rgba(255,172,0,.10) !important}
+.bol.furada ellipse{stroke:rgba(234,184,45,.32) !important;fill:rgba(234,184,45,.05) !important}
+.bol.viva ellipse{stroke:#EAB82D !important;fill:rgba(234,184,45,.10) !important}
 .bol text{fill:rgba(243,240,232,.5) !important}
 .bol.viva text{fill:#F3F0E8 !important}
 .bb-mini ellipse{stroke:rgba(243,240,232,.18) !important}
-.bb-mini .viva{stroke:#FFAC00 !important;fill:rgba(255,172,0,.10) !important}
-.bb-mini .feita{stroke:rgba(255,172,0,.32) !important;fill:rgba(255,172,0,.05) !important}
+.bb-mini .viva{stroke:#EAB82D !important;fill:rgba(234,184,45,.10) !important}
+.bb-mini .feita{stroke:rgba(234,184,45,.32) !important;fill:rgba(234,184,45,.05) !important}
 /* passos: texto em marfim, eyebrow dourado */
-.bb-passo .eyebrow{color:#FFAC00 !important}
-.bb-passo .eyebrow span{color:rgba(255,172,0,.6) !important}
+.bb-passo .eyebrow{color:#EAB82D !important}
+.bb-passo .eyebrow span{color:rgba(234,184,45,.6) !important}
 .bb-passo h3{color:#F3F0E8 !important}
 .bb-passo p{color:rgba(243,240,232,.72) !important}
 .bb-passo p b{color:#F3F0E8 !important}
@@ -79,7 +79,7 @@ footer a{color:rgba(243,240,232,.8) !important}
 .bb-passo:not(.viva){opacity:.32}
 /* a acusação "o pior erro" (fica dentro/depois das bolhas) em marfim */
 .erro,.erro *{color:#F3F0E8 !important}
-.erro .risco{background:linear-gradient(transparent 60%,rgba(255,172,0,.6) 60%) !important}
+.erro .risco{background:linear-gradient(transparent 60%,rgba(234,184,45,.6) 60%) !important}
 /* o V entre bolhas(carvão) e virada(carvão): seamless, mesma cor */
 .bolhas:after{background:#242320 !important}
 </style>
@@ -583,15 +583,15 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   padding:clamp(19px,2.3vw,25px) clamp(26px,4vw,50px);
   font-size:clamp(.94rem,1.9vw,1.12rem);
   border:1.5px solid hsl(40 100% 54% / .5);
-  background:linear-gradient(var(--ga),hsl(43 100% 58%),hsl(40 100% 50%),
-             hsl(34 100% 42%),hsl(40 100% 54%));
+  background:linear-gradient(var(--ga),hsl(48 100% 60%),hsl(43 96% 50%),
+             hsl(35 90% 42%),hsl(43 96% 56%));
   background-size:300% 300%;
   animation:gira-grad 3s linear infinite,brilha 2.5s ease-in-out infinite;
   transition:transform .3s ease,filter .3s ease;will-change:transform}
 .btn.ouro:before{content:"";position:absolute;inset:-1px;border-radius:inherit;
   padding:1.5px;pointer-events:none;
-  background:linear-gradient(var(--ga),hsl(44 100% 66%),hsl(40 100% 54% / .3),
-             hsl(34 100% 60%),hsl(40 100% 54% / .3));
+  background:linear-gradient(var(--ga),hsl(48 100% 70%),hsl(40 100% 54% / .3),
+             hsl(35 100% 65%),hsl(40 100% 54% / .3));
   -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   mask-composite:exclude;animation:gira-grad 3s linear infinite}
@@ -1373,9 +1373,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     <div class="garantia rv">
       <div class="selo" role="img" aria-label="Quinze dias de garantia, satisfação garantida">
         <svg viewBox="0 0 220 220" aria-hidden="true">
-          <defs><path id="anel" d="M110,110 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>
+          <defs><path id="anel" d="M110,110 m-85,0 a85,85 0 1,1 170,0 a85,85 0 1,1 -170,0"/></defs>
           <text class="volta"><textPath href="#anel" startOffset="0"
-            textLength="578" lengthAdjust="spacing">ZERO RISCO · SATISFAÇÃO GARANTIDA · REEMBOLSO EM 15 DIAS ·</textPath></text>
+            textLength="534" lengthAdjust="spacing">ZERO RISCO · SATISFAÇÃO GARANTIDA · REEMBOLSO EM 15 DIAS ·</textPath></text>
           <circle class="disco" cx="110" cy="110" r="74"/>
           <text class="num" x="110" y="118" text-anchor="middle">15</text>
           <text class="dias" x="110" y="146" text-anchor="middle">DIAS DE GARANTIA</text>
@@ -1849,49 +1849,49 @@ body{background:#F3F0E8;color:#292927}
 .noventa .sl{color:#57544D !important}
 /* os 100 livros: escuros apagados sobre o marfim, vivo dourado */
 .noventa .cem i{background:rgba(41,41,39,.22) !important}
-.noventa .cem i.viva{background:#FFAC00 !important;box-shadow:0 0 0 3px #F3F0E8,0 0 14px rgba(255,172,0,.55) !important}
+.noventa .cem i.viva{background:#EAB82D !important;box-shadow:0 0 0 3px #F3F0E8,0 0 14px rgba(234,184,45,.55) !important}
 /* o grifo do 99% (era claro sobre laranja) vira dourado translucido sobre marfim */
-.noventa .grifo,.noventa .grifo.claro{background:linear-gradient(transparent 58%,rgba(255,172,0,.5) 58%) !important}
+.noventa .grifo,.noventa .grifo.claro{background:linear-gradient(transparent 58%,rgba(234,184,45,.5) 58%) !important}
 .press{background:#FBFAF6 !important}
 .bolhas,.offer{background:#F3F0E8 !important}
 /* nas seções ESCURAS o dourado volta a poder ser texto/acento */
 .agit .eyebrow,.dany .eyebrow,.virada .eyebrow,.noventa .eyebrow,
-.um .pct,.virada .pct,.mult .c1,.mult .c2,.mult .c3{color:#FFAC00 !important}
+.um .pct,.virada .pct,.mult .c1,.mult .c2,.mult .c3{color:#EAB82D !important}
 .agit,.agit *,.dany .txt,.dany .txt *,.virada,.virada *,.noventa,.noventa *{}
 .agit,.dany,.virada{color:#F3F0E8}
 .virada h2,.virada .desfecho,.virada .causa,.noventa .hl,.noventa .sl,.noventa .sl b{color:#F3F0E8 !important}
-.agit .fio{background:#FFAC00 !important}
+.agit .fio{background:#EAB82D !important}
 /* 100 livros: apagados em marfim, vivo dourado (sobre a faixa carvao) */
 .cem i{background:rgba(243,240,232,.16) !important}
-.cem i.viva{background:#FFAC00 !important;box-shadow:0 0 0 3px #242320,0 0 14px rgba(255,172,0,.5) !important}
+.cem i.viva{background:#EAB82D !important;box-shadow:0 0 0 3px #242320,0 0 14px rgba(234,184,45,.5) !important}
 /* grifo/risco: sobre marfim, translucido escuro; sobre carvao, dourado */
 .grifo{background-image:none !important;background:linear-gradient(transparent 58%,rgba(41,41,39,.14) 58%) !important;padding:0 2px}
 .risco{background-image:none !important}
 .serifa{color:inherit}
-.agit .grifo,.dany .grifo,.virada .grifo,.noventa .grifo{background:linear-gradient(transparent 58%,rgba(255,172,0,.5) 58%) !important}
+.agit .grifo,.dany .grifo,.virada .grifo,.noventa .grifo{background:linear-gradient(transparent 58%,rgba(234,184,45,.5) 58%) !important}
 /* hero: o grifo da palavra vira dourado (unico dourado sobre marfim, como fundo) */
-.hero h1 em,h1 em{background:linear-gradient(transparent 60%,rgba(255,172,0,.85) 60%);color:#292927}
+.hero h1 em,h1 em{background:linear-gradient(transparent 60%,rgba(234,184,45,.85) 60%);color:#292927}
 /* CTA: dourado solido, tinta carvao — o unico preenchimento cheio */
-.btn:not(.ouro){background:#FFAC00 !important;color:#242320 !important}
-.btn.ouro{background:#FFAC00 !important;color:#242320 !important;box-shadow:0 0 26px rgba(255,172,0,.4) !important}
+.btn:not(.ouro){background:#EAB82D !important;color:#242320 !important}
+.btn.ouro{color:#241f10 !important}  /* gradiente+pulso vêm da base (btn-gold) */
 /* card de oferta: CARVAO sobre marfim (o momento escuro dentro do claro) */
 .offer-box{background:#242320 !important;border:0 !important;color:#F3F0E8 !important}
 .offer-box .promessa,.offer-box .conquistas li b,.offer-box .name{color:#F3F0E8 !important}
 .offer-box .conquistas li{color:rgba(243,240,232,.72) !important}
-.offer-box .conquistas li:before{border-color:#FFAC00 !important}
-.offer-box .promessa{color:#FFAC00 !important}
+.offer-box .conquistas li:before{border-color:#EAB82D !important}
+.offer-box .promessa{color:#EAB82D !important}
 .offer-box .price .val,.offer-box .price .cur,.offer-box .inst,.offer-box .inst b{color:#F3F0E8 !important}
 .offer-box .marca{filter:none !important}
 /* garantia selo: disco carvao com dourado */
 .garantia .disco{fill:#242320}
-.garantia .num{fill:#FFAC00}
+.garantia .num{fill:#EAB82D}
 .garantia .dias{fill:rgba(243,240,232,.8)}
 .garantia .volta{fill:#6E6B63}
 /* curva (fica na .virada, carvao): dourado mono */
-.curva .linha{stroke:#FFAC00 !important}
-.curva .ar{fill:#FFAC00 !important;opacity:.14}
-.curva .n1,.curva .n2,.curva .n3{stroke:#FFAC00 !important}
-.curva .t1,.curva .t2,.curva .t3,.curva .topo{fill:#FFAC00 !important}
+.curva .linha{stroke:#EAB82D !important}
+.curva .ar{fill:#EAB82D !important;opacity:.14}
+.curva .n1,.curva .n2,.curva .n3{stroke:#EAB82D !important}
+.curva .t1,.curva .t2,.curva .t3,.curva .topo{fill:#EAB82D !important}
 .curva .base,.curva .prev{stroke:rgba(243,240,232,.4) !important}
 .curva .cato,.curva .cdia,.curva .ceixo{fill:rgba(243,240,232,.6) !important}
 /* mosaico de provas e bolhas: eyebrows em carvao suave sobre marfim */
@@ -1903,7 +1903,7 @@ body{background:#F3F0E8;color:#292927}
 .noventa p strong{color:#292927 !important}
 /* FECHO (carvão): estava preto-no-preto */
 .final h2,.final .sub,.final p{color:#F3F0E8 !important}
-.final .grifo{background:linear-gradient(transparent 58%,rgba(255,172,0,.5) 58%) !important}
+.final .grifo{background:linear-gradient(transparent 58%,rgba(234,184,45,.5) 58%) !important}
 footer,footer *{color:rgba(243,240,232,.55) !important}
 footer a{color:rgba(243,240,232,.8) !important}
 /* eyebrow do 'O que vem junto' um tom mais escuro */
@@ -1913,19 +1913,19 @@ footer a{color:rgba(243,240,232,.8) !important}
 .bolhas{background:#242320 !important}
 .bolhas .abre h2{color:#F3F0E8 !important}
 .bolhas .abre .pergunta{color:#F3F0E8 !important}
-.bolhas .abre .opcoes{color:#E0B96A !important}
+.bolhas .abre .opcoes{color:#C9B77E !important}
 /* anéis: apagados em marfim, ativo dourado com fill âmbar */
 .bol ellipse{stroke:rgba(243,240,232,.18) !important}
-.bol.furada ellipse{stroke:rgba(255,172,0,.32) !important;fill:rgba(255,172,0,.05) !important}
-.bol.viva ellipse{stroke:#FFAC00 !important;fill:rgba(255,172,0,.10) !important}
+.bol.furada ellipse{stroke:rgba(234,184,45,.32) !important;fill:rgba(234,184,45,.05) !important}
+.bol.viva ellipse{stroke:#EAB82D !important;fill:rgba(234,184,45,.10) !important}
 .bol text{fill:rgba(243,240,232,.5) !important}
 .bol.viva text{fill:#F3F0E8 !important}
 .bb-mini ellipse{stroke:rgba(243,240,232,.18) !important}
-.bb-mini .viva{stroke:#FFAC00 !important;fill:rgba(255,172,0,.10) !important}
-.bb-mini .feita{stroke:rgba(255,172,0,.32) !important;fill:rgba(255,172,0,.05) !important}
+.bb-mini .viva{stroke:#EAB82D !important;fill:rgba(234,184,45,.10) !important}
+.bb-mini .feita{stroke:rgba(234,184,45,.32) !important;fill:rgba(234,184,45,.05) !important}
 /* passos: texto em marfim, eyebrow dourado */
-.bb-passo .eyebrow{color:#FFAC00 !important}
-.bb-passo .eyebrow span{color:rgba(255,172,0,.6) !important}
+.bb-passo .eyebrow{color:#EAB82D !important}
+.bb-passo .eyebrow span{color:rgba(234,184,45,.6) !important}
 .bb-passo h3{color:#F3F0E8 !important}
 .bb-passo p{color:rgba(243,240,232,.72) !important}
 .bb-passo p b{color:#F3F0E8 !important}
@@ -1933,7 +1933,7 @@ footer a{color:rgba(243,240,232,.8) !important}
 .bb-passo:not(.viva){opacity:.32}
 /* a acusação "o pior erro" (fica dentro/depois das bolhas) em marfim */
 .erro,.erro *{color:#F3F0E8 !important}
-.erro .risco{background:linear-gradient(transparent 60%,rgba(255,172,0,.6) 60%) !important}
+.erro .risco{background:linear-gradient(transparent 60%,rgba(234,184,45,.6) 60%) !important}
 /* o V entre bolhas(carvão) e virada(carvão): seamless, mesma cor */
 .bolhas:after{background:#242320 !important}
 
@@ -1941,7 +1941,7 @@ footer a{color:rgba(243,240,232,.8) !important}
    vira carvão, fechando junto com o .final num bloco escuro só. */
 footer{background:#242320 !important}
 /* eyebrows das bolhas em dourado um tom mais claro pra passar 4,5:1 */
-.bb-passo .eyebrow{color:#FFC24D !important}
+.bb-passo .eyebrow{color:#F0C959 !important}
 .bb-passo .eyebrow span{color:rgba(240,201,89,.62) !important}
 
 /* ===== QUEBRA A CORRENTE bolhas->virada->dany ===== */
@@ -1952,7 +1952,7 @@ footer{background:#242320 !important}
   margin-left:calc(50% - 50vw) !important;margin-right:calc(50% - 50vw) !important;
   border-top:0 !important;padding:clamp(56px,8vw,96px) 24px !important}
 .erro,.erro *{color:#292927 !important}
-.erro .risco{background:linear-gradient(transparent 60%,rgba(255,172,0,.6) 60%) !important}
+.erro .risco{background:linear-gradient(transparent 60%,rgba(234,184,45,.6) 60%) !important}
 /* 3) DANY volta pro MARFIM: separa virada(carvão) de dany, e alterna o ritmo */
 .dany{background:#F3F0E8 !important}
 .dany .eyebrow{color:#57544D !important}
@@ -1963,7 +1963,7 @@ footer{background:#242320 !important}
 .dany .assina span{color:#57544D !important}
 .dany .assina{border-top-color:rgba(41,41,39,.14) !important}
 .dany .mao,.dany .mao *{color:#292927 !important}
-.dany .mao{background-image:linear-gradient(transparent 80%,rgba(255,172,0,.75) 80%) !important;
+.dany .mao{background-image:linear-gradient(transparent 80%,rgba(234,184,45,.75) 80%) !important;
   background-size:100% 100% !important;background-position:0 0 !important}
 .dany .nums b{color:#292927 !important}
 .dany .nums span{color:#57544D !important}
@@ -1975,7 +1975,7 @@ footer{background:#242320 !important}
   margin:clamp(40px,6vw,72px) auto 0 !important;padding:clamp(36px,4.5vw,56px) 24px 0 !important;
   border-top:0 !important}
 .erro,.erro *{color:#F3F0E8 !important}
-.erro .risco{background:linear-gradient(transparent 60%,rgba(255,172,0,.6) 60%) !important}
+.erro .risco{background:linear-gradient(transparent 60%,rgba(234,184,45,.6) 60%) !important}
 /* V restaurado: carvão (cor das bolhas) apontando pra baixo, mordendo o verde */
 .bolhas:after{display:block !important;background:#242320 !important}
 /* a VIRADA vira VERDE — a cor da virada/do ganho. terceiro fundo escuro,
@@ -1983,22 +1983,22 @@ footer{background:#242320 !important}
 .virada{background:#14523E !important}
 /* garante texto/acento certos sobre o verde */
 .virada h2,.virada .causa,.virada .desfecho,.virada .mult b,.virada .remate *{color:#F3F0E8 !important}
-.virada .eyebrow{color:#FFAC00 !important}
-.virada .pct,.virada .mult .c1,.virada .mult .c2,.virada .mult .c3{color:#FFAC00 !important}
+.virada .eyebrow{color:#EAB82D !important}
+.virada .pct,.virada .mult .c1,.virada .mult .c2,.virada .mult .c3{color:#EAB82D !important}
 .virada .serifa{color:#F3F0E8 !important}
 
 /* card do preço: moldura girando + glow + número dourado (opção C) */
 .offer-box{position:relative !important;overflow:visible !important;
-  box-shadow:0 0 60px -6px rgba(255,172,0,.3),0 34px 76px -36px rgba(41,41,39,.55) !important}
+  box-shadow:0 0 60px -6px rgba(234,184,45,.3),0 34px 76px -36px rgba(41,41,39,.55) !important}
 .offer-box:before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.5px;
   pointer-events:none;z-index:2;
-  background:linear-gradient(var(--ga),#FFC24D,#FFAC00,#B87400,#FFAC00);
+  background:linear-gradient(var(--ga),#F0C959,#EAB82D,#9C6F12,#EAB82D);
   -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   mask-composite:exclude;animation:gira-moldura 6s linear infinite}
 @keyframes gira-moldura{to{--ga:360deg}}
 @media(prefers-reduced-motion:reduce){.offer-box:before{animation:none}}
-.offer-box .price .val{color:#FFAC00 !important}
+.offer-box .price .val{color:#EAB82D !important}
 </style>
 </body>
 </html>
