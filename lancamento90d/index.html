@@ -827,7 +827,7 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
    3,36:1, que passa raspando como objeto gráfico, e branco dá 8,99:1. */
 .offer-box{
   max-width:660px;margin:38px auto 0;background:var(--verde);color:#fff;
-  border:0;border-radius:20px;padding:clamp(32px,5vw,44px);text-align:center;
+  border:0;border-radius:20px;padding:clamp(40px,6vw,56px);text-align:center;
   box-shadow:0 0 60px -6px rgba(255,172,0,.3),0 34px 76px -36px rgba(0,0,0,.55)
 }
 /* ===== card do preço: moldura girando + glow + número dourado (opção C) ===== */
@@ -841,14 +841,14 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 @keyframes gira-moldura{to{--ga:360deg}}
 @media(prefers-reduced-motion:reduce){.offer-box:before{animation:none}}
 
-.offer-box .marca{height:clamp(30px,4vw,40px);width:auto;display:block;margin:0 auto 6px}
-.offer-box .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:10px 0 2px}
+.offer-box .marca{height:clamp(30px,4vw,40px);width:auto;display:block;margin:0 auto 20px}
+.offer-box .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0 4px}
 .offer-box .price .cur{font-size:1.15rem;color:rgba(255,255,255,.82)}
 .offer-box .price .ast{font-size:1.15rem;color:rgba(255,255,255,.82);align-self:flex-start;margin-left:-4px}
 /* o preço é o maior número da página */
 .offer-box .price .val{font-family:'Space Grotesk',sans-serif;font-size:clamp(3.4rem,10vw,5.6rem);
   font-weight:700;line-height:1;letter-spacing:-.045em;color:#FFAC00}
-.offer-box .inst{color:rgba(255,255,255,.82);font-size:.98rem;margin-bottom:26px}
+.offer-box .inst{color:rgba(255,255,255,.82);font-size:.98rem;margin-bottom:34px}
 .offer-box .inst b{color:#fff}
 /* O CARD VENDE CONQUISTA, NÃO ENTREGÁVEL.
    Antes ele listava nove substantivos ("o cronograma", "a planilha"), que é
@@ -858,9 +858,9 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
    A promessa entra logo abaixo do preço porque é o que o número compra. */
 .offer-box .promessa{font-family:'Space Grotesk',sans-serif;font-weight:700;
   letter-spacing:-.03em;font-size:clamp(1.18rem,2.5vw,1.5rem);line-height:1.2;
-  color:#fff;margin:0 0 24px;padding-bottom:22px;
+  color:#fff;margin:0 0 32px;padding-bottom:30px;
   border-bottom:1px solid rgba(255,255,255,.22)}
-.offer-box .conquistas{list-style:none;padding:0;margin:0 0 28px;text-align:left;display:grid;gap:12px}
+.offer-box .conquistas{list-style:none;padding:0;margin:0 0 36px;text-align:left;display:grid;gap:18px}
 .offer-box .conquistas li{position:relative;padding-left:30px;font-size:1rem;
   color:rgba(255,255,255,.82);line-height:1.45}
 .offer-box .conquistas li b{color:#fff;font-weight:700}
@@ -880,7 +880,7 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
   border-right:2px solid var(--verde);border-bottom:2px solid var(--verde);transform:rotate(40deg)}
 @media(max-width:640px){.vemjunto ul{grid-template-columns:1fr}}
 .nota-juros{margin:14px 0 0;font-size:.76rem;color:rgba(255,255,255,.7)}
-.seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:18px;
+.seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:24px;
   font-size:.78rem;color:rgba(255,255,255,.7)}
 
 /* ---------- faq ---------- */
