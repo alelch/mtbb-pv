@@ -2003,18 +2003,26 @@ footer{background:#242320 !important}
 /* ===== MOBILE: bolhas dinâmicas como no desk (diagrama sticky no topo) ===== */
 @media(max-width:860px){
   /* bloco em fluxo normal pra o sticky pegar a seção inteira (grid trava o sticky na linha) */
-  .bb{display:block !important;margin-top:28px}
-  /* o MESMO diagrama do desk, preso no topo; o texto rola por baixo */
-  .bb-palco{display:flex !important;position:sticky;top:14px;height:29vh;z-index:2;
+  .bb{display:block !important;margin-top:26px}
+  /* o MESMO diagrama do desk, preso no topo; o texto rola por baixo.
+     MAIOR e ocupando a largura: no tamanho antigo (258px) os rótulos
+     davam 4,6px, ilegíveis. */
+  .bb-palco{display:flex !important;position:sticky;top:12px;height:40vh;z-index:2;
     align-items:center;justify-content:center;background:#242320;
-    margin:0 -24px 18px;padding:8px 24px;
-    -webkit-mask-image:linear-gradient(#000 72%,transparent);mask-image:linear-gradient(#000 72%,transparent)}
-  .bb-palco svg{height:100%;width:auto;max-width:100%;overflow:visible}
+    margin:0 -24px 12px;padding:4px 12px;
+    -webkit-mask-image:linear-gradient(#000 84%,transparent);mask-image:linear-gradient(#000 84%,transparent)}
+  .bb-palco svg{width:100%;height:auto;max-height:100%;overflow:visible}
+  /* os rótulos dentro dos anéis ficam ilegíveis no estreito; o h3 que rola
+     logo abaixo já nomeia a bolha ativa. Fora com eles. */
+  .bb-palco .bol text{display:none !important}
+  /* anel ativo domina; passados em ouro apagado; futuros quase sumidos */
+  .bb-palco .bol ellipse{stroke-width:1.4}
+  .bb-palco .bol.viva ellipse{stroke-width:3}
   .bb-mini{display:none !important}
   /* passos altos: o centro de cada um cruza o meio da tela e dispara o JS */
-  .bb-passo{min-height:66vh !important;display:flex !important;flex-direction:column;
+  .bb-passo{min-height:64vh !important;display:flex !important;flex-direction:column;
     justify-content:center;padding:0 !important}
-  html.js .bb-passo:not(.viva){opacity:.3 !important;transition:opacity .5s var(--ease)}
+  html.js .bb-passo:not(.viva){opacity:.26 !important;transition:opacity .5s var(--ease)}
   /* o 'pior erro' respira depois do trilho */
   .erro{margin-top:8px !important}
 }
