@@ -608,15 +608,12 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   .curva .cato{font-size:27px;font-weight:600;letter-spacing:-.01em}
   .curva .cdia{font-size:22px;letter-spacing:.14em}
   .curva .ceixo{font-size:22px;letter-spacing:.14em}
-  .curva .marco{display:none}                 /* PRÉ-VENDA/LANÇAMENTO saem de dentro */
-  .curva-eixo,.curva-leg{display:none}
-  /* ...e viram legenda ABAIXO do gráfico, com o marcador tracejado */
-  .curva-nota{display:flex !important;justify-content:center;gap:22px;margin:16px 0 0;padding:0}
-  .curva-nota span{display:inline-flex;align-items:center;gap:8px;
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;
-    text-transform:uppercase;color:rgba(243,240,232,.7)}
-  .curva-nota i{width:2px;height:15px;flex:0 0 auto;
-    background:repeating-linear-gradient(rgba(243,240,232,.6) 0 3px,transparent 3px 6px)}
+  /* PRÉ-VENDA/LANÇAMENTO ficam DENTRO, cada um colado na sua tracejada.
+     No estreito eles colidiriam lado a lado (mesma altura), então o
+     LANÇAMENTO sobe: alturas diferentes, cada um junto da sua linha. */
+  .curva .marco{font-size:18px;font-weight:600;letter-spacing:.1em}
+  .curva .marco[data-x="856"]{transform:translateY(-104px)}
+  .curva-eixo,.curva-leg,.curva-nota{display:none}
 }
 @media(max-width:860px){
   .bb{grid-template-columns:1fr;gap:0;margin-top:34px}
