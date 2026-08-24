@@ -1,0 +1,9 @@
+<!doctype html><meta charset=utf-8><style>html,body{margin:0}#f{border:0;width:390px;height:844px}#o{position:fixed;top:0;left:0;z-index:9;background:#111;color:#0f0;font:11px monospace;white-space:pre;padding:6px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,L=[];
+setTimeout(function(){var p=d.querySelector('.bb-palco'),svg=p.querySelector('svg');
+var pr=p.getBoundingClientRect(),sr=svg.getBoundingClientRect();
+L.push('palco: '+Math.round(pr.width)+'x'+Math.round(pr.height)+' top='+Math.round(pr.top));
+L.push('svg:   '+Math.round(sr.width)+'x'+Math.round(sr.height));
+var t=svg.querySelector('.bol text'); if(t){var c=getComputedStyle(t);L.push('label font-size renderizado ~ '+(parseFloat(c.fontSize)*sr.width/586).toFixed(1)+'px (css '+c.fontSize+' em user units)')}
+document.getElementById('o').textContent=L.join('\n');},2200)};</script>

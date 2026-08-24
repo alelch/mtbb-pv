@@ -1,0 +1,42 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:390px;height:844px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:12px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){
+  var d=this.contentDocument,w=this.contentWindow,L=[];
+  setTimeout(function(){
+    var st=d.getElementById('sticky');
+    var ctas=[].slice.call(d.querySelectorAll('a.btn')).filter(function(b){return !b.closest('.sticky')});
+    var H=d.documentElement.scrollHeight, vh=w.innerHeight;
+    L.push('CTAs inline: '+ctas.length+'  ·  página '+H+'px  ·  viewport '+vh);
+    L.push('');
+    var ys=[]; for(var y=0;y<H-vh;y+=500) ys.push(y);
+    var i=0, conflito=0, barra=0, inline=0, nada=0;
+    (function passo(){
+      if(i>=ys.length){
+        L.push('');
+        L.push('amostras: '+ys.length);
+        L.push('  só barra fixa .......... '+barra);
+        L.push('  só CTA inline .......... '+inline);
+        L.push('  os dois (conflito) ..... '+conflito);
+        L.push('  NENHUM jeito de comprar. '+nada);
+        L.push('');
+        L.push('cobertura: '+Math.round(100*(barra+inline+conflito)/ys.length)+'% da rolagem tem CTA na tela');
+        document.getElementById('o').textContent=L.join('\n');
+        return;
+      }
+      w.scrollTo(0,ys[i]);
+      setTimeout(function(){
+        var on=st.classList.contains('on');
+        var vis=ctas.some(function(b){var r=b.getBoundingClientRect();return r.bottom>0&&r.top<vh});
+        if(on&&vis){conflito++; L.push('  y='+String(ys[i]).padStart(6)+'  <<< DOIS BOTÕES')}
+        else if(on) barra++;
+        else if(vis) inline++;
+        else { nada++; L.push('  y='+String(ys[i]).padStart(6)+'  sem CTA nenhum')}
+        i++; passo();
+      },160);
+    })();
+  },3000);
+};
+</script>

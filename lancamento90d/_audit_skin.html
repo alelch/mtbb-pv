@@ -1,0 +1,31 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:12px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="skin-full-claro.html"></iframe><div id=o>...</div>
+<script>
+var cv=document.createElement('canvas');cv.width=cv.height=1;var cx=cv.getContext('2d',{willReadFrequently:true});
+function px(c,b){cx.clearRect(0,0,1,1);if(b){cx.fillStyle=b;cx.fillRect(0,0,1,1)}cx.fillStyle=c;cx.fillRect(0,0,1,1);var d=cx.getImageData(0,0,1,1).data;return[d[0],d[1],d[2]]}
+function ln(c){c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function L(a){return .2126*ln(a[0])+.7152*ln(a[1])+.0722*ln(a[2])}
+function rz(f,b){var x=L(f),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,O=[];
+setTimeout(function(){
+ var H=d.documentElement.scrollHeight;for(var y=0;y<H;y+=600)w.scrollTo(0,y);w.scrollTo(0,0);
+ Object.keys(w).filter(k=>k.indexOf('__')==0&&typeof w[k]=='function').forEach(k=>{try{w[k]()}catch(e){}});
+ function fundo(e){while(e&&e.nodeType==1){var bg=getComputedStyle(e).backgroundColor;var m=String(bg).match(/[\d.]+/g);if(m&&(m.length<4||+m[3]>=.9)&&bg!='rgba(0, 0, 0, 0)')return bg;e=e.parentElement}return '#F3F0E8'}
+ var ruins=[];
+ [].forEach.call(d.querySelectorAll('h1,h2,h3,h4,p,li,span,a,b,summary,div'),function(e){
+  var tem=[].some.call(e.childNodes,n=>n.nodeType==3&&n.nodeValue.trim());if(!tem)return;
+  var c=getComputedStyle(e);if(c.display=='none'||+c.opacity==0)return;
+  var f=px(c.color,fundo(e.parentElement)),b=px(fundo(e.parentElement));
+  var fs=parseFloat(c.fontSize),bold=+c.fontWeight>=700,min=(fs>=24||(fs>=18.66&&bold))?3:4.5;
+  var r=rz(f,b);
+  if(r<min){var sec=(e.closest('section,footer,header,div[class]')||{}).className||'?';
+   var k=String(sec).split(' ')[0];
+    ruins.push(k.padEnd(14)+' '+Math.round(fs)+'px '+r.toFixed(1)+':1  "'+(e.textContent||'').replace(/\s+/g,' ').trim().slice(0,30)+'"');}
+ });
+ O.push('FALHAS ('+ruins.length+'), amostra:');
+ var vis={};ruins.forEach(r=>{var k=r.split(' ')[0];if((vis[k]=(vis[k]||0)+1)<=3)O.push('  '+r)});
+ document.getElementById('o').textContent=O.join('\n');
+},3200)};
+</script>

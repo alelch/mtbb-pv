@@ -1,0 +1,63 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:390px;height:844px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:11.5px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+var cv=document.createElement('canvas');cv.width=cv.height=1;
+var cx=cv.getContext('2d',{willReadFrequently:true});
+function px(cor,fundo){cx.clearRect(0,0,1,1);if(fundo){cx.fillStyle=fundo;cx.fillRect(0,0,1,1)}
+  cx.fillStyle=cor;cx.fillRect(0,0,1,1);var d=cx.getImageData(0,0,1,1).data;return [d[0],d[1],d[2]]}
+function ln(c){c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function L(a){return .2126*ln(a[0])+.7152*ln(a[1])+.0722*ln(a[2])}
+function rz(f,b){var x=L(f),y=L(b);return ((Math.max(x,y)+.05)/(Math.min(x,y)+.05))}
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,O=[];
+setTimeout(function(){
+  function fundo(e){while(e&&e.nodeType===1){var bg=getComputedStyle(e).backgroundColor;
+    var m=String(bg).match(/[\d.]+/g);
+    if(m&&(m.length<4||+m[3]>=.95)&&bg!=='rgba(0, 0, 0, 0)')return bg;e=e.parentElement}return '#ffffff'}
+  // rola a pagina toda pra ligar tudo que e' animado
+  var H=d.documentElement.scrollHeight;
+  for(var y=0;y<H;y+=500) w.scrollTo(0,y);
+  w.scrollTo(0,0);
+  Object.keys(w).filter(function(k){return k.indexOf('__')===0&&typeof w[k]==='function'})
+    .forEach(function(k){try{w[k]()}catch(e){}});
+
+  var pequenos=[], baixos=[], toque=[], vaza=[];
+  var vw=d.documentElement.clientWidth;
+  [].forEach.call(d.querySelectorAll('body *'), function(e){
+    var c=getComputedStyle(e);
+    if(c.display==='none'||c.visibility==='hidden'||+c.opacity===0) return;
+    var r=e.getBoundingClientRect();
+    if(!r.width||!r.height) return;
+    // so' folhas com texto proprio
+    var txt=''; for(var i=0;i<e.childNodes.length;i++){var n=e.childNodes[i];
+      if(n.nodeType===3) txt+=n.nodeValue}
+    txt=txt.trim();
+    if(txt){
+      var fs=parseFloat(c.fontSize);
+      if(fs<12) pequenos.push([fs, e.tagName+'.'+(e.className||'').toString().split(' ')[0], txt.slice(0,34)]);
+      var bold=+c.fontWeight>=700;
+      var min=(fs>=24||(fs>=18.66&&bold))?3:4.5;
+      var razao=rz(px(c.color, fundo(e.parentElement)), px(fundo(e.parentElement)));
+      if(razao<min) baixos.push([razao.toFixed(2), min, Math.round(fs), txt.slice(0,32)]);
+    }
+    if(e.matches('a,button,summary,input,[role=button]')){
+      if(r.height<44||r.width<44) toque.push([Math.round(r.width)+'x'+Math.round(r.height),
+        (e.textContent||'').trim().slice(0,28)||e.tagName]);
+    }
+    if(r.right>vw+1 && c.position!=='fixed' && !e.closest('.marquee,.provas')) vaza.push([Math.round(r.right-vw), e.tagName+'.'+(e.className||'').toString().split(' ')[0]]);
+  });
+  function bloco(t,arr,fmt){O.push(t+' ('+arr.length+')');
+    if(!arr.length){O.push('   nenhum');return}
+    var vis={};arr.forEach(function(x){var k=fmt(x);if(!vis[k]){vis[k]=1;O.push('   '+k)}})}
+  O.push('AUDITORIA MOBILE · 390px de largura'); O.push('');
+  bloco('TEXTO ABAIXO DE 12px', pequenos, function(x){return x[0].toFixed(1)+'px  '+x[1].padEnd(22)+'"'+x[2]+'"'});
+  O.push('');
+  bloco('CONTRASTE REPROVANDO', baixos, function(x){return x[0]+':1 (min '+x[1]+')  '+x[2]+'px  "'+x[3]+'"'});
+  O.push('');
+  bloco('ALVO DE TOQUE < 44px', toque, function(x){return x[0]+'  "'+x[1]+'"'});
+  O.push('');
+  bloco('VAZANDO A LARGURA', vaza, function(x){return '+'+x[0]+'px  '+x[1]});
+  document.getElementById('o').textContent=O.join('\n');
+},3400)};
+</script>

@@ -1,0 +1,25 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:10px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){var d=this.contentDocument,L=[];
+setTimeout(function(){
+  var cv=d.createElement('canvas'), cx=cv.getContext('2d');
+  var chars=Array.from(new Set(d.body.innerText.split(''))).filter(function(c){return c.trim()&&c.charCodeAt(0)>32});
+  [['DM Sans','16px'],['Space Grotesk','16px'],['Caveat','24px'],['Fraunces','16px']].forEach(function(par){
+    // compara contra DUAS fontes de fallback diferentes: se o glifo existe na
+    // fonte real, a largura difere de ambas. Coincidir com as duas é improvável.
+    var w=[];
+    ['"'+par[0]+'"','monospace','cursive'].forEach(function(fam){
+      cx.font=par[1]+' '+fam; w.push(chars.map(function(c){return cx.measureText(c).width}));
+    });
+    var susp=chars.filter(function(c,i){
+      return Math.abs(w[0][i]-w[1][i])<0.01 && Math.abs(w[0][i]-w[2][i])<0.01;
+    });
+    L.push(par[0].padEnd(15)+' suspeitos: '+(susp.length?susp.map(function(c){
+      return '"'+c+'" (U+'+c.charCodeAt(0).toString(16).toUpperCase()+')'}).join(' '):'nenhum'));
+  });
+  document.getElementById('o').textContent=L.join('\n');
+},3000)};
+</script>

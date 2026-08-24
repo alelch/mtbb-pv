@@ -1,0 +1,20 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;font:12px monospace">
+<iframe id="f" src="/lancamento-v1/" style="border:0;width:1280px;height:900px"></iframe>
+<pre id="o" style="padding:12px;white-space:pre-wrap"></pre>
+<script>
+document.getElementById('f').onload=function(){setTimeout(function(){
+ var d=document.getElementById('f').contentDocument;
+ function m(el){ if(!el) return null; var c=getComputedStyle(el), r=el.getBoundingClientRect();
+   return {txt:(el.textContent||'').trim().slice(0,48), tag:el.tagName, size:c.fontSize, weight:c.fontWeight,
+     lh:c.lineHeight, ls:c.letterSpacing, family:c.fontFamily.split(',')[0], color:c.color,
+     align:c.textAlign, largura:Math.round(r.width)}; }
+ var out=[];
+ ['h1','h2','p','span'].forEach(function(sel){
+   [].slice.call(d.querySelectorAll(sel)).slice(0,14).forEach(function(el){
+     var r=el.getBoundingClientRect();
+     if(r.top<900 && r.height>6 && el.textContent.trim()) out.push(m(el));
+   });
+ });
+ document.getElementById('o').textContent=JSON.stringify(out.slice(0,16),null,1);
+},1800)};
+</script></body>

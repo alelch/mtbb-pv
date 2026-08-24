@@ -1,0 +1,30 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:12.5px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+document.getElementById('f').onload=function(){var d=this.contentDocument,w=this.contentWindow,O=[];
+setTimeout(function(){
+  function norm(t){return t.replace(/\s+/g,' ').trim().toLowerCase()}
+  var verde=[].slice.call(d.querySelectorAll('.provas .pcard:not([aria-hidden])'))
+    .map(function(e){return norm(e.textContent)});
+  var mos=[].slice.call(d.querySelectorAll('.mrow img[alt]:not([alt=""])'))
+    .map(function(e){return e.alt.replace('Depoimento de ','')});
+  O.push('carrossel da seção VERDE: '+verde.length+' cards');
+  O.push('carrossel da PROVA: '+mos.length+' fotos');
+  O.push('');
+  O.push('pessoas em comum:');
+  var n=0;
+  mos.forEach(function(nome){
+    var bate = verde.filter(function(t){return t.indexOf(nome.toLowerCase())===0});
+    if(bate.length){n++; O.push('  · '+nome)}
+  });
+  O.push('  total: '+n+' de '+mos.length);
+  O.push('');
+  var a=d.querySelector('.provas'), b=d.querySelector('.marquee.prova');
+  var ya=a.getBoundingClientRect().bottom+w.scrollY, yb=b.getBoundingClientRect().top+w.scrollY;
+  O.push('distância entre o fim de um e o começo do outro: '+Math.round(yb-ya)+'px');
+  O.push('(a página inteira tem '+d.documentElement.scrollHeight+'px)');
+  document.getElementById('o').textContent=O.join('\n');
+},2800)};
+</script>

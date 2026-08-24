@@ -1,0 +1,30 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:12px ui-monospace;white-space:pre;padding:8px}</style>
+<iframe id=f src="skin-full-claro.html"></iframe><div id=o>...</div>
+<script>
+var cv=document.createElement('canvas');cv.width=cv.height=1;var cx=cv.getContext('2d',{willReadFrequently:true});
+function px(c){cx.clearRect(0,0,1,1);cx.fillStyle=c;cx.fillRect(0,0,1,1);var d=cx.getImageData(0,0,1,1).data;return[d[0],d[1],d[2]]}
+function lum(a){return (a[0]*0.299+a[1]*0.587+a[2]*0.114)}
+document.getElementById('f').onload=function(){var d=this.contentDocument,O=[];
+setTimeout(function(){
+ var secs=[].slice.call(d.querySelectorAll('body > section, body > header, body > div, body > footer'));
+ var rows=[], prev=null;
+ secs.forEach(function(s){
+   var bg=getComputedStyle(s).backgroundColor;
+   var m=String(bg).match(/[\d.]+/g);
+   var vis = m && !(m.length>3 && +m[3]<0.5) && bg!='rgba(0, 0, 0, 0)';
+   if(!vis) return; // pula wrappers transparentes
+   var L=lum(px(bg));
+   var rgb=px(bg);var g=rgb[1]>rgb[0]+15&&rgb[1]>rgb[2];
+   var tom = g?'VERDE':(L<60?'CARVÃO':(L>200?'marfim':'medio('+Math.round(L)+')'));
+   var nome=(s.className||s.tagName).split(' ')[0];
+   var flag='';
+   if(prev && prev.tom==tom && (tom=='CARVÃO'||tom=='VERDE')) flag='  <<< PRETO SEGUIDO DE PRETO';
+   rows.push('  '+nome.padEnd(14)+tom+flag);
+   prev={tom:tom};
+ });
+ O.push('SEQUÊNCIA DE FUNDOS (topo -> fim):'); O.push('');
+ document.getElementById('o').textContent=O.concat(rows).join('\n');
+},2600)};
+</script>

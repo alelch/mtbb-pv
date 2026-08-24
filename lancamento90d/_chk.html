@@ -1,0 +1,45 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}#f{position:fixed;inset:0;width:1280px;height:900px;border:0}
+#o{position:fixed;inset:0;z-index:9;background:#111;color:#0f0;font:13px ui-monospace;white-space:pre;padding:10px}</style>
+<iframe id=f src="index.html"></iframe><div id=o>...</div>
+<script>
+var cv=document.createElement('canvas');cv.width=cv.height=1;var cx=cv.getContext('2d',{willReadFrequently:true});
+// resolve QUALQUER notacao (oklab, color-mix, rgba) pintando 1px
+function rgba(cor,fundo){
+  cx.clearRect(0,0,1,1);
+  if(fundo){cx.fillStyle=fundo;cx.fillRect(0,0,1,1);}
+  cx.fillStyle=cor;cx.fillRect(0,0,1,1);
+  var d=cx.getImageData(0,0,1,1).data; return [d[0],d[1],d[2]];
+}
+function ln(c){c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function L(a){return .2126*ln(a[0])+.7152*ln(a[1])+.0722*ln(a[2])}
+function rz(f,b){var x=L(f),y=L(b);return ((Math.max(x,y)+.05)/(Math.min(x,y)+.05)).toFixed(2)}
+document.getElementById('f').onload=function(){var d=this.contentDocument,O=[];
+setTimeout(function(){
+  function fundoDe(e){ // sobe ate' achar fundo opaco de verdade
+    while(e && e.nodeType===1){
+      var bg=getComputedStyle(e).backgroundColor;
+      var m=String(bg).match(/[\d.]+/g);
+      if(m && (m.length<4 || +m[3]>=.95) && bg!=='transparent' && bg!=='rgba(0, 0, 0, 0)') return bg;
+      e=e.parentElement;
+    }
+    return '#ffffff';
+  }
+  [['.dany .eyebrow','eyebrow da bio'],['.offer .eyebrow','eyebrow da oferta'],
+   ['.offer-box .incl li','item da lista'],['.offer-box .inst','ou R$297 à vista'],
+   ['.offer-box .name','nome do produto'],['.seals span','selos'],
+   ['.nota-juros','nota dos juros'],['#ctaMain','texto do botão']].forEach(function(t){
+    var e=d.querySelector(t[0]); if(!e){O.push(t[1]+': nao achei');return}
+    var c=getComputedStyle(e);
+    var fundo = (t[0]==='#ctaMain') ? '#F0A800' : fundoDe(e.parentElement);
+    var f=rgba(c.color, fundo), b=rgba(fundo);
+    var fs=parseFloat(c.fontSize), bold=+c.fontWeight>=700;
+    var min=(fs>=24||(fs>=18.66&&bold))?3:4.5;
+    var r=rz(f,b);
+    O.push(t[1].padEnd(20)+('rgb('+f.join(',')+')').padEnd(20)+'sobre rgb('+b.join(',')+')'
+      +'  = '+String(r).padStart(6)+':1  min '+min+'  '+(+r>=min?'ok':'<<< REPROVA'));
+  });
+  O.push('');O.push('(o botão foi medido contra o meio do gradiente dourado, #F0A800)');
+  document.getElementById('o').textContent=O.join('\n');
+},2600)};
+</script>
