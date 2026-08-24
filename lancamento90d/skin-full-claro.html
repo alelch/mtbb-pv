@@ -611,8 +611,10 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   /* PRÉ-VENDA/LANÇAMENTO ficam DENTRO, cada um colado na sua tracejada.
      No estreito eles colidiriam lado a lado (mesma altura), então o
      LANÇAMENTO sobe: alturas diferentes, cada um junto da sua linha. */
-  .curva .marco{font-size:18px;font-weight:600;letter-spacing:.1em}
-  .curva .marco[data-x="856"]{transform:translateY(-104px)}
+  /* PRÉ-VENDA/LANÇAMENTO descem pra BASE, no pé de cada tracejada (marcam
+     momentos no tempo, não sobem com a curva). Os dois já são anchor:end,
+     então terminam antes da sua linha e não colidem mesmo próximos. */
+  .curva .marco{font-size:16px;font-weight:600;letter-spacing:.1em;transform:translateY(50px)}
   .curva-eixo,.curva-leg,.curva-nota{display:none}
 }
 @media(max-width:860px){
