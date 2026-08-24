@@ -605,10 +605,10 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   /* mesmo gráfico do desk: rótulos NA curva, só com fonte maior pra ficarem
      legíveis no estreito (o SVG escala ~0.37, então subimos o tamanho em
      user-units). Sem legenda embaixo. */
-  .curva .cato{font-size:32px}
-  .curva .cdia{font-size:24px}
-  .curva .ceixo{font-size:24px}
-  .curva .marco{font-size:21px}
+  .curva .cato{font-size:27px;font-weight:600;letter-spacing:-.01em}
+  .curva .cdia{font-size:22px;letter-spacing:.14em}
+  .curva .ceixo{font-size:22px;letter-spacing:.14em}
+  .curva .marco{font-size:19px;font-weight:600;letter-spacing:.14em}
   .curva-eixo,.curva-leg,.curva-nota{display:none}
 }
 @media(max-width:860px){
@@ -1995,32 +1995,27 @@ footer{background:#242320 !important}
 
 /* mobile-svg das bolhas: escondido no desktop */
 .bb-msvg{display:none}
-/* ===== MOBILE: bolhas interativas como no desk (1 diagrama fixo acende ao rolar) ===== */
+/* ===== MOBILE: bolhas no estilo do desk (elipses offset, rótulos na horizontal) ===== */
 @media(max-width:860px){
   .bb{display:block !important;margin-top:20px;position:relative}
-  /* o diagrama FIXO no topo, opaco, texto rola por baixo e some atrás dele */
+  /* diagrama FIXO no topo, opaco; texto rola por baixo e some atrás dele */
   .bb-palco{display:flex !important;position:sticky;top:0;height:40vh;z-index:3;
     align-items:center;justify-content:center;background:#242320;
-    margin:0 -20px;padding:10px 20px 6px;
-    box-shadow:0 18px 22px -12px #242320}
-  .bb-dsvg{display:none !important}         /* some com o svg desktop (elipses offset) */
-  .bb-msvg{display:block !important;height:100%;width:auto;max-width:100%}
-  .bb-msvg circle{fill:none;transition:all .45s var(--ease)}
-  .bb-msvg text{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.16em;transition:fill .45s var(--ease)}
-  /* estado padrão: tudo apagado */
-  .bb-msvg .r0,.bb-msvg .r1,.bb-msvg .r2{stroke:rgba(243,240,232,.16);stroke-width:1.5}
-  .bb-msvg .l0,.bb-msvg .l1,.bb-msvg .l2{fill:rgba(243,240,232,.4)}
-  /* acende conforme data-active (mesmo scroll driver do desk) */
-  .bb-palco[data-active="0"] .r0,
-  .bb-palco[data-active="1"] .r1,
-  .bb-palco[data-active="2"] .r2{stroke:#EAB82D;stroke-width:2.5;fill:rgba(234,184,45,.12);filter:drop-shadow(0 0 7px rgba(234,184,45,.5))}
-  .bb-palco[data-active="1"] .r0,
-  .bb-palco[data-active="2"] .r0,.bb-palco[data-active="2"] .r1{stroke:rgba(234,184,45,.35);stroke-width:1.5;fill:rgba(234,184,45,.05)}
-  .bb-palco[data-active="0"] .l0,
-  .bb-palco[data-active="1"] .l1,
-  .bb-palco[data-active="2"] .l2{fill:#fff}
-  .bb-palco[data-active="1"] .l0,
-  .bb-palco[data-active="2"] .l0,.bb-palco[data-active="2"] .l1{fill:rgba(234,184,45,.6)}
+    margin:0 -20px;padding:12px 20px 8px;box-shadow:0 18px 22px -12px #242320}
+  /* mostra o MESMO diagrama do desk (elipses offset), dirigido pelo mesmo JS */
+  .bb-msvg{display:none !important}
+  .bb-dsvg{display:block !important;width:100%;height:auto;max-height:100%;overflow:visible}
+  /* rótulos maiores e mais espaçados pra ficarem legíveis e elegantes no estreito */
+  .bb-palco .bol text{font-size:17px !important;letter-spacing:.14em !important;font-weight:600 !important;
+    opacity:0;transition:opacity .4s var(--ease)}
+  /* no estreito os 3 rótulos horizontais colidem: mostra só o da bolha ativa */
+  .bb-palco .bol.viva text{opacity:1 !important;fill:#fff !important}
+  /* indicador de continuar rolando: só na 1a bolha, some depois */
+  .bb-palco::after{content:"";position:absolute;left:50%;bottom:12px;width:11px;height:11px;
+    border-right:2px solid rgba(234,184,45,.75);border-bottom:2px solid rgba(234,184,45,.75);
+    transform:translateX(-50%) rotate(45deg);opacity:0;transition:opacity .4s;
+    animation:bb-desce 1.5s ease-in-out infinite}
+  .bb-palco[data-active="0"]::after{opacity:1}
   .bb-mini{display:none !important}
   /* passos altos: o centro cruza o meio da tela e dispara o JS */
   .bb-trilho{padding:0}
@@ -2033,6 +2028,7 @@ footer{background:#242320 !important}
   .bb-passo p{color:rgba(243,240,232,.72) !important}
   .erro{margin-top:6px !important;padding-top:18px !important}
 }
+@keyframes bb-desce{0%,100%{bottom:14px}50%{bottom:7px}}
 </style>
 </body>
 </html>
