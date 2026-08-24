@@ -1073,7 +1073,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
     <div class="bb">
       <div class="bb-palco">
-        <svg viewBox="-40 0 586 520" aria-hidden="true">
+        <svg class="bb-msvg" viewBox="0 0 300 300" aria-hidden="true"><circle class="r2" cx="150" cy="150" r="148"/><circle class="r1" cx="150" cy="150" r="108"/><circle class="r0" cx="150" cy="150" r="66"/><text class="l0" x="150" y="158" text-anchor="middle">AMIGOS E FAMÍLIA</text><text class="l1" x="150" y="62" text-anchor="middle">DESCONHECIDOS</text><text class="l2" x="150" y="20" text-anchor="middle">BOCA A BOCA</text></svg>
+        <svg class="bb-dsvg" viewBox="-40 0 586 520" aria-hidden="true">
           <g class="bol" id="bol3"><ellipse cx="238" cy="260" rx="268" ry="250"/><text x="440" y="267" text-anchor="middle">Boca a boca</text></g>
           <g class="bol" id="bol2"><ellipse cx="186" cy="260" rx="188" ry="195"/><text x="312" y="267" text-anchor="middle">Desconhecidos</text></g>
           <g class="bol viva" id="bol1"><ellipse cx="128" cy="260" rx="122" ry="127"/><text x="128" y="267" text-anchor="middle">Amigos e família</text></g>
@@ -1635,6 +1636,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     if (i === atual) return;
     atual = i;
     passos.forEach(function(p, k){ p.classList.toggle('viva', k === i); });
+    var palco = document.querySelector('.bb-palco'); if (palco) palco.setAttribute('data-active', i);
     bolhas.forEach(function(g, k){
       g.classList.toggle('viva', k === i);
       g.classList.toggle('furada', k < i);
@@ -1991,33 +1993,44 @@ footer{background:#242320 !important}
 @media(prefers-reduced-motion:reduce){.offer-box:before{animation:none}}
 .offer-box .price .val{color:#EAB82D !important}
 
-/* ===== MOBILE: bolhas GRANDES aninhadas, uma por card ===== */
+/* mobile-svg das bolhas: escondido no desktop */
+.bb-msvg{display:none}
+/* ===== MOBILE: bolhas interativas como no desk (1 diagrama fixo acende ao rolar) ===== */
 @media(max-width:860px){
-  .bb{display:block !important;margin-top:22px}
-  .bb-palco{display:none !important}
+  .bb{display:block !important;margin-top:20px;position:relative}
+  /* o diagrama FIXO no topo, opaco, texto rola por baixo e some atrás dele */
+  .bb-palco{display:flex !important;position:sticky;top:0;height:40vh;z-index:3;
+    align-items:center;justify-content:center;background:#242320;
+    margin:0 -20px;padding:10px 20px 6px;
+    box-shadow:0 18px 22px -12px #242320}
+  .bb-dsvg{display:none !important}         /* some com o svg desktop (elipses offset) */
+  .bb-msvg{display:block !important;height:100%;width:auto;max-width:100%}
+  .bb-msvg circle{fill:none;transition:all .45s var(--ease)}
+  .bb-msvg text{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;transition:fill .45s var(--ease)}
+  /* estado padrão: tudo apagado */
+  .bb-msvg .r0,.bb-msvg .r1,.bb-msvg .r2{stroke:rgba(243,240,232,.16);stroke-width:1.5}
+  .bb-msvg .l0,.bb-msvg .l1,.bb-msvg .l2{fill:rgba(243,240,232,.4)}
+  /* acende conforme data-active (mesmo scroll driver do desk) */
+  .bb-palco[data-active="0"] .r0,
+  .bb-palco[data-active="1"] .r1,
+  .bb-palco[data-active="2"] .r2{stroke:#EAB82D;stroke-width:2.5;fill:rgba(234,184,45,.12);filter:drop-shadow(0 0 7px rgba(234,184,45,.5))}
+  .bb-palco[data-active="1"] .r0,
+  .bb-palco[data-active="2"] .r0,.bb-palco[data-active="2"] .r1{stroke:rgba(234,184,45,.35);stroke-width:1.5;fill:rgba(234,184,45,.05)}
+  .bb-palco[data-active="0"] .l0,
+  .bb-palco[data-active="1"] .l1,
+  .bb-palco[data-active="2"] .l2{fill:#fff}
+  .bb-palco[data-active="1"] .l0,
+  .bb-palco[data-active="2"] .l0,.bb-palco[data-active="2"] .l1{fill:rgba(234,184,45,.6)}
+  .bb-mini{display:none !important}
+  /* passos altos: o centro cruza o meio da tela e dispara o JS */
   .bb-trilho{padding:0}
-  .bb-passo{position:relative !important;min-height:0 !important;display:block !important;
-    text-align:center;padding:22px 0 30px !important;opacity:1 !important;
-    border-top:1px solid rgba(243,240,232,.14)}
-  #bolhas .bb-trilho .bb-passo:first-child{border-top:0}
-  html.js .bb-passo:not(.viva){opacity:1 !important}
-  /* o diagrama grande, centralizado */
-  .bb-mini{display:block !important;width:74% !important;max-width:280px !important;height:auto !important;
-    margin:0 auto 18px !important}
-  .bb-mini circle{fill:none;transition:all .5s var(--ease)}
-  .bb-mini .off{stroke:rgba(243,240,232,.16);stroke-width:1.5}
-  .bb-mini .done{stroke:rgba(234,184,45,.35);stroke-width:1.5;fill:rgba(234,184,45,.05)}
-  .bb-mini .at{stroke:#EAB82D;stroke-width:2.5;fill:rgba(234,184,45,.12);
-    filter:drop-shadow(0 0 8px rgba(234,184,45,.45))}
-  .bb-mini .lab{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em}
-  .bb-mini .lab.off{fill:rgba(243,240,232,.4)}
-  .bb-mini .lab.done{fill:rgba(234,184,45,.6)}
-  .bb-mini .lab.at{fill:#fff}
+  .bb-passo{position:relative !important;min-height:70vh !important;display:flex !important;
+    flex-direction:column;justify-content:center;padding:0 !important;text-align:left}
+  html.js .bb-passo:not(.viva){opacity:.28 !important;transition:opacity .5s var(--ease)}
   .bb-passo .eyebrow{color:#EAB82D !important;margin-bottom:8px}
   .bb-passo .eyebrow span{color:rgba(234,184,45,.55) !important}
   .bb-passo h3{color:#fff !important;margin-bottom:10px}
   .bb-passo p{color:rgba(243,240,232,.72) !important}
-  .bb-passo .vira{margin:13px auto 0;padding-top:13px;max-width:34ch}
   .erro{margin-top:6px !important;padding-top:18px !important}
 }
 </style>
