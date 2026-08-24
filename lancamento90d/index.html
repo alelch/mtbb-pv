@@ -1090,19 +1090,19 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       </div>
       <div class="bb-trilho">
         <div class="bb-passo viva">
-          <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="" cx="62" cy="60" r="56"/><circle class="" cx="48" cy="60" r="42"/><circle class="viva" cx="34" cy="60" r="28"/></svg>
+          <svg class="bb-mini" viewBox="0 0 120 120" aria-hidden="true"><circle class="off" cx="60" cy="60" r="56"/><circle class="off" cx="60" cy="60" r="38"/><circle class="at" cx="60" cy="60" r="20"/></svg>
           <p class="eyebrow"><span>Primeira bolha</span>Autor sem leitores</p>
           <h3>Amigos e família</h3>
           <p>Eles compram rápido e elogiam. É a bolha que engana: a primeira semana parece sucesso, o livro vende trinta, cinquenta exemplares, e aí para. O que parecia começo era o teto.</p>
           <p class="vira"><b>É aqui que 99% dos livros ficam presos.</b> Será que o seu vai ficar também?</p>        </div>
         <div class="bb-passo">
-          <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="" cx="62" cy="60" r="56"/><circle class="viva" cx="48" cy="60" r="42"/><circle class="feita" cx="34" cy="60" r="28"/></svg>
+          <svg class="bb-mini" viewBox="0 0 120 120" aria-hidden="true"><circle class="off" cx="60" cy="60" r="56"/><circle class="at" cx="60" cy="60" r="38"/><circle class="done" cx="60" cy="60" r="20"/></svg>
           <p class="eyebrow"><span>Segunda bolha</span>Autor lido</p>
           <h3>Desconhecidos compram o seu livro</h3>
           <p><b>Não por sorte. Por estratégia.</b> Avaliação, estrela, exemplar presenteado, conversa: tudo isso sai da primeira bolha, e é o que faz alguém que não te conhece parar no seu livro.</p>
           <p class="vira"><b>Soft-marketing é vender sem vender:</b> leva isso para fora do seu círculo usando os seus pontos fortes, sem depender dos fracos.</p>        </div>
         <div class="bb-passo">
-          <svg class="bb-mini" viewBox="0 0 200 120" aria-hidden="true"><circle class="viva" cx="62" cy="60" r="56"/><circle class="feita" cx="48" cy="60" r="42"/><circle class="feita" cx="34" cy="60" r="28"/></svg>
+          <svg class="bb-mini" viewBox="0 0 120 120" aria-hidden="true"><circle class="at" cx="60" cy="60" r="56"/><circle class="done" cx="60" cy="60" r="38"/><circle class="done" cx="60" cy="60" r="20"/></svg>
           <p class="eyebrow"><span>Terceira bolha</span>Autor recomendado</p>
           <h3>Boca a boca</h3>
           <p>A única bolha que cresce sozinha: o leitor termina e recomenda.</p>
@@ -2000,31 +2000,31 @@ footer{background:#242320 !important}
 @media(prefers-reduced-motion:reduce){.offer-box:before{animation:none}}
 .offer-box .price .val{color:#EAB82D !important}
 
-/* ===== MOBILE: bolhas dinâmicas como no desk (diagrama sticky no topo) ===== */
+/* ===== MOBILE: bolhas em linha do tempo (ícones concêntricos crescendo) ===== */
 @media(max-width:860px){
-  /* bloco em fluxo normal pra o sticky pegar a seção inteira (grid trava o sticky na linha) */
-  .bb{display:block !important;margin-top:26px}
-  /* o MESMO diagrama do desk, preso no topo; o texto rola por baixo.
-     MAIOR e ocupando a largura: no tamanho antigo (258px) os rótulos
-     davam 4,6px, ilegíveis. */
-  .bb-palco{display:flex !important;position:sticky;top:12px;height:40vh;z-index:2;
-    align-items:center;justify-content:center;background:#242320;
-    margin:0 -24px 12px;padding:4px 12px;
-    -webkit-mask-image:linear-gradient(#000 84%,transparent);mask-image:linear-gradient(#000 84%,transparent)}
-  .bb-palco svg{width:100%;height:auto;max-height:100%;overflow:visible}
-  /* os rótulos dentro dos anéis ficam ilegíveis no estreito; o h3 que rola
-     logo abaixo já nomeia a bolha ativa. Fora com eles. */
-  .bb-palco .bol text{display:none !important}
-  /* anel ativo domina; passados em ouro apagado; futuros quase sumidos */
-  .bb-palco .bol ellipse{stroke-width:1.4}
-  .bb-palco .bol.viva ellipse{stroke-width:3}
-  .bb-mini{display:none !important}
-  /* passos altos: o centro de cada um cruza o meio da tela e dispara o JS */
-  .bb-passo{min-height:64vh !important;display:flex !important;flex-direction:column;
-    justify-content:center;padding:0 !important}
-  html.js .bb-passo:not(.viva){opacity:.26 !important;transition:opacity .5s var(--ease)}
-  /* o 'pior erro' respira depois do trilho */
-  .erro{margin-top:8px !important}
+  .bb{display:block !important;margin-top:24px;position:relative}
+  .bb-palco{display:none !important}
+  /* linha vertical ligando os estágios */
+  .bb-trilho{position:relative;padding:0}
+  .bb-trilho:before{content:"";position:absolute;left:27px;top:34px;bottom:120px;width:2px;
+    background:linear-gradient(#EAB82D,rgba(234,184,45,.12));opacity:.5}
+  .bb-passo{position:relative !important;min-height:0 !important;display:block !important;
+    padding:16px 0 30px 76px !important;opacity:1 !important}
+  html.js .bb-passo:not(.viva){opacity:1 !important}
+  /* o ícone concêntrico, centralizado, no eixo da linha */
+  .bb-mini{display:block !important;position:absolute;left:0;top:14px;
+    width:56px;height:56px;max-width:none;margin:0;background:#242320;border-radius:50%;z-index:2}
+  .bb-mini circle{fill:none;transition:all .5s var(--ease)}
+  .bb-mini .off{stroke:rgba(243,240,232,.18);stroke-width:2}
+  .bb-mini .done{stroke:rgba(234,184,45,.4);stroke-width:2;fill:rgba(234,184,45,.06)}
+  .bb-mini .at{stroke:#EAB82D;stroke-width:3;fill:rgba(234,184,45,.14);
+    filter:drop-shadow(0 0 6px rgba(234,184,45,.5))}
+  .bb-passo .eyebrow{color:#EAB82D !important;margin-bottom:8px}
+  .bb-passo .eyebrow span{color:rgba(234,184,45,.55) !important}
+  .bb-passo h3{color:#fff !important;margin-bottom:10px}
+  .bb-passo p{color:rgba(243,240,232,.72) !important}
+  .bb-passo .vira{margin-top:13px;padding-top:13px}
+  .erro{margin-top:6px !important}
 }
 </style>
 </body>
