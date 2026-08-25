@@ -28,6 +28,27 @@
     }catch(e){ return 'direto|direto'; }
   }
 
+  /* _rastro: PORTADO DA IMERSAO 25/08 (lá rendeu 89% de atribuição × 63-80% das edições anteriores).
+     Quando o clique cai num link SEM sck (o botão do player VTurb, criado async, que escapa do
+     appendParams), o guard antes usava só _origem() -> referrer/fbclid -> e DESCARTAVA as UTMs que
+     estavam na URL da página. Resultado: venda pelo botão do vídeo perdia campanha e criativo.
+     Agora reaproveita as UTMs da URL primeiro; origem só se não houver UTM nenhuma.
+     Formato de saída idêntico ao do appendParams: source|medium|campaign|term|content. */
+  function _rastro(){
+    try{
+      var p = new URLSearchParams(location.search);
+      var g = function(k){ return p.get(k) || ''; };
+      if(g('utm_source')||g('utm_medium')||g('utm_campaign')||g('utm_term')||g('utm_content')||g('utm_id')){
+        // o id do conjunto (2o componente do utm_id) ocupa o slot do utm_term quando for id de verdade
+        var t = g('utm_term');
+        var aid = (g('utm_id').split('|')[1] || '');
+        if(/^\d{15,}$/.test(aid)) t = aid;
+        return g('utm_source')+'|'+g('utm_medium')+'|'+g('utm_campaign')+'|'+t+'|'+g('utm_content');
+      }
+    }catch(e){}
+    return _origem();
+  }
+
   /* ATRIBUIÇÃO (página best-seller): esta é a página vencedora (B) com URL limpa; roda o TESTE DE CHECKOUT.
      Os links normais o framework (appendParams) já reescreve (checkout do teste + |ck<variante>).
      O botão do player VTurb é criado async e escapa disso E abre o checkout SEM sck -> fallback no clique:
@@ -45,7 +66,7 @@
       }
       // 2) garante sck e carimba os tags dos testes ativos (ex.: |ckA / |ckB) sem duplicar
       var v = u.searchParams.get('sck');
-      if(!v){ v='master-v1b2|'+_origem(); ch=true; }
+      if(!v){ v='master-v1b2|'+_rastro(); ch=true; }
       (window.__ABTESTS||[]).forEach(function(t){ if(t.sck_tag && t.variant && v.indexOf('|'+t.sck_tag+t.variant)<0){ v+='|'+t.sck_tag+t.variant; ch=true; } });
       u.searchParams.set('sck', v);
       if(ch) a.setAttribute('href', u.toString());
