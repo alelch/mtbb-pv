@@ -381,7 +381,7 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
     </script>
   
 
-<script src="assets/interactions.js" defer=""></script><script src="vsl-inject.v2.js?v=12"></script>
+<script src="assets/interactions.js" defer=""></script><script src="vsl-inject.v2.js?v=13"></script>
 <script>/* captura o xcod da VTurb num cookie (mv_xcod) p/ a ponte /r/ do botão do vídeo anexar no checkout -> VTurb segue marcando conversão */
 (function(){var n=0;function grab(){n++;try{var sp=window.smartplayer,i=sp&&sp.instances&&sp.instances[0]&&sp.instances[0].instance;
 if(i&&typeof i.urlUpdater==='function'){Promise.resolve(i.urlUpdater('https://pay.hotmart.com/x')).then(function(u){var m=String(u).match(/[?&]xcod=([^&]+)/);if(m&&m[1])document.cookie='mv_xcod='+encodeURIComponent(m[1])+';path=/;max-age=86400;SameSite=Lax';if(n<25)setTimeout(grab,3000);}).catch(function(){if(n<25)setTimeout(grab,2000);});return;}}catch(e){}if(n<25)setTimeout(grab,1500);}grab();})();</script>
@@ -389,7 +389,9 @@ if(i&&typeof i.urlUpdater==='function'){Promise.resolve(i.urlUpdater('https://pa
 /* 26-E15: escassez dinâmica — % de ingressos sobe até 100% no dia do evento (06/09 8h).
    Mesma lógica da página B (VSL). Sobrescreve o "113%" cravado do evento anterior. */
 (function(){
-  var EVENT_E15=new Date('2026-09-06T08:00:00-03:00');
+  // FONTE UNICA da data do evento: o vsl-inject (countdown) le daqui.
+  // Trocar de edicao = mudar SO esta linha.
+  var EVENT_E15=new Date('2026-09-06T08:00:00-03:00'); try{ window.__EVENTO=EVENT_E15; }catch(e){}
   var RAMP_DAYS=12, START_PCT=72;   // começa hoje (~12 dias antes) em 72% e sobe até 100% no evento
   function _now(){ try{ var q=new URLSearchParams(location.search).get('cdnow'); if(q){ var d=new Date(q); if(!isNaN(d)) return d; } }catch(e){} return new Date(); }
   function _pct(){ var now=_now().getTime(), ev=EVENT_E15.getTime(), ini=ev-RAMP_DAYS*864e5;

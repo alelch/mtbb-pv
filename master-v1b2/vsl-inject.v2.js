@@ -179,23 +179,15 @@
     return true;
   }
 
-  /* ===== 26-E13: ESCASSEZ DINÂMICA — % de ingressos sobe dia a dia até 100% no dia do evento (08/08) ===== */
-  var EVENT_E13=new Date('2026-08-08T08:00:00-03:00');   // aula ao vivo: 08/08 às 8h
-  var RAMP_DAYS=12, START_PCT=72;                        // começa hoje (~12 dias antes) em 72% -> 100% no evento
-  function _e13now(){ try{ var q=new URLSearchParams(location.search).get('cdnow'); if(q){ var d=new Date(q); if(!isNaN(d)) return d; } }catch(e){} return new Date(); }
-  function _e13pct(){ var now=_e13now().getTime(), ev=EVENT_E13.getTime(), ini=ev-RAMP_DAYS*864e5;
-    var f=Math.max(0,Math.min(1,(now-ini)/(ev-ini))); return Math.round(START_PCT+(100-START_PCT)*f); }
-  /* NÃO injeta barra de escassez embaixo do vídeo (o cliente não quer). Só mantém dinâmicas as
-     menções "% dos ingressos vendidos" que já existem no resto da página (as do 1º fold ficam
-     ocultas no layout VSL). */
-  function _e13scarcity(){ var pct=_e13pct();
-    [].forEach.call(document.querySelectorAll('p'),function(p){
-      if(!/dos ingressos vendidos/i.test(p.textContent||'')) return;
-      p.textContent=pct+'% dos ingressos vendidos por R$ 29,00';
-      var tr=p.previousElementSibling, fill=tr&&tr.querySelector?tr.querySelector('[style*="width"]'):null;
-      if(fill) fill.style.width=pct+'%';
-    }); }
-  _e13scarcity(); setTimeout(_e13scarcity,1200); setTimeout(_e13scarcity,3000); setInterval(_e13scarcity,300000);
+  /* ===== DATA DO EVENTO (fonte unica) =====
+     A ESCASSEZ foi REMOVIDA daqui em 25/08: ela ja existe no index.html (com a data certa) e as
+     duas rodavam no MESMO timer (imediato, 1.2s, 3s, 5min), competindo. Resultado: a pagina
+     oscilava entre o valor certo e 100%, porque a copia daqui tinha a data do E13 (08/08, ja
+     passada -> satura em 100%). Agora escassez vive SO no index, igual a arquitetura da Imersao.
+     O countdown abaixo continua aqui (so existe neste arquivo) e le a data do index. */
+  var EVENT_EV = (function(){ try{ if(window.__EVENTO instanceof Date && !isNaN(window.__EVENTO)) return window.__EVENTO; }catch(e){}
+    return new Date('2026-09-06T08:00:00-03:00'); })();   // fallback se o index nao tiver exposto
+  function _evnow(){ try{ var q=new URLSearchParams(location.search).get('cdnow'); if(q){ var d=new Date(q); if(!isNaN(d)) return d; } }catch(e){} return new Date(); }
 
   /* ===== 26-E13: CONTAGEM REGRESSIVA — aparece só nos últimos dias, abaixo do vídeo ===== */
   var CD_SHOW_DAYS=7;
@@ -237,7 +229,7 @@
   }
   function _e13cdTick(){
     var els=document.querySelectorAll('.e13-cd'); if(!els.length) return;
-    var t=_e13now().getTime(), ev=EVENT_E13.getTime(), fim=ev+4*36e5, de=ev-CD_SHOW_DAYS*864e5;
+    var t=_evnow().getTime(), ev=EVENT_EV.getTime(), fim=ev+4*36e5, de=ev-CD_SHOW_DAYS*864e5;
     var r=Math.max(0,ev-t), d=Math.floor(r/864e5), h=Math.floor(r%864e5/36e5), mi=Math.floor(r%36e5/6e4), s=Math.floor(r%6e4/1e3);
     [].forEach.call(els,function(el){
       var bx=el.querySelector('.e13-cd-boxes'), lv=el.querySelector('.e13-cd-live');

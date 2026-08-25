@@ -180,7 +180,11 @@
   }
 
   /* ===== 26-E13: ESCASSEZ DINÂMICA — % de ingressos sobe dia a dia até 100% no dia do evento (08/08) ===== */
-  var EVENT_E13=new Date('2026-08-08T08:00:00-03:00');   // aula ao vivo: 08/08 às 8h
+  /* data do evento: le do index (window.__EVENTO) se existir, senao usa o fallback.
+     ⚠️ best-seller: a escassez vive SO aqui (o index desta pagina nao tem), por isso ela NAO foi
+     removida como na master-v1b2. Trocar de edicao = atualizar o fallback abaixo. */
+  var EVENT_E13 = (function(){ try{ if(window.__EVENTO instanceof Date && !isNaN(window.__EVENTO)) return window.__EVENTO; }catch(e){}
+    return new Date('2026-09-06T08:00:00-03:00'); })();   // E15: aula ao vivo 06/09 as 8h
   var RAMP_DAYS=12, START_PCT=72;                        // começa hoje (~12 dias antes) em 72% -> 100% no evento
   function _e13now(){ try{ var q=new URLSearchParams(location.search).get('cdnow'); if(q){ var d=new Date(q); if(!isNaN(d)) return d; } }catch(e){} return new Date(); }
   function _e13pct(){ var now=_e13now().getTime(), ev=EVENT_E13.getTime(), ini=ev-RAMP_DAYS*864e5;
