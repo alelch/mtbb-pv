@@ -288,6 +288,9 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
               adset_id: /^\d{15,}$/.test(aid) ? aid : null, criativo: q.get("utm_content") }) });
           } catch (e) {}
         }
+        // dispara no PAGEVIEW, não só no clique: o 1º toque precisa existir mesmo pra quem
+        // vê o anúncio, sai sem clicar e volta comprando dias depois por link direto.
+        setTimeout(__lvSendCtx, 1200);
 
         function appendParams(link) {
           for (var j = 0; j < prefix.length; j++) {
