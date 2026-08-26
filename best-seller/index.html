@@ -278,7 +278,14 @@ Se precisar de ajuda, pode falar com nosso time de suporte, chamando a Dezza no 
             var fbp = (document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/) || [])[1] || null;
             var fbc = (document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/) || [])[1] || null;
             if (!fbc) { var fbclid = new URLSearchParams(location.search).get("fbclid"); if (fbclid) fbc = "fb.1." + Date.now() + "." + fbclid; }
-            fetch("https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/pv-click", { method: "POST", keepalive: true, body: JSON.stringify({ vid: vid, fbc: fbc, fbp: fbp }) });
+            // + primeiro toque de UTM: a função grava UMA vez por vid (first_utm_at trava).
+            // Venda futura sem UTM no sck (link direto, in-app) resolve o anúncio pelo |v<vid>.
+            var q = new URLSearchParams(location.search);
+            var aid = (q.get("utm_id") || "").split("|")[1] || "";
+            fetch("https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/pv-click", { method: "POST", keepalive: true, body: JSON.stringify({ vid: vid, fbc: fbc, fbp: fbp,
+              utm_source: q.get("utm_source"), utm_medium: q.get("utm_medium"), utm_campaign: q.get("utm_campaign"),
+              utm_term: q.get("utm_term"), utm_content: q.get("utm_content"),
+              adset_id: /^\d{15,}$/.test(aid) ? aid : null, criativo: q.get("utm_content") }) });
           } catch (e) {}
         }
 
