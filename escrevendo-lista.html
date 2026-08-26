@@ -4530,7 +4530,7 @@
         if (payload.whatsapp) fetch('https://jsqtpsxpaclslakafmvd.supabase.co/rest/v1/rpc/mtbb_pv_origem_set', {
           method: 'POST', keepalive: true,
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ORIG_ANON, 'apikey': _ORIG_ANON },
-          body: JSON.stringify({ p_phone: payload.whatsapp, p_sck: 'lista-' + payload.stage, p_stage: payload.stage, p_arm: 'lista', p_ad_src: payload.src || '', p_email: payload.email || '' })
+          body: JSON.stringify({ p_phone: payload.whatsapp, p_sck: 'lista-' + payload.stage, p_stage: payload.stage, p_arm: 'lista', p_ad_src: payload.src || '', p_email: payload.email || '', p_quiz_copy: (localStorage.getItem('mtbb_quiz_copy_ab')||''), p_obrigado: (localStorage.getItem('mtbb_obrigado_ab')||'') })
         }).catch(function () {});
       } catch (e) {}
 
