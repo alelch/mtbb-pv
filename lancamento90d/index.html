@@ -2123,9 +2123,9 @@ footer{background:#242320 !important}
 }
 /* ===== animação de scroll: o "aceso" passa do HOJE pro AGORA, linha por linha ===== */
 .t3.anim .row .old,.t3.anim .row .new,.t3.anim .row .arrow{
-  transition:opacity .5s var(--ease,ease),filter .5s var(--ease,ease),background-color .5s var(--ease,ease),box-shadow .5s var(--ease,ease)}
+  transition:opacity .5s var(--ease,ease),filter .5s var(--ease,ease),background-color .5s var(--ease,ease),border-color .5s var(--ease,ease),color .5s var(--ease,ease),box-shadow .5s var(--ease,ease)}
 /* DORMINDO: o "hoje" está aceso (célula clara, presente), o "agora" apagado */
-.t3.anim .row:not(.lit) .old{background:rgba(243,240,232,.11) !important;border-color:rgba(243,240,232,.22) !important}
+.t3.anim .row:not(.lit) .old{background:#7d1e14 !important;border-color:rgba(214,92,72,.55) !important;color:rgba(243,240,232,.95) !important}
 .t3.anim .row:not(.lit) .new{opacity:.3 !important;filter:saturate(.2) brightness(.66) !important}
 .t3.anim .row:not(.lit) .arrow{opacity:.32 !important;filter:saturate(.35) !important}
 /* ACESO: o "hoje" apaga (o aceso sai da esquerda), o "agora" acende + glow, a seta dispara */
