@@ -2123,13 +2123,15 @@ footer{background:#242320 !important}
 }
 /* ===== animação de scroll: o "aceso" passa do HOJE pro AGORA, linha por linha ===== */
 .t3.anim .row .old,.t3.anim .row .new,.t3.anim .row .arrow{
-  transition:opacity .55s var(--ease,ease),filter .55s var(--ease,ease),box-shadow .55s var(--ease,ease)}
-/* dormindo: hoje aceso, agora apagado */
-.t3.anim .row:not(.lit) .new{opacity:.42 !important;filter:saturate(.35) brightness(.82) !important}
-.t3.anim .row:not(.lit) .arrow{opacity:.5 !important;filter:saturate(.4) !important}
-/* aceso: hoje apaga, agora ganha cor cheia + glow dourado */
-.t3.anim .row.lit .old{opacity:.5 !important;filter:grayscale(.35) !important}
-.t3.anim .row.lit .new{box-shadow:0 8px 20px rgba(20,82,62,.28),0 0 0 1px rgba(234,184,45,.55),0 0 22px rgba(234,184,45,.22) !important}
+  transition:opacity .5s var(--ease,ease),filter .5s var(--ease,ease),background-color .5s var(--ease,ease),box-shadow .5s var(--ease,ease)}
+/* DORMINDO: o "hoje" está aceso (célula clara, presente), o "agora" apagado */
+.t3.anim .row:not(.lit) .old{background:rgba(243,240,232,.11) !important;border-color:rgba(243,240,232,.22) !important}
+.t3.anim .row:not(.lit) .new{opacity:.3 !important;filter:saturate(.2) brightness(.66) !important}
+.t3.anim .row:not(.lit) .arrow{opacity:.32 !important;filter:saturate(.35) !important}
+/* ACESO: o "hoje" apaga (o aceso sai da esquerda), o "agora" acende + glow, a seta dispara */
+.t3.anim .row.lit .old{opacity:.4 !important;filter:grayscale(.55) !important;background:rgba(243,240,232,.03) !important;border-color:rgba(243,240,232,.08) !important}
+.t3.anim .row.lit .arrow{box-shadow:0 0 20px rgba(234,184,45,.6) !important}
+.t3.anim .row.lit .new{box-shadow:0 8px 20px rgba(20,82,62,.28),0 0 0 1px rgba(234,184,45,.65),0 0 28px rgba(234,184,45,.32) !important}
 
 /* ===== CASOS COMPLETOS (prova) — LAYOUT DE EXEMPLO, dados a trocar ===== */
 .casos-exemplo{margin:0 auto 34px}
@@ -2161,7 +2163,7 @@ footer{background:#242320 !important}
   t.classList.add('anim');
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ e.target.classList.toggle('lit', e.isIntersecting); });
-  },{rootMargin:'0px 0px -35% 0px',threshold:0});
+  },{rootMargin:'0px 0px -20% 0px',threshold:0});
   t.querySelectorAll('.row').forEach(function(r){ io.observe(r); });
 })();
 </script>
