@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="pt-br"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Tabela hoje × agora — 5 versões mobile</title>
+<style>
+:root{--carvao:#242320;--verde:#14523E;--verde2:#1c6b51;--ouro:#EAB82D;--ouro2:#F0C959;
+  --marfim:#F3F0E8;--vermelho:rgba(125,30,20,.45)}
+*{box-sizing:border-box}
+body{margin:0;background:#141312;color:var(--marfim);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.pal{max-width:1500px;margin:0 auto;padding:24px 16px 80px;
+  display:flex;flex-wrap:wrap;gap:26px;justify-content:center;align-items:flex-start}
+.fone{width:375px;flex:0 0 375px;background:var(--carvao);border-radius:26px;
+  border:1px solid rgba(243,240,232,.1);overflow:hidden}
+.fone > .tit{background:#0f0e0d;padding:10px 16px;font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ouro2);font-weight:700}
+.fone > .obs{padding:0 16px 12px;font-size:11.5px;color:rgba(243,240,232,.45);line-height:1.45}
+.body{padding:6px 18px 26px}
+h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:9.5px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;margin:0 0 10px}
+ul{list-style:none;margin:0;padding:0}
+li{font-size:14.5px;line-height:1.45;padding:8px 0;display:flex;gap:9px;align-items:flex-start}
+li + li{border-top:1px solid rgba(243,240,232,.09)}
+.ic{flex:0 0 auto;font-size:12px;font-weight:800;line-height:1.6}
+
+/* ---------- V1 dois cartões ---------- */
+.v1 .card{border-radius:14px;padding:15px 16px}
+.v1 .hoje{background:var(--vermelho);border:1px solid rgba(214,92,72,.3)}
+.v1 .hoje h4{color:rgba(243,240,232,.6)} .v1 .hoje .ic{color:#e0917f}
+.v1 .hoje li{color:rgba(243,240,232,.9)}
+.v1 .seta{display:grid;place-items:center;height:40px;font-size:20px;color:var(--ouro)}
+.v1 .agora{background:linear-gradient(180deg,var(--verde2),var(--verde));
+  box-shadow:0 8px 22px rgba(20,82,62,.3)}
+.v1 .agora h4{color:var(--ouro2)} .v1 .agora .ic{color:var(--ouro2)}
+.v1 .agora li{font-weight:600}
+
+/* ---------- V2 numerados (par visual) ---------- */
+.v2 .card{border-radius:14px;padding:15px 16px}
+.v2 .hoje{background:var(--vermelho);border:1px solid rgba(214,92,72,.3)}
+.v2 .hoje h4{color:rgba(243,240,232,.6)}
+.v2 .hoje li{color:rgba(243,240,232,.9)}
+.v2 .agora{background:linear-gradient(180deg,var(--verde2),var(--verde));
+  box-shadow:0 8px 22px rgba(20,82,62,.3)}
+.v2 .agora h4{color:var(--ouro2)} .v2 .agora li{font-weight:600}
+.v2 .n{flex:0 0 19px;height:19px;border-radius:50%;display:grid;place-items:center;
+  font-size:10px;font-weight:800;margin-top:2px}
+.v2 .hoje .n{background:rgba(243,240,232,.12);color:rgba(243,240,232,.6)}
+.v2 .agora .n{background:var(--ouro);color:var(--carvao)}
+.v2 .seta{display:grid;place-items:center;height:40px;font-size:20px;color:var(--ouro)}
+.v2 .hoje .n{background:rgba(243,240,232,.14);color:rgba(243,240,232,.75)}
+
+/* ---------- V3 faixas full-bleed, sem moldura ---------- */
+.v3 .body{padding:0 0 26px}
+.v3 .faixa{padding:18px 18px}
+.v3 .hoje{background:rgba(125,30,20,.45);border-left:3px solid rgba(214,92,72,.55)}
+.v3 .hoje h4{color:#e0917f} .v3 .hoje li{color:rgba(243,240,232,.72)}
+.v3 .agora{background:rgba(20,82,62,.55);border-left:3px solid var(--ouro)}
+.v3 .agora h4{color:var(--ouro2)} .v3 .agora li{font-weight:600}
+.v3 .seta{display:grid;place-items:center;height:34px;font-size:18px;color:var(--ouro)}
+
+/* ---------- V4 cartão único partido ---------- */
+.v4 .caixa{border-radius:16px;overflow:hidden;border:1px solid rgba(243,240,232,.12)}
+.v4 .hoje{background:rgba(125,30,20,.4);padding:16px}
+.v4 .hoje h4{color:rgba(243,240,232,.6)} .v4 .hoje .ic{color:#e0917f}
+.v4 .hoje li{color:rgba(243,240,232,.88)}
+.v4 .divisor{position:relative;height:2px;background:var(--ouro)}
+.v4 .divisor b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:30px;height:30px;border-radius:50%;background:var(--ouro);color:var(--carvao);
+  display:grid;place-items:center;font-size:15px;box-shadow:0 0 0 5px var(--carvao)}
+.v4 .agora{background:linear-gradient(180deg,var(--verde2),var(--verde));padding:24px 16px 16px}
+.v4 .agora h4{color:var(--ouro2)} .v4 .agora .ic{color:var(--ouro2)}
+.v4 .agora li{font-weight:600}
+
+/* ---------- V5 a virada no meio ---------- */
+.v5 .bloco{background:var(--vermelho);border:1px solid rgba(214,92,72,.3);border-radius:14px;padding:15px 16px}
+.v5 .hoje h4{color:rgba(243,240,232,.6)}
+.v5 .hoje li{color:rgba(243,240,232,.9)}
+.v5 .hoje .ic{color:#e0917f}
+.v5 .virada{margin:20px 0 16px;padding:13px 15px;border-radius:12px;
+  background:var(--ouro);color:var(--carvao);font-weight:800;font-size:14.5px;
+  display:flex;align-items:center;gap:10px}
+.v5 .agora{background:linear-gradient(180deg,var(--verde2),var(--verde));
+  border-radius:14px;padding:15px 16px;box-shadow:0 8px 22px rgba(20,82,62,.3)}
+.v5 .agora h4{color:var(--ouro2)} .v5 .agora .ic{color:var(--ouro2)}
+.v5 .agora li{font-weight:600}
+
+/* o verde entra apagado e ACENDE quando aparece na tela */
+.agora{transition:opacity .55s cubic-bezier(.16,1,.3,1),filter .55s cubic-bezier(.16,1,.3,1),box-shadow .55s cubic-bezier(.16,1,.3,1)}
+.agora:not(.on){opacity:.3;filter:saturate(.2) brightness(.6)}
+.agora.on{box-shadow:0 8px 22px rgba(20,82,62,.3),0 0 0 1px rgba(234,184,45,.55),0 0 26px rgba(234,184,45,.28)}
+.hoje{transition:opacity .55s,filter .55s}
+.apagou{opacity:.45;filter:grayscale(.5)}
+</style></head>
+<body>
+<div class="pal">
+
+  <!-- V1 -->
+  <div class="fone v1">
+    <div class="tit">V1 · dois cartões</div>
+    <p class="obs">O mais direto. Vermelho translúcido no de cima, verde no de baixo, seta solta entre eles.</p>
+    <div class="body">
+      <div class="card hoje">
+        <h4>O que você faz hoje</h4>
+        <ul>
+          <li><span class="ic">✕</span>Publica e torce pra alguém descobrir.</li>
+          <li><span class="ic">✕</span>Espera uma editora escolher o seu livro.</li>
+          <li><span class="ic">✕</span>Só divulga depois do livro pronto.</li>
+          <li><span class="ic">✕</span>Vende pra amigos e família, e para por aí.</li>
+          <li><span class="ic">✕</span>Conta com sorte ou talento.</li>
+        </ul>
+      </div>
+      <div class="seta">↓</div>
+      <div class="card agora">
+        <h4>A partir de agora</h4>
+        <ul>
+          <li><span class="ic">✓</span>Prepara o mercado antes do livro existir.</li>
+          <li><span class="ic">✓</span>O lançamento é seu, não da editora.</li>
+          <li><span class="ic">✓</span>Já começa a vender na pré-venda.</li>
+          <li><span class="ic">✓</span>Chega em leitores desconhecidos.</li>
+          <li><span class="ic">✓</span>Segue um passo a passo, na ordem certa.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- V2 -->
+  <div class="fone v2">
+    <div class="tit">V2 · numerados</div>
+    <p class="obs">Os números pareiam os itens: o 1 de cima vira o 1 de baixo. Recupera a leitura "isto vira aquilo" que a versão em linhas tinha.</p>
+    <div class="body">
+      <div class="card hoje">
+        <h4>O que você faz hoje</h4>
+        <ul>
+          <li><span class="n">1</span>Publica e torce pra alguém descobrir.</li>
+          <li><span class="n">2</span>Espera uma editora escolher o seu livro.</li>
+          <li><span class="n">3</span>Só divulga depois do livro pronto.</li>
+          <li><span class="n">4</span>Vende pra amigos e família, e para por aí.</li>
+          <li><span class="n">5</span>Conta com sorte ou talento.</li>
+        </ul>
+      </div>
+      <div class="seta">↓</div>
+      <div class="card agora">
+        <h4>A partir de agora</h4>
+        <ul>
+          <li><span class="n">1</span>Prepara o mercado antes do livro existir.</li>
+          <li><span class="n">2</span>O lançamento é seu, não da editora.</li>
+          <li><span class="n">3</span>Já começa a vender na pré-venda.</li>
+          <li><span class="n">4</span>Chega em leitores desconhecidos.</li>
+          <li><span class="n">5</span>Segue um passo a passo, na ordem certa.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- V3 -->
+  <div class="fone v3">
+    <div class="tit">V3 · faixas sem moldura</div>
+    <p class="obs">Sem cartão, sem borda arredondada. Duas faixas de cor coladas na largura toda, com fio vertical. Mais editorial, menos "infoproduto".</p>
+    <div class="body">
+      <div class="faixa hoje">
+        <h4>O que você faz hoje</h4>
+        <ul>
+          <li>Publica e torce pra alguém descobrir.</li>
+          <li>Espera uma editora escolher o seu livro.</li>
+          <li>Só divulga depois do livro pronto.</li>
+          <li>Vende pra amigos e família, e para por aí.</li>
+          <li>Conta com sorte ou talento.</li>
+        </ul>
+      </div>
+      <div class="seta">↓</div>
+      <div class="faixa agora">
+        <h4>A partir de agora</h4>
+        <ul>
+          <li>Prepara o mercado antes do livro existir.</li>
+          <li>O lançamento é seu, não da editora.</li>
+          <li>Já começa a vender na pré-venda.</li>
+          <li>Chega em leitores desconhecidos.</li>
+          <li>Segue um passo a passo, na ordem certa.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- V4 -->
+  <div class="fone v4">
+    <div class="tit">V4 · cartão único partido</div>
+    <p class="obs">Um bloco só, dividido por uma linha dourada com a seta em cima dela. Passa a ideia de "mesma coisa, dois lados" em vez de dois objetos separados.</p>
+    <div class="body">
+      <div class="caixa">
+        <div class="hoje">
+          <h4>O que você faz hoje</h4>
+          <ul>
+            <li><span class="ic">✕</span>Publica e torce pra alguém descobrir.</li>
+            <li><span class="ic">✕</span>Espera uma editora escolher o seu livro.</li>
+            <li><span class="ic">✕</span>Só divulga depois do livro pronto.</li>
+            <li><span class="ic">✕</span>Vende pra amigos e família, e para por aí.</li>
+            <li><span class="ic">✕</span>Conta com sorte ou talento.</li>
+          </ul>
+        </div>
+        <div class="divisor"><b>↓</b></div>
+        <div class="agora">
+          <h4>A partir de agora</h4>
+          <ul>
+            <li><span class="ic">✓</span>Prepara o mercado antes do livro existir.</li>
+            <li><span class="ic">✓</span>O lançamento é seu, não da editora.</li>
+            <li><span class="ic">✓</span>Já começa a vender na pré-venda.</li>
+            <li><span class="ic">✓</span>Chega em leitores desconhecidos.</li>
+            <li><span class="ic">✓</span>Segue um passo a passo, na ordem certa.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V5 -->
+  <div class="fone v5">
+    <div class="tit">V5 · a virada no meio</div>
+    <p class="obs">O "hoje" fica apagado e sem moldura, como coisa do passado. A faixa dourada é a virada, e só o "agora" ganha cartão. Mais narrativo.</p>
+    <div class="body">
+      <div class="bloco hoje">
+        <h4>O que você faz hoje</h4>
+        <ul>
+          <li><span class="ic">✕</span>Publica e torce pra alguém descobrir.</li>
+          <li><span class="ic">✕</span>Espera uma editora escolher o seu livro.</li>
+          <li><span class="ic">✕</span>Só divulga depois do livro pronto.</li>
+          <li><span class="ic">✕</span>Vende pra amigos e família, e para por aí.</li>
+          <li><span class="ic">✕</span>Conta com sorte ou talento.</li>
+        </ul>
+      </div>
+      <div class="virada"><span>↓</span> Com o Lançamento 90D</div>
+      <div class="agora">
+        <h4>A partir de agora</h4>
+        <ul>
+          <li><span class="ic">✓</span>Prepara o mercado antes do livro existir.</li>
+          <li><span class="ic">✓</span>O lançamento é seu, não da editora.</li>
+          <li><span class="ic">✓</span>Já começa a vender na pré-venda.</li>
+          <li><span class="ic">✓</span>Chega em leitores desconhecidos.</li>
+          <li><span class="ic">✓</span>Segue um passo a passo, na ordem certa.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){ e.target.classList.add('on');
+    var f=e.target.closest('.fone'); var h=f&&f.querySelector('.hoje'); if(h)h.classList.add('apagou'); }
+});},{rootMargin:'0px 0px -25% 0px'});
+document.querySelectorAll('.agora').forEach(function(a){io.observe(a)});
+</script>
+</body></html>

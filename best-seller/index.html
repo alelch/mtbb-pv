@@ -111,7 +111,8 @@
       var e=new Date(); e.setTime(e.getTime()+d*864e5); document.cookie=n+"="+encodeURIComponent(v)+";expires="+e.toUTCString()+";path=/;SameSite=Lax"; }
     function vid(){ var k="ab_vid",v=null; try{v=localStorage.getItem(k);}catch(e){} if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8); try{localStorage.setItem(k,v);}catch(e){}} return v; }
     function pick(vs){ var t=0,i; for(i=0;i<vs.length;i++)t+=(vs[i].peso||1); var r=Math.random()*t,a=0; for(i=0;i<vs.length;i++){a+=(vs[i].peso||1); if(r<=a)return vs[i].id;} return vs[0].id; }
-    function reveal(){ try{applyHeadline(FIXED_HEADLINE);}catch(e){} H.classList.remove('ab-pending'); }
+    var _HL_TEST=false; // teste de headline no ar tem prioridade sobre a FIXED_HEADLINE (fallback do estado congelado)
+    function reveal(){ try{ if(!_HL_TEST) applyHeadline(FIXED_HEADLINE); }catch(e){} H.classList.remove('ab-pending'); }
     // guarda a headline nativa do HTML na 1ª troca, pra conseguir DESFAZER quando o teste acabar
     var _ORIG_HL=null;
     function _snapHeadline(){ if(_ORIG_HL!==null)return; var e=document.querySelector('[data-ab-el="headline"]'); if(e)_ORIG_HL=e.innerHTML; }
@@ -160,7 +161,7 @@
         if(ov.checkout) window.__ABCK=ov.checkout; });
       window.__ABTESTS=out; return needHide; }
     function applyAll(){
-      window.__ABTESTS.forEach(function(t){ if(t.ov.headline!=null) applyHeadline(t.ov.headline); });
+      window.__ABTESTS.forEach(function(t){ if(t.ov&&('headline' in t.ov)){ _HL_TEST=true; if(t.ov.headline!=null) applyHeadline(t.ov.headline); } });
       window.__ABGEN=(window.__ABGEN||0)+1; // config nova -> reprocessa os links (data-ab-gen)
       window.__ABREADY=true;
       if(typeof window.__abReprocess==='function') window.__abReprocess(); // reescreve checkout + tags nos links
@@ -184,7 +185,7 @@
             out.push({slug:t.slug,variant:fv,sck_tag:t.sck_tag,escopo:t.escopo,ov:ov}); if(ov.checkout)window.__ABCK=ov.checkout; });
           window.__ABTESTS=out;
           if(out.some(function(t){return t.ov.headline!=null;})) H.classList.add('ab-pending');
-          var pa=function(){ out.forEach(function(t){ if(t.ov.headline!=null)applyHeadline(t.ov.headline); }); window.__ABGEN=(window.__ABGEN||0)+1; window.__ABREADY=true; if(typeof window.__abReprocess==='function')window.__abReprocess(); reveal(); abFitHeadline(); };
+          var pa=function(){ out.forEach(function(t){ if(t.ov&&('headline' in t.ov)){ _HL_TEST=true; if(t.ov.headline!=null)applyHeadline(t.ov.headline); } }); window.__ABGEN=(window.__ABGEN||0)+1; window.__ABREADY=true; if(typeof window.__abReprocess==='function')window.__abReprocess(); reveal(); abFitHeadline(); };
           if(document.readyState!=='loading')pa(); else document.addEventListener('DOMContentLoaded',pa);
         })
         .catch(function(){ window.__ABREADY=true; reveal(); });
