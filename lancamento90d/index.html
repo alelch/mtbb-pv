@@ -2132,14 +2132,15 @@ footer{background:#242320 !important}
   .t3 .head .h-new{order:7;background:#14523E;color:#F0C959;text-align:left;
     border-radius:14px 14px 0 0;border:1px solid #EAB82D;border-bottom:0}
   /* itens: número + texto, sem moldura própria */
-  .t3 .old,.t3 .new{display:flex;gap:10px;align-items:flex-start;border:0;border-radius:0;
-    padding:9px 16px;font-size:14.5px;line-height:1.45;box-shadow:none;transform:none}
-  .t3 .old{background:rgba(125,30,20,.45);color:rgba(243,240,232,.9)}
-  .t3 .new{background:#14523E;color:#F3F0E8;font-weight:600;
+  .t3 .old,.t3 .new{display:flex;gap:11px;align-items:flex-start;border:0;border-radius:0;
+    padding:11px 17px;font-size:14.5px;line-height:1.55;letter-spacing:-.005em;
+    box-shadow:none;transform:none}
+  .t3 .old{background:rgba(125,30,20,.45);color:rgba(243,240,232,.82);font-weight:400}
+  .t3 .new{background:#14523E;color:#F3F0E8;font-weight:500;
     border-left:1px solid #EAB82D;border-right:1px solid #EAB82D}
-  .t3 .old::before,.t3 .new::before{flex:0 0 19px;height:19px;border-radius:50%;
-    display:grid;place-items:center;font-size:10px;font-weight:800;margin-top:2px;
-    font-family:'Space Grotesk',sans-serif}
+  .t3 .old::before,.t3 .new::before{flex:0 0 18px;height:18px;border-radius:50%;
+    display:grid;place-items:center;font-size:9.5px;font-weight:700;margin-top:4px;
+    font-family:'Space Grotesk',sans-serif;letter-spacing:0}
   .t3 .old::before{counter-increment:ch;content:counter(ch);
     background:rgba(243,240,232,.14);color:rgba(243,240,232,.75)}
   .t3 .new::before{counter-increment:ca;content:counter(ca);background:#EAB82D;color:#242320}
@@ -2159,9 +2160,9 @@ footer{background:#242320 !important}
   .t3 .row:nth-child(4) .arrow{display:grid;place-items:center;order:6;height:46px;padding:0;
     background:none;box-shadow:none;font-size:0;border:0}
   /* chevron fino, o mesmo desenho da setinha "role pra baixo" das bolhas */
-  .t3 .row:nth-child(4) .arrow::before{content:"";width:12px;height:12px;
-    border-right:2px solid #EAB82D;border-bottom:2px solid #EAB82D;
-    transform:rotate(45deg) translate(-3px,-3px)}
+  .t3 .row:nth-child(4) .arrow::before{content:"";width:11px;height:11px;
+    border-right:1.5px solid #EAB82D;border-bottom:1.5px solid #EAB82D;
+    transform:translateY(-5px) rotate(45deg)}
   /* o bloco verde entra apagado e ACENDE; o vermelho apaga junto */
   .t3 .new,.t3 .head .h-new{transition:opacity .55s var(--ease,ease),filter .55s var(--ease,ease)}
   .t3:not(.mob-on) .new,.t3:not(.mob-on) .head .h-new{opacity:.32;filter:saturate(.2) brightness(.6)}
