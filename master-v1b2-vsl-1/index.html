@@ -95,6 +95,7 @@
   <!-- End Meta Pixel Code -->
 
   <!-- A/B Test framework (master-v1b2) — multi-teste: pagina (headline) + checkout -->
+  <style>/* .hl-l = uma linha do titulo. Bloco nas 2 larguras, e no celular a fonte cai 1px (25->24) pra cada trecho caber numa linha so, igualando a quebra do desktop. NAO usar "hidden sm:block" aqui: o vsl-inject sequestra o primeiro elemento com essa classe. */[data-ab-el="headline"] .hl-l{display:block}@media (max-width:639px){[data-ab-el="headline"]:has(.hl-l){font-size:24px!important;line-height:1.12!important}}</style>
   <style>html.ab-pending [data-ab-el="headline"]{visibility:hidden!important}
   @media(max-width:639px){#sticky-cta a.btn-primary{white-space:nowrap;font-size:12.5px;letter-spacing:-.01em;padding-left:14px;padding-right:14px}#sticky-cta a.btn-primary svg{width:14px;height:14px;flex:0 0 auto}}</style>
   <script>
