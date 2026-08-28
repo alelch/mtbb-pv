@@ -2128,15 +2128,16 @@ footer{background:#242320 !important}
   .t3 .head .h-old,.t3 .head .h-new{display:block;padding:15px 16px 9px;font-size:9.5px;
     letter-spacing:.16em;margin:0}
   .t3 .head .h-old{order:0;background:rgba(125,30,20,.45);color:rgba(243,240,232,.6);
-    border-radius:14px 14px 0 0;border:1px solid rgba(214,92,72,.3);border-bottom:0}
+    border-radius:14px 14px 0 0;border:1px solid #EAB82D;border-bottom:0}
   .t3 .head .h-new{order:7;background:#14523E;color:#F0C959;text-align:left;
-    border-radius:14px 14px 0 0}
+    border-radius:14px 14px 0 0;border:1px solid #EAB82D;border-bottom:0}
   /* itens: número + texto, sem moldura própria */
   .t3 .old,.t3 .new{display:flex;gap:10px;align-items:flex-start;border:0;border-radius:0;
     padding:9px 16px;font-size:14.5px;line-height:1.45;box-shadow:none;transform:none}
   .t3 .old{background:rgba(125,30,20,.45);color:rgba(243,240,232,.9);
-    border-left:1px solid rgba(214,92,72,.3);border-right:1px solid rgba(214,92,72,.3)}
-  .t3 .new{background:#14523E;color:#F3F0E8;font-weight:600}
+    border-left:1px solid #EAB82D;border-right:1px solid #EAB82D}
+  .t3 .new{background:#14523E;color:#F3F0E8;font-weight:600;
+    border-left:1px solid #EAB82D;border-right:1px solid #EAB82D}
   .t3 .old::before,.t3 .new::before{flex:0 0 19px;height:19px;border-radius:50%;
     display:grid;place-items:center;font-size:10px;font-weight:800;margin-top:2px;
     font-family:'Space Grotesk',sans-serif}
@@ -2148,18 +2149,21 @@ footer{background:#242320 !important}
   .t3 .row:nth-child(4) .old{order:3}
   .t3 .row:nth-child(5) .old{order:4}
   .t3 .row:nth-child(6) .old{order:5;padding-bottom:15px;border-radius:0 0 14px 14px;
-    border-bottom:1px solid rgba(214,92,72,.3)}
+    border-bottom:1px solid #EAB82D}
   .t3 .row:nth-child(2) .new{order:8;padding-top:2px}
   .t3 .row:nth-child(3) .new{order:9}
   .t3 .row:nth-child(4) .new{order:10}
   .t3 .row:nth-child(5) .new{order:11}
   .t3 .row:nth-child(6) .new{order:12;padding-bottom:16px;border-radius:0 0 14px 14px;
-    box-shadow:0 8px 22px rgba(20,82,62,.3)}
+    border-bottom:1px solid #EAB82D;box-shadow:0 8px 22px rgba(20,82,62,.3)}
   /* divisória dourada com a seta no círculo (só a seta da linha do meio aparece) */
   .t3 .arrow{display:none}
-  .t3 .row:nth-child(4) .arrow{display:grid;place-items:center;order:6;height:42px;padding:0;
-    background:none;box-shadow:none;font-size:0}
-  .t3 .row:nth-child(4) .arrow::before{content:"↓";font-size:20px;line-height:1;color:#EAB82D}
+  .t3 .row:nth-child(4) .arrow{display:grid;place-items:center;order:6;height:46px;padding:0;
+    background:none;box-shadow:none;font-size:0;border:0}
+  /* chevron fino, o mesmo desenho da setinha "role pra baixo" das bolhas */
+  .t3 .row:nth-child(4) .arrow::before{content:"";width:12px;height:12px;
+    border-right:2px solid #EAB82D;border-bottom:2px solid #EAB82D;
+    transform:rotate(45deg) translate(-3px,-3px)}
   /* o bloco verde entra apagado e ACENDE; o vermelho apaga junto */
   .t3 .new,.t3 .head .h-new{transition:opacity .55s var(--ease,ease),filter .55s var(--ease,ease)}
   .t3:not(.mob-on) .new,.t3:not(.mob-on) .head .h-new{opacity:.32;filter:saturate(.2) brightness(.6)}
