@@ -2119,11 +2119,20 @@ footer{background:#242320 !important}
   box-shadow:0 8px 20px rgba(20,82,62,.28)}
 .t3 .new b{color:#F0C959;font-weight:700}
 @media(max-width:760px){
+  .t3{margin-top:clamp(24px,6vw,36px)}
+  /* sem o cabeçalho no estreito, cada par precisa se explicar sozinho */
   .t3 .head{display:none}
-  .t3 .row{grid-template-columns:1fr;margin-bottom:16px}
+  .t3 .row{grid-template-columns:1fr;margin-bottom:20px}
+  .t3 .old,.t3 .new{display:block;padding:13px 16px;font-size:15px}
+  .t3 .old::before,.t3 .new::before{display:block;font-family:'Space Grotesk',sans-serif;
+    font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+  .t3 .old::before{content:"Hoje";color:rgba(243,240,232,.5)}
+  .t3 .new::before{content:"A partir de agora";color:#F0C959}
   .t3 .old{border-radius:12px 12px 0 0;border-right:1px solid rgba(243,240,232,.12);border-bottom:0}
-  .t3 .arrow{transform:rotate(90deg);height:34px;border-radius:0}
-  .t3 .new{border-radius:0 0 12px 12px;transform:none}
+  .t3 .new{border-radius:0 0 12px 12px;box-shadow:0 6px 16px rgba(20,82,62,.24)}
+  /* seta: gira só o glifo. Rotacionar a CAIXA vira uma faixa vertical atravessando os cards. */
+  .t3 .arrow{transform:none;height:24px;border-radius:0;font-size:0;box-shadow:none}
+  .t3 .arrow::before{content:"↓";font-size:14px;line-height:1;color:#242320}
 }
 /* ===== animação de scroll: o "aceso" passa do HOJE pro AGORA, linha por linha ===== */
 .t3.anim .row .old,.t3.anim .row .new,.t3.anim .row .arrow{
