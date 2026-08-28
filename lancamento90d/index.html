@@ -2119,22 +2119,53 @@ footer{background:#242320 !important}
   box-shadow:0 8px 20px rgba(20,82,62,.28)}
 .t3 .new b{color:#F0C959;font-weight:700}
 @media(max-width:760px){
-  .t3{margin-top:clamp(24px,6vw,36px)}
-  /* sem o cabeçalho no estreito, cada par precisa se explicar sozinho */
-  .t3 .head{display:none}
-  .t3 .row{grid-template-columns:1fr;margin-bottom:20px}
-  .t3 .old,.t3 .new{display:block;padding:13px 16px;font-size:15px}
-  .t3 .old::before,.t3 .new::before{display:block;font-family:'Space Grotesk',sans-serif;
-    font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
-  .t3 .old::before{content:"Hoje";color:rgba(243,240,232,.5)}
-  .t3 .new::before{content:"A partir de agora";color:#F0C959}
-  .t3 .old{border-radius:12px 12px 0 0;border-right:1px solid rgba(243,240,232,.12);border-bottom:0}
-  .t3 .new{border-radius:0 0 12px 12px;box-shadow:0 6px 16px rgba(20,82,62,.24)}
-  /* seta: gira só o glifo. Rotacionar a CAIXA vira uma faixa vertical atravessando os cards. */
-  .t3 .arrow{transform:none;height:24px;border-radius:0;font-size:0;box-shadow:none}
-  .t3 .arrow::before{content:"↓";font-size:14px;line-height:1;color:#242320}
+  /* MOBILE: reagrupa em DOIS blocos (todos os "hoje" em cima, todos os "agora" embaixo)
+     usando display:contents + order. O HTML continua em pares, então o desktop não muda. */
+  .t3{display:flex;flex-direction:column;margin-top:clamp(24px,6vw,36px);
+    counter-reset:ch ca;border-radius:16px;overflow:hidden;border:1px solid rgba(243,240,232,.12)}
+  .t3 .head,.t3 .row{display:contents}
+  .t3 .head .sp{display:none}
+  /* títulos dos dois blocos */
+  .t3 .head .h-old,.t3 .head .h-new{display:block;padding:15px 16px 9px;font-size:9.5px;
+    letter-spacing:.16em;margin:0}
+  .t3 .head .h-old{order:0;background:rgba(125,30,20,.45);color:rgba(243,240,232,.6)}
+  .t3 .head .h-new{order:7;background:#14523E;color:#F0C959;padding-top:22px;text-align:left}
+  /* itens: número + texto, sem moldura própria */
+  .t3 .old,.t3 .new{display:flex;gap:10px;align-items:flex-start;border:0;border-radius:0;
+    padding:9px 16px;font-size:14.5px;line-height:1.45;box-shadow:none;transform:none}
+  .t3 .old{background:rgba(125,30,20,.45);color:rgba(243,240,232,.9)}
+  .t3 .new{background:#14523E;color:#F3F0E8;font-weight:600}
+  .t3 .old::before,.t3 .new::before{flex:0 0 19px;height:19px;border-radius:50%;
+    display:grid;place-items:center;font-size:10px;font-weight:800;margin-top:2px;
+    font-family:'Space Grotesk',sans-serif}
+  .t3 .old::before{counter-increment:ch;content:counter(ch);
+    background:rgba(243,240,232,.14);color:rgba(243,240,232,.75)}
+  .t3 .new::before{counter-increment:ca;content:counter(ca);background:#EAB82D;color:#242320}
+  .t3 .row:nth-child(2) .old{order:1;padding-top:2px}
+  .t3 .row:nth-child(3) .old{order:2}
+  .t3 .row:nth-child(4) .old{order:3}
+  .t3 .row:nth-child(5) .old{order:4}
+  .t3 .row:nth-child(6) .old{order:5;padding-bottom:16px}
+  .t3 .row:nth-child(2) .new{order:8;padding-top:2px}
+  .t3 .row:nth-child(3) .new{order:9}
+  .t3 .row:nth-child(4) .new{order:10}
+  .t3 .row:nth-child(5) .new{order:11}
+  .t3 .row:nth-child(6) .new{order:12;padding-bottom:18px}
+  /* divisória dourada com a seta no círculo (só a seta da linha do meio aparece) */
+  .t3 .arrow{display:none}
+  .t3 .row:nth-child(4) .arrow{display:block;order:6;position:relative;height:2px;padding:0;
+    background:#EAB82D;font-size:0;box-shadow:none;overflow:visible}
+  .t3 .row:nth-child(4) .arrow::before{content:"↓";position:absolute;left:50%;top:50%;
+    transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:#EAB82D;
+    color:#242320;display:grid;place-items:center;font-size:15px;z-index:2}
+  /* o bloco verde entra apagado e ACENDE; o vermelho apaga junto */
+  .t3 .new,.t3 .head .h-new{transition:opacity .55s var(--ease,ease),filter .55s var(--ease,ease)}
+  .t3:not(.mob-on) .new,.t3:not(.mob-on) .head .h-new{opacity:.32;filter:saturate(.2) brightness(.6)}
+  .t3 .old,.t3 .head .h-old{transition:opacity .55s var(--ease,ease),filter .55s var(--ease,ease)}
+  .t3.mob-on .old,.t3.mob-on .head .h-old{opacity:.5;filter:grayscale(.45)}
 }
 /* ===== animação de scroll: o "aceso" passa do HOJE pro AGORA, linha por linha ===== */
+@media(min-width:761px){
 .t3.anim .row .old,.t3.anim .row .new,.t3.anim .row .arrow{
   transition:opacity .5s var(--ease,ease),filter .5s var(--ease,ease),background-color .5s var(--ease,ease),border-color .5s var(--ease,ease),color .5s var(--ease,ease),box-shadow .5s var(--ease,ease)}
 /* DORMINDO: o "hoje" está aceso (célula clara, presente), o "agora" apagado */
@@ -2145,6 +2176,7 @@ footer{background:#242320 !important}
 .t3.anim .row.lit .old{opacity:.4 !important;filter:grayscale(.55) !important;background:rgba(243,240,232,.03) !important;border-color:rgba(243,240,232,.08) !important}
 .t3.anim .row.lit .arrow{box-shadow:0 0 20px rgba(234,184,45,.6) !important}
 .t3.anim .row.lit .new{box-shadow:0 8px 20px rgba(20,82,62,.28),0 0 0 1px rgba(234,184,45,.65),0 0 28px rgba(234,184,45,.32) !important}
+}
 
 /* ===== CASOS COMPLETOS (prova) — LAYOUT DE EXEMPLO, dados a trocar ===== */
 .casos-exemplo{margin:0 auto 34px}
@@ -2178,6 +2210,14 @@ footer{background:#242320 !important}
     es.forEach(function(e){ e.target.classList.toggle('lit', e.isIntersecting); });
   },{rootMargin:'0px 0px -20% 0px',threshold:0});
   t.querySelectorAll('.row').forEach(function(r){ io.observe(r); });
+
+  /* mobile: os dois blocos. Acende o verde quando ele entra na tela. */
+  if(window.matchMedia && matchMedia('(max-width:760px)').matches){
+    var alvo=t.querySelector('.row:nth-child(4) .arrow');
+    if(alvo){ new IntersectionObserver(function(es){
+      es.forEach(function(e){ t.classList.toggle('mob-on', e.isIntersecting || e.boundingClientRect.top < 0); });
+    },{rootMargin:'0px 0px -20% 0px'}).observe(alvo); }
+  }
 })();
 </script>
 </body>
