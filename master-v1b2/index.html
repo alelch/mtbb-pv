@@ -175,7 +175,7 @@
       var force={};
       PREVIEW.split(',').forEach(function(tok){ tok=tok.trim(); if(!tok)return;
         if(tok.length<=1) force['_pag']=tok.toUpperCase(); else force[tok.slice(0,-1)]=tok.slice(-1).toUpperCase(); });
-      fetch(SB+"/rest/v1/ab_testes?pagina=eq."+PAGINA+"&select=slug,escopo,sck_tag,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
+      fetch(SB+"/rest/v1/ab_testes?pagina=eq."+PAGINA+"&arquivado=eq.false&select=slug,escopo,sck_tag,variantes",{headers:{apikey:AK,Authorization:"Bearer "+AK}})
         .then(function(r){return r.json();})
         .then(function(rows){ var out=[];
           (rows||[]).forEach(function(t){ var vs=t.variantes||[]; var fv=force[t.sck_tag]||(t.escopo==='pagina'?force['_pag']:null); if(!fv)return;
