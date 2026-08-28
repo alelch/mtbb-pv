@@ -2121,19 +2121,21 @@ footer{background:#242320 !important}
 @media(max-width:760px){
   /* MOBILE: reagrupa em DOIS blocos (todos os "hoje" em cima, todos os "agora" embaixo)
      usando display:contents + order. O HTML continua em pares, então o desktop não muda. */
-  .t3{display:flex;flex-direction:column;margin-top:clamp(24px,6vw,36px);
-    counter-reset:ch ca;border-radius:16px;overflow:hidden;border:1px solid rgba(243,240,232,.12)}
+  .t3{display:flex;flex-direction:column;margin-top:clamp(24px,6vw,36px);counter-reset:ch ca}
   .t3 .head,.t3 .row{display:contents}
   .t3 .head .sp{display:none}
   /* títulos dos dois blocos */
   .t3 .head .h-old,.t3 .head .h-new{display:block;padding:15px 16px 9px;font-size:9.5px;
     letter-spacing:.16em;margin:0}
-  .t3 .head .h-old{order:0;background:rgba(125,30,20,.45);color:rgba(243,240,232,.6)}
-  .t3 .head .h-new{order:7;background:#14523E;color:#F0C959;padding-top:22px;text-align:left}
+  .t3 .head .h-old{order:0;background:rgba(125,30,20,.45);color:rgba(243,240,232,.6);
+    border-radius:14px 14px 0 0;border:1px solid rgba(214,92,72,.3);border-bottom:0}
+  .t3 .head .h-new{order:7;background:#14523E;color:#F0C959;text-align:left;
+    border-radius:14px 14px 0 0}
   /* itens: número + texto, sem moldura própria */
   .t3 .old,.t3 .new{display:flex;gap:10px;align-items:flex-start;border:0;border-radius:0;
     padding:9px 16px;font-size:14.5px;line-height:1.45;box-shadow:none;transform:none}
-  .t3 .old{background:rgba(125,30,20,.45);color:rgba(243,240,232,.9)}
+  .t3 .old{background:rgba(125,30,20,.45);color:rgba(243,240,232,.9);
+    border-left:1px solid rgba(214,92,72,.3);border-right:1px solid rgba(214,92,72,.3)}
   .t3 .new{background:#14523E;color:#F3F0E8;font-weight:600}
   .t3 .old::before,.t3 .new::before{flex:0 0 19px;height:19px;border-radius:50%;
     display:grid;place-items:center;font-size:10px;font-weight:800;margin-top:2px;
@@ -2145,19 +2147,19 @@ footer{background:#242320 !important}
   .t3 .row:nth-child(3) .old{order:2}
   .t3 .row:nth-child(4) .old{order:3}
   .t3 .row:nth-child(5) .old{order:4}
-  .t3 .row:nth-child(6) .old{order:5;padding-bottom:16px}
+  .t3 .row:nth-child(6) .old{order:5;padding-bottom:15px;border-radius:0 0 14px 14px;
+    border-bottom:1px solid rgba(214,92,72,.3)}
   .t3 .row:nth-child(2) .new{order:8;padding-top:2px}
   .t3 .row:nth-child(3) .new{order:9}
   .t3 .row:nth-child(4) .new{order:10}
   .t3 .row:nth-child(5) .new{order:11}
-  .t3 .row:nth-child(6) .new{order:12;padding-bottom:18px}
+  .t3 .row:nth-child(6) .new{order:12;padding-bottom:16px;border-radius:0 0 14px 14px;
+    box-shadow:0 8px 22px rgba(20,82,62,.3)}
   /* divisória dourada com a seta no círculo (só a seta da linha do meio aparece) */
   .t3 .arrow{display:none}
-  .t3 .row:nth-child(4) .arrow{display:block;order:6;position:relative;height:2px;padding:0;
-    background:#EAB82D;font-size:0;box-shadow:none;overflow:visible}
-  .t3 .row:nth-child(4) .arrow::before{content:"↓";position:absolute;left:50%;top:50%;
-    transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:#EAB82D;
-    color:#242320;display:grid;place-items:center;font-size:15px;z-index:2}
+  .t3 .row:nth-child(4) .arrow{display:grid;place-items:center;order:6;height:42px;padding:0;
+    background:none;box-shadow:none;font-size:0}
+  .t3 .row:nth-child(4) .arrow::before{content:"↓";font-size:20px;line-height:1;color:#EAB82D}
   /* o bloco verde entra apagado e ACENDE; o vermelho apaga junto */
   .t3 .new,.t3 .head .h-new{transition:opacity .55s var(--ease,ease),filter .55s var(--ease,ease)}
   .t3:not(.mob-on) .new,.t3:not(.mob-on) .head .h-new{opacity:.32;filter:saturate(.2) brightness(.6)}
