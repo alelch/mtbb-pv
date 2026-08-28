@@ -368,8 +368,11 @@ p{margin:0 0 1.05em}
    triangulo da cor do fundo desce por cima do verde, entao a propria quebra
    de secao aponta pra baixo. Feito com borda, nao com clip-path, pra nao
    correr risco de cortar conteudo em tela curta. */
-.bolhas:after{content:'';position:absolute;left:0;right:0;top:100%;z-index:2;
-  height:clamp(40px,6vw,90px);background:var(--bg);
+/* o topo do V comeca 2px ACIMA da fronteira, dentro do proprio carvao: assim a
+   aresta horizontal do clip-path e antialiasada contra carvao (some) e nao contra
+   o verde, que era o fio claro que aparecia na divisoria (mobile e desktop). */
+.bolhas:after{content:'';position:absolute;left:0;right:0;top:calc(100% - 2px);z-index:2;
+  height:calc(clamp(40px,6vw,90px) + 2px);background:var(--bg);
   -webkit-clip-path:polygon(0 0, 50% 100%, 100% 0);
   clip-path:polygon(0 0, 50% 100%, 100% 0)}
 .bolhas .wrap{max-width:1240px}
