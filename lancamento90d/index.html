@@ -2163,6 +2163,9 @@ footer{background:#242320 !important}
   .t3:not(.mob-on) .new,.t3:not(.mob-on) .head .h-new{opacity:.32;filter:saturate(.2) brightness(.6)}
   .t3 .old,.t3 .head .h-old{transition:opacity .55s var(--ease,ease),filter .55s var(--ease,ease)}
   .t3.mob-on .old,.t3.mob-on .head .h-old{opacity:.5;filter:grayscale(.45)}
+  /* respiro antes do V: com o bloco verde da tabela logo acima, 18px de carvão
+     deixavam a leitura "verde > tirinha escura > verde". O carvão precisa de presença. */
+  .bolhas{padding-bottom:80px}
 }
 /* ===== animação de scroll: o "aceso" passa do HOJE pro AGORA, linha por linha ===== */
 @media(min-width:761px){
