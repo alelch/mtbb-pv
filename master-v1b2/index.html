@@ -10,6 +10,15 @@
     <link rel="preconnect" href="https://connect.facebook.net">
     <link rel="dns-prefetch" href="https://www.facebook.com">
     <link rel="dns-prefetch" href="https://pay.hotmart.com">
+    <!-- VTurb: tira o player da fila. Sem isso ele so comeca a baixar ~1,6s depois (injetado por JS)
+         e o video, que e o maior elemento da tela, vira o LCP lento. -->
+    <link rel="preload" href="https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6a70e5541534153a07bee48b/player.js" as="script">
+    <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+    <link rel="preload" href="https://cdn.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/6a706e30c1c22075ec634f30/main.m3u8" as="fetch" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.converteai.net">
+    <link rel="dns-prefetch" href="https://scripts.converteai.net">
+    <link rel="dns-prefetch" href="https://images.converteai.net">
+    <link rel="dns-prefetch" href="https://license.vturb.com">
     <link rel="dns-prefetch" href="https://payment.hotmart.com">
 
     <!-- Fontes auto-hospedadas localmente (ver assets/fonts.css) -->
