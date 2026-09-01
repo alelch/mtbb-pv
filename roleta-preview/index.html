@@ -38,13 +38,11 @@
     <li><b>Reserva</b> de 10 minutos depois do preço final.</li>
   </ul></div>
 
-  <div class="card"><h2>Quando aparece (91% do tráfego é mobile)</h2><ul>
-    <li><b>Parado</b> 12s sem tocar, depois de 45s na página</li>
-    <li><b>Scroll ↑</b> subiu 420px de uma vez, sinal de saída no celular</li>
-    <li><b>Voltou</b> trocou de app e voltou para a aba</li>
-    <li><b>Voltar</b> botão de voltar (instável no navegador do IG/FB)</li>
-    <li><b>Mouse</b> saiu pelo topo — só desktop, 7,5% do tráfego</li>
-    <li><b>Nunca</b> para quem já clicou em comprar, nem 2× no mesmo dia</li>
+  <div class="card"><h2>Como o visitante compra</h2><ul>
+    <li><b>Botão da PV</b> deixa de ir pro checkout e passa a abrir a roleta</li>
+    <li><b>Todos passam</b> não é resgate de saída: é o caminho de compra</li>
+    <li><b>Depois de ganhar</b> o botão da página vira compra direta pelo preço ganho</li>
+    <li><b>Giro</b> 3,1s cada (era 5,2s na roleta antiga: aqui é caminho, não brinde)</li>
   </ul></div>
 
   <div class="card warn"><h2>Falta para poder ligar</h2><ul>
@@ -53,16 +51,11 @@
     <li><b>Teste A/B</b> esperar a headline fechar (não mexer na PV até lá)</li>
   </ul></div>
 
-  <p style="margin:20px 0 8px;color:var(--dim);font-size:14px">Teste aqui:</p>
-  <button class="btn" onclick="window.__roleta.abrir('preview')">Abrir a roleta</button>
-  <button class="btn g" onclick="window.__roleta.reset()">Zerar e recarregar</button>
-
-  <div class="fake">
-    <p>Role, fique parado 12 segundos ou suba a página de uma vez para ver os gatilhos reais.</p>
-  </div>
-  <div style="height:1400px"></div>
-  <div class="fake">Fim da página falsa. <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Voltar ao topo</a></div>
-  <a href="https://pay.hotmart.com/M98923280L?checkoutMode=10&sck=preview|teste|hdA" style="display:none">checkout base</a>
+  <p style="margin:24px 0 8px;color:var(--dim);font-size:14px">Este é o botão real da PV. Clique nele:</p>
+  <a class="btn" style="display:block;text-align:center;padding:18px;font-size:17px;border-radius:99px"
+     href="https://pay.hotmart.com/M98923280L?checkoutMode=10&amp;sck=preview|teste|hdA">Garantir minha vaga por R$ 29</a>
+  <p style="margin:14px 0 0;color:var(--dim);font-size:13px">O módulo reescreve o texto e intercepta o clique. Depois de ganhar, ele volta a levar direto pro checkout.</p>
+  <button class="btn g" style="margin-top:16px" onclick="window.__roleta.reset()">Zerar e recarregar</button>
 </div>
 <script src="roleta-embed.js" defer></script>
 </body></html>

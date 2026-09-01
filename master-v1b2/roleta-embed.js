@@ -23,12 +23,11 @@
     minutosDeReserva: 10,
     precoCheio: 'R$ 97',
 
-    // gatilhos (mobile é 91% do tráfego, então mouseleave é o menos importante)
-    segundosNaPagina: 45,   // só considera abrir depois disso
-    segundosParado: 12,     // sem toque/scroll/clique por esse tempo
-    scrollUpPx: 420,        // subiu isso de uma vez = sinal de saída no mobile
-    usarBotaoVoltar: true,  // intercepta o "voltar" (instável em WebView do IG/FB)
-    umaVezPorDia: true
+    // A roleta É o caminho de compra: todo botão de checkout da página abre ela.
+    trocarBotoes: true,
+    textoBotao: 'Gire e descubra o preço do seu ingresso',
+    // depois de ganhar, o botão da página vira compra direta (não gira de novo)
+    lembrarPremio: true
   };
 
   /* ---------- não mostrar pra quem não deve ---------- */
@@ -39,19 +38,8 @@
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { } }
 
   var FORCADO = /[?&]roleta=1/.test(location.search);
-  var HOJE = new Date().toISOString().slice(0, 10);
-  function podeAbrir() {
-    if (FORCADO) return true;
-    if (jaFoiPraCheckout) return false;                       // já clicou em comprar
-    if (CFG.umaVezPorDia && S.vistoEm === HOJE) return false;  // já viu hoje
-    return true;
-  }
-
-  var jaFoiPraCheckout = false;
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href*="hotmart"]');
-    if (a && !a.closest('#rlt')) jaFoiPraCheckout = true;
-  }, true);
+  // no modo botão a roleta é o caminho de compra: sempre pode abrir.
+  function podeAbrir() { return true; }
 
   /* ---------- link de checkout: herda o da página (preserva sck/hdA/hdB/utm) ---------- */
   function linkBase() {
@@ -63,7 +51,10 @@
     try { u = new URL(linkBase()); } catch (e) { return linkBase(); }
     if (premio && premio.off && premio.off.indexOf('COLE_') !== 0) u.searchParams.set('off', premio.off);
     else u.searchParams.delete('off');
-    var sck = u.searchParams.get('sck') || '';
+    // tira marcadores de roleta que já estejam no sck (a repintura relê o próprio href)
+    var sck = (u.searchParams.get('sck') || '').split('|').filter(function (x) {
+      return !/^rl(\d+|exp)$/.test(x);
+    }).join('|');
     u.searchParams.set('sck', sck + (sck ? '|' : '') + 'rl' + (premio ? premio.id : 'exp'));
     return u.toString();
   }
@@ -111,7 +102,7 @@
     +   'background:radial-gradient(circle,rgba(179,255,0,.22) 42%,rgba(179,255,0,.07) 62%,transparent 72%)}'
     + '#rlt .stage.hot .rays{opacity:.85}'
     + '#rlt svg.whl{width:100%;height:100%;display:block;position:relative;z-index:1}'
-    + '#rlt #rltDisc{transform-origin:100px 100px;transition:transform 5.2s cubic-bezier(.1,.72,.06,1)}'
+    + '#rlt #rltDisc{transform-origin:100px 100px;transition:transform 3.1s cubic-bezier(.12,.74,.08,1)}'
     + '#rlt .hub{position:absolute;left:50%;top:50%;width:23%;height:23%;transform:translate(-50%,-50%);'
     +   'border-radius:50%;z-index:5;cursor:pointer;border:2px solid rgba(179,255,0,.85);'
     +   'background:radial-gradient(circle at 34% 28%,#222b36,#0b0e13);color:var(--lime);'
@@ -157,9 +148,9 @@
     d.innerHTML =
       '<div class="cx">' +
       '<button class="x" id="rltX" aria-label="Fechar">&times;</button>' +
-      '<p class="kick">antes de você ir</p>' +
+      '<p class="kick" id="rltK">o preço não é fixo</p>' +
       '<h3 id="rltH">Gire e descubra <span>o preço do seu ingresso</span></h3>' +
-      '<p class="sub" id="rltS">O ingresso custa <s>' + CFG.precoCheio + '</s>. Você tem até <b>3 giros</b> para chegar em <b>R$ 29</b>.</p>' +
+      '<p class="sub" id="rltS">O ingresso sai por <s>' + CFG.precoCheio + '</s>. Você tem <b>3 giros</b> para derrubar esse preço até <b>R$ 29</b>.</p>' +
       '<div class="chances" id="rltChips"></div>' +
       '<div class="stage" id="rltStage">' +
         '<div class="rays"></div>' +
@@ -289,8 +280,8 @@
       girando = false; S.giros++; S.nivel = nivel;
       S.fechado = !!premio.max || S.giros >= CFG.chances;
       if (S.fechado && !S.prazo) S.prazo = Date.now() + CFG.minutosDeReserva * 60000;
-      save(); chips(); mostrar(premio);
-    }, 5250);
+      save(); chips(); mostrar(premio); pintarBotoes();
+    }, 3160);
   }
 
   function mostrar(premio) {
@@ -345,7 +336,7 @@
   function abrir(motivo) {
     if (aberto || !podeAbrir()) return;
     montar(); aberto = true;
-    S.vistoEm = HOJE; S.visto++; save();
+    S.visto++; save();
     el.root.classList.add('on');
     document.documentElement.style.overflow = 'hidden';
     px('RoletaAbriu', { motivo: motivo });
@@ -355,50 +346,50 @@
     el.root.classList.remove('on');
     document.documentElement.style.overflow = '';
     px('RoletaFechou', { giros: S.giros });
+    pintarBotoes();
   }
 
-  /* ---------- GATILHOS ----------
-     91% do tráfego é mobile e 78% está no navegador do Instagram/Facebook.
-     Por isso mouseleave é o gatilho MENOS importante aqui.                     */
-  var t0 = Date.now(), ultimo = Date.now(), armado = false, ultY = 0;
-  function maduro() { return (Date.now() - t0) / 1000 >= CFG.segundosNaPagina; }
-  function toque() { ultimo = Date.now(); }
-  ['touchstart', 'touchmove', 'scroll', 'keydown', 'click', 'pointerdown'].forEach(function (ev) {
-    window.addEventListener(ev, toque, { passive: true });
-  });
+  /* ---------- A ROLETA É O BOTÃO ----------
+     91% do tráfego é mobile e 78% está no WebView do Instagram/Facebook, onde
+     exit-intent por mouse não existe. Então não há gatilho de saída: todo botão
+     de checkout da página abre a roleta. Quem já ganhou vai direto pro checkout. */
 
-  // 1. inatividade depois de um tempo de página
-  setInterval(function () {
-    if (!maduro()) return;
-    if ((Date.now() - ultimo) / 1000 >= CFG.segundosParado) abrir('parado');
-  }, 2000);
+  function botoes() {
+    return Array.prototype.slice.call(document.querySelectorAll('a[href*="hotmart"]'))
+      .filter(function (a) { return !a.closest('#rlt'); });
+  }
+  function jaGanhou() { return CFG.lembrarPremio && S.fechado && S.nivel >= 0; }
 
-  // 2. scroll pra cima rápido (sinal de saída no mobile)
-  window.addEventListener('scroll', function () {
-    var y = window.scrollY || 0;
-    if (maduro() && ultY - y >= CFG.scrollUpPx) abrir('scroll-cima');
-    ultY = y;
-  }, { passive: true });
-
-  // 3. voltou pra aba depois de sair (troca de app no celular)
-  document.addEventListener('visibilitychange', function () {
-    if (document.visibilityState === 'visible' && maduro()) abrir('voltou');
-  });
-
-  // 4. botão voltar (funciona no Chrome mobile; instável no WebView do IG/FB)
-  if (CFG.usarBotaoVoltar) {
-    try {
-      history.pushState({ rlt: 1 }, '');
-      window.addEventListener('popstate', function () {
-        if (!aberto && podeAbrir()) { history.pushState({ rlt: 1 }, ''); abrir('voltar'); }
-      });
-    } catch (e) { }
+  function pintarBotoes() {
+    if (!CFG.trocarBotoes) return;
+    botoes().forEach(function (a) {
+      if (jaGanhou()) {
+        var p = CFG.escada[S.nivel];
+        a.textContent = 'Garantir meu ingresso por ' + p.label.replace(' ', '\u00a0');
+        a.href = link(p);
+        a.dataset.rltPronto = '1';
+        return;
+      }
+      if (a.dataset.rltOrig) return;
+      a.dataset.rltOrig = a.textContent.trim();
+      a.dataset.rltHref = a.getAttribute('href') || '';
+      a.textContent = CFG.textoBotao;
+    });
   }
 
-  // 5. mouse saindo pelo topo (só desktop, 7,5% do tráfego)
-  document.addEventListener('mouseout', function (e) {
-    if (!e.relatedTarget && e.clientY <= 0 && maduro()) abrir('mouse-saiu');
-  });
+  document.addEventListener('click', function (e) {
+    if (!CFG.trocarBotoes) return;
+    var a = e.target.closest && e.target.closest('a[href*="hotmart"]');
+    if (!a || a.closest('#rlt')) return;
+    if (a.dataset.rltPronto === '1') return;      // já ganhou: deixa ir pro checkout
+    e.preventDefault(); e.stopPropagation();
+    abrir('botao');
+  }, true);
+
+  // a página reescreve os links depois (teste A/B). repinta quando isso acontecer.
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pintarBotoes);
+  else pintarBotoes();
+  setInterval(pintarBotoes, 1200);
 
   // revisão
   if (FORCADO) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { abrir('forcado'); }); else abrir('forcado'); }
