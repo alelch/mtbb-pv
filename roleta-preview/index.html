@@ -1,0 +1,68 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Preview · Roleta de âncora na PV</title>
+<style>
+ :root{--bg:#0b0e13;--card:#0f141b;--line:#232a35;--txt:#e6ebf2;--dim:#9aa5b5;--ac:#c6f24e}
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{background:var(--bg);color:var(--txt);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      -webkit-font-smoothing:antialiased}
+ .wrap{max-width:620px;margin:0 auto;padding:28px 20px 120px}
+ .tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);
+      border:1px solid var(--ac);border-radius:99px;padding:4px 10px;margin-bottom:14px}
+ h1{font-size:26px;line-height:1.15;letter-spacing:-.02em;margin-bottom:8px;text-wrap:balance}
+ p.lead{color:var(--dim);margin-bottom:22px}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+ .card h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;font-weight:700}
+ ul{list-style:none} li{padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;font-size:14px}
+ li:last-child{border:0} li b{color:var(--ac);min-width:112px;font-variant-numeric:tabular-nums}
+ .btn{display:inline-block;background:var(--ac);color:#0b0e13;border:0;border-radius:11px;padding:13px 20px;
+      font-weight:800;font-size:15px;cursor:pointer;text-decoration:none;margin:4px 6px 4px 0}
+ .btn.g{background:transparent;color:var(--dim);border:1px solid var(--line);font-weight:600}
+ .warn{border-color:#7a5c12;background:#1a1509}
+ .warn h2{color:#e3b341}
+ .fake{margin-top:26px;padding:22px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--dim)}
+ .fake a{color:var(--ac)}
+ code{background:#161c25;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:13px}
+</style></head><body>
+<div class="wrap">
+  <span class="tag">preview · não está no ar</span>
+  <h1>Roleta de âncora dentro da PV</h1>
+  <p class="lead">O ingresso passa a ser anunciado a <b>R$ 97</b>. A roleta é o caminho para chegar em <b>R$ 29</b>, que é o preço de hoje. Ninguém paga menos do que já pagaria.</p>
+
+  <div class="card"><h2>Como o giro funciona</h2><ul>
+    <li><b>1º giro</b> nunca dá R$ 29. Cai em R$ 97 ou R$ 47.</li>
+    <li><b>2º giro</b> 55% das pessoas já chegam em R$ 29.</li>
+    <li><b>3º giro</b> as outras 45% chegam.</li>
+    <li><b>Parar antes</b> é permitido: quem aceitar R$ 47 ou R$ 97 compra na hora.</li>
+    <li><b>Reserva</b> de 10 minutos depois do preço final.</li>
+  </ul></div>
+
+  <div class="card"><h2>Quando aparece (91% do tráfego é mobile)</h2><ul>
+    <li><b>Parado</b> 12s sem tocar, depois de 45s na página</li>
+    <li><b>Scroll ↑</b> subiu 420px de uma vez, sinal de saída no celular</li>
+    <li><b>Voltou</b> trocou de app e voltou para a aba</li>
+    <li><b>Voltar</b> botão de voltar (instável no navegador do IG/FB)</li>
+    <li><b>Mouse</b> saiu pelo topo — só desktop, 7,5% do tráfego</li>
+    <li><b>Nunca</b> para quem já clicou em comprar, nem 2× no mesmo dia</li>
+  </ul></div>
+
+  <div class="card warn"><h2>Falta para poder ligar</h2><ul>
+    <li><b>Hotmart</b> criar as ofertas de R$ 47 e R$ 97 e me passar os códigos <code>off</code></li>
+    <li><b>Página</b> trocar o preço de tabela para R$ 97 na PV</li>
+    <li><b>Teste A/B</b> esperar a headline fechar (não mexer na PV até lá)</li>
+  </ul></div>
+
+  <p style="margin:20px 0 8px;color:var(--dim);font-size:14px">Teste aqui:</p>
+  <button class="btn" onclick="window.__roleta.abrir('preview')">Abrir a roleta</button>
+  <button class="btn g" onclick="window.__roleta.reset()">Zerar e recarregar</button>
+
+  <div class="fake">
+    <p>Role, fique parado 12 segundos ou suba a página de uma vez para ver os gatilhos reais.</p>
+  </div>
+  <div style="height:1400px"></div>
+  <div class="fake">Fim da página falsa. <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Voltar ao topo</a></div>
+  <a href="https://pay.hotmart.com/M98923280L?checkoutMode=10&sck=preview|teste|hdA" style="display:none">checkout base</a>
+</div>
+<script src="roleta-embed.js" defer></script>
+</body></html>
