@@ -15,7 +15,7 @@
     escada: [
       { id: '97', label: 'R$ 97', num: 97, off: 'COLE_OFF_97' },
       { id: '47', label: 'R$ 47', num: 47, off: 'COLE_OFF_47' },
-      { id: '29', label: 'R$ 29', num: 29, off: '', max: true }   // '' = preço base do produto
+      { id: '29', label: 'R$ 29', num: 29, off: '', max: true }   // '' = mantém a oferta atual da página
     ],
     fatias: ['29', '97', '47', '97', '29', '47', '97', '47'],
     chances: 3,
@@ -49,8 +49,9 @@
   function link(premio) {
     var u;
     try { u = new URL(linkBase()); } catch (e) { return linkBase(); }
+    // off vazio = mantém a oferta que a própria página já usa (hoje log82p18 = R$ 29).
+    // nunca apagar: o preço-base do produto pode não ser o preço anunciado.
     if (premio && premio.off && premio.off.indexOf('COLE_') !== 0) u.searchParams.set('off', premio.off);
-    else u.searchParams.delete('off');
     // tira marcadores de roleta que já estejam no sck (a repintura relê o próprio href)
     var sck = (u.searchParams.get('sck') || '').split('|').filter(function (x) {
       return !/^rl(\d+|exp)$/.test(x);
