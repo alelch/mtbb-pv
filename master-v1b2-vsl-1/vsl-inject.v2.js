@@ -133,7 +133,17 @@
   }
 
   /* ===== 26-E13: ESCASSEZ DINÂMICA — % de ingressos sobe dia a dia até 100% no dia do evento (08/08) ===== */
-  var EVENT_E13=new Date('2026-08-08T08:00:00-03:00');   // aula ao vivo: 08/08 às 8h
+  var EVENT_E13=new Date('2026-09-06T08:00:00-03:00');   // aula ao vivo: 08/08 às 8h
+  /* rotulo do countdown gerado a partir da PROPRIA data do evento.
+     Antes era texto cravado e ficou mentindo quando a data do evento mudou. */
+  function _evLabel(){ try{
+      var d=EVENT_E13, tz={timeZone:'America/Sao_Paulo'};
+      var dia=d.toLocaleDateString('pt-BR',Object.assign({day:'numeric'},tz));
+      var mes=d.toLocaleDateString('pt-BR',Object.assign({month:'long'},tz));
+      var h=d.toLocaleTimeString('pt-BR',Object.assign({hour:'numeric',hour12:false},tz));
+      return 'Aula ao vivo \u00b7 '+dia+' de '+mes+', '+parseInt(h,10)+'h';
+    }catch(e){ return 'Aula ao vivo'; } }
+
   var RAMP_DAYS=12, START_PCT=72;                        // começa hoje (~12 dias antes) em 72% -> 100% no evento
   function _e13now(){ try{ var q=new URLSearchParams(location.search).get('cdnow'); if(q){ var d=new Date(q); if(!isNaN(d)) return d; } }catch(e){} return new Date(); }
   function _e13pct(){ var now=_e13now().getTime(), ev=EVENT_E13.getTime(), ini=ev-RAMP_DAYS*864e5;
@@ -156,7 +166,7 @@
     var box=function(k,l){ return '<span style="display:inline-flex;flex-direction:column;align-items:center;min-width:34px"><b data-e13-'+k+' style="font-size:20px;font-weight:800;font-variant-numeric:tabular-nums">00</b><small style="font-size:8px;letter-spacing:.06em;text-transform:uppercase;opacity:.75">'+l+'</small></span>'; };
     var sep='<span style="font-size:16px;opacity:.5;margin-top:2px">:</span>';
     return '<div class="e13-cd" style="display:none;margin:14px auto 0;max-width:340px;text-align:center;background:rgba(250,171,0,.08);border:1px solid rgba(250,171,0,.35);border-radius:12px;padding:10px 12px">'
-      +'<div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#FAAB00;font-weight:700">Aula ao vivo · 8 de agosto, 8h</div>'
+      +'<div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#FAAB00;font-weight:700">'+_evLabel()+'</div>'
       +'<div class="e13-cd-boxes" style="display:none;gap:6px;justify-content:center;align-items:flex-start;margin-top:6px;color:#fff">'+box('d','dias')+sep+box('h','h')+sep+box('m','min')+sep+box('s','s')+'</div>'
       +'<div class="e13-cd-live" style="display:none;font-size:15px;font-weight:800;color:#FAAB00;margin-top:2px">🔴 AO VIVO AGORA</div>'
     +'</div>';
