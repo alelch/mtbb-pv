@@ -71,6 +71,19 @@ h1{font-family:var(--disp);font-size:clamp(26px,7.2vw,33px);line-height:1.06;mar
 h1 em{font-style:normal;color:var(--lime);text-shadow:0 0 34px rgba(179,255,0,.45)}
 .nw{white-space:nowrap}
 .sub{color:var(--muted);font-size:15px;margin:0 auto;max-width:390px}
+/* data do evento: pilula discreta sob o h1. O texto vem do JS (CFG.evento),
+   nunca cravado aqui, senao mente quando a data mudar. */
+.quando{display:inline-flex;align-items:center;gap:8px;margin:0 auto 12px;
+  padding:5px 13px 5px 11px;border:1px solid rgba(255,255,255,.14);border-radius:999px;
+  background:rgba(255,255,255,.035);font-family:var(--disp);font-size:11.5px;font-weight:600;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--txt);white-space:nowrap}
+.quando:empty{display:none}
+.quando i{flex:none;width:6px;height:6px;border-radius:50%;background:var(--lime);
+  box-shadow:0 0 9px rgba(179,255,0,.85);font-style:normal}
+@media (max-width:360px){ .quando{font-size:10.5px;letter-spacing:.05em;padding:5px 10px 5px 9px} }
+.tk-dt{font-size:11.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em}
+.tk-dt b{color:var(--txt);font-weight:600}
+.tk-dt:empty{display:none}
 .sub b{color:var(--txt);font-weight:700}
 
 /* ---------- chances ---------- */
@@ -244,6 +257,7 @@ svg.board{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 <div class="wrap">
   <p class="kicker">Você está concorrendo ao maior desconto na história da</p>
   <h1>MasterClass <em><span class="nw">Best-Seller</span> de Verdade</em></h1>
+  <p class="quando" id="quando"></p>
   <p class="sub">Você pode girar até <b>3 vezes</b> e pagar só <b>R$ 9,90</b> no ingresso.
      Cada giro é uma chance nova.</p>
 
@@ -300,6 +314,7 @@ svg.board{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
       <span class="tk-ev">MasterClass Best-Seller de Verdade</span>
       <span class="tk-tag">1 ingresso</span>
     </div>
+    <div class="tk-dt" id="tkDt"></div>
     <div class="tk-lbl" id="tkLbl">Seu preço agora</div>
     <div class="tk-val" id="tkVal">R$ 24,90</div>
     <div class="tk-was" id="tkWas">no lugar de <s>R$ 29</s></div>
@@ -376,8 +391,30 @@ var CFG = {
   produto: 'M98923280L',
   ofertaNormal: '',
   precoCheio: 'R$ 29',
+  evento: '2026-09-06T08:00:00-03:00',   // aula ao vivo. MUDAR SO AQUI: os rotulos sao gerados desta data.
+  eventoFimH: 12,
   slug: 'roleta'
 };
+
+/* ---------- data do evento ----------
+   Um unico ponto de verdade (CFG.evento). Em 03/09 as PVs mostraram "8 de agosto"
+   por causa de rotulo cravado em string enquanto o contador ja apontava pro 06/09.
+   Aqui o texto sai sempre da propria data, em fuso de Sao Paulo. */
+var EVENTO = new Date(CFG.evento);
+function _dt(opts){ try{ return EVENTO.toLocaleDateString('pt-BR',
+  Object.assign({timeZone:'America/Sao_Paulo'}, opts)); }catch(e){ return ''; } }
+function _hIni(){ try{ return parseInt(EVENTO.toLocaleTimeString('pt-BR',
+  {timeZone:'America/Sao_Paulo',hour:'numeric',hour12:false}),10); }catch(e){ return 8; } }
+var EV_DATA   = _dt({day:'numeric'}) + ' de ' + _dt({month:'long'});   // 6 de setembro
+var EV_DIA    = _dt({weekday:'short'}).replace(/\.$/,'');              // dom
+var EV_JANELA = _hIni() + 'h as ' + CFG.eventoFimH + 'h';
+EV_JANELA = EV_JANELA.replace(' as ', ' \u00e0s ');                    // 8h as 12h -> 8h às 12h
+(function(){
+  var q = document.getElementById('quando');
+  if (q && EV_DATA) q.innerHTML = '<i></i>Ao vivo \u00b7 ' + EV_DATA + ' \u00b7 ' + EV_JANELA;
+  var t = document.getElementById('tkDt');
+  if (t && EV_DATA) t.innerHTML = '<b>' + EV_DATA + '</b>, ' + EV_DIA + ' \u00b7 ' + EV_JANELA;
+})();
 
 var byId={}; CFG.escada.forEach(function(p,i){ p.i=i; byId[p.id]=p; });
 
