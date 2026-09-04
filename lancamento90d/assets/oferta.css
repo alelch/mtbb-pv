@@ -438,3 +438,39 @@ footer a{color:rgba(243,240,232,.8)}
 .escuro .garantia .disco{fill:var(--ouro)}
 .escuro .garantia .num{fill:var(--carvao)}
 .escuro .garantia .dias{fill:rgba(36,35,32,.75)}
+
+/* ============================================================
+   PROVA SOCIAL
+   O tipo de prova que a estrutura Done For You pede e HISTORIA DE
+   TRANSFORMACAO, nao credencial. Por isso cada card e antes -> depois, com a
+   frase da propria pessoa, e nao um numero solto.
+   ============================================================ */
+.provas{display:grid;gap:16px;margin:36px 0 0}
+@media(min-width:900px){.provas{grid-template-columns:repeat(3,1fr)}}
+.prova{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:26px 24px;display:flex;flex-direction:column}
+.escuro .prova{background:rgba(243,240,232,.05);border-color:rgba(243,240,232,.14)}
+.prova .quem{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.02rem;
+  letter-spacing:-.02em;margin:0;color:var(--ink)}
+.escuro .prova .quem{color:var(--ink-on-dark)}
+.prova .oque{font-size:.84rem;color:var(--mute);margin:2px 0 16px}
+.escuro .prova .oque{color:rgba(243,240,232,.55)}
+.prova .antes,.prova .depois{font-size:.95rem;line-height:1.5;margin:0}
+.prova .antes{color:var(--soft);padding-bottom:14px}
+.escuro .prova .antes{color:rgba(243,240,232,.66)}
+.prova .depois{color:var(--ink);border-top:1px solid var(--border);padding-top:14px}
+.escuro .prova .depois{color:var(--ink-on-dark);border-top-color:rgba(243,240,232,.16)}
+.prova .depois b{color:var(--ink)}
+.escuro .prova .depois b{color:var(--ouro)}
+.prova .fala{margin:16px 0 0;padding-left:14px;border-left:2px solid var(--ouro);
+  font-size:.93rem;line-height:1.5;color:var(--soft);font-style:italic}
+.escuro .prova .fala{color:rgba(243,240,232,.72)}
+.prova .link{margin:14px 0 0;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--mute);
+  text-decoration:none;border-bottom:1px solid var(--line);align-self:flex-start;padding-bottom:2px}
+.prova .link:hover{color:var(--ink)}
+.escuro .prova .link{color:rgba(243,240,232,.55);border-bottom-color:rgba(243,240,232,.2)}
+.escuro .prova .link:hover{color:var(--ink-on-dark)}
+.nota-prova{margin:26px auto 0;max-width:58ch;font-size:.93rem;color:var(--mute);
+  line-height:1.55;text-align:center}
+.escuro .nota-prova{color:rgba(243,240,232,.55)}
