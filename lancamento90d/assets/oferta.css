@@ -271,3 +271,86 @@ footer a{color:rgba(243,240,232,.8)}
 .escuro .numeros b{color:var(--ouro)}
 .numeros span{font-size:.86rem;color:var(--soft);line-height:1.4;display:block;margin-top:4px}
 .escuro .numeros span{color:rgba(243,240,232,.7)}
+
+/* ============================================================
+   ESQUELETO DE UPSELL (estrutura da página de upsell do Roas)
+   ============================================================ */
+
+/* BARRA DE PASSOS. A peça mais importante da estrutura: ela diz que esta
+   página é uma ETAPA DO CHECKOUT, não uma página de vendas nova. Quem
+   acabou de pagar aceita "passo 2 de 3" e não aceita "olha outro produto". */
+.passos{background:var(--carvao);color:var(--ink-on-dark);padding:16px 0;
+  border-bottom:1px solid rgba(243,240,232,.12)}
+.passos ol{list-style:none;margin:0;padding:0;display:flex;gap:8px;
+  justify-content:center;flex-wrap:wrap}
+.passos li{display:flex;align-items:center;gap:9px;font-family:'Space Grotesk',sans-serif;
+  font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  color:rgba(243,240,232,.42);padding:8px 16px;border-radius:999px;
+  border:1px solid rgba(243,240,232,.14)}
+.passos li .b{width:19px;height:19px;flex:0 0 19px;border-radius:50%;display:grid;
+  place-items:center;font-size:11px;background:rgba(243,240,232,.14);color:rgba(243,240,232,.6)}
+.passos li.feito{color:rgba(243,240,232,.72);border-color:rgba(20,82,62,.9);background:rgba(20,82,62,.45)}
+.passos li.feito .b{background:#14523E;color:#EAF3EF}
+.passos li.agora{color:var(--carvao);background:var(--ouro);border-color:var(--ouro)}
+.passos li.agora .b{background:var(--carvao);color:var(--ouro)}
+@media(max-width:640px){
+  .passos ol{gap:6px}
+  .passos li{font-size:.68rem;padding:6px 11px;gap:7px}
+  .passos li .b{width:16px;height:16px;flex:0 0 16px;font-size:10px}
+}
+
+/* TOPO: o parabéns e o "não feche esta página" */
+.topo{text-align:center;padding:clamp(34px,5vw,54px) 0 clamp(26px,4vw,40px)}
+.topo .parabens{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(1.2rem,3vw,1.75rem);letter-spacing:-.03em;line-height:1.2;
+  max-width:22ch;margin:0 auto 14px}
+.topo .nfeche{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.8rem;
+  letter-spacing:.16em;text-transform:uppercase;color:#6E1A12;margin:0}
+
+/* PERGUNTA + VÍDEO */
+.convite{text-align:center;padding-top:0}
+.convite h1{max-width:19ch;margin:0 auto 18px}
+.convite .lead{max-width:46ch;margin:0 auto 34px}
+/* Player: com o embed vazio o bloco inteiro some sozinho, sem deixar buraco
+   na página. Mesmo comportamento do front. */
+/* 9:16 VERTICAL, não 16:9. O player do VTurb que a casa usa mede 400x711
+   (medido no front), então a moldura é vertical e a largura trava perto de
+   392px. Desenhar em cima de um 16:9 inexistente já custou uma rodada
+   inteira de composições reprovadas no hero do front. */
+.player{max-width:392px;margin:0 auto;border-radius:var(--r);overflow:hidden;
+  background:var(--carvao)}
+/* Sem embed, a moldura tracejada avisa em vez de sumir: o vídeo é o que
+   vende nesta estrutura, então uma página sem ele não pode parecer pronta. */
+.player:empty{background:none;border:2px dashed var(--line);aspect-ratio:9/16;
+  display:grid;place-items:center;padding:20px;text-align:center}
+.player:empty:before{content:"vídeo de upsell entra aqui";
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+
+/* BLOCO DE PREÇO REPETÍVEL. Aparece três vezes na página, igual ao Roas:
+   ele é o refrão, e cada repetição fecha um argumento. */
+.fecha{text-align:center}
+.fecha .rot{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--soft);margin:0 0 10px}
+.escuro .fecha .rot{color:var(--ouro)}
+.fecha .nome{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(1.4rem,3.2vw,2rem);letter-spacing:-.03em;margin:0 0 20px}
+.fecha .val{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.04em;
+  font-size:clamp(2.4rem,6.5vw,3.3rem);line-height:1;display:block;margin:0}
+.fecha .cur{font-size:.44em;vertical-align:.72em;margin-right:.1em}
+.fecha .avista{font-size:1.02rem;color:var(--soft);margin:10px 0 0}
+.escuro .fecha .avista{color:rgba(243,240,232,.74)}
+.fecha .avista b{color:var(--ink)}
+.escuro .fecha .avista b{color:var(--ink-on-dark)}
+.fecha .obs{font-size:.8rem;color:var(--mute);margin:6px 0 0}
+.escuro .fecha .obs{color:rgba(243,240,232,.5)}
+.fecha .btn{margin-top:26px;max-width:520px}
+.fecha .recusa{margin-top:18px}
+/* o abatimento: a âncora VERDADEIRA desta oferta */
+.abate{max-width:470px;margin:22px auto 0;padding:14px 20px;border-radius:var(--r);
+  background:rgba(20,82,62,.1);border:1px solid rgba(20,82,62,.25);
+  font-size:.94rem;color:var(--soft);line-height:1.5}
+.escuro .abate{background:rgba(234,184,45,.08);border-color:rgba(234,184,45,.28);
+  color:rgba(243,240,232,.8)}
+.abate b{color:var(--ink)}
+.escuro .abate b{color:var(--ink-on-dark)}

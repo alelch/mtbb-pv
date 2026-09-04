@@ -15,6 +15,24 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/grotesk-sub.woff2">
 <link rel="stylesheet" href="../assets/oferta.css">
 
+<!-- ============================================================
+     ESTRUTURA: esqueleto de página de upsell do modelo Roas, decalcado da
+     página de Upsell 2 da Prisciane (Desafio > MSL > Loja Pronta).
+       barra de passos > parabéns + não feche > pergunta direta > vídeo >
+       preço + CTA > garantia + CTA > o que você recebe + CTA >
+       recapitulação + CTA
+     O CTA é refrão: repete a cada bloco, e cada repetição vem depois de um
+     argumento fechado.
+     DUAS COISAS NÃO FORAM COPIADAS, de propósito:
+     1. a âncora "de R$997 por R$697". O diagnóstico nunca custou R$997, e a
+        regra da casa é não usar âncora falsa. No lugar dela entra a âncora
+        VERDADEIRA: o valor é abatido se a pessoa entrar no D.E.
+     2. o bônus empacotado. O equivalente honesto aqui já existe dentro do
+        produto (a gravação e o material escrito), então ele ganhou bloco
+        próprio em vez de virar um produto inventado.
+     A versão longa e argumentada desta página está em index-longa.html.
+     ============================================================ -->
+
 <!-- Meta Pixel: mesmos dois IDs do front -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -33,200 +51,147 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <body>
 
 <!-- ============================================================
-     CONFIRMAÇÃO
-     Primeira coisa na tela. Quem acabou de pagar quer saber que deu certo
-     antes de escutar qualquer outra coisa; sem isso, a página de upsell
-     parece que o pagamento não passou.
+     BARRA DE PASSOS
+     A peça estrutural mais importante da página. Ela diz que isto é uma
+     etapa do checkout, não uma página de vendas nova.
      ============================================================ -->
-<div class="confirma">
+<nav class="passos" aria-label="Etapas da sua compra">
   <div class="wrap">
-    <span class="tick">✓</span>
-    <span><b>Pagamento aprovado.</b> O Lançamento 90D já é seu, e os dados de acesso estão indo para o seu e-mail agora.</span>
+    <ol>
+      <li class="feito"><span class="b">✓</span>Passo 1 · 90D garantido</li>
+      <li class="agora"><span class="b">2</span>Passo 2 · Acelere o resultado</li>
+      <li><span class="b">3</span>Passo 3 · Acesso liberado</li>
+    </ol>
+  </div>
+</nav>
+
+<!-- ============================================================
+     PARABÉNS + NÃO FECHE
+     ============================================================ -->
+<div class="topo">
+  <div class="wrap">
+    <p class="parabens">Parabéns! O Lançamento 90D já é seu, e os dados de acesso estão
+    indo para o seu e-mail agora.</p>
+    <p class="nfeche">Mas ainda não feche esta página</p>
   </div>
 </div>
 
 <!-- ============================================================
-     HERO
-     Não vende ainda. Nomeia a pergunta que a pessoa está fazendo em
-     silêncio desde que terminou de escrever. A frase é do próprio cliente.
+     A PERGUNTA + O VÍDEO
+     ⚠️ O player está vazio. Com o embed vazio o bloco some sozinho, sem
+     deixar buraco na página (mesmo comportamento do front). Ao gravar o
+     vídeo, colar o embed dentro da div .player.
      ============================================================ -->
-<section class="hero">
+<section class="hero convite">
   <div class="wrap">
-    <!-- sem logo aqui de propósito: o logo do 90D é dourado, e dourado sobre
-         marfim não tem contraste (1,5:1). Além disso, na página do upsell ele
-         competiria com o nome do produto que está sendo oferecido agora. -->
-    <p class="eyebrow">Espere um minuto antes de sair</p>
-    <h1>Você escreveu. Você vai lançar. E agora?</h1>
-    <p class="lead">Uma hora no Zoom, com um especialista do time da Dany olhando o
-    <em>seu</em> caso, para você sair sabendo qual é o próximo passo certo. Sem achismo,
-    sem tentar de tudo um pouco.</p>
+    <h1>Você quer que um especialista olhe o seu livro e te diga qual é o próximo passo?</h1>
+    <p class="lead">Tenho um recado rápido para você. Assista ao vídeo abaixo.</p>
+    <!-- ⚠️ EMBED DO VÍDEO DE UPSELL VAI DENTRO DA DIV ABAIXO. Enquanto ela estiver
+         vazia o CSS mostra uma moldura tracejada avisando, para ninguém publicar a
+         página achando que o vídeo está no ar. Ao colar o embed, a moldura some.
+         ATENÇÃO: a regra é :empty, e :empty quebra com espaço em branco. A div
+         precisa continuar numa linha só, sem quebra entre as tags. -->
+    <div class="player" id="vsl"></div>
   </div>
 </section>
 
 <!-- ============================================================
-     A DEMONSTRAÇÃO (carvão)
-     O parágrafo embaralhado. A pessoa lê sem tropeçar e só descobre depois.
-     Demonstração em vez de citação, de propósito: o "estudo da Universidade
-     de Cambridge" que circula junto com esse texto NÃO EXISTE (é lenda de
-     corrente de e-mail). O efeito é real, a fonte é falsa. Numa página a
-     gente pode simplesmente fazer o leitor viver o efeito, que é mais forte
-     que citar qualquer estudo, e não coloca a Dany citando fonte inventada.
+     O ARGUMENTO, CURTO
+     Existe porque nem todo mundo assiste o vídeo. É a versão comprimida da
+     narrativa que está inteira em index-longa.html: o parágrafo embaralhado
+     (demonstração, não citação, porque o "estudo de Cambridge" que circula
+     junto com esse texto não existe) e o gorila (Simons e Chabris, Harvard
+     1999, esse é real).
      ============================================================ -->
 <section class="escuro">
   <div class="wrap narrow">
-    <p class="eyebrow">Antes de falar do seu livro, leia isto</p>
-
+    <p class="eyebrow">Por que sozinho não dá</p>
     <div class="demo">
       <p class="txt">Vcoê leu o seu lvrio ttanas vzees que já não cnsoegue mias enxegrar o
-      que etsá esrcito nlee. O seu céerbro cosnerta tduo szoinho, atnes de vcoê pcerbeer.</p>
+      que etsá esrcito nlee.</p>
       <p class="apos"><b>Nenhuma palavra dessa frase está escrita certa.</b> Você leu na
-      velocidade normal e entendeu tudo. Não porque leu com atenção: porque não precisou.
-      O seu cérebro preencheu o que faltava antes de você chegar no fim da linha.</p>
+      velocidade normal e entendeu tudo, porque o seu cérebro preencheu o que faltava antes
+      de você chegar no fim da linha.</p>
     </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     O MACACO
-     Segundo caminho pro mesmo argumento. O experimento é real e citável
-     (Simons e Chabris, Harvard, 1999), ao contrário do de Cambridge.
-     A virada importante: você não perdeu o gorila por falta de atenção,
-     perdeu POR CAUSA da atenção. É isso que tira a culpa do autor.
-     ============================================================ -->
-<section class="escuro" style="padding-top:0">
-  <div class="wrap narrow">
-    <h2>Tem um experimento famoso em que pedem para você contar quantos passes um time de
-    basquete faz.</h2>
-    <p>As pessoas contam certo. E, no meio do vídeo, um sujeito fantasiado de gorila
-    atravessa a quadra andando, para no meio, bate no peito e sai. <strong>Metade das
-    pessoas não vê o gorila.</strong></p>
-    <p>Elas não perderam por falta de atenção. Perderam <em>por causa</em> dela. Estavam
-    fazendo exatamente o que foi pedido, contando os passes, e o cérebro cortou fora tudo
-    o que não era passe.</p>
-    <p>Faz anos que você conta os passes do seu livro. A escrita, a revisão, o capítulo que
-    não fecha, a capa, a data. <strong class="grifo">O gorila atravessa a sua página e você
-    não vê.</strong> E não adianta ler de novo com mais cuidado: quanto mais você lê, mais
-    convencido você fica de que está tudo certo.</p>
+    <p style="margin-top:30px">É o mesmo motivo pelo qual metade das pessoas não vê o
+    gorila atravessar a quadra naquele experimento em que pedem para contar os passes de
+    basquete. Elas não perderam por falta de atenção: perderam <em>por causa</em> dela.</p>
+    <p>Faz anos que você conta os passes do seu livro. <strong class="grifo">O gorila
+    atravessa a sua página e você não vê.</strong> E não é só o texto: é a data que você
+    escolheu para lançar, o tipo de publicação que você contratou, a ordem em que você está
+    fazendo as coisas. <span class="risco">Uma decisão errada custa mais que dez erros de
+    revisão</span>, e você nunca vai saber, porque não existe o cenário paralelo para
+    comparar.</p>
     <p>Ninguém enxerga o próprio livro. Nem quem escreve bem. Nem quem já publicou antes.</p>
   </div>
 </section>
 
 <!-- ============================================================
-     NÃO É SÓ TEXTO
-     Escala o argumento de revisão para estratégia, que é onde a call
-     realmente atua. O exemplo do Natal é do cliente e é ótimo: concreto,
-     verificável, e não acusa ninguém.
+     PREÇO 1
+     ⚠️ PREÇO: o cliente deu a faixa 597 a 697. Está em 597. Muda em quatro
+     lugares nesta página (três blocos .fecha e o objeto OFERTA no fim).
+     ⚠️ CONFERIR NA HOTMART: 12 x 59,56 = 714,72 contra 597 à vista, então
+     tem juros, e a nota do asterisco já diz isso.
+     ⚠️ ABATIMENTO: a regra "o valor é abatido se entrar no D.E." vem da
+     especificação da esteira de 30/07, quando esta call era o Upsell 3 e
+     custava R$297. O produto mudou de posição e de preço: CONFIRMAR que a
+     regra continua valendo antes de subir, porque é promessa operacional.
      ============================================================ -->
-<section>
-  <div class="wrap narrow">
-    <p class="eyebrow">E o gorila mais caro não é o do texto</p>
-    <h2>Uma decisão errada custa mais que dez erros de revisão.</h2>
-    <p>Lançar em dezembro, por exemplo, porque parece que livro vende no Natal. Vende, sim,
-    só que quem compra em dezembro está comprando presente, escolhe por autor conhecido e
-    por capa, e o seu livro entra numa vitrine disputada com todo o mercado ao mesmo tempo.
-    <span class="risco">Você gastou a sua estreia no pior mês possível</span> e nunca vai
-    saber, porque não existe o cenário paralelo para comparar.</p>
-    <p>É o mesmo com o tipo de publicação que você escolheu, com a prestadora que você
-    contratou, com o que você está postando, com a ordem em que você está fazendo as coisas.
-    Cada uma dessas é uma decisão que já foi tomada ou está prestes a ser, e você tomou
-    sozinho, contando os passes.</p>
+<section class="fecha">
+  <div class="wrap">
+    <p class="rot">Você quer o diagnóstico?</p>
+    <p class="nome">Diagnóstico do Autor</p>
+    <span class="val"><span class="cur">R$</span>597</span>
+    <p class="avista">à vista, ou em <b>12x de R$ 59,56</b></p>
+    <p class="obs">* parcelado no cartão, com juros</p>
+    <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
+    <div class="abate">Se depois dessa hora você entrar no <b>Direcionamento Estratégico</b>,
+    os R$597 são abatidos integralmente. Quem vira cliente paga zero por esta conversa.</div>
   </div>
 </section>
 
 <!-- ============================================================
-     AS DUAS PERGUNTAS
-     A dor dupla que o cliente descreveu, escrita como as duas perguntas
-     que a pessoa não consegue responder sozinha. Empilhadas de propósito:
-     é a soma delas que justifica falar com gente em vez de ver mais aula.
+     GARANTIA
+     ⚠️ Numa call a garantia não pode ser contada em dias como no front,
+     porque a call acontece depois da compra. A regra escrita aqui é a que o
+     cliente definiu em 30/07: devolve se a pessoa não achar valor, e o
+     material fica com ela. TEM que estar configurado na Hotmart e combinado
+     com quem atende, senão a página promete o que a operação não cumpre.
      ============================================================ -->
 <section class="escuro">
-  <div class="wrap narrow">
-    <p class="eyebrow">As duas perguntas</p>
-    <h2>Tem duas coisas que você não consegue responder sozinho. Nunca vai conseguir.</h2>
-    <div class="duas">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center">Pode ficar tranquila</p>
+    <div class="garantia" style="background:rgba(243,240,232,.05);border-color:rgba(243,240,232,.14)">
+      <svg viewBox="0 0 120 120" role="img" aria-label="Garantia">
+        <circle class="disco" cx="60" cy="60" r="52" fill="#EAB82D"></circle>
+        <text class="num" x="60" y="57" text-anchor="middle" fill="#242320">100%</text>
+        <text class="dias" x="60" y="76" text-anchor="middle" fill="rgba(36,35,32,.75)">DE VOLTA</text>
+      </svg>
       <div>
-        <p class="q">"O meu livro tem potencial de verdade?"</p>
-        <p>Ou eu estou empurrando um projeto que não vai a lugar nenhum, gastando dinheiro e
-        anos, porque todo mundo que leu é meu amigo e me disse que está lindo.</p>
-      </div>
-      <div>
-        <p class="q">"Qual é o meu próximo passo?"</p>
-        <p>Não o próximo passo de um autor genérico. O meu, no ponto em que eu estou, com o
-        livro que eu tenho, com o tempo e o dinheiro que eu tenho.</p>
+        <h3 style="color:#F3F0E8">Se ao fim da hora você achar que não valeu, devolvemos</h3>
+        <p style="color:rgba(243,240,232,.74)">Sem questionamento e sem justificativa. A
+        gravação e o material continuam sendo seus. A gente não quer o seu dinheiro se a
+        conversa não te levou a lugar nenhum.</p>
       </div>
     </div>
-    <p style="margin-top:34px">Nenhuma das duas se resolve com mais conteúdo. Se resolvessem,
-    você já teria resolvido: você tem acesso a tudo. Elas se resolvem com alguém de fora
-    olhando o seu caso e dizendo o que vê.</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     A OFERTA, NOMEADA
-     ============================================================ -->
-<section>
-  <div class="wrap narrow">
-    <p class="eyebrow">O que eu quero te oferecer</p>
-    <h2>Uma hora no Zoom com o time que já lançou mais de oitocentos livros.</h2>
-    <p>Não é aula, não é acompanhamento, não é mentoria de meses. É uma sessão só, marcada,
-    com um especialista do time da Dany que vai ter lido o seu caso antes de entrar na
-    chamada. <strong class="grifo">Você fala do seu livro e sai com os próximos passos
-    escritos.</strong></p>
-
-    <div class="numeros">
-      <div><b>+800</b><span>livros lançados pela casa</span></div>
-      <div><b>+10 mi</b><span>de cópias vendidas pelos autores</span></div>
-      <div><b>+15</b><span>anos dentro do mercado editorial</span></div>
+    <div class="fecha" style="margin-top:40px">
+      <p class="avista" style="margin:0 0 4px">Agora ficou mais fácil decidir, né?</p>
+      <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     COMO FUNCIONA
-     O caminho de compra que o cliente desenhou. O formulário é vendido
-     aqui como parte da entrega, não como burocracia: é ele que faz a call
-     começar no minuto zero em vez de gastar vinte minutos em contexto.
-     ⚠️ O formulário ainda não existe. Ver as pendências no fim do arquivo.
-     ============================================================ -->
-<section class="escuro">
-  <div class="wrap narrow">
-    <p class="eyebrow">Como funciona</p>
-    <h2>Quatro passos, e o primeiro é agora.</h2>
-    <ol class="trilha">
-      <li>
-        <h3>Você adiciona ao seu pedido</h3>
-        <p>Um clique, no mesmo pagamento que você acabou de fazer. Sem digitar cartão de novo.</p>
-      </li>
-      <li>
-        <h3>Você responde um formulário</h3>
-        <p>Em que ponto está o livro, como você publicou ou pretende publicar, o que você quer
-        alcançar, qual é a maior dificuldade hoje, e o que você quer que a gente responda na
-        chamada. Quanto mais você escrever, mais a hora rende: quem entra na call já entra
-        sabendo do que se trata.</p>
-      </li>
-      <li>
-        <h3>Você marca o dia</h3>
-        <p>Assim que o formulário chega, a nossa equipe entra em contato com você para agendar
-        no horário que der na sua agenda.</p>
-      </li>
-      <li>
-        <h3>A conversa, e o que fica depois</h3>
-        <p>Uma hora no Zoom. A chamada é gravada e a gravação é sua, junto com o material
-        escrito com os seus próximos passos.</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<!-- ============================================================
-     A HORA, MINUTO A MINUTO
+     O QUE VAI ACONTECER NA SUA HORA
      Isto é o que transforma "uma call" em produto. Sem a divisão do tempo,
      R$597 por uma conversa é caro; com ela, fica claro que existe método.
-     Os tempos são os que o cliente definiu.
+     Os tempos são os que o cliente definiu. O bloco de 10 minutos NOMEIA o
+     pitch antes da compra: quem paga e é emboscado no minuto cinquenta pede
+     reembolso e sai com raiva.
      ============================================================ -->
 <section>
   <div class="wrap">
-    <p class="eyebrow">A hora, por dentro</p>
+    <p class="eyebrow">O que vai acontecer na sua hora</p>
     <h2 style="max-width:22ch">Não é uma conversa solta. Tem uma ordem, e ela é sempre a mesma.</h2>
     <ol class="hora">
       <li><span class="min">5 min</span>
@@ -235,33 +200,37 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <li><span class="min">5 min</span>
         <h3>O que já está certo</h3>
         <p>O que você fez até agora que tem valor, e por quê. Não é elogio de cortesia: é o
-        inventário do que dá para aproveitar, com a justificativa de cada ponto.</p></li>
+        inventário do que dá para aproveitar.</p></li>
       <li><span class="min">40 min</span>
         <h3>Os seus próximos passos</h3>
-        <p>A parte grande. Onde o livro está no processo editorial e o que falta (leitura
-        crítica, revisão, o tipo de publicação mais apropriado para o seu caso). O que faz
-        sentido você publicar nas suas redes. E três frentes de lançamento escolhidas para o
-        seu livro, entre imprensa, influenciadores, eventos literários, eventos do seu nicho,
-        prêmios, vendas para empresas e escolas, editais, prefácio estratégico, endossos,
-        campanha de lista.</p></li>
+        <p>Onde o livro está no processo editorial e o que falta (leitura crítica, revisão, o
+        tipo de publicação mais apropriado para o seu caso). O que faz sentido você publicar
+        nas suas redes. E três frentes de lançamento escolhidas para o seu livro, entre
+        imprensa, influenciadores, eventos literários, eventos do seu nicho, prêmios, vendas
+        para empresas e escolas, editais, prefácio estratégico, endossos, campanha de lista.</p></li>
       <li><span class="min">10 min</span>
         <h3>As suas dúvidas, e uma conversa honesta no fim</h3>
         <p>No fim, se o seu caso for de alguma coisa que a gente faz, a gente te conta como
         faria. Se não for, a gente não conta. Você não vai descobrir no minuto cinquenta que
-        virou uma reunião de vendas: está escrito aqui.</p></li>
+        virou uma reunião de vendas: está escrito aqui, antes de você pagar.</p></li>
     </ol>
+    <div class="fecha" style="margin-top:44px">
+      <a class="btn ouro block" href="#" data-aceita>Eu quero o meu diagnóstico</a>
+    </div>
   </div>
 </section>
 
 <!-- ============================================================
      O QUE FICA
-     A objeção real de call: "e depois eu esqueço tudo". A gravação e o
-     material escrito são a resposta, e são o que torna o preço justo mesmo
-     para quem não compra mais nada depois.
+     Este é o lugar do "bônus" na estrutura do Roas. Na Prisciane é um
+     produto extra empacotado com valor; aqui é o que já existe dentro do
+     produto e que quase ninguém valoriza sozinho: a hora acaba, a gravação
+     e o material não. É o que torna o preço justo mesmo para quem não
+     compra mais nada depois.
      ============================================================ -->
 <section class="escuro">
   <div class="wrap narrow">
-    <p class="eyebrow">O que fica com você</p>
+    <p class="eyebrow">E você ainda leva isto</p>
     <h2>A hora acaba. O que você levou dela, não.</h2>
     <ul class="entregas">
       <li><b>A gravação da chamada</b>, para rever quantas vezes quiser</li>
@@ -269,74 +238,65 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <li><b>O tipo de publicação recomendado para o seu caso</b>, com o porquê</li>
       <li><b>As três frentes de lançamento escolhidas para o seu livro</b>, e o que fazer em cada uma</li>
     </ul>
-    <p style="margin-top:30px">É por isso que essa hora se paga mesmo que você nunca mais
+    <p style="margin-top:28px">É por isso que essa hora se paga mesmo que você nunca mais
     fale com a gente. Você sai com uma decisão tomada em cima de informação, em vez de mais
     um mês tentando decidir sozinho.</p>
   </div>
 </section>
 
 <!-- ============================================================
-     OFERTA
-     ⚠️ PREÇO: o cliente deu a faixa 597 a 697. Está em 597 na página, num
-     lugar só. Ver a nota no fim do arquivo antes de mudar.
+     COMO FUNCIONA (curto)
+     ⚠️ O formulário pós-compra ainda não existe, e a página promete ele aqui
+     e no FAQ.
      ============================================================ -->
-<section class="oferta">
+<section>
+  <div class="wrap narrow">
+    <p class="eyebrow">Como funciona depois do clique</p>
+    <ol class="trilha">
+      <li><h3>Você recebe um formulário</h3>
+        <p>Em que ponto está o livro, como você publicou ou pretende publicar, o que você quer
+        alcançar e qual é a maior dificuldade hoje. Quem entra na call já entra sabendo do seu
+        caso, então a hora inteira rende.</p></li>
+      <li><h3>Você marca o dia</h3>
+        <p>A nossa equipe entra em contato para agendar no horário que der na sua agenda.</p></li>
+      <li><h3>A conversa</h3>
+        <p>Uma hora no Zoom, gravada. Depois chega o material escrito com os seus próximos passos.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================================================
+     RECAPITULAÇÃO + FECHO
+     ============================================================ -->
+<section class="escuro fecha">
   <div class="wrap">
-    <p class="eyebrow">Adicionar ao seu pedido</p>
-    <h2 style="max-width:16ch;margin:0 auto 34px">Um clique. Sem digitar cartão de novo.</h2>
-
-    <div class="caixa">
-      <p class="nome">Diagnóstico do Autor</p>
-      <p class="promessa">Uma hora com um especialista, e você sai sabendo qual é o próximo passo certo.</p>
-      <ul class="conquistas">
-        <li>Você <b>para de adivinhar se o seu livro tem potencial</b> e escuta de alguém que
-        já viu isso oitocentas vezes</li>
-        <li>Você <b>sai com os próximos passos escritos</b>, na ordem, em vez de uma lista de
-        coisas que dá para tentar</li>
-        <li>Você <b>descobre o gorila</b> antes de ele custar a sua estreia</li>
-        <li>Você <b>fica com a gravação e o material</b>, para consultar sempre que travar</li>
+    <p class="rot">Recapitulando, você vai receber</p>
+    <div style="max-width:480px;margin:0 auto 34px;text-align:left">
+      <ul class="entregas">
+        <li><b>Uma hora no Zoom</b> com um especialista do time, só sobre o seu livro</li>
+        <li><b>Os seus próximos passos por escrito</b>, na ordem</li>
+        <li><b>O tipo de publicação</b> recomendado para o seu caso</li>
+        <li><b>Três frentes de lançamento</b> escolhidas para o seu livro</li>
+        <li><b>A gravação da chamada</b>, para sempre</li>
       </ul>
-      <div class="preco">
-        <span class="val"><span class="cur">R$</span>597</span>
-        <!-- ⚠️ CONFERIR NA HOTMART antes de subir: 12 x 59,56 = 714,72 contra 597 à vista,
-             então tem juros, e a nota do asterisco já diz isso. Não subir com número chutado. -->
-        <p class="inst">à vista, ou em até <b>12x de R$ 59,56</b></p>
-        <p class="obs">* parcelado no cartão, com juros</p>
-      </div>
-      <div class="acao">
-        <a class="btn ouro block" href="#" data-aceita>Sim, quero o diagnóstico</a>
-      </div>
     </div>
-
+    <p class="avista" style="margin:0 0 6px">Tudo isso por apenas</p>
+    <span class="val"><span class="cur">R$</span>597</span>
+    <p class="avista">à vista, ou em <b>12x de R$ 59,56</b></p>
+    <p class="obs">* parcelado no cartão, com juros</p>
+    <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
     <button class="recusa" data-recusa>Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button>
-
-    <p style="max-width:520px;margin:30px auto 0;font-size:.95rem;color:var(--mute)">
+    <p style="max-width:520px;margin:26px auto 0;font-size:.95rem;color:rgba(243,240,232,.55)">
       Se você fechar esta página, o diagnóstico não some do mundo. O que some é a chance de
       adicionar em um clique, sem passar por um checkout de novo.</p>
-
-    <!-- ⚠️ GARANTIA: numa call a garantia não pode ser "15 dias" como no front, porque a
-         call acontece depois. A regra escrita aqui é a que o cliente definiu em 30/07:
-         devolve se a pessoa não achar valor, e o material fica com ela. TEM que estar
-         configurado na Hotmart e combinado com quem atende, senão a página promete o que
-         a operação não cumpre. -->
-    <div class="garantia">
-      <svg viewBox="0 0 120 120" role="img" aria-label="Garantia">
-        <circle class="disco" cx="60" cy="60" r="52"></circle>
-        <text class="num" x="60" y="57" text-anchor="middle">100%</text>
-        <text class="dias" x="60" y="76" text-anchor="middle">DE VOLTA</text>
-      </svg>
-      <div>
-        <h3>Se ao fim da hora você achar que não valeu, devolvemos</h3>
-        <p>Sem justificar nada, e a gravação e o material continuam sendo seus. A gente não
-        quer o seu dinheiro se a conversa não te levou a lugar nenhum.</p>
-      </div>
-    </div>
   </div>
 </section>
 
 <!-- ============================================================
      FAQ
-     As quatro que travam o clique nesta página específica.
+     Fica, mesmo não existindo na página da Prisciane. As duas primeiras
+     perguntas são as que matam a venda de uma call: "é com a Dany?" e "isso
+     é reunião de vendas?". Sem resposta escrita, elas viram reembolso.
      ============================================================ -->
 <section>
   <div class="wrap">
@@ -348,13 +308,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         alguns milhares de reais.</p>
       </details>
       <details>
-        <summary>Meu livro ainda não está pronto. Faz sentido agora?</summary>
-        <p>Faz, e talvez faça mais. É mais barato descobrir agora que falta uma leitura crítica
-        do que descobrir depois de publicado. Se o livro ainda está sendo escrito, a conversa
-        vira sobre processo editorial e preparação; se já está publicado, vira sobre o que
-        fazer para ele voltar a andar.</p>
-      </details>
-      <details>
         <summary>Isso não é uma reunião de vendas disfarçada?</summary>
         <p>Cinquenta minutos são sobre o seu caso e dez são de conversa sobre o que a gente faz,
         e só se o seu caso for de alguma coisa que a gente faz. Está escrito acima, minuto a
@@ -362,10 +315,16 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         tendo comprado alguma coisa ou não.</p>
       </details>
       <details>
+        <summary>Meu livro ainda não está pronto. Faz sentido agora?</summary>
+        <p>Faz, e talvez faça mais. É mais barato descobrir agora que falta uma leitura crítica
+        do que descobrir depois de publicado. Se o livro ainda está sendo escrito, a conversa
+        vira sobre processo editorial e preparação; se já está publicado, vira sobre o que
+        fazer para ele voltar a andar.</p>
+      </details>
+      <details>
         <summary>Vou precisar preencher meus dados de novo?</summary>
         <p>Não. É a mesma compra: você clica e ele entra no seu pedido usando o pagamento que
-        você acabou de fazer. Depois disso você recebe o formulário por e-mail, e é ele que
-        prepara a nossa equipe para a sua hora.</p>
+        você acabou de fazer.</p>
       </details>
     </div>
   </div>
@@ -379,10 +338,9 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 
 <script>
 /* aceite = URL de 1 clique da Hotmart do Diagnóstico.
-   recusa = para onde vai quem diz não. Hoje aponta para a área de membros /
-            obrigado do 90D. NÃO existe downsell aqui: a mecânica de "metade
-            do preço, metade do acesso" da esteira não existe numa call de
-            uma hora, e cortar a hora pela metade estraga o produto.
+   recusa = para onde vai quem diz não (obrigado / área de membros do 90D).
+   NÃO existe downsell: "metade do preço, metade do acesso" não existe numa
+   call de uma hora, e cortar a hora pela metade estraga o produto.
    ⚠️ Enquanto o aceite tiver SUBSTITUIR, o botão avisa em vez de navegar. */
 window.OFERTA = {
   aceite: 'https://pay.hotmart.com/SUBSTITUIR-DIAGNOSTICO',
@@ -397,14 +355,16 @@ window.OFERTA = {
      PENDÊNCIAS PARA ESTA PÁGINA IR AO AR
      1. Link de 1 clique da Hotmart do Diagnóstico (aceite) e a URL de
         obrigado/membros do 90D (recusa). Os dois estão SUBSTITUIR.
-     2. Preço: 597 ou 697. Está em 597, em um lugar só (o card), mais o
-        parcelamento e o `valor` do objeto OFERTA.
-     3. O formulário pós-compra não existe. A página promete ele em dois
-        lugares (trilha e FAQ).
-     4. Regra de reembolso combinada com a operação e configurada na Hotmart.
-     5. Copy não passou pela Dany.
-     6. Não tem prova social. Os cards de prova do front são exemplos de
-        layout com dados inventados: não reaproveitar aqui.
+     2. O VÍDEO. A div .player está vazia e some sozinha. Nesta estrutura é
+        o vídeo que vende; sem ele, considerar subir a index-longa.html.
+     3. Preço: 597 ou 697. Está em 597, em quatro lugares.
+     4. A regra do abatimento no D.E. precisa ser confirmada: veio da
+        especificação de quando esta call custava R$297 e era o Upsell 3.
+     5. O formulário pós-compra não existe.
+     6. Regra de reembolso combinada com a operação e configurada na Hotmart.
+     7. Copy não passou pela Dany.
+     8. Sem prova social. Os cards de prova do front são exemplos de layout
+        com dados inventados: não reaproveitar aqui.
      ============================================================ -->
 </body>
 </html>
