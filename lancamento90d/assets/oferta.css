@@ -316,7 +316,6 @@ footer a{color:rgba(243,240,232,.8)}
 /* a interrupção vive DENTRO da frase do parabéns, não numa linha própria:
    é a mesma respiração, só muda de cor. */
 .topo .nfeche{color:#6E1A12}
-.topo .recibo{margin:10px 0 0;font-size:.92rem;color:var(--mute)}
 
 /* PERGUNTA + VÍDEO */
 .convite{text-align:center;padding-top:0}
