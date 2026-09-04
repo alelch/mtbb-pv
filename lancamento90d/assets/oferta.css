@@ -309,7 +309,10 @@ footer a{color:rgba(243,240,232,.8)}
    inteira antes de a pessoa chegar no play. */
 .topo .parabens{font-family:'Space Grotesk',sans-serif;font-weight:700;
   font-size:clamp(1.02rem,2.2vw,1.3rem);letter-spacing:-.02em;line-height:1.35;
-  max-width:56ch;margin:0 auto}
+  max-width:70ch;margin:0 auto}
+/* a quebra é manual: a interrupção fica sozinha na sua linha em vez de o
+   navegador cortá-la no meio ("mas não / feche esta página"). No estreito
+   as duas metades ainda se dobram sozinhas, o que é o certo. */
 /* a interrupção vive DENTRO da frase do parabéns, não numa linha própria:
    é a mesma respiração, só muda de cor. */
 .topo .nfeche{color:#6E1A12}
