@@ -78,8 +78,13 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
          O aviso de "o acesso está indo pro seu e-mail" foi tirado pelo cliente: a
          barra de passos já diz "Passo 1 · 90D garantido" e a frase não fazia nada
          além de ocupar linha entre o parabéns e o play. Não reintroduzir. -->
+    <!-- ⚠️ NÃO FECHAR O CICLO DE COMPRA. O script original do OTO diz que trocar
+         "parabéns, sua compra foi finalizada" por "seu pedido ainda não foi
+         concluído" aumentou conversão, e no nosso caso a frase é literalmente
+         verdadeira: a barra mostra três passos e ela está no segundo. Por isso
+         aqui NÃO se escreve "já é seu" nem "compra concluída". -->
     <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo,<br>
-    <span class="nfeche">mas não feche esta página!</span></p>
+    <span class="nfeche">mas o seu pedido ainda não está finalizado.</span></p>
   </div>
 </div>
 
@@ -136,6 +141,18 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      ============================================================ -->
 <section class="escuro">
   <div class="wrap narrow">
+    <!-- DECISÃO INTELIGENTE (passo 2 do OTO). Vem antes de amplificar a dor por um
+         motivo prático: sem ela, o bloco dos erros logo abaixo soa como "você já
+         errou". Com ela, soa como "você acertou, e agora falta uma coisa". -->
+    <p class="eyebrow">Antes de qualquer coisa</p>
+    <h2 style="max-width:22ch">Você acabou de tomar uma decisão inteligente.</h2>
+    <p style="margin-top:16px">Você comprou o Lançamento 90D porque não quer que o seu livro
+    nasça no silêncio, depois de todo esse tempo escrevendo. É exatamente isso que ele faz:
+    te dá o plano, na ordem certa, dia a dia.</p>
+    <p><strong class="grifo">Só que nenhum plano sabe qual é o seu livro.</strong></p>
+
+    <hr style="border:0;border-top:1px solid rgba(243,240,232,.16);margin:44px 0">
+
     <p class="eyebrow">Por que sozinho não dá?</p>
 
     <!-- OS DOIS ERROS CAROS. Vêm antes da cena de propósito: eles tornam a
@@ -271,6 +288,28 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 </section>
 
 <!-- ============================================================
+     A PERGUNTA (passo 3 do OTO) E O EXCLUSIVO (passo 4)
+     A pergunta do script é de VELOCIDADE. Na nossa estrutura, que é Done For
+     You, a dor não é tempo, é incerteza: então a pergunta é em quantas
+     DECISÕES ERRADAS, com o tempo entrando junto. O exclusivo é o do script e
+     é honesto sem inventar escassez: esta oferta só existe para quem acabou
+     de comprar o 90D.
+     ============================================================ -->
+<section>
+  <div class="wrap narrow">
+    <h2 style="max-width:24ch">Você vai descobrir tudo isso de qualquer jeito.</h2>
+    <p style="margin-top:16px">A pergunta é o preço que você vai pagar pela descoberta.
+    Descobrir errando custa dois anos e três decisões que não voltam atrás. Descobrir
+    perguntando para quem já viu isso <strong class="grifo">custa uma hora, esta
+    semana.</strong></p>
+    <p>E esta oferta não é para todo mundo. Ela não está em lugar nenhum do site e não se
+    compra avulsa: <b>ela aparece só aqui, para quem acabou de comprar o 90D.</b> Você já
+    provou que não fica só pensando no assunto, e é com esse tipo de autor que a gente quer
+    sentar.</p>
+  </div>
+</section>
+
+<!-- ============================================================
      PREÇO 1
      ⚠️ PREÇO: o cliente deu a faixa 597 a 697. Está em 597. Muda em quatro
      lugares nesta página (três blocos .fecha e o objeto OFERTA no fim).
@@ -375,15 +414,21 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         <h3>Os seus próximos passos</h3>
         <p>Onde o livro está no processo editorial e o que falta (leitura crítica, revisão, o
         tipo de publicação mais apropriado para o seu caso). O que faz sentido você publicar
-        nas suas redes. E <b>três frentes de lançamento escolhidas para o seu livro</b>, entre
-        estas:</p>
+        nas suas redes. E a parte que quase ninguém consegue fazer sozinho: <b>de quinze
+        frentes de lançamento possíveis, escolher as três do seu livro.</b></p>
+        <p style="font-size:.95rem">Todo autor conhece a lista. O problema nunca foi a lista,
+        foi saber quais três valem o seu tempo, o seu dinheiro e o seu tipo de livro. Escolher
+        três aqui é escolher <b>não fazer as outras doze</b>, e é isso que faz o lançamento
+        caber em noventa dias.</p>
         <ul class="chips">
           <li>Assessoria de imprensa</li><li>Influenciadores</li><li>Eventos literários</li>
           <li>Eventos do seu nicho</li><li>Prêmios e concursos</li><li>Vendas para empresas</li>
           <li>Vendas para escolas</li><li>Editais</li><li>Patrocínios</li>
           <li>Prefácio estratégico</li><li>Endossos</li><li>Campanha de lista</li>
           <li>Mapeamento de contatos</li><li>Redes sociais</li><li>UGC</li>
-        </ul></li>
+        </ul>
+        <p style="font-size:.95rem;margin-top:14px">E isso é só uma das coisas que acontecem
+        dentro da hora.</p></li>
       <li><span class="min">10 min</span>
         <h3>As suas dúvidas, e uma conversa honesta no fim</h3>
         <p>No fim, se o seu caso for de alguma coisa que a gente faz, a gente te conta como
@@ -406,17 +451,21 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      ============================================================ -->
 <section class="escuro">
   <div class="wrap narrow">
-    <p class="eyebrow">E você ainda leva isto</p>
-    <h2>A hora acaba. O que você levou dela, não.</h2>
-    <ul class="entregas">
-      <li><b>A gravação da chamada</b>, para rever quantas vezes quiser</li>
-      <li><b>Os seus próximos passos por escrito</b>, na ordem em que devem ser feitos</li>
-      <li><b>O tipo de publicação recomendado para o seu caso</b>, com o porquê</li>
-      <li><b>As três frentes de lançamento escolhidas para o seu livro</b>, e o que fazer em cada uma</li>
-    </ul>
-    <p style="margin-top:28px">É por isso que essa hora se paga mesmo que você nunca mais
-    fale com a gente. Você sai com uma decisão tomada em cima de informação, em vez de mais
-    um mês tentando decidir sozinho.</p>
+    <!-- EMPILHAMENTO (passo 10 do OTO): pegar a parte mais valiosa e entregá-la
+         como bônus. Aqui o bônus é honesto e não precisa de valor inventado em
+         reais: o material escrito é a única coisa da oferta que sobrevive ao
+         reembolso, e isso vale mais que um "no valor de R$X" chutado.
+         A lista de quatro entregáveis saiu daqui: ela repetia a recapitulação
+         e era a quarta lista da mesma página. O script do OTO avisa que
+         explicar tudo mata a venda. -->
+    <p class="eyebrow">E tem uma coisa que fica com você de qualquer jeito</p>
+    <h2>A hora acaba. O plano que sai dela, não.</h2>
+    <p style="margin-top:16px">Depois da chamada você recebe, por escrito, <b>os seus próximos
+    passos na ordem em que devem ser feitos</b>, mais a gravação da conversa inteira para
+    rever quando travar.</p>
+    <p><strong class="grifo">E esse material é seu mesmo se você pedir o dinheiro de
+    volta.</strong> A gente não tira. É por isso que essa hora se paga mesmo que você nunca
+    mais fale com a gente.</p>
   </div>
 </section>
 
