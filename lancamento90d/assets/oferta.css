@@ -249,17 +249,20 @@ footer a{color:rgba(243,240,232,.8)}
 .escuro .trilha p{color:rgba(243,240,232,.74)}
 
 /* a hora, minuto a minuto */
+/* > li de propósito: as etiquetas (.chips) são li DENTRO de .hora, e com
+   seletor descendente elas herdavam o grid de 64px e ficavam cortadas. */
 .hora{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:2px}
-.hora li{background:var(--card);border:1px solid var(--border);padding:18px 22px;
+.hora>li{background:var(--card);border:1px solid var(--border);padding:18px 22px;
   display:grid;grid-template-columns:64px 1fr;gap:4px 16px;align-items:baseline}
-.escuro .hora li{background:rgba(243,240,232,.05);border-color:rgba(243,240,232,.14)}
-.hora li:first-child{border-radius:var(--r) var(--r) 0 0}
-.hora li:last-child{border-radius:0 0 var(--r) var(--r)}
+.escuro .hora>li{background:rgba(243,240,232,.05);border-color:rgba(243,240,232,.14)}
+.hora>li:first-child{border-radius:var(--r) var(--r) 0 0}
+.hora>li:last-child{border-radius:0 0 var(--r) var(--r)}
 .hora .min{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.82rem;
   letter-spacing:.06em;color:var(--mute)}
 .escuro .hora .min{color:var(--ouro)}
 .hora h3{grid-column:2;color:var(--ink)}
 .escuro .hora h3{color:var(--ink-on-dark)}
+.hora .chips{grid-column:2}
 .hora p{grid-column:2;margin:6px 0 0;font-size:.96rem;color:var(--soft);line-height:1.55}
 .escuro .hora p{color:rgba(243,240,232,.74)}
 
@@ -344,7 +347,7 @@ footer a{color:rgba(243,240,232,.8)}
 .escuro .fecha .avista b{color:var(--ink-on-dark)}
 .fecha .obs{font-size:.8rem;color:var(--mute);margin:6px 0 0}
 .escuro .fecha .obs{color:rgba(243,240,232,.5)}
-.fecha .btn{margin-top:26px;max-width:520px}
+.fecha .btn{margin:26px auto 0;max-width:520px}
 .fecha .recusa{margin-top:18px}
 /* o abatimento: a âncora VERDADEIRA desta oferta */
 .abate{max-width:470px;margin:22px auto 0;padding:14px 20px;border-radius:var(--r);
@@ -354,3 +357,77 @@ footer a{color:rgba(243,240,232,.8)}
   color:rgba(243,240,232,.8)}
 .abate b{color:var(--ink)}
 .escuro .abate b{color:var(--ink-on-dark)}
+
+/* ============================================================
+   AUTORIDADE, FRENTES E BARRA FIXA
+   ============================================================ */
+
+/* Faixa de imprensa. Estática e quebrando linha de propósito: a marquee da
+   casa já mordeu duas vezes (N itens com gap = N-1 vãos, as metades ficam
+   desiguais e o translateX(-50%) pula). Aqui não tem ganho nenhum em animar. */
+.press{text-align:center;margin:30px 0 0}
+.press .rot{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:0 0 18px}
+.press .fila{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:14px 30px}
+.press img{height:calc(var(--h,36) * 1px);width:auto;opacity:.5;
+  filter:grayscale(1) contrast(.85)}
+@media(max-width:640px){.press .fila{gap:12px 20px}.press img{height:calc(var(--h,36) * .8px)}}
+
+/* As frentes de lançamento como etiquetas. Em linha corrida elas viravam uma
+   vírgula atrás da outra e a pessoa não lia até o fim; soltas, a extensão do
+   que cabe na hora é visível num relance, que é justamente o argumento. */
+.chips{display:flex;flex-wrap:wrap;align-items:flex-start;gap:7px;margin:14px 0 0;padding:0;list-style:none}
+.chips li{font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;
+  letter-spacing:-.01em;padding:6px 12px;border-radius:999px;white-space:nowrap;
+  flex:0 0 auto;   /* sem isto o flex encolhe as etiquetas e corta o texto */
+  border:1px solid var(--border);background:var(--bg);color:var(--soft)}
+.escuro .chips li{border-color:rgba(243,240,232,.18);background:rgba(243,240,232,.05);
+  color:rgba(243,240,232,.78)}
+.chips .mais{border-style:dashed;color:var(--mute)}
+
+/* Barra fixa no mobile. No desktop os quatro CTAs da página dão conta; no
+   celular a distância entre eles é de várias telas, e é lá que está o tráfego. */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:70;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(251,250,246,.97);backdrop-filter:blur(10px);
+  border-top:1px solid var(--border);display:none;align-items:center;gap:12px;
+  transform:translateY(105%);transition:transform .3s cubic-bezier(.2,.7,.3,1);
+  box-shadow:0 -8px 24px -18px rgba(0,0,0,.5)}
+.sticky.on{transform:none}
+.sticky .p{flex:0 0 auto;font-family:'Space Grotesk',sans-serif;font-weight:700;
+  line-height:1.1;font-size:.95rem;color:var(--ink)}
+.sticky .p small{display:block;font-weight:400;font-size:.74rem;color:var(--mute)}
+.sticky .btn.ouro{flex:1;padding:16px 10px;font-size:.78rem;letter-spacing:.02em}
+@media(max-width:760px){.sticky{display:flex}}
+
+/* ============================================================
+   O BLOCO DO GANHO (verde)
+   Verde é a cor da virada na paleta da casa, e este é o único momento da
+   página em que ela aparece: não é o problema (carvão) nem a mecânica
+   (marfim), é o depois. Desejo mora no que dá pra ver, então o bloco é
+   cena, não conceito.
+   ============================================================ */
+.ganho{background:var(--verde);color:#EDF4F1}
+.ganho h2,.ganho h3{color:#fff}
+.ganho .eyebrow{color:var(--ouro)}
+.ganho p{color:rgba(237,244,241,.86)}
+.ganho strong,.ganho b{color:#fff}
+.ganho .grifo{background:linear-gradient(transparent 58%,rgba(234,184,45,.55) 58%)}
+/* as cenas: uma embaixo da outra, cada uma um momento que dá pra enxergar */
+.cenas{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:20px}
+.cenas li{position:relative;padding-left:32px;font-size:clamp(1rem,2vw,1.12rem);
+  line-height:1.55;color:rgba(237,244,241,.9)}
+.cenas li:before{content:"";position:absolute;left:0;top:.62em;width:14px;height:2px;
+  background:var(--ouro)}
+.cenas li b{color:#fff}
+/* o fecho do bloco: a moeda real, em corpo maior */
+.moeda{margin:38px 0 0;padding-top:30px;border-top:1px solid rgba(237,244,241,.2);
+  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.18rem,2.8vw,1.6rem);line-height:1.3;color:#fff}
+
+/* Selo da garantia quando o bloco está numa seção escura: inverte, senão é
+   disco carvão sobre card carvão e o selo some. */
+.escuro .garantia .disco{fill:var(--ouro)}
+.escuro .garantia .num{fill:var(--carvao)}
+.escuro .garantia .dias{fill:rgba(36,35,32,.75)}
