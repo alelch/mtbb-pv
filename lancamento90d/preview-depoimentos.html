@@ -1,0 +1,109 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>5 versões da grade de depoimentos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--marfim:#F3F0E8;--carvao:#242320;--verde:#14523E;--ouro:#EAB82D;--cinza:#57544D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--marfim);color:var(--carvao);
+  font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+header{padding:44px 0 8px}
+h1{font-size:26px;margin:0 0 6px}
+header p{color:var(--cinza);margin:0;font-size:14.5px;max-width:70ch;line-height:1.5}
+section{padding:40px 0 8px;border-top:1px solid rgba(41,41,39,.12);margin-top:40px}
+.tag{display:inline-block;background:var(--verde);color:var(--marfim);font-size:12px;font-weight:700;
+  letter-spacing:.08em;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+h2{font-size:20px;margin:0 0 6px}
+.nota{color:var(--cinza);font-size:14px;margin:0 0 26px;max-width:72ch;line-height:1.55}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 18px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 22px}
+.card{display:flex;flex-direction:column;gap:10px;padding:0;border:0;background:none;
+  text-align:left;cursor:pointer;font:inherit;color:inherit}
+.th{position:relative;display:block;border-radius:14px;overflow:hidden;background:var(--carvao)}
+.th img{display:block;width:100%;height:auto;transition:filter .28s,transform .4s}
+.th:after{content:'';position:absolute;inset:0;border-radius:14px;
+  box-shadow:inset 0 0 0 1px rgba(41,41,39,.3);pointer-events:none}
+.nome{font-weight:700;font-size:15.5px}
+.obj{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cinza)}
+/* play */
+.pl{position:absolute;border-radius:50%;background:rgba(36,35,32,.8);transition:background .25s,transform .25s}
+.pl:after{content:'';position:absolute;border-style:solid;border-color:transparent;
+  border-left-color:var(--marfim);border-width:9px 0 9px 14px}
+.pl.mid{left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px}
+.pl.mid:after{left:21px;top:17px}
+.pl.canto{right:12px;bottom:12px;width:42px;height:42px}
+.pl.canto:after{left:17px;top:12px;border-width:8px 0 8px 12px}
+.card:hover .pl{background:var(--ouro);transform:scale(1.08)}
+.card:hover .pl:after{border-left-color:var(--carvao)}
+/* A */
+.vA .th img{filter:none}
+.vA:hover .th img{transform:scale(1.03)}
+/* B */
+.vB{background:#FBFAF6;border:1px solid rgba(41,41,39,.13);border-radius:18px;padding:14px 14px 16px;
+  gap:12px;transition:box-shadow .25s,transform .25s}
+.vB:hover{box-shadow:0 14px 30px -14px rgba(41,41,39,.3);transform:translateY(-3px)}
+.vB .th{border-radius:11px}.vB .th:after{border-radius:11px}
+/* C */
+.vC .pill{position:absolute;left:10px;top:10px;z-index:2;background:rgba(36,35,32,.9);
+  color:var(--marfim);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:6px 11px;border-radius:999px}
+.vC .th img{filter:brightness(.94)}
+.vC:hover .th img{filter:none;transform:scale(1.03)}
+/* D */
+.vD .bar{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;z-index:2;
+  background:linear-gradient(transparent,rgba(20,19,17,.88));
+  color:#fff;font-weight:700;font-size:15px}
+.vD:hover .th img{transform:scale(1.04)}
+/* E */
+.vE .th{border-radius:16px}.vE .th:after{border-radius:16px}
+.vE .pl.mid{width:64px;height:64px;margin:-32px 0 0 -32px}
+.vE .pl.mid:after{left:26px;top:21px;border-width:11px 0 11px 17px}
+.vE .nome{font-size:17px}
+.vE:hover .th img{transform:scale(1.02)}
+@media(max-width:820px){.g3,.g2{grid-template-columns:1fr}}
+</style></head><body>
+<div class="wrap">
+<header>
+  <h1>Grade de depoimentos: 5 versões</h1>
+  <p>Mesmas 6 thumbs, mesmo lightbox. O que muda é onde fica o play, se existe etiqueta de objeção,
+     onde mora o nome e o tamanho do card. O problema que todas resolvem: na versão no ar o play fica
+     no centro e cobre a manchete da thumb.</p>
+</header>
+<div id="app"></div>
+</div>
+<script>
+var D=[
+ ['Não sou do meio editorial','ingrid','Ingrid Azevedo'],
+ ['Meu gênero é muito de nicho','bernardo','Bernardo Stamato'],
+ ['Meu livro já saiu e não vendeu','tom','Tom Orgad'],
+ ['E se o meu livro encalhar?','profinho2','Vinicius Profinho'],
+ ['Já lancei uma vez e desisti','angelica','Maria Angélica Almeida'],
+ ['Livro técnico vende pouco','nei','Nei Santa Barbara']];
+
+function img(s,n){return '<img src="assets/depo-vid-'+s+'.webp" alt="Depoimento de '+n+'" loading="lazy" width="720" height="405">'}
+
+var V=[
+ {id:'A',t:'Play no canto, etiqueta em cima',
+  n:'Mudança mínima em relação ao que está no ar: o play sai do centro e vai pro canto, e a thumb deixa de ser escurecida. A manchete fica inteira legível. É a versão mais conservadora.',
+  g:'g3',f:function(d){return '<button class="card vA"><span class="obj">'+d[0]+'</span><span class="th">'+img(d[1],d[2])+'<span class="pl canto"></span></span><span class="nome">'+d[2]+'</span></button>'}},
+ {id:'B',t:'Card com moldura e fundo',
+  n:'Cada depoimento vira um objeto, não uma imagem solta na página. Ganha peso e sobe no hover. Custa mais altura vertical.',
+  g:'g3',f:function(d){return '<button class="card vB"><span class="obj">'+d[0]+'</span><span class="th">'+img(d[1],d[2])+'<span class="pl canto"></span></span><span class="nome">'+d[2]+'</span></button>'}},
+ {id:'C',t:'Etiqueta como pílula sobre a thumb',
+  n:'A objeção entra dentro da imagem, no canto superior. Some uma linha de texto acima de cada card e a etiqueta passa a pertencer à foto, em vez de flutuar solta.',
+  g:'g3',f:function(d){return '<button class="card vC"><span class="th"><span class="pill">'+d[0]+'</span>'+img(d[1],d[2])+'<span class="pl canto"></span></span><span class="nome">'+d[2]+'</span></button>'}},
+ {id:'D',t:'Nome dentro da imagem, sem texto embaixo',
+  n:'A mais limpa e a mais compacta: zero texto fora da thumb. Vira galeria de vídeo. Perde a etiqueta de objeção, que é o que organizava a seção por medo do leitor.',
+  g:'g3',f:function(d){return '<button class="card vD"><span class="th">'+img(d[1],d[2])+'<span class="pl canto"></span><span class="bar">'+d[2]+'</span></span></button>'}},
+ {id:'E',t:'Duas colunas, thumbs grandes',
+  n:'Menos cards por linha, imagem quase o dobro. As manchetes ficam de fato legíveis sem esforço e o rosto aparece. Custa o triplo de rolagem.',
+  g:'g2',f:function(d){return '<button class="card vE"><span class="obj">'+d[0]+'</span><span class="th">'+img(d[1],d[2])+'<span class="pl mid"></span></span><span class="nome">'+d[2]+'</span></button>'}}
+];
+document.getElementById('app').innerHTML=V.map(function(v){
+  return '<section><span class="tag">VERSÃO '+v.id+'</span><h2>'+v.t+'</h2><p class="nota">'+v.n+
+    '</p><div class="'+v.g+'">'+D.map(v.f).join('')+'</div></section>';
+}).join('');
+</script></body></html>
