@@ -806,7 +806,8 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 /* ---------- corte ---------- */
 
 /* ---------- casos ---------- */
-@media(max-width:860px){.casos{grid-template-columns:1fr}}
+@media(max-width:860px){.casos{grid-template-columns:1fr}
+.vcasos{grid-template-columns:1fr;gap:22px}}
 /* CASOS: o resultado é o elemento visual do card, não uma nota de rodapé.
    Isso já estava decidido e comentado no CSS, mas uma segunda regra .caso .res
    mais abaixo no arquivo derrubava calada: 1,5rem virava 1rem.
@@ -1233,74 +1234,68 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         É sobre estratégia.</p>
     </div>
   </div>
-  <!-- CASOS REAIS. Fonte: depoimentos em vídeo no canal do TBB (transcritos em
-       ~/Claude Code/tbb_yt/). Cada fala é LITERAL. Cada card linka o vídeo.
-       ⚠️ NÃO inventar "o que fez" nem "tempo": as versões anteriores tinham essas
-       duas linhas fabricadas nos três casos. Só entra o que a pessoa disse.
-       ⚠️ Tom Orgad: NUNCA escrever "esgotou" (ele se corrige pra "quase esgotou"). -->
+  <!-- DEPOIMENTOS EM VIDEO. A thumb de cada video ja' e' um card desenhado da casa
+       (rosto + capa do livro + manchete + nome), entao o card NAO leva prosa: a imagem
+       carrega a mensagem. Clique abre lightbox com o video embutido, sem tirar a
+       pessoa da pagina. Fonte das falas e checagem: ~/Claude Code/tbb_yt/.
+       ⚠️ NAO trocar por bloco de texto: ja' foi tentado e depoimento sem rosto vira
+       alegacao escrita. ⚠️ Tom Orgad: nunca escrever "esgotou" em copy sobre ele. -->
   <div class="wrap">
-    <div class="casos rv">
-        <article class="caso">
-          <span class="caso-obj">Não sou do meio editorial</span>
-          <p class="caso-res"><b>Quase 600 livros</b><span>vendidos na pré-venda, antes do lançamento</span></p>
-          <ul class="caso-arco">
-            <li><b>Antes:</b> escrevia artigos científicos por profissão. "É um mundo muito afastado do meu trabalho."</li>
-          </ul>
-          <blockquote class="caso-fala">Em dez dias de pré-venda, a Amazon comprou todo o meu estoque. E como eu tinha dois lançamentos marcados, em São Paulo e em Natal, eu precisei dobrar o pedido.</blockquote>
-          <p class="caso-nome">Ingrid Azevedo<span>não ficção</span></p>
-          <a class="caso-ver" href="https://youtu.be/2F1UOQsCClE" target="_blank" rel="noopener">ver o depoimento</a>
-        </article>
-        <article class="caso">
-          <span class="caso-obj">Tenho seguidores e não vendo</span>
-          <p class="caso-res"><b>De uma vez por mês<br>para toda semana</b><span>indo aos Correios despachar livro</span></p>
-          <ul class="caso-arco">
-            <li><b>Antes:</b> era o autor que mais vendia no stand da editora na Bienal de 2019, e mesmo assim travava no digital.</li>
-          </ul>
-          <blockquote class="caso-fala">Mesmo com perfil de vinte mil seguidores, eu não conseguia converter eles para leitores. Se antes eu ia nos Correios uma vez por mês, agora tô toda semana tendo que ter esse trabalho.</blockquote>
-          <p class="caso-nome">Bernardo Stamato<span>ficção, autor desde 2018</span></p>
-          <a class="caso-ver" href="https://youtu.be/5uv3bdkpDp0" target="_blank" rel="noopener">ver o depoimento</a>
-        </article>
-        <article class="caso">
-          <span class="caso-obj">Meu livro já saiu e não vendeu</span>
-          <p class="caso-res"><b>O mais vendido do stand</b><span>na Bienal do Rio de 2023</span></p>
-          <ul class="caso-arco">
-            <li><b>Antes:</b> lançou sozinho, saiu na Globo, e mesmo assim praticamente não vendia.</li>
-          </ul>
-          <blockquote class="caso-fala">Eu fui atrás depois de ter lançado o livro, para ver se ainda tem como salvar o trabalho, para não ficar mais um livro esquecido.</blockquote>
-          <p class="caso-nome">Tom Orgad<span>autoficção</span></p>
-          <a class="caso-ver" href="https://youtu.be/tTDZn4djQlk" target="_blank" rel="noopener">ver o depoimento</a>
-        </article>
-        <article class="caso">
-          <span class="caso-obj">E se o meu livro encalhar?</span>
-          <p class="caso-res"><b>8.000 cópias</b><span>e um dos dez livros de educação mais vendidos do país</span></p>
-          <ul class="caso-arco">
-            <li><b>Antes:</b> foi chamado pela editora pra escrever e travou de medo antes de começar.</li>
-          </ul>
-          <blockquote class="caso-fala">Fiquei com muito medo no começo, que o livro não vendesse, que ficasse encalhado, e que eu não fosse chamado mais para escrever nenhum outro livro.</blockquote>
-          <p class="caso-nome">Vinicius Profinho<span>educação</span></p>
-          <a class="caso-ver" href="https://youtu.be/ffBPbjjEWd4" target="_blank" rel="noopener">ver o depoimento</a>
-        </article>
-        <article class="caso">
-          <span class="caso-obj">Já lancei uma vez e desisti</span>
-          <p class="caso-res"><b>Voltou a escrever</b><span>depois de oito anos parada</span></p>
-          <ul class="caso-arco">
-            <li><b>Antes:</b> lançou o primeiro livro em 2015 e parou.</li>
-          </ul>
-          <blockquote class="caso-fala">Fiz o lançamento bonito, a família toda gostou, os amigos, falou-se disso por algum tempo. Depois o livro morreu, e eu também parei de escrever. Fiquei oito anos parada.</blockquote>
-          <p class="caso-nome">Maria Angélica Almeida<span>68 anos, professora aposentada</span></p>
-          <a class="caso-ver" href="https://youtu.be/wekFwnxZwx8" target="_blank" rel="noopener">ver o depoimento</a>
-        </article>
-        <article class="caso">
-          <span class="caso-obj">Livro técnico vende pouco</span>
-          <p class="caso-res"><b>Lotes de 100 e de 300</b><span>vendidos direto para empresas</span></p>
-          <ul class="caso-arco">
-            <li><b>Antes:</b> tinha capa, índice, capítulos e título prontos, feitos sozinho. Estava tudo errado.</li>
-          </ul>
-          <blockquote class="caso-fala">Eu recebi aqui no escritório uma pessoa que viu o livro numa empresa, comprou, entrou em contato comigo, veio aqui e contratou o nosso trabalho a partir do livro.</blockquote>
-          <p class="caso-nome">Nei Santa Barbara<span>gestão e processos</span></p>
-          <a class="caso-ver" href="https://youtu.be/2-OV8goHWao" target="_blank" rel="noopener">ver o depoimento</a>
-        </article>
+    <div class="vcasos rv">
+      <button class="vcaso" type="button" data-yt="2F1UOQsCClE" aria-label="Ver o depoimento de Ingrid Azevedo">
+        <span class="vcaso-obj">Não sou do meio editorial</span>
+        <span class="vcaso-thumb">
+          <img src="assets/depo-vid-ingrid.webp" alt="Depoimento de Ingrid Azevedo" loading="lazy" width="720" height="405">
+          <span class="vcaso-play" aria-hidden="true"></span>
+        </span>
+        <span class="vcaso-nome">Ingrid Azevedo<span>não ficção</span></span>
+      </button>
+      <button class="vcaso" type="button" data-yt="5uv3bdkpDp0" aria-label="Ver o depoimento de Bernardo Stamato">
+        <span class="vcaso-obj">Meu gênero é muito de nicho</span>
+        <span class="vcaso-thumb">
+          <img src="assets/depo-vid-bernardo.webp" alt="Depoimento de Bernardo Stamato" loading="lazy" width="720" height="405">
+          <span class="vcaso-play" aria-hidden="true"></span>
+        </span>
+        <span class="vcaso-nome">Bernardo Stamato<span>ficção</span></span>
+      </button>
+      <button class="vcaso" type="button" data-yt="tTDZn4djQlk" aria-label="Ver o depoimento de Tom Orgad">
+        <span class="vcaso-obj">Meu livro já saiu e não vendeu</span>
+        <span class="vcaso-thumb">
+          <img src="assets/depo-vid-tom.webp" alt="Depoimento de Tom Orgad" loading="lazy" width="720" height="405">
+          <span class="vcaso-play" aria-hidden="true"></span>
+        </span>
+        <span class="vcaso-nome">Tom Orgad<span>autoficção</span></span>
+      </button>
+      <button class="vcaso" type="button" data-yt="ffBPbjjEWd4" aria-label="Ver o depoimento de Vinicius Profinho">
+        <span class="vcaso-obj">E se o meu livro encalhar?</span>
+        <span class="vcaso-thumb">
+          <img src="assets/depo-vid-profinho2.webp" alt="Depoimento de Vinicius Profinho" loading="lazy" width="720" height="405">
+          <span class="vcaso-play" aria-hidden="true"></span>
+        </span>
+        <span class="vcaso-nome">Vinicius Profinho<span>educação</span></span>
+      </button>
+      <button class="vcaso" type="button" data-yt="wekFwnxZwx8" aria-label="Ver o depoimento de Maria Angélica Almeida">
+        <span class="vcaso-obj">Já lancei uma vez e desisti</span>
+        <span class="vcaso-thumb">
+          <img src="assets/depo-vid-angelica.webp" alt="Depoimento de Maria Angélica Almeida" loading="lazy" width="720" height="405">
+          <span class="vcaso-play" aria-hidden="true"></span>
+        </span>
+        <span class="vcaso-nome">Maria Angélica Almeida<span>68 anos</span></span>
+      </button>
+      <button class="vcaso" type="button" data-yt="2-OV8goHWao" aria-label="Ver o depoimento de Nei Santa Barbara">
+        <span class="vcaso-obj">Livro técnico vende pouco</span>
+        <span class="vcaso-thumb">
+          <img src="assets/depo-vid-nei.webp" alt="Depoimento de Nei Santa Barbara" loading="lazy" width="720" height="405">
+          <span class="vcaso-play" aria-hidden="true"></span>
+        </span>
+        <span class="vcaso-nome">Nei Santa Barbara<span>gestão</span></span>
+      </button>
     </div>
+  </div>
+
+  <div class="lbox" id="lbox" hidden>
+    <button class="lbox-x" type="button" aria-label="Fechar o vídeo">&times;</button>
+    <div class="lbox-in"><div id="lboxSlot"></div></div>
   </div>
 
   <!-- as copias existem so' pra emenda do carrossel: aria-hidden inteiras,
@@ -2231,18 +2226,41 @@ footer{background:#242320 !important}
 .caso-arco li{padding:7px 0;border-top:1px solid rgba(41,41,39,.08)}
 .caso-arco li:first-child{border-top:0}
 .caso-arco b{color:#292927}
-.caso-fala{margin:0 0 14px;padding:14px 16px;border-left:3px solid #EAB82D;
-  background:rgba(234,184,45,.08);border-radius:0 10px 10px 0;
-  font-size:14px;line-height:1.55;color:#292927;font-style:italic}
-.caso-fala:before{content:'\201C'}.caso-fala:after{content:'\201D'}
-.caso-nome span{display:block;font-weight:400;font-size:12.5px;color:#57544D;letter-spacing:0;margin-top:2px}
-.caso-ver{margin-top:auto;padding-top:12px;font-size:12.5px;font-weight:600;color:#14523E;
-  text-decoration:none;border-bottom:1px solid rgba(20,82,62,.3);align-self:flex-start;
-  transition:border-color .2s}
-.caso-ver:hover{border-bottom-color:#14523E}
-.caso-ver:after{content:' \2197'}
+.vcasos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 18px;margin-top:6px}
+.vcaso{display:flex;flex-direction:column;gap:10px;padding:0;border:0;background:none;
+  text-align:left;cursor:pointer;font:inherit;color:inherit}
+.vcaso-obj{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:#57544D}
+.vcaso-thumb{position:relative;display:block;border-radius:14px;overflow:hidden;
+  background:#242320;box-shadow:0 2px 0 rgba(41,41,39,.06)}
+.vcaso-thumb img{display:block;width:100%;height:auto;
+  filter:brightness(.82) saturate(.9);transition:filter .25s,transform .35s}
+.vcaso-thumb:after{content:'';position:absolute;inset:0;border-radius:14px;
+  box-shadow:inset 0 0 0 1px rgba(41,41,39,.35);pointer-events:none}
+.vcaso-play{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;
+  border-radius:50%;background:rgba(36,35,32,.78);backdrop-filter:blur(2px);
+  box-shadow:0 4px 16px rgba(0,0,0,.3);transition:background .25s,transform .25s}
+.vcaso-play:after{content:'';position:absolute;left:21px;top:16px;
+  border-left:17px solid #F3F0E8;border-top:11px solid transparent;border-bottom:11px solid transparent}
+.vcaso:hover .vcaso-thumb img,.vcaso:focus-visible .vcaso-thumb img{filter:none;transform:scale(1.03)}
+.vcaso:hover .vcaso-play{background:#EAB82D;transform:scale(1.08)}
+.vcaso:hover .vcaso-play:after{border-left-color:#242320}
+.vcaso:focus-visible{outline:2px solid #14523E;outline-offset:6px;border-radius:16px}
+.vcaso-nome{font-weight:700;font-size:15px;color:#292927;line-height:1.3}
+.vcaso-nome span{display:block;font-weight:400;font-size:12.5px;color:#57544D;margin-top:1px}
+.lbox{position:fixed;inset:0;z-index:9999;background:rgba(20,19,17,.92);
+  display:grid;place-items:center;padding:20px}
+.lbox[hidden]{display:none}
+.lbox-in{width:min(980px,100%);aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+  background:#000;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.lbox-in iframe{display:block;width:100%;height:100%;border:0}
+.lbox-x{position:absolute;top:18px;right:22px;width:44px;height:44px;border-radius:50%;
+  border:0;background:rgba(243,240,232,.14);color:#F3F0E8;font-size:26px;line-height:1;
+  cursor:pointer;transition:background .2s}
+.lbox-x:hover{background:rgba(243,240,232,.3)}
 .caso-nome{margin:14px 0 0;font-weight:700;color:#292927;font-size:15px}
-@media(max-width:760px){.casos{grid-template-columns:1fr}}
+@media(max-width:760px){.casos{grid-template-columns:1fr}
+.vcasos{grid-template-columns:1fr;gap:22px}}
 </style>
 <script>
 /* tabela hoje×agora: acende linha por linha no scroll (o "aceso" migra do hoje pro agora) */
@@ -2263,6 +2281,31 @@ footer{background:#242320 !important}
       es.forEach(function(e){ t.classList.toggle('mob-on', e.isIntersecting || e.boundingClientRect.top < 0); });
     },{rootMargin:'0px 0px -20% 0px'}).observe(alvo); }
   }
+})();
+</script>
+
+<script>
+/* lightbox dos depoimentos: o iframe so' nasce no clique (nada de 6 players
+   carregando junto com a pagina) e morre no fechamento, que e' o que para o audio */
+(function(){
+  var box=document.getElementById('lbox'), slot=document.getElementById('lboxSlot'), last=null;
+  if(!box) return;
+  function abrir(id,btn){
+    last=btn;
+    slot.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+
+      '?autoplay=1&rel=0&modestbranding=1" title="Depoimento" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    box.hidden=false; document.body.style.overflow='hidden';
+    box.querySelector('.lbox-x').focus();
+  }
+  function fechar(){
+    box.hidden=true; slot.innerHTML=''; document.body.style.overflow='';
+    if(last) last.focus();
+  }
+  document.querySelectorAll('.vcaso').forEach(function(b){
+    b.addEventListener('click',function(){abrir(b.dataset.yt,b)});
+  });
+  box.addEventListener('click',function(e){ if(e.target===box||e.target.closest('.lbox-x')) fechar(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!box.hidden) fechar(); });
 })();
 </script>
 </body>
