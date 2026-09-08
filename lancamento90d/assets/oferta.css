@@ -489,3 +489,25 @@ body.curta .faq p{color:rgba(243,240,232,.72)}
 body.curta .faq details{border-bottom-color:rgba(243,240,232,.14)}
 body.curta .faq summary:after{color:rgba(243,240,232,.5)}
 body.curta .recusa{color:var(--mute)}
+
+/* ============================================================
+   A MATEMÁGICA (08/09). A espinha da oferta em duas linhas: a primeira soma
+   dá no resultado que o autor teme (esquecido: vocabulário-âncora da marca),
+   a segunda no que ele quer. O leitor completa a conta sozinho, que é o
+   mesmo mecanismo da "pergunta 3x" do OTO.
+   ============================================================ */
+.mate{margin:26px auto 0;max-width:640px;display:grid;gap:10px}
+.mate .l{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;
+  padding:16px 20px;border-radius:var(--r);border:1px solid rgba(243,240,232,.14);
+  background:rgba(243,240,232,.05);font-family:'Space Grotesk',sans-serif;font-weight:700;
+  letter-spacing:-.02em;font-size:clamp(.95rem,1.9vw,1.08rem);color:var(--ink-on-dark)}
+.mate .l .eq{color:rgba(243,240,232,.45);font-weight:400}
+.mate .l .r{text-align:left}
+.mate .l.ruim .r{color:rgba(243,240,232,.55)}
+.mate .l.bom{border-color:rgba(234,184,45,.45);background:rgba(234,184,45,.08)}
+.mate .l.bom .r{color:var(--ouro)}
+@media(max-width:560px){
+  .mate .l{grid-template-columns:1fr;gap:4px;text-align:center}
+  .mate .l .eq{display:none}
+  .mate .l .r{text-align:center}
+}
