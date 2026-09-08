@@ -30,8 +30,8 @@ const STAGES_VALID = new Set(["escrevendo", "lancando", "publicado"]);
 const VARIANTS_VALID = new Set(["checkout", "lista"]);
 
 // ES (produto internacional, so preco): estrutura SEPARADA do BR. Preencher apos criar no AC.
-const ES_LIST_ID: number | null = null;        // lista "MTBB ES (internacional)"
-const ES_TAG_CHECKOUT: number | null = null;   // tag "MTBB ES - Finalizou Pre Checkout"
+const ES_LIST_ID: number | null = 13;          // lista "MTBB ES (internacional)" (criada 2026-09-08)
+const ES_TAG_CHECKOUT: number | null = 360;    // tag "MTBB ES - Finalizou Pre Checkout" (criada 2026-09-08)
 const ES_TAG_NAME_FALLBACK = "MTBB ES - Finalizou Pre Checkout"; // find-or-create se o id nao estiver setado
 
 const CORS_HEADERS = {
