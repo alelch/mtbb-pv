@@ -27,7 +27,6 @@ TROCAS = [
     # 1. preço e oferta
     ('<span class="cur">R$</span>697', '<span class="cur">R$</span>597'),
     ('os R$697 são abatidos', 'os R$597 são abatidos'),
-    ('R$697 por uma conversa é caro', 'R$597 por uma conversa é caro'),
     ('<div class="p">R$697<small>', '<div class="p">R$597<small>'),
     ('não custa seiscentos reais', 'não custa quinhentos reais'),
     ('?off=n740dj0b', '?off=8rn7djuk'),

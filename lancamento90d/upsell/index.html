@@ -51,10 +51,16 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <body>
 
 <!-- ============================================================
-     BARRA DE PASSOS
-     A peça estrutural mais importante da página. Ela diz que isto é uma
-     etapa do checkout, não uma página de vendas nova.
+     ESTRUTURA (08/09): a página foi CORTADA DE 13 PARA 9 SEÇÕES e de ~2.500
+     para ~1.000 palavras, a pedido do cliente: "nenhuma página nossa é assim,
+     nossas páginas são tiros curtos e certeiros". A referência continua sendo
+     a página de upsell da Prisciane (uma tela de texto). Quem vende é o VÍDEO;
+     a página é moldura. Cada bloco tem UMA ideia e cabe numa respiração.
+     A versão de 13 seções está preservada em index-longa-v2.html, com todo o
+     raciocínio de cada bloco nos comentários. Antes de acrescentar qualquer
+     coisa aqui, ler lá o porquê de ter saído.
      ============================================================ -->
+
 <nav class="passos" aria-label="Etapas da sua compra">
   <div class="wrap">
     <ol>
@@ -65,348 +71,144 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </nav>
 
-<!-- ============================================================
-     PARABÉNS + NÃO FECHE
-     ============================================================ -->
+<!-- não fechar o ciclo de compra: "já é seu" derruba conversão (script OTO) -->
 <div class="topo">
   <div class="wrap">
-    <!-- UMA FRASE SÓ, num fôlego só: a vitória e a interrupção grudadas, como na
-         página da Prisciane. E a vitória é a TRANSFORMAÇÃO ("o caminho para o seu
-         livro estrear vendendo"), não o recibo da operação. A versão anterior dizia
-         "os dados de acesso estão indo para o seu e-mail" no lugar de maior atenção
-         da página, que é informação de suporte e esfria tudo.
-         O aviso de "o acesso está indo pro seu e-mail" foi tirado pelo cliente: a
-         barra de passos já diz "Passo 1 · 90D garantido" e a frase não fazia nada
-         além de ocupar linha entre o parabéns e o play. Não reintroduzir. -->
-    <!-- ⚠️ NÃO FECHAR O CICLO DE COMPRA. O script original do OTO diz que trocar
-         "parabéns, sua compra foi finalizada" por "seu pedido ainda não foi
-         concluído" aumentou conversão, e no nosso caso a frase é literalmente
-         verdadeira: a barra mostra três passos e ela está no segundo. Por isso
-         aqui NÃO se escreve "já é seu" nem "compra concluída". -->
     <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo,<br>
     <span class="nfeche">mas o seu pedido ainda não está finalizado.</span></p>
   </div>
 </div>
 
-<!-- ============================================================
-     A PERGUNTA + O VÍDEO
-     ⚠️ O player está vazio. Com o embed vazio o bloco some sozinho, sem
-     deixar buraco na página (mesmo comportamento do front). Ao gravar o
-     vídeo, colar o embed dentro da div .player.
-     ============================================================ -->
+<!-- a H1 é do cliente. NÃO descrever a oferta aqui: é o vídeo que vende. -->
 <section class="hero convite">
   <div class="wrap">
     <h1>A gente, trabalhando junto no seu livro. Quer?</h1>
-    <!-- A H1 é do cliente. Ela troca AVALIAÇÃO ("um especialista olha e julga o seu
-         livro") por TRABALHO CONJUNTO, que assusta menos quem já tem medo de ouvir
-         que o livro não presta.
-         ⚠️ NÃO DESCREVER A OFERTA AQUI. Eu tinha posto o "uma hora no Zoom com o
-         time, pra sair sabendo o próximo passo" nesta linha e o cliente cortou, com
-         razão: nesta estrutura a página é moldura e quem vende é o VÍDEO. Entregar
-         a oferta antes do play tira o motivo de dar play. A linha de apoio só
-         empurra pro vídeo, igual à da Prisciane. -->
     <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
-    <!-- ⚠️ EMBED DO VÍDEO DE UPSELL VAI DENTRO DA DIV ABAIXO. Enquanto ela estiver
-         vazia o CSS mostra uma moldura tracejada avisando, para ninguém publicar a
-         página achando que o vídeo está no ar. Ao colar o embed, a moldura some.
-         ATENÇÃO: a regra é :empty, e :empty quebra com espaço em branco. A div
-         precisa continuar numa linha só, sem quebra entre as tags. -->
+    <!-- embed do vídeo dentro da div, numa linha só: a regra é :empty -->
     <div class="player" id="vsl"></div>
   </div>
 </section>
 
 <!-- ============================================================
-     O ARGUMENTO, CURTO
-     Existe porque nem todo mundo assiste o vídeo.
-
-     🚫 AQUI TINHA O PARÁGRAFO EMBARALHADO ("Vcoê leu o seu lvrio ttanas
-     vzees...") e ele foi CORTADO. Motivo, para não voltar: ele prova que o
-     cérebro conserta ERRO DE ESCRITA, o que é problema de revisão, e este
-     produto é sobre DIREÇÃO (o caminho do autor, não o caminho do livro). O
-     sinal de que estava fora do alvo era a copy ter que se desdizer logo
-     depois ("e não é só o texto, é a estratégia"). E ele convidava a objeção
-     "meu livro já passou por revisão profissional", que mata o argumento.
-     Ele continua ótimo, só que para um produto sobre o livro em si; se a
-     vitrine ("O Livro Pronto Para Vender") voltar como upsell, é lá que ele
-     deve morar. A versão com ele está preservada em index-longa.html.
-
-     No lugar entra a cena do cliente, que é melhor por três motivos: é
-     experiência vivida em vez de curiosidade científica; a Dany SE INCLUI no
-     erro ("eu já passei por isso"), que é o álibi que impede a leitora de se
-     sentir burra e sair; e os DEZ SEGUNDOS são, sem dizer, o argumento de
-     por que uma hora basta.
-     A ordem importa: a cena abre (vivência) e o gorila explica (mecanismo).
-     Invertido, vira aula. O gorila é Simons e Chabris, Harvard 1999, e é
-     real, ao contrário do "estudo de Cambridge" do texto embaralhado.
+     O PROBLEMA, EM UMA RESPIRAÇÃO
+     Decisão inteligente + o inimigo (tentativa e erro) + os dois erros caros
+     + a cena dos dez segundos. Era cinco seções; virou uma.
+     ⚠️ Meses: NOVEMBRO, DEZEMBRO E JANEIRO, na fala da Dany (minerado do
+     canal). Outubro é o último mês bom. Não inventar "melhor mês".
+     ⚠️ Editora: a Dany nunca acusa. "Não existe editora ruim, existe a que
+     alcança o seu leitor". Não afiar.
      ============================================================ -->
 <section class="escuro">
   <div class="wrap narrow">
-    <!-- DECISÃO INTELIGENTE (passo 2 do OTO). Vem antes de amplificar a dor por um
-         motivo prático: sem ela, o bloco dos erros logo abaixo soa como "você já
-         errou". Com ela, soa como "você acertou, e agora falta uma coisa". -->
-    <p class="eyebrow">Antes de qualquer coisa</p>
-    <h2 style="max-width:22ch">Você acabou de tomar uma decisão inteligente.</h2>
-    <p style="margin-top:16px">Você comprou o Lançamento 90D porque não quer que o seu livro
-    nasça no silêncio, depois de todo esse tempo escrevendo. É exatamente isso que ele faz:
-    te dá o plano, na ordem certa, dia a dia.</p>
-    <p>Só que entre <b>ter o plano</b> e <b>ter o livro vendendo</b> existe um inimigo
-    silencioso, e ele não está em plano nenhum: é a <strong class="grifo">tentativa e
-    erro</strong>. Nenhum plano sabe qual é o seu livro.</p>
-
-    <hr style="border:0;border-top:1px solid rgba(243,240,232,.16);margin:44px 0">
-
     <p class="eyebrow">Por que sozinho não dá?</p>
+    <h2>Você tomou uma decisão inteligente. Só que nenhum plano sabe qual é o seu livro.</h2>
+    <p style="margin-top:16px">Entre ter o plano e ter o livro vendendo existe um inimigo
+    silencioso: <strong class="grifo">tentativa e erro</strong>. E os erros que custam caro
+    parecem pequenos na hora.</p>
 
-    <!-- OS DOIS ERROS CAROS. Vêm antes da cena de propósito: eles tornam a
-         palavra "erro" concreta e cara ANTES de a copy afirmar que você não
-         enxerga os seus. Sem eles, "um erro custa o lançamento" é retórica.
-
-         ✅ SAZONALIDADE CORRIGIDA (04/09) COM A FALA DA PRÓPRIA DANY, minerada
-         das 197 transcrições do canal no YouTube (`~/Claude Code/tbb_yt/`).
-         Eu tinha escrito "outubro, novembro e dezembro" de cabeça: ERRADO. Ela
-         diz NOVEMBRO, DEZEMBRO E JANEIRO, e outubro é justamente o último mês
-         bom. Fontes: youtu.be/sVLzrUURJaw e youtu.be/kr4ZGQDxP7M. Falas dela:
-         "o estoque da livraria enche em novembro e não chega mais nenhum
-         caminhão", "em dezembro nenhuma livraria tá trazendo livro novo",
-         "em janeiro as livrarias se transformam em grandes papelarias por
-         conta do período de volta às aulas", "as grandes editoras lançam no
-         máximo até outubro, comecinho de novembro".
-         ⚠️ Ela se RECUSA a nomear o melhor mês ("depende do gênero do seu
-         livro, do seu público"). Não inventar um.
-         ⚠️ Data comemorativa é ruim pra LANÇAR e boa pra promoção de preço de
-         livro já lançado. Não misturar as duas coisas.
-
-         ⚠️ O ARGUMENTO DA EDITORA TEM HISTÓRICO: na VSL do 90D o cliente
-         cortou "se errar na editora, o livro nunca vende", porque briga com
-         a tese de que o lançamento é do autor e tem custo real para a Dany,
-         que trabalha com essas editoras. Aqui ele cabe, porque tipo de
-         publicação e short list de editoras estão dentro da entrega desta
-         call, mas está escrito na forma que NÃO acusa ninguém: não existe
-         editora ruim, existe a que alcança o seu leitor e a que não alcança.
-         Se afiar isso, reabre o problema que já foi fechado uma vez. -->
-    <h2 style="max-width:24ch">Um erro pode custar o sucesso do seu livro.</h2>
-    <p style="margin-top:16px">E não é um erro grande, com sinalização em volta. São duas
-    ou três decisões que parecem pequenas na hora de tomar.</p>
     <div class="duas">
       <div>
         <p class="q">O mês em que você lança</p>
-        <p>Tem mês em que lançar um livro é quase enterrar ele, e os piores são
-        <b>novembro, dezembro e janeiro</b>. O estoque da livraria enche em novembro, e
-        depois disso não chega mais caminhão: em dezembro nenhuma livraria está trazendo
-        livro novo. Em janeiro elas viram papelaria, por causa da volta às aulas. Não é à
-        toa que <b>as grandes editoras lançam no máximo até outubro</b>. Elas sabem disso, e
-        a sua data já pode estar marcada.</p>
+        <p>Novembro, dezembro e janeiro quase enterram um livro: o estoque da livraria enche
+        em novembro e <b>não chega mais caminhão</b>. As grandes editoras lançam até outubro.
+        Elas sabem. A sua data já pode estar marcada.</p>
       </div>
       <div>
         <p class="q">A editora que você escolhe</p>
-        <p>Não existe editora boa ou ruim. Existe a que consegue colocar o seu livro na
-        frente do leitor que você quer alcançar, e a que não consegue. <b>São coisas
-        diferentes, e ninguém te avisa qual é qual.</b> Escolher pelo prazo, pelo preço ou
-        porque foi a que respondeu o e-mail é como o livro vai parar num catálogo onde
-        quem procura por ele nunca vai olhar.</p>
+        <p>Não existe editora boa ou ruim. Existe <b>a que alcança o leitor que você quer</b>,
+        e a que não alcança. Ninguém te avisa qual é qual.</p>
       </div>
     </div>
-    <!-- A linha de fecho é da própria Dany, minerada do canal, e ela vale mais que
-         qualquer coisa que eu escreva: o sucesso de um livro não vem de uma grande
-         decisão, vem da sequência de boas decisões. Aparece em 3 vídeos. -->
-    <p style="margin-top:30px">O problema desses dois erros não é serem difíceis. É que
-    <span class="risco">os dois parecem certos por dentro</span>, na hora em que você
-    decide. E <b>o sucesso de um livro não vem de uma grande decisão. Vem da sequência de
-    boas decisões.</b></p>
 
-    <div class="demo">
-      <p class="txt">Você já passou por isso? Você olha o seu projeto mil vezes, revisa,
-      aprova, está tudo certo. Aí passa outra pessoa, olha dez segundos, e aponta um erro
-      que estava ali, na sua cara, o tempo todo.</p>
-      <p class="apos"><b>Eu já passei por isso mais vezes do que gostaria de admitir.</b>
-      E o pior não é o erro. É que ele estava visível o tempo inteiro, para qualquer um
-      menos para mim.</p>
-    </div>
-    <p style="margin-top:30px">Não é desatenção, e é por isso que ler de novo com mais
-    cuidado não resolve. Tem um experimento famoso em que pedem para você contar os passes
-    de um time de basquete. As pessoas contam certo, e no meio do vídeo um sujeito
-    fantasiado de gorila atravessa a quadra andando. Metade não vê. Elas não perderam por
-    falta de atenção: perderam <em>por causa</em> dela, porque estavam fazendo exatamente
-    o que foi pedido.</p>
-    <p>Faz anos que você conta os passes do seu livro. <strong class="grifo">O gorila
-    atravessa a sua página e você não vê.</strong> É a data que você escolheu para lançar,
-    o tipo de publicação que você contratou, a ordem em que você está fazendo as coisas.
-    e você nunca vai saber que foi isso, porque não existe o cenário paralelo para
-    comparar.</p>
-    <p>Ninguém enxerga o próprio projeto de fora. Nem quem escreve bem. Nem quem já publicou
-    antes. <b>Mas dez segundos de olhar de fora resolvem o que mil leituras suas não
-    resolveram.</b></p>
-
-    <!-- O POR QUE AGORA. É a peça que amarra este upsell no produto que a pessoa
-         acabou de comprar: ela não está comprando "uma call algum dia", está
-         comprando a informação que vai orientar os noventa dias que começam
-         agora. Urgência estrutural e verdadeira, sem escassez inventada. -->
-    <p style="margin-top:2.2em"><strong>E os seus noventa dias começam agora.</strong></p>
-    <p>Daqui pra frente é execução. Cada decisão que você tomar nesses três meses vai ser
-    tomada com a informação que você tem hoje, e algumas delas não voltam atrás: o mês em
-    que você lança, o tipo de publicação que você contrata, quem você chama pra ler antes.</p>
-    <p>Uma hora agora não é uma hora. <strong>É a direção dos próximos noventa dias.</strong></p>
+    <p style="margin-top:30px">Você olha o seu projeto mil vezes e está tudo certo. Outra
+    pessoa olha dez segundos e aponta o erro que estava na sua cara. <b>Eu já passei por isso
+    mais vezes do que gostaria de admitir.</b> Não é desatenção: quanto mais você olha, menos
+    você vê.</p>
+    <p><strong class="grifo">Dez segundos de olhar de fora resolvem o que mil leituras suas
+    não resolveram.</strong> E os seus noventa dias começam agora.</p>
   </div>
 </section>
 
 <!-- ============================================================
-     O GANHO (verde)
-     A página inteira até aqui é mecanismo (o gorila) e, depois, processo (a
-     hora minuto a minuto). Isso constrói CRENÇA e não constrói DESEJO. Este
-     bloco é o desejo, e ele segue duas regras que a gente já mediu neste
-     público: (1) cena vence conceito, porque desejo mora no que dá pra ver,
-     então são quatro momentos concretos e não quatro benefícios; (2) a moeda
-     do autor não é dinheiro, é poder escrever o próximo sem se justificar, e
-     é com isso que o bloco fecha.
-     O verde é a cor da virada na paleta da casa e este é o único lugar da
-     página onde ela aparece.
+     O GANHO (verde: única aparição da cor). Cena, não conceito.
+     Fecha na moeda real do autor: escrever o próximo sem se justificar.
      ============================================================ -->
 <section class="ganho">
   <div class="wrap narrow">
     <p class="eyebrow">Como é a semana depois</p>
-    <h2>Não é que você vai saber mais. É que você vai parar de carregar a dúvida.</h2>
+    <h2>Você para de carregar a dúvida.</h2>
     <ul class="cenas">
-      <li>Alguém te pergunta do que é o seu livro. Você responde em <b>duas frases</b>, sem
-      o resumo comprido que você mesma sente que não convence.</li>
-      <li>Você abre a agenda e sabe qual é a <b>próxima coisa</b>. Não a lista de trinta
-      coisas que dá pra fazer. A próxima.</li>
-      <li>Aparece um pacote de doze mil reais prometendo cuidar de tudo, e você sabe na
-      hora que <b>não é isso que o seu livro precisa agora</b>. E não compra.</li>
-      <li>Você para de acordar com a pergunta se está gastando anos num projeto que não vai
-      dar em nada. Não porque alguém te garantiu que vai. Porque <b>você finalmente sabe
-      onde ele está</b>.</li>
+      <li>Alguém pergunta do que é o seu livro. Você responde em <b>duas frases</b>.</li>
+      <li>Você abre a agenda e sabe qual é <b>a próxima coisa</b>. Não trinta. Uma.</li>
+      <li>Aparece um pacote de doze mil reais e você sabe, na hora, que <b>não é isso que o
+      seu livro precisa</b>.</li>
     </ul>
-    <p class="moeda">E lá na frente, a coisa que muda não é a venda. É poder começar o
-    próximo livro <span class="grifo">sem precisar justificar pra ninguém</span> por que
-    você está escrevendo de novo.</p>
+    <p class="moeda">E lá na frente, poder começar o próximo livro <span class="grifo">sem
+    precisar justificar pra ninguém</span> por que você está escrevendo de novo.</p>
   </div>
 </section>
 
 <!-- ============================================================
-     O CRITÉRIO DE DENTRO
-     A alavanca mais alta deste público não é volume, é o clube: a suspeita
-     de que existe alguém decidindo quais livros vão vender. Aqui ela é
-     verdadeira e verificável, porque a Dany era literalmente essa pessoa.
-     Fica curto de propósito, logo antes do preço.
-     ============================================================ -->
-<section>
-  <div class="wrap narrow">
-    <p class="eyebrow">Por que uma hora basta</p>
-    <h2 style="max-width:26ch">O que separa o livro que estreia vendendo do que faz tudo
-    certo e não acontece nada não é o plano.</h2>
-    <p style="margin-top:16px">Os dois têm o mesmo plano. A diferença é uma só:
-    <strong class="grifo">um deles foi olhado de fora antes de começar.</strong></p>
-    <p style="margin-top:2em">E não é um olhar qualquer. Existe um olhar que decide, lá
-    dentro da editora, quais livros vão receber empurrão.</p>
-    <p>Não é gosto e não é sorte: é critério, e ele é rápido. Quem trabalha com isso olha um
-    projeto e sabe, em minutos, o que está no lugar e o que vai travar.</p>
-    <p><strong class="grifo">A Dany passou quinze anos sendo a pessoa que dava esse
-    olhar.</strong> Era ela quem decidia o que a editora ia publicar e no que ia apostar. É
-    esse mesmo critério que o time usa na sua chamada, só que agora do seu lado da mesa.</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     PROVA SOCIAL
-     Casos REAIS, minerados dos depoimentos em video do canal (as 197
-     transcricoes estao em ~/Claude Code/tbb_yt/). Autorizacao de uso
-     confirmada pelo cliente em 04/09.
-     ⚠️ MOLDURA HONESTA, nao mexer: estas pessoas sao alunas do MÉTODO, nao
-     clientes da call de diagnostico. A pagina NUNCA pode sugerir "faca a call
-     e voce vira o Tom". O que e verdade, e o que esta escrito na nota abaixo
-     dos cards, e que a LEITURA e a mesma.
-     ⚠️ Tom Orgad se corrige ao vivo no video: "a primeira edicao esgotou,
-     quase esgotou". Nunca escrever "esgotou".
-     ⚠️ Sao DUAS Ingrids no canal. A do numero e a Ingrid AZEVEDO (nao ficcao).
-     A Ingrid GOMES e de fantasia e ainda nao lancou.
+     AUTORIDADE + PROVA, numa seção só.
+     Casos REAIS dos depoimentos do canal (~/Claude Code/tbb_yt/), com
+     autorização. São alunos do MÉTODO, não da call: a nota diz isso.
+     ⚠️ Tom: "esgotou, quase esgotou" no vídeo. Nunca escrever "esgotou".
+     ⚠️ A Ingrid do número é a AZEVEDO, não a Gomes.
      ============================================================ -->
 <section class="escuro">
   <div class="wrap">
-    <p class="eyebrow">Não é o livro que muda. É a ordem em que as coisas são feitas.</p>
-    <h2 style="max-width:26ch">Três autores que já passaram por essa leitura.</h2>
+    <p class="eyebrow">Quem está do outro lado</p>
+    <h2 style="max-width:26ch">Existe um olhar que decide, lá dentro da editora, quais livros
+    vão receber empurrão.</h2>
+    <p style="margin-top:16px;max-width:60ch">A Dany passou quinze anos sendo esse olhar. É
+    esse critério que o time usa na sua chamada, só que agora do seu lado da mesa. Não é
+    relatório gerado: <b>é uma pessoa lendo o seu caso antes de entrar.</b></p>
+
+    <div class="numeros">
+      <div><b>+800</b><span>livros lançados pela casa</span></div>
+      <div><b>+10 mi</b><span>de cópias vendidas pelos autores</span></div>
+      <div><b>+15</b><span>anos dentro do mercado editorial</span></div>
+    </div>
 
     <div class="provas">
       <div class="prova">
         <p class="quem">Tom Orgad</p>
-        <p class="oque">Jornalista, correspondente. Autoficção</p>
-        <p class="antes">Lançou por conta própria, antes de conhecer a Dany. <b>Saiu na Globo
-        e mesmo assim praticamente não vendia.</b> Foi atrás depois de já ter lançado, para o
-        livro não virar mais um esquecido.</p>
-        <p class="depois">Sem reescrever uma linha, o mesmo livro virou <b>o mais vendido do
-        stand dele na Bienal do Rio de 2023</b>, e a primeira edição quase esgotou.</p>
-        <p class="fala">"O mercado literário é extremamente contraintuitivo. Sem alguém de
-        dentro para te instruir como as coisas funcionam, é muito difícil acertar."</p>
+        <p class="oque">Autoficção</p>
+        <p class="antes">Saiu na Globo e mesmo assim <b>praticamente não vendia</b>.</p>
+        <p class="depois">Sem reescrever uma linha, virou <b>o mais vendido do stand na
+        Bienal do Rio 2023</b>.</p>
         <a class="link" href="https://youtu.be/tTDZn4djQlk" target="_blank" rel="noopener">Ver o depoimento</a>
       </div>
-
       <div class="prova">
         <p class="quem">Bernardo Stamato</p>
-        <p class="oque">Autor de saga de fantasia, desde 2018</p>
-        <p class="antes">Vendia bem em evento presencial e <b>não conseguia vender no
-        digital</b>. Tinha 20 mil seguidores e não convertia nenhum deles em leitor.</p>
-        <p class="depois">Antes ia aos Correios <b>uma vez por mês</b> despachar livro.
-        Hoje vai <b>toda semana</b>.</p>
-        <p class="fala">"Mesmo com perfil de 20.000 seguidores eu não conseguia converter
-        eles para leitores."</p>
+        <p class="oque">Saga de fantasia</p>
+        <p class="antes">20 mil seguidores e <b>nenhum virava leitor</b>.</p>
+        <p class="depois">Ia aos Correios uma vez por mês. <b>Hoje vai toda semana.</b></p>
         <a class="link" href="https://youtu.be/5uv3bdkpDp0" target="_blank" rel="noopener">Ver o depoimento</a>
       </div>
-
       <div class="prova">
         <p class="quem">Ingrid Azevedo</p>
-        <p class="oque">Não ficção. Primeiro livro</p>
-        <p class="antes">Preparou o lançamento antes de o livro existir, em vez de publicar
-        e esperar para ver o que acontecia.</p>
-        <p class="depois">Vendeu <b>quase 600 livros na pré-venda</b>. Em dez dias a Amazon
-        comprou todo o estoque e ela <b>precisou dobrar o pedido</b>.</p>
-        <p class="fala">"Em 10 dias de pré-venda, a Amazon comprou todo o meu estoque, e como
-        eu tinha dois lançamentos marcados, eu precisei dobrar o pedido."</p>
+        <p class="oque">Não ficção, primeiro livro</p>
+        <p class="antes">Preparou o lançamento <b>antes de o livro existir</b>.</p>
+        <p class="depois"><b>Quase 600 na pré-venda.</b> Em dez dias a Amazon comprou o estoque
+        e ela dobrou o pedido.</p>
         <a class="link" href="https://youtu.be/2F1UOQsCClE" target="_blank" rel="noopener">Ver o depoimento</a>
       </div>
     </div>
-
-    <p class="nota-prova">Os três são alunos do Método, não clientes desta chamada. O que eles
-    têm em comum com você não é o resultado: é que, em algum momento, alguém de fora olhou o
-    caso deles e disse o que fazer primeiro. <b>É essa leitura que acontece na sua hora.</b></p>
-  </div>
-</section>
-
-<!-- ============================================================
-     A PERGUNTA (passo 3 do OTO) E O EXCLUSIVO (passo 4)
-     A pergunta do script é de VELOCIDADE. Na nossa estrutura, que é Done For
-     You, a dor não é tempo, é incerteza: então a pergunta é em quantas
-     DECISÕES ERRADAS, com o tempo entrando junto. O exclusivo é o do script e
-     é honesto sem inventar escassez: esta oferta só existe para quem acabou
-     de comprar o 90D.
-     ============================================================ -->
-<section>
-  <div class="wrap narrow">
-    <h2 style="max-width:24ch">Você vai descobrir tudo isso de qualquer jeito.</h2>
-    <p style="margin-top:16px">A pergunta é o preço que você vai pagar pela descoberta.
-    Descobrir errando custa dois anos e três decisões que não voltam atrás. Descobrir
-    perguntando para quem já viu isso <strong class="grifo">custa uma hora, esta
-    semana.</strong></p>
-    <p>E esta oferta não é para todo mundo. Ela não está em lugar nenhum do site e não se
-    compra avulsa: <b>ela aparece só aqui, para quem acabou de comprar o 90D.</b> Você já
-    provou que não fica só pensando no assunto, e é com esse tipo de autor que a gente quer
-    sentar.</p>
+    <p class="nota-prova">São alunos do Método, não desta chamada. O que têm em comum: alguém
+    de fora olhou o caso deles e disse o que fazer primeiro. <b>É essa leitura que acontece na
+    sua hora.</b></p>
   </div>
 </section>
 
 <!-- ============================================================
      PREÇO 1
      💰 ESTA É A VARIANTE A DO TESTE DE PREÇO: R$697 (oferta n740dj0b).
-     A variante B (R$597, oferta 8rn7djuk) é a `/upsell-b/`, GERADA a partir
-     deste arquivo pelo `gera-b.py`. NÃO editar a B na mão: editar aqui e
-     rodar o script, senão as duas divergem.
-     ⚠️ O valor da parcela saiu da página. Eu tinha chutado "12x de R$59,56" e
-     não dá pra conferir: os dois checkouts respondem "Produto indisponível"
-     (o produto A107472443R ainda não está publicado na Hotmart). Enquanto
-     isso a página diz só "em até 12x no cartão", que é verdade e não erra
-     número. Ao publicar, pegar o valor real das duas ofertas e preencher.
-     ⚠️ ABATIMENTO: a regra "o valor é abatido se entrar no D.E." vem da
-     especificação da esteira de 30/07, quando esta call era o Upsell 3 e
-     custava R$297. O produto mudou de posição e de preço: CONFIRMAR que a
-     regra continua valendo antes de subir, porque é promessa operacional.
+     A B (R$597, 8rn7djuk) é a /upsell-b/, GERADA pelo gera-b.py. Não editar
+     a B na mão. Parcela sem valor de propósito: checkout fora do ar, não dá
+     pra conferir, e número chutado é pior que nenhum.
+     Sem âncora falsa. A âncora verdadeira é o abatimento no D.E.
+     (⚠️ regra veio de quando a call custava R$297: confirmar).
      ============================================================ -->
 <section class="fecha">
   <div class="wrap">
@@ -424,14 +226,8 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </section>
 
-<!-- ============================================================
-     GARANTIA
-     ⚠️ Numa call a garantia não pode ser contada em dias como no front,
-     porque a call acontece depois da compra. A regra escrita aqui é a que o
-     cliente definiu em 30/07: devolve se a pessoa não achar valor, e o
-     material fica com ela. TEM que estar configurado na Hotmart e combinado
-     com quem atende, senão a página promete o que a operação não cumpre.
-     ============================================================ -->
+<!-- garantia: numa call não pode ser em dias. Regra do cliente: devolve se não
+     valeu, e o material fica. ⚠️ Tem que estar configurada na Hotmart. -->
 <section class="escuro">
   <div class="wrap">
     <p class="eyebrow" style="text-align:center">Pode ficar tranquila</p>
@@ -443,9 +239,8 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       </svg>
       <div>
         <h3 style="color:#F3F0E8">Se ao fim da hora você achar que não valeu, devolvemos</h3>
-        <p style="color:rgba(243,240,232,.74)">Sem questionamento e sem justificativa. A
-        gravação e o material continuam sendo seus. A gente não quer o seu dinheiro se a
-        conversa não te levou a lugar nenhum.</p>
+        <p style="color:rgba(243,240,232,.74)">Sem justificar nada. E o material continua
+        sendo seu.</p>
       </div>
     </div>
     <div class="fecha" style="margin-top:40px">
@@ -456,218 +251,97 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 </section>
 
 <!-- ============================================================
-     O QUE VAI ACONTECER NA SUA HORA
-     Isto é o que transforma "uma call" em produto. Sem a divisão do tempo,
-     R$697 por uma conversa é caro; com ela, fica claro que existe método.
-     Os tempos são os que o cliente definiu. O bloco de 10 minutos NOMEIA o
-     pitch antes da compra: quem paga e é emboscado no minuto cinquenta pede
-     reembolso e sai com raiva.
+     A HORA + A ENTREGA, numa seção.
+     Minuto a minuto fica (mata a objeção "é reunião de vendas": o pitch de
+     10 min está NOMEADO antes da compra). A frase da entrega é do cliente,
+     palavra por palavra. 🚫 NÃO PROMETER DATA: a call só crava data de
+     lançamento pra quem já tem o livro pronto.
      ============================================================ -->
 <section>
   <div class="wrap">
-    <!-- QUEM ESTÁ DO OUTRO LADO. Antes de descrever a hora, dizer de quem é a
-         hora. Os números são os canônicos da casa (+800 lançados, +10 milhões
-         de cópias, +15 anos), e as logos de imprensa são as mesmas reais que o
-         front usa. Nenhum caso de aluno aqui: os cards de prova do front são
-         exemplos de layout com dados inventados. -->
-    <p class="eyebrow">Quem está do outro lado da chamada</p>
-    <h2 style="max-width:24ch">O time que a Dany formou, com o critério que ela usa.</h2>
-    <p style="margin-top:16px;max-width:52ch">Não é um relatório gerado, não é um formulário
-    devolvido com respostas prontas. <b>É uma pessoa lendo o seu caso antes de entrar na
-    chamada</b>, e depois uma hora olhando para o seu livro, e só para ele.</p>
-    <div class="numeros">
-      <div><b>+800</b><span>livros lançados pela casa</span></div>
-      <div><b>+10 mi</b><span>de cópias vendidas pelos autores</span></div>
-      <div><b>+15</b><span>anos dentro do mercado editorial</span></div>
-    </div>
-    <div class="press">
-      <p class="rot">O trabalho da casa já apareceu em</p>
-      <div class="fila">
-        <img src="../assets/imprensa/logo-cbn.webp" alt="CBN" style="--h:34" width="241" height="100" loading="lazy">
-        <img src="../assets/imprensa/logo-g1.webp" alt="G1" style="--h:42" width="120" height="120" loading="lazy">
-        <img src="../assets/imprensa/logo-record-tv.webp" alt="Record TV" style="--h:42" width="112" height="113" loading="lazy">
-        <img src="../assets/imprensa/logo-band.webp" alt="Band" style="--h:42" width="120" height="102" loading="lazy">
-        <img src="../assets/imprensa/logo-valor-economico.webp" alt="Valor Econômico" style="--h:30" width="346" height="120" loading="lazy">
-        <img src="../assets/imprensa/logo-publishnews.webp" alt="PublishNews" style="--h:27" width="184" height="52" loading="lazy">
-        <img src="../assets/imprensa/logo-tv-cultura.webp" alt="TV Cultura" style="--h:42" width="184" height="160" loading="lazy">
-        <img src="../assets/imprensa/logo-radio-senado.webp" alt="Rádio Senado" style="--h:27" width="440" height="120" loading="lazy">
-      </div>
-    </div>
-
-    <p class="eyebrow" style="margin-top:clamp(52px,7vw,84px)">O que vai acontecer na sua hora</p>
-    <h2 style="max-width:22ch">Não é uma conversa solta. Tem uma ordem, e ela é sempre a mesma.</h2>
+    <p class="eyebrow">A sua hora, por dentro</p>
+    <h2 style="max-width:22ch">Não é conversa solta. Tem uma ordem, e ela é sempre a mesma.</h2>
     <ol class="hora">
-      <li><span class="min">5 min</span>
-        <h3>Quem é você</h3>
-        <p>O seu livro, o seu momento, o que te trouxe até aqui. Aqui quem fala é você.</p></li>
-      <li><span class="min">5 min</span>
-        <h3>O que já está certo</h3>
-        <p>O que você fez até agora que tem valor, e por quê. Não é elogio de cortesia: é o
-        inventário do que dá para aproveitar.</p></li>
-      <li><span class="min">40 min</span>
-        <h3>Os seus próximos passos</h3>
-        <p>Onde o livro está no processo editorial e o que falta (leitura crítica, revisão, o
-        tipo de publicação mais apropriado para o seu caso). O que faz sentido você publicar
-        nas suas redes. E a parte que quase ninguém consegue fazer sozinho: <b>de quinze
-        frentes de lançamento possíveis, escolher as três do seu livro.</b></p>
-        <p style="font-size:.95rem">Todo autor conhece a lista. O problema nunca foi a lista,
-        foi saber quais três valem o seu tempo, o seu dinheiro e o seu tipo de livro. Escolher
-        três aqui é escolher <b>não fazer as outras doze</b>, e é isso que faz o lançamento
-        caber em noventa dias.</p>
+      <li><span class="min">5 min</span><h3>Quem é você</h3>
+        <p>O seu livro, o seu momento. Aqui quem fala é você.</p></li>
+      <li><span class="min">5 min</span><h3>O que já está certo</h3>
+        <p>O inventário do que dá para aproveitar. Não é elogio de cortesia.</p></li>
+      <li><span class="min">40 min</span><h3>Os seus próximos passos</h3>
+        <p>Onde o livro está e o que falta. O tipo de publicação certo para o seu caso. E a
+        parte que quase ninguém faz sozinho: <b>de quinze frentes de lançamento, escolher as
+        três do seu livro.</b> Escolher três é escolher não fazer as outras doze.</p>
         <ul class="chips">
           <li>Assessoria de imprensa</li><li>Influenciadores</li><li>Eventos literários</li>
           <li>Eventos do seu nicho</li><li>Prêmios e concursos</li><li>Vendas para empresas</li>
           <li>Vendas para escolas</li><li>Editais</li><li>Patrocínios</li>
           <li>Prefácio estratégico</li><li>Endossos</li><li>Campanha de lista</li>
           <li>Mapeamento de contatos</li><li>Redes sociais</li><li>UGC</li>
-        </ul>
-        <p style="font-size:.95rem;margin-top:14px">E isso é só uma das coisas que acontecem
-        dentro da hora.</p></li>
-      <li><span class="min">10 min</span>
-        <h3>As suas dúvidas, e uma conversa honesta no fim</h3>
-        <p>No fim, se o seu caso for de alguma coisa que a gente faz, a gente te conta como
-        faria. Se não for, a gente não conta. Você não vai descobrir no minuto cinquenta que
-        virou uma reunião de vendas: está escrito aqui, antes de você pagar.</p></li>
+        </ul></li>
+      <li><span class="min">10 min</span><h3>As suas dúvidas, e uma conversa honesta</h3>
+        <p>Se o seu caso for de alguma coisa que a gente faz, a gente te conta. Se não for,
+        não conta. <b>Você não vai descobrir no minuto cinquenta que virou reunião de
+        vendas.</b></p></li>
     </ol>
+
+    <div style="max-width:640px;margin:48px auto 0">
+      <h3 style="font-size:1.24rem"><span class="grifo">Você sai com um plano de ação e os
+      próximos passos mapeados.</span> Por escrito:</h3>
+      <ul class="entregas" style="margin-top:18px">
+        <li><b>O que consertar primeiro</b>, e o que deixar pra depois</li>
+        <li><b>O caminho até o lançamento</b>, na ordem</li>
+        <li><b>As três frentes escolhidas</b> para o seu livro</li>
+        <li><b>A gravação da conversa</b>, que é sua mesmo se pedir o dinheiro de volta</li>
+      </ul>
+    </div>
     <div class="fecha" style="margin-top:44px">
       <a class="btn ouro block" href="#" data-aceita>Eu quero o meu diagnóstico</a>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     O QUE FICA
-     Este é o lugar do "bônus" na estrutura do Roas. Na Prisciane é um
-     produto extra empacotado com valor; aqui é o que já existe dentro do
-     produto e que quase ninguém valoriza sozinho: a hora acaba, a gravação
-     e o material não. É o que torna o preço justo mesmo para quem não
-     compra mais nada depois.
-     ============================================================ -->
-<section class="escuro">
-  <div class="wrap narrow">
-    <!-- EMPILHAMENTO (passo 10 do OTO): pegar a parte mais valiosa e entregá-la
-         como bônus. Aqui o bônus é honesto e não precisa de valor inventado em
-         reais: o material escrito é a única coisa da oferta que sobrevive ao
-         reembolso, e isso vale mais que um "no valor de R$X" chutado.
-         A lista de quatro entregáveis saiu daqui: ela repetia a recapitulação
-         e era a quarta lista da mesma página. O script do OTO avisa que
-         explicar tudo mata a venda. -->
-    <!-- ⚠️ ESTA ENTREGA É PROMESSA DE OPERAÇÃO, não é copy. Só mexer com o ok de
-         quem atende.
-         🚫 NÃO PROMETER DATA. Eu tinha escrito "você sai com a sua próxima data
-         marcada" e o cliente trocou: a call só crava data de lançamento para
-         quem já tem o livro pronto, então prometer data para todo mundo faria a
-         página mentir com metade dos compradores. A frase da entrega é do
-         cliente, palavra por palavra: "você sai com um plano de ação e os
-         próximos passos mapeados".
-         O que segura a concretude sem prometer data são os bullets: a ORDEM
-         (o que primeiro, e o que deixar pra depois) é verificável na hora e
-         serve aos dois recortes de comprador. -->
-    <p class="eyebrow">E tem uma coisa que fica com você de qualquer jeito</p>
-    <h2>A hora acaba. O que sai dela, não.</h2>
-    <p style="margin-top:16px"><strong class="grifo">Você sai com um plano de ação e os
-    próximos passos mapeados.</strong> Por escrito, depois da chamada:</p>
-    <ul class="entregas" style="margin-top:18px">
-      <li><b>O que consertar primeiro, segundo e terceiro.</b> E, mais importante,
-      <b>o que deixar pra depois</b>. Sair de uma conversa dessas com trinta coisas para
-      fazer é o mesmo que sair sem nenhuma.</li>
-      <li><b>O caminho até o lançamento, na ordem</b>, do ponto em que o seu livro está
-      hoje até ele estar na mão do leitor</li>
-      <li><b>As três frentes de lançamento escolhidas para o seu livro</b>, e o que fazer
-      em cada uma</li>
-      <li><b>A gravação da conversa inteira</b>, para rever quando travar</li>
-    </ul>
-    <p><strong class="grifo">E esse material é seu mesmo se você pedir o dinheiro de
-    volta.</strong> A gente não tira. É por isso que essa hora se paga mesmo que você nunca
-    mais fale com a gente.</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     COMO FUNCIONA (curto)
-     ⚠️ O formulário pós-compra ainda não existe, e a página promete ele aqui
-     e no FAQ.
-     ============================================================ -->
-<section>
-  <div class="wrap narrow">
-    <p class="eyebrow">Como funciona depois do clique</p>
-    <ol class="trilha">
-      <li><h3>Você recebe um formulário</h3>
-        <p>Em que ponto está o livro, como você publicou ou pretende publicar, o que você quer
-        alcançar e qual é a maior dificuldade hoje. Quem entra na call já entra sabendo do seu
-        caso, então a hora inteira rende.</p></li>
-      <li><h3>Você marca o dia</h3>
-        <p>A nossa equipe entra em contato para agendar no horário que der na sua agenda.</p></li>
-      <li><h3>A conversa</h3>
-        <p>Uma hora no Zoom, gravada. Depois chega o material escrito com os seus próximos passos.</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ============================================================
-     RECAPITULAÇÃO + FECHO
-     ============================================================ -->
+<!-- fecho: recapitulação + o exclusivo honesto + a recusa -->
 <section class="escuro fecha">
   <div class="wrap">
-    <p class="rot">Recapitulando, você vai receber</p>
-    <div style="max-width:480px;margin:0 auto 34px;text-align:left">
+    <p class="rot">Recapitulando</p>
+    <div style="max-width:480px;margin:0 auto 30px;text-align:left">
       <ul class="entregas">
         <li><b>Uma hora no Zoom</b> com um especialista do time, só sobre o seu livro</li>
-        <li><b>Um plano de ação</b>, com o que consertar primeiro e o que deixar pra depois</li>
-        <li><b>O caminho até o lançamento</b>, na ordem</li>
-        <li><b>O tipo de publicação</b> recomendado para o seu caso</li>
+        <li><b>Um plano de ação</b>, com o que fazer primeiro</li>
         <li><b>Três frentes de lançamento</b> escolhidas para o seu livro</li>
-        <li><b>A gravação da chamada</b>, para sempre</li>
+        <li><b>A gravação</b>, para sempre</li>
       </ul>
-      <p style="margin:20px 0 0;font-size:.97rem;color:rgba(243,240,232,.7)">E, no fim das
-      contas, uma semana em que você para de adivinhar.</p>
     </div>
-    <p class="avista" style="margin:0 0 6px">Tudo isso por apenas</p>
+    <p class="avista" style="margin:0 0 6px">Tudo isso por</p>
     <span class="val"><span class="cur">R$</span>697</span>
     <p class="avista">à vista, ou em até <b>12x no cartão</b></p>
     <p class="obs">* parcelado no cartão, com juros</p>
     <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
     <button class="recusa" data-recusa>Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button>
     <p style="max-width:520px;margin:26px auto 0;font-size:.95rem;color:rgba(243,240,232,.55)">
-      Se você fechar esta página, o diagnóstico não some do mundo. O que some é a chance de
-      adicionar em um clique, sem passar por um checkout de novo.</p>
+    Esta oferta não existe no site. Ela aparece só aqui, para quem acabou de comprar o 90D.
+    Se você fechar a página, some a chance de adicionar em um clique.</p>
   </div>
 </section>
 
-<!-- ============================================================
-     FAQ
-     Fica, mesmo não existindo na página da Prisciane. As duas primeiras
-     perguntas são as que matam a venda de uma call: "é com a Dany?" e "isso
-     é reunião de vendas?". Sem resposta escrita, elas viram reembolso.
-     ============================================================ -->
+<!-- FAQ: as duas primeiras são as que viram reembolso -->
 <section>
   <div class="wrap">
     <div class="faq">
       <details open>
         <summary>A call é com a Dany?</summary>
-        <p>Não. É com um especialista do time dela, treinado por ela e usando o mesmo critério
-        que ela usa. É justamente por não ser a agenda dela que essa hora custa isto e não
-        alguns milhares de reais.</p>
+        <p>Não. É com um especialista do time dela, com o critério dela. É por não ser a
+        agenda da Dany que custa isto, e não alguns milhares de reais.</p>
       </details>
       <details>
         <summary>Isso não é uma reunião de vendas disfarçada?</summary>
-        <p>Cinquenta minutos são sobre o seu caso e dez são de conversa sobre o que a gente faz,
-        e só se o seu caso for de alguma coisa que a gente faz. Está escrito acima, minuto a
-        minuto, antes de você pagar. E você sai com a gravação e o material escrito na mão,
-        tendo comprado alguma coisa ou não.</p>
+        <p>Cinquenta minutos são sobre o seu caso e dez são de conversa, só se o seu caso for
+        de algo que a gente faz. Está escrito acima, minuto a minuto, antes de você pagar.</p>
       </details>
       <details>
-        <summary>Meu livro ainda não está pronto. Faz sentido agora?</summary>
-        <p>Faz, e talvez faça mais. É mais barato descobrir agora que falta uma leitura crítica
-        do que descobrir depois de publicado. Muda o ponto de partida, não a entrega: se o
-        livro ainda está sendo escrito, o plano começa na preparação; se já está publicado,
-        começa no que fazer para ele voltar a andar. <b>Nos dois casos você sai com o plano
-        e com a ordem</b>, e é isso que faz o resto andar.</p>
-      </details>
-      <details>
-        <summary>Vou precisar preencher meus dados de novo?</summary>
-        <p>Não. É a mesma compra: você clica e ele entra no seu pedido usando o pagamento que
-        você acabou de fazer.</p>
+        <summary>Meu livro ainda não está pronto. Faz sentido?</summary>
+        <p>Faz. Muda o ponto de partida, não a entrega: o plano começa na preparação em vez
+        de começar no lançamento. E é mais barato descobrir agora o que falta do que depois
+        de publicado.</p>
       </details>
     </div>
   </div>
@@ -744,8 +418,10 @@ window.OFERTA = {
      5. O formulário pós-compra não existe.
      6. Regra de reembolso combinada com a operação e configurada na Hotmart.
      7. Copy não passou pela Dany.
-     8. Sem prova social. Os cards de prova do front são exemplos de layout
-        com dados inventados: não reaproveitar aqui.
+     8. ✅ Prova social resolvida com casos reais dos depoimentos do canal.
+     9. Versões longas preservadas: index-longa.html (1ª, argumentada) e
+        index-longa-v2.html (a de 13 seções que foi cortada em 08/09 porque
+        "nenhuma página nossa é assim; nossas páginas são tiros curtos").
      ============================================================ -->
 </body>
 </html>

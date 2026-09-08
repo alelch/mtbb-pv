@@ -342,18 +342,18 @@ footer a{color:rgba(243,240,232,.8)}
 .fecha{text-align:center}
 .fecha .rot{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.78rem;
   letter-spacing:.18em;text-transform:uppercase;color:var(--soft);margin:0 0 10px}
-.escuro .fecha .rot{color:var(--ouro)}
+.escuro .fecha .rot,.escuro.fecha .rot{color:var(--ouro)}
 .fecha .nome{font-family:'Space Grotesk',sans-serif;font-weight:700;
   font-size:clamp(1.4rem,3.2vw,2rem);letter-spacing:-.03em;margin:0 0 20px}
 .fecha .val{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.04em;
   font-size:clamp(2.4rem,6.5vw,3.3rem);line-height:1;display:block;margin:0}
 .fecha .cur{font-size:.44em;vertical-align:.72em;margin-right:.1em}
 .fecha .avista{font-size:1.02rem;color:var(--soft);margin:10px 0 0}
-.escuro .fecha .avista{color:rgba(243,240,232,.74)}
+.escuro .fecha .avista,.escuro.fecha .avista{color:rgba(243,240,232,.74)}
 .fecha .avista b{color:var(--ink)}
-.escuro .fecha .avista b{color:var(--ink-on-dark)}
+.escuro .fecha .avista b,.escuro.fecha .avista b{color:var(--ink-on-dark)}
 .fecha .obs{font-size:.8rem;color:var(--mute);margin:6px 0 0}
-.escuro .fecha .obs{color:rgba(243,240,232,.5)}
+.escuro .fecha .obs,.escuro.fecha .obs{color:rgba(243,240,232,.5)}
 .fecha .btn{margin:26px auto 0;max-width:520px}
 .fecha .recusa{margin-top:18px}
 /* o abatimento: a âncora VERDADEIRA desta oferta */
