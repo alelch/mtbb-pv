@@ -53,17 +53,15 @@ if('requestIdleCallback' in window)requestIdleCallback(go,{timeout:2500});else s
 document.addEventListener(ev,go,{once:true,passive:true});});})();
 </script>
 </head>
-<body>
+<body class="curta">
 
 <!-- ============================================================
-     ESTRUTURA (08/09): a página foi CORTADA DE 13 PARA 9 SEÇÕES e de ~2.500
-     para ~1.000 palavras, a pedido do cliente: "nenhuma página nossa é assim,
-     nossas páginas são tiros curtos e certeiros". A referência continua sendo
-     a página de upsell da Prisciane (uma tela de texto). Quem vende é o VÍDEO;
-     a página é moldura. Cada bloco tem UMA ideia e cabe numa respiração.
-     A versão de 13 seções está preservada em index-longa-v2.html, com todo o
-     raciocínio de cada bloco nos comentários. Antes de acrescentar qualquer
-     coisa aqui, ler lá o porquê de ter saído.
+     ESTRUTURA (08/09, 2º corte): a página foi cortada ATÉ o tamanho da
+     referência (upsell da Prisciane: uma tela de texto). ~450 palavras.
+     Quem vende é o VÍDEO. Aqui só o que o vídeo não pode fazer: preço,
+     botão, garantia, prova e a resposta às duas objeções que viram reembolso.
+     As versões longas estão em index-longa.html e index-longa-v2.html com o
+     raciocínio de cada bloco. Antes de acrescentar, ler lá por que saiu.
      ============================================================ -->
 
 <nav class="passos" aria-label="Etapas da sua compra">
@@ -76,7 +74,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </nav>
 
-<!-- não fechar o ciclo de compra: "já é seu" derruba conversão (script OTO) -->
 <div class="topo">
   <div class="wrap">
     <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo,<br>
@@ -84,137 +81,27 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </div>
 
-<!-- a H1 é do cliente. NÃO descrever a oferta aqui: é o vídeo que vende. -->
 <section class="hero convite">
   <div class="wrap">
     <h1>A gente, trabalhando junto no seu livro. Quer?</h1>
     <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
-    <!-- embed do vídeo dentro da div, numa linha só: a regra é :empty -->
     <div class="player" id="vsl"></div>
   </div>
 </section>
 
-<!-- ============================================================
-     O PROBLEMA, EM UMA RESPIRAÇÃO
-     Decisão inteligente + o inimigo (tentativa e erro) + os dois erros caros
-     + a cena dos dez segundos. Era cinco seções; virou uma.
-     ⚠️ Meses: NOVEMBRO, DEZEMBRO E JANEIRO, na fala da Dany (minerado do
-     canal). Outubro é o último mês bom. Não inventar "melhor mês".
-     ⚠️ Editora: a Dany nunca acusa. "Não existe editora ruim, existe a que
-     alcança o seu leitor". Não afiar.
-     ============================================================ -->
+<!-- o problema em 3 linhas. O resto (gorila, dois erros, cena) é do vídeo. -->
 <section class="escuro">
-  <div class="wrap narrow">
-    <p class="eyebrow">Por que sozinho não dá?</p>
-    <h2>Você tomou uma decisão inteligente. Só que nenhum plano sabe qual é o seu livro.</h2>
-    <p style="margin-top:16px">Entre ter o plano e ter o livro vendendo existe um inimigo
-    silencioso: <strong class="grifo">tentativa e erro</strong>. E os erros que custam caro
-    parecem pequenos na hora.</p>
-
-    <div class="duas">
-      <div>
-        <p class="q">O mês em que você lança</p>
-        <p>Novembro, dezembro e janeiro quase enterram um livro: o estoque da livraria enche
-        em novembro e <b>não chega mais caminhão</b>. As grandes editoras lançam até outubro.
-        Elas sabem. A sua data já pode estar marcada.</p>
-      </div>
-      <div>
-        <p class="q">A editora que você escolhe</p>
-        <p>Não existe editora boa ou ruim. Existe <b>a que alcança o leitor que você quer</b>,
-        e a que não alcança. Ninguém te avisa qual é qual.</p>
-      </div>
-    </div>
-
-    <p style="margin-top:30px">Você olha o seu projeto mil vezes e está tudo certo. Outra
-    pessoa olha dez segundos e aponta o erro que estava na sua cara. <b>Eu já passei por isso
-    mais vezes do que gostaria de admitir.</b> Não é desatenção: quanto mais você olha, menos
-    você vê.</p>
-    <p><strong class="grifo">Dez segundos de olhar de fora resolvem o que mil leituras suas
-    não resolveram.</strong> E os seus noventa dias começam agora.</p>
+  <div class="wrap narrow" style="text-align:center">
+    <h2 style="max-width:24ch;margin:0 auto">Nenhum plano sabe qual é o seu livro.</h2>
+    <p style="margin:16px auto 0;max-width:52ch">Você olha o seu projeto mil vezes e está
+    tudo certo. Outra pessoa olha dez segundos e aponta o erro que estava na sua cara.
+    <strong class="grifo">Uma hora com o time, antes de os seus noventa dias começarem.</strong></p>
   </div>
 </section>
 
-<!-- ============================================================
-     O GANHO (verde: única aparição da cor). Cena, não conceito.
-     Fecha na moeda real do autor: escrever o próximo sem se justificar.
-     ============================================================ -->
-<section class="ganho">
-  <div class="wrap narrow">
-    <p class="eyebrow">Como é a semana depois</p>
-    <h2>Você para de carregar a dúvida.</h2>
-    <ul class="cenas">
-      <li>Alguém pergunta do que é o seu livro. Você responde em <b>duas frases</b>.</li>
-      <li>Você abre a agenda e sabe qual é <b>a próxima coisa</b>. Não trinta. Uma.</li>
-      <li>Aparece um pacote de doze mil reais e você sabe, na hora, que <b>não é isso que o
-      seu livro precisa</b>.</li>
-    </ul>
-    <p class="moeda">E lá na frente, poder começar o próximo livro <span class="grifo">sem
-    precisar justificar pra ninguém</span> por que você está escrevendo de novo.</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     AUTORIDADE + PROVA, numa seção só.
-     Casos REAIS dos depoimentos do canal (~/Claude Code/tbb_yt/), com
-     autorização. São alunos do MÉTODO, não da call: a nota diz isso.
-     ⚠️ Tom: "esgotou, quase esgotou" no vídeo. Nunca escrever "esgotou".
-     ⚠️ A Ingrid do número é a AZEVEDO, não a Gomes.
-     ============================================================ -->
-<section class="escuro">
-  <div class="wrap">
-    <p class="eyebrow">Quem está do outro lado</p>
-    <h2 style="max-width:26ch">Existe um olhar que decide, lá dentro da editora, quais livros
-    vão receber empurrão.</h2>
-    <p style="margin-top:16px;max-width:60ch">A Dany passou quinze anos sendo esse olhar. É
-    esse critério que o time usa na sua chamada, só que agora do seu lado da mesa. Não é
-    relatório gerado: <b>é uma pessoa lendo o seu caso antes de entrar.</b></p>
-
-    <div class="numeros">
-      <div><b>+800</b><span>livros lançados pela casa</span></div>
-      <div><b>+10 mi</b><span>de cópias vendidas pelos autores</span></div>
-      <div><b>+15</b><span>anos dentro do mercado editorial</span></div>
-    </div>
-
-    <div class="provas">
-      <div class="prova">
-        <p class="quem">Tom Orgad</p>
-        <p class="oque">Autoficção</p>
-        <p class="antes">Saiu na Globo e mesmo assim <b>praticamente não vendia</b>.</p>
-        <p class="depois">Sem reescrever uma linha, virou <b>o mais vendido do stand na
-        Bienal do Rio 2023</b>.</p>
-        <a class="link" href="https://youtu.be/tTDZn4djQlk" target="_blank" rel="noopener">Ver o depoimento</a>
-      </div>
-      <div class="prova">
-        <p class="quem">Bernardo Stamato</p>
-        <p class="oque">Saga de fantasia</p>
-        <p class="antes">20 mil seguidores e <b>nenhum virava leitor</b>.</p>
-        <p class="depois">Ia aos Correios uma vez por mês. <b>Hoje vai toda semana.</b></p>
-        <a class="link" href="https://youtu.be/5uv3bdkpDp0" target="_blank" rel="noopener">Ver o depoimento</a>
-      </div>
-      <div class="prova">
-        <p class="quem">Ingrid Azevedo</p>
-        <p class="oque">Não ficção, primeiro livro</p>
-        <p class="antes">Preparou o lançamento <b>antes de o livro existir</b>.</p>
-        <p class="depois"><b>Quase 600 na pré-venda.</b> Em dez dias a Amazon comprou o estoque
-        e ela dobrou o pedido.</p>
-        <a class="link" href="https://youtu.be/2F1UOQsCClE" target="_blank" rel="noopener">Ver o depoimento</a>
-      </div>
-    </div>
-    <p class="nota-prova">São alunos do Método, não desta chamada. O que têm em comum: alguém
-    de fora olhou o caso deles e disse o que fazer primeiro. <b>É essa leitura que acontece na
-    sua hora.</b></p>
-  </div>
-</section>
-
-<!-- ============================================================
-     PREÇO 1
+<!-- PREÇO 1
      💰 ESTA É A VARIANTE B DO TESTE DE PREÇO: R$597 (oferta 8rn7djuk).
-     A B (R$597, 8rn7djuk) é a /upsell-b/, GERADA pelo gera-b.py. Não editar
-     a B na mão. Parcela sem valor de propósito: checkout fora do ar, não dá
-     pra conferir, e número chutado é pior que nenhum.
-     Sem âncora falsa. A âncora verdadeira é o abatimento no D.E.
-     (⚠️ regra veio de quando a call custava R$297: confirmar).
-     ============================================================ -->
+     A B (R$597, 8rn7djuk) é a /upsell-b/, GERADA pelo gera-b.py. -->
 <section class="fecha">
   <div class="wrap">
     <p class="rot">Você quer o diagnóstico?</p>
@@ -223,19 +110,13 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     <p class="avista">à vista, ou em até <b>12x no cartão</b></p>
     <p class="obs">* parcelado no cartão, com juros</p>
     <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
-    <p style="max-width:44ch;margin:22px auto 0;font-size:1rem;color:var(--soft)">
-    Se essa hora te poupar <b>uma</b> decisão errada, ela já se pagou. E decisão errada
-    de lançamento não custa quinhentos reais.</p>
-    <div class="abate">Se depois dessa hora você entrar no <b>Direcionamento Estratégico</b>,
-    os R$597 são abatidos integralmente. Quem vira cliente paga zero por esta conversa.</div>
+    <div class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$597
+    são abatidos integralmente.</div>
   </div>
 </section>
 
-<!-- garantia: numa call não pode ser em dias. Regra do cliente: devolve se não
-     valeu, e o material fica. ⚠️ Tem que estar configurada na Hotmart. -->
 <section class="escuro">
   <div class="wrap">
-    <p class="eyebrow" style="text-align:center">Pode ficar tranquila</p>
     <div class="garantia" style="background:rgba(243,240,232,.05);border-color:rgba(243,240,232,.14)">
       <svg viewBox="0 0 120 120" role="img" aria-label="Garantia">
         <circle class="disco" cx="60" cy="60" r="52"></circle>
@@ -244,109 +125,109 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       </svg>
       <div>
         <h3 style="color:#F3F0E8">Se ao fim da hora você achar que não valeu, devolvemos</h3>
-        <p style="color:rgba(243,240,232,.74)">Sem justificar nada. E o material continua
-        sendo seu.</p>
+        <p style="color:rgba(243,240,232,.74)">Sem justificar. E o material continua seu.</p>
       </div>
     </div>
-    <div class="fecha" style="margin-top:40px">
+    <div class="fecha" style="margin-top:34px">
       <p class="avista" style="margin:0 0 4px">Agora ficou mais fácil decidir, né?</p>
       <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     A HORA + A ENTREGA, numa seção.
-     Minuto a minuto fica (mata a objeção "é reunião de vendas": o pitch de
-     10 min está NOMEADO antes da compra). A frase da entrega é do cliente,
-     palavra por palavra. 🚫 NÃO PROMETER DATA: a call só crava data de
-     lançamento pra quem já tem o livro pronto.
-     ============================================================ -->
+<!-- a hora + a entrega. O pitch de 10 min fica NOMEADO: é o que mata a
+     objeção "reunião de vendas". A frase da entrega é do cliente.
+     🚫 NÃO PROMETER DATA (a call só crava data pra quem tem livro pronto). -->
 <section>
   <div class="wrap">
-    <p class="eyebrow">A sua hora, por dentro</p>
-    <h2 style="max-width:22ch">Não é conversa solta. Tem uma ordem, e ela é sempre a mesma.</h2>
+    <h2 style="max-width:22ch">A sua hora, por dentro</h2>
     <ol class="hora">
-      <li><span class="min">5 min</span><h3>Quem é você</h3>
-        <p>O seu livro, o seu momento. Aqui quem fala é você.</p></li>
-      <li><span class="min">5 min</span><h3>O que já está certo</h3>
-        <p>O inventário do que dá para aproveitar. Não é elogio de cortesia.</p></li>
+      <li><span class="min">5 min</span><h3>Quem é você e onde o livro está</h3></li>
+      <li><span class="min">5 min</span><h3>O que já está certo</h3></li>
       <li><span class="min">40 min</span><h3>Os seus próximos passos</h3>
-        <p>Onde o livro está e o que falta. O tipo de publicação certo para o seu caso. E a
-        parte que quase ninguém faz sozinho: <b>de quinze frentes de lançamento, escolher as
-        três do seu livro.</b> Escolher três é escolher não fazer as outras doze.</p>
-        <ul class="chips">
-          <li>Assessoria de imprensa</li><li>Influenciadores</li><li>Eventos literários</li>
-          <li>Eventos do seu nicho</li><li>Prêmios e concursos</li><li>Vendas para empresas</li>
-          <li>Vendas para escolas</li><li>Editais</li><li>Patrocínios</li>
-          <li>Prefácio estratégico</li><li>Endossos</li><li>Campanha de lista</li>
-          <li>Mapeamento de contatos</li><li>Redes sociais</li><li>UGC</li>
-        </ul></li>
-      <li><span class="min">10 min</span><h3>As suas dúvidas, e uma conversa honesta</h3>
-        <p>Se o seu caso for de alguma coisa que a gente faz, a gente te conta. Se não for,
-        não conta. <b>Você não vai descobrir no minuto cinquenta que virou reunião de
-        vendas.</b></p></li>
+        <p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do
+        seu livro</b>, escolhidas entre quinze.</p></li>
+      <li><span class="min">10 min</span><h3>Dúvidas, e uma conversa honesta</h3>
+        <p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></li>
     </ol>
-
-    <div style="max-width:640px;margin:48px auto 0">
+    <div style="max-width:640px;margin:40px auto 0">
       <h3 style="font-size:1.24rem"><span class="grifo">Você sai com um plano de ação e os
-      próximos passos mapeados.</span> Por escrito:</h3>
-      <ul class="entregas" style="margin-top:18px">
+      próximos passos mapeados.</span></h3>
+      <ul class="entregas" style="margin-top:16px">
         <li><b>O que consertar primeiro</b>, e o que deixar pra depois</li>
-        <li><b>O caminho até o lançamento</b>, na ordem</li>
         <li><b>As três frentes escolhidas</b> para o seu livro</li>
-        <li><b>A gravação da conversa</b>, que é sua mesmo se pedir o dinheiro de volta</li>
+        <li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li>
       </ul>
     </div>
-    <div class="fecha" style="margin-top:44px">
+    <div class="fecha" style="margin-top:40px">
       <a class="btn ouro block" href="#" data-aceita>Eu quero o meu diagnóstico</a>
     </div>
   </div>
 </section>
 
-<!-- fecho: recapitulação + o exclusivo honesto + a recusa -->
-<section class="escuro fecha">
+<!-- prova: casos REAIS dos depoimentos do canal, com autorização. Alunos do
+     Método, não da call. Tom: "quase esgotou", nunca "esgotou". -->
+<section class="escuro">
+  <div class="wrap">
+    <h2 style="max-width:24ch">Quem já passou por essa leitura</h2>
+    <div class="provas" style="margin-top:26px">
+      <div class="prova">
+        <p class="quem">Tom Orgad</p>
+        <p class="antes">Saiu na Globo e <b>não vendia</b>.</p>
+        <p class="depois">Mesmo livro: <b>o mais vendido do stand na Bienal do Rio 2023</b>.</p>
+        <a class="link" href="https://youtu.be/tTDZn4djQlk" target="_blank" rel="noopener">Ver depoimento</a>
+      </div>
+      <div class="prova">
+        <p class="quem">Bernardo Stamato</p>
+        <p class="antes">20 mil seguidores, <b>nenhum virava leitor</b>.</p>
+        <p class="depois">Correios uma vez por mês. <b>Hoje, toda semana.</b></p>
+        <a class="link" href="https://youtu.be/5uv3bdkpDp0" target="_blank" rel="noopener">Ver depoimento</a>
+      </div>
+      <div class="prova">
+        <p class="quem">Ingrid Azevedo</p>
+        <p class="antes">Primeiro livro, não ficção.</p>
+        <p class="depois"><b>Quase 600 na pré-venda.</b> A Amazon comprou o estoque em dez dias.</p>
+        <a class="link" href="https://youtu.be/2F1UOQsCClE" target="_blank" rel="noopener">Ver depoimento</a>
+      </div>
+    </div>
+    <p class="nota-prova">Alunos do Método. A leitura que alguém fez do caso deles é a que
+    acontece na sua hora.</p>
+  </div>
+</section>
+
+<section class="fecha">
   <div class="wrap">
     <p class="rot">Recapitulando</p>
-    <div style="max-width:480px;margin:0 auto 30px;text-align:left">
+    <div style="max-width:440px;margin:0 auto 26px;text-align:left">
       <ul class="entregas">
-        <li><b>Uma hora no Zoom</b> com um especialista do time, só sobre o seu livro</li>
+        <li><b>Uma hora no Zoom</b> só sobre o seu livro</li>
         <li><b>Um plano de ação</b>, com o que fazer primeiro</li>
-        <li><b>Três frentes de lançamento</b> escolhidas para o seu livro</li>
+        <li><b>Três frentes de lançamento</b> escolhidas para você</li>
         <li><b>A gravação</b>, para sempre</li>
       </ul>
     </div>
-    <p class="avista" style="margin:0 0 6px">Tudo isso por</p>
     <span class="val"><span class="cur">R$</span>597</span>
     <p class="avista">à vista, ou em até <b>12x no cartão</b></p>
     <p class="obs">* parcelado no cartão, com juros</p>
     <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
     <button class="recusa" data-recusa>Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button>
-    <p style="max-width:520px;margin:26px auto 0;font-size:.95rem;color:rgba(243,240,232,.55)">
-    Esta oferta não existe no site. Ela aparece só aqui, para quem acabou de comprar o 90D.
-    Se você fechar a página, some a chance de adicionar em um clique.</p>
+    <p style="max-width:480px;margin:22px auto 0;font-size:.92rem;color:var(--mute)">Esta oferta
+    só existe aqui, para quem acabou de comprar o 90D.</p>
   </div>
 </section>
 
-<!-- FAQ: as duas primeiras são as que viram reembolso -->
-<section>
+<section class="escuro" style="padding-top:0">
   <div class="wrap">
     <div class="faq">
-      <details open>
+      <details>
         <summary>A call é com a Dany?</summary>
-        <p>Não. É com um especialista do time dela, com o critério dela. É por não ser a
-        agenda da Dany que custa isto, e não alguns milhares de reais.</p>
+        <p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto,
+        e não alguns milhares de reais.</p>
       </details>
       <details>
         <summary>Isso não é uma reunião de vendas disfarçada?</summary>
-        <p>Cinquenta minutos são sobre o seu caso e dez são de conversa, só se o seu caso for
-        de algo que a gente faz. Está escrito acima, minuto a minuto, antes de você pagar.</p>
-      </details>
-      <details>
-        <summary>Meu livro ainda não está pronto. Faz sentido?</summary>
-        <p>Faz. Muda o ponto de partida, não a entrega: o plano começa na preparação em vez
-        de começar no lançamento. E é mais barato descobrir agora o que falta do que depois
-        de publicado.</p>
+        <p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for
+        de algo que a gente faz. Está escrito acima, antes de você pagar.</p>
       </details>
     </div>
   </div>
