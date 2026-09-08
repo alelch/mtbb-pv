@@ -9,6 +9,7 @@
   var SUPABASE_URL = 'https://jsqtpsxpaclslakafmvd.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
   var ENDPOINT = SUPABASE_URL + '/rest/v1/mtbb_pv_events';
+  var ENDPOINT_ES = ENDPOINT.replace('/mtbb_pv_events', '/mtbb_pv_events_es'); // ES: tabela separada (outro produto)
 
   function rand() { return Math.random().toString(36).substr(2, 10); }
 
@@ -83,9 +84,11 @@
   window.MTBB_UTMS = getUTMs;
 
   function detectStageVariant() {
+    var isEs = window.MTBB_LANG === 'es' || /^\/es\//.test(window.location.pathname);
     var file = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
     var m = file.match(/^(escrevendo|lancando|publicado)(-lista)?(\.html)?$/);
-    if (m) return { stage: m[1], variant: m[2] ? 'lista' : 'preco' };
+    // ES (produto internacional): stage com prefixo es- e eventos em tabela propria (mtbb_pv_events_es)
+    if (m) return { stage: (isEs ? 'es-' : '') + m[1], variant: m[2] ? 'lista' : 'preco' };
     if (file.indexOf('obrigado-') === 0) {
       var params = new URLSearchParams(window.location.search);
       var ut = params.get('utm_test') || '';
@@ -123,6 +126,8 @@
     var utms = (window.MTBB_UTMS && window.MTBB_UTMS()) || {};
     var auto = detectStageVariant();
     var meta = extra.meta || {};
+    var _es = window.MTBB_LANG === 'es' || /^\/es\//.test(window.location.pathname);
+    if (_es && !meta.lang) meta.lang = 'es';
     if (window.MTBB_OBRIGADO_VARIANT && !meta.obrigado_variant) meta.obrigado_variant = window.MTBB_OBRIGADO_VARIANT;
     if (window.MTBB_QUIZ_VARIANT && !meta.quiz_variant) meta.quiz_variant = window.MTBB_QUIZ_VARIANT;
     if (window.MTBB_QUIZ_COPY && !meta.quiz_copy) meta.quiz_copy = window.MTBB_QUIZ_COPY;
@@ -148,7 +153,7 @@
     try { firePixel(eventType, payload.variant); } catch (e) {}
     try { fireGtag(eventType, payload.variant); } catch (e) {}
     try {
-      fetch(ENDPOINT, {
+      fetch(_es ? ENDPOINT_ES : ENDPOINT, {
         method: 'POST',
         headers: {
           'apikey': SUPABASE_KEY,

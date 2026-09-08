@@ -10,7 +10,8 @@
 //   whatsapp?: string,
 //   stage: "escrevendo" | "lancando" | "publicado",
 //   variant: "checkout" | "lista",
-//   utm_source?, utm_medium?, utm_campaign?, utm_content?, utm_term?
+//   utm_source?, utm_medium?, utm_campaign?, utm_content?, utm_term?,
+//   lang?: "es"           // produto INTERNACIONAL (so preco): lista/tag proprias, sem field 68, sem forcar DDI 55
 // }
 
 // deno-lint-ignore-file no-explicit-any
@@ -27,6 +28,11 @@ const FIELD_ESTAGIO = 68;         // MTBB_ESTAGIO_FUNIL (dropdown)
 
 const STAGES_VALID = new Set(["escrevendo", "lancando", "publicado"]);
 const VARIANTS_VALID = new Set(["checkout", "lista"]);
+
+// ES (produto internacional, so preco): estrutura SEPARADA do BR. Preencher apos criar no AC.
+const ES_LIST_ID: number | null = null;        // lista "MTBB ES (internacional)"
+const ES_TAG_CHECKOUT: number | null = null;   // tag "MTBB ES - Finalizou Pre Checkout"
+const ES_TAG_NAME_FALLBACK = "MTBB ES - Finalizou Pre Checkout"; // find-or-create se o id nao estiver setado
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -58,10 +64,11 @@ async function acFetch(path: string, init: RequestInit = {}) {
   return { ok: r.ok, status: r.status, data, text };
 }
 
-function normalizePhone(raw: string): string {
-  // Mantém só dígitos, prefixa 55 se for 10-11 dig (BR sem DDI)
+function normalizePhone(raw: string, intl = false): string {
+  // Mantém só dígitos, prefixa 55 se for 10-11 dig (BR sem DDI). intl (ES): nunca força 55, aceita 8-15 dígitos.
   const d = (raw || "").replace(/\D+/g, "");
   if (!d) return "";
+  if (intl) return d.length >= 8 && d.length <= 15 ? d : "";
   if (d.length >= 12 && d.length <= 13) return d;          // já tem DDI
   if (d.length === 10 || d.length === 11) return "55" + d;  // adiciona DDI BR
   return d;
@@ -85,7 +92,9 @@ serve(async (req) => {
 
   const nome = sanitize(payload.nome, 120);
   const email = sanitize(payload.email, 200).toLowerCase();
-  const whatsapp = normalizePhone(sanitize(payload.whatsapp, 30));
+  const lang = sanitize(payload.lang, 5).toLowerCase();
+  const isEs = lang === "es";
+  const whatsapp = normalizePhone(sanitize(payload.whatsapp, 30), isEs);
   const stage = sanitize(payload.stage, 30);
   const variant = sanitize(payload.variant, 30);
 
@@ -107,7 +116,7 @@ serve(async (req) => {
       firstName,
       lastName,
       phone: whatsapp || undefined,
-      fieldValues: [
+      fieldValues: isEs ? [] : [
         { field: FIELD_ESTAGIO, value: stage },
       ],
     },
@@ -118,20 +127,34 @@ serve(async (req) => {
   const contactId = sync.data?.contact?.id;
   if (!contactId) return json({ error: "ac_no_contact_id", detail: sync.text?.slice(0, 500) }, 502);
 
-  // 2) Add to list 6 (Book Business)
-  const listRel = await acFetch("/contactLists", {
-    method: "POST",
-    body: JSON.stringify({ contactList: { list: LIST_ID, contact: Number(contactId), status: 1 } }),
-  });
-  // status 1 = subscribed; AC retorna 201 ou 422 se já estiver (ok ambos)
-  const listOk = listRel.ok || listRel.status === 422;
+  // 2) Add to list: BR -> 6 (Book Business); ES -> lista propria (se configurada)
+  const targetList = isEs ? ES_LIST_ID : LIST_ID;
+  let listOk: boolean | null = null;
+  if (targetList) {
+    const listRel = await acFetch("/contactLists", {
+      method: "POST",
+      body: JSON.stringify({ contactList: { list: targetList, contact: Number(contactId), status: 1 } }),
+    });
+    listOk = listRel.ok || listRel.status === 422; // 422 = ja estava na lista
+  }
 
-  // 3) Apply tag
-  const tagRel = await acFetch("/contactTags", {
-    method: "POST",
-    body: JSON.stringify({ contactTag: { contact: Number(contactId), tag: tagId } }),
-  });
-  const tagOk = tagRel.ok || tagRel.status === 422;
+  // 3) Apply tag: BR -> 181/321; ES -> tag propria (id ou find-or-create por nome; nunca deixa lead ES sem marca)
+  let useTag: number | null = isEs ? ES_TAG_CHECKOUT : tagId;
+  if (isEs && !useTag) {
+    try {
+      const f = await acFetch("/tags?search=" + encodeURIComponent(ES_TAG_NAME_FALLBACK));
+      if (f.ok) { const t = (f.data?.tags || []).find((x: any) => x.tag === ES_TAG_NAME_FALLBACK); if (t) useTag = Number(t.id); }
+      if (!useTag) {
+        const c = await acFetch("/tags", { method: "POST", body: JSON.stringify({ tag: { tag: ES_TAG_NAME_FALLBACK, tagType: "contact", description: "Lead ES (produto internacional) que finalizou o pre-checkout" } }) });
+        useTag = c.data?.tag?.id ? Number(c.data.tag.id) : null;
+      }
+    } catch { /* nunca quebra o lead */ }
+  }
+  let tagOk: boolean | null = null;
+  if (useTag) {
+    const tagRel = await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: Number(contactId), tag: useTag } }) });
+    tagOk = tagRel.ok || tagRel.status === 422;
+  }
 
   // Pega UTMs e outros metadados pra eventual storage interno futuro
   const utms = {
@@ -148,7 +171,7 @@ serve(async (req) => {
   let paidTagOk: boolean | null = null;
   if (isPaid) {
     try {
-      const TAG_NAME = "MTBB - Tráfego pago";
+      const TAG_NAME = isEs ? "MTBB ES - Trafego pago" : "MTBB - Tráfego pago";
       let adTagId: number | null = null;
       const found = await acFetch("/tags?search=" + encodeURIComponent(TAG_NAME));
       if (found.ok) { const t = (found.data?.tags || []).find((x: any) => x.tag === TAG_NAME); if (t) adTagId = Number(t.id); }
@@ -172,6 +195,7 @@ serve(async (req) => {
     paid_tag: paidTagOk,
     variant,
     stage,
+    lang: isEs ? "es" : "pt",
     utms,
   });
 });

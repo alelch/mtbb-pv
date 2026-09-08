@@ -61,3 +61,6 @@ mudar `content.py` reproduz os 6 arquivos **byte a byte** (verificável com
 dos 6 HTML reais. Não é usado em runtime; fica só como documentação de como os
 moldes foram derivados. Para refazer o bootstrap a partir dos HTML atuais:
 `python3 build/_extract.py`.
+
+## Versão em espanhol (`es/`)
+`python3 build/es/build_es.py` gera `es/{escrevendo,lancando,publicado}.html` a partir das PVs PT geradas. Produto internacional = outra estrutura (só preço, entregável digital, US$ 249, eventos em `mtbb_pv_events_es`, leads com `lang=es` no `pv-lead`). Copy ES fica em `build/es/dados_es.py`. Regenerar as PT NÃO atualiza as ES: rodar este script depois.
