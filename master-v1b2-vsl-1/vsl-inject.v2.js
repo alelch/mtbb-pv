@@ -133,7 +133,7 @@
   }
 
   /* ===== 26-E13: ESCASSEZ DINÂMICA — % de ingressos sobe dia a dia até 100% no dia do evento (08/08) ===== */
-  var EVENT_E13=new Date('2026-09-06T08:00:00-03:00');   // aula ao vivo: 08/08 às 8h
+  var EVENT_E13=new Date('2026-09-27T08:00:00-03:00');   // aula ao vivo: 08/08 às 8h
   /* rotulo do countdown gerado a partir da PROPRIA data do evento.
      Antes era texto cravado e ficou mentindo quando a data do evento mudou. */
   function _evLabel(){ try{

@@ -184,7 +184,7 @@
      ⚠️ best-seller: a escassez vive SO aqui (o index desta pagina nao tem), por isso ela NAO foi
      removida como na master-v1b2. Trocar de edicao = atualizar o fallback abaixo. */
   var EVENT_E13 = (function(){ try{ if(window.__EVENTO instanceof Date && !isNaN(window.__EVENTO)) return window.__EVENTO; }catch(e){}
-    return new Date('2026-09-06T08:00:00-03:00'); })();   // E15: aula ao vivo 06/09 as 8h
+    return new Date('2026-09-27T08:00:00-03:00'); })();   // E16: aula ao vivo 27/09 as 8h
   /* rotulo do countdown gerado a partir da PROPRIA data do evento.
      Antes era texto cravado e ficou mentindo quando a data do evento mudou. */
   function _evLabel(){ try{

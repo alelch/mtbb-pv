@@ -186,7 +186,7 @@
      passada -> satura em 100%). Agora escassez vive SO no index, igual a arquitetura da Imersao.
      O countdown abaixo continua aqui (so existe neste arquivo) e le a data do index. */
   var EVENT_EV = (function(){ try{ if(window.__EVENTO instanceof Date && !isNaN(window.__EVENTO)) return window.__EVENTO; }catch(e){}
-    return new Date('2026-09-06T08:00:00-03:00'); })();   // fallback se o index nao tiver exposto
+    return new Date('2026-09-27T08:00:00-03:00'); })();   // fallback se o index nao tiver exposto
   /* rotulo do countdown gerado a partir da PROPRIA data do evento.
      Antes era texto cravado e ficou mentindo quando a data do evento mudou. */
   function _evLabel(){ try{
