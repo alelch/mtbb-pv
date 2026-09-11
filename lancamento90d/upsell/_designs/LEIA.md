@@ -45,3 +45,15 @@ não promover a pasta.
 | 08 | Neo-brutalista | Borda preta grossa, sombra dura, tipo gigante, acento elétrico. |
 | 09 | Cinema | Tela cheia, letterbox, grão, sequência de planos. |
 | 10 | Carta | Sem design: uma coluna, texto preto, assinatura. Parece pessoal. |
+
+## A prancha de comparação
+
+```
+python3 gera.py && python3 build_prancha.py ./prancha.html
+```
+
+Gera `prancha.html`: uma página só, autocontida (146 KB), com as dez renderizadas
+lado a lado em iframes. Abre sem servidor. `--artifact` emite só o corpo, para
+publicar como Artifact (o wrapper de lá põe o `<head>`).
+
+Publicada em 10/09: https://claude.ai/code/artifact/d96a9b02-0d9b-47bc-81ee-ef1e6560e1ed

@@ -1,0 +1,1088 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"></head><body><title>Pranchas do Diagnóstico</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Newsreader:wght@400;600&family=DM+Mono:wght@400;500&display=swap"><style>
+:root{
+  --board:#E4E1DA; --plate:#FAF9F6; --ink:#191816; --mut:#6E6A62;
+  --line:#CBC6BC; --ox:#7A2018; --gr:#14523E; --focus:#7A2018;
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --board:#151614; --plate:#1E201D; --ink:#EDEBE5; --mut:#928D83;
+    --line:#33352F; --ox:#D4776A; --gr:#63B294; --focus:#D4776A;
+  }
+}
+:root[data-theme="dark"]{
+  --board:#151614; --plate:#1E201D; --ink:#EDEBE5; --mut:#928D83;
+  --line:#33352F; --ox:#D4776A; --gr:#63B294; --focus:#D4776A;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--board);color:var(--ink);
+  font:400 16px/1.6 Newsreader,Georgia,serif;-webkit-font-smoothing:antialiased}
+.w{max-width:1560px;margin:0 auto;padding:0 clamp(18px,3vw,40px)}
+.mono{font-family:'DM Mono',ui-monospace,'SFMono-Regular',monospace;
+  font-variant-numeric:tabular-nums}
+.disp{font-family:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;
+  font-weight:700;letter-spacing:-.028em}
+
+/* masthead */
+header{border-bottom:1px solid var(--line);padding:clamp(30px,4vw,52px) 0 22px}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ox);margin:0 0 14px;display:flex;gap:12px;align-items:center}
+.eyebrow:after{content:'';flex:1;height:1px;background:var(--line)}
+h1{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+  font-size:clamp(30px,4.6vw,54px);line-height:1.02;letter-spacing:-.038em;text-wrap:balance;
+  max-width:18ch}
+.brief{margin:18px 0 0;max-width:66ch;font-size:17.5px;color:var(--mut)}
+.brief b{color:var(--ink);font-weight:600}
+.specs{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.specs li{font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.05em;
+  border:1px solid var(--line);border-radius:2px;padding:6px 10px;color:var(--mut)}
+.specs li b{color:var(--ink);font-weight:500}
+
+/* board */
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));
+  gap:clamp(18px,2.2vw,30px);padding:clamp(24px,3.4vw,44px) 0 clamp(50px,7vw,90px)}
+.plate{background:var(--plate);border:1px solid var(--line);display:flex;flex-direction:column;
+  position:relative}
+.plate:before,.plate:after{content:'';position:absolute;width:9px;height:9px;pointer-events:none;
+  border-color:var(--ox);opacity:.5}
+.plate:before{top:-1px;left:-1px;border-top:1px solid;border-left:1px solid}
+.plate:after{bottom:-1px;right:-1px;border-bottom:1px solid;border-right:1px solid}
+.ph{display:flex;align-items:baseline;gap:11px;padding:13px 15px 11px;border-bottom:1px solid var(--line)}
+.ph .no{font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--ox)}
+.ph h2{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;
+  font-size:19px;letter-spacing:-.028em}
+.win{position:relative;height:430px;overflow:hidden;background:#fff;
+  border-bottom:1px solid var(--line)}
+.win iframe{position:absolute;top:0;left:0;width:1320px;height:1400px;border:0;
+  transform:scale(var(--s,.3333));transform-origin:0 0}
+.win button.open{position:absolute;inset:0;z-index:2;width:100%;border:0;background:transparent;
+  cursor:zoom-in;padding:0;font:inherit;color:transparent}
+.win button.open:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
+.plate:hover .win iframe{filter:none}
+.pf{padding:14px 15px 15px;display:flex;flex-direction:column;gap:12px;flex:1}
+.tese{margin:0;font-size:16px;line-height:1.5;color:var(--ink)}
+.meta{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+.chips{display:flex;gap:0}
+.chips i{display:block;width:20px;height:20px;border:1px solid rgba(120,115,105,.4);
+  margin-right:-1px}
+.face{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--mut);
+  letter-spacing:.02em;text-align:right;flex:1}
+
+/* visor */
+.viewer{position:fixed;inset:0;z-index:50;background:rgba(12,12,11,.9);
+  display:grid;grid-template-rows:auto 1fr;padding:0}
+.viewer[hidden]{display:none!important}
+.vbar{display:flex;align-items:center;gap:14px;padding:11px clamp(12px,2vw,22px);
+  background:var(--plate);border-bottom:1px solid var(--line)}
+.vbar .no{font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--ox)}
+.vbar h3{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:18px;
+  letter-spacing:-.028em;flex:1}
+.vbar button{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;
+  background:transparent;border:1px solid var(--line);color:var(--ink);padding:8px 12px;
+  cursor:pointer;border-radius:2px}
+.vbar button:hover{border-color:var(--ox);color:var(--ox)}
+.vbar button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.vbar .x{border-color:var(--ox);color:var(--ox)}
+.viewer .stage{background:#fff;overflow:hidden}
+.viewer iframe{width:100%;height:100%;border:0;display:block}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--mut);
+  font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.05em}
+@media (prefers-reduced-motion:no-preference){
+  .plate{transition:border-color .18s ease,transform .18s ease}
+  .plate:hover{border-color:var(--ox);transform:translateY(-2px)}
+}
+@media (max-width:640px){.win{height:330px}}
+</style><div class="w"><header><p class="eyebrow">The Book Business · upsell do Lançamento 90D</p><h1>Dez rumos para a mesma página</h1><p class="brief">A página do <b>Diagnóstico do Autor</b>, desenhada de dez maneiras que não têm nada a ver umas com as outras. A copy é <b>idêntica</b> nas dez, palavra por palavra, então a única coisa em julgamento aqui é o design. Clique numa prancha para abrir em tamanho real e rolar até o fim.</p><ul class="specs"><li><b>10</b> pranchas</li><li><b>1</b> copy</li><li>protótipos: <b>sem checkout</b></li><li>← → e Esc no visor</li></ul></header><div class="board"><article class="plate" data-slug="01-editorial" data-no="01" data-nome="Editorial"><div class="ph"><span class="no">01</span><h2>Editorial</h2></div><div class="win"><iframe title="Prévia: Editorial" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 01, Editorial</button></div><div class="pf"><p class="tese">Revista literária: serifa grande, fio fino, muito respiro.</p><div class="meta"><span class="chips"><i style="background:#FBF9F3"></i><i style="background:#1A1814"></i><i style="background:#78231C"></i></span><span class="face">Playfair Display + Inter</span></div></div></article><article class="plate" data-slug="02-jacket" data-no="02" data-nome="Capa de livro"><div class="ph"><span class="no">02</span><h2>Capa de livro</h2></div><div class="win"><iframe title="Prévia: Capa de livro" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 02, Capa de livro</button></div><div class="pf"><p class="tese">A página inteira é a sobrecapa: lombada, orelha, quarta capa.</p><div class="meta"><span class="chips"><i style="background:#0F2A1E"></i><i style="background:#F3EEE1"></i><i style="background:#C9A227"></i></span><span class="face">Cormorant Garamond + Inter</span></div></div></article><article class="plate" data-slug="03-ficha" data-no="03" data-nome="Ficha catalográfica"><div class="ph"><span class="no">03</span><h2>Ficha catalográfica</h2></div><div class="win"><iframe title="Prévia: Ficha catalográfica" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 03, Ficha catalográfica</button></div><div class="pf"><p class="tese">Catálogo de biblioteca: monoespaçada, campos, carimbo.</p><div class="meta"><span class="chips"><i style="background:#EEEAE0"></i><i style="background:#131210"></i><i style="background:#B5241C"></i></span><span class="face">IBM Plex Mono</span></div></div></article><article class="plate" data-slug="04-noir" data-no="04" data-nome="Noir premium"><div class="ph"><span class="no">04</span><h2>Noir premium</h2></div><div class="win"><iframe title="Prévia: Noir premium" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 04, Noir premium</button></div><div class="pf"><p class="tese">Quase preto, fio de ouro, tipo leve e enorme. Silêncio caro.</p><div class="meta"><span class="chips"><i style="background:#09090A"></i><i style="background:#EDEAE3"></i><i style="background:#C6A254"></i></span><span class="face">Cormorant Garamond 300 + Inter</span></div></div></article><article class="plate" data-slug="05-relatorio" data-no="05" data-nome="Relatório clínico"><div class="ph"><span class="no">05</span><h2>Relatório clínico</h2></div><div class="win"><iframe title="Prévia: Relatório clínico" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 05, Relatório clínico</button></div><div class="pf"><p class="tese">A página vira o próprio diagnóstico: matriz, status, laudo.</p><div class="meta"><span class="chips"><i style="background:#EEF1F4"></i><i style="background:#0F1B24"></i><i style="background:#0F5E73"></i></span><span class="face">Inter + IBM Plex Mono</span></div></div></article><article class="plate" data-slug="06-suico" data-no="06" data-nome="Suíço"><div class="ph"><span class="no">06</span><h2>Suíço</h2></div><div class="win"><iframe title="Prévia: Suíço" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 06, Suíço</button></div><div class="pf"><p class="tese">Grade rígida, preto e um vermelho, numeração 01–07.</p><div class="meta"><span class="chips"><i style="background:#FFFFFF"></i><i style="background:#0B0B0B"></i><i style="background:#E8341C"></i></span><span class="face">Inter 700, grade de 12</span></div></div></article><article class="plate" data-slug="07-marginalia" data-no="07" data-nome="Marginalia"><div class="ph"><span class="no">07</span><h2>Marginalia</h2></div><div class="win"><iframe title="Prévia: Marginalia" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 07, Marginalia</button></div><div class="pf"><p class="tese">Alguém leu o seu livro e anotou na margem, à caneta.</p><div class="meta"><span class="chips"><i style="background:#F6F2E8"></i><i style="background:#221F1A"></i><i style="background:#C0392B"></i></span><span class="face">Lora + Caveat</span></div></div></article><article class="plate" data-slug="08-brutal" data-no="08" data-nome="Neo-brutalista"><div class="ph"><span class="no">08</span><h2>Neo-brutalista</h2></div><div class="win"><iframe title="Prévia: Neo-brutalista" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 08, Neo-brutalista</button></div><div class="pf"><p class="tese">Borda preta grossa, sombra dura, tipo gigante, um acento elétrico.</p><div class="meta"><span class="chips"><i style="background:#F4F0E4"></i><i style="background:#11100D"></i><i style="background:#2B4BF2"></i></span><span class="face">Archivo Black + Space Grotesk</span></div></div></article><article class="plate" data-slug="09-cinema" data-no="09" data-nome="Cinema"><div class="ph"><span class="no">09</span><h2>Cinema</h2></div><div class="win"><iframe title="Prévia: Cinema" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 09, Cinema</button></div><div class="pf"><p class="tese">Tela cheia, letterbox, grão, sequência de planos.</p><div class="meta"><span class="chips"><i style="background:#0A0A0C"></i><i style="background:#F2EFE9"></i><i style="background:#E9B949"></i></span><span class="face">Anton + Inter</span></div></div></article><article class="plate" data-slug="10-carta" data-no="10" data-nome="Carta"><div class="ph"><span class="no">10</span><h2>Carta</h2></div><div class="win"><iframe title="Prévia: Carta" scrolling="no" loading="lazy"></iframe><button class="open" type="button">Abrir a prancha 10, Carta</button></div><div class="pf"><p class="tese">Sem design: uma coluna, texto preto, assinatura. Parece pessoal.</p><div class="meta"><span class="chips"><i style="background:#FFFFFF"></i><i style="background:#1B1B19"></i><i style="background:#0B5B4F"></i></span><span class="face">Charter / Georgia</span></div></div></article></div><footer>Protótipos de design. Nenhum botão leva a checkout e nenhum tem o JS da oferta ou o teste de preço A/B.</footer></div><div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Prancha em tamanho real"><div class="vbar"><span class="no" id="vno">Prancha</span><h3 id="vtt"></h3><button type="button" id="vp">← anterior</button><button type="button" id="vn">próxima →</button><button type="button" id="vx" class="x">fechar ✕</button></div><div class="stage"><iframe id="vframe" title="Prancha em tamanho real"></iframe></div></div><script type="text/plain" id="src-01-editorial"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"><style>
+:root{--pa:#FBF9F3;--ink:#1A1814;--ox:#78231C;--mut:#6E6860;--ru:#DDD6C8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);
+  font:400 17px/1.72 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:1080px;margin:0 auto;padding:0 28px}
+.n{max-width:660px}
+h1,h2,h3,.pz{font-family:'Playfair Display',Georgia,serif;font-weight:400;letter-spacing:-.01em}
+.kick{font:600 11px/1 Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ox);display:flex;align-items:center;gap:14px;margin:0 0 20px}
+.kick:after{content:'';flex:1;height:1px;background:var(--ru)}
+hr.f{border:0;border-top:1px solid var(--ru);margin:0}
+/* topo */
+.bar{border-bottom:1px solid var(--ru);background:#fff}
+.bar ol{display:flex;gap:34px;list-style:none;margin:0;padding:14px 0;
+  font:500 11px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#A49B8C}
+.bar .on{color:var(--ox)}.bar .ok{color:var(--ink)}
+.bar b{font-weight:700;margin-right:7px}
+.hd{padding:20px 0;text-align:center;font-size:14px;color:var(--mut);border-bottom:1px solid var(--ru)}
+.hd i{font-style:normal;color:var(--ink);font-weight:600}
+/* hero */
+.hero{padding:74px 0 8px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end}
+.hero h1{font-size:clamp(38px,5.1vw,68px);line-height:1.03;margin:0}
+.hero h1 em{font-style:italic;color:var(--ox)}
+.hero .side{border-left:1px solid var(--ru);padding-left:32px;padding-bottom:8px}
+.hero .side p{margin:0;font-size:19px;line-height:1.6;color:var(--mut)}
+.play{margin:46px 0 0;aspect-ratio:16/9;background:#15130F;position:relative;overflow:hidden}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:26px solid var(--pa);border-top:17px solid transparent;border-bottom:17px solid transparent}
+/* matematica */
+.mate{padding:78px 0}
+.eqs{display:grid;gap:0;border-top:1px solid var(--ru)}
+.eq{display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:baseline;
+  padding:24px 0;border-bottom:1px solid var(--ru)}
+.eq .a{font-family:'Playfair Display',serif;font-size:clamp(19px,2.3vw,27px)}
+.eq .s{color:var(--ru);font-size:22px}
+.eq .b{color:var(--mut);font-size:16px}
+.eq.win .a,.eq.win .b{color:var(--ox)}
+.eq.win .b{font-weight:600}
+.dropc p:first-letter{float:left;font-family:'Playfair Display',serif;font-size:66px;
+  line-height:.78;padding:6px 12px 0 0;color:var(--ox)}
+.mate .dropc{margin-top:42px;max-width:62ch}
+.mate .dropc strong{font-weight:600}
+/* preco */
+.buy{background:#fff;border-top:1px solid var(--ru);border-bottom:1px solid var(--ru);padding:66px 0}
+.card{max-width:520px;margin:0 auto;text-align:center;border:1px solid var(--ink);padding:44px 34px;
+  position:relative}
+.card:before{content:'';position:absolute;inset:5px;border:1px solid var(--ru);pointer-events:none}
+.card .rot{font:500 12px/1.5 Inter;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);margin:0}
+.card .nm{font-family:'Playfair Display',serif;font-size:31px;margin:12px 0 20px}
+.pz{font-size:72px;line-height:1;display:block}
+.pz sup{font-size:22px;vertical-align:super;margin-right:4px;color:var(--mut)}
+.sm{font-size:14px;color:var(--mut);margin:12px 0 0}
+.sm.tiny{font-size:11.5px;opacity:.8;margin-top:5px}
+.btn{display:block;margin:26px auto 0;background:var(--ox);color:#fff;text-decoration:none;
+  font:600 15px/1 Inter;letter-spacing:.04em;padding:19px 26px;text-align:center;
+  transition:background .2s}
+.btn:hover{background:#5D1A14}
+.abate{margin:22px auto 0;font-size:14px;color:var(--mut);max-width:44ch}
+/* garantia */
+.gar{display:grid;grid-template-columns:104px 1fr;gap:26px;align-items:center;
+  max-width:660px;margin:70px auto;padding:0}
+.seal{width:104px;height:104px;border:1px solid var(--ox);border-radius:50%;display:grid;
+  place-content:center;text-align:center;color:var(--ox)}
+.seal b{display:block;font-family:'Playfair Display',serif;font-size:27px;line-height:1}
+.seal i{font-style:normal;font:600 9px/1 Inter;letter-spacing:.16em}
+.gar h3{margin:0 0 6px;font-size:23px}
+.gar p{margin:0;color:var(--mut);font-size:16px}
+/* hora */
+.hora{padding:78px 0;border-top:1px solid var(--ru)}
+.hora h2{font-size:clamp(28px,3.4vw,42px);margin:0 0 34px}
+.hl{display:grid;grid-template-columns:96px 1fr;gap:28px;padding:24px 0;border-top:1px solid var(--ru)}
+.hl .m{font-family:'Playfair Display',serif;font-size:25px;color:var(--ox)}
+.hl h3{margin:0;font-size:21px;font-weight:400}
+.hl p{margin:8px 0 0;color:var(--mut);font-size:16px;max-width:56ch}
+.entr{margin-top:48px;max-width:640px}
+.entr h3{font-size:22px;margin:0 0 14px}
+.entr ul{list-style:none;padding:0;margin:0}
+.entr li{padding:12px 0 12px 26px;border-top:1px solid var(--ru);position:relative;font-size:16px}
+.entr li:before{content:'';position:absolute;left:0;top:21px;width:9px;height:1px;background:var(--ox)}
+/* prova */
+.pv{background:#fff;border-top:1px solid var(--ru);padding:72px 0}
+.pv h2{font-size:clamp(26px,3vw,38px);margin:0 0 38px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:38px}
+.col{border-top:2px solid var(--ink);padding-top:18px}
+.col .q{font:600 12px/1 Inter;letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px}
+.col p{margin:0 0 12px;font-size:15.5px;color:var(--mut)}
+.col .dp{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:var(--ink);line-height:1.45}
+.col a{color:var(--ox);font:600 12px/1 Inter;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+  border-bottom:1px solid currentColor;padding-bottom:3px}
+.nota{margin:34px 0 0;font-size:14px;color:var(--mut);max-width:60ch}
+/* fecho */
+.end{padding:74px 0}
+.recap{max-width:520px;margin:0 auto 40px}
+.recap .kick{justify-content:center}.recap .kick:after{display:none}
+.recap ul{list-style:none;padding:0;margin:0;text-align:center}
+.recap li{padding:11px 0;border-bottom:1px solid var(--ru);font-size:16.5px}
+.recusa{display:block;margin:18px auto 0;background:none;border:0;color:var(--mut);
+  font:400 13.5px Inter;text-decoration:underline;cursor:pointer}
+.esc{max-width:52ch;margin:26px auto 0;text-align:center;font-size:13.5px;color:var(--mut);line-height:1.65}
+.faq{max-width:660px;margin:62px auto 0;border-top:1px solid var(--ru)}
+.faq details{border-bottom:1px solid var(--ru)}
+.faq summary{cursor:pointer;padding:20px 0;font-family:'Playfair Display',serif;font-size:20px;
+  list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:before{content:'+ ';color:var(--ox)}
+.faq details[open] summary:before{content:'– '}
+.faq p{margin:0 0 22px;color:var(--mut);font-size:16px;max-width:62ch}
+footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:#A49B8C}
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:26px}.hero .side{border:0;padding:0}
+ .cols{grid-template-columns:1fr;gap:30px}.bar ol{gap:16px;font-size:9.5px;overflow:auto}
+ .hl{grid-template-columns:72px 1fr;gap:16px}}
+</style></head><body><div class="bar"><div class="w"><ol><li class="ok"><b>✓</b>Passo 1 · 90D garantido</li><li class="on"><b>2</b>Passo 2 · Acelere o resultado</li><li class=""><b>3</b>Passo 3 · Acesso liberado</li></ol></div></div><div class="hd"><div class="w">Parabéns! Você já tem o caminho para o seu livro estrear vendendo, <i>mas o seu pedido ainda não está finalizado.</i></div></div><div class="w"><header class="hero"><div><p class="kick">Passo 2 de 3</p><h1>Você já sabe como lançar.<br><em>Mas o seu livro está bom de verdade?</em></h1></div><div class="side"><p>Aperta o play que eu tenho um recado rápido para você.</p></div></header><div class="play"></div><section class="mate"><div class="eqs"><div class="eq"><span class="a">Livro bom + lançamento ruim</span><span class="s">=</span><span class="b">ninguém descobre.</span></div><div class="eq"><span class="a">Lançamento bom + livro ruim</span><span class="s">=</span><span class="b">vende no lançamento. Depois, esquecido.</span></div><div class="eq win"><span class="a">Lançamento bom + livro bom</span><span class="s">=</span><span class="b">muda a vida do autor.</span></div></div><div class="dropc"><p><strong>Um erro só pode fazer o seu livro inteiro falhar.</strong> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <strong>Não é sobre a escrita.</strong> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p></div></section></div><section class="buy"><div class="w"><div class="card"><p class="rot">A gente, trabalhando junto no seu livro. Quer?</p><p class="nm">Diagnóstico do Autor</p><span class="pz"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm tiny">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><p class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</p></div><div class="gar"><div class="seal"><b>100%</b><i>DE VOLTA</i></div><div><h3>Se ao fim da hora você achar que não valeu, devolvemos</h3><p>Sem justificar. E o material continua seu.</p></div></div></div></section><div class="w"><section class="hora"><p class="kick">A hora</p><h2>A sua hora, por dentro</h2><div class="hl"><span class="m">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div><div class="hl"><span class="m">5 min</span><div><h3>O que já está certo</h3></div></div><div class="hl"><span class="m">40 min</span><div><h3>Os seus próximos passos</h3><p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div><div class="hl"><span class="m">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3><p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div><div class="entr"><h3>Você sai com um plano de ação e os próximos passos mapeados.</h3><ul><li><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li><b>As três frentes escolhidas</b> para o seu livro</li><li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul></div></section></div><section class="pv"><div class="w"><h2>Quem já passou por essa leitura</h2><div class="cols"><div class="col"><p class="q">Robson Leite</p><p>Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p class="dp">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">Ver depoimento</a></div><div class="col"><p class="q">Cláudio Yamaguchi</p><p>Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p class="dp">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento</a></div><div class="col"><p class="q">Luiz Valério</p><p>Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p class="dp">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento</a></div></div><p class="nota">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p></div></section><section class="end"><div class="w"><div class="recap"><p class="kick">Recapitulando</p><ul><li>Uma hora no Zoom só sobre o seu livro</li><li>Um plano de ação, com o que fazer primeiro</li><li>Três frentes de lançamento escolhidas para você</li><li>A gravação, para sempre</li></ul></div><div class="card"><span class="pz"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm tiny">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><button class="recusa">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button></div><p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p><div class="faq"><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details></div></div></section><footer>The Book Business · Dany Sakugawa</footer><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script type="text/plain" id="src-02-jacket"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"><style>
+:root{--fo:#0F2A1E;--fo2:#16382796;--cr:#F3EEE1;--go:#C9A227;--mut:#9FB0A6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fo);color:var(--cr);
+  font:400 17px/1.7 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:900px;margin:0 auto;padding:0 26px}
+h1,h2,h3,.big{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500}
+/* lombada */
+.spine{position:fixed;left:0;top:0;bottom:0;width:58px;background:#0A2016;
+  border-right:1px solid rgba(201,162,39,.34);display:grid;place-content:center;z-index:5}
+.spine span{writing-mode:vertical-rl;font:600 11px/1 Inter;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--go)}
+.pg{margin-left:58px}
+@media(max-width:760px){.spine{display:none}.pg{margin-left:0}}
+/* capa */
+.cover{min-height:92vh;display:grid;place-content:center;text-align:center;padding:70px 26px;
+  position:relative}
+.cover:before{content:'';position:absolute;inset:26px;border:1px solid rgba(201,162,39,.36);
+  pointer-events:none}
+.cover:after{content:'';position:absolute;inset:33px;border:1px solid rgba(201,162,39,.16);
+  pointer-events:none}
+.tag{font:600 10.5px/1 Inter;letter-spacing:.34em;text-transform:uppercase;color:var(--go);margin:0 0 30px}
+.cover h1{font-size:clamp(40px,6.4vw,82px);line-height:1.02;margin:0;max-width:15ch}
+.cover h1 i{font-style:italic}
+.rule{width:74px;height:1px;background:var(--go);margin:34px auto}
+.cover .sub{margin:0 auto;color:var(--mut);font-size:18px;max-width:40ch}
+.autor{margin:46px 0 0;font:600 11px/1 Inter;letter-spacing:.3em;text-transform:uppercase;color:var(--cr)}
+.play{max-width:760px;margin:0 auto;aspect-ratio:16/9;background:#081A12;
+  border:1px solid rgba(201,162,39,.3);position:relative}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:24px solid var(--go);border-top:16px solid transparent;border-bottom:16px solid transparent}
+/* orelha = claro */
+.flap{background:var(--cr);color:#15251C;padding:78px 0}
+.flap .lbl{font:600 10.5px/1 Inter;letter-spacing:.3em;text-transform:uppercase;color:#8A6B14;margin:0 0 26px}
+.flap h2{font-size:clamp(28px,3.8vw,44px);margin:0 0 28px;line-height:1.1}
+.eq{display:grid;grid-template-columns:1fr 26px 1fr;gap:14px;align-items:baseline;
+  padding:20px 0;border-bottom:1px solid rgba(21,37,28,.16)}
+.eq:first-of-type{border-top:1px solid rgba(21,37,28,.16)}
+.eq .a{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.4vw,28px)}
+.eq .s{color:#B6AC93;text-align:center}
+.eq .b{font-size:15.5px;color:#4C5C53}
+.eq.win{background:rgba(15,42,30,.05)}
+.eq.win .a,.eq.win .b{color:#0F2A1E}.eq.win .b{font-weight:600}
+.flap .txt{margin:32px 0 0;max-width:62ch;color:#3E4D45}
+.flap .txt strong{color:#15251C}
+/* etiqueta de preco */
+.price{padding:82px 0;text-align:center}
+.sticker{width:min(290px,74vw);aspect-ratio:1;margin:0 auto;border-radius:50%;
+  background:var(--go);color:#12231A;display:grid;place-content:center;
+  box-shadow:0 22px 60px rgba(0,0,0,.4)}
+.sticker .k{font:700 10px/1 Inter;letter-spacing:.22em;text-transform:uppercase;opacity:.72}
+.sticker .v{font-family:'Cormorant Garamond',serif;font-size:74px;line-height:1;margin:8px 0 2px}
+.sticker .v sup{font-size:23px;vertical-align:super}
+.sticker .p{font:600 12px/1.4 Inter;opacity:.8}
+.price .nm{font-family:'Cormorant Garamond',serif;font-size:32px;margin:30px 0 4px}
+.price .rot{color:var(--mut);font-size:15px;margin:0}
+.sm{color:var(--mut);font-size:14px;margin:16px 0 0}.sm.t{font-size:11.5px;opacity:.75;margin-top:5px}
+.btn{display:inline-block;margin:26px 0 0;background:var(--go);color:#12231A;text-decoration:none;
+  font:700 14px/1 Inter;letter-spacing:.06em;padding:20px 42px;border-radius:2px;transition:.2s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.abate{margin:22px auto 0;max-width:44ch;font-size:14px;color:var(--mut)}
+.gar{max-width:620px;margin:56px auto 0;border:1px solid rgba(201,162,39,.32);padding:26px;
+  display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;text-align:left}
+.gar .s{width:86px;height:86px;border-radius:50%;border:1px solid var(--go);display:grid;
+  place-content:center;color:var(--go);text-align:center}
+.gar .s b{display:block;font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1}
+.gar .s i{font-style:normal;font:600 8.5px/1 Inter;letter-spacing:.16em}
+.gar h3{margin:0 0 5px;font-size:21px}.gar p{margin:0;color:var(--mut);font-size:15px}
+/* quarta capa */
+.back{background:#0A2016;padding:78px 0;border-top:1px solid rgba(201,162,39,.24)}
+.back h2{font-size:clamp(26px,3.4vw,38px);margin:0 0 8px}
+.back .lbl{font:600 10.5px/1 Inter;letter-spacing:.3em;text-transform:uppercase;color:var(--go);margin:0 0 22px}
+.blurbs{display:grid;gap:26px;margin-top:30px}
+.bl{border-left:2px solid var(--go);padding-left:22px}
+.bl .q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.4;margin:0 0 10px}
+.bl .a{margin:0;color:var(--mut);font-size:14.5px}
+.bl .n{font:700 11px/1 Inter;letter-spacing:.16em;text-transform:uppercase;margin:12px 0 0}
+.bl a{color:var(--go);font-size:13px;text-decoration:none;border-bottom:1px solid rgba(201,162,39,.4)}
+.nota{margin:28px 0 0;color:var(--mut);font-size:14px;max-width:60ch}
+/* hora */
+.hora{padding:76px 0}
+.hora h2{font-size:clamp(26px,3.4vw,40px);margin:0 0 30px}
+.hl{display:grid;grid-template-columns:88px 1fr;gap:24px;padding:20px 0;
+  border-top:1px solid rgba(243,238,225,.12)}
+.hl .m{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--go)}
+.hl h3{margin:0;font-size:20px;font-weight:500}
+.hl p{margin:7px 0 0;color:var(--mut);font-size:15.5px;max-width:56ch}
+.entr{margin-top:42px;max-width:620px}.entr h3{font-size:21px;margin:0 0 12px}
+.entr ul{list-style:none;padding:0;margin:0}
+.entr li{padding:11px 0;border-top:1px solid rgba(243,238,225,.12);font-size:15.5px;color:var(--mut)}
+.entr b{color:var(--cr)}
+/* barcode + fecho */
+.bc{display:flex;gap:2px;align-items:flex-end;height:46px;justify-content:center;margin:0 0 14px}
+.bc i{display:block;width:2px;background:var(--cr);opacity:.75}
+.recap{max-width:500px;margin:0 auto 34px;text-align:center}
+.recap ul{list-style:none;padding:0;margin:0}
+.recap li{padding:10px 0;border-bottom:1px solid rgba(243,238,225,.12);font-size:16px}
+.recusa{display:block;margin:16px auto 0;background:none;border:0;color:var(--mut);
+  font:400 13.5px Inter;text-decoration:underline;cursor:pointer}
+.esc{max-width:52ch;margin:24px auto 0;font-size:13.5px;color:var(--mut);line-height:1.65;text-align:center}
+.faq{max-width:640px;margin:56px auto 0}
+.faq details{border-top:1px solid rgba(243,238,225,.14)}
+.faq summary{cursor:pointer;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:21px;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:before{content:'+ ';color:var(--go)}
+.faq details[open] summary:before{content:'– '}
+.faq p{margin:0 0 20px;color:var(--mut);font-size:15.5px}
+footer{border-top:1px solid rgba(201,162,39,.24);padding:28px 0;text-align:center;
+  font:600 10.5px/1 Inter;letter-spacing:.26em;text-transform:uppercase;color:var(--mut)}
+</style></head><body><div class="spine"><span>Diagnóstico do Autor</span></div><div class="pg"><header class="cover"><p class="tag">Passo 2 de 3 · mas o seu pedido ainda não está finalizado.</p><h1>Você já sabe como lançar. <i>Mas o seu livro está bom de verdade?</i></h1><div class="rule"></div><p class="sub">Aperta o play que eu tenho um recado rápido para você.</p><p class="autor">The Book Business</p></header><div class="w"><div class="play"></div></div><section class="flap"><div class="w"><p class="lbl">A conta que decide tudo</p><div class="eq"><span class="a">Livro bom + lançamento ruim</span><span class="s">=</span><span class="b">ninguém descobre.</span></div><div class="eq"><span class="a">Lançamento bom + livro ruim</span><span class="s">=</span><span class="b">vende no lançamento. Depois, esquecido.</span></div><div class="eq win"><span class="a">Lançamento bom + livro bom</span><span class="s">=</span><span class="b">muda a vida do autor.</span></div><p class="txt"><strong>Um erro só pode fazer o seu livro inteiro falhar.</strong> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <strong>Não é sobre a escrita.</strong> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p></div></section><section class="price"><div class="w"><div class="sticker"><span class="k">Só nesta página</span><span class="v"><sup>R$</sup>697</span><span class="p">ou 12x no cartão</span></div><p class="nm">Diagnóstico do Autor</p><p class="rot">A gente, trabalhando junto no seu livro. Quer?</p><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><p class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</p><div class="gar"><div class="s"><b>100%</b><i>DE VOLTA</i></div><div><h3>Se ao fim da hora você achar que não valeu, devolvemos</h3><p>Sem justificar. E o material continua seu.</p></div></div></div></section><div class="w"><section class="hora"><h2>A sua hora, por dentro</h2><div class="hl"><span class="m">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div><div class="hl"><span class="m">5 min</span><div><h3>O que já está certo</h3></div></div><div class="hl"><span class="m">40 min</span><div><h3>Os seus próximos passos</h3><p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div><div class="hl"><span class="m">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3><p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div><div class="entr"><h3>Você sai com um plano de ação e os próximos passos mapeados.</h3><ul><li><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li><b>As três frentes escolhidas</b> para o seu livro</li><li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul></div></section></div><section class="back"><div class="w"><p class="lbl">Quarta capa</p><h2>Quem já passou por essa leitura</h2><div class="blurbs"><div class="bl"><p class="q">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><p class="a">Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p class="n">Robson Leite</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">Ver depoimento</a></div><div class="bl"><p class="q">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><p class="a">Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p class="n">Cláudio Yamaguchi</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento</a></div><div class="bl"><p class="q">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><p class="a">Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p class="n">Luiz Valério</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento</a></div></div><p class="nota">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p></div></section><section class="price"><div class="w"><div class="bc"><i style="height:100%"></i><i style="height:55%"></i><i style="height:88%"></i><i style="height:40%"></i><i style="height:72%"></i><i style="height:96%"></i><i style="height:48%"></i><i style="height:80%"></i><i style="height:36%"></i><i style="height:92%"></i><i style="height:60%"></i><i style="height:100%"></i><i style="height:44%"></i><i style="height:76%"></i><i style="height:88%"></i><i style="height:52%"></i><i style="height:96%"></i><i style="height:40%"></i><i style="height:68%"></i><i style="height:100%"></i><i style="height:56%"></i><i style="height:84%"></i><i style="height:44%"></i><i style="height:92%"></i><i style="height:72%"></i><i style="height:48%"></i><i style="height:100%"></i><i style="height:60%"></i><i style="height:88%"></i><i style="height:36%"></i></div><div class="recap"><ul><li>Uma hora no Zoom só sobre o seu livro</li><li>Um plano de ação, com o que fazer primeiro</li><li>Três frentes de lançamento escolhidas para você</li><li>A gravação, para sempre</li></ul></div><span class="v" style="font-family:'Cormorant Garamond',serif;font-size:66px"><sup style="font-size:21px">R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><br><a class="btn" href="#">Sim! Adicione ao meu pedido</a><button class="recusa">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button><p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p><div class="faq"><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details></div></div></section><footer>The Book Business · Dany Sakugawa</footer></div><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script type="text/plain" id="src-03-ficha"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap"><style>
+:root{--pa:#EEEAE0;--ink:#131210;--red:#B5241C;--mut:#6B665C;--ru:#C9C2B4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);
+  font:400 15px/1.68 'IBM Plex Mono',ui-monospace,monospace;-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(rgba(19,18,16,.035) 1px,transparent 1px);
+  background-size:100% 30px}
+.w{max-width:880px;margin:0 auto;padding:0 24px}
+.sheet{background:#F7F4EC;border:1px solid var(--ink);margin:26px auto;max-width:880px;
+  box-shadow:6px 6px 0 rgba(19,18,16,.1)}
+.hd{border-bottom:1px solid var(--ink);padding:12px 22px;display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.hd .r{color:var(--red)}
+.pad{padding:32px 22px}
+.f{display:grid;grid-template-columns:130px 1fr;gap:0;border-top:1px dashed var(--ru)}
+.f:last-of-type{border-bottom:1px dashed var(--ru)}
+.f dt{padding:11px 0;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut)}
+.f dd{margin:0;padding:11px 0}
+h1{font-size:clamp(23px,3.4vw,36px);line-height:1.24;margin:0;font-weight:600;letter-spacing:-.02em}
+h1 u{text-decoration:none;box-shadow:inset 0 -.42em 0 rgba(181,36,28,.2)}
+.stamp{display:inline-block;border:2px solid var(--red);color:var(--red);padding:8px 14px;
+  font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.2em;text-transform:uppercase;
+  rotate:-4deg;opacity:.9}
+.play{margin:26px 0 0;aspect-ratio:16/9;background:var(--ink);position:relative;border:1px solid var(--ink)}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:22px solid var(--pa);border-top:15px solid transparent;border-bottom:15px solid transparent}
+.play:before{content:'[ REPRODUZIR ]';position:absolute;left:16px;bottom:12px;color:#fff9;
+  font-size:10px;letter-spacing:.2em}
+h2{font-size:13px;letter-spacing:.22em;text-transform:uppercase;margin:0 0 16px;font-weight:700}
+h2:after{content:'';display:block;height:1px;background:var(--ink);margin-top:9px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:13px 10px;border-bottom:1px dashed var(--ru);vertical-align:top}
+td.s{width:28px;text-align:center;color:var(--mut)}
+td.b{color:var(--mut)}
+tr.win td{background:rgba(181,36,28,.06);color:var(--ink);font-weight:600;border-bottom:1px solid var(--red)}
+.note{margin:24px 0 0;padding:16px 18px;border-left:3px solid var(--red);background:rgba(181,36,28,.05);
+  font-size:14.5px;max-width:70ch}
+.note b{background:rgba(181,36,28,.16)}
+/* preco = formulario */
+.buy{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);background:#F0ECE2}
+.rowf{display:grid;grid-template-columns:150px 1fr;border-bottom:1px dashed var(--ru)}
+.rowf:last-child{border:0}
+.rowf .k{padding:14px 22px;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--mut);border-right:1px dashed var(--ru)}
+.rowf .v{padding:14px 22px}
+.big{font-size:46px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.big sup{font-size:16px;vertical-align:super;color:var(--mut)}
+.btn{display:block;width:100%;background:var(--ink);color:var(--pa);text-decoration:none;
+  text-align:center;font:700 14px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;
+  text-transform:uppercase;padding:20px;border:0;cursor:pointer}
+.btn:hover{background:var(--red)}
+.mini{font-size:11.5px;color:var(--mut)}
+.gar{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;padding:24px 22px;
+  border-top:1px solid var(--ink)}
+.gar .s{width:78px;height:78px;border:2px solid var(--red);border-radius:50%;display:grid;
+  place-content:center;text-align:center;color:var(--red);rotate:-6deg}
+.gar .s b{display:block;font-size:20px;font-weight:700;line-height:1}
+.gar .s i{font-style:normal;font-size:8px;letter-spacing:.14em}
+.gar h3{margin:0 0 4px;font-size:15px}.gar p{margin:0;color:var(--mut);font-size:13.5px}
+.hl{display:grid;grid-template-columns:70px 1fr;gap:16px;padding:14px 0;border-top:1px dashed var(--ru)}
+.hl .m{color:var(--red);font-weight:700;font-size:13px}
+.hl h3{margin:0;font-size:15px;font-weight:600}
+.hl p{margin:6px 0 0;color:var(--mut);font-size:13.5px}
+ul.ck{list-style:none;padding:0;margin:14px 0 0}
+ul.ck li{padding:9px 0 9px 24px;position:relative;border-top:1px dashed var(--ru);font-size:14px}
+ul.ck li:before{content:'▸';position:absolute;left:4px;color:var(--red)}
+.pvs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--ink)}
+.pvc{padding:18px;border-right:1px dashed var(--ru)}
+.pvc:last-child{border-right:0}
+.pvc .n{font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px}
+.pvc p{margin:0 0 9px;font-size:13px;color:var(--mut)}
+.pvc .d{color:var(--ink)}
+.pvc a{color:var(--red);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.recusa{display:block;width:100%;background:none;border:0;border-top:1px dashed var(--ru);
+  padding:15px;color:var(--mut);font:400 12.5px 'IBM Plex Mono',monospace;cursor:pointer;text-decoration:underline}
+.esc{padding:18px 22px;font-size:12.5px;color:var(--mut);line-height:1.7;border-top:1px dashed var(--ru)}
+details{border-top:1px dashed var(--ru)}
+summary{cursor:pointer;padding:14px 0;font-size:14px;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:'[+] ';color:var(--red)}
+details[open] summary:before{content:'[–] '}
+details p{margin:0 0 16px;color:var(--mut);font-size:13.5px}
+footer{text-align:center;padding:24px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+@media(max-width:720px){.f,.rowf{grid-template-columns:1fr}.f dt,.rowf .k{padding-bottom:0;border:0}
+ .pvs{grid-template-columns:1fr}.pvc{border-right:0;border-bottom:1px dashed var(--ru)}}
+</style></head><body><div class="sheet"><div class="hd"><span>The Book Business · Ficha do autor</span><span class="r">Passo 2/3 · pedido em aberto</span></div><div class="pad"><dl class="f"><dt>Situação</dt><dd>Parabéns! Você já tem o caminho para o seu livro estrear vendendo, mas o seu pedido ainda não está finalizado.</dd></dl><dl class="f"><dt>Assunto</dt><dd><h1>Você já sabe como lançar. <u>Mas o seu livro está bom de verdade?</u></h1></dd></dl><dl class="f"><dt>Instrução</dt><dd>Aperta o play que eu tenho um recado rápido para você.</dd></dl><div class="play"></div></div><div class="pad" style="border-top:1px solid var(--ink)"><h2>Tabela de resultados possíveis</h2><table><tr class=""><td>Livro bom + lançamento ruim</td><td class="s">=</td><td class="b">ninguém descobre.</td></tr><tr class=""><td>Lançamento bom + livro ruim</td><td class="s">=</td><td class="b">vende no lançamento. Depois, esquecido.</td></tr><tr class="win"><td>Lançamento bom + livro bom</td><td class="s">=</td><td class="b">muda a vida do autor.</td></tr></table><p class="note"><b>Um erro só pode fazer o seu livro inteiro falhar.</b> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <b>Não é sobre a escrita.</b> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p></div><div class="buy"><div class="rowf"><div class="k">Item</div><div class="v">Diagnóstico do Autor<br><span class="mini">A gente, trabalhando junto no seu livro. Quer?</span></div></div><div class="rowf"><div class="k">Valor</div><div class="v"><span class="big"><sup>R$</sup>697</span><br><span class="mini">à vista, ou em até <b>12x no cartão</b> · * parcelado no cartão, com juros</span></div></div><div class="rowf"><div class="k">Crédito</div><div class="v mini">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</div></div><div class="rowf"><div class="k">Vaga</div><div class="v"><span class="stamp">vaga aberta este mês</span></div></div><a class="btn" href="#">Sim! Adicione ao meu pedido</a><div class="gar"><div class="s"><b>100%</b><i>DE VOLTA</i></div><div><h3>Se ao fim da hora você achar que não valeu, devolvemos</h3><p>Sem justificar. E o material continua seu.</p></div></div></div><div class="pad"><h2>A sua hora, por dentro</h2><div class="hl"><span class="m">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div><div class="hl"><span class="m">5 min</span><div><h3>O que já está certo</h3></div></div><div class="hl"><span class="m">40 min</span><div><h3>Os seus próximos passos</h3><p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div><div class="hl"><span class="m">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3><p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div><h2 style="margin-top:30px">Você sai com um plano de ação e os próximos passos mapeados.</h2><ul class="ck"><li><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li><b>As três frentes escolhidas</b> para o seu livro</li><li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul></div><div class="pad" style="border-top:1px solid var(--ink)"><h2>Quem já passou por essa leitura</h2><div class="pvs"><div class="pvc"><p class="n">Robson Leite</p><p>Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p class="d">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">ver depoimento →</a></div><div class="pvc"><p class="n">Cláudio Yamaguchi</p><p>Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p class="d">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">ver depoimento →</a></div><div class="pvc"><p class="n">Luiz Valério</p><p>Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p class="d">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">ver depoimento →</a></div></div><p class="mini" style="margin-top:16px">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p></div><div class="buy"><div class="rowf"><div class="k">Recapitulando</div><div class="v"><ul class="ck" style="margin:0"><li>Uma hora no Zoom só sobre o seu livro</li><li>Um plano de ação, com o que fazer primeiro</li><li>Três frentes de lançamento escolhidas para você</li><li>A gravação, para sempre</li></ul></div></div><div class="rowf"><div class="k">Total</div><div class="v"><span class="big"><sup>R$</sup>697</span> <span class="mini">à vista, ou em até <b>12x no cartão</b></span></div></div><a class="btn" href="#">Sim! Adicione ao meu pedido</a><button class="recusa">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button><p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p></div><div class="pad"><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details></div></div><footer>The Book Business · Dany Sakugawa</footer><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script type="text/plain" id="src-04-noir"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"><style>
+:root{--bg:#09090A;--tx:#EDEAE3;--go:#C6A254;--mut:#8A857C}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+  font:300 17px/1.8 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:1000px;margin:0 auto;padding:0 30px}
+.n{max-width:640px;margin:0 auto}
+h1,h2,h3,.pz{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;letter-spacing:-.005em}
+.k{font:500 10px/1 Inter;letter-spacing:.42em;text-transform:uppercase;color:var(--go);margin:0}
+.hair{width:64px;height:1px;background:var(--go);margin:0 auto;opacity:.8}
+.hair.l{margin:0}
+section{padding:clamp(80px,11vw,150px) 0}
+/* topo */
+.top{padding:0;border-bottom:1px solid rgba(237,234,227,.08)}
+.top ol{display:flex;gap:40px;justify-content:center;list-style:none;margin:0;padding:20px 0;
+  font:400 10px/1 Inter;letter-spacing:.24em;text-transform:uppercase;color:#4E4A44}
+.top .on{color:var(--go)}.top .ok{color:var(--mut)}
+/* hero */
+.hero{text-align:center;padding-top:clamp(70px,9vw,120px)}
+.hero .pre{color:var(--mut);font-size:14px;letter-spacing:.06em;margin:0 0 40px}
+.hero h1{font-size:clamp(40px,7vw,88px);line-height:1.12;margin:0 auto;max-width:14ch}
+.hero h1 span{display:block;color:var(--go);font-style:italic}
+.hero .sub{color:var(--mut);font-size:17px;margin:42px auto 0;max-width:36ch}
+.play{max-width:820px;margin:64px auto 0;aspect-ratio:16/9;background:#0E0E10;
+  border:1px solid rgba(198,162,84,.22);position:relative}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:22px solid rgba(198,162,84,.9);border-top:15px solid transparent;border-bottom:15px solid transparent}
+/* equacoes */
+.eqs{margin:0 auto;max-width:760px}
+.eq{padding:34px 0;border-bottom:1px solid rgba(237,234,227,.08);text-align:center}
+.eq:first-child{border-top:1px solid rgba(237,234,227,.08)}
+.eq .a{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(21px,2.7vw,31px);
+  color:var(--mut)}
+.eq .b{display:block;margin-top:9px;font-size:15px;color:#5E5A54;letter-spacing:.04em}
+.eq.win .a{color:var(--tx)}
+.eq.win .b{color:var(--go);font-size:17px}
+.para{margin:66px auto 0;max-width:56ch;text-align:center;color:var(--mut);font-size:17.5px}
+.para strong{color:var(--tx);font-weight:400}
+/* preco */
+.buy{text-align:center;border-top:1px solid rgba(237,234,227,.08)}
+.buy .nm{font-size:clamp(26px,3.4vw,40px);margin:22px 0 0}
+.pz{display:block;font-size:clamp(78px,14vw,168px);line-height:.94;margin:34px 0 0;
+  font-weight:200;letter-spacing:-.04em}
+.pz sup{font-size:.22em;vertical-align:super;color:var(--mut);letter-spacing:0;margin-right:.08em}
+.sm{color:var(--mut);font-size:14px;margin:18px 0 0}
+.sm.t{font-size:11.5px;color:#56524C;margin-top:6px}
+.btn{display:inline-block;margin:44px 0 0;border:1px solid var(--go);color:var(--go);
+  text-decoration:none;font:500 11px/1 Inter;letter-spacing:.28em;text-transform:uppercase;
+  padding:22px 52px;transition:.3s}
+.btn:hover{background:var(--go);color:#09090A}
+.abate{margin:30px auto 0;max-width:42ch;font-size:13.5px;color:#5E5A54}
+.gar{margin:0 auto;max-width:520px;text-align:center}
+.gar .n100{font-family:'Cormorant Garamond',serif;font-size:64px;color:var(--go);line-height:1}
+.gar .d{font:500 9px/1 Inter;letter-spacing:.3em;color:var(--mut);margin:6px 0 26px}
+.gar h3{font-size:24px;margin:0 0 10px}.gar p{margin:0;color:var(--mut);font-size:15px}
+/* hora */
+.hora h2{font-size:clamp(28px,4vw,50px);text-align:center;margin:0 0 12px}
+.hl{display:grid;grid-template-columns:120px 1fr;gap:34px;padding:30px 0;
+  border-top:1px solid rgba(237,234,227,.08);max-width:760px;margin:0 auto}
+.hl .m{font-family:'Cormorant Garamond',serif;font-size:27px;color:var(--go);text-align:right}
+.hl h3{margin:0;font-size:21px}
+.hl p{margin:9px 0 0;color:var(--mut);font-size:15.5px}
+.entr{max-width:760px;margin:56px auto 0;text-align:center}
+.entr h3{font-size:23px;margin:0 0 22px}
+.entr ul{list-style:none;padding:0;margin:0;display:grid;gap:1px;background:rgba(237,234,227,.08)}
+.entr li{background:var(--bg);padding:18px;font-size:15px;color:var(--mut)}
+.entr b{color:var(--tx);font-weight:400}
+/* prova */
+.pv h2{font-size:clamp(26px,3.4vw,42px);text-align:center;margin:0 0 54px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(237,234,227,.08)}
+.tc{background:var(--bg);padding:32px 26px}
+.tc .n{font:500 10px/1 Inter;letter-spacing:.24em;text-transform:uppercase;color:var(--go);margin:0 0 18px}
+.tc p{margin:0 0 14px;font-size:14.5px;color:#5E5A54}
+.tc .d{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:var(--tx);line-height:1.45}
+.tc a{color:var(--mut);font:400 11px/1 Inter;letter-spacing:.16em;text-transform:uppercase;text-decoration:none}
+.tc a:hover{color:var(--go)}
+.nota{text-align:center;margin:40px auto 0;max-width:56ch;font-size:13.5px;color:#56524C}
+/* fecho */
+.recap{max-width:460px;margin:0 auto 56px;text-align:center}
+.recap li{list-style:none;padding:14px 0;border-bottom:1px solid rgba(237,234,227,.08);
+  font-size:16px;color:var(--mut)}
+.recap ul{padding:0;margin:0}
+.recusa{display:block;margin:26px auto 0;background:none;border:0;color:#56524C;
+  font:300 13px Inter;text-decoration:underline;cursor:pointer}
+.esc{max-width:50ch;margin:34px auto 0;text-align:center;font-size:13px;color:#56524C;line-height:1.8}
+.faq{max-width:640px;margin:80px auto 0}
+details{border-top:1px solid rgba(237,234,227,.08)}
+summary{cursor:pointer;padding:24px 0;font-family:'Cormorant Garamond',serif;font-size:22px;list-style:none}
+summary::-webkit-details-marker{display:none}
+details p{margin:0 0 26px;color:var(--mut);font-size:15.5px}
+footer{border-top:1px solid rgba(237,234,227,.08);padding:36px 0;text-align:center;
+  font:400 10px/1 Inter;letter-spacing:.34em;text-transform:uppercase;color:#413E39}
+@media(max-width:820px){.tri{grid-template-columns:1fr}.hl{grid-template-columns:80px 1fr;gap:18px}
+ .hl .m{text-align:left;font-size:22px}.top ol{gap:16px;font-size:8.5px}}
+</style></head><body><nav class="top"><ol><li class="ok">Passo 1 · 90D garantido</li><li class="on">Passo 2 · Acelere o resultado</li><li class="">Passo 3 · Acesso liberado</li></ol></nav><header class="hero"><div class="w"><p class="pre">Parabéns! Você já tem o caminho para o seu livro estrear vendendo, mas o seu pedido ainda não está finalizado.</p><h1>Você já sabe como lançar.<span>Mas o seu livro está bom de verdade?</span></h1><p class="sub">Aperta o play que eu tenho um recado rápido para você.</p><div class="play"></div></div></header><section><div class="w"><div class="eqs"><div class="eq"><span class="a">Livro bom + lançamento ruim</span><span class="b">ninguém descobre.</span></div><div class="eq"><span class="a">Lançamento bom + livro ruim</span><span class="b">vende no lançamento. Depois, esquecido.</span></div><div class="eq win"><span class="a">Lançamento bom + livro bom</span><span class="b">muda a vida do autor.</span></div></div><p class="para"><strong>Um erro só pode fazer o seu livro inteiro falhar.</strong> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <strong>Não é sobre a escrita.</strong> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p></div></section><section class="buy"><div class="w"><p class="k">A gente, trabalhando junto no seu livro. Quer?</p><p class="nm">Diagnóstico do Autor</p><span class="pz"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><p class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</p></div></section><section><div class="w"><div class="gar"><div class="n100">100%</div><div class="d">DE VOLTA</div><h3>Se ao fim da hora você achar que não valeu, devolvemos</h3><p>Sem justificar. E o material continua seu.</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a></div></div></section><section class="hora"><div class="w"><h2>A sua hora, por dentro</h2><div class="hair" style="margin-bottom:44px"></div><div class="hl"><span class="m">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div><div class="hl"><span class="m">5 min</span><div><h3>O que já está certo</h3></div></div><div class="hl"><span class="m">40 min</span><div><h3>Os seus próximos passos</h3><p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div><div class="hl"><span class="m">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3><p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div><div class="entr"><h3>Você sai com um plano de ação e os próximos passos mapeados.</h3><ul><li><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li><b>As três frentes escolhidas</b> para o seu livro</li><li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul></div></div></section><section class="pv"><div class="w"><h2>Quem já passou por essa leitura</h2><div class="tri"><div class="tc"><p class="n">Robson Leite</p><p>Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p class="d">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">Ver depoimento</a></div><div class="tc"><p class="n">Cláudio Yamaguchi</p><p>Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p class="d">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento</a></div><div class="tc"><p class="n">Luiz Valério</p><p>Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p class="d">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento</a></div></div><p class="nota">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p></div></section><section class="buy"><div class="w"><div class="recap"><p class="k">Recapitulando</p><ul style="margin-top:24px"><li>Uma hora no Zoom só sobre o seu livro</li><li>Um plano de ação, com o que fazer primeiro</li><li>Três frentes de lançamento escolhidas para você</li><li>A gravação, para sempre</li></ul></div><span class="pz"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><button class="recusa">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button><p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p><div class="faq"><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details></div></div></section><footer>The Book Business · Dany Sakugawa</footer><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script type="text/plain" id="src-05-relatorio"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;700&display=swap"><style>
+:root{--bg:#EEF1F4;--cd:#fff;--ink:#0F1B24;--sl:#5B6B7A;--bd:#DCE3E9;
+      --ac:#0F5E73;--ok:#12795E;--wr:#C0662B;--bad:#B23A2F}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 15.5px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:1000px;margin:0 auto;padding:0 22px}
+h1,h2,h3{letter-spacing:-.022em;font-weight:650}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+/* barra de progresso */
+.tb{background:var(--ink);color:#fff;position:sticky;top:0;z-index:9}
+.tb .w{display:flex;align-items:center;gap:18px;padding:11px 22px;flex-wrap:wrap}
+.tb .br{font:700 11px/1 Inter;letter-spacing:.16em;text-transform:uppercase;opacity:.6}
+.tb ol{display:flex;gap:8px;list-style:none;margin:0;padding:0;flex:1;min-width:220px}
+.tb li{flex:1;font:600 10px/1 Inter;letter-spacing:.06em;text-transform:uppercase;
+  padding:7px 9px;border-radius:5px;background:rgba(255,255,255,.08);color:#fff8;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tb li.ok{background:rgba(18,121,94,.32);color:#8FD9C1}
+.tb li.on{background:#fff;color:var(--ink)}
+/* cabeca */
+.head{padding:44px 0 30px}
+.pill{display:inline-block;font:700 10.5px/1 Inter;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(15,94,115,.1);color:var(--ac);padding:7px 12px;border-radius:99px}
+.head h1{font-size:clamp(27px,3.9vw,44px);line-height:1.14;margin:18px 0 0;max-width:19ch}
+.head h1 span{color:var(--ac)}
+.head .lead{margin:14px 0 0;color:var(--sl);font-size:17px}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:14px;
+  box-shadow:0 1px 2px rgba(15,27,36,.04),0 12px 30px -18px rgba(15,27,36,.22)}
+.play{margin:24px 0 0;aspect-ratio:16/9;background:var(--ink);border-radius:14px;position:relative;overflow:hidden}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:22px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent}
+/* matriz 2x2 */
+.sec{padding:34px 0}
+.ttl{display:flex;align-items:center;gap:10px;margin:0 0 16px}
+.ttl h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--sl);margin:0;font-weight:700}
+.ttl:after{content:'';flex:1;height:1px;background:var(--bd)}
+.mtx{padding:22px}
+.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.q{border:1px solid var(--bd);border-radius:11px;padding:18px;min-height:126px;display:flex;
+  flex-direction:column;justify-content:space-between}
+.q .t{font:700 10.5px/1.4 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--sl)}
+.q .r{font-size:17px;font-weight:600;line-height:1.3;margin-top:12px}
+.q.bad{border-color:rgba(178,58,47,.3);background:rgba(178,58,47,.045)}
+.q.bad .r{color:var(--bad)}
+.q.wr{border-color:rgba(192,102,43,.32);background:rgba(192,102,43,.05)}
+.q.wr .r{color:var(--wr)}
+.q.ok{border-color:var(--ok);background:rgba(18,121,94,.07);box-shadow:0 0 0 3px rgba(18,121,94,.09)}
+.q.ok .r{color:var(--ok)}
+.q.na{border-style:dashed;opacity:.55}
+.st{display:inline-flex;align-items:center;gap:6px;font:700 9.5px/1 Inter;letter-spacing:.1em;
+  text-transform:uppercase;padding:5px 9px;border-radius:99px;margin-bottom:10px;align-self:flex-start}
+.st.bad{background:rgba(178,58,47,.12);color:var(--bad)}
+.st.wr{background:rgba(192,102,43,.13);color:var(--wr)}
+.st.ok{background:rgba(18,121,94,.13);color:var(--ok)}
+.laudo{margin:14px 0 0;padding:18px 20px;border-left:3px solid var(--ac);background:rgba(15,94,115,.05);
+  border-radius:0 10px 10px 0;font-size:15.5px}
+.laudo b{font-weight:650}
+/* oferta */
+.offer{display:grid;grid-template-columns:1.15fr 1fr;gap:0;overflow:hidden}
+.ol{padding:30px}
+.ol .k{font:700 10.5px/1 Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--sl);margin:0 0 8px}
+.ol h3{font-size:25px;margin:0 0 18px}
+.ol ul{list-style:none;padding:0;margin:0}
+.ol li{padding:9px 0 9px 26px;position:relative;font-size:14.6px;color:var(--sl)}
+.ol li:before{content:'';position:absolute;left:0;top:14px;width:15px;height:8px;
+  border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);rotate:-45deg}
+.orr{background:var(--ink);color:#fff;padding:30px;display:flex;flex-direction:column;justify-content:center}
+.orr .pv{font:700 10.5px/1 Inter;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin:0}
+.orr .big{font-size:58px;font-weight:700;letter-spacing:-.04em;line-height:1;margin:10px 0 0}
+.orr .big sup{font-size:.36em;vertical-align:super;opacity:.6;margin-right:3px}
+.orr .sm{margin:10px 0 0;font-size:13.5px;opacity:.7}
+.orr .sm.t{font-size:11px;opacity:.45;margin-top:4px}
+.btn{display:block;margin:20px 0 0;background:var(--ok);color:#fff;text-decoration:none;text-align:center;
+  font:650 15px/1 Inter;padding:17px;border-radius:9px;border:0;cursor:pointer;transition:.18s}
+.btn:hover{filter:brightness(1.07)}
+.orr .ab{margin:14px 0 0;font-size:12.5px;opacity:.62;line-height:1.55}
+/* garantia */
+.gar{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:20px 24px}
+.gar .s{width:62px;height:62px;border-radius:50%;background:rgba(18,121,94,.1);color:var(--ok);
+  display:grid;place-content:center;text-align:center}
+.gar .s b{display:block;font:700 16px/1 Inter}.gar .s i{font-style:normal;font:700 7.5px/1 Inter;letter-spacing:.1em}
+.gar h3{margin:0 0 3px;font-size:16.5px}.gar p{margin:0;color:var(--sl);font-size:14px}
+/* agenda */
+.tl{padding:8px 22px 22px}
+.tr{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:15px 0;border-top:1px solid var(--bd)}
+.tr:first-child{border-top:0}
+.bar{height:7px;border-radius:99px;background:var(--ac);opacity:.85;margin-top:8px}
+.tr .mm{font:700 13px/1 'IBM Plex Mono',monospace;color:var(--ac);padding-top:3px}
+.tr h3{margin:0;font-size:16.5px}
+.tr p{margin:6px 0 0;color:var(--sl);font-size:14.4px}
+/* prova */
+.pvs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pc{padding:20px}
+.pc .n{font-size:15px;font-weight:650;margin:0 0 12px}
+.pc .a{margin:0 0 10px;font-size:13.8px;color:var(--sl)}
+.pc .d{margin:0;font-size:14.4px;padding:11px 13px;background:rgba(15,94,115,.055);border-radius:9px}
+.pc a{display:inline-block;margin-top:12px;color:var(--ac);font:650 12.5px/1 Inter;text-decoration:none}
+.nota{margin:14px 0 0;font-size:13px;color:var(--sl)}
+/* fecho */
+.recusa{display:block;width:100%;margin:12px 0 0;background:none;border:0;color:var(--sl);
+  font:400 13.5px Inter;text-decoration:underline;cursor:pointer}
+.esc{margin:16px 0 0;padding:16px 20px;background:rgba(192,102,43,.07);border:1px solid rgba(192,102,43,.22);
+  border-radius:11px;font-size:13.4px;color:#7A4A1E;line-height:1.62}
+details{border-top:1px solid var(--bd)}
+summary{cursor:pointer;padding:16px 22px;font-weight:600;font-size:15.5px;list-style:none;
+  display:flex;justify-content:space-between;gap:14px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:'+';color:var(--ac);font-weight:700}
+details[open] summary:after{content:'–'}
+details p{margin:0 22px 18px;color:var(--sl);font-size:14.5px}
+footer{padding:30px 0;text-align:center;font-size:12px;color:var(--sl)}
+@media(max-width:840px){.offer{grid-template-columns:1fr}.pvs{grid-template-columns:1fr}
+ .grid4{grid-template-columns:1fr}.gar{grid-template-columns:auto 1fr}}
+</style></head><body><div class="tb"><div class="w"><span class="br">The Book Business</span><ol><li class="ok">Passo 1 · 90D garantido</li><li class="on">Passo 2 · Acelere o resultado</li><li class="">Passo 3 · Acesso liberado</li></ol></div></div><div class="w"><header class="head"><span class="pill">mas o seu pedido ainda não está finalizado.</span><h1>Você já sabe como lançar. <span>Mas o seu livro está bom de verdade?</span></h1><p class="lead">Aperta o play que eu tenho um recado rápido para você.</p><div class="play"></div></header><section class="sec"><div class="ttl"><h2>Matriz de resultado</h2></div><div class="card mtx"><div class="grid4"><div class="q bad"><span class="st bad">Risco</span><div><div class="t">Livro bom + lançamento ruim</div><div class="r">ninguém descobre.</div></div></div><div class="q wr"><span class="st wr">Risco</span><div><div class="t">Lançamento bom + livro ruim</div><div class="r">vende no lançamento. Depois, esquecido.</div></div></div><div class="q ok"><span class="st ok">Alvo</span><div><div class="t">Lançamento bom + livro bom</div><div class="r">muda a vida do autor.</div></div></div><div class="q na"><div class="t">Livro ruim + lançamento ruim</div><div class="r" style="font-size:15px;color:#8A97A3">fora de avaliação</div></div></div><p class="laudo"><b>Um erro só pode fazer o seu livro inteiro falhar.</b> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <b>Não é sobre a escrita.</b> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p></div></section><section class="sec"><div class="ttl"><h2>Recomendação</h2></div><div class="card offer"><div class="ol"><p class="k">A gente, trabalhando junto no seu livro. Quer?</p><h3>Diagnóstico do Autor</h3><ul><li>Uma hora no Zoom só sobre o seu livro</li><li>Um plano de ação, com o que fazer primeiro</li><li>Três frentes de lançamento escolhidas para você</li><li>A gravação, para sempre</li></ul></div><div class="orr"><p class="pv">Valor do procedimento</p><p class="big"><sup>R$</sup>697</p><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><p class="ab">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</p></div></div><div class="card gar" style="margin-top:14px"><div class="s"><b>100%</b><i>VOLTA</i></div><div><h3>Se ao fim da hora você achar que não valeu, devolvemos</h3><p>Sem justificar. E o material continua seu.</p></div><a class="btn" style="margin:0;padding:14px 22px" href="#">Eu quero o meu diagnóstico</a></div></section><section class="sec"><div class="ttl"><h2>A sua hora, por dentro</h2></div><div class="card tl"><div class="tr"><div><div class="mm">5 min</div><div class="bar" style="width:16%"></div></div><div><h3>Quem é você e onde o livro está</h3></div></div><div class="tr"><div><div class="mm">5 min</div><div class="bar" style="width:16%"></div></div><div><h3>O que já está certo</h3></div></div><div class="tr"><div><div class="mm">40 min</div><div class="bar" style="width:100%"></div></div><div><h3>Os seus próximos passos</h3><p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div><div class="tr"><div><div class="mm">10 min</div><div class="bar" style="width:30%"></div></div><div><h3>Dúvidas, e uma conversa honesta</h3><p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div></div><div class="card" style="margin-top:14px;padding:22px"><h3 style="margin:0 0 12px;font-size:17px">Você sai com um plano de ação e os próximos passos mapeados.</h3><ul class="ol" style="list-style:none;padding:0;margin:0"><li style="padding:8px 0;color:var(--sl);font-size:14.6px"><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li style="padding:8px 0;color:var(--sl);font-size:14.6px"><b>As três frentes escolhidas</b> para o seu livro</li><li style="padding:8px 0;color:var(--sl);font-size:14.6px"><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul></div></section><section class="sec"><div class="ttl"><h2>Quem já passou por essa leitura</h2></div><div class="pvs"><div class="card pc"><p class="n">Robson Leite</p><p class="a">Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p class="d">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">Ver depoimento →</a></div><div class="card pc"><p class="n">Cláudio Yamaguchi</p><p class="a">Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p class="d">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento →</a></div><div class="card pc"><p class="n">Luiz Valério</p><p class="a">Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p class="d">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento →</a></div></div><p class="nota">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p></section><section class="sec"><div class="card offer"><div class="ol"><p class="k">Recapitulando</p><h3>Diagnóstico do Autor</h3><ul><li>Uma hora no Zoom só sobre o seu livro</li><li>Um plano de ação, com o que fazer primeiro</li><li>Três frentes de lançamento escolhidas para você</li><li>A gravação, para sempre</li></ul></div><div class="orr"><p class="big"><sup>R$</sup>697</p><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><button class="recusa" style="color:#fff9">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button></div></div><p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p><div class="card" style="margin-top:16px"><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details></div></section><footer>The Book Business · Dany Sakugawa</footer></div><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script type="text/plain" id="src-06-suico"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"><style>
+:root{--pa:#fff;--ink:#0B0B0B;--red:#E8341C;--mut:#7A7A7A;--ru:#D8D8D8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);
+  font:400 16px/1.55 'Inter',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+  letter-spacing:-.011em}
+.w{max-width:1180px;margin:0 auto;padding:0 24px}
+.g{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+h1,h2,h3{font-weight:700;letter-spacing:-.038em;margin:0}
+.num{font:700 12px/1 Inter;letter-spacing:0;color:var(--red)}
+hr{border:0;border-top:1px solid var(--ink);margin:0}
+hr.t{border-top-width:2px}
+.sec{padding:52px 0;border-top:1px solid var(--ru)}
+.sec.k{border-top:2px solid var(--ink)}
+.lbl{font:700 11px/1 Inter;letter-spacing:.08em;text-transform:uppercase}
+/* topo */
+.tp{border-bottom:2px solid var(--ink)}
+.tp .w{display:flex;justify-content:space-between;align-items:baseline;padding:14px 24px;gap:20px;flex-wrap:wrap}
+.tp ol{display:flex;gap:22px;list-style:none;margin:0;padding:0;font:700 11px/1 Inter;
+  letter-spacing:.06em;text-transform:uppercase;color:#B4B4B4}
+.tp .on{color:var(--red)}.tp .ok{color:var(--ink)}
+/* hero */
+.hero{padding:60px 0 46px}
+.hero h1{grid-column:1/9;font-size:clamp(40px,7.4vw,104px);line-height:.94}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero .as{grid-column:9/13;align-self:end;border-top:2px solid var(--ink);padding-top:12px}
+.hero .as p{margin:0;font-size:15px;color:var(--mut)}
+.hero .as .st{display:block;margin-top:14px;font:700 13px/1.35 Inter;color:var(--ink)}
+.play{margin:0;aspect-ratio:16/9;background:var(--ink);position:relative}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:26px solid #fff;border-top:17px solid transparent;border-bottom:17px solid transparent}
+/* equacoes */
+.eq{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:22px 0;border-top:1px solid var(--ru);
+  align-items:baseline}
+.eq .n{grid-column:1/2;font:700 11px/1.6 Inter;color:var(--mut)}
+.eq .a{grid-column:2/7;font-size:clamp(18px,2.2vw,26px);font-weight:700;letter-spacing:-.03em}
+.eq .b{grid-column:7/13;font-size:16px;color:var(--mut)}
+.eq.win{background:var(--red);color:#fff;margin:0 -14px;padding:22px 14px;border-top-color:var(--red)}
+.eq.win .n,.eq.win .b{color:#fff}
+.para{grid-column:2/9;margin:30px 0 0;font-size:clamp(18px,2vw,23px);line-height:1.42;
+  letter-spacing:-.024em;font-weight:500}
+.para b{color:var(--red)}
+/* preco */
+.buy{background:var(--ink);color:#fff;padding:56px 0}
+.buy .g{align-items:end}
+.buy .l{grid-column:1/7}
+.buy .r{grid-column:7/13}
+.buy .lbl{color:var(--red)}
+.buy h2{font-size:clamp(28px,3.6vw,46px);margin:14px 0 0}
+.pz{font-size:clamp(90px,15vw,190px);line-height:.82;font-weight:700;letter-spacing:-.06em;margin:0;
+  text-align:right}
+.pz sup{font-size:.2em;vertical-align:super;font-weight:500;color:#ffffff8c}
+.buy .sm{margin:16px 0 0;font-size:14px;color:#ffffffa6;text-align:right}
+.buy .sm.t{font-size:11.5px;color:#ffffff6b;margin-top:5px}
+.btn{display:block;width:100%;margin:26px 0 0;background:var(--red);color:#fff;text-decoration:none;
+  text-align:center;font:700 16px/1 Inter;letter-spacing:-.01em;padding:24px;border:0;cursor:pointer}
+.btn:hover{background:#fff;color:var(--ink)}
+.ab{margin:18px 0 0;font-size:13.5px;color:#ffffffa6;max-width:46ch}
+/* garantia */
+.gar{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.gar .n100{grid-column:1/4;font-size:clamp(50px,7vw,92px);font-weight:700;letter-spacing:-.05em;
+  line-height:.9;color:var(--red)}
+.gar .tx{grid-column:4/10}
+.gar h3{font-size:clamp(20px,2.3vw,28px)}
+.gar p{margin:8px 0 0;color:var(--mut)}
+/* hora */
+.hr{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:20px 0;border-top:1px solid var(--ru)}
+.hr .m{grid-column:1/3;font:700 clamp(20px,2.4vw,30px)/1 Inter;letter-spacing:-.04em;color:var(--red)}
+.hr .c{grid-column:3/11}
+.hr h3{font-size:clamp(17px,1.9vw,22px)}
+.hr p{margin:7px 0 0;color:var(--mut);font-size:15.5px}
+ul.e{list-style:none;padding:0;margin:0}
+ul.e li{border-top:1px solid var(--ru);padding:14px 0;font-size:16px}
+/* prova */
+.pv3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--ink)}
+.pc{padding:22px 20px;border-right:1px solid var(--ru)}
+.pc:last-child{border-right:0}
+.pc .n{font-size:18px;font-weight:700;letter-spacing:-.03em;margin:0 0 12px}
+.pc .a{margin:0 0 12px;font-size:14.5px;color:var(--mut)}
+.pc .d{margin:0;font-size:16px;font-weight:500;line-height:1.42;letter-spacing:-.02em}
+.pc a{display:inline-block;margin-top:14px;color:var(--red);font:700 12px/1 Inter;
+  letter-spacing:.05em;text-transform:uppercase;text-decoration:none}
+.nota{margin:20px 0 0;font-size:14px;color:var(--mut);max-width:62ch}
+/* fecho */
+.recusa{display:block;width:100%;margin:12px 0 0;background:none;border:0;color:#ffffff8c;
+  font:400 13.5px Inter;text-decoration:underline;cursor:pointer}
+.esc{margin:22px 0 0;font-size:13.5px;color:#ffffff96;line-height:1.66;max-width:58ch}
+details{border-top:1px solid var(--ru)}
+summary{cursor:pointer;padding:20px 0;font:700 clamp(17px,2vw,21px)/1.3 Inter;letter-spacing:-.03em;
+  list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:'+';color:var(--red)}
+details[open] summary:after{content:'–'}
+details p{margin:0 0 22px;color:var(--mut);max-width:66ch}
+footer{border-top:2px solid var(--ink);padding:22px 0;font:700 11px/1 Inter;letter-spacing:.08em;
+  text-transform:uppercase}
+@media(max-width:860px){.g,.eq,.gar,.hr{grid-template-columns:repeat(6,1fr);gap:14px}
+ .hero h1,.eq .a,.eq .b,.para,.buy .l,.buy .r,.gar .n100,.gar .tx,.hr .m,.hr .c{grid-column:1/-1}
+ .eq .n{display:none}.pz,.buy .sm{text-align:left}.pv3{grid-template-columns:1fr}
+ .pc{border-right:0;border-bottom:1px solid var(--ru)}.tp ol{gap:10px;font-size:9px}}
+</style></head><body><div class="tp"><div class="w"><span class="lbl">The Book Business</span><ol><li class="ok">✓/90D garantido</li><li class="on">2/Acelere o resultado</li><li class="">3/Acesso liberado</li></ol></div></div><div class="w"><header class="hero g"><h1>Você já sabe como lançar. <em>Mas o seu livro está bom de verdade?</em></h1><div class="as"><p>Parabéns! Você já tem o caminho para o seu livro estrear vendendo,</p><span class="st">mas o seu pedido ainda não está finalizado.</span><span class="st" style="color:var(--red)">Aperta o play que eu tenho um recado rápido para você.</span></div></header><div class="play"></div><section class="sec k"><span class="num">01</span> <span class="lbl">A conta</span><div class="eq"><span class="n">01</span><span class="a">Livro bom + lançamento ruim</span><span class="b">= ninguém descobre.</span></div><div class="eq"><span class="n">02</span><span class="a">Lançamento bom + livro ruim</span><span class="b">= vende no lançamento. Depois, esquecido.</span></div><div class="eq win"><span class="n">03</span><span class="a">Lançamento bom + livro bom</span><span class="b">= muda a vida do autor.</span></div><div class="g"><p class="para"><b>Um erro só pode fazer o seu livro inteiro falhar.</b> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <b>Não é sobre a escrita.</b> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p></div></section></div><section class="buy"><div class="w"><div class="g"><div class="l"><span class="num">02</span> <span class="lbl">A gente, trabalhando junto no seu livro. Quer?</span><h2>Diagnóstico do Autor</h2><p class="ab">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</p></div><div class="r"><p class="pz"><sup>R$</sup>697</p><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a></div></div></div></section><div class="w"><section class="sec"><span class="num">03</span> <span class="lbl">Garantia</span><div class="gar" style="margin-top:22px"><div class="n100">100%</div><div class="tx"><h3>Se ao fim da hora você achar que não valeu, devolvemos</h3><p>Sem justificar. E o material continua seu.</p></div></div></section><section class="sec"><span class="num">04</span> <span class="lbl">A sua hora, por dentro</span><div style="margin-top:22px"><div class="hr"><span class="m">5 min</span><div class="c"><h3>Quem é você e onde o livro está</h3></div></div><div class="hr"><span class="m">5 min</span><div class="c"><h3>O que já está certo</h3></div></div><div class="hr"><span class="m">40 min</span><div class="c"><h3>Os seus próximos passos</h3><p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div><div class="hr"><span class="m">10 min</span><div class="c"><h3>Dúvidas, e uma conversa honesta</h3><p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div></div></section><section class="sec"><span class="num">05</span> <span class="lbl">Entrega</span><div class="g" style="margin-top:22px"><h3 style="grid-column:1/5;font-size:clamp(19px,2.2vw,26px)">Você sai com um plano de ação e os próximos passos mapeados.</h3><ul class="e" style="grid-column:5/13"><li><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li><b>As três frentes escolhidas</b> para o seu livro</li><li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul></div></section><section class="sec"><span class="num">06</span> <span class="lbl">Quem já passou por essa leitura</span><div class="pv3" style="margin-top:22px"><div class="pc"><p class="n">Robson Leite</p><p class="a">Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p class="d">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">Ver depoimento</a></div><div class="pc"><p class="n">Cláudio Yamaguchi</p><p class="a">Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p class="d">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento</a></div><div class="pc"><p class="n">Luiz Valério</p><p class="a">Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p class="d">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento</a></div></div><p class="nota">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p></section></div><section class="buy"><div class="w"><div class="g"><div class="l"><span class="num">07</span> <span class="lbl">Recapitulando</span><ul class="e" style="margin-top:16px"><li style="border-color:#ffffff2e">Uma hora no Zoom só sobre o seu livro</li><li style="border-color:#ffffff2e">Um plano de ação, com o que fazer primeiro</li><li style="border-color:#ffffff2e">Três frentes de lançamento escolhidas para você</li><li style="border-color:#ffffff2e">A gravação, para sempre</li></ul><p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p></div><div class="r"><p class="pz"><sup>R$</sup>697</p><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><button class="recusa">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button></div></div></div></section><div class="w"><section class="sec"><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details></section></div><footer><div class="w">The Book Business · Dany Sakugawa</div></footer><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script type="text/plain" id="src-07-marginalia"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Caveat:wght@500;600&display=swap"><style>
+:root{--pa:#F6F2E8;--pg:#FDFBF5;--ink:#221F1A;--pen:#C0392B;--blue:#2C4A7C;--mut:#6E675C;--ru:#DED6C5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);
+  font:400 17px/1.82 'Lora',Georgia,serif;-webkit-font-smoothing:antialiased}
+.pen{font-family:'Caveat',cursive;color:var(--pen);line-height:1.25}
+.page{max-width:960px;margin:26px auto;background:var(--pg);padding:0;
+  box-shadow:0 3px 0 rgba(34,31,26,.05),0 26px 60px -34px rgba(34,31,26,.4);
+  border:1px solid var(--ru);position:relative}
+.page:before{content:'';position:absolute;left:16.5%;top:0;bottom:0;width:1px;
+  background:rgba(192,57,43,.16);pointer-events:none}
+.rows{display:grid;grid-template-columns:17% 1fr;gap:0}
+.mg{padding:26px 16px 26px 22px;border-right:0;text-align:right}
+.mg .pen{font-size:20px;rotate:-3deg;display:block}
+.mg .pen.b{rotate:2deg}
+.bd{padding:26px 44px 26px 30px}
+h1,h2,h3{font-family:'Lora',Georgia,serif;font-weight:600;letter-spacing:-.012em;margin:0}
+.hdr{border-bottom:1px solid var(--ru);padding:14px 30px;display:flex;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;font:400 11.5px/1 'Lora',serif;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mut)}
+.hdr .on{color:var(--pen)}
+h1{font-size:clamp(29px,4.2vw,50px);line-height:1.14}
+mark{background:none;box-shadow:inset 0 -.5em 0 rgba(192,57,43,.16);padding:0 .06em}
+.circ{position:relative;display:inline-block}
+.circ:after{content:'';position:absolute;inset:-7px -12px;border:2px solid var(--pen);
+  border-radius:52% 48% 46% 54%/58% 42% 56% 44%;opacity:.75;pointer-events:none}
+.lead{color:var(--mut);font-size:18px;margin:16px 0 0}
+.play{margin:24px 0 0;aspect-ratio:16/9;background:#1D1A16;position:relative;
+  box-shadow:6px 6px 0 rgba(192,57,43,.16)}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:24px solid var(--pa);border-top:16px solid transparent;border-bottom:16px solid transparent}
+.rule{border:0;border-top:1px solid var(--ru);margin:0}
+.kick{font:400 11.5px/1 'Lora',serif;letter-spacing:.2em;text-transform:uppercase;color:var(--pen);margin:0 0 16px}
+/* equacoes = trecho anotado */
+.eq{padding:16px 0;border-bottom:1px dotted var(--ru);display:flex;gap:12px;flex-wrap:wrap;
+  align-items:baseline}
+.eq .a{font-size:clamp(18px,2.1vw,23px);font-weight:600}
+.eq .s{color:var(--ru)}
+.eq .b{color:var(--mut);font-size:16px}
+.eq.win .a{color:var(--pen)}
+.eq.win .b{color:var(--ink)}
+.eq.win{border-bottom:2px solid var(--pen)}
+.ann{margin:22px 0 0;padding:16px 20px;border-left:3px solid var(--pen);background:rgba(192,57,43,.045)}
+.ann strong{font-weight:600}
+/* preco = nota colada */
+.buy{margin:0;padding:34px 30px;background:#F1EADA;border-top:1px solid var(--ru);
+  border-bottom:1px solid var(--ru);text-align:center;position:relative}
+.buy .tape{position:absolute;top:-11px;left:50%;translate:-50%;width:130px;height:22px;
+  background:rgba(192,57,43,.14);border:1px dashed rgba(192,57,43,.4);rotate:-1.5deg}
+.buy .rot{font-size:15px;color:var(--mut);margin:0}
+.buy .nm{font-size:clamp(24px,3vw,34px);margin:8px 0 16px}
+.pz{font-size:clamp(56px,9vw,88px);line-height:1;font-weight:600;letter-spacing:-.03em;display:block}
+.pz sup{font-size:.26em;vertical-align:super;color:var(--mut)}
+.sm{color:var(--mut);font-size:14.5px;margin:12px 0 0}.sm.t{font-size:11.5px;margin-top:5px;opacity:.85}
+.btn{display:inline-block;margin:22px 0 0;background:var(--pen);color:#FDFBF5;text-decoration:none;
+  font:600 15px/1 'Lora',serif;letter-spacing:.02em;padding:18px 40px;border:0;cursor:pointer;
+  box-shadow:4px 4px 0 rgba(34,31,26,.22);transition:.14s}
+.btn:hover{translate:-2px -2px;box-shadow:6px 6px 0 rgba(34,31,26,.26)}
+.ab{margin:18px auto 0;max-width:46ch;font-size:14px;color:var(--mut)}
+.gar{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+  padding:24px 30px;border-bottom:1px solid var(--ru)}
+.gar .s{width:88px;height:88px;border:2px solid var(--pen);border-radius:50%;display:grid;
+  place-content:center;text-align:center;color:var(--pen);rotate:-7deg}
+.gar .s b{display:block;font-size:23px;font-weight:600;line-height:1}
+.gar .s i{font-style:normal;font-family:'Caveat',cursive;font-size:15px}
+.gar h3{font-size:20px}.gar p{margin:6px 0 0;color:var(--mut);font-size:15px}
+.hl{display:grid;grid-template-columns:76px 1fr;gap:18px;padding:15px 0;border-top:1px dotted var(--ru)}
+.hl .m{font-family:'Caveat',cursive;font-size:26px;color:var(--pen);line-height:1.2}
+.hl h3{font-size:19px}.hl p{margin:6px 0 0;color:var(--mut);font-size:15.5px}
+ul.e{list-style:none;padding:0;margin:14px 0 0}
+ul.e li{padding:10px 0 10px 28px;position:relative;border-top:1px dotted var(--ru);font-size:16px}
+ul.e li:before{content:'✓';position:absolute;left:2px;font-family:'Caveat',cursive;
+  font-size:22px;color:var(--pen)}
+.pv{display:grid;gap:18px}
+.pc{border:1px solid var(--ru);padding:18px 20px;background:#FBF8F0}
+.pc .n{font-size:17px;font-weight:600;margin:0 0 8px}
+.pc .a{margin:0 0 8px;font-size:15px;color:var(--mut)}
+.pc .d{margin:0;font-size:16.5px}
+.pc a{display:inline-block;margin-top:10px;color:var(--pen);font-size:14px}
+.nota{margin:16px 0 0;font-size:14px;color:var(--mut)}
+.recusa{display:block;margin:14px auto 0;background:none;border:0;color:var(--mut);
+  font:400 13.5px 'Lora',serif;text-decoration:underline;cursor:pointer}
+.esc{margin:20px auto 0;max-width:54ch;font-size:13.5px;color:var(--mut);line-height:1.7}
+details{border-top:1px dotted var(--ru)}
+summary{cursor:pointer;padding:16px 0;font-size:18px;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:'? ';font-family:'Caveat',cursive;color:var(--pen);font-size:22px}
+details p{margin:0 0 18px;color:var(--mut);font-size:16px}
+footer{padding:22px 30px;text-align:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mut);border-top:1px solid var(--ru)}
+@media(max-width:820px){.rows{grid-template-columns:1fr}.page:before{display:none}
+ .mg{text-align:left;padding:18px 24px 0}.bd{padding:18px 24px 24px}}
+</style></head><body><div class="page"><div class="hdr"><span>The Book Business · caderno do autor</span><span class="on">Passo 2 de 3</span></div><div class="rows"><div class="mg"><span class="pen">alguém precisa ler isso de fora ↘</span></div><div class="bd"><p class="kick">Parabéns! Você já tem o caminho para o seu livro estrear vendendo, mas o seu pedido ainda não está finalizado.</p><h1>Você já sabe como lançar. <mark>Mas o seu livro está bom de verdade?</mark></h1><p class="lead">Aperta o play que eu tenho um recado rápido para você.</p><div class="play"></div></div></div><hr class="rule"><div class="rows"><div class="mg"><span class="pen">as três contas<br>possíveis</span><span class="pen b" style="color:#2C4A7C;font-size:17px;margin-top:14px">você já resolveu<br>metade ✓</span></div><div class="bd"><div class="eq"><span class="a">Livro bom + lançamento ruim</span><span class="s">=</span><span class="b">ninguém descobre.</span></div><div class="eq"><span class="a">Lançamento bom + livro ruim</span><span class="s">=</span><span class="b">vende no lançamento. Depois, esquecido.</span></div><div class="eq win"><span class="a">Lançamento bom + livro bom</span><span class="s">=</span><span class="b">muda a vida do autor.</span></div><p class="ann"><strong>Um erro só pode fazer o seu livro inteiro falhar.</strong> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <strong class="circ">Não é sobre a escrita.</strong> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p></div></div><div class="buy"><div class="tape"></div><p class="rot">A gente, trabalhando junto no seu livro. Quer?</p><p class="nm">Diagnóstico do Autor</p><span class="pz"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><p class="ab">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</p></div><div class="gar"><div class="s"><b>100%</b><i>de volta</i></div><div><h3>Se ao fim da hora você achar que não valeu, devolvemos</h3><p>Sem justificar. E o material continua seu.</p></div></div><div class="rows"><div class="mg"><span class="pen">uma hora.<br>sem enrolação.</span></div><div class="bd"><p class="kick">A sua hora, por dentro</p><div class="hl"><span class="m">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div><div class="hl"><span class="m">5 min</span><div><h3>O que já está certo</h3></div></div><div class="hl"><span class="m">40 min</span><div><h3>Os seus próximos passos</h3><p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div><div class="hl"><span class="m">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3><p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div><h3 style="margin-top:28px;font-size:20px">Você sai com um plano de ação e os próximos passos mapeados.</h3><ul class="e"><li><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li><b>As três frentes escolhidas</b> para o seu livro</li><li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul></div></div><hr class="rule"><div class="rows"><div class="mg"><span class="pen">três livros que<br>alguém leu<br>de fora</span></div><div class="bd"><p class="kick">Quem já passou por essa leitura</p><div class="pv"><div class="pc"><p class="n">Robson Leite</p><p class="a">Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p class="d">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">ver depoimento →</a></div><div class="pc"><p class="n">Cláudio Yamaguchi</p><p class="a">Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p class="d">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">ver depoimento →</a></div><div class="pc"><p class="n">Luiz Valério</p><p class="a">Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p class="d">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">ver depoimento →</a></div></div><p class="nota">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p></div></div><div class="buy"><p class="kick" style="margin-bottom:10px">Recapitulando</p><ul class="e" style="max-width:420px;margin:0 auto;text-align:left"><li>Uma hora no Zoom só sobre o seu livro</li><li>Um plano de ação, com o que fazer primeiro</li><li>Três frentes de lançamento escolhidas para você</li><li>A gravação, para sempre</li></ul><span class="pz" style="margin-top:22px"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><button class="recusa">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button><p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p></div><div class="rows"><div class="mg"><span class="pen">dúvidas<br>honestas</span></div><div class="bd"><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details></div></div><footer>The Book Business · Dany Sakugawa</footer></div><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script type="text/plain" id="src-08-brutal"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;600;700&display=swap"><style>
+:root{--pa:#F4F0E4;--ink:#11100D;--el:#2B4BF2;--ye:#FFD23F;--pk:#FF5C43;--mut:#5F5B52}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);
+  font:500 17px/1.6 'Space Grotesk',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:'Archivo Black',Impact,sans-serif;font-weight:400;letter-spacing:-.028em;
+  margin:0;text-transform:uppercase;line-height:.96}
+.bx{border:3px solid var(--ink);background:#fff;box-shadow:7px 7px 0 var(--ink)}
+.tag{display:inline-block;border:3px solid var(--ink);background:var(--ye);padding:7px 12px;
+  font:700 12px/1 'Space Grotesk';letter-spacing:.06em;text-transform:uppercase;
+  box-shadow:3px 3px 0 var(--ink)}
+/* topo */
+.tp{background:var(--ink);color:var(--pa);padding:11px 0}
+.tp ol{display:flex;gap:10px;list-style:none;margin:0;padding:0;flex-wrap:wrap;
+  font:700 11px/1 'Space Grotesk';letter-spacing:.05em;text-transform:uppercase}
+.tp li{padding:6px 10px;border:2px solid #ffffff2e;border-radius:0}
+.tp .ok{background:#ffffff1a;border-color:#ffffff4d}
+.tp .on{background:var(--ye);color:var(--ink);border-color:var(--ye)}
+/* hero */
+.hero{padding:44px 0 34px}
+.hero .tag{rotate:-2deg;margin-bottom:22px}
+.hero h1{font-size:clamp(36px,7.6vw,88px);line-height:1.16}
+.hero h1 u{text-decoration:none;background:var(--ye);box-decoration-break:clone;padding:0 .06em;
+  border:3px solid var(--ink)}
+.hero .lead{margin:24px 0 0;font-size:19px;font-weight:600;max-width:34ch}
+.play{margin:26px 0 0;aspect-ratio:16/9;background:var(--ink);position:relative;
+  border:3px solid var(--ink);box-shadow:10px 10px 0 var(--el)}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:30px solid var(--ye);border-top:20px solid transparent;border-bottom:20px solid transparent}
+/* equacoes */
+.sec{padding:34px 0}
+.h2{font-size:clamp(22px,3.2vw,34px);margin-bottom:20px}
+.eqs{display:grid;gap:14px}
+.eq{border:3px solid var(--ink);background:#fff;padding:18px 20px;display:grid;
+  grid-template-columns:1fr auto;gap:14px;align-items:center;box-shadow:5px 5px 0 var(--ink)}
+.eq .a{font-family:'Archivo Black',sans-serif;font-size:clamp(16px,2.1vw,22px);text-transform:uppercase;
+  letter-spacing:-.02em;line-height:1.1}
+.eq .b{font-weight:600;text-align:right;font-size:16px;color:var(--mut);max-width:22ch}
+.eq.win{background:var(--el);color:#fff;box-shadow:7px 7px 0 var(--ink)}
+.eq.win .b{color:#fff}
+.ann{margin:22px 0 0;border:3px solid var(--ink);background:var(--pk);color:#fff;padding:22px;
+  box-shadow:7px 7px 0 var(--ink);font-weight:600;font-size:18px;line-height:1.5}
+.ann b{background:var(--ink);padding:1px 6px}
+/* preco */
+.buy{margin:0 0 0;padding:30px;background:var(--ye);text-align:center}
+.buy .rot{margin:0;font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.06em}
+.buy h2{font-size:clamp(26px,4vw,42px);margin:12px 0 18px}
+.pz{font-family:'Archivo Black',sans-serif;font-size:clamp(76px,14vw,150px);line-height:.86;
+  letter-spacing:-.05em;display:block}
+.pz sup{font-size:.24em;vertical-align:super}
+.sm{margin:14px 0 0;font-weight:600;font-size:15px}.sm.t{font-size:12px;opacity:.7;margin-top:5px}
+.btn{display:block;max-width:520px;margin:24px auto 0;background:var(--ink);color:var(--ye);
+  text-decoration:none;font-family:'Archivo Black',sans-serif;font-size:clamp(17px,2.4vw,24px);
+  text-transform:uppercase;letter-spacing:-.02em;padding:22px;border:3px solid var(--ink);
+  box-shadow:7px 7px 0 var(--pk);cursor:pointer;transition:.12s}
+.btn:hover{translate:-3px -3px;box-shadow:10px 10px 0 var(--pk)}
+.ab{margin:20px auto 0;max-width:48ch;font-weight:600;font-size:14.5px}
+.gar{margin:20px 0 0;padding:22px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.gar .s{width:96px;height:96px;background:var(--el);color:#fff;border:3px solid var(--ink);
+  display:grid;place-content:center;text-align:center;rotate:-4deg;box-shadow:4px 4px 0 var(--ink)}
+.gar .s b{display:block;font-family:'Archivo Black',sans-serif;font-size:23px;line-height:1}
+.gar .s i{font-style:normal;font:700 9px/1 'Space Grotesk';letter-spacing:.1em}
+.gar h3{font-size:clamp(17px,2.2vw,23px)}.gar p{margin:8px 0 0;color:var(--mut);font-weight:600;font-size:15px}
+/* hora */
+.hl{border:3px solid var(--ink);background:#fff;padding:16px 18px;margin-bottom:12px;
+  display:grid;grid-template-columns:84px 1fr;gap:16px;box-shadow:4px 4px 0 var(--ink)}
+.hl .m{font-family:'Archivo Black',sans-serif;font-size:19px;color:var(--el)}
+.hl h3{font-size:17px}.hl p{margin:7px 0 0;color:var(--mut);font-weight:500;font-size:15.5px}
+ul.e{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+ul.e li{border:3px solid var(--ink);background:#fff;padding:14px 16px;font-weight:600;font-size:16px;
+  box-shadow:4px 4px 0 var(--ink)}
+/* prova */
+.pv3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pc{border:3px solid var(--ink);background:#fff;padding:18px;box-shadow:5px 5px 0 var(--ink)}
+.pc .n{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;margin:0 0 12px}
+.pc .a{margin:0 0 10px;font-size:14.5px;color:var(--mut);font-weight:500}
+.pc .d{margin:0;font-size:16px;font-weight:600;line-height:1.45}
+.pc a{display:inline-block;margin-top:12px;background:var(--ink);color:var(--ye);text-decoration:none;
+  font:700 11.5px/1 'Space Grotesk';letter-spacing:.06em;text-transform:uppercase;padding:9px 12px}
+.nota{margin:16px 0 0;font-weight:600;font-size:14.5px;color:var(--mut)}
+.recusa{display:block;width:100%;margin:14px 0 0;background:none;border:0;color:var(--mut);
+  font:600 14px 'Space Grotesk';text-decoration:underline;cursor:pointer}
+.esc{margin:20px auto 0;max-width:56ch;font-weight:500;font-size:14px;line-height:1.65}
+details{border:3px solid var(--ink);background:#fff;margin-bottom:12px;box-shadow:4px 4px 0 var(--ink)}
+summary{cursor:pointer;padding:16px 18px;font-family:'Archivo Black',sans-serif;font-size:16px;
+  text-transform:uppercase;list-style:none;display:flex;justify-content:space-between;gap:14px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:'+';color:var(--el)}
+details[open] summary:after{content:'–'}
+details p{margin:0 18px 18px;color:var(--mut);font-weight:500;font-size:15.5px}
+footer{background:var(--ink);color:var(--pa);padding:22px 0;text-align:center;
+  font:700 12px/1 'Space Grotesk';letter-spacing:.16em;text-transform:uppercase}
+@media(max-width:840px){.pv3{grid-template-columns:1fr}.eq{grid-template-columns:1fr}
+ .eq .b{text-align:left;max-width:none}.gar{grid-template-columns:1fr}}
+</style></head><body><div class="tp"><div class="w"><ol><li class="ok">Passo 1 · 90D garantido</li><li class="on">Passo 2 · Acelere o resultado</li><li class="">Passo 3 · Acesso liberado</li></ol></div></div><div class="w"><header class="hero"><span class="tag">mas o seu pedido ainda não está finalizado.</span><h1>Você já sabe como lançar. <u>Mas o seu livro está bom de verdade?</u></h1><p class="lead">Aperta o play que eu tenho um recado rápido para você.</p><div class="play"></div></header><section class="sec"><h2 class="h2">A conta que decide tudo</h2><div class="eqs"><div class="eq"><span class="a">Livro bom + lançamento ruim</span><span class="b">ninguém descobre.</span></div><div class="eq"><span class="a">Lançamento bom + livro ruim</span><span class="b">vende no lançamento. Depois, esquecido.</span></div><div class="eq win"><span class="a">Lançamento bom + livro bom</span><span class="b">muda a vida do autor.</span></div></div><p class="ann"><b>Um erro só pode fazer o seu livro inteiro falhar.</b> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <b>Não é sobre a escrita.</b> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p></section><section class="sec"><div class="bx buy"><p class="rot">A gente, trabalhando junto no seu livro. Quer?</p><h2>Diagnóstico do Autor</h2><span class="pz"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><p class="ab">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</p></div><div class="bx gar"><div class="s"><b>100%</b><i>DE VOLTA</i></div><div><h3>Se ao fim da hora você achar que não valeu, devolvemos</h3><p>Sem justificar. E o material continua seu.</p></div></div></section><section class="sec"><h2 class="h2">A sua hora, por dentro</h2><div class="hl"><span class="m">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div><div class="hl"><span class="m">5 min</span><div><h3>O que já está certo</h3></div></div><div class="hl"><span class="m">40 min</span><div><h3>Os seus próximos passos</h3><p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div><div class="hl"><span class="m">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3><p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div><h3 style="margin:26px 0 14px;font-size:clamp(18px,2.4vw,24px)">Você sai com um plano de ação e os próximos passos mapeados.</h3><ul class="e"><li><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li><b>As três frentes escolhidas</b> para o seu livro</li><li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul></section><section class="sec"><h2 class="h2">Quem já passou por essa leitura</h2><div class="pv3"><div class="pc"><p class="n">Robson Leite</p><p class="a">Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p class="d">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">Ver depoimento</a></div><div class="pc"><p class="n">Cláudio Yamaguchi</p><p class="a">Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p class="d">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento</a></div><div class="pc"><p class="n">Luiz Valério</p><p class="a">Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p class="d">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento</a></div></div><p class="nota">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p></section><section class="sec"><div class="bx buy" style="background:var(--el);color:#fff"><p class="rot">Recapitulando</p><ul class="e" style="max-width:440px;margin:16px auto 0"><li style="background:#fff;color:var(--ink)">Uma hora no Zoom só sobre o seu livro</li><li style="background:#fff;color:var(--ink)">Um plano de ação, com o que fazer primeiro</li><li style="background:#fff;color:var(--ink)">Três frentes de lançamento escolhidas para você</li><li style="background:#fff;color:var(--ink)">A gravação, para sempre</li></ul><span class="pz" style="margin-top:22px"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><button class="recusa" style="color:#ffffffc4">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button><p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p></div></section><section class="sec"><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details></section></div><footer>The Book Business · Dany Sakugawa</footer><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script type="text/plain" id="src-09-cinema"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Anton&display=swap"><style>
+:root{--bg:#0A0A0C;--tx:#F2EFE9;--am:#E9B949;--mut:#8E8A84}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+  font:400 17px/1.7 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body:before{content:'';position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.3;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:3px 3px}
+.w{max-width:1120px;margin:0 auto;padding:0 26px}
+h1,h2,h3{margin:0;font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;
+  letter-spacing:-.005em;line-height:.94}
+.kick{font:600 10.5px/1 Inter;letter-spacing:.38em;text-transform:uppercase;color:var(--am);margin:0}
+/* cena 1 */
+.scene{position:relative;min-height:96vh;display:grid;place-content:center;text-align:center;
+  padding:90px 26px;overflow:hidden}
+.scene:before,.scene:after{content:'';position:absolute;left:0;right:0;height:48px;background:#000;z-index:2}
+.scene:before{top:0}.scene:after{bottom:0}
+.glow{position:absolute;inset:0;background:
+  radial-gradient(58% 46% at 50% 38%,rgba(233,185,73,.2),transparent 62%),
+  radial-gradient(70% 60% at 78% 88%,rgba(30,90,120,.28),transparent 66%);z-index:0}
+.scene>*{position:relative;z-index:3}
+.scene h1{font-size:clamp(38px,7.8vw,104px);line-height:1.08;max-width:15ch}
+.scene h1 span{display:block;color:var(--am)}
+.scene .sub{margin:30px auto 0;max-width:38ch;color:var(--mut);font-size:17px}
+.scene .top{margin:0 0 34px}
+.arrow{margin:46px auto 0;width:1px;height:54px;background:linear-gradient(var(--am),transparent)}
+.play{max-width:940px;margin:0 auto;aspect-ratio:16/9;background:#08080A;position:relative;
+  border:1px solid #ffffff1f;box-shadow:0 40px 120px -50px rgba(233,185,73,.4)}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:28px solid var(--tx);border-top:19px solid transparent;border-bottom:19px solid transparent}
+/* cenas seguintes */
+.act{padding:clamp(74px,10vw,140px) 0;border-top:1px solid #ffffff14;position:relative}
+.act .n{position:absolute;top:26px;right:26px;font:700 11px/1 Inter;letter-spacing:.3em;color:#3C3A37}
+.big{font-size:clamp(28px,4.8vw,62px);line-height:1.06;max-width:17ch}
+.big em{font-style:normal;color:var(--am)}
+.eqs{margin:44px 0 0;display:grid;gap:0}
+.eq{padding:26px 0;border-top:1px solid #ffffff14;display:grid;grid-template-columns:1fr auto 1fr;
+  gap:20px;align-items:baseline}
+.eq .a{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(17px,2.3vw,27px);
+  color:#78746E;letter-spacing:-.01em}
+.eq .s{color:#3C3A37}
+.eq .b{color:#78746E;font-size:15.5px}
+.eq.win .a{color:var(--tx)}.eq.win .b{color:var(--am);font-weight:600;font-size:17px}
+.para{margin:44px 0 0;max-width:60ch;font-size:clamp(17px,1.9vw,21px);color:#B4AFA8;line-height:1.62}
+.para strong{color:var(--tx);font-weight:600}
+/* preco = cartela */
+.card{min-height:88vh;display:grid;place-content:center;text-align:center;padding:80px 26px;
+  position:relative;overflow:hidden;border-top:1px solid #ffffff14}
+.card .glow{background:radial-gradient(52% 46% at 50% 50%,rgba(233,185,73,.17),transparent 64%)}
+.card>*{position:relative;z-index:3}
+.card h2{font-size:clamp(28px,4.4vw,58px);margin:16px 0 0}
+.pz{display:block;font-family:'Anton',sans-serif;font-size:clamp(96px,20vw,240px);line-height:.82;
+  letter-spacing:-.045em;margin:30px 0 0}
+.pz sup{font-size:.2em;vertical-align:super;color:var(--mut)}
+.sm{color:var(--mut);font-size:14.5px;margin:20px 0 0}.sm.t{font-size:11.5px;color:#5F5C57;margin-top:5px}
+.btn{display:inline-block;margin:40px 0 0;background:var(--am);color:#100E0A;text-decoration:none;
+  font:700 14px/1 Inter;letter-spacing:.14em;text-transform:uppercase;padding:24px 54px;
+  border:0;cursor:pointer;transition:.22s}
+.btn:hover{background:#fff;transform:translateY(-2px)}
+.ab{margin:26px auto 0;max-width:44ch;font-size:13.5px;color:var(--mut)}
+.gar{margin:60px auto 0;max-width:560px;border:1px solid #ffffff1f;padding:28px;display:grid;
+  grid-template-columns:auto 1fr;gap:22px;align-items:center;text-align:left}
+.gar .s{width:92px;height:92px;border:1px solid var(--am);border-radius:50%;display:grid;
+  place-content:center;text-align:center;color:var(--am)}
+.gar .s b{display:block;font-family:'Anton',sans-serif;font-size:25px;line-height:1}
+.gar .s i{font-style:normal;font:600 8.5px/1 Inter;letter-spacing:.16em}
+.gar h3{font-size:20px}.gar p{margin:7px 0 0;color:var(--mut);font-size:15px}
+/* hora */
+.hl{display:grid;grid-template-columns:110px 1fr;gap:28px;padding:24px 0;border-top:1px solid #ffffff14}
+.hl .m{font-family:'Anton',sans-serif;font-size:26px;color:var(--am)}
+.hl h3{font-size:clamp(17px,2vw,23px)}
+.hl p{margin:9px 0 0;color:var(--mut);font-size:15.5px;max-width:56ch}
+ul.e{list-style:none;padding:0;margin:22px 0 0}
+ul.e li{padding:14px 0;border-top:1px solid #ffffff14;color:var(--mut);font-size:16px}
+ul.e b{color:var(--tx);font-weight:600}
+/* prova */
+.pv3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#ffffff14;margin-top:40px}
+.pc{background:var(--bg);padding:30px 24px}
+.pc .n{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:19px;margin:0 0 16px}
+.pc .a{margin:0 0 12px;font-size:14.5px;color:#78746E}
+.pc .d{margin:0;font-size:17px;color:#E3DFD8;line-height:1.5}
+.pc a{display:inline-block;margin-top:16px;color:var(--am);font:600 11.5px/1 Inter;
+  letter-spacing:.16em;text-transform:uppercase;text-decoration:none}
+.nota{margin:24px 0 0;font-size:13.5px;color:#5F5C57;max-width:58ch}
+.recusa{display:block;margin:22px auto 0;background:none;border:0;color:#5F5C57;
+  font:400 13.5px Inter;text-decoration:underline;cursor:pointer}
+.esc{margin:30px auto 0;max-width:52ch;font-size:13px;color:#5F5C57;line-height:1.78}
+.faq{max-width:700px;margin:0 auto}
+details{border-top:1px solid #ffffff14}
+summary{cursor:pointer;padding:22px 0;font-family:'Anton',sans-serif;text-transform:uppercase;
+  font-size:clamp(16px,2vw,21px);list-style:none}
+summary::-webkit-details-marker{display:none}
+details p{margin:0 0 24px;color:var(--mut);font-size:15.5px}
+footer{border-top:1px solid #ffffff14;padding:34px 0;text-align:center;font:600 10.5px/1 Inter;
+  letter-spacing:.34em;text-transform:uppercase;color:#45423E}
+@media(max-width:860px){.pv3{grid-template-columns:1fr}.eq{grid-template-columns:1fr;gap:6px}
+ .eq .s{display:none}.hl{grid-template-columns:74px 1fr;gap:16px}.hl .m{font-size:20px}}
+</style></head><body><header class="scene"><div class="glow"></div><p class="kick top">mas o seu pedido ainda não está finalizado.</p><h1>Você já sabe como lançar.<span>Mas o seu livro está bom de verdade?</span></h1><p class="sub">Aperta o play que eu tenho um recado rápido para você.</p><div class="arrow"></div></header><div class="w" style="margin-top:-40px;position:relative;z-index:4"><div class="play"></div></div><section class="act"><div class="w"><span class="n">Cena 01</span><p class="kick">A conta</p><h2 class="big" style="margin-top:20px">Só uma das três <em>muda a sua vida</em>.</h2><div class="eqs"><div class="eq"><span class="a">Livro bom + lançamento ruim</span><span class="s">=</span><span class="b">ninguém descobre.</span></div><div class="eq"><span class="a">Lançamento bom + livro ruim</span><span class="s">=</span><span class="b">vende no lançamento. Depois, esquecido.</span></div><div class="eq win"><span class="a">Lançamento bom + livro bom</span><span class="s">=</span><span class="b">muda a vida do autor.</span></div></div><p class="para"><strong>Um erro só pode fazer o seu livro inteiro falhar.</strong> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <strong>Não é sobre a escrita.</strong> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p></div></section><section class="card"><div class="glow"></div><p class="kick">A gente, trabalhando junto no seu livro. Quer?</p><h2>Diagnóstico do Autor</h2><span class="pz"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><p class="ab">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</p><div class="gar"><div class="s"><b>100%</b><i>DE VOLTA</i></div><div><h3>Se ao fim da hora você achar que não valeu, devolvemos</h3><p>Sem justificar. E o material continua seu.</p></div></div></section><section class="act"><div class="w"><span class="n">Cena 02</span><p class="kick">A hora</p><h2 class="big" style="margin-top:20px">A sua hora, por dentro</h2><div style="margin-top:34px"><div class="hl"><span class="m">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div><div class="hl"><span class="m">5 min</span><div><h3>O que já está certo</h3></div></div><div class="hl"><span class="m">40 min</span><div><h3>Os seus próximos passos</h3><p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div><div class="hl"><span class="m">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3><p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div></div><h3 style="margin-top:40px;font-size:clamp(19px,2.4vw,27px)">Você sai com um plano de ação e os próximos passos mapeados.</h3><ul class="e"><li><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li><b>As três frentes escolhidas</b> para o seu livro</li><li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul></div></section><section class="act"><div class="w"><span class="n">Cena 03</span><p class="kick">Prova</p><h2 class="big" style="margin-top:20px">Quem já passou por essa leitura</h2><div class="pv3"><div class="pc"><p class="n">Robson Leite</p><p class="a">Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p class="d">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">Ver depoimento</a></div><div class="pc"><p class="n">Cláudio Yamaguchi</p><p class="a">Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p class="d">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento</a></div><div class="pc"><p class="n">Luiz Valério</p><p class="a">Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p class="d">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento</a></div></div><p class="nota">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p></div></section><section class="card"><div class="glow"></div><p class="kick">Recapitulando</p><ul class="e" style="max-width:440px;margin:20px auto 0;text-align:left"><li>Uma hora no Zoom só sobre o seu livro</li><li>Um plano de ação, com o que fazer primeiro</li><li>Três frentes de lançamento escolhidas para você</li><li>A gravação, para sempre</li></ul><span class="pz"><sup>R$</sup>697</span><p class="sm">à vista, ou em até <b>12x no cartão</b></p><p class="sm t">* parcelado no cartão, com juros</p><a class="btn" href="#">Sim! Adicione ao meu pedido</a><button class="recusa">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button><p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p></section><section class="act"><div class="w"><div class="faq"><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details></div></div></section><footer>The Book Business · Dany Sakugawa</footer><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script type="text/plain" id="src-10-carta"><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Diagnóstico do Autor | The Book Business</title><style>
+:root{--pa:#fff;--ink:#1B1B19;--lk:#0B5B4F;--mut:#66635D;--ru:#E4E1DA}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);
+  font:400 18.5px/1.78 Charter,Georgia,'Times New Roman',serif;-webkit-font-smoothing:antialiased}
+.w{max-width:640px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-weight:600;letter-spacing:-.014em;margin:0;font-size:inherit}
+p{margin:0 0 22px}
+a{color:var(--lk)}
+.top{padding:26px 0 0;font-size:13.5px;color:var(--mut)}
+.top b{color:var(--ink);font-weight:600}
+h1{font-size:clamp(26px,4.4vw,36px);line-height:1.26;margin:30px 0 20px}
+.play{margin:0 0 30px;aspect-ratio:16/9;background:#17171A;position:relative}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:22px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent}
+.eqs{margin:0 0 26px;padding:2px 0}
+.eq{padding:9px 0;font-size:17.5px;color:var(--mut)}
+.eq b{color:var(--ink);font-weight:600}
+.eq.win{color:var(--ink)}
+.eq.win b{box-shadow:inset 0 -.42em 0 rgba(11,91,79,.14)}
+hr{border:0;border-top:1px solid var(--ru);margin:38px 0}
+h2{font-size:20.5px;margin:0 0 16px}
+ul{margin:0 0 24px;padding-left:22px}
+li{margin:0 0 9px}
+.price{margin:0 0 8px;font-size:clamp(28px,5vw,40px);font-weight:600;letter-spacing:-.03em}
+.price small{font-size:.48em;font-weight:400;color:var(--mut);letter-spacing:0}
+.sm{font-size:14.5px;color:var(--mut);margin:0 0 4px}
+.sm.t{font-size:12.5px;margin-bottom:20px}
+.btn{display:inline-block;background:var(--lk);color:#fff;text-decoration:none;
+  font:600 17px/1 Charter,Georgia,serif;padding:17px 30px;border-radius:4px;border:0;cursor:pointer}
+.btn:hover{background:#084A40}
+.q{margin:0 0 24px;padding:0 0 0 20px;border-left:2px solid var(--ru)}
+.q .n{display:block;font-size:14px;color:var(--mut);margin-bottom:5px}
+.q p{margin:0 0 7px;font-size:17px}
+.q a{font-size:14.5px}
+.recusa{display:block;margin:18px 0 0;background:none;border:0;padding:0;color:var(--mut);
+  font:400 15.5px Charter,Georgia,serif;text-decoration:underline;cursor:pointer;text-align:left}
+.esc{font-size:15px;color:var(--mut);line-height:1.72}
+.sig{margin:34px 0 0;font-size:16.5px;color:var(--mut)}
+.sig b{display:block;color:var(--ink);font-weight:600;font-size:18px}
+details{margin:0 0 4px}
+summary{cursor:pointer;padding:11px 0;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:'▸ ';color:var(--lk)}
+details[open] summary:before{content:'▾ '}
+details p{margin:0 0 18px;color:var(--mut);font-size:17px}
+footer{padding:34px 0 50px;font-size:13.5px;color:var(--mut);border-top:1px solid var(--ru);margin-top:40px}
+</style></head><body><div class="w"><p class="top"><b>Passo 2 de 3.</b> Parabéns! Você já tem o caminho para o seu livro estrear vendendo, mas o seu pedido ainda não está finalizado.</p><h1>Você já sabe como lançar.<br>Mas o seu livro está bom de verdade?</h1><p>Aperta o play que eu tenho um recado rápido para você.</p><div class="play"></div><p>Tem uma conta simples por trás disso:</p><div class="eqs"><div class="eq"><b>Livro bom + lançamento ruim</b> = ninguém descobre.</div><div class="eq"><b>Lançamento bom + livro ruim</b> = vende no lançamento. Depois, esquecido.</div><div class="eq win"><b>Lançamento bom + livro bom</b> = muda a vida do autor.</div></div><p><b>Um erro só pode fazer o seu livro inteiro falhar.</b> E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara. <b>Não é sobre a escrita.</b> É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p><hr><h2>Diagnóstico do Autor</h2><p>A gente, trabalhando junto no seu livro. Quer?</p><p class="price">R$697 <small>à vista, ou em até <b>12x no cartão</b></small></p><p class="sm t">* parcelado no cartão, com juros</p><p><a class="btn" href="#">Sim! Adicione ao meu pedido</a></p><p class="sm">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697 são abatidos integralmente.</p><p class="sm"><b>100% de volta:</b> se ao fim da hora você achar que não valeu, devolvemos. Sem justificar. E o material continua seu.</p><hr><h2>A sua hora, por dentro</h2><ul><li><b>5 min</b> · Quem é você e onde o livro está</li><li><b>5 min</b> · O que já está certo</li><li><b>40 min</b> · Os seus próximos passos O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</li><li><b>10 min</b> · Dúvidas, e uma conversa honesta Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</li></ul><p><b>Você sai com um plano de ação e os próximos passos mapeados.</b></p><ul><li><b>O que consertar primeiro</b>, e o que deixar pra depois</li><li><b>As três frentes escolhidas</b> para o seu livro</li><li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li></ul><hr><h2>Quem já passou por essa leitura</h2><div class="q"><span class="n">Robson Leite</span><p>Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p><p>“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p><a href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">ver o depoimento</a></div><div class="q"><span class="n">Cláudio Yamaguchi</span><p>Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p><p>Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p><a href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">ver o depoimento</a></div><div class="q"><span class="n">Luiz Valério</span><p>Nove livros publicados. <b>Nenhum pensado para vender.</b></p><p>Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p><a href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">ver o depoimento</a></div><p class="sm">Alunos do Método. A leitura que alguém fez do caso deles é a que acontece na sua hora.</p><hr><h2>Recapitulando</h2><ul><li>Uma hora no Zoom só sobre o seu livro</li><li>Um plano de ação, com o que fazer primeiro</li><li>Três frentes de lançamento escolhidas para você</li><li>A gravação, para sempre</li></ul><p class="price">R$697 <small>à vista, ou em até <b>12x no cartão</b></small></p><p class="sm t">* parcelado no cartão, com juros</p><p><a class="btn" href="#">Sim! Adicione ao meu pedido</a></p><button class="recusa">Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button><p class="esc" style="margin-top:24px">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p><hr><details><summary>A call é com a Dany?</summary><p>Não. É com um especialista do time dela, com o critério dela. Por isso custa isto, e não alguns milhares de reais.</p></details><details><summary>Vocês vão ler o meu livro?</summary><p>Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</p></details><details><summary>Isso não é uma reunião de vendas disfarçada?</summary><p>Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</p></details><p class="sig">Um abraço,<b>Dany Sakugawa</b></p><footer>The Book Business · Dany Sakugawa</footer></div><div class="proto-tag">protótipo de design · sem checkout</div><style>.proto-tag{position:fixed;left:10px;bottom:10px;z-index:99;font:600 10px/1 ui-sans-serif,system-ui;letter-spacing:.1em;text-transform:uppercase;background:#111;color:#fff;padding:7px 10px;border-radius:99px;opacity:.55}</style></body></html></script><script>
+(function(){
+  var plates=[].slice.call(document.querySelectorAll('.plate'));
+  plates.forEach(function(p){
+    var src=document.getElementById('src-'+p.dataset.slug);
+    var fr=p.querySelector('.win iframe');
+    if(src&&fr) fr.srcdoc=src.textContent;
+  });
+  function escala(){
+    plates.forEach(function(p){
+      var win=p.querySelector('.win');
+      win.style.setProperty('--s', (win.clientWidth/1320).toFixed(4));
+    });
+  }
+  escala();
+  addEventListener('resize',escala);
+  if(window.ResizeObserver && plates[0]) new ResizeObserver(escala).observe(plates[0]);
+
+  var v=document.getElementById('viewer'), vfr=document.getElementById('vframe'),
+      vno=document.getElementById('vno'), vtt=document.getElementById('vtt'), volta=null, i=-1;
+  function mostra(n){
+    i=(n+plates.length)%plates.length;
+    var p=plates[i], s=document.getElementById('src-'+p.dataset.slug);
+    vno.textContent='Prancha '+p.dataset.no;
+    vtt.textContent=p.dataset.nome;
+    vfr.srcdoc=s.textContent;
+    v.hidden=false; document.body.style.overflow='hidden';
+    document.getElementById('vx').focus();
+  }
+  function fecha(){
+    v.hidden=true; vfr.srcdoc=''; document.body.style.overflow='';
+    if(volta) volta.focus();
+  }
+  plates.forEach(function(p,n){
+    p.querySelector('.open').addEventListener('click',function(e){
+      volta=e.currentTarget; mostra(n);
+    });
+  });
+  document.getElementById('vx').addEventListener('click',fecha);
+  document.getElementById('vp').addEventListener('click',function(){mostra(i-1)});
+  document.getElementById('vn').addEventListener('click',function(){mostra(i+1)});
+  document.addEventListener('keydown',function(e){
+    if(v.hidden) return;
+    if(e.key==='Escape') fecha();
+    if(e.key==='ArrowLeft') mostra(i-1);
+    if(e.key==='ArrowRight') mostra(i+1);
+  });
+})();
+</script></body></html>
