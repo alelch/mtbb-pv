@@ -101,6 +101,8 @@ RUMOS = [
  ('08-brutal',      'Neo-brutalista',   'Borda preta grossa, sombra dura, tipo gigante, um acento elétrico.'),
  ('09-cinema',      'Cinema',           'Tela cheia, letterbox, grão, sequência de planos.'),
  ('10-carta',       'Carta',            'Sem design: uma coluna, texto preto, assinatura. Parece pessoal.'),
+ ('11-suico-noturno','Suíço noturno',   'O cruzamento dos dois escolhidos: a grade do 06 no escuro do 09.'),
+ ('12-capitulos',   'Capítulos',        'O rumo da referência da Hotmart: numeral fantasma, marquise, oferta em preto.'),
 ]
 
 

@@ -1,8 +1,8 @@
-# 10 rumos de design · PV do upsell (Diagnóstico do Autor)
+# 12 rumos de design · PV do upsell (Diagnóstico do Autor)
 
-Abrir `index.html` desta pasta: é a galeria com as dez lado a lado.
+Abrir `prancha.html` desta pasta: é a galeria com todas lado a lado.
 
-**A copy é idêntica nas dez.** Sai toda de `copy_base.py`, que é uma cópia fiel
+**A copy é idêntica em todas.** Sai toda de `copy_base.py`, que é uma cópia fiel
 da copy que está no ar em `../index.html` (extraída em 10/09/2026). Quem muda é
 só o design, então a comparação é honesta.
 
@@ -14,7 +14,8 @@ python3 gera.py
 
 - `copy_base.py` — a copy + a lista dos dez rumos + o esqueleto do HTML.
 - `designs_a.py` — rumos 01 a 05.
-- `designs_b.py` — rumos 06 a 10.
+- `designs_b.py` — rumos 07, 08, 10 (e as versões de 1ª rodada do 06 e 09).
+- `designs_c.py` — 06 e 09 **acabados** (escolhidos pelo cliente), 11 e 12.
 - `gera.py` — escreve as dez pastas + a galeria.
 
 Nunca editar os `index.html` gerados à mão: a próxima rodada do `gera.py` apaga.
@@ -40,11 +41,26 @@ não promover a pasta.
 | 03 | Ficha catalográfica | Catálogo de biblioteca: monoespaçada, campos, carimbo. |
 | 04 | Noir premium | Quase preto, fio de ouro, tipo leve e enorme. Silêncio caro. |
 | 05 | Relatório clínico | A página vira o próprio diagnóstico: matriz, status, laudo. |
-| 06 | Suíço | Grade rígida, preto e um vermelho, numeração 01–07. |
+| 06 | **Suíço** ⭐ | Grade rígida, preto e um vermelho, numeração 01–07. Escolhido, com acabamento. |
 | 07 | Marginalia | Alguém leu o seu livro e anotou na margem, à caneta. |
 | 08 | Neo-brutalista | Borda preta grossa, sombra dura, tipo gigante, acento elétrico. |
-| 09 | Cinema | Tela cheia, letterbox, grão, sequência de planos. |
+| 09 | **Cinema** ⭐ | Tela cheia, letterbox, grão, cenas com ardósia. Escolhido, com acabamento. |
 | 10 | Carta | Sem design: uma coluna, texto preto, assinatura. Parece pessoal. |
+| 11 | Suíço noturno | O cruzamento dos dois escolhidos: a grade do 06 no escuro do 09. |
+| 12 | Capítulos | O rumo da referência da Hotmart, com a nossa copy. |
+
+## Sobre o 12 (a referência)
+
+Veio de um rascunho da própria Call de Diagnóstico em `hotmart.build`, que o
+cliente mandou em 10/09. Copiados de lá: numeral fantasma por capítulo, rótulo
+mono, fundos alternando branco/cinza, faixa em marquise, sublinhado à mão,
+fita de progresso, linha do tempo numerada, bloco de oferta em preto, FAQ em
+cartão com "+".
+
+**Não** foi copiado o fade-in ao rolar: numa página pós-compra a pessoa lê com
+pressa, e esconder cada bloco até ele entrar na tela troca leitura por efeito.
+Também entrou um acento (o verde da marca) em dois lugares só, porque a
+referência é preto e branco puro e isso a deixa igual a qualquer template.
 
 ## A prancha de comparação
 

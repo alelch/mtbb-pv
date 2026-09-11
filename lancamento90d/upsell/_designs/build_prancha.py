@@ -29,6 +29,8 @@ CHIPS = {
  '08-brutal':     ['#F4F0E4', '#11100D', '#2B4BF2'],
  '09-cinema':     ['#0A0A0C', '#F2EFE9', '#E9B949'],
  '10-carta':      ['#FFFFFF', '#1B1B19', '#0B5B4F'],
+ '11-suico-noturno': ['#0A0A0B', '#EFEBE1', '#E3B04B'],
+ '12-capitulos':  ['#FFFFFF', '#F4F4F5', '#0B0B0C'],
 }
 # a face que dá o tom de cada uma, escrita como um spec de gráfica
 FACES = {
@@ -42,7 +44,12 @@ FACES = {
  '08-brutal':     'Archivo Black + Space Grotesk',
  '09-cinema':     'Anton + Inter',
  '10-carta':      'Charter / Georgia',
+ '11-suico-noturno': 'Inter 700 + Anton só no preço',
+ '12-capitulos':  'Instrument Sans + DM Mono',
 }
+
+EXT = {8: 'oito', 9: 'nove', 10: 'dez', 11: 'onze', 12: 'doze', 13: 'treze'}
+NUM = EXT.get(len(RUMOS), str(len(RUMOS)))
 
 CSS = r"""
 :root{
@@ -144,18 +151,23 @@ footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--mut);
 JS = r"""
 (function(){
   var plates=[].slice.call(document.querySelectorAll('.plate'));
+  function fonte(slug){
+    var el=document.getElementById('src-'+slug);
+    return el ? el.textContent.split('<\\/script').join('</script') : '';
+  }
   plates.forEach(function(p){
-    var src=document.getElementById('src-'+p.dataset.slug);
     var fr=p.querySelector('.win iframe');
-    if(src&&fr) fr.srcdoc=src.textContent;
+    if(fr) fr.srcdoc=fonte(p.dataset.slug);
   });
   function escala(){
     plates.forEach(function(p){
-      var win=p.querySelector('.win');
-      win.style.setProperty('--s', (win.clientWidth/1320).toFixed(4));
+      var win=p.querySelector('.win'), w=win.clientWidth;
+      // so' sobrescreve quando ja' ha' layout: com w=0 fica o .3333 do CSS
+      if(w>0) win.style.setProperty('--s',(w/1320).toFixed(4));
     });
   }
   escala();
+  addEventListener('load',escala);
   addEventListener('resize',escala);
   if(window.ResizeObserver && plates[0]) new ResizeObserver(escala).observe(plates[0]);
 
@@ -163,10 +175,10 @@ JS = r"""
       vno=document.getElementById('vno'), vtt=document.getElementById('vtt'), volta=null, i=-1;
   function mostra(n){
     i=(n+plates.length)%plates.length;
-    var p=plates[i], s=document.getElementById('src-'+p.dataset.slug);
+    var p=plates[i];
     vno.textContent='Prancha '+p.dataset.no;
     vtt.textContent=p.dataset.nome;
-    vfr.srcdoc=s.textContent;
+    vfr.srcdoc=fonte(p.dataset.slug);
     v.hidden=false; document.body.style.overflow='hidden';
     document.getElementById('vx').focus();
   }
@@ -196,7 +208,9 @@ def main():
     plates, fontes = '', ''
     for n, (slug, nome, tese) in enumerate(RUMOS, 1):
         html = io.open(os.path.join(HERE, slug, 'index.html'), encoding='utf-8').read()
-        assert '</script' not in html.lower(), slug
+        # o rumo pode trazer <script> proprio (a fita de progresso do 12):
+        # dentro de <script type="text/plain"> so' o fecho precisa escapar.
+        html = html.replace('</script', '<\\/script')
         chips = ''.join('<i style="background:%s"></i>' % c for c in CHIPS[slug])
         plates += (
             '<article class="plate" data-slug="%s" data-no="%02d" data-nome="%s">'
@@ -218,12 +232,12 @@ def main():
         'family=Newsreader:wght@400;600&family=DM+Mono:wght@400;500&display=swap">'
         '<style>' + CSS + '</style>'
         '<div class="w"><header><p class="eyebrow">The Book Business · upsell do Lançamento 90D</p>'
-        '<h1>Dez rumos para a mesma página</h1>'
-        '<p class="brief">A página do <b>Diagnóstico do Autor</b>, desenhada de dez maneiras '
-        'que não têm nada a ver umas com as outras. A copy é <b>idêntica</b> nas dez, palavra '
+        '<h1>' + NUM.capitalize() + ' rumos para a mesma página</h1>'
+        '<p class="brief">A página do <b>Diagnóstico do Autor</b>, desenhada de ' + NUM + ' maneiras '
+        'que não têm nada a ver umas com as outras. A copy é <b>idêntica</b> em todas, palavra '
         'por palavra, então a única coisa em julgamento aqui é o design. Clique numa prancha '
         'para abrir em tamanho real e rolar até o fim.</p>'
-        '<ul class="specs"><li><b>10</b> pranchas</li><li><b>1</b> copy</li>'
+        '<ul class="specs"><li><b>' + str(len(RUMOS)) + '</b> pranchas</li><li><b>1</b> copy</li>'
         '<li>protótipos: <b>sem checkout</b></li><li>← → e Esc no visor</li></ul></header>'
         '<div class="board">' + plates + '</div>'
         '<footer>Protótipos de design. Nenhum botão leva a checkout e nenhum tem o JS da oferta '
