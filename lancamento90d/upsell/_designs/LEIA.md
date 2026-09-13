@@ -1,4 +1,4 @@
-# 12 rumos de design · PV do upsell (Diagnóstico do Autor)
+# 13 rumos de design · PV do upsell (Diagnóstico do Autor)
 
 Abrir `prancha.html` desta pasta: é a galeria com todas lado a lado.
 
@@ -15,7 +15,9 @@ python3 gera.py
 - `copy_base.py` — a copy + a lista dos dez rumos + o esqueleto do HTML.
 - `designs_a.py` — rumos 01 a 05.
 - `designs_b.py` — rumos 07, 08, 10 (e as versões de 1ª rodada do 06 e 09).
-- `designs_c.py` — 06 e 09 **acabados** (escolhidos pelo cliente), 11 e 12.
+- `designs_c.py` — 06 e 09 **acabados** (escolhidos pelo cliente), 11, 12 e 13.
+  O 11 e o 13 dividem o markup (`_corpo_suico()`): são a mesma página em duas
+  paletas, então não podem viver separados ou um envelhece sem o outro.
 - `gera.py` — escreve as dez pastas + a galeria.
 
 Nunca editar os `index.html` gerados à mão: a próxima rodada do `gera.py` apaga.
@@ -48,6 +50,7 @@ não promover a pasta.
 | 10 | Carta | Sem design: uma coluna, texto preto, assinatura. Parece pessoal. |
 | 11 | Suíço noturno | O cruzamento dos dois escolhidos: a grade do 06 no escuro do 09. |
 | 12 | Capítulos | O rumo da referência da Hotmart, com a nossa copy. |
+| 13 | Suíço diurno | O 11 no claro. Mesma grade, mesmo Anton no preço. |
 
 ## Sobre o 12 (a referência)
 
@@ -73,3 +76,15 @@ lado a lado em iframes. Abre sem servidor. `--artifact` emite só o corpo, para
 publicar como Artifact (o wrapper de lá põe o `<head>`).
 
 Publicada em 10/09: https://claude.ai/code/artifact/d96a9b02-0d9b-47bc-81ee-ef1e6560e1ed
+
+## Sobre o 13 (Suíço diurno)
+
+É o 11 no claro, e a diferença dele para o **06** é o que interessa: o 06 é
+branco puro com vermelho e sem Anton; o 13 é marfim com ocre e com Anton no H1
+e no preço. Dois suíços de temperatura diferente.
+
+**Armadilha resolvida aqui, vale anotar:** a tarja amarela sobre o H1 não pode
+ser `background` com `padding`. A caixa de conteúdo do Anton tem 1,51em de
+altura, então a faixa de uma linha invade a linha de cima. Vira um
+`linear-gradient` com `background-size` fixo, posicionado sobre as maiúsculas.
+Conferido sem estouro horizontal em 1280 e em 375.

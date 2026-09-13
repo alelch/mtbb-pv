@@ -103,6 +103,7 @@ RUMOS = [
  ('10-carta',       'Carta',            'Sem design: uma coluna, texto preto, assinatura. Parece pessoal.'),
  ('11-suico-noturno','Suíço noturno',   'O cruzamento dos dois escolhidos: a grade do 06 no escuro do 09.'),
  ('12-capitulos',   'Capítulos',        'O rumo da referência da Hotmart: numeral fantasma, marquise, oferta em preto.'),
+ ('13-suico-diurno','Suíço diurno',     'O 11 no claro: mesma grade e mesmo Anton, o ouro vira tarja em vez de texto.'),
 ]
 
 

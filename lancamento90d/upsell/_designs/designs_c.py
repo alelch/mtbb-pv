@@ -419,6 +419,73 @@ footer{border-top:1px solid #ffffff17;padding:32px 0;text-align:center;font:600 
 
 
 # ══════════════════════════════════════════ 11 SUÍÇO NOTURNO (o cruzamento)
+def _corpo_suico():
+    """
+    Markup compartilhado pelo 11 (noturno) e pelo 13 (diurno).
+
+    Os dois sao a MESMA pagina: mesma grade de 12, mesmos cabecalhos de secao,
+    mesma ficha lateral, Anton so no H1 e no preco. O que muda e' so a paleta,
+    entao tem que viver num lugar so ou um vai envelhecer sem o outro.
+    """
+    def sh(n, t):
+        return '<div class="sh"><span class="num">%s</span><span class="lbl">%s</span></div>' % (n, t)
+
+    b = ('<div class="tp"><div class="w"><span class="lbl">The Book Business</span><ol>' +
+         ''.join('<li class="%s">%s · %s</li>' % (
+             'ok' if k == 'feito' else ('on' if k == 'agora' else ''), a, t)
+             for n, a, t, k in C['passos']) + '</ol></div></div>'
+         '<div class="w"><header class="hero g"><h1>' + C['h1a'] + ' <em>' + C['h1b'] + '</em></h1>'
+         '<div class="fi">'
+         '<dl class="fr"><dt>Situação</dt><dd>' + C['parabens1'] + '</dd></dl>'
+         '<dl class="fr"><dt>Pendência</dt><dd><b>' + C['parabens2'] + '</b></dd></dl>'
+         '<dl class="fr k"><dt>Agora</dt><dd>' + C['lead'] + '</dd></dl>'
+         '</div></header><div class="play"></div>'
+         '<section class="sec">' + sh('01', 'A conta') +
+         ''.join('<div class="eq%s"><span class="n">%d</span><span class="a">%s</span>'
+                 '<span class="s">=</span><span class="b">%s</span></div>'
+                 % (' win' if w else '', i + 1, a, bb)
+                 for i, (a, bb, w) in enumerate(C['mate'])) +
+         '<div class="g"><p class="para"><b>' + C['erro_a'] + '</b> ' + C['erro_b'] + ' <b>' +
+         C['erro_c'] + '</b> ' + C['erro_d'] + '</p></div></section></div>'
+         '<section class="buy"><div class="w"><div class="g"><div class="l">' +
+         sh('02', C['rot']) + '<h2>' + C['nome'] + '</h2>'
+         '<dl class="fr" style="margin-top:22px"><dt>Formato</dt><dd>Uma hora no Zoom, '
+         'só sobre o seu livro</dd></dl>'
+         '<dl class="fr"><dt>Crédito</dt><dd>' + C['abate'] + '</dd></dl></div>'
+         '<div class="r"><p class="pz"><sup>R$</sup>' + C['preco'] + '</p>'
+         '<p class="sm">' + C['avista'] + '</p><p class="sm t">' + C['obs'] + '</p>'
+         '<a class="btn" href="#">' + C['cta'] + '</a></div></div></div></section>'
+         '<div class="w"><section class="sec">' + sh('03', 'Garantia') +
+         '<div class="g gar"><div class="n100">100%<i>DE VOLTA</i></div>'
+         '<div class="tx"><h3>' + C['gar_h'] + '</h3><p>' + C['gar_p'] + '</p></div></div></section>'
+         '<section class="sec">' + sh('04', C['hora_h']) +
+         ''.join('<div class="hr"><span class="n">%d</span><span class="m">%s</span>'
+                 '<div><h3>%s</h3>%s</div></div>'
+                 % (i + 1, m, h, ('<p>' + d + '</p>') if d else '')
+                 for i, (m, h, d) in enumerate(C['hora'])) + '</section>'
+         '<section class="sec">' + sh('05', 'Entrega') +
+         '<div class="g"><h3 style="grid-column:1/5;font-size:clamp(19px,2.2vw,27px)">' +
+         C['entr_h'] + '</h3><ul class="e" style="grid-column:5/13">' +
+         ''.join('<li>%s</li>' % e for e in C['entregas']) + '</ul></div></section>'
+         '<section class="sec">' + sh('06', C['prova_h']) + '<div class="pv3">' + ''.join(
+             '<div class="pc"><p class="n">%s</p><p class="a">%s</p><p class="d">%s</p>'
+             '<a href="%s" target="_blank" rel="noopener">Ver depoimento</a></div>' % x
+             for x in C['provas']) + '</div><p class="nota">' + C['nota_prova'] + '</p></section></div>'
+         '<section class="buy"><div class="w"><div class="g"><div class="l">' +
+         sh('07', C['recap_h']) + '<ul class="e">' +
+         ''.join('<li>%s</li>' % r for r in C['recap']) + '</ul>'
+         '<p class="esc">' + C['escassez'] + '</p></div>'
+         '<div class="r"><p class="pz"><sup>R$</sup>' + C['preco'] + '</p>'
+         '<p class="sm">' + C['avista'] + '</p><p class="sm t">' + C['obs'] + '</p>'
+         '<a class="btn" href="#">' + C['cta'] + '</a>'
+         '<button class="recusa">' + C['recusa'] + '</button></div></div></div></section>'
+         '<div class="w"><section class="sec">' + ''.join(
+             '<details><summary>%s</summary><p>%s</p></details>' % f for f in C['faq']) +
+         '</section></div><footer><div class="w">' + C['rodape'] + '</div></footer>')
+    return b
+
+
+# ══════════════════════════════════════════ 11 SUÍÇO NOTURNO (o cruzamento)
 def d11():
     css = r"""
 :root{--bg:#0A0A0B;--tx:#EFEBE1;--am:#E3B04B;--mut:#8C877D;--dim:#5A564F;--ru:#232326}
@@ -552,63 +619,156 @@ footer{border-top:1px solid var(--ru);padding:20px 0;font:700 11px/1 Inter;lette
  .pv3{grid-template-columns:1fr}.pc{border-right:0;padding:16px 0 22px!important}
  .tp ol{gap:11px;font-size:9.5px}}
 """
+    return doc(css, _corpo_suico(),
+               G + 'Inter:wght@400;500;600;700&family=Anton&display=swap')
 
-    def sh(n, t):
-        return '<div class="sh"><span class="num">%s</span><span class="lbl">%s</span></div>' % (n, t)
 
-    b = ('<div class="tp"><div class="w"><span class="lbl">The Book Business</span><ol>' +
-         ''.join('<li class="%s">%s · %s</li>' % (
-             'ok' if k == 'feito' else ('on' if k == 'agora' else ''), a, t)
-             for n, a, t, k in C['passos']) + '</ol></div></div>'
-         '<div class="w"><header class="hero g"><h1>' + C['h1a'] + ' <em>' + C['h1b'] + '</em></h1>'
-         '<div class="fi">'
-         '<dl class="fr"><dt>Situação</dt><dd>' + C['parabens1'] + '</dd></dl>'
-         '<dl class="fr"><dt>Pendência</dt><dd><b>' + C['parabens2'] + '</b></dd></dl>'
-         '<dl class="fr k"><dt>Agora</dt><dd>' + C['lead'] + '</dd></dl>'
-         '</div></header><div class="play"></div>'
-         '<section class="sec">' + sh('01', 'A conta') +
-         ''.join('<div class="eq%s"><span class="n">%d</span><span class="a">%s</span>'
-                 '<span class="s">=</span><span class="b">%s</span></div>'
-                 % (' win' if w else '', i + 1, a, bb)
-                 for i, (a, bb, w) in enumerate(C['mate'])) +
-         '<div class="g"><p class="para"><b>' + C['erro_a'] + '</b> ' + C['erro_b'] + ' <b>' +
-         C['erro_c'] + '</b> ' + C['erro_d'] + '</p></div></section></div>'
-         '<section class="buy"><div class="w"><div class="g"><div class="l">' +
-         sh('02', C['rot']) + '<h2>' + C['nome'] + '</h2>'
-         '<dl class="fr" style="margin-top:22px"><dt>Formato</dt><dd>Uma hora no Zoom, '
-         'só sobre o seu livro</dd></dl>'
-         '<dl class="fr"><dt>Crédito</dt><dd>' + C['abate'] + '</dd></dl></div>'
-         '<div class="r"><p class="pz"><sup>R$</sup>' + C['preco'] + '</p>'
-         '<p class="sm">' + C['avista'] + '</p><p class="sm t">' + C['obs'] + '</p>'
-         '<a class="btn" href="#">' + C['cta'] + '</a></div></div></div></section>'
-         '<div class="w"><section class="sec">' + sh('03', 'Garantia') +
-         '<div class="g gar"><div class="n100">100%<i>DE VOLTA</i></div>'
-         '<div class="tx"><h3>' + C['gar_h'] + '</h3><p>' + C['gar_p'] + '</p></div></div></section>'
-         '<section class="sec">' + sh('04', C['hora_h']) +
-         ''.join('<div class="hr"><span class="n">%d</span><span class="m">%s</span>'
-                 '<div><h3>%s</h3>%s</div></div>'
-                 % (i + 1, m, h, ('<p>' + d + '</p>') if d else '')
-                 for i, (m, h, d) in enumerate(C['hora'])) + '</section>'
-         '<section class="sec">' + sh('05', 'Entrega') +
-         '<div class="g"><h3 style="grid-column:1/5;font-size:clamp(19px,2.2vw,27px)">' +
-         C['entr_h'] + '</h3><ul class="e" style="grid-column:5/13">' +
-         ''.join('<li>%s</li>' % e for e in C['entregas']) + '</ul></div></section>'
-         '<section class="sec">' + sh('06', C['prova_h']) + '<div class="pv3">' + ''.join(
-             '<div class="pc"><p class="n">%s</p><p class="a">%s</p><p class="d">%s</p>'
-             '<a href="%s" target="_blank" rel="noopener">Ver depoimento</a></div>' % x
-             for x in C['provas']) + '</div><p class="nota">' + C['nota_prova'] + '</p></section></div>'
-         '<section class="buy"><div class="w"><div class="g"><div class="l">' +
-         sh('07', C['recap_h']) + '<ul class="e">' +
-         ''.join('<li>%s</li>' % r for r in C['recap']) + '</ul>'
-         '<p class="esc">' + C['escassez'] + '</p></div>'
-         '<div class="r"><p class="pz"><sup>R$</sup>' + C['preco'] + '</p>'
-         '<p class="sm">' + C['avista'] + '</p><p class="sm t">' + C['obs'] + '</p>'
-         '<a class="btn" href="#">' + C['cta'] + '</a>'
-         '<button class="recusa">' + C['recusa'] + '</button></div></div></div></section>'
-         '<div class="w"><section class="sec">' + ''.join(
-             '<details><summary>%s</summary><p>%s</p></details>' % f for f in C['faq']) +
-         '</section></div><footer><div class="w">' + C['rodape'] + '</div></footer>')
-    return doc(css, b, G + 'Inter:wght@400;500;600;700&family=Anton&display=swap')
+# ══════════════════════════════════════════ 13 SUÍÇO DIURNO (o mesmo, no claro)
+def d13():
+    css = r"""
+/* O gêmeo claro do 11: mesma grade, mesmo Anton no H1 e no preço.
+   O ouro não vira texto sobre branco (não passa contraste): vira TARJA.
+   Quem carrega o acento no claro é o ocre; o ouro só preenche. */
+:root{--bg:#FCFBF8;--tx:#12110F;--oc:#8A5E12;--am:#E9BE63;--mut:#6B665C;
+      --dim:#A29B8D;--ru:#E3DED2;--pan:#F3EFE4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+  font:400 16.5px/1.56 Inter,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+  letter-spacing:-.012em}
+.w{max-width:1240px;margin:0 auto;padding:0 26px}
+.g{display:grid;grid-template-columns:repeat(12,1fr);gap:26px}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.04em;text-wrap:balance}
+.lbl{font:700 11px/1 Inter;letter-spacing:.1em;text-transform:uppercase}
+.num{font:700 11px/1 Inter;letter-spacing:.06em;color:var(--oc);font-variant-numeric:tabular-nums}
+.sh{display:grid;grid-template-columns:46px 1fr;gap:0 14px;align-items:baseline;
+  border-top:2px solid var(--tx);padding-top:11px;margin-bottom:30px}
+.sh .lbl{display:flex;gap:14px;align-items:center;color:var(--tx)}
+.sh .lbl:after{content:'';flex:1;height:1px;background:var(--ru)}
+.sec{padding:clamp(44px,5.6vw,72px) 0}
+
+.tp{border-bottom:1px solid var(--tx)}
+.tp .w{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+  padding:13px 26px}
+.tp ol{display:flex;gap:20px;list-style:none;margin:0;padding:0;font:700 11px/1 Inter;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.tp .on{color:var(--oc)}.tp .ok{color:var(--tx)}
+.tp .lbl{color:var(--mut)}
+
+.hero{padding:clamp(44px,6vw,74px) 0 40px;align-items:end}
+.hero h1{grid-column:1/9;font-family:'Anton',Impact,sans-serif;font-weight:400;
+  text-transform:uppercase;font-size:clamp(34px,6.2vw,86px);line-height:1.16;letter-spacing:-.018em}
+/* a tarja NAO pode ser background com padding: a caixa de conteudo do Anton tem
+   1,51em de altura, entao a faixa invadia a linha de cima. Aqui ela e' um traco
+   de marcador com altura fixa, posicionado sobre as maiusculas. */
+.hero h1 em{font-style:normal;padding:0 .08em;margin:0 -.08em;
+  background:linear-gradient(var(--am),var(--am)) no-repeat;
+  background-size:100% .95em;background-position:0 .32em;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero .fi{grid-column:9/13;border-top:2px solid var(--tx)}
+.fr{display:grid;grid-template-columns:74px 1fr;gap:12px;padding:10px 0;
+  border-bottom:1px solid var(--ru);align-items:baseline}
+.fr dt{font:700 10px/1.5 Inter;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.fr dd{margin:0;font-size:14.5px;line-height:1.42;color:var(--mut)}
+.fr dd b{color:var(--tx);font-weight:700}
+.fr.k dd{color:var(--oc);font-weight:600}
+.play{aspect-ratio:16/9;background:var(--tx);position:relative}
+.play:after{content:'';position:absolute;left:50%;top:50%;translate:-42% -50%;
+  border-left:26px solid var(--am);border-top:17px solid transparent;border-bottom:17px solid transparent}
+
+.eq{display:grid;grid-template-columns:46px 1fr 30px 1fr;gap:0 14px;padding:19px 0;
+  border-bottom:1px solid var(--ru);align-items:baseline}
+.eq .n{font:700 11px/1.7 Inter;color:var(--dim);font-variant-numeric:tabular-nums}
+.eq .a{font-size:clamp(17px,2.1vw,25px);font-weight:700;letter-spacing:-.035em;line-height:1.14;
+  color:var(--mut)}
+.eq .s{color:var(--dim);text-align:center;font-weight:400}
+.eq .b{font-size:16px;color:var(--mut);line-height:1.4}
+.eq.win{background:var(--am);margin:0 -16px;padding:19px 16px;border-bottom-color:var(--oc)}
+.eq.win .n{color:#5E3F08}
+.eq.win .a{color:#17140C}
+.eq.win .b{color:#3D2E10;font-weight:600}
+.eq.win .s{color:#8A6B22}
+.para{grid-column:1/9;margin:32px 0 0;font-size:clamp(18px,2vw,24px);line-height:1.42;
+  letter-spacing:-.028em;font-weight:500;color:#2E2B25}
+.para b{color:var(--oc);font-weight:700}
+
+.buy{background:var(--pan);border-top:1px solid var(--ru);border-bottom:1px solid var(--ru)}
+.buy .w{padding-top:clamp(44px,5.6vw,68px);padding-bottom:clamp(44px,5.6vw,68px)}
+.buy .g{align-items:end}
+.buy .l{grid-column:1/7}.buy .r{grid-column:8/13}
+.buy h2{font-size:clamp(27px,3.4vw,44px)}
+.buy .fr{border-bottom-color:#D8D2C3}
+.pz{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:clamp(86px,13.5vw,176px);
+  line-height:.82;letter-spacing:-.048em;margin:0;text-align:right;color:var(--tx);
+  font-variant-numeric:tabular-nums}
+.pz sup{font-size:.2em;vertical-align:super;color:var(--oc)}
+.sm{margin:14px 0 0;font-size:14px;color:var(--mut);text-align:right}
+.sm.t{font-size:11.5px;color:var(--dim);margin-top:5px}
+.btn{display:block;width:100%;margin:22px 0 0;background:var(--tx);color:var(--bg);
+  text-decoration:none;text-align:center;font:700 16.5px/1 Inter;letter-spacing:-.015em;
+  padding:23px;border:0;cursor:pointer;transition:background .15s,color .15s}
+.btn:hover,.btn:focus-visible{background:var(--oc);color:#fff}
+
+.gar{align-items:center}
+.gar .n100{grid-column:1/4;font-family:'Anton',sans-serif;font-size:clamp(54px,7.6vw,104px);
+  line-height:.88;color:var(--oc)}
+.gar .n100 i{display:block;font-family:Inter,sans-serif;font-style:normal;font-size:.13em;
+  font-weight:700;letter-spacing:.16em;color:var(--mut);margin-top:10px}
+.gar .tx{grid-column:4/11}
+.gar h3{font-size:clamp(21px,2.4vw,30px)}
+.gar p{margin:9px 0 0;color:var(--mut)}
+
+.hr{display:grid;grid-template-columns:46px 88px 1fr;gap:0 14px;padding:19px 0;
+  border-bottom:1px solid var(--ru)}
+.hr .n{font:700 11px/1.9 Inter;color:var(--dim);font-variant-numeric:tabular-nums}
+.hr .m{font:700 clamp(19px,2.2vw,26px)/1.05 Inter;letter-spacing:-.045em;color:var(--oc);
+  font-variant-numeric:tabular-nums}
+.hr h3{font-size:clamp(17px,1.9vw,21px)}
+.hr p{margin:7px 0 0;color:var(--mut);font-size:15.5px;max-width:58ch}
+ul.e{list-style:none;padding:0;margin:0}
+ul.e li{border-bottom:1px solid var(--ru);padding:15px 0;font-size:16px;color:var(--mut)}
+ul.e li:first-child{border-top:1px solid var(--ru)}
+ul.e b{color:var(--tx);font-weight:600}
+
+.pv3{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.pc{padding:16px 22px 22px 0;border-top:2px solid var(--oc);border-right:1px solid var(--ru);
+  display:flex;flex-direction:column;gap:11px}
+.pc:last-child{border-right:0}
+.pc:not(:first-child){padding-left:22px}
+.pc .n{font-size:18.5px;font-weight:700;letter-spacing:-.035em;margin:0}
+.pc .a{margin:0;font-size:14.5px;color:var(--mut);line-height:1.45}
+.pc .d{margin:0;font-size:16.5px;font-weight:500;line-height:1.4;letter-spacing:-.022em;color:var(--tx)}
+.pc a{margin-top:auto;padding-top:8px;color:var(--oc);font:700 11.5px/1 Inter;letter-spacing:.08em;
+  text-transform:uppercase;text-decoration:none;align-self:flex-start;
+  border-bottom:1px solid currentColor;padding-bottom:3px}
+.nota{margin:22px 0 0;font-size:14px;color:var(--dim);max-width:64ch}
+
+.recusa{display:block;width:100%;margin:12px 0 0;background:none;border:0;color:var(--mut);
+  font:400 13.5px Inter;text-decoration:underline;cursor:pointer;text-align:center}
+.esc{margin:22px 0 0;font-size:13.5px;color:var(--mut);line-height:1.68;max-width:60ch}
+details{border-bottom:1px solid var(--ru)}
+details:first-of-type{border-top:1px solid var(--ru)}
+summary{cursor:pointer;padding:19px 0;font:700 clamp(17px,2vw,21px)/1.3 Inter;letter-spacing:-.035em;
+  list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:'+';color:var(--oc)}
+details[open] summary:after{content:'–'}
+details p{margin:0 0 22px;color:var(--mut);max-width:68ch}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--oc);outline-offset:4px}
+footer{border-top:2px solid var(--tx);padding:20px 0;font:700 11px/1 Inter;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mut)}
+@media(max-width:880px){
+ .g{grid-template-columns:repeat(6,1fr);gap:16px}
+ .hero h1,.hero .fi,.para,.buy .l,.buy .r,.gar .n100,.gar .tx{grid-column:1/-1}
+ .hero .fi{margin-top:26px}
+ .eq{grid-template-columns:1fr;gap:5px}.eq .n,.eq .s{display:none}
+ .eq.win{margin:0 -12px;padding:19px 12px}
+ .hr{grid-template-columns:64px 1fr}.hr .n{display:none}
+ .pz,.sm{text-align:left}
+ .pv3{grid-template-columns:1fr}.pc{border-right:0;padding:16px 0 22px!important}
+ .tp ol{gap:11px;font-size:9.5px}}
+"""
+    return doc(css, _corpo_suico(),
+               G + 'Inter:wght@400;500;600;700&family=Anton&display=swap')
 
 
 # ══════════════════════════════════════════ 12 CAPÍTULOS (a referência da Hotmart)
