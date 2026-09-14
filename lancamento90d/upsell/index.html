@@ -13,7 +13,34 @@
 
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/dmsans-sub.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/grotesk-sub.woff2">
-<link rel="stylesheet" href="../assets/oferta.css">
+
+<!-- ============================================================
+     DESIGN (14/09/2026): rumo "Capítulos", paleta "Noite", escolhidos pelo
+     cliente na prancha de 14 rumos × 8 paletas (_designs/). A página deixou
+     de usar ../assets/oferta.css: aquela folha é a linguagem do FRONT
+     (marfim, claro) e esta página agora é escura de propósito, para o upsell
+     se ler como OUTRA coisa e não como "mais uma tela do mesmo checkout".
+     Por isso o CSS mora aqui dentro, e as duas @font-face também.
+
+     O que veio do rumo Capítulos: numeral fantasma por capítulo, rótulo
+     miúdo em versalete, faixa em marquise, sublinhado à mão na frase-chave,
+     fita de progresso no topo, linha do tempo numerada, bloco de oferta
+     cheio e FAQ em cartão.
+     O que NÃO veio: o fade-in ao rolar da referência. Numa página pós-compra
+     a pessoa lê com pressa e muitas vezes no celular; esconder bloco até ele
+     entrar na tela troca leitura por efeito. Aqui tudo nasce visível.
+
+     FONTES: a referência usava Instrument Sans + DM Mono do Google. Aqui vão
+     as que a casa JÁ hospeda (Space Grotesk + DM Sans, as mesmas do front),
+     porque página pós-compra não pode depender de request externo. Os
+     rótulos em versalete, que na referência eram monoespaçados, usam a mono
+     do sistema: é texto miúdo em caixa alta com muito espacejamento, onde a
+     mono do sistema não destoa e não custa nada.
+
+     ⚠️ PALETA: o acento --ac é cor de TEXTO e precisa passar contraste; o
+     --acf é cor de PREENCHIMENTO (tarja, traço, botão). Não trocar um pelo
+     outro: âmbar como texto sobre fundo claro é ilegível.
+     ============================================================ -->
 
 <!-- ============================================================
      ESTRUTURA: esqueleto de página de upsell do modelo Roas, decalcado da
@@ -37,6 +64,222 @@
      A versão longa e argumentada desta página está em index-longa.html.
      ============================================================ -->
 
+<style>
+/* fontes da casa, as mesmas do front, servidas daqui */
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/grotesk-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/grotesk-sub.woff2) format('woff2')}
+
+:root{
+  --pa:#101012; --pa2:#17171A; --ink:#EFEDE8; --mut:#9A958D; --dim:#6B675F; --ru:#27272B;
+  --ac:#EAB82D; --acf:#EAB82D;
+  --off:#F3F0E8; --offtx:#141312; --offc:#FFFFFF; --offb:#DBD6CA;
+  --pill:#EAB82D; --pilltx:#141312; --pillh:#141312; --pillhtx:#EAB82D;
+  --play:#000; --band:#EAB82D; --bandtx:#141312;
+  --ff:'DM Sans',system-ui,-apple-system,sans-serif;
+  --fd:'Space Grotesk','DM Sans',sans-serif;
+  --fm:ui-monospace,'SF Mono','Roboto Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);font:400 17px/1.62 var(--ff);
+  -webkit-font-smoothing:antialiased}
+.w{max-width:1060px;margin:0 auto;padding:0 24px}
+h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;line-height:1.08;
+  text-wrap:balance}
+.rot{font-family:var(--fm);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dim);margin:0 0 14px}
+
+.prog{position:fixed;top:0;left:0;height:3px;background:var(--ac);width:0;z-index:40}
+
+/* fita dos passos */
+.passos{border-bottom:1px solid var(--ru)}
+.passos ol{display:flex;gap:24px;list-style:none;margin:0;padding:13px 0;flex-wrap:wrap;
+  font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.passos .feito{color:var(--mut)}
+.passos .agora{color:var(--ac)}
+
+/* abertura */
+.hero{position:relative;text-align:center;padding:clamp(44px,6.4vw,84px) 0 clamp(34px,4vw,52px);
+  overflow:hidden}
+.hero:before{content:'';position:absolute;inset:-30% -10% auto;height:150%;z-index:0;
+  background:radial-gradient(46% 42% at 50% 32%,rgba(239,237,232,.055),transparent 70%)}
+.hero>*{position:relative;z-index:1}
+.hero h1{font-size:clamp(31px,5.4vw,62px);max-width:17ch;margin:0 auto}
+.hero h1 .u{position:relative;white-space:nowrap}
+.hero h1 .u svg{position:absolute;left:-2%;bottom:-.16em;width:104%;height:.3em;overflow:visible}
+.hero h1 .u path{fill:none;stroke:var(--acf);stroke-width:7;stroke-linecap:round}
+.hero .parabens{margin:0 auto 18px;max-width:52ch;font-size:15.5px;color:var(--mut)}
+.hero .parabens b{color:var(--ink);font-weight:700}
+.hero .lead{margin:20px auto 0;max-width:46ch;color:var(--mut);font-size:17.5px}
+.cue{margin:26px 0 0;font-family:var(--fm);font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim)}
+
+/* o vídeo do upsell é VERTICAL (9/16), como na oferta.css do front */
+.player{max-width:392px;margin:28px auto 0;aspect-ratio:9/16;background:var(--play);
+  border-radius:14px;overflow:hidden}
+.player:empty{background:none;border:2px dashed var(--ru);display:grid;place-content:center}
+.player:empty:before{content:"vídeo de upsell entra aqui";font-family:var(--fm);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+/* botão */
+.btn{display:inline-block;background:var(--pill);color:var(--pilltx);text-decoration:none;
+  font:700 15.5px/1 var(--ff);padding:18px 34px;border-radius:999px;border:0;cursor:pointer;
+  transition:background .16s,color .16s,transform .16s}
+.btn:hover,.btn:focus-visible{background:var(--pillh);color:var(--pillhtx);transform:translateY(-1px)}
+.btn.bloco{display:block;width:100%;text-align:center}
+
+/* faixa em marquise */
+.mq{background:var(--band);color:var(--bandtx);overflow:hidden;padding:14px 0}
+.mq div{display:flex;gap:32px;white-space:nowrap;width:max-content;font-family:var(--fm);
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;animation:corre 34s linear infinite}
+.mq i{font-style:normal;opacity:.45}
+@keyframes corre{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* capítulos */
+.cap{position:relative;padding:clamp(48px,6.4vw,88px) 0}
+.cap.alt{background:var(--pa2)}
+.cap .ghost{position:absolute;right:clamp(8px,4vw,56px);top:clamp(26px,3.4vw,46px);
+  font-family:var(--fd);font-weight:700;font-size:clamp(64px,11vw,136px);line-height:.8;
+  letter-spacing:-.06em;color:rgba(239,237,232,.055);pointer-events:none;
+  font-variant-numeric:tabular-nums}
+.cap h2{font-size:clamp(23px,3.2vw,38px);max-width:20ch}
+.cap .tx{margin:20px 0 0;max-width:58ch;color:var(--mut);font-size:17px}
+.cap .tx b{color:var(--ink);font-weight:700}
+
+/* as três contas */
+.eqs{margin:30px 0 0;max-width:760px}
+.eq{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:baseline;padding:17px 0;
+  border-top:1px solid var(--ru)}
+.eq:last-child{border-bottom:1px solid var(--ru)}
+.eq .a{font-family:var(--fd);font-weight:700;letter-spacing:-.03em;font-size:clamp(16px,2vw,21px);
+  color:var(--mut)}
+.eq .s{color:var(--dim)}
+.eq .b{font-size:15.5px;color:var(--mut)}
+.eq.win{border-top-color:var(--ac)}
+.eq.win .a{color:var(--ink)}
+.eq.win .b{color:var(--ac);font-weight:700}
+
+/* citação */
+.pq{text-align:center}
+.pq .m{display:block;font-family:var(--fd);font-weight:700;font-size:42px;line-height:.6;
+  color:rgba(239,237,232,.2);margin-bottom:18px}
+.pq h2{margin:0 auto;max-width:22ch;font-size:clamp(23px,3.4vw,40px);line-height:1.12}
+.pq .tx{margin:20px auto 0;max-width:58ch}
+
+/* bloco da oferta: inverte para creme, é o único claro da página */
+.oferta{background:var(--off);color:var(--offtx);padding:clamp(46px,6vw,80px) 0}
+.oferta .rot{color:rgba(20,19,18,.5)}
+.oferta h2{font-size:clamp(24px,3.4vw,40px);max-width:16ch}
+.oferta .sub{margin:16px 0 0;max-width:52ch;font-size:17px;color:rgba(20,19,18,.7)}
+.caixa{margin:30px 0 0;background:var(--offc);border:1px solid var(--offb);border-radius:18px;
+  padding:26px;display:grid;grid-template-columns:1fr auto;gap:26px;align-items:end}
+.caixa ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.caixa li{font-size:15.5px;padding-left:22px;position:relative;color:rgba(20,19,18,.78)}
+.caixa li:before{content:'';position:absolute;left:0;top:8px;width:12px;height:6px;
+  border-left:1.6px solid var(--offtx);border-bottom:1.6px solid var(--offtx);rotate:-45deg}
+.caixa .rt{text-align:right;min-width:246px}
+.caixa .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  margin:0;color:rgba(20,19,18,.55)}
+.val{font-family:var(--fd);font-weight:700;font-size:clamp(46px,7vw,76px);line-height:.94;
+  letter-spacing:-.05em;margin:8px 0 0;font-variant-numeric:tabular-nums}
+.val .cur{font-size:.34em;vertical-align:super;color:rgba(20,19,18,.6)}
+.sm{margin:10px 0 0;font-size:13.5px;color:rgba(20,19,18,.7)}
+.sm.t{font-size:11.5px;color:rgba(20,19,18,.5);margin-top:4px}
+.abate{margin:18px 0 0;font-size:13.5px;max-width:52ch;color:rgba(20,19,18,.65)}
+.recusa{display:block;width:100%;margin:14px 0 0;background:none;border:0;font:400 13.5px var(--ff);
+  color:rgba(20,19,18,.58);text-decoration:underline;cursor:pointer;text-align:center}
+.esc{margin:18px 0 0;font-size:13.5px;line-height:1.66;max-width:64ch;color:rgba(20,19,18,.66)}
+
+/* garantia */
+.gar{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
+  border:1px solid var(--ru);border-radius:16px;padding:22px 24px}
+.gar .selo{width:72px;height:72px;border-radius:50%;border:1px solid rgba(234,184,45,.4);
+  display:grid;place-content:center;text-align:center;color:var(--ac)}
+.gar .selo b{display:block;font-family:var(--fd);font-weight:700;font-size:18px;line-height:1}
+.gar .selo i{font-style:normal;font-family:var(--fm);font-size:7.5px;letter-spacing:.12em}
+.gar h3{font-size:18px}
+.gar p{margin:5px 0 0;color:var(--mut);font-size:14.5px}
+
+/* linha do tempo */
+.hora{margin:28px 0 0;max-width:700px}
+.hl{display:grid;grid-template-columns:40px 1fr;gap:18px;position:relative;padding-bottom:24px}
+.hl:last-child{padding-bottom:0}
+.hl:not(:last-child):before{content:'';position:absolute;left:19px;top:38px;bottom:2px;width:1px;
+  background:var(--ru)}
+.hl .no{width:40px;height:40px;border-radius:50%;border:1px solid var(--ru);display:grid;
+  place-content:center;font-family:var(--fm);font-size:11.5px;color:var(--mut);background:var(--pa2)}
+.hl .min{font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ac);margin:0 0 5px}
+.hl h3{font-size:18px}
+.hl p{margin:7px 0 0;color:var(--mut);font-size:15.5px}
+.hl p b{color:var(--ink)}
+
+/* cartões */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:28px 0 0}
+.cd{background:var(--pa);border:1px solid var(--ru);border-radius:14px;padding:20px}
+.cap.alt .cd{background:var(--pa2)}
+.cd .ck{width:26px;height:26px;border-radius:50%;border:1px solid var(--ru);display:grid;
+  place-content:center;color:var(--ac);font-size:13px;margin-bottom:13px}
+.cd p{margin:0;font-size:15.5px;line-height:1.5}
+.cd p b{font-weight:700}
+
+/* prova */
+.provas{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0}
+.prova{background:var(--pa2);border:1px solid var(--ru);border-radius:14px;padding:20px;
+  display:flex;flex-direction:column;gap:10px}
+.prova .quem{margin:0;font-family:var(--fd);font-weight:700;font-size:17px;letter-spacing:-.03em}
+.prova .antes{margin:0;font-size:14.5px;color:var(--mut);line-height:1.5}
+.prova .antes b,.prova .depois b{color:var(--ink);font-weight:700}
+.prova .depois{margin:0;font-size:15.5px;line-height:1.48}
+.prova .link{margin-top:auto;padding-top:6px;color:var(--ac);font:700 13px/1 var(--ff);
+  text-decoration:none;align-self:flex-start;border-bottom:1px solid rgba(234,184,45,.35);
+  padding-bottom:3px}
+.nota-prova{margin:18px 0 0;font-size:13.5px;color:var(--dim);max-width:62ch}
+
+/* faq */
+.faq{display:grid;gap:10px;margin:26px 0 0;max-width:760px}
+details{background:var(--pa);border:1px solid var(--ru);border-radius:14px}
+summary{cursor:pointer;padding:17px 20px;font-weight:700;font-size:16.5px;list-style:none;
+  display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary:after{content:'+';color:var(--ac);font-size:19px;font-weight:400}
+details[open] summary:after{content:'–'}
+details p{margin:0 20px 18px;color:var(--mut);font-size:15.5px}
+
+:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+footer{border-top:1px solid var(--ru);padding:26px 0;text-align:center;font-family:var(--fm);
+  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+
+/* barra fixa, só no celular */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;align-items:center;
+  gap:14px;padding:11px 16px calc(11px + env(safe-area-inset-bottom));background:var(--off);
+  color:var(--offtx);border-top:1px solid var(--offb);transform:translateY(110%);
+  transition:transform .25s ease}
+.sticky.on{transform:none}
+.sticky .p{font-family:var(--fd);font-weight:700;font-size:21px;letter-spacing:-.04em;
+  line-height:1;white-space:nowrap}
+.sticky .p small{display:block;font-family:var(--ff);font-weight:400;font-size:10.5px;
+  letter-spacing:0;color:rgba(20,19,18,.6);margin-top:3px}
+.sticky .btn{flex:1;padding:15px 18px;font-size:14.5px;background:var(--offtx);color:var(--off)}
+.sticky .btn:hover{background:var(--ac);color:var(--offtx)}
+
+@media (max-width:820px){
+  .caixa{grid-template-columns:1fr}
+  .caixa .rt{text-align:left;min-width:0}
+  .eq{grid-template-columns:1fr;gap:4px}
+  .eq .s{display:none}
+  .provas{grid-template-columns:1fr}
+  .gar{grid-template-columns:auto 1fr}
+  .gar .btn{grid-column:1/-1}
+  .passos ol{gap:12px;font-size:9px}
+  .sticky{display:flex}
+  body{padding-bottom:80px}
+}
+@media (prefers-reduced-motion:reduce){.mq div{animation:none}*{transition:none!important}}
+</style>
+
 <!-- Meta Pixel: mesmos dois IDs do front -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -52,44 +295,42 @@ if('requestIdleCallback' in window)requestIdleCallback(go,{timeout:2500});else s
 document.addEventListener(ev,go,{once:true,passive:true});});})();
 </script>
 </head>
-<body class="curta">
+<body>
 
-<!-- ============================================================
-     ESTRUTURA (08/09, 2º corte): a página foi cortada ATÉ o tamanho da
-     referência (upsell da Prisciane: uma tela de texto). ~450 palavras.
-     Quem vende é o VÍDEO. Aqui só o que o vídeo não pode fazer: preço,
-     botão, garantia, prova e a resposta às duas objeções que viram reembolso.
-     As versões longas estão em index-longa.html e index-longa-v2.html com o
-     raciocínio de cada bloco. Antes de acrescentar, ler lá por que saiu.
-     ============================================================ -->
+<div class="prog" id="prog"></div>
 
 <nav class="passos" aria-label="Etapas da sua compra">
-  <div class="wrap">
+  <div class="w">
     <ol>
-      <li class="feito"><span class="b">✓</span>Passo 1 · 90D garantido</li>
-      <li class="agora"><span class="b">2</span>Passo 2 · Acelere o resultado</li>
-      <li><span class="b">3</span>Passo 3 · Acesso liberado</li>
+      <li class="feito">✓ Passo 1 · 90D garantido</li>
+      <li class="agora">2 · Acelere o resultado</li>
+      <li>3 · Acesso liberado</li>
     </ol>
   </div>
 </nav>
 
-<div class="topo">
-  <div class="wrap">
-    <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo,<br>
-    <span class="nfeche">mas o seu pedido ainda não está finalizado.</span></p>
-  </div>
-</div>
-
-<section class="hero convite">
-  <div class="wrap">
+<header class="hero">
+  <div class="w">
+    <!-- O rótulo em versalete é CURTO por regra: uma frase inteira em caixa alta
+         de 11px com .22em de espacejamento não se lê, vira textura. A frase do
+         parabéns fica em corpo de texto normal, logo acima. -->
+    <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo,
+    <b>mas o seu pedido ainda não está finalizado.</b></p>
+    <p class="rot">Passo 2 de 3</p>
     <!-- As duas frases são do cliente. A pergunta abre um loop que só o vídeo
          fecha, por isso ela é a H1; "a gente, trabalhando junto" é a oferta e
          foi pro bloco do preço. -->
-    <h1>Você já sabe como lançar.<br>Mas o seu livro está bom de verdade?</h1>
+    <h1>Você já sabe como lançar. Mas o seu livro está <span class="u">bom de verdade<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8.4C34 3.6 78 2.4 116 4.2c26 1.2 52 3.6 82 1.4"/></svg></span>?</h1>
     <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
     <div class="player" id="vsl"></div>
+    <p class="cue">Role para ver a conta ↓</p>
   </div>
-</section>
+</header>
+
+<div class="mq" aria-hidden="true"><div>
+  <span>Uma hora no Zoom</span><i>·</i><span>Só sobre o seu livro</span><i>·</i><span>Plano de ação</span><i>·</i><span>Três frentes de lançamento</span><i>·</i><span>A gravação é sua</span><i>·</i>
+  <span>Uma hora no Zoom</span><i>·</i><span>Só sobre o seu livro</span><i>·</i><span>Plano de ação</span><i>·</i><span>Três frentes de lançamento</span><i>·</i><span>A gravação é sua</span><i>·</i>
+</div></div>
 
 <!-- ============================================================
      A MATEMÁGICA (espinha da oferta e do vídeo, cliente 08/09).
@@ -100,62 +341,68 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      ⚠️ ESCOPO: "bom de verdade" NÃO é "bem escrito". A call não lê o
      manuscrito. É o livro como projeto (profissional × amador, vocabulário da
      Dany). A linha final e o FAQ "vocês vão ler o meu livro?" travam isso,
-     senão a pessoa espera leitura crítica e a hora vira reembolso.
-     ============================================================ -->
-<section class="escuro">
-  <div class="wrap narrow" style="text-align:center">
-    <!-- Sem título em cima: "O 90D resolve metade da conta" soava como confissão
-         de que o produto recém-comprado é metade (cliente cortou, 08/09). A seção
-         abre direto nas TRÊS contas. A primeira é o quadrante de onde o 90D tira a
-         pessoa: é o crédito dele, sem dizer "metade". -->
-    <div class="mate" style="margin-top:0">
-      <div class="l ruim"><span>Livro bom + lançamento ruim</span><span class="eq">=</span>
-        <span class="r">ninguém descobre.</span></div>
-      <div class="l ruim"><span>Lançamento bom + livro ruim</span><span class="eq">=</span>
-        <span class="r">vende no lançamento. Depois, esquecido.</span></div>
-      <div class="l bom"><span>Lançamento bom + livro bom</span><span class="eq">=</span>
-        <span class="r">muda a vida do autor.</span></div>
+     senão a pessoa espera leitura crítica e a hora vira reembolso. -->
+<section class="cap">
+  <div class="w">
+    <span class="ghost" aria-hidden="true">01</span>
+    <p class="rot">Capítulo um</p>
+    <h2>Só uma das três contas muda a sua vida</h2>
+    <div class="eqs">
+      <div class="eq"><span class="a">Livro bom + lançamento ruim</span><span class="s">=</span><span class="b">ninguém descobre.</span></div>
+      <div class="eq"><span class="a">Lançamento bom + livro ruim</span><span class="s">=</span><span class="b">vende no lançamento. Depois, esquecido.</span></div>
+      <div class="eq win"><span class="a">Lançamento bom + livro bom</span><span class="s">=</span><span class="b">muda a vida do autor.</span></div>
     </div>
-    <p style="margin:22px auto 0;max-width:54ch"><strong class="risco">Um erro só pode fazer o
-    seu livro inteiro falhar.</strong> E ninguém enxerga o próprio erro: você olha mil vezes e
-    está tudo certo, outra pessoa olha dez segundos e aponta o que estava na sua cara.
-    <strong class="grifo">Não é sobre a escrita.</strong> É sobre tudo que decide se o leitor
-    certo encontra, escolhe e recomenda.</p>
+    <p class="tx">E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra
+    pessoa olha dez segundos e aponta o que estava na sua cara.</p>
+  </div>
+</section>
+
+<section class="cap alt pq">
+  <div class="w">
+    <span class="m" aria-hidden="true">“</span>
+    <h2>Um erro só pode fazer o seu livro inteiro falhar.</h2>
+    <p class="tx"><b>Não é sobre a escrita.</b> É sobre tudo que decide se o leitor certo encontra,
+    escolhe e recomenda.</p>
   </div>
 </section>
 
 <!-- PREÇO 1
      💰 ESTA É A VARIANTE A DO TESTE DE PREÇO: R$697 (oferta n740dj0b).
      A B (R$597, 8rn7djuk) é a /upsell-b/, GERADA pelo gera-b.py. -->
-<section class="fecha">
-  <div class="wrap">
+<section class="oferta" id="oferta">
+  <div class="w">
     <p class="rot">A gente, trabalhando junto no seu livro. Quer?</p>
-    <p class="nome">Diagnóstico do Autor</p>
-    <span class="val"><span class="cur">R$</span>697</span>
-    <p class="avista">à vista, ou em até <b>12x no cartão</b></p>
-    <p class="obs">* parcelado no cartão, com juros</p>
-    <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
-    <div class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697
-    são abatidos integralmente.</div>
+    <h2>Diagnóstico do Autor</h2>
+    <p class="sub">Uma hora no Zoom com um especialista do time da Dany, só sobre o seu livro.</p>
+    <div class="caixa">
+      <ul>
+        <li>Uma hora no Zoom só sobre o seu livro</li>
+        <li>Um plano de ação, com o que fazer primeiro</li>
+        <li>Três frentes de lançamento escolhidas para você</li>
+        <li>A gravação, para sempre</li>
+      </ul>
+      <div class="rt">
+        <p class="k">Investimento</p>
+        <p class="val"><span class="cur">R$</span>697</p>
+        <p class="sm">à vista, ou em até <b>12x no cartão</b></p>
+        <p class="sm t">* parcelado no cartão, com juros</p>
+        <a class="btn bloco" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
+      </div>
+    </div>
+    <p class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697
+    são abatidos integralmente.</p>
   </div>
 </section>
 
-<section class="escuro">
-  <div class="wrap">
-    <div class="garantia" style="background:rgba(243,240,232,.05);border-color:rgba(243,240,232,.14)">
-      <svg viewBox="0 0 120 120" role="img" aria-label="Garantia">
-        <circle class="disco" cx="60" cy="60" r="52"></circle>
-        <text class="num" x="60" y="57" text-anchor="middle">100%</text>
-        <text class="dias" x="60" y="76" text-anchor="middle">DE VOLTA</text>
-      </svg>
+<section class="cap">
+  <div class="w">
+    <div class="gar">
+      <div class="selo"><b>100%</b><i>DE VOLTA</i></div>
       <div>
-        <h3 style="color:#F3F0E8">Se ao fim da hora você achar que não valeu, devolvemos</h3>
-        <p style="color:rgba(243,240,232,.74)">Sem justificar. E o material continua seu.</p>
+        <h3>Se ao fim da hora você achar que não valeu, devolvemos</h3>
+        <p>Sem justificar. E o material continua seu.</p>
       </div>
-    </div>
-    <div class="fecha" style="margin-top:34px">
-      <p class="avista" style="margin:0 0 4px">Agora ficou mais fácil decidir, né?</p>
-      <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
+      <a class="btn" href="#" data-aceita>Eu quero o meu diagnóstico</a>
     </div>
   </div>
 </section>
@@ -163,29 +410,32 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <!-- a hora + a entrega. O pitch de 10 min fica NOMEADO: é o que mata a
      objeção "reunião de vendas". A frase da entrega é do cliente.
      🚫 NÃO PROMETER DATA (a call só crava data pra quem tem livro pronto). -->
-<section>
-  <div class="wrap">
-    <h2 style="max-width:22ch">A sua hora, por dentro</h2>
-    <ol class="hora">
-      <li><span class="min">5 min</span><h3>Quem é você e onde o livro está</h3></li>
-      <li><span class="min">5 min</span><h3>O que já está certo</h3></li>
-      <li><span class="min">40 min</span><h3>Os seus próximos passos</h3>
+<section class="cap alt">
+  <div class="w">
+    <span class="ghost" aria-hidden="true">02</span>
+    <p class="rot">Capítulo dois</p>
+    <h2>A sua hora, por dentro</h2>
+    <div class="hora">
+      <div class="hl"><span class="no">01</span><div><p class="min">5 min</p><h3>Quem é você e onde o livro está</h3></div></div>
+      <div class="hl"><span class="no">02</span><div><p class="min">5 min</p><h3>O que já está certo</h3></div></div>
+      <div class="hl"><span class="no">03</span><div><p class="min">40 min</p><h3>Os seus próximos passos</h3>
         <p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do
-        seu livro</b>, escolhidas entre quinze.</p></li>
-      <li><span class="min">10 min</span><h3>Dúvidas, e uma conversa honesta</h3>
-        <p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></li>
-    </ol>
-    <div style="max-width:640px;margin:40px auto 0">
-      <h3 style="font-size:1.24rem"><span class="grifo">Você sai com um plano de ação e os
-      próximos passos mapeados.</span></h3>
-      <ul class="entregas" style="margin-top:16px">
-        <li><b>O que consertar primeiro</b>, e o que deixar pra depois</li>
-        <li><b>As três frentes escolhidas</b> para o seu livro</li>
-        <li><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</li>
-      </ul>
+        seu livro</b>, escolhidas entre quinze.</p></div></div>
+      <div class="hl"><span class="no">04</span><div><p class="min">10 min</p><h3>Dúvidas, e uma conversa honesta</h3>
+        <p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div>
     </div>
-    <div class="fecha" style="margin-top:40px">
-      <a class="btn ouro block" href="#" data-aceita>Eu quero o meu diagnóstico</a>
+  </div>
+</section>
+
+<section class="cap">
+  <div class="w">
+    <span class="ghost" aria-hidden="true">03</span>
+    <p class="rot">Capítulo três</p>
+    <h2>Você sai com um plano de ação e os próximos passos mapeados.</h2>
+    <div class="cards">
+      <div class="cd"><span class="ck">✓</span><p><b>O que consertar primeiro</b>, e o que deixar pra depois</p></div>
+      <div class="cd"><span class="ck">✓</span><p><b>As três frentes escolhidas</b> para o seu livro</p></div>
+      <div class="cd"><span class="ck">✓</span><p><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</p></div>
     </div>
   </div>
 </section>
@@ -197,26 +447,28 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      dois minutos antes. Prova repetida nao prova de novo. Estes tres sao casos do
      LIVRO COMO PROJETO, que e' o que a call realmente olha: os tres tinham o livro
      pronto e errado na embalagem, e alguem de fora viu o que eles nao viam. -->
-<section class="escuro">
-  <div class="wrap">
-    <h2 style="max-width:24ch">Quem já passou por essa leitura</h2>
-    <div class="provas" style="margin-top:26px">
+<section class="cap alt">
+  <div class="w">
+    <span class="ghost" aria-hidden="true">04</span>
+    <p class="rot">Quem já passou</p>
+    <h2>Quem já passou por essa leitura</h2>
+    <div class="provas">
       <div class="prova">
         <p class="quem">Robson Leite</p>
         <p class="antes">Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p>
-        <p class="depois">"Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro."</p>
+        <p class="depois">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p>
         <a class="link" href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">Ver depoimento</a>
       </div>
       <div class="prova">
         <p class="quem">Cláudio Yamaguchi</p>
-        <p class="antes">Anos escrevendo sobre comportamento humano. <b>"Não é isso que eu queria fazer."</b></p>
-        <p class="depois">Um toque de fora: <b>"coloca mais você"</b>. Hoje os leitores dizem: "eu vejo você nessa obra".</p>
+        <p class="antes">Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p>
+        <p class="depois">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p>
         <a class="link" href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento</a>
       </div>
       <div class="prova">
         <p class="quem">Luiz Valério</p>
         <p class="antes">Nove livros publicados. <b>Nenhum pensado para vender.</b></p>
-        <p class="depois">Ligou para a editora no meio da produção: <b>"terei de refazer a capa, a contracapa e a sinopse"</b>.</p>
+        <p class="depois">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p>
         <a class="link" href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento</a>
       </div>
     </div>
@@ -225,32 +477,38 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </section>
 
-<section class="fecha">
-  <div class="wrap">
+<!-- PREÇO 2 -->
+<section class="oferta">
+  <div class="w">
     <p class="rot">Recapitulando</p>
-    <div style="max-width:440px;margin:0 auto 26px;text-align:left">
-      <ul class="entregas">
-        <li><b>Uma hora no Zoom</b> só sobre o seu livro</li>
-        <li><b>Um plano de ação</b>, com o que fazer primeiro</li>
-        <li><b>Três frentes de lançamento</b> escolhidas para você</li>
-        <li><b>A gravação</b>, para sempre</li>
+    <h2>Diagnóstico do Autor</h2>
+    <div class="caixa">
+      <ul>
+        <li>Uma hora no Zoom só sobre o seu livro</li>
+        <li>Um plano de ação, com o que fazer primeiro</li>
+        <li>Três frentes de lançamento escolhidas para você</li>
+        <li>A gravação, para sempre</li>
       </ul>
+      <div class="rt">
+        <p class="k">Investimento</p>
+        <p class="val"><span class="cur">R$</span>697</p>
+        <p class="sm">à vista, ou em até <b>12x no cartão</b></p>
+        <p class="sm t">* parcelado no cartão, com juros</p>
+        <a class="btn bloco" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
+        <button class="recusa" data-recusa>Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button>
+      </div>
     </div>
-    <span class="val"><span class="cur">R$</span>697</span>
-    <p class="avista">à vista, ou em até <b>12x no cartão</b></p>
-    <p class="obs">* parcelado no cartão, com juros</p>
-    <a class="btn ouro block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
-    <button class="recusa" data-recusa>Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button>
-    <p style="max-width:480px;margin:22px auto 0;font-size:.92rem;color:var(--mute)">Esta oferta
-    só existe aqui, para quem acabou de comprar o 90D. E ela só está na sua frente porque
-    ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time: quando as vagas
-    acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o próximo autor
-    que chegar aqui.</p>
+    <p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está
+    na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time:
+    quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o
+    próximo autor que chegar aqui.</p>
   </div>
 </section>
 
-<section class="escuro" style="padding-top:0">
-  <div class="wrap">
+<section class="cap">
+  <div class="w">
+    <p class="rot">Dúvidas</p>
+    <h2>Perguntas frequentes</h2>
     <div class="faq">
       <details>
         <summary>A call é com a Dany?</summary>
@@ -273,16 +531,14 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 </section>
 
 <footer>
-  <div class="wrap">
-    <p style="margin:0">The Book Business · Dany Sakugawa</p>
-  </div>
+  <div class="w">The Book Business · Dany Sakugawa</div>
 </footer>
 
-<!-- Barra fixa, só no mobile. No desktop os quatro CTAs da página dão conta;
+<!-- Barra fixa, só no mobile. No desktop os CTAs da página dão conta;
      no celular a distância entre eles é de várias telas. -->
 <div class="sticky" id="sticky">
   <div class="p">R$697<small>ou 12x no cartão</small></div>
-  <a class="btn ouro" href="#" data-aceita>Adicionar ao pedido</a>
+  <a class="btn" href="#" data-aceita>Adicionar ao pedido</a>
 </div>
 
 <script>
@@ -319,23 +575,33 @@ window.OFERTA = {
 <script src="../assets/oferta.js"></script>
 <script>
 /* A barra fixa entra depois que a pessoa passa do vídeo: antes disso ela
-   atrapalha o único trabalho da primeira dobra, que é dar o play. */
+   atrapalha o único trabalho da primeira dobra, que é dar o play.
+   A fita de progresso no topo é do rumo Capítulos. */
 (function(){
   var barra = document.getElementById('sticky'), gatilho = document.getElementById('vsl');
-  if (!barra || !gatilho) return;
-  function ver(){ barra.classList.toggle('on', gatilho.getBoundingClientRect().bottom < 0); }
-  addEventListener('scroll', ver, {passive:true}); ver();
+  if (barra && gatilho){
+    var ver = function(){ barra.classList.toggle('on', gatilho.getBoundingClientRect().bottom < 0); };
+    addEventListener('scroll', ver, {passive:true}); ver();
+  }
+  var fita = document.getElementById('prog');
+  if (fita){
+    var anda = function(){
+      var h = document.documentElement, t = h.scrollHeight - h.clientHeight;
+      fita.style.width = (t > 0 ? h.scrollTop / t * 100 : 0) + '%';
+    };
+    addEventListener('scroll', anda, {passive:true}); addEventListener('resize', anda); anda();
+  }
 })();
 </script>
 
 <!-- ============================================================
-     PENDÊNCIAS PARA ESTA PÁGINA IR AO AR
-     1. ⚠️ O PRODUTO NÃO ESTÁ PUBLICADO: os dois checkouts respondem
-        "Produto indisponível". Enquanto isso a trava AO_VIVO segura o botão.
+     PENDÊNCIAS desta página, em ordem de quem trava o quê:
+     1. CHECKOUT. AO_VIVO:false até a Hotmart publicar o A107472443R.
         Falta também a URL de obrigado/membros do 90D (recusa), que ainda
         está SUBSTITUIR.
-     2. O VÍDEO. A div .player está vazia e some sozinha. Nesta estrutura é
-        o vídeo que vende; sem ele, considerar subir a index-longa.html.
+     2. O VÍDEO. A div .player está vazia e mostra o aviso tracejado. Nesta
+        estrutura é o vídeo que vende; sem ele, considerar subir a
+        index-longa.html.
      3. Preço: em TESTE A/B. A=R$697 aqui, B=R$597 na /upsell-b/ (gerada
         pelo gera-b.py). Falta o valor real da parcela das duas ofertas.
      4. A regra do abatimento no D.E. precisa ser confirmada: veio da
@@ -344,7 +610,9 @@ window.OFERTA = {
      6. Regra de reembolso combinada com a operação e configurada na Hotmart.
      7. Copy não passou pela Dany.
      8. ✅ Prova social resolvida com casos reais dos depoimentos do canal.
-     9. Versões longas preservadas: index-longa.html (1ª, argumentada) e
+     9. ✅ Design: rumo Capítulos, paleta Noite (14/09). Protótipos e as
+        outras 13 direções ficam em _designs/.
+    10. Versões longas preservadas: index-longa.html (1ª, argumentada) e
         index-longa-v2.html (a de 13 seções que foi cortada em 08/09 porque
         "nenhuma página nossa é assim; nossas páginas são tiros curtos").
      ============================================================ -->
