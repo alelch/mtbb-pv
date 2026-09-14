@@ -319,50 +319,42 @@ html.js .contas.acesa .luz{opacity:1}
 }
 
 /* ════════════════════════════════════════════════════════════
-   O ERRO QUE ESTÁ NA SUA FRENTE
-   Escolha do cliente (14/09, versão 1 da prancha _designs/erro.html).
+   O ERRO QUE ESTÁ NA SUA FRENTE  (ideia do cliente, 14/09)
 
-   A seção anterior AFIRMAVA que o autor não enxerga o próprio erro e não
-   mostrava nada. Aqui o erro nasce na tela em TEXTO COMUM, sem marca
-   nenhuma, dentro de uma sinopse que se lê normalmente. Conforme a pessoa
-   rola, cada erro acende em âmbar e negrito, um de cada vez, e ao lado
-   aparece por que aquilo é erro.
+   A versão anterior mostrava o erro numa sinopse dentro de um quadro. Esta é
+   melhor e é bem mais curta: o erro está na PRÓPRIA FRASE DA SEÇÃO.
 
-   O argumento deixa de ser dito e passa a ser sofrido: quando a primeira
-   marca acende, a pessoa já leu o bloco inteiro e passou os olhos por ali.
+   A pessoa lê "Acompanhado é smepre melhor" e não vê nada de errado, porque
+   o cérebro corrige "smepre" sozinho em frase conhecida. Logo abaixo ela lê
+   que o erro está na frente dela agora mesmo, e procura. Ao rolar, "smepre"
+   acende e é riscado: estava ali desde o começo, ela leu e passou reto.
 
-   ⚠️ O livro do exemplo é FICTÍCIO de propósito. Marcar erro no livro de um
-   aluno real numa página de venda seria expor gente que confiou na Dany.
-   ⚠️ COPY PENDENTE DA DANY. Os três erros são ensino do Método (falar de si
-   em vez do leitor, vender a própria jornada, "para todos"), mas a redação
-   é minha.
-   ⚠️ Sem JS nada acende e a sinopse continua legível: o erro fica lá, como
-   na vida. É por isso que as marcas nascem como texto comum e não escondidas. */
-.obj{max-width:660px;margin:30px auto 0;background:var(--pa);border:1px solid var(--ru);
-  border-radius:16px;padding:clamp(22px,3.2vw,34px);text-align:left}
-.obj-rot{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--dim);margin:0 0 14px}
-.sinopse{margin:0;font-size:clamp(1rem,2vw,1.16rem);line-height:1.68;color:var(--mut)}
-/* a marca: nasce texto comum e acende em âmbar e negrito */
-.m{transition:color .55s ease,font-weight .55s ease,background-color .55s ease;
-  border-radius:3px;padding:0 .12em;margin:0 -.12em}
-.m.on{color:var(--ac);font-weight:700;background:rgba(234,184,45,.1)}
-.notas{display:grid;gap:12px;margin:24px 0 0}
-.nt{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;opacity:0;
-  transform:translateY(8px);transition:opacity .6s ease,transform .6s var(--brasa)}
-.nt.on{opacity:1;transform:none}
-.nt i{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ac);color:var(--ac);
-  display:grid;place-content:center;font-style:normal;font:700 .72rem/1 var(--fd)}
-.nt p{margin:0;font-size:.95rem;line-height:1.45;color:var(--mut)}
-.nt p b{color:var(--ink);font-weight:700}
-.fecho-erro{max-width:40ch;margin:30px auto 0;text-align:center;font-family:var(--fd);
-  font-weight:700;font-size:clamp(1.1rem,2.4vw,1.5rem);letter-spacing:-.03em;line-height:1.25;
+   É a demonstração mais barata possível e a única que acontece COM a pessoa
+   em vez de com um livro de exemplo. Some junto o problema de expor livro de
+   aluno real.
+
+   ⚠️ O ERRO DE GRAFIA É PROPOSITAL. Nunca "corrigir" o smepre.
+   ⚠️ A linha de ESCOPO logo abaixo ficou MAIS necessária, não menos: a
+   demonstração usa um erro de escrita, e sem ela a pessoa conclui que a call
+   revisa texto. Ela não revisa. */
+.armadilha{margin:0 auto 22px;max-width:30ch;font-family:var(--fd);font-weight:700;
+  font-size:clamp(1.2rem,2.6vw,1.7rem);letter-spacing:-.03em;line-height:1.25;color:var(--ink)}
+.palavra{position:relative;white-space:nowrap;
+  transition:color .5s ease,background-color .5s ease}
+.palavra:after{content:'';position:absolute;left:-5%;right:-5%;top:54%;height:3px;border-radius:2px;
+  background:var(--ac);transform:scaleX(0);transform-origin:left;
+  transition:transform .6s var(--brasa) .3s}
+.armadilha.on .palavra{color:var(--ac);background:rgba(234,184,45,.1)}
+.armadilha.on .palavra:after{transform:scaleX(1)}
+.viu{margin:30px auto 0;max-width:34ch;font-family:var(--fd);font-weight:700;
+  font-size:clamp(1.15rem,2.5vw,1.6rem);letter-spacing:-.03em;line-height:1.28;
   opacity:0;transform:translateY(10px);transition:opacity .7s ease,transform .7s var(--brasa)}
-.fecho-erro.on{opacity:1;transform:none}
-.fecho-erro span{color:var(--ac)}
+.viu.on{opacity:1;transform:none}
+.viu b{color:var(--ac);font-weight:700}
 @media(prefers-reduced-motion:reduce){
-  .m{color:var(--ac);font-weight:700;background:rgba(234,184,45,.1);transition:none}
-  .nt,.fecho-erro{opacity:1;transform:none;transition:none}
+  .armadilha .palavra{color:var(--ac);background:rgba(234,184,45,.1);transition:none}
+  .armadilha .palavra:after{transform:scaleX(1);transition:none}
+  .viu{opacity:1;transform:none;transition:none}
 }
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
@@ -579,28 +571,13 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 
 <section class="alt">
   <div class="w">
-    <div class="meio">
-      <p class="eyebrow">Por que sozinho não dá</p>
+    <div class="meio" data-erro>
+      <!-- ⚠️ "smepre" está ERRADO DE PROPÓSITO. É o erro que a pessoa não vê.
+           Nunca corrigir. -->
+      <p class="armadilha">Acompanhado é <span class="palavra">smepre</span> melhor</p>
       <h2>O erro está na sua frente agora mesmo.<br>
       <span class="serifa">Mas você não consegue ver.</span></h2>
-      <p class="sub">Leia a sinopse abaixo. Depois continue rolando.</p>
-    </div>
-    <div class="obj" data-erro>
-      <p class="obj-rot">A sinopse, como o autor escreveu</p>
-      <p class="sinopse">Depois de vinte anos liderando equipes,
-      <span class="m">decidi colocar no papel tudo que aprendi</span>. Este livro é o resultado de
-      <span class="m">uma jornada pessoal</span> de descobertas sobre gestão, pessoas e propósito.
-      Uma obra <span class="m">para todos</span> que querem evoluir.</p>
-      <div class="notas">
-        <div class="nt"><i>1</i><p><b>Isso é sobre você.</b> O leitor não quer saber o que você
-        aprendeu. Quer saber o que muda pra ele.</p></div>
-        <div class="nt"><i>2</i><p><b>Ninguém compra a sua jornada.</b> Compra a saída da dele.</p></div>
-        <div class="nt"><i>3</i><p><b>Para todos é para ninguém.</b> Quem, exatamente, tem esse
-        problema hoje?</p></div>
-      </div>
-      <p class="fecho-erro">Três erros. Você leu os três<br><span>e não viu nenhum.</span></p>
-    </div>
-    <div class="meio">
+      <p class="viu">Viu?<br><b>Imagina o que você não está vendo nesse momento.</b></p>
       <p class="sub"><b>Não é sobre a escrita.</b><br>
       É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p>
     </div>
@@ -845,29 +822,25 @@ window.OFERTA = {
     addEventListener('resize', separa);
     separa();
   }
-  /* O erro que estava na sua frente: acende um de cada vez conforme rola.
-     Mesmo princípio da conta (progresso do bloco, não posição de cada marca):
-     as três marcas vivem dentro de um parágrafo só, então qualquer eixo fixo
-     faria as três acenderem juntas. */
-  var erro = document.querySelector('[data-erro]');
-  if (erro){
-    var MARCA = [0.30, 0.52, 0.74];
-    var marcas = erro.querySelectorAll('.m');
-    var notas  = erro.querySelectorAll('.nt');
-    var fechoE = erro.querySelector('.fecho-erro');
-    var acende = function(){
-      var r = erro.getBoundingClientRect();
-      var ini = innerHeight * 0.86, fim = innerHeight * 0.34;
+  /* A armadilha: "smepre" acende e é riscado quando a pessoa já passou os
+     olhos pela frase, e só depois entra o "Viu?". A ordem é o efeito: se as
+     duas coisas acontecessem juntas, a pessoa leria a explicação antes de ter
+     a chance de não ter visto. */
+  var arm = document.querySelector('[data-erro]');
+  if (arm){
+    var frase = arm.querySelector('.armadilha'), viu = arm.querySelector('.viu');
+    var pega = function(){
+      var r = arm.getBoundingClientRect();
+      var ini = innerHeight * 0.82, fim = innerHeight * 0.38;
       var curso = (ini - fim) + r.height;
       var p = curso > 0 ? (ini - r.top) / curso : 1;
       p = p < 0 ? 0 : (p > 1 ? 1 : p);
-      [].forEach.call(marcas, function(m, i){ m.classList.toggle('on', p >= MARCA[i]); });
-      [].forEach.call(notas,  function(n, i){ n.classList.toggle('on', p >= MARCA[i] + 0.04); });
-      if (fechoE) fechoE.classList.toggle('on', p >= 0.9);
+      if (frase) frase.classList.toggle('on', p >= 0.46);
+      if (viu) viu.classList.toggle('on', p >= 0.66);
     };
-    addEventListener('scroll', acende, {passive:true});
-    addEventListener('resize', acende);
-    acende();
+    addEventListener('scroll', pega, {passive:true});
+    addEventListener('resize', pega);
+    pega();
   }
 
   var fita = document.getElementById('prog');
