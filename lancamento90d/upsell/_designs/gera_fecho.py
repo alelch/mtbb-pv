@@ -1,0 +1,200 @@
+# -*- coding: utf-8 -*-
+"""
+"Muda a vida do autor.", seis tratamentos.
+
+    python3 gera_fecho.py [destino.html] [--artifact]
+
+O cliente aprovou o gráfico e travou na última linha: "tá bom, não tá
+excelente". Ela já foi em Fraunces itálica e foi cortada por parecer enfeite
+colado. O que sobrou (bold âmbar com brilho) funciona e não empolga.
+
+Cada versão abaixo aposta numa coisa diferente: o traço da marca, o grifo, a
+cor, uma placa, um fio que liga a frase à curva, e o tamanho puro. Todas com
+o gráfico real em cima, porque a linha não existe sozinha.
+
+⚠️ A regra que não pode cair: o botão de compra continua sendo o elemento
+mais forte da página. A placa (D) é a que mais chega perto disso, e por isso
+ela não é botão, não tem sombra e não é clicável.
+"""
+import io
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+_args = [a for a in sys.argv[1:] if not a.startswith('--')]
+OUT = _args[0] if _args else os.path.join(HERE, 'fecho.html')
+ARTIFACT = '--artifact' in sys.argv
+
+P3 = ('M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 '
+      'C482 19 560 9 640 2')
+P2 = 'M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99'
+P1 = 'M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101'
+
+# o grifo e o risco desenhados à mão, iguais aos do front (só que âmbar)
+GRIFO = ("url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27"
+         "%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20"
+         "d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20"
+         "C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20"
+         "fill%3D%27%23EAB82D%27%20fill-opacity%3D%270.22%27%2F%3E%3C%2Fsvg%3E\")")
+RISCO = ("url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27"
+         "%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20"
+         "d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20"
+         "fill%3D%27none%27%20stroke%3D%27%23EAB82D%27%20stroke-width%3D%276%27%20"
+         "stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E\")")
+
+BASE = r"""
+:root{--pa:#0B0B0D;--ink:#EFEDE8;--mut:#9A958D;--dim:#868178;--ru:#2C2C33;--ac:#EAB82D;
+  --off:#F3F0E8;--offtx:#141312;
+  --ff:'DM Sans',system-ui,sans-serif;--fd:'Space Grotesk','DM Sans',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#0F0F11;color:var(--ink);font:400 16px/1.62 var(--ff);
+  -webkit-font-smoothing:antialiased}
+.w{max-width:1120px;margin:0 auto;padding-inline:22px}
+h1,h2{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.1;
+  text-wrap:balance}
+header{padding-block:54px 30px}
+header h1{font-size:clamp(1.9rem,4vw,2.7rem)}
+header p{margin:16px 0 0;max-width:68ch;color:var(--mut)}
+header p b{color:var(--ink)}
+.item{border-top:1px solid var(--ru);padding-block:42px 8px}
+.cab{display:flex;align-items:baseline;gap:12px;margin:0 0 6px}
+.cab .no{font-family:var(--fd);font-weight:700;font-size:.78rem;letter-spacing:.16em;color:var(--ac)}
+.cab h2{font-size:1.2rem}
+.tese{margin:0 0 24px;color:var(--mut);max-width:74ch;font-size:.95rem}
+.palco{background:var(--pa);border:1px solid var(--ru);border-radius:16px;
+  padding:clamp(28px,4vw,44px) clamp(20px,4vw,44px)}
+footer{padding-block:38px 70px;color:var(--dim);font-size:.85rem;border-top:1px solid var(--ru);
+  margin-top:44px}
+
+/* o gráfico real, reduzido ao terceiro */
+.contas{max-width:700px;margin:0 auto;padding-left:24px}
+.conta .q{margin:0 0 9px;font:700 clamp(1.08rem,2.6vw,1.45rem)/1.24 var(--fd);
+  letter-spacing:-.03em;color:var(--ac)}
+.graf{position:relative;padding-bottom:12px}
+.graf svg{display:block;width:100%;height:auto;overflow:visible}
+.eixo-y,.eixo-x,.marca{position:absolute;font-family:var(--fd);font-weight:400;font-size:.62rem;
+  line-height:1;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
+.eixo-y,.marca{top:0;display:flex;align-items:center;writing-mode:vertical-rl;
+  transform:rotate(180deg)}
+.eixo-y{bottom:12px;left:-24px;color:var(--dim);justify-content:center}
+.marca{bottom:0;right:85.625%;margin-right:6px;color:var(--ac);opacity:.85;
+  justify-content:flex-end}
+.eixo-x{right:0;bottom:0;color:var(--dim)}
+.conta .r{margin:2px 0 0;font-family:var(--fd);font-weight:700;letter-spacing:-.02em;
+  line-height:1.3;font-size:clamp(1.15rem,2.7vw,1.45rem);color:var(--ac)}
+
+/* ── A · como está hoje: só o brilho ── */
+.v-hoje .r{text-shadow:0 0 28px rgba(234,184,45,.4)}
+
+/* ── B · o risco da marca ── */
+.v-risco .r span{background:RISCO no-repeat;background-size:100% .3em;
+  background-position:0 .96em;padding-bottom:.12em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ── C · o grifo por trás ── */
+.v-grifo .r{color:var(--ink)}
+.v-grifo .r span{background:GRIFO no-repeat;background-size:100% .82em;
+  background-position:0 .34em;padding:0 5px;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ── D · creme: a cor da caixa da oferta ── */
+.v-creme .r{color:var(--off);text-shadow:0 0 30px rgba(243,240,232,.22)}
+
+/* ── E · a placa ──
+   ⚠️ não é botão: sem sombra, sem cursor, sem hover. O mais forte da página
+   continua sendo o que leva ao checkout. */
+.v-placa .r{display:inline-block;background:var(--ac);color:var(--offtx);
+  padding:10px 20px;border-radius:10px;text-shadow:none;margin-top:8px}
+
+/* ── F · o fio que sai da curva ── */
+.v-fio .r{position:relative;padding-left:0}
+.v-fio .fio{position:absolute;right:0;top:-12px;width:1px;height:12px;
+  background:linear-gradient(180deg,var(--ac),rgba(234,184,45,0))}
+.v-fio .r{border-top:1px solid rgba(234,184,45,.3);padding-top:12px;margin-top:10px;
+  text-shadow:0 0 28px rgba(234,184,45,.4)}
+
+/* ── G · tamanho puro ── */
+.v-grande .r{font-size:clamp(1.7rem,4.4vw,2.5rem);line-height:1.1;margin-top:8px;
+  text-shadow:0 0 34px rgba(234,184,45,.4)}
+"""
+
+def svg(i):
+    """um gradiente por bloco, senão os ids repetem no documento"""
+    return ("""<svg viewBox="0 0 640 108" fill="none" aria-hidden="true">
+<defs><linearGradient id="g{i}" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#EAB82D" stop-opacity=".26"></stop>
+<stop offset="1" stop-color="#EAB82D" stop-opacity="0"></stop></linearGradient></defs>
+<line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line>
+<line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line>
+<line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1"
+      stroke-dasharray="4 5"></line>
+<path d="{P1}" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34"></path>
+<path d="{P2}" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34"></path>
+<path d="{P3} L640 104 L1 104 Z" fill="url(#g{i})"></path>
+<path d="{P3}" fill="none" stroke="#EAB82D" stroke-width="2.6" stroke-linecap="round"
+      filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"></path>
+<circle cx="638" cy="2" r="4.5" fill="#EAB82D"
+        filter="drop-shadow(0 0 10px rgba(234,184,45,.85))"></circle>
+</svg>""".replace('{i}', str(i)).replace('{P1}', P1).replace('{P2}', P2).replace('{P3}', P3))
+
+
+RUMOS = [
+    ('A', 'hoje', 'Como está no ar', 'Bold âmbar com o brilho da curva. Funciona, e é '
+     'exatamente o "tá bom, não tá excelente".'),
+    ('B', 'risco', 'O risco da marca', 'O mesmo traço à mão que sublinha "ninguém" no título '
+     'da seção e "bom de verdade" na H1. É o gesto de ênfase da casa, e ele volta aqui pra '
+     'fechar o que o título abriu.'),
+    ('C', 'grifo', 'O grifo por trás', 'Marca-texto desenhado à mão atrás da frase, e o texto '
+     'em marfim em vez de âmbar. A cor sai da letra e vai pro fundo: a frase fica limpa e o '
+     'âmbar continua na página.'),
+    ('D', 'creme', 'A cor da oferta', 'Sem ornamento nenhum, só a cor: o marfim da caixa do '
+     'preço. A conta que fecha passa a ser da mesma cor do lugar pra onde ela leva.'),
+    ('E', 'placa', 'A placa', 'Âmbar cheio com texto escuro. É o tratamento mais forte da '
+     'página depois do botão. ⚠️ Não é botão: sem sombra, sem cursor, sem hover. Se esta '
+     'ganhar, vale conferir se ela não rouba o clique da compra.'),
+    ('F', 'fio', 'O fio da curva', 'Um filete âmbar separa a frase do gráfico e a apresenta '
+     'como conclusão dele, não como legenda. É o tratamento mais silencioso dos seis.'),
+    ('G', 'grande', 'Tamanho puro', 'Nenhum enfeite: ela simplesmente fica grande, do tamanho '
+     'de um título. Era isso que a versão antiga em escala fazia, e foi a que o cliente mais '
+     'gostou lá atrás.'),
+]
+
+FONTES = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
+          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+          '<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700'
+          '&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">')
+TITULO = '<title>A frase que fecha a conta</title>'
+HEAD = (TITULO + FONTES + '<style>%s</style>') if ARTIFACT else (
+    '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
+    '<meta name="viewport" content="width=device-width,initial-scale=1">'
+    + TITULO + FONTES + '<style>%s</style></head><body>')
+
+
+def bloco(i, slug):
+    return ('<div class="contas v-%s"><div class="conta">'
+            '<p class="q">Livro bom + lançamento bom</p>'
+            '<div class="graf"><span class="eixo-y">vendas</span>'
+            '<span class="marca">lançamento</span><span class="eixo-x">tempo</span>%s</div>'
+            '<p class="r"><span>Muda a vida do autor.</span></p>'
+            '</div></div>' % (slug, svg(i)))
+
+
+def doc():
+    css = BASE.replace('RISCO', RISCO).replace('GRIFO', GRIFO)
+    p = [HEAD % css, '<div class="w"><header><h1>A frase que fecha a conta</h1>'
+         '<p>Sete tratamentos para <b>"Muda a vida do autor."</b>, sempre com o gráfico real '
+         'em cima, porque a linha não existe sozinha. A copy é a mesma nas sete: muda só o '
+         'peso que ela recebe.</p></header>']
+    for i, (letra, slug, nome, tese) in enumerate(RUMOS):
+        p.append('<section class="item"><div class="cab"><span class="no">%s</span><h2>%s</h2>'
+                 '</div><p class="tese">%s</p><div class="palco">%s</div></section>'
+                 % (letra, nome, tese, bloco(i, slug)))
+    p.append('<footer>Protótipo. Nenhuma versão está no ar: a página segue com a A. '
+             'Gerado por <code>gera_fecho.py</code>.</footer></div>')
+    if not ARTIFACT:
+        p.append('</body></html>')
+    return ''.join(p)
+
+
+io.open(OUT, 'w', encoding='utf-8').write(doc())
+print('%s  (%s bytes)' % (OUT, format(os.path.getsize(OUT), ',d')))
