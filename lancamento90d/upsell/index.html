@@ -235,71 +235,67 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .btn:active{transform:translateY(0)}
 .btn.block{display:flex;width:100%}
 
-/* ════ A CONTA, EM ESCALA ════
-   Estava em três cartões lado a lado e isso matava o bloco: lado a lado elas
-   viram três coisas independentes, e o argumento é justamente que são A MESMA
-   conta com uma variável trocada. Agora ficam uma embaixo da outra, e crescem.
-
-   Cresce o CORPO e cresce o AR junto (é a calibragem B da prancha de escala).
-   Só o tamanho do tipo não basta: com as três linhas grudadas a hierarquia se
-   perde. Com o espaço crescendo junto, o olho lê a importância antes de ler a
-   palavra. A primeira fica espremida de propósito; a última tem folga.
-
-   Nenhuma caixa, nenhum fio, nenhum ícone: quem hierarquiza é a tipografia. */
 /* ════════════════════════════════════════════════════════════
-   A CONTA
-   A página inteira é centralizada, e esta seção não é exceção.
+   A CONTA, EM CURVA  (escolhido pelo cliente em 14/09)
 
-   As três são três possibilidades da mesma conta, e a separação entre elas É
-   o argumento. Quem hierarquiza é o CORPO e a COR, sem efeito nenhum:
-     1ª  a pior. Menor, recuada e VERMELHA: fica lá atrás, como aviso.
-     2ª  a do meio. Corpo médio, tom neutro. Nem morre nem brilha.
-     3ª  a que fecha. 48px, Fraunces itálica âmbar, com o halo que acende a
-         seção e o filete embaixo.
+   A conta deixou de ser três frases em escala e virou a VIDA DO LIVRO NO
+   TEMPO. Vendas no eixo vertical, tempo no horizontal, e o lançamento
+   marcado no mesmo ponto nos três gráficos.
 
-   ⚠️ SEM JS o estado final é o que fica, porque é ele que significa. A
-   classe .js (posta no <head>, antes de pintar) é que liga a partida igual.
-   ⚠️ CONTRASTE medido sobre #101012, todos ≥4,5:1: vermelho #E0574A 5,10 ·
-   #CB5F52 4,93 · #ACA69B 7,86 · #948E85 5,85 · partida #C9C3B8 10,84.
-   Hierarquia é corpo e cor, nunca apagar até sumir: a terceira não
-   significa nada sem as duas legíveis. */
-.contas{margin:44px auto 0;max-width:860px;text-align:center;position:relative;isolation:isolate}
-.conta{position:relative;z-index:1}
-.conta .q{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.18}
-.conta .r{margin:5px 0 0;line-height:1.32}
+   Por que isto e não o empilhamento: a frase da seção é uma comparação, e
+   comparação se vê, não se afirma. O pico do lançamento bom com livro ruim
+   é o MAIS BAIXO dos dois lançamentos bons e mesmo assim morre; o do livro
+   bom sobe e continua subindo. Quem lê chega na conclusão antes da frase.
 
-/* ── o estado final, e o único quando não há JS ── */
-.conta.um{padding:6px 0;transform:scale(.92);opacity:.88}
-.conta.um .q{font-size:1rem;color:#E0574A}
-.conta.um .r{font-size:.9rem;color:#CB5F52}
-.conta.dois{padding:26px 0}
-.conta.dois .q{font-size:clamp(1.15rem,2.2vw,1.35rem);color:#ACA69B}
-.conta.dois .r{font-size:clamp(1rem,1.8vw,1.08rem);color:#948E85}
-/* a que fecha CRESCE de verdade: sai dos 23px da partida e vai a 48px, que é
-   maior que o próprio título da seção. É proposital: o título enquadra, a
-   conta que fecha é que domina. */
-.conta.tres{padding:56px 0 12px}
-.conta.tres .q{font-size:clamp(1.8rem,4.6vw,3rem);color:var(--ink);line-height:1.1}
-.conta.tres .r{margin-top:10px;font-size:clamp(1.45rem,3.6vw,2.3rem);color:var(--ac);
-  font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:500;letter-spacing:-.02em;
-  text-shadow:0 0 34px rgba(234,184,45,.5),0 0 10px rgba(234,184,45,.3)}
-.conta.tres:after{content:'';display:block;height:2px;width:min(340px,66%);margin:28px auto 0;
-  background:linear-gradient(90deg,transparent,var(--ac),transparent)}
-.contas .luz{position:absolute;left:50%;bottom:-30px;translate:-50% 0;z-index:0;
-  width:min(920px,150%);height:360px;pointer-events:none;
-  background:radial-gradient(50% 50% at 50% 50%,rgba(234,184,45,.16),rgba(234,184,45,.05) 45%,transparent 72%)}
+   ⚠️ AS CURVAS SE SOMAM: cada faixa desenha as anteriores por baixo, na cor
+   delas, bem apagadas. É na terceira que a ultrapassagem acontece na frente
+   da pessoa. Tirar os fantasmas mata o argumento.
 
-/* ⚠️ A CONTA NÃO TEM MAIS EFEITO (decisão do cliente, 14/09).
-   Ela chegou a partir das três iguais e se separar conforme a pessoa rolava.
-   Depois de algumas rodadas de calibragem o efeito continuou sem acertar, e a
-   decisão foi ficar com o ESTADO FINAL, parado: a hierarquia já está toda na
-   escala e na cor, e um efeito de rolagem aqui competia com a leitura.
-   O halo e o filete continuam, mas nascem acesos.
-   Se um dia voltar, o que existia está no histórico e a prancha de escala
-   está em _designs/escala.html. */
+   ⚠️ O PICO DO BOM+BOM TEM QUE SER >= O DO RUIM+BOM (o cliente pegou isto
+   invertido em 14/09). O lançamento é igualmente bom nos dois, e com livro
+   bom ele converte MAIS. Desenhar o pico do livro bom mais baixo diz, sem
+   querer, que livro bom vende menos.
 
-/* a seção clipa: o halo tem 150% de largura e transform não pode criar
-   barra de rolagem horizontal */
+   ⚠️ NÃO É GRÁFICO DE DADOS, é diagrama, e a nota embaixo diz isso. Tem que
+   continuar dizendo: número inventado numa página que vende honestidade é
+   o pior lugar possível pra mentir.
+
+   Uma cor por conta, e cada uma significa: frio azulado para quem nunca é
+   encontrado, o vermelho da página para o que acende e morre, âmbar para o
+   que fica. Contraste sobre #0B0B0D: #93A6B8 7,6:1 · #E0574A 5,1:1 ·
+   #EFEDE8 16:1 · #868178 4,7:1.
+   O protótipo das três versões está em _designs/curva.html.
+   ════════════════════════════════════════════════════════════ */
+.contas{margin:clamp(34px,5vw,52px) auto 0;max-width:740px;padding-left:24px;text-align:left}
+.conta + .conta{margin-top:clamp(26px,3.6vw,38px)}
+.conta .q{margin:0 0 9px;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;
+  line-height:1.24;font-size:clamp(.95rem,2vw,1.14rem);color:var(--cor)}
+.conta .r{margin:9px 0 0;font-size:.96rem;line-height:1.45;color:var(--dim)}
+.conta.tres .q{font-size:clamp(1.08rem,2.6vw,1.45rem)}
+.conta.tres .r{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:500;
+  letter-spacing:-.02em;color:var(--ac);font-size:clamp(1.2rem,2.8vw,1.6rem);
+  text-shadow:0 0 30px rgba(234,184,45,.35)}
+.graf{position:relative}
+.graf svg{display:block;width:100%;height:auto;overflow:visible}
+/* OS DOIS RÓTULOS DE EIXO ficam COLADOS no eixo que nomeiam, e só no
+   primeiro gráfico: soltos no meio do bloco (como estavam) ninguém sabia a
+   que se referiam. "vendas" corre ao lado da linha vertical, "tempo" fecha a
+   horizontal, e "lançamento" nasce em cima do próprio pontilhado. */
+.eixo-y{position:absolute;left:-24px;top:0;bottom:0;display:flex;align-items:center;
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font:700 .62rem/1 var(--fd);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.marca-lanc{position:absolute;top:-1px;left:14.375%;margin-left:8px;white-space:nowrap;
+  font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.eixo-x{margin:10px 0 0;text-align:right;
+  font:700 .62rem/1 var(--fd);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.nota-conta{margin:26px auto 0;max-width:56ch;text-align:center;font-size:.8rem;color:var(--dim)}
+@media(max-width:560px){
+  .contas{padding-left:20px}
+  .eixo-y{left:-20px}
+  .eixo-y,.marca-lanc,.eixo-x{font-size:.56rem;letter-spacing:.12em}
+}
+
+/* o brilho da terceira curva estoura a caixa; clipar evita barra de rolagem */
 .conta-sec{overflow-x:clip;position:relative}
 
 /* ════════════════════════════════════════════════════════════
@@ -531,19 +527,29 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <h2>A conta que <span class="risco">ninguém</span> te conta</h2>
     </div>
     <div class="contas">
-      <span class="luz" aria-hidden="true"></span>
-      <div class="conta um">
+      <div class="conta um" style="--cor:#93A6B8">
         <p class="q">Livro bom + lançamento ruim</p>
+        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span>
+          <svg viewBox="0 0 640 112" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F7184" stop-opacity=".13"></stop><stop offset="1" stop-color="#5F7184" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".20"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAB82D" stop-opacity=".26"></stop><stop offset="1" stop-color="#EAB82D" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="4" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="8" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#5F7184" stroke-width="1.5"></circle></svg>
+        </div>
         <p class="r">Ninguém descobre.</p>
       </div>
-      <div class="conta dois">
+      <div class="conta dois" style="--cor:#E0574A">
         <p class="q">Livro ruim + lançamento bom</p>
+        <div class="graf">
+          <svg viewBox="0 0 640 112" fill="none" aria-hidden="true"><line x1="1" y1="4" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="8" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
+        </div>
         <p class="r">Vende no lançamento. Depois, esquecido.</p>
       </div>
-      <div class="conta tres">
+      <div class="conta tres" style="--cor:#EFEDE8">
         <p class="q">Livro bom + lançamento bom</p>
+        <div class="graf">
+          <svg viewBox="0 0 640 112" fill="none" aria-hidden="true"><line x1="1" y1="4" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="8" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#EAB82D" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"></path><circle cx="638" cy="2" r="4.5" fill="#EAB82D" filter="drop-shadow(0 0 10px rgba(234,184,45,.85))"></circle></svg>
+        </div>
         <p class="r">Muda a vida do autor.</p>
       </div>
+      <p class="eixo-x">tempo &rarr;</p>
+      <p class="nota-conta">Não é gráfico de dados: é o desenho do que acontece com as vendas do livro depois que o lançamento acaba.</p>
     </div>
   </div>
 </section>

@@ -100,16 +100,18 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 /* a marca do lançamento é desenhada DENTRO de cada gráfico (mesmo x, mesmo
    viewBox nas três), e não como uma régua em HTML por cima de tudo: assim
    ela cruza só os traços, nunca os rótulos. Em HTML fica só a legenda. */
-.marca{position:absolute;top:0;left:0;white-space:nowrap;transform:translateX(-50%);
-  font:700 .62rem/1 var(--fd);letter-spacing:.16em;text-transform:uppercase;color:var(--ac)}
+.marca{position:absolute;top:-1px;left:14.375%;margin-left:8px;white-space:nowrap;
+  font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
 .tempo{display:flex;justify-content:flex-end;margin-top:12px;
   font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-/* O EIXO VERTICAL É VENDAS. Ele é rotulado UMA vez pro grupo inteiro, não uma
-   vez por faixa: as três dividem a mesma escala, e repetir a palavra três
-   vezes diria o contrário (três gráficos soltos em vez de um sistema). */
-.eixoy{position:absolute;left:0;top:0;bottom:26px;display:flex;align-items:center;
+/* OS RÓTULOS DE EIXO COLAM NO EIXO QUE NOMEIAM, e só no primeiro gráfico:
+   soltos no meio do bloco ninguém sabia a que se referiam (o cliente pegou
+   isso em 14/09). "vendas" corre ao lado da linha vertical, "tempo" fecha a
+   horizontal e "lançamento" nasce em cima do próprio pontilhado. */
+.graf{position:relative}
+.eixoy{position:absolute;left:-24px;top:0;bottom:0;display:flex;align-items:center;
   writing-mode:vertical-rl;transform:rotate(180deg);
-  font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  font:700 .62rem/1 var(--fd);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
 
 /* ── G1 · TRÊS FAIXAS, UM SÓ TEMPO ── */
 .g1 .corpo{padding:30px 0 0 26px}
@@ -160,9 +162,10 @@ MIUDO = ('<p class="miudo">Não é gráfico de dados: é o desenho do que aconte
          'com as vendas do livro depois que o lançamento acaba.</p>')
 MARCA = '<span class="marca" style="left:%.4f%%">lançamento</span>' % LANC
 # o pontilhado do lançamento, em coordenadas do gráfico
-RETA = ('<line x1="92" y1="4" x2="92" y2="108" stroke="rgba(234,184,45,.34)" stroke-width="1" '
+RETA = ('<line x1="1" y1="4" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line>'
+        '<line x1="92" y1="8" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" '
         'stroke-dasharray="4 5"></line>')
-TEMPO = '<div class="tempo"><span>os anos seguintes &rarr;</span></div>'
+TEMPO = '<div class="tempo"><span>tempo &rarr;</span></div>'
 EIXOY = '<span class="eixoy">vendas</span>'
 
 
@@ -210,13 +213,14 @@ def g1():
         fantasmas = ''.join(_traco(j, ghost=True) for j in range(i))
         fx.append(
             '<div class="faixa%s" style="--cor:%s"><p class="q">%s</p>'
+            '<div class="graf">%s'
             '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s'
             '<line class="base" x1="0" y1="104" x2="640" y2="104"></line>%s%s%s</svg>'
-            '<p class="r">%s</p></div>' % (fim, COR_ROT[i], q,
-                                           _defs() if i == 0 else '', RETA,
-                                           fantasmas, _traco(i), r))
-    return ('<div class="g1"><div class="corpo">%s%s%s</div>%s%s</div>'
-            % (EIXOY, MARCA, ''.join(fx), TEMPO, MIUDO))
+            '</div><p class="r">%s</p></div>'
+            % (fim, COR_ROT[i], q, (EIXOY + MARCA) if i == 0 else '',
+               _defs() if i == 0 else '', RETA, fantasmas, _traco(i), r))
+    return ('<div class="g1"><div class="corpo">%s</div>%s%s</div>'
+            % (''.join(fx), TEMPO, MIUDO))
 
 
 # ─────────────────────────── G2 ───────────────────────────
@@ -236,8 +240,8 @@ def g2():
     rot = ''.join('<span class="rot %s" style="left:%.1f%%;top:%.1f%%">%s</span>' % r for r in ROTS)
     leg = ''.join('<li><i style="background:%s"></i>%s</li>' % (COR[i], C[i][0])
                   for i in (0, 1, 2))
-    return ('<div class="g2"><div class="corpo">%s%s'
-            '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s</svg>%s</div>%s'
+    return ('<div class="g2"><div class="corpo"><div class="graf">%s%s'
+            '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s</svg>%s</div></div>%s'
             '<ul class="leg">%s</ul>'
             '<p class="veredito">%s</p>%s</div>'
             % (EIXOY, MARCA, tracos, rot, TEMPO, leg, C[2][1], MIUDO))
