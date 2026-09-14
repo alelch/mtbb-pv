@@ -266,28 +266,61 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    estado final, que é legível por si. */
 :root{--brasa:cubic-bezier(.16,1,.3,1)}
 html.js .conta.arde{transition:padding .6s var(--brasa),transform .6s var(--brasa),
-  opacity .45s ease;transform-origin:center}
+  opacity .45s ease,filter .7s ease;transform-origin:center}
 html.js .conta.arde{padding:34px 0;transform:scale(1.14)}
 html.js .conta.dois.arde{padding:40px 0;transform:scale(1.1)}
-html.js .conta.arde.queimou{padding:5px 0;transform:scale(.84);opacity:.42}
+html.js .conta.arde.queimou{padding:5px 0;transform:scale(.84);opacity:.42;
+  filter:blur(1.3px) saturate(.45)}
 html.js .conta.ganha{opacity:.55;transform:scale(.94);transform-origin:center;
   transition:opacity .6s ease,transform .7s var(--brasa),padding .6s var(--brasa)}
 html.js .conta.ganha.brilha{opacity:1;transform:scale(1)}
 html.js .conta.ganha .r{transition:text-shadow .9s ease}
 html.js .conta.ganha.brilha .r{text-shadow:0 0 34px rgba(234,184,45,.5),0 0 10px rgba(234,184,45,.3)}
-/* no celular a linha já ocupa a largura toda: crescer 14% joga o texto pra
-   fora e a página passa a rolar de lado. Aqui o que cresce é quase só o
-   espaço, que é o essencial do efeito. O clip é cinto e suspensório: transform
-   não pode criar barra de rolagem horizontal. */
-.conta-sec{overflow-x:clip}
+/* ════ O ACABAMENTO DA BRASA ════
+   Quatro coisas diferentes, não quatro versões da mesma:
+
+   1. FOCO. O que queima não só apaga: sai de foco e perde cor, como fumaça.
+      Só apagar deixava a linha "de menos"; desfocada ela vira passado.
+   2. LUZ. Um halo quente nasce atrás da linha que vence e ilumina a seção
+      inteira. Antes a luz existia só dentro do texto (text-shadow); agora ela
+      sai do texto e acende o ambiente. É o que faz o bloco parecer aceso por
+      dentro em vez de escrito por cima do preto.
+   3. VOZ. O resultado que muda a vida vem na Fraunces itálica, a mesma que
+      assina os títulos da página. A recompensa troca de tipo, não só de corpo.
+   4. FIO. Um filete âmbar se desenha do centro para fora quando a conta
+      fecha, como um rastilho que chega ao fim. É o ponto final da sequência.
+
+   Sem JS nada disso roda: o fio nasce desenhado, a luz apagada, e o bloco
+   fica no estado final, legível por si. */
+.conta-sec{overflow-x:clip;position:relative}
+.contas{position:relative;isolation:isolate}
+.contas .luz{position:absolute;left:50%;bottom:-30px;translate:-50% 0;z-index:0;
+  width:min(920px,150%);height:360px;pointer-events:none;opacity:0;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(234,184,45,.16),rgba(234,184,45,.05) 45%,transparent 72%);
+  transition:opacity 1.2s ease}
+html.js .contas.acesa .luz{opacity:1}
+.conta{position:relative;z-index:1}
+
+/* a voz da marca na linha que fecha a conta */
+.conta.ganha .r{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:500;
+  letter-spacing:-.02em}
+
+/* o rastilho */
+.conta.ganha:after{content:'';display:block;height:2px;width:min(340px,66%);margin:26px auto 0;
+  background:linear-gradient(90deg,transparent,var(--ac),transparent)}
+html.js .conta.ganha:after{width:0;transition:width 1.2s var(--brasa) .2s}
+html.js .conta.ganha.brilha:after{width:min(340px,66%)}
 @media(max-width:700px){
   html.js .conta.arde{transform:scale(1.03);padding:26px 0}
   html.js .conta.dois.arde{transform:scale(1.03);padding:30px 0}
   html.js .conta.arde.queimou{transform:scale(.9);padding:4px 0}
 }
 @media(prefers-reduced-motion:reduce){
-  html.js .conta.arde,html.js .conta.ganha{padding:revert;transform:none;opacity:1;transition:none}
+  html.js .conta.arde,html.js .conta.ganha{padding:revert;transform:none;opacity:1;transition:none;
+    filter:none}
   html.js .conta.ganha.brilha .r{text-shadow:none}
+  html.js .conta.ganha:after{width:min(340px,66%);transition:none}
+  html.js .contas .luz{opacity:1;transition:none}
 }
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
@@ -481,6 +514,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <h2>A conta que ninguém te conta</h2>
     </div>
     <div class="contas">
+      <span class="luz" aria-hidden="true"></span>
       <div class="conta arde">
         <p class="q">Livro bom + lançamento ruim</p>
         <p class="r">Ninguém descobre.</p>
@@ -729,8 +763,11 @@ window.OFERTA = {
       var eixo = innerHeight * 0.55;
       linhas.forEach(function(el){
         var r = el.getBoundingClientRect(), c = r.top + r.height / 2;
-        if (el.classList.contains('ganha')) el.classList.toggle('brilha', c < innerHeight * 0.9);
-        else el.classList.toggle('queimou', c < eixo);
+        if (el.classList.contains('ganha')){
+          var acesa = c < innerHeight * 0.9;
+          el.classList.toggle('brilha', acesa);
+          el.parentNode.classList.toggle('acesa', acesa);
+        } else el.classList.toggle('queimou', c < eixo);
       });
     };
     addEventListener('scroll', arde, {passive:true}); addEventListener('resize', arde); arde();
