@@ -318,6 +318,53 @@ html.js .contas.acesa .luz{opacity:1}
   html.js .contas .luz{opacity:1;transition:none}
 }
 
+/* ════════════════════════════════════════════════════════════
+   O ERRO QUE ESTÁ NA SUA FRENTE
+   Escolha do cliente (14/09, versão 1 da prancha _designs/erro.html).
+
+   A seção anterior AFIRMAVA que o autor não enxerga o próprio erro e não
+   mostrava nada. Aqui o erro nasce na tela em TEXTO COMUM, sem marca
+   nenhuma, dentro de uma sinopse que se lê normalmente. Conforme a pessoa
+   rola, cada erro acende em âmbar e negrito, um de cada vez, e ao lado
+   aparece por que aquilo é erro.
+
+   O argumento deixa de ser dito e passa a ser sofrido: quando a primeira
+   marca acende, a pessoa já leu o bloco inteiro e passou os olhos por ali.
+
+   ⚠️ O livro do exemplo é FICTÍCIO de propósito. Marcar erro no livro de um
+   aluno real numa página de venda seria expor gente que confiou na Dany.
+   ⚠️ COPY PENDENTE DA DANY. Os três erros são ensino do Método (falar de si
+   em vez do leitor, vender a própria jornada, "para todos"), mas a redação
+   é minha.
+   ⚠️ Sem JS nada acende e a sinopse continua legível: o erro fica lá, como
+   na vida. É por isso que as marcas nascem como texto comum e não escondidas. */
+.obj{max-width:660px;margin:30px auto 0;background:var(--pa);border:1px solid var(--ru);
+  border-radius:16px;padding:clamp(22px,3.2vw,34px);text-align:left}
+.obj-rot{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+.sinopse{margin:0;font-size:clamp(1rem,2vw,1.16rem);line-height:1.68;color:var(--mut)}
+/* a marca: nasce texto comum e acende em âmbar e negrito */
+.m{transition:color .55s ease,font-weight .55s ease,background-color .55s ease;
+  border-radius:3px;padding:0 .12em;margin:0 -.12em}
+.m.on{color:var(--ac);font-weight:700;background:rgba(234,184,45,.1)}
+.notas{display:grid;gap:12px;margin:24px 0 0}
+.nt{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;opacity:0;
+  transform:translateY(8px);transition:opacity .6s ease,transform .6s var(--brasa)}
+.nt.on{opacity:1;transform:none}
+.nt i{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ac);color:var(--ac);
+  display:grid;place-content:center;font-style:normal;font:700 .72rem/1 var(--fd)}
+.nt p{margin:0;font-size:.95rem;line-height:1.45;color:var(--mut)}
+.nt p b{color:var(--ink);font-weight:700}
+.fecho-erro{max-width:40ch;margin:30px auto 0;text-align:center;font-family:var(--fd);
+  font-weight:700;font-size:clamp(1.1rem,2.4vw,1.5rem);letter-spacing:-.03em;line-height:1.25;
+  opacity:0;transform:translateY(10px);transition:opacity .7s ease,transform .7s var(--brasa)}
+.fecho-erro.on{opacity:1;transform:none}
+.fecho-erro span{color:var(--ac)}
+@media(prefers-reduced-motion:reduce){
+  .m{color:var(--ac);font-weight:700;background:rgba(234,184,45,.1);transition:none}
+  .nt,.fecho-erro{opacity:1;transform:none;transition:none}
+}
+
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
 .offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
   border:0;border-radius:20px;padding:clamp(34px,5vw,52px);text-align:center;
@@ -534,10 +581,26 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   <div class="w">
     <div class="meio">
       <p class="eyebrow">Por que sozinho não dá</p>
-      <h2>Um erro só pode fazer<br><span class="serifa">o seu livro inteiro falhar.</span></h2>
-      <p class="sub">E ninguém enxerga o próprio erro.<br>
-      Você olha mil vezes e está tudo certo.<br>
-      Outra pessoa olha dez segundos e aponta o que estava na sua cara.</p>
+      <h2>O erro está na sua frente agora mesmo.<br>
+      <span class="serifa">Mas você não consegue ver.</span></h2>
+      <p class="sub">Leia a sinopse abaixo. Depois continue rolando.</p>
+    </div>
+    <div class="obj" data-erro>
+      <p class="obj-rot">A sinopse, como o autor escreveu</p>
+      <p class="sinopse">Depois de vinte anos liderando equipes,
+      <span class="m">decidi colocar no papel tudo que aprendi</span>. Este livro é o resultado de
+      <span class="m">uma jornada pessoal</span> de descobertas sobre gestão, pessoas e propósito.
+      Uma obra <span class="m">para todos</span> que querem evoluir.</p>
+      <div class="notas">
+        <div class="nt"><i>1</i><p><b>Isso é sobre você.</b> O leitor não quer saber o que você
+        aprendeu. Quer saber o que muda pra ele.</p></div>
+        <div class="nt"><i>2</i><p><b>Ninguém compra a sua jornada.</b> Compra a saída da dele.</p></div>
+        <div class="nt"><i>3</i><p><b>Para todos é para ninguém.</b> Quem, exatamente, tem esse
+        problema hoje?</p></div>
+      </div>
+      <p class="fecho-erro">Três erros. Você leu os três<br><span>e não viu nenhum.</span></p>
+    </div>
+    <div class="meio">
       <p class="sub"><b>Não é sobre a escrita.</b><br>
       É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p>
     </div>
@@ -782,6 +845,31 @@ window.OFERTA = {
     addEventListener('resize', separa);
     separa();
   }
+  /* O erro que estava na sua frente: acende um de cada vez conforme rola.
+     Mesmo princípio da conta (progresso do bloco, não posição de cada marca):
+     as três marcas vivem dentro de um parágrafo só, então qualquer eixo fixo
+     faria as três acenderem juntas. */
+  var erro = document.querySelector('[data-erro]');
+  if (erro){
+    var MARCA = [0.30, 0.52, 0.74];
+    var marcas = erro.querySelectorAll('.m');
+    var notas  = erro.querySelectorAll('.nt');
+    var fechoE = erro.querySelector('.fecho-erro');
+    var acende = function(){
+      var r = erro.getBoundingClientRect();
+      var ini = innerHeight * 0.86, fim = innerHeight * 0.34;
+      var curso = (ini - fim) + r.height;
+      var p = curso > 0 ? (ini - r.top) / curso : 1;
+      p = p < 0 ? 0 : (p > 1 ? 1 : p);
+      [].forEach.call(marcas, function(m, i){ m.classList.toggle('on', p >= MARCA[i]); });
+      [].forEach.call(notas,  function(n, i){ n.classList.toggle('on', p >= MARCA[i] + 0.04); });
+      if (fechoE) fechoE.classList.toggle('on', p >= 0.9);
+    };
+    addEventListener('scroll', acende, {passive:true});
+    addEventListener('resize', acende);
+    acende();
+  }
+
   var fita = document.getElementById('prog');
   if (fita){
     var anda = function(){
