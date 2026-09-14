@@ -297,6 +297,11 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
   font-size:.62rem;line-height:1;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
 .eixo-y,.marca-lanc{top:0;bottom:16px;display:flex;align-items:center;
   writing-mode:vertical-rl;transform:rotate(180deg)}
+/* em escrita vertical o eixo principal do flex é o vertical, e o
+   rotate(180deg) inverte as pontas: flex-end é o TOPO na tela.
+   "vendas" fica no meio da sua linha, "lançamento" no topo da dela. */
+.eixo-y{justify-content:center}
+.marca-lanc{justify-content:flex-end}
 .eixo-y{left:-24px;color:var(--dim)}
 /* encostada no pontilhado e do lado de fora dele: à direita passam as curvas */
 .marca-lanc{right:85.625%;margin-right:6px;color:var(--ac);opacity:.85}

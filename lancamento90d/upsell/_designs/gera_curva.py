@@ -107,6 +107,11 @@ svg{display:block;width:100%;height:auto;overflow:visible}
   font-size:.62rem;line-height:1;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
 .eixoy,.marca{top:0;bottom:16px;display:flex;align-items:center;
   writing-mode:vertical-rl;transform:rotate(180deg)}
+/* em escrita vertical o eixo principal do flex é o vertical, e o
+   rotate(180deg) inverte as pontas: flex-end é o TOPO na tela.
+   "vendas" fica no meio da sua linha, "lançamento" no topo da dela. */
+.eixoy{justify-content:center}
+.marca{justify-content:flex-end}
 .eixoy{left:-24px;color:var(--dim)}
 .marca{right:85.625%;margin-right:6px;color:var(--ac);opacity:.85}
 .tempo{right:0;bottom:0;color:var(--dim)}
