@@ -357,38 +357,42 @@ html.js .conta:not(.viva){opacity:.32}
 .conta-sec{overflow-x:clip;position:relative}
 
 /* ════════════════════════════════════════════════════════════
-   O SEU LIVRO ESTÁ BOM DE VERDADE?  (pedido do cliente, 14/09)
+   O SEU LIVRO ESTÁ BOM DE VERDADE?  (narrativa nova, 14/09)
 
-   Esta seção entrou no lugar da armadilha do erro de grafia, aquela com o
-   botão "Mostrar o erro". Ela saiu inteira a pedido do cliente; se um dia
-   voltar, está no histórico, no commit 3c7d173.
+   A versão anterior DEFINIA: "bom de verdade é o livro que o leitor certo
+   encontra, escolhe e recomenda", com as três frentes numa lista. Virava
+   glossário, e glossário não cria necessidade nenhuma: a pessoa concorda,
+   acha bonito e continua achando que o livro dela está pronto.
 
-   Por que aqui: a H1 da página faz uma pergunta e a página nunca respondia.
-   Ia da conta direto pro preço, e "bom de verdade" ficava sendo opinião.
-   Esta seção é a resposta, e é ela que transforma a pergunta em CRITÉRIO.
+   A narrativa agora é outra e responde à linha que fecha a conta logo
+   acima ("detalhes que o autor nem sabe que existem"):
+
+     1. você vai responder que sim   (a resposta automática)
+     2. e não é falta de capricho, é POSIÇÃO: você é a única pessoa que
+        nunca vai abrir o seu livro pela primeira vez   (a causa)
+     3. e o livro que não funciona não avisa por quê     (por que nunca
+        se corrige sozinho: silêncio não é diagnóstico)
+     4. por isso a pergunta não se responde sozinho      (a ponte)
+
+   Cada passo é uma premissa que a pessoa aceita sem esforço, e o último
+   é a oferta sem precisar ser dita.
 
    ⚠️ A COPY É PROPOSTA e precisa passar pela Dany antes de ir pro ar.
-   ⚠️ As três frentes (encontra, escolhe, recomenda) são a mesma promessa
-   que "A sua hora, por dentro" entrega mais abaixo. Mexer numa obriga a
-   mexer na outra, ou a página promete uma coisa e entrega outra.
+   ⚠️ Não acusar o autor de desleixo em nenhuma linha. O argumento inteiro
+   depende de o motivo ser POSIÇÃO, não falta de esforço: quem se sente
+   acusado fecha a página em vez de comprar.
+   ⚠️ Nada de lista, caixa ou três itens lado a lado aqui. A seção de cima
+   é um gráfico; esta é só tipografia, de propósito, pra não virar mais um
+   bloco de três coisas.
    ════════════════════════════════════════════════════════════ */
-.verdade .abre{margin:20px auto 0;max-width:46ch;font-family:var(--fd);font-weight:700;
-  font-size:clamp(1.12rem,2.4vw,1.45rem);letter-spacing:-.03em;line-height:1.3;color:var(--ink)}
-.verdade .abre b{color:var(--ac);font-weight:700}
-.frentes{margin:clamp(34px,5vw,50px) auto 0;max-width:620px}
-/* o filete que separa as frentes é o mesmo da conta: fio âmbar que nasce e
-   morre no transparente. Separa sem virar tabela e sem numerar, porque a
-   ordem já é a sequência (primeiro ele encontra, depois escolhe, depois
-   recomenda). Numerar aqui seria enfeite, e o cliente já cortou numeração
-   desta página uma vez, com razão. */
-.frente + .frente:before{content:"";display:block;width:min(240px,52%);height:1px;
-  margin:clamp(26px,3.6vw,36px) auto;
-  background:linear-gradient(90deg,transparent,rgba(234,184,45,.34),transparent)}
-.frente .v{margin:0;font-size:clamp(1.55rem,4vw,2.25rem);color:var(--ac);
-  text-shadow:0 0 30px rgba(234,184,45,.22)}
-.frente .d{margin:9px auto 0;max-width:44ch;color:var(--mut);font-size:1.02rem;line-height:1.6}
-.verdade .fecha{margin:clamp(34px,5vw,48px) auto 0;max-width:50ch}
-.verdade .fecha b{color:var(--ink)}
+.verdade .abre{margin:22px auto 0;max-width:34ch;font-family:var(--fd);font-weight:700;
+  font-size:clamp(1.15rem,2.7vw,1.5rem);letter-spacing:-.03em;line-height:1.28;color:var(--ink)}
+.verdade .passo{margin:clamp(26px,3.6vw,34px) auto 0;max-width:50ch;color:var(--mut);
+  font-size:1.02rem;line-height:1.62}
+.verdade .passo b{color:var(--ink);font-weight:700}
+.verdade .fecha{margin:clamp(30px,4.4vw,44px) auto 0;max-width:34ch;font-family:var(--fd);
+  font-weight:700;font-size:clamp(1.2rem,2.9vw,1.6rem);letter-spacing:-.03em;line-height:1.26;
+  color:var(--ac);text-shadow:0 0 30px rgba(234,184,45,.32)}
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
 .offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
@@ -619,35 +623,22 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 
 <!-- A RESPOSTA DA PERGUNTA DA H1.
      ⚠️ Copy PROPOSTA (14/09), ainda não aprovada pela Dany.
-     ⚠️ As três frentes são a mesma promessa da seção "A sua hora, por
-        dentro". Mudar aqui obriga a mudar lá. -->
+     ⚠️ O motivo é POSIÇÃO, nunca desleixo. Ver o comentário no CSS. -->
 <section class="alt verdade">
   <div class="w">
     <div class="meio">
       <p class="eyebrow">A pergunta do começo</p>
       <h2>O seu livro está <span class="risco">bom de verdade</span>?</h2>
-      <p class="abre">Bom de verdade não é bem escrito.<br>
-      É o livro que o leitor certo <b>encontra</b>, <b>escolhe</b> e <b>recomenda</b>.</p>
-      <div class="frentes">
-        <div class="frente">
-          <p class="v serifa">encontra</p>
-          <p class="d">O título, a categoria e as palavras que o seu leitor usa quando
-          procura um livro como o seu. Se ele não procura por elas, o livro não existe
-          pra ele.</p>
-        </div>
-        <div class="frente">
-          <p class="v serifa">escolhe</p>
-          <p class="d">A capa, a contracapa e a primeira página. É onde ele decide em
-          menos de um minuto, com o livro na mão ou na tela.</p>
-        </div>
-        <div class="frente">
-          <p class="v serifa">recomenda</p>
-          <p class="d">O que ele conta pro amigo depois de fechar o livro. É a única
-          propaganda que continua depois que o lançamento acaba.</p>
-        </div>
-      </div>
-      <p class="sub fecha"><b>Um livro pode estar bem escrito e falhar nas três.</b><br>
-      É exatamente isso que a gente olha na sua hora.</p>
+      <p class="abre">Você vai responder que sim.<br>
+      Todo autor responde. Inclusive os que erraram.</p>
+      <p class="passo"><b>Não é falta de capricho. É posição.</b><br>
+      Você leu cada frase dezenas de vezes e sabe o que quis dizer em todas.<br>
+      É a única pessoa que nunca vai abrir o seu livro pela primeira vez.</p>
+      <p class="passo"><b>E livro que não funciona não avisa por quê.</b><br>
+      Ele não conta que o título afastou o leitor certo, nem que a capa prometeu
+      outra coisa.<br>
+      Ele só vende pouco.</p>
+      <p class="fecha">Por isso essa pergunta não se responde sozinho.</p>
     </div>
   </div>
 </section>
