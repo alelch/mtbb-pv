@@ -337,14 +337,26 @@ html.js .contas.acesa .luz{opacity:1}
    ⚠️ A linha de ESCOPO logo abaixo ficou MAIS necessária, não menos: a
    demonstração usa um erro de escrita, e sem ela a pessoa conclui que a call
    revisa texto. Ela não revisa. */
-.armadilha{margin:0 auto 22px;max-width:30ch;font-family:var(--fd);font-weight:700;
-  font-size:clamp(1.2rem,2.6vw,1.7rem);letter-spacing:-.03em;line-height:1.25;color:var(--ink)}
-.palavra{position:relative;white-space:nowrap;
-  transition:color .5s ease,background-color .5s ease}
-.palavra:after{content:'';position:absolute;left:-5%;right:-5%;top:54%;height:3px;border-radius:2px;
+/* A linha da armadilha é a PRIMEIRA da seção e é âmbar, como o rótulo das
+   outras seções. Com ela já âmbar, "acender" a palavra não teria o que
+   acender: então o efeito inverte. Quando chega a hora, a LINHA INTEIRA
+   apaga para o tom de apoio e só o erro continua aceso, ganha um fundo e
+   recebe o risco. O erro passa a ser a única coisa viva na frase.
+
+   Sentença normal, não caixa alta: caixa alta com espacejamento largo faz a
+   pessoa ler letra por letra, que é exatamente quando um erro de grafia é
+   pego, e a armadilha morre. Âmbar e primeira linha, como pedido; o resto
+   fica legível de propósito. */
+.armadilha{margin:0 auto 20px;max-width:36ch;font-family:var(--fd);font-weight:700;
+  font-size:clamp(1rem,2vw,1.18rem);letter-spacing:.03em;line-height:1.35;color:var(--ac);
+  transition:color .6s ease}
+.armadilha.on{color:var(--mut)}
+.palavra{position:relative;white-space:nowrap;color:var(--ac);
+  transition:background-color .5s ease}
+.palavra:after{content:'';position:absolute;left:-6%;right:-6%;top:54%;height:3px;border-radius:2px;
   background:var(--ac);transform:scaleX(0);transform-origin:left;
   transition:transform .6s var(--brasa) .3s}
-.armadilha.on .palavra{color:var(--ac);background:rgba(234,184,45,.1)}
+.armadilha.on .palavra{background:rgba(234,184,45,.14)}
 .armadilha.on .palavra:after{transform:scaleX(1)}
 .viu{margin:30px auto 0;max-width:34ch;font-family:var(--fd);font-weight:700;
   font-size:clamp(1.15rem,2.5vw,1.6rem);letter-spacing:-.03em;line-height:1.28;
