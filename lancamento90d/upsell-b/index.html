@@ -275,7 +275,7 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .conta + .conta{margin-top:clamp(26px,3.6vw,38px)}
 .conta .q{margin:0 0 9px;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;
   line-height:1.24;font-size:clamp(.95rem,2vw,1.14rem);color:var(--cor)}
-.conta .r{margin:9px 0 0;font-size:.96rem;line-height:1.45;color:var(--dim)}
+.conta .r{margin:2px 0 0;font-size:.96rem;line-height:1.45;color:var(--dim)}
 /* O TERCEIRO É IGUAL AOS OUTROS DOIS, só que âmbar. Ele já teve etiqueta
    branca e resultado em Fraunces itálica, e ficava feio ao lado dos outros:
    três gráficos iguais com um deles falando outra língua. Cada etiqueta usa
@@ -283,7 +283,14 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    fecha é o desenho (traço mais grosso, brilho e a ponta acesa), não uma
    fonte diferente. */
 .conta.tres .q{font-size:clamp(1.08rem,2.6vw,1.45rem)}
-.conta.tres .r{color:var(--ac);font-size:clamp(1rem,2.2vw,1.2rem)}
+/* A FRASE QUE FECHA A CONTA. Ela já foi em Fraunces itálica e o cliente
+   cortou: parecia enfeite colado, de outra língua que os outros dois blocos
+   não falam. O peso aqui vem da MESMA linguagem do gráfico: bold, âmbar e o
+   mesmo brilho que a curva e a ponta acesa têm. Mesma fonte dos outros dois,
+   mesma estrutura, só acesa. */
+.conta.tres .r{color:var(--ac);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.15rem,2.7vw,1.45rem);line-height:1.3;
+  text-shadow:0 0 28px rgba(234,184,45,.4)}
 .graf{position:relative}
 .graf svg{display:block;width:100%;height:auto;overflow:visible}
 /* OS RÓTULOS DE EIXO, NOS TRÊS GRÁFICOS.
@@ -302,13 +309,16 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    e só entra vazio, e o bloco inteiro estica. Quem precisa de altura é o
    "lançamento" na vertical, e ele pega essa altura da reserva de baixo
    (bottom:0), não de um gráfico maior. */
-.graf{position:relative;padding-bottom:16px}
+/* a reserva de baixo é a faixa do "tempo". Ela era de 16px e, somada ao
+   vazio que o viewBox tinha abaixo da linha de base, jogava a frase do
+   resultado longe do próprio gráfico. */
+.graf{position:relative;padding-bottom:12px}
 .graf svg{display:block;width:100%;height:auto;overflow:visible}
 .eixo-y,.eixo-x,.marca-lanc{position:absolute;font-family:var(--fd);font-weight:400;
   font-size:.62rem;line-height:1;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
 .eixo-y,.marca-lanc{top:0;display:flex;align-items:center;
   writing-mode:vertical-rl;transform:rotate(180deg)}
-.eixo-y{bottom:16px}
+.eixo-y{bottom:12px}
 /* até a borda de baixo: a palavra é comprida e o gráfico é baixo, então ela
    pega emprestada a faixa reservada pro "tempo". Como está alinhada no topo,
    sobra é folga, não deslocamento. */
@@ -583,21 +593,21 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <div class="conta um" style="--cor:#93A6B8">
         <p class="q">Livro bom + lançamento ruim</p>
         <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 112" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F7184" stop-opacity=".13"></stop><stop offset="1" stop-color="#5F7184" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".20"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAB82D" stop-opacity=".26"></stop><stop offset="1" stop-color="#EAB82D" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#5F7184" stroke-width="1.5"></circle></svg>
+          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F7184" stop-opacity=".13"></stop><stop offset="1" stop-color="#5F7184" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".20"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAB82D" stop-opacity=".26"></stop><stop offset="1" stop-color="#EAB82D" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#5F7184" stroke-width="1.5"></circle></svg>
         </div>
         <p class="r">Ninguém descobre.</p>
       </div>
       <div class="conta dois" style="--cor:#E0574A">
         <p class="q">Livro ruim + lançamento bom</p>
         <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 112" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
+          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
         </div>
         <p class="r">Vende no lançamento. Depois, esquecido.</p>
       </div>
       <div class="conta tres" style="--cor:#EAB82D">
         <p class="q">Livro bom + lançamento bom</p>
         <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 112" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#EAB82D" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"></path><circle cx="638" cy="2" r="4.5" fill="#EAB82D" filter="drop-shadow(0 0 10px rgba(234,184,45,.85))"></circle></svg>
+          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#EAB82D" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"></path><circle cx="638" cy="2" r="4.5" fill="#EAB82D" filter="drop-shadow(0 0 10px rgba(234,184,45,.85))"></circle></svg>
         </div>
         <p class="r">Muda a vida do autor.</p>
       </div>

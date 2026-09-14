@@ -101,13 +101,13 @@ svg{display:block;width:100%;height:auto;overflow:visible}
    base. Sem bold e em caixa baixa: são mobília do gráfico, não título.
    (Foi assim que foi pro ar na página, em 14/09.) */
 .corpo{position:relative}
-.graf{position:relative;padding-bottom:16px}
+.graf{position:relative;padding-bottom:12px}
 .graf svg{display:block;width:100%;height:auto;overflow:visible}
 .eixoy,.tempo,.marca{position:absolute;font-family:var(--fd);font-weight:400;
   font-size:.62rem;line-height:1;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
 .eixoy,.marca{top:0;display:flex;align-items:center;
   writing-mode:vertical-rl;transform:rotate(180deg)}
-.eixoy{bottom:16px}
+.eixoy{bottom:12px}
 .marca{bottom:0}
 /* em escrita vertical o eixo principal do flex é o vertical, e o
    rotate(180deg) inverte as pontas: flex-end é o TOPO na tela.
@@ -128,9 +128,11 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .g1 .faixa + .faixa{margin-top:clamp(26px,3.6vw,40px)}
 .g1 .q{margin:0 0 8px;font:700 clamp(.92rem,2vw,1.12rem)/1.25 var(--fd);letter-spacing:-.03em;
   color:var(--cor)}
-.g1 .r{margin:8px 0 0;font-size:.95rem;line-height:1.4;color:var(--dim)}
+.g1 .r{margin:2px 0 0;font-size:.95rem;line-height:1.4;color:var(--dim)}
 .g1 .faixa.fim .q{font-size:clamp(1.05rem,2.5vw,1.4rem)}
-.g1 .faixa.fim .r{color:var(--ac);font-size:clamp(1rem,2.2vw,1.2rem)}
+.g1 .faixa.fim .r{color:var(--ac);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.15rem,2.7vw,1.45rem);line-height:1.3;
+  text-shadow:0 0 28px rgba(234,184,45,.4)}
 .g1 .base{stroke:var(--ru);stroke-width:1}
 
 /* ── G2 · UMA CURVA SÓ ── */
@@ -224,7 +226,7 @@ def g1():
         fx.append(
             '<div class="faixa%s" style="--cor:%s"><p class="q">%s</p>'
             '<div class="graf">%s'
-            '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s'
+            '<svg viewBox="0 0 640 108" fill="none" aria-hidden="true">%s'
             '<line class="base" x1="0" y1="104" x2="640" y2="104"></line>%s%s%s</svg>'
             '</div><p class="r">%s</p></div>'
             % (fim, COR_ROT[i], q, ROTULOS,
@@ -251,7 +253,7 @@ def g2():
     leg = ''.join('<li><i style="background:%s"></i>%s</li>' % (COR[i], C[i][0])
                   for i in (0, 1, 2))
     return ('<div class="g2"><div class="corpo"><div class="graf">%s'
-            '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s</svg>%s</div></div>'
+            '<svg viewBox="0 0 640 108" fill="none" aria-hidden="true">%s</svg>%s</div></div>'
             '<ul class="leg">%s</ul>'
             '<p class="veredito">%s</p>%s</div>'
             % (ROTULOS, tracos, rot, leg, C[2][1], MIUDO))
