@@ -90,6 +90,10 @@
      A versão longa e argumentada desta página está em index-longa.html.
      ============================================================ -->
 
+<!-- a classe .js entra AQUI, antes de pintar: se ela entrasse no fim do body,
+     a página renderizaria no estado final e depois pularia pro inicial. Sem JS,
+     a classe não entra e o bloco da conta fica parado no estado final. -->
+<script>document.documentElement.className+=" js"</script>
 <style>
 /* fontes da casa, as mesmas do front, servidas daqui */
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
@@ -251,6 +255,40 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .conta.ganha .q{font-size:clamp(1.6rem,3.6vw,2.3rem);color:var(--ink)}
 .conta.ganha .r{margin-top:6px;font-size:clamp(1.28rem,2.9vw,1.8rem);color:var(--ac);font-weight:700}
 @media(max-width:640px){.conta.ganha{padding-top:30px}.conta.dois{padding:16px 0}}
+
+/* ════ A QUEIMA (só com JS) ════
+   As duas primeiras nascem GRANDES e BEM ESPAÇADAS. Conforme passam pelo eixo
+   de leitura, encolhem, apagam E o espaço entre elas fecha: o bloco se compacta
+   enquanto você rola. A terceira faz o contrário: ela não queima, ela ACENDE.
+   Chega meio recuada e, ao entrar no campo de leitura, assume o tamanho cheio
+   e ganha o brilho âmbar.
+   Sem JS a classe .js não existe e nada disso roda: o bloco fica parado no
+   estado final, que é legível por si. */
+:root{--brasa:cubic-bezier(.16,1,.3,1)}
+html.js .conta.arde{transition:padding .6s var(--brasa),transform .6s var(--brasa),
+  opacity .45s ease;transform-origin:center}
+html.js .conta.arde{padding:34px 0;transform:scale(1.14)}
+html.js .conta.dois.arde{padding:40px 0;transform:scale(1.1)}
+html.js .conta.arde.queimou{padding:5px 0;transform:scale(.84);opacity:.42}
+html.js .conta.ganha{opacity:.55;transform:scale(.94);transform-origin:center;
+  transition:opacity .6s ease,transform .7s var(--brasa),padding .6s var(--brasa)}
+html.js .conta.ganha.brilha{opacity:1;transform:scale(1)}
+html.js .conta.ganha .r{transition:text-shadow .9s ease}
+html.js .conta.ganha.brilha .r{text-shadow:0 0 34px rgba(234,184,45,.5),0 0 10px rgba(234,184,45,.3)}
+/* no celular a linha já ocupa a largura toda: crescer 14% joga o texto pra
+   fora e a página passa a rolar de lado. Aqui o que cresce é quase só o
+   espaço, que é o essencial do efeito. O clip é cinto e suspensório: transform
+   não pode criar barra de rolagem horizontal. */
+.conta-sec{overflow-x:clip}
+@media(max-width:700px){
+  html.js .conta.arde{transform:scale(1.03);padding:26px 0}
+  html.js .conta.dois.arde{transform:scale(1.03);padding:30px 0}
+  html.js .conta.arde.queimou{transform:scale(.9);padding:4px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  html.js .conta.arde,html.js .conta.ganha{padding:revert;transform:none;opacity:1;transition:none}
+  html.js .conta.ganha.brilha .r{text-shadow:none}
+}
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
 .offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
@@ -443,11 +481,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <h2>A conta que ninguém te conta</h2>
     </div>
     <div class="contas">
-      <div class="conta">
+      <div class="conta arde">
         <p class="q">Livro bom + lançamento ruim</p>
         <p class="r">Ninguém descobre.</p>
       </div>
-      <div class="conta dois">
+      <div class="conta dois arde">
         <p class="q">Lançamento bom + livro ruim</p>
         <p class="r">Vende no lançamento. Depois, esquecido.</p>
       </div>
@@ -683,6 +721,19 @@ window.OFERTA = {
   if (barra && gatilho){
     var ver = function(){ barra.classList.toggle('on', gatilho.getBoundingClientRect().bottom < 0); };
     addEventListener('scroll', ver, {passive:true}); ver();
+  }
+  /* a conta: as duas primeiras queimam ao passar, a terceira acende ao chegar */
+  var linhas = [].slice.call(document.querySelectorAll('.contas .conta'));
+  if (linhas.length){
+    var arde = function(){
+      var eixo = innerHeight * 0.55;
+      linhas.forEach(function(el){
+        var r = el.getBoundingClientRect(), c = r.top + r.height / 2;
+        if (el.classList.contains('ganha')) el.classList.toggle('brilha', c < innerHeight * 0.9);
+        else el.classList.toggle('queimou', c < eixo);
+      });
+    };
+    addEventListener('scroll', arde, {passive:true}); addEventListener('resize', arde); arde();
   }
   var fita = document.getElementById('prog');
   if (fita){
