@@ -215,17 +215,29 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .btn:active{transform:translateY(0)}
 .btn.block{display:flex;width:100%}
 
-/* as três contas: os cartões do front, com a gramática de cor do 90D
-   (as duas que dão errado apagadas, a que ganha em destaque) */
-.contas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:36px 0 0;text-align:left}
-.conta{background:var(--pa2);border:1px solid var(--ru);border-radius:var(--r);padding:24px}
-section.alt .conta{background:var(--pa)}
-.conta .q{font-family:var(--fd);font-weight:700;font-size:1.02rem;letter-spacing:-.02em;
-  line-height:1.25;margin:0;color:var(--mut)}
-.conta .r{margin:12px 0 0;font-size:.97rem;color:var(--dim);line-height:1.45}
-.conta.ganha{background:rgba(234,184,45,.07);border-color:var(--ac)}
-.conta.ganha .q{color:var(--ink)}
-.conta.ganha .r{color:var(--ac);font-weight:700}
+/* ════ A CONTA, EM ESCALA ════
+   Estava em três cartões lado a lado e isso matava o bloco: lado a lado elas
+   viram três coisas independentes, e o argumento é justamente que são A MESMA
+   conta com uma variável trocada. Agora ficam uma embaixo da outra, e crescem.
+
+   Cresce o CORPO e cresce o AR junto (é a calibragem B da prancha de escala).
+   Só o tamanho do tipo não basta: com as três linhas grudadas a hierarquia se
+   perde. Com o espaço crescendo junto, o olho lê a importância antes de ler a
+   palavra. A primeira fica espremida de propósito; a última tem folga.
+
+   Nenhuma caixa, nenhum fio, nenhum ícone: quem hierarquiza é a tipografia. */
+.contas{margin:38px auto 0;max-width:820px;text-align:left}
+.conta{padding:6px 0}
+.conta .q{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.18;
+  font-size:1rem;color:#55524D}
+.conta .r{margin:4px 0 0;line-height:1.32;font-size:.92rem;color:#44413D}
+.conta.dois{padding:22px 0}
+.conta.dois .q{font-size:clamp(1.2rem,2.4vw,1.45rem);color:var(--mut)}
+.conta.dois .r{font-size:clamp(1.02rem,1.9vw,1.15rem);color:#55524D}
+.conta.ganha{padding:44px 0 10px}
+.conta.ganha .q{font-size:clamp(1.6rem,3.6vw,2.3rem);color:var(--ink)}
+.conta.ganha .r{margin-top:6px;font-size:clamp(1.28rem,2.9vw,1.8rem);color:var(--ac);font-weight:700}
+@media(max-width:640px){.conta.ganha{padding-top:30px}.conta.dois{padding:16px 0}}
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
 .offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
@@ -327,7 +339,7 @@ footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-fami
 .sticky .btn:hover{background:var(--ac);color:var(--offtx)}
 
 @media (max-width:900px){
-  .contas,.provas{grid-template-columns:1fr}
+  .provas{grid-template-columns:1fr}
 }
 @media (max-width:820px){
   .gar{grid-template-columns:1fr;text-align:center;justify-items:center}
@@ -417,7 +429,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         <p class="q">Livro bom + lançamento ruim</p>
         <p class="r">Ninguém descobre.</p>
       </div>
-      <div class="conta">
+      <div class="conta dois">
         <p class="q">Lançamento bom + livro ruim</p>
         <p class="r">Vende no lançamento. Depois, esquecido.</p>
       </div>
