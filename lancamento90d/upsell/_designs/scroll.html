@@ -1,0 +1,101 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"></head><body><title>A conta rolando</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;700&family=Fraunces:ital,wght@1,500&display=swap"><style>
+:root{--pa:#101012;--pa2:#17171A;--ink:#EFEDE8;--mut:#9A958D;--dim:#6B675F;--ru:#27272B;
+  --ac:#EAB82D;
+  --ff:'DM Sans',system-ui,sans-serif;--fd:'Space Grotesk','DM Sans',sans-serif;
+  --fs:Fraunces,Georgia,serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);font:400 16px/1.6 var(--ff);
+  -webkit-font-smoothing:antialiased}
+.w{max-width:1120px;margin:0 auto;padding:0 22px}
+h1,h2{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.serifa{font-family:var(--fs);font-style:italic;font-weight:500;letter-spacing:-.02em}
+.eyebrow{font-family:var(--fd);font-size:.78rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ac);margin:0 0 16px}
+header{padding:56px 0 34px;border-bottom:1px solid var(--ru)}
+header h1{font-size:clamp(1.9rem,4vw,3rem)}
+header p{margin:18px 0 0;max-width:70ch;color:var(--mut)}
+header p b{color:var(--ink)}
+header .nota{margin-top:16px;padding:14px 18px;border-left:2px solid var(--ac);
+  background:rgba(234,184,45,.05);font-size:.94rem;max-width:70ch}
+.item{border-bottom:1px solid var(--ru);padding:40px 0 90px}
+.cab{display:flex;align-items:baseline;gap:12px;margin:0 0 8px}
+.cab .no{font-family:var(--fd);font-weight:700;font-size:.78rem;letter-spacing:.16em;color:var(--ac)}
+.cab h2{font-size:1.3rem}
+.tese{margin:0 0 20px;color:var(--mut);max-width:74ch;font-size:.97rem}
+.rolar{font-family:var(--fd);font-weight:700;font-size:.7rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);margin:0 0 34px}
+footer{padding:34px 0 60px;color:var(--dim);font-size:.85rem}
+
+/* o bloco, no estado final e legível: é assim que ele nasce em todas */
+.bloco{text-align:center;max-width:860px;margin:0 auto}
+.bloco .l{padding:6px 0}
+.bloco .q{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.18;
+  font-size:1rem;color:#8A857C}
+.bloco .r{margin:4px 0 0;line-height:1.32;font-size:.92rem;color:#7E7970}
+.bloco .l2{padding:22px 0}
+.bloco .l2 .q{font-size:clamp(1.2rem,2.4vw,1.45rem);color:#ACA69B}
+.bloco .l2 .r{font-size:clamp(1.02rem,1.9vw,1.15rem);color:#948E85}
+.bloco .l3{padding:44px 0 10px}
+.bloco .l3 .q{font-size:clamp(1.6rem,3.6vw,2.3rem);color:var(--ink)}
+.bloco .l3 .r{margin-top:6px;font-size:clamp(1.28rem,2.9vw,1.8rem);color:var(--ac);font-weight:700}
+
+/* respiro para dar o que rolar */
+.espaco{height:58vh}
+
+/* ── S1 foco móvel ──
+   Mexe na COR, não na opacidade: as linhas já nascem em tons diferentes, e
+   empilhar opacity por cima dava um resultado imprevisível. Aqui a linha que
+   está no eixo de leitura assume a tinta cheia e o âmbar; as outras voltam
+   ao tom de base. Classe, não atributo. */
+.s1 .l .q,.s1 .l .r{transition:color .4s ease}
+.s1 .l{transition:transform .4s ease}
+.s1 .l.foco{transform:scale(1.03)}
+.s1 .l.foco .q{color:var(--ink)}
+.s1 .l.foco .r{color:var(--ac)}
+
+/* ── S2 construção: acendem uma a uma e FICAM ── */
+.s2 .l{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+html.js .s2 .l{opacity:0;transform:translateY(16px)}
+html.js .s2 .l.on{opacity:1;transform:none}
+
+/* ── S3 queima: começam grandes e acesas, encolhem e apagam ── */
+.s3 .l{transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1);transform-origin:center}
+.s3 .l1[data-passou="1"],.s3 .l2[data-passou="1"]{opacity:.3;transform:scale(.82)}
+html.js .s3 .l1,html.js .s3 .l2{opacity:1;transform:scale(1.5)}
+html.js .s3 .l1[data-passou="1"],html.js .s3 .l2[data-passou="1"]{opacity:.3;transform:scale(.82)}
+
+/* ── S4 controle: nada se move ── */
+
+@media (prefers-reduced-motion:reduce){
+  .s2 .l,.s3 .l{opacity:1!important;transform:none!important;transition:none!important}
+  .s1 .l{transform:none!important;transition:none!important}
+}
+</style><header><div class="w"><p class="eyebrow">Upsell do 90D · o bloco da conta</p><h1>Quatro jeitos de<br><span class="serifa">a conta reagir ao scroll.</span></h1><p>Esta página só faz sentido <b>rolando</b>. Role devagar por cada bloco.</p><p class="nota">Na sua observação havia duas coisas juntas. A primeira era <b>defeito, não estilo</b>: as duas linhas de cima estavam com 2,4:1 e 1,87:1 de contraste, quando o mínimo legível é 4,5:1. Isso já foi corrigido na página, e as quatro versões aqui usam os tons novos. A segunda é o <b>movimento</b>, que é o que está em teste.</p></div></header><section class="item"><div class="w"><div class="cab"><span class="no">S1</span><h2>Foco móvel</h2></div><p class="tese">A linha que está no meio da tela acende; as outras recuam. Você sempre lê uma linha forte, e as três continuam legíveis. É a que mais responde ao "tá sumida": nada fica apagado no momento em que está sendo lido.</p><p class="rolar">Role devagar ↓</p><div class="espaco"></div><div class="bloco s1"><div class="l l1"><p class="q">Livro bom + lançamento ruim</p><p class="r">Ninguém descobre.</p></div><div class="l l2"><p class="q">Lançamento bom + livro ruim</p><p class="r">Vende no lançamento. Depois, esquecido.</p></div><div class="l l3"><p class="q">Lançamento bom + livro bom</p><p class="r">Muda a vida do autor.</p></div></div><div class="espaco"></div></div></section><section class="item"><div class="w"><div class="cab"><span class="no">S2</span><h2>Construção</h2></div><p class="tese">As três entram uma a uma conforme sobem, e FICAM. O bloco se monta na frente da pessoa e termina inteiro. Risco: quem rola rápido pula a animação e vê tudo de uma vez, o que é aceitável, mas o efeito se perde.</p><p class="rolar">Role devagar ↓</p><div class="espaco"></div><div class="bloco s2"><div class="l l1"><p class="q">Livro bom + lançamento ruim</p><p class="r">Ninguém descobre.</p></div><div class="l l2"><p class="q">Lançamento bom + livro ruim</p><p class="r">Vende no lançamento. Depois, esquecido.</p></div><div class="l l3"><p class="q">Lançamento bom + livro bom</p><p class="r">Muda a vida do autor.</p></div></div><div class="espaco"></div></div></section><section class="item"><div class="w"><div class="cab"><span class="no">S3</span><h2>Queima</h2></div><p class="tese">O que você descreveu ao pé da letra: as duas primeiras começam grandes e acesas, e vão encolhendo e apagando conforme passam, até a terceira dominar. É a mais cinematográfica e a mais arriscada: o texto se mexe embaixo do olho de quem está lendo.</p><p class="rolar">Role devagar ↓</p><div class="espaco"></div><div class="bloco s3"><div class="l l1"><p class="q">Livro bom + lançamento ruim</p><p class="r">Ninguém descobre.</p></div><div class="l l2"><p class="q">Lançamento bom + livro ruim</p><p class="r">Vende no lançamento. Depois, esquecido.</p></div><div class="l l3"><p class="q">Lançamento bom + livro bom</p><p class="r">Muda a vida do autor.</p></div></div><div class="espaco"></div></div></section><section class="item"><div class="w"><div class="cab"><span class="no">S4</span><h2>Sem movimento</h2></div><p class="tese">O controle. Nada anima; a hierarquia é só de tamanho e os três tons agora passam contraste. Numa página pós-compra, lida com pressa, isso pode bastar. Compare com as de cima antes de decidir que precisa de animação.</p><p class="rolar">Role devagar ↓</p><div class="espaco"></div><div class="bloco s4"><div class="l l1"><p class="q">Livro bom + lançamento ruim</p><p class="r">Ninguém descobre.</p></div><div class="l l2"><p class="q">Lançamento bom + livro ruim</p><p class="r">Vende no lançamento. Depois, esquecido.</p></div><div class="l l3"><p class="q">Lançamento bom + livro bom</p><p class="r">Muda a vida do autor.</p></div></div><div class="espaco"></div></div></section><footer><div class="w">As três animadas nascem no estado final e só então animam: se o script não rodar, nada some.</div></footer><script>
+document.documentElement.classList.add('js');
+(function(){
+  var s1 = [].slice.call(document.querySelectorAll('.s1'));
+  var s2 = [].slice.call(document.querySelectorAll('.s2 .l'));
+  var s3 = [].slice.call(document.querySelectorAll('.s3 .l'));
+  function meio(el){ var r = el.getBoundingClientRect(); return r.top + r.height/2; }
+  function passo(){
+    var eixo = innerHeight * 0.48;
+    // S1: o bloco e' curto, entao uma faixa fixa acendia as tres de uma vez.
+    // Aqui acende sempre e SO' a linha mais proxima do eixo de leitura.
+    s1.forEach(function(bloco){
+      var ls = [].slice.call(bloco.querySelectorAll('.l')), perto = null, d = 1e9;
+      ls.forEach(function(el){
+        var dd = Math.abs(meio(el) - eixo);
+        if (dd < d){ d = dd; perto = el; }
+      });
+      ls.forEach(function(el){ el.classList.toggle('foco', el === perto && d < innerHeight*0.42); });
+    });
+    s2.forEach(function(el){
+      if (el.getBoundingClientRect().top < innerHeight*0.86) el.classList.add('on');
+    });
+    s3.forEach(function(el){ el.dataset.passou = meio(el) < eixo ? '1' : '0'; });
+  }
+  addEventListener('scroll', passo, {passive:true});
+  addEventListener('resize', passo);
+  passo();
+})();
+</script></body></html>

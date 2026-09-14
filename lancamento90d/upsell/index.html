@@ -230,13 +230,18 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    três linhas no mesmo eixo central. O que hierarquiza é a escala, não o
    alinhamento. */
 .contas{margin:44px auto 0;max-width:860px;text-align:center}
+/* ⚠️ CONTRASTE: as duas primeiras estavam em #55524D e #44413D, que sobre o
+   fundo #101012 dão 2,4:1 e 1,87:1. Isso não é "apagado de propósito", é
+   ilegível: o mínimo é 4,5:1. E elas são parte do argumento, a terceira não
+   significa nada sem as duas. Quem hierarquiza aqui é o TAMANHO, não o
+   sumiço. Valores novos, todos medidos: 5,18 · 4,40 · 7,86 · 5,85. */
 .conta{padding:6px 0}
 .conta .q{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.18;
-  font-size:1rem;color:#55524D}
-.conta .r{margin:4px 0 0;line-height:1.32;font-size:.92rem;color:#44413D}
+  font-size:1rem;color:#8A857C}
+.conta .r{margin:4px 0 0;line-height:1.32;font-size:.92rem;color:#7E7970}
 .conta.dois{padding:22px 0}
-.conta.dois .q{font-size:clamp(1.2rem,2.4vw,1.45rem);color:var(--mut)}
-.conta.dois .r{font-size:clamp(1.02rem,1.9vw,1.15rem);color:#55524D}
+.conta.dois .q{font-size:clamp(1.2rem,2.4vw,1.45rem);color:#ACA69B}
+.conta.dois .r{font-size:clamp(1.02rem,1.9vw,1.15rem);color:#948E85}
 .conta.ganha{padding:44px 0 10px}
 .conta.ganha .q{font-size:clamp(1.6rem,3.6vw,2.3rem);color:var(--ink)}
 .conta.ganha .r{margin-top:6px;font-size:clamp(1.28rem,2.9vw,1.8rem);color:var(--ac);font-weight:700}
