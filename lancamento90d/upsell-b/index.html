@@ -358,15 +358,44 @@ html.js .contas.acesa .luz{opacity:1}
   transition:transform .6s var(--brasa) .3s}
 .armadilha.on .palavra{background:rgba(234,184,45,.14)}
 .armadilha.on .palavra:after{transform:scaleX(1)}
-.viu{margin:30px auto 0;max-width:34ch;font-family:var(--fd);font-weight:700;
-  font-size:clamp(1.15rem,2.5vw,1.6rem);letter-spacing:-.03em;line-height:1.28;
-  opacity:0;transform:translateY(10px);transition:opacity .7s ease,transform .7s var(--brasa)}
-.viu.on{opacity:1;transform:none}
+/* O BOTÃO. A revelação deixou de ser automática no scroll e passou a depender
+   de um clique: a pessoa é desafiada, não acha o erro, e pede pra ver. Isso é
+   compromisso, e faz a revelação chegar em quem já admitiu que não viu.
+
+   ⚠️ Ele é chamativo de propósito (pedido do cliente), mas NÃO é igual aos
+   botões de compra: tem ícone de olho e pulsa, e os de compra não pulsam.
+   Se um dia alguém quiser mexer, a regra é essa: o mais forte da página
+   continua sendo o que leva ao checkout. */
+.acao{margin:30px 0 0;display:none}
+html.js .acao{display:block}
+.revelar{display:inline-flex;align-items:center;gap:11px;background:var(--ac);color:var(--pilltx);
+  border:0;border-radius:999px;cursor:pointer;font:700 clamp(1rem,2.1vw,1.16rem)/1 var(--fd);
+  letter-spacing:-.01em;padding:19px 34px;transition:transform .18s ease,background .18s ease;
+  animation:pulso-erro 2.4s ease-out infinite}
+.revelar svg{width:20px;height:20px;flex:none}
+.revelar:hover,.revelar:focus-visible{transform:translateY(-2px);background:#F5C842}
+@keyframes pulso-erro{
+  0%{box-shadow:0 0 0 0 rgba(234,184,45,.5)}
+  70%{box-shadow:0 0 0 20px rgba(234,184,45,0)}
+  100%{box-shadow:0 0 0 0 rgba(234,184,45,0)}}
+/* precisa do html.js: sem ele, `html.js .acao{display:block}` tem mais peso
+   e o botão continuava pulsando ao lado do texto que ele mesmo revelou */
+html.js .revelado .acao{display:none}
+
+/* o que só aparece depois do clique */
+.viu,.escopo{margin-left:auto;margin-right:auto}
+.viu{margin-top:34px;max-width:34ch;font-family:var(--fd);font-weight:700;
+  font-size:clamp(1.15rem,2.5vw,1.6rem);letter-spacing:-.03em;line-height:1.28}
 .viu b{color:var(--ac);font-weight:700}
+html.js .viu,html.js .escopo{display:none}
+html.js .revelado .viu,html.js .revelado .escopo{display:block;animation:entra-erro .7s var(--brasa) both}
+html.js .revelado .escopo{animation-delay:.25s}
+@keyframes entra-erro{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
 @media(prefers-reduced-motion:reduce){
-  .armadilha .palavra{color:var(--ac);background:rgba(234,184,45,.1);transition:none}
-  .armadilha .palavra:after{transform:scaleX(1);transition:none}
-  .viu{opacity:1;transform:none;transition:none}
+  .armadilha,.armadilha .palavra,.armadilha .palavra:after{transition:none}
+  .revelar{animation:none}
+  html.js .revelado .viu,html.js .revelado .escopo{animation:none}
 }
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
@@ -589,8 +618,14 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <p class="armadilha">Acompanhado é <span class="palavra">smepre</span> melhor</p>
       <h2>O erro está na sua frente agora mesmo.<br>
       <span class="serifa">Mas você não consegue ver.</span></h2>
+      <p class="acao"><button class="revelar" type="button" data-revelar aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>Mostrar o erro</button></p>
       <p class="viu">Viu?<br><b>Imagina o que você não está vendo nesse momento.</b></p>
-      <p class="sub"><b>Não é sobre a escrita.</b><br>
+      <p class="sub escopo"><b>Não é sobre a escrita.</b><br>
       É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p>
     </div>
   </div>
@@ -834,25 +869,23 @@ window.OFERTA = {
     addEventListener('resize', separa);
     separa();
   }
-  /* A armadilha: "smepre" acende e é riscado quando a pessoa já passou os
-     olhos pela frase, e só depois entra o "Viu?". A ordem é o efeito: se as
-     duas coisas acontecessem juntas, a pessoa leria a explicação antes de ter
-     a chance de não ter visto. */
+  /* A ARMADILHA
+     Antes o risco e o texto entravam no scroll. Agora dependem de um clique:
+     a pessoa lê "o erro está na sua frente", procura, não acha, e pede pra
+     ver. Quem chega no "Viu?" já admitiu que não viu, e é isso que faz a
+     frase funcionar.
+     Sem JS a classe .js não existe: o botão não aparece, o erro já nasce
+     riscado e os dois parágrafos ficam visíveis. Nada fica escondido. */
   var arm = document.querySelector('[data-erro]');
-  if (arm){
-    var frase = arm.querySelector('.armadilha'), viu = arm.querySelector('.viu');
-    var pega = function(){
-      var r = arm.getBoundingClientRect();
-      var ini = innerHeight * 0.82, fim = innerHeight * 0.38;
-      var curso = (ini - fim) + r.height;
-      var p = curso > 0 ? (ini - r.top) / curso : 1;
-      p = p < 0 ? 0 : (p > 1 ? 1 : p);
-      if (frase) frase.classList.toggle('on', p >= 0.46);
-      if (viu) viu.classList.toggle('on', p >= 0.66);
-    };
-    addEventListener('scroll', pega, {passive:true});
-    addEventListener('resize', pega);
-    pega();
+  var bt = arm && arm.querySelector('[data-revelar]');
+  if (arm && bt){
+    bt.addEventListener('click', function(){
+      arm.classList.add('revelado');
+      arm.querySelector('.armadilha').classList.add('on');
+      bt.setAttribute('aria-expanded', 'true');
+      var viu = arm.querySelector('.viu');
+      if (viu){ viu.setAttribute('tabindex', '-1'); viu.focus({preventScroll:true}); }
+    });
   }
 
   var fita = document.getElementById('prog');
