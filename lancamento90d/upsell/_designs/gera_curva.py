@@ -54,7 +54,7 @@ FIM_Y = [101, 99, 2]          # onde cada uma termina, pro ponto final
 COR = ['#5F7184', '#E0574A', '#EAB82D']
 # o rótulo de cada conta puxa a cor da sua curva, num tom que passa em
 # contraste no fundo escuro (o traço pode ser fraco, o texto não)
-COR_ROT = ['#93A6B8', '#E0574A', '#EFEDE8']
+COR_ROT = ['#93A6B8', '#E0574A', '#EAB82D']
 LANC = 92.0 / 640.0 * 100.0   # a marca do lançamento, em %
 
 
@@ -105,8 +105,10 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .graf svg{display:block;width:100%;height:auto;overflow:visible}
 .eixoy,.tempo,.marca{position:absolute;font-family:var(--fd);font-weight:400;
   font-size:.62rem;line-height:1;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
-.eixoy,.marca{top:0;bottom:16px;display:flex;align-items:center;
+.eixoy,.marca{top:0;display:flex;align-items:center;
   writing-mode:vertical-rl;transform:rotate(180deg)}
+.eixoy{bottom:16px}
+.marca{bottom:0}
 /* em escrita vertical o eixo principal do flex é o vertical, e o
    rotate(180deg) inverte as pontas: flex-end é o TOPO na tela.
    "vendas" fica no meio da sua linha, "lançamento" no topo da dela. */
@@ -128,8 +130,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
   color:var(--cor)}
 .g1 .r{margin:8px 0 0;font-size:.95rem;line-height:1.4;color:var(--dim)}
 .g1 .faixa.fim .q{font-size:clamp(1.05rem,2.5vw,1.4rem)}
-.g1 .faixa.fim .r{font-family:var(--fs);font-style:italic;font-weight:500;color:var(--ac);
-  font-size:clamp(1.15rem,2.6vw,1.5rem)}
+.g1 .faixa.fim .r{color:var(--ac);font-size:clamp(1rem,2.2vw,1.2rem)}
 .g1 .base{stroke:var(--ru);stroke-width:1}
 
 /* ── G2 · UMA CURVA SÓ ── */
@@ -171,9 +172,9 @@ MIUDO = ('<p class="miudo">Não é gráfico de dados: é o desenho do que aconte
 ROTULOS = ('<span class="eixoy">vendas</span><span class="marca">lançamento</span>'
            '<span class="tempo">tempo</span>')
 # o pontilhado do lançamento, em coordenadas do gráfico
-RETA = ('<line x1="1" y1="-30" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line>'
+RETA = ('<line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line>'
         '<line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line>'
-        '<line x1="92" y1="-30" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" '
+        '<line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" '
         'stroke-dasharray="4 5"></line>')
 
 
@@ -223,7 +224,7 @@ def g1():
         fx.append(
             '<div class="faixa%s" style="--cor:%s"><p class="q">%s</p>'
             '<div class="graf">%s'
-            '<svg viewBox="0 -32 640 136" fill="none" aria-hidden="true">%s'
+            '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s'
             '<line class="base" x1="0" y1="104" x2="640" y2="104"></line>%s%s%s</svg>'
             '</div><p class="r">%s</p></div>'
             % (fim, COR_ROT[i], q, ROTULOS,
@@ -250,7 +251,7 @@ def g2():
     leg = ''.join('<li><i style="background:%s"></i>%s</li>' % (COR[i], C[i][0])
                   for i in (0, 1, 2))
     return ('<div class="g2"><div class="corpo"><div class="graf">%s'
-            '<svg viewBox="0 -32 640 136" fill="none" aria-hidden="true">%s</svg>%s</div></div>'
+            '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s</svg>%s</div></div>'
             '<ul class="leg">%s</ul>'
             '<p class="veredito">%s</p>%s</div>'
             % (ROTULOS, tracos, rot, leg, C[2][1], MIUDO))
