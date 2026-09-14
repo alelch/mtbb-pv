@@ -17,6 +17,8 @@ python3 gera.py
 - `designs_b.py` — rumos 07, 08, 10 (e as versões de 1ª rodada do 06 e 09).
 - `designs_c.py` — 06 e 09 **acabados** (escolhidos pelo cliente), 11, 12 e 13.
 - `designs_d.py` — 14 (LOMBADA).
+- `designs_e.py` — o 12, com a **paleta parametrizada** (`PALETAS` + `d12(paleta)`).
+- `gera_paletas.py` — gera o 12 em todas as paletas em `12-paletas/` + a prancha delas.
   O 11 e o 13 dividem o markup (`_corpo_suico()`): são a mesma página em duas
   paletas, então não podem viver separados ou um envelhece sem o outro.
 - `gera.py` — escreve as dez pastas + a galeria.
@@ -116,3 +118,34 @@ gramática da área do autor, não desta página.
 
 Conferido em 1280 e em 375 sem estouro horizontal. No celular os cortes
 diagonais somem e os painéis empilham (é o que o próprio LOMBADA faz).
+
+## O 12 venceu. Agora é só cor.
+
+O cliente escolheu o rumo 12 (Capítulos) em 14/09 e pediu para testar paleta.
+A paleta virou parâmetro: `designs_e.PALETAS` tem oito, e
+
+```
+python3 gera_paletas.py
+```
+
+escreve `12-paletas/<slug>/index.html` para cada uma mais `12-paletas/prancha.html`
+com as oito lado a lado. Layout, tipografia e copy são idênticos, então o que
+se vê de diferente é a cor e mais nada.
+
+Publicada em 14/09: https://claude.ai/code/artifact/732cdc09-f530-484b-82b3-e7895858aead
+
+### Os papéis que toda paleta tem que preencher
+
+| token | papel | regra |
+|---|---|---|
+| `pa` / `pa2` | fundo principal / alternado | `pa2` é o que separa capítulo de capítulo |
+| `ink` `mut` `dim` `ru` | tinta, apoio, fraco, fio | |
+| `ac` | acento em **texto** | tem que passar contraste sobre `pa` |
+| `acf` | acento em **preenchimento** | tarja e traço, nunca texto |
+| `off*` | o bloco da oferta | fundo, texto, cartão, borda |
+| `pill*` | o botão | fundo, texto e o par do hover |
+| `play*` `band*` | vídeo e faixa em marquise | ganharam token próprio: herdando `ink` a paleta escura punha um retângulo creme no meio da página |
+
+**A regra que não pode ser quebrada:** `ac` é cor de texto e `acf` é cor de
+fundo. Trocar um pelo outro é como o âmbar vira ilegível (foi o que aconteceu
+no 13 antes de virar traço de marcador).
