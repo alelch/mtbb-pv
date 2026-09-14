@@ -155,7 +155,9 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .hero:before{content:'';position:absolute;inset:-30% -10% auto;height:150%;z-index:0;
   background:radial-gradient(46% 42% at 50% 32%,rgba(239,237,232,.055),transparent 70%)}
 .hero>*{position:relative;z-index:1}
-.hero h1{font-size:clamp(31px,5.4vw,62px);max-width:17ch;margin:0 auto}
+/* a caixa tem que caber a frase INTEIRA em uma linha no desktop: com 17ch
+   o corte seco virava quatro linhas em vez de duas. */
+.hero h1{font-size:clamp(28px,4.4vw,50px);max-width:38ch;margin:0 auto;text-wrap:pretty}
 .hero h1 .u{position:relative;white-space:nowrap}
 .hero h1 .u svg{position:absolute;left:-2%;bottom:-.16em;width:104%;height:.3em;overflow:visible}
 .hero h1 .u path{fill:none;stroke:var(--acf);stroke-width:7;stroke-linecap:round}
@@ -202,7 +204,8 @@ section.alt{background:var(--pa2)}
 .meio{text-align:center;max-width:720px;margin:0 auto}
 h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
   letter-spacing:-.03em;line-height:1.1}
-.sub{margin:18px auto 0;max-width:60ch;color:var(--mut);font-size:1.02rem;line-height:1.6}
+.sub{margin:18px auto 0;max-width:60ch;color:var(--mut);font-size:1.02rem;line-height:1.62}
+.sub+.sub{margin-top:16px}
 .sub b{color:var(--ink);font-weight:700}
 
 /* botão: a pílula do front */
@@ -254,7 +257,8 @@ section.alt .conta{background:var(--pa)}
 .abate{margin:22px auto 0;max-width:52ch;font-size:.92rem;color:rgba(20,19,18,.62);line-height:1.55}
 .recusa{display:block;width:100%;margin:16px 0 0;background:none;border:0;font:400 .92rem/1.5 var(--ff);
   color:rgba(20,19,18,.55);text-decoration:underline;cursor:pointer}
-.esc{margin:22px auto 0;max-width:62ch;font-size:.88rem;line-height:1.62;color:rgba(20,19,18,.6)}
+.esc{margin:22px auto 0;max-width:62ch;font-size:.88rem;line-height:1.66;color:rgba(20,19,18,.6)}
+.esc+.esc{margin-top:12px}
 
 /* garantia */
 .gar{max-width:660px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:22px;
@@ -306,6 +310,8 @@ section.alt .prova{background:var(--pa)}
   transition:transform .22s}
 .faq details[open] summary:after{transform:rotate(-135deg);top:31px}
 .faq .a{padding:0 0 20px;color:var(--mut);max-width:64ch;font-size:.98rem;line-height:1.6}
+.faq .a p{margin:0 0 11px}
+.faq .a p:last-child{margin-bottom:0}
 
 :focus-visible{outline:2px solid var(--ac);outline-offset:3px}
 footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-family:var(--fd);
@@ -375,12 +381,12 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     <!-- O rótulo em versalete é CURTO por regra: uma frase inteira em caixa alta
          de 11px com .22em de espacejamento não se lê, vira textura. A frase do
          parabéns fica em corpo de texto normal, logo acima. -->
-    <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo,
-    <b>mas o seu pedido ainda não está finalizado.</b></p>
+    <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo.<br>
+    <b>Mas o seu pedido ainda não está finalizado.</b></p>
     <!-- As duas frases são do cliente. A pergunta abre um loop que só o vídeo
          fecha, por isso ela é a H1; "a gente, trabalhando junto" é a oferta e
          foi pro bloco do preço. -->
-    <h1>Você já sabe como lançar. Mas o seu livro está <span class="u">bom de verdade<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8.4C34 3.6 78 2.4 116 4.2c26 1.2 52 3.6 82 1.4"/></svg></span>?</h1>
+    <h1>Você já sabe como lançar.<br>Mas o seu livro está <span class="u">bom de verdade<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8.4C34 3.6 78 2.4 116 4.2c26 1.2 52 3.6 82 1.4"/></svg></span>?</h1>
     <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
     <div class="player" id="vsl"></div>
     <p class="cue">Role para ver a conta ↓</p>
@@ -409,7 +415,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   <div class="w">
     <div class="meio">
       <p class="eyebrow">A conta</p>
-      <h2>Só uma das três contas<br><span class="serifa">muda a vida do autor.</span></h2>
+      <h2>São três contas possíveis.<br><span class="serifa">Só uma muda a vida do autor.</span></h2>
     </div>
     <div class="contas">
       <div class="conta">
@@ -433,10 +439,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     <div class="meio">
       <p class="eyebrow">Por que sozinho não dá</p>
       <h2>Um erro só pode fazer<br><span class="serifa">o seu livro inteiro falhar.</span></h2>
-      <p class="sub">E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo,
-      outra pessoa olha dez segundos e aponta o que estava na sua cara.
-      <b>Não é sobre a escrita.</b> É sobre tudo que decide se o leitor certo encontra,
-      escolhe e recomenda.</p>
+      <p class="sub">E ninguém enxerga o próprio erro.<br>
+      Você olha mil vezes e está tudo certo.<br>
+      Outra pessoa olha dez segundos e aponta o que estava na sua cara.</p>
+      <p class="sub"><b>Não é sobre a escrita.</b><br>
+      É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p>
     </div>
   </div>
 </section>
@@ -453,8 +460,8 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <h2>Diagnóstico do Autor</h2>
     </div>
     <div class="offer-box">
-      <p class="promessa">Uma hora no Zoom com um especialista do time da Dany,
-      <span class="risco">só sobre o seu livro</span>.</p>
+      <p class="promessa">Uma hora no Zoom com um especialista do time da Dany.<br>
+      <span class="risco">Só sobre o seu livro.</span></p>
       <div class="price"><span class="cur">R$</span><span class="val">597</span></div>
       <p class="inst">à vista, ou em até <b>12x no cartão</b></p>
       <p class="obs">* parcelado no cartão, com juros</p>
@@ -471,7 +478,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <div class="selo"><b>100%</b><i>DE VOLTA</i></div>
       <div>
         <h3>Se ao fim da hora você achar que não valeu, devolvemos</h3>
-        <p>Sem justificar. E o material continua seu.</p>
+        <p>Sem justificar.<br>E o material continua seu.</p>
       </div>
     </div>
   </div>
@@ -490,10 +497,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <div class="hl"><span class="min">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div>
       <div class="hl"><span class="min">5 min</span><div><h3>O que já está certo</h3></div></div>
       <div class="hl"><span class="min">40 min</span><div><h3>Os seus próximos passos</h3>
-        <p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do
-        seu livro</b>, escolhidas entre quinze.</p></div></div>
+        <p>O que falta e o tipo de publicação certo.<br>
+        E <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div>
       <div class="hl"><span class="min">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3>
-        <p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div>
+        <p>Se o seu caso for de algo que a gente faz, a gente conta.<br>
+        Se não for, não conta.</p></div></div>
     </div>
     <div class="meio" style="margin-top:34px">
       <a class="btn" href="#" data-aceita>Eu quero o meu diagnóstico</a>
@@ -523,19 +531,21 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       </div>
       <div class="prova">
         <p class="quem">Cláudio Yamaguchi</p>
-        <p class="antes">Anos escrevendo sobre comportamento humano. <b>“Não é isso que eu queria fazer.”</b></p>
-        <p class="depois">Um toque de fora: <b>“coloca mais você”</b>. Hoje os leitores dizem: “eu vejo você nessa obra”.</p>
+        <p class="antes">Anos escrevendo sobre comportamento humano.<br>
+        <b>“Não é isso que eu queria fazer.”</b></p>
+        <p class="depois">Um toque de fora: <b>“coloca mais você”</b>.<br>
+        Hoje os leitores dizem: “eu vejo você nessa obra”.</p>
         <a class="link" href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento ↗</a>
       </div>
       <div class="prova">
         <p class="quem">Luiz Valério</p>
-        <p class="antes">Nove livros publicados. <b>Nenhum pensado para vender.</b></p>
+        <p class="antes">Nove livros publicados.<br><b>Nenhum pensado para vender.</b></p>
         <p class="depois">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p>
         <a class="link" href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento ↗</a>
       </div>
     </div>
-    <p class="nota-prova">Alunos do Método. A leitura que alguém fez do caso deles é a que
-    acontece na sua hora.</p>
+    <p class="nota-prova">Alunos do Método.<br>
+    A leitura que alguém fez do caso deles é a que acontece na sua hora.</p>
   </div>
 </section>
 
@@ -544,7 +554,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   <div class="w">
     <div class="meio">
       <p class="eyebrow">Recapitulando</p>
-      <h2>Você sai da hora com<br><span class="serifa">o próximo passo mapeado.</span></h2>
+      <h2>Você sai da hora<br><span class="serifa">com o próximo passo mapeado.</span></h2>
     </div>
     <div class="offer-box">
       <p class="promessa">Diagnóstico do Autor</p>
@@ -559,10 +569,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <p class="obs">* parcelado no cartão, com juros</p>
       <a class="btn block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
       <button class="recusa" data-recusa>Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button>
-      <p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D. E ela só está
-      na sua frente porque ainda há vaga este mês. Cada diagnóstico é uma hora de agenda do time:
-      quando as vagas acabam, esta página deixa de aparecer. Se você fechar, a vaga fica para o
-      próximo autor que chegar aqui.</p>
+      <p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D.<br>
+      E ela só está na sua frente porque ainda há vaga este mês.</p>
+      <p class="esc">Cada diagnóstico é uma hora de agenda do time.<br>
+      Quando as vagas acabam, esta página deixa de aparecer.<br>
+      Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p>
     </div>
   </div>
 </section>
@@ -576,19 +587,21 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     <div class="faq">
       <details>
         <summary>A call é com a Dany?</summary>
-        <div class="a">Não. É com um especialista do time dela, com o critério dela. Por isso custa
-        isto, e não alguns milhares de reais.</div>
+        <div class="a"><p>Não. É com um especialista do time dela, com o critério dela.</p>
+        <p>Por isso custa isto, e não alguns milhares de reais.</p></div>
       </details>
       <details>
         <summary>Vocês vão ler o meu livro?</summary>
-        <div class="a">Não o manuscrito inteiro. O que a gente olha é o que decide se ele vai ser
-        encontrado, escolhido e lembrado: para quem ele é, como se apresenta, como foi publicado
-        e como vai ser lançado. É aí que mora a diferença entre livro profissional e livro amador.</div>
+        <div class="a"><p>Não o manuscrito inteiro.</p>
+        <p>O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado:
+        para quem ele é, como se apresenta, como foi publicado e como vai ser lançado.</p>
+        <p>É aí que mora a diferença entre livro profissional e livro amador.</p></div>
       </details>
       <details>
         <summary>Isso não é uma reunião de vendas disfarçada?</summary>
-        <div class="a">Cinquenta minutos são sobre o seu caso. Dez são de conversa, e só se o seu
-        caso for de algo que a gente faz. Está escrito acima, antes de você pagar.</div>
+        <div class="a"><p>Cinquenta minutos são sobre o seu caso.</p>
+        <p>Dez são de conversa, e só se o seu caso for de algo que a gente faz.</p>
+        <p>Está escrito acima, antes de você pagar.</p></div>
       </details>
     </div>
   </div>
