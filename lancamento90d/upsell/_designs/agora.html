@@ -1,0 +1,209 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"></head><body><title>Agora e depois</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;700&family=Fraunces:ital,wght@1,500&display=swap"><style>
+:root{--pa:#101012;--pa2:#17171A;--ink:#EFEDE8;--mut:#9A958D;--dim:#6B675F;--ru:#27272B;
+  --ac:#EAB82D;--vm:#E0574A;--ok:#63B294;
+  --ff:'DM Sans',system-ui,sans-serif;--fd:'Space Grotesk','DM Sans',sans-serif;
+  --fs:Fraunces,Georgia,serif;--brasa:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);font:400 16px/1.6 var(--ff);
+  -webkit-font-smoothing:antialiased}
+.w{max-width:1120px;margin:0 auto;padding:0 22px}
+h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.serifa{font-family:var(--fs);font-style:italic;font-weight:500;letter-spacing:-.02em}
+.eyebrow{font-family:var(--fd);font-size:.78rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ac);margin:0 0 16px}
+header{padding:56px 0 34px;border-bottom:1px solid var(--ru)}
+header h1{font-size:clamp(1.9rem,4vw,3rem)}
+header p{margin:18px 0 0;max-width:72ch;color:var(--mut)}
+header p b{color:var(--ink)}
+.item{border-bottom:1px solid var(--ru);padding:56px 0}
+.cab{display:flex;align-items:baseline;gap:12px;margin:0 0 8px;flex-wrap:wrap}
+.cab .no{font-family:var(--fd);font-weight:700;font-size:.78rem;letter-spacing:.16em;color:var(--ac)}
+.cab h2{font-size:1.3rem}
+.cab .mec{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);border:1px solid var(--ru);padding:4px 8px;border-radius:99px}
+.tese{margin:0 0 30px;color:var(--mut);max-width:76ch;font-size:.97rem}
+.tese b{color:var(--ink)}
+.palco{background:var(--pa2);border:1px solid var(--ru);border-radius:18px;
+  padding:clamp(26px,4vw,48px) clamp(18px,3vw,42px)}
+.meio{text-align:center;max-width:720px;margin:0 auto}
+.h2{font-size:clamp(1.45rem,3.1vw,2.2rem)}
+.sub{margin:16px auto 0;max-width:56ch;color:var(--mut);font-size:1rem;line-height:1.6}
+.dica{font-family:var(--fd);font-weight:700;font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);text-align:center;margin:22px 0 0}
+footer{padding:34px 0 60px;color:var(--dim);font-size:.85rem}
+
+/* capa reutilizada */
+.capa{background:#1D2A24;border-radius:4px;display:flex;flex-direction:column;padding:9%;
+  box-shadow:0 20px 44px -26px #000;aspect-ratio:2/3}
+.capa .t{font-family:var(--fd);font-weight:700;color:#EDE7D8;line-height:1.05;letter-spacing:-.03em}
+.capa .a{color:#C9A227;margin-top:auto;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+
+/* ══ A · CORTINA ══ */
+.cort{position:relative;margin:30px auto 0;max-width:680px;aspect-ratio:16/10;border-radius:14px;
+  overflow:hidden;border:1px solid var(--ru);cursor:ew-resize;user-select:none;touch-action:none}
+/* cada lado ancorado no SEU lado: com os dois centralizados, mover a alça
+   cobria justamente o conteúdo do lado de baixo e não dava pra comparar */
+.cena{position:absolute;inset:0;display:grid;align-content:center;padding:5% 6%;max-width:54%}
+.cena.hoje{justify-items:start;text-align:left;left:0}
+.cena.dep{justify-items:end;text-align:right;left:auto;right:0;max-width:100%;padding-left:46%}
+.cena.hoje{background:radial-gradient(70% 70% at 50% 40%,#1E1E22,#131316)}
+.cena.dep{background:radial-gradient(70% 70% at 50% 40%,#1A1416,#121012);
+  clip-path:inset(0 0 0 var(--x,50%));width:100%}
+.cena .capa{width:120px;margin:0 0 16px}
+.cena .capa .t{font-size:13px}.cena .capa .a{font-size:5px}
+.cena.dep .capa{width:62px;opacity:.5;filter:grayscale(.5);margin-left:auto}
+.cena.dep .capa .t{font-size:6.6px}.cena.dep .capa .a{font-size:2.6px}
+.cena .q{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);margin:0 0 10px}
+.cena .f{margin:0;font-family:var(--fd);font-weight:700;font-size:clamp(1rem,2.2vw,1.35rem);
+  letter-spacing:-.03em;line-height:1.2}
+.cena.hoje .f{color:var(--ink)}
+.cena.dep .f{color:var(--vm)}
+.cena .d{margin:8px 0 0;font-size:.9rem;color:var(--mut)}
+.alca{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;background:var(--ac);z-index:3}
+.alca:after{content:'';position:absolute;top:50%;left:50%;translate:-50% -50%;width:38px;height:38px;
+  border-radius:50%;background:var(--ac);box-shadow:0 0 0 6px rgba(234,184,45,.18)}
+.alca:before{content:'‹ ›';position:absolute;top:50%;left:50%;translate:-50% -50%;z-index:1;
+  font:700 15px/1 var(--fd);color:#141312;letter-spacing:.06em}
+
+/* ══ B · LINHA DO TEMPO ══ */
+.tl{margin:28px 0 0}
+.tl .vis{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--ru);
+  border-radius:14px;overflow:hidden;min-height:170px}
+.tl .col{padding:22px 24px}
+.tl .col+.col{border-left:1px solid var(--ru);background:rgba(224,87,74,.045)}
+.tl .k{font-family:var(--fd);font-weight:700;font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;margin:0 0 14px;color:var(--dim)}
+.tl .col+.col .k{color:var(--vm)}
+.tl .txt{margin:0;font-family:var(--fd);font-weight:700;font-size:clamp(1.05rem,2.2vw,1.3rem);
+  letter-spacing:-.03em;line-height:1.25;transition:opacity .3s ease}
+.tl .col+.col .txt{color:var(--vm)}
+.tl .sm{margin:10px 0 0;font-size:.92rem;color:var(--mut)}
+.tl .ctrl{margin:24px 0 0}
+.tl input[type=range]{width:100%;accent-color:var(--ac);height:28px}
+.tl .marcos{display:flex;justify-content:space-between;margin:2px 0 0;font-family:var(--fd);
+  font-weight:700;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.tl .marcos span.on{color:var(--ac)}
+
+/* ══ C · A ESCOLHA ══ */
+.esc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0 0}
+.op{background:var(--pa);border:1px solid var(--ru);border-radius:14px;padding:24px;text-align:left;
+  cursor:pointer;font:inherit;color:inherit;transition:border-color .25s ease,transform .25s var(--brasa)}
+.op:hover{border-color:var(--ac);transform:translateY(-2px)}
+.op .tt{font-family:var(--fd);font-weight:700;font-size:clamp(1.05rem,2.2vw,1.3rem);
+  letter-spacing:-.03em;line-height:1.2}
+.op .sb{margin:8px 0 0;font-size:.92rem;color:var(--mut)}
+.op .dep{margin:16px 0 0;padding-top:16px;border-top:1px solid var(--ru);display:none}
+.esc.revelado .op .dep{display:block}
+.esc.revelado .op{cursor:default}
+.esc.revelado .op:hover{transform:none;border-color:var(--ru)}
+.op .dep .k{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);margin:0 0 8px}
+.op .dep p{margin:0;font-size:.98rem;line-height:1.45}
+.op.ruim .dep p{color:var(--vm)}
+.op.boa .dep p{color:var(--ok)}
+.op.sua{border-color:var(--ac)}
+.op.sua:after{content:'você escolheu';display:inline-block;margin-top:12px;font-family:var(--fd);
+  font-weight:700;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.veredito{margin:24px auto 0;max-width:54ch;text-align:center;font-family:var(--fd);font-weight:700;
+  font-size:clamp(1.05rem,2.3vw,1.4rem);letter-spacing:-.03em;line-height:1.3;display:none}
+.esc.revelado+.veredito{display:block}
+
+/* ══ D · A FRASE ══ */
+/* a frase é trocada INTEIRA a cada estágio, não montada por pedaços: com
+   pedaços acumulados as linhas começavam com vírgula e a leitura tropeçava */
+.frase{margin:32px auto 0;max-width:24ch;text-align:center;font-family:var(--fd);font-weight:700;
+  font-size:clamp(1.5rem,4vw,2.7rem);letter-spacing:-.035em;line-height:1.2;min-height:4.4em;
+  display:grid;align-content:center;transition:opacity .35s ease}
+.frase.trocando{opacity:0}
+.frase em{font-style:normal;color:var(--vm)}
+.frase .risca{position:relative;white-space:nowrap}
+.frase .risca:after{content:'';position:absolute;left:-3%;right:-3%;top:53%;height:3px;
+  background:var(--vm);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--brasa) .2s}
+.frase.risca-on .risca:after{transform:scaleX(1)}
+.relogio{display:flex;justify-content:center;gap:0;margin:30px 0 0}
+.relogio button{font:700 .72rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--ru);color:var(--dim);padding:12px 18px;cursor:pointer;
+  transition:.2s}
+.relogio button:first-child{border-radius:99px 0 0 99px}
+.relogio button:last-child{border-radius:0 99px 99px 0}
+.relogio button+button{border-left:0}
+.relogio button.on{background:var(--ac);color:#141312;border-color:var(--ac)}
+
+@media(max-width:760px){.tl .vis,.esc{grid-template-columns:1fr}
+ .tl .col+.col{border-left:0;border-top:1px solid var(--ru)}
+ .relogio{flex-wrap:wrap;gap:8px}
+ .relogio button{border-radius:99px!important;border-left:1px solid var(--ru)!important}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><header><div class="w"><p class="eyebrow">Upsell do 90D · a seção da ponte</p><h1>O erro que você não vê agora<br><span class="serifa">se manifesta depois.</span></h1><p>A ideia é sua e ela é melhor que as cinco anteriores: o argumento inteiro cabe numa frase, e a frase é <b>demonstrável</b>. O que muda entre as quatro é como a pessoa faz o tempo passar com a própria mão. <b>Mexa em todas</b>: arraste, empurre, escolha, clique.</p><p>Nenhuma esconde conteúdo. Todas nascem no estado <b>agora</b>, que é legível e faz sentido sozinho; a interação só adianta o relógio. A copy é proposta minha em cima da sua frase e precisa passar pela Dany.</p></div></header><section class="item"><div class="w"><div class="cab"><span class="no">A</span><h2>A cortina</h2><span class="mec">arrastar</span></div><p class="tese">Uma cena só, cortada ao meio por uma alça que você arrasta. À esquerda, hoje: o livro pronto, grande, bonito. À direita, seis meses depois: <b>a mesma capa</b>, agora do tamanho que o mundo vê. Nada mudou no livro. Mudou o tempo. É a tradução mais direta da sua frase, e a única em que a pessoa faz o tempo passar com a mão.</p><div class="palco"><div class="meio"><p class="eyebrow">Agora × depois</p><h2 class="h2">Agora está perfeito.<br><span class="serifa">O erro só aparece depois.</span></h2><p class="sub">Arraste para o lado e veja o mesmo livro daqui a seis meses.</p></div><div class="cort" style="--x:52%"><div class="cena hoje"><div class="capa"><span class="t">Estratégia e liderança em tempos de profundas mudanças</span><span class="a">Robson Leite</span></div><p class="q">Hoje</p><p class="f">Ficou pronto. Ficou lindo.</p><p class="d">Você olhou mil vezes e está tudo certo.</p></div><div class="cena dep"><div class="capa"><span class="t">Estratégia e liderança em tempos de profundas mudanças</span><span class="a">Robson Leite</span></div><p class="q">Seis meses depois</p><p class="f">Onze vendas. Todas de quem já te conhecia.</p><p class="d">A capa é a mesma. O que mudou foi o tamanho em que o mundo a vê.</p></div><span class="alca"></span></div><p class="dica">Arraste ↔</p></div></div></section><section class="item"><div class="w"><div class="cab"><span class="no">B</span><h2>A linha do tempo</h2><span class="mec">controle</span></div><p class="tese">Um controle de dia 0 a um ano. De um lado, <b>o que você via</b>; do outro, <b>o que estava acontecendo</b>. O erro não aparece de uma vez: ele vai ficando visível conforme a pessoa empurra o tempo. É a que melhor explica POR QUE ninguém percebe na hora: no dia 0 as duas colunas parecem compatíveis.</p><div class="palco"><div class="meio"><p class="eyebrow">Agora × depois</p><h2 class="h2">O erro que você não vê hoje<br><span class="serifa">se manifesta daqui a um ano.</span></h2></div><div class="tl"><div class="vis"><div class="col"><p class="k">O que você via</p><p class="txt ve"></p><p class="sm ve-sm"></p></div><div class="col"><p class="k">O que estava acontecendo</p><p class="txt ac"></p><p class="sm ac-sm"></p></div></div><div class="ctrl"><input type="range" min="0" max="3" step="1" value="0" aria-label="Tempo desde o lançamento"><div class="marcos"><span>Lançamento</span><span>1 semana</span><span>3 meses</span><span>1 ano</span></div></div></div><p class="dica">Empurre o tempo →</p></div></div></section><section class="item"><div class="w"><div class="cab"><span class="no">C</span><h2>A escolha</h2><span class="mec">decisão</span></div><p class="tese">Dois títulos. Os dois bons, os dois defensáveis, e é impossível saber qual funciona <b>agora</b>. A pessoa escolhe um e só então vê o que cada um causa. O argumento não é "você escolheu errado": é que <b>a informação que decide não estava disponível na hora de escolher</b>. É a mais incômoda das quatro, e a que mais justifica pagar por um olhar de fora.</p><div class="palco"><div class="meio"><p class="eyebrow">Agora × depois</p><h2 class="h2">Qual destes dois você publicaria?</h2><p class="sub">Os dois são bons. Escolha um.</p></div><div class="esc"><button class="op ruim" type="button"><span class="tt">O silêncio das pontes</span><p class="sb">Poético, memorável, seu.</p><span class="dep"><p class="k">Um ano depois</p><p>Ninguém digita isso. Zero buscas por mês. O livro só é achado por quem já sabe que ele existe.</p></span></button><button class="op boa" type="button"><span class="tt">Liderar equipes remotas sem microgerenciar</span><p class="sb">Direto, específico, sem graça.</p><span class="dep"><p class="k">Um ano depois</p><p>É exatamente o que o seu leitor digita. Ele acha o livro sem nunca ter ouvido o seu nome.</p></span></button></div><p class="veredito">Você não escolheu errado.<br><span class="serifa" style="color:var(--ac)">Você escolheu sem a informação que só aparece depois.</span></p></div></div></section><section class="item"><div class="w"><div class="cab"><span class="no">D</span><h2>A frase que envelhece</h2><span class="mec">tempo tipográfico</span></div><p class="tese">Uma frase só, grande, que se reescreve conforme o tempo avança. No lançamento ela está certa. Um ano depois ela ganhou uma parte que você não tinha escrito. É a mais contida e a que menos depende de interação: funciona só com os botões, e sozinha já diz a coisa toda.</p><div class="palco"><div class="meio"><p class="eyebrow">Agora × depois</p><h2 class="h2">A mesma frase,<br><span class="serifa">um ano depois.</span></h2></div><p class="frase" id="fr1">O meu livro está <span class="risca">pronto</span>.</p><div class="relogio" data-alvo="fr1"><button class="on">Lançamento</button><button>3 meses</button><button>6 meses</button><button>1 ano</button></div><p class="dica">Avance o relógio →</p></div></div></section><footer><div class="w">The Book Business · agora × depois</div></footer><script>
+/* A · cortina */
+document.querySelectorAll('.cort').forEach(function(c){
+  function move(e){
+    var r = c.getBoundingClientRect();
+    var x = ((e.touches ? e.touches[0].clientX : e.clientX) - r.left) / r.width * 100;
+    c.style.setProperty('--x', Math.max(4, Math.min(96, x)) + '%');
+  }
+  var ativo = false;
+  c.addEventListener('pointerdown', function(e){ ativo = true; c.setPointerCapture(e.pointerId); move(e); });
+  c.addEventListener('pointermove', function(e){ if (ativo) move(e); });
+  c.addEventListener('pointerup', function(){ ativo = false; });
+  c.addEventListener('pointerleave', function(){ ativo = false; });
+});
+
+/* B · linha do tempo */
+document.querySelectorAll('.tl').forEach(function(t){
+  var r = t.querySelector('input'), ve = t.querySelector('.ve'), ac = t.querySelector('.ac');
+  var vs = t.querySelector('.ve-sm'), as = t.querySelector('.ac-sm');
+  var marcos = [].slice.call(t.querySelectorAll('.marcos span'));
+  var D = [
+    ['O livro está pronto.', 'Ficou do jeito que você imaginou.',
+     'Ninguém sabe que ele existe.', 'Ainda não tem por quê: acabou de sair.'],
+    ['Vendeu bem na primeira semana.', 'Amigos, família, a sua lista.',
+     'Todo mundo que comprou já te conhecia.', 'A primeira bolha comprou. A segunda não veio.'],
+    ['As vendas pararam.', 'Você acha que foi o algoritmo.',
+     'Quem procura o seu assunto não acha o seu livro.', 'O título não é o que ninguém digita.'],
+    ['Você já está escrevendo o próximo.', 'Esse aqui "não deu certo".',
+     'O livro não falhou. A embalagem falhou.', 'A capa, o título e a sinopse nunca foram testados.']
+  ];
+  function pinta(){
+    var i = +r.value;
+    ve.textContent = D[i][0]; vs.textContent = D[i][1];
+    ac.textContent = D[i][2]; as.textContent = D[i][3];
+    marcos.forEach(function(m, k){ m.classList.toggle('on', k === i); });
+  }
+  r.addEventListener('input', pinta); pinta();
+});
+
+/* C · a escolha */
+document.querySelectorAll('.esc').forEach(function(e){
+  e.querySelectorAll('.op').forEach(function(b){
+    b.addEventListener('click', function(){
+      if (e.classList.contains('revelado')) return;
+      e.classList.add('revelado'); b.classList.add('sua');
+    });
+  });
+});
+
+/* D · a frase */
+var FRASES = [
+  'O meu livro está <span class="risca">pronto</span>.',
+  'O meu livro está pronto <em>e ninguém achou</em>.',
+  'O meu livro está pronto e ninguém achou <em>porque ninguém procura por ele</em>.',
+  'O <span class="risca">livro</span> não falhou. <em>A embalagem falhou.</em>'
+];
+document.querySelectorAll('.relogio').forEach(function(rl){
+  var alvo = document.getElementById(rl.dataset.alvo);
+  rl.querySelectorAll('button').forEach(function(b, i){
+    b.addEventListener('click', function(){
+      rl.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      alvo.classList.add('trocando');
+      setTimeout(function(){
+        alvo.innerHTML = FRASES[i];
+        alvo.classList.remove('trocando');
+        alvo.classList.toggle('risca-on', i === 0 || i === 3);
+      }, 350);
+    });
+  });
+});
+</script></body></html>
