@@ -1,0 +1,278 @@
+# -*- coding: utf-8 -*-
+"""
+"O erro está na sua frente agora mesmo. Mas você não consegue ver."
+
+    python3 gera_erro.py [destino.html] [--artifact]
+
+A mecânica é a do cliente e é sempre a mesma nas três: o erro está na tela
+desde o primeiro instante, em texto comum, sem marca nenhuma. Conforme a
+pessoa ROLA, ele acende em âmbar e negrito, um de cada vez, e ao lado aparece
+por que aquilo é um erro.
+
+O argumento não é dito, é sofrido: a pessoa leu o bloco inteiro antes de
+qualquer coisa acender. Quando acende, ela já tinha passado os olhos por ali.
+
+O que muda entre as três é O OBJETO em que o erro mora:
+  1 A SINOPSE  o texto que o próprio autor escreveu
+  2 A FICHA    os campos como ele preencheu
+  3 A CAPA     o que está impresso
+
+Os erros das três são ensino real do Método, não invenção: falar de si em vez
+do leitor, categoria genérica, "para todos", título que não se lê no tamanho
+em que o leitor vê.
+
+⚠️ COPY toda proposta minha em cima da frase do cliente. Precisa passar pela
+Dany. Os exemplos são de um livro FICTÍCIO de propósito: marcar erro em livro
+de aluno na página de venda seria expor gente real.
+"""
+import io
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+_args = [a for a in sys.argv[1:] if not a.startswith('--')]
+OUT = _args[0] if _args else os.path.join(HERE, 'erro.html')
+
+CSS = r"""
+:root{--pa:#101012;--pa2:#17171A;--ink:#EFEDE8;--mut:#9A958D;--dim:#6B675F;--ru:#27272B;
+  --ac:#EAB82D;--vm:#E0574A;
+  --ff:'DM Sans',system-ui,sans-serif;--fd:'Space Grotesk','DM Sans',sans-serif;
+  --fs:Fraunces,Georgia,serif;--brasa:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);font:400 16px/1.6 var(--ff);
+  -webkit-font-smoothing:antialiased}
+.w{max-width:1120px;margin:0 auto;padding:0 22px}
+h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.serifa{font-family:var(--fs);font-style:italic;font-weight:500;letter-spacing:-.02em}
+.eyebrow{font-family:var(--fd);font-size:.78rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ac);margin:0 0 16px}
+header{padding:56px 0 34px;border-bottom:1px solid var(--ru)}
+header h1{font-size:clamp(1.9rem,4vw,3rem)}
+header p{margin:18px 0 0;max-width:72ch;color:var(--mut)}
+header p b{color:var(--ink)}
+header .nota{margin-top:16px;padding:14px 18px;border-left:2px solid var(--vm);
+  background:rgba(224,87,74,.06);font-size:.94rem;max-width:72ch}
+.item{border-bottom:1px solid var(--ru);padding:52px 0 0}
+.cab{display:flex;align-items:baseline;gap:12px;margin:0 0 8px;flex-wrap:wrap}
+.cab .no{font-family:var(--fd);font-weight:700;font-size:.78rem;letter-spacing:.16em;color:var(--ac)}
+.cab h2{font-size:1.3rem}
+.cab .mec{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);border:1px solid var(--ru);padding:4px 8px;border-radius:99px}
+.tese{margin:0 0 30px;color:var(--mut);max-width:76ch;font-size:.97rem}
+.tese b{color:var(--ink)}
+.meio{text-align:center;max-width:720px;margin:0 auto}
+.h2{font-size:clamp(1.5rem,3.4vw,2.4rem)}
+.sub{margin:16px auto 0;max-width:54ch;color:var(--mut);font-size:1rem}
+.dica{font-family:var(--fd);font-weight:700;font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);text-align:center;margin:26px 0 0}
+.ar{height:34vh}
+footer{padding:34px 0 60px;color:var(--dim);font-size:.85rem}
+
+/* ════ o objeto onde o erro mora ════ */
+.obj{max-width:660px;margin:34px auto 0;background:var(--pa2);border:1px solid var(--ru);
+  border-radius:16px;padding:clamp(24px,3.6vw,40px)}
+
+/* A MARCA: nasce como texto comum e acende em âmbar e negrito */
+.m{transition:color .55s ease,font-weight .55s ease,background-color .55s ease;
+  border-radius:3px;padding:0 .12em;margin:0 -.12em}
+.m.on{color:var(--ac);font-weight:700;background:rgba(234,184,45,.1)}
+
+/* a nota que explica, ao lado */
+.notas{display:grid;gap:12px;margin:26px 0 0}
+.nt{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;opacity:0;
+  transform:translateY(8px);transition:opacity .6s ease,transform .6s var(--brasa)}
+.nt.on{opacity:1;transform:none}
+.nt i{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ac);color:var(--ac);
+  display:grid;place-content:center;font-style:normal;font:700 .72rem/1 var(--fd)}
+.nt p{margin:0;font-size:.97rem;line-height:1.45;color:var(--mut)}
+.nt p b{color:var(--ink);font-weight:700}
+
+/* fecho da seção */
+.fecho{max-width:44ch;margin:34px auto 0;text-align:center;font-family:var(--fd);font-weight:700;
+  font-size:clamp(1.15rem,2.6vw,1.6rem);letter-spacing:-.03em;line-height:1.25;opacity:0;
+  transform:translateY(10px);transition:opacity .7s ease,transform .7s var(--brasa)}
+.fecho.on{opacity:1;transform:none}
+.fecho span{color:var(--ac)}
+
+/* 1 · sinopse */
+.sinopse{font-size:clamp(1.02rem,2.1vw,1.2rem);line-height:1.65;margin:0;color:var(--mut)}
+.rot{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+
+/* 2 · ficha */
+.ficha{display:grid;gap:0}
+.linha{display:grid;grid-template-columns:minmax(94px,150px) 1fr;gap:16px;padding:13px 0;
+  border-top:1px solid var(--ru);align-items:baseline}
+.linha:first-child{border-top:0}
+.linha dt{font-family:var(--fd);font-weight:700;font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);margin:0}
+.linha dd{margin:0;font-size:1.02rem;color:var(--mut)}
+.linha dd.vazio{color:var(--dim);font-style:italic}
+
+/* 3 · capa */
+.palco-capa{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,40px);align-items:center}
+.capa{width:min(190px,44vw);aspect-ratio:2/3;background:#1D2A24;border-radius:4px;display:flex;
+  flex-direction:column;padding:9%;box-shadow:0 20px 44px -26px #000}
+.capa .tt{font-family:var(--fd);font-weight:700;font-size:15px;line-height:1.08;
+  letter-spacing:-.03em;color:#EDE7D8}
+.capa .sb{font-size:7px;color:#8FA398;margin-top:6px;min-height:1em}
+.capa .au{margin-top:auto;font-family:var(--fd);font-weight:700;font-size:16px;color:#C9A227;
+  letter-spacing:-.02em}
+.capa .m.on{background:rgba(234,184,45,.18);color:var(--ac)}
+
+@media(max-width:700px){.palco-capa{grid-template-columns:1fr;justify-items:center;text-align:left}
+ .linha{grid-template-columns:1fr;gap:2px}}
+@media(prefers-reduced-motion:reduce){
+  .m,.nt,.fecho{transition:none}
+  .m{color:var(--ac);font-weight:700;background:rgba(234,184,45,.1)}
+  .nt,.fecho{opacity:1;transform:none}
+}
+"""
+
+JS = r"""
+/* O erro acende conforme a pessoa ROLA, um de cada vez.
+   O gatilho é o progresso do bloco pela tela (0 a 1), não a posição de cada
+   marca: com as marcas dentro de um parágrafo, elas cruzariam qualquer eixo
+   quase juntas e as três acenderiam de uma vez.
+   Sem JS nada acende e o bloco continua legível: o erro fica lá, como na vida. */
+(function(){
+  var blocos = [].slice.call(document.querySelectorAll('[data-erro]'));
+  if (!blocos.length) return;
+  var ETAPA = [0.30, 0.52, 0.74, 0.92];
+  function passo(){
+    blocos.forEach(function(b){
+      var r = b.getBoundingClientRect();
+      var ini = innerHeight * 0.86, fim = innerHeight * 0.34;
+      var curso = (ini - fim) + r.height;
+      var p = curso > 0 ? (ini - r.top) / curso : 1;
+      p = p < 0 ? 0 : (p > 1 ? 1 : p);
+      var ms = b.querySelectorAll('.m'), ns = b.querySelectorAll('.nt');
+      [].forEach.call(ms, function(m, i){ m.classList.toggle('on', p >= ETAPA[i]); });
+      [].forEach.call(ns, function(n, i){ n.classList.toggle('on', p >= ETAPA[i] + 0.04); });
+      var f = b.querySelector('.fecho');
+      if (f) f.classList.toggle('on', p >= ETAPA[ms.length] || p >= 0.92);
+    });
+  }
+  addEventListener('scroll', passo, {passive:true});
+  addEventListener('resize', passo);
+  passo();
+})();
+"""
+
+CABECA = ('<div class="meio"><p class="eyebrow">Por que sozinho não dá</p>'
+          '<h2 class="h2">O erro está na sua frente agora mesmo.<br>'
+          '<span class="serifa">Mas você não consegue ver.</span></h2>'
+          '<p class="sub">Leia. Depois continue rolando.</p></div>')
+
+V = []
+
+
+def add(no, nome, mec, tese, corpo):
+    V.append((no, nome, mec, tese, corpo))
+
+
+# ══ 1 · A SINOPSE ═══════════════════════════════════════════════
+add('1', 'A sinopse', 'o texto dele',
+    'O erro mora no que o próprio autor escreveu. A sinopse é lida inteira, em tom normal, e só '
+    'depois acendem as três frases em que ele fala <b>de si</b> em vez de falar do leitor. É a '
+    'mais dolorosa das três, porque quase todo autor reconhece a própria sinopse ali.',
+    CABECA +
+    '<div class="obj" data-erro><p class="rot">A sinopse, como o autor escreveu</p>'
+    '<p class="sinopse">Depois de vinte anos liderando equipes, '
+    '<span class="m">decidi colocar no papel tudo que aprendi</span>. Este livro é o resultado de '
+    '<span class="m">uma jornada pessoal</span> de descobertas sobre gestão, pessoas e propósito. '
+    'Uma obra <span class="m">para todos</span> que querem evoluir.</p>'
+    '<div class="notas">'
+    '<div class="nt"><i>1</i><p><b>Isso é sobre você.</b> O leitor não quer saber o que você '
+    'aprendeu. Quer saber o que muda pra ele.</p></div>'
+    '<div class="nt"><i>2</i><p><b>Ninguém compra a sua jornada.</b> Compra a saída da dele.</p></div>'
+    '<div class="nt"><i>3</i><p><b>Para todos é para ninguém.</b> Quem, exatamente, tem esse '
+    'problema hoje?</p></div></div>'
+    '<p class="fecho">Três erros. Você leu os três<br><span>e não viu nenhum.</span></p></div>')
+
+# ══ 2 · A FICHA ═════════════════════════════════════════════════
+add('2', 'A ficha', 'o que ele preencheu',
+    'O erro mora nos campos, e dois dos três estão <b>vazios</b>. É a versão mais fria e a mais '
+    'fácil de ler no celular, e a única em que o erro é uma <b>ausência</b>: não tem nada errado '
+    'escrito, tem coisa que nunca foi escrita.',
+    CABECA +
+    '<div class="obj" data-erro><p class="rot">A ficha do livro, como ele preencheu</p>'
+    '<dl class="ficha">'
+    '<div class="linha"><dt>Título</dt><dd>O silêncio das pontes</dd></div>'
+    '<div class="linha"><dt>Subtítulo</dt><dd class="vazio"><span class="m">não preenchido</span></dd></div>'
+    '<div class="linha"><dt>Categoria</dt><dd><span class="m">Literatura</span></dd></div>'
+    '<div class="linha"><dt>Para quem é</dt><dd class="vazio"><span class="m">não preenchido</span></dd></div>'
+    '<div class="linha"><dt>Preço</dt><dd>R$ 79,90</dd></div>'
+    '</dl>'
+    '<div class="notas">'
+    '<div class="nt"><i>1</i><p><b>O subtítulo é quem explica o livro</b> para quem não te conhece. '
+    'Sem ele, a capa tem que fazer sozinha um trabalho que ela não faz.</p></div>'
+    '<div class="nt"><i>2</i><p><b>"Literatura" não é uma categoria, é um andar inteiro da '
+    'livraria.</b> Nessa lista o seu livro fica em milésimo lugar.</p></div>'
+    '<div class="nt"><i>3</i><p><b>Enquanto isso estiver vazio</b>, todas as outras decisões são '
+    'chute: capa, título, preço, onde anunciar.</p></div></div>'
+    '<p class="fecho">Você preencheu o formulário inteiro.<br>'
+    '<span>Os campos que decidiam ficaram em branco.</span></p></div>')
+
+# ══ 3 · A CAPA ══════════════════════════════════════════════════
+add('3', 'A capa', 'o que está impresso',
+    'O erro mora no objeto que a pessoa já olhou mil vezes. Acende o que está desproporcional na '
+    'própria capa: o nome maior que o título, a linha que explicaria o livro e não existe. É a '
+    'mais visual e a que menos depende de leitura.',
+    CABECA +
+    '<div class="obj" data-erro><p class="rot">A capa, como foi para a gráfica</p>'
+    '<div class="palco-capa">'
+    '<div class="capa"><span class="tt">O silêncio <span class="m">das pontes</span></span>'
+    '<span class="sb"><span class="m">&nbsp;</span></span>'
+    '<span class="au"><span class="m">Marcos Vieira</span></span></div>'
+    '<div class="notas" style="margin:0">'
+    '<div class="nt"><i>1</i><p><b>No tamanho em que o leitor vê</b>, que é uma miniatura, esse '
+    'título some. Você nunca olhou a sua capa desse tamanho.</p></div>'
+    '<div class="nt"><i>2</i><p><b>Não há uma linha dizendo do que é o livro.</b> A capa tem uma '
+    'frase para convencer, e essa frase não foi escrita.</p></div>'
+    '<div class="nt"><i>3</i><p><b>O seu nome está maior que o título.</b> O nome vende o segundo '
+    'livro. O título vende o primeiro.</p></div></div></div>'
+    '<p class="fecho">Você olhou essa capa mil vezes.<br><span>Ela nunca olhou de volta.</span></p></div>')
+
+
+def main():
+    itens = ''.join(
+        '<section class="item"><div class="w">'
+        '<div class="cab"><span class="no">%s</span><h2>%s</h2><span class="mec">%s</span></div>'
+        '<p class="tese">%s</p><div class="ar"></div>%s<p class="dica">Continue rolando ↓</p>'
+        '<div class="ar"></div></div></section>'
+        % (no, nome, mec, tese, corpo) for no, nome, mec, tese, corpo in V)
+
+    page = (
+        '<title>O erro na sua frente</title>'
+        '<link rel="preconnect" href="https://fonts.googleapis.com">'
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
+        'family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;700&'
+        'family=Fraunces:ital,wght@1,500&display=swap">'
+        '<style>' + CSS + '</style>'
+        '<header><div class="w"><p class="eyebrow">Upsell do 90D · a seção da ponte</p>'
+        '<h1>O erro está na sua frente agora mesmo.<br>'
+        '<span class="serifa">Mas você não consegue ver.</span></h1>'
+        '<p><b>Role devagar.</b> A mecânica é a mesma nas três: o erro está na tela desde o '
+        'primeiro instante, em texto comum, sem marca nenhuma. Conforme você rola, ele acende em '
+        'âmbar e negrito, um de cada vez, e ao lado aparece por que aquilo é um erro. O argumento '
+        'não é dito, é sofrido: quando acende, você já tinha passado os olhos por ali.</p>'
+        '<p>O que muda entre as três é <b>o objeto</b> em que o erro mora.</p>'
+        '<p class="nota">Os exemplos são de um livro <b>fictício</b>, de propósito: marcar erro em '
+        'livro de aluno numa página de venda seria expor gente real. A copy é proposta minha em '
+        'cima da sua frase e precisa passar pela Dany.</p>'
+        '</div></header>' + itens +
+        '<footer><div class="w">The Book Business · o erro que estava na sua frente</div></footer>'
+        '<script>' + JS + '</script>')
+
+    if '--artifact' not in sys.argv:
+        page = ('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
+                '<meta name="viewport" content="width=device-width,initial-scale=1">'
+                '<meta name="robots" content="noindex"></head><body>' + page + '</body></html>')
+    io.open(OUT, 'w', encoding='utf-8').write(page)
+    print('  %d objetos -> %s  (%.0f KB)' % (len(V), OUT, len(page.encode('utf-8')) / 1024.0))
+
+
+if __name__ == '__main__':
+    main()
