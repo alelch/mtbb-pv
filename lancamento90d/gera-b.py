@@ -25,7 +25,8 @@ antes = s
 
 TROCAS = [
     # 1. preço e oferta
-    ('<span class="cur">R$</span>697', '<span class="cur">R$</span>597'),
+    # a marcação do preço é a do front (.price > .cur + .val, irmãos)
+    ('<span class="val">697</span>', '<span class="val">597</span>'),
     ('os R$697\n    são abatidos', 'os R$597\n    são abatidos'),
     ('<div class="p">R$697<small>', '<div class="p">R$597<small>'),
     ('?off=n740dj0b', '?off=8rn7djuk'),
