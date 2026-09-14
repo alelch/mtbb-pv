@@ -95,26 +95,29 @@ footer{padding-block:38px 70px;color:var(--dim);font-size:.85rem;border-top:1px 
   margin-top:44px}
 svg{display:block;width:100%;height:auto;overflow:visible}
 
-/* ── comum às três: a marca do lançamento e a legenda do tempo ── */
+/* ── OS RÓTULOS DE EIXO, EM TODOS OS GRÁFICOS ──
+   Cada um colado na linha que nomeia: "vendas" e "lançamento" na vertical,
+   porque as linhas deles são verticais, e "tempo" logo abaixo da linha de
+   base. Sem bold e em caixa baixa: são mobília do gráfico, não título.
+   (Foi assim que foi pro ar na página, em 14/09.) */
 .corpo{position:relative}
-/* a marca do lançamento é desenhada DENTRO de cada gráfico (mesmo x, mesmo
-   viewBox nas três), e não como uma régua em HTML por cima de tudo: assim
-   ela cruza só os traços, nunca os rótulos. Em HTML fica só a legenda. */
-.marca{position:absolute;top:-1px;left:14.375%;margin-left:8px;white-space:nowrap;
-  font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
-.tempo{display:flex;justify-content:flex-end;margin-top:12px;
-  font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-/* OS RÓTULOS DE EIXO COLAM NO EIXO QUE NOMEIAM, e só no primeiro gráfico:
-   soltos no meio do bloco ninguém sabia a que se referiam (o cliente pegou
-   isso em 14/09). "vendas" corre ao lado da linha vertical, "tempo" fecha a
-   horizontal e "lançamento" nasce em cima do próprio pontilhado. */
-.graf{position:relative}
-.eixoy{position:absolute;left:-24px;top:0;bottom:0;display:flex;align-items:center;
-  writing-mode:vertical-rl;transform:rotate(180deg);
-  font:700 .62rem/1 var(--fd);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.graf{position:relative;padding-bottom:16px}
+.graf svg{display:block;width:100%;height:auto;overflow:visible}
+.eixoy,.tempo,.marca{position:absolute;font-family:var(--fd);font-weight:400;
+  font-size:.62rem;line-height:1;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
+.eixoy,.marca{top:0;bottom:16px;display:flex;align-items:center;
+  writing-mode:vertical-rl;transform:rotate(180deg)}
+.eixoy{left:-24px;color:var(--dim)}
+.marca{right:85.625%;margin-right:6px;color:var(--ac);opacity:.85}
+.tempo{right:0;bottom:0;color:var(--dim)}
+@media(max-width:560px){
+  .eixoy{left:-20px}
+  .eixoy,.marca,.tempo{font-size:.55rem;letter-spacing:.02em}
+  .marca{margin-right:4px}
+}
 
 /* ── G1 · TRÊS FAIXAS, UM SÓ TEMPO ── */
-.g1 .corpo{padding:30px 0 0 26px}
+.g1 .corpo{padding-left:26px}
 .g1 .faixa + .faixa{margin-top:clamp(26px,3.6vw,40px)}
 .g1 .q{margin:0 0 8px;font:700 clamp(.92rem,2vw,1.12rem)/1.25 var(--fd);letter-spacing:-.03em;
   color:var(--cor)}
@@ -125,7 +128,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .g1 .base{stroke:var(--ru);stroke-width:1}
 
 /* ── G2 · UMA CURVA SÓ ── */
-.g2 .corpo{padding:30px 0 0 26px}
+.g2 .corpo{padding-left:26px}
 .g2 .rot{position:absolute;font:700 .72rem/1.28 var(--fd);letter-spacing:-.01em;
   white-space:nowrap;pointer-events:none}
 .g2 .r1{color:#93A6B8}
@@ -160,13 +163,14 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 TIT = '<h2 class="tit">A conta que <span class="risco">ninguém</span> te conta</h2>'
 MIUDO = ('<p class="miudo">Não é gráfico de dados: é o desenho do que acontece '
          'com as vendas do livro depois que o lançamento acaba.</p>')
-MARCA = '<span class="marca" style="left:%.4f%%">lançamento</span>' % LANC
+ROTULOS = ('<span class="eixoy">vendas</span><span class="marca">lançamento</span>'
+           '<span class="tempo">tempo</span>')
 # o pontilhado do lançamento, em coordenadas do gráfico
-RETA = ('<line x1="1" y1="4" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line>'
-        '<line x1="92" y1="8" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" '
+RETA = ('<line x1="1" y1="-30" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line>'
+        '<line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line>'
+        '<line x1="92" y1="-30" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" '
         'stroke-dasharray="4 5"></line>')
-TEMPO = '<div class="tempo"><span>tempo &rarr;</span></div>'
-EIXOY = '<span class="eixoy">vendas</span>'
+
 
 
 def _defs():
@@ -214,13 +218,13 @@ def g1():
         fx.append(
             '<div class="faixa%s" style="--cor:%s"><p class="q">%s</p>'
             '<div class="graf">%s'
-            '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s'
+            '<svg viewBox="0 -32 640 136" fill="none" aria-hidden="true">%s'
             '<line class="base" x1="0" y1="104" x2="640" y2="104"></line>%s%s%s</svg>'
             '</div><p class="r">%s</p></div>'
-            % (fim, COR_ROT[i], q, (EIXOY + MARCA) if i == 0 else '',
+            % (fim, COR_ROT[i], q, ROTULOS,
                _defs() if i == 0 else '', RETA, fantasmas, _traco(i), r))
-    return ('<div class="g1"><div class="corpo">%s</div>%s%s</div>'
-            % (''.join(fx), TEMPO, MIUDO))
+    return ('<div class="g1"><div class="corpo">%s</div>%s</div>'
+            % (''.join(fx), MIUDO))
 
 
 # ─────────────────────────── G2 ───────────────────────────
@@ -240,11 +244,11 @@ def g2():
     rot = ''.join('<span class="rot %s" style="left:%.1f%%;top:%.1f%%">%s</span>' % r for r in ROTS)
     leg = ''.join('<li><i style="background:%s"></i>%s</li>' % (COR[i], C[i][0])
                   for i in (0, 1, 2))
-    return ('<div class="g2"><div class="corpo"><div class="graf">%s%s'
-            '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s</svg>%s</div></div>%s'
+    return ('<div class="g2"><div class="corpo"><div class="graf">%s'
+            '<svg viewBox="0 -32 640 136" fill="none" aria-hidden="true">%s</svg>%s</div></div>'
             '<ul class="leg">%s</ul>'
             '<p class="veredito">%s</p>%s</div>'
-            % (EIXOY, MARCA, tracos, rot, TEMPO, leg, C[2][1], MIUDO))
+            % (ROTULOS, tracos, rot, leg, C[2][1], MIUDO))
 
 
 # ─────────────────────────── G3 ───────────────────────────

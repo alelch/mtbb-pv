@@ -282,22 +282,38 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
   text-shadow:0 0 30px rgba(234,184,45,.35)}
 .graf{position:relative}
 .graf svg{display:block;width:100%;height:auto;overflow:visible}
-/* OS DOIS RÓTULOS DE EIXO ficam COLADOS no eixo que nomeiam, e só no
-   primeiro gráfico: soltos no meio do bloco (como estavam) ninguém sabia a
-   que se referiam. "vendas" corre ao lado da linha vertical, "tempo" fecha a
-   horizontal, e "lançamento" nasce em cima do próprio pontilhado. */
-.eixo-y{position:absolute;left:-24px;top:0;bottom:0;display:flex;align-items:center;
-  writing-mode:vertical-rl;transform:rotate(180deg);
-  font:700 .62rem/1 var(--fd);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-.marca-lanc{position:absolute;top:-1px;left:14.375%;margin-left:8px;white-space:nowrap;
-  font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
-.eixo-x{margin:10px 0 0;text-align:right;
-  font:700 .62rem/1 var(--fd);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+/* OS RÓTULOS DE EIXO, NOS TRÊS GRÁFICOS.
+   Cada um colado na linha que nomeia: "vendas" e "lançamento" na vertical,
+   porque as linhas deles são verticais, e "tempo" logo abaixo da linha de
+   base, onde ela termina. Soltos no meio do bloco (como estavam) ninguém
+   sabia a que se referiam, e num gráfico só a pessoa que começasse a ler
+   pela segunda faixa ficava sem eles.
+
+   ⚠️ SEM BOLD e em caixa baixa (pedido do cliente): são mobília do gráfico,
+   não título. Caixa alta aqui também não caberia: "LANÇAMENTO" na vertical
+   fica mais alto que o próprio gráfico no celular.
+
+   O viewBox termina EXATAMENTE na linha de base (y=104), pra "tempo" poder
+   encostar nela por baixo. As pontas passam disso e continuam visíveis
+   porque o svg não corta (overflow:visible). */
+.graf{position:relative;padding-bottom:16px}
+.graf svg{display:block;width:100%;height:auto;overflow:visible}
+.eixo-y,.eixo-x,.marca-lanc{position:absolute;font-family:var(--fd);font-weight:400;
+  font-size:.62rem;line-height:1;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
+.eixo-y,.marca-lanc{top:0;bottom:16px;display:flex;align-items:center;
+  writing-mode:vertical-rl;transform:rotate(180deg)}
+.eixo-y{left:-24px;color:var(--dim)}
+/* encostada no pontilhado e do lado de fora dele: à direita passam as curvas */
+.marca-lanc{right:85.625%;margin-right:6px;color:var(--ac);opacity:.85}
+.eixo-x{right:0;bottom:0;color:var(--dim)}
 .nota-conta{margin:26px auto 0;max-width:56ch;text-align:center;font-size:.8rem;color:var(--dim)}
 @media(max-width:560px){
   .contas{padding-left:20px}
   .eixo-y{left:-20px}
-  .eixo-y,.marca-lanc,.eixo-x{font-size:.56rem;letter-spacing:.12em}
+  /* no celular o gráfico tem ~65px de altura: "lançamento" na vertical só
+     cabe menor e quase sem espacejamento */
+  .eixo-y,.marca-lanc,.eixo-x{font-size:.55rem;letter-spacing:.02em}
+  .marca-lanc{margin-right:4px}
 }
 
 /* o brilho da terceira curva estoura a caixa; clipar evita barra de rolagem */
@@ -534,26 +550,25 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     <div class="contas">
       <div class="conta um" style="--cor:#93A6B8">
         <p class="q">Livro bom + lançamento ruim</p>
-        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span>
-          <svg viewBox="0 0 640 112" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F7184" stop-opacity=".13"></stop><stop offset="1" stop-color="#5F7184" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".20"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAB82D" stop-opacity=".26"></stop><stop offset="1" stop-color="#EAB82D" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="4" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="8" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#5F7184" stroke-width="1.5"></circle></svg>
+        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
+          <svg viewBox="0 -32 640 136" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F7184" stop-opacity=".13"></stop><stop offset="1" stop-color="#5F7184" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".20"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAB82D" stop-opacity=".26"></stop><stop offset="1" stop-color="#EAB82D" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="-30" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="-30" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#5F7184" stroke-width="1.5"></circle></svg>
         </div>
         <p class="r">Ninguém descobre.</p>
       </div>
       <div class="conta dois" style="--cor:#E0574A">
         <p class="q">Livro ruim + lançamento bom</p>
-        <div class="graf">
-          <svg viewBox="0 0 640 112" fill="none" aria-hidden="true"><line x1="1" y1="4" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="8" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
+        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
+          <svg viewBox="0 -32 640 136" fill="none" aria-hidden="true"><line x1="1" y1="-30" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="-30" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
         </div>
         <p class="r">Vende no lançamento. Depois, esquecido.</p>
       </div>
       <div class="conta tres" style="--cor:#EFEDE8">
         <p class="q">Livro bom + lançamento bom</p>
-        <div class="graf">
-          <svg viewBox="0 0 640 112" fill="none" aria-hidden="true"><line x1="1" y1="4" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="8" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#EAB82D" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"></path><circle cx="638" cy="2" r="4.5" fill="#EAB82D" filter="drop-shadow(0 0 10px rgba(234,184,45,.85))"></circle></svg>
+        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
+          <svg viewBox="0 -32 640 136" fill="none" aria-hidden="true"><line x1="1" y1="-30" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="-30" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#EAB82D" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"></path><circle cx="638" cy="2" r="4.5" fill="#EAB82D" filter="drop-shadow(0 0 10px rgba(234,184,45,.85))"></circle></svg>
         </div>
         <p class="r">Muda a vida do autor.</p>
       </div>
-      <p class="eixo-x">tempo &rarr;</p>
       <p class="nota-conta">Não é gráfico de dados: é o desenho do que acontece com as vendas do livro depois que o lançamento acaba.</p>
     </div>
   </div>
