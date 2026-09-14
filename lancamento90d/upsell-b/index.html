@@ -410,30 +410,41 @@ html.js .revelado .acao{display:none}
    é inline dentro de uma linha centralizada: qualquer posição fixa em CSS
    erraria o alvo em outra largura de tela.
    aria-hidden: é ornamento. Quem usa leitor de tela já recebe o texto. */
-/* o espaço da seta é reservado desde sempre: ela é posicionada em top:100%
-   e, sem reserva, cai por cima do parágrafo seguinte (aconteceu com a seta 2
-   em cima de "Não é sobre a escrita"). Reservar evita isso e evita também
-   o pulo de layout quando ela entra. */
+/* A seta cola na PALAVRA, não no fim do bloco: o JS põe `left` e `top` a
+   partir do retângulo da palavra. Antes ela era ancorada no fim do
+   parágrafo e, num texto de três linhas, aparecia longe do erro.
+   Quando a palavra não está na última linha, a seta vai POR CIMA dela
+   (.acima): embaixo ela cairia em cima da linha seguinte.
+   O espaço embaixo é reservado pra seta que desce não empurrar nem cobrir
+   o parágrafo seguinte. Quem sobe não precisa de reserva. */
 .marcado{position:relative}
-html.js .marcado{padding-bottom:46px}
+html.js .marcado{padding-bottom:42px}
+html.js .marcado.sobe{padding-bottom:0}
 .seta{display:none}
-html.js .seta{display:flex;top:auto;bottom:0}
-.seta{position:absolute;top:100%;left:50%;align-items:flex-start;gap:7px;
-  transform:translate(-16px,2px);opacity:0;transition:opacity .55s ease;pointer-events:none;
+html.js .seta{display:flex}
+.seta{position:absolute;top:0;left:50%;align-items:flex-start;gap:7px;
+  transform:translate(-16px,0);opacity:0;transition:opacity .55s ease;pointer-events:none;
   font-family:var(--fd);font-weight:700;font-size:.78rem;letter-spacing:-.005em;color:var(--ac);
   white-space:nowrap;line-height:1.3}
-.seta svg{width:26px;height:30px;flex:none;margin-top:-2px}
-.seta b{margin-top:14px;font-weight:700}
+.seta svg{width:26px;height:30px;flex:none}
+.seta b{margin-top:15px;font-weight:700}
+/* a seta que sobe é a mesma, virada: a ponta passa a olhar pra baixo e o
+   rótulo desce junto pra ficar rente à palavra. */
+.seta.acima{align-items:flex-end}
+.seta.acima svg{rotate:-90deg}
+.seta.acima b{margin:0 0 3px}
 html.js .mostra-seta .seta{opacity:1}
 /* no celular não cabe seta + rótulo lado a lado: o rótulo saía da tela (e
    levava 7px de rolagem horizontal junto). Empilhado, ele fica centrado sob
    a palavra e cabe. O JS ainda trava o bloco dentro do container. */
 @media(max-width:560px){
   .seta{font-size:.72rem;flex-direction:column;align-items:center;gap:0;
-    transform:translate(-50%,2px)}
+    transform:translate(-50%,0)}
   .seta svg{width:22px;height:26px}
   .seta b{margin-top:3px;text-align:center}
-  html.js .marcado{padding-bottom:58px}
+  .seta.acima{flex-direction:column-reverse;align-items:center}
+  .seta.acima b{margin:0 0 3px}
+  html.js .marcado{padding-bottom:52px}
 }
 
 /* o que só aparece depois do clique */
@@ -700,9 +711,9 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         <span class="grito g2" aria-hidden="true"><svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 33C20 22 16 13 8 6"></path><path d="M4 14L7 4l10 2"></path></svg><b>clica agora!</b></span>
         <span class="grito g3" aria-hidden="true"><svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 33C20 22 16 13 8 6"></path><path d="M4 14L7 4l10 2"></path></svg><b>já achou?</b></span>
       </span></p>
-      <div class="marcado">
+      <div class="marcado sobe">
         <p class="viu">Viu?<br><b>Imagina o que você não <span class="palavra">esta</span> vendo nesse momento.</b></p>
-        <span class="seta" data-aponta=".viu .palavra" aria-hidden="true">
+        <span class="seta acima" data-aponta=".viu .palavra" aria-hidden="true">
           <svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2"
                stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 33C20 22 16 13 8 6"></path>
@@ -955,8 +966,10 @@ window.OFERTA = {
         var alvo = arm.querySelector(s.getAttribute('data-aponta'));
         if (!alvo || !alvo.offsetParent) return;
         var a = alvo.getBoundingClientRect(), b = s.parentNode.getBoundingClientRect();
-        var x = Math.round(a.left - b.left + a.width / 2);
+        var x = Math.round(a.left - b.left + a.width / 2), sobe = s.classList.contains('acima');
         s.style.left = x + 'px';
+        s.style.top = Math.round(sobe ? a.top - b.top - s.offsetHeight - 2
+                                      : a.bottom - b.top + 2) + 'px';
         /* trava dentro do container: em tela estreita o rótulo saía pela
            direita e criava rolagem horizontal. */
         var r = s.getBoundingClientRect(), fuga = r.right - (b.right - 4);
