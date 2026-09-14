@@ -101,7 +101,7 @@
 :root{
   /* OS DOIS FUNDOS. O passo entre eles era de 3 pontos e sumia: a página
      inteira lia como um preto só. Agora a distância é o dobro e a seção
-     clara se anuncia. --pa é o palco (herói, a conta, a armadilha: onde o
+     clara se anuncia. --pa é o palco (herói e a conta: onde o
      âmbar brilha e precisa de escuro embaixo). --pa2 é a mesa de trabalho
      (o que acontece na call, a prova, as perguntas).
      --dim subiu junto: no fundo novo ele reprovava contraste no texto
@@ -263,7 +263,6 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    #CB5F52 4,93 · #ACA69B 7,86 · #948E85 5,85 · partida #C9C3B8 10,84.
    Hierarquia é corpo e cor, nunca apagar até sumir: a terceira não
    significa nada sem as duas legíveis. */
-:root{--brasa:cubic-bezier(.16,1,.3,1)}
 .contas{margin:44px auto 0;max-width:860px;text-align:center;position:relative;isolation:isolate}
 .conta{position:relative;z-index:1}
 .conta .q{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.18}
@@ -294,8 +293,7 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    Ela chegou a partir das três iguais e se separar conforme a pessoa rolava.
    Depois de algumas rodadas de calibragem o efeito continuou sem acertar, e a
    decisão foi ficar com o ESTADO FINAL, parado: a hierarquia já está toda na
-   escala e na cor, e a página não devia dois efeitos seguidos (este e o do
-   botão "Mostrar o erro", logo abaixo).
+   escala e na cor, e um efeito de rolagem aqui competia com a leitura.
    O halo e o filete continuam, mas nascem acesos.
    Se um dia voltar, o que existia está no histórico e a prancha de escala
    está em _designs/escala.html. */
@@ -305,183 +303,38 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .conta-sec{overflow-x:clip;position:relative}
 
 /* ════════════════════════════════════════════════════════════
-   O ERRO QUE ESTÁ NA SUA FRENTE  (ideia do cliente, 14/09)
+   O SEU LIVRO ESTÁ BOM DE VERDADE?  (pedido do cliente, 14/09)
 
-   A versão anterior mostrava o erro numa sinopse dentro de um quadro. Esta é
-   melhor e é bem mais curta: o erro está na PRÓPRIA FRASE DA SEÇÃO.
+   Esta seção entrou no lugar da armadilha do erro de grafia, aquela com o
+   botão "Mostrar o erro". Ela saiu inteira a pedido do cliente; se um dia
+   voltar, está no histórico, no commit 3c7d173.
 
-   A pessoa lê "Acompanhado é smepre melhor" e não vê nada de errado, porque
-   o cérebro corrige "smepre" sozinho em frase conhecida. Logo abaixo ela lê
-   que o erro está na frente dela agora mesmo, e procura. Ao rolar, "smepre"
-   acende e é riscado: estava ali desde o começo, ela leu e passou reto.
+   Por que aqui: a H1 da página faz uma pergunta e a página nunca respondia.
+   Ia da conta direto pro preço, e "bom de verdade" ficava sendo opinião.
+   Esta seção é a resposta, e é ela que transforma a pergunta em CRITÉRIO.
 
-   É a demonstração mais barata possível e a única que acontece COM a pessoa
-   em vez de com um livro de exemplo. Some junto o problema de expor livro de
-   aluno real.
-
-   ⚠️ O ERRO DE GRAFIA É PROPOSITAL. Nunca "corrigir" o smepre.
-   ⚠️ A linha de ESCOPO logo abaixo ficou MAIS necessária, não menos: a
-   demonstração usa um erro de escrita, e sem ela a pessoa conclui que a call
-   revisa texto. Ela não revisa. */
-/* A linha da armadilha é a PRIMEIRA da seção e é âmbar, como o rótulo das
-   outras seções. Com ela já âmbar, "acender" a palavra não teria o que
-   acender: então o efeito inverte. Quando chega a hora, a LINHA INTEIRA
-   apaga para o tom de apoio e só o erro continua aceso, ganha um fundo e
-   recebe o risco. O erro passa a ser a única coisa viva na frase.
-
-   Sentença normal, não caixa alta: caixa alta com espacejamento largo faz a
-   pessoa ler letra por letra, que é exatamente quando um erro de grafia é
-   pego, e a armadilha morre. Âmbar e primeira linha, como pedido; o resto
-   fica legível de propósito. */
-.armadilha{margin:0 auto 20px;max-width:36ch;font-family:var(--fd);font-weight:700;
-  font-size:clamp(1rem,2vw,1.18rem);letter-spacing:.03em;line-height:1.35;color:var(--ac);
-  transition:color .6s ease}
-.armadilha.on{color:var(--mut)}
-/* o erro é VERMELHO, não âmbar: âmbar na página é a cor do que dá certo (a
-   conta que ganha, o preço, o botão). Erro é #E0574A, o mesmo vermelho da
-   primeira conta, medido em 5,10:1 sobre o fundo. */
-.palavra{position:relative;white-space:nowrap;color:var(--ac);
-  transition:color .45s ease,background-color .45s ease}
-.palavra:after{content:'';position:absolute;left:-6%;right:-6%;top:54%;height:3px;border-radius:2px;
-  background:#E0574A;transform:scaleX(0);transform-origin:left;
-  transition:transform .6s var(--brasa) .25s}
-.armadilha.on .palavra{color:#E0574A;background:rgba(224,87,74,.14)}
-.armadilha.on .palavra:after{transform:scaleX(1)}
-/* o SEGUNDO erro, plantado na própria frase da revelação: a pessoa acabou de
-   ser avisada de que não enxerga, e não enxerga de novo na linha seguinte.
-   "esta" sem acento, que é o erro que mais passa batido em português. */
-.viu .palavra{color:inherit;background:none}
-.viu.on .palavra{color:#E0574A;background:rgba(224,87,74,.14)}
-.viu.on .palavra:after{transform:scaleX(1)}
-/* O BOTÃO. A revelação deixou de ser automática no scroll e passou a depender
-   de um clique: a pessoa é desafiada, não acha o erro, e pede pra ver. Isso é
-   compromisso, e faz a revelação chegar em quem já admitiu que não viu.
-
-   ⚠️ Ele é chamativo de propósito (pedido do cliente), mas NÃO é igual aos
-   botões de compra: tem ícone de olho e pulsa, e os de compra não pulsam.
-   Se um dia alguém quiser mexer, a regra é essa: o mais forte da página
-   continua sendo o que leva ao checkout. */
-.acao{margin:30px 0 0;padding-bottom:50px;display:none}
-html.js .acao{display:block}
-.revelar{display:inline-flex;align-items:center;gap:11px;background:var(--ac);color:var(--pilltx);
-  border:0;border-radius:999px;cursor:pointer;font:700 clamp(1rem,2.1vw,1.16rem)/1 var(--fd);
-  letter-spacing:-.01em;padding:19px 34px;transition:transform .18s ease,background .18s ease;
-  animation:pulso-erro 2.4s ease-out infinite}
-.revelar svg{width:20px;height:20px;flex:none}
-.revelar:hover,.revelar:focus-visible{transform:translateY(-2px);background:#F5C842}
-@keyframes pulso-erro{
-  0%{box-shadow:0 0 0 0 rgba(234,184,45,.5)}
-  70%{box-shadow:0 0 0 20px rgba(234,184,45,0)}
-  100%{box-shadow:0 0 0 0 rgba(234,184,45,0)}}
-/* precisa do html.js: sem ele, `html.js .acao{display:block}` tem mais peso
-   e o botão continuava pulsando ao lado do texto que ele mesmo revelou */
-html.js .revelado .acao{display:none}
-
-/* ⚠️ AS TRÊS SETINHAS DO BOTÃO (pedido do cliente, 14/09).
-   Existem pra tirar a pessoa da posição de leitor: o botão não é enfeite nem
-   opção, é o desafio da seção. São ornamento puro (aria-hidden) e somem junto
-   com o botão, porque depois do clique o assunto é o erro, não o botão.
-   `rotate` e `translate` são propriedades separadas de `transform` de
-   propósito: a inclinação, o balanço e a centralização convivem sem uma
-   sobrescrever a outra. */
-.chamada{position:relative;display:inline-block}
-.grito{position:absolute;display:flex;align-items:flex-end;gap:5px;pointer-events:none;
-  color:var(--ac);font-family:var(--fd);font-weight:700;font-size:.88rem;letter-spacing:-.01em;
-  line-height:1.2;white-space:nowrap}
-.grito svg{width:28px;height:32px;flex:none}
-.g1{right:100%;top:50%;transform:translateY(-68%);margin-right:10px;rotate:-7deg;
-  animation:bate-e 1.6s ease-in-out infinite}
-.g1 svg{rotate:90deg}
-.g2{left:100%;top:50%;transform:translateY(-68%);margin-left:10px;rotate:7deg;
-  animation:bate-d 1.6s ease-in-out infinite .25s}
-.g3{top:100%;left:50%;transform:translateX(-50%);margin-top:6px;rotate:-3deg;
-  flex-direction:column;align-items:center;gap:2px;
-  animation:bate-b 1.6s ease-in-out infinite .5s}
-.g3 svg{rotate:45deg}
-@keyframes bate-e{50%{translate:6px -3px}}
-@keyframes bate-d{50%{translate:-6px -3px}}
-@keyframes bate-b{50%{translate:0 -6px}}
-/* no celular não há sobra dos lados: as três descem e apontam pra cima, cada
-   uma de um ângulo. O texto continua o mesmo, o gesto também. */
-@media(max-width:640px){
-  .grito{top:100%;font-size:.7rem;gap:2px;flex-direction:column;align-items:center;
-    margin:8px 0 0;transform:none}
-  .grito svg{width:20px;height:23px}
-  .g1{flex-direction:column-reverse;right:auto;left:-16px}
-  .g2{left:auto;right:-16px}
-  .g3{left:50%;transform:translateX(-50%)}
-}
-
-/* AS SETAS
-   Anotação à mão apontando cada erro. Elas são ÂMBAR e o erro é VERMELHO: o
-   âmbar é a voz de quem aponta, o vermelho é o que está errado. Trocar isso
-   faz a página dizer que o erro é a coisa boa.
-
-   A seta é posicionada por JS sob o centro exato da palavra, porque a palavra
-   é inline dentro de uma linha centralizada: qualquer posição fixa em CSS
-   erraria o alvo em outra largura de tela.
-   aria-hidden: é ornamento. Quem usa leitor de tela já recebe o texto. */
-/* A seta cola na PALAVRA, não no fim do bloco: o JS põe `left` e `top` a
-   partir do retângulo da palavra. Antes ela era ancorada no fim do
-   parágrafo e, num texto de três linhas, aparecia longe do erro.
-   Quando a palavra não está na última linha, a seta vai POR CIMA dela
-   (.acima): embaixo ela cairia em cima da linha seguinte.
-   O espaço embaixo é reservado pra seta que desce não empurrar nem cobrir
-   o parágrafo seguinte. Quem sobe não precisa de reserva. */
-.marcado{position:relative}
-html.js .marcado{padding-bottom:42px}
-html.js .marcado.sobe{padding-bottom:0}
-.seta{display:none}
-html.js .seta{display:flex}
-.seta{position:absolute;top:0;left:50%;align-items:flex-start;gap:7px;
-  transform:translate(-16px,0);opacity:0;transition:opacity .55s ease;pointer-events:none;
-  font-family:var(--fd);font-weight:700;font-size:.78rem;letter-spacing:-.005em;color:var(--ac);
-  white-space:nowrap;line-height:1.3}
-.seta svg{width:26px;height:30px;flex:none}
-.seta b{margin-top:15px;font-weight:700}
-/* a seta que sobe é a mesma, virada: a ponta passa a olhar pra baixo e o
-   rótulo desce junto pra ficar rente à palavra. */
-.seta.acima{align-items:flex-end}
-.seta.acima svg{rotate:-90deg}
-.seta.acima b{margin:0 0 3px}
-html.js .mostra-seta .seta{opacity:1}
-/* no celular não cabe seta + rótulo lado a lado: o rótulo saía da tela (e
-   levava 7px de rolagem horizontal junto). Empilhado, ele fica centrado sob
-   a palavra e cabe. O JS ainda trava o bloco dentro do container. */
-@media(max-width:560px){
-  .seta{font-size:.72rem;flex-direction:column;align-items:center;gap:0;
-    transform:translate(-50%,0)}
-  .seta svg{width:22px;height:26px}
-  .seta b{margin-top:3px;text-align:center}
-  .seta.acima{flex-direction:column-reverse;align-items:center}
-  .seta.acima b{margin:0 0 3px}
-  html.js .marcado{padding-bottom:52px}
-}
-
-/* o que só aparece depois do clique */
-.viu,.escopo{margin-left:auto;margin-right:auto}
-.viu{margin-top:34px;max-width:34ch;font-family:var(--fd);font-weight:700;
-  font-size:clamp(1.15rem,2.5vw,1.6rem);letter-spacing:-.03em;line-height:1.28}
-.viu b{color:var(--ac);font-weight:700}
-/* CADA COISA NO SEU TEMPO. Três classes, postas pelo JS em momentos
-   diferentes, porque tudo junto vira um piscar e a pessoa não registra nada:
-     .revelado  o erro 1 acende          (0,0s)
-     .explicado entra o "Viu?"           (2,7s)
-     .fechado   entra a linha de escopo  (5,9s)
-   O erro 2 e as duas setas são ligados direto pelo JS. A tabela completa dos
-   tempos está no comentário do script, no fim do arquivo. */
-html.js .viu,html.js .escopo{display:none}
-html.js .explicado .viu{display:block;animation:entra-erro .7s var(--brasa) both}
-html.js .fechado .escopo{display:block;animation:entra-erro .7s var(--brasa) both}
-html.js .viu .palavra:after{transform:scaleX(0)}
-@keyframes entra-erro{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-
-@media(prefers-reduced-motion:reduce){
-  .armadilha,.armadilha .palavra,.armadilha .palavra:after{transition:none}
-  .revelar,.grito{animation:none}
-  html.js .explicado .viu,html.js .fechado .escopo{animation:none}
-  .seta{transition:none}
-}
+   ⚠️ A COPY É PROPOSTA e precisa passar pela Dany antes de ir pro ar.
+   ⚠️ As três frentes (encontra, escolhe, recomenda) são a mesma promessa
+   que "A sua hora, por dentro" entrega mais abaixo. Mexer numa obriga a
+   mexer na outra, ou a página promete uma coisa e entrega outra.
+   ════════════════════════════════════════════════════════════ */
+.verdade .abre{margin:20px auto 0;max-width:46ch;font-family:var(--fd);font-weight:700;
+  font-size:clamp(1.12rem,2.4vw,1.45rem);letter-spacing:-.03em;line-height:1.3;color:var(--ink)}
+.verdade .abre b{color:var(--ac);font-weight:700}
+.frentes{margin:clamp(34px,5vw,50px) auto 0;max-width:620px}
+/* o filete que separa as frentes é o mesmo da conta: fio âmbar que nasce e
+   morre no transparente. Separa sem virar tabela e sem numerar, porque a
+   ordem já é a sequência (primeiro ele encontra, depois escolhe, depois
+   recomenda). Numerar aqui seria enfeite, e o cliente já cortou numeração
+   desta página uma vez, com razão. */
+.frente + .frente:before{content:"";display:block;width:min(240px,52%);height:1px;
+  margin:clamp(26px,3.6vw,36px) auto;
+  background:linear-gradient(90deg,transparent,rgba(234,184,45,.34),transparent)}
+.frente .v{margin:0;font-size:clamp(1.55rem,4vw,2.25rem);color:var(--ac);
+  text-shadow:0 0 30px rgba(234,184,45,.22)}
+.frente .d{margin:9px auto 0;max-width:44ch;color:var(--mut);font-size:1.02rem;line-height:1.6}
+.verdade .fecha{margin:clamp(34px,5vw,48px) auto 0;max-width:50ch}
+.verdade .fecha b{color:var(--ink)}
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
 .offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
@@ -695,44 +548,37 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </section>
 
-<section class="alt">
+<!-- A RESPOSTA DA PERGUNTA DA H1.
+     ⚠️ Copy PROPOSTA (14/09), ainda não aprovada pela Dany.
+     ⚠️ As três frentes são a mesma promessa da seção "A sua hora, por
+        dentro". Mudar aqui obriga a mudar lá. -->
+<section class="alt verdade">
   <div class="w">
-    <div class="meio" data-erro>
-      <!-- ⚠️ "smepre" está ERRADO DE PROPÓSITO. É o erro que a pessoa não vê.
-           Nunca corrigir. -->
-      <div class="marcado">
-        <p class="armadilha">Acompanhado é <span class="palavra">smepre</span> melhor</p>
-        <span class="seta" data-aponta=".armadilha .palavra" aria-hidden="true">
-          <svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 33C20 22 16 13 8 6"></path>
-            <path d="M4 14L7 4l10 2"></path>
-          </svg><b>o erro que você não viu</b></span>
+    <div class="meio">
+      <p class="eyebrow">A pergunta do começo</p>
+      <h2>O seu livro está <span class="risco">bom de verdade</span>?</h2>
+      <p class="abre">Bom de verdade não é bem escrito.<br>
+      É o livro que o leitor certo <b>encontra</b>, <b>escolhe</b> e <b>recomenda</b>.</p>
+      <div class="frentes">
+        <div class="frente">
+          <p class="v serifa">encontra</p>
+          <p class="d">O título, a categoria e as palavras que o seu leitor usa quando
+          procura um livro como o seu. Se ele não procura por elas, o livro não existe
+          pra ele.</p>
+        </div>
+        <div class="frente">
+          <p class="v serifa">escolhe</p>
+          <p class="d">A capa, a contracapa e a primeira página. É onde ele decide em
+          menos de um minuto, com o livro na mão ou na tela.</p>
+        </div>
+        <div class="frente">
+          <p class="v serifa">recomenda</p>
+          <p class="d">O que ele conta pro amigo depois de fechar o livro. É a única
+          propaganda que continua depois que o lançamento acaba.</p>
+        </div>
       </div>
-      <h2>O erro está na sua frente agora mesmo.<br>
-      <span class="serifa">Mas você não consegue ver.</span></h2>
-      <p class="acao"><span class="chamada">
-        <span class="grito g1" aria-hidden="true"><b>clica!</b><svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 33C20 22 16 13 8 6"></path><path d="M4 14L7 4l10 2"></path></svg></span>
-        <button class="revelar" type="button" data-revelar aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"></path>
-          <circle cx="12" cy="12" r="3"></circle>
-        </svg>Mostrar o erro</button>
-        <span class="grito g2" aria-hidden="true"><svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 33C20 22 16 13 8 6"></path><path d="M4 14L7 4l10 2"></path></svg><b>clica agora!</b></span>
-        <span class="grito g3" aria-hidden="true"><svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 33C20 22 16 13 8 6"></path><path d="M4 14L7 4l10 2"></path></svg><b>já achou?</b></span>
-      </span></p>
-      <div class="marcado sobe">
-        <p class="viu">Viu?<br><b>Imagina o que você não <span class="palavra">esta</span> vendo nesse momento.</b></p>
-        <span class="seta acima" data-aponta=".viu .palavra" aria-hidden="true">
-          <svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 33C20 22 16 13 8 6"></path>
-            <path d="M4 14L7 4l10 2"></path>
-          </svg><b>olha outro erro aqui</b></span>
-      </div>
-      <p class="sub escopo"><b>Não é sobre a escrita.</b><br>
-      É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p>
+      <p class="sub fecha"><b>Um livro pode estar bem escrito e falhar nas três.</b><br>
+      É exatamente isso que a gente olha na sua hora.</p>
     </div>
   </div>
 </section>
@@ -949,77 +795,6 @@ window.OFERTA = {
     var ver = function(){ barra.classList.toggle('on', gatilho.getBoundingClientRect().bottom < 0); };
     addEventListener('scroll', ver, {passive:true}); ver();
   }
-  var arm = document.querySelector('[data-erro]');
-  var bt = arm && arm.querySelector('[data-revelar]');
-  if (arm && bt){
-    /* ══════════════════════════════════════════════════════════
-       A ARMADILHA, COORDENADA
-
-       A regra: cada passo só entra depois de o anterior ter tido tempo de ser
-       ENTENDIDO. Tudo junto vira um piscar e a pessoa não registra nada, que
-       é o oposto do que esta seção quer.
-
-         0,0s  clique: a linha apaga, "smepre" fica vermelho e o risco começa
-               a se desenhar (leva 0,85s)
-         1,3s  seta 1, "o erro que você não viu". Só agora ela sabe o que foi
-         2,7s  entra "Viu? Imagina o que você não esta vendo nesse momento."
-         4,9s  o SEGUNDO erro acende e entra a seta 2. Os 2,2s de intervalo
-               são de propósito: sem eles a pessoa não teve tempo de ler a
-               frase e, portanto, não teve chance de NÃO VER o erro dela.
-         5,9s  a linha de escopo ("não é sobre a escrita")
-
-       Com movimento reduzido tudo entra de uma vez.
-       ══════════════════════════════════════════════════════════ */
-    /* a seta vai sob o centro exato da palavra: ela é inline numa linha
-       centralizada, então qualquer posição fixa em CSS erraria o alvo em
-       outra largura de tela. */
-    var mirar = function(){
-      [].forEach.call(arm.querySelectorAll('.seta'), function(s){
-        var alvo = arm.querySelector(s.getAttribute('data-aponta'));
-        if (!alvo || !alvo.offsetParent) return;
-        var a = alvo.getBoundingClientRect(), b = s.parentNode.getBoundingClientRect();
-        var x = Math.round(a.left - b.left + a.width / 2), sobe = s.classList.contains('acima');
-        s.style.left = x + 'px';
-        s.style.top = Math.round(sobe ? a.top - b.top - s.offsetHeight - 2
-                                      : a.bottom - b.top + 2) + 'px';
-        /* trava dentro do container: em tela estreita o rótulo saía pela
-           direita e criava rolagem horizontal. */
-        var r = s.getBoundingClientRect(), fuga = r.right - (b.right - 4);
-        if (fuga > 0) s.style.left = (x - fuga) + 'px';
-        else { fuga = (b.left + 4) - r.left; if (fuga > 0) s.style.left = (x + fuga) + 'px'; }
-      });
-    };
-    addEventListener('resize', mirar);
-
-    bt.addEventListener('click', function(){
-      var lento = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var t = function(ms, f){ setTimeout(f, lento ? 0 : ms); };
-      var marcados = arm.querySelectorAll('.marcado');
-
-      bt.setAttribute('aria-expanded', 'true');
-      arm.classList.add('revelado');
-      arm.querySelector('.armadilha').classList.add('on');
-      mirar();
-
-      t(1300, function(){ mirar(); marcados[0].classList.add('mostra-seta'); });
-
-      t(2700, function(){
-        arm.classList.add('explicado');
-        var viu = arm.querySelector('.viu');
-        if (viu){ viu.setAttribute('tabindex', '-1'); viu.focus({preventScroll:true}); }
-        mirar();
-      });
-
-      t(4900, function(){
-        arm.querySelector('.viu').classList.add('on');
-        mirar();
-        marcados[1].classList.add('mostra-seta');
-      });
-
-      t(5900, function(){ arm.classList.add('fechado'); });
-    });
-  }
-
   var fita = document.getElementById('prog');
   if (fita){
     var anda = function(){

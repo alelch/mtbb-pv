@@ -31,15 +31,30 @@ C = [
     ('Livro bom + lançamento bom',  'Muda a vida do autor.'),
 ]
 
-# o traço de cada conta. x=92 é o lançamento nas três.
+# O traço de cada conta. x=92 é o lançamento nas três.
+# ⚠️ O PICO DO BOM+BOM TEM QUE SER >= O DO RUIM+BOM (erro corrigido em 14/09,
+# o cliente pegou): o lançamento é igualmente bom nos dois, e com o livro bom
+# ele converte MAIS, não menos. A diferença entre as duas contas não está no
+# lançamento, está no que vem depois dele. Desenhar o pico do livro bom mais
+# baixo dizia, sem querer, que livro bom vende menos.
 P = [
     'M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101',
-    'M0 100 L92 100 C114 100 122 20 152 20 C184 20 198 70 240 86 C300 104 350 96 420 98 L640 99',
-    'M0 100 L92 100 C114 100 124 54 150 52 C176 50 190 64 214 64 C282 64 332 48 402 35 '
-    'C482 20 560 11 640 3',
+    'M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99',
+    'M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 '
+    'C482 19 560 9 640 2',
 ]
-FIM_Y = [101, 99, 3]          # onde cada uma termina, pro ponto final
-COR = ['#6A665F', '#9A958D', '#EAB82D']
+FIM_Y = [101, 99, 2]          # onde cada uma termina, pro ponto final
+# UMA COR POR CONTA, e cada uma diz o que aconteceu:
+#   frio azulado  o livro que ninguém encontra (nunca chegou a acender)
+#   vermelho      o que acende e morre. É o mesmo vermelho do erro da seção
+#                 de baixo, de propósito: ali e aqui ele quer dizer a mesma
+#                 coisa, "isto deu errado"
+#   âmbar         o que fica. É a cor da marca e da oferta, e na página só
+#                 ela brilha
+COR = ['#5F7184', '#E0574A', '#EAB82D']
+# o rótulo de cada conta puxa a cor da sua curva, num tom que passa em
+# contraste no fundo escuro (o traço pode ser fraco, o texto não)
+COR_ROT = ['#93A6B8', '#E0574A', '#EFEDE8']
 LANC = 92.0 / 640.0 * 100.0   # a marca do lançamento, em %
 
 
@@ -88,25 +103,31 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .marca{position:absolute;top:0;left:0;white-space:nowrap;transform:translateX(-50%);
   font:700 .62rem/1 var(--fd);letter-spacing:.16em;text-transform:uppercase;color:var(--ac)}
 .tempo{display:flex;justify-content:flex-end;margin-top:12px;
-  font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--apaga)}
+  font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+/* O EIXO VERTICAL É VENDAS. Ele é rotulado UMA vez pro grupo inteiro, não uma
+   vez por faixa: as três dividem a mesma escala, e repetir a palavra três
+   vezes diria o contrário (três gráficos soltos em vez de um sistema). */
+.eixoy{position:absolute;left:0;top:0;bottom:26px;display:flex;align-items:center;
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 
 /* ── G1 · TRÊS FAIXAS, UM SÓ TEMPO ── */
-.g1 .corpo{padding-top:30px}
+.g1 .corpo{padding:30px 0 0 26px}
 .g1 .faixa + .faixa{margin-top:clamp(26px,3.6vw,40px)}
 .g1 .q{margin:0 0 8px;font:700 clamp(.92rem,2vw,1.12rem)/1.25 var(--fd);letter-spacing:-.03em;
-  color:var(--mut)}
+  color:var(--cor)}
 .g1 .r{margin:8px 0 0;font-size:.95rem;line-height:1.4;color:var(--dim)}
-.g1 .faixa.fim .q{color:var(--ink);font-size:clamp(1.05rem,2.5vw,1.4rem)}
+.g1 .faixa.fim .q{font-size:clamp(1.05rem,2.5vw,1.4rem)}
 .g1 .faixa.fim .r{font-family:var(--fs);font-style:italic;font-weight:500;color:var(--ac);
   font-size:clamp(1.15rem,2.6vw,1.5rem)}
 .g1 .base{stroke:var(--ru);stroke-width:1}
 
 /* ── G2 · UMA CURVA SÓ ── */
-.g2 .corpo{padding-top:30px}
+.g2 .corpo{padding:30px 0 0 26px}
 .g2 .rot{position:absolute;font:700 .72rem/1.28 var(--fd);letter-spacing:-.01em;
   white-space:nowrap;pointer-events:none}
-.g2 .r1{color:#7E7A73}
-.g2 .r2{color:var(--mut)}
+.g2 .r1{color:#93A6B8}
+.g2 .r2{color:#E0574A}
 .g2 .r3{color:var(--ac)}
 .g2 .veredito{margin:26px 0 0;text-align:center;font-family:var(--fs);font-style:italic;
   font-weight:500;color:var(--ac);font-size:clamp(1.3rem,3.2vw,1.9rem);
@@ -127,21 +148,22 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .g3 .desenho svg{height:clamp(78px,12vw,112px)}
 .g3 .txt{max-width:34ch}
 .g3 .q{margin:0;font:700 clamp(.95rem,2.1vw,1.2rem)/1.25 var(--fd);letter-spacing:-.03em;
-  color:var(--mut)}
+  color:var(--cor)}
 .g3 .r{margin:7px 0 0;font-size:.95rem;line-height:1.4;color:var(--dim)}
-.g3 .faixa.fim .q{color:var(--ink);font-size:clamp(1.15rem,2.8vw,1.55rem)}
+.g3 .faixa.fim .q{font-size:clamp(1.15rem,2.8vw,1.55rem)}
 .g3 .faixa.fim .r{font-family:var(--fs);font-style:italic;font-weight:500;color:var(--ac);
   font-size:clamp(1.25rem,2.9vw,1.6rem)}
 """
 
 TIT = '<h2 class="tit">A conta que <span class="risco">ninguém</span> te conta</h2>'
-MIUDO = ('<p class="miudo">Não é gráfico de dados. É o desenho do que acontece '
-         'com o livro depois que o lançamento acaba.</p>')
+MIUDO = ('<p class="miudo">Não é gráfico de dados: é o desenho do que acontece '
+         'com as vendas do livro depois que o lançamento acaba.</p>')
 MARCA = '<span class="marca" style="left:%.4f%%">lançamento</span>' % LANC
 # o pontilhado do lançamento, em coordenadas do gráfico
 RETA = ('<line x1="92" y1="4" x2="92" y2="108" stroke="rgba(234,184,45,.34)" stroke-width="1" '
         'stroke-dasharray="4 5"></line>')
 TEMPO = '<div class="tempo"><span>os anos seguintes &rarr;</span></div>'
+EIXOY = '<span class="eixoy">vendas</span>'
 
 
 def _defs():
@@ -151,20 +173,21 @@ def _defs():
         g.append('<linearGradient id="gr%d" x1="0" y1="0" x2="0" y2="1">'
                  '<stop offset="0" stop-color="%s" stop-opacity="%s"></stop>'
                  '<stop offset="1" stop-color="%s" stop-opacity="0"></stop></linearGradient>'
-                 % (i, cor, ('.10', '.16', '.26')[i], cor))
+                 % (i, cor, ('.13', '.20', '.26')[i], cor))
     return '<defs>%s</defs>' % ''.join(g)
 
 
 def _traco(i, ghost=False, fill=True):
-    cor = '#242429' if ghost else COR[i]
+    cor = COR[i] if not ghost else COR[i]
     largura = 1.5 if ghost else (2.6 if i == 2 else 2)
+    op = ' stroke-opacity=".34"' if ghost else ''
     brilho = (' filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"'
               if (i == 2 and not ghost) else '')
     s = ''
     if fill and not ghost:
         s += '<path d="%s" fill="url(#gr%d)"></path>' % (area(P[i]), i)
-    s += ('<path d="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round"%s></path>'
-          % (P[i], cor, largura, brilho))
+    s += ('<path d="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round"%s%s>'
+          '</path>' % (P[i], cor, largura, op, brilho))
     if not ghost:
         if i == 2:
             s += ('<circle cx="638" cy="%s" r="4.5" fill="%s"'
@@ -180,15 +203,20 @@ def g1():
     fx = []
     for i, (q, r) in enumerate(C):
         fim = ' fim' if i == 2 else ''
-        fantasmas = (_traco(0, ghost=True) + _traco(1, ghost=True)) if i == 2 else ''
+        # AS CURVAS SE SOMAM: cada faixa desenha todas as anteriores por baixo,
+        # apagadas mas na cor delas. Quem chega na terceira está vendo as três
+        # no mesmo eixo, e a ultrapassagem acontece na frente da pessoa em vez
+        # de ser afirmada por escrito.
+        fantasmas = ''.join(_traco(j, ghost=True) for j in range(i))
         fx.append(
-            '<div class="faixa%s"><p class="q">%s</p>'
+            '<div class="faixa%s" style="--cor:%s"><p class="q">%s</p>'
             '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s'
             '<line class="base" x1="0" y1="104" x2="640" y2="104"></line>%s%s%s</svg>'
-            '<p class="r">%s</p></div>' % (fim, q, _defs() if i == 0 else '', RETA,
+            '<p class="r">%s</p></div>' % (fim, COR_ROT[i], q,
+                                           _defs() if i == 0 else '', RETA,
                                            fantasmas, _traco(i), r))
-    return ('<div class="g1"><div class="corpo">%s%s</div>%s%s</div>'
-            % (MARCA, ''.join(fx), TEMPO, MIUDO))
+    return ('<div class="g1"><div class="corpo">%s%s%s</div>%s%s</div>'
+            % (EIXOY, MARCA, ''.join(fx), TEMPO, MIUDO))
 
 
 # ─────────────────────────── G2 ───────────────────────────
@@ -208,11 +236,11 @@ def g2():
     rot = ''.join('<span class="rot %s" style="left:%.1f%%;top:%.1f%%">%s</span>' % r for r in ROTS)
     leg = ''.join('<li><i style="background:%s"></i>%s</li>' % (COR[i], C[i][0])
                   for i in (0, 1, 2))
-    return ('<div class="g2"><div class="corpo">%s'
+    return ('<div class="g2"><div class="corpo">%s%s'
             '<svg viewBox="0 0 640 112" fill="none" aria-hidden="true">%s</svg>%s</div>%s'
             '<ul class="leg">%s</ul>'
             '<p class="veredito">%s</p>%s</div>'
-            % (MARCA, tracos, rot, TEMPO, leg, C[2][1], MIUDO))
+            % (EIXOY, MARCA, tracos, rot, TEMPO, leg, C[2][1], MIUDO))
 
 
 # ─────────────────────────── G3 ───────────────────────────
@@ -223,12 +251,12 @@ def g3():
         # o texto vem ANTES do desenho: com o desenho em cima, a curva parecia
         # pertencer à conta de cima e o bloco perdia o pé.
         fx.append(
-            '<div class="faixa%s">'
+            '<div class="faixa%s" style="--cor:%s">'
             '<div class="txt"><p class="q">%s</p><p class="r">%s</p></div>'
             '<div class="desenho">'
             '<svg viewBox="0 0 640 104" preserveAspectRatio="none" fill="none" aria-hidden="true">'
             '%s%s</svg></div></div>'
-            % (fim, q, r, _defs() if i == 0 else '', _traco(i)))
+            % (fim, COR_ROT[i], q, r, _defs() if i == 0 else '', _traco(i)))
     return '<div class="g3">%s</div>%s' % (''.join(fx), MIUDO)
 
 
