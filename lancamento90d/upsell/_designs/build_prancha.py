@@ -32,6 +32,7 @@ CHIPS = {
  '11-suico-noturno': ['#0A0A0B', '#EFEBE1', '#E3B04B'],
  '12-capitulos':  ['#FFFFFF', '#F4F4F5', '#0B0B0C'],
  '13-suico-diurno': ['#FCFBF8', '#12110F', '#E9BE63'],
+ '14-lombada':    ['#FFFFFF', '#1A1A1A', '#FAAB00'],
 }
 # a face que dá o tom de cada uma, escrita como um spec de gráfica
 FACES = {
@@ -48,9 +49,10 @@ FACES = {
  '11-suico-noturno': 'Inter 700 + Anton só no preço',
  '12-capitulos':  'Instrument Sans + DM Mono',
  '13-suico-diurno': 'Inter 700 + Anton só no preço',
+ '14-lombada':    'Archivo 900 + Montserrat',
 }
 
-EXT = {8: 'oito', 9: 'nove', 10: 'dez', 11: 'onze', 12: 'doze', 13: 'treze'}
+EXT = {8: 'oito', 9: 'nove', 10: 'dez', 11: 'onze', 12: 'doze', 13: 'treze', 14: 'catorze'}
 NUM = EXT.get(len(RUMOS), str(len(RUMOS)))
 
 CSS = r"""

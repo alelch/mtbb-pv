@@ -16,10 +16,11 @@ from copy_base import C, RUMOS                      # noqa: E402
 import designs_a as A                               # noqa: E402
 import designs_b as B                               # noqa: E402
 import designs_c as D                               # noqa: E402
+import designs_d as E                               # noqa: E402
 
 # 06 e 09 saem do designs_c: foram escolhidos e ganharam passe de acabamento.
 # As versoes de primeira rodada continuam em designs_b (B.d06 / B.d09).
-FN = [A.d01, A.d02, A.d03, A.d04, A.d05, D.d06, B.d07, B.d08, D.d09, B.d10, D.d11, D.d12, D.d13]
+FN = [A.d01, A.d02, A.d03, A.d04, A.d05, D.d06, B.d07, B.d08, D.d09, B.d10, D.d11, D.d12, D.d13, E.d14]
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 GAL_CSS = r"""

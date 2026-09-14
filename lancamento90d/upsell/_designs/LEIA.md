@@ -1,4 +1,4 @@
-# 13 rumos de design · PV do upsell (Diagnóstico do Autor)
+# 14 rumos de design · PV do upsell (Diagnóstico do Autor)
 
 Abrir `prancha.html` desta pasta: é a galeria com todas lado a lado.
 
@@ -16,6 +16,7 @@ python3 gera.py
 - `designs_a.py` — rumos 01 a 05.
 - `designs_b.py` — rumos 07, 08, 10 (e as versões de 1ª rodada do 06 e 09).
 - `designs_c.py` — 06 e 09 **acabados** (escolhidos pelo cliente), 11, 12 e 13.
+- `designs_d.py` — 14 (LOMBADA).
   O 11 e o 13 dividem o markup (`_corpo_suico()`): são a mesma página em duas
   paletas, então não podem viver separados ou um envelhece sem o outro.
 - `gera.py` — escreve as dez pastas + a galeria.
@@ -51,6 +52,7 @@ não promover a pasta.
 | 11 | Suíço noturno | O cruzamento dos dois escolhidos: a grade do 06 no escuro do 09. |
 | 12 | Capítulos | O rumo da referência da Hotmart, com a nossa copy. |
 | 13 | Suíço diurno | O 11 no claro. Mesma grade, mesmo Anton no preço. |
+| 14 | LOMBADA | A linguagem visual da área do autor, aplicada aqui. |
 
 ## Sobre o 12 (a referência)
 
@@ -88,3 +90,29 @@ ser `background` com `padding`. A caixa de conteúdo do Anton tem 1,51em de
 altura, então a faixa de uma linha invade a linha de cima. Vira um
 `linear-gradient` com `background-size` fixo, posicionado sobre as maiúsculas.
 Conferido sem estouro horizontal em 1280 e em 375.
+
+## Sobre o 14 (LOMBADA)
+
+A direção visual da área do autor (`~/Claude Code/plataforma-do-autor`),
+aprovada em 13/09 como **"FIRE com paleta MTBB"**. Trazida com os mesmos
+valores, não "inspirada":
+
+- fundo sempre branco, painéis de cor **chapada** (zero gradiente, zero sombra)
+- corte diagonal de 26px sempre pro mesmo lado, vizinho entrando 44px por baixo
+  (as classes `corte-d` / `-ml-[44px]` do `index.css` de lá), deslizando 26→42px
+  em 14s, todos no mesmo ritmo
+- Archivo 900 caixa alta, `letter-spacing:-.03em`, `line-height:.92` + Montserrat
+- paleta MTBB idêntica; texto sobre âmbar/laranja preto, sobre verde/preto creme
+- grade de círculos no cabeçalho, um deles o anel vazado; botão `corte-btn`
+- blocos de apoio com `border-top:3px` em vez de cartão
+
+**O encaixe que fez valer a pena:** as três contas da matemágica caem
+exatamente nos três painéis diagonais que no LOMBADA são as três FASES, e a
+gramática de cor da PV do 90D (escuro=risco, laranja=os que fracassam,
+verde=o 1%) preenche os três sem adaptação nenhuma.
+
+**Não veio:** o wordmark `L○MBADA` e o anel de estado das ações. São marca e
+gramática da área do autor, não desta página.
+
+Conferido em 1280 e em 375 sem estouro horizontal. No celular os cortes
+diagonais somem e os painéis empilham (é o que o próprio LOMBADA faz).
