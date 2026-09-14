@@ -99,7 +99,14 @@
 @font-face{font-family:'Fraunces';font-style:italic;font-weight:500;font-display:swap;src:url(../assets/fonts/fraunces-italic-500-sub.woff2) format('woff2')}
 
 :root{
-  --pa:#101012; --pa2:#17171A; --ink:#EFEDE8; --mut:#9A958D; --dim:#6B675F; --ru:#27272B;
+  /* OS DOIS FUNDOS. O passo entre eles era de 3 pontos e sumia: a página
+     inteira lia como um preto só. Agora a distância é o dobro e a seção
+     clara se anuncia. --pa é o palco (herói, a conta, a armadilha: onde o
+     âmbar brilha e precisa de escuro embaixo). --pa2 é a mesa de trabalho
+     (o que acontece na call, a prova, as perguntas).
+     --dim subiu junto: no fundo novo ele reprovava contraste no texto
+     miúdo (3,2:1). Em #868178 passa em 4,5:1 nos dois fundos. */
+  --pa:#0B0B0D; --pa2:#191920; --ink:#EFEDE8; --mut:#9A958D; --dim:#868178; --ru:#2C2C33;
   --ac:#EAB82D; --acf:#EAB82D;
   --off:#F3F0E8; --offtx:#141312; --offc:#FFFFFF; --offb:#DBD6CA;
   --pill:#EAB82D; --pilltx:#141312; --pillh:#141312; --pillhtx:#EAB82D;
@@ -199,7 +206,16 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
   -webkit-box-decoration-break:clone;box-decoration-break:clone}
 
 section{padding:clamp(52px,7vw,80px) 0}
-section.alt{background:var(--pa2)}
+/* o filete marca a virada de capítulo. Só a seção clara carrega os dois,
+   e como elas se alternam, cada emenda tem exatamente um fio. */
+section.alt{background:var(--pa2);border-top:1px solid var(--ru);border-bottom:1px solid var(--ru)}
+/* herói e conta são os dois escuros seguidos: sem o fio a emenda some. */
+.conta-sec{border-top:1px solid var(--ru)}
+/* as duas seções de oferta ganham TEMPERATURA, não tom: um calor âmbar
+   nascendo no topo. É o único lugar da página onde se pede dinheiro, e
+   ele tem que parecer de outra natureza, não só de outro cinza. */
+#oferta,.oferta-sec{background:
+  radial-gradient(130% 62% at 50% 0%, rgba(234,184,45,.055), rgba(234,184,45,0) 72%)}
 .meio{text-align:center;max-width:720px;margin:0 auto}
 h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
   letter-spacing:-.03em;line-height:1.1}
@@ -823,7 +839,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 </section>
 
 <!-- PREÇO 2: aqui sim a lista completa, porque a página já explicou cada item -->
-<section>
+<section class="oferta-sec">
   <div class="w">
     <div class="meio">
       <p class="eyebrow">Recapitulando</p>
