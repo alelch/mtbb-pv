@@ -231,12 +231,10 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    palavra. A primeira fica espremida de propósito; a última tem folga.
 
    Nenhuma caixa, nenhum fio, nenhum ícone: quem hierarquiza é a tipografia. */
-/* a seção da conta tem UM eixo: rótulo, título e as três linhas começam na
-   mesma vertical. Título centrado com a conta à esquerda deixava um vazio
-   enorme à direita e duas leituras concorrentes. */
-.conta-sec .eixo{max-width:820px;margin:0;text-align:left}
-.conta-sec .eixo h2{max-width:20ch}
-.contas{margin:40px 0 0;max-width:820px;text-align:left}
+/* a página inteira é centralizada, e esta seção não é exceção: título e as
+   três linhas no mesmo eixo central. O que hierarquiza é a escala, não o
+   alinhamento. */
+.contas{margin:44px auto 0;max-width:860px;text-align:center}
 .conta{padding:6px 0}
 .conta .q{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.18;
   font-size:1rem;color:#55524D}
@@ -429,12 +427,15 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      ⚠️ O TÍTULO NÃO PODE ENTREGAR O RESULTADO. Ele já dizia "só uma muda a
      vida do autor" e três linhas abaixo a terceira conta dizia exatamente
      "Muda a vida do autor.". Com o spoiler no título a conta vira repetição e
-     a escala não revela nada. O título enquadra; quem conclui é a conta. -->
+     a escala não revela nada. O título enquadra; quem conclui é a conta.
+     Título atual é do cliente (14/09): "A conta que ninguém te conta". Uma
+     linha só, sem rótulo em versalete: a seção não precisa dos dois.
+     ⚠️ TUDO CENTRALIZADO. A página inteira é centralizada e esta seção não é
+     exceção. Quem hierarquiza aqui é a ESCALA, não o alinhamento. -->
 <section class="conta-sec">
   <div class="w">
-    <div class="eixo">
-      <p class="eyebrow">A conta</p>
-      <h2>São três contas possíveis.<br><span class="serifa">Você está em uma delas.</span></h2>
+    <div class="meio">
+      <h2>A conta que ninguém te conta</h2>
     </div>
     <div class="contas">
       <div class="conta">
