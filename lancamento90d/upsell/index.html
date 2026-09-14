@@ -22,10 +22,30 @@
      se ler como OUTRA coisa e não como "mais uma tela do mesmo checkout".
      Por isso o CSS mora aqui dentro, e as duas @font-face também.
 
-     O que veio do rumo Capítulos: numeral fantasma por capítulo, rótulo
-     miúdo em versalete, faixa em marquise, sublinhado à mão na frase-chave,
-     fita de progresso no topo, linha do tempo numerada, bloco de oferta
-     cheio e FAQ em cartão.
+     O que veio do rumo Capítulos: rótulo miúdo em versalete, sublinhado à
+     mão na frase-chave, fita de progresso no topo, fundos alternando, bloco
+     de oferta cheio e FAQ em cartão.
+
+     ⚠️ REVISÃO 14/09 (cliente: "o 01 02 03 04 não faz sentido algum"). Ele
+     está certo e o erro foi meu: numeração só se justifica quando o conteúdo
+     É uma sequência, e estes blocos não são. Saíram os numerais fantasma e
+     os rótulos "Capítulo um/dois/três", e junto saíram três outras coisas que
+     eram ornamento herdado da referência:
+       · a FAIXA EM MARQUISE, que listava as entregas antes de a pessoa saber
+         qual é a oferta, e girava sozinha sem dizer nada;
+       · a CITAÇÃO entre aspas, que repetia uma frase do próprio texto como se
+         fosse de outra pessoa;
+       · os CONTADORES 01-04 da linha do tempo. Ali o marcador certo é o
+         MINUTO (5/5/40/10), que é a informação real; o contador ao lado só
+         somava número.
+     Duas correções de conteúdo na mesma passada:
+       · a ORDEM do argumento estava invertida. "E ninguém enxerga o próprio
+         erro" vinha ANTES de "um erro só pode fazer o livro inteiro falhar",
+         ou seja, o motivo chegava antes da consequência. Voltou pra ordem do
+         texto original.
+       · a lista de entregas aparecia TRÊS vezes (marquise, caixa da oferta 1,
+         cartões). Ficou uma vez só, na recapitulação, e a oferta 1 ficou com
+         frase + preço + botão.
      O que NÃO veio: o fade-in ao rolar da referência. Numa página pós-compra
      a pessoa lê com pressa e muitas vezes no celular; esconder bloco até ele
      entrar na tela troca leitura por efeito. Aqui tudo nasce visível.
@@ -93,12 +113,32 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 
 .prog{position:fixed;top:0;left:0;height:3px;background:var(--ac);width:0;z-index:40}
 
-/* fita dos passos */
-.passos{border-bottom:1px solid var(--ru)}
-.passos ol{display:flex;gap:24px;list-style:none;margin:0;padding:13px 0;flex-wrap:wrap;
-  font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+/* A BARRA DE PASSOS é informação, não enfeite: a pessoa acabou de pagar e
+   precisa saber, sem procurar, que o pedido tem três etapas e ela está na 2.
+   Por isso ela é a coisa mais forte acima da dobra depois da H1. */
+.passos{border-bottom:1px solid var(--ru);background:var(--pa2)}
+.passos ol{display:flex;align-items:stretch;gap:0;list-style:none;margin:0;padding:0}
+.passos li{flex:1;display:flex;align-items:center;gap:10px;padding:14px 16px;position:relative;
+  font:700 13px/1.2 var(--ff);color:var(--dim);min-width:0}
+.passos li+li{border-left:1px solid var(--ru)}
+.passos .n{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-content:center;
+  font:700 12px/1 var(--ff);border:1.5px solid currentColor}
+.passos .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* feito: cumprido, some do caminho */
 .passos .feito{color:var(--mut)}
-.passos .agora{color:var(--ac)}
+.passos .feito .n{background:var(--mut);color:var(--pa2);border-color:var(--mut)}
+/* agora: a única em destaque, preenchida */
+.passos .agora{background:var(--ac);color:var(--pilltx)}
+.passos .agora .n{background:var(--pilltx);color:var(--ac);border-color:var(--pilltx)}
+.passos .agora .t{font-weight:700}
+.passos .agora:after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:3px;
+  background:var(--pilltx)}
+@media(max-width:640px){
+  .passos li{padding:11px 10px;font-size:11.5px;gap:7px}
+  .passos .n{width:22px;height:22px;font-size:11px}
+  .passos li:not(.agora) .t{display:none}
+  .passos li:not(.agora){flex:0 0 auto}
+}
 
 /* abertura */
 .hero{position:relative;text-align:center;padding:clamp(44px,6.4vw,84px) 0 clamp(34px,4vw,52px);
@@ -131,19 +171,9 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .btn.bloco{display:block;width:100%;text-align:center}
 
 /* faixa em marquise */
-.mq{background:var(--band);color:var(--bandtx);overflow:hidden;padding:14px 0}
-.mq div{display:flex;gap:32px;white-space:nowrap;width:max-content;font-family:var(--fm);
-  font-size:11px;letter-spacing:.22em;text-transform:uppercase;animation:corre 34s linear infinite}
-.mq i{font-style:normal;opacity:.45}
-@keyframes corre{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
 /* capítulos */
 .cap{position:relative;padding:clamp(48px,6.4vw,88px) 0}
 .cap.alt{background:var(--pa2)}
-.cap .ghost{position:absolute;right:clamp(8px,4vw,56px);top:clamp(26px,3.4vw,46px);
-  font-family:var(--fd);font-weight:700;font-size:clamp(64px,11vw,136px);line-height:.8;
-  letter-spacing:-.06em;color:rgba(239,237,232,.055);pointer-events:none;
-  font-variant-numeric:tabular-nums}
 .cap h2{font-size:clamp(23px,3.2vw,38px);max-width:20ch}
 .cap .tx{margin:20px 0 0;max-width:58ch;color:var(--mut);font-size:17px}
 .cap .tx b{color:var(--ink);font-weight:700}
@@ -161,13 +191,6 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .eq.win .a{color:var(--ink)}
 .eq.win .b{color:var(--ac);font-weight:700}
 
-/* citação */
-.pq{text-align:center}
-.pq .m{display:block;font-family:var(--fd);font-weight:700;font-size:42px;line-height:.6;
-  color:rgba(239,237,232,.2);margin-bottom:18px}
-.pq h2{margin:0 auto;max-width:22ch;font-size:clamp(23px,3.4vw,40px);line-height:1.12}
-.pq .tx{margin:20px auto 0;max-width:58ch}
-
 /* bloco da oferta: inverte para creme, é o único claro da página */
 .oferta{background:var(--off);color:var(--offtx);padding:clamp(46px,6vw,80px) 0}
 .oferta .rot{color:rgba(20,19,18,.5)}
@@ -179,6 +202,9 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .caixa li{font-size:15.5px;padding-left:22px;position:relative;color:rgba(20,19,18,.78)}
 .caixa li:before{content:'';position:absolute;left:0;top:8px;width:12px;height:6px;
   border-left:1.6px solid var(--offtx);border-bottom:1.6px solid var(--offtx);rotate:-45deg}
+.caixa.so-preco{align-items:center}
+.caixa.so-preco .k{font-family:var(--ff);font-size:16.5px;letter-spacing:0;text-transform:none;
+  line-height:1.5;color:rgba(20,19,18,.72);max-width:30ch;margin:0}
 .caixa .rt{text-align:right;min-width:246px}
 .caixa .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
   margin:0;color:rgba(20,19,18,.55)}
@@ -202,19 +228,18 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .gar h3{font-size:18px}
 .gar p{margin:5px 0 0;color:var(--mut);font-size:14.5px}
 
-/* linha do tempo */
-.hora{margin:28px 0 0;max-width:700px}
-.hl{display:grid;grid-template-columns:40px 1fr;gap:18px;position:relative;padding-bottom:24px}
-.hl:last-child{padding-bottom:0}
-.hl:not(:last-child):before{content:'';position:absolute;left:19px;top:38px;bottom:2px;width:1px;
-  background:var(--ru)}
-.hl .no{width:40px;height:40px;border-radius:50%;border:1px solid var(--ru);display:grid;
-  place-content:center;font-family:var(--fm);font-size:11.5px;color:var(--mut);background:var(--pa2)}
-.hl .min{font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ac);margin:0 0 5px}
+/* a hora, minuto a minuto. O marcador de cada linha é o MINUTO, que é a
+   informação real; um contador 01/02/03 ao lado dele não acrescentaria nada. */
+.hora{margin:26px 0 0;max-width:720px}
+.hl{display:grid;grid-template-columns:86px 1fr;gap:20px;padding:17px 0;border-top:1px solid var(--ru)}
+.hl:first-child{border-top:0;padding-top:0}
+.hl .min{font-family:var(--fd);font-weight:700;font-size:19px;letter-spacing:-.035em;
+  color:var(--ac);font-variant-numeric:tabular-nums}
 .hl h3{font-size:18px}
 .hl p{margin:7px 0 0;color:var(--mut);font-size:15.5px}
 .hl p b{color:var(--ink)}
+.entrega{margin:34px 0 0;padding-top:28px;border-top:1px solid var(--ru);max-width:720px}
+.entrega h3{font-size:clamp(18px,2.2vw,23px);max-width:26ch}
 
 /* cartões */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:28px 0 0}
@@ -302,9 +327,9 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <nav class="passos" aria-label="Etapas da sua compra">
   <div class="w">
     <ol>
-      <li class="feito">✓ Passo 1 · 90D garantido</li>
-      <li class="agora">2 · Acelere o resultado</li>
-      <li>3 · Acesso liberado</li>
+      <li class="feito"><span class="n" aria-hidden="true">✓</span><span class="t">Passo 1 · 90D garantido</span></li>
+      <li class="agora" aria-current="step"><span class="n" aria-hidden="true">2</span><span class="t">Passo 2 · Acelere o resultado</span></li>
+      <li><span class="n" aria-hidden="true">3</span><span class="t">Passo 3 · Acesso liberado</span></li>
     </ol>
   </div>
 </nav>
@@ -316,7 +341,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
          parabéns fica em corpo de texto normal, logo acima. -->
     <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo,
     <b>mas o seu pedido ainda não está finalizado.</b></p>
-    <p class="rot">Passo 2 de 3</p>
     <!-- As duas frases são do cliente. A pergunta abre um loop que só o vídeo
          fecha, por isso ela é a H1; "a gente, trabalhando junto" é a oferta e
          foi pro bloco do preço. -->
@@ -327,11 +351,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </header>
 
-<div class="mq" aria-hidden="true"><div>
-  <span>Uma hora no Zoom</span><i>·</i><span>Só sobre o seu livro</span><i>·</i><span>Plano de ação</span><i>·</i><span>Três frentes de lançamento</span><i>·</i><span>A gravação é sua</span><i>·</i>
-  <span>Uma hora no Zoom</span><i>·</i><span>Só sobre o seu livro</span><i>·</i><span>Plano de ação</span><i>·</i><span>Três frentes de lançamento</span><i>·</i><span>A gravação é sua</span><i>·</i>
-</div></div>
-
 <!-- ============================================================
      A MATEMÁGICA (espinha da oferta e do vídeo, cliente 08/09).
      Dá o crédito inteiro pro 90D ("você sabe lançar") e abre a única
@@ -341,48 +360,47 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      ⚠️ ESCOPO: "bom de verdade" NÃO é "bem escrito". A call não lê o
      manuscrito. É o livro como projeto (profissional × amador, vocabulário da
      Dany). A linha final e o FAQ "vocês vão ler o meu livro?" travam isso,
-     senão a pessoa espera leitura crítica e a hora vira reembolso. -->
+     senão a pessoa espera leitura crítica e a hora vira reembolso.
+
+     ⚠️ A ORDEM DESTES DOIS BLOCOS É O ARGUMENTO, não é arrumação:
+     1º as três contas (o que está em jogo), 2º por que você não resolve
+     sozinho (e é aí que a oferta faz sentido). Invertido, a oferta chega
+     antes do motivo. -->
 <section class="cap">
   <div class="w">
-    <span class="ghost" aria-hidden="true">01</span>
-    <p class="rot">Capítulo um</p>
     <h2>Só uma das três contas muda a sua vida</h2>
     <div class="eqs">
       <div class="eq"><span class="a">Livro bom + lançamento ruim</span><span class="s">=</span><span class="b">ninguém descobre.</span></div>
       <div class="eq"><span class="a">Lançamento bom + livro ruim</span><span class="s">=</span><span class="b">vende no lançamento. Depois, esquecido.</span></div>
       <div class="eq win"><span class="a">Lançamento bom + livro bom</span><span class="s">=</span><span class="b">muda a vida do autor.</span></div>
     </div>
-    <p class="tx">E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra
-    pessoa olha dez segundos e aponta o que estava na sua cara.</p>
   </div>
 </section>
 
-<section class="cap alt pq">
+<section class="cap alt">
   <div class="w">
-    <span class="m" aria-hidden="true">“</span>
     <h2>Um erro só pode fazer o seu livro inteiro falhar.</h2>
-    <p class="tx"><b>Não é sobre a escrita.</b> É sobre tudo que decide se o leitor certo encontra,
-    escolhe e recomenda.</p>
+    <p class="tx">E ninguém enxerga o próprio erro: você olha mil vezes e está tudo certo, outra
+    pessoa olha dez segundos e aponta o que estava na sua cara. <b>Não é sobre a escrita.</b>
+    É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p>
   </div>
 </section>
 
 <!-- PREÇO 1
      💰 ESTA É A VARIANTE A DO TESTE DE PREÇO: R$697 (oferta n740dj0b).
-     A B (R$597, 8rn7djuk) é a /upsell-b/, GERADA pelo gera-b.py. -->
+     A B (R$597, 8rn7djuk) é a /upsell-b/, GERADA pelo gera-b.py.
+     Sem a lista de entregas aqui de propósito: neste ponto a página ainda não
+     explicou o que é a hora. A lista existe uma vez só, na recapitulação. -->
 <section class="oferta" id="oferta">
   <div class="w">
-    <p class="rot">A gente, trabalhando junto no seu livro. Quer?</p>
+    <p class="sub" style="margin:0 0 10px">A gente, trabalhando junto no seu livro. Quer?</p>
     <h2>Diagnóstico do Autor</h2>
-    <p class="sub">Uma hora no Zoom com um especialista do time da Dany, só sobre o seu livro.</p>
-    <div class="caixa">
-      <ul>
-        <li>Uma hora no Zoom só sobre o seu livro</li>
-        <li>Um plano de ação, com o que fazer primeiro</li>
-        <li>Três frentes de lançamento escolhidas para você</li>
-        <li>A gravação, para sempre</li>
-      </ul>
+    <div class="caixa so-preco">
+      <div>
+        <p class="k">Uma hora no Zoom com um especialista do time da Dany,
+        só sobre o seu livro.</p>
+      </div>
       <div class="rt">
-        <p class="k">Investimento</p>
         <p class="val"><span class="cur">R$</span>697</p>
         <p class="sm">à vista, ou em até <b>12x no cartão</b></p>
         <p class="sm t">* parcelado no cartão, com juros</p>
@@ -412,30 +430,23 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      🚫 NÃO PROMETER DATA (a call só crava data pra quem tem livro pronto). -->
 <section class="cap alt">
   <div class="w">
-    <span class="ghost" aria-hidden="true">02</span>
-    <p class="rot">Capítulo dois</p>
     <h2>A sua hora, por dentro</h2>
     <div class="hora">
-      <div class="hl"><span class="no">01</span><div><p class="min">5 min</p><h3>Quem é você e onde o livro está</h3></div></div>
-      <div class="hl"><span class="no">02</span><div><p class="min">5 min</p><h3>O que já está certo</h3></div></div>
-      <div class="hl"><span class="no">03</span><div><p class="min">40 min</p><h3>Os seus próximos passos</h3>
+      <div class="hl"><span class="min">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div>
+      <div class="hl"><span class="min">5 min</span><div><h3>O que já está certo</h3></div></div>
+      <div class="hl"><span class="min">40 min</span><div><h3>Os seus próximos passos</h3>
         <p>O que falta, o tipo de publicação certo, e <b>as três frentes de lançamento do
         seu livro</b>, escolhidas entre quinze.</p></div></div>
-      <div class="hl"><span class="no">04</span><div><p class="min">10 min</p><h3>Dúvidas, e uma conversa honesta</h3>
+      <div class="hl"><span class="min">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3>
         <p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div></div>
     </div>
-  </div>
-</section>
-
-<section class="cap">
-  <div class="w">
-    <span class="ghost" aria-hidden="true">03</span>
-    <p class="rot">Capítulo três</p>
-    <h2>Você sai com um plano de ação e os próximos passos mapeados.</h2>
-    <div class="cards">
-      <div class="cd"><span class="ck">✓</span><p><b>O que consertar primeiro</b>, e o que deixar pra depois</p></div>
-      <div class="cd"><span class="ck">✓</span><p><b>As três frentes escolhidas</b> para o seu livro</p></div>
-      <div class="cd"><span class="ck">✓</span><p><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</p></div>
+    <div class="entrega">
+      <h3>Você sai com um plano de ação e os próximos passos mapeados.</h3>
+      <div class="cards">
+        <div class="cd"><span class="ck">✓</span><p><b>O que consertar primeiro</b>, e o que deixar pra depois</p></div>
+        <div class="cd"><span class="ck">✓</span><p><b>As três frentes escolhidas</b> para o seu livro</p></div>
+        <div class="cd"><span class="ck">✓</span><p><b>A gravação</b>, sua mesmo se pedir o dinheiro de volta</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -449,8 +460,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      pronto e errado na embalagem, e alguem de fora viu o que eles nao viam. -->
 <section class="cap alt">
   <div class="w">
-    <span class="ghost" aria-hidden="true">04</span>
-    <p class="rot">Quem já passou</p>
     <h2>Quem já passou por essa leitura</h2>
     <div class="provas">
       <div class="prova">
@@ -507,7 +516,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 
 <section class="cap">
   <div class="w">
-    <p class="rot">Dúvidas</p>
     <h2>Perguntas frequentes</h2>
     <div class="faq">
       <details>
