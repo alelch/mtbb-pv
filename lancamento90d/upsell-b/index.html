@@ -239,15 +239,12 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    A CONTA
    A página inteira é centralizada, e esta seção não é exceção.
 
-   As três nascem IGUAIS: mesmo corpo, mesma cor, mesmo respiro. São três
-   possibilidades e, no começo, nenhuma vale mais que a outra. É rolando que
-   elas se separam, e essa separação É o argumento.
-
-   Estado final de cada uma:
-     1ª  a pior. Encolhe, recua e fica VERMELHA: fica lá atrás, como aviso.
+   As três são três possibilidades da mesma conta, e a separação entre elas É
+   o argumento. Quem hierarquiza é o CORPO e a COR, sem efeito nenhum:
+     1ª  a pior. Menor, recuada e VERMELHA: fica lá atrás, como aviso.
      2ª  a do meio. Corpo médio, tom neutro. Nem morre nem brilha.
-     3ª  a que fecha. Cresce, vai pra Fraunces itálica âmbar, ganha o halo
-         que acende a seção e o filete que se desenha embaixo.
+     3ª  a que fecha. 48px, Fraunces itálica âmbar, com o halo que acende a
+         seção e o filete embaixo.
 
    ⚠️ SEM JS o estado final é o que fica, porque é ele que significa. A
    classe .js (posta no <head>, antes de pintar) é que liga a partida igual.
@@ -282,41 +279,19 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
   width:min(920px,150%);height:360px;pointer-events:none;
   background:radial-gradient(50% 50% at 50% 50%,rgba(234,184,45,.16),rgba(234,184,45,.05) 45%,transparent 72%)}
 
-/* ── com JS: partem iguais e cada uma assume o seu ao cruzar a leitura ── */
-/* a mudança é grande (23px -> 48px), então precisa de tempo: em .65s ela
-   parecia um estalo. E o corpo demora um pouco mais que a cor, senão o
-   tamanho chega antes e a linha "pisca". */
-html.js .conta{transition:padding .9s var(--brasa),transform .9s var(--brasa),opacity .7s ease}
-html.js .conta .q,html.js .conta .r{transition:font-size .9s var(--brasa),color .7s ease .1s,
-  text-shadow 1.1s ease .2s,letter-spacing .9s var(--brasa)}
-html.js .conta:not(.fim){padding:30px 0;transform:none;opacity:1}
-html.js .conta:not(.fim) .q{font-size:clamp(1.15rem,2.3vw,1.45rem);color:#C9C3B8}
-/* a Fraunces também é peso: na partida a terceira usa a mesma sans das outras
-   duas, senão ela já chega diferente e a separação deixa de acontecer na tela */
-html.js .conta:not(.fim) .r{font-size:clamp(1rem,1.9vw,1.15rem);color:#9A958D;text-shadow:none;
-  font-family:var(--ff);font-style:normal;font-weight:400;letter-spacing:0}
-html.js .conta.tres:after{width:0;transition:width 1.2s var(--brasa) .2s}
-html.js .conta.tres.fim:after{width:min(340px,66%)}
-html.js .contas .luz{opacity:0;transition:opacity 1.2s ease}
-html.js .contas.acesa .luz{opacity:1}
+/* ⚠️ A CONTA NÃO TEM MAIS EFEITO (decisão do cliente, 14/09).
+   Ela chegou a partir das três iguais e se separar conforme a pessoa rolava.
+   Depois de algumas rodadas de calibragem o efeito continuou sem acertar, e a
+   decisão foi ficar com o ESTADO FINAL, parado: a hierarquia já está toda na
+   escala e na cor, e a página não devia dois efeitos seguidos (este e o do
+   botão "Mostrar o erro", logo abaixo).
+   O halo e o filete continuam, mas nascem acesos.
+   Se um dia voltar, o que existia está no histórico e a prancha de escala
+   está em _designs/escala.html. */
 
-/* no celular o respiro inicial encolhe, senão o bloco não cabe numa dobra */
-@media(max-width:700px){
-  html.js .conta:not(.fim){padding:20px 0}
-  .conta.dois{padding:20px 0}
-  .conta.tres{padding:38px 0 8px}
-}
 /* a seção clipa: o halo tem 150% de largura e transform não pode criar
    barra de rolagem horizontal */
 .conta-sec{overflow-x:clip;position:relative}
-
-@media(prefers-reduced-motion:reduce){
-  html.js .conta,html.js .conta .q,html.js .conta .r{transition:none}
-  html.js .conta:not(.fim){padding:revert;transform:revert;opacity:revert}
-  html.js .conta:not(.fim) .q,html.js .conta:not(.fim) .r{font-size:revert;color:revert}
-  html.js .conta.tres:after{width:min(340px,66%);transition:none}
-  html.js .contas .luz{opacity:1;transition:none}
-}
 
 /* ════════════════════════════════════════════════════════════
    O ERRO QUE ESTÁ NA SUA FRENTE  (ideia do cliente, 14/09)
@@ -351,13 +326,22 @@ html.js .contas.acesa .luz{opacity:1}
   font-size:clamp(1rem,2vw,1.18rem);letter-spacing:.03em;line-height:1.35;color:var(--ac);
   transition:color .6s ease}
 .armadilha.on{color:var(--mut)}
+/* o erro é VERMELHO, não âmbar: âmbar na página é a cor do que dá certo (a
+   conta que ganha, o preço, o botão). Erro é #E0574A, o mesmo vermelho da
+   primeira conta, medido em 5,10:1 sobre o fundo. */
 .palavra{position:relative;white-space:nowrap;color:var(--ac);
-  transition:background-color .5s ease}
+  transition:color .45s ease,background-color .45s ease}
 .palavra:after{content:'';position:absolute;left:-6%;right:-6%;top:54%;height:3px;border-radius:2px;
-  background:var(--ac);transform:scaleX(0);transform-origin:left;
-  transition:transform .6s var(--brasa) .3s}
-.armadilha.on .palavra{background:rgba(234,184,45,.14)}
+  background:#E0574A;transform:scaleX(0);transform-origin:left;
+  transition:transform .6s var(--brasa) .25s}
+.armadilha.on .palavra{color:#E0574A;background:rgba(224,87,74,.14)}
 .armadilha.on .palavra:after{transform:scaleX(1)}
+/* o SEGUNDO erro, plantado na própria frase da revelação: a pessoa acabou de
+   ser avisada de que não enxerga, e não enxerga de novo na linha seguinte.
+   "esta" sem acento, que é o erro que mais passa batido em português. */
+.viu .palavra{color:inherit;background:none}
+.viu.on .palavra{color:#E0574A;background:rgba(224,87,74,.14)}
+.viu.on .palavra:after{transform:scaleX(1)}
 /* O BOTÃO. A revelação deixou de ser automática no scroll e passou a depender
    de um clique: a pessoa é desafiada, não acha o erro, e pede pra ver. Isso é
    compromisso, e faz a revelação chegar em quem já admitiu que não viu.
@@ -366,7 +350,7 @@ html.js .contas.acesa .luz{opacity:1}
    botões de compra: tem ícone de olho e pulsa, e os de compra não pulsam.
    Se um dia alguém quiser mexer, a regra é essa: o mais forte da página
    continua sendo o que leva ao checkout. */
-.acao{margin:30px 0 0;display:none}
+.acao{margin:30px 0 0;padding-bottom:50px;display:none}
 html.js .acao{display:block}
 .revelar{display:inline-flex;align-items:center;gap:11px;background:var(--ac);color:var(--pilltx);
   border:0;border-radius:999px;cursor:pointer;font:700 clamp(1rem,2.1vw,1.16rem)/1 var(--fd);
@@ -382,20 +366,99 @@ html.js .acao{display:block}
    e o botão continuava pulsando ao lado do texto que ele mesmo revelou */
 html.js .revelado .acao{display:none}
 
+/* ⚠️ AS TRÊS SETINHAS DO BOTÃO (pedido do cliente, 14/09).
+   Existem pra tirar a pessoa da posição de leitor: o botão não é enfeite nem
+   opção, é o desafio da seção. São ornamento puro (aria-hidden) e somem junto
+   com o botão, porque depois do clique o assunto é o erro, não o botão.
+   `rotate` e `translate` são propriedades separadas de `transform` de
+   propósito: a inclinação, o balanço e a centralização convivem sem uma
+   sobrescrever a outra. */
+.chamada{position:relative;display:inline-block}
+.grito{position:absolute;display:flex;align-items:flex-end;gap:5px;pointer-events:none;
+  color:var(--ac);font-family:var(--fd);font-weight:700;font-size:.88rem;letter-spacing:-.01em;
+  line-height:1.2;white-space:nowrap}
+.grito svg{width:28px;height:32px;flex:none}
+.g1{right:100%;top:50%;transform:translateY(-68%);margin-right:10px;rotate:-7deg;
+  animation:bate-e 1.6s ease-in-out infinite}
+.g1 svg{rotate:90deg}
+.g2{left:100%;top:50%;transform:translateY(-68%);margin-left:10px;rotate:7deg;
+  animation:bate-d 1.6s ease-in-out infinite .25s}
+.g3{top:100%;left:50%;transform:translateX(-50%);margin-top:6px;rotate:-3deg;
+  flex-direction:column;align-items:center;gap:2px;
+  animation:bate-b 1.6s ease-in-out infinite .5s}
+.g3 svg{rotate:45deg}
+@keyframes bate-e{50%{translate:6px -3px}}
+@keyframes bate-d{50%{translate:-6px -3px}}
+@keyframes bate-b{50%{translate:0 -6px}}
+/* no celular não há sobra dos lados: as três descem e apontam pra cima, cada
+   uma de um ângulo. O texto continua o mesmo, o gesto também. */
+@media(max-width:640px){
+  .grito{top:100%;font-size:.7rem;gap:2px;flex-direction:column;align-items:center;
+    margin:8px 0 0;transform:none}
+  .grito svg{width:20px;height:23px}
+  .g1{flex-direction:column-reverse;right:auto;left:-16px}
+  .g2{left:auto;right:-16px}
+  .g3{left:50%;transform:translateX(-50%)}
+}
+
+/* AS SETAS
+   Anotação à mão apontando cada erro. Elas são ÂMBAR e o erro é VERMELHO: o
+   âmbar é a voz de quem aponta, o vermelho é o que está errado. Trocar isso
+   faz a página dizer que o erro é a coisa boa.
+
+   A seta é posicionada por JS sob o centro exato da palavra, porque a palavra
+   é inline dentro de uma linha centralizada: qualquer posição fixa em CSS
+   erraria o alvo em outra largura de tela.
+   aria-hidden: é ornamento. Quem usa leitor de tela já recebe o texto. */
+/* o espaço da seta é reservado desde sempre: ela é posicionada em top:100%
+   e, sem reserva, cai por cima do parágrafo seguinte (aconteceu com a seta 2
+   em cima de "Não é sobre a escrita"). Reservar evita isso e evita também
+   o pulo de layout quando ela entra. */
+.marcado{position:relative}
+html.js .marcado{padding-bottom:46px}
+.seta{display:none}
+html.js .seta{display:flex;top:auto;bottom:0}
+.seta{position:absolute;top:100%;left:50%;align-items:flex-start;gap:7px;
+  transform:translate(-16px,2px);opacity:0;transition:opacity .55s ease;pointer-events:none;
+  font-family:var(--fd);font-weight:700;font-size:.78rem;letter-spacing:-.005em;color:var(--ac);
+  white-space:nowrap;line-height:1.3}
+.seta svg{width:26px;height:30px;flex:none;margin-top:-2px}
+.seta b{margin-top:14px;font-weight:700}
+html.js .mostra-seta .seta{opacity:1}
+/* no celular não cabe seta + rótulo lado a lado: o rótulo saía da tela (e
+   levava 7px de rolagem horizontal junto). Empilhado, ele fica centrado sob
+   a palavra e cabe. O JS ainda trava o bloco dentro do container. */
+@media(max-width:560px){
+  .seta{font-size:.72rem;flex-direction:column;align-items:center;gap:0;
+    transform:translate(-50%,2px)}
+  .seta svg{width:22px;height:26px}
+  .seta b{margin-top:3px;text-align:center}
+  html.js .marcado{padding-bottom:58px}
+}
+
 /* o que só aparece depois do clique */
 .viu,.escopo{margin-left:auto;margin-right:auto}
 .viu{margin-top:34px;max-width:34ch;font-family:var(--fd);font-weight:700;
   font-size:clamp(1.15rem,2.5vw,1.6rem);letter-spacing:-.03em;line-height:1.28}
 .viu b{color:var(--ac);font-weight:700}
+/* CADA COISA NO SEU TEMPO. Três classes, postas pelo JS em momentos
+   diferentes, porque tudo junto vira um piscar e a pessoa não registra nada:
+     .revelado  o erro 1 acende          (0,0s)
+     .explicado entra o "Viu?"           (2,7s)
+     .fechado   entra a linha de escopo  (5,9s)
+   O erro 2 e as duas setas são ligados direto pelo JS. A tabela completa dos
+   tempos está no comentário do script, no fim do arquivo. */
 html.js .viu,html.js .escopo{display:none}
-html.js .revelado .viu,html.js .revelado .escopo{display:block;animation:entra-erro .7s var(--brasa) both}
-html.js .revelado .escopo{animation-delay:.25s}
+html.js .explicado .viu{display:block;animation:entra-erro .7s var(--brasa) both}
+html.js .fechado .escopo{display:block;animation:entra-erro .7s var(--brasa) both}
+html.js .viu .palavra:after{transform:scaleX(0)}
 @keyframes entra-erro{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
 @media(prefers-reduced-motion:reduce){
   .armadilha,.armadilha .palavra,.armadilha .palavra:after{transition:none}
-  .revelar{animation:none}
-  html.js .revelado .viu,html.js .revelado .escopo{animation:none}
+  .revelar,.grito{animation:none}
+  html.js .explicado .viu,html.js .fechado .escopo{animation:none}
+  .seta{transition:none}
 }
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
@@ -615,16 +678,37 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     <div class="meio" data-erro>
       <!-- ⚠️ "smepre" está ERRADO DE PROPÓSITO. É o erro que a pessoa não vê.
            Nunca corrigir. -->
-      <p class="armadilha">Acompanhado é <span class="palavra">smepre</span> melhor</p>
+      <div class="marcado">
+        <p class="armadilha">Acompanhado é <span class="palavra">smepre</span> melhor</p>
+        <span class="seta" data-aponta=".armadilha .palavra" aria-hidden="true">
+          <svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 33C20 22 16 13 8 6"></path>
+            <path d="M4 14L7 4l10 2"></path>
+          </svg><b>o erro que você não viu</b></span>
+      </div>
       <h2>O erro está na sua frente agora mesmo.<br>
       <span class="serifa">Mas você não consegue ver.</span></h2>
-      <p class="acao"><button class="revelar" type="button" data-revelar aria-expanded="false">
+      <p class="acao"><span class="chamada">
+        <span class="grito g1" aria-hidden="true"><b>clica!</b><svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 33C20 22 16 13 8 6"></path><path d="M4 14L7 4l10 2"></path></svg></span>
+        <button class="revelar" type="button" data-revelar aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"></path>
           <circle cx="12" cy="12" r="3"></circle>
-        </svg>Mostrar o erro</button></p>
-      <p class="viu">Viu?<br><b>Imagina o que você não está vendo nesse momento.</b></p>
+        </svg>Mostrar o erro</button>
+        <span class="grito g2" aria-hidden="true"><svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 33C20 22 16 13 8 6"></path><path d="M4 14L7 4l10 2"></path></svg><b>clica agora!</b></span>
+        <span class="grito g3" aria-hidden="true"><svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 33C20 22 16 13 8 6"></path><path d="M4 14L7 4l10 2"></path></svg><b>já achou?</b></span>
+      </span></p>
+      <div class="marcado">
+        <p class="viu">Viu?<br><b>Imagina o que você não <span class="palavra">esta</span> vendo nesse momento.</b></p>
+        <span class="seta" data-aponta=".viu .palavra" aria-hidden="true">
+          <svg viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 33C20 22 16 13 8 6"></path>
+            <path d="M4 14L7 4l10 2"></path>
+          </svg><b>olha outro erro aqui</b></span>
+      </div>
       <p class="sub escopo"><b>Não é sobre a escrita.</b><br>
       É sobre tudo que decide se o leitor certo encontra, escolhe e recomenda.</p>
     </div>
@@ -842,49 +926,72 @@ window.OFERTA = {
     var ver = function(){ barra.classList.toggle('on', gatilho.getBoundingClientRect().bottom < 0); };
     addEventListener('scroll', ver, {passive:true}); ver();
   }
-  /* A CONTA: uma linha de cada vez.
-     A primeira versão amarrava cada linha à própria posição na tela. Como as
-     três ficam a poucos pixels uma da outra, elas cruzavam o eixo quase ao
-     mesmo tempo e as três se mexiam juntas: o efeito virava um solavanco.
-
-     Aqui o gatilho é o PROGRESSO do bloco inteiro pela tela, de 0 a 1, e cada
-     linha tem a sua fatia. A separação passa a depender de quanto a pessoa
-     rolou, não de onde a linha calhou de estar, então funciona igual em
-     qualquer altura de tela e com o bloco de qualquer tamanho. */
-  var bloco = document.querySelector('.contas');
-  var linhas = bloco ? [].slice.call(bloco.querySelectorAll('.conta')) : [];
-  if (linhas.length){
-    var ETAPA = [0.28, 0.55, 0.82];
-    var separa = function(){
-      var r = bloco.getBoundingClientRect();
-      var ini = innerHeight * 0.88;          /* topo do bloco aqui  -> 0 */
-      var fim = innerHeight * 0.45;          /* base do bloco aqui  -> 1 */
-      var curso = (ini - fim) + r.height;
-      var p = curso > 0 ? (ini - r.top) / curso : 1;
-      p = p < 0 ? 0 : (p > 1 ? 1 : p);
-      linhas.forEach(function(el, i){ el.classList.toggle('fim', p >= ETAPA[i]); });
-      bloco.classList.toggle('acesa', p >= ETAPA[2]);
-    };
-    addEventListener('scroll', separa, {passive:true});
-    addEventListener('resize', separa);
-    separa();
-  }
-  /* A ARMADILHA
-     Antes o risco e o texto entravam no scroll. Agora dependem de um clique:
-     a pessoa lê "o erro está na sua frente", procura, não acha, e pede pra
-     ver. Quem chega no "Viu?" já admitiu que não viu, e é isso que faz a
-     frase funcionar.
-     Sem JS a classe .js não existe: o botão não aparece, o erro já nasce
-     riscado e os dois parágrafos ficam visíveis. Nada fica escondido. */
   var arm = document.querySelector('[data-erro]');
   var bt = arm && arm.querySelector('[data-revelar]');
   if (arm && bt){
+    /* ══════════════════════════════════════════════════════════
+       A ARMADILHA, COORDENADA
+
+       A regra: cada passo só entra depois de o anterior ter tido tempo de ser
+       ENTENDIDO. Tudo junto vira um piscar e a pessoa não registra nada, que
+       é o oposto do que esta seção quer.
+
+         0,0s  clique: a linha apaga, "smepre" fica vermelho e o risco começa
+               a se desenhar (leva 0,85s)
+         1,3s  seta 1, "o erro que você não viu". Só agora ela sabe o que foi
+         2,7s  entra "Viu? Imagina o que você não esta vendo nesse momento."
+         4,9s  o SEGUNDO erro acende e entra a seta 2. Os 2,2s de intervalo
+               são de propósito: sem eles a pessoa não teve tempo de ler a
+               frase e, portanto, não teve chance de NÃO VER o erro dela.
+         5,9s  a linha de escopo ("não é sobre a escrita")
+
+       Com movimento reduzido tudo entra de uma vez.
+       ══════════════════════════════════════════════════════════ */
+    /* a seta vai sob o centro exato da palavra: ela é inline numa linha
+       centralizada, então qualquer posição fixa em CSS erraria o alvo em
+       outra largura de tela. */
+    var mirar = function(){
+      [].forEach.call(arm.querySelectorAll('.seta'), function(s){
+        var alvo = arm.querySelector(s.getAttribute('data-aponta'));
+        if (!alvo || !alvo.offsetParent) return;
+        var a = alvo.getBoundingClientRect(), b = s.parentNode.getBoundingClientRect();
+        var x = Math.round(a.left - b.left + a.width / 2);
+        s.style.left = x + 'px';
+        /* trava dentro do container: em tela estreita o rótulo saía pela
+           direita e criava rolagem horizontal. */
+        var r = s.getBoundingClientRect(), fuga = r.right - (b.right - 4);
+        if (fuga > 0) s.style.left = (x - fuga) + 'px';
+        else { fuga = (b.left + 4) - r.left; if (fuga > 0) s.style.left = (x + fuga) + 'px'; }
+      });
+    };
+    addEventListener('resize', mirar);
+
     bt.addEventListener('click', function(){
+      var lento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var t = function(ms, f){ setTimeout(f, lento ? 0 : ms); };
+      var marcados = arm.querySelectorAll('.marcado');
+
+      bt.setAttribute('aria-expanded', 'true');
       arm.classList.add('revelado');
       arm.querySelector('.armadilha').classList.add('on');
-      bt.setAttribute('aria-expanded', 'true');
-      var viu = arm.querySelector('.viu');
-      if (viu){ viu.setAttribute('tabindex', '-1'); viu.focus({preventScroll:true}); }
+      mirar();
+
+      t(1300, function(){ mirar(); marcados[0].classList.add('mostra-seta'); });
+
+      t(2700, function(){
+        arm.classList.add('explicado');
+        var viu = arm.querySelector('.viu');
+        if (viu){ viu.setAttribute('tabindex', '-1'); viu.focus({preventScroll:true}); }
+        mirar();
+      });
+
+      t(4900, function(){
+        arm.querySelector('.viu').classList.add('on');
+        mirar();
+        marcados[1].classList.add('mostra-seta');
+      });
+
+      t(5900, function(){ arm.classList.add('fechado'); });
     });
   }
 
