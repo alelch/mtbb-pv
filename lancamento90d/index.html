@@ -1308,7 +1308,10 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <!-- ============ AGITAÇÃO ============ -->
 <section class="agit" data-etapa="1">
   <div class="wrap rv">
-    <p class="pre">Você pode passar anos <span class="dig">escrevendo um livro</span>.</p>
+    <!-- a quebra depois de "anos" e' FORCADA: sem ela, a frase curta (ou vazia,
+     no meio do laco) ainda cabe na 1a linha, entao a digitacao comeca la' e
+     PULA pra 2a no meio da palavra. -->
+    <p class="pre">Você pode passar anos<br><span class="dig">escrevendo um livro</span>.</p>
     <span class="fio" aria-hidden="true"></span>
     <p class="big">É o lançamento que define se ele será lido, ou&nbsp;<span class="risco">esquecido</span>.</p>
   </div>
