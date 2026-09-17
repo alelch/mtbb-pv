@@ -26,9 +26,13 @@ antes = s
 TROCAS = [
     # 1. preço e oferta
     # a marcação do preço é a do front (.price > .cur + .val, irmãos)
-    ('<span class="val">697</span>', '<span class="val">597</span>'),
+    # o número grande é a PARCELA (cliente, 16/09: parcelado primeiro, à vista depois)
+    ('<span class="cur">12x de R$</span><span class="val">69,56</span>',
+     '<span class="cur">12x de R$</span><span class="val">59,58</span>'),
+    ('<p class="inst">ou <b>R$697 à vista</b></p>', '<p class="inst">ou <b>R$597 à vista</b></p>'),
     ('os R$697\n    são abatidos', 'os R$597\n    são abatidos'),
-    ('<div class="p">R$697<small>', '<div class="p">R$597<small>'),
+    ('<div class="p">12x R$69,56<small>ou R$697 à vista</small></div>',
+     '<div class="p">12x R$59,58<small>ou R$597 à vista</small></div>'),
     ('?off=n740dj0b', '?off=8rn7djuk'),
     # 2, 3. identidade da variante
     ("  variante: 'A',", "  variante: 'B',"),
