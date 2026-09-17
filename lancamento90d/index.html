@@ -1107,15 +1107,22 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   /* Um vídeo só: preencher aqui, em segundos. Ex.: 8*60+20 = 8min20. */
   var ABRE_EM = null;
 
-  /* Vídeos diferentes (teste A/B com dois ARQUIVOS): um número por id de
-     player, que é o id do <vturb-smartplayer> no HTML. Quando o id do
-     player estiver aqui, este valor ganha de ABRE_EM. */
+  /* Um número por vídeo do teste A/B. A chave é o id do VÍDEO (vid-...),
+     que é o que o script de teste escreve no elemento depois de sortear.
+     Quando o vídeo desta visita está aqui, este valor ganha de ABRE_EM.
+
+     Os três são CORTES DIFERENTES, não a mesma gravação acelerada: as
+     durações são 21min30, 20min15 e 20min02, ou seja 1,00x / 1,06x / 1,07x.
+     Por isso cada um tem o seu número, medido pelo cliente em 17/09.
+
+     Conferência que fecha: o trecho DEPOIS do pitch dá 3min24, 3min21 e
+     3min20 nos três. Toda a diferença entre as versões está antes do preço.
+     Se um dia algum vídeo for reeditado, refazer essa conta: se a sobra
+     depois do pitch destoar das outras, o número está errado. */
   var POR_VIDEO = {
-    /* Uma linha por vídeo do teste. O id é o do VÍDEO (vid-...), não o do
-       teste (ab-...). Descobre assim: abre a página, e no console
-       document.querySelector('vturb-smartplayer').getAttribute('original-id')
-       Ou pega os três no painel da VTurb.
-       'vid-6aabfd7e7d9f1e22a867a669': 8*60+20,   <- variante vista em 17/09 */
+    'vid-6aabffc77f8c8bdc79cff7af': 18*60+6,    // A · pitch 18:06 · vídeo de 21min30
+    'vid-6aac028e9ade27369c6a214e': 16*60+54,   // B · pitch 16:54 · vídeo de 20min15
+    'vid-6aabfd7e7d9f1e22a867a669': 16*60+42,   // C · pitch 16:42 · vídeo de 20min02
   };
 
   /* ⬆⬆⬆ ----------------------------------- ⬆⬆⬆ */
