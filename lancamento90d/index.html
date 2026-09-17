@@ -21,6 +21,19 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/dmsans-sub.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/grotesk-sub.woff2">
 
+<!-- Otimização do player (bloco fornecido pela VTurb, 17/09). O _plt marca o
+     instante em que a página começou, e é o que o player usa pra medir o
+     próprio tempo de carga. Os dois preloads são o script do teste A/B e o
+     smartplayer; os dns-prefetch são os hosts que o vídeo usa depois. -->
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6aac034536f51977b87306ba/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://m3u8.vturb.net">
+<link rel="dns-prefetch" href="https://license.vturb.com">
+
 <!-- Meta Pixel: PageView imediato por beacon (preserva connect rate), fbevents no idle -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -1098,7 +1111,11 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
      player, que é o id do <vturb-smartplayer> no HTML. Quando o id do
      player estiver aqui, este valor ganha de ABRE_EM. */
   var POR_VIDEO = {
-    /* 'vid-6a5f7822551c549be7ce3ea7': 8*60+20, */
+    /* Uma linha por vídeo do teste. O id é o do VÍDEO (vid-...), não o do
+       teste (ab-...). Descobre assim: abre a página, e no console
+       document.querySelector('vturb-smartplayer').getAttribute('original-id')
+       Ou pega os três no painel da VTurb.
+       'vid-6aabfd7e7d9f1e22a867a669': 8*60+20,   <- variante vista em 17/09 */
   };
 
   /* ⬆⬆⬆ ----------------------------------- ⬆⬆⬆ */
@@ -1117,10 +1134,16 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     try { if (window.MTBB_TRACK) MTBB_TRACK('pv_abriu',{produto:'L90D'}); } catch(e){}
   }
 
-  /* qual número vale para o vídeo que está nesta página */
+  /* Qual número vale para o vídeo que ESTA visita sorteou.
+     Medido em 17/09: o script de teste A/B REESCREVE o id do elemento.
+     O HTML nasce com 'ab-6aac...' (o id do teste) e vira 'vid-...' (o id
+     do vídeo sorteado), com um atributo original-id repetindo esse valor.
+     Por isso isto só pode ser lido DEPOIS de o player existir, nunca no
+     DOMContentLoaded: lá o id ainda é o 'ab-'. */
   function alvo(){
     var el = document.querySelector('vturb-smartplayer');
-    var id = el && el.id;
+    if (!el) return ABRE_EM;
+    var id = el.getAttribute('original-id') || el.id;
     if (id && typeof POR_VIDEO[id] === 'number') return POR_VIDEO[id];
     return ABRE_EM;
   }
@@ -1144,11 +1167,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   setTimeout(abrir, 30 * 60 * 1000);
 
   document.addEventListener('DOMContentLoaded', function(){
-    var ALVO = alvo();
-    /* mapa preenchido mas sem entrada para este vídeo, e sem ABRE_EM:
-       não há o que travar. */
-    if (typeof ALVO !== 'number' || ALVO <= 0) { abrir(); return; }
-
     var tentativas = 0;
 
     /* 2 · espera o VTurb existir. Se não aparecer em ~12s, abre:
@@ -1161,6 +1179,11 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     }, 300);
 
     function liga(sp){
+      /* só agora o id do elemento é o do vídeo sorteado */
+      var ALVO = alvo();
+      /* mapa sem entrada para este vídeo e sem ABRE_EM: não há o que travar */
+      if (typeof ALVO !== 'number' || ALVO <= 0) { abrir(); return; }
+
       var falhas = 0;
       function checa(){
         var t;
@@ -1689,19 +1712,21 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
      ============================================================ */
   var CHECKOUT = 'https://pay.hotmart.com/F107221310T?off=xpzf016q';
 
-  /* Embed da VSL do VTurb. Vazio = a página esconde o player e não fica buraco. */
-  /* ============================================================
-     ⚠️ TEMPORÁRIO — VSL DE TEMPLATE, SÓ PRA VER O LAYOUT
-     Este é o vídeo da IMERSÃO (outro produto: fala em evento ao vivo,
-     domingo, Zoom e R$29). Está aqui só pra avaliar a dobra com um player
-     de verdade em vez de um retângulo.
-     AO GRAVAR A VSL DO 90D: trocar PLAYER_SRC e PLAYER_ID pelos novos e
-     apagar este aviso. Deixar vazio volta ao placeholder.
+  /* Embed da VSL do VTurb. Vazio = a página esconde o player e não fica buraco.
+     ============================================================
+     17/09: entrou o embed DE VERDADE, e ele é de TESTE A/B (repare no
+     /ab-test/ no caminho e no prefixo ab- no id). A VTurb sorteia a
+     variante do lado dela, atrás de um id único: o id aqui NÃO muda de
+     uma variante para outra.
+     Consequência para a trava da página: não dá para saber qual vídeo
+     está tocando pelo id do elemento. Se as variantes tiverem durações
+     diferentes, o discriminador tem que ser outro (ver o comentário da
+     trava lá em cima).
      ============================================================ */
   var VSL = {
-    src: 'https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6a5f7822551c549be7ce3ea7/v4/player.js',
-    id:  'vid-6a5f7822551c549be7ce3ea7',
-    temporaria: true
+    src: 'https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6aac034536f51977b87306ba/player.js',
+    id:  'ab-6aac034536f51977b87306ba',
+    temporaria: false
   };
 
   var vsl = document.getElementById('vsl'), slot = document.getElementById('vslSlot');
