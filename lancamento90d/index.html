@@ -1042,9 +1042,22 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         currentTime é tempo do VÍDEO, não do relógio. Acelerando, a
         pessoa chega no mesmo segundo de conteúdo mais cedo no relógio,
         e a trava abre no ponto certo em qualquer velocidade.
-        Isso só vale se a aceleração for playbackRate no player. Se um
-        dia o teste virar DOIS ARQUIVOS diferentes, cada um precisa do
-        seu número (aí a trava passa a ser um mapa por id de player).
+        Isso vale enquanto a aceleração for playbackRate. Se o teste for
+        feito com DOIS ARQUIVOS (um já exportado acelerado), cada um tem
+        o preço num segundo diferente: aí preencher POR_VIDEO em vez de
+        ABRE_EM. A ideia do mapa veio do listPitch da VTurb.
+
+     📄 Sobre o tutorial de "script de delay" da VTurb (help.vturb.com,
+        artigo 1alctbg): ele NÃO roda nesta página. Medido em 17/09 no
+        player que está no ar: `displayHiddenElements` não existe (nem na
+        instância nem no window.smartplayer) e os eventos `player:ready`,
+        `player:timeupdate` e `player:play` nunca disparam. Aquele artigo
+        descreve outro embed; o nosso é smartplayer-wc/v4 (web component).
+        Se um dia trocarmos de embed, vale reavaliar, MAS antes de adotar
+        o mecanismo deles descobrir uma coisa que o artigo não diz: se o
+        `delay` deles conta tempo de VÍDEO ou de RELÓGIO. Se for relógio,
+        ele tem os dois furos que a gente já consertou aqui (vaza em quem
+        pausa, e quebra com o teste de velocidade).
 
      Como testar sem esperar o vídeo: ?abrir=1 na URL.
 
@@ -1061,9 +1074,19 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 </style>
 <script>
 (function(){
-  /* ⬇⬇⬇ O ÚNICO NÚMERO QUE VOCÊ PRECISA MEXER ⬇⬇⬇ */
-  var ABRE_EM = null;   /* segundos. Ex.: 8*60+20 para 8min20. null = sem trava. */
-  /* ⬆⬆⬆ ------------------------------------- ⬆⬆⬆ */
+  /* ⬇⬇⬇ O ÚNICO LUGAR QUE VOCÊ PRECISA MEXER ⬇⬇⬇ */
+
+  /* Um vídeo só: preencher aqui, em segundos. Ex.: 8*60+20 = 8min20. */
+  var ABRE_EM = null;
+
+  /* Vídeos diferentes (teste A/B com dois ARQUIVOS): um número por id de
+     player, que é o id do <vturb-smartplayer> no HTML. Quando o id do
+     player estiver aqui, este valor ganha de ABRE_EM. */
+  var POR_VIDEO = {
+    /* 'vid-6a5f7822551c549be7ce3ea7': 8*60+20, */
+  };
+
+  /* ⬆⬆⬆ ----------------------------------- ⬆⬆⬆ */
 
   var H = document.documentElement;
   var CHAVE = 'l90d_aberta';
@@ -1079,8 +1102,20 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     try { if (window.MTBB_TRACK) MTBB_TRACK('pv_abriu',{produto:'L90D'}); } catch(e){}
   }
 
-  /* desligada, já aberta nesta sessão, ou escape manual: não trava */
-  if (typeof ABRE_EM !== 'number' || ABRE_EM <= 0) return;
+  /* qual número vale para o vídeo que está nesta página */
+  function alvo(){
+    var el = document.querySelector('vturb-smartplayer');
+    var id = el && el.id;
+    if (id && typeof POR_VIDEO[id] === 'number') return POR_VIDEO[id];
+    return ABRE_EM;
+  }
+
+  /* desligada, já aberta nesta sessão, ou escape manual: não trava.
+     Se o mapa POR_VIDEO estiver preenchido, o <vturb-smartplayer> ainda
+     não existe aqui no head, então a checagem de "tem número" acontece
+     de novo lá embaixo, quando o DOM existir. */
+  var temMapa = Object.keys(POR_VIDEO).length > 0;
+  if (!temMapa && (typeof ABRE_EM !== 'number' || ABRE_EM <= 0)) return;
   if (jaAberta() || /[?&]abrir=1/.test(location.search)) return;
 
   H.classList.add('travado');
@@ -1094,6 +1129,11 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   setTimeout(abrir, 30 * 60 * 1000);
 
   document.addEventListener('DOMContentLoaded', function(){
+    var ALVO = alvo();
+    /* mapa preenchido mas sem entrada para este vídeo, e sem ABRE_EM:
+       não há o que travar. */
+    if (typeof ALVO !== 'number' || ALVO <= 0) { abrir(); return; }
+
     var tentativas = 0;
 
     /* 2 · espera o VTurb existir. Se não aparecer em ~12s, abre:
@@ -1116,7 +1156,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
           return;
         }
         falhas = 0;
-        if (typeof t === 'number' && t >= ABRE_EM) abrir();
+        if (typeof t === 'number' && t >= ALVO) abrir();
       }
       /* evento quando existe, e polling como rede: o evento é da API
          do VTurb e pode mudar de nome numa atualização deles. */
