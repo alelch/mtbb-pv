@@ -696,7 +696,20 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 /* A premissa desce de tom e de tamanho, e o fio faz o trabalho que o "Mas" fazia.
    Ele fica no laranja CHEIO, fora da rampa: a 15% um traço de 1px sumiria no escuro. */
 .agit .pre{font-family:'Space Grotesk',sans-serif;font-weight:400;letter-spacing:-.025em;
-  font-size:clamp(1.2rem,2.7vw,1.75rem);line-height:1.25;color:#B4B0AB;margin:0 auto;max-width:22ch}
+  font-size:clamp(1.2rem,2.7vw,1.75rem);line-height:1.25;color:#B4B0AB;margin:0 auto;max-width:22ch;
+  /* 2 linhas travadas: a frase digitada vive sozinha na 2a linha, e quando ela
+     esvazia no meio do laco o paragrafo encolheria para 1 linha e empurraria a
+     secao inteira. 2 x line-height 1.25 = 2.5em. */
+  min-height:2.5em}
+/* o cursor so' existe com JS e com a animacao rodando */
+.agit .dig{color:#E8E4DE}
+html.js .agit .dig::after{content:'';display:inline-block;width:2px;height:1em;
+  margin-left:2px;vertical-align:-.12em;background:var(--accent);
+  animation:pisca 1s steps(1) infinite}
+@keyframes pisca{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+html.js.sem-motion .agit .dig::after,
+html:not(.js) .agit .dig::after{display:none}
+@media(prefers-reduced-motion:reduce){.agit .dig::after{display:none!important}}
 .agit .fio{display:block;width:1px;height:64px;background:var(--accent);margin:26px auto}
 .agit .big i{font-style:normal;color:var(--accent)}
 /* ══ MARCAS DA CASA ══
@@ -1295,9 +1308,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <!-- ============ AGITAÇÃO ============ -->
 <section class="agit" data-etapa="1">
   <div class="wrap rv">
-    <p class="pre">Você pode passar anos escrevendo um livro.</p>
+    <p class="pre">Você pode passar anos <span class="dig">escrevendo um livro</span>.</p>
     <span class="fio" aria-hidden="true"></span>
-    <p class="big">É o lançamento que define se ele será lido, ou <span class="risco">esquecido</span>.</p>
+    <p class="big">É o lançamento que define se ele será lido, ou&nbsp;<span class="risco">esquecido</span>.</p>
   </div>
 </section>
 
@@ -2509,6 +2522,66 @@ footer{background:#242320 !important}
   });
   box.addEventListener('click',function(e){ if(e.target===box||e.target.closest('.lbox-x')) fechar(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!box.hidden) fechar(); });
+})();
+</script>
+<script>
+/* ============================================================
+   A MAQUINA DE ESCREVER DA AGITACAO
+   ============================================================
+   "Você pode passar anos ___." troca a ponta em laco infinito.
+   As quatro sao coisas em que o autor investe ANOS e que nao tem
+   nada a ver com lancamento: quanto mais ele concorda com as
+   quatro, mais forte cai o "ou esquecido" da linha seguinte.
+
+   Regras que o codigo respeita:
+   · so' roda com a secao NA TELA. Fora dela, pausa. Animar a
+     5000px de distancia gasta bateria e ninguem ve.
+   · a altura do paragrafo esta' travada em 2 linhas no CSS,
+     senao no instante em que a frase esvazia ele encolhe e
+     empurra a pagina inteira.
+   · sem JS, fica a 1a frase escrita no HTML. Com movimento
+     reduzido, fica a 1a frase e sem cursor.
+   ============================================================ */
+(function(){
+  var el = document.querySelector('.agit .dig');
+  if (!el) return;
+  var H = document.documentElement;
+  if (H.classList.contains('sem-motion')) return;
+  try { if (matchMedia('(prefers-reduced-motion:reduce)').matches) return; } catch(e){}
+
+  var FRASES = [
+    'escrevendo um livro',
+    'deixando tudo perfeito',
+    'reescrevendo o começo',
+    'sonhando com esse dia'
+  ];
+  var DIGITA = 55, APAGA = 30, SEGURA = 1800, RESPIRA = 350;
+
+  var i = 0, n = FRASES[0].length, apagando = false, rodando = false, t = null;
+
+  function passo(){
+    if (!rodando) return;
+    var f = FRASES[i];
+    if (!apagando) {
+      n++;
+      el.textContent = f.slice(0, n);
+      if (n >= f.length) { apagando = true; t = setTimeout(passo, SEGURA); return; }
+      t = setTimeout(passo, DIGITA);
+    } else {
+      n--;
+      el.textContent = f.slice(0, n);
+      if (n <= 0) { apagando = false; i = (i + 1) % FRASES.length; t = setTimeout(passo, RESPIRA); return; }
+      t = setTimeout(passo, APAGA);
+    }
+  }
+
+  function liga(){ if (rodando) return; rodando = true; t = setTimeout(passo, SEGURA); }
+  function desliga(){ rodando = false; clearTimeout(t); }
+
+  if (!('IntersectionObserver' in window)) { liga(); return; }
+  new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){ e.isIntersecting ? liga() : desliga(); });
+  }, {threshold: 0.4}).observe(el.closest('.agit'));
 })();
 </script>
 </body>
