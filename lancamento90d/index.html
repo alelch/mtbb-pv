@@ -1025,6 +1025,90 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "y7voirl91d");
 </script>
+<!-- ============================================================
+     TRAVA DA PÁGINA — a PV abre quando a VSL fala o preço (17/09)
+     ============================================================
+     Do "Como visto em" pra baixo fica tudo escondido até o vídeo
+     chegar no segundo ABRE_EM. O hero (manchete, sub e player)
+     continua sempre visível, senão não sobra o que assistir.
+
+     ⚠️ ABRE_EM = null DESLIGA a trava e a página fica aberta como
+        sempre foi. Preencher com o segundo em que a Dany fala o
+        preço, medido no vídeo FINAL que for ao ar.
+     ⚠️ Se a VSL for regravada ou reeditada, ESTE NÚMERO MUDA.
+
+     Como testar sem esperar o vídeo: ?abrir=1 na URL.
+
+     Por que a trava mora no <head>: se ela entrasse junto com o
+     resto do JS (fim do body), a página inteira pintaria e só
+     depois sumiria. Aqui ela vale antes da primeira pintura.
+
+     Regra de ouro: NUNCA prender o comprador. Toda falha abre a
+     página. Sem JS, player quebrado, API do VTurb mudou, vídeo
+     que nunca carrega: em todos esses casos a página abre.
+     ============================================================ -->
+<style>
+  html.travado body > *:not(.hero):not(script):not(style){display:none !important}
+</style>
+<script>
+(function(){
+  /* ⬇⬇⬇ O ÚNICO NÚMERO QUE VOCÊ PRECISA MEXER ⬇⬇⬇ */
+  var ABRE_EM = null;   /* segundos. Ex.: 8*60+20 para 8min20. null = sem trava. */
+  /* ⬆⬆⬆ ------------------------------------- ⬆⬆⬆ */
+
+  var H = document.documentElement;
+  var CHAVE = 'l90d_aberta';
+
+  function jaAberta(){
+    try { return sessionStorage.getItem(CHAVE) === '1'; } catch(e){ return false; }
+  }
+  function abrir(){
+    if (!H.classList.contains('travado')) return;
+    H.classList.remove('travado');
+    try { sessionStorage.setItem(CHAVE,'1'); } catch(e){}
+    /* de propósito NÃO rola a página: a pessoa está assistindo. */
+    try { if (window.MTBB_TRACK) MTBB_TRACK('pv_abriu',{produto:'L90D'}); } catch(e){}
+  }
+
+  /* desligada, já aberta nesta sessão, ou escape manual: não trava */
+  if (typeof ABRE_EM !== 'number' || ABRE_EM <= 0) return;
+  if (jaAberta() || /[?&]abrir=1/.test(location.search)) return;
+
+  H.classList.add('travado');
+
+  /* 1 · failsafe de relógio: mesmo que o player nunca fale, a página
+        abre em ABRE_EM + 90s de página aberta. */
+  setTimeout(abrir, (ABRE_EM + 90) * 1000);
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var tentativas = 0;
+
+    /* 2 · espera o VTurb existir. Se não aparecer em ~12s, abre:
+          player quebrado não pode esconder a oferta. */
+    var procura = setInterval(function(){
+      tentativas++;
+      var sp = window.smartplayer && window.smartplayer.instances && window.smartplayer.instances[0];
+      if (sp) { clearInterval(procura); liga(sp); return; }
+      if (tentativas > 40) { clearInterval(procura); abrir(); }
+    }, 300);
+
+    function liga(sp){
+      function checa(){
+        var t = 0;
+        try { t = sp.video.currentTime; } catch(e){ return; }
+        if (t >= ABRE_EM) abrir();
+      }
+      /* evento quando existe, e polling como rede: o evento é da API
+         do VTurb e pode mudar de nome numa atualização deles. */
+      try { sp.on('timeupdate', checa); } catch(e){}
+      var relogio = setInterval(function(){
+        if (!H.classList.contains('travado')) { clearInterval(relogio); return; }
+        checa();
+      }, 500);
+    }
+  });
+})();
+</script>
 </head>
 <body>
 
