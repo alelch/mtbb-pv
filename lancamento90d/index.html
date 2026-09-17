@@ -295,11 +295,18 @@ p{margin:0 0 1.05em}
   font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;
   text-transform:uppercase;color:var(--accent);margin:0 0 18px}
 .hero h1{
-  font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;line-height:1.12;
-  letter-spacing:-.9px;max-width:552px;color:var(--ink)}
+  font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:700;line-height:1.08;
+  letter-spacing:-1.5px;max-width:820px;color:var(--ink)}
+/* A quebra do desktop e' ESCOLHIDA (3 linhas equilibradas, decisao do cliente 17/09).
+   No mobile as mesmas quebras dariam linhas orfas, entao la' o texto quebra sozinho. */
+.hero h1 br{display:none}
+@media(min-width:761px){ .hero h1 br{display:inline} }
 .hero h1 em{font-style:normal;color:var(--accent)}
 .hero .sub{
   margin-top:14px;max-width:372px;font-size:16px;line-height:1.4;color:var(--soft)}
+@media(max-width:760px){
+  .hero h1{font-size:38px;letter-spacing:-1.1px}
+}
 @media(max-width:600px){
   .hero{padding-top:52px}
   .hero h1{font-size:30px;letter-spacing:-.6px}
@@ -683,8 +690,14 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .risco{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23FC783C%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .34em;background-position:0 .92em;
   padding-bottom:.14em}
 .risco.claro{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E")}
-/* a contravoz: serifa italica, baixinha, do lado da frase de marketing */
-.serifa{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
+/* a contravoz, do lado da frase forte. Mesmo dispositivo do .afirma/.pergunta-v
+   e do .causa/.desfecho: contraste por PESO na mesma familia, nao por outra fonte.
+   17/09: a serifa italica saiu daqui (cliente: "muito feio") e ficou SO' na
+   citacao da bio, que e' fala de gente. Serifa como voz de outra pessoa passa;
+   serifa como enfeite de titulo, nao. */
+.serifa{font-weight:400;letter-spacing:-.025em}
+/* a fala de um leitor: ai' sim serifa italica, porque e' outra boca falando */
+.dany .fala{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
 /* a letra da Dany: se escreve sozinha e o traco cresce junto */
 .mao{font-family:'Caveat',cursive;font-weight:600;font-size:clamp(26px,3.4vw,38px);
   line-height:1.08;letter-spacing:.5px;color:var(--accent);transform:rotate(-1.5deg);
@@ -1018,9 +1031,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <!-- ============ HERO ============ -->
 <header class="hero" data-etapa="1">
   <div class="wrap">
-    <p class="chapeu">O lançamento decide o destino do seu livro.</p>
-    <h1 data-ab-el="headline">Crie desejo.<br>Gere antecipação.<br>Lance <em>vendendo</em><br>desde o primeiro dia.</h1>
-    <p class="sub">O plano de 90 dias que faz o seu livro entrar no mercado vendendo, mesmo sem editora ou milhares de seguidores.</p>
+    <h1 data-ab-el="headline">Copie e cole um plano de 90 dias <br>para o seu livro <em>vender</em> <br>desde o primeiro&nbsp;dia.</h1>
+    <p class="sub">Mesmo sem editora ou milhares de seguidores.</p>
 
     <div class="player" id="vsl">
       <div class="slot" id="vslSlot">
@@ -1123,7 +1135,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     </div>
 
     <div class="t3 rv">
-      <div class="head"><span class="h-old">O que você faz hoje</span><span class="sp"></span><span class="h-new">A partir de agora</span></div>
+      <div class="head"><span class="h-old">Sem o Lançamento 90D</span><span class="sp"></span><span class="h-new">Com o Lançamento 90D</span></div>
       <div class="row"><div class="old">Publica e torce pra alguém descobrir.</div><div class="arrow">→</div><div class="new">Prepara o mercado antes do livro existir.</div></div>
       <div class="row"><div class="old">Espera uma editora escolher o seu livro.</div><div class="arrow">→</div><div class="new"><span>O lançamento é <b>seu</b>, não da editora.</span></div></div>
       <div class="row"><div class="old">Só divulga depois do livro pronto.</div><div class="arrow">→</div><div class="new">Já começa a vender na pré-venda.</div></div>
@@ -1413,7 +1425,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       <img src="assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa" loading="lazy" width="800" height="1000">
       <div class="txt">
         <p class="eyebrow">Quem está do outro lado</p>
-        <p class="fala serifa">“Dany, queria ter te conhecido antes.”</p>
+        <p class="fala">“Dany, queria ter te conhecido antes.”</p>
         <p class="cont">É a frase que eu mais ouço. Já ouvi de autora com caixas do próprio
           livro debaixo da cama. De autor que doou o estoque inteiro para não precisar mais
           olhar para ele. De gente que nunca escreveu o segundo porque o primeiro não vendeu.</p>
@@ -1900,7 +1912,10 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <style id="skin-claro">
 /* SKIN CLARO — marfim/carvao/dourado, 70/25/5. override no fim do body. */
 :root{
-  --bg:#F3F0E8; --card:#FBFAF6; --ink:#292927;
+  /* 17/09: --card era #FBFAF6, um segundo marfim. O nome engana: nao veste card
+     nenhum, veste 3 SECOES inteiras (.hero, .press, .final). Dois marfins numa
+     paleta de 4 tons e' ruido, entao os dois viraram o oficial #F3F0E8. */
+  --bg:#F3F0E8; --card:#F3F0E8; --ink:#292927;
   --soft:#57544D; --mute:#6E6B63;
   --border:rgba(41,41,39,.12); --line:rgba(41,41,39,.14);
   --accent:#292927;            /* na maioria (marfim) o acento e' o carvao */
@@ -1922,7 +1937,7 @@ body{background:#F3F0E8;color:#292927}
 .noventa .cem i.viva{background:#EAB82D !important;box-shadow:0 0 0 3px #F3F0E8,0 0 14px rgba(234,184,45,.55) !important}
 /* o grifo do 99% (era claro sobre laranja) vira dourado translucido sobre marfim */
 .noventa .grifo,.noventa .grifo.claro{background:linear-gradient(transparent 58%,rgba(234,184,45,.5) 58%) !important}
-.press{background:#FBFAF6 !important}
+.press{background:var(--card) !important}
 .bolhas,.offer{background:#F3F0E8 !important}
 /* nas seções ESCURAS o dourado volta a poder ser texto/acento */
 .agit .eyebrow,.dany .eyebrow,.virada .eyebrow,.noventa .eyebrow,
