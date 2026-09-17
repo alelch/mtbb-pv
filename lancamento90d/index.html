@@ -1033,9 +1033,18 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
      continua sempre visível, senão não sobra o que assistir.
 
      ⚠️ ABRE_EM = null DESLIGA a trava e a página fica aberta como
-        sempre foi. Preencher com o segundo em que a Dany fala o
-        preço, medido no vídeo FINAL que for ao ar.
+        sempre foi. Preencher com o segundo em que a Dany TERMINA de
+        falar o preço (decisão do cliente, 17/09: abre depois da frase
+        inteira, não no meio dela), medido no vídeo FINAL que for ao ar.
      ⚠️ Se a VSL for regravada ou reeditada, ESTE NÚMERO MUDA.
+
+     ⏩ TESTE DE VELOCIDADE (1,3x / 1,5x no VTurb): o número NÃO muda.
+        currentTime é tempo do VÍDEO, não do relógio. Acelerando, a
+        pessoa chega no mesmo segundo de conteúdo mais cedo no relógio,
+        e a trava abre no ponto certo em qualquer velocidade.
+        Isso só vale se a aceleração for playbackRate no player. Se um
+        dia o teste virar DOIS ARQUIVOS diferentes, cada um precisa do
+        seu número (aí a trava passa a ser um mapa por id de player).
 
      Como testar sem esperar o vídeo: ?abrir=1 na URL.
 
@@ -1076,9 +1085,13 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
   H.classList.add('travado');
 
-  /* 1 · failsafe de relógio: mesmo que o player nunca fale, a página
-        abre em ABRE_EM + 90s de página aberta. */
-  setTimeout(abrir, (ABRE_EM + 90) * 1000);
+  /* 1 · teto absoluto, só como seguro: meia hora de página aberta.
+        NÃO existe failsafe de "ABRE_EM + margem" no relógio, porque
+        relógio e vídeo não andam juntos: quem pausasse por mais tempo
+        que a margem veria a página abrir ANTES do preço. Player vivo
+        e parado continua travando; quem abre a página é player MORTO
+        (o bloco 2 abaixo) ou este teto. */
+  setTimeout(abrir, 30 * 60 * 1000);
 
   document.addEventListener('DOMContentLoaded', function(){
     var tentativas = 0;
@@ -1093,10 +1106,17 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     }, 300);
 
     function liga(sp){
+      var falhas = 0;
       function checa(){
-        var t = 0;
-        try { t = sp.video.currentTime; } catch(e){ return; }
-        if (t >= ABRE_EM) abrir();
+        var t;
+        try { t = sp.video.currentTime; }
+        catch(e){
+          /* player existe mas parou de responder = player morto */
+          if (++falhas > 20) abrir();
+          return;
+        }
+        falhas = 0;
+        if (typeof t === 'number' && t >= ABRE_EM) abrir();
       }
       /* evento quando existe, e polling como rede: o evento é da API
          do VTurb e pode mudar de nome numa atualização deles. */
