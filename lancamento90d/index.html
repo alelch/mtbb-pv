@@ -1056,9 +1056,10 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <!-- ============================================================
      TRAVA DA PÁGINA — a PV abre quando a VSL fala o preço (17/09)
      ============================================================
-     Do "Como visto em" pra baixo fica tudo escondido até o vídeo
-     chegar no segundo ABRE_EM. O hero (manchete, sub e player)
-     continua sempre visível, senão não sobra o que assistir.
+     Fica tudo escondido até o vídeo chegar no segundo ABRE_EM, MENOS o
+     hero (manchete, sub e player) e a faixa "Como visto em". O hero
+     porque senão não sobra o que assistir; a faixa de imprensa porque
+     ela é credibilidade e a primeira tela precisa dela (cliente, 17/09).
 
      ⚠️ ABRE_EM = null DESLIGA a trava e a página fica aberta como
         sempre foi. Preencher com o segundo em que a Dany TERMINA de
@@ -1098,7 +1099,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
      que nunca carrega: em todos esses casos a página abre.
      ============================================================ -->
 <style>
-  html.travado body > *:not(.hero):not(script):not(style){display:none !important}
+  html.travado body > *:not(.hero):not(.press):not(script):not(style){display:none !important}
 </style>
 <script>
 (function(){
