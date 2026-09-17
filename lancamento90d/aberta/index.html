@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>Lançamento 90D</title>
+<!-- ============================================================
+     PÁGINA ABERTA · atalho, não é uma cópia.
+     ============================================================
+     A PV normal fica fechada até a VSL falar o preço. Esta URL existe
+     para os lugares onde o visitante NÃO deve ter que assistir: lista
+     quente, remarketing, link em post, obrigado de outro produto.
+
+     É só um redirect para ../?abrir=1, PRESERVANDO as UTMs e o sck.
+     De propósito não é um segundo arquivo da página: duas cópias
+     desandam uma da outra na primeira vez que alguém edita só uma.
+
+     noindex porque é a mesma página da canônica; o Google não pode
+     indexar as duas.
+     ============================================================ -->
+<script>
+(function(){
+  var qs = location.search || '';
+  var sep = qs ? (qs.charAt(0)==='?' ? qs + '&' : '?' + qs + '&') : '?';
+  location.replace('../' + sep + 'abrir=1' + location.hash);
+})();
+</script>
+<meta http-equiv="refresh" content="0;url=../?abrir=1">
+</head>
+<body style="font:16px/1.5 system-ui;margin:0;padding:40px;background:#F3F0E8;color:#292927">
+<p>Abrindo a página do Lançamento 90D… <a href="../?abrir=1">clique aqui se não abrir sozinho</a>.</p>
+</body>
+</html>

@@ -1177,7 +1177,17 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
      de novo lá embaixo, quando o DOM existir. */
   var temMapa = Object.keys(POR_VIDEO).length > 0;
   if (!temMapa && (typeof ABRE_EM !== 'number' || ABRE_EM <= 0)) return;
-  if (jaAberta() || /[?&]abrir=1/.test(location.search)) return;
+
+  /* ?abrir=1 é a PÁGINA ABERTA, para colocar onde o visitante não deve ter
+     que assistir (lista quente, remarketing, link em post, obrigado de outro
+     produto). Ele GRUDA na sessão: quem entrou por um desses lugares navega
+     e recarrega sem a página voltar a fechar. A URL limpa /aberta/ manda
+     pra cá preservando as UTMs. */
+  if (/[?&]abrir=1/.test(location.search)) {
+    try { sessionStorage.setItem(CHAVE,'1'); } catch(e){}
+    return;
+  }
+  if (jaAberta()) return;
 
   H.classList.add('travado');
 
@@ -1241,7 +1251,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 <!-- ============ HERO ============ -->
 <header class="hero" data-etapa="1">
   <div class="wrap">
-    <h1 data-ab-el="headline">Copie e cole um plano de 90 dias <br>para o seu livro <em>vender</em> <br>desde o primeiro&nbsp;dia.</h1>
+    <h1 data-ab-el="headline">Copie e cole um plano de 90 dias <br>para <em>o seu livro vender</em> <br>desde o primeiro&nbsp;dia.</h1>
     <p class="sub">Mesmo sem editora ou milhares de seguidores.</p>
 
     <div class="player" id="vsl">
