@@ -289,7 +289,9 @@ p{margin:0 0 1.05em}
    H1 36px / entrelinha 1.12 / tracking -0.9px / largura máx 552px
    sub 16px / entrelinha 1.4 / largura máx 372px
    Sem logo e sem botão: o CTA da primeira dobra é o do próprio player. */
-.hero{background:var(--card);padding:64px 0 44px;text-align:center}
+/* 17/09: era 64px em cima. Aquele respiro existia porque o chapéu morava
+   ali; sem ele, virou buraco. */
+.hero{background:var(--card);padding:28px 0 44px;text-align:center}
 .hero .wrap>*{margin-left:auto;margin-right:auto}
 .chapeu{
   font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;
@@ -308,7 +310,7 @@ p{margin:0 0 1.05em}
   .hero h1{font-size:38px;letter-spacing:-1.1px}
 }
 @media(max-width:600px){
-  .hero{padding-top:52px}
+  .hero{padding-top:22px}
   .hero h1{font-size:30px;letter-spacing:-.6px}
 }
 
@@ -322,6 +324,19 @@ p{margin:0 0 1.05em}
 .player .ph{text-align:center;padding:26px;color:#8A8A8A;font-size:.9rem;max-width:44ch}
 .player .ph b{display:block;color:#D8D8D8;font-family:'Space Grotesk',sans-serif;font-size:1.05rem;margin-bottom:8px}
 .player iframe,.player video{width:100%;height:100%;border:0;display:block}
+
+/* MOBILE: o vídeo vai de ponta a ponta (cliente, 17/09).
+   Sai dos 22px de padding do .wrap por margem negativa exata, e não por
+   100vw: com barra de rolagem, 100vw é maior que a área visível e abriria
+   scroll horizontal. Sem raio e sem sombra, que só fazem sentido enquanto
+   ele é um objeto dentro da página; colado nas bordas, viram sujeira. */
+@media(max-width:600px){
+  /* especificidade alta de propósito: .hero .wrap>* devolve as margens
+     para auto e ganharia de um .player sozinho. Já mordeu antes. */
+  .hero .wrap>.player{max-width:none;width:auto;
+    margin-left:-22px;margin-right:-22px;
+    border-radius:0;box-shadow:none}
+}
 
 /* números */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;border-top:1px solid var(--border);padding-top:24px}
