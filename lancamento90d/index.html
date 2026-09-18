@@ -647,6 +647,43 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
   -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   mask-composite:exclude;animation:gira-grad 3s linear infinite}
 .btn.ouro:hover{transform:translateY(-2px) scale(1.02);filter:brightness(1.1)}
+
+/* ---------- botão VERDE (18/09) ----------
+   Mesma engenharia do .ouro: gradiente girando, borda luminosa recortada por
+   mask-composite, e pulso. Só troca a família de cor.
+   ⚠️ POR QUE O GRADIENTE VAI ATÉ UM VERDE CLARO: o verde da paleta (#14523E)
+   sozinho dá 1,73:1 contra o carvão, ou seja, sumiria nas seções escuras. É a
+   borda luminosa e o topo claro do gradiente que fazem o botão existir lá.
+   Se alguém "simplificar" isso para um preenchimento chapado #14523E, o botão
+   do card da oferta e o do fecho desaparecem.
+   Tinta marfim sobre o verde da paleta = 8,0:1. */
+@keyframes brilha-verde{
+  0%,100%{box-shadow:0 0 10px rgba(47,203,134,.42),0 0 30px rgba(47,203,134,.16),
+          inset 0 0 8px rgba(47,203,134,.10)}
+  50%{box-shadow:0 0 20px rgba(47,203,134,.62),0 0 56px rgba(20,160,100,.26),
+      inset 0 0 12px rgba(47,203,134,.16)}}
+.btn.verde{position:relative;overflow:hidden;isolation:isolate;
+  color:#F3F0E8;text-transform:uppercase;letter-spacing:.05em;
+  padding:clamp(19px,2.3vw,25px) clamp(26px,4vw,50px);
+  font-size:clamp(.94rem,1.9vw,1.12rem);
+  border:1.5px solid hsl(157 60% 55% / .5);
+  background:linear-gradient(var(--ga),hsl(157 62% 48%),hsl(160 70% 30%),
+             hsl(164 72% 18%),hsl(157 62% 40%));
+  background-size:300% 300%;
+  animation:gira-grad 3s linear infinite,brilha-verde 2.5s ease-in-out infinite;
+  transition:transform .3s ease,filter .3s ease;will-change:transform}
+.btn.verde:before{content:"";position:absolute;inset:-1px;border-radius:inherit;
+  padding:1.5px;pointer-events:none;
+  background:linear-gradient(var(--ga),hsl(157 70% 70%),hsl(157 60% 55% / .3),
+             hsl(150 75% 62%),hsl(157 60% 55% / .3));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;animation:gira-grad 3s linear infinite}
+.btn.verde:hover{transform:translateY(-2px) scale(1.02);filter:brightness(1.1)}
+@media(prefers-reduced-motion:reduce){
+  .btn.verde,.btn.verde:before{animation:none}
+  .btn.verde{box-shadow:0 0 18px rgba(47,203,134,.5)}
+}
 @media(prefers-reduced-motion:reduce){
   .btn.ouro,.btn.ouro:before{animation:none}
   .btn.ouro{box-shadow:0 0 18px rgba(251,189,35,.5)}
@@ -855,7 +892,7 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
    é a palavra que carrega a promessa e não pode nascer apagada. */
 [data-etapa] h1 em{color:var(--accent)}
 /* o CTA nunca desbota. O :not e' pra regra nao atropelar as variantes. */
-.btn:not(.ouro){background:var(--accent)!important}
+.btn:not(.ouro):not(.verde){background:var(--accent)!important}
 
 /* ============================================================
    CONCEITO 05 · O SILÊNCIO E O BARULHO
@@ -1632,7 +1669,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         <li><b>Vendas na primeira semana</b>, não só elogios</li>
         <li><b>Um livro que não morre</b> em trinta dias</li>
       </ul>
-      <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn ouro block" id="ctaMain" data-cta="oferta">Acesso Imediato e Vitalício</a>
+      <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn verde block" id="ctaMain" data-cta="oferta">Acesso Imediato e Vitalício</a>
       <p class="urg">Antecipação é a única coisa que não dá para construir depois. Cada semana que você espera é uma semana a menos de preparo, e a estreia do seu livro acontece uma vez só.</p>
         <div class="seals"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div>
       <p class="nota-juros">* Parcelado no cartão, com juros.</p>
@@ -1739,7 +1776,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     <div class="rv">
       <h2>Você só lança o seu livro <span class="grifo">uma vez</span>.</h2>
       <span class="sub">Não jogue fora essa chance.</span>
-      <a href="#oferta" class="btn ouro" data-cta="final">Acesso Imediato e Vitalício</a>
+      <a href="#oferta" class="btn verde" data-cta="final">Acesso Imediato e Vitalício</a>
     </div>
   </div>
 </section>
@@ -1753,7 +1790,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
 <div class="sticky" id="sticky">
   <div class="p">12x R$29,64<small>ou R$297 à vista</small></div>
-  <a href="#oferta" class="btn ouro" data-cta="sticky">Acesso Imediato e Vitalício</a>
+  <a href="#oferta" class="btn verde" data-cta="sticky">Acesso Imediato e Vitalício</a>
 </div>
 
 <script src="../tracker.js" defer></script>
@@ -2194,7 +2231,7 @@ body{background:#F3F0E8;color:#292927}
 /* hero: o grifo da palavra vira dourado (unico dourado sobre marfim, como fundo) */
 .hero h1 em,h1 em{background:linear-gradient(transparent 60%,rgba(234,184,45,.85) 60%);color:#292927}
 /* CTA: dourado solido, tinta carvao — o unico preenchimento cheio */
-.btn:not(.ouro){background:#EAB82D !important;color:#242320 !important}
+.btn:not(.ouro):not(.verde){background:#EAB82D !important;color:#242320 !important}
 .btn.ouro{color:#241f10 !important}  /* gradiente+pulso vêm da base (btn-gold) */
 /* card de oferta: CARVAO sobre marfim (o momento escuro dentro do claro) */
 .offer-box{background:#242320 !important;border:0 !important;color:#F3F0E8 !important}
