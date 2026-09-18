@@ -41,7 +41,7 @@
     <div class="quadro"><iframe data-v="1" src="index.html?abrir=1"></iframe></div>
   </div>
   <div class="col">
-    <p class="rot"><b>2 · lista fora do card</b><span>sob o título, no marfim; o card fica só com preço, conquistas e botão</span></p>
+    <p class="rot"><b>2 · lista fora do card</b><span>sob o título, no marfim, sem rótulo; o card fica só com preço, conquistas e botão</span></p>
     <div class="quadro"><iframe data-v="2" src="index.html?abrir=1"></iframe></div>
   </div>
 </div>
@@ -85,6 +85,9 @@ document.querySelectorAll('iframe').forEach(function(f){
            escuras sao .offer-box .vemjunto e deixam de casar. So' o respiro
            precisa de ajuste. */
         vj.style.cssText = 'max-width:660px;margin:26px auto 0;text-align:left';
+        /* fora do card o rotulo vira um terceiro cabecalho em sequencia,
+           anunciando uma lista que ja' esta' a vista (cliente, 18/09) */
+        var tit = vj.querySelector('.tit'); if (tit) tit.remove();
       }
     }
 
