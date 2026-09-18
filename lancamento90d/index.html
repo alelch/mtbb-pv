@@ -969,6 +969,19 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .offer-box .conquistas li{position:relative;padding-left:30px;font-size:1rem;
   color:rgba(255,255,255,.82);line-height:1.45}
 .offer-box .conquistas li b{color:#fff;font-weight:700}
+/* 18/09: as duas listas do card viraram UMA. Cada conquista carrega embaixo,
+   apagado, o mecanismo que a entrega. O que nao tinha conquista pra parear
+   (checklist, as 3 estrategias, vitalicio) fecha na .fecho-lista. Cortado no
+   caminho: "nao um pedido de apoio" e "nao so' elogios" (acusam os amigos do
+   leitor) e "uma estreia com fila" (promete comportamento de plateia).
+   O CSS da .vemjunto ficou sem elemento; esta' morto mas inofensivo. */
+.offer-box .conquistas{margin-bottom:22px;gap:16px}
+.offer-box .conquistas li .meio{display:block;font-size:.85rem;line-height:1.4;
+  color:rgba(243,240,232,.48);margin-top:2px}
+.offer-box .fecho-lista{max-width:660px;margin:0 auto 30px;text-align:left;
+  font-size:.88rem;line-height:1.55;color:rgba(243,240,232,.55);
+  border-top:1px solid rgba(243,240,232,.12);padding-top:16px}
+.offer-box .fecho-lista b{color:rgba(243,240,232,.85);font-weight:600}
 .offer-box .conquistas li:before{content:"";position:absolute;left:5px;top:.34em;width:7px;height:13px;
   border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(40deg)}
 
@@ -1652,26 +1665,12 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       <p class="inst">ou <b>R$ 297,00 à vista</b></p>
       <p class="promessa">De invisível a lido em 90 dias.</p>
       <ul class="conquistas">
-        <li><b>Seus primeiros compradores</b>, antes do livro existir</li>
-        <li><b>Desconhecidos descobrindo o livro</b> sem você parecer vendedor</li>
-        <li><b>Uma pré-venda que já vende</b>, não um pedido de apoio</li>
-        <li><b>Uma estreia com fila</b>, não com silêncio</li>
-        <li><b>Vendas na primeira semana</b>, não só elogios</li>
-        <li><b>Um livro que não morre</b> em trinta dias</li>
+        <li><b>Seus primeiros compradores</b>, antes do livro existir<span class="meio">com a planilha guiada de Mapeamento de Contatos</span></li>
+        <li><b>Uma pré-venda que já vende</b>, e vendas na primeira semana<span class="meio">com o plano de pré-venda e o cronograma de 90 dias nas suas datas</span></li>
+        <li><b>Desconhecidos descobrindo o livro</b> sem você parecer vendedor<span class="meio">com o soft-marketing e exemplos prontos</span></li>
+        <li><b>Um livro que não morre</b> em trinta dias<span class="meio">com o roteiro do pós-lançamento</span></li>
       </ul>
-      <div class="vemjunto">
-        <p class="tit">O que vem junto</p>
-        <ul>
-          <li><b>O cronograma de 90 dias preenchível</b>, com as suas datas</li>
-          <li><b>A planilha guiada</b>, seu Mapeamento de Contatos, para identificar seus primeiros cem potenciais compradores</li>
-          <li><b>O plano de pré-venda</b>, para estrear vendendo</li>
-          <li><b>O roteiro do pós-lançamento</b>, para não parar de vender quando a novidade passa</li>
-          <li><b>O soft-marketing</b>, com exemplos práticos, para chegar em quem não te conhece</li>
-          <li><b>Checklist de cada etapa</b>, com explicação detalhada em vídeo</li>
-          <li><b>3 diferentes estratégias de publicação</b>, para você identificar o melhor caminho para o seu livro</li>
-          <li><b>Acesso vitalício</b>, para usar neste livro e em todos os próximos</li>
-        </ul>
-      </div>
+      <p class="fecho-lista">E mais: o <b>checklist de cada etapa</b>, explicado em vídeo, as <b>3 estratégias de publicação</b>, para achar o caminho do seu livro, e <b>acesso vitalício</b>, para usar neste livro e em todos os próximos.</p>
       <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn verde block" id="ctaMain" data-cta="oferta">Acesso Imediato e Vitalício</a>
       <p class="urg">Antecipação é a única coisa que não dá para construir depois. Cada semana que você espera é uma semana a menos de preparo, e a estreia do seu livro acontece uma vez só.</p>
         <div class="seals"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div>
