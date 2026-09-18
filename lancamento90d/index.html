@@ -1015,6 +1015,19 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
   border-right:2px solid var(--verde);border-bottom:2px solid var(--verde);transform:rotate(40deg)}
 @media(max-width:640px){.vemjunto ul{grid-template-columns:1fr}}
 .nota-juros{margin:14px 0 0;font-size:.76rem;color:rgba(255,255,255,.7)}
+
+/* 18/09: "O que vem junto" entrou PARA DENTRO do card da oferta. Antes ele
+   ficava solto embaixo, no marfim, e parecia outra seção. As cores aqui
+   repetem as da .conquistas de propósito (marfim .72, negrito #F3F0E8,
+   check dourado): dentro do card ele tem que parecer a mesma família, e não
+   uma lista estrangeira que alguém colou ali. O fio em cima separa o que o
+   produto FAZ (conquistas) do que ele ENTREGA (isto). */
+.offer-box .vemjunto{max-width:none;margin:0 0 30px;padding-top:26px;
+  border-top:1px solid rgba(243,240,232,.14)}
+.offer-box .vemjunto .tit{color:rgba(243,240,232,.55) !important;margin-bottom:16px}
+.offer-box .vemjunto li{color:rgba(243,240,232,.72);font-size:.95rem}
+.offer-box .vemjunto li b{color:#F3F0E8;font-weight:700}
+.offer-box .vemjunto li:before{border-color:#EAB82D}
 .seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:24px;
   font-size:.78rem;color:rgba(255,255,255,.7)}
 
@@ -1669,25 +1682,25 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         <li><b>Vendas na primeira semana</b>, não só elogios</li>
         <li><b>Um livro que não morre</b> em trinta dias</li>
       </ul>
+      <div class="vemjunto">
+        <p class="tit">O que vem junto</p>
+        <ul>
+          <li><b>O cronograma de 90 dias preenchível</b>, com as suas datas</li>
+          <li><b>A planilha guiada</b> dos seus primeiros cem potenciais compradores</li>
+          <li><b>O plano de pré-venda</b>, para estrear vendendo</li>
+          <li><b>O roteiro do pós-lançamento</b>, para não parar de vender quando a novidade passa</li>
+          <li><b>O soft-marketing</b>, para chegar em quem não te conhece</li>
+          <li><b>Checklist de cada etapa</b>, com prazos</li>
+          <li><b>Marcos nos dias 15, 45 e 90</b>, para saber se você está no ritmo</li>
+          <li><b>Acesso vitalício</b>, para usar neste livro e em todos os próximos</li>
+        </ul>
+      </div>
       <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn verde block" id="ctaMain" data-cta="oferta">Acesso Imediato e Vitalício</a>
       <p class="urg">Antecipação é a única coisa que não dá para construir depois. Cada semana que você espera é uma semana a menos de preparo, e a estreia do seu livro acontece uma vez só.</p>
         <div class="seals"><span>Pagamento seguro</span><span>Garantia de 15 dias</span></div>
       <p class="nota-juros">* Parcelado no cartão, com juros.</p>
     </div>
 
-    <div class="vemjunto rv">
-      <p class="tit">O que vem junto</p>
-      <ul>
-        <li><b>O cronograma de 90 dias preenchível</b>, com as suas datas</li>
-        <li><b>A planilha guiada</b> dos seus primeiros cem potenciais compradores</li>
-        <li><b>O plano de pré-venda</b>, para estrear vendendo</li>
-        <li><b>O roteiro do pós-lançamento</b>, para não parar de vender quando a novidade passa</li>
-        <li><b>O soft-marketing</b>, para chegar em quem não te conhece</li>
-        <li><b>Checklist de cada etapa</b>, com prazos</li>
-        <li><b>Marcos nos dias 15, 45 e 90</b>, para saber se você está no ritmo</li>
-        <li><b>Acesso vitalício</b>, para usar neste livro e em todos os próximos</li>
-      </ul>
-    </div>
   </div>
 </section>
 
