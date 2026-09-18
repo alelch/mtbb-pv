@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Card da oferta · 3 jeitos</title>
+<!-- PREVIEW descartável (18/09). Cada quadro é a PÁGINA DE VERDADE num iframe,
+     com o card remontado por cima depois que ela carrega. Apagar quando decidir. -->
+<style>
+  :root{color-scheme:light}
+  body{margin:0;background:#E8E4DC;font:15px/1.5 system-ui,-apple-system,sans-serif;color:#242320}
+  header{padding:22px 24px 6px;max-width:1240px;margin:0 auto}
+  h1{font-size:1.15rem;margin:0 0 4px}
+  header p{margin:0;color:#57544D;max-width:74ch}
+  .linha{display:flex;gap:18px;max-width:1240px;margin:20px auto;padding:0 24px;align-items:flex-start}
+  .col{flex:1;min-width:0}
+  .rot{margin:0 0 8px}
+  .rot b{font-size:.95rem}
+  .rot span{display:block;color:#57544D;font-size:.84rem}
+  .quadro{height:860px;border-radius:14px;overflow:hidden;background:#F3F0E8;
+    box-shadow:0 18px 40px -26px rgba(0,0,0,.5)}
+  iframe{width:100%;height:100%;border:0;display:block}
+  @media(max-width:1000px){.linha{flex-direction:column}.quadro{height:760px}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>O card da oferta, em três jeitos</h1>
+  <p>Cada quadro é a página de verdade, com o card remontado por cima. Role dentro de cada um.</p>
+</header>
+
+<div class="linha">
+  <div class="col">
+    <p class="rot"><b>Atual</b><span>preço, 6 conquistas, 8 entregáveis, todos do mesmo peso</span></p>
+    <div class="quadro"><iframe data-v="0" src="index.html?abrir=1"></iframe></div>
+  </div>
+  <div class="col">
+    <p class="rot"><b>1 · com degrau</b><span>os entregáveis recuam: menores, sem check, mais apertados</span></p>
+    <div class="quadro"><iframe data-v="1" src="index.html?abrir=1"></iframe></div>
+  </div>
+  <div class="col">
+    <p class="rot"><b>2 · preço depois</b><span>promessa, listas com degrau, e o preço logo antes do botão</span></p>
+    <div class="quadro"><iframe data-v="2" src="index.html?abrir=1"></iframe></div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('iframe').forEach(function(f){
+  f.addEventListener('load', function(){
+    var d = f.contentDocument, w = f.contentWindow;
+    if (!d) return;
+    var pl = d.querySelector('.player'); if (pl) pl.remove();
+    var s = d.createElement('style');
+    s.textContent = '.rv{opacity:1!important;transform:none!important}html{scroll-behavior:auto!important}';
+    d.documentElement.appendChild(s);
+    d.querySelectorAll('.rv').forEach(function(e){ e.classList.add('on','in','vis'); });
+
+    var v   = f.getAttribute('data-v');
+    var box = d.querySelector('.offer-box');
+    if (!box) return;
+    var vj  = box.querySelector('.vemjunto');
+
+    /* o degrau: os entregaveis param de competir com as conquistas */
+    if (v === '1' || v === '2') {
+      var st = d.createElement('style');
+      st.textContent =
+        '.offer-box .vemjunto li{font-size:.82rem!important;line-height:1.45!important;' +
+        'padding-left:0!important;color:rgba(243,240,232,.6)!important;margin-bottom:7px!important}' +
+        '.offer-box .vemjunto li:before{display:none!important}' +
+        '.offer-box .vemjunto li b{font-weight:600!important;color:rgba(243,240,232,.9)!important}' +
+        '.offer-box .vemjunto{border-top:0!important;padding-top:6px!important}' +
+        '.offer-box .vemjunto .tit{font-size:.68rem!important;margin-bottom:12px!important}';
+      d.documentElement.appendChild(st);
+    }
+
+    /* o preco desce pra logo antes do botao */
+    if (v === '2') {
+      var btn  = box.querySelector('.btn');
+      var pre  = box.querySelector('.price');
+      var inst = box.querySelector('.inst');
+      var prom = box.querySelector('.promessa');
+      var marca= box.querySelector('.marca');
+      if (prom && marca) marca.after(prom);
+      if (btn && pre)  btn.before(pre);
+      if (btn && inst) btn.before(inst);
+    }
+
+    setTimeout(function(){
+      var alvo = d.querySelector('.offer-box');
+      if (alvo) w.scrollTo(0, alvo.getBoundingClientRect().top + w.scrollY - 30);
+    }, 300);
+  });
+});
+</script>
+</body>
+</html>
