@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>O plano · 3 jeitos</title>
+<!-- PREVIEW descartável (18/09). Um bloco NOVO, injetado na página de verdade
+     logo depois dos três atos. Apagar quando decidir. -->
+<style>
+  :root{color-scheme:light}
+  body{margin:0;background:#E8E4DC;font:15px/1.5 system-ui,-apple-system,sans-serif;color:#242320}
+  header{padding:22px 24px 6px;max-width:1280px;margin:0 auto}
+  h1{font-size:1.15rem;margin:0 0 4px}
+  header p{margin:0;color:#57544D;max-width:80ch}
+  .linha{display:flex;gap:18px;max-width:1280px;margin:20px auto;padding:0 24px;align-items:flex-start}
+  .col{flex:1;min-width:0}
+  .rot{margin:0 0 8px}
+  .rot b{font-size:.95rem}
+  .rot span{display:block;color:#57544D;font-size:.84rem}
+  .quadro{height:880px;border-radius:14px;overflow:hidden;background:#F3F0E8;
+    box-shadow:0 18px 40px -26px rgba(0,0,0,.5)}
+  iframe{width:100%;height:100%;border:0;display:block}
+  @media(max-width:1000px){.linha{flex-direction:column}.quadro{height:760px}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mostrar o plano, em três jeitos</h1>
+  <p>Bloco novo, entrando logo depois dos três atos e antes da prova. O texto é o mesmo nos três: o que muda é o que a pessoa vê.</p>
+</header>
+
+<div class="linha">
+  <div class="col">
+    <p class="rot"><b>A · o documento</b><span>só a foto do plano em leque, gerada do PDF de verdade</span></p>
+    <div class="quadro"><iframe data-v="a" src="index.html?abrir=1"></iframe></div>
+  </div>
+  <div class="col">
+    <p class="rot"><b>B · as doze semanas</b><span>sem imagem: o foco de cada semana, agrupado pelos atos</span></p>
+    <div class="quadro"><iframe data-v="b" src="index.html?abrir=1"></iframe></div>
+  </div>
+  <div class="col">
+    <p class="rot"><b>C · os dois</b><span>a foto de um lado, as semanas do outro</span></p>
+    <div class="quadro"><iframe data-v="c" src="index.html?abrir=1"></iframe></div>
+  </div>
+</div>
+
+<script>
+var SEMANAS = [
+  ['Pré-lançamento', [
+    ['1','Planejamento e objetivo'],
+    ['2','Soft-marketing e organização de listas'],
+    ['3','Mapeamento de contatos'],
+    ['4','Endossos e estudo do mercado'],
+    ['5','Capa e identidade visual'],
+    ['6','Planejamento da pré-venda'],
+    ['7','Evento de lançamento'],
+    ['8','Aquecimento final']
+  ]],
+  ['Pré-venda', [
+    ['9','Abertura da pré-venda'],
+    ['10','Vendas em lote e provas sociais'],
+    ['11','Urgência e provas sociais']
+  ]],
+  ['Lançamento e depois', [
+    ['12','Lançamento'],
+    ['+','Pós-lançamento, para o livro não morrer em trinta dias']
+  ]]
+];
+
+function gradeHTML(){
+  return SEMANAS.map(function(g){
+    return '<div class="pl-ato"><p class="pl-ato-nome">' + g[0] + '</p><ul class="pl-lista">' +
+      g[1].map(function(s){
+        return '<li><b>' + (s[0] === '+' ? '+' : 'Semana ' + s[0]) + '</b><span>' + s[1] + '</span></li>';
+      }).join('') + '</ul></div>';
+  }).join('');
+}
+
+var CABECA =
+  '<p class="eyebrow">O plano</p>' +
+  '<h2>Isto é o que você copia e&nbsp;cola.</h2>' +
+  '<p class="pl-sub">Doze semanas, cada uma com um foco, a lista de tarefas e o post da semana. ' +
+  'Você põe as suas datas e segue.</p>';
+
+var FOTO = '<div class="pl-foto"><img src="assets/plano-90d.webp" alt="O plano de 90 dias, semana a semana" loading="lazy"></div>';
+
+var CSS =
+  '.pl{background:#242320;color:#F3F0E8}' +
+  '.pl .eyebrow{color:#EAB82D !important}' +
+  '.pl h2{color:#F3F0E8 !important;margin:0 0 14px}' +
+  '.pl .pl-sub{max-width:52ch;margin:0 auto 34px;color:rgba(243,240,232,.68);font-size:1rem;line-height:1.6}' +
+  '.pl .pl-cab{text-align:center}' +
+  '.pl-foto img{width:100%;height:auto;display:block}' +
+  '.pl-foto{max-width:520px;margin:0 auto}' +
+  '.pl-grade{display:grid;gap:26px;text-align:left}' +
+  '.pl-ato-nome{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:.7rem;' +
+    'letter-spacing:.2em;text-transform:uppercase;color:#EAB82D;margin:0 0 12px;' +
+    'padding-bottom:8px;border-bottom:1px solid rgba(243,240,232,.16)}' +
+  '.pl-lista{list-style:none;padding:0;margin:0;display:grid;gap:9px}' +
+  '.pl-lista li{display:flex;gap:12px;align-items:baseline;font-size:.93rem;line-height:1.4}' +
+  '.pl-lista li b{flex:0 0 74px;font-family:"Space Grotesk",sans-serif;font-weight:700;' +
+    'font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(243,240,232,.45)}' +
+  '.pl-lista li span{color:rgba(243,240,232,.9)}' +
+  '@media(min-width:761px){.pl-grade{grid-template-columns:repeat(3,1fr);gap:30px}}' +
+  '.pl-duo{display:grid;gap:34px;align-items:start}' +
+  '@media(min-width:901px){.pl-duo{grid-template-columns:.85fr 1.15fr;gap:44px}' +
+    '.pl-duo .pl-grade{grid-template-columns:1fr;gap:22px}}';
+
+document.querySelectorAll('iframe').forEach(function(f){
+  f.addEventListener('load', function(){
+    var d = f.contentDocument, w = f.contentWindow;
+    if (!d) return;
+    var pl = d.querySelector('.player'); if (pl) pl.remove();
+    var s = d.createElement('style');
+    s.textContent = '.rv{opacity:1!important;transform:none!important}html{scroll-behavior:auto!important}' + CSS;
+    d.documentElement.appendChild(s);
+    d.querySelectorAll('.rv').forEach(function(e){ e.classList.add('on','in','vis'); });
+
+    var v = f.getAttribute('data-v');
+    var corpo =
+      v === 'a' ? FOTO :
+      v === 'b' ? '<div class="pl-grade">' + gradeHTML() + '</div>' :
+                  '<div class="pl-duo">' + FOTO + '<div class="pl-grade">' + gradeHTML() + '</div></div>';
+
+    var sec = d.createElement('section');
+    sec.className = 'pl';
+    sec.innerHTML = '<div class="wrap"><div class="pl-cab">' + CABECA + '</div>' + corpo + '</div>';
+
+    var virada = d.querySelector('.virada');
+    virada.after(sec);
+
+    setTimeout(function(){
+      w.scrollTo(0, sec.getBoundingClientRect().top + w.scrollY - 20);
+    }, 340);
+  });
+});
+</script>
+</body>
+</html>
