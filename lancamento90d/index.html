@@ -1004,6 +1004,10 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 
 footer{padding-bottom:44px;background:var(--bg);color:var(--mute);padding:38px 0;font-size:.8rem;border-top:1px solid var(--border)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+/* no mobile a marca e o copyright nao cabem na mesma linha, e ai o
+   space-between deixa de separar nada: sobra um item por linha, os dois
+   encostados na esquerda. Centraliza. */
+@media(max-width:760px){footer .wrap{justify-content:center;text-align:center}}
 
 /* ---------- barra fixa mobile ---------- */
 .sticky{
