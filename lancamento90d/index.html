@@ -569,9 +569,8 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .mult .c1{color:#fff}.mult .c2{color:#FAAB00}.mult .c3{color:#FF7A5C}
 .desfecho{margin-top:20px!important}
 
-/* fecho da parede de prova: a seta a mao encurta a distancia entre o leitor
-   e os rostos. A anotacao usa o mesmo motor de escrita da frase da Dany
-   (.mao), so' que sem o traco embaixo e menor. */
+/* fecho da parede de prova. Tinha uma seta a mao e um "Voce esta aqui" que
+   sairam em 18/09, a pedido do cliente. */
 .fecho-prova{text-align:center;margin-top:clamp(40px,5vw,60px)}
 .fp1{margin:0;font-size:clamp(1.06rem,2.3vw,1.34rem);color:var(--soft)}
 .fp2{display:block;margin:10px 0 0;
@@ -758,12 +757,10 @@ html:not(.js) .agit .dig::after{display:none}
 @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/grotesk-sub.woff2) format('woff2')}
 
 /* Fontes decorativas com subset EXATO dos glifos que a página usa:
-   Caveat 74,9 -> 11,8 KB · Fraunces 22,9 -> 5,3 KB. Juntas, -80,7 KB.
-   ⚠️ Se a copy do .mao ou do .serifa ganhar uma letra nova, ela cai no
+   Fraunces 22,9 -> 5,3 KB. (Caveat saiu em 18/09 junto com a frase manuscrita.)
+   ⚠️ Se a copy do .serifa ganhar uma letra nova, ela cai no
    fallback e aparece torta na hora. Pra regerar: python3 tools/subset-fontes.py
    (os arquivos completos continuam em assets/fonts/, são a fonte da verdade). */
-@font-face{font-family:'Caveat';font-style:normal;font-weight:600;font-display:swap;
-  src:url(assets/fonts/caveat-sub.woff2) format('woff2')}
 @font-face{font-family:'Fraunces';font-style:italic;font-weight:500;font-display:swap;
   src:url(assets/fonts/fraunces-italic-500-sub.woff2) format('woff2')}
 .grifo{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2060%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M3%2C15%20C1%2C33%204%2C48%2011%2C52%20C110%2C58%20205%2C55%20293%2C50%20C299%2C45%20299%2C21%20294%2C13%20C200%2C6%2092%2C9%203%2C15%20Z%27%20fill%3D%27%23FC783C%27%20fill-opacity%3D%270.42%27%2F%3E%3C%2Fsvg%3E") no-repeat;background-size:100% .78em;background-position:0 .42em;
@@ -780,21 +777,6 @@ html:not(.js) .agit .dig::after{display:none}
 .serifa{font-weight:400;letter-spacing:-.025em}
 /* a fala de um leitor: ai' sim serifa italica, porque e' outra boca falando */
 .dany .fala{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
-/* a letra da Dany: se escreve sozinha e o traco cresce junto */
-.mao{font-family:'Caveat',cursive;font-weight:600;font-size:clamp(26px,3.4vw,38px);
-  line-height:1.08;letter-spacing:.5px;color:var(--accent);transform:rotate(-1.5deg);
-  display:inline-block;position:relative;margin:26px 0 0;
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23FC783C%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-size:0% .14em;
-  background-position:0 99%;padding-bottom:.16em;
-  transition:background-size 2.2s cubic-bezier(.5,.05,.2,1)}
-.mao.escreveu{background-size:100% .14em}
-.mao .pal{white-space:nowrap}
-.mao .ch{opacity:0;display:inline-block;transition:opacity .14s ease-out}
-.mao.escreveu .ch{opacity:1}
-html:not(.js) .mao{background-size:100% .14em}
-html:not(.js) .mao .ch{opacity:1}
-html.js.sem-motion .mao{background-size:100% .14em}
-html.js.sem-motion .mao .ch{opacity:1!important;transition:none!important}
 
 /* OS 99%: o numero ganha um outdoor so' pra ele, antes do diagrama. */
 .noventa{background:var(--accent);color:#fff;padding:clamp(60px,7.5vw,98px) 0;text-align:center}
@@ -844,7 +826,6 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .dany .cont{margin:16px 0 0;color:#CFCBC6;font-size:1.02rem;line-height:1.64}
 .dany .peso{margin:14px 0 0;color:#fff;font-weight:600;font-size:1.06rem;
   line-height:1.5;text-wrap:balance}
-.dany .mao{font-size:clamp(24px,2.8vw,31px);margin-top:24px}
 /* o nome chega no FIM, como assinatura */
 .dany .assina{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.22)}
 .dany .assina h2{color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;
@@ -1707,7 +1688,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
           livro debaixo da cama. De autor que doou o estoque inteiro para não precisar mais
           olhar para ele. De gente que nunca escreveu o segundo porque o primeiro não vendeu.</p>
         <p class="peso">Nenhum deles escreveu um livro ruim. Todos começaram tarde demais.</p>
-        <p class="mao"><span class="lin">O maior risco que um autor corre é ser esquecido.</span></p>
         <div class="assina">
           <h2>Dany Sakugawa</h2>
           <span>Passou anos do outro lado, como diretora da editora que mais emplacava best-sellers
@@ -2032,37 +2012,6 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 })();
 </script>
 <script>
-/* A LETRA DA DANY: cada caractere entra em sequencia e o traco cresce junto.
-   Sem JS ou com movimento desligado, o CSS ja' deixa tudo no estado final. */
-(function(){
-  var maos=[].slice.call(document.querySelectorAll('.mao'));
-  if(!maos.length) return;
-  maos.forEach(function(m){
-    m.querySelectorAll('.lin').forEach(function(l){
-      var palavras=l.textContent.split(' '); l.textContent='';
-      palavras.forEach(function(pal,k){
-        var w=document.createElement('span'); w.className='pal';
-        for(var i=0;i<pal.length;i++){ var c=document.createElement('span');
-          c.className='ch'; c.textContent=pal.charAt(i); w.appendChild(c); }
-        l.appendChild(w);
-        if(k<palavras.length-1){ var esp=document.createElement('span');
-          esp.className='ch'; esp.textContent='\u00A0'; l.appendChild(esp); }
-      });
-    });
-  });
-  function escrever(m){
-    if(m.dataset.feito) return; m.dataset.feito='1';
-    var d=0; m.querySelectorAll('.ch').forEach(function(c){ c.style.transitionDelay=d+'ms'; d+=26; });
-    m.classList.add('escreveu');
-  }
-  if(!('IntersectionObserver' in window)){ maos.forEach(escrever); return; }
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){
-    if(e.isIntersecting){ escrever(e.target); io.unobserve(e.target); }});},{threshold:.5});
-  maos.forEach(function(m){io.observe(m);});
-  window.__escrever=function(){maos.forEach(escrever);};
-})();
-</script>
-<script>
 /* OS CEM LIVROS: enchem conforme a secao sobe na tela. Uma variavel CSS so',
    atualizada em rAF; as 100 marcas leem dela sozinhas. O ultimo a acender e'
    justamente o unico aceso. */
@@ -2326,9 +2275,6 @@ footer{background:#242320 !important}
 .dany .assina h2{color:#292927 !important}
 .dany .assina span{color:#57544D !important}
 .dany .assina{border-top-color:rgba(41,41,39,.14) !important}
-.dany .mao,.dany .mao *{color:#292927 !important}
-.dany .mao{background-image:linear-gradient(transparent 80%,rgba(234,184,45,.75) 80%) !important;
-  background-size:100% 100% !important;background-position:0 0 !important}
 .dany .nums b{color:#292927 !important}
 .dany .nums span{color:#57544D !important}
 .dany .nums div{border-top-color:rgba(41,41,39,.16) !important}
