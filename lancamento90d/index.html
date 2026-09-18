@@ -301,7 +301,6 @@ section{padding:80px 0}
   section{padding:48px 0}
   .agit,.noventa,.virada{padding:72px 0}
   :is(.agit,.noventa,.virada) + :is(.agit,.noventa,.virada){padding-top:48px}
-  .virada{padding-top:96px}
   body{font-size:16px}
 }
 
@@ -500,6 +499,10 @@ html.js .bb-passo:not(.viva){opacity:.26}
    Por isso NAO entra laranja aqui dentro: laranja e' a cor do problema. */
 .virada{background:var(--verde);color:#fff;text-align:center;
   padding-top:140px}
+/* excecao 1 do ritmo, e ela mora aqui pra vencer o bloco la' de cima:
+   o .bolhas:after e' um V pendurado pra dentro da virada, entao quem paga a
+   folga e' ela. Entalhe (clamp 40..90) + ~55 em cada tamanho. */
+@media(max-width:760px){.virada{padding-top:96px}}
 .virada .eyebrow{color:rgba(255,255,255,.62)}
 .virada .eyebrow.forte{color:#fff;font-size:.86rem;letter-spacing:.2em;margin-bottom:16px}
 .virada h2{color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;
