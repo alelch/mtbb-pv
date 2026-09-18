@@ -932,16 +932,20 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
    acima do selo fica igual ao de baixo da caixa: 80 no desktop, 48 no mobile.
    DENTRO: o topo nao tem padding porque quem ocupa e' a metade de baixo do
    selo, e isso dava 71 em cima contra 35 embaixo. A padding de baixo sobe. */
-.garantia{max-width:560px;margin:56px auto 0;text-align:center;
+.garantia{max-width:500px;margin:56px auto 0;text-align:center;
   position:relative;background:#F6F4EE;border:1px solid rgba(36,35,32,.22);border-radius:3px;
-  padding:0 clamp(22px,4vw,44px) 50px}
+  padding:0 clamp(22px,4vw,40px) 54px}
+/* a caixa era larga pro texto que guarda: centralizado, sobrava rag dos dois
+   lados e o olho nao achava o inicio da linha. A caixa estreita e o paragrafo
+   ganha teto proprio, pra quebrar parelho. */
+.garantia .txt p{max-width:38ch;margin-left:auto;margin-right:auto}
 .garantia:before{content:"";position:absolute;inset:6px;border:1px solid rgba(36,35,32,.12);
   border-radius:2px;pointer-events:none}
 .garantia .txt{position:relative;z-index:1}
 .garantia .selo{max-width:112px;margin:-56px auto 16px;position:relative;z-index:2}
 .garantia .selo svg{filter:drop-shadow(0 6px 16px rgba(0,0,0,.18))}
 .garantia .cert-eyebrow{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.68rem;
-  letter-spacing:.2em;text-transform:uppercase;color:#8A867C;margin:0 0 10px}
+  letter-spacing:.2em;text-transform:uppercase;color:#6E6A60;margin:0 0 10px}
 .garantia .selo svg{width:100%;height:auto;display:block}
 .garantia .volta{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;
   letter-spacing:.14em;fill:#757168;
@@ -959,7 +963,7 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .garantia .lei b{color:var(--ink);font-weight:700}
 .garantia .fecho{margin:14px 0 0;color:var(--ink);font-weight:600;font-size:.95rem}
 @media(max-width:760px){
-  .garantia{margin-top:48px;padding-bottom:40px}
+  .garantia{margin-top:48px;padding-bottom:44px}
   .garantia .selo{max-width:96px;margin:-48px auto 12px}
 }
 
