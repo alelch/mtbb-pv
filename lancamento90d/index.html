@@ -2499,9 +2499,13 @@ footer{background:#242320 !important}
 .lbox{position:fixed;inset:0;z-index:9999;background:rgba(20,19,17,.92);
   display:grid;place-items:center;padding:20px}
 .lbox[hidden]{display:none}
-.lbox-in{width:min(980px,100%);aspect-ratio:16/9;border-radius:14px;overflow:hidden;
-  background:#000;box-shadow:0 24px 70px rgba(0,0,0,.5)}
-.lbox-in iframe{display:block;width:100%;height:100%;border:0}
+/* 18/09 BUG: o video abria com 150px de altura, que e' o height PADRAO de um
+   <iframe>. A .lbox-in tem aspect-ratio e nenhuma altura explicita, entao o
+   height:100% do filho nao achava contra o que calcular e caia no padrao.
+   Ancorar por position absoluta resolve sem depender de porcentagem. */
+.lbox-in{position:relative;width:min(980px,100%);aspect-ratio:16/9;border-radius:14px;
+  overflow:hidden;background:#000;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.lbox-in iframe{position:absolute;inset:0;display:block;width:100%;height:100%;border:0}
 .lbox-x{position:absolute;top:18px;right:22px;width:44px;height:44px;border-radius:50%;
   border:0;background:rgba(243,240,232,.14);color:#F3F0E8;font-size:26px;line-height:1;
   cursor:pointer;transition:background .2s}
