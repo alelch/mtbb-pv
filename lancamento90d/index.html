@@ -278,7 +278,13 @@ a{color:inherit}
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
 .narrow{max-width:760px}
 section{padding:80px 0}
-@media(max-width:760px){section{padding:54px 0}body{font-size:16px}}
+/* 18/09: duas medidas no mobile, nao oito. 48 = secao normal, 72 = secao de
+   declaracao (.agit, .noventa, .virada). As costuras viram 96 no corrido, 120
+   quando uma declaracao encosta numa normal e 144 entre duas declaracoes:
+   quando o espaco cresce e' porque a secao mudou de peso, nao por acaso.
+   Os clamp() foram calibrados pra escalar no desktop e o PISO ficou solto,
+   e o piso e' exatamente o que o celular recebe. */
+@media(max-width:760px){section{padding:48px 0}body{font-size:16px}}
 
 h1,h2,h3{font-family:'Space Grotesk','DM Sans',sans-serif;line-height:1.1;letter-spacing:-.03em;margin:0;color:var(--ink)}
 h1{font-size:clamp(2rem,5.2vw,3.7rem);font-weight:700}
@@ -777,7 +783,7 @@ html:not(.js) .agit .dig::after{display:none}
 .dany .fala{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
 
 /* OS 99%: o numero ganha um outdoor so' pra ele, antes do diagrama. */
-.noventa{background:var(--accent);color:#fff;padding:clamp(60px,7.5vw,98px) 0;text-align:center}
+.noventa{background:var(--accent);color:#fff;padding:clamp(72px,7.5vw,98px) 0;text-align:center}
 .noventa h2{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
   font-size:clamp(1.65rem,4.1vw,2.7rem);line-height:1.12;color:#fff;max-width:26ch;margin:0 auto}
 .noventa p{margin:18px auto 0;max-width:46ch;font-size:1.06rem;line-height:1.55;
