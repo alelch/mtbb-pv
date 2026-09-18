@@ -33,7 +33,7 @@
 
 <div class="linha">
   <div class="col">
-    <p class="rot"><b>3 · lista única</b><span>cada conquista carrega embaixo o que a entrega; as duas listas viram uma</span></p>
+    <p class="rot"><b>3 · lista única</b><span>5 bullets: cada conquista carrega embaixo o que a entrega</span></p>
     <div class="quadro"><iframe data-v="3" src="index.html?abrir=1"></iframe></div>
   </div>
   <div class="col">
@@ -95,17 +95,18 @@ document.querySelectorAll('iframe').forEach(function(f){
        entrega logo embaixo. Some a .vemjunto inteira; o que sobra dela
        (sem conquista pra parear) fecha numa linha so'. */
     if (v === '3' && vj) {
+      /* 18/09, cliente: "nao um pedido de apoio" e' punk demais pra PV (acusa
+         os amigos do leitor de comprarem por caridade), e pre-venda e estreia
+         sao o mesmo movimento partido em dois. Viraram 5 bullets. */
       var PARES = [
         ['Seus primeiros compradores', ', antes do livro existir',
          'com a planilha guiada de Mapeamento de Contatos'],
-        ['Uma pré-venda que já vende', ', não um pedido de apoio',
-         'com o plano de pré-venda'],
-        ['Uma estreia com fila', ', não com silêncio',
-         'com o cronograma de 90 dias, preenchido nas suas datas'],
-        ['Desconhecidos descobrindo o livro', ' sem você parecer vendedor',
-         'com o soft-marketing e exemplos prontos'],
+        ['Uma pré-venda que já vende', ', e uma estreia com fila',
+         'com o plano de pré-venda e o cronograma de 90 dias nas suas datas'],
         ['Vendas na primeira semana', ', não só elogios',
          'com o checklist de cada etapa, explicado em vídeo'],
+        ['Desconhecidos descobrindo o livro', ' sem você parecer vendedor',
+         'com o soft-marketing e exemplos prontos'],
         ['Um livro que não morre', ' em trinta dias',
          'com o roteiro do pós-lançamento']
       ];
