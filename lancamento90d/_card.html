@@ -28,13 +28,13 @@
 
 <header>
   <h1>O card da oferta, em três jeitos</h1>
-  <p>Cada quadro é a página de verdade, com o card remontado por cima. Role dentro de cada um.</p>
+  <p>Cada quadro é a página de verdade, com o card remontado por cima. Role dentro de cada um. A versão que está no ar é a do link normal.</p>
 </header>
 
 <div class="linha">
   <div class="col">
-    <p class="rot"><b>Atual</b><span>preço, 6 conquistas, 8 entregáveis, todos do mesmo peso</span></p>
-    <div class="quadro"><iframe data-v="0" src="index.html?abrir=1"></iframe></div>
+    <p class="rot"><b>3 · lista única</b><span>cada conquista carrega embaixo o que a entrega; as duas listas viram uma</span></p>
+    <div class="quadro"><iframe data-v="3" src="index.html?abrir=1"></iframe></div>
   </div>
   <div class="col">
     <p class="rot"><b>1 · com degrau</b><span>os entregáveis recuam: menores, sem check, mais apertados</span></p>
@@ -91,8 +91,48 @@ document.querySelectorAll('iframe').forEach(function(f){
       }
     }
 
+    /* as duas listas viram uma: a conquista em cima, o mecanismo que a
+       entrega logo embaixo. Some a .vemjunto inteira; o que sobra dela
+       (sem conquista pra parear) fecha numa linha so'. */
+    if (v === '3' && vj) {
+      var PARES = [
+        ['Seus primeiros compradores', ', antes do livro existir',
+         'com a planilha guiada de Mapeamento de Contatos'],
+        ['Uma pré-venda que já vende', ', não um pedido de apoio',
+         'com o plano de pré-venda'],
+        ['Uma estreia com fila', ', não com silêncio',
+         'com o cronograma de 90 dias, preenchido nas suas datas'],
+        ['Desconhecidos descobrindo o livro', ' sem você parecer vendedor',
+         'com o soft-marketing e exemplos prontos'],
+        ['Vendas na primeira semana', ', não só elogios',
+         'com o checklist de cada etapa, explicado em vídeo'],
+        ['Um livro que não morre', ' em trinta dias',
+         'com o roteiro do pós-lançamento']
+      ];
+      var ul = box.querySelector('.conquistas');
+      ul.innerHTML = PARES.map(function(x){
+        return '<li><b>' + x[0] + '</b>' + x[1] + '<span class="meio">' + x[2] + '</span></li>';
+      }).join('');
+      var fecho = d.createElement('p');
+      fecho.className = 'fecho-lista';
+      fecho.innerHTML = 'E mais: as <b>3 estratégias de publicação</b>, para achar o caminho do seu livro, e <b>acesso vitalício</b>, para usar neste livro e em todos os próximos.';
+      ul.after(fecho);
+      vj.remove();
+      var s3 = d.createElement('style');
+      s3.textContent =
+        '.offer-box .conquistas{margin-bottom:22px!important;gap:16px!important}' +
+        '.offer-box .conquistas li .meio{display:block;font-size:.85rem;line-height:1.4;' +
+        'color:rgba(243,240,232,.48);margin-top:2px}' +
+        '.offer-box .fecho-lista{max-width:660px;margin:0 auto 30px;text-align:left;' +
+        'font-size:.88rem;line-height:1.55;color:rgba(243,240,232,.55);' +
+        'border-top:1px solid rgba(243,240,232,.12);padding-top:16px}' +
+        '.offer-box .fecho-lista b{color:rgba(243,240,232,.85);font-weight:600}';
+      d.documentElement.appendChild(s3);
+    }
+
     setTimeout(function(){
-      var alvo = d.querySelector('.offer-box');
+      var alvo = (v === '2') ? d.querySelector('#oferta .narrow')
+                             : d.querySelector('.offer-box');
       if (alvo) w.scrollTo(0, alvo.getBoundingClientRect().top + w.scrollY - 30);
     }, 300);
   });
