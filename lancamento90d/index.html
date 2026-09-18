@@ -621,7 +621,7 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .btn.ouro{position:relative;overflow:hidden;isolation:isolate;
   color:#0D0D0D;text-transform:uppercase;letter-spacing:.05em;
   padding:clamp(19px,2.3vw,25px) clamp(26px,4vw,50px);
-  font-size:clamp(.94rem,1.9vw,1.12rem);
+  font-size:clamp(1.05rem,2.4vw,1.32rem);
   border:1.5px solid hsl(40 100% 54% / .5);
   background:linear-gradient(var(--ga),hsl(48 100% 60%),hsl(43 96% 50%),
              hsl(35 90% 42%),hsl(43 96% 56%));
@@ -654,7 +654,7 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .btn.verde{position:relative;overflow:hidden;isolation:isolate;
   color:#F3F0E8;text-transform:uppercase;letter-spacing:.05em;
   padding:clamp(19px,2.3vw,25px) clamp(26px,4vw,50px);
-  font-size:clamp(.94rem,1.9vw,1.12rem);
+  font-size:clamp(1.05rem,2.4vw,1.32rem);
   border:1.5px solid hsl(157 60% 55% / .5);
   background:linear-gradient(var(--ga),hsl(157 62% 48%),hsl(160 70% 30%),
              hsl(164 72% 18%),hsl(157 62% 40%));
@@ -1018,9 +1018,10 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .offer-box .vemjunto li b{color:#F3F0E8;font-weight:700}
 .offer-box .vemjunto li:before{border-color:#EAB82D}
 
-/* 18/09: o CTA do card da oferta e' o botao que de fato vende, entao o texto
-   dele e' maior que o dos outros. Os demais seguem o clamp da variante. */
-.offer-box .btn.verde{font-size:clamp(1.12rem,2.7vw,1.5rem);letter-spacing:.03em}
+/* 18/09: os tres botoes da pagina usam o MESMO tamanho, que e' o do card da
+   oferta. Subiu na base das duas variantes (.ouro e .verde), entao nao existe
+   mais excecao aqui. A barra fixa continua com regra propria e menor, porque
+   la' o botao divide a largura com o preco. */
 .seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:24px;
   font-size:.78rem;color:rgba(255,255,255,.7)}
 
