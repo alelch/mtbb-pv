@@ -41,7 +41,7 @@
     <div class="quadro"><iframe data-v="1" src="index.html?abrir=1"></iframe></div>
   </div>
   <div class="col">
-    <p class="rot"><b>2 · preço depois</b><span>promessa, listas com degrau, e o preço logo antes do botão</span></p>
+    <p class="rot"><b>2 · lista fora do card</b><span>sob o título, no marfim; o card fica só com preço, conquistas e botão</span></p>
     <div class="quadro"><iframe data-v="2" src="index.html?abrir=1"></iframe></div>
   </div>
 </div>
@@ -63,7 +63,7 @@ document.querySelectorAll('iframe').forEach(function(f){
     var vj  = box.querySelector('.vemjunto');
 
     /* o degrau: os entregaveis param de competir com as conquistas */
-    if (v === '1' || v === '2') {
+    if (v === '1') {
       var st = d.createElement('style');
       st.textContent =
         '.offer-box .vemjunto li{font-size:.82rem!important;line-height:1.45!important;' +
@@ -75,16 +75,17 @@ document.querySelectorAll('iframe').forEach(function(f){
       d.documentElement.appendChild(st);
     }
 
-    /* o preco desce pra logo antes do botao */
-    if (v === '2') {
-      var btn  = box.querySelector('.btn');
-      var pre  = box.querySelector('.price');
-      var inst = box.querySelector('.inst');
-      var prom = box.querySelector('.promessa');
-      var marca= box.querySelector('.marca');
-      if (prom && marca) marca.after(prom);
-      if (btn && pre)  btn.before(pre);
-      if (btn && inst) btn.before(inst);
+    /* a lista sai do card e vai pro marfim, logo abaixo do titulo */
+    if (v === '2' && vj) {
+      var titulo = d.querySelector('#oferta .narrow');
+      if (titulo) {
+        titulo.after(vj);
+        vj.classList.add('rv','on','in','vis');
+        /* fora do card ela volta sozinha as cores do marfim, porque as regras
+           escuras sao .offer-box .vemjunto e deixam de casar. So' o respiro
+           precisa de ajuste. */
+        vj.style.cssText = 'max-width:660px;margin:26px auto 0;text-align:left';
+      }
     }
 
     setTimeout(function(){
