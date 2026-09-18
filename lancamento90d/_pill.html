@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Título + packshot + preço</title>
+<!-- PREVIEW descartável (18/09). Quadros LARGOS, empilhados, pra dar pra ver o
+     desktop de verdade. Apagar quando decidir. -->
+<style>
+  :root{color-scheme:light}
+  body{margin:0;background:#E8E4DC;font:15px/1.5 system-ui,-apple-system,sans-serif;color:#242320}
+  .cx{max-width:1180px;margin:0 auto;padding:22px 24px 40px}
+  h1{font-size:1.15rem;margin:0 0 4px}
+  .cx>p{margin:0 0 4px;color:#57544D;max-width:86ch}
+  .rot{margin:26px 0 8px}
+  .rot b{font-size:.98rem}
+  .rot span{display:block;color:#57544D;font-size:.85rem}
+  .quadro{height:760px;border-radius:14px;overflow:hidden;background:#F3F0E8;
+    box-shadow:0 18px 40px -26px rgba(0,0,0,.5)}
+  iframe{width:100%;height:100%;border:0;display:block}
+</style>
+</head>
+<body>
+<div class="cx">
+  <h1>Título, packshot e preço como um bloco só</h1>
+  <p>Quadros largos e empilhados, porque o assunto é o desktop. Role dentro de cada um.</p>
+
+  <p class="rot"><b>No ar hoje</b><span>título · packshot solto no marfim · card estreito embaixo</span></p>
+  <div class="quadro"><iframe data-v="0" src="index.html?abrir=1"></iframe></div>
+
+  <p class="rot"><b>1 · packshot dentro do card, sangrando no topo</b><span>a imagem entra no carvão e desce pro preço; um objeto só</span></p>
+  <div class="quadro"><iframe data-v="1" src="index.html?abrir=1"></iframe></div>
+
+  <p class="rot"><b>2 · card em duas colunas</b><span>packshot à esquerda, preço e bullets à direita; no mobile empilha igual à 1</span></p>
+  <div class="quadro"><iframe data-v="2" src="index.html?abrir=1"></iframe></div>
+</div>
+
+<script>
+var BASE =
+  /* a imagem entra no card: sangra ate' a borda e o carvao recebe ela por baixo */
+  '.offer-box .packshot{margin:0 0 6px;max-width:none;width:auto}' +
+  '.offer-box .packshot img{width:100%;height:auto;display:block}' +
+  '.offer-box{padding-top:0!important;overflow:hidden}' +
+  '.offer-box .packshot{margin-left:calc(-1 * var(--pad));margin-right:calc(-1 * var(--pad));' +
+    'margin-top:calc(-1 * var(--padtop));padding:26px 18px 0;' +
+    'background:radial-gradient(120% 90% at 50% 0%, rgba(243,240,232,.10) 0%, rgba(243,240,232,0) 70%)}' +
+  '.offer-box .marca{margin-top:2px}';
+
+var DUAS =
+  '@media(min-width:900px){' +
+    '.offer-box{display:grid;grid-template-columns:.92fr 1.08fr;gap:34px;align-items:center;' +
+      'text-align:left;max-width:1000px;padding-top:34px!important}' +
+    '.offer-box .packshot{grid-column:1;margin:0;padding:0;background:none;align-self:center}' +
+    '.offer-box .lado{grid-column:2}' +
+    '.offer-box .marca{margin:0 0 14px 0}' +
+    '.offer-box .price{justify-content:flex-start}' +
+    '.offer-box .conquistas{margin-bottom:20px}' +
+    '.offer-box .seals{justify-content:flex-start}' +
+  '}';
+
+document.querySelectorAll('iframe').forEach(function(f){
+  f.addEventListener('load', function(){
+    var d = f.contentDocument, w = f.contentWindow;
+    if (!d) return;
+    var pl = d.querySelector('.player'); if (pl) pl.remove();
+    var s0 = d.createElement('style');
+    s0.textContent = '.rv{opacity:1!important;transform:none!important}html{scroll-behavior:auto!important}';
+    d.documentElement.appendChild(s0);
+    d.querySelectorAll('.rv').forEach(function(e){ e.classList.add('on','in','vis'); });
+
+    var v = f.getAttribute('data-v');
+    var box = d.querySelector('.offer-box'), pk = d.querySelector('.packshot');
+    if (!box || !pk) return;
+
+    if (v !== '0') {
+      /* guarda a padding real do card pra poder sangrar a imagem por cima dela */
+      var cs = w.getComputedStyle(box);
+      box.style.setProperty('--pad', cs.paddingLeft);
+      box.style.setProperty('--padtop', cs.paddingTop);
+      box.insertBefore(pk, box.firstChild);
+
+      if (v === '2') {
+        var lado = d.createElement('div');
+        lado.className = 'lado';
+        while (pk.nextSibling) lado.appendChild(pk.nextSibling);
+        box.appendChild(lado);
+      }
+
+      var st = d.createElement('style');
+      st.textContent = BASE + (v === '2' ? DUAS : '');
+      d.documentElement.appendChild(st);
+    }
+
+    setTimeout(function(){
+      var alvo = d.querySelector('#oferta .narrow');
+      w.scrollTo(0, alvo.getBoundingClientRect().top + w.scrollY - 24);
+    }, 340);
+  });
+});
+</script>
+</body>
+</html>
