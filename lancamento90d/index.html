@@ -296,10 +296,17 @@ a{color:inherit}
       baixo usa a medida normal. */
 section{padding:80px 0}
 .agit,.noventa,.virada{padding:120px 0}
+/* 3a excecao do ritmo: a .offer-fecho tem um filho unico, e ele e' uma CAIXA
+   EMOLDURADA. Moldura substitui espaco em branco: o quadro ja' separa o objeto
+   do resto, entao a padding cheia da secao vira redundante e o certificado
+   (380px de altura) ficava com 160 de ar em cima e 160 embaixo, ou seja, mais
+   ar do que objeto. Metade da medida normal. */
+.offer-fecho{padding:40px 0}
 :is(.agit,.noventa,.virada) + :is(.agit,.noventa,.virada){padding-top:80px}
 @media(max-width:760px){
   section{padding:48px 0}
   .agit,.noventa,.virada{padding:72px 0}
+  .offer-fecho{padding:24px 0}
   :is(.agit,.noventa,.virada) + :is(.agit,.noventa,.virada){padding-top:48px}
   body{font-size:16px}
 }
