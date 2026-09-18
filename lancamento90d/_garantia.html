@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Garantia · 3 jeitos</title>
+<!-- PREVIEW descartável (18/09). Cada quadro é a PÁGINA DE VERDADE num iframe,
+     com a seção da garantia remontada por cima. Apagar quando decidir. -->
+<style>
+  :root{color-scheme:light}
+  body{margin:0;background:#E8E4DC;font:15px/1.5 system-ui,-apple-system,sans-serif;color:#242320}
+  header{padding:22px 24px 6px;max-width:1240px;margin:0 auto}
+  h1{font-size:1.15rem;margin:0 0 4px}
+  header p{margin:0;color:#57544D;max-width:74ch}
+  .linha{display:flex;gap:18px;max-width:1240px;margin:20px auto;padding:0 24px;align-items:flex-start}
+  .col{flex:1;min-width:0}
+  .rot{margin:0 0 8px}
+  .rot b{font-size:.95rem}
+  .rot span{display:block;color:#57544D;font-size:.84rem}
+  .quadro{height:840px;border-radius:14px;overflow:hidden;background:#F3F0E8;
+    box-shadow:0 18px 40px -26px rgba(0,0,0,.5)}
+  iframe{width:100%;height:100%;border:0;display:block}
+  @media(max-width:1000px){.linha{flex-direction:column}.quadro{height:740px}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>A garantia, em três jeitos</h1>
+  <p>Cada quadro é a página de verdade, com a seção remontada por cima. O texto encurtado é o mesmo nos três: o que muda é o desenho.</p>
+</header>
+
+<div class="linha">
+  <div class="col">
+    <p class="rot"><b>Atual</b><span>texto novo, desenho de hoje: seis blocos centralizados, sem nada contendo</span></p>
+    <div class="quadro"><iframe data-v="0" src="index.html?abrir=1"></iframe></div>
+  </div>
+  <div class="col">
+    <p class="rot"><b>1 · certificado com lacre</b><span>moldura de fio duplo, o selo encavalado na borda de cima</span></p>
+    <div class="quadro"><iframe data-v="1" src="index.html?abrir=1"></iframe></div>
+  </div>
+  <div class="col">
+    <p class="rot"><b>2 · certificado austero</b><span>sem moldura: só dois fios, o selo pequeno e o texto em coluna estreita</span></p>
+    <div class="quadro"><iframe data-v="2" src="index.html?abrir=1"></iframe></div>
+  </div>
+</div>
+
+<script>
+/* o texto curto, igual nos tres: sai o "baixe o cronograma" (ensinava a
+   extracao) e os tres passos viram uma linha so' */
+var TXT =
+  '<p class="cert-eyebrow">Garantia incondicional</p>' +
+  '<h3>Quer olhar por dentro antes de decidir?</h3>' +
+  '<p class="lei">A lei exige sete dias. A gente dá <b>quinze</b>, porque sete não dá tempo de olhar um plano de noventa.</p>' +
+  '<p class="cert-termos">Entre, veja o plano inteiro e o cronograma das noventa datas. Não é para você? Pede por e-mail, recebe cem por cento de volta, sem perguntas.</p>' +
+  '<p class="fecho">Eu não vendo garantia de venda, ninguém pode dar isso. O que eu entrego é o plano, na ordem certa. O risco financeiro é nosso. É a sua vez agora.</p>';
+
+var BASE =
+  '.garantia .cert-eyebrow{font-family:"Space Grotesk",sans-serif;font-weight:700;' +
+    'font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#8A867C;margin:0 0 10px}' +
+  '.garantia h3{font-size:1.28rem;margin-bottom:12px}' +
+  '.garantia p{font-size:.93rem;line-height:1.55;margin-bottom:10px}' +
+  '.garantia .fecho{font-size:.95rem;margin-top:14px}';
+
+var VAR = {
+  /* 1: moldura de fio duplo e o selo encavalado, como lacre */
+  '1': BASE +
+    '.garantia{max-width:560px;border:1px solid rgba(36,35,32,.22);border-radius:3px;' +
+      'padding:0 clamp(22px,4vw,44px) clamp(26px,3.4vw,34px);position:relative;background:#F6F4EE}' +
+    '.garantia:before{content:"";position:absolute;inset:6px;border:1px solid rgba(36,35,32,.12);' +
+      'border-radius:2px;pointer-events:none}' +
+    '.garantia .selo{max-width:112px;margin:-56px auto 14px;position:relative;z-index:2}' +
+    '.garantia .selo svg{filter:drop-shadow(0 6px 16px rgba(0,0,0,.18))}' +
+    '.garantia .txt{position:relative;z-index:1}',
+  /* 2: sem caixa. dois fios horizontais e o selo pequeno, como diploma */
+  '2': BASE +
+    '.garantia{max-width:520px;border-top:2px solid rgba(36,35,32,.5);' +
+      'border-bottom:2px solid rgba(36,35,32,.5);padding:clamp(26px,3.4vw,34px) 0 clamp(22px,3vw,28px)}' +
+    '.garantia .selo{max-width:84px;margin:0 auto 14px}' +
+    '.garantia .cert-eyebrow{color:#57544D}' +
+    '.garantia .cert-termos{max-width:42ch;margin-left:auto;margin-right:auto}' +
+    '.garantia .fecho{border-top:1px solid rgba(36,35,32,.14);padding-top:14px}'
+};
+
+document.querySelectorAll('iframe').forEach(function(f){
+  f.addEventListener('load', function(){
+    var d = f.contentDocument, w = f.contentWindow;
+    if (!d) return;
+    var pl = d.querySelector('.player'); if (pl) pl.remove();
+    var s = d.createElement('style');
+    s.textContent = '.rv{opacity:1!important;transform:none!important}html{scroll-behavior:auto!important}';
+    d.documentElement.appendChild(s);
+    d.querySelectorAll('.rv').forEach(function(e){ e.classList.add('on','in','vis'); });
+
+    var v = f.getAttribute('data-v');
+    var g = d.querySelector('.garantia');
+    if (!g) return;
+    var txt = g.querySelector('.txt');
+    if (txt) txt.innerHTML = TXT;
+    if (VAR[v]) {
+      var st = d.createElement('style');
+      st.textContent = VAR[v];
+      d.documentElement.appendChild(st);
+    } else {
+      var st0 = d.createElement('style'); st0.textContent = BASE;
+      d.documentElement.appendChild(st0);
+    }
+
+    setTimeout(function(){
+      w.scrollTo(0, g.getBoundingClientRect().top + w.scrollY - 40);
+    }, 320);
+  });
+});
+</script>
+</body>
+</html>
