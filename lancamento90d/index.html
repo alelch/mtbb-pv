@@ -1028,6 +1028,10 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .offer-box .vemjunto li{color:rgba(243,240,232,.72);font-size:.95rem}
 .offer-box .vemjunto li b{color:#F3F0E8;font-weight:700}
 .offer-box .vemjunto li:before{border-color:#EAB82D}
+
+/* 18/09: o CTA do card da oferta e' o botao que de fato vende, entao o texto
+   dele e' maior que o dos outros. Os demais seguem o clamp da variante. */
+.offer-box .btn.verde{font-size:clamp(1.05rem,2.4vw,1.32rem);letter-spacing:.03em}
 .seals{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:24px;
   font-size:.78rem;color:rgba(255,255,255,.7)}
 
@@ -1060,6 +1064,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
 .sticky .p small{display:block;font-weight:400;font-size:.75rem;color:var(--mute)}
 .sticky .btn{flex:1;padding:17px 20px;font-size:1rem}
 .sticky .btn.ouro{padding:16px 10px;font-size:.78rem;letter-spacing:.02em}
+/* 18/09: o botao da barra virou VERDE e parou de pegar a regra acima, que e'
+   do .ouro. Sem regra propria ele herdava o tamanho grande do .btn.verde,
+   quebrava em duas linhas e esticava a barra. Repete aqui o mesmo aperto. */
+.sticky .btn.verde{padding:16px 10px;font-size:.78rem;letter-spacing:.02em}
 .sticky .p{font-size:.95rem}
 @media(max-width:760px){.sticky{display:flex}}
 
