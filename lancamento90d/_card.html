@@ -33,7 +33,7 @@
 
 <div class="linha">
   <div class="col">
-    <p class="rot"><b>3 · lista única</b><span>5 bullets: cada conquista carrega embaixo o que a entrega</span></p>
+    <p class="rot"><b>3 · lista única</b><span>4 bullets: cada conquista carrega embaixo o que a entrega</span></p>
     <div class="quadro"><iframe data-v="3" src="index.html?abrir=1"></iframe></div>
   </div>
   <div class="col">
@@ -95,16 +95,20 @@ document.querySelectorAll('iframe').forEach(function(f){
        entrega logo embaixo. Some a .vemjunto inteira; o que sobra dela
        (sem conquista pra parear) fecha numa linha so'. */
     if (v === '3' && vj) {
-      /* 18/09, cliente: "nao um pedido de apoio" e' punk demais pra PV (acusa
-         os amigos do leitor de comprarem por caridade), e pre-venda e estreia
-         sao o mesmo movimento partido em dois. Viraram 5 bullets. */
+      /* 18/09, cliente, em tres passadas:
+         - "nao um pedido de apoio" e' punk demais pra PV: acusa os amigos do
+           leitor de comprarem por caridade;
+         - "nao pode falar que a estreia tera fila": promete comportamento de
+           publico que ninguem controla. O "nao so' elogios" caiu junto, pelo
+           mesmo motivo do pedido de apoio;
+         - pre-venda e venda sao 1 bullet so'.
+         Sobraram 4, numa linha do tempo: antes, durante, quem nao te conhece,
+         depois. O checklist foi pro fecho porque nao pareava com conquista. */
       var PARES = [
         ['Seus primeiros compradores', ', antes do livro existir',
          'com a planilha guiada de Mapeamento de Contatos'],
-        ['Uma pré-venda que já vende', ', e uma estreia com fila',
+        ['Uma pré-venda que já vende', ', e vendas na primeira semana',
          'com o plano de pré-venda e o cronograma de 90 dias nas suas datas'],
-        ['Vendas na primeira semana', ', não só elogios',
-         'com o checklist de cada etapa, explicado em vídeo'],
         ['Desconhecidos descobrindo o livro', ' sem você parecer vendedor',
          'com o soft-marketing e exemplos prontos'],
         ['Um livro que não morre', ' em trinta dias',
@@ -116,7 +120,7 @@ document.querySelectorAll('iframe').forEach(function(f){
       }).join('');
       var fecho = d.createElement('p');
       fecho.className = 'fecho-lista';
-      fecho.innerHTML = 'E mais: as <b>3 estratégias de publicação</b>, para achar o caminho do seu livro, e <b>acesso vitalício</b>, para usar neste livro e em todos os próximos.';
+      fecho.innerHTML = 'E mais: o <b>checklist de cada etapa</b>, explicado em vídeo, as <b>3 estratégias de publicação</b>, para achar o caminho do seu livro, e <b>acesso vitalício</b>, para usar neste livro e em todos os próximos.';
       ul.after(fecho);
       vj.remove();
       var s3 = d.createElement('style');
