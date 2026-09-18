@@ -977,13 +977,17 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .vemjunto{max-width:660px;margin:24px auto 0;text-align:left}
 .vemjunto .tit{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.78rem;
   letter-spacing:.16em;text-transform:uppercase;color:#757168;margin:0 0 14px;text-align:center}
-.vemjunto ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 26px}
+/* 18/09: era grid de 2 colunas, e grid alinha por LINHA: cada linha fica com
+   a altura do item mais alto dela, entao um item de 2 linhas emparelhado com
+   um de 4 deixava duas linhas de buraco embaixo. Colunas de texto nao alinham
+   nada: os itens escorrem e se empacotam sozinhos. */
+.vemjunto ul{list-style:none;padding:0;margin:0;column-count:2;column-gap:26px}
+.vemjunto li{break-inside:avoid;-webkit-column-break-inside:avoid;margin-bottom:10px}
 .vemjunto li{position:relative;padding-left:22px;font-size:.92rem;color:var(--soft);line-height:1.5}
 .vemjunto li b{color:var(--ink);font-weight:600}
-.vemjunto li:last-child:nth-child(odd){grid-column:1/-1}
 .vemjunto li:before{content:"";position:absolute;left:2px;top:.42em;width:5px;height:10px;
   border-right:2px solid var(--verde);border-bottom:2px solid var(--verde);transform:rotate(40deg)}
-@media(max-width:640px){.vemjunto ul{grid-template-columns:1fr}}
+@media(max-width:640px){.vemjunto ul{column-count:1}}
 .nota-juros{margin:14px 0 0;font-size:.76rem;color:rgba(255,255,255,.7)}
 
 /* 18/09: "O que vem junto" entrou PARA DENTRO do card da oferta. Antes ele
