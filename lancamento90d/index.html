@@ -277,14 +277,33 @@ img{max-width:100%;display:block}
 a{color:inherit}
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
 .narrow{max-width:760px}
+/* ===== RITMO VERTICAL: DUAS MEDIDAS, NAO OITO =====
+   Antes cada secao de declaracao tinha o proprio clamp(), com piso e teto
+   escolhidos um a um: 132/98/116 no desktop, 72/60/72 no mobile. Oito
+   costuras, sete valores, e nenhum queria dizer nada.
+
+   Agora: NORMAL e DECLARACAO (.agit, .noventa, .virada), com a declaracao
+   sempre valendo 1,5x a normal, nos dois tamanhos de tela.
+               normal   declaracao
+     desktop     80        120
+     mobile      48         72
+
+   Duas excecoes, e as duas tem motivo:
+   1) o topo da .virada e' entalhe + ~55. O .bolhas:after e' um V de
+      clamp(40px,6vw,90px) que fica PENDURADO pra dentro da virada, entao
+      quem paga a folga e' ela: 140 no desktop, 96 no mobile.
+   2) duas declaracoes encostadas somariam 240/144 sem motivo, entao a de
+      baixo usa a medida normal. */
 section{padding:80px 0}
-/* 18/09: duas medidas no mobile, nao oito. 48 = secao normal, 72 = secao de
-   declaracao (.agit, .noventa, .virada). As costuras viram 96 no corrido, 120
-   quando uma declaracao encosta numa normal e 144 entre duas declaracoes:
-   quando o espaco cresce e' porque a secao mudou de peso, nao por acaso.
-   Os clamp() foram calibrados pra escalar no desktop e o PISO ficou solto,
-   e o piso e' exatamente o que o celular recebe. */
-@media(max-width:760px){section{padding:48px 0}body{font-size:16px}}
+.agit,.noventa,.virada{padding:120px 0}
+:is(.agit,.noventa,.virada) + :is(.agit,.noventa,.virada){padding-top:80px}
+@media(max-width:760px){
+  section{padding:48px 0}
+  .agit,.noventa,.virada{padding:72px 0}
+  :is(.agit,.noventa,.virada) + :is(.agit,.noventa,.virada){padding-top:48px}
+  .virada{padding-top:96px}
+  body{font-size:16px}
+}
 
 h1,h2,h3{font-family:'Space Grotesk','DM Sans',sans-serif;line-height:1.1;letter-spacing:-.03em;margin:0;color:var(--ink)}
 h1{font-size:clamp(2rem,5.2vw,3.7rem);font-weight:700}
@@ -480,7 +499,7 @@ html.js .bb-passo:not(.viva){opacity:.26}
    escuro = o risco · laranja = os 99% · verde = o 1%.
    Por isso NAO entra laranja aqui dentro: laranja e' a cor do problema. */
 .virada{background:var(--verde);color:#fff;text-align:center;
-  padding:clamp(96px,10vw,140px) 0 clamp(72px,9vw,116px)}
+  padding-top:140px}
 .virada .eyebrow{color:rgba(255,255,255,.62)}
 .virada .eyebrow.forte{color:#fff;font-size:.86rem;letter-spacing:.2em;margin-bottom:16px}
 .virada h2{color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;
@@ -718,7 +737,7 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
    ============================================================ */
 
 /* AGITAÇÃO: escura, sangrada, tipo grande. Primeiro contraste forte da página. */
-.agit{background:var(--ink);color:#EFEDEA;padding:clamp(72px,10vw,132px) 0;text-align:center}
+.agit{background:var(--ink);color:#EFEDEA;text-align:center}
 .agit .big{
   font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
   font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.08;margin:0 auto;color:#fff;max-width:20ch}
@@ -783,7 +802,7 @@ html:not(.js) .agit .dig::after{display:none}
 .dany .fala{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
 
 /* OS 99%: o numero ganha um outdoor so' pra ele, antes do diagrama. */
-.noventa{background:var(--accent);color:#fff;padding:clamp(72px,7.5vw,98px) 0;text-align:center}
+.noventa{background:var(--accent);color:#fff;text-align:center}
 .noventa h2{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.035em;
   font-size:clamp(1.65rem,4.1vw,2.7rem);line-height:1.12;color:#fff;max-width:26ch;margin:0 auto}
 .noventa p{margin:18px auto 0;max-width:46ch;font-size:1.06rem;line-height:1.55;
