@@ -44,6 +44,7 @@
 var ESCURA =
   '.offer{background:#242320!important}' +
   '.offer .narrow h2, .offer .narrow h2 .serifa{color:#F3F0E8!important}' +
+  '.offer-box:before{display:none!important}' +
   '.offer-box{background:none!important;border:0!important;box-shadow:none!important;' +
     'max-width:940px;padding:0!important;margin-top:8px}' +
   '.offer-box .marca{margin:0 auto 6px}' +
@@ -58,10 +59,12 @@ var ESCURA =
 /* B · o inverso: a oferta clara e emoldurada, falando a mesma lingua do
    certificado da garantia. Os dois momentos de compromisso viram irmaos. */
 var CLARA =
-  '.offer-box{background:#F7F5EF!important;border:1.5px solid #242320!important;border-radius:2px;' +
+  '.offer-box{background:#F7F5EF!important;border:1.5px solid #242320!important;border-radius:2px!important;' +
     'box-shadow:none!important;max-width:620px;padding:clamp(26px,3.4vw,40px) clamp(22px,3.4vw,40px) 34px!important;' +
     'position:relative}' +
-  '.offer-box:before{content:"";position:absolute;inset:7px;border:1px solid rgba(234,184,45,.85);pointer-events:none}' +
+  '.offer-box:before{inset:7px!important;padding:0!important;border-radius:0!important;' +
+    'border:1px solid rgba(234,184,45,.85)!important;background:none!important;' +
+    '-webkit-mask:none!important;mask:none!important;animation:none!important}' +
   '.offer-box .canto{position:absolute;width:15px;height:15px;z-index:3;pointer-events:none}' +
   '.offer-box .canto:before,.offer-box .canto:after{content:"";position:absolute;background:#EAB82D}' +
   '.offer-box .canto:before{left:0;top:0;width:100%;height:2px}' +
