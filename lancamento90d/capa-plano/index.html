@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  @page{size:A4;margin:0}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{width:595px;height:842px;background:#F3F0E8;color:#242320;
+    font-family:'DM Sans',sans-serif;position:relative;overflow:hidden}
+
+  /* faixa carvao no topo, com o fio dourado embaixo */
+  .topo{height:150px;background:#242320;padding:34px 46px 0;position:relative}
+  .topo:after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:#EAB82D}
+  .topo .marca{height:30px;width:auto;display:block}
+  .topo .casa{margin:14px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;
+    font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,240,232,.5)}
+
+  .corpo{padding:46px 46px 0}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;line-height:1.04;
+    letter-spacing:-.035em;margin:0}
+  h1 em{font-style:normal;color:#14523E}
+  .sub{margin:16px 0 0;font-size:13.5px;line-height:1.5;color:#57544D;max-width:40ch}
+
+  /* os tres atos, como regua */
+  .regua{margin:40px 0 0;display:grid;grid-template-columns:8fr 3fr 2fr;gap:5px}
+  .regua div{padding-top:11px;border-top:2px solid #C9C3B4}
+  .regua div:nth-child(1){border-color:#242320}
+  .regua div:nth-child(2){border-color:#14523E}
+  .regua div:nth-child(3){border-color:#EAB82D}
+  .regua b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:9px;
+    letter-spacing:.16em;text-transform:uppercase;color:#242320}
+  .regua span{display:block;margin-top:3px;font-size:10.5px;color:#7A766C}
+
+  /* os campos que o autor preenche: e' o que faz o documento virar dele */
+  .campos{margin:46px 0 0;display:grid;gap:26px}
+  .campos p{margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:8.5px;
+    letter-spacing:.2em;text-transform:uppercase;color:#8A867C}
+  .campos .fio{margin-top:17px;border-bottom:1px solid #C9C3B4}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+
+  .rodape{position:absolute;left:46px;right:46px;bottom:34px;display:flex;
+    justify-content:space-between;align-items:flex-end}
+  .rodape .frase{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12.5px;
+    letter-spacing:-.02em;color:#242320;max-width:30ch;line-height:1.3}
+  .rodape .site{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#8A867C}
+</style></head>
+<body>
+  <div class="topo">
+    <img class="marca" src="logo.webp" alt="Lançamento 90D">
+    <p class="casa">The Book Business</p>
+  </div>
+
+  <div class="corpo">
+    <h1>Plano de 90 dias<br>para lançar <em>o seu livro</em>.</h1>
+    <p class="sub">O checklist semana a semana. Cada semana tem um foco, uma lista de tarefas e o post da semana.</p>
+
+    <div class="regua">
+      <div><b>Pré-lançamento</b><span>semanas 1 a 8</span></div>
+      <div><b>Pré-venda</b><span>9 a 11</span></div>
+      <div><b>Lançamento</b><span>12</span></div>
+    </div>
+
+    <div class="campos">
+      <div><p>O livro</p><div class="fio"></div></div>
+      <div class="duo">
+        <div><p>Autor</p><div class="fio"></div></div>
+        <div><p>Data de publicação</p><div class="fio"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rodape">
+    <span class="frase">De invisível a lido em 90 dias.</span>
+    <span class="site">thebookbusiness.com.br</span>
+  </div>
+</body></html>
