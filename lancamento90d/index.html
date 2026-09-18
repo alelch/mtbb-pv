@@ -844,6 +844,18 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .mrow img{height:380px;width:auto;flex:0 0 auto;margin-right:18px;object-fit:cover;
   border-radius:14px;box-shadow:0 12px 26px -16px rgba(0,0,0,.4)}
 @keyframes desliza{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+/* 18/09: com os prints fora sobraram 3 casos, e meia-linha (1188px) ficou mais
+   estreita que a tela, o que faz o carrossel abrir buraco na emenda. Tres itens
+   em loop tambem so' anunciam que sao tres. Vira faixa PARADA: as copias da
+   emenda somem e os tres se centralizam. No mobile ele volta a deslizar, que
+   la' a linha e' mais larga que a tela. */
+@media(min-width:761px){
+  .marquee.prova{overflow:visible;-webkit-mask-image:none;mask-image:none}
+  .marquee.prova .mrow{animation:none;width:auto;justify-content:center}
+  .marquee.prova .mrow>[aria-hidden="true"]{display:none}
+  .marquee.prova .mrow .mc{margin-right:18px}
+  .marquee.prova .mrow .mc:last-of-type{margin-right:0}
+}
 @media(max-width:700px){.mrow img{height:270px;margin-right:12px}}
 @media(prefers-reduced-motion:reduce){.mrow{animation:none}}
 
