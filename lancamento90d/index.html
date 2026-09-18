@@ -925,13 +925,20 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
    da pagina e estava solta no marfim, enquanto a oferta mora num card: lia
    como mais um paragrafo, nao como compromisso. Moldura de fio duplo, e o
    selo sobe encavalado na borda de cima, como lacre. */
-.garantia{max-width:560px;margin:clamp(52px,6.5vw,84px) auto 0;text-align:center;
+/* 18/09, 2a passada: o espacamento estava torto por dois motivos.
+   FORA: a margin-top propria somava com a padding da secao, sobra de quando a
+   garantia vinha depois de outro conteudo aqui. Hoje ela e' filha unica, entao
+   a margem passa a valer exatamente o quanto o selo sobe (-56/-48). Assim o ar
+   acima do selo fica igual ao de baixo da caixa: 80 no desktop, 48 no mobile.
+   DENTRO: o topo nao tem padding porque quem ocupa e' a metade de baixo do
+   selo, e isso dava 71 em cima contra 35 embaixo. A padding de baixo sobe. */
+.garantia{max-width:560px;margin:56px auto 0;text-align:center;
   position:relative;background:#F6F4EE;border:1px solid rgba(36,35,32,.22);border-radius:3px;
-  padding:0 clamp(22px,4vw,44px) clamp(26px,3.4vw,34px)}
+  padding:0 clamp(22px,4vw,44px) 50px}
 .garantia:before{content:"";position:absolute;inset:6px;border:1px solid rgba(36,35,32,.12);
   border-radius:2px;pointer-events:none}
 .garantia .txt{position:relative;z-index:1}
-.garantia .selo{max-width:112px;margin:-56px auto 14px;position:relative;z-index:2}
+.garantia .selo{max-width:112px;margin:-56px auto 16px;position:relative;z-index:2}
 .garantia .selo svg{filter:drop-shadow(0 6px 16px rgba(0,0,0,.18))}
 .garantia .cert-eyebrow{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.68rem;
   letter-spacing:.2em;text-transform:uppercase;color:#8A867C;margin:0 0 10px}
@@ -951,7 +958,10 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .garantia p{margin:0 0 10px;color:var(--soft);font-size:.93rem;line-height:1.55}
 .garantia .lei b{color:var(--ink);font-weight:700}
 .garantia .fecho{margin:14px 0 0;color:var(--ink);font-weight:600;font-size:.95rem}
-@media(max-width:560px){.garantia .selo{max-width:96px;margin-top:-48px}}
+@media(max-width:760px){
+  .garantia{margin-top:48px;padding-bottom:40px}
+  .garantia .selo{max-width:96px;margin:-48px auto 12px}
+}
 
 /* ---------- depoimentos ---------- */
 @media(max-width:900px){.depos{grid-template-columns:repeat(2,1fr)}}
