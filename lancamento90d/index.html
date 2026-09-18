@@ -932,23 +932,33 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
    acima do selo fica igual ao de baixo da caixa: 80 no desktop, 48 no mobile.
    DENTRO: o topo nao tem padding porque quem ocupa e' a metade de baixo do
    selo, e isso dava 71 em cima contra 35 embaixo. A padding de baixo sobe. */
-.garantia{max-width:500px;margin:56px auto 0;text-align:center;
-  position:relative;background:#F6F4EE;border:1px solid rgba(36,35,32,.22);border-radius:3px;
-  padding:0 clamp(22px,4vw,40px) 54px}
+.garantia{max-width:520px;margin:70px auto 0;text-align:center;
+  position:relative;background:#F7F5EF;border:1.5px solid #242320;border-radius:2px;
+  padding:0 clamp(24px,4vw,44px) 40px}
 /* a caixa era larga pro texto que guarda: centralizado, sobrava rag dos dois
    lados e o olho nao achava o inicio da linha. A caixa estreita e o paragrafo
    ganha teto proprio, pra quebrar parelho. */
-.garantia .txt p{max-width:38ch;margin-left:auto;margin-right:auto}
-.garantia:before{content:"";position:absolute;inset:6px;border:1px solid rgba(36,35,32,.12);
-  border-radius:2px;pointer-events:none}
+.garantia .txt p{max-width:40ch;margin-left:auto;margin-right:auto}
+/* dois fios iguais nao fazem hierarquia, fazem borrao: o de fora vira carvao
+   cheio e o de dentro dourado. Os quatro cantos em L sao o gesto mais barato
+   que diz "documento". */
+.garantia:before{content:"";position:absolute;inset:7px;border:1px solid rgba(234,184,45,.85);
+  pointer-events:none}
+.garantia .canto{position:absolute;width:15px;height:15px;z-index:3;pointer-events:none}
+.garantia .canto:before,.garantia .canto:after{content:"";position:absolute;background:#EAB82D}
+.garantia .canto:before{left:0;top:0;width:100%;height:2px}
+.garantia .canto:after{left:0;top:0;width:2px;height:100%}
+.garantia .c1{left:13px;top:13px}
+.garantia .c2{right:13px;top:13px;transform:scaleX(-1)}
+.garantia .c3{left:13px;bottom:13px;transform:scaleY(-1)}
+.garantia .c4{right:13px;bottom:13px;transform:scale(-1)}
 .garantia .txt{position:relative;z-index:1}
-.garantia .selo{max-width:112px;margin:-56px auto 16px;position:relative;z-index:2}
-.garantia .selo svg{filter:drop-shadow(0 6px 16px rgba(0,0,0,.18))}
-.garantia .cert-eyebrow{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.68rem;
-  letter-spacing:.2em;text-transform:uppercase;color:#6E6A60;margin:0 0 10px}
+.garantia .selo{max-width:140px;margin:-70px auto 20px;position:relative;z-index:2}
+.garantia .cert-eyebrow{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.64rem;
+  letter-spacing:.24em;text-transform:uppercase;color:#8A867C;margin:0 0 14px}
 .garantia .selo svg{width:100%;height:auto;display:block}
-.garantia .volta{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;
-  letter-spacing:.14em;fill:#757168;
+.garantia .volta{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.17em;fill:#3A372F;
   transform-origin:110px 110px;animation:gira-selo 26s linear infinite}
 @keyframes gira-selo{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.garantia .volta{animation:none}}
@@ -963,8 +973,8 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 .garantia .lei b{color:var(--ink);font-weight:700}
 .garantia .fecho{margin:14px 0 0;color:var(--ink);font-weight:600;font-size:.95rem}
 @media(max-width:760px){
-  .garantia{margin-top:48px;padding-bottom:44px}
-  .garantia .selo{max-width:96px;margin:-48px auto 12px}
+  .garantia{margin-top:60px;padding-bottom:34px}
+  .garantia .selo{max-width:120px;margin:-60px auto 16px}
 }
 
 /* ---------- depoimentos ---------- */
@@ -1757,6 +1767,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
           Pede por e-mail, recebe cem por cento de volta, sem perguntas.</p>
         <p class="fecho">Eu não vendo garantia de venda, ninguém pode dar isso. O que eu entrego é o plano, na ordem certa. O risco financeiro é nosso. É a sua vez agora.</p>
       </div>
+      <span class="canto c1" aria-hidden="true"></span><span class="canto c2" aria-hidden="true"></span>
+      <span class="canto c3" aria-hidden="true"></span><span class="canto c4" aria-hidden="true"></span>
     </div>
   </div>
 </section>
