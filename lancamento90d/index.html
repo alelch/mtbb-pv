@@ -978,6 +978,9 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 /* ---------- oferta ---------- */
 
 .offer{background:var(--bg)}
+.packshot{max-width:640px;margin:26px auto 30px}
+.packshot img{width:100%;height:auto;display:block}
+@media(max-width:760px){.packshot{max-width:none;margin:18px -10px 22px}}
 /* O CARD DA OFERTA É VERDE INTEIRO.
    Na gramática da página o verde é a cor do 1%, e o card é justamente o que
    faz o leitor virar o 1%: comprar é comprar o verde. A faixa verde no topo
@@ -1672,6 +1675,14 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="narrow rv" style="text-align:center;margin:0 auto">
       <h2>O seu lançamento vai&nbsp;acontecer.<br><span class="serifa">Faça o seu livro vender de&nbsp;verdade.</span></h2>
+    </div>
+    <!-- 18/09: a pagina prometia o cronograma na headline, no bullet e na
+         garantia, e nunca mostrava nada. O packshot entra AQUI, entre o titulo
+         e o preco: responde "o que eu recebo" no instante exato em que o
+         numero aparece, e sem engordar o card, que passou o dia emagrecendo. -->
+    <div class="packshot rv">
+      <img src="assets/packshot.webp" alt="O Lançamento 90D no computador, no tablet e no celular, e o cronograma impresso"
+           width="1463" height="918" loading="lazy" decoding="async">
     </div>
     <div class="offer-box rv">
       <img class="marca" src="assets/logo-90d-novo.webp" alt="Lançamento 90D" width="490" height="125">
