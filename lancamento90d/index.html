@@ -999,6 +999,9 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 /* ---------- oferta ---------- */
 
 .offer{background:var(--bg)}
+/* 19/09: os CTAs apontavam pro topo da secao, e com o packshot no meio o
+   PRECO caia fora da tela depois do clique. Agora eles miram o card. */
+#preco{scroll-margin-top:26px}
 .packshot{max-width:640px;margin:26px auto 30px}
 .packshot img{width:100%;height:auto;display:block}
 @media(max-width:760px){.packshot{max-width:none;margin:18px -10px 22px}}
@@ -1544,7 +1547,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     </div>
 
     <div class="acao rv">
-      <a href="#oferta" class="btn ouro" data-cta="meio">Acesso Imediato e Vitalício</a>
+      <a href="#preco" class="btn ouro" data-cta="meio">Acesso Imediato e Vitalício</a>
       <p class="acao-nota">A data da estreia você não muda. O preparo, sim.</p>
     </div>
 
@@ -1677,7 +1680,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       <img src="assets/packshot.webp" alt="O Lançamento 90D no computador, no tablet e no celular, e o cronograma impresso"
            width="1463" height="918" loading="lazy" decoding="async">
     </div>
-    <div class="offer-box rv">
+    <div class="offer-box rv" id="preco">
       <img class="marca" src="assets/logo-90d-novo.webp" alt="Lançamento 90D" width="490" height="125">
       <div class="price"><span class="cur">12x de R$</span><span class="val">29,64</span></div>
       <p class="inst">ou <b>R$ 297,00 à vista</b></p>
@@ -1781,7 +1784,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     <div class="rv">
       <h2>Você só lança o seu livro <span class="grifo">uma vez</span>.</h2>
       <span class="sub">Não jogue fora essa chance.</span>
-      <a href="#oferta" class="btn verde" data-cta="final">Acesso Imediato e Vitalício</a>
+      <a href="#preco" class="btn verde" data-cta="final">Acesso Imediato e Vitalício</a>
     </div>
   </div>
 </section>
@@ -1795,7 +1798,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
 <div class="sticky" id="sticky">
   <div class="p">12x R$29,64<small>ou R$297 à vista</small></div>
-  <a href="#oferta" class="btn verde" data-cta="sticky">Acesso Imediato e Vitalício</a>
+  <a href="#preco" class="btn verde" data-cta="sticky">Acesso Imediato e Vitalício</a>
 </div>
 
 <script src="../tracker.js" defer></script>
@@ -1884,7 +1887,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   }
   document.addEventListener('click', function(ev){
     var a = ev.target.closest('[data-cta]'); if (!a) return;
-    if (a.getAttribute('href') === '#oferta') return;   /* âncoras rolam, não compram */
+    var h = a.getAttribute('href') || '';
+    if (h.charAt(0) === '#') return;   /* qualquer ancora rola, nao compra */
     ev.preventDefault(); comprar(a.getAttribute('data-cta'));
   });
 
