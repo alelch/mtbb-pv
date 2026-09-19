@@ -849,7 +849,11 @@ html.js.sem-motion .cem,html:not(.js) .cem{--p:1}
 
 /* DANY: foto sangra a largura toda, texto entra por cima no desktop */
 .dany{background:var(--ink);color:#EFEDEA}
-.dany .wrap{padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)}
+/* 19/09: a .dany .wrap carregava 104px de padding propria em cima e embaixo,
+   SOMADA aos 80 da secao. Sobra de antes do sistema de ritmo, e era a causa
+   real do "espaco gigante em volta da garantia": o vao acima do selo dava 231
+   contra 120 embaixo, e o excesso estava do lado de ca'. A unica .wrap da
+   pagina com padding propria; agora o ritmo da secao cuida sozinho. */
 .bio{display:grid;grid-template-columns:.68fr 1fr;gap:clamp(28px,4vw,46px);align-items:center}
 .bio > img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;
   object-position:center 16%;border-radius:14px;display:block}
