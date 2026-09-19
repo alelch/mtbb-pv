@@ -1462,11 +1462,11 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
 
     <div class="t3 rv">
       <div class="head"><span class="h-old">Sem o Lançamento 90D</span><span class="sp"></span><span class="h-new">Com o Lançamento 90D</span></div>
-      <div class="row"><div class="old">Publica e torce pra alguém descobrir.</div><div class="arrow">→</div><div class="new">Prepara o mercado antes do livro existir.</div></div>
-      <div class="row"><div class="old">Espera uma editora escolher o seu livro.</div><div class="arrow">→</div><div class="new"><span>O lançamento é <b>seu</b>, não da editora.</span></div></div>
-      <div class="row"><div class="old">Só divulga depois do livro pronto.</div><div class="arrow">→</div><div class="new">Já começa a vender na pré-venda.</div></div>
-      <div class="row"><div class="old">Vende pra amigos e família, e para por aí.</div><div class="arrow">→</div><div class="new">Chega em leitores desconhecidos.</div></div>
-      <div class="row"><div class="old">Conta com sorte ou talento.</div><div class="arrow">→</div><div class="new">Segue um passo a passo, na ordem certa.</div></div>
+      <div class="row"><div class="old"><span class="lg">Publica e torce pra alguém descobrir.</span><span class="sm">Publica e torce</span></div><div class="arrow">→</div><div class="new"><span class="lg">Prepara o mercado antes do livro existir.</span><span class="sm">Prepara o mercado antes</span></div></div>
+      <div class="row"><div class="old"><span class="lg">Espera uma editora escolher o seu livro.</span><span class="sm">Espera a editora</span></div><div class="arrow">→</div><div class="new"><span class="lg">O lançamento é <b>seu</b>, não da editora.</span><span class="sm">O lançamento é <b>seu</b></span></div></div>
+      <div class="row"><div class="old"><span class="lg">Só divulga depois do livro pronto.</span><span class="sm">Divulga depois</span></div><div class="arrow">→</div><div class="new"><span class="lg">Já começa a vender na pré-venda.</span><span class="sm">Vende na pré-venda</span></div></div>
+      <div class="row"><div class="old"><span class="lg">Vende pra amigos e família, e para por aí.</span><span class="sm">Só amigos e família</span></div><div class="arrow">→</div><div class="new"><span class="lg">Chega em leitores desconhecidos.</span><span class="sm">Chega em desconhecidos</span></div></div>
+      <div class="row"><div class="old"><span class="lg">Conta com sorte ou talento.</span><span class="sm">Conta com sorte</span></div><div class="arrow">→</div><div class="new"><span class="lg">Segue um passo a passo, na ordem certa.</span><span class="sm">Segue um passo a passo</span></div></div>
     </div>
 
   </div>
@@ -2391,58 +2391,31 @@ footer{background:#242320 !important}
   border-radius:0 12px 12px 0;display:flex;align-items:center;font-size:15px;font-weight:600;
   box-shadow:0 8px 20px rgba(20,82,62,.28)}
 .t3 .new b{color:#F0C959;font-weight:700}
+/* 19/09: a tabela nao cabia no celular porque a CELULA era uma frase. Cada
+   lado passa a ter duas versoes e o breakpoint escolhe. A curta so' aparece
+   abaixo de 760. Os textos ficam dentro de um <span> porque a celula e' flex:
+   texto solto e <b> viram itens separados e o espaco entre eles some, que era
+   o "seu" fora do lugar. */
+.t3 .sm{display:none}
 @media(max-width:760px){
-  /* MOBILE: reagrupa em DOIS blocos (todos os "hoje" em cima, todos os "agora" embaixo)
-     usando display:contents + order. O HTML continua em pares, então o desktop não muda. */
-  .t3{display:flex;flex-direction:column;margin-top:clamp(24px,6vw,36px);counter-reset:ch ca}
-  .t3 .head,.t3 .row{display:contents}
-  .t3 .head .sp{display:none}
-  /* títulos dos dois blocos */
-  .t3 .head .h-old,.t3 .head .h-new{display:block;padding:15px 16px 9px;font-size:9.5px;
-    letter-spacing:.16em;margin:0}
-  .t3 .head .h-old{order:0;background:rgba(125,30,20,.45);color:rgba(243,240,232,.6);
-    border-radius:14px 14px 0 0}
-  .t3 .head .h-new{order:7;background:#14523E;color:#F0C959;text-align:left;
-    border-radius:14px 14px 0 0;border:1px solid #EAB82D;border-bottom:0}
-  /* itens: número + texto, sem moldura própria */
-  .t3 .old,.t3 .new{display:flex;gap:11px;align-items:flex-start;border:0;border-radius:0;
-    padding:11px 17px;font-size:14.5px;line-height:1.55;letter-spacing:-.005em;
-    box-shadow:none;transform:none}
-  .t3 .old{background:rgba(125,30,20,.45);color:rgba(243,240,232,.82);font-weight:400}
-  .t3 .new{background:#14523E;color:#F3F0E8;font-weight:500;
-    border-left:1px solid #EAB82D;border-right:1px solid #EAB82D}
-  .t3 .old::before,.t3 .new::before{flex:0 0 18px;height:18px;border-radius:50%;
-    display:grid;place-items:center;font-size:9.5px;font-weight:700;margin-top:4px;
-    font-family:'Space Grotesk',sans-serif;letter-spacing:0}
-  .t3 .old::before{counter-increment:ch;content:counter(ch);
-    background:rgba(243,240,232,.14);color:rgba(243,240,232,.75)}
-  .t3 .new::before{counter-increment:ca;content:counter(ca);background:#EAB82D;color:#242320}
-  .t3 .row:nth-child(2) .old{order:1;padding-top:2px}
-  .t3 .row:nth-child(3) .old{order:2}
-  .t3 .row:nth-child(4) .old{order:3}
-  .t3 .row:nth-child(5) .old{order:4}
-  .t3 .row:nth-child(6) .old{order:5;padding-bottom:15px;border-radius:0 0 14px 14px}
-  .t3 .row:nth-child(2) .new{order:8;padding-top:2px}
-  .t3 .row:nth-child(3) .new{order:9}
-  .t3 .row:nth-child(4) .new{order:10}
-  .t3 .row:nth-child(5) .new{order:11}
-  .t3 .row:nth-child(6) .new{order:12;padding-bottom:16px;border-radius:0 0 14px 14px;
-    border-bottom:1px solid #EAB82D;box-shadow:0 8px 22px rgba(20,82,62,.3)}
-  /* divisória dourada com a seta no círculo (só a seta da linha do meio aparece) */
-  .t3 .arrow{display:none}
-  .t3 .row:nth-child(4) .arrow{display:grid;place-items:center;order:6;height:46px;padding:0;
-    background:none;box-shadow:none;font-size:0;border:0}
-  /* chevron fino, o mesmo desenho da setinha "role pra baixo" das bolhas */
-  .t3 .row:nth-child(4) .arrow::before{content:"";width:11px;height:11px;
-    border-right:1.5px solid #EAB82D;border-bottom:1.5px solid #EAB82D;
-    transform:translateY(-5px) rotate(45deg)}
+  /* MOBILE: a tabela CONTINUA tabela, com a copy curta. A versao anterior
+     empilhava todos os "sem" e depois todos os "com", e o leitor perdia o PAR,
+     que e' a ideia da secao: no desktop ele le na horizontal, isto vira aquilo. */
+  .t3{margin-top:clamp(24px,6vw,36px)}
+  .t3 .lg{display:none}
+  .t3 .sm{display:inline}
+  .t3 .head{grid-template-columns:1fr 26px 1fr;margin-bottom:8px}
+  .t3 .head span{font-size:9.5px;letter-spacing:.14em}
+  .t3 .row{grid-template-columns:1fr 26px 1fr;margin-bottom:8px}
+  .t3 .old{padding:12px 11px;font-size:13px;line-height:1.3;border-radius:10px 0 0 10px}
+  .t3 .new{padding:12px 11px;font-size:13px;line-height:1.3;border-radius:0 10px 10px 0;
+    font-weight:700;box-shadow:none}
+  .t3 .arrow{font-size:12px;box-shadow:none}
   /* o bloco verde entra apagado e ACENDE; o vermelho apaga junto */
   .t3 .new,.t3 .head .h-new{transition:opacity .55s var(--ease,ease),filter .55s var(--ease,ease)}
   .t3:not(.mob-on) .new,.t3:not(.mob-on) .head .h-new{opacity:.32;filter:saturate(.2) brightness(.6)}
   .t3 .old,.t3 .head .h-old{transition:opacity .55s var(--ease,ease),filter .55s var(--ease,ease)}
   .t3.mob-on .old,.t3.mob-on .head .h-old{opacity:.5;filter:grayscale(.45)}
-  /* respiro antes do V: com o bloco verde da tabela logo acima, 18px de carvão
-     deixavam a leitura "verde > tirinha escura > verde". O carvão precisa de presença. */
   .bolhas{padding-bottom:80px}
 }
 /* ===== animação de scroll: o "aceso" passa do HOJE pro AGORA, linha por linha ===== */
