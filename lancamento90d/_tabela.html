@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sem × Com · no mobile</title>
+<!-- PREVIEW descartável (19/09). Quadros de 380px = celular. Apagar quando decidir. -->
+<style>
+  :root{color-scheme:light}
+  body{margin:0;background:#E8E4DC;font:15px/1.5 system-ui,-apple-system,sans-serif;color:#242320}
+  header{padding:22px 24px 6px;max-width:1660px;margin:0 auto}
+  h1{font-size:1.15rem;margin:0 0 4px}
+  header p{margin:0;color:#57544D;max-width:92ch}
+  .linha{display:flex;gap:16px;padding:20px 24px 40px;overflow-x:auto}
+  .col{flex:0 0 380px}
+  .rot{margin:0 0 8px;min-height:62px}
+  .rot b{font-size:.95rem}
+  .rot span{display:block;color:#57544D;font-size:.83rem;line-height:1.35}
+  .quadro{height:900px;border-radius:14px;overflow:hidden;background:#242320;
+    box-shadow:0 18px 40px -26px rgba(0,0,0,.5)}
+  iframe{width:380px;height:900px;border:0;display:block}
+</style>
+</head>
+<body>
+<header>
+  <h1>A comparação no celular</h1>
+  <p>Cada quadro tem 380px, que é celular de verdade. A atual agrupa os dois lados em blocos separados e o leitor perde o par; as três alternativas devolvem o par.</p>
+</header>
+<div class="linha">
+  <div class="col">
+    <p class="rot"><b>No ar hoje</b><span>dois blocos: todos os "sem", seta, todos os "com". O par se perde.</span></p>
+    <div class="quadro"><iframe data-v="0" src="index.html?abrir=1"></iframe></div>
+  </div>
+  <div class="col">
+    <p class="rot"><b>1 · pares empilhados</b><span>cada linha vira um cartão com o "sem" em cima e o "com" embaixo</span></p>
+    <div class="quadro"><iframe data-v="1" src="index.html?abrir=1"></iframe></div>
+  </div>
+  <div class="col">
+    <p class="rot"><b>2 · o "sem" riscado</b><span>sem caixa nenhuma: a frase antiga riscada e a nova embaixo, em verde</span></p>
+    <div class="quadro"><iframe data-v="2" src="index.html?abrir=1"></iframe></div>
+  </div>
+  <div class="col">
+    <p class="rot"><b>3 · só o "com"</b><span>o "sem" some no celular; o título da seção já fez o contraste</span></p>
+    <div class="quadro"><iframe data-v="3" src="index.html?abrir=1"></iframe></div>
+  </div>
+</div>
+
+<script>
+/* zera tudo o que o mobile atual faz (display:contents, orders, ::before,
+   cores de bloco) pra poder remontar do zero em cada alternativa */
+var ZERO =
+  '@media(max-width:760px){' +
+  '.t3{display:block!important}' +
+  '.t3 .head{display:none!important}' +
+  '.t3 .row{display:block!important;margin:0 0 12px!important}' +
+  '.t3 .old,.t3 .new{display:block!important;order:0!important;background:none!important;' +
+    'border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;' +
+    'opacity:1!important;filter:none!important;transform:none!important}' +
+  '.t3 .old::before,.t3 .new::before{display:none!important;content:none!important}' +
+  '.t3 .arrow{display:none!important}' +
+  '}';
+
+var PARES = ZERO +
+  '@media(max-width:760px){' +
+  '.t3 .row{background:rgba(243,240,232,.05);border:1px solid rgba(243,240,232,.12);' +
+    'border-radius:14px!important;overflow:hidden;margin-bottom:12px!important}' +
+  '.t3 .old{padding:13px 16px 11px!important;font-size:14px;line-height:1.45;' +
+    'color:rgba(243,240,232,.5)!important;text-decoration:line-through;' +
+    'text-decoration-color:rgba(243,240,232,.3)}' +
+  '.t3 .new{padding:13px 16px 14px!important;font-size:15px;line-height:1.45;font-weight:600;' +
+    'background:#14523E!important;color:#F3F0E8!important;position:relative}' +
+  '.t3 .new:before{content:"\\2192";position:absolute;left:16px;top:-11px;width:22px;height:22px;' +
+    'display:grid!important;place-items:center;border-radius:50%;background:#EAB82D;color:#242320;' +
+    'font-weight:800;font-size:13px}' +
+  '.t3 .new b{color:#F0C959!important}' +
+  '}';
+
+var RISCADO = ZERO +
+  '@media(max-width:760px){' +
+  '.t3 .row{padding:0 0 13px!important;margin-bottom:13px!important;' +
+    'border-bottom:1px solid rgba(243,240,232,.1)!important}' +
+  '.t3 .row:last-child{border-bottom:0!important}' +
+  '.t3 .old{font-size:13.5px;line-height:1.4;color:rgba(243,240,232,.38)!important;' +
+    'text-decoration:line-through;text-decoration-color:rgba(243,240,232,.26);margin-bottom:5px!important}' +
+  '.t3 .new{font-size:16px;line-height:1.38;font-weight:700;color:#F3F0E8!important;' +
+    'padding-left:20px!important;position:relative}' +
+  '.t3 .new:before{content:"";position:absolute;left:0;top:.42em;width:7px;height:12px;' +
+    'display:block!important;border-right:2px solid #EAB82D;border-bottom:2px solid #EAB82D;' +
+    'transform:rotate(40deg)}' +
+  '.t3 .new b{color:#F0C959!important}' +
+  '}';
+
+var SOCOM = ZERO +
+  '@media(max-width:760px){' +
+  '.t3 .old{display:none!important}' +
+  '.t3 .row{background:#14523E!important;border-radius:12px!important;margin-bottom:9px!important;' +
+    'border:1px solid rgba(234,184,45,.28)!important}' +
+  '.t3 .new{padding:14px 16px!important;font-size:15px;line-height:1.4;font-weight:600;' +
+    'color:#F3F0E8!important;padding-left:42px!important;position:relative}' +
+  '.t3 .new:before{content:"";position:absolute;left:16px;top:1.05em;width:8px;height:13px;' +
+    'display:block!important;border-right:2px solid #EAB82D;border-bottom:2px solid #EAB82D;' +
+    'transform:rotate(40deg)}' +
+  '.t3 .new b{color:#F0C959!important}' +
+  '}';
+
+var V = {'1':PARES, '2':RISCADO, '3':SOCOM};
+
+document.querySelectorAll('iframe').forEach(function(f){
+  f.addEventListener('load', function(){
+    var d = f.contentDocument, w = f.contentWindow;
+    if (!d) return;
+    var pl = d.querySelector('.player'); if (pl) pl.remove();
+    var s0 = d.createElement('style');
+    s0.textContent = '.rv{opacity:1!important;transform:none!important}html{scroll-behavior:auto!important}';
+    d.documentElement.appendChild(s0);
+    d.querySelectorAll('.rv').forEach(function(e){ e.classList.add('on','in','vis'); });
+    var t = d.querySelector('.t3');
+    if (!t) return;
+    t.classList.add('mob-on');
+    var v = f.getAttribute('data-v');
+    if (V[v]) { var st = d.createElement('style'); st.textContent = V[v]; d.documentElement.appendChild(st); }
+    setTimeout(function(){
+      var erro = d.querySelector('.erro') || t;
+      w.scrollTo(0, erro.getBoundingClientRect().top + w.scrollY - 16);
+    }, 360);
+  });
+});
+</script>
+</body>
+</html>
