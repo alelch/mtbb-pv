@@ -21,6 +21,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/fraunces-italic-500-sub.woff2">
 
 <!-- ============================================================
+     VTURB — otimizador (bloco do painel, colado como veio 22/09).
+     Marca o tempo de origem e pre-carrega o player, que e' o unico
+     elemento que precisa estar pronto na primeira dobra: a pagina
+     inteira existe pra pessoa dar o play.
+     ============================================================ -->
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6ab2d7d8f8d7b4fc8efca837/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://m3u8.vturb.net">
+<link rel="dns-prefetch" href="https://license.vturb.com">
+
+<!-- ============================================================
      DESIGN (14/09/2026): rumo "Capítulos", paleta "Noite", escolhidos pelo
      cliente na prancha de 14 rumos × 8 paletas (_designs/). A página deixou
      de usar ../assets/oferta.css: aquela folha é a linguagem do FRONT
@@ -560,7 +575,25 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
          foi pro bloco do preço. -->
     <h1>Você já sabe como lançar.<br>Mas o seu livro está <span class="u">bom de verdade<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8.4C34 3.6 78 2.4 116 4.2c26 1.2 52 3.6 82 1.4"/></svg></span>?</h1>
     <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
-    <div class="player" id="vsl"></div>
+    <!-- ============================================================
+         VTURB — teste A/B das CINCO LEADS (id ab-6ab2d7d8f8d7b4fc8efca837).
+         Cinco variantes com 20% cada, sticky por 7 dias (ttl 604800s).
+         O video e' VERTICAL (1080x1920, verticalVideo:true), que e' por que
+         a .player tem aspect-ratio 9/16. Smart Autoplay com auto-unmute.
+         As cinco leads e o palpite registrado antes do teste estao em
+         `~/Claude Code/vsl-upsell-leads.md`.
+         ⚠️ A conversao do teste e' por `xcod` (conversion:["xcod"] na config).
+         Ver a PENDENCIA 2 no rodape: hoje o clique do botao nao carrega o
+         xcod, e sem ele o teste roda mas nao diz qual lead vendeu.
+         ============================================================ -->
+    <div class="player" id="vsl">
+      <vturb-smartplayer id="ab-6ab2d7d8f8d7b4fc8efca837" style="display:block;margin:0 auto;width:100%"></vturb-smartplayer>
+      <script type="text/javascript">
+        var s=document.createElement("script");
+        s.src="https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6ab2d7d8f8d7b4fc8efca837/player.js",
+        s.async=!0,document.head.appendChild(s);
+      </script>
+    </div>
     <p class="cue">Role para ver a conta ↓</p>
   </div>
 </header>
@@ -903,9 +936,20 @@ window.OFERTA = {
      1. CHECKOUT. AO_VIVO:false até a Hotmart publicar o A107472443R.
         Falta também a URL de obrigado/membros do 90D (recusa), que ainda
         está SUBSTITUIR.
-     2. O VÍDEO. A div .player está vazia e mostra o aviso tracejado. Nesta
-        estrutura é o vídeo que vende; sem ele, considerar subir a
-        index-longa.html.
+     2. ✅ O VÍDEO entrou em 22/09: player VTurb com o teste A/B das CINCO
+        LEADS (ab-6ab2d7d8f8d7b4fc8efca837), 20% cada, sticky 7 dias.
+        ⚠️ MAS A ATRIBUIÇÃO NÃO FECHA. A VTurb conta a conversão por `xcod`
+        (conversion:["xcod"]), que ela injeta no href dos links de checkout
+        da página. O oferta.js NÃO segue o href: no clique ele faz
+        `window.location.href = destino(CFG.aceite)`, remontando a URL do
+        zero a partir da constante. O xcod que a VTurb escreveu é descartado
+        no caminho, e a Hotmart recebe a venda sem saber qual das cinco
+        leads a produziu. O teste roda e não responde nada.
+        É a MESMA falha de 01/08 na master, agora por outro caminho: lá foi
+        override de href, aqui é navegação por JS ignorando o href.
+        Conserto proposto (1 linha no oferta.js): em `vai()`, ler o `xcod`
+        do href do próprio botão e carregar ele pro destino. Não aplicado
+        ainda, aguarda decisão.
      3. Preço: em TESTE A/B. A=R$697 aqui, B=R$597 na /upsell-b/ (gerada
         pelo gera-b.py). Falta o valor real da parcela das duas ofertas.
      4. A regra do abatimento no D.E. precisa ser confirmada: veio da
