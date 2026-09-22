@@ -199,6 +199,13 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .player:empty:before{content:"vídeo de upsell entra aqui";font-family:var(--fm);font-size:11px;
   letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
 
+/* o widget da Hotmart e' um iframe que se mede sozinho (a lib manda a altura
+   por postMessage). So damos largura e o respiro do scroll, pra barra fixa
+   nao cobrir ele quando os outros CTAs rolam ate aqui. */
+.funil{margin:26px 0 8px}
+#compra{scroll-margin-top:96px}
+#hotmart-sales-funnel iframe{width:100%;border:0;display:block}
+
 /* ════════════════════════════════════════════════════════════
    A LINGUAGEM DAQUI PRA BAIXO É A DA PÁGINA DO LANÇAMENTO 90D
    (../index.html), transposta para a paleta Noite. Nada foi inventado:
@@ -679,8 +686,8 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 </section>
 
 <!-- PREÇO 1
-     💰 ESTA É A VARIANTE A DO TESTE DE PREÇO: R$697 (oferta n740dj0b).
-     A B (R$597, 8rn7djuk) é a /upsell-b/, GERADA pelo gera-b.py.
+     O preço aqui e no bloco final são TEXTO. Quem cobra é o funil da Hotmart
+     (o widget não aceita oferta). Mudou lá, muda os dois aqui.
      Sem a lista de entregas aqui de propósito: neste ponto a página ainda não
      explicou o que é a hora. A lista existe uma vez só, na recapitulação. -->
 <section id="oferta">
@@ -695,7 +702,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <div class="price"><span class="cur">12x de R$</span><span class="val">69,56</span></div>
       <p class="inst">ou <b>R$697 à vista</b></p>
       <p class="obs">* parcelado no cartão, com juros</p>
-      <a class="btn block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
+      <a class="btn block" href="#compra">Sim! Adicione ao meu pedido</a>
       <p class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697
     são abatidos integralmente.</p>
     </div>
@@ -734,7 +741,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         Se não for, não conta.</p></div></div>
     </div>
     <div class="meio" style="margin-top:34px">
-      <a class="btn" href="#" data-aceita>Eu quero o meu diagnóstico</a>
+      <a class="btn" href="#compra">Eu quero o meu diagnóstico</a>
     </div>
   </div>
 </section>
@@ -797,8 +804,19 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <div class="price"><span class="cur">12x de R$</span><span class="val">69,56</span></div>
       <p class="inst">ou <b>R$697 à vista</b></p>
       <p class="obs">* parcelado no cartão, com juros</p>
-      <a class="btn block" href="#" data-aceita>Sim! Adicione ao meu pedido</a>
-      <button class="recusa" data-recusa>Não quero o diagnóstico. Seguir só com o Lançamento 90D.</button>
+      <!-- ============================================================
+           HOTMART — Sales Funnel Widget (22/09). Ele renderiza o aceite E a
+           recusa dentro de um iframe, com compra de UM CLIQUE: o comprador
+           nao digita cartao de novo, porque a Hotmart reusa o pagamento da
+           compra do 90D. Por isso o botao de aceite e o de recusa que existiam
+           aqui sairam: seriam dois caminhos de compra concorrendo no mesmo
+           bloco.
+           ⚠️ O widget NAO aceita oferta. Diferente do inlineCheckout da mesma
+           lib, o salesFunnel nao manda `off=`: quem decide produto e PRECO e o
+           funil configurado na Hotmart. O preco escrito acima nesta pagina
+           precisa bater com o que estiver la, senao a pagina mente.
+           ============================================================ -->
+      <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
       <p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D.<br>
       E ela só está na sua frente porque ainda há vaga este mês.</p>
       <p class="esc">Cada diagnóstico é uma hora de agenda do time.<br>
@@ -845,41 +863,87 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      no celular a distância entre eles é de várias telas. -->
 <div class="sticky" id="sticky">
   <div class="p">12x R$69,56<small>ou R$697 à vista</small></div>
-  <a class="btn" href="#" data-aceita>Adicionar ao pedido</a>
+  <a class="btn" href="#compra">Adicionar ao pedido</a>
 </div>
 
-<script>
-/* ============================================================
-   TESTE DE PREÇO — VARIANTE A (R$697)
-   Arquitetura: DUAS PÁGINAS com o checkout FIXO no HTML e split por
-   REDIRECT, que é a que a casa provou em agosto. NÃO trocar a URL do botão
-   em runtime: foi override de href que apagou o xcod da VTurb na master em
-   01/08, e esta página vai ter player de vídeo com botão de compra.
-     /upsell/    = A = R$697 = off n740dj0b = COM o branch de redirect
-     /upsell-b/  = B = R$597 = off 8rn7djuk = SEM o branch (senão vira loop)
-   A B FORÇA variante 'B', para quem cair direto nela (link compartilhado,
-   cookie expirado) não sair carimbado como A vendo o preço de B.
+<!-- ============================================================
+     O TESTE DE PREÇO (697 × 597) FOI ENCERRADO EM 22/09, antes de rodar.
+     Motivo: o Sales Funnel Widget da Hotmart NAO aceita oferta. Diferente do
+     inlineCheckout da mesma lib, o salesFunnel nao manda `off=` nenhum, entao
+     duas paginas com `?off=` diferentes mostrariam exatamente o mesmo preco.
+     A arquitetura de duas paginas + redirect ficou sem funcao e saiu junto com
+     a /upsell-b/ e o gera-b.py. Decisao do cliente: vale mais a compra de UM
+     CLIQUE do widget do que o teste de preco.
+     Com isso saiu tambem o bloco `window.OFERTA` e o include do oferta.js: o
+     checkout nao e mais nosso. (O arquivo assets/oferta.js FICA, porque as
+     duas versoes longas arquivadas em upsell/ ainda dependem dele.)
+     ⚠️ O preco impresso nesta pagina agora e' so texto. Quem cobra e' o funil
+     da Hotmart. Se os dois divergirem, a pagina mente para o comprador.
+     ============================================================ -->
 
-   ⚠️ AO_VIVO:false = trava. Os dois checkouts respondem "Produto
-   indisponível" hoje (produto A107472443R não publicado). Com a trava, o
-   botão avisa em vez de mandar comprador pra página morta. Virar para true
-   quando a Hotmart estiver no ar, e o teste começa a rodar. Nasce travado
-   por regra da casa: teste A/B começa pausado, o cliente ativa depois de
-   testar.
-   ============================================================ */
-window.OFERTA = {
-  variante: 'A',
-  preco:    697,
-  aceite:   'https://pay.hotmart.com/A107472443R?off=n740dj0b',
-  recusa:   'SUBSTITUIR-OBRIGADO-90D',
-  outraUrl: '../upsell-b/',
-  sku:      'L90D-DIAG',
-  valor:    697,
-  sckTag:   'pd',
-  AO_VIVO:  false
-};
+<!-- ============================================================
+     HOTMART — carga e montagem do Sales Funnel Widget.
+
+     A ORDEM AQUI E' O QUE FAZ O TESTE DAS CINCO LEADS EXISTIR.
+     A lib monta um iframe em `pay.hotmart.com/funnel` + a QUERY STRING DESTA
+     PAGINA (`getMainPageSearchParams`, lida no construtor). Essa query e' o
+     unico canal nosso ate a Hotmart.
+     A VTurb conta a conversao por `xcod` (conversion:["xcod"]) e expoe a
+     variante sorteada em `<vturb-smartplayer>.conversionKey`, no formato
+     `v3_<conta>_<idDaVariante>_30_s-1`. Entao: le a chave, escreve na URL,
+     E SO DEPOIS monta. Montar antes perde a variante e o teste nao responde
+     qual lead vendeu, que e' a unica razao dele existir.
+
+     🚫 A COMPRA NUNCA ESPERA PELO TRACKING. Se a chave nao aparecer em 6s
+     (adblock, script bloqueado, player que nao carregou), monta assim mesmo
+     sem xcod: perde-se a atribuicao daquela venda, nao a venda.
+     ============================================================ -->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+(function(){
+  var PRAZO = 6000, INICIO = Date.now(), montado = false;
+
+  function montar(){
+    if (montado) return; montado = true;
+    try {
+      checkoutElements.init('salesFunnel', {
+        payment: {
+          /* A lib expoe on_payment_approve -> payment.onSuccess. Vale mais que
+             o antigo InitiateCheckout no clique: aqui a compra ACONTECEU.
+             🚫 De proposito NAO disparamos fbq('Purchase'): a campanha do Meta
+             otimiza na conversao por product_id (Compra Diagnostico, 8457576),
+             que vem da Hotmart. Disparar aqui tambem contaria a mesma venda
+             duas vezes. O formato do payload nao pode ser conferido antes de
+             existir compra real, entao ele vai cru pro nosso tracker. */
+          onSuccess: function(dados){
+            try { if (window.MTBB_TRACK) MTBB_TRACK('upsell_compra',
+              {produto:'L90D-DIAG', payload:dados}); } catch(e){}
+          },
+          onError: function(erro){ console.error('Hotmart: pagamento', erro); }
+        }
+      }).mount('#hotmart-sales-funnel');
+    }
+    catch(e){ console.error('Hotmart: funil nao montou', e); }
+  }
+
+  function carimba(chave){
+    try {
+      var u = new URL(location.href);
+      if (u.searchParams.get('xcod')) return;   /* ja veio de fora, respeita */
+      u.searchParams.set('xcod', chave);
+      history.replaceState(null, '', u.toString());
+    } catch(e){}
+  }
+
+  (function espera(){
+    var el = document.querySelector('vturb-smartplayer');
+    var chave = el && el.conversionKey;
+    if (chave){ carimba(chave); return montar(); }
+    if (Date.now() - INICIO > PRAZO) return montar();
+    setTimeout(espera, 150);
+  })();
+})();
 </script>
-<script src="../assets/oferta.js"></script>
 <script>
 /* A barra fixa entra depois que a pessoa passa do vídeo: antes disso ela
    atrapalha o único trabalho da primeira dobra, que é dar o play.
@@ -929,25 +993,25 @@ window.OFERTA = {
 
 <!-- ============================================================
      PENDÊNCIAS desta página, em ordem de quem trava o quê:
-     1. CHECKOUT. AO_VIVO:false até a Hotmart publicar o A107472443R.
-        Falta também a URL de obrigado/membros do 90D (recusa), que ainda
-        está SUBSTITUIR.
-     2. ✅ O VÍDEO entrou em 22/09: player VTurb com o teste A/B das CINCO
+     1. ✅ CHECKOUT resolvido em 22/09 pelo Sales Funnel Widget da Hotmart.
+        Compra de UM CLIQUE: o comprador nao digita cartao de novo. Com ele
+        sairam a trava AO_VIVO, o bloco window.OFERTA, o include do oferta.js
+        e a URL de obrigado/membros (a recusa agora e do funil da Hotmart).
+        ⚠️ O QUE SOBROU DE RISCO: o preco impresso na pagina (12x R$69,56 /
+        R$697, em dois lugares + a barra fixa) e so texto. Quem cobra e o
+        funil configurado na Hotmart. Se divergirem, a pagina mente.
+     2. ✅ O VIDEO entrou em 22/09: player VTurb com o teste A/B das CINCO
         LEADS (ab-6ab2d7d8f8d7b4fc8efca837), 20% cada, sticky 7 dias.
-        ⚠️ MAS A ATRIBUIÇÃO NÃO FECHA. A VTurb conta a conversão por `xcod`
-        (conversion:["xcod"]), que ela injeta no href dos links de checkout
-        da página. O oferta.js NÃO segue o href: no clique ele faz
-        `window.location.href = destino(CFG.aceite)`, remontando a URL do
-        zero a partir da constante. O xcod que a VTurb escreveu é descartado
-        no caminho, e a Hotmart recebe a venda sem saber qual das cinco
-        leads a produziu. O teste roda e não responde nada.
-        É a MESMA falha de 01/08 na master, agora por outro caminho: lá foi
-        override de href, aqui é navegação por JS ignorando o href.
-        Conserto proposto (1 linha no oferta.js): em `vai()`, ler o `xcod`
-        do href do próprio botão e carregar ele pro destino. Não aplicado
-        ainda, aguarda decisão.
-     3. Preço: em TESTE A/B. A=R$697 aqui, B=R$597 na /upsell-b/ (gerada
-        pelo gera-b.py). Falta o valor real da parcela das duas ofertas.
+        ✅ A ATRIBUICAO FECHOU no mesmo dia. A VTurb conta por `xcod` e expoe
+        a variante em `<vturb-smartplayer>.conversionKey`; o widget repassa a
+        query string desta pagina pro iframe do funil. Entao o script de
+        montagem le a chave, escreve `xcod` na URL e SO DEPOIS monta.
+        Verificado no navegador: a chave chega identica no src do iframe.
+        Se a chave nao aparecer em 6s, monta sem ela: a compra nunca espera
+        pelo rastreio.
+     3. ✅ TESTE DE PRECO ENCERRADO antes de rodar, por decisao do cliente.
+        O salesFunnel nao aceita `off=`, entao duas paginas mostrariam o mesmo
+        preco. /upsell-b/ e gera-b.py foram apagados.
      4. A regra do abatimento no D.E. precisa ser confirmada: veio da
         especificação de quando esta call custava R$297 e era o Upsell 3.
      5. O formulário pós-compra não existe.
