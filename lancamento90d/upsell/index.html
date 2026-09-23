@@ -416,10 +416,18 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    Os graficos sao os MESMOS: o cliente pediu pra manter as curvas atuais.
    ⚠️ No celular volta a ser empilhado. Tres curvas de 300px de largura nao
    se leem, e ai a comparacao morre de vez. */
-.contas{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;
-  margin:clamp(34px,5vw,52px) auto 0;max-width:1080px;padding-left:24px;text-align:left}
+.dupla{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch;
+  margin:clamp(30px,4.4vw,46px) auto 0;max-width:1080px;text-align:left}
+.solo{margin:18px auto 0;max-width:1080px;text-align:left}
+@media(max-width:700px){.dupla{grid-template-columns:1fr}}
 .conta{background:var(--offc);border:2px solid var(--ink);border-radius:var(--r);
-  padding:20px 18px;box-shadow:4px 4px 0 var(--ink);display:flex;flex-direction:column}
+  padding:22px 22px;box-shadow:4px 4px 0 var(--ink);display:flex;flex-direction:column}
+/* o cartao do acerto e' o maior da secao, de proposito */
+.solo .conta{padding:30px 32px}
+.dupla .graf svg{height:88px}
+.solo .graf svg{height:clamp(130px,15vw,190px)}
+.solo .conta .q{font-size:clamp(1.2rem,3vw,1.7rem)}
+.solo .conta .r{font-size:clamp(1.14rem,2.6vw,1.5rem)}
 /* a frase do resultado desce pro rodape do cartao: os titulos tem 1 ou 2 linhas
    e sem isto as tres frases ficavam em alturas diferentes. */
 .conta .r{margin-top:auto;padding-top:10px}
@@ -435,11 +443,8 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .conta.tres .graf svg path[stroke="#7D8B99"],
 .conta.tres .graf svg path[stroke="#E0574A"]{stroke:rgba(255,255,255,.4)}
 .conta.tres .graf svg [fill^="url"]{opacity:.22}
-.conta.tres .eixo-y,.conta.tres .eixo-x{color:rgba(255,255,255,.6)}
-.conta.tres .marca-lanc{color:rgba(255,255,255,.75)}
-@media(max-width:900px){
-  .contas{grid-template-columns:1fr;max-width:740px;gap:16px}
-}
+.conta.tres .rot-y,.conta.tres .rot-x{color:rgba(255,255,255,.62)}
+.conta.tres .rot-lanc{color:rgba(255,255,255,.8)}
 .conta .q{margin:0 0 9px;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;
   line-height:1.24;font-size:clamp(.95rem,2vw,1.14rem);color:var(--cor)}
 .conta .r{margin:2px 0 0;font-size:.96rem;line-height:1.45;color:var(--dim)}
@@ -479,26 +484,20 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 /* a reserva de baixo é a faixa do "tempo". Ela era de 16px e, somada ao
    vazio que o viewBox tinha abaixo da linha de base, jogava a frase do
    resultado longe do próprio gráfico. */
-.graf{position:relative;padding-bottom:12px}
-.graf svg{display:block;width:100%;height:auto;overflow:visible}
-.eixo-y,.eixo-x,.marca-lanc{position:absolute;font-family:var(--fd);font-weight:400;
-  font-size:.62rem;line-height:1;letter-spacing:.06em;white-space:nowrap;pointer-events:none}
-.eixo-y,.marca-lanc{top:0;display:flex;align-items:center;
-  writing-mode:vertical-rl;transform:rotate(180deg)}
-.eixo-y{bottom:12px}
-/* até a borda de baixo: a palavra é comprida e o gráfico é baixo, então ela
-   pega emprestada a faixa reservada pro "tempo". Como está alinhada no topo,
-   sobra é folga, não deslocamento. */
-.marca-lanc{bottom:0}
-/* em escrita vertical o eixo principal do flex é o vertical, e o
-   rotate(180deg) inverte as pontas: flex-end é o TOPO na tela.
-   "vendas" fica no meio da sua linha, "lançamento" no topo da dela. */
-.eixo-y{justify-content:center}
-.marca-lanc{justify-content:flex-end}
-.eixo-y{left:-20px;color:var(--dim)}
-/* encostada no pontilhado e do lado de fora dele: à direita passam as curvas */
-.marca-lanc{right:85.625%;margin-right:6px;color:var(--ac);opacity:.85}
-.eixo-x{right:0;bottom:0;color:var(--dim)}
+/* ── OS ROTULOS DOS EIXOS, POR FORA DO DESENHO (cliente 23/09) ──
+   Eram texto VERTICAL posicionado dentro da area do grafico, e "lancamento"
+   caia exatamente em cima do pontilhado e da curva. Agora sao tres linhas
+   horizontais na moldura: "vendas" em cima a esquerda, "lancamento" embaixo
+   no ponto do pontilhado (x=92 de 640 = 14,4%) e "tempo" embaixo a direita.
+   Com isso o desenho pode crescer a vontade sem esbarrar em texto. */
+.graf{position:relative;padding:16px 0 26px}
+.graf svg{display:block;width:100%;overflow:visible}
+.rot-y,.rot-x,.rot-lanc{position:absolute;font-family:var(--fd);font-weight:700;
+  font-size:.6rem;line-height:1;letter-spacing:.14em;text-transform:uppercase;
+  white-space:nowrap;pointer-events:none;color:var(--dim)}
+.rot-y{top:0;left:0}
+.rot-x{bottom:8px;right:0}
+.rot-lanc{bottom:8px;left:14.4%;transform:translateX(-50%);color:var(--mut)}
 /* ⚠️ COM JS: acende a conta mais perto do centro da tela e apaga as outras.
    É o MESMO mecanismo da seção de bolhas do front (proximidade do centro, e
    não IntersectionObserver com faixa percentual, que some em tela curta). Os
@@ -521,12 +520,8 @@ html.js .conta{transition:none}
 .nota-conta{margin:30px auto 0;max-width:48ch;text-align:center;
   font-size:clamp(1.02rem,2vw,1.2rem);line-height:1.5;color:var(--ink);font-weight:500}
 @media(max-width:560px){
-  .contas{padding-left:20px}
-  .eixo-y{left:-20px}
-  /* no celular o gráfico tem ~65px de altura: "lançamento" na vertical só
-     cabe menor e quase sem espacejamento */
-  .eixo-y,.marca-lanc,.eixo-x{font-size:.55rem;letter-spacing:.02em}
-  .marca-lanc{margin-right:4px}
+  .rot-y,.rot-x,.rot-lanc{font-size:.54rem;letter-spacing:.08em}
+  .solo .conta{padding:24px 20px}
 }
 
 /* o brilho da terceira curva estoura a caixa; clipar evita barra de rolagem */
@@ -677,7 +672,9 @@ section.alt .prova{background:var(--offc)}
 
 /* o ultimo pedido, colado no rodape. Sem fundo proprio: ele encosta no footer
    e os dois leem como o fim da pagina, nao como mais uma secao. */
-.fecho{padding:clamp(40px,5.5vw,64px) 0 clamp(34px,4.5vw,52px)}
+/* 23/09: o botao ficava longe da conta. A secao do fecho perdeu o respiro
+   de cima; quem separa agora e' so a margem da nota. */
+.fecho{padding:clamp(18px,2.4vw,28px) 0 clamp(34px,4.5vw,52px)}
 
 
 /* ════════════════════════════════════════════════════════════
@@ -761,8 +758,8 @@ a.btn[href="#compra"]:hover,a.btn[href="#compra"]:focus-visible{background:var(-
    que e a secao inteira. Esta regra sobreviveu a troca e lavava os dois
    primeiros cartoes. */
 .graf svg path[stroke="#2C2C33"]{stroke:var(--hair)}
-.eixo-y,.eixo-x{color:var(--dim)}
-.marca-lanc{color:var(--mut);opacity:1}
+.rot-y,.rot-x{color:var(--dim)}
+.rot-lanc{color:var(--mut)}
 
 /* ---- sessão e prova ---- */
 .hora{background:var(--offc)}
@@ -1141,28 +1138,36 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
            frase inteira ele desequilibra um título centrado. -->
       <h2>A conta que <span class="risco">ninguém</span> faz</h2>
     </div>
-    <div class="contas">
+    <!-- VERSAO 5 (cliente 23/09): os dois erros pequenos lado a lado e o
+         acerto sozinho em largura inteira. A hierarquia vira o argumento:
+         o certo ocupa mais tela que os dois errados juntos.
+         ⚠️ Os rotulos dos eixos sairam de DENTRO do desenho (eram texto
+         vertical em cima da linha) e viraram linhas horizontais em volta. -->
+    <div class="dupla">
       <div class="conta um" style="--cor:#7D8B99">
         <p class="q">Livro bom + lançamento ruim</p>
-        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7D8B99" stop-opacity=".22"></stop><stop offset="1" stop-color="#7D8B99" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".30"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E7D46" stop-opacity=".30"></stop><stop offset="1" stop-color="#1E7D46" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#7D8B99" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#7D8B99" stroke-width="1.5"></circle></svg>
+        <div class="graf"><span class="rot-y">vendas</span><span class="rot-lanc">lançamento</span><span class="rot-x">tempo</span>
+          <svg viewBox="0 0 640 108" preserveAspectRatio="none" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7D8B99" stop-opacity=".22"></stop><stop offset="1" stop-color="#7D8B99" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".30"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E7D46" stop-opacity=".30"></stop><stop offset="1" stop-color="#1E7D46" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#7D8B99" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#7D8B99" stroke-width="1.5"></circle></svg>
         </div>
         <p class="r">Ninguém descobre.</p>
       </div>
       <div class="conta dois" style="--cor:#E0574A">
         <p class="q">Livro ruim + lançamento bom</p>
-        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#7D8B99" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
+        <div class="graf"><span class="rot-y">vendas</span><span class="rot-lanc">lançamento</span><span class="rot-x">tempo</span>
+          <svg viewBox="0 0 640 108" preserveAspectRatio="none" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#7D8B99" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
         </div>
         <p class="r">Vende no lançamento. Depois, esquecido.</p>
       </div>
+    </div>
+    <div class="solo">
       <div class="conta tres" style="--cor:#1E7D46">
         <p class="q">Livro bom + lançamento bom</p>
-        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#7D8B99" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#1E7D46" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(30,125,70,.35))"></path><circle cx="638" cy="2" r="4.5" fill="#1E7D46" filter="drop-shadow(0 0 10px rgba(30,125,70,.55))"></circle></svg>
+        <div class="graf"><span class="rot-y">vendas</span><span class="rot-lanc">lançamento</span><span class="rot-x">tempo</span>
+          <svg viewBox="0 0 640 108" preserveAspectRatio="none" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#7D8B99" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#1E7D46" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(30,125,70,.35))"></path><circle cx="638" cy="2" r="4.5" fill="#1E7D46" filter="drop-shadow(0 0 10px rgba(30,125,70,.55))"></circle></svg>
         </div>
         <p class="r">Muda a vida do autor.</p>
       </div>
+    </div>
     </div>
     <!-- ⚠️ Copy do cliente (14/09). Tirei só a vírgula entre sujeito e verbo
          ("livro bom , está"), que era erro de digitação. As palavras são as dele.
