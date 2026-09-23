@@ -6,7 +6,7 @@
 <link rel="icon" type="image/webp" href="../favicon.webp">
 
 <title>Diagnóstico do Autor | The Book Business</title>
-<meta name="description" content="Uma sessão de uma hora no Zoom com um especialista do time da Dany Sakugawa, olhando o seu caso, para você sair sabendo o próximo passo certo.">
+<meta name="description" content="Uma sessão de até 1h30 no Zoom com um especialista do time da Dany Sakugawa, olhando o seu caso, para você sair sabendo o próximo passo certo.">
 <!-- Página de upsell: nunca indexada, nunca acessada direto. Só existe dentro
      do fluxo de quem acabou de comprar o Lançamento 90D. -->
 <meta name="robots" content="noindex,nofollow">
@@ -174,7 +174,7 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    um terço inteiro preenchido, que é o que dá o peso.
    O passo 2 é o único preenchido, porque é onde ela está. */
 .passos{display:flex;justify-content:center;margin:0 0 26px}
-.passos ol{display:flex;align-items:stretch;gap:24px;list-style:none;margin:0;padding:6px;
+.passos ol{display:flex;align-items:stretch;gap:30px;list-style:none;margin:0;padding:6px;
   width:80%;border:1px solid var(--ru);border-radius:999px;background:var(--pa2)}
 .passos li{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;
   padding:11px 14px;border-radius:999px;font:700 14px/1.15 var(--ff);color:var(--dim);
@@ -186,9 +186,13 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    duas bordas rotacionadas, e nao com o caractere ">": o caractere muda de
    desenho e de peso conforme a fonte disponivel, e a borda e' sempre a mesma.
    Verde, que e a cor do caminho ate a compra. */
-.passos li + li:before{content:"";position:absolute;left:-19px;top:50%;
-  width:7px;height:7px;border-right:2.2px solid var(--go);border-top:2.2px solid var(--go);
-  transform:translateY(-50%) rotate(45deg)}
+/* ⚠️ CENTRALIZADO NO VÃO, não deslocado por tentativa. O `left` é METADE do
+   gap, e o `translate(-50%,-50%)` joga o centro da caixa exatamente ali.
+   Antes eu chutava um `left` negativo e o caret ficava 3px pra esquerda.
+   Se o gap mudar, esta conta muda junto: left = gap / 2. */
+.passos li + li:before{content:"";position:absolute;left:-15px;top:50%;
+  width:11px;height:11px;border-right:3px solid var(--go);border-top:3px solid var(--go);
+  transform:translate(-50%,-50%) rotate(45deg)}
 .passos .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-content:center;
   font:700 12.5px/1 var(--ff);border:1.5px solid currentColor}
 .passos .t{overflow:hidden;text-overflow:ellipsis}
@@ -200,7 +204,8 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 @media(max-width:760px){
   .passos{margin-bottom:20px}
   .passos ol{width:100%;padding:5px;gap:16px}
-  .passos li + li:before{left:-13px;width:6px;height:6px;border-width:2px}
+  .passos ol{gap:22px}
+  .passos li + li:before{left:-11px;width:9px;height:9px;border-width:2.5px}
   .passos li{padding:10px 8px;font-size:12px;gap:7px}
   .passos .n{width:21px;height:21px;font-size:11px}
   /* os tres nomes nao cabem: os passos feito e futuro viram so o numero e
@@ -971,7 +976,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     <div class="offer-box">
       <p class="promessa">Diagnóstico do Autor</p>
       <ul class="conquistas">
-        <li><b>Uma sessão de uma hora no Zoom</b>, só sobre o seu livro</li>
+        <li><b>Uma sessão de até 1h30 no Zoom</b>, só sobre o seu livro</li>
         <li><b>Um plano de ação</b>, com o que consertar primeiro e o que deixar pra depois</li>
         <li><b>Três frentes de lançamento</b> escolhidas para o seu livro, entre quinze</li>
         <li><b>A gravação da sessão inteira</b>, pra rever quando estiver executando</li>
@@ -1014,7 +1019,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       </div>
       <p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D.<br>
       E ela só está na sua frente porque ainda há vaga este mês.</p>
-      <p class="esc">Cada diagnóstico é uma hora de agenda do time.<br>
+      <p class="esc">Cada diagnóstico ocupa até 1h30 de agenda do time.<br>
       Quando as vagas acabam, esta página deixa de aparecer.<br>
       Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p>
     </div>
@@ -1124,12 +1129,18 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       </details>
       <details>
         <summary>Isso não é uma reunião de vendas disfarçada?</summary>
-        <div class="a"><p>Cinquenta minutos são sobre o seu caso.</p>
-        <p>Dez são de conversa, e só se o seu caso for de algo que a gente faz.</p>
-        <p>Está escrito acima, antes de você pagar.</p></div>
+        <!-- ⚠️ Esta resposta provava o ponto com a CONTA (cinquenta minutos contra
+             dez). Em 23/09 o cliente tirou toda menção a duração da página, e a
+             conta foi junto. O argumento agora é a ORDEM e a condição: a oferta
+             só existe no fim, e só se couber. É mais fraco que o número, então
+             se um dia a duração voltar, o número volta com ela. -->
+        <div class="a"><p>A sessão é sobre o seu caso, do começo ao fim.</p>
+        <p>No fim, se o que você precisa for algo que a gente faz, a gente conta.
+        Se não for, não conta.</p>
+        <p>Está escrito aqui, antes de você pagar.</p></div>
       </details>
       <!-- 23/09: cinco perguntas novas, aprovadas pelo cliente. Eram três, e
-           três não cobre as objeções de uma call de uma hora.
+           três não cobre as objeções de uma sessão ao vivo.
            ⚠️ Todas respondem SÓ com o que a página já afirma em outro lugar.
            Nenhuma inventa regra operacional. Ver a pendência sobre as duas
            que ficaram de fora. -->
