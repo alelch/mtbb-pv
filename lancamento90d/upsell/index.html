@@ -463,25 +463,32 @@ html.js .conta:not(.viva){opacity:.32}
 .offer-box .btn:hover{box-shadow:0 16px 30px -14px rgba(20,19,18,.5)}
 .recusa{display:block;width:100%;margin:16px 0 0;background:none;border:0;font:400 .92rem/1.5 var(--ff);
   color:rgba(20,19,18,.55);text-decoration:underline;cursor:pointer}
+.pix + .esc{margin-top:26px}
 .esc{margin:22px auto 0;max-width:62ch;font-size:.88rem;line-height:1.66;color:rgba(20,19,18,.6)}
 .esc+.esc{margin-top:12px}
 
 /* ── A SAIDA DO PIX ──────────────────────────────────────────
-   LARANJA, que e a cor do caminho alternativo. Ela nao e um detalhe: pra quem
-   pagou o 90D no PIX e o unico caminho de compra, porque o widget da Hotmart
-   so recobra cartao salvo.
-   Painel proprio, com fundo e borda, pra ela se ler como OUTRA coisa e nao
-   como um segundo botao de comprar. */
-.pix{max-width:660px;margin:clamp(30px,4.4vw,42px) auto 0;text-align:center;
-  border:1px solid rgba(240,106,42,.42);border-radius:18px;
-  background:rgba(240,106,42,.07);padding:clamp(26px,3.6vw,34px) clamp(20px,3vw,30px)}
-.pix .q{margin:0 0 20px;font-family:var(--fd);font-weight:700;color:var(--ink);
-  letter-spacing:-.03em;line-height:1.18;font-size:clamp(1.24rem,3vw,1.75rem)}
-.pix .btn{width:100%;max-width:480px;font-size:clamp(1rem,2.4vw,1.14rem);padding:22px 32px;
-  background:var(--alt);color:#fff;box-shadow:0 16px 36px -16px rgba(240,106,42,.95)}
+   DENTRO do card, logo abaixo do widget. Ela e a alternativa ao botao de
+   cima, nao um bloco a parte: fora do card virava uma terceira caixa
+   empilhada e a area de oferta lia como bagunca.
+
+   A faixa SANGRA ate a borda do card (margens negativas iguais ao padding
+   dele), pra ser uma SECAO do card e nao uma caixa dentro de outra caixa.
+   Laranja, que e a cor do caminho alternativo.
+
+   Ela nao e um detalhe: pra quem pagou o 90D no PIX e o unico caminho de
+   compra, porque o widget da Hotmart so recobra cartao salvo. */
+.pix{--pad:clamp(34px,5vw,52px);
+  margin:26px calc(-1 * var(--pad)) 0;padding:26px var(--pad) 28px;
+  text-align:center;background:rgba(240,106,42,.09);
+  border-top:1px solid rgba(240,106,42,.3);border-bottom:1px solid rgba(240,106,42,.3)}
+.pix .q{margin:0 0 18px;font-family:var(--fd);font-weight:700;color:var(--ink);
+  letter-spacing:-.03em;line-height:1.2;font-size:clamp(1.14rem,2.6vw,1.5rem)}
+.pix .btn{width:100%;max-width:440px;font-size:clamp(.98rem,2.2vw,1.1rem);padding:20px 30px;
+  background:var(--alt);color:#fff;box-shadow:0 14px 32px -14px rgba(240,106,42,.95)}
 .pix .btn:hover,.pix .btn:focus-visible{background:var(--alt2);color:#fff;
-  box-shadow:0 20px 42px -16px rgba(240,106,42,.8)}
-.pix .d{margin:15px auto 0;max-width:46ch;font-size:.86rem;line-height:1.5;color:var(--dim)}
+  box-shadow:0 18px 38px -14px rgba(240,106,42,.8)}
+.pix .d{margin:14px auto 0;max-width:46ch;font-size:.84rem;line-height:1.5;color:var(--dim)}
 
 /* garantia */
 .gar{max-width:660px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:22px;
@@ -563,6 +570,10 @@ footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-fami
   .gar .selo{margin-bottom:4px}
   .hl{grid-template-columns:72px 1fr;gap:14px;padding:18px 18px}
   .offer-box{padding:30px 22px}
+  /* a faixa do PIX sangra ate a borda do card, entao o recuo dela tem que
+     acompanhar o padding do card. Sem esta linha ela usava os 34px do desktop
+     e vazava 11px pra cada lado no celular. */
+  .pix{--pad:22px}
   .offer-box .price .val{font-size:clamp(3rem,16vw,4rem)}
   .btn{padding:19px 26px;font-size:1.02rem}
   .sticky{display:flex}
@@ -737,6 +748,26 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
            precisa bater com o que estiver la, senao a pagina mente.
            ============================================================ -->
       <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
+      <!-- ============================================================
+           A SAIDA DO PIX. Fora do card, no fundo escuro, e chamativa de
+           proposito (pedido do cliente 23/09, com referencia).
+           Por que ela merece esse peso: o widget da Hotmart so fecha de um
+           clique quem comprou o 90D no CARTAO, porque e o cartao salvo que ele
+           recobra. Quem pagou no PIX ve o formulario nao carregar e, se esta
+           saida for discreta, simplesmente nao compra. Nao e um link de rodape,
+           e o unico caminho de uma fatia inteira do publico.
+           Fica SEMPRE visivel: quem pagou no PIX nao sabe que aquele formulario
+           nunca vai carregar pra ele.
+           A pergunta se auto-qualifica ("comprou no PIX?"), e a linha miuda
+           existe pra quem pagou no cartao nao vir por aqui e pagar de novo sem
+           o desconto de um clique.
+           O href e' montado pelo script no fim do body, com o xcod da VTurb.
+           ============================================================ -->
+      <div class="pix">
+        <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+        <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar <span aria-hidden="true">&rarr;</span></a>
+        <p class="d">Só para quem pagou no PIX. Quem pagou no cartão fecha no botão acima, em um clique.</p>
+      </div>
       <p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D.<br>
       E ela só está na sua frente porque ainda há vaga este mês.</p>
       <p class="esc">Cada diagnóstico é uma hora de agenda do time.<br>
@@ -757,26 +788,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       </div>
     </div>
 
-    <!-- ============================================================
-         A SAIDA DO PIX. Fora do card, no fundo escuro, e chamativa de
-         proposito (pedido do cliente 23/09, com referencia).
-         Por que ela merece esse peso: o widget da Hotmart so fecha de um
-         clique quem comprou o 90D no CARTAO, porque e o cartao salvo que ele
-         recobra. Quem pagou no PIX ve o formulario nao carregar e, se esta
-         saida for discreta, simplesmente nao compra. Nao e um link de rodape,
-         e o unico caminho de uma fatia inteira do publico.
-         Fica SEMPRE visivel: quem pagou no PIX nao sabe que aquele formulario
-         nunca vai carregar pra ele.
-         A pergunta se auto-qualifica ("comprou no PIX?"), e a linha miuda
-         existe pra quem pagou no cartao nao vir por aqui e pagar de novo sem
-         o desconto de um clique.
-         O href e' montado pelo script no fim do body, com o xcod da VTurb.
-         ============================================================ -->
-    <div class="pix">
-      <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
-      <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar <span aria-hidden="true">&rarr;</span></a>
-      <p class="d">Só para quem pagou no PIX. Quem pagou no cartão fecha no botão acima, em um clique.</p>
-    </div>
   </div>
 </section>
 
