@@ -262,8 +262,10 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    por postMessage). So damos largura e o respiro do scroll, pra barra fixa
    nao cobrir ele quando os outros CTAs rolam ate aqui. */
 .funil{margin:26px 0 8px}
+/* a copia do topo: mesma largura do video, pra os dois lerem como um bloco so */
+.funil-topo{max-width:392px;margin:18px auto 0}
 #compra{scroll-margin-top:96px}
-#hotmart-sales-funnel iframe{width:100%;border:0;display:block}
+#hotmart-sales-funnel iframe,#hotmart-sales-funnel-topo iframe{width:100%;border:0;display:block}
 
 /* ════════════════════════════════════════════════════════════
    A LINGUAGEM DAQUI PRA BAIXO É A DA PÁGINA DO LANÇAMENTO 90D
@@ -935,6 +937,16 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         s.async=!0,document.head.appendChild(s);
       </script>
     </div>
+    <!-- ============================================================
+         O WIDGET TAMBEM AQUI, logo abaixo do video (cliente 23/09). Quem
+         decide durante o video nao precisa rolar a pagina inteira ate o card
+         pra comprar.
+         ⚠️ SAO DUAS INSTANCIAS do mesmo funil na mesma pagina. A lib monta um
+         iframe por `init()`, entao o script no fim do body chama init duas
+         vezes, uma por container, e os ids sao diferentes (id repetido e HTML
+         invalido e o querySelector pegaria so o primeiro).
+         ============================================================ -->
+    <div class="funil funil-topo" id="compra-topo"><div id="hotmart-sales-funnel-topo"></div></div>
     <p class="cue">Role para ver a conta ↓</p>
   </div>
 </header>
@@ -1348,6 +1360,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 
   function montar(){
     if (montado) return; montado = true;
+    montarEm('#hotmart-sales-funnel-topo');
+    montarEm('#hotmart-sales-funnel');
+  }
+
+  function montarEm(alvo){
     try {
       checkoutElements.init('salesFunnel', {
         payment: {
@@ -1364,9 +1381,9 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
           },
           onError: function(erro){ console.error('Hotmart: pagamento', erro); }
         }
-      }).mount('#hotmart-sales-funnel');
+      }).mount(alvo);
     }
-    catch(e){ console.error('Hotmart: funil nao montou', e); }
+    catch(e){ console.error('Hotmart: funil nao montou em ' + alvo, e); }
   }
 
   function carimba(chave){
@@ -1533,7 +1550,13 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         o resto: quem aprova, como é processado, e o que acontece DEPOIS dos
         7 dias em que a Hotmart devolve sozinha por lei. Se a sessão cair no
         dia 20, é manual.
-     8. O formulário pós-compra não existe.
+     8. ⚠️ SÃO DUAS INSTÂNCIAS DO WIDGET na mesma página (uma abaixo do vídeo,
+        outra no card de preço). Isso não está documentado pela Hotmart. Local
+        as duas montam e as duas carregam o mesmo xcod, mas o comportamento
+        com uma compra REAL em andamento é desconhecido: se a pessoa aceitar
+        numa, a outra provavelmente deveria sumir ou dar erro, e não dá pra
+        testar antes da primeira venda. Se der problema, a de cima sai.
+     9. O formulário pós-compra não existe.
 
      7. Copy não passou pela Dany.
      8. ✅ Prova social resolvida com casos reais dos depoimentos do canal.
