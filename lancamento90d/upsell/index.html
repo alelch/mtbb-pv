@@ -125,22 +125,29 @@
      (o que acontece na call, a prova, as perguntas).
      --dim subiu junto: no fundo novo ele reprovava contraste no texto
      miúdo (3,2:1). Em #868178 passa em 4,5:1 nos dois fundos. */
-  --pa:#0B0B0D; --pa2:#191920; --ink:#EFEDE8; --mut:#9A958D; --dim:#868178; --ru:#2C2C33;
-  --ac:#EAB82D; --acf:#EAB82D;
-  --off:#F3F0E8; --offtx:#141312; --offc:#FFFFFF; --offb:#DBD6CA;
-  --pill:#EAB82D; --pilltx:#141312; --pillh:#141312; --pillhtx:#EAB82D;
-  --play:#000; --band:#EAB82D; --bandtx:#141312;
-  /* 23/09 (direcao B): a cor passa a ter PAPEL. Uma cor so pra tudo nao cria
-     hierarquia nenhuma, e de longe a pagina lia como um bloco morto.
-       --go  VERDE  = comprar. O preco e os botoes que levam ao checkout.
-       --alt LARANJA = o caminho alternativo (a saida do PIX).
-     O ambar continua sendo a cor da MARCA (eyebrow das outras secoes, grafico,
-     rabisco). Ele so nao manda mais na hora de agir. */
-  --go:#25A85A; --go2:#1F8F4C; --alt:#F06A2A; --alt2:#D85B1F;
+  /* ════════════════════════════════════════════════════════
+     A SÍNTESE (23/09). A página INVERTEU: era quase preta com âmbar em tudo,
+     e agora é creme com o preto virando acento. O cliente escolheu entre
+     quatro direções e pediu a mistura de duas: a base editorial clara de uma,
+     com o PESO da outra (borda preta de verdade, sombra deslocada, grifo).
+
+     O que cada cor faz, e isso não pode se diluir:
+       VERDE   comprar. Preço, checks, selo, todo botão de checkout.
+       LARANJA o caminho alternativo, que é a saída do PIX.
+       AMARELO só o grifo, atrás da palavra que carrega a frase.
+       PRETO   a borda e a sombra. É ele que dá o peso.
+     ════════════════════════════════════════════════════════ */
+  --pa:#F7F4EC; --pa2:#EFE9DB; --ink:#191714; --mut:#6E675C; --dim:#8C8478; --ru:#191714;
+  --hair:#DDD5C4;                 /* filete leve, pra separar sem pesar */
+  --ac:#EAB82D; --acf:#EAB82D;    /* ambar: so grafico e marca */
+  --go:#1E7D46; --go2:#165E35; --alt:#E8622B; --alt2:#C94E1D; --grifo:#FFD84D;
+  --off:#FFFFFF; --offtx:#191714; --offc:#FFFFFF; --offb:#191714;
+  --pill:#1E7D46; --pilltx:#FFFFFF; --pillh:#191714; --pillhtx:#FFFFFF;
+  --play:#191714; --band:#1E7D46; --bandtx:#FFFFFF;
+  --r:22px;
   --ff:'DM Sans',system-ui,-apple-system,sans-serif;
   --fd:'Space Grotesk','DM Sans',sans-serif;
   --fm:ui-monospace,'SF Mono','Roboto Mono','Courier New',monospace;
-  --r:14px;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--pa);color:var(--ink);font:400 17px/1.62 var(--ff);
@@ -563,7 +570,122 @@ section.alt .prova{background:var(--pa)}
 .faq .a p{margin:0 0 11px}
 .faq .a p:last-child{margin-bottom:0}
 
-:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+/* ════════════════════════════════════════════════════════════
+   A SÍNTESE, PARTE 2: as arestas
+
+   Os tokens la em cima ja viraram a pagina de preta pra creme. Aqui vem o que
+   a direcao "dura" trouxe: BORDA PRETA DE VERDADE e SOMBRA DESLOCADA, em vez
+   de sombra difusa. E o que a direcao "clara" trouxe: raio grande.
+
+   ⚠️ A sombra e SOLIDA e deslocada (x y 0), nunca borrada. Sombra borrada num
+   fundo claro some, e foi isso que deixou a pagina anterior sem peso.
+   ⚠️ A borda preta so vai em objeto que a pessoa PEGA: cartao, pilula, botao,
+   selo, video. Filete de separacao usa --hair, senao a pagina vira grade.
+   ════════════════════════════════════════════════════════════ */
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* ---- os objetos: borda preta e sombra solida ---- */
+.offer-box{border:2px solid var(--ink);border-radius:26px;
+  box-shadow:9px 9px 0 rgba(12,48,28,.55)}
+.gar,.hora,.prova,.passos ol{border:2px solid var(--ink);border-radius:var(--r);
+  box-shadow:4px 4px 0 var(--ink)}
+.player{border:2px solid var(--ink);border-radius:26px;box-shadow:7px 7px 0 rgba(25,23,20,.2)}
+.btn{border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.btn:hover,.btn:focus-visible{transform:translate(1px,1px);box-shadow:3px 3px 0 var(--ink)}
+
+/* ---- as seções ---- */
+body{background:var(--pa);color:var(--ink)}
+section.alt{background:var(--pa2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+header + section{border-top:0}
+.eyebrow{color:var(--mut)}
+.hero .parabens,.hero .lead,.sub,.nota-prova{color:var(--mut)}
+.hero .parabens b,.sub b{color:var(--ink)}
+
+/* o grifo amarelo: era um rabisco ambar em SVG, que sumia no creme */
+.risco,.u{background:linear-gradient(transparent 60%, var(--grifo) 60%, var(--grifo) 92%, transparent 92%);
+  background-size:auto;background-position:0 0;padding:0 .06em}
+.u svg{display:none}
+
+/* ---- a pílula dos passos ---- */
+.passos ol{background:var(--offc)}
+.passos li{color:var(--dim)}
+.passos .feito{color:var(--mut)}
+.passos .feito .n{background:var(--ink);color:var(--offc);border-color:var(--ink)}
+.passos .agora{background:var(--go);color:#fff}
+.passos .agora .n{background:#fff;color:var(--go);border-color:#fff}
+
+/* ---- o bloco de oferta: cor chapada verde, cartão branco em cima ---- */
+.oferta-sec{background:var(--go);background-image:none;color:#EAF4ED;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.oferta-sec .eyebrow{color:rgba(255,255,255,.72)}
+.oferta-sec h2{color:#fff}
+.oferta-sec .offer-box{background:var(--offc);color:var(--ink)}
+.oferta-sec .offer-box .promessa{border-bottom:2px solid var(--ink);color:var(--ink)}
+.oferta-sec .offer-box .conquistas li{color:#4A443B}
+.oferta-sec .offer-box .conquistas li b{color:var(--ink)}
+.oferta-sec .offer-box .conquistas li:before{border-color:var(--go)}
+.oferta-sec .offer-box .price .cur{color:var(--mut)}
+.oferta-sec .offer-box .price .val{color:var(--go)}
+.oferta-sec .offer-box .inst{color:var(--mut)}
+.oferta-sec .offer-box .inst b{color:var(--ink)}
+.oferta-sec .offer-box .obs,.oferta-sec .esc{color:var(--dim)}
+.oferta-sec .gar{background:var(--offc);color:var(--ink);
+  box-shadow:4px 4px 0 rgba(12,48,28,.5)}
+.oferta-sec .gar .selo{background:var(--go);color:#fff;border:2px solid var(--ink);
+  width:68px;height:68px}
+.oferta-sec .gar h3{color:var(--ink)}
+.oferta-sec .gar p{color:var(--mut)}
+
+/* ---- a saída do PIX, faixa dentro do cartão ---- */
+.pix{background:none;border-top:2px solid var(--ink);border-bottom:0;padding-bottom:10px}
+.pix .q{color:var(--ink)}
+.pix .btn{background:var(--alt);color:#fff}
+.pix .btn:hover,.pix .btn:focus-visible{background:var(--alt2);color:#fff}
+.pix .d{color:var(--dim)}
+
+/* ---- botão de comprar: verde em toda a página ---- */
+a.btn[href="#compra"]{background:var(--go);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+a.btn[href="#compra"]:hover,a.btn[href="#compra"]:focus-visible{background:var(--go2);color:#fff}
+
+/* ---- a conta em curva: os traços foram desenhados pra fundo preto ---- */
+.conta .r{color:var(--mut)}
+.conta.tres .r{color:var(--go);text-shadow:none}
+/* no creme o apagado de .32 sumia de vez; .55 ainda hierarquiza e continua legivel */
+html.js .conta:not(.viva){opacity:.55}
+.graf svg path[stroke="#2C2C33"]{stroke:var(--hair)}
+.eixo-y,.eixo-x{color:var(--dim)}
+.marca-lanc{color:var(--mut);opacity:1}
+
+/* ---- sessão, prova, faq ---- */
+.hora{background:var(--offc)}
+.hl{border-top:1px solid var(--hair)}
+.hl .min{color:var(--go)}
+.hl p{color:var(--mut)}
+.prova{background:var(--offc)}
+section.alt .prova{background:var(--offc)}
+.prova .antes{color:var(--mut)}
+.prova .link{color:var(--go);border-bottom-color:rgba(30,125,70,.35)}
+.prova .link:hover{border-bottom-color:var(--go)}
+.faq{border-top:2px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--hair)}
+.faq details:last-child{border-bottom:0}
+.faq summary:after{border-color:var(--go)}
+.faq .a{color:var(--mut)}
+
+/* ---- fecho e rodapé ---- */
+.depois{color:var(--dim)}
+footer{border-top:2px solid var(--ink);color:var(--mut)}
+
+/* ---- barra fixa ---- */
+.sticky{background:var(--offc);color:var(--ink);border-top:2px solid var(--ink)}
+.sticky .p small{color:var(--mut)}
+.sticky .btn{background:var(--go);color:#fff;border:2px solid var(--ink);box-shadow:none}
+.sticky .btn:hover{background:var(--go2);color:#fff}
+
+@media(max-width:760px){
+  .offer-box{box-shadow:6px 6px 0 rgba(12,48,28,.55)}
+  .gar,.hora,.prova,.passos ol,.btn{box-shadow:3px 3px 0 var(--ink)}
+}
 footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-family:var(--fd);
   font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
 
@@ -846,24 +968,24 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <h2>A conta que <span class="risco">ninguém</span> te conta</h2>
     </div>
     <div class="contas">
-      <div class="conta um" style="--cor:#93A6B8">
+      <div class="conta um" style="--cor:#7D8B99">
         <p class="q">Livro bom + lançamento ruim</p>
         <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F7184" stop-opacity=".13"></stop><stop offset="1" stop-color="#5F7184" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".20"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAB82D" stop-opacity=".26"></stop><stop offset="1" stop-color="#EAB82D" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#5F7184" stroke-width="1.5"></circle></svg>
+          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7D8B99" stop-opacity=".22"></stop><stop offset="1" stop-color="#7D8B99" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".30"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E7D46" stop-opacity=".30"></stop><stop offset="1" stop-color="#1E7D46" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#7D8B99" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#7D8B99" stroke-width="1.5"></circle></svg>
         </div>
         <p class="r">Ninguém descobre.</p>
       </div>
       <div class="conta dois" style="--cor:#E0574A">
         <p class="q">Livro ruim + lançamento bom</p>
         <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
+          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#7D8B99" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
         </div>
         <p class="r">Vende no lançamento. Depois, esquecido.</p>
       </div>
-      <div class="conta tres" style="--cor:#EAB82D">
+      <div class="conta tres" style="--cor:#1E7D46">
         <p class="q">Livro bom + lançamento bom</p>
         <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#EAB82D" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"></path><circle cx="638" cy="2" r="4.5" fill="#EAB82D" filter="drop-shadow(0 0 10px rgba(234,184,45,.85))"></circle></svg>
+          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#7D8B99" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#1E7D46" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(30,125,70,.35))"></path><circle cx="638" cy="2" r="4.5" fill="#1E7D46" filter="drop-shadow(0 0 10px rgba(30,125,70,.55))"></circle></svg>
         </div>
         <p class="r">Muda a vida do autor.</p>
       </div>
