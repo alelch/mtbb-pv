@@ -247,13 +247,6 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .hero h1 .u{position:relative;white-space:nowrap}
 .hero h1 .u svg{position:absolute;left:-2%;bottom:-.16em;width:104%;height:.3em;overflow:visible}
 .hero h1 .u path{fill:none;stroke:var(--acf);stroke-width:7;stroke-linecap:round}
-/* o parabens e a PRIMEIRA frase que a pessoa le depois de comprar. Estava em
-   15,5px, menor que o corpo da pagina, e sumia. Agora ele e maior que o corpo,
-   e a linha do pedido em aberto e a que carrega o peso. */
-.hero .parabens{margin:0 auto 20px;max-width:46ch;font-size:clamp(17px,2.2vw,19.5px);
-  line-height:1.5;color:var(--mut)}
-.hero .parabens b{color:var(--ink);font-size:1.06em}
-.hero .parabens b{color:var(--ink);font-weight:700}
 .hero .lead{margin:20px auto 0;max-width:46ch;color:var(--mut);font-size:17.5px}
 .cue{margin:26px 0 0;font-family:var(--fm);font-size:10.5px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--dim)}
@@ -735,8 +728,8 @@ body{background:var(--pa);color:var(--ink)}
 section.alt{background:var(--pa2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
 header + section{border-top:0}
 .eyebrow{color:var(--mut)}
-.hero .parabens,.hero .lead,.sub,.nota-prova{color:var(--mut)}
-.hero .parabens b,.sub b{color:var(--ink)}
+.hero .lead,.sub,.nota-prova{color:var(--mut)}
+.sub b{color:var(--ink)}
 
 /* o grifo amarelo: era um rabisco ambar em SVG, que sumia no creme */
 .risco,.u{background:linear-gradient(transparent 60%, var(--grifo) 60%, var(--grifo) 92%, transparent 92%);
@@ -912,15 +905,16 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       </ol>
     </nav>
 
-    <!-- O rótulo em versalete é CURTO por regra: uma frase inteira em caixa alta
-         de 11px com .22em de espacejamento não se lê, vira textura. A frase do
-         parabéns fica em corpo de texto normal, logo acima. -->
-    <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo.<br>
-    <b>Mas o seu pedido ainda não está finalizado.</b></p>
+    <!-- 23/09: o parágrafo de parabéns saiu. Com o aviso e a pílula acima
+         dele, ele dizia em texto o que os dois já dizem: a pílula marca o 90D
+         como cumprido e o passo 2 como o de agora, e o aviso diz que a página
+         não pode ser fechada. Três avisos do mesmo fato antes da H1.
+         E a H1 ganhou o "Agora,": com o parabéns fora, era ele que amarrava a
+         frase à compra que acabou de acontecer. Sem isso a H1 flutuava. -->
     <!-- As duas frases são do cliente. A pergunta abre um loop que só o vídeo
          fecha, por isso ela é a H1; "a gente, trabalhando junto" é a oferta e
          foi pro bloco do preço. -->
-    <h1>Você já sabe como lançar.<br>Mas o seu livro está <span class="u">bom de verdade<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8.4C34 3.6 78 2.4 116 4.2c26 1.2 52 3.6 82 1.4"/></svg></span>?</h1>
+    <h1>Agora, você já sabe como lançar.<br>Mas o seu livro está <span class="u">bom de verdade<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8.4C34 3.6 78 2.4 116 4.2c26 1.2 52 3.6 82 1.4"/></svg></span>?</h1>
     <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
     <!-- ============================================================
          VTURB — teste A/B das CINCO LEADS (id ab-6ab2d7d8f8d7b4fc8efca837).
