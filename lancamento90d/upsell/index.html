@@ -283,7 +283,6 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
      .btn       pílula, Space Grotesk 700, 21px 40px, raio 999
      .offer-box cartão arredondado de raio 20, centrado, com .promessa,
                 .conquistas (o check feito de bordas) e .price .val enorme
-     .faq       fios em cima e embaixo, seta que gira ao abrir
      section    80px de respiro; .w com 1120 e 22 de padding
    A diferença de lá pra cá é só a cor: no front a caixa da oferta é o verde
    sobre papel claro; aqui ela é o creme sobre o escuro. Em cada página ela é
@@ -693,19 +692,6 @@ section.alt .prova{background:var(--offc)}
    e os dois leem como o fim da pagina, nao como mais uma secao. */
 .fecho{padding:clamp(40px,5.5vw,64px) 0 clamp(34px,4.5vw,52px)}
 
-/* faq: o do front */
-.faq{max-width:720px;margin:36px auto 0;text-align:left;border-top:1px solid var(--ru)}
-.faq details{border-bottom:1px solid var(--ru)}
-.faq summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;position:relative;
-  font-family:var(--fd);font-weight:700;font-size:1.02rem;letter-spacing:-.02em}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:after{content:"";position:absolute;right:8px;top:27px;width:9px;height:9px;
-  border-right:2px solid var(--ac);border-bottom:2px solid var(--ac);transform:rotate(45deg);
-  transition:transform .22s}
-.faq details[open] summary:after{transform:rotate(-135deg);top:31px}
-.faq .a{padding:0 0 20px;color:var(--mut);max-width:64ch;font-size:.98rem;line-height:1.6}
-.faq .a p{margin:0 0 11px}
-.faq .a p:last-child{margin-bottom:0}
 
 /* ════════════════════════════════════════════════════════════
    A SÍNTESE, PARTE 2: as arestas
@@ -795,7 +781,7 @@ a.btn[href="#compra"]:hover,a.btn[href="#compra"]:focus-visible{background:var(-
 .eixo-y,.eixo-x{color:var(--dim)}
 .marca-lanc{color:var(--mut);opacity:1}
 
-/* ---- sessão, prova, faq ---- */
+/* ---- sessão e prova ---- */
 .hora{background:var(--offc)}
 .hl{border-top:1px solid var(--hair)}
 .hl .min{color:var(--go)}
@@ -805,11 +791,6 @@ section.alt .prova{background:var(--offc)}
 .prova .antes{color:var(--mut)}
 .prova .link{color:var(--go);border-bottom-color:rgba(30,125,70,.35)}
 .prova .link:hover{border-bottom-color:var(--go)}
-.faq{border-top:2px solid var(--ink)}
-.faq details{border-bottom:1px solid var(--hair)}
-.faq details:last-child{border-bottom:0}
-.faq summary:after{border-color:var(--go)}
-.faq .a{color:var(--mut)}
 
 /* ---- fecho e rodapé ---- */
 footer{border-top:2px solid var(--ink);color:var(--mut)}
@@ -1212,78 +1193,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </section>
 
-<section class="alt">
-  <div class="w">
-    <div class="meio">
-      <p class="eyebrow">Perguntas</p>
-      <h2>Antes de decidir</h2>
-    </div>
-    <div class="faq">
-      <details>
-        <summary>A sessão é com a Dany?</summary>
-        <div class="a"><p>Não. É com um especialista do time dela, com o critério dela.</p>
-        <p>Por isso custa isto, e não alguns milhares de reais.</p></div>
-      </details>
-      <details>
-        <summary>Vocês vão ler o meu livro?</summary>
-        <div class="a"><p>Não o manuscrito inteiro.</p>
-        <p>O que a gente olha é o que decide se ele vai ser encontrado, escolhido e lembrado:
-        para quem ele é, como se apresenta, como foi publicado e como vai ser lançado.</p>
-        <p>É aí que mora a diferença entre livro profissional e livro amador.</p></div>
-      </details>
-      <details>
-        <summary>Isso não é uma reunião de vendas disfarçada?</summary>
-        <!-- ⚠️ Esta resposta provava o ponto com a CONTA (cinquenta minutos contra
-             dez). Em 23/09 o cliente tirou toda menção a duração da página, e a
-             conta foi junto. O argumento agora é a ORDEM e a condição: a oferta
-             só existe no fim, e só se couber. É mais fraco que o número, então
-             se um dia a duração voltar, o número volta com ela. -->
-        <div class="a"><p>A sessão é sobre o seu caso, do começo ao fim.</p>
-        <p>No fim, se o que você precisa for algo que a gente faz, a gente conta.
-        Se não for, não conta.</p>
-        <p>E isso está dito antes de você pagar, não depois.</p></div>
-      </details>
-      <!-- 23/09: cinco perguntas novas, aprovadas pelo cliente. Eram três, e
-           três não cobre as objeções de uma sessão ao vivo.
-           ⚠️ Todas respondem SÓ com o que a página já afirma em outro lugar.
-           Nenhuma inventa regra operacional. Ver a pendência sobre as duas
-           que ficaram de fora. -->
-      <details>
-        <summary>Preciso ter o livro pronto?</summary>
-        <div class="a"><p>Não. A sessão funciona com o livro pronto, pela metade ou ainda só na cabeça.</p>
-        <p>O que muda é o que a gente olha: com o livro pronto, o que dá pra ajustar antes de lançar.
-        Ainda escrevendo, as decisões que você toma agora e que decidem o lançamento depois.</p></div>
-      </details>
-      <details>
-        <summary>Preciso mandar o livro antes?</summary>
-        <div class="a"><p>Não. Você manda o que já existe: título, sinopse, capa, o que estiver pronto.</p>
-        <p>Ninguém vai ler o manuscrito, e não é leitura crítica.</p></div>
-      </details>
-      <details>
-        <summary>E se o meu livro já foi lançado?</summary>
-        <div class="a"><p>Serve.</p>
-        <p>Metade dos autores que chegam aqui já publicou e não vendeu, e relançar é um dos caminhos
-        que a sessão avalia.</p></div>
-      </details>
-      <details>
-        <summary>Serve se eu quero publicar por uma editora?</summary>
-        <div class="a"><p>Serve.</p>
-        <p>O tipo de publicação certo pro seu caso é uma das coisas que sai da sessão, e editora é
-        um dos caminhos.</p></div>
-      </details>
-      <details>
-        <summary>Isso substitui o Lançamento 90D?</summary>
-        <div class="a"><p>Não. O 90D é o plano, e ele já é seu.</p>
-        <p>A sessão olha o seu livro de fora antes de você começar a executar esse plano.</p></div>
-      </details>
-    </div>
-  </div>
-</section>
 
-<!-- O ultimo pedido da pagina, colado no rodape. Depois das objecoes e depois
-     de tudo: quem chegou ate aqui leu as tres duvidas e continua na pagina.
+<!-- O ultimo pedido da pagina, colado no rodape, logo depois da conta.
      Verde, porque na direcao B verde e comprar, e aponta pra #compra, que e o
      card la em cima com o widget.
+     ⚠️ O FAQ SAIU EM 23/09 (cliente). A pagina acaba na conta e no botao. -->
      🚫 SEM linha embaixo explicando o que o botao faz. Eu tinha posto "leva
      voce de volta para a oferta" com o argumento de que o botao nao compra,
      ele rola. O cliente cortou, e esta certo: a pessoa clica e VE a tela
