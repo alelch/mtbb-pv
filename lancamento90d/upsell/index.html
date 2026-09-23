@@ -247,7 +247,10 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .hero h1 .u{position:relative;white-space:nowrap}
 .hero h1 .u svg{position:absolute;left:-2%;bottom:-.16em;width:104%;height:.3em;overflow:visible}
 .hero h1 .u path{fill:none;stroke:var(--acf);stroke-width:7;stroke-linecap:round}
-.hero .lead{margin:20px auto 0;max-width:46ch;color:var(--mut);font-size:17.5px}
+/* uma linha so no desktop: o max-width de 46ch quebrava a frase em duas.
+   No celular ela quebra de qualquer jeito, e ai o balance reparte melhor. */
+.hero .lead{margin:20px auto 0;max-width:none;color:var(--mut);
+  font-size:clamp(16px,1.6vw,17.5px);text-wrap:balance}
 .cue{margin:26px 0 0;font-family:var(--fm);font-size:10.5px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--dim)}
 
