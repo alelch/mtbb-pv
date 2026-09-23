@@ -345,7 +345,6 @@ header + section{border-top:1px solid var(--ru)}
 /* o card da oferta e escuro: os valores claros do .offer-box sao revertidos */
 .bloco-preco .offer-box{background:var(--pa2);color:var(--ink);
   border:1px solid var(--ru);box-shadow:none}
-.bloco-preco 
 /* a garantia, dentro do bloco: selo verde, porque garantia e do lado de comprar */
 /* ── A GARANTIA, VERSÃO CARIMBO (G2, cliente 23/09) ──────────
    O selo era verde sobre branco DENTRO de uma seção verde, e por isso sumia,
@@ -356,7 +355,7 @@ header + section{border-top:1px solid var(--ru)}
 /* ⚠️ o respiro entre o card e a garantia mora AQUI. A regra base
    `.gar{margin:0 auto}` vem depois no arquivo, entao sem esta linha as
    duas caixas encostam uma na outra. */
-.bloco-preco .gar{max-width:660px;margin:26px auto 0!important;padding:24px 28px;gap:24px}
+.bloco-preco .gar{max-width:660px;margin:26px auto 0;padding:24px 28px;gap:24px}
 .bloco-preco .gar .selo{position:relative;width:88px;height:88px;background:var(--ink);
   border:0;color:var(--grifo)}
 .bloco-preco .gar .selo:before{content:"";position:absolute;inset:5px;border-radius:50%;
