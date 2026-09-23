@@ -688,7 +688,6 @@ section.alt .prova{background:var(--offc)}
   font:700 14px/1 var(--fd);padding:11px 18px}
 @media(max-width:640px){ .vbox-x{top:auto;bottom:-52px} }
 
-.nota-prova{margin:26px auto 0;max-width:62ch;font-size:.88rem;color:var(--dim)}
 
 /* o ultimo pedido, colado no rodape. Sem fundo proprio: ele encosta no footer
    e os dois leem como o fim da pagina, nao como mais uma secao. */
@@ -736,7 +735,7 @@ body{background:var(--pa);color:var(--ink)}
 section.alt{background:var(--pa2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
 header + section{border-top:0}
 .eyebrow{color:var(--mut)}
-.hero .lead,.sub,.nota-prova{color:var(--mut)}
+.hero .lead,.sub{color:var(--mut)}
 .sub b{color:var(--ink)}
 
 /* o grifo amarelo: era um rabisco ambar em SVG, que sumia no creme */
@@ -1072,8 +1071,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         <span class="link">Ver o depoimento</span>
       </button>
     </div>
-    <p class="nota-prova">Alunos do Método.<br>
-    Os três descrevem a mesma coisa: alguém de fora olhando o caso deles.</p>
+    <!-- 🚫 AQUI TINHA UMA NOTA MINHA, e o cliente cortou: "Alunos do Método.
+         Os três descrevem a mesma coisa: alguém de fora olhando o caso deles."
+         Mesmo defeito da legenda que explicava o que o botão final fazia: eu
+         explicando o que a pessoa ACABOU DE VER. Ela viu três depoimentos e
+         entendeu que são três depoimentos. Não repor. -->
   </div>
 </section>
 
