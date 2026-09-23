@@ -235,8 +235,11 @@ section{padding:clamp(52px,7vw,80px) 0}
 /* o filete marca a virada de capítulo. Só a seção clara carrega os dois,
    e como elas se alternam, cada emenda tem exatamente um fio. */
 section.alt{background:var(--pa2);border-top:1px solid var(--ru);border-bottom:1px solid var(--ru)}
-/* herói e conta são os dois escuros seguidos: sem o fio a emenda some. */
-.conta-sec{border-top:1px solid var(--ru)}
+/* 23/09: a conta desceu pra depois do preço. Em cima dela agora está o campo
+   âmbar da oferta (emenda dura, dispensa fio) e embaixo o FAQ, que é `.alt` e
+   traz o próprio. Quem passou a encostar no herói foi a seção da hora, e são
+   dois escuros seguidos: o fio mudou de dono. */
+header + section{border-top:1px solid var(--ru)}
 /* as duas seções de oferta ganham TEMPERATURA, não tom: um calor âmbar
    nascendo no topo. É o único lugar da página onde se pede dinheiro, e
    ele tem que parecer de outra natureza, não só de outro cinza. */
@@ -431,7 +434,6 @@ html.js .conta:not(.viva){opacity:.32}
 .offer-box .obs{font-size:.8rem;color:rgba(20,19,18,.5);margin:0 0 26px}
 .offer-box .btn{box-shadow:0 10px 24px -14px rgba(20,19,18,.6)}
 .offer-box .btn:hover{box-shadow:0 16px 30px -14px rgba(20,19,18,.5)}
-.abate{margin:22px auto 0;max-width:52ch;font-size:.92rem;color:rgba(20,19,18,.62);line-height:1.55}
 .recusa{display:block;width:100%;margin:16px 0 0;background:none;border:0;font:400 .92rem/1.5 var(--ff);
   color:rgba(20,19,18,.55);text-decoration:underline;cursor:pointer}
 .esc{margin:22px auto 0;max-width:62ch;font-size:.88rem;line-height:1.66;color:rgba(20,19,18,.6)}
@@ -602,72 +604,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </header>
 
-<!-- ============================================================
-     A MATEMÁGICA (espinha da oferta e do vídeo, cliente 08/09).
-     Dá o crédito inteiro pro 90D ("você sabe lançar") e abre a única
-     variável que ele não toca: o livro. É a dor nº1 ("meu livro presta?")
-     voltando sem assustar, porque a fórmula fala de PERMANÊNCIA, não de
-     julgamento. "Esquecido" é vocabulário-âncora da marca (19 vídeos).
-     ⚠️ ESCOPO: "bom de verdade" NÃO é "bem escrito". A call não lê o
-     manuscrito. É o livro como projeto (profissional × amador, vocabulário da
-     Dany). A linha final e o FAQ "vocês vão ler o meu livro?" travam isso,
-     senão a pessoa espera leitura crítica e a hora vira reembolso.
-
-     ⚠️ A ORDEM DESTES DOIS BLOCOS É O ARGUMENTO, não é arrumação:
-     1º as três contas (o que está em jogo), 2º por que você não resolve
-     sozinho (e é aí que a oferta faz sentido). Invertido, a oferta chega
-     antes do motivo.
-
-     ⚠️ O TÍTULO NÃO PODE ENTREGAR O RESULTADO. Ele já dizia "só uma muda a
-     vida do autor" e três linhas abaixo a terceira conta dizia exatamente
-     "Muda a vida do autor.". Com o spoiler no título a conta vira repetição e
-     a escala não revela nada. O título enquadra; quem conclui é a conta.
-     Título atual é do cliente (14/09): "A conta que ninguém te conta". Uma
-     linha só, sem rótulo em versalete: a seção não precisa dos dois.
-     ⚠️ TUDO CENTRALIZADO. A página inteira é centralizada e esta seção não é
-     exceção. Quem hierarquiza aqui é a ESCALA, não o alinhamento. -->
-<section class="conta-sec">
-  <div class="w">
-    <div class="meio">
-      <!-- o rabisco vai em "ninguém": é a palavra que diz que a conta foi
-           ESCONDIDA de você, que é o gancho da seção. Em "te conta" ele
-           marcaria o trocadilho, que é mais bonitinho e menos útil; na
-           frase inteira ele desequilibra um título centrado. -->
-      <h2>A conta que <span class="risco">ninguém</span> te conta</h2>
-    </div>
-    <div class="contas">
-      <div class="conta um" style="--cor:#93A6B8">
-        <p class="q">Livro bom + lançamento ruim</p>
-        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F7184" stop-opacity=".13"></stop><stop offset="1" stop-color="#5F7184" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".20"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAB82D" stop-opacity=".26"></stop><stop offset="1" stop-color="#EAB82D" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#5F7184" stroke-width="1.5"></circle></svg>
-        </div>
-        <p class="r">Ninguém descobre.</p>
-      </div>
-      <div class="conta dois" style="--cor:#E0574A">
-        <p class="q">Livro ruim + lançamento bom</p>
-        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
-        </div>
-        <p class="r">Vende no lançamento. Depois, esquecido.</p>
-      </div>
-      <div class="conta tres" style="--cor:#EAB82D">
-        <p class="q">Livro bom + lançamento bom</p>
-        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
-          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#EAB82D" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"></path><circle cx="638" cy="2" r="4.5" fill="#EAB82D" filter="drop-shadow(0 0 10px rgba(234,184,45,.85))"></circle></svg>
-        </div>
-        <p class="r">Muda a vida do autor.</p>
-      </div>
-      <!-- ⚠️ Copy do cliente (14/09). Tirei só a vírgula entre sujeito e verbo
-           ("livro bom , está"), que era erro de digitação. As palavras são as dele.
-           ⚠️ Esta linha SUBSTITUIU o aviso de que o gráfico não é dado real. Se
-           alguém sentir falta, o aviso é o que impedia a curva de ser lida como
-           número medido. -->
-      <p class="nota-conta">A diferença para um livro bom está muitas vezes em
-      detalhes que o autor nem sabe que existem.</p>
-    </div>
-  </div>
-</section>
-
 <!-- 23/09: saíram daqui a seção "A pergunta do começo" e o PREÇO 1.
      A página estava longa e o cliente cortou. Agora existe UM bloco de preço
      só, o da recapitulação, que é o que tem o widget da Hotmart.
@@ -744,7 +680,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   <div class="w">
     <div class="meio">
       <p class="eyebrow">A gente, trabalhando junto no seu livro</p>
-      <h2>Você sai da hora<br><span class="serifa">com o próximo passo mapeado.</span></h2>
+      <h2>Você sai do seu diagnóstico<br><span class="serifa">com o próximo passo mapeado.</span></h2>
     </div>
     <div class="offer-box">
       <p class="promessa">Diagnóstico do Autor</p>
@@ -757,11 +693,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <div class="price"><span class="cur">12x de R$</span><span class="val">69,56</span></div>
       <p class="inst">ou <b>R$697 à vista</b></p>
       <p class="obs">* parcelado no cartão, com juros</p>
-      <!-- Veio do PREÇO 1, que saiu em 23/09. Mora ao lado do preço porque
-           é sobre ele. ⚠️ A regra do abatimento ainda não foi confirmada
-           (pendência 4): ela vem de quando esta call custava R$297. -->
-      <p class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697
-      são abatidos integralmente.</p>
       <!-- ============================================================
            HOTMART — Sales Funnel Widget (22/09). Ele renderiza o aceite E a
            recusa dentro de um iframe, com compra de UM CLIQUE: o comprador
@@ -814,6 +745,74 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
       <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar <span aria-hidden="true">&rarr;</span></a>
       <p class="d">Só para quem pagou no PIX. Quem pagou no cartão fecha no botão acima, em um clique.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     A MATEMÁGICA (espinha da oferta e do vídeo, cliente 08/09).
+     Dá o crédito inteiro pro 90D ("você sabe lançar") e abre a única
+     variável que ele não toca: o livro. É a dor nº1 ("meu livro presta?")
+     voltando sem assustar, porque a fórmula fala de PERMANÊNCIA, não de
+     julgamento. "Esquecido" é vocabulário-âncora da marca (19 vídeos).
+     ⚠️ ESCOPO: "bom de verdade" NÃO é "bem escrito". A call não lê o
+     manuscrito. É o livro como projeto (profissional × amador, vocabulário da
+     Dany). A linha final e o FAQ "vocês vão ler o meu livro?" travam isso,
+     senão a pessoa espera leitura crítica e a hora vira reembolso.
+
+     ⚠️ 23/09: ESTA SEÇÃO FOI MOVIDA PARA DEPOIS DO BLOCO DE PREÇO
+     (pedido do cliente). Antes ela vinha logo depois do herói, com a regra de
+     que a conta (o que está em jogo) precisava vir antes da oferta. A ordem
+     agora é outra: quem abre a necessidade é o VÍDEO, no topo, e a conta virou
+     o argumento de quem chegou até o preço e não comprou. Se um dia ela voltar
+     pra cima, é esta nota que explica por que ela estava lá.
+
+     ⚠️ O TÍTULO NÃO PODE ENTREGAR O RESULTADO. Ele já dizia "só uma muda a
+     vida do autor" e três linhas abaixo a terceira conta dizia exatamente
+     "Muda a vida do autor.". Com o spoiler no título a conta vira repetição e
+     a escala não revela nada. O título enquadra; quem conclui é a conta.
+     Título atual é do cliente (14/09): "A conta que ninguém te conta". Uma
+     linha só, sem rótulo em versalete: a seção não precisa dos dois.
+     ⚠️ TUDO CENTRALIZADO. A página inteira é centralizada e esta seção não é
+     exceção. Quem hierarquiza aqui é a ESCALA, não o alinhamento. -->
+<section class="conta-sec">
+  <div class="w">
+    <div class="meio">
+      <!-- o rabisco vai em "ninguém": é a palavra que diz que a conta foi
+           ESCONDIDA de você, que é o gancho da seção. Em "te conta" ele
+           marcaria o trocadilho, que é mais bonitinho e menos útil; na
+           frase inteira ele desequilibra um título centrado. -->
+      <h2>A conta que <span class="risco">ninguém</span> te conta</h2>
+    </div>
+    <div class="contas">
+      <div class="conta um" style="--cor:#93A6B8">
+        <p class="q">Livro bom + lançamento ruim</p>
+        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
+          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><defs><linearGradient id="gr0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F7184" stop-opacity=".13"></stop><stop offset="1" stop-color="#5F7184" stop-opacity="0"></stop></linearGradient><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0574A" stop-opacity=".20"></stop><stop offset="1" stop-color="#E0574A" stop-opacity="0"></stop></linearGradient><linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAB82D" stop-opacity=".26"></stop><stop offset="1" stop-color="#EAB82D" stop-opacity="0"></stop></linearGradient></defs><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101 L640 104 L1 104 Z" fill="url(#gr0)"></path><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="101" r="3.5" fill="var(--pa)" stroke="#5F7184" stroke-width="1.5"></circle></svg>
+        </div>
+        <p class="r">Ninguém descobre.</p>
+      </div>
+      <div class="conta dois" style="--cor:#E0574A">
+        <p class="q">Livro ruim + lançamento bom</p>
+        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
+          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99 L640 104 L1 104 Z" fill="url(#gr1)"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="2" stroke-linecap="round"></path><circle cx="632" cy="99" r="3.5" fill="var(--pa)" stroke="#E0574A" stroke-width="1.5"></circle></svg>
+        </div>
+        <p class="r">Vende no lançamento. Depois, esquecido.</p>
+      </div>
+      <div class="conta tres" style="--cor:#EAB82D">
+        <p class="q">Livro bom + lançamento bom</p>
+        <div class="graf"><span class="eixo-y">vendas</span><span class="marca-lanc">lançamento</span><span class="eixo-x">tempo</span>
+          <svg viewBox="0 0 640 108" fill="none" aria-hidden="true"><line x1="1" y1="2" x2="1" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="1" y1="104" x2="640" y2="104" stroke="#2C2C33" stroke-width="1"></line><line x1="92" y1="2" x2="92" y2="104" stroke="rgba(234,184,45,.34)" stroke-width="1" stroke-dasharray="4 5"></line><path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" fill="none" stroke="#5F7184" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" fill="none" stroke="#E0574A" stroke-width="1.5" stroke-opacity=".34" stroke-linecap="round"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2 L640 104 L1 104 Z" fill="url(#gr2)"></path><path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" fill="none" stroke="#EAB82D" stroke-width="2.6" stroke-linecap="round" filter="drop-shadow(0 0 9px rgba(234,184,45,.5))"></path><circle cx="638" cy="2" r="4.5" fill="#EAB82D" filter="drop-shadow(0 0 10px rgba(234,184,45,.85))"></circle></svg>
+        </div>
+        <p class="r">Muda a vida do autor.</p>
+      </div>
+      <!-- ⚠️ Copy do cliente (14/09). Tirei só a vírgula entre sujeito e verbo
+           ("livro bom , está"), que era erro de digitação. As palavras são as dele.
+           ⚠️ Esta linha SUBSTITUIU o aviso de que o gráfico não é dado real. Se
+           alguém sentir falta, o aviso é o que impedia a curva de ser lida como
+           número medido. -->
+      <p class="nota-conta">A diferença para um livro bom está muitas vezes em
+      detalhes que o autor nem sabe que existem.</p>
     </div>
   </div>
 </section>
@@ -1028,8 +1027,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      3. ✅ TESTE DE PRECO ENCERRADO antes de rodar, por decisao do cliente.
         O salesFunnel nao aceita `off=`, entao duas paginas mostrariam o mesmo
         preco. /upsell-b/ e gera-b.py foram apagados.
-     4. A regra do abatimento no D.E. precisa ser confirmada: veio da
-        especificação de quando esta call custava R$297 e era o Upsell 3.
+     4. ✅ O abatimento no D.E. SAIU da página em 23/09 (cliente). Ele
+        prometia devolver os R$697 a quem entrasse no Direcionamento
+        Estratégico depois, e a regra nunca foi confirmada: vinha de quando
+        esta call custava R$297 e era o Upsell 3. Promessa não confirmada
+        numa página de venda é passivo, não benefício.
      5. O formulário pós-compra não existe.
      6. Regra de reembolso combinada com a operação e configurada na Hotmart.
      7. Copy não passou pela Dany.
