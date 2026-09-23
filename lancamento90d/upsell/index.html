@@ -618,10 +618,12 @@ section.alt .prova{background:var(--offc)}
 .prova .play:before{content:"";position:absolute;left:21px;top:16px;
   border-left:17px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent}
 .prova:hover .play{transform:scale(1.08)}
-.prova .quem{display:block;margin:18px 22px 0;font-family:var(--fd);font-weight:700;
+.prova .quem{display:block;margin:18px 22px 0;color:var(--ink);font-family:var(--fd);font-weight:700;
   font-size:1.04rem;letter-spacing:-.02em}
 .prova .antes{display:block;margin:7px 22px 0;font-size:.92rem;color:var(--mut);line-height:1.45}
-.prova .depois{display:block;margin:11px 22px 0;font-size:1rem;line-height:1.45}
+/* o cartao e um <button>, entao sem cor explicita o texto herda o preto puro
+   do navegador em vez do tom da pagina. */
+.prova .depois{display:block;margin:11px 22px 0;font-size:1rem;line-height:1.45;color:var(--ink)}
 .prova .antes b,.prova .depois b{color:var(--ink);font-weight:700}
 .prova .link{display:block;margin:auto 22px 20px;padding-top:14px;color:var(--go);
   font-family:var(--fd);font-weight:700;font-size:.86rem}
@@ -644,9 +646,6 @@ section.alt .prova{background:var(--offc)}
 /* o ultimo pedido, colado no rodape. Sem fundo proprio: ele encosta no footer
    e os dois leem como o fim da pagina, nao como mais uma secao. */
 .fecho{padding:clamp(40px,5.5vw,64px) 0 clamp(34px,4.5vw,52px)}
-/* a linha sob o ultimo CTA: ela existe porque o botao NAO compra, ele rola de
-   volta pro card. Sem ela, quem clica espera checkout e leva um susto. */
-.depois{margin:14px auto 0;font-size:.84rem;color:var(--dim)}
 
 /* faq: o do front */
 .faq{max-width:720px;margin:36px auto 0;text-align:left;border-top:1px solid var(--ru)}
@@ -771,7 +770,6 @@ section.alt .prova{background:var(--offc)}
 .faq .a{color:var(--mut)}
 
 /* ---- fecho e rodapé ---- */
-.depois{color:var(--dim)}
 footer{border-top:2px solid var(--ink);color:var(--mut)}
 
 /* ---- barra fixa ---- */
@@ -1205,8 +1203,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      de tudo: quem chegou ate aqui leu as tres duvidas e continua na pagina.
      Verde, porque na direcao B verde e comprar, e aponta pra #compra, que e o
      card la em cima com o widget.
-     A linha embaixo existe porque este botao NAO compra: sem ela, quem clica
-     espera checkout e leva um susto ao ser rolado de volta pro topo.
+     🚫 SEM linha embaixo explicando o que o botao faz. Eu tinha posto "leva
+     voce de volta para a oferta" com o argumento de que o botao nao compra,
+     ele rola. O cliente cortou, e esta certo: a pessoa clica e VE a tela
+     rolar. Explicar antes e' ansiedade de quem escreve, nao necessidade de
+     quem le, e ainda enfraquece o CTA logo acima dele.
      ⚠️ O TEXTO E' UMA FRASE, NAO O NOME DO PRODUTO (cliente 23/09). "Quero o
      meu diagnostico" descrevia o que a pessoa compra; "quero saber o que eu
      nao estou vendo" e' o que ela quer. E e' a tese da pagina inteira dita na
@@ -1214,7 +1215,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section class="fecho">
   <div class="w meio">
     <a class="btn" href="#compra">Quero saber o que eu não estou vendo</a>
-    <p class="depois">Leva você de volta para a oferta, no topo da página.</p>
   </div>
 </section>
 
