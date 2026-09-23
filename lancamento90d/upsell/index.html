@@ -756,7 +756,10 @@ header + section{border-top:0}
   border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
 .oferta-sec .eyebrow{color:rgba(255,255,255,.72)}
 .oferta-sec h2{color:#fff}
-.oferta-sec .offer-box{background:var(--offc);color:var(--ink)}
+/* o margin-top de 38px do card existia pra separar ele do titulo da secao.
+   O titulo saiu em 23/09, entao a margem virou vao morto: 80px de padding da
+   secao mais 38 do card. */
+.oferta-sec .offer-box{background:var(--offc);color:var(--ink);margin-top:0}
 .oferta-sec .offer-box .promessa{border-bottom:2px solid var(--ink);color:var(--ink)}
 .oferta-sec .offer-box .conquistas li{color:#4A443B}
 .oferta-sec .offer-box .conquistas li b{color:var(--ink)}
@@ -1011,8 +1014,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section class="alt">
   <div class="w">
     <div class="meio">
-      <p class="eyebrow">Quem já passou</p>
-      <h2>Três autores que ouviram<br><span class="serifa">o que não estavam vendo.</span></h2>
+      <h2>Você sai do seu diagnóstico<br><span class="serifa">com o próximo passo mapeado</span></h2>
     </div>
     <!-- ============================================================
          OS TRÊS DEPOIMENTOS. Eram cartões só de texto, sem rosto nenhum, e o
@@ -1082,10 +1084,10 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <!-- PREÇO 2: aqui sim a lista completa, porque a página já explicou cada item -->
 <section class="oferta-sec">
   <div class="w">
-    <div class="meio">
-      <p class="eyebrow">A gente, trabalhando junto no seu livro</p>
-      <h2>Você sai do seu diagnóstico<br><span class="serifa">com o próximo passo mapeado.</span></h2>
-    </div>
+    <!-- 23/09: a seção de preço não tem mais título. Ele subiu para a seção
+         de prova, que agora promete o resultado; aqui embaixo vem só o
+         mecanismo, que é o card. Dois títulos dizendo a mesma coisa em
+         sequência era um deles sobrando. -->
     <div class="offer-box">
       <!-- ============================================================
            A ESCASSEZ, TRAZIDA DA VSL (23/09). O roteiro sempre disse "vinte
