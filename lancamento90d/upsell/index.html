@@ -535,18 +535,45 @@ html.js .conta:not(.viva){opacity:.32}
 .hl p b{color:var(--ink)}
 
 /* prova: os cartões do front */
-.provas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:36px 0 0;text-align:left}
-.prova{background:var(--pa2);border:1px solid var(--ru);border-radius:var(--r);padding:24px;
-  display:flex;flex-direction:column;gap:12px}
-section.alt .prova{background:var(--pa)}
-.prova .quem{margin:0;font-family:var(--fd);font-weight:700;font-size:1.02rem;letter-spacing:-.02em}
-.prova .antes{margin:0;font-size:.93rem;color:var(--mut);line-height:1.5}
-.prova .depois{margin:0;font-size:1rem;line-height:1.5}
+.provas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0 0;text-align:left}
+/* o cartao inteiro e o botao: a area de clique e o cartao, nao um link de 14px */
+.prova{appearance:none;font:inherit;text-align:left;cursor:pointer;
+  background:var(--offc);border:2px solid var(--ink);border-radius:var(--r);padding:0;
+  box-shadow:4px 4px 0 var(--ink);display:flex;flex-direction:column;
+  transition:transform .14s ease,box-shadow .14s ease}
+.prova:hover,.prova:focus-visible{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+section.alt .prova{background:var(--offc)}
+.prova .thumb{position:relative;display:block;border-bottom:2px solid var(--ink);
+  border-radius:calc(var(--r) - 2px) calc(var(--r) - 2px) 0 0;overflow:hidden;line-height:0}
+.prova .thumb img{width:100%;height:auto;display:block}
+/* o play: preto com o triangulo vazado, pra nao virar o vermelho do YouTube */
+.prova .play{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;
+  border-radius:50%;background:var(--ink);border:2px solid #fff;
+  box-shadow:0 8px 20px -8px rgba(0,0,0,.6);transition:transform .14s ease}
+.prova .play:before{content:"";position:absolute;left:21px;top:16px;
+  border-left:17px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent}
+.prova:hover .play{transform:scale(1.08)}
+.prova .quem{display:block;margin:18px 22px 0;font-family:var(--fd);font-weight:700;
+  font-size:1.04rem;letter-spacing:-.02em}
+.prova .antes{display:block;margin:7px 22px 0;font-size:.92rem;color:var(--mut);line-height:1.45}
+.prova .depois{display:block;margin:11px 22px 0;font-size:1rem;line-height:1.45}
 .prova .antes b,.prova .depois b{color:var(--ink);font-weight:700}
-.prova .link{margin-top:auto;padding-top:4px;color:var(--ac);font-family:var(--fd);font-weight:700;
-  font-size:.84rem;letter-spacing:.02em;text-decoration:none;align-self:flex-start;
-  border-bottom:2px solid rgba(234,184,45,.35);padding-bottom:3px}
-.prova .link:hover{border-bottom-color:var(--ac)}
+.prova .link{display:block;margin:auto 22px 20px;padding-top:14px;color:var(--go);
+  font-family:var(--fd);font-weight:700;font-size:.86rem}
+.prova .link:after{content:" →"}
+
+/* ── a janela do vídeo. Ninguém sai da página durante um upsell. ── */
+.vbox{position:fixed;inset:0;z-index:80;display:none;place-content:center;
+  background:rgba(12,10,8,.9);padding:20px}
+.vbox.on{display:grid}
+.vbox-in{position:relative;width:min(880px,94vw);aspect-ratio:16/9;
+  border:2px solid var(--ink);border-radius:18px;overflow:hidden;background:#000}
+.vbox-in iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vbox-x{position:absolute;top:-52px;right:0;appearance:none;background:var(--offc);
+  color:var(--ink);border:2px solid var(--ink);border-radius:999px;cursor:pointer;
+  font:700 14px/1 var(--fd);padding:11px 18px}
+@media(max-width:640px){ .vbox-x{top:auto;bottom:-52px} }
+
 .nota-prova{margin:26px auto 0;max-width:62ch;font-size:.88rem;color:var(--dim)}
 
 /* o ultimo pedido, colado no rodape. Sem fundo proprio: ele encosta no footer
@@ -831,27 +858,41 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <p class="eyebrow">Quem já passou</p>
       <h2>Três autores que ouviram<br><span class="serifa">o que não estavam vendo.</span></h2>
     </div>
+    <!-- ============================================================
+         OS TRÊS DEPOIMENTOS. Eram cartões só de texto, sem rosto nenhum, e o
+         link mandava a pessoa EMBORA pra o YouTube, no meio de um upsell que
+         diz "se você fechar, a vaga fica para o próximo".
+         Agora: a miniatura real do vídeo de cada um (rosto + o livro dele +
+         o nome, todas da mesma família), e o clique abre o vídeo NUMA JANELA
+         AQUI. Ninguém sai da página.
+         As três frases foram emparelhadas: uma linha de situação e uma aspa.
+         Antes tinham tamanhos diferentes e o bloco lia torto.
+         🚫 SEM loading="lazy" nas três. São 28 KB cada e são a PROVA: chegar
+         atrasada numa página de decisão é o mesmo que não chegar.
+         ============================================================ -->
     <div class="provas">
-      <div class="prova">
-        <p class="quem">Robson Leite</p>
-        <p class="antes">Livro pronto, <b>conteúdo elogiado</b> por quem leu.</p>
-        <p class="depois">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</p>
-        <a class="link" href="https://youtu.be/hW7NjsY2WrA" target="_blank" rel="noopener">Ver depoimento ↗</a>
-      </div>
-      <div class="prova">
-        <p class="quem">Cláudio Yamaguchi</p>
-        <p class="antes">Anos escrevendo sobre comportamento humano.<br>
-        <b>“Não é isso que eu queria fazer.”</b></p>
-        <p class="depois">Um toque de fora: <b>“coloca mais você”</b>.<br>
-        Hoje os leitores dizem: “eu vejo você nessa obra”.</p>
-        <a class="link" href="https://youtu.be/6mhrEgy2Uvc" target="_blank" rel="noopener">Ver depoimento ↗</a>
-      </div>
-      <div class="prova">
-        <p class="quem">Luiz Valério</p>
-        <p class="antes">Nove livros publicados.<br><b>Nenhum pensado para vender.</b></p>
-        <p class="depois">Ligou para a editora no meio da produção: <b>“terei de refazer a capa, a contracapa e a sinopse”</b>.</p>
-        <a class="link" href="https://youtu.be/6pMViMbw6GA" target="_blank" rel="noopener">Ver depoimento ↗</a>
-      </div>
+      <button class="prova" data-vid="hW7NjsY2WrA" data-quem="Robson Leite">
+        <span class="thumb"><img src="../assets/depo-robson.webp" alt="Robson Leite" width="640" height="360"><span class="play" aria-hidden="true"></span></span>
+        <span class="quem">Robson Leite</span>
+        <span class="antes">Livro pronto e <b>elogiado</b> por quem leu.</span>
+        <span class="depois">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</span>
+        <span class="link">Ver o depoimento</span>
+      </button>
+      <button class="prova" data-vid="6mhrEgy2Uvc" data-quem="Cláudio Yamaguchi">
+        <span class="thumb"><img src="../assets/depo-yamaguchi.webp" alt="Cláudio Yamaguchi" width="640" height="360"><span class="play" aria-hidden="true"></span></span>
+        <span class="quem">Cláudio Yamaguchi</span>
+        <span class="antes">Anos escrevendo sobre <b>comportamento humano</b>.</span>
+        <span class="depois">“<b>Coloca mais você.</b> Hoje os leitores dizem: eu vejo você nessa obra.”</span>
+        <span class="link">Ver o depoimento</span>
+      </button>
+      <button class="prova" data-vid="6pMViMbw6GA" data-quem="Luiz Valério">
+        <span class="thumb"><img src="../assets/depo-valerio.webp" alt="Luiz Valério" width="640" height="360"><span class="play" aria-hidden="true"></span></span>
+        <span class="quem">Luiz Valério</span>
+        <span class="antes">Nove livros publicados. <b>Nenhum pensado para vender.</b></span>
+        <span class="depois">“Vou ter de refazer <b>a capa, a contracapa e a sinopse</b>.”</span>
+        <span class="link">Ver o depoimento</span>
+      </button>
+    </div>
     </div>
     <p class="nota-prova">Alunos do Método.<br>
     A leitura que alguém fez do caso deles é a que acontece na sua sessão.</p>
@@ -1042,6 +1083,10 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </section>
 
+<div class="vbox" id="vbox" role="dialog" aria-modal="true" aria-label="Depoimento em vídeo">
+  <div class="vbox-in" id="vbox-in"><button class="vbox-x" type="button">Fechar ✕</button></div>
+</div>
+
 <footer>
   <div class="w">The Book Business · Dany Sakugawa</div>
 </footer>
@@ -1190,6 +1235,35 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     addEventListener('resize', pedir);
     acender();
   }
+
+  /* ── a janela do depoimento ──────────────────────────────
+     Abre o vídeo AQUI. Mandar a pessoa pro YouTube no meio de um upsell que
+     diz "se você fechar, a vaga fica para o próximo" é perder ela de vez.
+     O iframe só nasce no clique (nada do YouTube carrega antes) e morre no
+     fechamento, que é o que para o som. */
+  var vbox = document.getElementById('vbox'), vin = document.getElementById('vbox-in');
+  function fecharVideo(){
+    if (!vbox) return;
+    vbox.classList.remove('on');
+    var f = vin.querySelector('iframe'); if (f) f.remove();
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('click', function(ev){
+    var b = ev.target.closest('.prova');
+    if (b && vbox){
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube.com/embed/' + b.getAttribute('data-vid') + '?autoplay=1&rel=0';
+      f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
+      f.setAttribute('allowfullscreen','');
+      f.title = 'Depoimento de ' + (b.getAttribute('data-quem') || '');
+      vin.appendChild(f);
+      vbox.classList.add('on');
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+    if (ev.target.closest('.vbox-x') || ev.target === vbox) fecharVideo();
+  });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape') fecharVideo(); });
 
   var fita = document.getElementById('prog');
   if (fita){
