@@ -643,7 +643,12 @@ body{background:var(--pa);color:var(--ink)}
 section.alt{background:var(--pa2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
 header + section{border-top:0}
 .eyebrow{color:var(--mut)}
-.hero .lead,.sub{color:var(--mut)}
+/* ⚠️ A .hero .lead SAIU DAQUI (23/09). Esta regra vinha DEPOIS da que
+   pinta a chamada de preto, com a MESMA especificidade, entao era ela que
+   mandava e a chamada aparecia num cinza que ninguem tinha pedido. Mesmo
+   tipo de bug que ja quebrou o pill e o selo da garantia: trocar o valor
+   num lugar nao basta, tem que procurar o seletor repetido. */
+.sub{color:var(--mut)}
 .sub b{color:var(--ink)}
 
 /* o grifo amarelo: era um rabisco ambar em SVG, que sumia no creme */
