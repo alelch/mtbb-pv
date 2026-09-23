@@ -182,8 +182,13 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 /* a seta mora no VÃO entre os passos, não dentro deles: dentro, ela entraria
    na pílula verde do passo de agora e viraria parte do botão. Por isso o gap
    cresceu de 6 pra 24 e ela é posicionada no meio dele. */
-.passos li + li:before{content:"→";position:absolute;left:-18px;top:50%;
-  transform:translateY(-50%);color:var(--dim);font-weight:400;font-size:15px;line-height:1}
+/* o separador e' um CARET, nao a seta de texto (cliente 23/09). Desenhado com
+   duas bordas rotacionadas, e nao com o caractere ">": o caractere muda de
+   desenho e de peso conforme a fonte disponivel, e a borda e' sempre a mesma.
+   Verde, que e a cor do caminho ate a compra. */
+.passos li + li:before{content:"";position:absolute;left:-19px;top:50%;
+  width:7px;height:7px;border-right:2.2px solid var(--go);border-top:2.2px solid var(--go);
+  transform:translateY(-50%) rotate(45deg)}
 .passos .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-content:center;
   font:700 12.5px/1 var(--ff);border:1.5px solid currentColor}
 .passos .t{overflow:hidden;text-overflow:ellipsis}
@@ -195,7 +200,7 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 @media(max-width:760px){
   .passos{margin-bottom:20px}
   .passos ol{width:100%;padding:5px;gap:16px}
-  .passos li + li:before{left:-12px;font-size:13px}
+  .passos li + li:before{left:-13px;width:6px;height:6px;border-width:2px}
   .passos li{padding:10px 8px;font-size:12px;gap:7px}
   .passos .n{width:21px;height:21px;font-size:11px}
   /* os tres nomes nao cabem: os passos feito e futuro viram so o numero e
