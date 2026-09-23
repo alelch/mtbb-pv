@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/webp" href="../favicon.webp">
 
-<title>Diagnóstico do Autor | The Book Business</title>
+<title>Diagnóstico + Plano de Ação | The Book Business</title>
 <meta name="description" content="Uma sessão de até 1h30 no Zoom com um especialista do time da Dany Sakugawa, olhando o seu caso, para você sair sabendo o próximo passo certo.">
 <!-- Página de upsell: nunca indexada, nunca acessada direto. Só existe dentro
      do fluxo de quem acabou de comprar o Lançamento 90D. -->
@@ -877,7 +877,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
              que explicava que a oferta so existe aqui (a pagina inteira ja diz
              isso) e a da agenda do time. Ficou so a consequencia, que e a parte
              que age: se fechar, perde. -->
-        <p class="esc">Esta oferta não está no site e não é vendida avulsa.</p>
+        <!-- 23/09: e aqui que a pagina NOMEIA o produto. O nome saiu do card com
+             a lista de entregas, e a pagina ficou vendendo uma coisa sem
+             nunca dizer como ela se chama. O nome e o MESMO da Hotmart
+             ("Diagnostico + Plano de Acao"), pra bater com o checkout. -->
+        <p class="esc">O Diagnóstico + Plano de Ação não está no site e não é vendido avulso.</p>
       </div>
 
       <!-- A GARANTIA, colada no preco. Ela morava numa secao propria logo
@@ -960,7 +964,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section class="alt">
   <div class="w">
     <div class="meio">
-      <h2>Você sai do seu diagnóstico<br>com o próximo passo mapeado</h2>
+      <h2>Você sai do seu diagnóstico<br>com os próximos passos mapeados</h2>
     </div>
     <!-- ============================================================
          OS TRÊS DEPOIMENTOS. Eram cartões só de texto, sem rosto nenhum, e o
@@ -1128,7 +1132,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <!-- Barra fixa, só no mobile. No desktop os CTAs da página dão conta;
      no celular a distância entre eles é de várias telas. -->
 <div class="sticky" id="sticky">
-  <a class="btn" href="#compra">Adicionar ao pedido</a>
+  <a class="btn" href="#compra">Quero garantir minha vaga</a>
 </div>
 
 <!-- ============================================================
@@ -1177,17 +1181,18 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     try {
       checkoutElements.init('salesFunnel', {
         payment: {
-          /* A lib expoe on_payment_approve -> payment.onSuccess. Vale mais que
-             o antigo InitiateCheckout no clique: aqui a compra ACONTECEU.
-             🚫 De proposito NAO disparamos fbq('Purchase'): a campanha do Meta
-             otimiza na conversao por product_id (Compra Diagnostico, 8457576),
-             que vem da Hotmart. Disparar aqui tambem contaria a mesma venda
-             duas vezes. O formato do payload nao pode ser conferido antes de
-             existir compra real, entao ele vai cru pro nosso tracker. */
-          onSuccess: function(dados){
-            try { if (window.MTBB_TRACK) MTBB_TRACK('upsell_compra',
-              {produto:'L90D-DIAG', payload:dados}); } catch(e){}
-          },
+          /* 🚫 ESTA PAGINA NAO REGISTRA A VENDA, e e' de proposito (23/09).
+             Aqui existia uma chamada a MTBB_TRACK que NUNCA rodou: a funcao
+             nao e' definida em lugar nenhum desta pagina, entao o `if` sempre
+             deu falso e o codigo so fingia gravar.
+             Quem registra a venda e' o webhook da Hotmart -> n8n -> Supabase,
+             que e' o mesmo caminho de todos os outros produtos. E a variante
+             da VTurb chega junto: o `xcod` da pagina entra na query do iframe
+             do widget, entao ela viaja com a compra sem precisar de JS nosso.
+             🚫 Tambem NAO disparamos fbq('Purchase'): a campanha otimiza na
+             conversao por product_id (8457576) que vem da Hotmart, e disparar
+             aqui contaria a mesma venda duas vezes. */
+          onSuccess: function(){},
           onError: function(erro){ console.error('Hotmart: pagamento', erro); }
         }
       }).mount(alvo);
