@@ -251,6 +251,19 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    No celular ela quebra de qualquer jeito, e ai o balance reparte melhor. */
 /* a chamada do video e' a unica linha entre o aviso e o play, entao ela e'
    grande e preta, nao legenda cinza (cliente 23/09, com referencia) */
+/* ── O GRIFO DA CHAMADA (cliente 23/09) ──
+   A frase INTEIRA marcada no amarelo da marca, nao so um pedaco. Era a unica
+   linha entre o aviso e o play e nao tinha nenhum tratamento; de dez opcoes o
+   cliente escolheu essa, na versao sem animacao.
+   ⚠️ Tem que ser um <span> INLINE. No <h1>, que e bloco, o fundo pintaria a
+   largura inteira do container em vez da largura do texto.
+   box-decoration-break:clone faz cada linha ganhar a propria faixa quando a
+   frase quebra no celular; sem isso a marca vira um retangulo so, por baixo
+   das tres linhas e das pontas vazias. */
+.hero .lead .marcada{background:linear-gradient(var(--grifo),var(--grifo)) no-repeat;
+  background-size:100% .62em;background-position:0 .62em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+
 /* ⚠️ max-width solto: o cliente pediu esta linha EM UMA LINHA so no desktop.
    ⚠️ PROPORCAO DA REFERENCIA (cliente 23/09): a chamada tem uns 55% do
    tamanho do "NAO FECHE". Com 55% e 70 caracteres contra 34, ela sai um pouco
@@ -809,7 +822,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
          aviso e a chamada pro video, e nada disputa com o play.
          Quem abre o loop agora e' o proprio video. Esta linha virou a H1 da
          pagina, que e' o unico titulo que sobrou aqui em cima. -->
-    <h1 class="lead">Assista ao vídeo abaixo e descubra como acelerar em 10x seus resultados</h1>
+    <h1 class="lead"><span class="marcada">Assista ao vídeo abaixo e descubra como acelerar em 10x seus resultados</span></h1>
     <!-- ============================================================
          VTURB — teste A/B das CINCO LEADS (id ab-6ab2d7d8f8d7b4fc8efca837).
          Cinco variantes com 20% cada, sticky por 7 dias (ttl 604800s).
