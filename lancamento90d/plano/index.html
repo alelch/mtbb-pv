@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Checklist semana a semana do plano de 90 dias para lançamento de livro.">
+<title>Lançamento em 90 Dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --papel:#ffffff;
+  --creme:#fffae5;
+  --tinta:#0a0a0a;
+  --tinta-72:rgba(10,10,10,.72);
+  --tinta-55:rgba(10,10,10,.55);
+  --tinta-32:rgba(10,10,10,.32);
+  --laranja:#fe7743;
+  --linha:rgba(10,10,10,.1);
+  --linha-2:rgba(10,10,10,.26);
+  --tipo:'Montserrat','Helvetica Neue',Arial,sans-serif;
+  --gutter:22px;
+  --col:820px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--tipo);
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.env{max-width:var(--col);margin:0 auto;padding-inline:var(--gutter)}
+h1,h2,h3,h4{margin:0}
+a{color:inherit}
+button{font-family:inherit;font-size:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--laranja);outline-offset:3px}
+
+/* o padrão do deck: caixa alta, peso 900, entrelinha curta, tracking negativo */
+.d{font-weight:900;text-transform:uppercase;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+
+/* ---------- marca ---------- */
+.logo{font-weight:900;text-transform:uppercase;letter-spacing:-.075em;line-height:.8;font-size:15px}
+.logo span{display:block}
+.logo .b{color:var(--laranja)}
+
+/* ---------- abertura ---------- */
+.abre{padding-block:52px 0}
+.logo.topo{font-size:clamp(20px,3.2vw,28px)}
+.abre .sub{margin:24px 0 0;font-size:15px;line-height:1.55;color:var(--tinta-72);max-width:52ch}
+
+/* ---------- console de datas ---------- */
+.console{margin-top:30px;border-top:1px solid var(--linha-2);border-bottom:1px solid var(--linha-2);padding-block:26px 28px}
+.console-grade{display:grid;grid-template-columns:minmax(220px,290px) 1fr;gap:26px 40px;align-items:start}
+.rot{font-weight:700;text-transform:uppercase;letter-spacing:-.01em;font-size:11px;color:var(--tinta-55)}
+.campo-data{margin-top:9px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+input[type=date]{
+  font-family:var(--tipo);font-size:14.5px;font-weight:600;
+  background:var(--papel);color:var(--tinta);
+  border:1px solid var(--linha-2);border-radius:0;padding:8px 10px;min-width:160px;
+}
+input[type=date]:hover{border-color:var(--laranja)}
+.contagem{margin-top:18px;font-weight:900;text-transform:uppercase;letter-spacing:-.05em;line-height:.92;font-size:26px;color:var(--tinta-32)}
+.contagem.viva{color:var(--laranja)}
+.contagem small{display:block;font-weight:500;font-size:12.5px;letter-spacing:0;color:var(--tinta-72);text-transform:none;margin-top:10px;line-height:1.5}
+.datas-chave{display:flex;flex-direction:column}
+.dk{display:grid;grid-template-columns:1fr auto;gap:14px;padding:9px 0;align-items:baseline;border-top:1px solid var(--linha)}
+.dk:first-child{border-top:0;padding-top:0}
+.dk b{font-weight:500;font-size:13px;color:var(--tinta-72)}
+.dk span{font-variant-numeric:tabular-nums;font-size:13px;font-weight:700}
+.dk.destaque b{color:var(--tinta);font-weight:700}
+.dk.destaque span{color:var(--laranja)}
+
+/* ---------- faixas de fase ---------- */
+.faixa{margin-top:44px;padding-block:24px 26px;border-top:2px solid var(--tinta)}
+.faixa .olho{font-weight:700;text-transform:uppercase;letter-spacing:-.01em;font-size:11px;color:var(--tinta-55);margin-bottom:10px}
+.faixa h2{font-size:clamp(26px,5vw,38px)}
+.faixa p{margin:12px 0 0;font-size:14px;line-height:1.55;color:var(--tinta-72);max-width:60ch}
+.faixa-venda h2,.faixa-venda .olho{color:var(--laranja)}
+.faixa-lanc{background:var(--laranja);color:var(--tinta);border-top:0;padding:26px var(--gutter) 30px}
+.faixa-lanc .env{padding-inline:0}
+.faixa-lanc .olho{color:rgba(10,10,10,.65)}
+.faixa-lanc p{color:rgba(10,10,10,.82)}
+.faixa-pos h2{color:var(--tinta-55)}
+
+/* ---------- seções ---------- */
+.semana{padding-block:26px;border-top:1px solid var(--linha-2);scroll-margin-top:20px}
+.sem-cab{display:grid;grid-template-columns:1fr auto;gap:10px 20px;align-items:baseline;margin-bottom:16px}
+.sem-tag{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:11.5px;margin-bottom:8px}
+.sem-tag b{font-weight:800;text-transform:uppercase;letter-spacing:-.01em;color:var(--laranja)}
+.sem-tag span{color:var(--tinta-55);font-variant-numeric:tabular-nums}
+.sem-titulo{font-size:21px}
+.contador{font-weight:800;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--tinta-55)}
+.contador.ok{color:var(--laranja)}
+.intro{margin:0 0 16px;font-size:14px;line-height:1.55;color:var(--tinta-72);max-width:62ch}
+
+/* ---------- tarefas ---------- */
+.lista{list-style:none;margin:0;padding:0}
+.lista .sub{list-style:none;margin:5px 0 2px;padding:0 0 0 31px}
+.tarefa{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;padding:8px 0}
+.sub .tarefa{padding:6px 0}
+.sub .tarefa .txt{font-size:14px;color:var(--tinta-72)}
+.marca-cx{
+  appearance:none;-webkit-appearance:none;margin:1px 0 0;flex:none;
+  width:20px;height:20px;border:1.5px solid var(--tinta-32);background:var(--papel);
+  cursor:pointer;display:grid;place-content:center;transition:border-color .15s,background .15s;
+}
+.marca-cx:hover{border-color:var(--laranja)}
+.marca-cx::after{content:'';width:9px;height:5px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) scale(0);transition:transform .15s}
+.marca-cx:checked{background:var(--laranja);border-color:var(--laranja)}
+.marca-cx:checked::after{transform:rotate(-45deg) scale(1)}
+.sub .marca-cx{width:16px;height:16px}
+.sub .marca-cx::after{width:8px;height:4px;border-width:2px}
+.txt{font-size:14.5px;line-height:1.4;cursor:pointer;font-weight:500}
+.tarefa.feita .txt{color:var(--tinta-32);text-decoration:line-through;text-decoration-thickness:1px}
+.nota{display:block;font-size:13px;line-height:1.45;color:var(--tinta-55);margin-top:2px;font-weight:400;max-width:68ch}
+.tarefa.feita .nota{color:var(--tinta-32)}
+
+.apoios{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  font-size:11px;font-weight:600;line-height:1.2;padding:4px 8px;
+  border:1px solid var(--linha-2);color:var(--tinta-72);background:var(--papel);
+}
+.chip::before{content:'';width:5px;height:5px;flex:none;background:var(--tinta-32)}
+.chip:hover{border-color:var(--laranja);color:var(--laranja)}
+.chip:hover::before{background:var(--laranja)}
+.chip.aula::before{background:var(--laranja)}
+
+/* ---------- post da semana ---------- */
+.post{margin-top:18px;background:var(--creme);padding:16px 18px}
+.post .et{font-weight:700;text-transform:uppercase;letter-spacing:-.01em;font-size:10.5px;color:var(--laranja)}
+.post .frase{font-weight:900;text-transform:uppercase;letter-spacing:-.04em;line-height:1.1;font-size:17px;margin-top:6px}
+.post .nota{color:var(--tinta-72);margin-top:5px}
+.post ul{margin:9px 0 0;padding-left:18px;font-size:14px;color:var(--tinta-72)}
+.post ul li{margin-bottom:4px}
+.post .chip{background:transparent}
+
+.lembrete{margin:14px 0 4px;border:2px solid var(--laranja);padding:14px 16px;font-size:14.5px;line-height:1.5;font-weight:600}
+.lembrete b{display:block;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;font-size:10.5px;color:var(--laranja);margin-bottom:6px}
+
+.bloco-foco{margin-top:24px}
+.bloco-foco:first-of-type{margin-top:0}
+.bloco-foco > h4{font-weight:900;text-transform:uppercase;letter-spacing:-.03em;font-size:13px;color:var(--laranja);margin-bottom:10px}
+
+/* ---------- regras ---------- */
+.regras{margin-top:44px;border-top:2px solid var(--tinta);padding-block:28px 0}
+.regras h2{font-size:clamp(22px,4.4vw,32px);margin-bottom:20px}
+.regras .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px 28px}
+.regras .it b{display:block;font-weight:900;text-transform:uppercase;letter-spacing:-.035em;font-size:14px;color:var(--laranja);margin-bottom:5px;line-height:1.05}
+.regras .it span{font-size:13px;line-height:1.5;color:var(--tinta-72)}
+
+/* ---------- papel ---------- */
+.papel{margin-top:40px;border-top:1px solid var(--linha-2);padding-block:26px 32px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn{border:0;padding:12px 20px;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:-.02em;cursor:pointer;display:inline-flex;align-items:center;text-decoration:none;line-height:1}
+.btn-cheio{background:var(--laranja);color:var(--tinta)}
+.btn-cheio:hover{background:var(--tinta);color:var(--papel)}
+.btn-vazio{background:transparent;color:var(--tinta);border:1px solid var(--linha-2)}
+.btn-vazio:hover{border-color:var(--laranja);color:var(--laranja)}
+.btn-texto{background:none;border:0;padding:0;font-size:12px;font-weight:600;color:var(--tinta-55);cursor:pointer;text-decoration:underline;text-underline-offset:3px;margin-left:auto}
+.btn-texto:hover{color:var(--laranja)}
+.papel p{margin:0;flex:1 1 100%;font-size:12.5px;line-height:1.5;color:var(--tinta-55);max-width:60ch}
+
+.rodape{padding-block:20px 40px;border-top:1px solid var(--linha);font-size:11.5px;color:var(--tinta-55);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.rodape a{font-weight:600}
+.rodape a:hover{color:var(--laranja)}
+
+@media (max-width:640px){
+  .console-grade{grid-template-columns:1fr}
+  .sem-cab{grid-template-columns:1fr}
+  .btn-texto{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+@media print{
+  body{font-size:10.5pt}
+  .papel,.btn-texto{display:none!important}
+  .faixa-lanc{background:#fff;color:#000;border-top:2px solid #000;padding-inline:0}
+  .faixa-lanc .olho{color:var(--tinta-55)}
+  .faixa-lanc p{color:var(--tinta-72)}
+  .semana{break-inside:avoid;page-break-inside:avoid}
+  .faixa,.regras{break-inside:avoid}
+  .marca-cx{width:14px;height:14px}
+  .rodape{display:none}
+  .abre{padding-block:0}
+  .console{margin-top:20px;padding-block:18px 20px}
+  .semana{padding-block:12px}
+  .sem-cab{margin-bottom:9px}
+  .sem-titulo{font-size:14pt}
+  .tarefa{padding:4px 0}
+  .sub .tarefa{padding:3px 0}
+  .txt{font-size:10pt;line-height:1.3}
+  .nota{font-size:8.5pt;line-height:1.35}
+  .apoios{margin-top:4px;gap:4px}
+  .chip{padding:2px 5px;font-size:7.5pt}
+  .post{margin-top:10px;padding:10px 12px}
+  .post .frase{font-size:12pt}
+  .faixa{margin-top:18px;padding-block:12px 14px}
+  .faixa h2{font-size:20pt}
+  .faixa p{font-size:9pt;margin-top:8px}
+  .intro{font-size:9pt;margin-bottom:10px}
+  .bloco-foco{margin-top:14px}
+  .lembrete{margin:10px 0 4px;padding:9px 12px;font-size:10pt}
+  .regras{margin-top:18px;padding-block:16px 0}
+  .regras h2{font-size:17pt;margin-bottom:12px}
+  a{text-decoration:none}
+}
+</style>
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<section class="env abre">
+  <h1 class="logo topo"><span>Lançamento</span><span class="b">90D</span></h1>
+  <p class="sub">A execução inteira, semana a semana. Marque o que já fez: a página guarda o seu progresso neste navegador.</p>
+
+  <div class="console" aria-label="Datas do lançamento">
+    <div class="console-grade">
+      <div>
+        <div class="rot">Data de publicação (Dia 90)</div>
+        <div class="campo-data">
+          <input type="date" id="dataPub" aria-label="Data de publicação do livro">
+          <button type="button" class="btn-fantasma" id="limparData">limpar</button>
+        </div>
+        <div class="contagem" id="contagem">defina a data
+          <small id="contagemSub">Com a data, cada semana ganha dia certo e a trilha marca onde você está hoje.</small>
+        </div>
+      </div>
+      <div>
+        <div class="rot" style="margin-bottom:12px">Datas-chave</div>
+        <div class="datas-chave" id="datasChave"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main id="conteudo"></main>
+
+<section class="env regras">
+  <h2 class="d">Quatro regras para os 90 dias</h2>
+  <div class="grade">
+    <div class="it"><b>Mantenha o foco</b><span>Cada semana tem um objetivo claro. Faça o dela.</span></div>
+    <div class="it"><b>Não pule etapas</b><span>Cada fase prepara o terreno para a próxima.</span></div>
+    <div class="it"><b>Seja consistente</b><span>Comunicação regular vale mais que explosão pontual.</span></div>
+    <div class="it"><b>Celebre cada conquista</b><span>Compartilhe marcos, depoimentos, aprendizados.</span></div>
+  </div>
+</section>
+
+<section class="env papel">
+  <button type="button" class="btn btn-cheio" id="btnImprimir">Imprimir ou salvar em PDF</button>
+  <a class="btn btn-vazio" href="Plano-90-Dias.pdf" target="_blank" rel="noopener">Baixar o PDF em branco</a>
+  <button type="button" class="btn-texto" id="zerar">zerar progresso</button>
+  <p id="notaPapel">No destino da impressão, escolha "Salvar como PDF" para guardar o arquivo. O que você marcar fica guardado neste navegador.</p>
+</section>
+
+<div class="env rodape">
+  <span>Lançamento 90D · Plano de 90 dias para lançamento de livro</span>
+  <a href="https://hotmart.com/pt-br/club/the-book-business/products/2275987" target="_blank" rel="noopener">Área de membros ↗</a>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+var CLUB = 'https://hotmart.com/pt-br/club/the-book-business/products/2275987';
+function aula(nome, id){ return {t:'aula', nome:nome, url: id ? CLUB + '/content/' + id : CLUB}; }
+function mat(nome){ return {t:'mat', nome:nome, url:CLUB}; }
+function fora(nome, url){ return {t:'fora', nome:nome, url:url}; }
+
+var A = {
+  guia:        function(){ return aula('Aula 2.3 Guia de Parceiros','m7Y6k80ZO6'); },
+  capa:        function(){ return aula('Aula 2.2 Capa boa x capa vendedora','ROxonv9V7D'); },
+  tipos:       function(){ return aula('Aula 2.5 Tipos de publicação','ROxoMdNp7D'); },
+  raiox:       function(){ return aula('Aula 2.4 Raio-X do livro','y4PZldXl7x'); },
+  microciclos: function(){ return aula('Aula 2.11 Micro-ciclos','V7yGkkWP4J'); },
+  objetivo:    function(){ return aula('Aula 3.3 Objetivo do livro','M7qwGvMy4x'); },
+  objetivoMao: function(){ return aula('Aula 3.4 Mão na massa','V73WM1nY73'); },
+  leitor:      function(){ return aula('Aula 3.5 Leitor ideal','ROxo8k8J7D'); },
+  zona:        function(){ return aula('Aula 3.8 Zona de influência','k45d665qOl'); },
+  plataforma:  function(){ return aula('Aula 3.13 Sua plataforma de autor','V4VPWANx72'); },
+  descricao:   function(){ return aula('Aula 3.17 Descrição do livro','K4kZ8KmEOY'); },
+  preco:       function(){ return aula('Aula 3.22 Precificação','M7qwrgYj4x'); },
+  prelanc:     function(){ return aula('Aula 3.23 Pré-lançamento','y4PZXX6E7x'); },
+  cronoPre:    function(){ return aula('Aula 3.24 Cronograma de pré-venda','BeZEa1x84w'); },
+  cronoLanc:   function(){ return aula('Aula 3.25 Cronograma de lançamento','k7QxDR6Pey'); },
+  cronoPos:    function(){ return aula('Aula 3.26 Cronograma de pós-lançamento','EOgkB1dgO6'); },
+  excel:       function(){ return aula('Aula 3.27 Cronograma no Excel','k45dk9nROl'); },
+  avaliacoes:  function(){ return aula('Aula 4.1 Avaliações na Amazon','M7qw132N4x'); },
+  evento:      function(){ return aula('Aula 4.2 Evento de lançamento','14o9E9ak7p'); },
+  grupo:       function(){ return aula('Aula 4.05 Grupo de lançamento','EOgkqMwpO6'); },
+  site:        function(){ return aula('Aula 4.06 Site do autor','V7yG3LKG4J'); },
+  imprensa:    function(){ return aula('Aula 4.09 Assessoria de imprensa','m7Y6jpqZO6'); },
+  endossos:    function(){ return aula('Aula 4.10 Endossos','V73Wd23p73'); },
+  influContr:  function(){ return aula('Aula 4.12 Contratação de influencers','RO9daAvY7P'); },
+  influEnvio:  function(){ return aula('Aula 4.13 Envio para influencers','97BjX3AL7p'); },
+  patrocinio:  function(){ return aula('Aula 4.16 Patrocínio e vendas em lote','14o9DGA07p'); },
+  revelacao:   function(){ return aula('Aula 4.18 Revelação de capa','k7QxJdzkey'); },
+  datasCom:    function(){ return aula('Aula 4.20 Datas comemorativas','oODRDWZQeP'); },
+  eventos:     function(){ return aula('Aula 4.21 Participação em eventos','LO0lVRWMOG'); },
+  email:       function(){ return aula('Aula 4.22 E-mail','M7GQ0D684w'); },
+  contatos:    function(){ return aula('Aula 4.25 Ativando seus contatos','V4VkkvQ2e2'); }
+};
+
+var BANCO = mat('Banco de Ideias de Posts');
+
+var VIABILIZADORES = {
+  id:'v', fase:'pre', rotulo:'Antes', num:'Viabilizadores',
+  foco:'O que precisa estar pronto antes do Dia 1',
+  intro:'Se algum destes ainda não está de pé, o relógio dos 90 dias não começou. Resolva aqui antes de abrir a Semana 1.',
+  itens:[
+    {t:'Data exata da publicação definida (editora ou plataforma)'},
+    {t:'Manuscrito finalizado'},
+    {t:'Leitura crítica feita, com leitor crítico especializado', apoio:[mat('Leitores Recomendados')]},
+    {t:'Tipo de publicação definido', nota:'Autopublicação, prestadora de serviço ou tradicional.', apoio:[A.tipos()]},
+    {t:'Primeira revisão feita', apoio:[A.guia()]},
+    {t:'Capa profissional pronta (ou em produção)', apoio:[A.capa()]},
+    {t:'Diagramação encaminhada', apoio:[A.guia()]},
+    {t:'ISBN solicitado (pelo autor ou pela editora)', apoio:[fora('Câmara Brasileira do Livro','https://www.cblservicos.org.br/')]},
+    {t:'Ficha catalográfica solicitada (pelo autor ou pela editora)'}
+  ]
+};
+
+var SEMANAS = [
+{
+  id:'s1', num:'Semana 1', semana:1, fase:'pre', rotulo:'Objetivo',
+  foco:'Planejamento e objetivo',
+  itens:[
+    {t:'Definir o objetivo do livro', apoio:[A.objetivo(), A.objetivoMao()]},
+    {t:'Definir público-alvo e persona do leitor ideal', apoio:[A.leitor()]},
+    {t:'Definir os temas universais que o livro aborda', apoio:[mat('Lista de Temas Universais')]},
+    {t:'Montar o cronograma reverso', nota:'Da data de publicação para trás.', apoio:[A.excel()]},
+    {t:'Tirar as fotos dos posts das próximas semanas', nota:'Lendo, escrevendo, assinando contrato, revisando o manuscrito, aprovando a diagramação.', apoio:[BANCO]},
+    {t:'Listar datas comemorativas e efemérides ligadas ao tema do livro', apoio:[A.datasCom(), mat('Planejamento Anual do Escritor')]}
+  ],
+  post:{frase:'O porquê.', nota:'Foto de criança: "essa criança nunca imaginou que um dia lançaria um livro…"'}
+},
+{
+  id:'s2', num:'Semana 2', semana:2, fase:'pre', rotulo:'Listas',
+  foco:'Soft marketing e organização de listas',
+  itens:[
+    {t:'Atualizar site, página de autor e perfis nas redes', apoio:[A.plataforma(), A.site()], subs:[{t:'Instagram'},{t:'LinkedIn'}]},
+    {t:'Criar o Grupo de Lançamento', nota:'20 a 30 pessoas, no WhatsApp.', apoio:[A.grupo()]},
+    {t:'Compartilhar o processo de produção nos stories', nota:'"mais um capítulo revisado"'},
+    {t:'Registrar o livro na Câmara Brasileira do Livro', nota:'ISBN e ficha catalográfica.', apoio:[fora('cblservicos.org.br','https://www.cblservicos.org.br/')]},
+    {t:'Enviar o post da semana no Grupo de Lançamento', nota:'Peça engajamento.'}
+  ],
+  post:{frase:'Por trás de todo bom escritor, existe um bom leitor.'}
+},
+{
+  id:'s3', num:'Semana 3', semana:3, fase:'pre', rotulo:'Contatos',
+  foco:'Mapeamento de contatos',
+  itens:[
+    {t:'Mapear contatos por origem', nota:'Família, amigos, carreira, escola, clube, condomínio, igreja.', apoio:[A.zona(), A.contatos()]},
+    {t:'Atribuir tarefas aos contatos mapeados', subs:[
+      {t:'Possíveis compradores da pré-venda'},
+      {t:'Parceiros estratégicos (outros autores, empresas, instituições)'},
+      {t:'Convidados do evento de lançamento'},
+      {t:'Influenciadores online (mais de 3.000 seguidores)'},
+      {t:'Influenciadores offline (professores, coordenadores, empresários)'}
+    ]},
+    {t:'Criar um Instagram ou TikTok de estudo', nota:'Para acompanhar o que os concorrentes fazem.', apoio:[A.raiox()]},
+    {t:'Mapear influenciadores do nicho', nota:'Bookstagrammers, booktubers, podcasters.', apoio:[A.influContr(), mat('Lista de Influenciadores Verificados')]},
+    {t:'Mapear veículos e podcasts da sua região', nota:'Rádios, revistas, jornais, portais.', apoio:[A.imprensa()]},
+    {t:'Enviar o post da semana no Grupo de Lançamento'}
+  ],
+  post:{frase:'Recomendação de livros.', nota:'"comenta aqui se você já leu algum deles ou se acrescentaria mais algum nessa lista"'}
+},
+{
+  id:'s4', num:'Semana 4', semana:4, fase:'pre', rotulo:'Endossos',
+  foco:'Endossos e estudo do mercado',
+  itens:[
+    {t:'Preparar a amostra do livro com 3 capítulos', nota:'Em PDF, com marca d’água, no máximo 30% do livro.'},
+    {t:'Pedir depoimentos e endossos de pessoas relevantes', nota:'Escritores, jornalistas, profissionais ligados ao tema universal do seu livro.', apoio:[A.endossos()]},
+    {t:'Montar a lista de livros comparáveis', nota:'Editora, páginas, formatos, preços de capa.', apoio:[A.raiox()]},
+    {t:'Enviar o post da semana no Grupo de Lançamento'}
+  ],
+  post:{frase:'Terminei de escrever o livro.', nota:'"Foram mais de X anos, Y referências, Z viagens, e finalmente…"'}
+},
+{
+  id:'s5', num:'Semana 5', semana:5, fase:'pre', rotulo:'Capa',
+  foco:'Capa e identidade visual',
+  itens:[
+    {t:'Compartilhar o processo nos stories', nota:'Capa, revisão, diagramação.'},
+    {t:'Definir o preço de capa', apoio:[A.preco()]},
+    {t:'Finalizar a sinopse do livro', nota:'Para a quarta-capa e os cadastros digitais.', apoio:[A.descricao()]},
+    {t:'Criar o press release', nota:'Foto do autor, capa, sinopse, bio, links, preço.', apoio:[A.imprensa()]},
+    {t:'Planejar os kits para influenciadores e jornalistas', apoio:[A.influEnvio()], subs:[
+      {t:'Livro'},{t:'Carta personalizada'},{t:'Release do livro'},{t:'Brinde (opcional)'}
+    ]},
+    {t:'Enviar o post da semana no Grupo de Lançamento'}
+  ],
+  post:{frase:'Revelar a capa oficial.', nota:'Evento online ou post especial.', apoio:[A.revelacao()]}
+},
+{
+  id:'s6', num:'Semana 6', semana:6, fase:'pre', rotulo:'Oferta',
+  foco:'Planejamento da pré-venda',
+  itens:[
+    {t:'Alinhar início e fim da pré-venda com a editora ou plataforma', apoio:[A.cronoPre(), A.prelanc()]},
+    {t:'Definir as condições especiais da pré-venda', subs:[
+      {t:'Brinde'},{t:'Bônus'},{t:'Desconto'},{t:'Pacotes'}
+    ]},
+    {t:'Organizar as lives de pré-venda', nota:'Uma semana inteira de lives com outros escritores e profissionais ligados ao tema do livro.'},
+    {t:'Fazer cadastro na Amazon Associados', apoio:[fora('associados.amazon.com.br','https://associados.amazon.com.br/')]},
+    {t:'Enviar o post da semana no Grupo de Lançamento'}
+  ],
+  post:{frase:'Assinatura de contrato.'}
+},
+{
+  id:'s7', num:'Semana 7', semana:7, fase:'pre', rotulo:'Evento',
+  foco:'Evento de lançamento',
+  itens:[
+    {t:'Planejar o evento de lançamento', nota:'Presencial ou online.', apoio:[A.evento()]},
+    {t:'Definir o local do evento'},
+    {t:'Confirmar os detalhes com a livraria', subs:[
+      {t:'O local tem estacionamento?'},
+      {t:'Pode servir buffet?'},
+      {t:'Pode levar fotógrafo?'},
+      {t:'O que é um bom número de vendas para aquela loja?'}
+    ]},
+    {t:'Montar a lista final de convidados'},
+    {t:'Mandar o Save the Date para as pessoas mais importantes e ocupadas'},
+    {t:'Enviar o post da semana no Grupo de Lançamento'}
+  ],
+  post:{frase:'Crenças e valores.'}
+},
+{
+  id:'s8', num:'Semana 8', semana:8, fase:'pre', rotulo:'Aquecer',
+  foco:'Aquecimento final',
+  itens:[
+    {t:'Agendar entrevistas e podcasts para a semana do lançamento', apoio:[A.imprensa()]},
+    {t:'Reforçar o soft marketing', nota:'Bastidores, depoimentos e expectativas nos stories.'},
+    {t:'Repassar o mapeamento de contatos com foco na pré-venda', subs:[
+      {t:'Quem não mora na cidade do evento'},
+      {t:'Quem tem potencial de comprar mais de um exemplar'},
+      {t:'Quem tem perfil de influenciador (online ou offline)'}
+    ]}
+  ],
+  post:{frase:'História pessoal + tema universal do livro.'}
+},
+{
+  id:'s9', num:'Semana 9', semana:9, fase:'venda', rotulo:'Abertura',
+  foco:'Abertura da pré-venda',
+  lembrete:'Não tenha vergonha de vender. A pré-venda é uma janela de oportunidade, e ela fecha.',
+  itens:[
+    {t:'Abrir oficialmente a pré-venda', nota:'Site, Amazon, editora.'},
+    {t:'Divulgar os bônus exclusivos de quem compra na pré-venda', nota:'Desconto, brindes, acesso antecipado.'},
+    {t:'Ativar os contatos com potencial de compra em lote, de um em um', apoio:[A.patrocinio()]},
+    {t:'Divulgar a pré-venda no Grupo de Lançamento', nota:'São os primeiros compradores.'},
+    {t:'Enviar e-mails e mensagens para a lista anunciando a pré-venda', apoio:[A.email()]}
+  ],
+  post:{frase:'5 formas de ajudar um escritor.'}
+},
+{
+  id:'s10', num:'Semana 10', semana:10, fase:'venda', rotulo:'Provas',
+  foco:'Vendas em lote e provas sociais',
+  itens:[
+    {t:'Incentivar o Grupo de Lançamento a compartilhar'},
+    {t:'Fazer lives e stories', nota:'Bastidores, depoimentos, bônus.'}
+  ],
+  post:{frase:'Semana de quatro posts.', lista:[
+    'Post com a oferta da pré-venda',
+    'Post com prints de quem já comprou',
+    'Post emocional com o motivo pelo qual você escreveu esse livro',
+    'Post com trechos do prefácio ou dos endossos'
+  ]}
+},
+{
+  id:'s11', num:'Semana 11', semana:11, fase:'venda', rotulo:'Urgência',
+  foco:'Urgência e provas sociais',
+  itens:[
+    {t:'Realizar a agenda de lives de pré-venda'},
+    {t:'Reforçar nos stories o fim da pré-venda', nota:'Contagem regressiva.'},
+    {t:'Intensificar o contato direto', nota:'Mensagens pessoais para amigos, familiares e leitores próximos.'}
+  ],
+  post:{frase:'Depoimentos de quem já comprou na pré-venda.'}
+},
+{
+  id:'s12', num:'Semana 12', semana:12, fase:'lanc', rotulo:'Lançar',
+  foco:'Lançamento',
+  itens:[
+    {t:'Enviar os convites individualmente', nota:'Grupo de Lançamento, lista de e-mails e WhatsApp, no dia seguinte ao encerramento da pré-venda.', apoio:[A.cronoLanc()]},
+    {t:'Ativar a mídia', nota:'Entrevistas, podcasts e matérias já agendadas.'},
+    {t:'Incentivar os compradores a avaliar na Amazon e nas redes', nota:'Individualmente, de 30 em 30.', apoio:[A.avaliacoes()]},
+    {t:'Repostar menções e agradecer cada leitor'},
+    {t:'Monitorar rankings e vendas', nota:'Amazon, Amazon Associados, site, editora.'},
+    {t:'Fazer stories e posts com o livro nas mãos dos leitores'}
+  ],
+  post:{frase:'O livro chegou.', nota:'E agradecimento a quem comprou na pré-venda.'}
+}
+];
+
+var POS = {
+  id:'pos', num:'Pós-lançamento', fase:'pos', rotulo:'Depois',
+  foco:'Depois do Dia 90',
+  intro:'O lançamento acaba. O livro, não. Estes três blocos seguram o livro em movimento depois da data de publicação.',
+  blocos:[
+    {foco:'Evento de lançamento', itens:[
+      {t:'Realizar o evento de lançamento', apoio:[A.evento()]},
+      {t:'Ativar a mídia', nota:'Entrevistas, podcasts e matérias já agendadas.'},
+      {t:'Incentivar os compradores a avaliar na Amazon e nas redes', apoio:[A.avaliacoes()]},
+      {t:'Repostar menções e agradecer publicamente cada leitor'},
+      {t:'Fazer stories e posts com o livro nas mãos dos leitores'}
+    ]},
+    {foco:'Pós-lançamento imediato', itens:[
+      {t:'Enviar agradecimento personalizado para quem esteve no evento', nota:'Com a foto que o fotógrafo tirou, e o pedido de avaliação na Amazon.'},
+      {t:'Compartilhar as primeiras avaliações e depoimentos de leitores'},
+      {t:'Fazer o post de bastidores do lançamento', nota:'Aprendizados, emoções.'},
+      {t:'Enviar os kits para influenciadores e parceiros estratégicos', nota:'Primeiro lote.', apoio:[A.influEnvio()]}
+    ]},
+    {foco:'Microciclos mensais', itens:[
+      {t:'Planejar os próximos microciclos mensais', apoio:[A.microciclos(), A.cronoPos()], subs:[
+        {t:'Datas comemorativas, com oportunidade contextualizada', apoio:[A.datasCom()]},
+        {t:'Marcos de vendas', nota:'Primeira edição, lançamento do audiobook, 5 países com leitores.'},
+        {t:'Participação em eventos', apoio:[A.eventos()]},
+        {t:'Lives com parceiros'},
+        {t:'Inscrição em prêmios e concursos', apoio:[mat('Workshop Prêmios e Concursos')]},
+        {t:'Novos lotes de envio para influenciadores', nota:'A cada trimestre.'},
+        {t:'Sprint de novas avaliações na Amazon', apoio:[A.avaliacoes()]}
+      ]}
+    ]}
+  ]
+};
+
+var FASES = {
+  pre:  {nome:'Pré-lançamento', classe:'faixa-pre',   semanas:'Semanas 1 a 8',    texto:'Ninguém compra um livro que não sabe que existe. Estas oito semanas constroem o terreno: objetivo, leitor, contatos, capa e o plano da pré-venda.'},
+  venda:{nome:'Pré-venda',      classe:'faixa-venda', semanas:'Semanas 9 a 11',   texto:'A janela em que o livro vende antes de existir na estante. É aqui que o trabalho das oito semanas anteriores vira número.'},
+  lanc: {nome:'Lançamento',     classe:'faixa-lanc',  semanas:'Semana 12',        texto:'A semana do Dia 90. Convite individual, mídia no ar, e a corrida das primeiras avaliações.'},
+  pos:  {nome:'Pós-lançamento', classe:'faixa-pos',   semanas:'Depois do Dia 90', texto:'O evento, os agradecimentos e os microciclos que impedem o livro de ser esquecido.'}
+};
+
+/* ---------------- estado ---------------- */
+
+var CHAVE = 'plano90d.v1';
+var estado = {pub:'', feitos:{}, evento:''};
+
+function carregar(){
+  try{
+    var bruto = localStorage.getItem(CHAVE);
+    if(bruto){
+      var o = JSON.parse(bruto);
+      if(o && typeof o === 'object'){
+        estado.pub = typeof o.pub === 'string' ? o.pub : '';
+        estado.evento = typeof o.evento === 'string' ? o.evento : '';
+        estado.feitos = (o.feitos && typeof o.feitos === 'object') ? o.feitos : {};
+      }
+    }
+  }catch(e){}
+}
+function salvar(){
+  try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){}
+}
+
+/* ---------------- datas ----------------
+   90 dias = 6 dias de viabilizadores + 12 semanas de 7 dias.
+   A Semana 12 termina exatamente no Dia 90, a data de publicação. */
+
+var MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+
+function dePub(){
+  if(!estado.pub) return null;
+  var p = estado.pub.split('-');
+  if(p.length !== 3) return null;
+  var d = new Date(+p[0], +p[1]-1, +p[2]);
+  return isNaN(d.getTime()) ? null : d;
+}
+function somaDias(d, n){ var x = new Date(d.getTime()); x.setDate(x.getDate()+n); return x; }
+function fmt(d){ return d.getDate() + ' ' + MES[d.getMonth()]; }
+function fmtLongo(d){ return d.getDate() + ' ' + MES[d.getMonth()] + ' ' + d.getFullYear(); }
+function iso(d){
+  var m = String(d.getMonth()+1); if(m.length<2) m='0'+m;
+  var dia = String(d.getDate()); if(dia.length<2) dia='0'+dia;
+  return d.getFullYear() + m + dia;
+}
+function hoje(){ var h = new Date(); return new Date(h.getFullYear(), h.getMonth(), h.getDate()); }
+
+function janela(n){
+  var pub = dePub(); if(!pub) return null;
+  var fim = somaDias(pub, -(12-n)*7);
+  return {ini: somaDias(fim,-6), fim: fim};
+}
+function janelaGate(){
+  var pub = dePub(); if(!pub) return null;
+  var ini = somaDias(pub,-89);
+  return {ini: ini, fim: somaDias(ini,5)};
+}
+function diasAte(){
+  var pub = dePub(); if(!pub) return null;
+  return Math.round((pub - hoje()) / 86400000);
+}
+function semanaAtual(){
+  var pub = dePub(); if(!pub) return null;
+  var d = diasAte();
+  if(d === null) return null;
+  if(d < 0) return 'pos';
+  if(d > 83) return 'v';
+  return 's' + (12 - Math.floor(d/7));
+}
+
+/* ---------------- render ---------------- */
+
+var raiz = document.getElementById('conteudo');
+
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function chips(lista){
+  if(!lista || !lista.length) return '';
+  var h = '<div class="apoios">';
+  for(var i=0;i<lista.length;i++){
+    var a = lista[i];
+    var cls = a.t === 'aula' ? 'chip aula' : 'chip';
+    h += '<a class="'+cls+'" href="'+esc(a.url)+'" target="_blank" rel="noopener">'+esc(a.nome)+' &#8599;</a>';
+  }
+  return h + '</div>';
+}
+function tarefa(id, it){
+  var feito = !!estado.feitos[id];
+  var h = '<li class="tarefa'+(feito?' feita':'')+'">';
+  h += '<input type="checkbox" class="marca-cx" id="'+id+'"'+(feito?' checked':'')+'>';
+  h += '<div><label class="txt" for="'+id+'">'+esc(it.t)+'</label>';
+  if(it.nota) h += '<span class="nota">'+esc(it.nota)+'</span>';
+  h += chips(it.apoio);
+  if(it.subs && it.subs.length){
+    h += '<ul class="sub">';
+    for(var j=0;j<it.subs.length;j++) h += tarefa(id+'_'+j, it.subs[j]);
+    h += '</ul>';
+  }
+  h += '</div></li>';
+  return h;
+}
+function listaItens(prefixo, itens){
+  var h = '<ul class="lista">';
+  for(var i=0;i<itens.length;i++) h += tarefa(prefixo+'_'+i, itens[i]);
+  return h + '</ul>';
+}
+function blocoPost(p){
+  if(!p) return '';
+  var corpo = '<div class="et">Post da semana</div><div class="frase">'+esc(p.frase)+'</div>';
+  if(p.nota) corpo += '<span class="nota" style="margin-top:8px">'+esc(p.nota)+'</span>';
+  if(p.lista){
+    corpo += '<ul>';
+    for(var i=0;i<p.lista.length;i++) corpo += '<li>'+esc(p.lista[i])+'</li>';
+    corpo += '</ul>';
+  }
+  corpo += chips((p.apoio||[]).concat([BANCO]));
+  return '<div class="post">'+corpo+'</div>';
+}
+function idsDe(bloco){
+  var ids = [];
+  function anda(prefixo, itens){
+    for(var i=0;i<itens.length;i++){
+      var id = prefixo+'_'+i;
+      ids.push(id);
+      if(itens[i].subs) anda(id, itens[i].subs);
+    }
+  }
+  if(bloco.itens) anda(bloco.id, bloco.itens);
+  if(bloco.blocos) for(var b=0;b<bloco.blocos.length;b++) anda(bloco.id+'b'+b, bloco.blocos[b].itens);
+  return ids;
+}
+
+var TODOS = [VIABILIZADORES].concat(SEMANAS).concat([POS]);
+
+function montar(){
+  var h = '';
+  var faseAberta = '';
+  var atual = semanaAtual();
+
+  for(var i=0;i<TODOS.length;i++){
+    var b = TODOS[i];
+    if(b.fase !== faseAberta){
+      faseAberta = b.fase;
+      var f = FASES[faseAberta];
+      h += '<section class="faixa '+f.classe+'"><div class="env">'
+        + '<div class="olho">'+esc(f.semanas)+'</div>'
+        + '<h2 class="d">'+esc(f.nome)+'</h2><p>'+esc(f.texto)+'</p>'
+        + '</div></section>';
+    }
+
+    var jan = b.id === 'v' ? janelaGate() : (b.semana ? janela(b.semana) : null);
+    var quando = jan ? fmt(jan.ini) + ' a ' + fmtLongo(jan.fim) : '';
+
+    h += '<section class="semana" id="'+b.id+'"><div class="env">';
+    h += '<div class="sem-cab"><div>'
+      + '<div class="sem-tag"><b>'+esc(b.num)+'</b>'+(quando ? '<span>'+esc(quando)+'</span>' : '')+'</div>'
+      + '<h3 class="sem-titulo d">'+esc(b.foco)+'</h3>'
+      + '</div>'
+      + '<div class="contador" id="c_'+b.id+'"></div>'
+      + '</div>';
+
+    if(b.intro) h += '<p style="margin:0 0 22px;font-size:14.5px;color:var(--creme-72);max-width:62ch">'+esc(b.intro)+'</p>';
+    if(b.lembrete) h += '<div class="lembrete"><b>Lembrete</b>'+esc(b.lembrete)+'</div>';
+
+    if(b.blocos){
+      for(var k=0;k<b.blocos.length;k++){
+        h += '<div class="bloco-foco"><h4>'+esc(b.blocos[k].foco)+'</h4>'
+          + listaItens(b.id+'b'+k, b.blocos[k].itens) + '</div>';
+      }
+    }else{
+      h += listaItens(b.id, b.itens);
+    }
+
+    h += blocoPost(b.post);
+    h += '</div></section>';
+  }
+  raiz.innerHTML = h;
+
+}
+
+function atualizarProgresso(){
+  for(var i=0;i<TODOS.length;i++){
+    var b = TODOS[i];
+    var ids = idsDe(b);
+    var n = 0;
+    for(var k=0;k<ids.length;k++) if(estado.feitos[ids[k]]) n++;
+
+    var c = document.getElementById('c_'+b.id);
+    if(c){
+      c.textContent = n + '/' + ids.length;
+      c.className = 'contador' + (n === ids.length ? ' ok' : '');
+    }
+  }
+}
+
+function atualizarDatas(){
+  var pub = dePub();
+  var cont = document.getElementById('contagem');
+  var sub = document.getElementById('contagemSub');
+  var dk = document.getElementById('datasChave');
+
+  if(!pub){
+    cont.firstChild.nodeValue = 'defina a data';
+    cont.classList.remove('viva');
+    sub.textContent = 'Com a data, cada semana ganha dia certo e a trilha marca onde você está hoje.';
+    dk.innerHTML = '<div class="dk"><b>Início da pré-venda</b><span>a definir</span></div>'
+      + '<div class="dk"><b>Encerramento da pré-venda</b><span>a definir</span></div>'
+      + '<div class="dk destaque"><b>Publicação, Dia 90</b><span>a definir</span></div>'
+      + '<div class="dk"><b>Evento de lançamento</b><span>a definir</span></div>';
+    return;
+  }
+
+  var d = diasAte();
+  cont.classList.add('viva');
+  if(d > 0){ cont.firstChild.nodeValue = 'faltam ' + d + (d === 1 ? ' dia' : ' dias'); }
+  else if(d === 0){ cont.firstChild.nodeValue = 'é hoje'; }
+  else { cont.firstChild.nodeValue = 'dia ' + (90 - d) + ' do livro'; }
+
+  var atual = semanaAtual();
+  var nomeAtual = '';
+  for(var i=0;i<TODOS.length;i++) if(TODOS[i].id === atual) nomeAtual = TODOS[i].num + ', ' + TODOS[i].foco.toLowerCase();
+  sub.textContent = d < 0 ? 'Você está no pós-lançamento. Os microciclos começam agora.' : ('Você está na ' + nomeAtual + '.');
+
+  var j9 = janela(9), j11 = janela(11);
+  var evento = somaDias(pub, 7);
+  dk.innerHTML = '<div class="dk"><b>Início da pré-venda</b><span>'+fmtLongo(j9.ini)+'</span></div>'
+    + '<div class="dk"><b>Encerramento da pré-venda</b><span>'+fmtLongo(j11.fim)+'</span></div>'
+    + '<div class="dk destaque"><b>Publicação, Dia 90</b><span>'+fmtLongo(pub)+'</span></div>'
+    + '<div class="dk"><b>Evento de lançamento</b><span>'+fmtLongo(evento)+'</span></div>';
+}
+
+function redesenhar(){
+  montar();
+  atualizarProgresso();
+  atualizarDatas();
+}
+
+/* ---------------- eventos ---------------- */
+
+document.addEventListener('change', function(ev){
+  var alvo = ev.target;
+  if(alvo.classList && alvo.classList.contains('marca-cx')){
+    if(alvo.checked) estado.feitos[alvo.id] = 1; else delete estado.feitos[alvo.id];
+    var li = alvo.closest('.tarefa');
+    if(li) li.classList.toggle('feita', alvo.checked);
+    salvar();
+    atualizarProgresso();
+  }
+  if(alvo.id === 'dataPub'){
+    estado.pub = alvo.value;
+    salvar();
+    redesenhar();
+  }
+});
+
+function imprimir(){
+  var nota = document.getElementById('notaPapel');
+  var aviso = 'Este visualizador bloqueou a impressão. Clique em "Abrir em aba própria" aqui do lado e use Cmd+P no Mac ou Ctrl+P no Windows.';
+  if(typeof window.print !== 'function'){ nota.textContent = aviso; return; }
+  var abriu = false;
+  var marcar = function(){ abriu = true; };
+  window.addEventListener('beforeprint', marcar);
+  try{
+    window.print();
+  }catch(e){
+    nota.textContent = aviso;
+    window.removeEventListener('beforeprint', marcar);
+    return;
+  }
+  setTimeout(function(){
+    window.removeEventListener('beforeprint', marcar);
+    if(!abriu) nota.textContent = aviso;
+  }, 700);
+}
+
+document.addEventListener('click', function(ev){
+  if(ev.target.closest && ev.target.closest('#btnImprimir')){ imprimir(); return; }
+  if(ev.target.id === 'limparData'){
+    estado.pub = '';
+    document.getElementById('dataPub').value = '';
+    salvar();
+    redesenhar();
+  }
+  if(ev.target.id === 'zerar'){
+    if(confirm('Isso desmarca todos os itens do plano. Continuar?')){
+      estado.feitos = {};
+      salvar();
+      redesenhar();
+    }
+  }
+});
+
+carregar();
+document.getElementById('dataPub').value = estado.pub || '';
+redesenhar();
+
+})();
+</script>
+</body>
+</html>
