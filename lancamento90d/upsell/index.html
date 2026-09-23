@@ -321,10 +321,6 @@ section{padding:clamp(52px,7vw,80px) 0}
 /* o filete marca a virada de capítulo. Só a seção clara carrega os dois,
    e como elas se alternam, cada emenda tem exatamente um fio. */
 section.alt{background:var(--pa2);border-top:1px solid var(--ru);border-bottom:1px solid var(--ru)}
-/* 23/09: a conta desceu pra depois do preço. Em cima dela agora está o campo
-   âmbar da oferta (emenda dura, dispensa fio) e embaixo o FAQ, que é `.alt` e
-   traz o próprio. Quem passou a encostar no herói foi a seção da sessão, e são
-   dois escuros seguidos: o fio mudou de dono. */
 header + section{border-top:1px solid var(--ru)}
 /* as duas seções de oferta ganham TEMPERATURA, não tom: um calor âmbar
    nascendo no topo. É o único lugar da página onde se pede dinheiro, e
@@ -394,83 +390,8 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .btn:active{transform:translateY(0)}
 .btn.block{display:flex;width:100%}
 
-/* ════════════════════════════════════════════════════════════
-   A CONTA, EM CURVA  (escolhido pelo cliente em 14/09)
-
-   A conta deixou de ser três frases em escala e virou a VIDA DO LIVRO NO
-   TEMPO. Vendas no eixo vertical, tempo no horizontal, e o lançamento
-   marcado no mesmo ponto nos três gráficos.
-
-   Por que isto e não o empilhamento: a frase da seção é uma comparação, e
-   comparação se vê, não se afirma. O pico do lançamento bom com livro ruim
-   é o MAIS BAIXO dos dois lançamentos bons e mesmo assim morre; o do livro
-   bom sobe e continua subindo. Quem lê chega na conclusão antes da frase.
-
-   ⚠️ AS CURVAS SE SOMAM: cada faixa desenha as anteriores por baixo, na cor
-   delas, bem apagadas. É na terceira que a ultrapassagem acontece na frente
-   da pessoa. Tirar os fantasmas mata o argumento.
-
-   ⚠️ O PICO DO BOM+BOM TEM QUE SER >= O DO RUIM+BOM (o cliente pegou isto
-   invertido em 14/09). O lançamento é igualmente bom nos dois, e com livro
-   bom ele converte MAIS. Desenhar o pico do livro bom mais baixo diz, sem
-   querer, que livro bom vende menos.
-
-   ⚠️ NÃO É GRÁFICO DE DADOS, é diagrama, e a nota embaixo diz isso. Tem que
-   continuar dizendo: número inventado numa página que vende honestidade é
-   o pior lugar possível pra mentir.
-
-   Uma cor por conta, e cada uma significa: frio azulado para quem nunca é
-   encontrado, o vermelho da página para o que acende e morre, âmbar para o
-   que fica. Contraste sobre #0B0B0D: #93A6B8 7,6:1 · #E0574A 5,1:1 ·
-   #EFEDE8 16:1 · #868178 4,7:1.
-   O protótipo das três versões está em _designs/curva.html.
-   ════════════════════════════════════════════════════════════ */
-/* ── 23/09: as tres contas viraram UM GRAFICO SO (cliente).
-   Ja foram tres blocos empilhados e depois tres colunas lado a lado. Nos dois
-   casos eram tres desenhos SEPARADOS, cada um com a propria escala implicita,
-   e comparar dependia da memoria de quem le. Aqui as tres curvas dividem o
-   mesmo eixo: a distancia entre elas E' o argumento, e nao precisa ser dita.
-   A legenda embaixo carrega os tres veredictos, com o tracinho na cor da
-   curva. As curvas sao as MESMAS de sempre. */
-.uno{max-width:900px;margin:clamp(30px,4.4vw,46px) auto 0;background:var(--offc);
-  border:2px solid var(--ink);border-radius:var(--r);box-shadow:6px 6px 0 var(--ink);
-  padding:26px 28px 22px;text-align:left}
-.uno .graf svg{height:clamp(140px,17vw,210px)}
-.leg{list-style:none;margin:18px 0 0;padding:16px 0 0;display:grid;gap:12px;
-  border-top:1px solid var(--hair)}
-.leg li{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:baseline}
-/* o tracinho da legenda usa a MESMA cor da curva: e' o unico jeito de ligar
-   as duas coisas sem escrever "a linha cinza e'..." */
-.leg li:before{content:"";width:20px;height:4px;border-radius:2px;background:var(--c);
-  transform:translateY(-3px)}
-.leg b{font-family:var(--fd);font-weight:700;letter-spacing:-.02em;
-  font-size:clamp(.98rem,2vw,1.1rem);color:var(--ink)}
-.leg span{grid-column:2;font-size:.95rem;line-height:1.45;color:var(--mut)}
-/* ── OS ROTULOS DOS EIXOS, POR FORA DO DESENHO (cliente 23/09) ──
-   Eram texto VERTICAL posicionado dentro da area do grafico, e "lancamento"
-   caia exatamente em cima do pontilhado e da curva. Agora sao tres linhas
-   horizontais na moldura: "vendas" em cima a esquerda, "lancamento" embaixo
-   no ponto do pontilhado (x=92 de 640 = 14,4%) e "tempo" embaixo a direita.
-   Com isso o desenho pode crescer a vontade sem esbarrar em texto. */
-.graf{position:relative;padding:16px 0 26px}
-.graf svg{display:block;width:100%;overflow:visible}
-.rot-y,.rot-x,.rot-lanc{position:absolute;font-family:var(--fd);font-weight:700;
-  font-size:.6rem;line-height:1;letter-spacing:.14em;text-transform:uppercase;
-  white-space:nowrap;pointer-events:none;color:var(--dim)}
-.rot-y{top:0;left:0}
-.rot-x{bottom:8px;right:0}
-.rot-lanc{bottom:8px;left:14.4%;transform:translateX(-50%);color:var(--mut)}
-/* 23/09: a nota era miuda demais e o cliente pediu ela visivel. Ela e a
-   conclusao da secao, nao um rodape de grafico. */
-.nota-conta{margin:30px auto 0;max-width:48ch;text-align:center;
-  font-size:clamp(1.02rem,2vw,1.2rem);line-height:1.5;color:var(--ink);font-weight:500}
 @media(max-width:560px){
-  .rot-y,.rot-x,.rot-lanc{font-size:.54rem;letter-spacing:.08em}
-  .uno{padding:20px 18px 18px}
-}
-
-/* o brilho da terceira curva estoura a caixa; clipar evita barra de rolagem */
-.conta-sec{overflow-x:clip;position:relative}
+    }
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
 .offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
@@ -699,19 +620,6 @@ header + section{border-top:0}
 a.btn[href="#compra"]{background:var(--go);color:#fff;box-shadow:4px 4px 0 var(--ink)}
 a.btn[href="#compra"]:hover,a.btn[href="#compra"]:focus-visible{background:var(--go2);color:#fff}
 
-/* ---- a conta em curva: os traços foram desenhados pra fundo preto ---- */
-/* ⚠️ dentro do cartao verde a frase tem que ser BRANCA. Esta regra mora depois
-   da que pinta o cartao, entao e ela que manda: deixar var(--go) aqui fazia a
-   frase sumir em verde sobre verde. */
-/* no creme o apagado de .32 sumia de vez; .55 ainda hierarquiza e continua legivel */
-/* 🚫 o apagado por rolagem morreu quando as contas viraram tres colunas.
-   Lado a lado elas sao lidas DE UMA VEZ; apagar duas quebra a comparacao,
-   que e a secao inteira. Esta regra sobreviveu a troca e lavava os dois
-   primeiros cartoes. */
-.graf svg path[stroke="#2C2C33"]{stroke:var(--hair)}
-.rot-y,.rot-x{color:var(--dim)}
-.rot-lanc{color:var(--mut)}
-
 /* ---- sessão e prova ---- */
 .hora{background:var(--offc)}
 .hl{border-top:1px solid var(--hair)}
@@ -861,7 +769,10 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
              vagas nao forem acompanhadas e a pagina continuar no ar depois delas
              acabarem, a escassez vira mentira e leva o resto da pagina junto.
              ============================================================ -->
-        <p class="vagas"><b>Somente 20 vagas</b><span>Se você fechar, a vaga fica para o próximo autor que chegar aqui.</span></p>
+        <!-- ⚠️ A MESMA FRASE DOS DOIS LADOS (cliente 23/09). A faixa dizia
+             "Somente 20 vagas" e o rodape "20 vagas a cada mes": um numero
+             absoluto e um mensal, na mesma pagina. -->
+        <p class="vagas"><b>Apenas 20 vagas disponíveis por mês</b><span>Se você fechar, a vaga fica para o próximo autor que chegar aqui.</span></p>
         <!-- 23/09: sairam daqui o nome do produto e a lista das tres entregas.
              O cliente cortou: quem ja assistiu o video nao precisa da ficha
              tecnica de novo, e o card vira so o gesto de comprar. -->
@@ -1057,77 +968,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </section>
 
-<!-- ============================================================
-     A MATEMÁGICA (espinha da oferta e do vídeo, cliente 08/09).
-     Dá o crédito inteiro pro 90D ("você sabe lançar") e abre a única
-     variável que ele não toca: o livro. É a dor nº1 ("meu livro presta?")
-     voltando sem assustar, porque a fórmula fala de PERMANÊNCIA, não de
-     julgamento. "Esquecido" é vocabulário-âncora da marca (19 vídeos).
-     ⚠️ ESCOPO: "bom de verdade" NÃO é "bem escrito". A call não lê o
-     manuscrito. É o livro como projeto (profissional × amador, vocabulário da
-     Dany). A linha final e o FAQ "vocês vão ler o meu livro?" travam isso,
-     senão a pessoa espera leitura crítica e a sessão vira reembolso.
-
-     ⚠️ 23/09: ESTA SEÇÃO FOI MOVIDA PARA DEPOIS DO BLOCO DE PREÇO
-     (pedido do cliente). Antes ela vinha logo depois do herói, com a regra de
-     que a conta (o que está em jogo) precisava vir antes da oferta. A ordem
-     agora é outra: quem abre a necessidade é o VÍDEO, no topo, e a conta virou
-     o argumento de quem chegou até o preço e não comprou. Se um dia ela voltar
-     pra cima, é esta nota que explica por que ela estava lá.
-
-     ⚠️ O TÍTULO NÃO PODE ENTREGAR O RESULTADO. Ele já dizia "só uma muda a
-     vida do autor" e três linhas abaixo a terceira conta dizia exatamente
-     "Muda a vida do autor.". Com o spoiler no título a conta vira repetição e
-     a escala não revela nada. O título enquadra; quem conclui é a conta.
-     Título atual é do cliente (23/09): "A conta que ninguém faz". Uma
-     linha só, sem rótulo em versalete: a seção não precisa dos dois.
-     ⚠️ TUDO CENTRALIZADO. A página inteira é centralizada e esta seção não é
-     exceção. Quem hierarquiza aqui é a ESCALA, não o alinhamento. -->
-<section class="conta-sec">
-  <div class="w">
-    <div class="meio">
-      <!-- o rabisco vai em "ninguém": é a palavra que diz que a conta foi
-           ESCONDIDA de você, que é o gancho da seção. Em "te conta" ele
-           marcaria o trocadilho, que é mais bonitinho e menos útil; na
-           frase inteira ele desequilibra um título centrado. -->
-      <h2>A conta que <span class="risco">ninguém</span> faz</h2>
-    </div>
-    <!-- VERSAO 2 (cliente 23/09): UM grafico so, com as tres curvas no mesmo
-         eixo, e a legenda embaixo. E' a unica montagem em que as tres contas
-         sao comparaveis de verdade: antes eram tres desenhos separados, cada
-         um com a propria escala implicita, e a pessoa tinha que comparar de
-         memoria. Aqui a distancia entre as curvas E' o argumento.
-         ⚠️ Os rotulos dos eixos ficam POR FORA do desenho. Eram texto vertical
-         dentro da area do grafico e "lancamento" caia em cima do pontilhado. -->
-    <div class="uno">
-      <div class="graf">
-        <span class="rot-y">vendas</span><span class="rot-lanc">lançamento</span><span class="rot-x">tempo</span>
-        <svg viewBox="0 0 640 108" preserveAspectRatio="none" fill="none" aria-hidden="true">
-          <line x1="1" y1="2" x2="1" y2="104" stroke="var(--hair)" stroke-width="1"></line>
-          <line x1="1" y1="104" x2="640" y2="104" stroke="var(--hair)" stroke-width="1"></line>
-          <line x1="92" y1="2" x2="92" y2="104" stroke="rgba(25,23,20,.28)" stroke-width="1" stroke-dasharray="4 5"></line>
-          <path d="M0 100 L92 100 C110 100 116 90 130 90 C144 90 152 99 170 100 L640 101" stroke="#7D8B99" stroke-width="2.4" stroke-linecap="round"></path>
-          <path d="M0 100 L92 100 C114 100 122 26 152 26 C184 26 198 72 240 87 C300 104 350 96 420 98 L640 99" stroke="#E0574A" stroke-width="2.4" stroke-linecap="round"></path>
-          <path d="M0 100 L92 100 C112 100 119 11 150 11 C176 11 188 42 214 46 C278 51 330 40 402 30 C482 19 560 9 640 2" stroke="#1E7D46" stroke-width="3.4" stroke-linecap="round"></path>
-          <circle cx="636" cy="2" r="5" fill="#1E7D46"></circle>
-        </svg>
-      </div>
-      <ul class="leg">
-        <li style="--c:#7D8B99"><b>Livro bom + lançamento ruim</b><span>Ninguém descobre.</span></li>
-        <li style="--c:#E0574A"><b>Livro ruim + lançamento bom</b><span>Vende no lançamento. Depois, esquecido.</span></li>
-        <li style="--c:#1E7D46"><b>Livro bom + lançamento bom</b><span>Muda a vida do autor.</span></li>
-      </ul>
-    </div>
-    <!-- ⚠️ Copy do cliente (14/09). Tirei só a vírgula entre sujeito e verbo
-         ("livro bom , está"), que era erro de digitação. As palavras são as dele.
-         ⚠️ Esta linha SUBSTITUIU o aviso de que o gráfico não é dado real. Se
-         alguém sentir falta, o aviso é o que impedia a curva de ser lida como
-         número medido. -->
-    <p class="nota-conta">A diferença para um livro bom está muitas vezes em
-    detalhes que o autor nem sabe que existem.</p>
-  </div>
-</section>
-
 <!-- O ultimo pedido da pagina, colado no rodape, logo depois da conta.
      Verde, porque na direcao B verde e comprar, e aponta pra #compra, que e o
      card la em cima com o widget.
@@ -1143,7 +983,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section class="fecho">
   <div class="w meio">
     <a class="btn" href="#compra">Quero garantir minha vaga</a>
-    <p class="sub-cta">Apenas 20 vagas disponíveis a cada mês.</p>
+    <p class="sub-cta">Apenas 20 vagas disponíveis por mês.</p>
   </div>
 </section>
 
