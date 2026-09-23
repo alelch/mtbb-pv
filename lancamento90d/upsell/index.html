@@ -265,14 +265,9 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    por postMessage). So damos largura e o respiro do scroll, pra barra fixa
    nao cobrir ele quando os outros CTAs rolam ate aqui. */
 .funil{margin:26px 0 8px}
-/* a copia do topo: mesma largura do video, pra os dois lerem como um bloco so */
-.funil-topo{max-width:392px;margin:18px auto 0}
-.vagas-topo{max-width:44ch;margin:14px auto 0;text-align:center;font-size:.92rem;
-  line-height:1.5;color:var(--mut)}
-.vagas-topo b{color:var(--red);font-weight:700}
-/* a linha abaixo do botao final: mesma familia da escassez do topo */
-.sub-cta{margin:16px 0 0;font-size:.92rem;line-height:1.5;color:var(--mut)}
 #compra{scroll-margin-top:96px}
+/* a linha abaixo do botao final */
+.sub-cta{margin:16px 0 0;font-size:.92rem;line-height:1.5;color:var(--mut)}
 #hotmart-sales-funnel iframe{width:100%;border:0;display:block}
 
 /* ════════════════════════════════════════════════════════════
@@ -284,10 +279,13 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
      .serifa    Fraunces itálico 500, o segundo verso do título
      .risco     o rabisco à mão sob a palavra-chave
      .btn       pílula, Space Grotesk 700, 21px 40px, raio 999
+     .offer-box cartão arredondado de raio 20, centrado, com .promessa,
+                .conquistas (o check feito de bordas) e .price .val enorme
      .faq       fios em cima e embaixo, seta que gira ao abrir
      section    80px de respiro; .w com 1120 e 22 de padding
-   ⚠️ 23/09: a caixa de oferta (.offer-box) saiu da página. Quem vende agora é
-   o widget da Hotmart abaixo do vídeo, e ele desenha o próprio bloco. */
+   A diferença de lá pra cá é só a cor: no front a caixa da oferta é o verde
+   sobre papel claro; aqui ela é o creme sobre o escuro. Em cada página ela é
+   a única coisa que inverte, que é o que faz a oferta pular. */
 .eyebrow{font-family:var(--fd);font-size:.78rem;font-weight:700;letter-spacing:.18em;
   text-transform:uppercase;color:var(--ac);margin:0 0 16px}
 .serifa{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:500;letter-spacing:-.02em}
@@ -326,6 +324,31 @@ header + section{border-top:1px solid var(--ru)}
    pro ponto de partida, so que com mais cores.
    ⚠️ Contraste sobre #191920: #25A85A da 4,6:1, #F06A2A da 6,3:1.
    ════════════════════════════════════════════════════════════ */
+/* o card da oferta e escuro: os valores claros do .offer-box sao revertidos */
+.bloco-preco .offer-box{background:var(--pa2);color:var(--ink);
+  border:1px solid var(--ru);box-shadow:none}
+.bloco-preco .offer-box .promessa{border-bottom-color:var(--ru)}
+.bloco-preco .offer-box .conquistas li{color:var(--mut)}
+.bloco-preco .offer-box .conquistas li b{color:var(--ink)}
+.bloco-preco .offer-box .conquistas li:before{border-color:var(--go)}
+.bloco-preco .esc{color:var(--dim)}
+
+/* a garantia, dentro do bloco: selo verde, porque garantia e do lado de comprar */
+/* ── A GARANTIA, VERSÃO CARIMBO (G2, cliente 23/09) ──────────
+   O selo era verde sobre branco DENTRO de uma seção verde, e por isso sumia,
+   justamente sendo o elemento que devia gritar "garantia". Agora ele e' PRETO
+   com o numero em amarelo e um anel tracejado por dentro: preto e' a unica
+   cor que aparece nos dois fundos da pagina, e o tracejado da ao circulo cara
+   de carimbo em vez de cara de icone. */
+.bloco-preco .gar{max-width:660px;margin:26px auto 0;padding:24px 28px;gap:24px}
+.bloco-preco .gar .selo{position:relative;width:88px;height:88px;background:var(--ink);
+  border:0;color:var(--grifo)}
+.bloco-preco .gar .selo:before{content:"";position:absolute;inset:5px;border-radius:50%;
+  border:1.5px dashed rgba(255,216,77,.55)}
+.bloco-preco .gar .selo b{font-size:1.5rem}
+.bloco-preco .gar .selo i{color:#fff;font-size:.5rem;letter-spacing:.16em;margin-top:5px}
+.bloco-preco .gar h3{font-size:1.2rem;line-height:1.25}
+
 /* ⭐ VERDE = COMPRAR, e isso vale na pagina inteira. Sem isto o preco seria
    verde aqui e o botao que leva ate ele continuaria ambar duas secoes acima,
    que e exatamente o problema que a direcao veio resolver. */
@@ -504,6 +527,34 @@ html.js .conta{transition:none}
 /* o brilho da terceira curva estoura a caixa; clipar evita barra de rolagem */
 .conta-sec{overflow-x:clip;position:relative}
 
+/* a caixa da oferta: o .offer-box do front, invertido para creme */
+.offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
+  border:0;border-radius:20px;padding:clamp(34px,5vw,52px);text-align:center;
+  box-shadow:0 34px 76px -36px rgba(0,0,0,.75)}
+.offer-box .promessa{font-family:var(--fd);font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.18rem,2.5vw,1.5rem);line-height:1.2;margin:0 0 30px;padding-bottom:28px;
+  border-bottom:1px solid rgba(20,19,18,.16)}
+.offer-box .conquistas{list-style:none;padding:0;margin:0 0 32px;text-align:left;display:grid;gap:16px}
+.offer-box .conquistas li{position:relative;padding-left:30px;font-size:1rem;
+  color:rgba(20,19,18,.74);line-height:1.45}
+.offer-box .conquistas li b{color:var(--offtx);font-weight:700}
+.offer-box .conquistas li:before{content:"";position:absolute;left:5px;top:.34em;width:7px;height:13px;
+  border-right:2px solid var(--offtx);border-bottom:2px solid var(--offtx);transform:rotate(40deg)}
+.offer-box .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0 4px}
+.offer-box .price .cur{font-size:1.15rem;color:rgba(20,19,18,.7)}
+.offer-box .price .val{font-family:var(--fd);font-size:clamp(3.4rem,10vw,5.4rem);font-weight:700;
+  line-height:1;letter-spacing:-.045em;color:var(--offtx)}
+.offer-box .inst{color:rgba(20,19,18,.74);font-size:.98rem;margin:0 0 4px}
+.offer-box .inst b{color:var(--offtx)}
+.offer-box .obs{font-size:.8rem;color:rgba(20,19,18,.5);margin:0 0 26px}
+.offer-box .btn{box-shadow:0 10px 24px -14px rgba(20,19,18,.6)}
+.offer-box .btn:hover{box-shadow:0 16px 30px -14px rgba(20,19,18,.5)}
+.recusa{display:block;width:100%;margin:16px 0 0;background:none;border:0;font:400 .92rem/1.5 var(--ff);
+  color:rgba(20,19,18,.55);text-decoration:underline;cursor:pointer}
+.pix + .esc{margin-top:26px}
+.esc{margin:22px auto 0;max-width:62ch;font-size:.88rem;line-height:1.66;color:rgba(20,19,18,.6)}
+.esc+.esc{margin-top:12px}
+
 /* ── A SAIDA DO PIX ──────────────────────────────────────────
    DENTRO do card, logo abaixo do widget. Ela e a alternativa ao botao de
    cima, nao um bloco a parte: fora do card virava uma terceira caixa
@@ -520,7 +571,21 @@ html.js .conta{transition:none}
    margem negativa igual ao padding do card. Amarelo porque e' a unica cor da
    pagina que nao tem papel de acao: verde e comprar, laranja e o PIX, e o
    amarelo era so o grifo. Aqui ele vira aviso. */
-.pix{max-width:392px;margin:22px auto 0;padding:0;text-align:center}
+/* ⚠️ o card tem padding VERTICAL diferente do horizontal no celular (30px 22px),
+   entao a sangria precisa de duas variaveis. Com uma so, a faixa descolava 8px
+   do topo justamente na tela pequena. */
+.vagas{--pad:clamp(34px,5vw,52px);--padV:clamp(34px,5vw,52px);
+  margin:calc(-1 * var(--padV)) calc(-1 * var(--pad)) 26px;
+  padding:13px var(--pad);background:var(--grifo);color:var(--ink);
+  border-bottom:2px solid var(--ink);border-radius:24px 24px 0 0;
+  display:flex;gap:12px;align-items:baseline;justify-content:center;flex-wrap:wrap;text-align:center}
+.vagas b{font:700 1.14rem/1 var(--fd);letter-spacing:-.02em}
+.vagas span{font-size:.92rem;line-height:1.3}
+
+.pix{--pad:clamp(34px,5vw,52px);
+  margin:26px calc(-1 * var(--pad)) 0;padding:26px var(--pad) 28px;
+  text-align:center;background:rgba(240,106,42,.09);
+  border-top:1px solid rgba(240,106,42,.3);border-bottom:1px solid rgba(240,106,42,.3)}
 .pix .q{margin:0 0 18px;font-family:var(--fd);font-weight:700;color:var(--ink);
   letter-spacing:-.03em;line-height:1.2;font-size:clamp(1.14rem,2.6vw,1.5rem)}
 .pix .btn{width:100%;max-width:440px;font-size:clamp(.98rem,2.2vw,1.1rem);padding:20px 30px;
@@ -528,6 +593,18 @@ html.js .conta{transition:none}
 .pix .btn:hover,.pix .btn:focus-visible{background:var(--alt2);color:#fff;
   box-shadow:0 18px 38px -14px rgba(240,106,42,.8)}
 .pix .d{margin:14px auto 0;max-width:46ch;font-size:.84rem;line-height:1.5;color:var(--dim)}
+
+/* garantia */
+.gar{max-width:660px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:22px;
+  align-items:center;text-align:left;border:1px solid var(--ru);border-radius:var(--r);
+  padding:26px 28px}
+.gar .selo{width:84px;height:84px;border-radius:50%;border:2px solid var(--ac);display:grid;
+  place-content:center;text-align:center;color:var(--ac)}
+.gar .selo b{display:block;font-family:var(--fd);font-weight:700;font-size:1.3rem;line-height:1}
+.gar .selo i{font-style:normal;font-family:var(--fd);font-weight:700;font-size:.52rem;
+  letter-spacing:.14em}
+.gar h3{font-family:var(--fd);font-weight:700;font-size:1.12rem;letter-spacing:-.02em;line-height:1.25}
+.gar p{margin:7px 0 0;color:var(--mut);font-size:.95rem}
 
 /* ── A SESSÃO, EM TRÊS CARTÕES ──────────────────────────────
    Escolha do cliente (3a). A copy e' dele; aqui e' so a arrumacao.
@@ -632,7 +709,9 @@ section.alt .prova{background:var(--offc)}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 
 /* ---- os objetos: borda preta e sombra solida ---- */
-.prova,.passos ol{border:2px solid var(--ink);border-radius:var(--r);
+.offer-box{border:2px solid var(--ink);border-radius:26px;
+  box-shadow:9px 9px 0 rgba(12,48,28,.55)}
+.gar,.hora,.prova,.passos ol{border:2px solid var(--ink);border-radius:var(--r);
   box-shadow:4px 4px 0 var(--ink)}
 .player{border:2px solid var(--ink);border-radius:26px;box-shadow:7px 7px 0 rgba(25,23,20,.2)}
 .btn{border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
@@ -659,8 +738,26 @@ header + section{border-top:0}
 .passos .agora{background:var(--go);color:#fff}
 .passos .agora .n{background:#fff;color:var(--go);border-color:#fff}
 
-/* ---- a saída do PIX, logo abaixo do widget ---- */
-.pix{background:none;border:0}
+/* ---- o bloco de oferta: cartão branco, logo abaixo do vídeo ---- */
+.bloco-preco .offer-box{background:var(--offc);color:var(--ink);margin:26px auto 0}
+.bloco-preco .offer-box .promessa{border-bottom:2px solid var(--ink);color:var(--ink)}
+.bloco-preco .offer-box .conquistas li{color:#4A443B}
+.bloco-preco .offer-box .conquistas li b{color:var(--ink)}
+.bloco-preco .offer-box .conquistas li:before{border-color:var(--go)}
+.bloco-preco .esc{color:var(--dim)}
+.bloco-preco .gar{background:var(--offc);color:var(--ink);
+  box-shadow:4px 4px 0 var(--ink)}
+/* 🚫 AQUI TINHA UMA SEGUNDA REGRA DO SELO (verde, 68px) que vencia a do
+   carimbo la em cima por vir depois no arquivo, com a MESMA especificidade.
+   Mesmo tipo de bug que quebrou o pill: trocar um componente nao basta,
+   e preciso procurar o seletor repetido. O selo agora e definido num lugar so. */
+.bloco-preco .gar h3{color:var(--ink)}
+.bloco-preco .gar p{color:var(--mut)}
+
+/* ---- a saída do PIX, faixa dentro do cartão ---- */
+/* sem filete entre o widget e esta faixa (cliente 23/09): os dois sao o mesmo
+   gesto de comprar, e a linha separava o que devia ler junto. */
+.pix{background:none;border-top:0;border-bottom:0;padding-top:6px;padding-bottom:10px}
 .pix .q{color:var(--ink)}
 .pix .btn{background:var(--alt);color:#fff}
 .pix .btn:hover,.pix .btn:focus-visible{background:var(--alt2);color:#fff}
@@ -710,7 +807,8 @@ footer{border-top:2px solid var(--ink);color:var(--mut)}
 .sticky .btn:hover{background:var(--go2);color:#fff}
 
 @media(max-width:760px){
-  .prova,.passos ol,.btn{box-shadow:3px 3px 0 var(--ink)}
+  .offer-box{box-shadow:6px 6px 0 rgba(12,48,28,.55)}
+  .gar,.hora,.prova,.passos ol,.btn{box-shadow:3px 3px 0 var(--ink)}
 }
 footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-family:var(--fd);
   font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
@@ -730,7 +828,16 @@ footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-fami
   .provas{grid-template-columns:1fr}
 }
 @media (max-width:820px){
+  .gar{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .gar .selo{margin-bottom:4px}
   .hl{grid-template-columns:72px 1fr;gap:14px;padding:18px 18px}
+  .offer-box{padding:30px 22px}
+  .vagas{--pad:22px;--padV:30px;border-radius:18px 18px 0 0}
+  /* a faixa do PIX sangra ate a borda do card, entao o recuo dela tem que
+     acompanhar o padding do card. Sem esta linha ela usava os 34px do desktop
+     e vazava 11px pra cada lado no celular. */
+  .pix{--pad:22px}
+  .offer-box .price .val{font-size:clamp(3rem,16vw,4rem)}
   .btn{padding:19px 26px;font-size:1.02rem}
   .sticky{display:flex}
   body{padding-bottom:84px}
@@ -810,47 +917,107 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       </script>
     </div>
     <!-- ============================================================
-         O WIDGET DA HOTMART, logo abaixo do video. E' o UNICO ponto de compra
-         da pagina (cliente 23/09): o card de preco que existia la embaixo saiu
-         inteiro, com lista, preco escrito e garantia. Todos os CTAs rolam de
-         volta pra ca (#compra).
-         Quem diz o preco e' o proprio widget. A pagina nao escreve mais valor
-         em lugar nenhum, entao nao tem como ela discordar do checkout.
+         O BLOCO DE PRECO, LOGO ABAIXO DO VIDEO (cliente 23/09). Ele morava
+         numa secao verde la embaixo; subiu inteiro pra ca, com a garantia
+         atras. A pagina passa a ter um ponto de compra so.
+         O PRECO ESCRITO SAIU: quem mostra valor e' o widget da Hotmart.
          ============================================================ -->
-    <div class="funil funil-topo" id="compra"><div id="hotmart-sales-funnel"></div></div>
-    <!-- A escassez logo abaixo do botao do widget (cliente 23/09): ela chega
-         no momento em que a pessoa esta com o dedo no botao. -->
-    <p class="vagas-topo"><b>Apenas 20 vagas disponíveis por mês.</b><br>
-    Ao fechar a página, a vaga vai automaticamente para o próximo autor.</p>
+    <div class="bloco-preco">
+      <div class="offer-box">
+        <!-- ============================================================
+             A ESCASSEZ, TRAZIDA DA VSL (23/09). O roteiro sempre disse "vinte
+             vagas" e "quando elas acabam, essa pagina deixa de existir", e a
+             pagina nao falava em numero nenhum. Quem ouve o video e le a pagina
+             recebia duas versoes do mesmo aviso, uma delas sem forca.
+             Faixa no TOPO do card, sangrando ate a borda, em amarelo: e' a
+             primeira coisa que a pessoa ve do bloco de preco.
+             ⚠️ O NUMERO TEM QUE SER VERDADE E TEM QUE SER CONTROLADO. Se as 20
+             vagas nao forem acompanhadas e a pagina continuar no ar depois delas
+             acabarem, a escassez vira mentira e leva o resto da pagina junto.
+             ============================================================ -->
+        <p class="vagas"><b>20 vagas por mês</b><span>Quando elas acabam, esta página deixa de existir.</span></p>
+        <p class="promessa">Diagnóstico do Autor</p>
+        <!-- 🚫 NAO VOLTAR com "tres frentes de lancamento, entre quinze".
+             O numero vinha do briefing e das versoes v1, v4 e v6 do roteiro,
+             mas a v5, que e a que esta em uso, ABANDONOU ele: ela diz so "quais
+             frentes combinam com voce" e enumera NOVE em voz alta. E a lista
+             das quinze nao existe em documento nenhum. A pagina estava
+             afirmando um numero que ninguem sustenta. Cortado pelo cliente. -->
+        <ul class="conquistas">
+          <li><b>Uma sessão de até 1h30 no Zoom</b>, só sobre o seu livro</li>
+          <li><b>Um plano de ação</b>, com o que consertar primeiro e o que deixar pra depois</li>
+          <li><b>A gravação da sessão inteira</b>, pra rever quando estiver executando</li>
+        </ul>
+        <!-- ============================================================
+             HOTMART — Sales Funnel Widget (22/09). Ele renderiza o aceite E a
+             recusa dentro de um iframe, com compra de UM CLIQUE: o comprador
+             nao digita cartao de novo, porque a Hotmart reusa o pagamento da
+             compra do 90D. Por isso o botao de aceite e o de recusa que existiam
+             aqui sairam: seriam dois caminhos de compra concorrendo no mesmo
+             bloco.
+             ⚠️ O widget NAO aceita oferta. Diferente do inlineCheckout da mesma
+             lib, o salesFunnel nao manda `off=`: quem decide produto e PRECO e o
+             funil configurado na Hotmart. Por isso a pagina nao escreve mais
+             valor nenhum (cliente 23/09): quem diz o preco e' o widget, e assim
+             nao existe texto nosso que possa discordar do checkout.
+             ============================================================ -->
+        <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
+        <!-- ============================================================
+             A SAIDA DO PIX, dentro do card e logo abaixo do widget, chamativa
+             de proposito (pedido do cliente 23/09, com referencia).
+             Por que ela merece esse peso: o widget da Hotmart so fecha de um
+             clique quem comprou o 90D no CARTAO, porque e o cartao salvo que ele
+             recobra. Quem pagou no PIX ve o formulario nao carregar e, se esta
+             saida for discreta, simplesmente nao compra. Nao e um link de rodape,
+             e o unico caminho de uma fatia inteira do publico.
+             Fica SEMPRE visivel: quem pagou no PIX nao sabe que aquele formulario
+             nunca vai carregar pra ele.
+             A pergunta se auto-qualifica ("comprou no PIX?"), e a linha miuda
+             existe pra quem pagou no cartao nao vir por aqui e pagar de novo sem
+             o desconto de um clique.
+             O href e' montado pelo script no fim do body, com o xcod da VTurb.
+             ============================================================ -->
+        <div class="pix">
+          <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+          <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão <span aria-hidden="true">&rarr;</span></a>
+          <p class="d">Só para quem pagou no PIX. Quem pagou no cartão fecha no botão acima, em um clique.</p>
+        </div>
+        <!-- 23/09: a escassez foi de cinco linhas pra duas (cliente). Sairam a
+             que explicava que a oferta so existe aqui (a pagina inteira ja diz
+             isso) e a da agenda do time. Ficou so a consequencia, que e a parte
+             que age: se fechar, perde. -->
+        <p class="esc">Esta oferta não está no site e não é vendida avulsa.<br>
+        Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p>
+      </div>
 
-    <!-- ============================================================
-         A SAIDA DO PIX, logo abaixo do widget, e chamativa de proposito
-         (pedido do cliente 23/09, com referencia). Ela morava dentro do card
-         de preco; o card saiu em 23/09 e ela seguiu o widget pra ca.
-         Por que ela merece esse peso: o widget da Hotmart so fecha de um
-         clique quem comprou o 90D no CARTAO, porque e o cartao salvo que ele
-         recobra. Quem pagou no PIX ve o formulario nao carregar e, se esta
-         saida for discreta, simplesmente nao compra. Nao e um link de rodape,
-         e o unico caminho de uma fatia inteira do publico.
-         Fica SEMPRE visivel: quem pagou no PIX nao sabe que aquele formulario
-         nunca vai carregar pra ele.
-         A pergunta se auto-qualifica ("comprou no PIX?"), e a linha miuda
-         existe pra quem pagou no cartao nao vir por aqui e pagar de novo sem
-         o desconto de um clique.
-         O href e' montado pelo script no fim do body, com o xcod da VTurb.
-         ============================================================ -->
-    <div class="pix">
-      <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
-      <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão <span aria-hidden="true">&rarr;</span></a>
-      <p class="d">Só para quem pagou no PIX. Quem pagou no cartão fecha no botão acima, em um clique.</p>
+      <!-- A GARANTIA, colada no preco. Ela morava numa secao propria logo
+           depois do PRECO 1; com o PRECO 1 fora (23/09) ela passou a aparecer
+           ANTES de a pagina dizer quanto custa, prometendo devolver um dinheiro
+           que a pessoa ainda nao sabia que ia gastar. Aqui a ordem volta a ser
+           a certa: custa, e entao o risco e zero. -->
+      <div class="gar">
+        <div class="selo"><b>100%</b><i>DE VOLTA</i></div>
+        <div>
+          <!-- ⚠️ CONDICIONADA À PRESENÇA (cliente, 23/09). Antes era "se ao fim da
+               sessão", que juntava consumo TOTAL do produto com zero condição: a
+               pessoa usava a sessão inteira e pedia o dinheiro de volta, e nem
+               precisava ter aparecido. "Se você fizer a sessão" fecha essa porta
+               com duas palavras, e não enfraquece nada pra quem vai de verdade.
+               ⏳ A REGRA AINDA NÃO EXISTE na operação (pendência). E a Hotmart
+               devolve sozinha só por 7 dias: se a sessão cair no dia 20, o
+               reembolso vira processo manual do time. -->
+          <h3>Se você fizer a sessão e ao final achar que não valeu, devolvemos</h3>
+          <p>Sem justificar, sem formulário, sem falar com três pessoas.</p>
+        </div>
+      </div>
     </div>
     <p class="cue">Role para ver a conta ↓</p>
   </div>
 </header>
 
-<!-- 23/09: saíram daqui a seção "A pergunta do começo" e o PREÇO 1; mais
-     tarde no mesmo dia saiu também o PREÇO 2, o card inteiro. A página não
-     tem mais bloco de preço: o único ponto de compra é o widget do topo.
+<!-- 23/09: saíram daqui a seção "A pergunta do começo" e o PREÇO 1.
+     A página estava longa e o cliente cortou. Agora existe UM bloco de preço
+     só, o da recapitulação, que é o que tem o widget da Hotmart.
      A pergunta continua viva onde ela nasceu: é a H1 do topo, e quem a
      responde é o vídeo. Repetir ela em seção própria era responder duas
      vezes a mesma coisa, uma delas sem o vídeo junto. -->
