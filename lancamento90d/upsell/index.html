@@ -162,30 +162,33 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    texto que explicam: a pessoa lia "passo 2" antes de saber que existe um
    pedido em aberto. Agora são uma pílula dentro do herói, encostada no
    parabéns, e leem como legenda dele.
+   23/09: o cliente pediu ela MAIOR, ocupando 80% da largura. Com os três
+   passos dividindo o espaço em partes iguais (flex:1), o passo de agora ganha
+   um terço inteiro preenchido, que é o que dá o peso.
    O passo 2 é o único preenchido, porque é onde ela está. */
-.passos{display:flex;justify-content:center;margin:0 0 22px}
-.passos ol{display:inline-flex;align-items:center;gap:4px;list-style:none;margin:0;padding:5px;
-  border:1px solid var(--ru);border-radius:999px;background:var(--pa2);
-  max-width:100%;overflow:hidden}
-.passos li{display:flex;align-items:center;gap:7px;padding:6px 13px 6px 7px;border-radius:999px;
-  font:700 12.5px/1 var(--ff);color:var(--dim);white-space:nowrap;min-width:0}
-.passos .n{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-content:center;
-  font:700 11px/1 var(--ff);border:1.5px solid currentColor}
+.passos{display:flex;justify-content:center;margin:0 0 26px}
+.passos ol{display:flex;align-items:stretch;gap:6px;list-style:none;margin:0;padding:6px;
+  width:80%;border:1px solid var(--ru);border-radius:999px;background:var(--pa2)}
+.passos li{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;
+  padding:11px 14px;border-radius:999px;font:700 14px/1.15 var(--ff);color:var(--dim);
+  white-space:nowrap;min-width:0}
+.passos .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-content:center;
+  font:700 12.5px/1 var(--ff);border:1.5px solid currentColor}
 .passos .t{overflow:hidden;text-overflow:ellipsis}
 .passos .feito{color:var(--mut)}
 .passos .feito .n{background:var(--mut);color:var(--pa2);border-color:var(--mut)}
 /* o passo de agora: preenchido, e o unico com peso */
 .passos .agora{background:var(--ac);color:var(--pilltx)}
 .passos .agora .n{background:var(--pilltx);color:var(--ac);border-color:var(--pilltx)}
-@media(max-width:640px){
-  .passos{margin-bottom:18px}
-  .passos ol{padding:4px}
-  .passos li{padding:6px 10px 6px 6px;font-size:11.5px;gap:6px}
-  .passos .n{width:18px;height:18px;font-size:10px}
-  /* no celular a pilula nao cabe com os tres nomes: os ja feitos e os que
-     ainda vem viram so o numero, e o de agora mantem o nome. */
+@media(max-width:760px){
+  .passos{margin-bottom:20px}
+  .passos ol{width:100%;padding:5px;gap:4px}
+  .passos li{padding:10px 8px;font-size:12px;gap:7px}
+  .passos .n{width:21px;height:21px;font-size:11px}
+  /* os tres nomes nao cabem: os passos feito e futuro viram so o numero e
+     encolhem, e o de agora fica com o espaco que sobra. */
+  .passos li:not(.agora){flex:0 0 auto;padding:10px}
   .passos li:not(.agora) .t{display:none}
-  .passos li:not(.agora){padding:6px}
 }
 
 /* abertura */
