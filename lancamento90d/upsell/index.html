@@ -603,6 +603,7 @@ html.js .conta{transition:none}
   letter-spacing:.14em}
 .gar h3{font-family:var(--fd);font-weight:700;font-size:1.12rem;letter-spacing:-.02em;line-height:1.25}
 .gar p{margin:7px 0 0;color:var(--mut);font-size:.95rem}
+.gar .prazo{margin-top:9px;font-size:.82rem;line-height:1.45;color:var(--dim)}
 
 /* ── A SESSÃO, EM TRÊS CARTÕES ──────────────────────────────
    Escolha do cliente (3a). A copy e' dele; aqui e' so a arrumacao.
@@ -975,6 +976,12 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
                reembolso vira processo manual do time. -->
           <h3>Se você fizer a sessão e ao final achar que não valeu,<br>envie um email e devolvemos 100%</h3>
           <p>Sem justificar, sem formulário, sem falar com três pessoas.</p>
+          <!-- ⏳ O PRAZO, escrito (cliente 23/09). "O que ocorrer por ultimo"
+               e' o que torna a regra honesta: quem marca a sessao pra daqui a
+               tres semanas nao perde a garantia no dia 7. E' tambem o que a
+               Hotmart NAO faz sozinha: ela devolve automatico so nos 7 dias
+               corridos, entao a partir dai o reembolso e' processo do time. -->
+          <p class="prazo">O prazo termina no fim do dia da sessão ou em 7 dias úteis, o que acontecer por último.</p>
         </div>
       </div>
     </div>
