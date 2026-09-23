@@ -141,6 +141,10 @@
   --hair:#DDD5C4;                 /* filete leve, pra separar sem pesar */
   --ac:#EAB82D; --acf:#EAB82D;    /* ambar: so grafico e marca */
   --go:#1E7D46; --go2:#165E35; --alt:#E8622B; --alt2:#C94E1D; --grifo:#FFD84D;
+  /* 23/09: o vermelho vem do logo do Diagnostico. Papel dele na pagina e'
+     ALERTA, nao acao: assim ele nao briga com o verde (comprar) e nao colide
+     com o vermelho do grafico da conta, que significa "vende e e' esquecido". */
+  --red:#CE0E16;
   --off:#FFFFFF; --offtx:#191714; --offc:#FFFFFF; --offb:#191714;
   --pill:#1E7D46; --pilltx:#FFFFFF; --pillh:#191714; --pillhtx:#FFFFFF;
   --play:#191714; --band:#1E7D46; --bandtx:#FFFFFF;
@@ -164,6 +168,18 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 /* A BARRA DE PASSOS é informação, não enfeite: a pessoa acabou de pagar e
    precisa saber, sem procurar, que o pedido tem três etapas e ela está na 2.
    Por isso ela é a coisa mais forte acima da dobra depois da H1. */
+/* ── O AVISO ─────────────────────────────────────────────────
+   A tarja e' vermelha e o resto e' caixa alta em carvao. Vermelho aqui e'
+   ALERTA: e' a unica funcao dele na pagina. */
+.aviso{display:flex;flex-direction:column;align-items:center;gap:9px;margin:0 0 26px}
+.aviso b{display:inline-block;background:var(--red);color:#fff;border:2px solid var(--ink);
+  border-radius:9px;padding:9px 18px;font:700 clamp(.92rem,1.9vw,1.06rem)/1 var(--fd);
+  letter-spacing:.07em;text-transform:uppercase;box-shadow:3px 3px 0 var(--ink)}
+.aviso span{font-family:var(--fd);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.22rem,3.4vw,2rem);line-height:1.1;letter-spacing:-.03em;
+  color:var(--ink);text-align:center}
+@media(max-width:760px){.aviso{margin-bottom:20px;gap:8px}}
+
 /* ── OS PASSOS, EM PÍLULA ────────────────────────────────────
    Eram uma barra colada no topo da página, largura inteira. Ficavam longe do
    texto que explicam: a pessoa lia "passo 2" antes de saber que existe um
@@ -880,6 +896,14 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
          uma PÍLULA aqui dentro, logo acima do parabéns. Na barra eles estavam
          longe demais do texto que explicam, e a pessoa lia "passo 2" sem ter
          lido ainda que existe um pedido em aberto. -->
+    <!-- ============================================================
+         O AVISO DE NAO FECHAR (23/09). Nao e' retorica de upsell: aqui ele e'
+         literal. O widget da Hotmart so carrega com uma COMPRA EM ANDAMENTO,
+         entao atualizar a pagina pode derrubar o formulario de verdade. E o
+         roteiro da VSL ja diz isso em voz alta no primeiro bloco.
+         Vermelho, que na pagina significa ALERTA e mais nada. -->
+    <p class="aviso"><b>⚠ Atenção</b><span>Não feche nem atualize esta página</span></p>
+
     <nav class="passos" aria-label="Etapas da sua compra">
       <ol>
         <li class="feito"><span class="n" aria-hidden="true">✓</span><span class="t">90D garantido</span></li>
