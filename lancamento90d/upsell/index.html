@@ -264,6 +264,9 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .funil{margin:26px 0 8px}
 /* a copia do topo: mesma largura do video, pra os dois lerem como um bloco so */
 .funil-topo{max-width:392px;margin:18px auto 0}
+.vagas-topo{max-width:44ch;margin:14px auto 0;text-align:center;font-size:.92rem;
+  line-height:1.5;color:var(--mut)}
+.vagas-topo b{color:var(--red);font-weight:700}
 #compra{scroll-margin-top:96px}
 #hotmart-sales-funnel iframe,#hotmart-sales-funnel-topo iframe{width:100%;border:0;display:block}
 
@@ -947,6 +950,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
          invalido e o querySelector pegaria so o primeiro).
          ============================================================ -->
     <div class="funil funil-topo" id="compra-topo"><div id="hotmart-sales-funnel-topo"></div></div>
+    <!-- A escassez logo abaixo do botao do widget (cliente 23/09). Repete o
+         que a faixa do card diz la embaixo, mas aqui ela chega no momento em
+         que a pessoa esta com o dedo no botao. -->
+    <p class="vagas-topo"><b>Apenas 20 vagas disponíveis por mês.</b><br>
+    Ao fechar a página, a vaga vai automaticamente para o próximo autor.</p>
     <p class="cue">Role para ver a conta ↓</p>
   </div>
 </header>
@@ -1085,7 +1093,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
            vagas nao forem acompanhadas e a pagina continuar no ar depois delas
            acabarem, a escassez vira mentira e leva o resto da pagina junto.
            ============================================================ -->
-      <p class="vagas"><b>20 vagas</b><span>Quando elas acabam, esta página deixa de existir.</span></p>
+      <p class="vagas"><b>20 vagas por mês</b><span>Quando elas acabam, esta página deixa de existir.</span></p>
       <p class="promessa">Diagnóstico do Autor</p>
       <ul class="conquistas">
         <li><b>Uma sessão de até 1h30 no Zoom</b>, só sobre o seu livro</li>
