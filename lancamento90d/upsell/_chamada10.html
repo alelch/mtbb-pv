@@ -708,6 +708,16 @@ header.hero{padding:14px 0 30px;border-bottom:2px solid var(--ink)}
 /* 10. selo inline */
 .g10{display:inline-block;background:var(--ink);color:var(--grifo);border-radius:7px;
   padding:3px 10px;text-transform:uppercase;letter-spacing:.04em;font-size:.86em}
+
+/* 11. o mesmo pincel da 6, mas na frase inteira */
+.g11{background:linear-gradient(var(--grifo),var(--grifo)) no-repeat;
+  background-size:0 .62em;background-position:0 .62em;animation:pinta .85s .35s ease-out forwards;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media(prefers-reduced-motion:reduce){.g11{animation:none;background-size:100% .62em}}
+/* 12. a mesma coisa, sem animacao: so o grifo na frase inteira */
+.g12{background:linear-gradient(var(--grifo),var(--grifo)) no-repeat;
+  background-size:100% .62em;background-position:0 .62em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
 </style></head>
 <body><div class="rotulo">Versão 1<small>Grifo amarelo atrás de "acelerar em 10x"</small></div><header class="hero"><div class="w"><p class="aviso"><b>⚠ Atenção</b><span>Não feche nem atualize esta página</span></p>
 <nav class="passos" aria-label="Etapas da sua compra">
@@ -800,5 +810,23 @@ header.hero{padding:14px 0 30px;border-bottom:2px solid var(--ink)}
     </nav>
 <h1 class="lead">Assista ao vídeo abaixo e descubra como <span class="g10">acelerar em 10x</span> seus resultados</h1>
 <div class="stub">o vídeo entra aqui</div></div></header>
-<footer><div class="w">preview interno · 10 tratamentos da chamada do vídeo</div></footer>
+<div class="rotulo">Versão 11<small>A frase INTEIRA em grifo, se pintando (a 6 aplicada em tudo)</small></div><header class="hero"><div class="w"><p class="aviso"><b>⚠ Atenção</b><span>Não feche nem atualize esta página</span></p>
+<nav class="passos" aria-label="Etapas da sua compra">
+      <ol>
+        <li class="feito"><span class="n" aria-hidden="true">✓</span><span class="t">90D garantido</span></li>
+        <li class="agora" aria-current="step"><span class="n" aria-hidden="true">2</span><span class="t">Acelere o seu resultado</span></li>
+        <li><span class="n" aria-hidden="true">3</span><span class="t">Acesso liberado</span></li>
+      </ol>
+    </nav>
+<h1 class="lead"><span class="g11">Assista ao vídeo abaixo e descubra como acelerar em 10x seus resultados</span></h1>
+<div class="stub">o vídeo entra aqui</div></div></header><div class="rotulo">Versão 12<small>A frase INTEIRA em grifo, sem animação</small></div><header class="hero"><div class="w"><p class="aviso"><b>⚠ Atenção</b><span>Não feche nem atualize esta página</span></p>
+<nav class="passos" aria-label="Etapas da sua compra">
+      <ol>
+        <li class="feito"><span class="n" aria-hidden="true">✓</span><span class="t">90D garantido</span></li>
+        <li class="agora" aria-current="step"><span class="n" aria-hidden="true">2</span><span class="t">Acelere o seu resultado</span></li>
+        <li><span class="n" aria-hidden="true">3</span><span class="t">Acesso liberado</span></li>
+      </ol>
+    </nav>
+<h1 class="lead"><span class="g12">Assista ao vídeo abaixo e descubra como acelerar em 10x seus resultados</span></h1>
+<div class="stub">o vídeo entra aqui</div></div></header><footer><div class="w">preview interno · 10 tratamentos da chamada do vídeo</div></footer>
 </body></html>
