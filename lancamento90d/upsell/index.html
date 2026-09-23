@@ -240,7 +240,9 @@ section.alt{background:var(--pa2);border-top:1px solid var(--ru);border-bottom:1
 /* as duas seções de oferta ganham TEMPERATURA, não tom: um calor âmbar
    nascendo no topo. É o único lugar da página onde se pede dinheiro, e
    ele tem que parecer de outra natureza, não só de outro cinza. */
-#oferta,.oferta-sec{background:
+/* o brilho atras do bloco de preco. Era `#oferta,.oferta-sec`; o #oferta saiu
+   com o PREÇO 1 em 23/09 e o seletor ficou orfao. */
+.oferta-sec{background:
   radial-gradient(130% 62% at 50% 0%, rgba(234,184,45,.055), rgba(234,184,45,0) 72%)}
 .meio{text-align:center;max-width:720px;margin:0 auto}
 h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
@@ -381,45 +383,6 @@ html.js .conta:not(.viva){opacity:.32}
 
 /* o brilho da terceira curva estoura a caixa; clipar evita barra de rolagem */
 .conta-sec{overflow-x:clip;position:relative}
-
-/* ════════════════════════════════════════════════════════════
-   O SEU LIVRO ESTÁ BOM DE VERDADE?  (narrativa nova, 14/09)
-
-   A versão anterior DEFINIA: "bom de verdade é o livro que o leitor certo
-   encontra, escolhe e recomenda", com as três frentes numa lista. Virava
-   glossário, e glossário não cria necessidade nenhuma: a pessoa concorda,
-   acha bonito e continua achando que o livro dela está pronto.
-
-   A narrativa agora é outra e responde à linha que fecha a conta logo
-   acima ("detalhes que o autor nem sabe que existem"):
-
-     1. você vai dizer que sim        (a resposta automática)
-     2. você nunca abre o seu livro pela primeira vez, o leitor abre uma
-        vez só                         (a causa, sem explicar: é POSIÇÃO)
-     3. e livro que não funciona não avisa, só vende pouco
-                                       (silêncio não é diagnóstico)
-     4. essa pergunta não se responde sozinho          (a ponte)
-
-   ⚠️ QUATRO BATIDAS, OITO LINHAS, 32 PALAVRAS. Esta seção já foi o dobro
-   disso, com cada passo explicado, e o cliente cortou: as páginas da casa
-   são batidas, não parágrafos. Uma linha, um golpe. Se alguém precisar
-   acrescentar explicação aqui, o problema é a frase, não a falta dela.
-
-   ⚠️ A COPY É PROPOSTA e precisa passar pela Dany antes de ir pro ar.
-   ⚠️ Não acusar o autor de desleixo em nenhuma linha. O argumento inteiro
-   depende de o motivo ser POSIÇÃO, não falta de esforço: quem se sente
-   acusado fecha a página em vez de comprar.
-   ⚠️ Nada de lista, caixa ou três itens lado a lado aqui. A seção de cima
-   é um gráfico; esta é só tipografia, de propósito, pra não virar mais um
-   bloco de três coisas.
-   ════════════════════════════════════════════════════════════ */
-.verdade .abre{margin:22px auto 0;max-width:34ch;font-family:var(--fd);font-weight:700;
-  font-size:clamp(1.15rem,2.7vw,1.5rem);letter-spacing:-.03em;line-height:1.28;color:var(--ink)}
-.verdade .passo{margin:clamp(24px,3.4vw,32px) auto 0;max-width:40ch;color:var(--mut);
-  font-size:clamp(1.02rem,2.2vw,1.18rem);line-height:1.42}
-.verdade .fecha{margin:clamp(30px,4.4vw,44px) auto 0;max-width:34ch;font-family:var(--fd);
-  font-weight:700;font-size:clamp(1.2rem,2.9vw,1.6rem);letter-spacing:-.03em;line-height:1.26;
-  color:var(--ac);text-shadow:0 0 30px rgba(234,184,45,.32)}
 
 /* a caixa da oferta: o .offer-box do front, invertido para creme */
 .offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
@@ -682,49 +645,12 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   </div>
 </section>
 
-<!-- A RESPOSTA DA PERGUNTA DA H1.
-     ⚠️ Copy PROPOSTA (14/09), ainda não aprovada pela Dany.
-     ⚠️ O motivo é POSIÇÃO, nunca desleixo. Ver o comentário no CSS. -->
-<section class="alt verdade">
-  <div class="w">
-    <div class="meio">
-      <p class="eyebrow">A pergunta do começo</p>
-      <h2>O seu livro está <span class="risco">bom de verdade</span>?</h2>
-      <p class="abre">Você vai dizer que sim.<br>
-      Todo autor diz.</p>
-      <p class="passo">Você nunca vai abrir o seu livro pela primeira vez.<br>
-      O seu leitor abre uma vez só.</p>
-      <p class="passo">E livro que não funciona não avisa.<br>
-      Só vende pouco.</p>
-      <p class="fecha">Essa pergunta não se responde sozinho.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PREÇO 1
-     O preço aqui e no bloco final são TEXTO. Quem cobra é o funil da Hotmart
-     (o widget não aceita oferta). Mudou lá, muda os dois aqui.
-     Sem a lista de entregas aqui de propósito: neste ponto a página ainda não
-     explicou o que é a hora. A lista existe uma vez só, na recapitulação. -->
-<section id="oferta">
-  <div class="w">
-    <div class="meio">
-      <p class="eyebrow">A gente, trabalhando junto no seu livro</p>
-      <h2>Diagnóstico do Autor</h2>
-    </div>
-    <div class="offer-box">
-      <p class="promessa">Uma hora no Zoom com um especialista do time da Dany.<br>
-      <span class="risco">Só sobre o seu livro.</span></p>
-      <div class="price"><span class="cur">12x de R$</span><span class="val">69,56</span></div>
-      <p class="inst">ou <b>R$697 à vista</b></p>
-      <p class="obs">* parcelado no cartão, com juros</p>
-      <a class="btn block" href="#compra">Sim! Adicione ao meu pedido</a>
-      <p class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697
-    são abatidos integralmente.</p>
-    </div>
-  </div>
-</section>
-
+<!-- 23/09: saíram daqui a seção "A pergunta do começo" e o PREÇO 1.
+     A página estava longa e o cliente cortou. Agora existe UM bloco de preço
+     só, o da recapitulação, que é o que tem o widget da Hotmart.
+     A pergunta continua viva onde ela nasceu: é a H1 do topo, e quem a
+     responde é o vídeo. Repetir ela em seção própria era responder duas
+     vezes a mesma coisa, uma delas sem o vídeo junto. -->
 <section class="alt">
   <div class="w">
     <div class="gar">
@@ -806,7 +732,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section class="oferta-sec">
   <div class="w">
     <div class="meio">
-      <p class="eyebrow">Recapitulando</p>
+      <p class="eyebrow">A gente, trabalhando junto no seu livro</p>
       <h2>Você sai da hora<br><span class="serifa">com o próximo passo mapeado.</span></h2>
     </div>
     <div class="offer-box">
@@ -820,6 +746,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <div class="price"><span class="cur">12x de R$</span><span class="val">69,56</span></div>
       <p class="inst">ou <b>R$697 à vista</b></p>
       <p class="obs">* parcelado no cartão, com juros</p>
+      <!-- Veio do PREÇO 1, que saiu em 23/09. Mora ao lado do preço porque
+           é sobre ele. ⚠️ A regra do abatimento ainda não foi confirmada
+           (pendência 4): ela vem de quando esta call custava R$297. -->
+      <p class="abate">Se depois você entrar no <b>Direcionamento Estratégico</b>, os R$697
+      são abatidos integralmente.</p>
       <!-- ============================================================
            HOTMART — Sales Funnel Widget (22/09). Ele renderiza o aceite E a
            recusa dentro de um iframe, com compra de UM CLIQUE: o comprador
