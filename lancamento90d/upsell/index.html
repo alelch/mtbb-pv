@@ -345,8 +345,7 @@ header + section{border-top:1px solid var(--ru)}
 /* o card da oferta e escuro: os valores claros do .offer-box sao revertidos */
 .bloco-preco .offer-box{background:var(--pa2);color:var(--ink);
   border:1px solid var(--ru);box-shadow:none}
-.bloco-preco .esc{color:var(--dim)}
-
+.bloco-preco 
 /* a garantia, dentro do bloco: selo verde, porque garantia e do lado de comprar */
 /* ── A GARANTIA, VERSÃO CARIMBO (G2, cliente 23/09) ──────────
    O selo era verde sobre branco DENTRO de uma seção verde, e por isso sumia,
@@ -408,10 +407,7 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .offer-box .btn:hover{box-shadow:0 16px 30px -14px rgba(20,19,18,.5)}
 .recusa{display:block;width:100%;margin:16px 0 0;background:none;border:0;font:400 .92rem/1.5 var(--ff);
   color:rgba(20,19,18,.55);text-decoration:underline;cursor:pointer}
-.pix + .esc{margin-top:26px}
-.esc{margin:22px auto 0;max-width:62ch;font-size:.88rem;line-height:1.66;color:rgba(20,19,18,.6)}
-.esc+.esc{margin-top:12px}
-
+.esc+
 /* ── A SAIDA DO PIX ──────────────────────────────────────────
    DENTRO do card, logo abaixo do widget. Ela e a alternativa ao botao de
    cima, nao um bloco a parte: fora do card virava uma terceira caixa
@@ -439,8 +435,10 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .vagas b{font:700 1.14rem/1 var(--fd);letter-spacing:-.02em}
 .vagas span{font-size:.92rem;line-height:1.3}
 
+/* 23/09: a saida do PIX e a ULTIMA coisa do card, entao ela fecha o bloco.
+   Antes tinha uma linha de escassez embaixo dela, que o cliente tirou. */
 .pix{--pad:clamp(34px,5vw,52px);
-  margin:22px calc(-1 * var(--pad)) 0;padding:20px var(--pad) 22px;
+  margin:22px calc(-1 * var(--pad)) 0;padding:20px var(--pad) 26px;
   text-align:center;background:rgba(240,106,42,.09);
   border-top:1px solid rgba(240,106,42,.3);border-bottom:1px solid rgba(240,106,42,.3)}
 /* ── O MEIO TERMO DA SAIDA DO PIX (cliente 23/09) ──
@@ -600,8 +598,7 @@ header + section{border-top:0}
 
 /* ---- o bloco de oferta: cartão branco, logo abaixo do vídeo ---- */
 .bloco-preco .offer-box{background:var(--offc);color:var(--ink);margin:26px auto 0}
-.bloco-preco .esc{color:var(--dim)}
-.bloco-preco .gar{background:var(--offc);color:var(--ink);
+.bloco-preco .bloco-preco .gar{background:var(--offc);color:var(--ink);
   box-shadow:4px 4px 0 var(--ink)}
 /* 🚫 AQUI TINHA UMA SEGUNDA REGRA DO SELO (verde, 68px) que vencia a do
    carimbo la em cima por vir depois no arquivo, com a MESMA especificidade.
@@ -810,15 +807,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
           <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão <span aria-hidden="true">&rarr;</span></a>
           <p class="d">Só para quem pagou no PIX. Quem pagou no cartão fecha no botão acima, em um clique.</p>
         </div>
-        <!-- 23/09: a escassez foi de cinco linhas pra duas (cliente). Sairam a
-             que explicava que a oferta so existe aqui (a pagina inteira ja diz
-             isso) e a da agenda do time. Ficou so a consequencia, que e a parte
-             que age: se fechar, perde. -->
-        <!-- 23/09: e aqui que a pagina NOMEIA o produto. O nome saiu do card com
-             a lista de entregas, e a pagina ficou vendendo uma coisa sem
-             nunca dizer como ela se chama. O nome e o MESMO da Hotmart
-             ("Diagnostico + Plano de Acao"), pra bater com o checkout. -->
-        <p class="esc">O Diagnóstico + Plano de Ação não está no site e não é vendido avulso.</p>
       </div>
 
       <!-- A GARANTIA, colada no preco. Ela morava numa secao propria logo
