@@ -98,6 +98,11 @@ input[type=date]:hover{border-color:var(--laranja)}
 .sem-titulo{font-size:21px}
 .contador{font-weight:800;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--tinta-55)}
 .contador.ok{color:var(--laranja)}
+.sem-cab.so-conta{grid-template-columns:1fr;justify-items:end;margin-bottom:12px}
+.semana.colada{padding-top:16px;border-top:0}
+.sem-tag .hoje{font-style:normal;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;background:var(--laranja);color:var(--tinta);padding:2px 6px}
+.contagem small a{color:var(--laranja);font-weight:700;text-decoration:none;border-bottom:1px solid currentColor}
+.contagem small a:hover{color:var(--tinta)}
 .intro{margin:0 0 16px;font-size:14px;line-height:1.55;color:var(--tinta-72);max-width:62ch}
 
 /* ---------- tarefas ---------- */
@@ -228,7 +233,7 @@ input[type=date]:hover{border-color:var(--laranja)}
           <button type="button" class="btn-fantasma" id="limparData">limpar</button>
         </div>
         <div class="contagem" id="contagem">defina a data
-          <small id="contagemSub">Com a data, cada semana ganha dia certo e a trilha marca onde você está hoje.</small>
+          <small id="contagemSub">Com a data, cada semana ganha dia certo e a lista marca onde você está hoje.</small>
         </div>
       </div>
       <div>
@@ -666,6 +671,11 @@ function idsDe(bloco){
 
 var TODOS = [VIABILIZADORES].concat(SEMANAS).concat([POS]);
 
+// Fase com uma seção só (Lançamento, Pós) repetiria o mesmo título duas vezes:
+// a faixa fala, e a seção entra direto na lista.
+var CONTA_FASE = {};
+for(var q=0;q<TODOS.length;q++) CONTA_FASE[TODOS[q].fase] = (CONTA_FASE[TODOS[q].fase]||0) + 1;
+
 function montar(){
   var h = '';
   var faseAberta = '';
@@ -685,13 +695,20 @@ function montar(){
     var jan = b.id === 'v' ? janelaGate() : (b.semana ? janela(b.semana) : null);
     var quando = jan ? fmt(jan.ini) + ' a ' + fmtLongo(jan.fim) : '';
 
-    h += '<section class="semana" id="'+b.id+'"><div class="env">';
-    h += '<div class="sem-cab"><div>'
-      + '<div class="sem-tag"><b>'+esc(b.num)+'</b>'+(quando ? '<span>'+esc(quando)+'</span>' : '')+'</div>'
-      + '<h3 class="sem-titulo d">'+esc(b.foco)+'</h3>'
-      + '</div>'
-      + '<div class="contador" id="c_'+b.id+'"></div>'
-      + '</div>';
+    var sozinha = CONTA_FASE[b.fase] === 1;
+    h += '<section class="semana'+(sozinha?' colada':'')+(atual===b.id?' agora':'')+'" id="'+b.id+'"><div class="env">';
+    if(sozinha){
+      h += '<div class="sem-cab so-conta"><div class="contador" id="c_'+b.id+'"></div></div>';
+    }else{
+      h += '<div class="sem-cab"><div>'
+        + '<div class="sem-tag"><b>'+esc(b.num)+'</b>'
+        + (atual===b.id ? '<i class="hoje">esta semana</i>' : '')
+        + (quando ? '<span>'+esc(quando)+'</span>' : '')+'</div>'
+        + '<h3 class="sem-titulo d">'+esc(b.foco)+'</h3>'
+        + '</div>'
+        + '<div class="contador" id="c_'+b.id+'"></div>'
+        + '</div>';
+    }
 
     if(b.intro) h += '<p style="margin:0 0 22px;font-size:14.5px;color:var(--creme-72);max-width:62ch">'+esc(b.intro)+'</p>';
     if(b.lembrete) h += '<div class="lembrete"><b>Lembrete</b>'+esc(b.lembrete)+'</div>';
@@ -736,7 +753,7 @@ function atualizarDatas(){
   if(!pub){
     cont.firstChild.nodeValue = 'defina a data';
     cont.classList.remove('viva');
-    sub.textContent = 'Com a data, cada semana ganha dia certo e a trilha marca onde você está hoje.';
+    sub.textContent = 'Com a data, cada semana ganha dia certo e a lista marca onde você está hoje.';
     dk.innerHTML = '<div class="dk"><b>Início da pré-venda</b><span>a definir</span></div>'
       + '<div class="dk"><b>Encerramento da pré-venda</b><span>a definir</span></div>'
       + '<div class="dk destaque"><b>Publicação, Dia 90</b><span>a definir</span></div>'
@@ -753,7 +770,9 @@ function atualizarDatas(){
   var atual = semanaAtual();
   var nomeAtual = '';
   for(var i=0;i<TODOS.length;i++) if(TODOS[i].id === atual) nomeAtual = TODOS[i].num + ', ' + TODOS[i].foco.toLowerCase();
-  sub.textContent = d < 0 ? 'Você está no pós-lançamento. Os microciclos começam agora.' : ('Você está na ' + nomeAtual + '.');
+  sub.innerHTML = d < 0
+    ? 'Você está no <a href="#pos">pós-lançamento</a>. Os microciclos começam agora.'
+    : ('Você está na <a href="#' + esc(atual) + '">' + esc(nomeAtual) + '</a>.');
 
   var j9 = janela(9), j11 = janela(11);
   var evento = somaDias(pub, 7);
