@@ -562,6 +562,22 @@ html.js .conta{transition:none}
 
    Ela nao e um detalhe: pra quem pagou o 90D no PIX e o unico caminho de
    compra, porque o widget da Hotmart so recobra cartao salvo. */
+/* ── A FAIXA DE VAGAS ────────────────────────────────────────
+   Sangra ate a borda do card, como a faixa do PIX, e usa o mesmo truque de
+   margem negativa igual ao padding do card. Amarelo porque e' a unica cor da
+   pagina que nao tem papel de acao: verde e comprar, laranja e o PIX, e o
+   amarelo era so o grifo. Aqui ele vira aviso. */
+/* ⚠️ o card tem padding VERTICAL diferente do horizontal no celular (30px 22px),
+   entao a sangria precisa de duas variaveis. Com uma so, a faixa descolava 8px
+   do topo justamente na tela pequena. */
+.vagas{--pad:clamp(34px,5vw,52px);--padV:clamp(34px,5vw,52px);
+  margin:calc(-1 * var(--padV)) calc(-1 * var(--pad)) 26px;
+  padding:13px var(--pad);background:var(--grifo);color:var(--ink);
+  border-bottom:2px solid var(--ink);border-radius:24px 24px 0 0;
+  display:flex;gap:12px;align-items:baseline;justify-content:center;flex-wrap:wrap;text-align:center}
+.vagas b{font:700 1.14rem/1 var(--fd);letter-spacing:-.02em}
+.vagas span{font-size:.92rem;line-height:1.3}
+
 .pix{--pad:clamp(34px,5vw,52px);
   margin:26px calc(-1 * var(--pad)) 0;padding:26px var(--pad) 28px;
   text-align:center;background:rgba(240,106,42,.09);
@@ -826,6 +842,7 @@ footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-fami
   .gar .selo{margin-bottom:4px}
   .hl{grid-template-columns:72px 1fr;gap:14px;padding:18px 18px}
   .offer-box{padding:30px 22px}
+  .vagas{--pad:22px;--padV:30px;border-radius:18px 18px 0 0}
   /* a faixa do PIX sangra ate a borda do card, entao o recuo dela tem que
      acompanhar o padding do card. Sem esta linha ela usava os 34px do desktop
      e vazava 11px pra cada lado no celular. */
@@ -1017,6 +1034,18 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
       <h2>Você sai do seu diagnóstico<br><span class="serifa">com o próximo passo mapeado.</span></h2>
     </div>
     <div class="offer-box">
+      <!-- ============================================================
+           A ESCASSEZ, TRAZIDA DA VSL (23/09). O roteiro sempre disse "vinte
+           vagas" e "quando elas acabam, essa pagina deixa de existir", e a
+           pagina nao falava em numero nenhum. Quem ouve o video e le a pagina
+           recebia duas versoes do mesmo aviso, uma delas sem forca.
+           Faixa no TOPO do card, sangrando ate a borda, em amarelo: e' a
+           primeira coisa que a pessoa ve do bloco de preco.
+           ⚠️ O NUMERO TEM QUE SER VERDADE E TEM QUE SER CONTROLADO. Se as 20
+           vagas nao forem acompanhadas e a pagina continuar no ar depois delas
+           acabarem, a escassez vira mentira e leva o resto da pagina junto.
+           ============================================================ -->
+      <p class="vagas"><b>20 vagas</b><span>Quando elas acabam, esta página deixa de existir.</span></p>
       <p class="promessa">Diagnóstico do Autor</p>
       <ul class="conquistas">
         <li><b>Uma sessão de até 1h30 no Zoom</b>, só sobre o seu livro</li>
@@ -1064,7 +1093,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
            que explicava que a oferta so existe aqui (a pagina inteira ja diz
            isso) e a da agenda do time. Ficou so a consequencia, que e a parte
            que age: se fechar, perde. -->
-      <p class="esc">Quando as vagas acabam, esta página deixa de aparecer.<br>
+      <p class="esc">Esta oferta não está no site e não é vendida avulsa.<br>
       Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p>
     </div>
 
