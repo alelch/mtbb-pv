@@ -413,20 +413,20 @@ html.js .conta:not(.viva){opacity:.32}
 .esc+.esc{margin-top:12px}
 
 /* ── A SAIDA DO PIX ──────────────────────────────────────────
-   O widget da Hotmart so fecha de um clique quem comprou o 90D no CARTAO:
-   e' o cartao salvo que ele recobra. Quem pagou no PIX nao tem o que
-   recobrar, ve o formulario nao carregar e nao tem por onde comprar.
-   Esta caixa e' o caminho normal de checkout pra essa pessoa.
-   Botao de CONTORNO, nao solido: o widget continua sendo a acao principal
-   e esta e a saida secundaria. Dois botoes solidos brigariam. */
-.pix{margin:24px 0 0;padding:22px 0 0;border-top:1px solid rgba(20,19,18,.16)}
-.pix .q{margin:0;font-family:var(--fd);font-weight:700;font-size:1.02rem;
-  letter-spacing:-.02em;color:var(--offtx)}
-.pix .d{margin:7px 0 16px;font-size:.9rem;line-height:1.55;color:rgba(20,19,18,.6)}
-.pix .btn{background:transparent;color:var(--offtx);border:1.5px solid rgba(20,19,18,.3);
-  box-shadow:none}
-.pix .btn:hover,.pix .btn:focus-visible{background:var(--offtx);color:var(--off);
-  border-color:var(--offtx)}
+   Fora do card claro, no fundo escuro, e CHAMATIVA (cliente 23/09). Ela nao
+   e um detalhe: pra quem pagou o 90D no PIX, e o unico caminho de compra,
+   porque o widget da Hotmart so recobra cartao salvo.
+   O botao e solido e grande, com halo. Ele nao compete com o widget: quem
+   chega ate aqui ja viu que o de cima nao carrega pra ele. */
+.pix{max-width:660px;margin:clamp(30px,4.6vw,44px) auto 0;text-align:center}
+.pix .q{margin:0 0 22px;font-family:var(--fd);font-weight:700;color:var(--ink);
+  letter-spacing:-.03em;line-height:1.18;font-size:clamp(1.28rem,3.2vw,1.9rem)}
+.pix .btn{width:100%;max-width:520px;font-size:clamp(1rem,2.4vw,1.16rem);
+  padding:23px 34px;
+  box-shadow:0 0 0 6px rgba(234,184,45,.12),0 18px 40px -18px rgba(234,184,45,.85)}
+.pix .btn:hover,.pix .btn:focus-visible{box-shadow:0 0 0 8px rgba(234,184,45,.16),
+  0 22px 44px -18px rgba(234,184,45,.7)}
+.pix .d{margin:16px auto 0;max-width:46ch;font-size:.86rem;line-height:1.5;color:var(--dim)}
 
 /* garantia */
 .gar{max-width:660px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:22px;
@@ -764,23 +764,32 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
            precisa bater com o que estiver la, senao a pagina mente.
            ============================================================ -->
       <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
-      <!-- A saida do PIX. Fica SEMPRE visivel, e nao so quando o widget
-           falha: a pessoa que pagou no PIX nao sabe que o formulario acima
-           nunca vai carregar pra ela, e um erro em cinza nao explica isso.
-           O href e' montado pelo script la embaixo, junto com o xcod da
-           VTurb, pra que a venda por este caminho tambem diga qual das
-           cinco leads a produziu. -->
-      <div class="pix">
-        <p class="q">Comprou o Lançamento 90D no PIX?</p>
-        <p class="d">O botão de um clique acima só funciona para quem pagou no cartão.
-        Se você pagou no PIX, o seu diagnóstico é por aqui.</p>
-        <a class="btn block" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão</a>
-      </div>
       <p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D.<br>
       E ela só está na sua frente porque ainda há vaga este mês.</p>
       <p class="esc">Cada diagnóstico é uma hora de agenda do time.<br>
       Quando as vagas acabam, esta página deixa de aparecer.<br>
       Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p>
+    </div>
+
+    <!-- ============================================================
+         A SAIDA DO PIX. Fora do card, no fundo escuro, e chamativa de
+         proposito (pedido do cliente 23/09, com referencia).
+         Por que ela merece esse peso: o widget da Hotmart so fecha de um
+         clique quem comprou o 90D no CARTAO, porque e o cartao salvo que ele
+         recobra. Quem pagou no PIX ve o formulario nao carregar e, se esta
+         saida for discreta, simplesmente nao compra. Nao e um link de rodape,
+         e o unico caminho de uma fatia inteira do publico.
+         Fica SEMPRE visivel: quem pagou no PIX nao sabe que aquele formulario
+         nunca vai carregar pra ele.
+         A pergunta se auto-qualifica ("comprou no PIX?"), e a linha miuda
+         existe pra quem pagou no cartao nao vir por aqui e pagar de novo sem
+         o desconto de um clique.
+         O href e' montado pelo script no fim do body, com o xcod da VTurb.
+         ============================================================ -->
+    <div class="pix">
+      <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+      <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar <span aria-hidden="true">&rarr;</span></a>
+      <p class="d">Só para quem pagou no PIX. Quem pagou no cartão fecha no botão acima, em um clique.</p>
     </div>
   </div>
 </section>
