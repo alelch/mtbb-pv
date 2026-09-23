@@ -145,6 +145,8 @@
      ALERTA, nao acao: assim ele nao briga com o verde (comprar) e nao colide
      com o vermelho do grafico da conta, que significa "vende e e' esquecido". */
   --red:#CE0E16;
+  /* a capa do Diagnostico: vermelho, chumbo e o cinza do '+' */
+  --logo-r:#CA0013; --logo-d:#373737; --logo-g:#A6A6A6;
   --off:#FFFFFF; --offtx:#191714; --offc:#FFFFFF; --offb:#191714;
   --pill:#1E7D46; --pilltx:#FFFFFF; --pillh:#191714; --pillhtx:#FFFFFF;
   --play:#191714; --band:#1E7D46; --bandtx:#FFFFFF;
@@ -514,7 +516,10 @@ html.js .conta{transition:none}
 @media(prefers-reduced-motion:reduce){
   html.js .conta{transition:none}
 }
-.nota-conta{margin:26px auto 0;max-width:56ch;text-align:center;font-size:.8rem;color:var(--dim)}
+/* 23/09: a nota era miuda demais e o cliente pediu ela visivel. Ela e a
+   conclusao da secao, nao um rodape de grafico. */
+.nota-conta{margin:30px auto 0;max-width:48ch;text-align:center;
+  font-size:clamp(1.02rem,2vw,1.2rem);line-height:1.5;color:var(--ink);font-weight:500}
 @media(max-width:560px){
   .contas{padding-left:20px}
   .eixo-y{left:-20px}
@@ -531,9 +536,17 @@ html.js .conta{transition:none}
 .offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
   border:0;border-radius:20px;padding:clamp(34px,5vw,52px);text-align:center;
   box-shadow:0 34px 76px -36px rgba(0,0,0,.75)}
-.offer-box .promessa{font-family:var(--fd);font-weight:700;letter-spacing:-.03em;
-  font-size:clamp(1.18rem,2.5vw,1.5rem);line-height:1.2;margin:0 0 30px;padding-bottom:28px;
-  border-bottom:1px solid rgba(20,19,18,.16)}
+/* ── O LOCKUP DA CAPA DO DIAGNOSTICO (cliente 23/09) ─────────
+   A capa escreve o nome em caixa alta, pesado e grudado: "DIAGNOSTICO DO
+   AUTOR" em vermelho, o "+" em cinza e "PLANO DE ACAO" em chumbo. Aqui e a
+   mesma leitura, na fonte da pagina. */
+.offer-box .promessa{font-family:var(--fd);font-weight:700;text-transform:uppercase;
+  letter-spacing:-.025em;font-size:clamp(1.34rem,3.6vw,2rem);line-height:.98;
+  margin:0 0 30px;padding-bottom:28px;border-bottom:1px solid rgba(20,19,18,.16)}
+.offer-box .promessa span{display:block}
+.offer-box .promessa .l1{color:var(--logo-r)}
+.offer-box .promessa .l2{color:var(--logo-d)}
+.offer-box .promessa i{font-style:normal;color:var(--logo-g)}
 .offer-box .conquistas{list-style:none;padding:0;margin:0 0 32px;text-align:left;display:grid;gap:16px}
 .offer-box .conquistas li{position:relative;padding-left:30px;font-size:1rem;
   color:rgba(20,19,18,.74);line-height:1.45}
@@ -576,11 +589,11 @@ html.js .conta{transition:none}
    do topo justamente na tela pequena. */
 .vagas{--pad:clamp(34px,5vw,52px);--padV:clamp(34px,5vw,52px);
   margin:calc(-1 * var(--padV)) calc(-1 * var(--pad)) 26px;
-  padding:13px var(--pad);background:var(--grifo);color:var(--ink);
+  padding:13px var(--pad);background:var(--logo-r);color:#fff;
   border-bottom:2px solid var(--ink);border-radius:24px 24px 0 0;
   display:flex;gap:12px;align-items:baseline;justify-content:center;flex-wrap:wrap;text-align:center}
 .vagas b{font:700 1.14rem/1 var(--fd);letter-spacing:-.02em}
-.vagas span{font-size:.92rem;line-height:1.3}
+.vagas span{font-size:.92rem;line-height:1.3;color:rgba(255,255,255,.88)}
 
 .pix{--pad:clamp(34px,5vw,52px);
   margin:26px calc(-1 * var(--pad)) 0;padding:26px var(--pad) 28px;
@@ -740,7 +753,7 @@ header + section{border-top:0}
 
 /* ---- o bloco de oferta: cartão branco, logo abaixo do vídeo ---- */
 .bloco-preco .offer-box{background:var(--offc);color:var(--ink);margin:26px auto 0}
-.bloco-preco .offer-box .promessa{border-bottom:2px solid var(--ink);color:var(--ink)}
+.bloco-preco .offer-box .promessa{border-bottom:2px solid var(--ink)}
 .bloco-preco .offer-box .conquistas li{color:#4A443B}
 .bloco-preco .offer-box .conquistas li b{color:var(--ink)}
 .bloco-preco .offer-box .conquistas li:before{border-color:var(--go)}
@@ -935,8 +948,8 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
              vagas nao forem acompanhadas e a pagina continuar no ar depois delas
              acabarem, a escassez vira mentira e leva o resto da pagina junto.
              ============================================================ -->
-        <p class="vagas"><b>20 vagas por mês</b><span>Quando elas acabam, esta página deixa de existir.</span></p>
-        <p class="promessa">Diagnóstico do Autor</p>
+        <p class="vagas"><b>20 vagas por mês</b><span>Se você fechar, a vaga fica para o próximo autor que chegar aqui.</span></p>
+        <p class="promessa"><span class="l1">Diagnóstico do Autor <i>+</i></span><span class="l2">Plano de Ação</span></p>
         <!-- 🚫 NAO VOLTAR com "tres frentes de lancamento, entre quinze".
              O numero vinha do briefing e das versoes v1, v4 e v6 do roteiro,
              mas a v5, que e a que esta em uso, ABANDONOU ele: ela diz so "quais
@@ -986,8 +999,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
              que explicava que a oferta so existe aqui (a pagina inteira ja diz
              isso) e a da agenda do time. Ficou so a consequencia, que e a parte
              que age: se fechar, perde. -->
-        <p class="esc">Esta oferta não está no site e não é vendida avulsa.<br>
-        Se você fechar, a vaga fica para o próximo autor que chegar aqui.</p>
+        <p class="esc">Esta oferta não está no site e não é vendida avulsa.</p>
       </div>
 
       <!-- A GARANTIA, colada no preco. Ela morava numa secao propria logo
@@ -1154,7 +1166,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      vida do autor" e três linhas abaixo a terceira conta dizia exatamente
      "Muda a vida do autor.". Com o spoiler no título a conta vira repetição e
      a escala não revela nada. O título enquadra; quem conclui é a conta.
-     Título atual é do cliente (14/09): "A conta que ninguém te conta". Uma
+     Título atual é do cliente (23/09): "A conta que ninguém faz". Uma
      linha só, sem rótulo em versalete: a seção não precisa dos dois.
      ⚠️ TUDO CENTRALIZADO. A página inteira é centralizada e esta seção não é
      exceção. Quem hierarquiza aqui é a ESCALA, não o alinhamento. -->
@@ -1165,7 +1177,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
            ESCONDIDA de você, que é o gancho da seção. Em "te conta" ele
            marcaria o trocadilho, que é mais bonitinho e menos útil; na
            frase inteira ele desequilibra um título centrado. -->
-      <h2>A conta que <span class="risco">ninguém</span> te conta</h2>
+      <h2>A conta que <span class="risco">ninguém</span> faz</h2>
     </div>
     <div class="contas">
       <div class="conta um" style="--cor:#7D8B99">
