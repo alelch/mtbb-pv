@@ -13,7 +13,6 @@
 
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/dmsans-sub.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/grotesk-sub.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/fraunces-italic-500-sub.woff2">
 
 <!-- ============================================================
      VTURB — otimizador (bloco do painel, colado como veio 22/09).
@@ -115,7 +114,6 @@
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
 @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/grotesk-sub.woff2) format('woff2')}
 @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/grotesk-sub.woff2) format('woff2')}
-@font-face{font-family:'Fraunces';font-style:italic;font-weight:500;font-display:swap;src:url(../assets/fonts/fraunces-italic-500-sub.woff2) format('woff2')}
 
 :root{
   /* OS DOIS FUNDOS. O passo entre eles era de 3 pontos e sumia: a página
@@ -193,7 +191,7 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 .passos ol{display:flex;align-items:stretch;gap:30px;list-style:none;margin:0;padding:6px;
   width:80%;border:1px solid var(--ru);border-radius:999px;background:var(--pa2)}
 .passos li{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;
-  padding:11px 14px;border-radius:999px;font:700 14px/1.15 var(--ff);color:var(--dim);
+  padding:11px 14px;border-radius:999px;font:700 14px/1.15 var(--fd);color:var(--dim);
   white-space:nowrap;min-width:0;position:relative}
 /* a seta mora no VÃO entre os passos, não dentro deles: dentro, ela entraria
    na pílula verde do passo de agora e viraria parte do botão. Por isso o gap
@@ -215,7 +213,7 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
   width:16px;height:16px;transform:translate(-50%,-50%);
   background:no-repeat center/16px 16px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E7D46' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E")}
 .passos .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-content:center;
-  font:700 12.5px/1 var(--ff);border:1.5px solid currentColor}
+  font:700 12.5px/1 var(--fd);border:1.5px solid currentColor}
 .passos .t{overflow:hidden;text-overflow:ellipsis}
 .passos .feito{color:var(--mut)}
 .passos .feito .n{background:var(--mut);color:var(--pa2);border-color:var(--mut)}
@@ -276,7 +274,6 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    os componentes abaixo são os de lá, com os mesmos valores.
      .eyebrow   Space Grotesk 700, .78rem, .18em, caixa alta, no acento
      h2         Space Grotesk 700, clamp(1.62,3.8vw,2.7rem), -.03em, lh 1.1
-     .serifa    Fraunces itálico 500, o segundo verso do título
      .risco     o rabisco à mão sob a palavra-chave
      .btn       pílula, Space Grotesk 700, 21px 40px, raio 999
      section    80px de respiro; .w com 1120 e 22 de padding
@@ -285,7 +282,12 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    a única coisa que inverte, que é o que faz a oferta pular. */
 .eyebrow{font-family:var(--fd);font-size:.78rem;font-weight:700;letter-spacing:.18em;
   text-transform:uppercase;color:var(--ac);margin:0 0 16px}
-.serifa{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:500;letter-spacing:-.02em}
+/* 🚫 A FRAUNCES ITALICA SAIU EM 23/09 (cliente). Ela aparecia no segundo
+   verso de dois titulos e em mais nada, e era o que fazia as secoes
+   parecerem de outra familia. A pagina agora tem duas fontes: Space
+   Grotesk no que grita e DM Sans no que se le.
+   ⚠️ A pagina do L90D (../index.html) ainda usa a Fraunces do mesmo jeito.
+   Se um dia as duas tiverem que combinar, a decisao e la, nao aqui. */
 .risco{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23EAB82D%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") no-repeat;
   background-size:100% .34em;background-position:0 .92em;padding-bottom:.14em;
   /* sem isto, a frase marcada que cai em duas linhas estica o rabisco por
@@ -981,7 +983,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section>
   <div class="w">
     <div class="meio">
-      <h2>O seu livro é único,<br><span class="serifa">e o nosso time entende disso.</span></h2>
+      <h2>O seu livro é único,<br>e o nosso time entende disso.</h2>
     </div>
     <!-- ============================================================
          A SESSÃO, DESCRITA (23/09). Eram quatro passos numerados, e antes
@@ -1019,7 +1021,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section class="alt">
   <div class="w">
     <div class="meio">
-      <h2>Você sai do seu diagnóstico<br><span class="serifa">com o próximo passo mapeado</span></h2>
+      <h2>Você sai do seu diagnóstico<br>com o próximo passo mapeado</h2>
     </div>
     <!-- ============================================================
          OS TRÊS DEPOIMENTOS. Eram cartões só de texto, sem rosto nenhum, e o
