@@ -330,9 +330,20 @@ header + section{border-top:1px solid var(--ru)}
 .oferta-sec .esc{color:var(--dim)}
 
 /* a garantia, dentro do bloco: selo verde, porque garantia e do lado de comprar */
-.oferta-sec .gar{max-width:660px;margin:26px auto 0}
-.oferta-sec .gar .selo{width:68px;height:68px;border-color:var(--go);color:var(--go)}
-.oferta-sec .gar .selo b{font-size:1.06rem}
+/* ── A GARANTIA, VERSÃO CARIMBO (G2, cliente 23/09) ──────────
+   O selo era verde sobre branco DENTRO de uma seção verde, e por isso sumia,
+   justamente sendo o elemento que devia gritar "garantia". Agora ele e' PRETO
+   com o numero em amarelo e um anel tracejado por dentro: preto e' a unica
+   cor que aparece nos dois fundos da pagina, e o tracejado da ao circulo cara
+   de carimbo em vez de cara de icone. */
+.oferta-sec .gar{max-width:660px;margin:26px auto 0;padding:24px 28px;gap:24px}
+.oferta-sec .gar .selo{position:relative;width:88px;height:88px;background:var(--ink);
+  border:0;color:var(--grifo)}
+.oferta-sec .gar .selo:before{content:"";position:absolute;inset:5px;border-radius:50%;
+  border:1.5px dashed rgba(255,216,77,.55)}
+.oferta-sec .gar .selo b{font-size:1.5rem}
+.oferta-sec .gar .selo i{color:#fff;font-size:.5rem;letter-spacing:.16em;margin-top:5px}
+.oferta-sec .gar h3{font-size:1.2rem;line-height:1.25}
 
 /* ⭐ VERDE = COMPRAR, e isso vale na pagina inteira. Sem isto o preco seria
    verde aqui e o botao que leva ate ele continuaria ambar duas secoes acima,
@@ -725,13 +736,17 @@ header + section{border-top:0}
 .oferta-sec .offer-box .obs,.oferta-sec .esc{color:var(--dim)}
 .oferta-sec .gar{background:var(--offc);color:var(--ink);
   box-shadow:4px 4px 0 rgba(12,48,28,.5)}
-.oferta-sec .gar .selo{background:var(--go);color:#fff;border:2px solid var(--ink);
-  width:68px;height:68px}
+/* 🚫 AQUI TINHA UMA SEGUNDA REGRA DO SELO (verde, 68px) que vencia a do
+   carimbo la em cima por vir depois no arquivo, com a MESMA especificidade.
+   Mesmo tipo de bug que quebrou o pill: trocar um componente nao basta,
+   e preciso procurar o seletor repetido. O selo agora e definido num lugar so. */
 .oferta-sec .gar h3{color:var(--ink)}
 .oferta-sec .gar p{color:var(--mut)}
 
 /* ---- a saída do PIX, faixa dentro do cartão ---- */
-.pix{background:none;border-top:2px solid var(--ink);border-bottom:0;padding-bottom:10px}
+/* sem filete entre o widget e esta faixa (cliente 23/09): os dois sao o mesmo
+   gesto de comprar, e a linha separava o que devia ler junto. */
+.pix{background:none;border-top:0;border-bottom:0;padding-top:6px;padding-bottom:10px}
 .pix .q{color:var(--ink)}
 .pix .btn{background:var(--alt);color:#fff}
 .pix .btn:hover,.pix .btn:focus-visible{background:var(--alt2);color:#fff}
@@ -901,7 +916,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section>
   <div class="w">
     <div class="meio">
-      <p class="eyebrow">Como é a sessão</p>
       <h2>O seu livro é único,<br><span class="serifa">e o nosso time entende disso.</span></h2>
     </div>
     <!-- ============================================================
@@ -1075,7 +1089,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
              ⏳ A REGRA AINDA NÃO EXISTE na operação (pendência). E a Hotmart
              devolve sozinha só por 7 dias: se a sessão cair no dia 20, o
              reembolso vira processo manual do time. -->
-        <h3>Se você fizer a sessão e achar que não valeu, devolvemos</h3>
+        <h3>Se você fizer a sessão e ao final achar que não valeu, devolvemos</h3>
         <p>Sem justificar, sem formulário, sem falar com três pessoas.</p>
       </div>
     </div>
