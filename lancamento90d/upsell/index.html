@@ -529,6 +529,10 @@ section.alt .prova{background:var(--pa)}
 .prova .link:hover{border-bottom-color:var(--ac)}
 .nota-prova{margin:26px auto 0;max-width:62ch;font-size:.88rem;color:var(--dim)}
 
+/* a linha sob o ultimo CTA: ela existe porque o botao NAO compra, ele rola de
+   volta pro card. Sem ela, quem clica espera checkout e leva um susto. */
+.depois{margin:14px auto 0;font-size:.84rem;color:var(--dim)}
+
 /* faq: o do front */
 .faq{max-width:720px;margin:36px auto 0;text-align:left;border-top:1px solid var(--ru)}
 .faq details{border-bottom:1px solid var(--ru)}
@@ -884,6 +888,15 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         <p>Dez são de conversa, e só se o seu caso for de algo que a gente faz.</p>
         <p>Está escrito acima, antes de você pagar.</p></div>
       </details>
+    </div>
+    <!-- O ultimo CTA da pagina. Ele vem DEPOIS das objecoes, que e o unico
+         lugar onde ainda vale pedir de novo: quem chegou ate aqui leu as tres
+         duvidas e continua na pagina.
+         Verde, porque na direcao B verde e comprar, e aponta pra #compra, que
+         e o card la em cima com o widget. -->
+    <div class="meio" style="margin-top:clamp(30px,4vw,42px)">
+      <a class="btn" href="#compra">Quero o meu diagnóstico</a>
+      <p class="depois">Leva você de volta para a oferta, no topo da página.</p>
     </div>
   </div>
 </section>
