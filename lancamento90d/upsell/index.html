@@ -575,29 +575,22 @@ html.js .conta{transition:none}
 .gar h3{font-family:var(--fd);font-weight:700;font-size:1.12rem;letter-spacing:-.02em;line-height:1.25}
 .gar p{margin:7px 0 0;color:var(--mut);font-size:.95rem}
 
-/* ── A SESSÃO, EM PASSOS ─────────────────────────────────────
-   Quatro passos numa fila horizontal, sem minuto nenhum (cliente 23/09).
-   O passo 3 e' o unico destacado: e' onde a sessao de fato acontece, e sem o
-   contraste do "40 min contra 10 min" e' ele que precisa dizer isso sozinho.
-   No celular a fila vira coluna, senao os quatro titulos ficam ilegiveis. */
-.passo-fila{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
-  max-width:980px;margin:34px auto 0;text-align:left}
-.pf{background:var(--offc);border:2px solid var(--ink);border-radius:var(--r);
-  padding:22px 20px;box-shadow:4px 4px 0 var(--ink);display:flex;flex-direction:column}
-.pf .pn{display:grid;place-content:center;width:34px;height:34px;border-radius:50%;
-  border:2px solid var(--ink);font:700 1rem/1 var(--fd);margin-bottom:14px}
-.pf h3{font-family:var(--fd);font-weight:700;font-size:1.02rem;letter-spacing:-.02em;line-height:1.25}
-.pf p{margin:9px 0 0;color:var(--mut);font-size:.93rem;line-height:1.45}
-/* o passo onde a sessao acontece */
-.pf.viva{background:var(--go);color:#fff;box-shadow:4px 4px 0 var(--ink)}
-.pf.viva .pn{background:#fff;color:var(--go);border-color:#fff}
-.pf.viva p{color:rgba(255,255,255,.88)}
-.pf.viva p b{color:#fff}
-@media(max-width:900px){
-  .passo-fila{grid-template-columns:1fr;gap:12px}
-  .pf{flex-direction:row;align-items:flex-start;gap:16px;padding:18px}
-  .pf .pn{flex:none;margin-bottom:0}
-}
+/* ── A SESSÃO, DESCRITA ──────────────────────────────────────
+   Sem cartao, sem caixa, sem numero. So tipografia: a pagina ja tem caixa
+   demais, e esta secao nao organiza nada, ela conta.
+   As tres linhas do "se voce tem" sao o centro, e por isso sao as unicas em
+   corpo grande. */
+/* largo o bastante pras tres linhas do "se voce tem" caberem em UMA linha cada.
+   Quebrando em duas, a repeticao perde o ritmo, que e o motor da secao. */
+.descr{max-width:820px;margin:34px auto 0;text-align:center}
+.descr .abre{margin:0;font-size:clamp(1.05rem,2.3vw,1.24rem);line-height:1.5;color:var(--mut)}
+.ses{list-style:none;padding:0;margin:clamp(26px,3.4vw,36px) 0;display:grid;
+  gap:clamp(12px,1.8vw,18px)}
+.ses li{font-family:var(--fd);font-weight:400;letter-spacing:-.02em;
+  font-size:clamp(1.1rem,2.5vw,1.38rem);line-height:1.35;color:var(--mut);
+  text-wrap:balance}
+.ses li b{font-weight:700;color:var(--ink)}
+.descr .fecha{margin:0;font-size:clamp(.98rem,2.1vw,1.08rem);line-height:1.55;color:var(--dim)}
 
 /* prova: os cartões do front */
 .provas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0 0;text-align:left}
@@ -898,27 +891,31 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section>
   <div class="w">
     <div class="meio">
-      <p class="eyebrow">O que acontece na sessão</p>
-      <h2>A sua sessão,<br><span class="serifa">por dentro.</span></h2>
+      <p class="eyebrow">Como é a sessão</p>
+      <h2>O seu livro é único,<br><span class="serifa">e o nosso time entende disso.</span></h2>
     </div>
     <!-- ============================================================
-         A SESSÃO EM PASSOS (23/09). Era uma lista vertical com o MINUTO de
-         cada bloco à esquerda. O cliente tirou os minutos: a seção aponta os
-         passos, não cronometra a sessão.
-         ⚠️ Cronômetro tinha um efeito colateral bom que se perde aqui: os
-         40 minutos contra os 10 provavam, sozinhos, que a sessão é sobre o
-         livro e não sobre vender. Quem faz esse trabalho agora é o passo 3
-         estar DESTACADO e o passo 4 dizer o que diz.
-         🚫 Continua valendo: NÃO PROMETER DATA (a sessão só crava data pra
-         quem tem livro pronto).
-         ============================================================ -->
-    <div class="passo-fila">
-      <div class="pf"><span class="pn">1</span><h3>Quem é você e onde o livro está</h3></div>
-      <div class="pf"><span class="pn">2</span><h3>O que já está certo</h3></div>
-      <div class="pf viva"><span class="pn">3</span><h3>Os seus próximos passos</h3>
-        <p>O que falta e o tipo de publicação certo. E <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div>
-      <div class="pf"><span class="pn">4</span><h3>Dúvidas, e uma conversa honesta</h3>
-        <p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div>
+         A SESSÃO, DESCRITA (23/09). Eram quatro passos numerados, e antes
+         disso quatro blocos com o minuto de cada um.
+         Por que parou de segmentar: segmento PROMETE rigidez. Quatro blocos
+         dizem que a sessão tem roteiro fixo, e aí toda sessão que fugir dele
+         vira quebra de promessa. Descrever não cria essa dívida.
+         ⚠️ A COPY É DO CLIENTE. Ele escreveu o registro inteiro e as duas
+         primeiras linhas do "se você tem"; eu completei a tríade e mantive a
+         última linha, que é a que torna o resto crível.
+         O motor aqui é a REPETIÇÃO "se você tem X, a gente Y". Mexer numa das
+         três quebra as outras duas.
+         🚫 Continua valendo: NÃO PROMETER DATA. -->
+    <div class="descr">
+      <p class="abre">Você tem uma visão única e um objetivo único.<br>
+      A sessão existe para te levar até lá.</p>
+      <ul class="ses">
+        <li>Se você tem uma dúvida, <b>a gente mata na hora.</b></li>
+        <li>Se você tem um projeto pro seu livro, <b>a gente tapa os buracos.</b></li>
+        <li>Se você não sabe por onde começar, <b>a gente te dá a ordem.</b></li>
+      </ul>
+      <p class="fecha">E se o que você precisa for algo que a gente faz, a gente conta.<br>
+      Se não for, não conta.</p>
     </div>
   </div>
 </section>
