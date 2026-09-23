@@ -366,8 +366,37 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    #EFEDE8 16:1 · #868178 4,7:1.
    O protótipo das três versões está em _designs/curva.html.
    ════════════════════════════════════════════════════════════ */
-.contas{margin:clamp(34px,5vw,52px) auto 0;max-width:740px;padding-left:24px;text-align:left}
-.conta + .conta{margin-top:clamp(26px,3.6vw,38px)}
+/* ── 23/09: as tres contas viraram TRES COLUNAS (cliente).
+   Empilhadas, a comparacao era vertical e a pessoa tinha que segurar a
+   primeira na cabeca ate chegar na terceira. Lado a lado o olho compara
+   sozinho, e a terceira e' visivelmente a unica que sobe.
+   Os graficos sao os MESMOS: o cliente pediu pra manter as curvas atuais.
+   ⚠️ No celular volta a ser empilhado. Tres curvas de 300px de largura nao
+   se leem, e ai a comparacao morre de vez. */
+.contas{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;
+  margin:clamp(34px,5vw,52px) auto 0;max-width:1080px;padding-left:24px;text-align:left}
+.conta{background:var(--offc);border:2px solid var(--ink);border-radius:var(--r);
+  padding:20px 18px;box-shadow:4px 4px 0 var(--ink);display:flex;flex-direction:column}
+/* a frase do resultado desce pro rodape do cartao: os titulos tem 1 ou 2 linhas
+   e sem isto as tres frases ficavam em alturas diferentes. */
+.conta .r{margin-top:auto;padding-top:10px}
+/* o cartao que fecha a conta e' verde. Tudo que era verde DENTRO dele tem que
+   virar branco, senao some: a curva, a ponta acesa, o rotulo e a frase. */
+.conta.tres{background:var(--go);border-color:var(--ink)}
+.conta.tres .q{color:#fff}
+.conta.tres .r{color:#fff;text-shadow:none}
+.conta.tres .graf svg path[stroke="#1E7D46"]{stroke:#fff}
+.conta.tres .graf svg circle[fill="#1E7D46"]{fill:#fff}
+.conta.tres .graf svg path[stroke="#2C2C33"],
+.conta.tres .graf svg line{stroke:rgba(255,255,255,.3)}
+.conta.tres .graf svg path[stroke="#7D8B99"],
+.conta.tres .graf svg path[stroke="#E0574A"]{stroke:rgba(255,255,255,.4)}
+.conta.tres .graf svg [fill^="url"]{opacity:.22}
+.conta.tres .eixo-y,.conta.tres .eixo-x{color:rgba(255,255,255,.6)}
+.conta.tres .marca-lanc{color:rgba(255,255,255,.75)}
+@media(max-width:900px){
+  .contas{grid-template-columns:1fr;max-width:740px;gap:16px}
+}
 .conta .q{margin:0 0 9px;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;
   line-height:1.24;font-size:clamp(.95rem,2vw,1.14rem);color:var(--cor)}
 .conta .r{margin:2px 0 0;font-size:.96rem;line-height:1.45;color:var(--dim)}
@@ -423,7 +452,7 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    "vendas" fica no meio da sua linha, "lançamento" no topo da dela. */
 .eixo-y{justify-content:center}
 .marca-lanc{justify-content:flex-end}
-.eixo-y{left:-24px;color:var(--dim)}
+.eixo-y{left:-20px;color:var(--dim)}
 /* encostada no pontilhado e do lado de fora dele: à direita passam as curvas */
 .marca-lanc{right:85.625%;margin-right:6px;color:var(--ac);opacity:.85}
 .eixo-x{right:0;bottom:0;color:var(--dim)}
@@ -437,11 +466,12 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
    contas continuam legíveis apagadas. O que ele faz é dar UMA de cada vez
    pra ler, que é o que faltava quando as três brigavam pela atenção.
    Sem JS, e com movimento reduzido, as três ficam acesas. */
-html.js .conta{transition:opacity .45s ease}
-html.js .conta:not(.viva){opacity:.32}
+/* 🚫 O apagado por rolagem morreu com as tres colunas: lado a lado as tres sao
+   lidas DE UMA VEZ, e apagar duas quebraria a comparacao, que e a seção toda.
+   O JS que marca .viva continua rodando e agora nao pinta nada. */
+html.js .conta{transition:none}
 @media(prefers-reduced-motion:reduce){
   html.js .conta{transition:none}
-  html.js .conta:not(.viva){opacity:1}
 }
 .nota-conta{margin:26px auto 0;max-width:56ch;text-align:center;font-size:.8rem;color:var(--dim)}
 @media(max-width:560px){
@@ -519,20 +549,29 @@ html.js .conta:not(.viva){opacity:.32}
 .gar h3{font-family:var(--fd);font-weight:700;font-size:1.12rem;letter-spacing:-.02em;line-height:1.25}
 .gar p{margin:7px 0 0;color:var(--mut);font-size:.95rem}
 
-/* a sessão, minuto a minuto: o minuto é o marcador, porque é a informação.
-   ⚠️ 23/09: a entrega se chama SESSÃO, nunca "a hora" (cliente). "Uma hora"
-   só sobrevive onde é DURAÇÃO ("uma sessão de uma hora"). A classe .hora
-   ficou como está pra não espalhar renomeação de CSS por causa de copy. */
-.hora{max-width:660px;margin:34px auto 0;text-align:left;border:1px solid var(--ru);
-  border-radius:var(--r);overflow:hidden}
-.hl{display:grid;grid-template-columns:92px 1fr;gap:18px;padding:20px 24px;
-  border-top:1px solid var(--ru)}
-.hl:first-child{border-top:0}
-.hl .min{font-family:var(--fd);font-weight:700;font-size:1.06rem;letter-spacing:-.03em;
-  color:var(--ac);font-variant-numeric:tabular-nums}
-.hl h3{font-family:var(--fd);font-weight:700;font-size:1.02rem;letter-spacing:-.02em;line-height:1.3}
-.hl p{margin:7px 0 0;color:var(--mut);font-size:.95rem;line-height:1.5}
-.hl p b{color:var(--ink)}
+/* ── A SESSÃO, EM PASSOS ─────────────────────────────────────
+   Quatro passos numa fila horizontal, sem minuto nenhum (cliente 23/09).
+   O passo 3 e' o unico destacado: e' onde a sessao de fato acontece, e sem o
+   contraste do "40 min contra 10 min" e' ele que precisa dizer isso sozinho.
+   No celular a fila vira coluna, senao os quatro titulos ficam ilegiveis. */
+.passo-fila{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  max-width:980px;margin:34px auto 0;text-align:left}
+.pf{background:var(--offc);border:2px solid var(--ink);border-radius:var(--r);
+  padding:22px 20px;box-shadow:4px 4px 0 var(--ink);display:flex;flex-direction:column}
+.pf .pn{display:grid;place-content:center;width:34px;height:34px;border-radius:50%;
+  border:2px solid var(--ink);font:700 1rem/1 var(--fd);margin-bottom:14px}
+.pf h3{font-family:var(--fd);font-weight:700;font-size:1.02rem;letter-spacing:-.02em;line-height:1.25}
+.pf p{margin:9px 0 0;color:var(--mut);font-size:.93rem;line-height:1.45}
+/* o passo onde a sessao acontece */
+.pf.viva{background:var(--go);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+.pf.viva .pn{background:#fff;color:var(--go);border-color:#fff}
+.pf.viva p{color:rgba(255,255,255,.88)}
+.pf.viva p b{color:#fff}
+@media(max-width:900px){
+  .passo-fila{grid-template-columns:1fr;gap:12px}
+  .pf{flex-direction:row;align-items:flex-start;gap:16px;padding:18px}
+  .pf .pn{flex:none;margin-bottom:0}
+}
 
 /* prova: os cartões do front */
 .provas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0 0;text-align:left}
@@ -676,7 +715,10 @@ a.btn[href="#compra"]:hover,a.btn[href="#compra"]:focus-visible{background:var(-
 
 /* ---- a conta em curva: os traços foram desenhados pra fundo preto ---- */
 .conta .r{color:var(--mut)}
-.conta.tres .r{color:var(--go);text-shadow:none}
+/* ⚠️ dentro do cartao verde a frase tem que ser BRANCA. Esta regra mora depois
+   da que pinta o cartao, entao e ela que manda: deixar var(--go) aqui fazia a
+   frase sumir em verde sobre verde. */
+.conta.tres .r{color:#fff;text-shadow:none}
 /* no creme o apagado de .32 sumia de vez; .55 ainda hierarquiza e continua legivel */
 html.js .conta:not(.viva){opacity:.55}
 .graf svg path[stroke="#2C2C33"]{stroke:var(--hair)}
@@ -829,18 +871,27 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section>
   <div class="w">
     <div class="meio">
-      <p class="eyebrow">O que acontece na call</p>
+      <p class="eyebrow">O que acontece na sessão</p>
       <h2>A sua sessão,<br><span class="serifa">por dentro.</span></h2>
     </div>
-    <div class="hora">
-      <div class="hl"><span class="min">5 min</span><div><h3>Quem é você e onde o livro está</h3></div></div>
-      <div class="hl"><span class="min">5 min</span><div><h3>O que já está certo</h3></div></div>
-      <div class="hl"><span class="min">40 min</span><div><h3>Os seus próximos passos</h3>
-        <p>O que falta e o tipo de publicação certo.<br>
-        E <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div></div>
-      <div class="hl"><span class="min">10 min</span><div><h3>Dúvidas, e uma conversa honesta</h3>
-        <p>Se o seu caso for de algo que a gente faz, a gente conta.<br>
-        Se não for, não conta.</p></div></div>
+    <!-- ============================================================
+         A SESSÃO EM PASSOS (23/09). Era uma lista vertical com o MINUTO de
+         cada bloco à esquerda. O cliente tirou os minutos: a seção aponta os
+         passos, não cronometra a sessão.
+         ⚠️ Cronômetro tinha um efeito colateral bom que se perde aqui: os
+         40 minutos contra os 10 provavam, sozinhos, que a sessão é sobre o
+         livro e não sobre vender. Quem faz esse trabalho agora é o passo 3
+         estar DESTACADO e o passo 4 dizer o que diz.
+         🚫 Continua valendo: NÃO PROMETER DATA (a sessão só crava data pra
+         quem tem livro pronto).
+         ============================================================ -->
+    <div class="passo-fila">
+      <div class="pf"><span class="pn">1</span><h3>Quem é você e onde o livro está</h3></div>
+      <div class="pf"><span class="pn">2</span><h3>O que já está certo</h3></div>
+      <div class="pf viva"><span class="pn">3</span><h3>Os seus próximos passos</h3>
+        <p>O que falta e o tipo de publicação certo. E <b>as três frentes de lançamento do seu livro</b>, escolhidas entre quinze.</p></div>
+      <div class="pf"><span class="pn">4</span><h3>Dúvidas, e uma conversa honesta</h3>
+        <p>Se o seu caso for de algo que a gente faz, a gente conta. Se não for, não conta.</p></div>
     </div>
   </div>
 </section>
