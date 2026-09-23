@@ -449,6 +449,22 @@ html.js .conta:not(.viva){opacity:.32}
 .esc{margin:22px auto 0;max-width:62ch;font-size:.88rem;line-height:1.66;color:rgba(20,19,18,.6)}
 .esc+.esc{margin-top:12px}
 
+/* ── A SAIDA DO PIX ──────────────────────────────────────────
+   O widget da Hotmart so fecha de um clique quem comprou o 90D no CARTAO:
+   e' o cartao salvo que ele recobra. Quem pagou no PIX nao tem o que
+   recobrar, ve o formulario nao carregar e nao tem por onde comprar.
+   Esta caixa e' o caminho normal de checkout pra essa pessoa.
+   Botao de CONTORNO, nao solido: o widget continua sendo a acao principal
+   e esta e a saida secundaria. Dois botoes solidos brigariam. */
+.pix{margin:24px 0 0;padding:22px 0 0;border-top:1px solid rgba(20,19,18,.16)}
+.pix .q{margin:0;font-family:var(--fd);font-weight:700;font-size:1.02rem;
+  letter-spacing:-.02em;color:var(--offtx)}
+.pix .d{margin:7px 0 16px;font-size:.9rem;line-height:1.55;color:rgba(20,19,18,.6)}
+.pix .btn{background:transparent;color:var(--offtx);border:1.5px solid rgba(20,19,18,.3);
+  box-shadow:none}
+.pix .btn:hover,.pix .btn:focus-visible{background:var(--offtx);color:var(--off);
+  border-color:var(--offtx)}
+
 /* garantia */
 .gar{max-width:660px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:22px;
   align-items:center;text-align:left;border:1px solid var(--ru);border-radius:var(--r);
@@ -817,6 +833,18 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
            precisa bater com o que estiver la, senao a pagina mente.
            ============================================================ -->
       <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
+      <!-- A saida do PIX. Fica SEMPRE visivel, e nao so quando o widget
+           falha: a pessoa que pagou no PIX nao sabe que o formulario acima
+           nunca vai carregar pra ela, e um erro em cinza nao explica isso.
+           O href e' montado pelo script la embaixo, junto com o xcod da
+           VTurb, pra que a venda por este caminho tambem diga qual das
+           cinco leads a produziu. -->
+      <div class="pix">
+        <p class="q">Comprou o Lançamento 90D no PIX?</p>
+        <p class="d">O botão de um clique acima só funciona para quem pagou no cartão.
+        Se você pagou no PIX, o seu diagnóstico é por aqui.</p>
+        <a class="btn block" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão</a>
+      </div>
       <p class="esc">Esta oferta só existe aqui, para quem acabou de comprar o 90D.<br>
       E ela só está na sua frente porque ainda há vaga este mês.</p>
       <p class="esc">Cada diagnóstico é uma hora de agenda do time.<br>
@@ -929,17 +957,41 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   function carimba(chave){
     try {
       var u = new URL(location.href);
-      if (u.searchParams.get('xcod')) return;   /* ja veio de fora, respeita */
-      u.searchParams.set('xcod', chave);
-      history.replaceState(null, '', u.toString());
+      if (!u.searchParams.get('xcod')) {
+        u.searchParams.set('xcod', chave);
+        history.replaceState(null, '', u.toString());
+      }
     } catch(e){}
+  }
+
+  /* ── A SAIDA DO PIX ──────────────────────────────────────────
+     Checkout normal, pra quem pagou o 90D no PIX e por isso nunca vai ver o
+     widget carregar. O xcod entra aqui TAMBEM: sem ele, toda venda que vier
+     por este caminho fica sem dizer qual das cinco leads a produziu, e o
+     teste perde justamente a fatia que pagou no PIX.
+     ⚠️ A oferta n740dj0b (R$697) precisa bater com o preco configurado no
+     funil da Hotmart e com o texto impresso nesta pagina. Sao tres lugares
+     e nenhum deles conversa com o outro sozinho. */
+  var PIX_CHECKOUT = 'https://pay.hotmart.com/A107472443R?off=n740dj0b';
+
+  function ligaPix(chave){
+    var a = document.getElementById('pix-checkout');
+    if (!a) return;
+    try {
+      var u = new URL(PIX_CHECKOUT);
+      if (chave) u.searchParams.set('xcod', chave);
+      new URLSearchParams(location.search).forEach(function(v, k){
+        if (k !== 'xcod' && !u.searchParams.get(k)) u.searchParams.set(k, v);
+      });
+      a.setAttribute('href', u.toString());
+    } catch(e){ a.setAttribute('href', PIX_CHECKOUT); }
   }
 
   (function espera(){
     var el = document.querySelector('vturb-smartplayer');
     var chave = el && el.conversionKey;
-    if (chave){ carimba(chave); return montar(); }
-    if (Date.now() - INICIO > PRAZO) return montar();
+    if (chave){ carimba(chave); ligaPix(chave); return montar(); }
+    if (Date.now() - INICIO > PRAZO){ ligaPix(null); return montar(); }
     setTimeout(espera, 150);
   })();
 })();
