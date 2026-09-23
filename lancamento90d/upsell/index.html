@@ -130,6 +130,13 @@
   --off:#F3F0E8; --offtx:#141312; --offc:#FFFFFF; --offb:#DBD6CA;
   --pill:#EAB82D; --pilltx:#141312; --pillh:#141312; --pillhtx:#EAB82D;
   --play:#000; --band:#EAB82D; --bandtx:#141312;
+  /* 23/09 (direcao B): a cor passa a ter PAPEL. Uma cor so pra tudo nao cria
+     hierarquia nenhuma, e de longe a pagina lia como um bloco morto.
+       --go  VERDE  = comprar. O preco e os botoes que levam ao checkout.
+       --alt LARANJA = o caminho alternativo (a saida do PIX).
+     O ambar continua sendo a cor da MARCA (eyebrow das outras secoes, grafico,
+     rabisco). Ele so nao manda mais na hora de agir. */
+  --go:#25A85A; --go2:#1F8F4C; --alt:#F06A2A; --alt2:#D85B1F;
   --ff:'DM Sans',system-ui,-apple-system,sans-serif;
   --fd:'Space Grotesk','DM Sans',sans-serif;
   --fm:ui-monospace,'SF Mono','Roboto Mono','Courier New',monospace;
@@ -244,34 +251,54 @@ header + section{border-top:1px solid var(--ru)}
    nascendo no topo. É o único lugar da página onde se pede dinheiro, e
    ele tem que parecer de outra natureza, não só de outro cinza. */
 /* ════════════════════════════════════════════════════════════
-   O BLOCO DE COR  (direcao A, escolhida pelo cliente em 23/09)
+   A COR COM PAPEL  (direcao B, escolhida pelo cliente em 23/09)
 
-   A pagina inteira e escura. AQUI ELA ABRE: a secao de oferta e um campo
-   ambar chapado, com o card quase branco flutuando em cima.
+   A pagina usava UMA cor pra tudo: titulo, icone, botao, selo, destaque.
+   Quando tudo e da mesma cor nada tem hierarquia, e de longe a pagina le como
+   um bloco morto. O cliente disse isso com todas as letras.
 
-   Por que isto, e nao mais um ajuste: a pagina usava UMA cor pra tudo
-   (titulo, icone, botao, selo, destaque). Quando tudo e da mesma cor nada
-   tem hierarquia, e de longe a pagina le como um bloco morto. O cliente
-   disse isso com todas as letras. A correcao nao e mudar de tom, e mudar de
-   NATUREZA no unico lugar onde se pede dinheiro.
+   Aqui cada cor significa uma coisa:
+     VERDE   comprar. O preco e todo botao que leva ao checkout.
+     LARANJA o caminho alternativo, que e a saida do PIX.
+     AMBAR   a marca. Continua no resto da pagina, mas sai da hora de agir.
 
-   ⚠️ Daqui pra dentro o ambar deixa de ser destaque e vira FUNDO. Tudo que
-   era ambar aqui (eyebrow, selo, borda) tem que virar escuro, senao some.
-   ⚠️ Contraste conferido sobre #EAB82D: #141312 da 11,4:1.
+   ⚠️ Verde e laranja NAO podem aparecer em mais nada. No segundo em que o
+   verde virar enfeite, ele deixa de querer dizer "compre" e a pagina volta
+   pro ponto de partida, so que com mais cores.
+   ⚠️ Contraste sobre #191920: #25A85A da 4,6:1, #F06A2A da 6,3:1.
    ════════════════════════════════════════════════════════════ */
-.oferta-sec{background:var(--ac);color:#141312}
-.oferta-sec .eyebrow{color:rgba(20,19,18,.6)}
-.oferta-sec h2{color:#141312}
-/* o card sobe pra quase branco: sobre ambar, o creme sumia */
-.oferta-sec .offer-box{background:#FFFDF7;box-shadow:0 34px 70px -34px rgba(0,0,0,.5)}
+.oferta-sec{background:var(--pa);
+  background-image:radial-gradient(120% 58% at 50% 0%, rgba(37,168,90,.11), rgba(0,0,0,0) 70%)}
+.oferta-sec .eyebrow{color:var(--go)}
 
-/* a garantia, agora dentro do bloco e sobre o ambar */
-.oferta-sec .gar{max-width:660px;margin:26px auto 0;background:rgba(20,19,18,.09);
-  border:0;border-radius:14px;padding:20px 24px}
-.oferta-sec .gar .selo{width:68px;height:68px;background:#141312;border:0;color:var(--ac)}
+/* o card da oferta e escuro: os valores claros do .offer-box sao revertidos */
+.oferta-sec .offer-box{background:var(--pa2);color:var(--ink);
+  border:1px solid var(--ru);box-shadow:none}
+.oferta-sec .offer-box .promessa{border-bottom-color:var(--ru)}
+.oferta-sec .offer-box .conquistas li{color:var(--mut)}
+.oferta-sec .offer-box .conquistas li b{color:var(--ink)}
+.oferta-sec .offer-box .conquistas li:before{border-color:var(--go)}
+.oferta-sec .offer-box .price .cur{color:var(--mut)}
+/* o preco e VERDE porque e o que se ganha, nao o que se perde */
+.oferta-sec .offer-box .price .val{color:var(--go)}
+.oferta-sec .offer-box .inst{color:var(--mut)}
+.oferta-sec .offer-box .inst b{color:var(--ink)}
+.oferta-sec .offer-box .obs{color:var(--dim)}
+.oferta-sec .esc{color:var(--dim)}
+
+/* a garantia, dentro do bloco: selo verde, porque garantia e do lado de comprar */
+.oferta-sec .gar{max-width:660px;margin:26px auto 0}
+.oferta-sec .gar .selo{width:68px;height:68px;border-color:var(--go);color:var(--go)}
 .oferta-sec .gar .selo b{font-size:1.06rem}
-.oferta-sec .gar h3{color:#141312}
-.oferta-sec .gar p{color:rgba(20,19,18,.68)}
+
+/* ⭐ VERDE = COMPRAR, e isso vale na pagina inteira. Sem isto o preco seria
+   verde aqui e o botao que leva ate ele continuaria ambar duas secoes acima,
+   que e exatamente o problema que a direcao veio resolver. */
+a.btn[href="#compra"]{background:var(--go);color:#fff;
+  box-shadow:0 14px 30px -14px rgba(37,168,90,.9)}
+a.btn[href="#compra"]:hover,a.btn[href="#compra"]:focus-visible{background:var(--go2);color:#fff;
+  box-shadow:0 18px 36px -14px rgba(37,168,90,.75)}
+
 .meio{text-align:center;max-width:720px;margin:0 auto}
 h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
   letter-spacing:-.03em;line-height:1.1}
@@ -439,19 +466,22 @@ html.js .conta:not(.viva){opacity:.32}
 .esc{margin:22px auto 0;max-width:62ch;font-size:.88rem;line-height:1.66;color:rgba(20,19,18,.6)}
 .esc+.esc{margin-top:12px}
 
-/* ── A SAIDA DO PIX, sobre o campo ambar ────────────────────
-   Ela nao e um detalhe: pra quem pagou o 90D no PIX e o unico caminho de
-   compra, porque o widget da Hotmart so recobra cartao salvo.
-   ⚠️ O botao aqui e PRETO, nao ambar: ambar sobre ambar desaparece. */
-.pix{max-width:660px;margin:clamp(30px,4.4vw,42px) auto 0;text-align:center}
-.pix .q{margin:0 0 20px;font-family:var(--fd);font-weight:700;color:#141312;
-  letter-spacing:-.03em;line-height:1.18;font-size:clamp(1.28rem,3.2vw,1.9rem)}
-.pix .btn{width:100%;max-width:520px;font-size:clamp(1rem,2.4vw,1.16rem);padding:23px 34px;
-  background:#141312;color:var(--ac);box-shadow:0 18px 40px -20px rgba(0,0,0,.8)}
-.pix .btn:hover,.pix .btn:focus-visible{background:#000;color:var(--ac);
-  box-shadow:0 22px 46px -20px rgba(0,0,0,.7)}
-.pix .d{margin:15px auto 0;max-width:46ch;font-size:.86rem;line-height:1.5;
-  color:rgba(20,19,18,.62)}
+/* ── A SAIDA DO PIX ──────────────────────────────────────────
+   LARANJA, que e a cor do caminho alternativo. Ela nao e um detalhe: pra quem
+   pagou o 90D no PIX e o unico caminho de compra, porque o widget da Hotmart
+   so recobra cartao salvo.
+   Painel proprio, com fundo e borda, pra ela se ler como OUTRA coisa e nao
+   como um segundo botao de comprar. */
+.pix{max-width:660px;margin:clamp(30px,4.4vw,42px) auto 0;text-align:center;
+  border:1px solid rgba(240,106,42,.42);border-radius:18px;
+  background:rgba(240,106,42,.07);padding:clamp(26px,3.6vw,34px) clamp(20px,3vw,30px)}
+.pix .q{margin:0 0 20px;font-family:var(--fd);font-weight:700;color:var(--ink);
+  letter-spacing:-.03em;line-height:1.18;font-size:clamp(1.24rem,3vw,1.75rem)}
+.pix .btn{width:100%;max-width:480px;font-size:clamp(1rem,2.4vw,1.14rem);padding:22px 32px;
+  background:var(--alt);color:#fff;box-shadow:0 16px 36px -16px rgba(240,106,42,.95)}
+.pix .btn:hover,.pix .btn:focus-visible{background:var(--alt2);color:#fff;
+  box-shadow:0 20px 42px -16px rgba(240,106,42,.8)}
+.pix .d{margin:15px auto 0;max-width:46ch;font-size:.86rem;line-height:1.5;color:var(--dim)}
 
 /* garantia */
 .gar{max-width:660px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:22px;
@@ -520,9 +550,10 @@ footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-fami
   line-height:1;white-space:nowrap}
 .sticky .p small{display:block;font-family:var(--ff);font-weight:400;font-size:10.5px;
   letter-spacing:0;color:rgba(20,19,18,.6);margin-top:3px}
+/* verde aqui tambem: e o mesmo gesto de comprar */
 .sticky .btn{flex:1;min-width:0;padding:15px 14px;font-size:14.5px;border-radius:999px;
-  background:var(--offtx);color:var(--off);box-shadow:none;white-space:nowrap}
-.sticky .btn:hover{background:var(--ac);color:var(--offtx)}
+  background:var(--go);color:#fff;box-shadow:none;white-space:nowrap}
+.sticky .btn:hover{background:var(--go2);color:#fff}
 
 @media (max-width:900px){
   .provas{grid-template-columns:1fr}
