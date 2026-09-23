@@ -771,6 +771,16 @@ section.vv{padding:18px 0 64px;border-bottom:2px solid var(--ink)}
 .v3 .faixa.tres{background:var(--go);border-color:var(--ink)}
 .v3 .faixa.tres .q{color:#fff}
 .v3 .faixa.tres .r{color:#fff;font-weight:700}
+/* a faixa verde da V3 nao e .conta.tres, entao as regras de curva branca
+   nao pegavam nela e a linha verde sumia no fundo verde */
+.v3 .faixa.tres .graf svg path[stroke="#1E7D46"]{stroke:#fff}
+.v3 .faixa.tres .graf svg circle[fill="#1E7D46"]{fill:#fff}
+.v3 .faixa.tres .graf svg line{stroke:rgba(255,255,255,.3)}
+.v3 .faixa.tres .graf svg path[stroke="#E0574A"],
+.v3 .faixa.tres .graf svg path[stroke="#7D8B99"]{stroke:rgba(255,255,255,.34)}
+.v3 .faixa.tres .graf svg [fill^="url"]{opacity:.22}
+.v3 .faixa.tres .rot-y,.v3 .faixa.tres .rot-x{color:rgba(255,255,255,.62)}
+.v3 .faixa.tres .rot-lanc{color:rgba(255,255,255,.8)}
 @media(max-width:760px){.v3 .faixa{grid-template-columns:1fr;gap:10px}}
 
 /* ── V4 ── */
