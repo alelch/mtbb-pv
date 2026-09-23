@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>4 direcoes de design - upsell 90D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b0b0d;color:#EFEDE8;font:17px/1.6 'DM Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.topo{position:sticky;top:0;z-index:50;background:#000;border-bottom:1px solid #2C2C33;padding:13px 0;
+  text-align:center;font:700 12px/1 'Space Grotesk';letter-spacing:.16em;text-transform:uppercase;color:#EAB82D}
+.intro{width:min(820px,90vw);margin:44px auto 0;text-align:center}
+.intro h1{font:700 clamp(1.4rem,3.6vw,2.1rem)/1.15 'Space Grotesk';letter-spacing:-.03em;margin:0}
+.intro p{color:#9A958D;margin:14px 0 0;font-size:.98rem}
+.sep{width:min(1120px,92vw);margin:56px auto 0;padding-top:30px;border-top:1px solid #2C2C33}
+.sep .tag{display:inline-block;font:700 12px/1 'Space Grotesk';letter-spacing:.2em;text-transform:uppercase;
+  background:#EAB82D;color:#141312;padding:9px 16px;border-radius:999px}
+.sep h2{font:700 clamp(1.3rem,3vw,1.8rem)/1.2 'Space Grotesk';letter-spacing:-.03em;margin:16px 0 0}
+.sep p{color:#9A958D;max-width:72ch;margin:10px 0 0;font-size:.95rem}
+.demo{margin:26px 0 0;border-radius:18px;overflow:hidden}
+/* ---------- base comum das quatro ---------- */
+.d{padding:0}
+.d .blk{padding:clamp(40px,5vw,72px) clamp(20px,4vw,56px)}
+.d h1{font:700 clamp(1.6rem,4vw,2.9rem)/1.1 'Space Grotesk';letter-spacing:-.035em;margin:18px 0 0}
+.d h2{font:700 clamp(1.4rem,3.2vw,2.3rem)/1.12 'Space Grotesk';letter-spacing:-.035em;margin:0}
+.d h3{font:700 1.02rem/1.25 'Space Grotesk';letter-spacing:-.02em;margin:0}
+.d em{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:500}
+.d .hero,.d .arg,.d .oferta{text-align:center}
+.d .parabens{margin:0;font-size:.98rem}
+.d .lead{margin:16px 0 0;font-size:1.02rem}
+.d .video{margin:26px auto 0;width:min(300px,70%);aspect-ratio:9/16;display:grid;place-content:center;
+  font:700 11px/1 'Space Grotesk';letter-spacing:.14em;text-transform:uppercase}
+.d .passos{display:flex;justify-content:center;margin:0 0 22px}
+.d .passos ol{display:flex;width:80%;gap:6px;list-style:none;margin:0;padding:6px;border-radius:999px}
+.d .passos li{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;
+  border-radius:999px;font:700 13px/1.15 'DM Sans';white-space:nowrap;min-width:0}
+.d .passos .n{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-content:center;
+  font:700 11.5px/1 'DM Sans';border:1.5px solid currentColor}
+.d .contas{display:grid;gap:14px;margin:30px auto 0;max-width:620px;text-align:left}
+.d .contas .c{padding:18px 22px}
+.d .contas b{display:block;font:700 1.02rem/1.2 'Space Grotesk';letter-spacing:-.02em}
+.d .contas span{display:block;margin-top:5px;font-size:.95rem}
+.d .eyebrow{font:700 .76rem/1 'Space Grotesk';letter-spacing:.18em;text-transform:uppercase;margin:0 0 14px}
+.d .card{max-width:600px;margin:30px auto 0;padding:clamp(26px,3.4vw,40px);text-align:left}
+.d .nome{margin:0 0 20px;padding-bottom:18px;font:700 1.3rem/1.2 'Space Grotesk';letter-spacing:-.03em;
+  text-align:center}
+.d .conq{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:12px}
+.d .conq li{position:relative;padding-left:28px;font-size:.98rem;line-height:1.4}
+.d .conq li:before{content:"";position:absolute;left:4px;top:.32em;width:7px;height:12px;
+  border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(40deg)}
+.d .preco{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:0}
+.d .preco .c{font-size:1.05rem}
+.d .preco .v{font:700 clamp(2.9rem,8vw,4.3rem)/1 'Space Grotesk';letter-spacing:-.05em}
+.d .vista{text-align:center;margin:6px 0 20px;font-size:.95rem}
+.d .widget{padding:26px 16px;text-align:center;font:700 .74rem/1.5 'Space Grotesk';
+  letter-spacing:.12em;text-transform:uppercase}
+.d .pix{margin:22px 0 0;padding:22px 0 4px;text-align:center}
+.d .pix .q{margin:0 0 16px;font:700 clamp(1.02rem,2.2vw,1.24rem)/1.25 'Space Grotesk';letter-spacing:-.025em}
+.d .bt{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;
+  font:700 1rem/1 'Space Grotesk';padding:18px 30px;width:100%;max-width:380px}
+.d .gar{max-width:600px;margin:24px auto 0;padding:20px 24px;display:flex;gap:16px;align-items:center;
+  text-align:left}
+.d .gar .selo{flex:0 0 58px;height:58px;border-radius:50%;display:grid;place-content:center;text-align:center;
+  font:700 1rem/1 'Space Grotesk'}
+.d .gar .selo i{font-style:normal;display:block;font-size:.42rem;letter-spacing:.12em;margin-top:2px}
+.d .gar p{margin:4px 0 0;font-size:.9rem}
+
+.dA{background:#F7F4EC;color:#191714}
+.dA .passos ol{background:#fff;border:1px solid #E2DCCE}
+.dA .passos li{color:#8C8478}
+.dA .passos .feito{color:#A79C8A}
+.dA .passos .feito .n{background:#A79C8A;color:#fff;border-color:#A79C8A}
+.dA .passos .agora{background:#1E7D46;color:#fff}
+.dA .passos .agora .n{background:#fff;color:#1E7D46;border-color:#fff}
+.dA .parabens{color:#6E675C}.dA .parabens b{color:#191714}
+.dA .lead{color:#6E675C}
+.dA h1 em{color:#1E7D46}
+.dA .video{background:#191714;color:#F7F4EC;border-radius:26px}
+.dA .arg{background:#EFE9DB}
+.dA .contas .c{background:#fff;border-radius:20px;border:1px solid #E2DCCE}
+.dA .contas .c span{color:#6E675C}
+.dA .contas .viva{background:#1E7D46;border-color:#1E7D46;color:#fff}
+.dA .contas .viva span{color:rgba(255,255,255,.82)}
+.dA .eyebrow{color:#1E7D46}
+.dA .card{background:#fff;border-radius:28px;border:1px solid #E2DCCE;
+  box-shadow:0 30px 60px -34px rgba(25,23,20,.3)}
+.dA .nome{border-bottom:1px solid #E9E3D5}
+.dA .conq li{color:#4A443B}.dA .conq li b{color:#191714}
+.dA .conq li:before{border-color:#1E7D46}
+.dA .preco .v{color:#1E7D46}
+.dA .widget{background:#F2EEE4;border-radius:18px;color:#8C8478}
+.dA .pix{border-top:1px solid #E9E3D5}
+.dA .bt.alt{background:#E8622B;color:#fff;border-radius:999px}
+.dA .gar{background:#fff;border:1px solid #E2DCCE;border-radius:20px}
+.dA .gar .selo{background:#1E7D46;color:#fff}
+.dA .gar p{color:#6E675C}
+
+.dB{background:#0B0B0D}
+.dB .blk{margin:14px;border-radius:30px}
+.dB .hero{background:#15151B;color:#EFEDE8}
+.dB .passos ol{background:rgba(255,255,255,.06)}
+.dB .passos li{color:#8E8A82}
+.dB .passos .feito .n{background:#8E8A82;color:#15151B;border-color:#8E8A82}
+.dB .passos .agora{background:#EAB82D;color:#141312}
+.dB .passos .agora .n{background:#141312;color:#EAB82D;border-color:#141312}
+.dB .parabens{color:#9A958D}.dB .parabens b{color:#EFEDE8}
+.dB .lead{color:#9A958D}
+.dB h1 em{color:#EAB82D}
+.dB .video{background:#000;border-radius:24px;color:#5A564F}
+.dB .arg{background:#F3EFE4;color:#191714}
+.dB .contas .c{background:#fff;border-radius:18px}
+.dB .contas .c span{color:#6E675C}
+.dB .contas .viva{background:#191714;color:#F3EFE4}
+.dB .contas .viva span{color:#B9B2A4}
+.dB .oferta{background:#12452B;color:#EAF4ED}
+.dB .eyebrow{color:#7FD3A2}
+.dB .card{background:#fff;color:#191714;border-radius:26px}
+.dB .nome{border-bottom:1px solid #E9E3D5}
+.dB .conq li{color:#4A443B}.dB .conq li b{color:#191714}
+.dB .conq li:before{border-color:#12452B}
+.dB .preco .v{color:#12452B}
+.dB .widget{background:#F2EEE4;border-radius:16px;color:#8C8478}
+.dB .pix{border-top:1px solid #E9E3D5}
+.dB .bt.alt{background:#E8622B;color:#fff;border-radius:999px}
+.dB .gar{background:rgba(255,255,255,.08);border-radius:20px}
+.dB .gar .selo{background:#EAF4ED;color:#12452B}
+.dB .gar p{color:#A9C7B6}
+
+.dC{background:#FFF8E9;color:#101010}
+.dC .blk{border-bottom:3px solid #101010}
+.dC .passos ol{background:#fff;border:3px solid #101010;box-shadow:5px 5px 0 #101010}
+.dC .passos li{color:#5C5C5C}
+.dC .passos .feito .n{background:#101010;color:#fff;border-color:#101010}
+.dC .passos .agora{background:#FFD400;color:#101010}
+.dC .passos .agora .n{background:#101010;color:#FFD400;border-color:#101010}
+.dC .parabens{color:#3F3F3F}.dC .parabens b{color:#101010}
+.dC .lead{color:#3F3F3F}
+.dC h1 em{background:#FFD400;padding:0 .12em}
+.dC .video{background:#101010;color:#FFF8E9;border-radius:22px;border:3px solid #101010;
+  box-shadow:8px 8px 0 #101010}
+.dC .arg{background:#C8E6FF}
+.dC .contas .c{background:#fff;border:3px solid #101010;border-radius:16px;box-shadow:5px 5px 0 #101010}
+.dC .contas .c span{color:#3F3F3F}
+.dC .contas .viva{background:#21C46B}
+.dC .contas .viva span{color:#0C3E22}
+.dC .oferta{background:#FF7A3D}
+.dC .eyebrow{color:#101010}
+.dC .card{background:#fff;border:3px solid #101010;border-radius:24px;box-shadow:10px 10px 0 #101010}
+.dC .nome{border-bottom:3px solid #101010}
+.dC .conq li{color:#3F3F3F}.dC .conq li b{color:#101010}
+.dC .conq li:before{border-color:#101010}
+.dC .preco .v{color:#101010}
+.dC .widget{background:#FFF8E9;border:3px dashed #101010;border-radius:14px;color:#5C5C5C}
+.dC .pix{border-top:3px solid #101010}
+.dC .bt.alt{background:#101010;color:#FFD400;border-radius:999px;border:3px solid #101010;
+  box-shadow:5px 5px 0 rgba(16,16,16,.25)}
+.dC .gar{background:#fff;border:3px solid #101010;border-radius:18px;box-shadow:5px 5px 0 #101010}
+.dC .gar .selo{background:#21C46B;color:#fff;border:3px solid #101010}
+.dC .gar p{color:#3F3F3F}
+
+.dD{background:#0A0A12;color:#EDEBF2;position:relative;overflow:hidden}
+.dD .hero{background:
+  radial-gradient(90% 70% at 20% 0%, rgba(80,200,140,.22), rgba(0,0,0,0) 62%),
+  radial-gradient(80% 60% at 92% 12%, rgba(234,184,45,.2), rgba(0,0,0,0) 60%)}
+.dD .passos ol{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(8px)}
+.dD .passos li{color:#9C99A8}
+.dD .passos .feito .n{background:#9C99A8;color:#0A0A12;border-color:#9C99A8}
+.dD .passos .agora{background:rgba(80,200,140,.9);color:#062617}
+.dD .passos .agora .n{background:#062617;color:#50C88C;border-color:#062617}
+.dD .parabens{color:#9C99A8}.dD .parabens b{color:#EDEBF2}
+.dD .lead{color:#9C99A8}
+.dD h1 em{color:#50C88C}
+.dD .video{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  border-radius:28px;color:#6E6B7A}
+.dD .arg{background:radial-gradient(70% 90% at 50% 100%, rgba(234,184,45,.12), rgba(0,0,0,0) 65%)}
+.dD .contas .c{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px}
+.dD .contas .c span{color:#9C99A8}
+.dD .contas .viva{background:rgba(80,200,140,.14);border-color:rgba(80,200,140,.45)}
+.dD .contas .viva b{color:#8FE3B5}
+.dD .oferta{background:radial-gradient(80% 60% at 50% 0%, rgba(80,200,140,.16), rgba(0,0,0,0) 62%)}
+.dD .eyebrow{color:#50C88C}
+.dD .card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);
+  border-radius:30px;backdrop-filter:blur(14px);box-shadow:0 30px 70px -34px rgba(0,0,0,.9)}
+.dD .nome{border-bottom:1px solid rgba(255,255,255,.12)}
+.dD .conq li{color:#A8A5B2}.dD .conq li b{color:#EDEBF2}
+.dD .conq li:before{border-color:#50C88C}
+.dD .preco .v{color:#50C88C}
+.dD .widget{background:rgba(0,0,0,.35);border-radius:18px;color:#6E6B7A}
+.dD .pix{border-top:1px solid rgba(255,255,255,.12)}
+.dD .bt.alt{background:linear-gradient(135deg,#F0762A,#E8532B);color:#fff;border-radius:999px;
+  box-shadow:0 16px 40px -16px rgba(240,118,42,.9)}
+.dD .gar{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:22px}
+.dD .gar .selo{background:rgba(80,200,140,.16);color:#8FE3B5;border:1px solid rgba(80,200,140,.5)}
+.dD .gar p{color:#9C99A8}
+
+@media(max-width:760px){
+  .d .passos ol{width:100%}
+  .d .passos li:not(.agora) .t{display:none}
+  .d .passos li:not(.agora){flex:0 0 auto}
+  .d .video{width:min(260px,82%)}
+}
+</style></head><body>
+<div class="topo">4 direcoes de design &middot; pagina inteira &middot; escolha uma</div>
+<div class="intro">
+  <h1>Quatro caminhos, e nenhum e ajuste do que existe hoje</h1>
+  <p>Cada um muda a natureza da pagina, nao o tom. Rola ate o fim de cada bloco:
+  o topo, uma secao de argumento e a oferta, que e onde o desenho precisa aguentar peso.</p>
+</div>
+<div class="sep"><span class="tag">A &middot; Claro editorial</span><h2>Claro editorial</h2><p>A página inteira vira CLARA. É a inversão mais radical: hoje tudo é quase preto, e o preto passa a ser só o acento. Cartões brancos bem arredondados, tipografia grande, verde e laranja saturados. Livro é objeto claro, e a marca é de livro.</p><div class="demo"><div class="d dA">
+  <div class="blk hero">
+    <nav class="passos"><ol>
+      <li class="feito"><span class="n">&#10003;</span><span class="t">90D garantido</span></li>
+      <li class="agora"><span class="n">2</span><span class="t">Acelere o resultado</span></li>
+      <li><span class="n">3</span><span class="t">Acesso liberado</span></li>
+    </ol></nav>
+    <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo.<br>
+    <b>Mas o seu pedido ainda não está finalizado.</b></p>
+    <h1>Você já sabe como lançar.<br>Mas o seu livro está <em>bom de verdade</em>?</h1>
+    <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
+    <div class="video">vídeo vertical</div>
+  </div>
+
+  <div class="blk arg">
+    <h2>A conta que ninguém te conta</h2>
+    <div class="contas">
+      <div class="c"><b>Livro bom + lançamento ruim</b><span>Some em trinta dias.</span></div>
+      <div class="c"><b>Livro ruim + lançamento bom</b><span>Vende, e some depois.</span></div>
+      <div class="c viva"><b>Livro bom + lançamento bom</b><span>Muda a vida do autor.</span></div>
+    </div>
+  </div>
+
+  <div class="blk oferta">
+    <p class="eyebrow">A gente, trabalhando junto no seu livro</p>
+    <h2>Você sai do seu diagnóstico<br><em>com o próximo passo mapeado.</em></h2>
+    <div class="card">
+      <p class="nome">Diagnóstico do Autor</p>
+      <ul class="conq">
+        <li><b>Uma sessão de uma hora no Zoom</b>, só sobre o seu livro</li>
+        <li><b>Um plano de ação</b>, com o que consertar primeiro</li>
+        <li><b>Três frentes de lançamento</b>, escolhidas entre quinze</li>
+        <li><b>A gravação da sessão</b>, pra rever executando</li>
+      </ul>
+      <div class="preco"><span class="c">12x de R$</span><span class="v">69,56</span></div>
+      <p class="vista">ou <b>R$697 à vista</b></p>
+      <div class="widget">widget da hotmart (aceitar / recusar)</div>
+      <div class="pix">
+        <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+        <a class="bt alt" href="#">Quero parcelar &rarr;</a>
+      </div>
+    </div>
+    <div class="gar">
+      <div class="selo"><b>100%</b><i>DE VOLTA</i></div>
+      <div><h3>Se ao fim da sessão você achar que não valeu, devolvemos</h3>
+      <p>Sem justificar. Sem formulário.</p></div>
+    </div>
+  </div>
+</div></div></div>
+<div class="sep"><span class="tag">B &middot; Blocos de cor alternados</span><h2>Blocos de cor alternados</h2><p>Cada seção é um bloco de cor CHAPADA diferente, com cantos arredondados grandes e margem lateral: as seções flutuam em vez de encostar. O ritmo da página passa a ser dado pela cor, não pelo espaço. É a que mais se vê de longe.</p><div class="demo"><div class="d dB">
+  <div class="blk hero">
+    <nav class="passos"><ol>
+      <li class="feito"><span class="n">&#10003;</span><span class="t">90D garantido</span></li>
+      <li class="agora"><span class="n">2</span><span class="t">Acelere o resultado</span></li>
+      <li><span class="n">3</span><span class="t">Acesso liberado</span></li>
+    </ol></nav>
+    <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo.<br>
+    <b>Mas o seu pedido ainda não está finalizado.</b></p>
+    <h1>Você já sabe como lançar.<br>Mas o seu livro está <em>bom de verdade</em>?</h1>
+    <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
+    <div class="video">vídeo vertical</div>
+  </div>
+
+  <div class="blk arg">
+    <h2>A conta que ninguém te conta</h2>
+    <div class="contas">
+      <div class="c"><b>Livro bom + lançamento ruim</b><span>Some em trinta dias.</span></div>
+      <div class="c"><b>Livro ruim + lançamento bom</b><span>Vende, e some depois.</span></div>
+      <div class="c viva"><b>Livro bom + lançamento bom</b><span>Muda a vida do autor.</span></div>
+    </div>
+  </div>
+
+  <div class="blk oferta">
+    <p class="eyebrow">A gente, trabalhando junto no seu livro</p>
+    <h2>Você sai do seu diagnóstico<br><em>com o próximo passo mapeado.</em></h2>
+    <div class="card">
+      <p class="nome">Diagnóstico do Autor</p>
+      <ul class="conq">
+        <li><b>Uma sessão de uma hora no Zoom</b>, só sobre o seu livro</li>
+        <li><b>Um plano de ação</b>, com o que consertar primeiro</li>
+        <li><b>Três frentes de lançamento</b>, escolhidas entre quinze</li>
+        <li><b>A gravação da sessão</b>, pra rever executando</li>
+      </ul>
+      <div class="preco"><span class="c">12x de R$</span><span class="v">69,56</span></div>
+      <p class="vista">ou <b>R$697 à vista</b></p>
+      <div class="widget">widget da hotmart (aceitar / recusar)</div>
+      <div class="pix">
+        <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+        <a class="bt alt" href="#">Quero parcelar &rarr;</a>
+      </div>
+    </div>
+    <div class="gar">
+      <div class="selo"><b>100%</b><i>DE VOLTA</i></div>
+      <div><h3>Se ao fim da sessão você achar que não valeu, devolvemos</h3>
+      <p>Sem justificar. Sem formulário.</p></div>
+    </div>
+  </div>
+</div></div></div>
+<div class="sep"><span class="tag">C &middot; Contraste duro</span><h2>Contraste duro</h2><p>Bordas grossas, sombra dura deslocada, cores chapadas e zero degradê. Tudo tem peso e aresta. É a mais 'viva' das quatro e a mais distante do que existe hoje. Risco: é uma linguagem forte, e pode brigar com a seriedade de uma marca de livros.</p><div class="demo"><div class="d dC">
+  <div class="blk hero">
+    <nav class="passos"><ol>
+      <li class="feito"><span class="n">&#10003;</span><span class="t">90D garantido</span></li>
+      <li class="agora"><span class="n">2</span><span class="t">Acelere o resultado</span></li>
+      <li><span class="n">3</span><span class="t">Acesso liberado</span></li>
+    </ol></nav>
+    <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo.<br>
+    <b>Mas o seu pedido ainda não está finalizado.</b></p>
+    <h1>Você já sabe como lançar.<br>Mas o seu livro está <em>bom de verdade</em>?</h1>
+    <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
+    <div class="video">vídeo vertical</div>
+  </div>
+
+  <div class="blk arg">
+    <h2>A conta que ninguém te conta</h2>
+    <div class="contas">
+      <div class="c"><b>Livro bom + lançamento ruim</b><span>Some em trinta dias.</span></div>
+      <div class="c"><b>Livro ruim + lançamento bom</b><span>Vende, e some depois.</span></div>
+      <div class="c viva"><b>Livro bom + lançamento bom</b><span>Muda a vida do autor.</span></div>
+    </div>
+  </div>
+
+  <div class="blk oferta">
+    <p class="eyebrow">A gente, trabalhando junto no seu livro</p>
+    <h2>Você sai do seu diagnóstico<br><em>com o próximo passo mapeado.</em></h2>
+    <div class="card">
+      <p class="nome">Diagnóstico do Autor</p>
+      <ul class="conq">
+        <li><b>Uma sessão de uma hora no Zoom</b>, só sobre o seu livro</li>
+        <li><b>Um plano de ação</b>, com o que consertar primeiro</li>
+        <li><b>Três frentes de lançamento</b>, escolhidas entre quinze</li>
+        <li><b>A gravação da sessão</b>, pra rever executando</li>
+      </ul>
+      <div class="preco"><span class="c">12x de R$</span><span class="v">69,56</span></div>
+      <p class="vista">ou <b>R$697 à vista</b></p>
+      <div class="widget">widget da hotmart (aceitar / recusar)</div>
+      <div class="pix">
+        <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+        <a class="bt alt" href="#">Quero parcelar &rarr;</a>
+      </div>
+    </div>
+    <div class="gar">
+      <div class="selo"><b>100%</b><i>DE VOLTA</i></div>
+      <div><h3>Se ao fim da sessão você achar que não valeu, devolvemos</h3>
+      <p>Sem justificar. Sem formulário.</p></div>
+    </div>
+  </div>
+</div></div></div>
+<div class="sep"><span class="tag">D &middot; Luz e vidro</span><h2>Luz e vidro</h2><p>Fundo escuro com luz de cor por trás, cartões translúcidos e muito arredondados, brilho nas bordas. Mantém o escuro que você já tem, mas troca o preto chapado por profundidade. É a mais próxima do atual, e a mais fácil de aprovar.</p><div class="demo"><div class="d dD">
+  <div class="blk hero">
+    <nav class="passos"><ol>
+      <li class="feito"><span class="n">&#10003;</span><span class="t">90D garantido</span></li>
+      <li class="agora"><span class="n">2</span><span class="t">Acelere o resultado</span></li>
+      <li><span class="n">3</span><span class="t">Acesso liberado</span></li>
+    </ol></nav>
+    <p class="parabens">Parabéns! Você já tem o caminho para o seu livro estrear vendendo.<br>
+    <b>Mas o seu pedido ainda não está finalizado.</b></p>
+    <h1>Você já sabe como lançar.<br>Mas o seu livro está <em>bom de verdade</em>?</h1>
+    <p class="lead">Aperta o play que eu tenho um recado rápido para você.</p>
+    <div class="video">vídeo vertical</div>
+  </div>
+
+  <div class="blk arg">
+    <h2>A conta que ninguém te conta</h2>
+    <div class="contas">
+      <div class="c"><b>Livro bom + lançamento ruim</b><span>Some em trinta dias.</span></div>
+      <div class="c"><b>Livro ruim + lançamento bom</b><span>Vende, e some depois.</span></div>
+      <div class="c viva"><b>Livro bom + lançamento bom</b><span>Muda a vida do autor.</span></div>
+    </div>
+  </div>
+
+  <div class="blk oferta">
+    <p class="eyebrow">A gente, trabalhando junto no seu livro</p>
+    <h2>Você sai do seu diagnóstico<br><em>com o próximo passo mapeado.</em></h2>
+    <div class="card">
+      <p class="nome">Diagnóstico do Autor</p>
+      <ul class="conq">
+        <li><b>Uma sessão de uma hora no Zoom</b>, só sobre o seu livro</li>
+        <li><b>Um plano de ação</b>, com o que consertar primeiro</li>
+        <li><b>Três frentes de lançamento</b>, escolhidas entre quinze</li>
+        <li><b>A gravação da sessão</b>, pra rever executando</li>
+      </ul>
+      <div class="preco"><span class="c">12x de R$</span><span class="v">69,56</span></div>
+      <p class="vista">ou <b>R$697 à vista</b></p>
+      <div class="widget">widget da hotmart (aceitar / recusar)</div>
+      <div class="pix">
+        <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+        <a class="bt alt" href="#">Quero parcelar &rarr;</a>
+      </div>
+    </div>
+    <div class="gar">
+      <div class="selo"><b>100%</b><i>DE VOLTA</i></div>
+      <div><h3>Se ao fim da sessão você achar que não valeu, devolvemos</h3>
+      <p>Sem justificar. Sem formulário.</p></div>
+    </div>
+  </div>
+</div></div></div>
+<div style="height:90px"></div></body></html>
