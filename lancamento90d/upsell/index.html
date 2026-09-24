@@ -287,6 +287,13 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    nao cobrir ele quando os outros CTAs rolam ate aqui. */
 .funil{margin:26px 0 8px}
 #compra{scroll-margin-top:96px}
+/* ── A TRAVA DA VSL ─────────────────────────────────────────
+   `display:none` mesmo, nao `visibility` nem altura zero: o conteudo nao
+   pode ocupar espaco nem ser lido por leitor de tela antes da hora.
+   A barra fixa tem `!important` porque a regra que a mostra no celular
+   (`.sticky{display:flex}` dentro da media query) vem depois no arquivo. */
+.vsl-travada .pos-vsl{display:none}
+.vsl-travada .sticky{display:none!important}
 /* a linha abaixo do botao final */
 .sub-cta{margin:16px 0 0;font-size:.92rem;line-height:1.5;color:var(--mut)}
 /* ⚠️ A HOTMART POE `min-width:320px` INLINE NO IFRAME DELA (conferido 24/09).
@@ -696,6 +703,18 @@ if('requestIdleCallback' in window)requestIdleCallback(go,{timeout:2500});else s
 document.addEventListener(ev,go,{once:true,passive:true});});})();
 </script>
 </head>
+<!-- ============================================================
+     A TRAVA DA VSL (cliente 24/09). Tudo abaixo do video so aparece no
+     minuto em que a Dany chama o botao, e o minuto MUDA por lead: sao cinco
+     vídeos diferentes no teste A/B da VTurb.
+     A classe entra AQUI, antes de o navegador pintar qualquer coisa, senao o
+     card apareceria por um instante e sumiria na cara da pessoa.
+     ⚠️ SEM JS A PAGINA NASCE ABERTA. A trava so existe se este script rodar;
+     se a VTurb nao carregar, o destravamento por tempo limite (no fim do
+     body) abre tudo. Uma pagina de compra nunca pode ficar trancada por um
+     script de terceiro que falhou.
+     ============================================================ -->
+<script>document.documentElement.classList.add('vsl-travada')</script>
 <body>
 
 <div class="prog" id="prog"></div>
@@ -759,7 +778,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
          atras. A pagina passa a ter um ponto de compra so.
          O PRECO ESCRITO SAIU: quem mostra valor e' o widget da Hotmart.
          ============================================================ -->
-    <div class="bloco-preco">
+    <div class="bloco-preco pos-vsl">
       <div class="offer-box">
         <!-- ============================================================
              A ESCASSEZ, TRAZIDA DA VSL (23/09). O roteiro sempre disse "vinte
@@ -854,7 +873,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <!-- a sessão. O pitch de 10 min fica NOMEADO: é o que mata a objeção "reunião
      de vendas". 🚫 NÃO PROMETER DATA (a call só crava data pra quem tem livro
      pronto). O marcador de cada linha é o MINUTO, que é a informação real. -->
-<section>
+<section class="pos-vsl">
   <div class="w">
     <div class="meio">
       <h2>Você sai do seu diagnóstico<br>com os próximos passos mapeados</h2>
@@ -931,7 +950,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      dois minutos antes. Prova repetida nao prova de novo. Estes tres sao casos do
      LIVRO COMO PROJETO, que e' o que a call realmente olha: os tres tinham o livro
      pronto e errado na embalagem, e alguem de fora viu o que eles nao viam. -->
-<section class="alt">
+<section class="alt pos-vsl">
   <div class="w">
     <!-- ============================================================
          A ULTIMA SECAO: UMA PERGUNTA SO (cliente 23/09).
@@ -1104,6 +1123,61 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     var ver = function(){ barra.classList.toggle('on', gatilho.getBoundingClientRect().bottom < 0); };
     addEventListener('scroll', ver, {passive:true}); ver();
   }
+
+  /* ── A TRAVA DA VSL: cada lead libera num minuto diferente ──
+     Os tempos sao do cliente (24/09) e batem com o momento em que a Dany
+     chama o botao em cada um dos cinco videos do teste A/B.
+     Como a gente sabe qual lead esta tocando: o proprio player carrega
+     `config.id` (o id da variante) e `config.name` ("LEAD B - ..."). O id e'
+     a chave principal; o nome e' o plano B, caso uma variante seja trocada
+     por outra no painel da VTurb e o id mude.
+     ⚠️ TRES SAIDAS DE EMERGENCIA, porque pagina de compra trancada e' pior
+     que pagina aberta cedo demais:
+       1. lead desconhecida (id novo e nome fora do padrao) -> abre na hora;
+       2. player nao apareceu em 12s (script da VTurb caiu) -> abre;
+       3. sem JS a classe nunca entra e a pagina ja nasce aberta.
+     ⚠️ QUEM JA PASSOU DO TEMPO NAO ASSISTE DE NOVO: o destravamento fica
+     gravado por VARIANTE no localStorage. Quem sai pelo PIX e volta, ou
+     fecha e reabre pelo historico, cai na pagina ja aberta. */
+  var TEMPOS = {
+    '6ab2d610e36dac033f1af30f': 473, /* LEAD A · A LACUNA DO 90D        · 7:53 */
+    '6ab2d5f21765bc233dec7dde': 408, /* LEAD B · A PERGUNTA QUE TRAVA   · 6:48 */
+    '6ab2d5dbd2e38e220f910ba7': 406, /* LEAD C · A JANELA               · 6:46 */
+    '6ab2d5c55d1948cc62c4bc61': 402, /* LEAD D · ANOS DE UM LADO...     · 6:42 */
+    '6ab2d62bd350cce060eafaf1': 404  /* LEAD E · ANTES DO DIA UM        · 6:44 */
+  };
+  var POR_LETRA = { A:473, B:408, C:406, D:402, E:404 };
+
+  (function travaVSL(){
+    var html = document.documentElement;
+    if (!html.classList.contains('vsl-travada')) return;
+    var aberto = false;
+    function abrir(){ if (aberto) return; aberto = true; html.classList.remove('vsl-travada'); }
+    function lembrar(id){ try { localStorage.setItem('upsell.liberado.' + id, '1'); } catch(e){} }
+    function jaLiberou(id){ try { return localStorage.getItem('upsell.liberado.' + id) === '1'; } catch(e){ return false; } }
+
+    var LIMITE = 12000, INICIO = Date.now();
+    (function espera(){
+      var el = document.querySelector('vturb-smartplayer');
+      var cfg = null;
+      try { cfg = el && el.config; } catch(e){}
+      if (!cfg || !cfg.id){
+        if (Date.now() - INICIO > LIMITE) abrir();   /* saida 2 */
+        else setTimeout(espera, 200);
+        return;
+      }
+      var segundos = TEMPOS[cfg.id];
+      if (segundos == null){
+        var m = /LEAD\s*([A-E])/i.exec(cfg.name || '');
+        segundos = m ? POR_LETRA[m[1].toUpperCase()] : null;
+      }
+      if (segundos == null) return abrir();          /* saida 1 */
+      if (jaLiberou(cfg.id)) return abrir();
+      try {
+        el.onTime(segundos, function(){ lembrar(cfg.id); abrir(); }, { once: true });
+      } catch(e){ abrir(); }
+    })();
+  })();
 
   /* ── OS CTAs DESLIZAM ATE O WIDGET (cliente 23/09) ──────────
      O botao do rodape e o da barra fixa apontam pra #compra, que e o widget
