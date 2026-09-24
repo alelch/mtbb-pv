@@ -473,31 +473,21 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .gar p{margin:7px 0 0;color:var(--mut);font-size:.95rem}
 .gar .prazo{margin-top:9px;font-size:.82rem;line-height:1.45;color:var(--dim)}
 
-/* ── A SESSÃO, EM TRÊS CARTÕES ──────────────────────────────
-   Escolha do cliente (3a). A copy e' dele; aqui e' so a arrumacao.
-
-   ⚠️ O CONTEUDO E' ALINHADO NO TOPO, de proposito. Em grid os tres cartoes
-   ficam com a altura do mais alto, e a condicao do meio quebra em duas linhas
-   enquanto as outras cabem em uma. Se o conteudo fosse ancorado embaixo (ou
-   se eu reservasse altura minima pra condicao, que foi a muleta da primeira
-   versao), a sobra viraria um BURACO no meio do cartao. Ancorado no topo, a
-   mesma sobra cai depois do ganho e le como respiro.
-   Custo assumido: os tres ganhos nao ficam na mesma linha de base. Buraco no
-   meio e' pior que base desalinhada. */
-.descr{max-width:980px;margin:34px auto 0;text-align:center}
-.descr .abre{margin:0;font-size:clamp(1.05rem,2.3vw,1.24rem);line-height:1.5;color:var(--mut)}
-.descr .abre b{color:var(--ink);font-weight:700}
-.ses{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
-  margin:clamp(28px,3.6vw,38px) 0;text-align:left}
-.ses .cd{background:var(--offc);border:2px solid var(--ink);border-radius:18px;
-  box-shadow:4px 4px 0 var(--ink);padding:22px 22px 24px}
-.ses span{display:block;font-size:.96rem;line-height:1.35;color:var(--dim)}
-.ses b{display:block;margin-top:10px;font-family:var(--fd);font-weight:700;
-  font-size:clamp(1.18rem,2.2vw,1.34rem);line-height:1.18;letter-spacing:-.03em;color:var(--ink)}
-.descr .fecha{margin:0;font-size:clamp(.98rem,2.1vw,1.08rem);line-height:1.55;color:var(--dim)}
+/* a pergunta de um lado, a resposta do outro, com um fio verde ligando os
+   dois. O titulo e' alinhado a ESQUERDA, e e' o unico da pagina que e':
+   ele nao esta apresentando uma secao, esta falando com alguem. */
+.pergunta{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:44px;
+  align-items:center;text-align:left}
+.pergunta h2{margin:0;text-align:left;font-size:clamp(1.8rem,4.6vw,3.1rem);line-height:1.02}
+.pergunta .resp{border-left:3px solid var(--go);padding-left:26px;display:grid;gap:14px}
+.pergunta .resp p{margin:0;font-size:clamp(1rem,2.1vw,1.16rem);line-height:1.5;color:var(--mut)}
+.pergunta .resp p:first-child{font-family:var(--fd);font-weight:700;color:var(--ink);
+  font-size:clamp(1.1rem,2.4vw,1.34rem);letter-spacing:-.02em}
+.pergunta .resp b{color:var(--ink)}
 @media(max-width:780px){
-  .ses{grid-template-columns:1fr;gap:12px}
-  .ses .cd{padding:18px 20px}
+  .pergunta{grid-template-columns:1fr;gap:24px;text-align:center}
+  .pergunta h2{text-align:center}
+  .pergunta .resp{border-left:0;border-top:3px solid var(--go);padding:22px 0 0}
 }
 
 /* prova: os cartões do front */
@@ -931,31 +921,26 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      pronto e errado na embalagem, e alguem de fora viu o que eles nao viam. -->
 <section class="alt">
   <div class="w">
-    <div class="meio">
-      <h2>O seu livro é único,<br>e o nosso time entende disso.</h2>
-    </div>
     <!-- ============================================================
-         A SESSÃO, DESCRITA (23/09). Eram quatro passos numerados, e antes
-         disso quatro blocos com o minuto de cada um.
-         Por que parou de segmentar: segmento PROMETE rigidez. Quatro blocos
-         dizem que a sessão tem roteiro fixo, e aí toda sessão que fugir dele
-         vira quebra de promessa. Descrever não cria essa dívida.
-         ⚠️ A COPY É DO CLIENTE. Ele escreveu o registro inteiro e as duas
-         primeiras linhas do "se você tem"; eu completei a tríade e mantive a
-         última linha, que é a que torna o resto crível.
-         O motor aqui é a REPETIÇÃO "se você tem X, a gente Y". Mexer numa das
-         três quebra as outras duas.
-         🚫 Continua valendo: NÃO PROMETER DATA. -->
-    <div class="descr">
-      <p class="abre">Você tem <b>uma visão única e um objetivo único</b>.<br>
-      A sessão existe para te levar até lá.</p>
-      <div class="ses">
-        <div class="cd"><span>Se você tem uma dúvida,</span><b>a gente mata na hora.</b></div>
-        <div class="cd"><span>Se você tem um projeto pro seu livro,</span><b>a gente tapa os buracos.</b></div>
-        <div class="cd"><span>Se você não sabe por onde começar,</span><b>a gente te dá a mão.</b></div>
+         A ULTIMA SECAO: UMA PERGUNTA SO (cliente 23/09).
+         Aqui ja teve "a hora por dentro" em quatro passos com minutos, depois
+         "O seu livro e unico" com tres cartoes "se voce tem X, a gente Y".
+         Os dois descreviam o produto, e nesse ponto da pagina a pessoa ja viu
+         o video, o preco, a garantia e tres alunos: nao falta prova nem
+         seguranca. O que sobra e' "e se o MEU caso for diferente?".
+         Entao a secao parou de descrever e passou a responder isso, em voz
+         alta e em tres linhas. Sem lista, sem cartao, sem tres de nada.
+         ⚠️ A copy e' minha (23/09), nao do cliente: ele escolheu o mecanismo
+         num preview de cinco. Se a Dany mudar as palavras, o mecanismo e'
+         que tem que sobreviver, nao a redacao.
+         🚫 Continua valendo: NAO PROMETER DATA. -->
+    <div class="pergunta">
+      <h2>E se o meu caso<br>for diferente?</h2>
+      <div class="resp">
+        <p>É sempre diferente.</p>
+        <p>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</p>
+        <p>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</p>
       </div>
-      <p class="fecha">E se no final você precisar de algo a mais, a gente consegue te atender.<br>
-      E se não precisar, o seu livro estará pronto para decolar.</p>
     </div>
     <!-- O ULTIMO PEDIDO DA PAGINA, DENTRO DA SECAO (cliente 23/09). Ele vinha
          numa secao propria, com fundo e filete proprios, e isso o separava do
