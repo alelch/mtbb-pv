@@ -289,7 +289,14 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 #compra{scroll-margin-top:96px}
 /* a linha abaixo do botao final */
 .sub-cta{margin:16px 0 0;font-size:.92rem;line-height:1.5;color:var(--mut)}
-#hotmart-sales-funnel iframe{width:100%;border:0;display:block}
+/* ⚠️ A HOTMART POE `min-width:320px` INLINE NO IFRAME DELA (conferido 24/09).
+   Num celular de 360px o espaco dentro do card e' 270px (22 de margem da
+   pagina + 22 de padding do card, de cada lado), entao o widget saia 27px
+   pra fora do card e 5px pra fora da TELA, cortando o botao de comprar.
+   O `!important` aqui e' o unico jeito de vencer um estilo inline, e sem ele
+   a largura que a gente pede nao vale nada. */
+#hotmart-sales-funnel iframe{width:100%!important;min-width:0!important;
+  max-width:100%;border:0;display:block}
 
 /* ════════════════════════════════════════════════════════════
    A LINGUAGEM DAQUI PRA BAIXO É A DA PÁGINA DO LANÇAMENTO 90D
@@ -661,6 +668,11 @@ footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-fami
      acompanhar o padding do card. Sem esta linha ela usava os 34px do desktop
      e vazava 11px pra cada lado no celular. */
   .pix{--pad:22px}
+  /* o widget tambem sangra ate as bordas do card no celular: e' o que
+     devolve pra ele os 46px que o padding do card tirava (270 -> 316 numa
+     tela de 360). Junto com o min-width:0 la em cima, ele nunca mais passa
+     da caixa. */
+  .funil{margin-left:-22px;margin-right:-22px}
   .offer-box .price .val{font-size:clamp(3rem,16vw,4rem)}
   .btn{padding:19px 26px;font-size:1.02rem}
   .sticky{display:flex}
