@@ -968,6 +968,30 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 @media(max-width:560px){
   .faixa .dentro{gap:8px 12px;padding:11px 12px;font-size:.9rem;line-height:1.25}
 }
+/* ---- quem fala ---- */
+.quem-fala{display:flex;align-items:center;justify-content:center;gap:10px;margin:clamp(22px,3.4vw,30px) 0 12px;
+  font:700 .92rem/1.15 var(--fd);letter-spacing:-.01em;text-align:left}
+.quem-fala img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 18%;
+  border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.quem-fala span{display:grid;gap:2px}
+.quem-fala span b{font-weight:700}
+.quem-fala span{font-family:var(--ff);font-weight:400;font-size:.8rem;color:var(--mut)}
+.quem-fala span b{font-family:var(--fd);font-size:.95rem;color:var(--ink)}
+/* ---- UM relógio por vez (24/09): no topo manda o grande; o da faixa só
+   aparece quando o grande sai da tela. Com o relógio escondido a faixa lê
+   "...sai do ar em" e o grande está logo abaixo, como na referência. ---- */
+/* escondido SEM sair do fluxo vertical: guarda a altura do selo, senão a
+   faixa cresce 14px quando ele entra e a página pula (medido no celular) */
+.faixa:not(.mostra-t) .mmss{visibility:hidden;max-width:0;padding-left:0;padding-right:0;
+  border-left-width:0;border-right-width:0;overflow:hidden;margin-left:-14px}
+@media(max-width:560px){
+  /* numa linha só no celular, com ou sem relógio: se a faixa mudasse de
+     altura quando o relógio entra, a página pularia no meio da rolagem */
+  .faixa .dentro{flex-wrap:nowrap;white-space:nowrap;font-size:clamp(.74rem,3.6vw,.9rem);padding:12px 10px;gap:10px}
+  .faixa .longo{display:none}
+  .faixa .mmss{padding:4px 8px;font-size:1.12em}
+  .faixa:not(.mostra-t) .mmss{margin-left:-10px}
+}
 .expirou{max-width:560px;margin:34px auto 0;text-align:center;padding:30px 26px;background:#fff;
   border:2px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink)}
 .expirou h2{font-size:1.5rem}
@@ -1002,7 +1026,7 @@ main{padding:0 0 clamp(56px,8vw,90px);
      Sem JS o relógio fica parado e a oferta continua aberta.
      ============================================================ -->
 <div class="faixa" id="faixa">
-  <div class="dentro"><span id="faixa-txt"><b class="imp">⚠ Importante:</b> esta condição sai do ar em</span><span class="mmss" id="faixa-t">05:00</span></div>
+  <div class="dentro"><span id="faixa-txt"><b class="imp">⚠ Importante:</b> <span class="longo">esta condição </span>sai do ar em</span><span class="mmss" id="faixa-t">05:00</span></div>
   <span class="dreno" id="dreno" aria-hidden="true"></span>
 </div>
 
@@ -1018,6 +1042,10 @@ main{padding:0 0 clamp(56px,8vw,90px);
       <!-- 24/09: TÍTULO DO CLIENTE (copy dele é decisão, não rascunho). Os riscos
            logo abaixo são o "isto": ela diz que vai ser obrigada, e o preço
            cai na frente da pessoa. -->
+      <!-- QUEM FALA (24/09): o título é na voz da Dany ("vai ME obrigar"), e o
+           rosto dela só aparecia na assinatura, lá embaixo. Uma linha resolve:
+           a mensagem chega com remetente. -->
+      <p class="quem-fala"><img src="../assets/dany-bio-B0X57zHq.webp" alt="" width="44" height="44"><span><b>Dany Sakugawa</b>The Book Business</span></p>
       <h1>Espera, não acredito que você vai me obrigar a <span class="gr">fazer&nbsp;isto</span>...</h1>
       <!-- 24/09 (cliente): quem recusa, na maioria, recusa pelo PREÇO, não pela
            call. Então o preço é o primeiro a ser riscado, e a hora ao vivo vem
@@ -1224,6 +1252,14 @@ main{padding:0 0 clamp(56px,8vw,90px);
     setTimeout(tique, 250);
   }
   tique();
+
+  /* o relógio da faixa só aparece quando o grande sai da tela */
+  var grande = document.querySelector('.relogio');
+  if (grande && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ $('faixa').classList.toggle('mostra-t', !e.isIntersecting); });
+    }, {rootMargin:'-90px 0px 0px 0px'}).observe(grande);
+  } else { $('faixa').classList.add('mostra-t'); }
 
   /* ── os botões que apontam pra #compra deslizam até o widget, centralizado ── */
   var alvo = $('compra');
