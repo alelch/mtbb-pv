@@ -1092,6 +1092,29 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     var ver = function(){ barra.classList.toggle('on', gatilho.getBoundingClientRect().bottom < 0); };
     addEventListener('scroll', ver, {passive:true}); ver();
   }
+
+  /* ── OS CTAs DESLIZAM ATE O WIDGET (cliente 23/09) ──────────
+     O botao do rodape e o da barra fixa apontam pra #compra, que e o widget
+     da Hotmart la em cima. Com o salto seco do navegador a pessoa aparecia
+     no meio da pagina sem entender que subiu; deslizando, ela VE o caminho.
+     Centraliza o widget na tela em vez de encostar ele no topo: o botao de
+     aceitar fica dentro do iframe, e a gente nao sabe a que altura, entao
+     centralizar e o unico jeito de garantir que ele caiba na dobra.
+     ⚠️ Respeita quem pediu menos movimento: pra essas pessoas o salto seco
+     continua sendo o certo.
+     🚫 Nao mexe na URL: a query desta pagina carrega o xcod da VTurb e nao
+     vale arriscar reescrever ela por causa de uma ancora. */
+  var alvo = document.getElementById('compra');
+  if (alvo){
+    var quieto = matchMedia('(prefers-reduced-motion: reduce)');
+    [].slice.call(document.querySelectorAll('a[href="#compra"]')).forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        try { alvo.scrollIntoView({behavior: quieto.matches ? 'auto' : 'smooth', block:'center'}); }
+        catch(err){ alvo.scrollIntoView(); }
+      });
+    });
+  }
   /* ── a janela do depoimento ──────────────────────────────
      Abre o vídeo AQUI. Mandar a pessoa pro YouTube no meio de um upsell que
      diz "se você fechar, a vaga fica para o próximo" é perder ela de vez.
