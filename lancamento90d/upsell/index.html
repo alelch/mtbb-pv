@@ -330,6 +330,10 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
   -webkit-box-decoration-break:clone;box-decoration-break:clone}
 
 section{padding:clamp(52px,7vw,80px) 0}
+/* 24/09: a conversa continua a secao dos depoimentos, sem virar outro bloco
+   (cliente: "nao separe visualmente"). Mesmo fundo, sem filete, e o respiro
+   de cima encolhe pra nao somar com o de baixo da secao anterior. */
+section.continua{padding-top:clamp(8px,2vw,20px)}
 /* o filete marca a virada de capítulo. Só a seção clara carrega os dois,
    e como elas se alternam, cada emenda tem exatamente um fio. */
 section.alt{background:var(--pa2);border-top:1px solid var(--ru);border-bottom:1px solid var(--ru)}
@@ -642,15 +646,15 @@ section.alt .prova{background:var(--offc)}
 .prova .link:hover{border-bottom-color:var(--go)}
 
 /* ---- fecho e rodapé ---- */
-footer{border-top:2px solid var(--ink);color:var(--mut)}
 
 
 @media(max-width:760px){
   .offer-box{box-shadow:6px 6px 0 rgba(12,48,28,.55)}
   .gar,.hora,.prova,.passos ol,.btn{box-shadow:3px 3px 0 var(--ink)}
 }
-footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-family:var(--fd);
-  font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+/* 24/09: rodape em fundo preto (cliente). */
+footer{background:var(--ink);border-top:0;padding:30px 0;text-align:center;font-family:var(--fd);
+  font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.62)}
 
 /* 🚫 A BARRA FIXA DO CELULAR SAIU EM 24/09 (cliente). Nao voltar com ela. */
 
@@ -940,7 +944,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      dois minutos antes. Prova repetida nao prova de novo. Estes tres sao casos do
      LIVRO COMO PROJETO, que e' o que a call realmente olha: os tres tinham o livro
      pronto e errado na embalagem, e alguem de fora viu o que eles nao viam. -->
-<section class="alt pos-vsl">
+<section class="pos-vsl continua">
   <div class="w">
     <!-- ============================================================
          A ULTIMA SECAO: UMA PERGUNTA SO (cliente 23/09).
