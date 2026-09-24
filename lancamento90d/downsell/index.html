@@ -817,6 +817,11 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 /* as linhas de rascunho: o resto do documento, sem inventar mais texto */
 .lin{display:block;height:8px;border-radius:4px;background:var(--pa2);margin-top:9px}
 .lin.l80{width:80%}.lin.l65{width:65%}.lin.l90{width:90%}.lin.l50{width:50%}
+.lin.l95{width:95%}.lin.l88{width:88%}.lin.l82{width:82%}.lin.l92{width:92%}.lin.l70{width:70%}
+.lin.l60{width:60%}.lin.l55{width:55%}.lin.l45{width:45%}
+/* 24/09 (cliente): mais linhas encobertas, pra dar a ideia de um plano mais
+   completo. São só o volume do documento; o texto legível continua sendo uma
+   frase por parte, que é o exemplo. */
 /* o grifo que PASSA */
 .doc mark{background:linear-gradient(var(--grifo),var(--grifo)) no-repeat 0 60%/100% .62em;color:inherit;padding:0 .04em;
   -webkit-box-decoration-break:clone;box-decoration-break:clone}
@@ -1120,17 +1125,17 @@ main{padding:0 0 clamp(56px,8vw,90px);
             <div class="doc-sec ok">
               <h4><i aria-hidden="true">✓</i>O que já está certo</h4>
               <p>O assunto tem público, e você já fala dele com&nbsp;naturalidade.</p>
-              <span class="lin l80"></span>
+              <span class="lin l95"></span><span class="lin l88"></span><span class="lin l60"></span>
             </div>
             <div class="doc-sec muda">
               <h4><i aria-hidden="true">!</i>O que precisa mudar</h4>
               <p>O título diz o tema, mas não diz <mark>para quem é o&nbsp;livro</mark>.</p>
-              <span class="lin l90"></span><span class="lin l65"></span>
+              <span class="lin l90"></span><span class="lin l95"></span><span class="lin l82"></span><span class="lin l92"></span><span class="lin l55"></span>
             </div>
             <div class="doc-sec passo">
               <h4><i aria-hidden="true">→</i>O seu próximo passo</h4>
               <p>Antes da pré-venda: <span class="circ">reescrever o subtítulo<svg viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M12,34 C8,12 60,4 110,6 C160,8 196,16 192,34 C188,52 130,58 90,56 C50,54 10,50 14,30"/></svg></span>.</p>
-              <span class="lin l50"></span>
+              <span class="lin l88"></span><span class="lin l95"></span><span class="lin l70"></span><span class="lin l45"></span>
             </div>
             <div class="carimbo" aria-hidden="true"><div><b>Pronto</b><i>para você</i></div></div>
           </div>
