@@ -752,6 +752,8 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 /* as barreiras riscadas: a caneta vermelha é a mesma do documento */
 .barreiras{list-style:none;margin:clamp(24px,3.4vw,32px) auto 0;padding:0;display:grid;gap:6px;justify-items:center}
 .barreiras li{font:700 clamp(1.35rem,3.8vw,1.9rem)/1.2 var(--fd);letter-spacing:-.03em;color:var(--dim)}
+/* o preço riscado é o maior: é ele que a maioria recusou */
+.barreiras li.preco{font-size:clamp(2rem,6vw,2.9rem);letter-spacing:-.045em;color:var(--mut)}
 .barreiras span{position:relative;display:inline-block;padding:0 .12em}
 .barreiras span:after{content:"";position:absolute;left:-4%;right:-4%;top:54%;height:.075em;min-height:2.5px;
   background:var(--red);border-radius:3px;transform:rotate(-2.5deg) scaleX(1);transform-origin:left center}
@@ -950,18 +952,23 @@ main{padding:0 0 clamp(56px,8vw,90px);
     </div>
 
     <div class="abre">
-      <h1>Espera. Talvez o problema tenha sido <span class="gr">a&nbsp;call</span>.</h1>
+      <h1>Espera. Talvez o problema tenha sido <span class="gr">o&nbsp;preço</span>.</h1>
       <!-- A PONTE ATÉ O DOCUMENTO (cliente 24/09: "a conexão está fraca").
+           ⚠️ Ver o comentário logo abaixo: o foco virou o PREÇO.
            Eram três frases que EXPLICAVAM ("uma sessão pede agenda, câmera e
            um valor maior"). Agora a página MOSTRA: as barreiras da call são
            riscadas pela mesma caneta vermelha que marca o documento logo
            abaixo, e o que sobra é o que chega. O fio tracejado desce até ele. -->
+      <!-- 24/09 (cliente): quem recusa, na maioria, recusa pelo PREÇO, não pela
+           call. Então o preço é o primeiro a ser riscado, e a hora ao vivo vem
+           junto como o MOTIVO honesto de ele cair: é ela que encarece a sessão.
+           Tirando a hora ao vivo, sobra o diagnóstico. -->
       <ul class="barreiras" id="barreiras">
+        <li class="preco"><span>R$697</span></li>
         <li><span>Horário marcado</span></li>
-        <li><span>Câmera aberta</span></li>
         <li><span>Até 1h30 no Zoom</span></li>
       </ul>
-      <p class="sobra">O mesmo diagnóstico, <span class="gr">por&nbsp;escrito.</span></p>
+      <p class="sobra">O mesmo diagnóstico, por escrito, <span class="gr">pela&nbsp;metade.</span></p>
       <span class="fio" aria-hidden="true"></span>
     </div>
 
@@ -1032,7 +1039,7 @@ main{padding:0 0 clamp(56px,8vw,90px);
 
         <div class="nota">
           <h3>De verdade.</h3>
-          <p>O diagnóstico nasceu para ser uma conversa. Mas se o que te segurou foi a agenda ou o valor, eu prefiro que você tenha ele por escrito do que lance o seu livro&nbsp;sem.</p>
+          <p>O diagnóstico nasceu para ser uma conversa. Mas se o que te segurou foi o valor, eu prefiro que você tenha ele por escrito do que lance o seu livro&nbsp;sem.</p>
           <div class="ass"><img src="../assets/dany-bio-B0X57zHq.webp" alt="" width="38" height="38"><div>Dany Sakugawa<span>The Book Business</span></div></div>
         </div>
       </div>
@@ -1052,7 +1059,7 @@ main{padding:0 0 clamp(56px,8vw,90px);
       <!-- ════ A ÚLTIMA CHANCE ════ -->
       <div class="ultima">
         <h2>Última chance.</h2>
-        <p>Se a hora ao vivo era a barreira, ela não existe&nbsp;mais.</p>
+        <p>Se o preço era a barreira, ele acabou de cair pela&nbsp;metade.</p>
         <p class="tchau">Te espero do outro lado.</p>
         <span class="seta" aria-hidden="true"></span>
         <div class="compra-box">
