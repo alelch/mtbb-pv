@@ -754,7 +754,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 .abre h1 .gr{background:linear-gradient(transparent 60%,var(--grifo) 60%,var(--grifo) 92%,transparent 92%);
   padding:0 .06em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 /* as barreiras riscadas: a caneta vermelha é a mesma do documento */
-.barreiras{list-style:none;margin:clamp(24px,3.4vw,32px) auto 0;padding:0;display:grid;gap:6px;justify-items:center}
+.barreiras{list-style:none;margin:clamp(18px,2.8vw,26px) auto 0;padding:0;display:grid;gap:6px;justify-items:center}
 .barreiras li{font:700 clamp(1.35rem,3.8vw,1.9rem)/1.2 var(--fd);letter-spacing:-.03em;color:var(--dim)}
 /* o preço riscado é o maior: é ele que a maioria recusou */
 .barreiras li.preco{font-size:clamp(2rem,6vw,2.9rem);letter-spacing:-.045em;color:var(--mut)}
@@ -992,6 +992,10 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   .faixa .mmss{padding:4px 8px;font-size:1.12em}
   .faixa:not(.mostra-t) .mmss{margin-left:-10px}
 }
+/* ---- o "explica": duas linhas entre o título e o corte ---- */
+.ne{margin:clamp(16px,2.4vw,22px) 0 0;font:700 clamp(1.2rem,3.2vw,1.5rem)/1.2 var(--fd);letter-spacing:-.025em;color:var(--ink)}
+.tirei{margin:8px 0 0;color:var(--mut);font-size:clamp(1.02rem,2.3vw,1.14rem);line-height:1.45}
+.tirei b{color:var(--ink);font:700 clamp(1.1rem,2.6vw,1.28rem)/1.3 var(--fd);letter-spacing:-.02em}
 .expirou{max-width:560px;margin:34px auto 0;text-align:center;padding:30px 26px;background:#fff;
   border:2px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink)}
 .expirou h2{font-size:1.5rem}
@@ -1054,6 +1058,12 @@ main{padding:0 0 clamp(56px,8vw,90px);
            🚫 24/09: uma abertura em quatro tempos (drama > explica > virada >
            corte, no modelo da referência) foi ao ar e o cliente reprovou
            ("não gostei, volta atrás"). Alternativas em discussão. -->
+      <!-- O "EXPLICA" (cliente 24/09, opção B+C): entre o drama e o corte, como
+           na referência, mas em duas linhas. A segunda é o MOTIVO VERDADEIRO de
+           custar metade, e faz do "isto" do título uma ação da Dany: ela tira a
+           hora ao vivo, e os riscos logo abaixo mostram ela tirando. -->
+      <p class="ne">Foi o preço, né?</p>
+      <p class="tirei">O que encarece a sessão é a hora ao&nbsp;vivo.<br><b>Então eu&nbsp;tirei.</b></p>
       <ul class="barreiras" id="barreiras">
         <li class="preco"><span>R$697</span></li>
         <li><span>Horário marcado</span></li>
