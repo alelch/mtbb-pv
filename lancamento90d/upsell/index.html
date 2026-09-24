@@ -485,22 +485,29 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
 .gar p{margin:7px 0 0;color:var(--mut);font-size:.95rem}
 .gar .prazo{margin-top:9px;font-size:.82rem;line-height:1.45;color:var(--dim)}
 
-/* a pergunta de um lado, a resposta do outro, com um fio verde ligando os
-   dois. O titulo e' alinhado a ESQUERDA, e e' o unico da pagina que e':
-   ele nao esta apresentando uma secao, esta falando com alguem. */
-.pergunta{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:44px;
-  align-items:center;text-align:left}
-.pergunta h2{margin:0;text-align:left;font-size:clamp(1.8rem,4.6vw,3.1rem);line-height:1.02}
-.pergunta .resp{border-left:3px solid var(--go);padding-left:26px;display:grid;gap:14px}
-.pergunta .resp p{margin:0;font-size:clamp(1rem,2.1vw,1.16rem);line-height:1.5;color:var(--mut)}
-.pergunta .resp p:first-child{font-family:var(--fd);font-weight:700;color:var(--ink);
-  font-size:clamp(1.1rem,2.4vw,1.34rem);letter-spacing:-.02em}
-.pergunta .resp b{color:var(--ink)}
-@media(max-width:780px){
-  .pergunta{grid-template-columns:1fr;gap:24px;text-align:center}
-  .pergunta h2{text-align:center}
-  .pergunta .resp{border-left:0;border-top:3px solid var(--go);padding:22px 0 0}
-}
+/* ── A CONVERSA (cliente 24/09, versão "na língua da página") ──
+   A pergunta vira o que a pessoa diria, num balão dela; a resposta vem da
+   Dany e do time. Os balões usam a MESMA borda preta e a mesma sombra dura
+   dos outros blocos, de propósito: nada aqui imita aplicativo, parece que a
+   conversa sempre fez parte da página.
+   ⚠️ O balão da pessoa é PRETO e o da resposta é BRANCO: é a cor que diz
+   quem fala, então os dois não podem ficar parecidos.
+   ⚠️ O rosto é a foto da Dany (a mesma dos assets do L90D). A página não tinha
+   nenhum rosto de quem conduz, e esse é o lugar em que ele responde. */
+.pg-chat{max-width:520px;margin:0 auto;display:grid;gap:22px;text-align:left}
+.pg-grupo{display:grid;gap:7px;position:relative}
+.pg-grupo.eu{justify-items:end}
+.pg-grupo.ela{justify-items:start;padding-left:46px}
+.pg-nome{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.pg{max-width:92%;padding:13px 17px;border:2px solid var(--ink);border-radius:20px;font-size:1.04rem;line-height:1.48;
+  box-shadow:3px 3px 0 var(--ink)}
+.pg.eu{background:var(--ink);color:#fff;border-bottom-right-radius:6px;font-family:var(--fd);font-weight:700;letter-spacing:-.01em}
+.pg.ela{background:var(--offc);color:var(--ink)}
+.pg.ela.forte{font-family:var(--fd);font-weight:700;font-size:1.18rem;letter-spacing:-.02em}
+.pg.ela.ult{border-bottom-left-radius:6px}
+.pg.ela b{color:var(--ink)}
+.pg-av{position:absolute;left:0;bottom:0;width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 18%;
+  border:2px solid var(--ink)}
 
 /* prova: os cartões do front */
 .provas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0 0;text-align:left}
@@ -948,12 +955,14 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
          num preview de cinco. Se a Dany mudar as palavras, o mecanismo e'
          que tem que sobreviver, nao a redacao.
          🚫 Continua valendo: NAO PROMETER DATA. -->
-    <div class="pergunta">
-      <h2>E se o meu caso<br>for diferente?</h2>
-      <div class="resp">
-        <p>É sempre diferente.</p>
-        <p>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</p>
-        <p>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</p>
+    <div class="pg-chat">
+      <div class="pg-grupo eu"><span class="pg-nome">você</span><div class="pg eu">E se o meu caso for diferente?</div></div>
+      <div class="pg-grupo ela">
+        <span class="pg-nome">Dany e o time</span>
+        <div class="pg ela forte">É sempre diferente.</div>
+        <div class="pg ela">É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</div>
+        <div class="pg ela ult">A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</div>
+        <img class="pg-av" src="../assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa" width="36" height="36">
       </div>
     </div>
     <!-- O ULTIMO PEDIDO DA PAGINA, DENTRO DA SECAO (cliente 23/09). Ele vinha
