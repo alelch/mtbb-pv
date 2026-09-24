@@ -14,19 +14,6 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/dmsans-sub.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/grotesk-sub.woff2">
 
-<!-- ============================================================
-     VTURB — otimizador (bloco do painel, colado como veio 22/09).
-     Marca o tempo de origem e pre-carrega o player, que e' o unico
-     elemento que precisa estar pronto na primeira dobra: a pagina
-     inteira existe pra pessoa dar o play.
-     ============================================================ -->
-<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
-<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
-<link rel="dns-prefetch" href="https://cdn.converteai.net">
-<link rel="dns-prefetch" href="https://scripts.converteai.net">
-<link rel="dns-prefetch" href="https://images.converteai.net">
-<link rel="dns-prefetch" href="https://m3u8.vturb.net">
-<link rel="dns-prefetch" href="https://license.vturb.com">
 
 <!-- ============================================================
      DESIGN (14/09/2026): rumo "Capítulos", paleta "Noite", escolhidos pelo
@@ -694,306 +681,238 @@ if('requestIdleCallback' in window)requestIdleCallback(go,{timeout:2500});else s
 document.addEventListener(ev,go,{once:true,passive:true});});})();
 </script>
 <!-- ============================================================
-     DOWNSELL DO L90D (24/09). CLONE DO UPSELL (../upsell/): o CSS e o
-     <head> vieram inteiros de lá, e os comentários do CSS falam do upsell
-     porque foram escritos para ele. O que é desta página está no <body>.
+     DOWNSELL DO L90D (24/09). O <head> e o CSS vieram do upsell (../upsell/),
+     e os comentários do CSS falam do upsell porque foram escritos para ele.
+     O que é desta página está no <body>, inclusive o CSS próprio.
      Decisões do cliente em 24/09: sem call; o autor preenche um formulário
      e o time devolve o MATERIAL ESCRITO de próximos passos (o mesmo
-     documento da call). R$347. Com vídeo, e a página abre no preço.
-     Roteiro do vídeo: ~/Claude Code/vsl-downsell-diagnostico-escrito-v1.md
+     documento da call). R$347. SEM vídeo e COM cronômetro, no modelo do
+     downsell da Comunidade CDF.
      ============================================================ -->
-<style>
-/* o texto do quadro vazio do player dizia "vídeo de upsell" */
-.player:empty:before{content:"vídeo do downsell entra aqui"}
-</style>
 </head>
 <!-- ============================================================
-     A TRAVA DA VSL, igual à do upsell: tudo abaixo do vídeo só aparece
-     quando a Dany termina a frase do preço.
-     ⚠️ ENQUANTO NÃO EXISTE VÍDEO, A TRAVA FICA DESLIGADA (TEM_VIDEO=false)
-     e a página nasce aberta, com o quadro tracejado no lugar do player.
-     Quando o vídeo entrar no VTurb: trocar TEM_VIDEO para true, colar o
-     embed no .player e preencher TEMPOS no script do fim do body.
+     ESTRUTURA (cliente 24/09): decalcada do downsell da Comunidade CDF
+     (formatocriativodeconteudo.com.br/fcc-downsell-comunidade-cdf/).
+       faixa + cronômetro > H1 que reconhece o "não" > caixa da oferta >
+       como essa condição funciona > última chance > widget > saída do PIX
+     SEM VÍDEO (cliente 24/09): quem vende é o texto curto. A pessoa
+     acabou de recusar uma VSL; não assiste outra.
+     O visual é o do upsell de propósito: o funil tem que parecer uma
+     coisa só, e a referência é a marca de outra pessoa.
      ============================================================ -->
-<script>var TEM_VIDEO=false; if(TEM_VIDEO) document.documentElement.classList.add('vsl-travada')</script>
 <body>
 
-<div class="prog" id="prog"></div>
+<style>
+/* ---- componentes desta página (o resto vem do CSS do upsell) ---- */
+.faixa{background:var(--red);color:#fff;text-align:center;padding:11px 16px;
+  font:700 clamp(.84rem,2.2vw,1rem)/1.25 var(--fd);letter-spacing:.04em;text-transform:uppercase;
+  border-bottom:2px solid var(--ink)}
+.relogio{display:flex;justify-content:center;gap:clamp(14px,3vw,22px);margin:clamp(22px,3vw,30px) auto 0;
+  width:max-content;padding:12px 26px;background:#fff;border:2px solid var(--ink);border-radius:18px;
+  box-shadow:4px 4px 0 var(--ink)}
+.relogio div{text-align:center;min-width:3ch}
+.relogio b{display:block;font:700 clamp(1.7rem,4.6vw,2.2rem)/1 var(--fd);letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;color:var(--red)}
+.relogio span{font:700 .62rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.abre{max-width:640px;margin:clamp(26px,4vw,40px) auto 0;text-align:center}
+.abre h1{font-size:clamp(28px,4.4vw,46px);max-width:none}
+.abre p{margin:14px 0 0;color:var(--mut);font-size:1.04rem;line-height:1.5;text-wrap:balance}
+.abre p b{color:var(--ink)}
+.oferta .offer-box{margin-top:clamp(28px,4vw,40px);background:#fff}
+.oferta .chamada{margin:0;font:700 clamp(1.3rem,3.4vw,1.8rem)/1.15 var(--fd);letter-spacing:-.03em}
+.oferta .compara{margin:18px 0 0;color:var(--mut);font-size:1rem}
+.oferta .compara s{color:var(--dim)}
+.oferta .price{margin-top:4px}
+.oferta .price .val{color:var(--go)}
+.alerta{display:flex;gap:12px;align-items:center;text-align:left;margin:20px auto 0;max-width:460px;
+  padding:12px 16px;border:2px solid var(--ink);border-radius:14px;background:var(--pa2);
+  font-size:.92rem;line-height:1.4}
+.alerta i{flex:none;display:grid;place-content:center;width:28px;height:28px;border-radius:8px;
+  background:var(--red);color:#fff;font:700 1rem/1 var(--fd);font-style:normal;border:2px solid var(--ink)}
+.verdade{margin:26px 0 0}
+.verdade h3{font-size:1.3rem}
+.verdade p{margin:10px auto 0;max-width:46ch;color:var(--mut);font-size:1rem;line-height:1.55}
+.cond{max-width:660px;margin:26px auto 0;padding:clamp(26px,4vw,36px);text-align:center;
+  background:var(--grifo);border:2px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink)}
+.cond h2{font-size:clamp(1.4rem,3.4vw,2rem)}
+.cond p{margin:12px auto 0;max-width:48ch;font-size:1.02rem;line-height:1.5}
+.ultima{max-width:660px;margin:clamp(40px,6vw,60px) auto 0;text-align:center}
+.ultima h2{font-size:clamp(1.6rem,4vw,2.4rem)}
+.ultima p{margin:10px 0 0;color:var(--mut)}
+.ultima .alerta{justify-content:center;text-align:center;font-family:var(--fd);font-weight:700;font-size:1rem}
+.ultima .tchau{margin-top:18px;color:var(--ink)}
+.compra-box{max-width:660px;margin:26px auto 0}
+.compra-box .offer-box{margin:0;background:#fff}
+.expirou{max-width:560px;margin:26px auto 0;text-align:center;padding:30px 26px;background:#fff;
+  border:2px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink)}
+.expirou h2{font-size:1.5rem}
+.expirou p{margin:10px 0 0;color:var(--mut)}
+.expirou[hidden],.fecha[hidden]{display:none}
+main{padding:0 0 clamp(52px,7vw,80px)}
+@media(max-width:820px){
+  .relogio{padding:10px 20px}
+  .alerta{font-size:.88rem}
+}
+</style>
 
-<header class="hero">
+<!-- ============================================================
+     O CRONÔMETRO (cliente 24/09, igual à referência).
+     ⚠️ ELE É DE VERDADE: quando chega a zero, a oferta SAI da página e no
+     lugar entra um aviso de que a condição acabou. Relógio que zera e não
+     muda nada, ou que reinicia no F5, é mentira que o comprador pega.
+     O prazo fica gravado no navegador (por compra, pelo fsid da Hotmart
+     quando vem na URL), então recarregar não devolve os minutos.
+     Sem JS o relógio fica parado e a oferta continua aberta: a página
+     nunca tranca a compra por falha nossa.
+     ============================================================ -->
+<div class="faixa">⚠ Importante: esta condição sai do ar em</div>
+
+<main>
   <div class="w">
-    <!-- o widget da Hotmart só carrega com a compra em andamento: aqui o aviso
-         também é literal, como no upsell -->
-    <p class="aviso"><b>⚠ Atenção</b><span>Não feche nem atualize esta página</span></p>
+    <div class="relogio" id="relogio" role="timer" aria-live="off">
+      <div><b id="rel-h">00</b><span>Horas</span></div>
+      <div><b id="rel-m">05</b><span>Minutos</span></div>
+      <div><b id="rel-s">00</b><span>Segundos</span></div>
+    </div>
 
-    <!-- a pessoa continua no passo 2: recusou a sessão, mas o pedido ainda
-         não terminou. O passo 3 só vem depois desta página. -->
-    <nav class="passos" aria-label="Etapas da sua compra">
-      <ol>
-        <li class="feito"><span class="n" aria-hidden="true">✓</span><span class="t">90D garantido</span></li>
-        <li class="agora" aria-current="step"><span class="n" aria-hidden="true">2</span><span class="t">Acelere o seu resultado</span></li>
-        <li><span class="n" aria-hidden="true">3</span><span class="t">Acesso liberado</span></li>
-      </ol>
-    </nav>
+    <div class="abre">
+      <h1>Espera. Talvez o problema tenha sido a&nbsp;call.</h1>
+      <p>Você entendeu o que o diagnóstico faz pelo seu&nbsp;livro.</p>
+      <p>Mas uma sessão ao vivo pede agenda, câmera e um valor&nbsp;maior.</p>
+      <p><b>É por isso que esta página&nbsp;existe.</b></p>
+    </div>
 
-    <h1 class="lead"><span class="marcada">Assista ao vídeo abaixo: o mesmo diagnóstico, agora sem precisar de&nbsp;call</span></h1>
+    <!-- tudo que é OFERTA fica dentro de .fecha, que é o que some quando o
+         cronômetro zera -->
+    <div class="fecha" id="fecha">
+      <div class="oferta">
+        <div class="offer-box">
+          <p class="chamada">Metade do valor. Só aqui. Só&nbsp;agora.</p>
+          <!-- ⚠️ SEM "DE R$697 POR R$347". A referência faz "de/por" porque lá
+               é o MESMO produto com metade do acesso. Aqui é outro formato: o
+               diagnóstico por escrito nunca custou 697. A comparação honesta é
+               com a sessão, que a pessoa acabou de ver.
+               ⚠️ O preço está ESCRITO aqui, diferente do upsell. Tem que bater
+               com o configurado no funil da Hotmart (quem cobra é o widget). -->
+          <p class="compara">A sessão ao vivo custa R$697.<br>O diagnóstico por escrito:</p>
+          <div class="price"><span class="cur">R$</span><span class="val">347</span></div>
+          <p class="obs">ou parcelado no cartão, direto no botão abaixo</p>
+          <p class="alerta"><i aria-hidden="true">!</i><span>Esta condição não aparece de novo. Ela só existe nesta&nbsp;página.</span></p>
 
-    <!-- VTURB: o embed do vídeo do downsell entra AQUI, numa linha só
-         (a regra :empty quebra com espaço em branco dentro da div). -->
-    <div class="player" id="vsl"></div>
-
-    <!-- ============================================================
-         O BLOCO DE PREÇO, logo abaixo do vídeo, como no upsell.
-         Sem preço escrito: quem mostra valor é o widget da Hotmart, e assim
-         não existe texto nosso que possa discordar do checkout.
-         🚫 SEM A FAIXA DE VAGAS DO UPSELL. Lá ela é verdade porque a sessão
-         gasta hora de agenda do time. Aqui ninguém definiu limite nenhum, e
-         escassez sem limite real é mentira. Se o time tiver um teto de
-         diagnósticos por mês, ela volta com esse número.
-         ============================================================ -->
-    <div class="bloco-preco pos-vsl">
-      <div class="offer-box">
-        <!-- HOTMART, Sales Funnel Widget: o passo de DOWNSELL do funil. Compra
-             de um clique pra quem pagou o 90D no cartão. O produto e o preço
-             (R$347) são os configurados no funil, não aqui. -->
-        <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
-        <!-- A SAÍDA DO PIX, igual à do upsell. Fica ESCONDIDA até existir o
-             checkout do produto (PIX_CHECKOUT no script do fim). -->
-        <div class="pix" id="pix" hidden>
-          <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
-          <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão <span aria-hidden="true">&rarr;</span></a>
+          <div class="verdade">
+            <h3>De verdade.</h3>
+            <p>O diagnóstico nasceu para ser uma conversa. Mas se o que te segurou foi a agenda ou o valor, eu prefiro que você tenha ele por escrito do que lance o seu livro&nbsp;sem.</p>
+          </div>
         </div>
       </div>
 
-      <!-- ⚠️ A GARANTIA DEPENDE DE UMA DECISÃO (nota 2 do roteiro). No upsell,
-           quem pede reembolso não fica com a gravação nem com o material. Aqui
-           o produto É o documento, e depois de entregue ele não volta. Este
-           texto é a opção (b): garantia depois da entrega, aceitando que o
-           material fica com a pessoa. -->
-      <div class="gar">
-        <div class="selo"><b>100%</b><i>DE VOLTA</i></div>
-        <div>
-          <h3>Se você receber o seu diagnóstico e achar que não valeu,<br>envie um email e devolvemos&nbsp;100%</h3>
-          <p>Sem justificar e sem falar com três&nbsp;pessoas.</p>
-          <p class="prazo">O prazo termina 7 dias úteis depois da entrega do seu diagnóstico.</p>
+      <div class="cond">
+        <h2>Como essa condição funciona</h2>
+        <p>Em vez da sessão ao vivo, você preenche um formulário sobre o seu livro e o seu&nbsp;lançamento.</p>
+        <p>O time estuda o seu caso e te devolve <b>por escrito</b> o que já está certo, o que precisa mudar e o seu próximo&nbsp;passo.</p>
+        <p>É o mesmo material que quem faz a sessão recebe no&nbsp;final.</p>
+      </div>
+
+      <div class="ultima">
+        <h2>Última chance.</h2>
+        <p>Se a hora ao vivo era a barreira, ela não existe&nbsp;mais.</p>
+        <p class="alerta"><span>Clica no botão abaixo e garante o seu diagnóstico por&nbsp;escrito.</span></p>
+        <p class="tchau">Te espero do outro lado.</p>
+      </div>
+
+      <div class="compra-box">
+        <div class="offer-box">
+          <!-- HOTMART, Sales Funnel Widget: o passo de DOWNSELL do funil. Ele
+               traz o aceite E a recusa ("não quero"), com compra de um clique
+               pra quem pagou o 90D no cartão. Produto e preço vêm do funil. -->
+          <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
+          <!-- A SAÍDA DO PIX, igual à do upsell. ESCONDIDA até existir o
+               checkout do produto (PIX_CHECKOUT no script do fim). -->
+          <div class="pix" id="pix" hidden>
+            <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+            <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão <span aria-hidden="true">&rarr;</span></a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</header>
 
-<!-- a prova: os MESMOS três do upsell, porque o argumento é o mesmo (alguém
-     de fora olhou o caso deles). ⚠️ Quem chega aqui acabou de passar pela
-     página do upsell e pode já ter visto estes três. Se isso pesar, esta
-     seção é a primeira que sai. -->
-<section class="pos-vsl">
-  <div class="w">
-    <div class="meio">
-      <h2>Você recebe o seu diagnóstico<br>com os próximos passos&nbsp;mapeados</h2>
-    </div>
-    <div class="provas">
-      <button class="prova" data-vid="6RhRrPjf7UA" data-quem="Robson Leite">
-        <span class="thumb"><img src="../assets/depo-robson2.webp" alt="Robson Leite" width="640" height="360"><span class="play" aria-hidden="true"></span></span>
-        <span class="quem">Robson Leite</span>
-        <span class="antes">O livro era bom. <b>A capa é que não era.</b></span>
-        <span class="depois">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</span>
-        <span class="link">Ver o depoimento</span>
-      </button>
-      <button class="prova" data-vid="bOgr78gqu5w" data-quem="Giuliana e Susana">
-        <span class="thumb"><img src="../assets/depo-susana.webp" alt="Giuliana e Susana" width="640" height="360"><span class="play" aria-hidden="true"></span></span>
-        <span class="quem">Giuliana e Susana</span>
-        <span class="antes">Primeiro livro. <b>Não sabiam nem como publicar.</b></span>
-        <span class="depois">“Primeiro lugar Brasil em vendas da PublishNews, <b>na categoria de negócios</b>.”</span>
-        <span class="link">Ver o depoimento</span>
-      </button>
-      <button class="prova" data-vid="XuQFaoyo0lk" data-quem="Sônia Wilke">
-        <span class="thumb"><img src="../assets/depo-sonia.webp" alt="Sônia Wilke" width="640" height="360"><span class="play" aria-hidden="true"></span></span>
-        <span class="quem">Sônia Wilke</span>
-        <span class="antes">Doze títulos e <b>nenhuma direção</b>.</span>
-        <span class="depois">“As informações estavam <b>espalhadas na minha mente</b>. Ela organizou tudo.”</span>
-        <span class="link">Ver o depoimento</span>
-      </button>
+    <!-- o que aparece quando o cronômetro zera -->
+    <div class="expirou" id="expirou" hidden>
+      <h2>Esta condição saiu do ar.</h2>
+      <p>O seu Lançamento 90D continua garantido. O acesso chega no seu&nbsp;email.</p>
     </div>
   </div>
-</section>
-
-<!-- A CONVERSA, o mesmo mecanismo do upsell, com a objeção que é DESTE
-     produto: sem call, como eles entendem o meu caso? -->
-<section class="pos-vsl continua">
-  <div class="w">
-    <div class="pg-chat">
-      <div class="pg-grupo eu"><span class="pg-nome">você</span><div class="pg eu">Sem conversar, como vocês vão entender o meu livro?</div></div>
-      <div class="pg-grupo ela">
-        <span class="pg-nome">Dany e o time</span>
-        <div class="pg ela forte">Pelo que você contar.</div>
-        <div class="pg ela">O formulário tem as perguntas que a gente faria <b>na conversa</b>.</div>
-        <div class="pg ela ult">A gente lê, estuda o seu caso e devolve por escrito o que fazer com ele.</div>
-        <img class="pg-av" src="../assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa" width="36" height="36">
-      </div>
-    </div>
-    <div class="cta-fim">
-      <a class="btn" href="#compra">Quero o meu diagnóstico</a>
-    </div>
-  </div>
-</section>
-
-<div class="vbox" id="vbox" role="dialog" aria-modal="true" aria-label="Depoimento em vídeo">
-  <div class="vbox-in" id="vbox-in"><button class="vbox-x" type="button">Fechar ✕</button></div>
-</div>
+</main>
 
 <footer>
   <div class="w">The Book Business · Dany Sakugawa</div>
 </footer>
 
-<!-- HOTMART: carga e montagem do widget. Mesma regra do upsell: se houver
-     player, espera a chave da VTurb (xcod) até 6s e escreve na URL ANTES de
-     montar; sem player, monta na hora. A compra nunca espera o rastreio. -->
+<!-- HOTMART: carga e montagem do widget. Sem player nesta página, então
+     não há xcod da VTurb pra esperar: monta na hora. -->
 <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 <script>
 (function(){
-  var PRAZO = 6000, INICIO = Date.now(), montado = false;
-
-  function montar(){
-    if (montado) return; montado = true;
-    try {
-      checkoutElements.init('salesFunnel', {
-        payment: {
-          /* quem registra a venda é o webhook Hotmart -> n8n -> Supabase, e a
-             campanha otimiza pela conversão por product_id: nada de fbq aqui */
-          onSuccess: function(){},
-          onError: function(erro){ console.error('Hotmart: pagamento', erro); }
-        }
-      }).mount('#hotmart-sales-funnel');
-    }
-    catch(e){ console.error('Hotmart: funil nao montou', e); }
-  }
-
-  function carimba(chave){
-    try {
-      var u = new URL(location.href);
-      if (!u.searchParams.get('xcod')) {
-        u.searchParams.set('xcod', chave);
-        history.replaceState(null, '', u.toString());
+  try {
+    checkoutElements.init('salesFunnel', {
+      payment: {
+        /* quem registra a venda é o webhook Hotmart -> n8n -> Supabase, e a
+           campanha otimiza pela conversão por product_id: nada de fbq aqui */
+        onSuccess: function(){},
+        onError: function(erro){ console.error('Hotmart: pagamento', erro); }
       }
-    } catch(e){}
+    }).mount('#hotmart-sales-funnel');
   }
+  catch(e){ console.error('Hotmart: funil nao montou', e); }
 
   /* ⏳ O CHECKOUT DO PIX AINDA NÃO EXISTE: o produto do downsell não foi
      criado na Hotmart. Enquanto isto for null, a saída do PIX fica escondida.
      Quando existir: 'https://pay.hotmart.com/<PRODUTO>?off=<OFERTA>' */
   var PIX_CHECKOUT = null;
-
-  function ligaPix(chave){
+  (function ligaPix(){
     var a = document.getElementById('pix-checkout'), box = document.getElementById('pix');
     if (!a || !box || !PIX_CHECKOUT) return;
     box.hidden = false;
     try {
       var u = new URL(PIX_CHECKOUT);
-      if (chave) u.searchParams.set('xcod', chave);
       new URLSearchParams(location.search).forEach(function(v, k){
-        if (k !== 'xcod' && !u.searchParams.get(k)) u.searchParams.set(k, v);
+        if (!u.searchParams.get(k)) u.searchParams.set(k, v);
       });
       a.setAttribute('href', u.toString());
     } catch(e){ a.setAttribute('href', PIX_CHECKOUT); }
-  }
-
-  (function espera(){
-    var el = document.querySelector('vturb-smartplayer');
-    if (!el){ ligaPix(null); return montar(); }
-    var chave = el.conversionKey;
-    if (chave){ carimba(chave); ligaPix(chave); return montar(); }
-    if (Date.now() - INICIO > PRAZO){ ligaPix(null); return montar(); }
-    setTimeout(espera, 150);
   })();
 })();
 </script>
 <script>
 (function(){
-
-  /* ── A TRAVA DA VSL ─────────────────────────────────────────
-     Mesmo motor do upsell. Com um vídeo só, TEMPOS tem uma linha:
-     'id do vídeo': [segundo em que a Dany termina o preço, duração].
-     As mesmas saídas de emergência: vídeo desconhecido abre na hora,
-     player que não aparece em 12s abre, e sem JS a página nasce aberta.
-     Quem já passou do preço não assiste de novo (localStorage). */
-  var TEMPOS = {};
-
-  (function travaVSL(){
-    var html = document.documentElement;
-    if (!html.classList.contains('vsl-travada')) return;
-    var aberto = false;
-    function abrir(){ if (aberto) return; aberto = true; html.classList.remove('vsl-travada'); }
-    function lembrar(id){ try { localStorage.setItem('downsell.liberado.' + id, '1'); } catch(e){} }
-    function jaLiberou(id){ try { return localStorage.getItem('downsell.liberado.' + id) === '1'; } catch(e){ return false; } }
-
-    var LIMITE = 12000, INICIO = Date.now();
-    (function espera(){
-      var el = document.querySelector('vturb-smartplayer');
-      var cfg = null;
-      try { cfg = el && el.config; } catch(e){}
-      if (!cfg || !cfg.id){
-        if (Date.now() - INICIO > LIMITE) abrir();
-        else setTimeout(espera, 200);
-        return;
-      }
-      var reg = TEMPOS[cfg.id];
-      if (!reg) return abrir();
-      var dur = Number(el.duration) || 0;
-      if (!dur && Date.now() - INICIO <= LIMITE) { setTimeout(espera, 200); return; }
-      /* vídeo trocado no mesmo id: o tempo medido não vale mais, abre */
-      if (dur && Math.abs(dur - reg[1]) > 3) return abrir();
-      if (jaLiberou(cfg.id)) return abrir();
-      try { el.onTime(reg[0], function(){ lembrar(cfg.id); abrir(); }, { once: true }); }
-      catch(e){ abrir(); }
-    })();
-  })();
-
-  /* o botão do fim desliza até o widget, centralizado */
-  var alvo = document.getElementById('compra');
-  if (alvo){
-    var quieto = matchMedia('(prefers-reduced-motion: reduce)');
-    [].slice.call(document.querySelectorAll('a[href="#compra"]')).forEach(function(a){
-      a.addEventListener('click', function(e){
-        e.preventDefault();
-        try { alvo.scrollIntoView({behavior: quieto.matches ? 'auto' : 'smooth', block:'center'}); }
-        catch(err){ alvo.scrollIntoView(); }
-      });
-    });
+  /* ── O CRONÔMETRO ───────────────────────────────────────────
+     MINUTOS é o único número a mexer. A referência usa 5. */
+  var MINUTOS = 5;
+  var q = new URLSearchParams(location.search);
+  var CHAVE = 'downsell.prazo.' + (q.get('fsid') || 'geral');
+  /* ?reset=1 zera o prazo desta compra, pra testar a página de novo */
+  if (q.get('reset') === '1'){ try { localStorage.removeItem(CHAVE); } catch(e){} }
+  var agora = Date.now(), fim = null;
+  try { fim = Number(localStorage.getItem(CHAVE)) || null; } catch(e){}
+  if (!fim){
+    fim = agora + MINUTOS * 60 * 1000;
+    try { localStorage.setItem(CHAVE, String(fim)); } catch(e){}
   }
-
-  /* a janela do depoimento: o vídeo abre aqui, ninguém sai da página */
-  var vbox = document.getElementById('vbox'), vin = document.getElementById('vbox-in');
-  function fecharVideo(){
-    if (!vbox) return;
-    vbox.classList.remove('on');
-    var f = vin.querySelector('iframe'); if (f) f.remove();
-    document.body.style.overflow = '';
+  var h = document.getElementById('rel-h'), m = document.getElementById('rel-m'), s = document.getElementById('rel-s');
+  var dois = function(n){ return (n < 10 ? '0' : '') + n; };
+  function expira(){
+    var f = document.getElementById('fecha'), x = document.getElementById('expirou');
+    if (f) f.hidden = true;
+    if (x) x.hidden = false;
   }
-  document.addEventListener('click', function(ev){
-    var b = ev.target.closest('.prova');
-    if (b && vbox){
-      var f = document.createElement('iframe');
-      f.src = 'https://www.youtube.com/embed/' + b.getAttribute('data-vid') + '?autoplay=1&rel=0';
-      f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
-      f.setAttribute('allowfullscreen','');
-      f.title = 'Depoimento de ' + (b.getAttribute('data-quem') || '');
-      vin.appendChild(f);
-      vbox.classList.add('on');
-      document.body.style.overflow = 'hidden';
-      return;
-    }
-    if (ev.target.closest('.vbox-x') || ev.target === vbox) fecharVideo();
-  });
-  addEventListener('keydown', function(e){ if (e.key === 'Escape') fecharVideo(); });
-
-  var fita = document.getElementById('prog');
-  if (fita){
-    var anda = function(){
-      var h = document.documentElement, t = h.scrollHeight - h.clientHeight;
-      fita.style.width = (t > 0 ? h.scrollTop / t * 100 : 0) + '%';
-    };
-    addEventListener('scroll', anda, {passive:true}); addEventListener('resize', anda); anda();
+  function tique(){
+    var falta = Math.max(0, Math.round((fim - Date.now()) / 1000));
+    if (h){ h.textContent = dois(Math.floor(falta / 3600)); m.textContent = dois(Math.floor(falta % 3600 / 60)); s.textContent = dois(falta % 60); }
+    if (falta <= 0){ expira(); return; }
+    setTimeout(tique, 1000 - (Date.now() % 1000));
   }
+  tique();
+
 })();
 </script>
 
@@ -1004,12 +923,10 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         O id do produto vai nas 3 listas do n8n (ROAS, Estorno, Sync) e no
         dash Esteira do Miolo.
      2. Checkout do PIX (PIX_CHECKOUT) do produto novo.
-     3. O vídeo: gravar pelo roteiro, subir no VTurb, colar o embed, ligar
-        TEM_VIDEO e medir o segundo do preço em TEMPOS.
-     4. A regra de reembolso de um documento (nota 2 do roteiro).
-     5. O prazo de entrega real do time (nota 3 do roteiro).
-     6. O formulário (não existe, igual ao do upsell).
-     7. Copy não passou pela Dany.
+     3. O preço escrito (R$347) tem que bater com o funil da Hotmart.
+     4. O prazo de entrega real do time, se for entrar na página.
+     5. O formulário (não existe, igual ao do upsell).
+     6. Copy não passou pela Dany.
      ============================================================ -->
 </body>
 </html>
