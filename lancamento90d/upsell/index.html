@@ -293,7 +293,7 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    */
 .vsl-travada .pos-vsl{display:none}
 /* a linha abaixo do botao final */
-.sub-cta{margin:16px 0 0;font-size:.92rem;line-height:1.5;color:var(--mut)}
+.sub-cta{margin:16px 0 0;font-size:.92rem;line-height:1.5;color:var(--mut);text-wrap:balance}
 /* ⚠️ A HOTMART POE `min-width:320px` INLINE NO IFRAME DELA (conferido 24/09).
    Num celular de 360px o espaco dentro do card e' 270px (22 de margem da
    pagina + 22 de padding do card, de cada lado), entao o widget saia 27px
@@ -450,7 +450,7 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
   border-bottom:2px solid var(--ink);border-radius:24px 24px 0 0;
   display:flex;gap:12px;align-items:baseline;justify-content:center;flex-wrap:wrap;text-align:center}
 .vagas b{font:700 1.14rem/1 var(--fd);letter-spacing:-.02em}
-.vagas span{font-size:.92rem;line-height:1.3}
+.vagas span{font-size:.92rem;line-height:1.3;text-wrap:balance}
 
 /* 23/09: a saida do PIX e a ULTIMA coisa do card, entao ela fecha o bloco.
    Antes tinha uma linha de escassez embaixo dela, que o cliente tirou. */
@@ -673,7 +673,7 @@ footer{background:var(--ink);border-top:0;padding:30px 0;text-align:center;font-
      devolve pra ele os 46px que o padding do card tirava (270 -> 316 numa
      tela de 360). Junto com o min-width:0 la em cima, ele nunca mais passa
      da caixa. */
-  .funil{margin-left:-22px;margin-right:-22px}
+  .funil{margin-left:-22px;margin-right:-22px;margin-top:0}
   .offer-box .price .val{font-size:clamp(3rem,16vw,4rem)}
   .btn{padding:19px 26px;font-size:1.02rem}
 }
@@ -789,7 +789,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
              continua verdade o mes inteiro.
              ⚠️ A VSL ainda fala "vinte vagas" em voz alta. Nao contradiz (vinte e'
              pouco), mas a pagina e o video deixaram de dizer a mesma coisa. -->
-        <p class="vagas"><b>Poucas vagas disponíveis por mês</b><span>Ao sair desta página, sua vaga passa para outro autor.</span></p>
+        <p class="vagas"><b>Poucas vagas disponíveis por&nbsp;mês</b><span>Ao sair desta página, sua vaga passa para outro&nbsp;autor.</span></p>
         <!-- 23/09: sairam daqui o nome do produto e a lista das tres entregas.
              O cliente cortou: quem ja assistiu o video nao precisa da ficha
              tecnica de novo, e o card vira so o gesto de comprar. -->
@@ -843,7 +843,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
                ⏳ A REGRA AINDA NÃO EXISTE na operação (pendência). E a Hotmart
                devolve sozinha só por 7 dias: se a sessão cair no dia 20, o
                reembolso vira processo manual do time. -->
-          <h3>Se você fizer a sessão e ao final achar que não valeu,<br>envie um email e devolvemos 100%</h3>
+          <h3>Se você fizer a sessão e ao final achar que não valeu,<br>envie um email e devolvemos&nbsp;100%</h3>
           <p>Sem justificar, sem formulário, sem falar com três pessoas.</p>
           <!-- ⏳ O PRAZO, escrito (cliente 23/09). "O que ocorrer por ultimo"
                e' o que torna a regra honesta: quem marca a sessao pra daqui a
@@ -869,7 +869,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <section class="pos-vsl">
   <div class="w">
     <div class="meio">
-      <h2>Você sai do seu diagnóstico<br>com os próximos passos mapeados</h2>
+      <h2>Você sai do seu diagnóstico<br>com os próximos passos&nbsp;mapeados</h2>
     </div>
     <!-- ============================================================
          OS TRÊS DEPOIMENTOS. Eram cartões só de texto, sem rosto nenhum, e o
@@ -980,7 +980,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
          ⚠️ O TEXTO E' UMA FRASE, NAO O NOME DO PRODUTO. -->
     <div class="cta-fim">
       <a class="btn" href="#compra">Quero garantir minha vaga</a>
-      <p class="sub-cta">Ao sair desta página, sua vaga passa para outro autor.</p>
+      <p class="sub-cta">Ao sair desta página, sua vaga passa para outro&nbsp;autor.</p>
     </div>
   </div>
 </section>
