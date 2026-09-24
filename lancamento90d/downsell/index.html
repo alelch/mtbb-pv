@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/webp" href="../favicon.webp">
+
+<title>Diagnóstico por escrito | The Book Business</title>
+<meta name="description" content="O diagnóstico do seu livro, por escrito: você responde um formulário e o time da Dany Sakugawa devolve os próximos passos do seu caso.">
+<!-- Página de DOWNSELL: nunca indexada, nunca acessada direto. Só existe dentro
+     do fluxo de quem comprou o Lançamento 90D e recusou a sessão de diagnóstico. -->
+<meta name="robots" content="noindex,nofollow">
+
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/dmsans-sub.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/grotesk-sub.woff2">
+
+<!-- ============================================================
+     VTURB — otimizador (bloco do painel, colado como veio 22/09).
+     Marca o tempo de origem e pre-carrega o player, que e' o unico
+     elemento que precisa estar pronto na primeira dobra: a pagina
+     inteira existe pra pessoa dar o play.
+     ============================================================ -->
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://m3u8.vturb.net">
+<link rel="dns-prefetch" href="https://license.vturb.com">
+
+<!-- ============================================================
+     DESIGN (14/09/2026): rumo "Capítulos", paleta "Noite", escolhidos pelo
+     cliente na prancha de 14 rumos × 8 paletas (_designs/). A página deixou
+     de usar ../assets/oferta.css: aquela folha é a linguagem do FRONT
+     (marfim, claro) e esta página agora é escura de propósito, para o upsell
+     se ler como OUTRA coisa e não como "mais uma tela do mesmo checkout".
+     Por isso o CSS mora aqui dentro, e as duas @font-face também.
+
+     O que veio do rumo Capítulos: rótulo miúdo em versalete, sublinhado à
+     mão na frase-chave, fita de progresso no topo, fundos alternando, bloco
+     de oferta cheio e FAQ em cartão.
+
+     ⚠️ REVISÃO 14/09 (cliente: "o 01 02 03 04 não faz sentido algum"). Ele
+     está certo e o erro foi meu: numeração só se justifica quando o conteúdo
+     É uma sequência, e estes blocos não são. Saíram os numerais fantasma e
+     os rótulos "Capítulo um/dois/três", e junto saíram três outras coisas que
+     eram ornamento herdado da referência:
+       · a FAIXA EM MARQUISE, que listava as entregas antes de a pessoa saber
+         qual é a oferta, e girava sozinha sem dizer nada;
+       · a CITAÇÃO entre aspas, que repetia uma frase do próprio texto como se
+         fosse de outra pessoa;
+       · os CONTADORES 01-04 da linha do tempo. Ali o marcador certo é o
+         MINUTO (5/5/40/10), que é a informação real; o contador ao lado só
+         somava número.
+     Duas correções de conteúdo na mesma passada:
+       · a ORDEM do argumento estava invertida. "E ninguém enxerga o próprio
+         erro" vinha ANTES de "um erro só pode fazer o livro inteiro falhar",
+         ou seja, o motivo chegava antes da consequência. Voltou pra ordem do
+         texto original.
+       · a lista de entregas aparecia TRÊS vezes (marquise, caixa da oferta 1,
+         cartões). Ficou uma vez só, na recapitulação, e a oferta 1 ficou com
+         frase + preço + botão.
+     O que NÃO veio: o fade-in ao rolar da referência. Numa página pós-compra
+     a pessoa lê com pressa e muitas vezes no celular; esconder bloco até ele
+     entrar na tela troca leitura por efeito. Aqui tudo nasce visível.
+
+     FONTES: a referência usava Instrument Sans + DM Mono do Google. Aqui vão
+     as que a casa JÁ hospeda (Space Grotesk + DM Sans, as mesmas do front),
+     porque página pós-compra não pode depender de request externo. Os
+     rótulos em versalete, que na referência eram monoespaçados, usam a mono
+     do sistema: é texto miúdo em caixa alta com muito espacejamento, onde a
+     mono do sistema não destoa e não custa nada.
+
+     ⚠️ PALETA: o acento --ac é cor de TEXTO e precisa passar contraste; o
+     --acf é cor de PREENCHIMENTO (tarja, traço, botão). Não trocar um pelo
+     outro: âmbar como texto sobre fundo claro é ilegível.
+     ============================================================ -->
+
+<!-- ============================================================
+     ESTRUTURA: esqueleto de página de upsell do modelo Roas, decalcado da
+     página de Upsell 2 da Prisciane (Desafio > MSL > Loja Pronta).
+       barra de passos > parabéns + não feche > pergunta direta > vídeo >
+       preço + CTA > garantia + CTA > o que você recebe + CTA >
+       recapitulação + CTA
+     O CTA é refrão: repete a cada bloco, e cada repetição vem depois de um
+     argumento fechado.
+     DUAS COISAS NÃO FORAM COPIADAS, de propósito:
+     1. a âncora "de R$997 por R$697". O diagnóstico nunca custou R$997, e a
+        regra da casa é não usar âncora falsa. No lugar dela entra a âncora
+        VERDADEIRA: o valor é abatido se a pessoa entrar no D.E.
+     2b. ESCASSEZ (10/09): a oferta so aparece enquanto ha vaga no mes, e a vaga
+        recusada volta pra fila do proximo comprador. E limite REAL de horas do
+        time. So continua honesto se alguem DESLIGAR o upsell quando as vagas
+        do mes acabarem.
+     2. o bônus empacotado. O equivalente honesto aqui já existe dentro do
+        produto (a gravação e o material escrito), então ele ganhou bloco
+        próprio em vez de virar um produto inventado.
+     ⚠️ REEMBOLSO (decisão do cliente, 16/09): quem pede reembolso NÃO fica
+        com a gravação nem com o material. A página e o vídeo chegaram a
+        dizer o contrário em três lugares; corrigido. Nunca reescrever essa
+        garantia como "o material continua seu".
+     A versão longa e argumentada desta página está em index-longa.html.
+     ============================================================ -->
+
+<!-- a classe .js entra AQUI, antes de pintar: se ela entrasse no fim do body,
+     a página renderizaria no estado final e depois pularia pro inicial. Sem JS,
+     a classe não entra e o bloco da conta fica parado no estado final. -->
+<script>document.documentElement.className+=" js"</script>
+<style>
+/* fontes da casa, as mesmas do front, servidas daqui */
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/grotesk-sub.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/grotesk-sub.woff2) format('woff2')}
+
+:root{
+  /* OS DOIS FUNDOS. O passo entre eles era de 3 pontos e sumia: a página
+     inteira lia como um preto só. Agora a distância é o dobro e a seção
+     clara se anuncia. --pa é o palco (herói e a conta: onde o
+     âmbar brilha e precisa de escuro embaixo). --pa2 é a mesa de trabalho
+     (o que acontece na call, a prova, as perguntas).
+     --dim subiu junto: no fundo novo ele reprovava contraste no texto
+     miúdo (3,2:1). Em #868178 passa em 4,5:1 nos dois fundos. */
+  /* ════════════════════════════════════════════════════════
+     A SÍNTESE (23/09). A página INVERTEU: era quase preta com âmbar em tudo,
+     e agora é creme com o preto virando acento. O cliente escolheu entre
+     quatro direções e pediu a mistura de duas: a base editorial clara de uma,
+     com o PESO da outra (borda preta de verdade, sombra deslocada, grifo).
+
+     O que cada cor faz, e isso não pode se diluir:
+       VERDE   comprar. Preço, checks, selo, todo botão de checkout.
+       LARANJA o caminho alternativo, que é a saída do PIX.
+       AMARELO só o grifo, atrás da palavra que carrega a frase.
+       PRETO   a borda e a sombra. É ele que dá o peso.
+     ════════════════════════════════════════════════════════ */
+  --pa:#F7F4EC; --pa2:#EFE9DB; --ink:#191714; --mut:#6E675C; --dim:#8C8478; --ru:#191714;
+  --hair:#DDD5C4;                 /* filete leve, pra separar sem pesar */
+  --ac:#EAB82D; --acf:#EAB82D;    /* ambar: so grafico e marca */
+  --go:#1E7D46; --go2:#165E35; --alt:#E8622B; --alt2:#C94E1D; --grifo:#FFD84D;
+  /* 23/09: o vermelho vem do logo do Diagnostico. Papel dele na pagina e'
+     ALERTA, nao acao: assim ele nao briga com o verde (comprar) e nao colide
+     com o vermelho do grafico da conta, que significa "vende e e' esquecido". */
+  --red:#CE0E16;
+  --off:#FFFFFF; --offtx:#191714; --offc:#FFFFFF; --offb:#191714;
+  --pill:#1E7D46; --pilltx:#FFFFFF; --pillh:#191714; --pillhtx:#FFFFFF;
+  --play:#191714; --band:#1E7D46; --bandtx:#FFFFFF;
+  --r:22px;
+  --ff:'DM Sans',system-ui,-apple-system,sans-serif;
+  --fd:'Space Grotesk','DM Sans',sans-serif;
+  --fm:ui-monospace,'SF Mono','Roboto Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ink);font:400 17px/1.62 var(--ff);
+  -webkit-font-smoothing:antialiased}
+/* a mesma medida da .wrap do front */
+.w{width:100%;max-width:1120px;margin:0 auto;padding:0 22px}
+h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;line-height:1.08;
+  text-wrap:balance}
+.rot{font-family:var(--fm);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dim);margin:0 0 14px}
+
+.prog{position:fixed;top:0;left:0;height:3px;background:var(--ac);width:0;z-index:40}
+
+/* A BARRA DE PASSOS é informação, não enfeite: a pessoa acabou de pagar e
+   precisa saber, sem procurar, que o pedido tem três etapas e ela está na 2.
+   Por isso ela é a coisa mais forte acima da dobra depois da H1. */
+/* ── O AVISO ─────────────────────────────────────────────────
+   A tarja e' vermelha e o resto e' caixa alta em carvao. Vermelho aqui e'
+   ALERTA: e' a unica funcao dele na pagina. */
+.aviso{display:flex;flex-direction:column;align-items:center;gap:19px;margin:0 0 26px}
+.aviso b{display:inline-block;background:var(--red);color:#fff;border:2px solid var(--ink);
+  border-radius:9px;padding:9px 18px;font:700 clamp(.92rem,1.9vw,1.06rem)/1 var(--fd);
+  letter-spacing:.07em;text-transform:uppercase;box-shadow:3px 3px 0 var(--ink)}
+.aviso span{font-family:var(--fd);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.06rem,2.5vw,1.6rem);line-height:1.14;letter-spacing:-.03em;
+  color:var(--ink);text-align:center}
+@media(max-width:760px){.aviso{margin-bottom:20px;gap:14px}}
+
+/* ── OS PASSOS, EM PÍLULA ────────────────────────────────────
+   Eram uma barra colada no topo da página, largura inteira. Ficavam longe do
+   texto que explicam: a pessoa lia "passo 2" antes de saber que existe um
+   pedido em aberto. Agora são uma pílula dentro do herói, encostada no
+   parabéns, e leem como legenda dele.
+   23/09: o cliente pediu ela MAIOR, ocupando 80% da largura. Com os três
+   passos dividindo o espaço em partes iguais (flex:1), o passo de agora ganha
+   um terço inteiro preenchido, que é o que dá o peso.
+   O passo 2 é o único preenchido, porque é onde ela está. */
+.passos{display:flex;justify-content:center;margin:0 0 26px}
+.passos ol{display:flex;align-items:stretch;gap:30px;list-style:none;margin:0;padding:6px;
+  width:80%;border:1px solid var(--ru);border-radius:999px;background:var(--pa2)}
+.passos li{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;
+  padding:11px 14px;border-radius:999px;font:700 14px/1.15 var(--fd);color:var(--dim);
+  white-space:nowrap;min-width:0;position:relative}
+/* a seta mora no VÃO entre os passos, não dentro deles: dentro, ela entraria
+   na pílula verde do passo de agora e viraria parte do botão. Por isso o gap
+   cresceu de 6 pra 24 e ela é posicionada no meio dele. */
+/* o separador e' um CARET, nao a seta de texto (cliente 23/09). Desenhado com
+   duas bordas rotacionadas, e nao com o caractere ">": o caractere muda de
+   desenho e de peso conforme a fonte disponivel, e a borda e' sempre a mesma.
+   Verde, que e a cor do caminho ate a compra. */
+/* ⚠️ CENTRALIZADO NO VÃO, não deslocado por tentativa. O `left` é METADE do
+   gap, e o `translate(-50%,-50%)` joga o centro da caixa exatamente ali.
+   Antes eu chutava um `left` negativo e o caret ficava 3px pra esquerda.
+   Se o gap mudar, esta conta muda junto: left = gap / 2. */
+/* ⚠️ O caret e' um SVG, nao duas bordas rotacionadas. Com as bordas, o desenho
+   nao ocupa a caixa toda: a ponta fica de um lado e os bracos do outro, entao
+   centralizar a CAIXA no vao deixava o DESENHO fora do centro. O SVG e' desenhado
+   centrado no proprio viewBox, e ai a caixa e o desenho coincidem.
+   O `left` e' metade do gap; se o gap mudar, esta conta muda junto. */
+.passos li + li:before{content:"";position:absolute;left:-15px;top:50%;
+  width:16px;height:16px;transform:translate(-50%,-50%);
+  background:no-repeat center/16px 16px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E7D46' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E")}
+.passos .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-content:center;
+  font:700 12.5px/1 var(--fd);border:1.5px solid currentColor}
+.passos .t{overflow:hidden;text-overflow:ellipsis}
+.passos .feito{color:var(--mut)}
+.passos .feito .n{background:var(--mut);color:var(--pa2);border-color:var(--mut)}
+/* o passo de agora: preenchido, e o unico com peso */
+.passos .agora{background:var(--ac);color:var(--pilltx)}
+.passos .agora .n{background:var(--pilltx);color:var(--ac);border-color:var(--pilltx)}
+@media(max-width:760px){
+  .passos{margin-bottom:20px}
+  .passos ol{width:100%;padding:5px;gap:16px}
+  .passos ol{gap:22px}
+  .passos li + li:before{left:-11px;width:13px;height:13px;background-size:13px 13px}
+  .passos li{padding:10px 8px;font-size:12px;gap:7px}
+  .passos .n{width:21px;height:21px;font-size:11px}
+  /* os tres nomes nao cabem: os passos feito e futuro viram so o numero e
+     encolhem, e o de agora fica com o espaco que sobra. */
+  .passos li:not(.agora){flex:0 0 auto;padding:10px}
+  .passos li:not(.agora) .t{display:none}
+}
+
+/* abertura */
+/* respiro de cima curto de proposito (cliente 23/09): o aviso e' a primeira
+   coisa que a pessoa tem que ver, sem ter que rolar nada. */
+.hero{position:relative;text-align:center;padding:clamp(16px,2vw,26px) 0 clamp(34px,4vw,52px);
+  overflow:hidden}
+.hero:before{content:'';position:absolute;inset:-30% -10% auto;height:150%;z-index:0;
+  background:radial-gradient(46% 42% at 50% 32%,rgba(239,237,232,.055),transparent 70%)}
+.hero>*{position:relative;z-index:1}
+/* a caixa tem que caber a frase INTEIRA em uma linha no desktop: com 17ch
+   o corte seco virava quatro linhas em vez de duas. */
+.hero h1{font-size:clamp(28px,4.4vw,50px);max-width:38ch;margin:0 auto;text-wrap:pretty}
+.hero h1 .u{position:relative;white-space:nowrap}
+.hero h1 .u svg{position:absolute;left:-2%;bottom:-.16em;width:104%;height:.3em;overflow:visible}
+.hero h1 .u path{fill:none;stroke:var(--acf);stroke-width:7;stroke-linecap:round}
+/* uma linha so no desktop: o max-width de 46ch quebrava a frase em duas.
+   No celular ela quebra de qualquer jeito, e ai o balance reparte melhor. */
+/* a chamada do video e' a unica linha entre o aviso e o play, entao ela e'
+   grande e preta, nao legenda cinza (cliente 23/09, com referencia) */
+/* ── O GRIFO DA CHAMADA (cliente 23/09) ──
+   A frase INTEIRA marcada no amarelo da marca, nao so um pedaco. Era a unica
+   linha entre o aviso e o play e nao tinha nenhum tratamento; de dez opcoes o
+   cliente escolheu essa, na versao sem animacao.
+   ⚠️ Tem que ser um <span> INLINE. No <h1>, que e bloco, o fundo pintaria a
+   largura inteira do container em vez da largura do texto.
+   box-decoration-break:clone faz cada linha ganhar a propria faixa quando a
+   frase quebra no celular; sem isso a marca vira um retangulo so, por baixo
+   das tres linhas e das pontas vazias. */
+.hero .lead .marcada{background:linear-gradient(var(--grifo),var(--grifo)) no-repeat;
+  background-size:100% .62em;background-position:0 .62em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ⚠️ max-width solto: o cliente pediu esta linha EM UMA LINHA so no desktop.
+   ⚠️ PROPORCAO DA REFERENCIA (cliente 23/09): a chamada tem uns 55% do
+   tamanho do "NAO FECHE". Com 55% e 70 caracteres contra 34, ela sai um pouco
+   MAIS LARGA que o titulo, que e o desenho da referencia.
+   ⚠️ Os dois sao contidos de proposito. A primeira tentativa acertou a razao
+   e errou a escala: 40px no titulo e 22 na chamada, e o cliente reprovou. A
+   razao ficou e os dois encolheram. */
+.hero .lead{margin:18px auto 0;max-width:none;color:var(--ink);font-family:var(--fd);
+  font-weight:700;letter-spacing:-.02em;line-height:1.24;
+  font-size:clamp(14.5px,1.45vw,18.5px);text-wrap:balance}
+
+/* o vídeo do upsell é VERTICAL (9/16), como na oferta.css do front */
+.player{max-width:392px;margin:28px auto 0;aspect-ratio:9/16;background:var(--play);
+  border-radius:14px;overflow:hidden}
+.player:empty{background:none;border:2px dashed var(--ru);display:grid;place-content:center}
+.player:empty:before{content:"vídeo de upsell entra aqui";font-family:var(--fm);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+/* o widget da Hotmart e' um iframe que se mede sozinho (a lib manda a altura
+   por postMessage). So damos largura e o respiro do scroll, pra barra fixa
+   nao cobrir ele quando os outros CTAs rolam ate aqui. */
+.funil{margin:26px 0 8px}
+#compra{scroll-margin-top:96px}
+/* ── A TRAVA DA VSL ─────────────────────────────────────────
+   `display:none` mesmo, nao `visibility` nem altura zero: o conteudo nao
+   pode ocupar espaco nem ser lido por leitor de tela antes da hora.
+   */
+.vsl-travada .pos-vsl{display:none}
+/* a linha abaixo do botao final */
+.sub-cta{margin:16px 0 0;font-size:.92rem;line-height:1.5;color:var(--mut);text-wrap:balance}
+/* ⚠️ A HOTMART POE `min-width:320px` INLINE NO IFRAME DELA (conferido 24/09).
+   Num celular de 360px o espaco dentro do card e' 270px (22 de margem da
+   pagina + 22 de padding do card, de cada lado), entao o widget saia 27px
+   pra fora do card e 5px pra fora da TELA, cortando o botao de comprar.
+   O `!important` aqui e' o unico jeito de vencer um estilo inline, e sem ele
+   a largura que a gente pede nao vale nada. */
+#hotmart-sales-funnel iframe{width:100%!important;min-width:0!important;
+  max-width:100%;border:0;display:block}
+
+/* ════════════════════════════════════════════════════════════
+   A LINGUAGEM DAQUI PRA BAIXO É A DA PÁGINA DO LANÇAMENTO 90D
+   (../index.html), transposta para a paleta Noite. Nada foi inventado:
+   os componentes abaixo são os de lá, com os mesmos valores.
+     .eyebrow   Space Grotesk 700, .78rem, .18em, caixa alta, no acento
+     h2         Space Grotesk 700, clamp(1.62,3.8vw,2.7rem), -.03em, lh 1.1
+     .risco     o rabisco à mão sob a palavra-chave
+     .btn       pílula, Space Grotesk 700, 21px 40px, raio 999
+     section    80px de respiro; .w com 1120 e 22 de padding
+   A diferença de lá pra cá é só a cor: no front a caixa da oferta é o verde
+   sobre papel claro; aqui ela é o creme sobre o escuro. Em cada página ela é
+   a única coisa que inverte, que é o que faz a oferta pular. */
+.eyebrow{font-family:var(--fd);font-size:.78rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ac);margin:0 0 16px}
+/* 🚫 A FRAUNCES ITALICA SAIU EM 23/09 (cliente). Ela aparecia no segundo
+   verso de dois titulos e em mais nada, e era o que fazia as secoes
+   parecerem de outra familia. A pagina agora tem duas fontes: Space
+   Grotesk no que grita e DM Sans no que se le.
+   ⚠️ A pagina do L90D (../index.html) ainda usa a Fraunces do mesmo jeito.
+   Se um dia as duas tiverem que combinar, a decisao e la, nao aqui. */
+.risco{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%2018%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M4%2C11%20C70%2C4%20130%2C15%20198%2C8%20C242%2C4%20270%2C12%20296%2C8%27%20fill%3D%27none%27%20stroke%3D%27%23EAB82D%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") no-repeat;
+  background-size:100% .34em;background-position:0 .92em;padding-bottom:.14em;
+  /* sem isto, a frase marcada que cai em duas linhas estica o rabisco por
+     baixo da linha inteira, inclusive das palavras que não fazem parte dela */
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+section{padding:clamp(52px,7vw,80px) 0}
+/* 24/09: a conversa continua a secao dos depoimentos, sem virar outro bloco
+   (cliente: "nao separe visualmente"). Mesmo fundo, sem filete, e o respiro
+   de cima encolhe pra nao somar com o de baixo da secao anterior. */
+section.continua{padding-top:clamp(8px,2vw,20px)}
+/* o filete marca a virada de capítulo. Só a seção clara carrega os dois,
+   e como elas se alternam, cada emenda tem exatamente um fio. */
+section.alt{background:var(--pa2);border-top:1px solid var(--ru);border-bottom:1px solid var(--ru)}
+header + section{border-top:1px solid var(--ru)}
+/* as duas seções de oferta ganham TEMPERATURA, não tom: um calor âmbar
+   nascendo no topo. É o único lugar da página onde se pede dinheiro, e
+   ele tem que parecer de outra natureza, não só de outro cinza. */
+/* ════════════════════════════════════════════════════════════
+   A COR COM PAPEL  (direcao B, escolhida pelo cliente em 23/09)
+
+   A pagina usava UMA cor pra tudo: titulo, icone, botao, selo, destaque.
+   Quando tudo e da mesma cor nada tem hierarquia, e de longe a pagina le como
+   um bloco morto. O cliente disse isso com todas as letras.
+
+   Aqui cada cor significa uma coisa:
+     VERDE   comprar. O preco e todo botao que leva ao checkout.
+     LARANJA o caminho alternativo, que e a saida do PIX.
+     AMBAR   a marca. Continua no resto da pagina, mas sai da hora de agir.
+
+   ⚠️ Verde e laranja NAO podem aparecer em mais nada. No segundo em que o
+   verde virar enfeite, ele deixa de querer dizer "compre" e a pagina volta
+   pro ponto de partida, so que com mais cores.
+   ⚠️ Contraste sobre #191920: #25A85A da 4,6:1, #F06A2A da 6,3:1.
+   ════════════════════════════════════════════════════════════ */
+/* o card da oferta e escuro: os valores claros do .offer-box sao revertidos */
+.bloco-preco .offer-box{background:var(--pa2);color:var(--ink);
+  border:1px solid var(--ru);box-shadow:none}
+/* a garantia, dentro do bloco: selo verde, porque garantia e do lado de comprar */
+/* ── A GARANTIA, VERSÃO CARIMBO (G2, cliente 23/09) ──────────
+   O selo era verde sobre branco DENTRO de uma seção verde, e por isso sumia,
+   justamente sendo o elemento que devia gritar "garantia". Agora ele e' PRETO
+   com o numero em amarelo e um anel tracejado por dentro: preto e' a unica
+   cor que aparece nos dois fundos da pagina, e o tracejado da ao circulo cara
+   de carimbo em vez de cara de icone. */
+/* ⚠️ o respiro entre o card e a garantia mora AQUI. A regra base
+   `.gar{margin:0 auto}` vem depois no arquivo, entao sem esta linha as
+   duas caixas encostam uma na outra. */
+.bloco-preco .gar{max-width:660px;margin:26px auto 0;padding:24px 28px;gap:24px}
+.bloco-preco .gar .selo{position:relative;width:88px;height:88px;background:var(--ink);
+  border:0;color:var(--grifo)}
+.bloco-preco .gar .selo:before{content:"";position:absolute;inset:5px;border-radius:50%;
+  border:1.5px dashed rgba(255,216,77,.55)}
+.bloco-preco .gar .selo b{font-size:1.5rem}
+.bloco-preco .gar .selo i{color:#fff;font-size:.5rem;letter-spacing:.16em;margin-top:5px}
+.bloco-preco .gar h3{font-size:1.2rem;line-height:1.25}
+
+/* ⭐ VERDE = COMPRAR, e isso vale na pagina inteira. Sem isto o preco seria
+   verde aqui e o botao que leva ate ele continuaria ambar duas secoes acima,
+   que e exatamente o problema que a direcao veio resolver. */
+a.btn[href="#compra"]{background:var(--go);color:#fff;
+  box-shadow:0 14px 30px -14px rgba(37,168,90,.9)}
+a.btn[href="#compra"]:hover,a.btn[href="#compra"]:focus-visible{background:var(--go2);color:#fff;
+  box-shadow:0 18px 36px -14px rgba(37,168,90,.75)}
+
+.meio{text-align:center;max-width:720px;margin:0 auto}
+h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
+  letter-spacing:-.03em;line-height:1.1}
+.sub{margin:18px auto 0;max-width:60ch;color:var(--mut);font-size:1.02rem;line-height:1.62}
+.sub+.sub{margin-top:16px}
+.sub b{color:var(--ink);font-weight:700}
+
+/* botão: a pílula do front */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--pill);color:var(--pilltx);text-decoration:none;font-weight:700;
+  font-family:var(--fd);letter-spacing:-.01em;padding:21px 40px;border-radius:999px;border:0;
+  cursor:pointer;font-size:1.1rem;line-height:1;
+  box-shadow:0 10px 24px -14px rgba(234,184,45,.9);
+  transition:transform .16s ease,box-shadow .16s ease,background .16s ease,color .16s ease}
+.btn:hover,.btn:focus-visible{transform:translateY(-1px);background:var(--pillh);color:var(--pillhtx);
+  box-shadow:0 16px 30px -14px rgba(234,184,45,.8)}
+.btn:active{transform:translateY(0)}
+.btn.block{display:flex;width:100%}
+
+@media(max-width:560px){
+    }
+
+/* a caixa da oferta: o .offer-box do front, invertido para creme */
+.offer-box{max-width:660px;margin:38px auto 0;background:var(--off);color:var(--offtx);
+  border:0;border-radius:20px;padding:clamp(34px,5vw,52px);text-align:center;
+  box-shadow:0 34px 76px -36px rgba(0,0,0,.75)}
+.offer-box .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0 4px}
+.offer-box .price .cur{font-size:1.15rem;color:rgba(20,19,18,.7)}
+.offer-box .price .val{font-family:var(--fd);font-size:clamp(3.4rem,10vw,5.4rem);font-weight:700;
+  line-height:1;letter-spacing:-.045em;color:var(--offtx)}
+.offer-box .inst{color:rgba(20,19,18,.74);font-size:.98rem;margin:0 0 4px}
+.offer-box .inst b{color:var(--offtx)}
+.offer-box .obs{font-size:.8rem;color:rgba(20,19,18,.5);margin:0 0 26px}
+.offer-box .btn{box-shadow:0 10px 24px -14px rgba(20,19,18,.6)}
+.offer-box .btn:hover{box-shadow:0 16px 30px -14px rgba(20,19,18,.5)}
+.recusa{display:block;width:100%;margin:16px 0 0;background:none;border:0;font:400 .92rem/1.5 var(--ff);
+  color:rgba(20,19,18,.55);text-decoration:underline;cursor:pointer}
+/* ── A SAIDA DO PIX ──────────────────────────────────────────
+   DENTRO do card, logo abaixo do widget. Ela e a alternativa ao botao de
+   cima, nao um bloco a parte: fora do card virava uma terceira caixa
+   empilhada e a area de oferta lia como bagunca.
+
+   A faixa SANGRA ate a borda do card (margens negativas iguais ao padding
+   dele), pra ser uma SECAO do card e nao uma caixa dentro de outra caixa.
+   Laranja, que e a cor do caminho alternativo.
+
+   Ela nao e um detalhe: pra quem pagou o 90D no PIX e o unico caminho de
+   compra, porque o widget da Hotmart so recobra cartao salvo. */
+/* ── A FAIXA DE VAGAS ────────────────────────────────────────
+   Sangra ate a borda do card, como a faixa do PIX, e usa o mesmo truque de
+   margem negativa igual ao padding do card. Amarelo porque e' a unica cor da
+   pagina que nao tem papel de acao: verde e comprar, laranja e o PIX, e o
+   amarelo era so o grifo. Aqui ele vira aviso. */
+/* ⚠️ o card tem padding VERTICAL diferente do horizontal no celular (30px 22px),
+   entao a sangria precisa de duas variaveis. Com uma so, a faixa descolava 8px
+   do topo justamente na tela pequena. */
+.vagas{--pad:clamp(34px,5vw,52px);--padV:clamp(34px,5vw,52px);
+  margin:calc(-1 * var(--padV)) calc(-1 * var(--pad)) 4px;
+  padding:13px var(--pad);background:var(--grifo);color:var(--ink);
+  border-bottom:2px solid var(--ink);border-radius:24px 24px 0 0;
+  display:flex;gap:12px;align-items:baseline;justify-content:center;flex-wrap:wrap;text-align:center}
+.vagas b{font:700 1.14rem/1 var(--fd);letter-spacing:-.02em}
+.vagas span{font-size:.92rem;line-height:1.3;text-wrap:balance}
+
+/* 23/09: a saida do PIX e a ULTIMA coisa do card, entao ela fecha o bloco.
+   Antes tinha uma linha de escassez embaixo dela, que o cliente tirou. */
+.pix{--pad:clamp(34px,5vw,52px);
+  margin:22px calc(-1 * var(--pad)) 0;padding:20px var(--pad) 26px;
+  text-align:center;background:rgba(240,106,42,.09);
+  border-top:1px solid rgba(240,106,42,.3);border-bottom:1px solid rgba(240,106,42,.3)}
+/* ── O MEIO TERMO DA SAIDA DO PIX (cliente 23/09) ──
+   Ela estava gritando: pergunta de 1,5rem e botao laranja chapado de 440px
+   com brilho. Do lado do widget isso vira DOIS botoes de comprar disputando,
+   e o caminho alternativo ganhava do principal.
+   Ela nao pode encolher a ponto de sumir (quem pagou no PIX nao tem outro
+   caminho), entao o que mudou foi o PESO, nao o tamanho: a pergunta virou
+   uma linha normal e o botao virou contorno laranja, que continua sendo a
+   unica coisa laranja da pagina mas nao compete com um botao preenchido. */
+.pix .q{margin:0 0 14px;font-family:var(--fd);font-weight:700;color:var(--mut);
+  letter-spacing:-.02em;line-height:1.3;font-size:clamp(.96rem,1.9vw,1.06rem)}
+.pix .btn{width:auto;max-width:100%;font-size:clamp(.9rem,1.9vw,.98rem);padding:13px 24px;
+  background:none;color:var(--alt2);border-color:var(--alt);box-shadow:2px 2px 0 var(--alt)}
+.pix .btn:hover,.pix .btn:focus-visible{background:var(--alt);color:#fff;
+  box-shadow:1px 1px 0 var(--alt)}
+
+/* garantia */
+/* 23/09: o carimbo fica AO LADO do texto no desktop (cliente) e empilhado e
+   centrado no celular, que e onde a coluna dupla nao cabe. */
+.gar{max-width:660px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:22px;
+  align-items:center;text-align:left;border:1px solid var(--ru);border-radius:var(--r);
+  padding:26px 28px}
+.gar .selo{width:84px;height:84px;border-radius:50%;border:2px solid var(--ac);display:grid;
+  place-content:center;text-align:center;color:var(--ac)}
+.gar .selo b{display:block;font-family:var(--fd);font-weight:700;font-size:1.3rem;line-height:1}
+.gar .selo i{font-style:normal;font-family:var(--fd);font-weight:700;font-size:.52rem;
+  letter-spacing:.14em}
+.gar h3{font-family:var(--fd);font-weight:700;font-size:1.12rem;letter-spacing:-.02em;line-height:1.25}
+.gar p{margin:7px 0 0;color:var(--mut);font-size:.95rem}
+.gar .prazo{margin-top:9px;font-size:.82rem;line-height:1.45;color:var(--dim)}
+
+/* ── A CONVERSA (cliente 24/09, versão "na língua da página") ──
+   A pergunta vira o que a pessoa diria, num balão dela; a resposta vem da
+   Dany e do time. Os balões usam a MESMA borda preta e a mesma sombra dura
+   dos outros blocos, de propósito: nada aqui imita aplicativo, parece que a
+   conversa sempre fez parte da página.
+   ⚠️ O balão da pessoa é PRETO e o da resposta é BRANCO: é a cor que diz
+   quem fala, então os dois não podem ficar parecidos.
+   ⚠️ O rosto é a foto da Dany (a mesma dos assets do L90D). A página não tinha
+   nenhum rosto de quem conduz, e esse é o lugar em que ele responde. */
+.pg-chat{max-width:520px;margin:0 auto;display:grid;gap:22px;text-align:left}
+.pg-grupo{display:grid;gap:7px;position:relative}
+.pg-grupo.eu{justify-items:end}
+.pg-grupo.ela{justify-items:start;padding-left:46px}
+.pg-nome{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.pg{max-width:92%;padding:13px 17px;border:2px solid var(--ink);border-radius:20px;font-size:1.04rem;line-height:1.48;
+  box-shadow:3px 3px 0 var(--ink)}
+.pg.eu{background:var(--ink);color:#fff;border-bottom-right-radius:6px;font-family:var(--fd);font-weight:700;letter-spacing:-.01em}
+.pg.ela{background:var(--offc);color:var(--ink)}
+.pg.ela.forte{font-family:var(--fd);font-weight:700;font-size:1.18rem;letter-spacing:-.02em}
+.pg.ela.ult{border-bottom-left-radius:6px}
+.pg.ela b{color:var(--ink)}
+.pg-av{position:absolute;left:0;bottom:0;width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 18%;
+  border:2px solid var(--ink)}
+
+/* prova: os cartões do front */
+.provas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0 0;text-align:left}
+/* o cartao inteiro e o botao: a area de clique e o cartao, nao um link de 14px */
+.prova{appearance:none;font:inherit;text-align:left;cursor:pointer;
+  background:var(--offc);border:2px solid var(--ink);border-radius:var(--r);padding:0;
+  box-shadow:4px 4px 0 var(--ink);display:flex;flex-direction:column;
+  transition:transform .14s ease,box-shadow .14s ease}
+.prova:hover,.prova:focus-visible{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+section.alt .prova{background:var(--offc)}
+.prova .thumb{position:relative;display:block;border-bottom:2px solid var(--ink);
+  border-radius:calc(var(--r) - 2px) calc(var(--r) - 2px) 0 0;overflow:hidden;line-height:0}
+.prova .thumb img{width:100%;height:auto;display:block}
+/* o play: preto com o triangulo vazado, pra nao virar o vermelho do YouTube */
+.prova .play{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;
+  border-radius:50%;background:var(--ink);border:2px solid #fff;
+  box-shadow:0 8px 20px -8px rgba(0,0,0,.6);transition:transform .14s ease}
+.prova .play:before{content:"";position:absolute;left:21px;top:16px;
+  border-left:17px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent}
+.prova:hover .play{transform:scale(1.08)}
+.prova .quem{display:block;margin:18px 22px 0;color:var(--ink);font-family:var(--fd);font-weight:700;
+  font-size:1.04rem;letter-spacing:-.02em}
+.prova .antes{display:block;margin:7px 22px 0;font-size:.92rem;color:var(--mut);line-height:1.45}
+/* o cartao e um <button>, entao sem cor explicita o texto herda o preto puro
+   do navegador em vez do tom da pagina. */
+.prova .depois{display:block;margin:11px 22px 0;font-size:1rem;line-height:1.45;color:var(--ink)}
+.prova .antes b,.prova .depois b{color:var(--ink);font-weight:700}
+.prova .link{display:block;margin:auto 22px 20px;padding-top:14px;color:var(--go);
+  font-family:var(--fd);font-weight:700;font-size:.86rem}
+.prova .link:after{content:" →"}
+
+/* ── a janela do vídeo. Ninguém sai da página durante um upsell. ── */
+.vbox{position:fixed;inset:0;z-index:80;display:none;place-content:center;
+  background:rgba(12,10,8,.9);padding:20px}
+.vbox.on{display:grid}
+.vbox-in{position:relative;width:min(880px,94vw);aspect-ratio:16/9;
+  border:2px solid var(--ink);border-radius:18px;overflow:hidden;background:#000}
+.vbox-in iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vbox-x{position:absolute;top:-52px;right:0;appearance:none;background:var(--offc);
+  color:var(--ink);border:2px solid var(--ink);border-radius:999px;cursor:pointer;
+  font:700 14px/1 var(--fd);padding:11px 18px}
+@media(max-width:640px){ .vbox-x{top:auto;bottom:-52px} }
+
+/* o ultimo pedido, colado no rodape. Sem fundo proprio: ele encosta no footer
+   e os dois leem como o fim da pagina, nao como mais uma secao. */
+/* 23/09: o botao ficava longe da conta. A secao do fecho perdeu o respiro
+   de cima; quem separa agora e' so a margem da nota. */
+/* 23/09: o botao final deixou de ter secao propria e virou o fim da secao
+   da sessao. Antes ele tinha fundo e filete so dele, o que o separava do
+   texto que acabou de dar o motivo pra clicar. */
+.cta-fim{margin:clamp(34px,4.4vw,48px) auto 0;text-align:center}
+
+/* ════════════════════════════════════════════════════════════
+   A SÍNTESE, PARTE 2: as arestas
+
+   Os tokens la em cima ja viraram a pagina de preta pra creme. Aqui vem o que
+   a direcao "dura" trouxe: BORDA PRETA DE VERDADE e SOMBRA DESLOCADA, em vez
+   de sombra difusa. E o que a direcao "clara" trouxe: raio grande.
+
+   ⚠️ A sombra e SOLIDA e deslocada (x y 0), nunca borrada. Sombra borrada num
+   fundo claro some, e foi isso que deixou a pagina anterior sem peso.
+   ⚠️ A borda preta so vai em objeto que a pessoa PEGA: cartao, pilula, botao,
+   selo, video. Filete de separacao usa --hair, senao a pagina vira grade.
+   ════════════════════════════════════════════════════════════ */
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* ---- os objetos: borda preta e sombra solida ---- */
+.offer-box{border:2px solid var(--ink);border-radius:26px;
+  box-shadow:9px 9px 0 rgba(12,48,28,.55)}
+.gar,.hora,.prova,.passos ol{border:2px solid var(--ink);border-radius:var(--r);
+  box-shadow:4px 4px 0 var(--ink)}
+.player{border:2px solid var(--ink);border-radius:26px;box-shadow:7px 7px 0 rgba(25,23,20,.2)}
+.btn{border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.btn:hover,.btn:focus-visible{transform:translate(1px,1px);box-shadow:3px 3px 0 var(--ink)}
+
+/* ---- as seções ---- */
+body{background:var(--pa);color:var(--ink)}
+section.alt{background:var(--pa2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+header + section{border-top:0}
+.eyebrow{color:var(--mut)}
+/* ⚠️ A .hero .lead SAIU DAQUI (23/09). Esta regra vinha DEPOIS da que
+   pinta a chamada de preto, com a MESMA especificidade, entao era ela que
+   mandava e a chamada aparecia num cinza que ninguem tinha pedido. Mesmo
+   tipo de bug que ja quebrou o pill e o selo da garantia: trocar o valor
+   num lugar nao basta, tem que procurar o seletor repetido. */
+.sub{color:var(--mut)}
+.sub b{color:var(--ink)}
+
+/* o grifo amarelo: era um rabisco ambar em SVG, que sumia no creme */
+.risco,.u{background:linear-gradient(transparent 60%, var(--grifo) 60%, var(--grifo) 92%, transparent 92%);
+  background-size:auto;background-position:0 0;padding:0 .06em}
+.u svg{display:none}
+
+/* ---- a pílula dos passos ---- */
+.passos ol{background:var(--offc)}
+.passos li{color:var(--dim)}
+.passos .feito{color:var(--mut)}
+.passos .feito .n{background:var(--ink);color:var(--offc);border-color:var(--ink)}
+.passos .agora{background:var(--go);color:#fff}
+.passos .agora .n{background:#fff;color:var(--go);border-color:#fff}
+
+/* ---- o bloco de oferta: cartão branco, logo abaixo do vídeo ---- */
+.bloco-preco .offer-box{background:var(--offc);color:var(--ink);margin:26px auto 0}
+.bloco-preco .gar{background:var(--offc);color:var(--ink);
+  box-shadow:4px 4px 0 var(--ink)}
+/* 🚫 AQUI TINHA UMA SEGUNDA REGRA DO SELO (verde, 68px) que vencia a do
+   carimbo la em cima por vir depois no arquivo, com a MESMA especificidade.
+   Mesmo tipo de bug que quebrou o pill: trocar um componente nao basta,
+   e preciso procurar o seletor repetido. O selo agora e definido num lugar so. */
+.bloco-preco .gar h3{color:var(--ink)}
+.bloco-preco .gar p{color:var(--mut)}
+
+/* ---- a saída do PIX, faixa dentro do cartão ---- */
+/* sem filete entre o widget e esta faixa (cliente 23/09): os dois sao o mesmo
+   gesto de comprar, e a linha separava o que devia ler junto. */
+.pix{background:none;border-top:0;border-bottom:0;padding-top:6px;padding-bottom:10px}
+
+/* ---- botão de comprar: verde em toda a página ---- */
+a.btn[href="#compra"]{background:var(--go);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+a.btn[href="#compra"]:hover,a.btn[href="#compra"]:focus-visible{background:var(--go2);color:#fff}
+
+/* ---- sessão e prova ---- */
+.hora{background:var(--offc)}
+.hl{border-top:1px solid var(--hair)}
+.hl .min{color:var(--go)}
+.hl p{color:var(--mut)}
+.prova{background:var(--offc)}
+section.alt .prova{background:var(--offc)}
+.prova .antes{color:var(--mut)}
+.prova .link{color:var(--go);border-bottom-color:rgba(30,125,70,.35)}
+.prova .link:hover{border-bottom-color:var(--go)}
+
+/* ---- fecho e rodapé ---- */
+
+
+@media(max-width:760px){
+  .offer-box{box-shadow:6px 6px 0 rgba(12,48,28,.55)}
+  .gar,.hora,.prova,.passos ol,.btn{box-shadow:3px 3px 0 var(--ink)}
+}
+/* 24/09: rodape em fundo preto (cliente). */
+footer{background:var(--ink);border-top:0;padding:30px 0;text-align:center;font-family:var(--fd);
+  font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+
+/* 🚫 A BARRA FIXA DO CELULAR SAIU EM 24/09 (cliente). Nao voltar com ela. */
+
+@media (max-width:900px){
+  .provas{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  .gar{grid-template-columns:1fr;text-align:center;justify-items:center;gap:16px}
+  .gar .selo{margin-bottom:4px}
+  .hl{grid-template-columns:72px 1fr;gap:14px;padding:18px 18px}
+  .offer-box{padding:30px 22px}
+  .vagas{--pad:22px;--padV:30px;border-radius:18px 18px 0 0;margin-bottom:0}
+  /* a faixa do PIX sangra ate a borda do card, entao o recuo dela tem que
+     acompanhar o padding do card. Sem esta linha ela usava os 34px do desktop
+     e vazava 11px pra cada lado no celular. */
+  .pix{--pad:22px}
+  /* o widget tambem sangra ate as bordas do card no celular: e' o que
+     devolve pra ele os 46px que o padding do card tirava (270 -> 316 numa
+     tela de 360). Junto com o min-width:0 la em cima, ele nunca mais passa
+     da caixa. */
+  .funil{margin-left:-22px;margin-right:-22px;margin-top:0}
+  .offer-box .price .val{font-size:clamp(3rem,16vw,4rem)}
+  .btn{padding:19px 26px;font-size:1.02rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<!-- Meta Pixel: mesmos dois IDs do front -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document,'script');
+fbq('init','1665265050801984'); fbq('init','617884976680212');
+fbq('track','PageView');
+(function(){var l=false;function go(){if(l)return;l=true;var t=document.createElement('script');
+t.async=true;t.src='https://connect.facebook.net/en_US/fbevents.js';
+var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(t,s);}
+if('requestIdleCallback' in window)requestIdleCallback(go,{timeout:2500});else setTimeout(go,2000);
+['scroll','click','touchstart','keydown'].forEach(function(ev){
+document.addEventListener(ev,go,{once:true,passive:true});});})();
+</script>
+<!-- ============================================================
+     DOWNSELL DO L90D (24/09). CLONE DO UPSELL (../upsell/): o CSS e o
+     <head> vieram inteiros de lá, e os comentários do CSS falam do upsell
+     porque foram escritos para ele. O que é desta página está no <body>.
+     Decisões do cliente em 24/09: sem call; o autor preenche um formulário
+     e o time devolve o MATERIAL ESCRITO de próximos passos (o mesmo
+     documento da call). R$347. Com vídeo, e a página abre no preço.
+     Roteiro do vídeo: ~/Claude Code/vsl-downsell-diagnostico-escrito-v1.md
+     ============================================================ -->
+<style>
+/* o texto do quadro vazio do player dizia "vídeo de upsell" */
+.player:empty:before{content:"vídeo do downsell entra aqui"}
+</style>
+</head>
+<!-- ============================================================
+     A TRAVA DA VSL, igual à do upsell: tudo abaixo do vídeo só aparece
+     quando a Dany termina a frase do preço.
+     ⚠️ ENQUANTO NÃO EXISTE VÍDEO, A TRAVA FICA DESLIGADA (TEM_VIDEO=false)
+     e a página nasce aberta, com o quadro tracejado no lugar do player.
+     Quando o vídeo entrar no VTurb: trocar TEM_VIDEO para true, colar o
+     embed no .player e preencher TEMPOS no script do fim do body.
+     ============================================================ -->
+<script>var TEM_VIDEO=false; if(TEM_VIDEO) document.documentElement.classList.add('vsl-travada')</script>
+<body>
+
+<div class="prog" id="prog"></div>
+
+<header class="hero">
+  <div class="w">
+    <!-- o widget da Hotmart só carrega com a compra em andamento: aqui o aviso
+         também é literal, como no upsell -->
+    <p class="aviso"><b>⚠ Atenção</b><span>Não feche nem atualize esta página</span></p>
+
+    <!-- a pessoa continua no passo 2: recusou a sessão, mas o pedido ainda
+         não terminou. O passo 3 só vem depois desta página. -->
+    <nav class="passos" aria-label="Etapas da sua compra">
+      <ol>
+        <li class="feito"><span class="n" aria-hidden="true">✓</span><span class="t">90D garantido</span></li>
+        <li class="agora" aria-current="step"><span class="n" aria-hidden="true">2</span><span class="t">Acelere o seu resultado</span></li>
+        <li><span class="n" aria-hidden="true">3</span><span class="t">Acesso liberado</span></li>
+      </ol>
+    </nav>
+
+    <h1 class="lead"><span class="marcada">Assista ao vídeo abaixo: o mesmo diagnóstico, agora sem precisar de&nbsp;call</span></h1>
+
+    <!-- VTURB: o embed do vídeo do downsell entra AQUI, numa linha só
+         (a regra :empty quebra com espaço em branco dentro da div). -->
+    <div class="player" id="vsl"></div>
+
+    <!-- ============================================================
+         O BLOCO DE PREÇO, logo abaixo do vídeo, como no upsell.
+         Sem preço escrito: quem mostra valor é o widget da Hotmart, e assim
+         não existe texto nosso que possa discordar do checkout.
+         🚫 SEM A FAIXA DE VAGAS DO UPSELL. Lá ela é verdade porque a sessão
+         gasta hora de agenda do time. Aqui ninguém definiu limite nenhum, e
+         escassez sem limite real é mentira. Se o time tiver um teto de
+         diagnósticos por mês, ela volta com esse número.
+         ============================================================ -->
+    <div class="bloco-preco pos-vsl">
+      <div class="offer-box">
+        <!-- HOTMART, Sales Funnel Widget: o passo de DOWNSELL do funil. Compra
+             de um clique pra quem pagou o 90D no cartão. O produto e o preço
+             (R$347) são os configurados no funil, não aqui. -->
+        <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
+        <!-- A SAÍDA DO PIX, igual à do upsell. Fica ESCONDIDA até existir o
+             checkout do produto (PIX_CHECKOUT no script do fim). -->
+        <div class="pix" id="pix" hidden>
+          <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+          <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+
+      <!-- ⚠️ A GARANTIA DEPENDE DE UMA DECISÃO (nota 2 do roteiro). No upsell,
+           quem pede reembolso não fica com a gravação nem com o material. Aqui
+           o produto É o documento, e depois de entregue ele não volta. Este
+           texto é a opção (b): garantia depois da entrega, aceitando que o
+           material fica com a pessoa. -->
+      <div class="gar">
+        <div class="selo"><b>100%</b><i>DE VOLTA</i></div>
+        <div>
+          <h3>Se você receber o seu diagnóstico e achar que não valeu,<br>envie um email e devolvemos&nbsp;100%</h3>
+          <p>Sem justificar e sem falar com três&nbsp;pessoas.</p>
+          <p class="prazo">O prazo termina 7 dias úteis depois da entrega do seu diagnóstico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- a prova: os MESMOS três do upsell, porque o argumento é o mesmo (alguém
+     de fora olhou o caso deles). ⚠️ Quem chega aqui acabou de passar pela
+     página do upsell e pode já ter visto estes três. Se isso pesar, esta
+     seção é a primeira que sai. -->
+<section class="pos-vsl">
+  <div class="w">
+    <div class="meio">
+      <h2>Você recebe o seu diagnóstico<br>com os próximos passos&nbsp;mapeados</h2>
+    </div>
+    <div class="provas">
+      <button class="prova" data-vid="6RhRrPjf7UA" data-quem="Robson Leite">
+        <span class="thumb"><img src="../assets/depo-robson2.webp" alt="Robson Leite" width="640" height="360"><span class="play" aria-hidden="true"></span></span>
+        <span class="quem">Robson Leite</span>
+        <span class="antes">O livro era bom. <b>A capa é que não era.</b></span>
+        <span class="depois">“Às vezes a sua capa <b>não comunica o conteúdo</b> do seu livro.”</span>
+        <span class="link">Ver o depoimento</span>
+      </button>
+      <button class="prova" data-vid="bOgr78gqu5w" data-quem="Giuliana e Susana">
+        <span class="thumb"><img src="../assets/depo-susana.webp" alt="Giuliana e Susana" width="640" height="360"><span class="play" aria-hidden="true"></span></span>
+        <span class="quem">Giuliana e Susana</span>
+        <span class="antes">Primeiro livro. <b>Não sabiam nem como publicar.</b></span>
+        <span class="depois">“Primeiro lugar Brasil em vendas da PublishNews, <b>na categoria de negócios</b>.”</span>
+        <span class="link">Ver o depoimento</span>
+      </button>
+      <button class="prova" data-vid="XuQFaoyo0lk" data-quem="Sônia Wilke">
+        <span class="thumb"><img src="../assets/depo-sonia.webp" alt="Sônia Wilke" width="640" height="360"><span class="play" aria-hidden="true"></span></span>
+        <span class="quem">Sônia Wilke</span>
+        <span class="antes">Doze títulos e <b>nenhuma direção</b>.</span>
+        <span class="depois">“As informações estavam <b>espalhadas na minha mente</b>. Ela organizou tudo.”</span>
+        <span class="link">Ver o depoimento</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- A CONVERSA, o mesmo mecanismo do upsell, com a objeção que é DESTE
+     produto: sem call, como eles entendem o meu caso? -->
+<section class="pos-vsl continua">
+  <div class="w">
+    <div class="pg-chat">
+      <div class="pg-grupo eu"><span class="pg-nome">você</span><div class="pg eu">Sem conversar, como vocês vão entender o meu livro?</div></div>
+      <div class="pg-grupo ela">
+        <span class="pg-nome">Dany e o time</span>
+        <div class="pg ela forte">Pelo que você contar.</div>
+        <div class="pg ela">O formulário tem as perguntas que a gente faria <b>na conversa</b>.</div>
+        <div class="pg ela ult">A gente lê, estuda o seu caso e devolve por escrito o que fazer com ele.</div>
+        <img class="pg-av" src="../assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa" width="36" height="36">
+      </div>
+    </div>
+    <div class="cta-fim">
+      <a class="btn" href="#compra">Quero o meu diagnóstico</a>
+    </div>
+  </div>
+</section>
+
+<div class="vbox" id="vbox" role="dialog" aria-modal="true" aria-label="Depoimento em vídeo">
+  <div class="vbox-in" id="vbox-in"><button class="vbox-x" type="button">Fechar ✕</button></div>
+</div>
+
+<footer>
+  <div class="w">The Book Business · Dany Sakugawa</div>
+</footer>
+
+<!-- HOTMART: carga e montagem do widget. Mesma regra do upsell: se houver
+     player, espera a chave da VTurb (xcod) até 6s e escreve na URL ANTES de
+     montar; sem player, monta na hora. A compra nunca espera o rastreio. -->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+(function(){
+  var PRAZO = 6000, INICIO = Date.now(), montado = false;
+
+  function montar(){
+    if (montado) return; montado = true;
+    try {
+      checkoutElements.init('salesFunnel', {
+        payment: {
+          /* quem registra a venda é o webhook Hotmart -> n8n -> Supabase, e a
+             campanha otimiza pela conversão por product_id: nada de fbq aqui */
+          onSuccess: function(){},
+          onError: function(erro){ console.error('Hotmart: pagamento', erro); }
+        }
+      }).mount('#hotmart-sales-funnel');
+    }
+    catch(e){ console.error('Hotmart: funil nao montou', e); }
+  }
+
+  function carimba(chave){
+    try {
+      var u = new URL(location.href);
+      if (!u.searchParams.get('xcod')) {
+        u.searchParams.set('xcod', chave);
+        history.replaceState(null, '', u.toString());
+      }
+    } catch(e){}
+  }
+
+  /* ⏳ O CHECKOUT DO PIX AINDA NÃO EXISTE: o produto do downsell não foi
+     criado na Hotmart. Enquanto isto for null, a saída do PIX fica escondida.
+     Quando existir: 'https://pay.hotmart.com/<PRODUTO>?off=<OFERTA>' */
+  var PIX_CHECKOUT = null;
+
+  function ligaPix(chave){
+    var a = document.getElementById('pix-checkout'), box = document.getElementById('pix');
+    if (!a || !box || !PIX_CHECKOUT) return;
+    box.hidden = false;
+    try {
+      var u = new URL(PIX_CHECKOUT);
+      if (chave) u.searchParams.set('xcod', chave);
+      new URLSearchParams(location.search).forEach(function(v, k){
+        if (k !== 'xcod' && !u.searchParams.get(k)) u.searchParams.set(k, v);
+      });
+      a.setAttribute('href', u.toString());
+    } catch(e){ a.setAttribute('href', PIX_CHECKOUT); }
+  }
+
+  (function espera(){
+    var el = document.querySelector('vturb-smartplayer');
+    if (!el){ ligaPix(null); return montar(); }
+    var chave = el.conversionKey;
+    if (chave){ carimba(chave); ligaPix(chave); return montar(); }
+    if (Date.now() - INICIO > PRAZO){ ligaPix(null); return montar(); }
+    setTimeout(espera, 150);
+  })();
+})();
+</script>
+<script>
+(function(){
+
+  /* ── A TRAVA DA VSL ─────────────────────────────────────────
+     Mesmo motor do upsell. Com um vídeo só, TEMPOS tem uma linha:
+     'id do vídeo': [segundo em que a Dany termina o preço, duração].
+     As mesmas saídas de emergência: vídeo desconhecido abre na hora,
+     player que não aparece em 12s abre, e sem JS a página nasce aberta.
+     Quem já passou do preço não assiste de novo (localStorage). */
+  var TEMPOS = {};
+
+  (function travaVSL(){
+    var html = document.documentElement;
+    if (!html.classList.contains('vsl-travada')) return;
+    var aberto = false;
+    function abrir(){ if (aberto) return; aberto = true; html.classList.remove('vsl-travada'); }
+    function lembrar(id){ try { localStorage.setItem('downsell.liberado.' + id, '1'); } catch(e){} }
+    function jaLiberou(id){ try { return localStorage.getItem('downsell.liberado.' + id) === '1'; } catch(e){ return false; } }
+
+    var LIMITE = 12000, INICIO = Date.now();
+    (function espera(){
+      var el = document.querySelector('vturb-smartplayer');
+      var cfg = null;
+      try { cfg = el && el.config; } catch(e){}
+      if (!cfg || !cfg.id){
+        if (Date.now() - INICIO > LIMITE) abrir();
+        else setTimeout(espera, 200);
+        return;
+      }
+      var reg = TEMPOS[cfg.id];
+      if (!reg) return abrir();
+      var dur = Number(el.duration) || 0;
+      if (!dur && Date.now() - INICIO <= LIMITE) { setTimeout(espera, 200); return; }
+      /* vídeo trocado no mesmo id: o tempo medido não vale mais, abre */
+      if (dur && Math.abs(dur - reg[1]) > 3) return abrir();
+      if (jaLiberou(cfg.id)) return abrir();
+      try { el.onTime(reg[0], function(){ lembrar(cfg.id); abrir(); }, { once: true }); }
+      catch(e){ abrir(); }
+    })();
+  })();
+
+  /* o botão do fim desliza até o widget, centralizado */
+  var alvo = document.getElementById('compra');
+  if (alvo){
+    var quieto = matchMedia('(prefers-reduced-motion: reduce)');
+    [].slice.call(document.querySelectorAll('a[href="#compra"]')).forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        try { alvo.scrollIntoView({behavior: quieto.matches ? 'auto' : 'smooth', block:'center'}); }
+        catch(err){ alvo.scrollIntoView(); }
+      });
+    });
+  }
+
+  /* a janela do depoimento: o vídeo abre aqui, ninguém sai da página */
+  var vbox = document.getElementById('vbox'), vin = document.getElementById('vbox-in');
+  function fecharVideo(){
+    if (!vbox) return;
+    vbox.classList.remove('on');
+    var f = vin.querySelector('iframe'); if (f) f.remove();
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('click', function(ev){
+    var b = ev.target.closest('.prova');
+    if (b && vbox){
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube.com/embed/' + b.getAttribute('data-vid') + '?autoplay=1&rel=0';
+      f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
+      f.setAttribute('allowfullscreen','');
+      f.title = 'Depoimento de ' + (b.getAttribute('data-quem') || '');
+      vin.appendChild(f);
+      vbox.classList.add('on');
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+    if (ev.target.closest('.vbox-x') || ev.target === vbox) fecharVideo();
+  });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape') fecharVideo(); });
+
+  var fita = document.getElementById('prog');
+  if (fita){
+    var anda = function(){
+      var h = document.documentElement, t = h.scrollHeight - h.clientHeight;
+      fita.style.width = (t > 0 ? h.scrollTop / t * 100 : 0) + '%';
+    };
+    addEventListener('scroll', anda, {passive:true}); addEventListener('resize', anda); anda();
+  }
+})();
+</script>
+
+<!-- ============================================================
+     PENDÊNCIAS desta página:
+     1. Produto do downsell na Hotmart (L90D_DOWN) + o passo de downsell no
+        funil, apontando pra esta URL quando a pessoa recusa o upsell.
+        O id do produto vai nas 3 listas do n8n (ROAS, Estorno, Sync) e no
+        dash Esteira do Miolo.
+     2. Checkout do PIX (PIX_CHECKOUT) do produto novo.
+     3. O vídeo: gravar pelo roteiro, subir no VTurb, colar o embed, ligar
+        TEM_VIDEO e medir o segundo do preço em TEMPOS.
+     4. A regra de reembolso de um documento (nota 2 do roteiro).
+     5. O prazo de entrega real do time (nota 3 do roteiro).
+     6. O formulário (não existe, igual ao do upsell).
+     7. Copy não passou pela Dany.
+     ============================================================ -->
+</body>
+</html>
