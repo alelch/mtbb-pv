@@ -472,7 +472,6 @@ h2{font-family:var(--fd);font-weight:700;font-size:clamp(1.62rem,3.8vw,2.7rem);
   background:none;color:var(--alt2);border-color:var(--alt);box-shadow:2px 2px 0 var(--alt)}
 .pix .btn:hover,.pix .btn:focus-visible{background:var(--alt);color:#fff;
   box-shadow:1px 1px 0 var(--alt)}
-.pix .d{margin:14px auto 0;max-width:46ch;font-size:.84rem;line-height:1.5;color:var(--dim)}
 
 /* garantia */
 /* 23/09: o carimbo fica AO LADO do texto no desktop (cliente) e empilhado e
@@ -628,7 +627,6 @@ header + section{border-top:0}
 /* sem filete entre o widget e esta faixa (cliente 23/09): os dois sao o mesmo
    gesto de comprar, e a linha separava o que devia ler junto. */
 .pix{background:none;border-top:0;border-bottom:0;padding-top:6px;padding-bottom:10px}
-.pix .d{color:var(--dim)}
 
 /* ---- botão de comprar: verde em toda a página ---- */
 a.btn[href="#compra"]{background:var(--go);color:#fff;box-shadow:4px 4px 0 var(--ink)}
@@ -819,15 +817,13 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
              e o unico caminho de uma fatia inteira do publico.
              Fica SEMPRE visivel: quem pagou no PIX nao sabe que aquele formulario
              nunca vai carregar pra ele.
-             A pergunta se auto-qualifica ("comprou no PIX?"), e a linha miuda
-             existe pra quem pagou no cartao nao vir por aqui e pagar de novo sem
-             o desconto de um clique.
+             A pergunta se auto-qualifica ("comprou no PIX?"). A linha miuda que
+             explicava "so para quem pagou no PIX" saiu em 24/09 (cliente).
              O href e' montado pelo script no fim do body, com o xcod da VTurb.
              ============================================================ -->
         <div class="pix">
           <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
           <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão <span aria-hidden="true">&rarr;</span></a>
-          <p class="d">Só para quem pagou no PIX. Quem pagou no cartão fecha no botão acima, em um clique.</p>
         </div>
       </div>
 
