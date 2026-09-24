@@ -929,6 +929,12 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 .cta-preco .btn{width:100%;max-width:420px}
 .gar-linha{margin:18px auto 0;text-align:center;color:var(--mut);font-size:.9rem}
 .gar-linha b{color:var(--ink)}
+/* ---- a saída do PIX: SÓLIDA, e o hover é o contorno de antes (cliente 24/09).
+   Preenchida com o laranja escuro (--alt2) e não com o da borda (--alt): texto
+   branco sobre --alt2 dá 4,6:1, sobre --alt só 3,4:1. ---- */
+.pix .btn{background:var(--alt2);color:#fff;border-color:var(--alt2);box-shadow:2px 2px 0 var(--alt)}
+.pix .btn:hover,.pix .btn:focus-visible{background:none;color:var(--alt2);border-color:var(--alt);
+  box-shadow:2px 2px 0 var(--alt)}
 .expirou{max-width:560px;margin:34px auto 0;text-align:center;padding:30px 26px;background:#fff;
   border:2px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink)}
 .expirou h2{font-size:1.5rem}
