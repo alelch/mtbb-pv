@@ -1888,6 +1888,17 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   document.addEventListener('click', function(ev){
     var a = ev.target.closest('[data-cta]'); if (!a) return;
     var h = a.getAttribute('href') || '';
+    /* os botoes que levam a oferta param no botao de compra, centralizado,
+       e nao no topo da caixa: senao a pessoa ainda rola a lista toda */
+    if (h === '#preco') {
+      var alvo = document.getElementById('ctaMain');
+      if (!alvo) return;
+      ev.preventDefault();
+      var calmo = false;
+      try { calmo = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){}
+      alvo.scrollIntoView({behavior: calmo ? 'auto' : 'smooth', block: 'center'});
+      return;
+    }
     if (h.charAt(0) === '#') return;   /* qualquer ancora rola, nao compra */
     ev.preventDefault(); comprar(a.getAttribute('data-cta'));
   });
