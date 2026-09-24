@@ -1,5 +1,5 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex"><title>Seção do caso: 5 designs</title><style>
+<meta name="robots" content="noindex"><title>Conversa: 5 versões</title><style>
 /* fontes da casa, as mesmas do front, servidas daqui */
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(../assets/fonts/dmsans-sub.woff2) format('woff2')}
@@ -563,88 +563,148 @@ footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-fami
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 
-/* ══════ PREVIEW: 5 designs de "E se o meu caso for diferente?" ══════ */
-.rotulo{max-width:1120px;margin:0 auto;padding:44px 22px 0;font-family:var(--fd);font-weight:700;font-size:.74rem;
+/* ══════ PREVIEW: 5 versões da conversa ══════ */
+.rotulo{max-width:1120px;margin:0 auto;padding:46px 22px 0;font-family:var(--fd);font-weight:700;font-size:.74rem;
   letter-spacing:.18em;text-transform:uppercase;color:var(--go)}
 .rotulo small{display:block;margin-top:6px;font-family:var(--ff);font-weight:400;font-size:.92rem;letter-spacing:0;
-  text-transform:none;color:var(--mut);max-width:70ch}
-section.vv{padding:22px 0 60px;border-bottom:2px solid var(--ink)}
+  text-transform:none;color:var(--mut);max-width:72ch}
+section.vv{padding:26px 0 64px;border-bottom:2px solid var(--ink)}
+.sys{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif}
 
-/* 1 · conversa */
-.chat{max-width:560px;margin:0 auto;display:grid;gap:10px}
-.bal{max-width:84%;padding:13px 17px;border:2px solid var(--ink);border-radius:20px;font-size:clamp(1rem,2.2vw,1.1rem);
-  line-height:1.45;text-align:left;box-shadow:3px 3px 0 var(--ink)}
-.bal .quem{display:block;font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--mut);margin-bottom:3px}
-.bal.eu{justify-self:end;background:var(--ink);color:#fff;border-bottom-right-radius:6px;font-family:var(--fd);font-weight:700}
-.bal.eu .quem{color:rgba(255,255,255,.6)}
-.bal.ela{justify-self:start;background:var(--offc);color:var(--ink);border-bottom-left-radius:6px}
-.bal.ela + .bal.ela .quem{display:none}
+/* 1 ─ WhatsApp */
+.fone{width:min(330px,100%);margin:0 auto;background:#0e0e10;border-radius:46px;padding:11px;
+  box-shadow:0 30px 60px -28px rgba(0,0,0,.55),0 0 0 2px #2a2a2e inset}
+.fone-tela{border-radius:36px;overflow:hidden;background:#efe7de;display:flex;flex-direction:column;text-align:left;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif}
+.wa-top{display:flex;align-items:center;gap:9px;background:#075e54;color:#fff;padding:34px 12px 10px}
+.wa-back{font-size:26px;line-height:1;margin-right:-2px;opacity:.9}
+.wa-top img{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 18%}
+.wa-top b{display:block;font-size:15px;font-weight:600}
+.wa-top small{display:block;font-size:12px;opacity:.8}
+.wa-chat{padding:12px 10px 14px;display:flex;flex-direction:column;gap:4px;min-height:330px;
+  background-color:#efe7de;
+  background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1.2px);background-size:14px 14px}
+.wa-dia{align-self:center;background:#e1f2fb;color:#54656f;font-size:11.5px;padding:4px 10px;border-radius:8px;margin:0 0 8px;
+  box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.wa{position:relative;max-width:82%;padding:6px 8px 7px 9px;border-radius:9px;font-size:14.2px;line-height:1.38;color:#111b21;
+  box-shadow:0 1px .5px rgba(0,0,0,.13);display:flex;flex-wrap:wrap;align-items:flex-end;gap:0 8px}
+.wa span{flex:1 1 auto}
+.wa i{font-style:normal;font-size:11px;color:#667781;margin-left:auto;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;
+  transform:translateY(3px)}
+.wa.eu{align-self:flex-end;background:#d9fdd3;border-top-right-radius:0;margin-bottom:8px}
+.wa.ela{align-self:flex-start;background:#fff}
+.wa.ela.primeira{border-top-left-radius:0}
+.wa.eu:after{content:"";position:absolute;right:-7px;top:0;border-left:8px solid #d9fdd3;border-bottom:9px solid transparent}
+.wa.ela.primeira:before{content:"";position:absolute;left:-7px;top:0;border-right:8px solid #fff;border-bottom:9px solid transparent}
+.tk{width:17px;height:11px;color:#53bdeb}
+.wa-bar{display:flex;align-items:center;gap:7px;padding:7px 8px 22px;background:#efe7de}
+.wa-bar span{flex:1;background:#fff;border-radius:22px;padding:9px 14px;font-size:14px;color:#8696a0}
+.wa-bar i{width:38px;height:38px;border-radius:50%;background:#00a884;flex:none}
 
-/* 2 · cartaz */
-.cartaz{background:var(--ink);margin:0 -22px;padding:clamp(34px,6vw,64px) 22px}
-.cartaz h2{color:#fff;margin:0 auto;max-width:14ch;font-size:clamp(2.2rem,7vw,4.6rem);line-height:.98;letter-spacing:-.04em}
-.cartaz-resp{max-width:620px;margin:30px auto 0;display:grid;gap:10px}
-.cartaz-resp p{margin:0;font-size:clamp(1.02rem,2.3vw,1.2rem);line-height:1.5;color:var(--mut)}
-.cartaz-resp .um{font-family:var(--fd);font-weight:700;color:var(--ink);font-size:clamp(1.3rem,3vw,1.7rem);letter-spacing:-.02em}
+/* 2 ─ balões da página */
+.pg-chat{max-width:520px;margin:0 auto;display:grid;gap:22px;text-align:left}
+.pg-grupo{display:grid;gap:7px;position:relative}
+.pg-grupo.eu{justify-items:end}
+.pg-grupo.ela{justify-items:start;padding-left:46px}
+.pg-nome{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.pg{max-width:92%;padding:13px 17px;border:2px solid var(--ink);border-radius:20px;font-size:1.04rem;line-height:1.48;
+  box-shadow:3px 3px 0 var(--ink)}
+.pg.eu{background:var(--ink);color:#fff;border-bottom-right-radius:6px;font-family:var(--fd);font-weight:700;letter-spacing:-.01em}
+.pg.ela{background:var(--offc);color:var(--ink)}
+.pg.ela.forte{font-family:var(--fd);font-weight:700;font-size:1.18rem;letter-spacing:-.02em}
+.pg.ela.ult{border-bottom-left-radius:6px}
+.pg.ela b{color:var(--ink)}
+.pg-av{position:absolute;left:0;bottom:0;width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 18%;
+  border:2px solid var(--ink)}
 
-/* 3 · correção */
-.corr{max-width:720px;margin:0 auto}
-.corr h2{font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.04;margin:0}
-.risc{position:relative;color:var(--mut)}
-.risc:after{content:"";position:absolute;left:-2%;right:-2%;top:54%;height:.09em;background:var(--red);border-radius:4px;
-  transform:rotate(-2.5deg)}
-.insere{margin:10px 0 0;font-family:var(--fd);font-weight:700;font-size:clamp(1.5rem,4vw,2.4rem);letter-spacing:-.03em}
-.insere .mc{background:linear-gradient(var(--grifo),var(--grifo)) no-repeat;background-size:100% .5em;background-position:0 .62em;
-  -webkit-box-decoration-break:clone;box-decoration-break:clone}
-.insere:before{content:"^";color:var(--red);margin-right:.25em;font-weight:800}
-.corr-resp{max-width:560px;margin:22px auto 0;display:grid;gap:10px}
-.corr-resp p{margin:0;font-size:1.05rem;line-height:1.55;color:var(--mut)}
-.corr-resp b{color:var(--ink)}
+/* 3 ─ Dany falando */
+.fala{max-width:860px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:34px;align-items:center;text-align:left}
+.fala-foto{margin:0}
+.fala-foto img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;
+  border:2px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink)}
+.fala-foto figcaption{margin-top:12px;font-family:var(--fd);font-weight:700;font-size:.92rem;letter-spacing:-.01em}
+.fala-lado{display:grid;gap:10px;justify-items:start}
+.fala-q{margin:0 0 6px;font-family:var(--fd);font-weight:700;font-size:clamp(1.25rem,2.8vw,1.6rem);letter-spacing:-.02em;line-height:1.2}
+.fala-q span{display:block;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:5px;font-weight:700}
+.bf{position:relative;background:var(--offc);border:2px solid var(--ink);border-radius:18px;padding:12px 16px;
+  font-size:1.03rem;line-height:1.48;box-shadow:3px 3px 0 var(--ink);max-width:100%}
+.bf.forte{font-family:var(--fd);font-weight:700;font-size:1.16rem;letter-spacing:-.02em}
+.bf.forte:before{content:"";position:absolute;left:-12px;top:14px;width:14px;height:14px;background:var(--offc);
+  border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg)}
+@media(max-width:760px){
+  .fala{grid-template-columns:1fr;gap:22px;text-align:center}
+  .fala-foto{max-width:170px;margin:0 auto}
+  .fala-foto img{aspect-ratio:1;border-radius:50%}
+  .fala-lado{justify-items:center}
+  .bf{text-align:left}
+  .bf.forte:before{left:50%;top:-9px;transform:translateX(-50%) rotate(135deg)}
+}
 
-/* 4 · prontuário */
-.ficha{max-width:640px;margin:0 auto;background:var(--offc);border:2px solid var(--ink);border-radius:var(--r);
-  box-shadow:6px 6px 0 var(--ink);text-align:left;overflow:hidden}
-.ficha-top{display:flex;justify-content:space-between;gap:12px;background:var(--ink);color:#fff;padding:10px 18px;
-  font-family:var(--fd);font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
-.ficha-top span:last-child{color:var(--grifo)}
-.ficha-lin{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:14px 18px;border-top:1px solid var(--hair)}
-.ficha-lin:first-of-type{border-top:0}
-.ficha-lin .rot{font-family:var(--fd);font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--mut);padding-top:3px}
-.ficha-lin p{margin:0;font-size:1.02rem;line-height:1.5;color:var(--ink)}
-.ficha-lin .q{font-family:var(--fd);font-weight:700;font-size:clamp(1.1rem,2.6vw,1.35rem);letter-spacing:-.02em}
-@media(max-width:560px){.ficha-lin{grid-template-columns:1fr;gap:4px}}
+/* 4 ─ notificações */
+.nt-q{max-width:16ch;margin:0 auto 26px;font-size:clamp(1.9rem,5vw,3rem);line-height:1.02}
+.bloq{width:min(360px,100%);margin:0 auto;border-radius:34px;padding:34px 14px 22px;
+  background:#1b1d24;
+  background-image:radial-gradient(120% 70% at 20% 0%,#3a3f55 0%,transparent 60%),radial-gradient(90% 60% at 100% 100%,#2c3a36 0%,transparent 60%);
+  box-shadow:0 30px 60px -28px rgba(0,0,0,.6);color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;display:grid;gap:8px}
+.bloq-hora{font-size:62px;font-weight:600;letter-spacing:-.02em;line-height:1;text-align:center;opacity:.95}
+.bloq-dia{text-align:center;font-size:14px;opacity:.75;margin:4px 0 18px}
+.nt{display:flex;gap:10px;align-items:flex-start;text-align:left;background:rgba(245,245,247,.86);color:#111;
+  border-radius:18px;padding:11px 13px}
+.nt img{width:34px;height:34px;border-radius:9px;object-fit:cover;object-position:50% 18%;flex:none}
+.nt>div{flex:1;min-width:0}
+.nt-top{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.nt-top span{color:#6b6b70;font-size:12px}
+.nt p{margin:2px 0 0;font-size:13.8px;line-height:1.36;color:#1d1d1f}
 
-/* 5 · eco */
-.eco{max-width:760px;margin:0 auto}
-.eco p,.eco h2{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.03em;line-height:1.05}
-.eco .e3{font-size:clamp(1.1rem,2.6vw,1.6rem);color:var(--ink);opacity:.14}
-.eco .e2{font-size:clamp(1.4rem,3.6vw,2.2rem);color:var(--ink);opacity:.32;margin-top:4px}
-.eco .e1{font-size:clamp(1.9rem,5vw,3.1rem);margin-top:6px}
-.eco-resp{max-width:560px;margin:26px auto 0;display:grid;gap:10px}
-.eco-resp p{margin:0;font-size:1.05rem;line-height:1.55;color:var(--mut);font-family:var(--ff);letter-spacing:0;font-weight:400}
-.eco-resp .um{font-family:var(--fd);font-weight:700;color:var(--ink);font-size:clamp(1.25rem,2.8vw,1.55rem);letter-spacing:-.02em}
-.eco-resp b{color:var(--ink)}
-</style></head><body><div class="rotulo">Atual<small>Pergunta à esquerda, resposta à direita com um fio verde. É a referência.</small></div><section class="alt vv"><div class="w meio"><div class="pergunta"><h2>E se o meu caso<br>for diferente?</h2><div class="resp"><p>É sempre diferente.</p><p>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</p><p>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</p></div></div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><div class="rotulo">1 · Conversa<small>A pergunta vira o que a pessoa diria, num balão dela. A resposta vem da Dany e do time, como numa conversa de verdade.</small></div><section class="alt vv"><div class="w meio"><div class="chat">
-   <div class="bal eu"><span class="quem">você</span>E se o meu caso for diferente?</div>
-   <div class="bal ela"><span class="quem">Dany e o time</span><b>É sempre diferente.</b></div>
-   <div class="bal ela">É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</div>
-   <div class="bal ela">A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</div>
- </div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><div class="rotulo">2 · Cartaz<small>A pergunta em corpo enorme numa faixa preta de ponta a ponta. A resposta embaixo, uma frase por linha, sem enfeite.</small></div><section class="alt vv"><div class="w meio"><div class="cartaz"><h2>E se o meu caso for diferente?</h2></div>
- <div class="cartaz-resp"><p class="um">É sempre diferente.</p><p>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</p><p>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</p></div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><div class="rotulo">3 · Correção<small>A resposta corrige a pergunta: "for diferente" é riscado e em cima entra "é sempre diferente", no grifo amarelo da página.</small></div><section class="alt vv"><div class="w meio"><div class="corr">
-   <h2>E se o meu caso <span class="risc">for diferente?</span></h2>
-   <p class="insere"><span class="mc">é sempre diferente.</span></p>
-   <div class="corr-resp"><p>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</p><p>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</p></div>
- </div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><div class="rotulo">4 · Prontuário<small>É um diagnóstico, então a seção vira uma ficha de caso: a dúvida entra como queixa e a resposta como conduta.</small></div><section class="alt vv"><div class="w meio"><div class="ficha">
-   <div class="ficha-top"><span>Diagnóstico do Autor</span><span>caso individual</span></div>
-   <div class="ficha-lin"><span class="rot">Queixa</span><p class="q">"E se o meu caso for diferente?"</p></div>
-   <div class="ficha-lin"><span class="rot">Resposta</span><p><b>É sempre diferente.</b></p></div>
-   <div class="ficha-lin"><span class="rot">Formato</span><p>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</p></div>
-   <div class="ficha-lin"><span class="rot">Conduta</span><p>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</p></div>
- </div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><div class="rotulo">5 · Eco<small>A pergunta aparece três vezes, cada vez mais apagada, porque todo autor faz ela. A resposta vem uma vez só, cheia.</small></div><section class="alt vv"><div class="w meio"><div class="eco">
-   <p class="e3">E se o meu caso for diferente?</p>
-   <p class="e2">E se o meu caso for diferente?</p>
-   <h2 class="e1">E se o meu caso for diferente?</h2>
-   <div class="eco-resp"><p class="um">É sempre diferente.</p><p>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</p><p>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</p></div>
- </div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><footer><div class="w">preview interno · "E se o meu caso for diferente?"</div></footer></body></html>
+/* 5 ─ entrevista */
+.ent{max-width:760px;margin:0 auto;text-align:left;border-top:2px solid var(--ink)}
+.ent-lin{display:grid;grid-template-columns:110px 1fr;gap:22px;padding:22px 0;border-bottom:1px solid var(--hair)}
+.ent-quem{font-family:var(--fd);font-weight:700;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);
+  padding-top:.5em}
+.ent-quem.ela{color:var(--go)}
+.ent-q{margin:0;font-family:var(--fd);font-weight:700;font-size:clamp(1.5rem,3.6vw,2.2rem);letter-spacing:-.03em;line-height:1.08}
+.ent-lin p{margin:0 0 10px;font-size:1.06rem;line-height:1.6;color:var(--mut)}
+.ent-lin p:last-child{margin-bottom:0}
+.ent-lin p b{color:var(--ink)}
+.ent-r1{font-family:var(--fd);font-weight:700;font-size:clamp(1.2rem,2.6vw,1.45rem)!important;color:var(--ink)!important;letter-spacing:-.02em}
+@media(max-width:560px){.ent-lin{grid-template-columns:1fr;gap:6px}}
+</style></head><body><div class="rotulo">1 · No WhatsApp<small>A conversa como ela aconteceria de verdade: dentro de um celular, no aplicativo que o autor usa todo dia. O mais literal dos cinco, e o que se reconhece em meio segundo.</small></div><section class="alt vv"><div class="w meio"><div class="fone" aria-label="Conversa ilustrada">
+  <div class="fone-tela">
+    <div class="wa-top"><span class="wa-back" aria-hidden="true">‹</span><img src="../assets/dany-bio-B0X57zHq.webp" alt=""><div><b>Dany Sakugawa</b><small>online</small></div></div>
+    <div class="wa-chat">
+      <div class="wa-dia">hoje</div>
+      <div class="wa eu"><span>E se o meu caso for diferente?</span><i>09:41 <svg class="tk" viewBox="0 0 18 11" aria-hidden="true"><path d="M1 6l3 3 6-7M7 8.5l1 1 6-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
+      <div class="wa ela primeira"><span><b>É sempre diferente.</b></span><i>09:41</i></div>
+      <div class="wa ela"><span>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</span><i>09:42</i></div>
+      <div class="wa ela"><span>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</span><i>09:42</i></div>
+    </div>
+    <div class="wa-bar" aria-hidden="true"><span>Mensagem</span><i></i></div>
+  </div>
+</div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><div class="rotulo">2 · Na língua da página<small>Os balões desenhados com a mesma borda preta e a mesma sombra dura dos outros blocos. Não imita aplicativo nenhum: parece que a conversa sempre fez parte da página.</small></div><section class="alt vv"><div class="w meio"><div class="pg-chat">
+  <div class="pg-grupo eu"><span class="pg-nome">você</span><div class="pg eu">E se o meu caso for diferente?</div></div>
+  <div class="pg-grupo ela">
+    <span class="pg-nome">Dany e o time</span>
+    <div class="pg ela forte">É sempre diferente.</div>
+    <div class="pg ela">É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</div>
+    <div class="pg ela ult">A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</div>
+    <img class="pg-av" src="../assets/dany-bio-B0X57zHq.webp" alt="">
+  </div>
+</div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><div class="rotulo">3 · A Dany responde<small>O rosto dela e os balões saindo dela. A página inteira não tem uma foto de quem conduz, e aqui ela aparece justamente respondendo a dúvida.</small></div><section class="alt vv"><div class="w meio"><div class="fala">
+  <figure class="fala-foto"><img src="../assets/dany-bio-B0X57zHq.webp" alt="Dany Sakugawa"><figcaption>Dany Sakugawa</figcaption></figure>
+  <div class="fala-lado">
+    <p class="fala-q"><span>você perguntou</span>E se o meu caso for diferente?</p>
+    <div class="bf forte">É sempre diferente.</div>
+    <div class="bf">É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</div>
+    <div class="bf">A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</div>
+  </div>
+</div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><div class="rotulo">4 · Chegou resposta<small>A pergunta fica no alto, grande. A resposta chega como três notificações na tela do celular, do jeito que uma mensagem importante chega.</small></div><section class="alt vv"><div class="w meio"><h2 class="nt-q">E se o meu caso for diferente?</h2>
+<div class="bloq" aria-label="Notificações ilustradas">
+  <div class="bloq-hora">09:41</div><div class="bloq-dia">quarta-feira, 24 de setembro</div>
+  <div class="nt"><img src="../assets/dany-bio-B0X57zHq.webp" alt=""><div><div class="nt-top"><b>Dany Sakugawa</b><span>agora</span></div><p><b>É sempre diferente.</b></p></div></div>
+  <div class="nt"><img src="../assets/dany-bio-B0X57zHq.webp" alt=""><div><div class="nt-top"><b>Dany Sakugawa</b><span>agora</span></div><p>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</p></div></div>
+  <div class="nt"><img src="../assets/dany-bio-B0X57zHq.webp" alt=""><div><div class="nt-top"><b>Dany Sakugawa</b><span>agora</span></div><p>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</p></div></div>
+</div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><div class="rotulo">5 · Entrevista<small>Sem balão nenhum. A conversa como se lê numa entrevista impressa: quem fala numa coluna, o que fala na outra. O mais sóbrio, e o que melhor aguenta texto.</small></div><section class="alt vv"><div class="w meio"><div class="ent">
+  <div class="ent-lin"><span class="ent-quem">Você</span><p class="ent-q">E se o meu caso for diferente?</p></div>
+  <div class="ent-lin"><span class="ent-quem ela">Dany</span><div><p class="ent-r1">É sempre diferente.</p><p>É por isso que a sessão é <b>individual</b>, e não uma aula gravada.</p><p>A gente não tem um roteiro pronto pra aplicar em você. A gente olha o que você tem e diz o que fazer com isso.</p></div></div>
+</div><div class="cta-fim"><a class="btn" href="#">Quero garantir minha vaga</a><p class="sub-cta">Ao fechar esta página, sua vaga vai para o próximo autor</p></div></div></section><footer><div class="w">preview interno · 5 versões da conversa</div></footer></body></html>
