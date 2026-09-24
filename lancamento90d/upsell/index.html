@@ -290,10 +290,8 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
 /* ── A TRAVA DA VSL ─────────────────────────────────────────
    `display:none` mesmo, nao `visibility` nem altura zero: o conteudo nao
    pode ocupar espaco nem ser lido por leitor de tela antes da hora.
-   A barra fixa tem `!important` porque a regra que a mostra no celular
-   (`.sticky{display:flex}` dentro da media query) vem depois no arquivo. */
+   */
 .vsl-travada .pos-vsl{display:none}
-.vsl-travada .sticky{display:none!important}
 /* a linha abaixo do botao final */
 .sub-cta{margin:16px 0 0;font-size:.92rem;line-height:1.5;color:var(--mut)}
 /* ⚠️ A HOTMART POE `min-width:320px` INLINE NO IFRAME DELA (conferido 24/09).
@@ -639,10 +637,6 @@ section.alt .prova{background:var(--offc)}
 /* ---- fecho e rodapé ---- */
 footer{border-top:2px solid var(--ink);color:var(--mut)}
 
-/* ---- barra fixa ---- */
-.sticky{background:var(--offc);color:var(--ink);border-top:2px solid var(--ink)}
-.sticky .btn{background:var(--go);color:#fff;border:2px solid var(--ink);box-shadow:none}
-.sticky .btn:hover{background:var(--go2);color:#fff}
 
 @media(max-width:760px){
   .offer-box{box-shadow:6px 6px 0 rgba(12,48,28,.55)}
@@ -651,16 +645,7 @@ footer{border-top:2px solid var(--ink);color:var(--mut)}
 footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-family:var(--fd);
   font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
 
-/* barra fixa, só no celular */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;align-items:center;
-  gap:14px;padding:11px 16px calc(11px + env(safe-area-inset-bottom));background:var(--off);
-  color:var(--offtx);border-top:1px solid var(--offb);transform:translateY(110%);
-  transition:transform .25s ease}
-.sticky.on{transform:none}
-/* verde aqui tambem: e o mesmo gesto de comprar */
-.sticky .btn{flex:1;min-width:0;padding:15px 14px;font-size:14.5px;border-radius:999px;
-  background:var(--go);color:#fff;box-shadow:none;white-space:nowrap}
-.sticky .btn:hover{background:var(--go2);color:#fff}
+/* 🚫 A BARRA FIXA DO CELULAR SAIU EM 24/09 (cliente). Nao voltar com ela. */
 
 @media (max-width:900px){
   .provas{grid-template-columns:1fr}
@@ -682,8 +667,6 @@ footer{border-top:1px solid var(--ru);padding:30px 0;text-align:center;font-fami
   .funil{margin-left:-22px;margin-right:-22px}
   .offer-box .price .val{font-size:clamp(3rem,16vw,4rem)}
   .btn{padding:19px 26px;font-size:1.02rem}
-  .sticky{display:flex}
-  body{padding-bottom:84px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -1000,11 +983,6 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   <div class="w">The Book Business · Dany Sakugawa</div>
 </footer>
 
-<!-- Barra fixa, só no mobile. No desktop os CTAs da página dão conta;
-     no celular a distância entre eles é de várias telas. -->
-<div class="sticky" id="sticky">
-  <a class="btn" href="#compra">Quero garantir minha vaga</a>
-</div>
 
 <!-- ============================================================
      O TESTE DE PREÇO (697 × 597) FOI ENCERRADO EM 22/09, antes de rodar.
@@ -1114,15 +1092,7 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 })();
 </script>
 <script>
-/* A barra fixa entra depois que a pessoa passa do vídeo: antes disso ela
-   atrapalha o único trabalho da primeira dobra, que é dar o play.
-   A fita de progresso no topo é do rumo Capítulos. */
 (function(){
-  var barra = document.getElementById('sticky'), gatilho = document.getElementById('vsl');
-  if (barra && gatilho){
-    var ver = function(){ barra.classList.toggle('on', gatilho.getBoundingClientRect().bottom < 0); };
-    addEventListener('scroll', ver, {passive:true}); ver();
-  }
 
   /* ── A TRAVA DA VSL: cada lead libera num minuto diferente ──
      Os tempos sao do cliente (24/09) e batem com o momento em que a Dany
