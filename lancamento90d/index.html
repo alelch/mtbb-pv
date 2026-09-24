@@ -609,6 +609,11 @@ html:not(.js) .curva .prev,html:not(.js) .curva .marco{opacity:1}
 .fp2{display:block;margin:10px 0 0;
   font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
   font-size:clamp(1.5rem,3.4vw,2.1rem);color:var(--accent)}
+/* 24/09 (cliente): a linha de baixo ganha um SUBLINHADO no dourado do grifo
+   de cima. Grifo nas duas seria o mesmo gesto repetido; o traco por baixo
+   liga as duas linhas sem competir com a marca da primeira. */
+.fp2 .sublinha{text-decoration:underline;text-decoration-color:#EAB82D;
+  text-decoration-thickness:.12em;text-underline-offset:.16em;text-decoration-skip-ink:none}
 /* PROVA: o carrossel com os cards de texto ENTRANDO no meio das fotos.
    Antes eram dois blocos separados, e as 8 pessoas da parede sao as MESMAS 8
    do carrossel da secao verde: a parede chegava como segunda vez.
@@ -1648,7 +1653,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <div class="wrap">
     <div class="fecho-prova rv">
       <p class="fp1">Todos começaram <span class="grifo">onde você está agora</span>.</p>
-      <p class="fp2">Você é o próximo.</p>
+      <p class="fp2"><span class="sublinha">Você é o próximo</span>.</p>
     </div>
   </div>
 </section>
