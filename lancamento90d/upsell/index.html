@@ -706,7 +706,9 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
      body) abre tudo. Uma pagina de compra nunca pode ficar trancada por um
      script de terceiro que falhou.
      ============================================================ -->
-<script>document.documentElement.classList.add('vsl-travada')</script>
+<!-- ?abrir=1 abre a página inteira sem esperar o vídeo (24/09), igual ao front:
+     pra revisar a página ou mandar o link pra alguém ver. -->
+<script>if(!/[?&]abrir=1/.test(location.search))document.documentElement.classList.add('vsl-travada')</script>
 <body>
 
 <div class="prog" id="prog"></div>
