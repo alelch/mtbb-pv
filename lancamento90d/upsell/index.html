@@ -300,6 +300,11 @@ h1,h2,h3{margin:0;font-family:var(--fd);font-weight:700;letter-spacing:-.035em;l
    pra fora do card e 5px pra fora da TELA, cortando o botao de comprar.
    O `!important` aqui e' o unico jeito de vencer um estilo inline, e sem ele
    a largura que a gente pede nao vale nada. */
+/* 25/09: teto de altura. O script da Hotmart aplica no iframe a altura que a
+   página de dentro informa; se ela entrar em ciclo (altura relativa à tela),
+   o iframe cresce sem parar e vira um espaço enorme. max-height vence o
+   style.height inline, e 1100px sobra folgado pro formulário de 1 clique. */
+#hotmart-sales-funnel iframe{max-height:1100px}
 #hotmart-sales-funnel iframe{width:100%!important;min-width:0!important;
   max-width:100%;border:0;display:block}
 
@@ -1199,8 +1204,15 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
     [].slice.call(document.querySelectorAll('a[href="#compra"]')).forEach(function(a){
       a.addEventListener('click', function(e){
         e.preventDefault();
-        try { alvo.scrollIntoView({behavior: quieto.matches ? 'auto' : 'smooth', block:'center'}); }
-        catch(err){ alvo.scrollIntoView(); }
+        /* 25/09: era scrollIntoView({block:'center'}), suave. O widget da
+           Hotmart muda de altura sozinho (o iframe recebe a altura por
+           postMessage), e a rolagem suave "no centro" ia perseguindo um alvo
+           que mudava de lugar: era o suspeito do espaço enorme com o topo
+           sumindo (cliente reproduziu no clique). Agora é UM salto calculado
+           na hora do clique, até o topo do widget, com folga pra faixa fixa. */
+        var y = alvo.getBoundingClientRect().top + window.pageYOffset - 24;
+        try { window.scrollTo({top: Math.max(0, y), behavior: quieto.matches ? 'auto' : 'smooth'}); }
+        catch(err){ window.scrollTo(0, Math.max(0, y)); }
       });
     });
   }
@@ -1306,5 +1318,23 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
         index-longa-v2.html (a de 13 seções que foi cortada em 08/09 porque
         "nenhuma página nossa é assim; nossas páginas são tiros curtos").
      ============================================================ -->
+<script>
+/* ?debug=1 (25/09): mostra ao vivo a altura da página, a do widget e a
+   rolagem. Serve pra, quando o "espaço enorme" acontecer, ver na hora QUEM
+   cresceu. Não roda sem o parâmetro. */
+(function(){
+  if (!/[?&]debug=1/.test(location.search)) return;
+  var b = document.createElement('div');
+  b.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:99999;background:#111;color:#0f0;font:12px/1.4 ui-monospace,monospace;padding:8px 10px;border-radius:8px;pointer-events:none;white-space:pre';
+  document.body.appendChild(b);
+  var maxH = 0, maxF = 0;
+  setInterval(function(){
+    var f = document.querySelector('#hotmart-sales-funnel iframe');
+    var H = document.documentElement.scrollHeight, fh = f ? f.getBoundingClientRect().height : 0;
+    maxH = Math.max(maxH, H); maxF = Math.max(maxF, fh);
+    b.textContent = 'pagina ' + H + 'px (max ' + maxH + ')\nwidget ' + Math.round(fh) + 'px (max ' + Math.round(maxF) + ')\nstyle ' + (f ? f.style.height : '-') + '\nrolagem ' + Math.round(window.pageYOffset);
+  }, 250);
+})();
+</script>
 </body>
 </html>
