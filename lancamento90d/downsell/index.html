@@ -1020,6 +1020,32 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 .explica .gr{color:var(--ink);font-weight:700;background:linear-gradient(transparent 60%,var(--grifo) 60%,var(--grifo) 92%,transparent 92%);
   padding:0 .06em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .explica .valor{color:var(--ink);font:700 clamp(1.1rem,2.6vw,1.3rem)/1.3 var(--fd);letter-spacing:-.02em}
+/* ---- o email em volta do documento (cliente 25/09) ---- */
+.doc-wrap{scroll-margin-top:70px}
+.doc-h2{font-size:clamp(1.6rem,4vw,2.4rem);text-align:center}
+.doc-sub{margin:10px auto 26px;text-align:center;color:var(--mut)}
+.email{max-width:600px;margin:0 auto;background:#fff;border:2px solid var(--ink);border-radius:20px;
+  box-shadow:6px 6px 0 var(--ink);overflow:hidden;text-align:left}
+.email-barra{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--pa2);border-bottom:2px solid var(--ink);
+  font:700 .7rem/1 var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.email-barra .bol{display:flex;gap:6px}
+.email-barra .bol i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink);background:#fff}
+.email-barra .bol i:first-child{background:var(--red)}
+.email-cab{display:flex;align-items:center;gap:12px;padding:16px 18px 0}
+.email-av{display:grid;place-content:center;width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;
+  font:700 .72rem/1 var(--fd);letter-spacing:.04em}
+.email-de{display:grid;gap:2px}
+.email-de b{font:700 .95rem/1.2 var(--fd)}
+.email-de span{font-size:.8rem;color:var(--mut)}
+.email-assunto{margin:14px 18px 0;font:700 clamp(1.15rem,3vw,1.35rem)/1.25 var(--fd);letter-spacing:-.02em}
+.email-corpo{margin:8px 18px 0;color:var(--mut);font-size:.98rem;line-height:1.5}
+.email-anexo{display:inline-flex;align-items:center;gap:8px;margin:14px 18px 0;padding:8px 12px;border:2px solid var(--ink);
+  border-radius:10px;font:700 .82rem/1 var(--fd);background:var(--pa)}
+.email-anexo .clipe{flex:none}
+.email .doc{margin:20px 14px 18px;max-width:none}
+.email .doc .tras{display:none}
+.email .doc .folha{box-shadow:4px 4px 0 var(--ink)}
+@media(max-width:560px){ .email .doc{margin:18px 10px 14px} .email .doc .folha{padding:20px 16px 24px} }
 .expirou{max-width:560px;margin:34px auto 0;text-align:center;padding:30px 26px;background:#fff;
   border:2px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink)}
 .expirou h2{font-size:1.5rem}
@@ -1133,34 +1159,48 @@ main{padding:0 0 clamp(56px,8vw,90px);
         </div>
       </div>
 
-      <!-- ════ O DOCUMENTO ════ -->
-      <div class="doc-wrap">
-        <p class="eyebrow sobe">O que chega no seu email</p>
-        <figure class="doc" id="doc">
-          <div class="tras t2" aria-hidden="true"></div>
-          <div class="tras t1" aria-hidden="true"></div>
-          <div class="folha">
-            <div class="doc-top"><span class="doc-marca">Diagnóstico do Autor</span><span class="doc-rot">Exemplo</span></div>
-            <h3 class="doc-tit">O seu livro, visto de&nbsp;fora</h3>
-            <div class="doc-sec ok">
-              <h4><i aria-hidden="true">✓</i>O que já está certo</h4>
-              <p>O assunto tem público, e você já fala dele com&nbsp;naturalidade.</p>
-              <p class="borrado" aria-hidden="true">O posicionamento conversa com um leitor que já procura esse tema, e a sua história pessoal dá credibilidade ao livro. A ordem dos capítulos prende quem começou a ler.</p>
-            </div>
-            <div class="doc-sec muda">
-              <h4><i aria-hidden="true">!</i>O que precisa mudar</h4>
-              <p>O título diz o tema, mas não diz <mark>para quem é o&nbsp;livro</mark>.</p>
-              <p class="borrado" aria-hidden="true">A capa segue o padrão do gênero, mas não se diferencia na vitrine. O subtítulo promete um resultado genérico: vale nomear o leitor e a situação dele. A sinopse abre pela sua trajetória, e o leitor precisa se ver na primeira frase.</p>
-            </div>
-            <div class="doc-sec passo">
-              <h4><i aria-hidden="true">→</i>O seu próximo passo</h4>
-              <p>Antes da pré-venda: <span class="circ">reescrever o subtítulo<svg viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M12,34 C8,12 60,4 110,6 C160,8 196,16 192,34 C188,52 130,58 90,56 C50,54 10,50 14,30"/></svg></span>.</p>
-              <p class="borrado" aria-hidden="true">Testar duas versões do subtítulo com os seus primeiros leitores. Depois, ajustar a sinopse com a mesma frase de abertura e só então abrir a pré-venda.</p>
-            </div>
-            <div class="carimbo" aria-hidden="true"><div><b>Pronto</b><i>para você</i></div></div>
+      <!-- ════ O DOCUMENTO, DENTRO DO EMAIL (cliente 25/09, prévia B) ════
+           O rótulo "O que chega no seu email" virou título e o documento aparece
+           dentro de um email aberto: em vez de dizer o que chega, MOSTRA chegando.
+           ⚠️ O anexo não tem extensão de propósito: o formato do material (PDF,
+           documento, email) ainda não foi definido. -->
+      <div class="doc-wrap" id="doc-sec">
+        <h2 class="doc-h2 sobe">O que chega no seu&nbsp;email</h2>
+        <p class="doc-sub sobe">Um exemplo. O seu é escrito a partir das suas&nbsp;respostas.</p>
+        <div class="email sobe">
+          <div class="email-barra" aria-hidden="true"><span class="bol"><i></i><i></i><i></i></span><span>Caixa de entrada</span></div>
+          <div class="email-cab">
+            <span class="email-av" aria-hidden="true">TBB</span>
+            <div class="email-de"><b>Time The Book Business</b><span>para você · agora</span></div>
           </div>
-          <figcaption>Um exemplo. O seu é escrito a partir das suas&nbsp;respostas.</figcaption>
-        </figure>
+          <p class="email-assunto">O seu diagnóstico está pronto</p>
+          <p class="email-corpo">Aqui está o diagnóstico do seu livro: o que já está certo, o que precisa mudar e o seu próximo&nbsp;passo.</p>
+          <p class="email-anexo"><svg class="clipe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9"/></svg>Diagnóstico do seu livro</p>
+            <figure class="doc" id="doc">
+              <div class="tras t2" aria-hidden="true"></div>
+              <div class="tras t1" aria-hidden="true"></div>
+              <div class="folha">
+                <div class="doc-top"><span class="doc-marca">Diagnóstico do Autor</span><span class="doc-rot">Exemplo</span></div>
+                <h3 class="doc-tit">O seu livro, visto de&nbsp;fora</h3>
+                <div class="doc-sec ok">
+                  <h4><i aria-hidden="true">✓</i>O que já está certo</h4>
+                  <p>O assunto tem público, e você já fala dele com&nbsp;naturalidade.</p>
+                  <p class="borrado" aria-hidden="true">O posicionamento conversa com um leitor que já procura esse tema, e a sua história pessoal dá credibilidade ao livro. A ordem dos capítulos prende quem começou a ler.</p>
+                </div>
+                <div class="doc-sec muda">
+                  <h4><i aria-hidden="true">!</i>O que precisa mudar</h4>
+                  <p>O título diz o tema, mas não diz <mark>para quem é o&nbsp;livro</mark>.</p>
+                  <p class="borrado" aria-hidden="true">A capa segue o padrão do gênero, mas não se diferencia na vitrine. O subtítulo promete um resultado genérico: vale nomear o leitor e a situação dele. A sinopse abre pela sua trajetória, e o leitor precisa se ver na primeira frase.</p>
+                </div>
+                <div class="doc-sec passo">
+                  <h4><i aria-hidden="true">→</i>O seu próximo passo</h4>
+                  <p>Antes da pré-venda: <span class="circ">reescrever o subtítulo<svg viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M12,34 C8,12 60,4 110,6 C160,8 196,16 192,34 C188,52 130,58 90,56 C50,54 10,50 14,30"/></svg></span>.</p>
+                  <p class="borrado" aria-hidden="true">Testar duas versões do subtítulo com os seus primeiros leitores. Depois, ajustar a sinopse com a mesma frase de abertura e só então abrir a pré-venda.</p>
+                </div>
+                <div class="carimbo" aria-hidden="true"><div><b>Pronto</b><i>para você</i></div></div>
+              </div>
+            </figure>
+        </div>
       </div>
 
       <!-- ════ COMO FUNCIONA ════ -->
