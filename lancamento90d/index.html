@@ -1966,7 +1966,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     try { l9Ctx(); } catch(e){}   // última chance de o clique levar o fbp antes do checkout
     try { if (window.fbq) fbq('track','InitiateCheckout',
       {content_ids:['L90D'],content_type:'product',currency:'BRL',value:297}); } catch(e){}
-    try { if (window.MTBB_TRACK) MTBB_TRACK('hotmart_click',{cta:origem,produto:'L90D', meta:{vsl:(function(){ var e=document.querySelector('vturb-smartplayer'); return e ? (e.getAttribute('original-id')||e.id) : null; })(), xcod:l9Xcod}}); } catch(e){}
+    try { if (window.MTBB_TRACK) MTBB_TRACK('hotmart_click',{cta:origem,produto:'L90D', meta:{vsl:(function(){ var e=document.querySelector('vturb-smartplayer'); return e ? (e.getAttribute('original-id')||e.id) : null; })(), xcod:l9Xcod, vid:l9Vid()}}); } catch(e){}
     window.location.href = checkoutUrl();
   }
   document.addEventListener('click', function(ev){
