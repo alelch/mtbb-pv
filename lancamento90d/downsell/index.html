@@ -1052,6 +1052,9 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 .nao-le .t{margin:0 0 6px;font:700 clamp(1.1rem,2.8vw,1.3rem)/1.25 var(--fd);letter-spacing:-.02em}
 .nao-le p{margin:0;color:var(--mut);font-size:.98rem;line-height:1.5}
 .nao-le p.nl2{margin-top:10px;color:var(--ink)}
+/* ---- a conversa (sem avatar: sem o recuo que o upsell reserva pra foto) ---- */
+.conversa{margin:clamp(56px,7vw,84px) auto 0}
+.conversa .pg-grupo.ela{padding-left:0}
 .expirou{max-width:560px;margin:34px auto 0;text-align:center;padding:30px 26px;background:#fff;
   border:2px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink)}
 .expirou h2{font-size:1.5rem}
@@ -1220,13 +1223,37 @@ main{padding:0 0 clamp(56px,8vw,90px);
           <li class="sobe"><span class="n">3</span><h3>O diagnóstico chega por escrito</h3><p>Em até <b>5 dias úteis</b> depois do formulário: o que está certo, o que mudar e o seu próximo passo. Junto com <b>1 ebook</b> para você acelerar ainda mais seus&nbsp;resultados.</p></li>
         </ol>
         <p class="igual sobe"><span>É o mesmo material que quem faz a sessão ao vivo recebe no&nbsp;final.</span></p>
-        <!-- 28/09 (cliente): por que o manuscrito não entra, dito como método -->
-        <div class="nao-le sobe">
-          <p class="t">Não precisa mandar o seu livro.</p>
-          <!-- 28/09: o mesmo argumento da resposta do upsell que o cliente aprovou
-               ("agora essa resposta VENDE"), na voz da Dany como o resto da página -->
-          <p>No lançamento, o que decide o potencial de venda não é o texto. Na editora, eu via isso todo&nbsp;dia.</p>
-          <p class="nl2">O que faz o seu livro vender de verdade é você, as suas habilidades e o gênero do livro. Do conteúdo, basta uma&nbsp;pincelada.</p>
+      </div>
+
+      <!-- ════ A CONVERSA (cliente 28/09) ════
+           A mesma caixa de conversa do upsell, no fim, antes da última chance.
+           A 1ª pergunta é a dúvida DESTE produto: sem sessão, como eles sabem do
+           meu livro? A 2ª é a resposta aprovada no upsell ("agora essa resposta
+           VENDE"). Sem foto da Dany: o cliente tirou o rosto dela desta página. -->
+      <div class="conversa">
+        <div class="pg-chat">
+          <div class="pg-grupo eu sobe"><span class="pg-nome">você</span><div class="pg eu">Mas, sem uma conversa, como vocês vão saber sobre o meu livro?</div></div>
+          <div class="pg-grupo ela sobe">
+            <span class="pg-nome">Dany e o time</span>
+            <div class="pg ela forte">Pelo formulário.</div>
+            <div class="pg ela">Ele tem as mesmas perguntas que a gente faria na sessão ao&nbsp;vivo.</div>
+            <div class="pg ela ult">Você responde no seu tempo, sem marcar horário e sem abrir&nbsp;câmera.</div>
+          </div>
+          <div class="pg-grupo eu sobe"><span class="pg-nome">você</span><div class="pg eu">Vocês vão ler o meu livro?</div></div>
+          <div class="pg-grupo ela sobe">
+            <span class="pg-nome">Dany e o time</span>
+            <div class="pg ela forte">Não é necessário.</div>
+            <div class="pg ela">No lançamento, o que decide o potencial de venda não é o texto.</div>
+            <div class="pg ela">Na editora, eu via isso todo dia.</div>
+            <div class="pg ela">O que faz o seu livro vender de verdade é você, as suas habilidades e o gênero do&nbsp;livro.</div>
+            <div class="pg ela ult">Do conteúdo, basta uma pincelada.</div>
+          </div>
+          <div class="pg-grupo eu sobe"><span class="pg-nome">você</span><div class="pg eu">E o meu diagnóstico, quando vai chegar?</div></div>
+          <div class="pg-grupo ela sobe">
+            <span class="pg-nome">Dany e o time</span>
+            <div class="pg ela">Em até <b>5 dias úteis</b> depois do formulário.</div>
+            <div class="pg ela ult">Junto com <b>1 ebook</b> para você acelerar ainda mais seus&nbsp;resultados.</div>
+          </div>
         </div>
       </div>
 
