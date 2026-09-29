@@ -1873,8 +1873,40 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     var marca = (window.__ABTESTS || []).filter(function(t){ return t.sck_tag; })
                  .map(function(t){ return t.sck_tag + '|' + t.variant; }).join('|');
     if (marca) u.searchParams.set('sck', (u.searchParams.get('sck') ? u.searchParams.get('sck') + '|' : '') + marca);
+    /* 29/09: o id do visitante vai no COMEÇO do sck. O n8n acha pelo "|v<vid>" o clique
+       gravado pelo pv-click (fbc/fbp/ip/ua) e manda no CAPI; sem isso o Meta recebia a
+       compra só com e-mail e não creditava ao anúncio. No começo, e não no fim, porque o
+       n8n tira o ID do anúncio do ÚLTIMO pedaço do sck. */
+    var _v = l9Vid();
+    if (_v) u.searchParams.set('sck', 'L90D|v' + _v + (u.searchParams.get('sck') ? '|' + u.searchParams.get('sck') : ''));
     return u.toString();
   }
+
+  /* ---- contexto do clique pro CAPI (mesmo mecanismo das outras PVs, ver lancamento-v1) ---- */
+  function l9Vid(){
+    var v = null; try { v = localStorage.getItem('ab_vid'); } catch(e) {}
+    if (!v) { v = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); try { localStorage.setItem('ab_vid', v); } catch(e) {} }
+    return String(v).toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 16);
+  }
+  /* dispara no PAGEVIEW: a pessoa passa ~17 min na VSL antes do botão, e o cookie
+     _fbc/_fbp já existe desde a chegada. A função grava o 1º toque UMA vez por vid. */
+  setTimeout(function(){
+    try {
+      var vid = l9Vid(); if (!vid) return;
+      var q = new URLSearchParams(location.search), st = {};
+      try { st = JSON.parse(localStorage.getItem('mtbb_utms') || '{}') || {}; } catch(e) {}
+      var g = function(k){ return q.get(k) || st[k] || null; };
+      var fbp = (document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/) || [])[1] || null;
+      var fbc = (document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/) || [])[1] || null;
+      if (!fbc && g('fbclid')) fbc = 'fb.1.' + Date.now() + '.' + g('fbclid');
+      var adset = g('utm_term');   // nas url_tags do L90D o utm_term JÁ é o id do conjunto
+      fetch('https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/pv-click', { method: 'POST', keepalive: true,
+        body: JSON.stringify({ vid: vid, fbc: fbc, fbp: fbp,
+          utm_source: g('utm_source'), utm_medium: g('utm_medium'), utm_campaign: g('utm_campaign'),
+          utm_term: adset, utm_content: g('utm_content'),
+          adset_id: /^\d{15,}$/.test(adset || '') ? adset : null, criativo: g('utm_content') }) });
+    } catch(e) {}
+  }, 1200);
   /* o framework chama isto depois de resolver o teste; como monto a URL no clique, é só um hook */
   window.__abReprocess = function(){};
   /* mantém o href do botão em dia com o CHECKOUT atual. O href existe pra
