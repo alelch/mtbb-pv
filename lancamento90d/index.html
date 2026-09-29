@@ -1925,9 +1925,10 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     if (!v) { v = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); try { localStorage.setItem('ab_vid', v); } catch(e) {} }
     return String(v).toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 16);
   }
-  /* dispara no PAGEVIEW: a pessoa passa ~17 min na VSL antes do botão, e o cookie
-     _fbc/_fbp já existe desde a chegada. A função grava o 1º toque UMA vez por vid. */
-  setTimeout(function(){
+  /* dispara no PAGEVIEW e de novo depois: aos 1,2s o pixel ainda não criou o _fbp
+     (29/09: só 1 de 9 cliques tinha fbp). O pv-click nunca sobrescreve fbc/fbp com null
+     e trava o 1º toque de UTM, então reenviar só COMPLETA. */
+  function l9Ctx(){
     try {
       var vid = l9Vid(); if (!vid) return;
       var q = new URLSearchParams(location.search), st = {};
@@ -1943,7 +1944,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
           utm_term: adset, utm_content: g('utm_content'),
           adset_id: /^\d{15,}$/.test(adset || '') ? adset : null, criativo: g('utm_content') }) });
     } catch(e) {}
-  }, 1200);
+  }
+  setTimeout(l9Ctx, 1200);
+  setTimeout(l9Ctx, 8000);
   /* o framework chama isto depois de resolver o teste; como monto a URL no clique, é só um hook */
   window.__abReprocess = function(){};
   /* mantém o href do botão em dia com o CHECKOUT atual. O href existe pra
@@ -1960,6 +1963,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
                b.scrollIntoView({behavior:'smooth',block:'center'}); }
       return;
     }
+    try { l9Ctx(); } catch(e){}   // última chance de o clique levar o fbp antes do checkout
     try { if (window.fbq) fbq('track','InitiateCheckout',
       {content_ids:['L90D'],content_type:'product',currency:'BRL',value:297}); } catch(e){}
     try { if (window.MTBB_TRACK) MTBB_TRACK('hotmart_click',{cta:origem,produto:'L90D', meta:{vsl:(function(){ var e=document.querySelector('vturb-smartplayer'); return e ? (e.getAttribute('original-id')||e.id) : null; })(), xcod:l9Xcod}}); } catch(e){}
