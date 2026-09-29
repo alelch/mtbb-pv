@@ -1225,8 +1225,35 @@ main{padding:0 0 clamp(56px,8vw,90px);
         <p class="igual sobe"><span>É o mesmo material que quem faz a sessão ao vivo recebe no&nbsp;final.</span></p>
       </div>
 
+      <!-- ════ A ÚLTIMA CHANCE ════ -->
+      <div class="ultima">
+        <h2 class="sobe">Última chance.</h2>
+        <p class="sobe">Se o preço era a barreira, ele acabou de cair pela&nbsp;metade.</p>
+        <p class="tchau sobe">Te espero do outro lado.</p>
+        <span class="seta" aria-hidden="true"></span>
+        <div class="compra-box sobe">
+          <div class="offer-box">
+            <!-- HOTMART, Sales Funnel Widget: o passo de DOWNSELL do funil,
+                 com o aceite e o "não quero". Um clique pra quem pagou o 90D
+                 no cartão. Produto e preço vêm do funil, não daqui. -->
+            <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
+            <!-- A SAÍDA DO PIX (cliente 24/09: visível). Pra quem pagou o 90D no
+                 PIX, que nunca vê o widget carregar. Enquanto PIX_CHECKOUT (no
+                 script do fim) for null, o botão aparece mas não navega. -->
+            <div class="pix" id="pix">
+              <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
+              <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+        <!-- A GARANTIA, na versão que não depende de decisão nenhuma: os 7 dias
+             que a Hotmart devolve sozinha, por lei. Se o cliente escolher uma
+             garantia maior (a regra de reembolso de um documento está em
+             aberto), é esta linha que muda. -->
+        <p class="gar-linha sobe"><b>7 dias de garantia</b> pela&nbsp;Hotmart.</p>
+      </div>
       <!-- ════ A CONVERSA (cliente 28/09) ════
-           A mesma caixa de conversa do upsell, no fim, antes da última chance.
+           A mesma caixa de conversa do upsell, DEPOIS do widget de compra (cliente 28/09).
            A 1ª pergunta é a dúvida DESTE produto: sem sessão, como eles sabem do
            meu livro? A 2ª é a resposta aprovada no upsell ("agora essa resposta
            VENDE"). Sem foto da Dany: o cliente tirou o rosto dela desta página. -->
@@ -1257,33 +1284,6 @@ main{padding:0 0 clamp(56px,8vw,90px);
         </div>
       </div>
 
-      <!-- ════ A ÚLTIMA CHANCE ════ -->
-      <div class="ultima">
-        <h2 class="sobe">Última chance.</h2>
-        <p class="sobe">Se o preço era a barreira, ele acabou de cair pela&nbsp;metade.</p>
-        <p class="tchau sobe">Te espero do outro lado.</p>
-        <span class="seta" aria-hidden="true"></span>
-        <div class="compra-box sobe">
-          <div class="offer-box">
-            <!-- HOTMART, Sales Funnel Widget: o passo de DOWNSELL do funil,
-                 com o aceite e o "não quero". Um clique pra quem pagou o 90D
-                 no cartão. Produto e preço vêm do funil, não daqui. -->
-            <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
-            <!-- A SAÍDA DO PIX (cliente 24/09: visível). Pra quem pagou o 90D no
-                 PIX, que nunca vê o widget carregar. Enquanto PIX_CHECKOUT (no
-                 script do fim) for null, o botão aparece mas não navega. -->
-            <div class="pix" id="pix">
-              <p class="q">Comprou o Lançamento 90D no PIX<br>e quer parcelar no cartão?</p>
-              <a class="btn" id="pix-checkout" href="#" rel="nofollow">Quero parcelar no cartão <span aria-hidden="true">&rarr;</span></a>
-            </div>
-          </div>
-        </div>
-        <!-- A GARANTIA, na versão que não depende de decisão nenhuma: os 7 dias
-             que a Hotmart devolve sozinha, por lei. Se o cliente escolher uma
-             garantia maior (a regra de reembolso de um documento está em
-             aberto), é esta linha que muda. -->
-        <p class="gar-linha sobe"><b>7 dias de garantia</b> pela&nbsp;Hotmart.</p>
-      </div>
     </div>
 
     <!-- o que aparece quando o cronômetro zera -->
