@@ -1879,8 +1879,44 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
        n8n tira o ID do anúncio do ÚLTIMO pedaço do sck. */
     var _v = l9Vid();
     if (_v) u.searchParams.set('sck', 'L90D|v' + _v + (u.searchParams.get('sck') ? '|' + u.searchParams.get('sck') : ''));
+    /* 29/09: xcod = como a VTurb credita a venda ao VÍDEO do teste A/B. Ela só põe no
+       botão verde DELA; o nosso botão ia sem, e nenhuma venda caía no vídeo certo.
+       Testado: o urlUpdater dela SUBSTITUI um xcod que já exista e preserva o sck. */
+    if (l9Xcod) u.searchParams.set('xcod', l9Xcod);
     return u.toString();
   }
+
+  /* xcod fresco a cada 3s (ele carrega o tempo assistido), pelo mesmo interno da
+     VTurb que a master-v1b2 usa (urlUpdater) */
+  var l9Xcod = null;
+  (function grabXcod(){
+    try {
+      var sp = window.smartplayer && window.smartplayer.instances && window.smartplayer.instances[0];
+      var i = sp && (sp.instance || sp);
+      if (i && typeof i.urlUpdater === 'function') {
+        Promise.resolve(i.urlUpdater(CHECKOUT)).then(function(url){
+          var m = String(url).match(/[?&]xcod=([^&]+)/); if (m) l9Xcod = decodeURIComponent(m[1]);
+        }).catch(function(){});
+      }
+    } catch(e) {}
+    setTimeout(grabXcod, 3000);
+  })();
+  /* o botão verde da VTurb (aparece no preço) ia sem sck/src/vid: venda por ele perdia o
+     anúncio. Reescrevo só os parâmetros, MESMA oferta: trocar a oferta mata o xcod (lição
+     da master em 01/08), trocar parâmetro não. */
+  setInterval(function(){
+    try {
+      if (/SUBSTITUIR/.test(CHECKOUT)) return;
+      var alvo = checkoutUrl();
+      var cta = document.getElementById('ctaMain');   // href em dia com o xcod (clique do meio, copiar link)
+      if (cta && cta.getAttribute('href') !== alvo) cta.setAttribute('href', alvo);
+      [].forEach.call(document.querySelectorAll('a[href*="pay.hotmart.com"]'), function(a){
+        if (a.id === 'ctaMain' || a.getAttribute('href') === alvo) return;
+        if (a.closest && !a.closest('vturb-smartplayer, #vsl')) return;
+        a.setAttribute('href', alvo);
+      });
+    } catch(e) {}
+  }, 2000);
 
   /* ---- contexto do clique pro CAPI (mesmo mecanismo das outras PVs, ver lancamento-v1) ---- */
   function l9Vid(){
