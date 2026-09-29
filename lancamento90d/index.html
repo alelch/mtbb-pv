@@ -1867,7 +1867,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       var v = here.get(k) || stored[k];
       if (v && !u.searchParams.get(k)) u.searchParams.set(k, v);
     });
-    if (!u.searchParams.get('src')) u.searchParams.set('src','L90D-organico');
+    /* a venda na Hotmart só guarda src e sck, as utm_* ela descarta. Sem isto,
+       venda de anúncio (que chega com utm_source e sem src) ficava "orgânico". */
+    if (!u.searchParams.get('src')) u.searchParams.set('src', u.searchParams.get('utm_source') || 'L90D-organico');
     var marca = (window.__ABTESTS || []).filter(function(t){ return t.sck_tag; })
                  .map(function(t){ return t.sck_tag + '|' + t.variant; }).join('|');
     if (marca) u.searchParams.set('sck', (u.searchParams.get('sck') ? u.searchParams.get('sck') + '|' : '') + marca);
