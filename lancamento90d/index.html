@@ -1262,7 +1262,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     H.classList.remove('travado');
     try { sessionStorage.setItem(CHAVE,'1'); } catch(e){}
     /* de propósito NÃO rola a página: a pessoa está assistindo. */
-    try { if (window.MTBB_TRACK) MTBB_TRACK('pv_abriu',{produto:'L90D'}); } catch(e){}
+    /* 29/09: grava QUAL VSL a pessoa viu (A/B/C). Sem isso não dava pra dizer de que vídeo veio a venda. */
+    try { if (window.MTBB_TRACK) MTBB_TRACK('pv_abriu',{produto:'L90D', meta:{vsl:(function(){ var e=document.querySelector('vturb-smartplayer'); return e ? (e.getAttribute('original-id')||e.id) : null; })()}}); } catch(e){}
   }
 
   /* Qual número vale para o vídeo que ESTA visita sorteou.
@@ -1961,7 +1962,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     }
     try { if (window.fbq) fbq('track','InitiateCheckout',
       {content_ids:['L90D'],content_type:'product',currency:'BRL',value:297}); } catch(e){}
-    try { if (window.MTBB_TRACK) MTBB_TRACK('hotmart_click',{cta:origem,produto:'L90D'}); } catch(e){}
+    try { if (window.MTBB_TRACK) MTBB_TRACK('hotmart_click',{cta:origem,produto:'L90D', meta:{vsl:(function(){ var e=document.querySelector('vturb-smartplayer'); return e ? (e.getAttribute('original-id')||e.id) : null; })(), xcod:l9Xcod}}); } catch(e){}
     window.location.href = checkoutUrl();
   }
   document.addEventListener('click', function(ev){
