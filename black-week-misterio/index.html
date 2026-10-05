@@ -137,6 +137,32 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   .secret__grid { grid-template-columns: minmax(0, 1fr) 360px; gap: 80px; }
 }
 
+/* ---------- depoimentos ---------- */
+.depo { border-top: 1px solid var(--line); }
+.depo__track { display: flex; gap: 12px; margin-top: 40px; padding: 4px var(--gutter) 8px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+.depo__track::-webkit-scrollbar { display: none; }
+.depo__c { flex: none; width: min(84%, 340px); scroll-snap-align: start; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; padding: 24px 22px;
+  border: 1px solid #2a292e; border-radius: 16px; background: linear-gradient(170deg, #141317, #0b0b0d); }
+.depo__q { position: relative; font-size: 16px; line-height: 1.55; color: var(--ink); }
+.depo__q::before { content: "“"; display: block; height: 30px; font-size: 54px; font-weight: 700; line-height: 1; color: var(--amber); }
+.depo__who { display: flex; align-items: center; gap: 12px; }
+.depo__who img, .depo__who .ini { flex: none; width: 46px; height: 46px; border-radius: 50%; object-fit: cover; }
+.depo__who .ini { display: grid; place-items: center; background: #2a292e; font-weight: 600; color: var(--amber); }
+.depo__who b { display: block; font-size: 15px; font-weight: 600; }
+.depo__who i { display: block; font-size: 13px; color: var(--ink-2); }
+.depo__f { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.depo__f::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.depo__f.construcao { color: var(--f-construcao); }
+.depo__f.lancamento { color: var(--f-lancamento); }
+.depo__f.permanencia { color: var(--f-permanencia); }
+.depo__ex { position: absolute; top: 12px; right: 12px; padding: 3px 8px; border-radius: 99px; background: #c0392b; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .1em; }
+.depo__c { position: relative; }
+@media (min-width: 900px) {
+  /* no computador: colunas tipo mural, sem rolagem lateral */
+  .depo__track { display: block; max-width: 1120px; margin: 56px auto 0; padding: 0 var(--gutter); overflow: visible; columns: 3; column-gap: 16px; }
+  .depo__c { width: auto; margin-bottom: 16px; break-inside: avoid; }
+}
+
 /* ---------- logos ---------- */
 /* Black Week Motorizada (vetor, o mesmo do VD_05) */
 .bwlogo { --bw-ink: #f4efe4; --bw-amber: #faab00; --bw-page: transparent;
@@ -585,11 +611,11 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .h1-sub { margin-top: 6px; font-size: clamp(11px, 3.1vw, 14px); letter-spacing: .1em; }
   .hero .when-pill { margin-top: 14px; padding: 5px 14px; font-size: 11px; letter-spacing: .14em; }
   /* Dany no centro e a frase sobre o esmaecido da foto */
-  .speak { display: block; position: relative; margin-top: 14px; }
+  .speak { display: block; position: relative; margin-top: 10px; }
   .speak .dany-glow { display: block; }
   .speak .dany-glow::before { top: 0; width: 240px; height: 190px; }
-  .speak .dany-m { width: auto; height: 150px; margin: 0 auto; -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 96%); mask-image: linear-gradient(to bottom, #000 58%, transparent 96%); }
-  .speak .pitch { margin: -46px auto 0; max-width: 360px; font-size: 16px; line-height: 1.25; text-shadow: 0 2px 14px rgba(0, 0, 0, .95); }
+  .speak .dany-m { width: auto; height: 140px; margin: 0 auto; -webkit-mask-image: linear-gradient(to bottom, #000 46%, transparent 82%); mask-image: linear-gradient(to bottom, #000 46%, transparent 82%); }
+  .speak .pitch { margin: -24px auto 0; max-width: 360px; font-size: 16px; line-height: 1.25; text-shadow: 0 2px 14px rgba(0, 0, 0, .95); }
   .speak .pitch i { font-size: clamp(17px, 5vw, 20px); }
   .speak .pitch__by { display: none; }
   .hero .lead-form { margin-top: 18px; }
@@ -754,6 +780,17 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     </div>
   </section>
 
+  <!-- 6b. depoimentos dos autores que receberam o LOMBADA antes (fica escondida enquanto não houver depoimento) -->
+  <section class="blk depo" id="depoimentos" hidden>
+    <div class="wrap">
+      <div class="center rv">
+        <p class="eyebrow">Quem já viu</p>
+        <h2 class="h2">Eles já viram o LOMBADA por dentro. <span class="amber">Você vê dia 9.</span></h2>
+      </div>
+    </div>
+    <div class="depo__track" id="depo-track"></div>
+  </section>
+
   <!-- 7. quem colocou o motor -->
   <section class="blk">
     <div class="wrap">
@@ -865,6 +902,35 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     if (REDUCED || !('IntersectionObserver' in window)) { items.forEach(function (li) { li.classList.add('lit'); }); return; }
     var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting || (en.rootBounds && en.boundingClientRect.bottom < en.rootBounds.top)) en.target.classList.add('lit'); }); }, { rootMargin: '-38% 0px -38% 0px' });
     items.forEach(function (li) { io.observe(li); });
+  })();
+
+  /* ================= 6b. DEPOIMENTOS =================
+     Preencher com os depoimentos reais (texto exato, com autorização do autor). Enquanto a lista estiver vazia, a seção fica escondida.
+     { nome: 'Nome Sobrenome', livro: 'Título do livro', fase: 'construcao' | 'lancamento' | 'permanencia', foto: 'assets/depo/arquivo.webp' (opcional), texto: '...' } */
+  var DEPOS = [];
+  (function () {
+    var lista = DEPOS, exemplo = false;
+    if (!lista.length && new URLSearchParams(location.search).get('depo') === 'exemplo') {
+      exemplo = true;
+      lista = [
+        { nome: 'Nome do autor', livro: 'Título do livro', fase: 'construcao', texto: 'Aqui entra o depoimento real, com as palavras do autor. Um parágrafo curto funciona melhor.' },
+        { nome: 'Nome do autor', livro: 'Título do livro', fase: 'lancamento', texto: 'Depoimento mais longo para ver como o cartão cresce. Duas ou três frases, contando o que mudou depois de usar e o que mais surpreendeu.' },
+        { nome: 'Nome do autor', livro: 'Título do livro', fase: 'permanencia', texto: 'Depoimento curto.' }
+      ];
+    }
+    if (!lista.length) return;
+    var FASE = { construcao: 'Escrevendo', lancamento: 'Recém-lançado', permanencia: 'Livro publicado' };
+    var sec = $('#depoimentos'), track = $('#depo-track'), n = $('.depo__n', sec);
+    if (n) n.textContent = lista.length;
+    track.innerHTML = lista.map(function (d) {
+      var ini = esc(String(d.nome || '?').trim().charAt(0).toUpperCase());
+      var foto = d.foto ? '<img src="' + esc(d.foto) + '" alt="" width="46" height="46" loading="lazy" decoding="async">' : '<span class="ini" aria-hidden="true">' + ini + '</span>';
+      return '<figure class="depo__c">' + (exemplo ? '<span class="depo__ex">EXEMPLO</span>' : '') +
+        '<blockquote class="depo__q">' + esc(d.texto) + '</blockquote>' +
+        '<figcaption class="depo__who">' + foto + '<span><b>' + esc(d.nome) + '</b><i>' + esc(d.livro) + '</i>' +
+        (FASE[d.fase] ? '<span class="depo__f ' + d.fase + '">' + FASE[d.fase] + '</span>' : '') + '</span></figcaption></figure>';
+    }).join('');
+    sec.hidden = false;
   })();
 
   /* ================= 7. DANY NA MÍDIA: esteira contínua ================= */
