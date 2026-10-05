@@ -12,7 +12,10 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Black Week Motorizada da Dany Sakugawa">
 <meta property="og:description" content="A ferramenta que todo autor sonhou. Abre segunda, 9 de novembro, às 20h.">
-<meta property="og:image" content="https://metodo.thebookbusiness.com.br/black-week/assets/og-black-week.png">
+<meta property="og:image" content="https://metodo.thebookbusiness.com.br/black-week/assets/og-black-week.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://connect.facebook.net">
@@ -68,7 +71,7 @@
   --pop: cubic-bezier(.34, 1.56, .64, 1);
   --sec: 88px;
   --gutter: 20px;
-  --infinity: url("https://thebookbusiness.com.br/wp-content/uploads/2025/10/infinity.webp");
+  --infinity: url("assets/infinity.webp");
 }
 @media (min-width: 900px) { :root { --sec: 128px; } }
 
@@ -142,7 +145,9 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .lead-form .done { display: none; padding: 22px 18px; border: 1.5px solid var(--amber); border-radius: 12px; background: rgba(250, 171, 0, .12); text-align: center; }
 .lead-form .done .big { font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
 .lead-form .done p + p { margin-top: 6px; font-size: 15px; color: var(--ink-2); }
-.lead-form.is-done .hint, .lead-form.is-done form, .lead-form.is-done .fine { display: none; }
+.lead-form .lgpd { margin-top: 6px; text-align: center; font-size: 11px; line-height: 1.5; color: var(--ink-3); }
+.lead-form .lgpd a { color: var(--ink-2); }
+.lead-form.is-done .hint, .lead-form.is-done form, .lead-form.is-done .fine, .lead-form.is-done .lgpd { display: none; }
 .lead-form.is-done .done { display: block; animation: pop .5s var(--pop); }
 
 /* ---------- telas do app (test drive, oportunidades, ideias) ---------- */
@@ -171,8 +176,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .pulse::after { content: ""; position: absolute; inset: -4px; border: 2px solid var(--amber); border-radius: inherit; pointer-events: none; animation: ring 1.6s cubic-bezier(0, 0, .2, 1) infinite; }
 
 /* ---------- 0. faixa do topo ---------- */
-.topbar { position: relative; z-index: 5; padding: 11px 16px; background: var(--yellow); color: #111; text-align: center;
-  font-size: 13px; font-weight: 500; letter-spacing: .02em; text-transform: uppercase; }
+.topbar { position: relative; z-index: 5; padding: 11px 10px; white-space: nowrap; background: var(--yellow); color: #111; text-align: center;
+  font-size: clamp(10px, 3vw, 13px); font-weight: 500; letter-spacing: .02em; text-transform: uppercase; }
 
 /* ---------- 1. abertura ---------- */
 .hero { position: relative; overflow: hidden; isolation: isolate; }
@@ -207,19 +212,32 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: gold 6s linear infinite; filter: drop-shadow(0 8px 34px rgba(250, 171, 0, .22)); }
 .h1-sub { margin-top: 10px; font-size: clamp(13px, 3.8vw, 18px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); text-wrap: balance; }
-/* data de abertura + contagem regressiva */
-.when-pill { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 10px; margin-top: 18px; padding: 8px 16px;
-  border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; background: rgba(250, 171, 0, .08); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
-.when-pill__d { font-weight: 600; color: var(--ink); }
-.when-pill__c { font-weight: 600; color: var(--amber); }
-.when-pill__c:empty { display: none; }
-.when-pill__c::before { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 8px 1px 0; border-radius: 50%; background: var(--amber); vertical-align: middle; }
+/* data de abertura: só a data, sempre em uma linha */
+.when-pill { display: inline-block; margin-top: 18px; padding: 8px 18px; border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; background: rgba(250, 171, 0, .08);
+  font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; color: var(--ink); }
 .fecho__form .when-pill { margin: 0 0 16px; }
-@media (max-width: 520px) { .when-pill { border-radius: 14px; padding: 9px 14px; } }
+.jump { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 440px; min-height: 52px; margin: 14px auto 0; border-radius: 6px;
+  background: var(--green); color: #fff; font-size: 16px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; text-decoration: none; }
+.jump svg { width: 18px; height: 18px; }
 .pitch { margin: 22px auto 0; max-width: 470px; font-size: clamp(16px, 4.4vw, 19px); line-height: 1.45; }
 .dany-m { width: 280px; height: auto; margin: 18px auto -18px;
   -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
-.dany-d, .dany-q { display: none; }
+.dany-d, .dany-q, .pitch__by, .dany-glow { display: none; }
+/* celular e telas médias: a foto fica em cima da frase, então a frase vira a fala da Dany (balão com ponta, aspas e assinatura) */
+@media (max-width: 1179px) {
+  .dany-m { position: relative; z-index: 1; margin-bottom: 0; }
+  .dany-glow { display: block; position: relative; height: 0; }
+  .dany-glow::before { content: ""; position: absolute; left: 50%; top: 18px; width: 300px; height: 260px; transform: translateX(-50%); border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(250, 171, 0, .28), rgba(250, 171, 0, 0) 68%); filter: blur(10px); }
+  .pitch { position: relative; z-index: 2; max-width: 340px; margin: -4px auto 0; padding: 22px 22px 16px; border: 1px solid rgba(250, 171, 0, .4); border-radius: 20px;
+    background: linear-gradient(165deg, #1d170c 0%, #0f0d09 100%); box-shadow: 0 24px 50px -24px rgba(0, 0, 0, .9), 0 0 40px -18px rgba(250, 171, 0, .35); line-height: 1.4; }
+  .pitch::before { content: ""; position: absolute; top: -9px; left: 50%; width: 16px; height: 16px; transform: translateX(-50%) rotate(45deg);
+    background: #1d170c; border-top: 1px solid rgba(250, 171, 0, .4); border-left: 1px solid rgba(250, 171, 0, .4); }
+  .pitch::after { content: "\201C"; position: absolute; top: -2px; left: 14px; font: 700 54px/1 Georgia, serif; color: var(--amber); opacity: .9; }
+  .pitch i { display: block; font-size: 19px; }
+  .pitch__by { display: block; margin-top: 10px; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
+  .pitch__by::before { content: ""; display: inline-block; width: 16px; height: 1.5px; margin: 0 8px 3px 0; background: var(--amber); vertical-align: middle; }
+}
 
 /* ---------- 2. a cena do sonho (guiada pela rolagem; --p vai de 0 a 1) ---------- */
 .dx { position: relative; height: 340vh; background: #000; }
@@ -386,6 +404,13 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .mon .after .tag { color: var(--amber); }
 .mon-foot { margin-top: 30px; text-align: center; font-size: clamp(18px, 5vw, 24px); font-weight: 600; text-wrap: balance; }
 
+.real { max-width: 880px; margin: 44px auto 0; }
+.real__bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; border: 1px solid #2e2d33; border-bottom: 0; border-radius: 14px 14px 0 0; background: #17161a; }
+.real__bar i { width: 10px; height: 10px; border-radius: 50%; background: #3a3940; }
+.real__bar span { margin-left: 10px; font-size: 11px; font-weight: 500; letter-spacing: .06em; color: var(--ink-3); }
+.real img { width: 100%; height: auto; border: 1px solid #2e2d33; border-radius: 0 0 14px 14px; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .9), 0 0 70px -30px rgba(250, 171, 0, .25); }
+.real figcaption { margin-top: 12px; text-align: center; font-size: 12px; color: var(--ink-3); }
+
 /* ---------- 6. cada etapa do livro ---------- */
 .ages { padding: var(--sec) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; overflow: hidden; }
 .ages .h2 { max-width: 720px; margin: 12px auto 44px; }
@@ -473,7 +498,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   .h1 { margin-top: 38px; }
   .h1__a { font-size: 21px; letter-spacing: .2em; }
   .h1-sub { margin-top: 12px; font-size: 18px; letter-spacing: .18em; }
-  .hero .when-pill { margin-top: 22px; font-size: 13px; }
+  .hero .when-pill { margin-top: 22px; font-size: 14px; }
   .hero { min-height: 1000px; }
   .pitch { margin-top: 24px; max-width: 600px; font-size: 21px; line-height: 1.5; }
   .hero .lead-form { max-width: 594px; margin-top: 34px; }
@@ -482,7 +507,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   .fld input { height: 52px; font-size: 17px; }
   .hero .btn { min-height: 61px; font-size: 23px; }
   .lead-form .fine { margin-top: 12px; font-size: 14px; }
-  .dany-m { display: none; }
+  .dany-m, .jump { display: none; }
   /* a foto começa depois da coluna de texto (metade dela = 324px) e nunca fica por cima do texto */
   .dany-d { display: block; position: absolute; z-index: -1; left: calc(50% + 300px); top: 150px; width: 430px; height: auto;
     -webkit-mask-image: linear-gradient(to bottom, #000 76%, transparent 97%); mask-image: linear-gradient(to bottom, #000 76%, transparent 97%); }
@@ -511,6 +536,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
 /* computador estreito: não cabe a foto ao lado do texto, então ela volta para o meio, como no celular */
 @media (min-width: 900px) and (max-width: 1179px) {
   .dany-m { display: block; width: 300px; }
+  .jump { display: flex; }
   .dany-d, .dany-q { display: none; }
   .hero { min-height: 0; }
 }
@@ -554,7 +580,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
 <body class="no-js">
 <script>document.body.classList.remove('no-js'); if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('rm');</script>
 
-<div class="topbar">O <b>maior lançamento</b> do mercado literário</div>
+<div class="topbar">O <b>maior lançamento</b> para o mercado literário</div>
 
 <main>
   <!-- 1. abertura + cadastro -->
@@ -562,7 +588,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
     <div class="wrap">
       <div class="hero__in">
         <div class="hero__main">
-          <div class="proof"><img src="https://thebookbusiness.com.br/wp-content/uploads/2024/11/alunos-e-pessoas-400px-1.png" alt="" width="118" height="26"><span><b>+4.400 autores</b> impactando vidas</span></div>
+          <div class="proof"><img src="assets/alunos.webp" alt="" width="118" height="26"><span><b>+4.400 autores</b> impactando vidas</span></div>
 
           <div class="logo-box">
             <span class="streaks" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -571,11 +597,12 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
 
           <h1 class="h1"><span class="h1__a">A ferramenta que todo autor</span> <span class="h1__b">sonhou</span></h1>
           <p class="h1-sub">Mas nunca pensou que poderia existir</p>
-          <p class="when-pill"><span class="when-pill__d">Abre segunda, 9 de novembro, às 20h</span><span class="when-pill__c" data-countdown></span></p>
-          <img class="dany-m" src="assets/dany-bw-m.webp" alt="Dany Sakugawa" width="560" height="378" decoding="async">
-          <p class="pitch"><i>Seu livro agora tem <b class="amber">motor</b><br><b>E ele nunca vai parar.</b></i></p>
+          <p class="when-pill">9 de novembro, às 20h</p>
+          <a class="jump" href="#form-topo">Quero me cadastrar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+          <span class="dany-glow" aria-hidden="true"></span><img class="dany-m" src="assets/dany-bw-m.webp" alt="Dany Sakugawa" width="560" height="378" decoding="async">
+          <p class="pitch"><i>Seu livro agora tem <b class="amber">motor</b><br><b>E ele nunca vai parar.</b></i><span class="pitch__by">Dany Sakugawa</span></p>
 
-          <div class="lead-form" data-pos="topo">
+          <div class="lead-form" data-pos="topo" id="form-topo">
             <p class="hint">Faça seu cadastro e seja avisado na abertura</p>
             <form novalidate>
               <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
@@ -584,7 +611,8 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
               <button class="btn" type="submit">Cadastre-se <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
             </form>
             <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
-            <p class="fine">Você fica sabendo no minuto em que abrir.</p>
+            <p class="fine">Cadastro gratuito e sem compromisso.</p>
+            <p class="lgpd">Ao se cadastrar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
             <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Quando a Black Week Motorizada abrir, você fica sabendo.</p></div>
           </div>
         </div>
@@ -738,6 +766,13 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
       <h2 class="h2">Cada ação sai das aulas do Método The Book Business.</h2>
       <p class="lede">Na ordem certa para o seu livro.</p>
     </div>
+    <div class="wrap">
+      <figure class="real rv">
+        <div class="real__bar" aria-hidden="true"><i></i><i></i><i></i><span>LOMBADA · plano da semana</span></div>
+        <img src="assets/lombada-plano.webp" alt="Tela real do LOMBADA: o plano da semana de um livro, com as ações, o texto e a aula de cada uma" width="1200" height="1218" loading="lazy" decoding="async">
+        <figcaption>Tela real do LOMBADA, com uma autora de exemplo.</figcaption>
+      </figure>
+    </div>
     <div class="belt rv" aria-hidden="true">
       <div class="belt__row" id="belt-1"></div>
       <div class="belt__row rev" id="belt-2"></div>
@@ -779,7 +814,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   <section class="blk">
     <div class="wrap">
       <div class="who__grid">
-        <figure class="who__pic rv"><img src="https://thebookbusiness.com.br/wp-content/uploads/2025/10/dany-grande-degrade2.webp" alt="Dany Sakugawa no palco" width="577" height="1024" loading="lazy" decoding="async"></figure>
+        <figure class="who__pic rv"><img src="assets/dany-palco.webp" alt="Dany Sakugawa no palco" width="680" height="1207" loading="lazy" decoding="async"></figure>
         <div class="who__body">
           <div class="rv">
           <p class="eyebrow">Quem colocou o motor</p>
@@ -815,7 +850,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   <section class="fecho" id="cadastro-fim">
     <div class="wrap">
       <div class="fecho__card rv">
-        <img class="fecho__gift" src="https://thebookbusiness.com.br/wp-content/uploads/2025/10/presente.webp" alt="" width="799" height="799" loading="lazy" decoding="async">
+        <img class="fecho__gift" src="assets/presente.webp" alt="" width="260" height="260" loading="lazy" decoding="async">
         <div class="fecho__grid">
           <div class="fecho__offer">
             <p class="eyebrow">Na Black Week Motorizada</p>
@@ -830,7 +865,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
             </ul>
           </div>
           <div class="fecho__form">
-            <p class="when-pill"><span class="when-pill__d">Abre segunda, 9 de novembro, às 20h</span><span class="when-pill__c" data-countdown></span></p>
+            <p class="when-pill">9 de novembro, às 20h</p>
             <h3 class="fecho__h">Ligue o motor do seu livro.</h3>
             <p class="fecho__m">Cadastre-se e seja avisado no minuto em que a Black Week Motorizada abrir.</p>
             <div class="lead-form" data-pos="fim">
@@ -842,6 +877,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
               </form>
               <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
               <p class="fine">Cadastro gratuito e sem compromisso.</p>
+              <p class="lgpd">Ao se cadastrar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
               <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Quando a Black Week Motorizada abrir, você fica sabendo.</p></div>
             </div>
           </div>
@@ -1126,19 +1162,15 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
     });
   });
 
-  /* ================= CONTAGEM ATÉ A ABERTURA (9/11, 20h de Brasília = 23h UTC) ================= */
-  (function () {
-    var alvo = Date.UTC(2026, 10, 9, 23, 0, 0), els = $$('[data-countdown]');
-    function pad(n) { return (n < 10 ? '0' : '') + n; }
-    function tick() {
-      var ms = alvo - Date.now(), txt;
-      if (ms <= 0) txt = 'Aberta agora';
-      else if (ms >= 2 * 864e5) txt = 'Faltam ' + Math.floor(ms / 864e5) + ' dias';
-      else { var h = Math.floor(ms / 36e5), m = Math.floor(ms % 36e5 / 6e4); txt = 'Faltam ' + pad(h) + 'h ' + pad(m) + 'min'; }
-      els.forEach(function (el) { el.textContent = txt; });
-    }
-    tick(); setInterval(tick, 30000);
-  })();
+  /* ================= ABERTURA: 9/11, 20h de Brasília (23h UTC) =================
+     Depois da hora, a data vira "Aberta agora". Se VENDA_URL estiver preenchido, os formulários viram o botão de entrar. */
+  var ABRE = Date.UTC(2026, 10, 9, 23, 0, 0), VENDA_URL = '';
+  if (Date.now() >= ABRE) {
+    $$('.when-pill').forEach(function (el) { el.textContent = 'Aberta agora'; });
+    if (VENDA_URL) $$('.lead-form').forEach(function (b) {
+      b.innerHTML = '<a class="btn" href="' + VENDA_URL + '">Entrar na Black Week Motorizada</a>';
+    });
+  }
 
   /* ================= ENTRADA DOS BLOCOS ================= */
   $$('.rv').forEach(function (el) { onView(el, function (t) { t.classList.add('in'); }); });
@@ -1212,7 +1244,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
         body: JSON.stringify(payload)
       }).then(function (r) {
         if (!r.ok) throw new Error('http ' + r.status);
-        try { if (window.fbq) fbq('track', 'Lead', { content_name: 'black-week-motorizada' }); } catch (e) {}
+        try { if (window.fbq) { fbq('track', 'Lead', { content_name: 'black-week-motorizada' }); fbq('trackCustom', 'CadastroBlackWeek'); } } catch (e) {}
         try { if (window.gtag) gtag('event', 'generate_lead', { campaign: 'black-week-motorizada' }); } catch (e) {}
         allDone();
       }).catch(function () {
