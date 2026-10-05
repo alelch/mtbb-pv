@@ -131,6 +131,9 @@ input[type=date]:hover{border-color:var(--laranja)}
 .nota{display:block;font-size:13px;line-height:1.45;color:var(--tinta-55);margin-top:2px;font-weight:400;max-width:68ch}
 .tarefa.feita .nota{color:var(--tinta-32)}
 
+.refs{margin:4px 0 0;font-size:12.5px;line-height:1.45;color:var(--tinta-55);font-style:italic}
+.tarefa.feita .refs{color:var(--tinta-32)}
+.post .refs{color:var(--tinta-55)}
 .apoios{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .chip{
   display:inline-flex;align-items:center;gap:6px;text-decoration:none;
@@ -208,6 +211,7 @@ input[type=date]:hover{border-color:var(--laranja)}
   .nota{font-size:8.5pt;line-height:1.35}
   .apoios{margin-top:4px;gap:4px}
   .chip{padding:2px 5px;font-size:7.5pt}
+  .refs{font-size:8pt;margin-top:1px;line-height:1.3}
   .post{margin-top:10px;padding:10px 12px}
   .post .frase{font-size:12pt}
   .faixa{margin-top:18px;padding-block:12px 14px}
@@ -275,16 +279,17 @@ input[type=date]:hover{border-color:var(--laranja)}
 
 <div class="env rodape">
   <span>Lançamento 90D · Plano de 90 dias para lançamento de livro</span>
-  <a href="https://hotmart.com/pt-br/club/the-book-business/products/2275987" target="_blank" rel="noopener">Área de membros ↗</a>
 </div>
 
 <script>
 (function(){
 'use strict';
 
-var CLUB = 'https://hotmart.com/pt-br/club/the-book-business/products/2275987';
-function aula(nome, id){ return {t:'aula', nome:nome, url: id ? CLUB + '/content/' + id : CLUB}; }
-function mat(nome){ return {t:'mat', nome:nome, url:CLUB}; }
+// Aula e material do Metodo entram como TEXTO, nunca como link: esta pagina
+// acompanha o Lancamento 90D e quem a recebe pode nao ter acesso a area de
+// membros do Metodo The Book Business.
+function aula(nome, id){ return {t:'ref', nome:nome}; }
+function mat(nome){ return {t:'ref', nome:nome}; }
 function fora(nome, url){ return {t:'fora', nome:nome, url:url}; }
 
 var A = {
@@ -625,13 +630,16 @@ function esc(s){
 }
 function chips(lista){
   if(!lista || !lista.length) return '';
-  var h = '<div class="apoios">';
+  var links = [], refs = [];
   for(var i=0;i<lista.length;i++){
     var a = lista[i];
-    var cls = a.t === 'aula' ? 'chip aula' : 'chip';
-    h += '<a class="'+cls+'" href="'+esc(a.url)+'" target="_blank" rel="noopener">'+esc(a.nome)+' &#8599;</a>';
+    if(a.t === 'fora') links.push('<a class="chip" href="'+esc(a.url)+'" target="_blank" rel="noopener">'+esc(a.nome)+' &#8599;</a>');
+    else refs.push(esc(a.nome));
   }
-  return h + '</div>';
+  var h = '';
+  if(refs.length) h += '<p class="refs">' + refs.join(' &middot; ') + '</p>';
+  if(links.length) h += '<div class="apoios">' + links.join('') + '</div>';
+  return h;
 }
 function tarefa(id, it){
   var feito = !!estado.feitos[id];
