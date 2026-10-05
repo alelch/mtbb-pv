@@ -131,8 +131,6 @@ input[type=date]:hover{border-color:var(--laranja)}
 .nota{display:block;font-size:13px;line-height:1.45;color:var(--tinta-55);margin-top:2px;font-weight:400;max-width:68ch}
 .tarefa.feita .nota{color:var(--tinta-32)}
 
-.refs{margin:3px 0 0;font-size:12.5px;line-height:1.4;color:var(--tinta-55);font-style:italic}
-.tarefa.feita .refs{color:var(--tinta-32)}
 .apoios{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .chip{
   display:inline-flex;align-items:center;gap:6px;text-decoration:none;
@@ -210,7 +208,6 @@ input[type=date]:hover{border-color:var(--laranja)}
   .nota{font-size:8.5pt;line-height:1.35}
   .apoios{margin-top:4px;gap:4px}
   .chip{padding:2px 5px;font-size:7.5pt}
-  .refs{font-size:8pt;margin-top:1px;line-height:1.3}
   .post{margin-top:10px;padding:10px 12px}
   .post .frase{font-size:12pt}
   .faixa{margin-top:18px;padding-block:12px 14px}
@@ -301,7 +298,7 @@ var VIABILIZADORES = {
     {t:'Primeira revisão feita'},
     {t:'Capa profissional pronta (ou em produção)'},
     {t:'Diagramação encaminhada'},
-    {t:'ISBN solicitado (pelo autor ou pela editora)', apoio:[fora('Câmara Brasileira do Livro','https://www.cblservicos.org.br/')]},
+    {t:'ISBN solicitado (pelo autor ou pela editora)'},
     {t:'Ficha catalográfica solicitada (pelo autor ou pela editora)'}
   ]
 };
@@ -313,7 +310,7 @@ var SEMANAS = [
   itens:[
     {t:'Definir o objetivo do livro'},
     {t:'Definir público-alvo e persona do leitor ideal'},
-    {t:'Definir os temas universais que o livro aborda', ref:'Lista de Temas Universais'},
+    {t:'Definir os temas universais que o livro aborda', apoio:[fora('Lista de Temas Universais','https://docs.google.com/document/d/1GqO_ObhQJIWnbhTbUjyKaiFMdKUSdaKZSAlWP3ngvlU/edit?usp=sharing')]},
     {t:'Montar o cronograma reverso', nota:'Da data de publicação para trás.'},
     {t:'Tirar as fotos dos posts das próximas semanas', nota:'Lendo, escrevendo, assinando contrato, revisando o manuscrito, aprovando a diagramação.'},
     {t:'Listar datas comemorativas e efemérides ligadas ao tema do livro'}
@@ -327,7 +324,7 @@ var SEMANAS = [
     {t:'Atualizar site, página de autor e perfis nas redes', subs:[{t:'Instagram'},{t:'LinkedIn'}]},
     {t:'Criar o Grupo de Lançamento', nota:'20 a 30 pessoas, no WhatsApp.'},
     {t:'Compartilhar o processo de produção nos stories', nota:'"mais um capítulo revisado"'},
-    {t:'Registrar o livro na Câmara Brasileira do Livro', nota:'ISBN e ficha catalográfica.', apoio:[fora('cblservicos.org.br','https://www.cblservicos.org.br/')]},
+    {t:'Registrar o livro na Câmara Brasileira do Livro', nota:'ISBN e ficha catalográfica.', apoio:[fora('Solicitar o ISBN na CBL','https://www.cblservicos.org.br/isbn/')]},
     {t:'Enviar o post da semana no Grupo de Lançamento', nota:'Peça engajamento.'}
   ],
   post:{frase:'Por trás de todo bom escritor, existe um bom leitor.'}
@@ -336,7 +333,7 @@ var SEMANAS = [
   id:'s3', num:'Semana 3', semana:3, fase:'pre', rotulo:'Contatos',
   foco:'Mapeamento de contatos',
   itens:[
-    {t:'Mapear contatos por origem', nota:'Família, amigos, carreira, escola, clube, condomínio, igreja.', ref:'Planilha Modelo'},
+    {t:'Mapear contatos por origem', nota:'Família, amigos, carreira, escola, clube, condomínio, igreja.', apoio:[fora('Planilha Modelo de contatos','https://docs.google.com/spreadsheets/d/1NdM4y1ueuNkYWmgFqqXW_TDFtVEDx1Q1ghbPZUIlGBk/edit?usp=sharing')]},
     {t:'Atribuir tarefas aos contatos mapeados', subs:[
       {t:'Possíveis compradores da pré-venda'},
       {t:'Parceiros estratégicos (outros autores, empresas, instituições)'},
@@ -604,7 +601,6 @@ function tarefa(id, it){
   h += '<input type="checkbox" class="marca-cx" id="'+id+'"'+(feito?' checked':'')+'>';
   h += '<div><label class="txt" for="'+id+'">'+esc(it.t)+'</label>';
   if(it.nota) h += '<span class="nota">'+esc(it.nota)+'</span>';
-  if(it.ref) h += '<p class="refs">'+esc(it.ref)+'</p>';
   h += chips(it.apoio);
   if(it.subs && it.subs.length){
     h += '<ul class="sub">';
