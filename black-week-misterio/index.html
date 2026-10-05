@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Black Week Motorizada da Dany Sakugawa</title>
-<meta name="description" content="O LOMBADA é a ferramenta que todo autor sonhou. A Black Week Motorizada da Dany Sakugawa abre segunda, 9 de novembro, às 20h. Cadastre-se.">
+<meta name="description" content="A ferramenta que todo autor sonhou. A Black Week Motorizada da Dany Sakugawa abre segunda, 9 de novembro, às 20h. Cadastre-se.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#000000">
-<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week/">
+<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-misterio/">
 <link rel="icon" type="image/webp" href="../lancamento90d/favicon.webp">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Black Week Motorizada da Dany Sakugawa">
@@ -18,10 +18,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://connect.facebook.net">
 <!-- Montserrat só para o logo da Black Week; o texto é Poppins (local, a mesma das PVs) -->
-<link rel="preload" as="image" href="assets/infinity.webp" fetchpriority="high">
+<link rel="preload" as="image" href="../black-week/assets/infinity.webp" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/poppins-400.woff2">
-<link rel="preload" as="image" href="assets/dany-bw-m.webp" media="(max-width: 899px)">
-<link rel="preload" as="image" href="assets/dany-bw.webp" media="(min-width: 900px)">
+<link rel="preload" as="image" href="../black-week/assets/dany-bw-m.webp" media="(max-width: 899px)">
+<link rel="preload" as="image" href="../black-week/assets/dany-bw.webp" media="(min-width: 900px)">
 <script src="../pixel.js"></script>
 <script src="../gtag.js" defer></script>
 <style>
@@ -37,9 +37,9 @@
 @font-face { font-family: "Poppins"; font-weight: 600; font-display: swap; src: url("../assets/fonts/poppins-600.woff2") format("woff2"); }
 @font-face { font-family: "Poppins"; font-weight: 700; font-display: swap; src: url("../assets/fonts/poppins-700.woff2") format("woff2"); }
 /* Montserrat só para o logo da Black Week: local, para não travar o desenho da página */
-@font-face { font-family: "Montserrat"; font-weight: 500; font-display: swap; src: url("assets/fonts/montserrat-500-latin.woff2") format("woff2"); }
-@font-face { font-family: "Montserrat"; font-style: italic; font-weight: 900; font-display: swap; src: url("assets/fonts/montserrat-900i-latin.woff2") format("woff2"); }
-@font-face { font-family: "Archivo LMB"; font-weight: 900; font-display: swap; src: url("assets/fonts/archivo-900-latin.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 500; font-display: swap; src: url("../black-week/assets/fonts/montserrat-500-latin.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-style: italic; font-weight: 900; font-display: swap; src: url("../black-week/assets/fonts/montserrat-900i-latin.woff2") format("woff2"); }
+@font-face { font-family: "Archivo LMB"; font-weight: 900; font-display: swap; src: url("../black-week/assets/fonts/archivo-900-latin.woff2") format("woff2"); }
 
 /* ---------- tokens ---------- */
 :root {
@@ -73,7 +73,7 @@
   /* ritmo vertical: 12 rótulo→título, 16 título→texto, 40 cabeçalho→conteúdo, 48 entre blocos, --sec de folga em cada seção */
   --sec: 64px;
   --gutter: 20px;
-  --infinity: url("assets/infinity.webp");
+  --infinity: url("../black-week/assets/infinity.webp");
 }
 @media (min-width: 900px) { :root { --sec: 104px; } }
 
@@ -101,6 +101,41 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .lede { margin-top: 16px; max-width: 540px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.55; color: var(--ink-2); text-wrap: balance; }
 .center .lede { margin-left: auto; margin-right: auto; }
 .blk { position: relative; padding: var(--sec) 0; }
+
+/* ---------- segredo (versão mistério: nenhuma tela do LOMBADA aparece) ---------- */
+.secret__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: center; }
+.nots { margin-top: 28px; list-style: none; display: grid; gap: 10px; }
+.nots li { display: flex; align-items: center; gap: 12px; font-size: clamp(17px, 4.6vw, 21px); font-weight: 500; color: var(--ink-2); }
+.nots li::before { content: ""; flex: none; width: 18px; height: 1.5px; background: var(--ink-3); }
+.nots li:last-child { margin-top: 6px; color: var(--ink); }
+.nots li:last-child::before { background: var(--amber); }
+.vault { display: flex; justify-content: center; }
+.vault__phone { position: relative; width: min(300px, 78vw); aspect-ratio: 9 / 18; border: 10px solid #1b1a1f; border-radius: 42px; overflow: hidden;
+  background: linear-gradient(180deg, #16151a, #0c0c0e); box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .9), 0 0 90px -30px rgba(250, 171, 0, .35); }
+.vault__blur { position: absolute; inset: 0; padding: 38px 20px; display: grid; align-content: start; gap: 14px; filter: blur(9px); opacity: .7; }
+.vault__blur i { display: block; height: 54px; border-radius: 14px; background: linear-gradient(90deg, rgba(250, 171, 0, .35), rgba(255, 255, 255, .08)); }
+.vault__blur i:nth-child(1) { height: 22px; width: 55%; }
+.vault__blur i:nth-child(2) { height: 90px; }
+.vault__blur i:nth-child(odd) { background: linear-gradient(90deg, rgba(255, 255, 255, .14), rgba(250, 171, 0, .2)); }
+.vault__lock { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 24px; text-align: center;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, .55), rgba(0, 0, 0, .15) 70%); }
+.vault__lock svg { width: 54px; height: 54px; padding: 13px; border: 1.5px solid rgba(250, 171, 0, .6); border-radius: 50%; color: var(--amber); background: rgba(0, 0, 0, .5);
+  animation: headlight 2.4s ease-in-out infinite; }
+.vault__lock p { max-width: 190px; font-size: 12px; font-weight: 600; letter-spacing: .16em; line-height: 1.6; text-transform: uppercase; }
+
+/* ---------- para todo autor ---------- */
+.ages { padding: var(--sec) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; overflow: hidden; }
+.ages .h2 { max-width: 720px; margin: 12px auto 40px; }
+.ages__rows { display: grid; gap: 4px; }
+.ages__r { font-size: clamp(24px, 7.4vw, 50px); font-weight: 600; line-height: 1; letter-spacing: -.01em; text-transform: uppercase; }
+.ages__r small { display: block; margin: 6px 0 16px; font-size: clamp(12px, 3.4vw, 15px); font-weight: 500; letter-spacing: .04em; text-transform: none; color: var(--ink-3); }
+.ages__r.c1 { color: var(--f-construcao); }
+.ages__r.c2 { color: var(--f-lancamento); }
+.ages__r.c3 { color: var(--f-permanencia); }
+.ages__foot { margin-top: 24px; font-size: clamp(18px, 5vw, 24px); font-weight: 500; text-wrap: balance; }
+@media (min-width: 900px) {
+  .secret__grid { grid-template-columns: minmax(0, 1fr) 360px; gap: 80px; }
+}
 
 /* ---------- logos ---------- */
 /* Black Week Motorizada (vetor, o mesmo do VD_05) */
@@ -636,7 +671,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     <div class="wrap">
       <div class="hero__in">
         <div class="hero__main">
-          <div class="proof"><img src="assets/alunos.webp" alt="" width="118" height="26"><span><b>+4.400 autores</b> impactando vidas</span></div>
+          <div class="proof"><img src="../black-week/assets/alunos.webp" alt="" width="118" height="26"><span><b>+4.400 autores</b> impactando vidas</span></div>
 
           <div class="logo-box">
             <span class="streaks" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -647,7 +682,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           <p class="h1-sub">Mas nunca pensou que poderia existir</p>
           <p class="when-pill">9 de novembro, às 20h</p>
           <div class="speak">
-          <span class="dany-glow" aria-hidden="true"></span><img class="dany-m" src="assets/dany-bw-m.webp" alt="Dany Sakugawa" width="408" height="378" decoding="async">
+          <span class="dany-glow" aria-hidden="true"></span><img class="dany-m" src="../black-week/assets/dany-bw-m.webp" alt="Dany Sakugawa" width="408" height="378" decoding="async">
           <p class="pitch"><i>Seu livro agora vai ter <b class="amber">motor</b><br><b>E ele nunca vai parar.</b></i><span class="pitch__by">Dany Sakugawa</span></p>
           </div>
 
@@ -668,7 +703,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         </div>
 
         <p class="dany-q"><i>“Eu queria que o autor abrisse a segunda-feira e já soubesse o que fazer pelo livro. Agora ele sabe, sempre.”</i><span>Dany Sakugawa</span></p>
-        <img class="dany-d" src="assets/dany-bw.webp" alt="Dany Sakugawa" width="840" height="1135" loading="lazy" decoding="async">
+        <img class="dany-d" src="../black-week/assets/dany-bw.webp" alt="Dany Sakugawa" width="840" height="1135" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
@@ -696,156 +731,57 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <p class="dx__pre">Parecia impossível.</p>
         <p class="dx__now">Agora existe.</p>
         <p class="dx__tag">Tudo o que você precisa fazer para o seu livro ser lido cada vez mais, <span class="amber">em um lugar só.</span></p>
-        <a class="dx__cue" href="#test-drive">Faça um test drive <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        <a class="dx__cue" href="#segredo">Descubra o que é <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
       </div>
     </div>
   </section>
 
-  <!-- 3. test drive -->
-  <section class="blk drive" id="test-drive">
+  <!-- 3. o segredo: nada do LOMBADA aparece antes da abertura -->
+  <section class="blk secret" id="segredo">
     <div class="wrap">
-      <div class="drive__grid">
-        <div class="rv">
-          <p class="eyebrow">Test drive</p>
-          <h2 class="h2">Instale um motor no seu livro.</h2>
-          <p class="lede">Escreva o nome dele. Escolha a fase. A sua segunda-feira aparece na hora.</p>
-          <div class="ctrl">
-            <div>
-              <label for="td-livro">O nome do seu livro</label>
-              <input id="td-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done">
-            </div>
-            <div>
-              <span class="lbl" id="td-fase-l">Em que fase ele está</span>
-              <div class="seg" role="group" aria-labelledby="td-fase-l">
-                <button type="button" data-f="construcao" aria-pressed="false">Escrevendo<small>Construção</small></button>
-                <button type="button" data-f="lancamento" aria-pressed="false">Lancei há pouco<small>Lançamento</small></button>
-                <button type="button" data-f="permanencia" aria-pressed="true">Já tem tempo<small>Permanência</small></button>
-              </div>
-            </div>
-            <p class="note">Copie o texto, publique e marque como feito. <b>Toda semana tem plano novo para o seu livro decolar.</b></p>
-          </div>
-          <p class="drive__claim">Demonstração. No LOMBADA, o plano é montado pela fase do seu livro, pelo gênero e pelo tempo que você tem, e o texto vem preenchido com os dados do seu cadastro.</p>
+      <div class="secret__grid">
+        <div class="secret__txt rv">
+          <p class="eyebrow">Ainda em segredo</p>
+          <h2 class="h2">O LOMBADA ainda não pode ser mostrado. <span class="amber">Mas ele já existe.</span></h2>
+          <p class="lede">O mercado literário nunca viu nada parecido. Você vê tudo na abertura, dia 9 de novembro, às 20h.</p>
+          <ul class="nots">
+            <li>Não é um curso.</li>
+            <li>Não é mais uma planilha.</li>
+            <li><b>É a ferramenta que todo autor <span class="amber">sonhou.</span></b></li>
+          </ul>
         </div>
-        <div class="rv">
-          <div class="try-wrap"><p class="try"><i aria-hidden="true"></i>Interativo · toque para testar</p></div>
-          <div class="phone">
-            <div class="screen" id="td-screen">
-              <div class="app-top">
-                <div class="app-brand"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span><span class="chip" id="td-chip" data-f="permanencia">Permanência</span></div>
-                <p class="app-day">Segunda · plano da semana</p>
-                <p class="app-title" id="td-titulo">A Casa das Marés</p>
-                <div class="app-prog"><span id="td-cont">0 de 3</span><span class="bar"><i id="td-bar"></i></span></div>
-              </div>
-              <div class="app-list" id="td-list" aria-live="polite"></div>
+        <div class="vault rv" aria-hidden="true">
+          <div class="vault__phone">
+            <div class="vault__blur"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="vault__lock">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+              <p>Revelado dia 9 de novembro, às 20h</p>
             </div>
           </div>
-          <p class="phone-cap">É como ter a Dany, todo dia ao seu lado, falando o que fazer para o seu livro alcançar cada vez mais leitores.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 4. tem mais motor aí dentro: oportunidades + ideias de post -->
-  <section class="blk" id="mais-motor">
+  <!-- 4. para todo autor -->
+  <section class="ages">
     <div class="wrap">
-      <div class="center rv">
-        <p class="eyebrow">E não para na segunda</p>
-        <h2 class="h2">Tem mais motor aí dentro.</h2>
+      <p class="eyebrow rv">Para todo autor</p>
+      <h2 class="h2 rv">Não importa em que fase você está. <span class="amber">O LOMBADA é para você.</span></h2>
+      <div class="ages__rows">
+        <p class="ages__r c1 rv">Ainda escrevendo<small>Começa antes do lançamento.</small></p>
+        <p class="ages__r c2 rv">Acabou de lançar<small>Não deixa o livro parar.</small></p>
+        <p class="ages__r c3 rv">Parado há anos<small>Coloca o livro para andar.</small></p>
       </div>
-
-      <div class="feat rv">
-        <div class="feat__txt">
-          <p class="feat__k">Oportunidades</p>
-          <h3 class="feat__h">Prêmios, feiras e editais. <span class="amber">Não perca nenhuma chance de ver o seu livro brilhar.</span></h3>
-          <p class="feat__p">O LOMBADA mostra o que vem aí para o gênero do seu livro: prêmios, feiras, editais e datas comemorativas. Você só escolhe onde entrar.</p>
-        </div>
-        <div class="feat__win">
-          <div class="try-wrap"><p class="try"><i aria-hidden="true"></i>Interativo · toque para testar</p></div>
-          <div class="panel">
-            <div class="panel__top">
-              <div class="panel__k"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/></svg>LOMBADA</span><span class="tg">Oportunidades</span></div>
-              <p class="panel__t">O que vem aí para o seu livro</p>
-              <p class="panel__d">Escolha o gênero do seu livro.</p>
-              <div class="pills gen" role="group" aria-label="Gênero do livro" id="op-gen">
-                <button type="button" data-g="Romance" aria-pressed="true">Romance</button>
-                <button type="button" data-g="Infantil" aria-pressed="false" class="pulse">Infantil</button>
-                <button type="button" data-g="Negócios" aria-pressed="false">Negócios</button>
-                <button type="button" data-g="Poesia" aria-pressed="false">Poesia</button>
-                <button type="button" data-g="Biografia e memórias" aria-pressed="false">Memórias</button>
-              </div>
-            </div>
-            <div class="ops" id="op-list" aria-live="polite"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="feat feat--rev rv">
-        <div class="feat__txt">
-          <p class="feat__k">Ideias de post ilimitadas</p>
-          <h3 class="feat__h">Faça suas redes sociais <span class="amber">decolarem.</span></h3>
-          <p class="feat__p">O LOMBADA já sabe tudo sobre o seu livro: o gênero, o leitor, a fase e a ação da semana. Por isso cria posts únicos, feitos para você brilhar nas redes. Responda 3 perguntas e gere quantos quiser.</p>
-          <p class="feat__inf" aria-hidden="true">∞</p>
-        </div>
-        <div class="feat__win">
-          <div class="try-wrap"><p class="try"><i aria-hidden="true"></i>Interativo · toque para testar</p></div>
-          <div class="panel">
-            <div class="panel__top">
-              <div class="panel__k"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/></svg>LOMBADA</span><span class="tg">Ideias de post</span></div>
-              <p class="panel__t">Ideias de post ilimitadas</p>
-              <p class="panel__d">Escolha a rede, a habilidade e o tom.</p>
-            </div>
-            <div class="idea">
-              <div><span class="q__l">1. Para qual rede?</span><div class="pills" data-k="rede"><button type="button" aria-pressed="true">Instagram</button><button type="button" aria-pressed="false">TikTok</button><button type="button" aria-pressed="false">LinkedIn</button><button type="button" aria-pressed="false">YouTube</button></div></div>
-              <div><span class="q__l">2. Sua habilidade em redes</span><div class="pills" data-k="hab"><button type="button" aria-pressed="false">alta</button><button type="button" aria-pressed="true">média</button><button type="button" aria-pressed="false">baixa</button></div></div>
-              <div><span class="q__l">3. Que tom?</span><div class="pills" data-k="tom"><button type="button" aria-pressed="true">inspirador</button><button type="button" aria-pressed="false">provocativo</button><button type="button" aria-pressed="false">educativo</button><button type="button" aria-pressed="false">humor</button></div></div>
-              <button type="button" class="gen-btn pulse" id="idea-btn"><span>Gerar ideias</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.6L12 15l-1.8-4.4L5.5 9l4.7-1.4z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button>
-              <p class="ideas__count" id="ideas-count"></p>
-              <div class="ideas" id="ideas" aria-live="polite"></div>
-            </div>
-            <p class="panel__foot">Exemplos. No LOMBADA, o Gerador de Posts abre no ChatGPT já com os dados do seu livro.</p>
-          </div>
-        </div>
-      </div>
+      <p class="ages__foot rv">Primeiro livro ou décimo. <span class="amber">O LOMBADA é único.</span></p>
     </div>
   </section>
 
-  <!-- 5. por dentro do motor -->
-  <section class="blk" style="border-top:1px solid var(--line)">
-    <div class="wrap center rv">
-      <p class="eyebrow">Livro novo ou antigo</p>
-      <h2 class="h2">Saiba o que fazer, quando fazer, em cada etapa do seu livro. <span class="amber">Sempre.</span></h2>
-      <p class="phases"><span class="c1">Escrevendo</span><span class="c2">Recém-lançado</span><span class="c3">Parado há anos</span></p>
-      <p class="lede">Cada ação é feita para o seu livro e o seu momento como autor. Tudo sai das aulas do Método The Book Business.</p>
-    </div>
-    <div class="belt rv" aria-hidden="true">
-      <div class="belt__row" id="belt-1"></div>
-      <div class="belt__row rev" id="belt-2"></div>
-    </div>
-    <div class="wrap">
-      <div class="mon rv">
-        <div class="before">
-          <p class="tag">Sem o LOMBADA</p>
-          <p class="l">Você lembra que precisa divulgar.</p>
-          <p class="l">Abre o Instagram. Não sabe o que postar.</p>
-          <p class="l">Fecha. Semana que vem você vê isso.</p>
-        </div>
-        <div class="after">
-          <p class="tag">Com o LOMBADA</p>
-          <p class="l">Você abre o painel.</p>
-          <p class="l">O plano da semana já está lá.</p>
-          <p class="l">O texto já vem escrito. Você copia, publica e marca como feito.</p>
-        </div>
-      </div>
-      <p class="mon-foot rv">A diferença não é disciplina. É saber o próximo passo.</p>
-    </div>
-  </section>
-
-  <!-- 6. cada etapa do livro -->
   <!-- 7. quem colocou o motor -->
   <section class="blk">
     <div class="wrap">
       <div class="who__grid">
-        <figure class="who__pic rv"><img src="assets/dany-palco.webp" alt="Dany Sakugawa no palco" width="680" height="1207" loading="lazy" decoding="async"></figure>
+        <figure class="who__pic rv"><img src="../black-week/assets/dany-palco.webp" alt="Dany Sakugawa no palco" width="680" height="1207" loading="lazy" decoding="async"></figure>
         <div class="who__body">
           <div class="rv">
           <p class="eyebrow">Quem colocou o motor</p>
@@ -867,13 +803,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       <div class="media-k rv"><p class="eyebrow">Dany na mídia</p></div>
       <div class="media rv" aria-label="Dany na mídia">
         <div class="media__track">
-        <figure><img src="assets/midia/band.webp" alt="Dany Sakugawa na Band" loading="lazy" decoding="async" width="520" height="292"><figcaption>Band</figcaption></figure>
-        <figure><img src="assets/midia/sbt.webp" alt="Dany Sakugawa no SBT" loading="lazy" decoding="async" width="520" height="262"><figcaption>SBT</figcaption></figure>
-        <figure><img src="assets/midia/bienal-do-livro.webp" alt="Dany Sakugawa na Bienal do Livro" loading="lazy" decoding="async" width="520" height="390"><figcaption>Bienal do Livro</figcaption></figure>
-        <figure><img src="assets/midia/premio-publishnews.webp" alt="Dany Sakugawa no Prêmio PublishNews" loading="lazy" decoding="async" width="520" height="390"><figcaption>Prêmio PublishNews</figcaption></figure>
-        <figure><img src="assets/midia/hotmart-festival.webp" alt="Dany Sakugawa no Hotmart Festival" loading="lazy" decoding="async" width="520" height="290"><figcaption>Hotmart Festival</figcaption></figure>
-        <figure><img src="assets/midia/mauricio-de-sousa.webp" alt="Dany Sakugawa com Maurício de Sousa" loading="lazy" decoding="async" width="520" height="693"><figcaption>Com Maurício de Sousa</figcaption></figure>
-        <figure><img src="assets/midia/band-entrevista.webp" alt="Dany Sakugawa no Band Entrevista" loading="lazy" decoding="async" width="520" height="390"><figcaption>Band Entrevista</figcaption></figure>
+        <figure><img src="../black-week/assets/midia/band.webp" alt="Dany Sakugawa na Band" loading="lazy" decoding="async" width="520" height="292"><figcaption>Band</figcaption></figure>
+        <figure><img src="../black-week/assets/midia/sbt.webp" alt="Dany Sakugawa no SBT" loading="lazy" decoding="async" width="520" height="262"><figcaption>SBT</figcaption></figure>
+        <figure><img src="../black-week/assets/midia/bienal-do-livro.webp" alt="Dany Sakugawa na Bienal do Livro" loading="lazy" decoding="async" width="520" height="390"><figcaption>Bienal do Livro</figcaption></figure>
+        <figure><img src="../black-week/assets/midia/premio-publishnews.webp" alt="Dany Sakugawa no Prêmio PublishNews" loading="lazy" decoding="async" width="520" height="390"><figcaption>Prêmio PublishNews</figcaption></figure>
+        <figure><img src="../black-week/assets/midia/hotmart-festival.webp" alt="Dany Sakugawa no Hotmart Festival" loading="lazy" decoding="async" width="520" height="290"><figcaption>Hotmart Festival</figcaption></figure>
+        <figure><img src="../black-week/assets/midia/mauricio-de-sousa.webp" alt="Dany Sakugawa com Maurício de Sousa" loading="lazy" decoding="async" width="520" height="693"><figcaption>Com Maurício de Sousa</figcaption></figure>
+        <figure><img src="../black-week/assets/midia/band-entrevista.webp" alt="Dany Sakugawa no Band Entrevista" loading="lazy" decoding="async" width="520" height="390"><figcaption>Band Entrevista</figcaption></figure>
         </div>
       </div>
     </div>
@@ -883,18 +819,17 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   <section class="fecho" id="cadastro-fim">
     <div class="wrap">
       <div class="fecho__card rv">
-        <img class="fecho__gift" src="assets/presente.webp" alt="" width="260" height="260" loading="lazy" decoding="async">
+        <img class="fecho__gift" src="../black-week/assets/presente.webp" alt="" width="260" height="260" loading="lazy" decoding="async">
         <div class="fecho__grid">
           <div class="fecho__offer">
             <p class="eyebrow">Na Black Week Motorizada</p>
             <h3 class="fecho__t">Método The Book Business <span class="amber">+</span> LOMBADA</h3>
             <p class="fecho__s">O Método ensina. O LOMBADA não deixa parar.</p>
             <ul class="fecho__list">
-              <li>Toda segunda, o plano da semana do seu livro.</li>
-              <li>O texto pronto, com o nome do seu livro.</li>
-              <li><b>Oportunidades:</b> prêmios, feiras e editais do seu gênero.</li>
-              <li><b>Ideias de post ilimitadas.</b></li>
+              <li>O LOMBADA, revelado na abertura.</li>
+              <li>Para quem ainda está escrevendo.</li>
               <li>Para livro novo <span class="amber">e para livro parado há anos.</span></li>
+              <li>Condições só no dia 9 de novembro, às 20h.</li>
             </ul>
           </div>
           <div class="fecho__form">
@@ -921,7 +856,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 </main>
 
 <footer>
-  <img class="foot-logo" src="assets/logo-mtbb.webp" alt="Método The Book Business" width="80" height="52" loading="lazy" decoding="async">
+  <img class="foot-logo" src="../black-week/assets/logo-mtbb.webp" alt="Método The Book Business" width="80" height="52" loading="lazy" decoding="async">
   <p>© 2026 . The Book Business. Todos os direitos reservados.</p>
   <p><a class="foot-link" href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a></p>
   <p class="legal"><b>Aviso Legal:</b> “Nenhuma informação contida neste site deve ser interpretada como uma afirmação de resultados ou de retornos financeiros. Qualquer referência a desempenho passado ou potencial é uma estratégia elaborada no contexto <b>individual de cada autor</b>, e não deve ser interpretada como recomendação ou garantia de resultados específicos.”</p>
@@ -945,223 +880,6 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     io.observe(el);
   }
   function setPressed(group, btn) { $$('button', group).forEach(function (x) { x.setAttribute('aria-pressed', x === btn ? 'true' : 'false'); }); }
-
-  /* ================= 3. TEST DRIVE =================
-     Ações e textos reais do catálogo do LOMBADA (plataforma-do-autor/src/dados/acoes_mtbb.js).
-     {T} = nome do livro. [[x]] = campo que o LOMBADA preenche com o cadastro do autor. */
-  var FASES = {
-    construcao: { nome: 'Construção', acoes: [
-      { t: 'Anuncie que decidiu escrever {T}', min: 30, texto:
-        'Eu nunca contei isso aqui.\n\nVou publicar um livro. Chama {T}.\n\n[[o que o livro faz pelo leitor]]\n\nEscrevi pensando em [[quem vai ler]]. Não é um projeto de fim de semana: é uma coisa que eu carrego há tempo.\n\nVou mostrar os bastidores por aqui, do rascunho até a capa. Quem quiser acompanhar, me conta nos comentários: você já leu um livro que mudou uma decisão sua?\n\n[[seu nome]]' },
-      { t: 'Escreva em uma frase o que {T} faz pelo leitor', min: 40 },
-      { t: 'Dê nome e rosto ao leitor ideal de {T}', min: 60 }
-    ] },
-    lancamento: { nome: 'Lançamento', acoes: [
-      { t: 'Peça avaliação a quem comprou {T} ou te marcou nesta semana', min: 30, texto:
-        'Oi, [[nome do leitor]]! Vi que você comprou {T}. Obrigado de verdade.\n\nPosso te pedir 2 minutos? Uma avaliação honesta na página do livro, com estrelas e uma frase, é o que mais ajuda o livro a ser encontrado por outras pessoas.\n\nÉ só entrar aqui e rolar até "Avaliações": [[link do seu livro]]\n\nNão precisa ser longa. O que ficou com você já basta.\n\n[[seu nome]]' },
-      { t: 'Reposte tudo que {T} gerou: marcações, matérias, depoimentos', min: 30 },
-      { t: 'Avise sua lista que {T} está no ar', min: 30 }
-    ] },
-    permanencia: { nome: 'Permanência', acoes: [
-      { t: 'Republique um trecho de {T} como post', min: 20, texto:
-        '"[[o seu trecho favorito]]"\n\nEsse é um trecho de {T}. Escrevi para [[quem vai ler]], e é a parte que mais recebo mensagem.\n\n[[o que o livro faz pelo leitor]]\n\nSe essa frase mexeu com você, o livro inteiro está aqui: [[link do seu livro]]\n\n[[seu nome]]' },
-      { t: 'Peça avaliação a quem comprou {T} ou te marcou', min: 30 },
-      { t: 'Busque uma audiência nova para falar de {T}', min: 45 }
-    ] }
-  };
-
-  var inLivro = $('#td-livro'), list = $('#td-list'), screen = $('#td-screen'), chip = $('#td-chip');
-  var tTitulo = $('#td-titulo'), cont = $('#td-cont'), bar = $('#td-bar'), seg = $('.seg');
-  var fase = 'permanencia', feitas = {}, demoNome = '', userTouched = false;
-
-  // nome do livro: o que a pessoa digitou ou o que a demonstração está "digitando"
-  function livro(padrao) { var v = (userTouched ? inLivro.value : demoNome).trim(); return v || padrao; }
-  function comLivro(s, padrao) { return esc(s).replace(/\{T\}/g, '<span class="bk">' + esc(livro(padrao)) + '</span>'); }
-  function fmtTexto(s) { return comLivro(s, 'A Casa das Marés').replace(/\[\[(.+?)\]\]/g, '<span class="vr">$1</span>'); }
-  function plain(s) { return s.replace(/\{T\}/g, livro('A Casa das Marés')).replace(/\[\[(.+?)\]\]/g, '[$1]'); }
-  function meta(i) { return FASES[fase].acoes[i].min + ' min · ' + (feitas[i] ? 'Feito' : 'Esta semana'); }
-
-  function progresso() {
-    var n = Object.keys(feitas).length, tot = FASES[fase].acoes.length;
-    cont.textContent = n + ' de ' + tot;
-    bar.style.width = (n / tot * 100) + '%';
-    screen.classList.toggle('complete', n === tot);
-  }
-  function setTitulo(digitando) { tTitulo.innerHTML = esc(livro('A Casa das Marés')) + (digitando ? '<span class="caret"></span>' : ''); }
-  function refreshTexts() {
-    $$('.act', list).forEach(function (el) {
-      var a = FASES[fase].acoes[+el.getAttribute('data-i')];
-      $('.act__t', el).innerHTML = comLivro(a.t, 'A Casa das Marés');
-      var b = $('.texto__b', el); if (b) b.innerHTML = fmtTexto(a.texto);
-    });
-  }
-  function render() {
-    var f = FASES[fase];
-    chip.textContent = f.nome; chip.setAttribute('data-f', fase);
-    setTitulo(false);
-    list.innerHTML = f.acoes.map(function (a, i) {
-      var tx = a.texto ? '<div class="texto"><div class="texto__h"><span>Texto pronto</span><button type="button" class="copy" data-i="' + i + '">Copiar texto</button></div><p class="texto__b">' + fmtTexto(a.texto) + '</p></div>' : '';
-      return '<div class="act' + (feitas[i] ? ' done' : '') + '" data-i="' + i + '"><div class="act__row">' +
-        '<button type="button" class="check' + (!userTouched && i === 0 ? ' pulse' : '') + '" aria-label="Marcar como feito" aria-pressed="' + !!feitas[i] + '" data-i="' + i + '"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>' +
-        '<div><p class="act__t">' + comLivro(a.t, 'A Casa das Marés') + '</p><p class="act__m">' + meta(i) + '</p></div></div>' + tx + '</div>';
-    }).join('') + '<div class="app-done">Semana completa.<small>Segunda tem plano novo.</small></div>';
-    progresso();
-  }
-  function marcar(i, on) {
-    if (on) feitas[i] = 1; else delete feitas[i];
-    var card = $('.act[data-i="' + i + '"]', list); if (!card) return;
-    card.classList.toggle('done', on);
-    $('.check', card).setAttribute('aria-pressed', on);
-    $('.act__m', card).textContent = meta(i);
-    progresso();
-  }
-  function choose(f) {
-    if (f === fase) return;
-    fase = f; feitas = {};
-    setPressed(seg, $('[data-f="' + f + '"]', seg));
-    render();
-  }
-  function takeOver() { if (!userTouched) { userTouched = true; stopDemo(); } }
-
-  inLivro.addEventListener('focus', takeOver);
-  inLivro.addEventListener('input', function () { takeOver(); setTitulo(false); refreshTexts(); });
-  seg.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; takeOver(); choose(b.getAttribute('data-f')); });
-  list.addEventListener('click', function (e) {
-    var c = e.target.closest('.check');
-    if (c) { takeOver(); var i = +c.getAttribute('data-i'); marcar(i, !feitas[i]); return; }
-    var cp = e.target.closest('.copy');
-    if (cp) {
-      takeOver();
-      var t = plain(FASES[fase].acoes[+cp.getAttribute('data-i')].texto);
-      var ok = function () { cp.textContent = 'Copiado'; cp.classList.add('ok'); setTimeout(function () { cp.textContent = 'Copiar texto'; cp.classList.remove('ok'); }, 1800); };
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, ok);
-      else { var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (er) {} ta.remove(); ok(); }
-    }
-  });
-  render();
-
-  // demonstração: quando o celular entra na tela, o painel "digita" um livro sozinho; para no primeiro toque
-  var timers = [];
-  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
-  function stopDemo() { timers.forEach(clearTimeout); timers = []; setTitulo(false); }
-  if (!REDUCED) onView($('.phone'), function () {
-    if (userTouched) return;
-    var nome = 'O Último Verão', passo = 70, t0 = 500;
-    for (var k = 1; k <= nome.length; k++) (function (k) { later(function () { demoNome = nome.slice(0, k); setTitulo(true); refreshTexts(); }, t0 + k * passo); })(k);
-    var fim = t0 + nome.length * passo + 300;
-    later(function () { setTitulo(false); }, fim);
-    later(function () { choose('lancamento'); }, fim + 1600);
-    later(function () { if (!userTouched) marcar(1, true); }, fim + 3000);
-  }, { threshold: .45 });
-
-  /* ================= 4a. OPORTUNIDADES =================
-     Dados reais do app: dados/oportunidades_reais.js e regras/datas_comemorativas.js. */
-  var ALL = '*';
-  var OPS = [ // [prazo, tipo de prazo, data prevista?, tipo, nome, gêneros]
-    ['2026-12-31', 'acompanhar', 1, 'Edital', 'Editais da Política Nacional Aldir Blanc para livro e leitura', ALL],
-    ['2027-01-14', 'inscricao', 1, 'Prêmio', 'Prêmio Cepe Nacional de Literatura', ['Romance', 'Poesia', 'Infantil']],
-    ['2027-02-14', 'inscricao', 1, 'Prêmio', '23º Prêmio Barco a Vapor', ['Infantil']],
-    ['2027-03-02', 'inscricao', 1, 'Prêmio', 'Prêmio Sesc de Literatura', ['Romance', 'Poesia']],
-    ['2027-03-09', 'inscricao', 1, 'Prêmio', 'Prêmio Oceanos', ['Romance', 'Poesia']],
-    ['2027-03-31', 'acompanhar', 1, 'Prêmio', 'Prêmio Off Flip de Literatura', ['Romance', 'Poesia', 'Infantil']],
-    ['2027-04-24', 'evento', 0, 'Feira', 'Flipoços 2027', ALL],
-    ['2027-04-29', 'evento', 1, 'Feira', 'Bienal Mineira do Livro', ALL],
-    ['2027-04-30', 'acompanhar', 1, 'Prêmio', 'Prêmio Todavia de Não Ficção', ['Negócios', 'Biografia e memórias']],
-    ['2027-05-19', 'inscricao', 1, 'Prêmio', '69º Prêmio Jabuti', ALL],
-    ['2027-05-31', 'acompanhar', 1, 'Prêmio', 'Prêmio Malê de Literatura', ['Romance', 'Poesia', 'Biografia e memórias']],
-    ['2027-06-01', 'evento', 1, 'Feira', 'Salão FNLIJ do Livro para Crianças e Jovens', ['Infantil']],
-    ['2027-06-15', 'evento', 1, 'Feira', 'Bienal do Livro Rio', ALL],
-    ['2027-07-08', 'inscricao', 1, 'Prêmio', 'Prêmio Literário Biblioteca Nacional', ['Romance', 'Poesia', 'Infantil', 'Biografia e memórias']],
-    ['2027-07-21', 'evento', 1, 'Evento', 'Flip 2027 · Paraty', ALL],
-    ['2027-08-31', 'inscricao', 1, 'Prêmio', '12º Prêmio Kindle de Literatura', ['Romance']]
-  ];
-  var DATAS = [ // [mês, dia, nome, gêneros]
-    [3, 8, 'Dia Internacional da Mulher', ALL], [3, 14, 'Dia Nacional da Poesia', ['Poesia']], [4, 18, 'Dia Nacional do Livro Infantil', ['Infantil']],
-    [4, 23, 'Dia Mundial do Livro', ALL], [6, 12, 'Dia dos Namorados', ['Romance', 'Poesia']], [7, 25, 'Dia do Escritor', ALL],
-    [7, 26, 'Dia dos Avós', ['Romance', 'Biografia e memórias', 'Infantil']], [10, 5, 'Dia do Empreendedor', ['Negócios']],
-    [10, 12, 'Dia das Crianças', ['Infantil']], [10, 29, 'Dia Nacional do Livro', ALL], [12, 25, 'Natal', ALL]
-  ];
-  var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
-  var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
-  var opList = $('#op-list'), opGen = $('#op-gen');
-  function dias(d) { return Math.round((d - hoje) / 864e5); }
-  function serve(gs, g) { return gs === ALL || gs.indexOf(g) !== -1; }
-  function renderOps(g) {
-    var itens = OPS.filter(function (o) { return serve(o[5], g); }).map(function (o) { return { d: new Date(o[0] + 'T00:00:00'), n: o[4], ty: o[3], tp: o[1], est: o[2] }; });
-    DATAS.forEach(function (x) {
-      if (!serve(x[3], g)) return;
-      var d = new Date(hoje.getFullYear(), x[0] - 1, x[1]); if (d < hoje) d.setFullYear(d.getFullYear() + 1);
-      itens.push({ d: d, n: x[2], ty: 'Data comemorativa', tp: 'data', est: 0 });
-    });
-    itens = itens.filter(function (o) { return dias(o.d) >= 0; }).sort(function (a, b) { return a.d - b.d; }).slice(0, 5);
-    opList.innerHTML = itens.map(function (o) {
-      var n = dias(o.d), ev = o.tp === 'evento' || o.tp === 'data';
-      var cd = n === 0 ? (ev ? 'É hoje' : 'Vence hoje') : n === 1 ? (ev ? 'É amanhã' : 'Vence amanhã') : (ev ? 'Em ' : 'Vence em ') + n + ' dias';
-      return '<div class="op' + (o.tp === 'data' ? ' dt' : '') + '"><div class="op__d"><b>' + o.d.getDate() + '</b><small>' + MES[o.d.getMonth()] + '</small></div>' +
-        '<div><p class="op__n">' + esc(o.n) + '</p><p class="op__m"><span class="ty">' + o.ty + '</span><span class="cd">' + cd + '</span>' + (o.est ? '<span>data prevista</span>' : '') + '</p></div></div>';
-    }).join('');
-  }
-  opGen.addEventListener('click', function (e) {
-    var b = e.target.closest('button'); if (!b) return;
-    setPressed(opGen, b);
-    $$('.pulse', opGen).forEach(function (x) { x.classList.remove('pulse'); });
-    renderOps(b.getAttribute('data-g'));
-  });
-  renderOps('Romance');
-
-  /* ================= 4b. IDEIAS DE POST ILIMITADAS =================
-     No app: 3 perguntas (rede, habilidade, tom) e o Gerador de Posts abre no ChatGPT com o livro, a fase e a ação da semana.
-     Aqui: exemplos por tom, que se acumulam, para mostrar que não acaba. */
-  var IDEIAS = {
-    inspirador: [['O dia em que eu quase desisti de {T}.', 'Conte a cena. Termine com o que te fez continuar.'], ['O que {T} me ensinou antes de ensinar o leitor.', 'Uma lição por slide. Feche com o livro.'], ['Por que eu escrevi {T} mesmo com medo.', 'Fale do medo primeiro. A decisão vem depois.'], ['A frase de {T} que eu precisava ter lido anos atrás.', 'A frase no centro. Na legenda, o porquê.'], ['Para quem acha que é tarde: {T} começou assim.', 'Mostre o começo real: data, lugar, rascunho.'], ['Quem eu era antes de escrever {T}.', 'Antes e depois. Uma foto de cada.']],
-    provocativo: [['Ninguém te conta isso sobre o tema de {T}.', 'Abra com a afirmação. Prove em 3 pontos.'], ['O erro que quase todo mundo comete, e que {T} desmonta.', 'Nomeie o erro. Mostre a saída.'], ['A opinião impopular que virou {T}.', 'A opinião na primeira linha. Convide a discordar.'], ['Discordo de quase todo mundo sobre isso. Está em {T}.', 'Uma frase forte e o trecho que sustenta.'], ['Se você acha que já sabe tudo sobre o tema, leia {T}.', 'Desafie o leitor. Termine com uma pergunta.'], ['O que eu cortei de {T} porque ia causar briga.', 'Bastidor. Conte só o suficiente.']],
-    educativo: [['3 lições de {T} em 30 segundos.', 'Uma lição por cena. Fala direta para a câmera.'], ['A ideia central de {T}, explicada com um exemplo.', 'Um exemplo do dia a dia. Sem jargão.'], ['Um mito que {T} derruba.', 'O mito na capa. A verdade no último slide.'], ['As perguntas que os leitores mais fazem sobre {T}.', 'Uma resposta por slide.'], ['Antes e depois: o que muda quando você aplica {T}.', 'Duas colunas. Concreto, não abstrato.'], ['O glossário de {T} em 5 palavras.', 'Uma palavra por slide, com a definição.']],
-    humor: [['Eu escrevendo {T} x eu revisando {T}.', 'Dois cortes. A mesma roupa, outra cara.'], ['Minha família quando eu falo de {T} pela vigésima vez.', 'Vídeo de reação com um áudio em alta.'], ['Expectativa x realidade do lançamento de {T}.', 'Tela dividida. Seja honesto.'], ['Coisas que só quem escreveu um livro entende (versão {T}).', 'Lista rápida. Uma por cena.'], ['O que meus amigos acham que é {T} x o que é.', 'Brinque com o mal-entendido.'], ['Eu pedindo avaliação de {T} pela terceira vez na semana.', 'Rir de si mesmo pede avaliação sem pedir.']]
-  };
-  var IC = {
-    carrossel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="M19 7v10M22 9v6"/></svg>',
-    video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>',
-    stories: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5" stroke-dasharray="3 2.2"/><circle cx="12" cy="12" r="4"/></svg>',
-    texto: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg>'
-  };
-  var FORMATO = {
-    Instagram: [['Carrossel', 'carrossel'], ['Reels', 'video'], ['Stories', 'stories']],
-    TikTok: [['Vídeo curto', 'video'], ['Trend', 'video'], ['Carrossel', 'carrossel']],
-    LinkedIn: [['Post de texto', 'texto'], ['Carrossel', 'carrossel'], ['Vídeo', 'video']],
-    YouTube: [['Shorts', 'video'], ['Vídeo', 'video'], ['Comunidade', 'texto']]
-  };
-  var escolha = { rede: 'Instagram', hab: 'média', tom: 'inspirador' }, gerados = 0, porTom = {};
-  var ideasBox = $('#ideas'), ideasCount = $('#ideas-count'), ideaBtn = $('#idea-btn');
-  $$('.pills[data-k]').forEach(function (g) {
-    g.addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      setPressed(g, b);
-      escolha[g.getAttribute('data-k')] = b.textContent;
-    });
-  });
-  function gerar(destacar) {
-    var lista = IDEIAS[escolha.tom], fmts = FORMATO[escolha.rede], html = '';
-    $$('.ia.new', ideasBox).forEach(function (x) { x.classList.remove('new'); });
-    for (var k = 0; k < 3; k++) {
-      var i = porTom[escolha.tom] = (porTom[escolha.tom] || 0) + 1;
-      var it = lista[(i - 1) % lista.length], f = fmts[(gerados + k) % fmts.length];
-      html += '<div class="ia' + (destacar ? ' new' : '') + '"><span class="ia__ic">' + IC[f[1]] + '</span><div class="ia__b">' +
-        '<p class="ia__tg"><b>Ideia ' + (gerados + k + 1) + '</b><span>' + escolha.rede + ' · ' + f[0] + '</span><span>' + escolha.tom + '</span></p>' +
-        '<p class="ia__t">' + comLivro(it[0], 'A Casa das Marés') + '</p><p class="ia__h">' + esc(it[1]) + '</p></div></div>';
-    }
-    gerados += 3;
-    ideasBox.insertAdjacentHTML('afterbegin', html);
-    ideasBox.scrollTop = 0;
-    ideasCount.innerHTML = '<span><b>' + gerados + ' ideias</b> geradas</span><span>gere quantas quiser <span class="inf">∞</span></span>';
-  }
-  ideaBtn.addEventListener('click', function () { gerar(true); ideaBtn.classList.remove('pulse'); $('span', ideaBtn).textContent = 'Gerar mais ideias'; });
-  gerar(false);
-
-  /* ================= 5. ESTEIRA DE AÇÕES (títulos reais do catálogo) ================= */
-  var A1 = ['Anuncie que decidiu escrever <b>seu livro</b>', 'Dê nome e rosto ao leitor ideal', 'Liste 10 palavras que o leitor digitaria para achar <b>seu livro</b>', 'Escolha a subcategoria na árvore da Amazon', 'Escreva a descrição em 3 partes', 'Faça a votação ou a revelação da capa', 'Comece a lista de e-mails dos leitores', 'Publique a contagem regressiva da pré-venda', 'Envie <b>seu livro</b> antes a 3 influenciadores'];
-  var A2 = ['Peça avaliação a quem comprou <b>seu livro</b>', 'Republique um trecho como post', 'Crie um microciclo para uma data comemorativa', 'Proponha uma pauta ao jornal da sua cidade', 'Reposte tudo que <b>seu livro</b> gerou', 'Busque uma audiência nova', 'Faça um sorteio ou concurso cultural', 'Escreva o release no padrão da imprensa', 'Divulgue em quais livrarias <b>seu livro</b> está'];
-  function fill(id, arr) { $(id).innerHTML = arr.concat(arr).map(function (s) { return '<span>' + s + '</span>'; }).join(''); }
-  fill('#belt-1', A1); fill('#belt-2', A2);
 
   /* ================= 2. CENA DO SONHO (rolagem) ================= */
   var dx = $('#reveal'), dxIn = false;
@@ -1274,9 +992,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         email: form.email.value.trim(),
         whatsapp: zap.value.replace(/\D/g, ''),
         variant: 'black-week',
-        posicao: box.getAttribute('data-pos'),
-        td_fase: userTouched ? fase : '',
-        td_livro: userTouched ? inLivro.value.trim().slice(0, 48) : ''
+        posicao: 'misterio-' + box.getAttribute('data-pos')
       };
       Object.keys(utms).forEach(function (k) { payload[k] = utms[k]; });
 
