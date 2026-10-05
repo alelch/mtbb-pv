@@ -406,15 +406,13 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 
 
 /* ---------- 6. cada etapa do livro ---------- */
-.ages { padding: var(--sec) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; overflow: hidden; }
-.ages .h2 { max-width: 720px; margin: 12px auto 44px; }
-.ages__rows { display: grid; gap: 4px; }
-.ages__r { font-size: clamp(24px, 7.4vw, 50px); font-weight: 600; line-height: 1; letter-spacing: -.01em; text-transform: uppercase; }
-.ages__r small { display: block; margin: 6px 0 16px; font-size: clamp(12px, 3.4vw, 15px); font-weight: 500; letter-spacing: .04em; text-transform: none; color: var(--ink-3); }
-.ages__r.c1 { color: var(--f-construcao); }
-.ages__r.c2 { color: var(--f-lancamento); }
-.ages__r.c3 { color: var(--f-permanencia); }
-.ages__foot { margin-top: 24px; font-size: clamp(18px, 5vw, 24px); font-weight: 500; }
+/* as três fases do livro, numa linha só */
+.phases { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-top: 20px; font-size: clamp(13px, 3.6vw, 16px); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.phases span { display: inline-flex; align-items: center; gap: 8px; }
+.phases span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.phases .c1 { color: var(--f-construcao); }
+.phases .c2 { color: var(--f-lancamento); }
+.phases .c3 { color: var(--f-permanencia); }
 
 /* ---------- 7. quem colocou o motor ---------- */
 .who__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
@@ -762,9 +760,10 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   <!-- 5. por dentro do motor -->
   <section class="blk" style="border-top:1px solid var(--line)">
     <div class="wrap center rv">
-      <p class="eyebrow">Por dentro do motor</p>
-      <h2 class="h2">Cada ação é feita para o seu livro e para o seu momento como autor. <span class="amber">Nada é genérico.</span></h2>
-      <p class="lede">Tudo sai das aulas do Método The Book Business, na ordem certa para você.</p>
+      <p class="eyebrow">Livro novo ou antigo</p>
+      <h2 class="h2">Saiba o que fazer, quando fazer, em cada etapa do seu livro. <span class="amber">Sempre.</span></h2>
+      <p class="phases"><span class="c1">Escrevendo</span><span class="c2">Recém-lançado</span><span class="c3">Parado há anos</span></p>
+      <p class="lede">Cada ação é feita para o seu livro e o seu momento como autor. Tudo sai das aulas do Método The Book Business.</p>
     </div>
     <div class="belt rv" aria-hidden="true">
       <div class="belt__row" id="belt-1"></div>
@@ -790,19 +789,6 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   </section>
 
   <!-- 6. cada etapa do livro -->
-  <section class="ages">
-    <div class="wrap">
-      <p class="eyebrow rv">Livro novo ou antigo</p>
-      <h2 class="h2 rv">Saiba o que fazer, quando fazer, em cada etapa do seu livro. <span class="amber">Sempre.</span></h2>
-      <div class="ages__rows">
-        <p class="ages__r c1 rv">Escrevendo<small>Começa antes do lançamento.</small></p>
-        <p class="ages__r c2 rv">Recém-lançado<small>Não deixa o livro parar.</small></p>
-        <p class="ages__r c3 rv">Parado há anos<small>Coloca o livro para andar.</small></p>
-      </div>
-      <p class="ages__foot rv">O motor é o mesmo.</p>
-    </div>
-  </section>
-
   <!-- 7. quem colocou o motor -->
   <section class="blk">
     <div class="wrap">
