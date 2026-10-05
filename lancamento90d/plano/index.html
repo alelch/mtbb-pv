@@ -131,6 +131,8 @@ input[type=date]:hover{border-color:var(--laranja)}
 .nota{display:block;font-size:13px;line-height:1.45;color:var(--tinta-55);margin-top:2px;font-weight:400;max-width:68ch}
 .tarefa.feita .nota{color:var(--tinta-32)}
 
+.refs{margin:3px 0 0;font-size:12.5px;line-height:1.4;color:var(--tinta-55);font-style:italic}
+.tarefa.feita .refs{color:var(--tinta-32)}
 .apoios{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .chip{
   display:inline-flex;align-items:center;gap:6px;text-decoration:none;
@@ -208,6 +210,7 @@ input[type=date]:hover{border-color:var(--laranja)}
   .nota{font-size:8.5pt;line-height:1.35}
   .apoios{margin-top:4px;gap:4px}
   .chip{padding:2px 5px;font-size:7.5pt}
+  .refs{font-size:8pt;margin-top:1px;line-height:1.3}
   .post{margin-top:10px;padding:10px 12px}
   .post .frase{font-size:12pt}
   .faixa{margin-top:18px;padding-block:12px 14px}
@@ -237,7 +240,7 @@ input[type=date]:hover{border-color:var(--laranja)}
   <div class="console" aria-label="Datas do lançamento">
     <div class="console-grade">
       <div>
-        <div class="rot">Data de publicação (Dia 90)</div>
+        <div class="rot">Data de publicação</div>
         <div class="campo-data">
           <input type="date" id="dataPub" aria-label="Data de publicação do livro">
           <button type="button" class="btn-fantasma" id="limparData">limpar</button>
@@ -310,7 +313,7 @@ var SEMANAS = [
   itens:[
     {t:'Definir o objetivo do livro'},
     {t:'Definir público-alvo e persona do leitor ideal'},
-    {t:'Definir os temas universais que o livro aborda'},
+    {t:'Definir os temas universais que o livro aborda', ref:'Lista de Temas Universais'},
     {t:'Montar o cronograma reverso', nota:'Da data de publicação para trás.'},
     {t:'Tirar as fotos dos posts das próximas semanas', nota:'Lendo, escrevendo, assinando contrato, revisando o manuscrito, aprovando a diagramação.'},
     {t:'Listar datas comemorativas e efemérides ligadas ao tema do livro'}
@@ -333,7 +336,7 @@ var SEMANAS = [
   id:'s3', num:'Semana 3', semana:3, fase:'pre', rotulo:'Contatos',
   foco:'Mapeamento de contatos',
   itens:[
-    {t:'Mapear contatos por origem', nota:'Família, amigos, carreira, escola, clube, condomínio, igreja.'},
+    {t:'Mapear contatos por origem', nota:'Família, amigos, carreira, escola, clube, condomínio, igreja.', ref:'Planilha Modelo'},
     {t:'Atribuir tarefas aos contatos mapeados', subs:[
       {t:'Possíveis compradores da pré-venda'},
       {t:'Parceiros estratégicos (outros autores, empresas, instituições)'},
@@ -401,8 +404,8 @@ var SEMANAS = [
       {t:'O que é um bom número de vendas para aquela loja?'}
     ]},
     {t:'Montar a lista final de convidados'},
-    {t:'Mandar o Save the Date para as pessoas mais importantes e ocupadas'},
-    {t:'Enviar o post da semana no Grupo de Lançamento'}
+    {t:'Enviar o post da semana no Grupo de Lançamento'},
+    {t:'Mandar o Save the Date para as pessoas mais importantes e ocupadas'}
   ],
   post:{frase:'Crenças e valores.'}
 },
@@ -440,7 +443,7 @@ var SEMANAS = [
     {t:'Incentivar o Grupo de Lançamento a compartilhar'},
     {t:'Fazer lives e stories', nota:'Bastidores, depoimentos, bônus.'}
   ],
-  post:{frase:'Semana de quatro posts.', lista:[
+  post:{frase:'Intensificar as postagens sobre a pré-venda nas redes sociais.', lista:[
     'Post com a oferta da pré-venda',
     'Post com prints de quem já comprou',
     'Post emocional com o motivo pelo qual você escreveu esse livro',
@@ -468,7 +471,7 @@ var SEMANAS = [
     {t:'Monitorar rankings e vendas', nota:'Amazon, Amazon Associados, site, editora.'},
     {t:'Fazer stories e posts com o livro nas mãos dos leitores'}
   ],
-  post:{frase:'O livro chegou.', nota:'E agradecimento a quem comprou na pré-venda.'}
+  post:{frase:'Unboxing e agradecimento a quem comprou na pré-venda.'}
 }
 ];
 
@@ -601,6 +604,7 @@ function tarefa(id, it){
   h += '<input type="checkbox" class="marca-cx" id="'+id+'"'+(feito?' checked':'')+'>';
   h += '<div><label class="txt" for="'+id+'">'+esc(it.t)+'</label>';
   if(it.nota) h += '<span class="nota">'+esc(it.nota)+'</span>';
+  if(it.ref) h += '<p class="refs">'+esc(it.ref)+'</p>';
   h += chips(it.apoio);
   if(it.subs && it.subs.length){
     h += '<ul class="sub">';
@@ -728,7 +732,7 @@ function atualizarDatas(){
     sub.textContent = 'Com a data, cada semana ganha dia certo e a lista marca onde você está hoje.';
     dk.innerHTML = '<div class="dk"><b>Início da pré-venda</b><span>a definir</span></div>'
       + '<div class="dk"><b>Encerramento da pré-venda</b><span>a definir</span></div>'
-      + '<div class="dk destaque"><b>Publicação, Dia 90</b><span>a definir</span></div>'
+      + '<div class="dk destaque"><b>Data de publicação</b><span>a definir</span></div>'
       + '<div class="dk"><b>Evento de lançamento</b><span>a definir</span></div>';
     return;
   }
@@ -750,7 +754,7 @@ function atualizarDatas(){
   var evento = somaDias(pub, 7);
   dk.innerHTML = '<div class="dk"><b>Início da pré-venda</b><span>'+fmtLongo(j9.ini)+'</span></div>'
     + '<div class="dk"><b>Encerramento da pré-venda</b><span>'+fmtLongo(j11.fim)+'</span></div>'
-    + '<div class="dk destaque"><b>Publicação, Dia 90</b><span>'+fmtLongo(pub)+'</span></div>'
+    + '<div class="dk destaque"><b>Data de publicação</b><span>'+fmtLongo(pub)+'</span></div>'
     + '<div class="dk"><b>Evento de lançamento</b><span>'+fmtLongo(evento)+'</span></div>';
 }
 
