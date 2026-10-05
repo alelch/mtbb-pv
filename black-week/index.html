@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Black Week Motorizada da Dany Sakugawa</title>
-<meta name="description" content="O LOMBADA é a ferramenta que todo autor sonhou. Cadastre-se na Black Week Motorizada da Dany Sakugawa.">
+<meta name="description" content="O LOMBADA é a ferramenta que todo autor sonhou. A Black Week Motorizada da Dany Sakugawa abre segunda, 9 de novembro, às 20h. Cadastre-se.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#000000">
 <link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week/">
 <link rel="icon" type="image/webp" href="../lancamento90d/favicon.webp">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Black Week Motorizada da Dany Sakugawa">
-<meta property="og:description" content="A ferramenta que todo autor sonhou, mas nunca pensou que poderia existir.">
+<meta property="og:description" content="A ferramenta que todo autor sonhou. Abre segunda, 9 de novembro, às 20h.">
 <meta property="og:image" content="https://metodo.thebookbusiness.com.br/black-week/assets/og-black-week.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -207,6 +207,15 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: gold 6s linear infinite; filter: drop-shadow(0 8px 34px rgba(250, 171, 0, .22)); }
 .h1-sub { margin-top: 10px; font-size: clamp(13px, 3.8vw, 18px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); text-wrap: balance; }
+/* data de abertura + contagem regressiva */
+.when-pill { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 10px; margin-top: 18px; padding: 8px 16px;
+  border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; background: rgba(250, 171, 0, .08); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.when-pill__d { font-weight: 600; color: var(--ink); }
+.when-pill__c { font-weight: 600; color: var(--amber); }
+.when-pill__c:empty { display: none; }
+.when-pill__c::before { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 8px 1px 0; border-radius: 50%; background: var(--amber); vertical-align: middle; }
+.fecho__form .when-pill { margin: 0 0 16px; }
+@media (max-width: 520px) { .when-pill { border-radius: 14px; padding: 9px 14px; } }
 .pitch { margin: 22px auto 0; max-width: 470px; font-size: clamp(16px, 4.4vw, 19px); line-height: 1.45; }
 .dany-m { width: 280px; height: auto; margin: 18px auto -18px;
   -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
@@ -464,6 +473,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   .h1 { margin-top: 38px; }
   .h1__a { font-size: 21px; letter-spacing: .2em; }
   .h1-sub { margin-top: 12px; font-size: 18px; letter-spacing: .18em; }
+  .hero .when-pill { margin-top: 22px; font-size: 13px; }
   .hero { min-height: 1000px; }
   .pitch { margin-top: 24px; max-width: 600px; font-size: 21px; line-height: 1.5; }
   .hero .lead-form { max-width: 594px; margin-top: 34px; }
@@ -561,6 +571,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
 
           <h1 class="h1"><span class="h1__a">A ferramenta que todo autor</span> <span class="h1__b">sonhou</span></h1>
           <p class="h1-sub">Mas nunca pensou que poderia existir</p>
+          <p class="when-pill"><span class="when-pill__d">Abre segunda, 9 de novembro, às 20h</span><span class="when-pill__c" data-countdown></span></p>
           <img class="dany-m" src="assets/dany-bw-m.webp" alt="Dany Sakugawa" width="560" height="378" decoding="async">
           <p class="pitch"><i>Seu livro agora tem <b class="amber">motor</b><br><b>E ele nunca vai parar.</b></i></p>
 
@@ -819,6 +830,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
             </ul>
           </div>
           <div class="fecho__form">
+            <p class="when-pill"><span class="when-pill__d">Abre segunda, 9 de novembro, às 20h</span><span class="when-pill__c" data-countdown></span></p>
             <h3 class="fecho__h">Ligue o motor do seu livro.</h3>
             <p class="fecho__m">Cadastre-se e seja avisado no minuto em que a Black Week Motorizada abrir.</p>
             <div class="lead-form" data-pos="fim">
@@ -829,7 +841,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
                 <button class="btn" type="submit">Cadastre-se <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
               </form>
               <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
-              <p class="fine">As condições saem na abertura. Quem está cadastrado fica sabendo na hora.</p>
+              <p class="fine">As condições saem na abertura, segunda, 9 de novembro, às 20h. Quem está cadastrado fica sabendo na hora.</p>
               <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Quando a Black Week Motorizada abrir, você fica sabendo.</p></div>
             </div>
           </div>
@@ -1113,6 +1125,20 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
       (function step(now) { var k = Math.min(1, (now - t0) / dur); el.textContent = k < 1 ? fmt(n * (1 - Math.pow(1 - k, 3))) : fmt(n); if (k < 1) requestAnimationFrame(step); })(t0);
     });
   });
+
+  /* ================= CONTAGEM ATÉ A ABERTURA (9/11, 20h de Brasília = 23h UTC) ================= */
+  (function () {
+    var alvo = Date.UTC(2026, 10, 9, 23, 0, 0), els = $$('[data-countdown]');
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function tick() {
+      var ms = alvo - Date.now(), txt;
+      if (ms <= 0) txt = 'Aberta agora';
+      else if (ms >= 2 * 864e5) txt = 'Faltam ' + Math.floor(ms / 864e5) + ' dias';
+      else { var h = Math.floor(ms / 36e5), m = Math.floor(ms % 36e5 / 6e4); txt = 'Faltam ' + pad(h) + 'h ' + pad(m) + 'min'; }
+      els.forEach(function (el) { el.textContent = txt; });
+    }
+    tick(); setInterval(tick, 30000);
+  })();
 
   /* ================= ENTRADA DOS BLOCOS ================= */
   $$('.rv').forEach(function (el) { onView(el, function (t) { t.classList.add('in'); }); });
