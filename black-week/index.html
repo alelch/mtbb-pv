@@ -229,14 +229,12 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   .dany-glow { display: block; position: relative; height: 0; }
   .dany-glow::before { content: ""; position: absolute; left: 50%; top: 18px; width: 300px; height: 260px; transform: translateX(-50%); border-radius: 50%;
     background: radial-gradient(ellipse, rgba(250, 171, 0, .28), rgba(250, 171, 0, 0) 68%); filter: blur(10px); }
-  .pitch { position: relative; z-index: 2; max-width: 340px; margin: -4px auto 0; padding: 22px 22px 16px; border: 1px solid rgba(250, 171, 0, .4); border-radius: 20px;
-    background: linear-gradient(165deg, #1d170c 0%, #0f0d09 100%); box-shadow: 0 24px 50px -24px rgba(0, 0, 0, .9), 0 0 40px -18px rgba(250, 171, 0, .35); line-height: 1.4; }
-  .pitch::before { content: ""; position: absolute; top: -9px; left: 50%; width: 16px; height: 16px; transform: translateX(-50%) rotate(45deg);
-    background: #1d170c; border-top: 1px solid rgba(250, 171, 0, .4); border-left: 1px solid rgba(250, 171, 0, .4); }
-  .pitch::after { content: "\201C"; position: absolute; top: -2px; left: 14px; font: 700 54px/1 Georgia, serif; color: var(--amber); opacity: .9; }
-  .pitch i { display: block; font-size: 19px; }
-  .pitch__by { display: block; margin-top: 10px; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
-  .pitch__by::before { content: ""; display: inline-block; width: 16px; height: 1.5px; margin: 0 8px 3px 0; background: var(--amber); vertical-align: middle; }
+  /* a frase fica sobre o esmaecido da foto, como capa de revista: sem caixa, sem ponta */
+  .dany-m { width: 300px; -webkit-mask-image: linear-gradient(to bottom, #000 48%, transparent 92%); mask-image: linear-gradient(to bottom, #000 48%, transparent 92%); }
+  .pitch { position: relative; z-index: 2; max-width: 360px; margin: -78px auto 0; padding: 0 8px; line-height: 1.3; text-shadow: 0 2px 18px rgba(0, 0, 0, .9); }
+  .pitch i { display: block; font-size: 23px; letter-spacing: -.01em; }
+  .pitch__by { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 12px; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); text-shadow: none; }
+  .pitch__by::before, .pitch__by::after { content: ""; width: 18px; height: 1.5px; background: var(--amber); }
 }
 
 /* ---------- 2. a cena do sonho (guiada pela rolagem; --p vai de 0 a 1) ---------- */
