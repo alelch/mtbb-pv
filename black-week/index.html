@@ -46,6 +46,7 @@
   --line: #222127;
   --amber: #faab00;
   --yellow: #ffcc00;
+  --green: #1ebb00; /* botão de cadastro, o mesmo verde da página do Aniversário */
   --err: #ff6b5e;
   --red: #d6483c;
   --teal: 26, 88, 90;
@@ -113,13 +114,13 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 
 /* ---------- botão ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; padding: 0 20px;
-  border: 0; border-radius: 6px; background: var(--amber); color: #111; cursor: pointer; text-decoration: none;
+  border: 0; border-radius: 6px; background: var(--green); color: #fff; cursor: pointer; text-decoration: none;
   font: 600 clamp(16px, 4.6vw, 21px)/1 "Poppins", sans-serif; letter-spacing: .01em; text-transform: uppercase;
   transition: transform .15s, box-shadow .2s, filter .2s; }
-.btn:hover { filter: brightness(1.05); transform: translateY(-1px); box-shadow: 0 12px 28px -14px rgba(250, 171, 0, .85); }
+.btn:hover { filter: brightness(1.06); transform: translateY(-1px); box-shadow: 0 12px 28px -14px rgba(30, 187, 0, .8); }
 .btn:active { transform: scale(.99); }
 .btn[disabled] { opacity: .65; cursor: wait; transform: none; }
-.btn svg { flex: none; width: 20px; height: 20px; }
+.btn svg { flex: none; width: 26px; height: 20px; }
 
 /* ---------- formulário de cadastro (o mesmo nos dois lugares) ---------- */
 .lead-form { max-width: 440px; margin: 30px auto 0; text-align: left; }
@@ -536,7 +537,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
               <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
               <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu melhor e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
               <div class="fld half" data-f="whatsapp"><input name="whatsapp" type="tel" autocomplete="tel" inputmode="numeric" enterkeyhint="send" maxlength="16" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD"><p class="msg">Confira o número com DDD.</p></div>
-              <button class="btn" type="submit">Cadastre-se <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+              <button class="btn" type="submit">Cadastre-se <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
             </form>
             <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
             <p class="fine">Você fica sabendo no minuto em que abrir.</p>
@@ -789,7 +790,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
                 <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
                 <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu melhor e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
                 <div class="fld half" data-f="whatsapp"><input name="whatsapp" type="tel" autocomplete="tel" inputmode="numeric" enterkeyhint="send" maxlength="16" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD"><p class="msg">Confira o número com DDD.</p></div>
-                <button class="btn" type="submit">Cadastre-se <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+                <button class="btn" type="submit">Cadastre-se <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
               </form>
               <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
               <p class="fine">As condições saem na abertura. Quem está cadastrado fica sabendo na hora.</p>
@@ -809,7 +810,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   <p class="legal"><b>Aviso Legal:</b> “Nenhuma informação contida neste site deve ser interpretada como uma afirmação de resultados ou de retornos financeiros. Qualquer referência a desempenho passado ou potencial é uma estratégia elaborada no contexto individual de cada autor, e não deve ser interpretada como recomendação ou garantia de resultados específicos.”</p>
 </footer>
 
-<div class="dock" id="dock"><a class="btn" href="#cadastro-fim">Cadastre-se <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+<div class="dock" id="dock"><a class="btn" href="#cadastro-fim">Cadastre-se <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div>
 
 <script>
 (function () {
