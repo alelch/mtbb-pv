@@ -74,7 +74,7 @@
   --gutter: 20px;
   --infinity: url("assets/infinity.webp");
 }
-@media (min-width: 900px) { :root { --sec: 128px; } }
+@media (min-width: 900px) { :root { --sec: 104px; } }
 
 /* ---------- base ---------- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -514,7 +514,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .dx { height: 340vh; }
   .dx__checks { margin-top: 64px; }
   .drive__grid { grid-template-columns: minmax(0, 1fr) 410px; gap: 72px; align-items: center; }
-  .feat { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; margin-top: 96px; }
+  /* ritmo no computador: 56 cabeçalho→conteúdo, 64 entre blocos, 80 entre as duas funcionalidades */
+  .feat { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; margin-top: 56px; }
+  .feat + .feat { margin-top: 80px; }
+  .belt { margin-top: 56px; }
+  .mon { margin-top: 64px; }
+  .mon-foot { margin-top: 32px; }
+  .media-k { margin-top: 64px; }
   .feat--rev .feat__txt { order: 2; }
   .feat__win .try-wrap { max-width: 460px; }
   .feat:not(.feat--rev) .feat__win .try-wrap, .feat:not(.feat--rev) .feat__win .panel { margin-left: auto; margin-right: 0; }
