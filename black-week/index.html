@@ -100,6 +100,18 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .center .lede { margin-left: auto; margin-right: auto; }
 .blk { position: relative; padding: var(--sec) 0; }
 
+/* ---------- perguntas ---------- */
+.faq { max-width: 760px; margin: 0 auto; }
+.faq__list { margin-top: 32px; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 2px; cursor: pointer; list-style: none;
+  font-size: clamp(16px, 4.3vw, 19px); font-weight: 500; line-height: 1.35; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid rgba(250, 171, 0, .5); border-radius: 50%;
+  font-size: 18px; font-weight: 400; color: var(--amber); transition: transform .3s var(--ease); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { padding: 0 2px 22px; max-width: 640px; font-size: clamp(15px, 4vw, 17px); line-height: 1.6; color: var(--ink-2); }
+
 /* ---------- logos ---------- */
 /* Black Week Motorizada (vetor, o mesmo do VD_05) */
 .bwlogo { --bw-ink: #f4efe4; --bw-amber: #faab00; --bw-page: transparent;
@@ -216,29 +228,31 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .when-pill { display: inline-block; margin-top: 18px; padding: 8px 18px; border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; background: rgba(250, 171, 0, .08);
   font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; color: var(--ink); }
 .fecho__form .when-pill { margin: 0 0 16px; }
-.jump { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 440px; min-height: 52px; margin: 14px auto 0; border-radius: 6px;
-  background: var(--green); color: #fff; font-size: 16px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; text-decoration: none; }
-.jump svg { width: 18px; height: 18px; }
 .pitch { margin: 22px auto 0; max-width: 470px; font-size: clamp(16px, 4.4vw, 19px); line-height: 1.45; }
 .dany-m { width: 280px; height: auto; margin: 18px auto -18px;
   -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
 .dany-d, .dany-q, .pitch__by, .dany-glow { display: none; }
-/* celular e telas médias: a foto fica em cima da frase, então a frase vira a fala da Dany (balão com ponta, aspas e assinatura) */
+/* celular e telas médias: a foto vem antes, a frase logo abaixo (nunca por cima) com a assinatura da Dany */
 @media (max-width: 1179px) {
   .dany-m { position: relative; z-index: 1; margin-bottom: 0; }
   .dany-glow { display: block; position: relative; height: 0; }
   .dany-glow::before { content: ""; position: absolute; left: 50%; top: 18px; width: 300px; height: 260px; transform: translateX(-50%); border-radius: 50%;
     background: radial-gradient(ellipse, rgba(250, 171, 0, .28), rgba(250, 171, 0, 0) 68%); filter: blur(10px); }
-  /* a frase fica sobre o esmaecido da foto, como capa de revista: sem caixa, sem ponta */
-  .dany-m { width: 300px; -webkit-mask-image: linear-gradient(to bottom, #000 48%, transparent 92%); mask-image: linear-gradient(to bottom, #000 48%, transparent 92%); }
-  .pitch { position: relative; z-index: 2; max-width: 360px; margin: -78px auto 0; padding: 0 8px; line-height: 1.3; text-shadow: 0 2px 18px rgba(0, 0, 0, .9); }
+  .dany-m { width: 300px; -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); }
+  .pitch { position: relative; z-index: 2; max-width: 360px; margin: 18px auto 0; padding: 0 8px; line-height: 1.3; }
   .pitch i { display: block; font-size: 23px; letter-spacing: -.01em; }
   .pitch__by { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 12px; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); text-shadow: none; }
   .pitch__by::before, .pitch__by::after { content: ""; width: 18px; height: 1.5px; background: var(--amber); }
 }
 
 /* ---------- 2. a cena do sonho (guiada pela rolagem; --p vai de 0 a 1) ---------- */
-.dx { position: relative; height: 340vh; background: #000; }
+/* ponte entre a primeira e a segunda seção: convida a descer */
+.next { display: flex; flex-direction: column; align-items: center; gap: 10px; width: max-content; margin: 56px auto 0; padding-bottom: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); text-decoration: none; }
+.next span { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(250, 171, 0, .5); border-radius: 50%; transition: background .25s; }
+.next:hover span { background: rgba(250, 171, 0, .1); }
+.next svg { width: 18px; height: 18px; animation: bob 1.6s ease-in-out infinite; }
+.dx { position: relative; height: 270vh; background: #000; }
 .dx__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; padding: 0 var(--gutter); text-align: center; }
 .dx__a, .dx__b { grid-area: 1 / 1; width: 100%; max-width: 900px; transition: opacity .6s ease, transform .6s var(--ease), filter .6s ease; }
 .dx__lead { font-size: clamp(14px, 4vw, 19px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
@@ -509,13 +523,14 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .fld input { height: 52px; font-size: 17px; }
   .hero .btn { min-height: 61px; font-size: 23px; }
   .lead-form .fine { margin-top: 12px; font-size: 14px; }
-  .dany-m, .jump { display: none; }
+  .dany-m { display: none; }
   /* a foto começa depois da coluna de texto (metade dela = 324px) e nunca fica por cima do texto */
   .dany-d { display: block; position: absolute; z-index: -1; left: calc(50% + 300px); top: 150px; width: 430px; height: auto;
     -webkit-mask-image: linear-gradient(to bottom, #000 76%, transparent 97%); mask-image: linear-gradient(to bottom, #000 76%, transparent 97%); }
   .dany-q { display: block; position: absolute; left: calc(50% + 352px); top: 46px; width: 260px; text-align: center; font-size: 13.5px; font-weight: 500; line-height: 1.4; color: rgba(255, 255, 255, .5); }
   .dany-q span { display: block; margin-top: 4px; font-size: 12px; font-style: normal; color: rgba(255, 255, 255, .42); }
 
+  .dx { height: 340vh; }
   .dx__checks { margin-top: 64px; }
   .drive__grid { grid-template-columns: minmax(0, 1fr) 410px; gap: 72px; align-items: center; }
   .feat { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; margin-top: 96px; }
@@ -538,7 +553,6 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 /* computador estreito: não cabe a foto ao lado do texto, então ela volta para o meio, como no celular */
 @media (min-width: 900px) and (max-width: 1179px) {
   .dany-m { display: block; width: 300px; }
-  .jump { display: flex; }
   .dany-d, .dany-q { display: none; }
   .hero { min-height: 0; }
 }
@@ -602,7 +616,6 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           <h1 class="h1"><span class="h1__a">A ferramenta que todo autor</span> <span class="h1__b">sonhou</span></h1>
           <p class="h1-sub">Mas nunca pensou que poderia existir</p>
           <p class="when-pill">9 de novembro, às 20h</p>
-          <a class="jump" href="#form-topo">Quero me cadastrar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
           <span class="dany-glow" aria-hidden="true"></span><img class="dany-m" src="assets/dany-bw-m.webp" alt="Dany Sakugawa" width="560" height="378" decoding="async">
           <p class="pitch"><i>Seu livro agora tem <b class="amber">motor</b><br><b>E ele nunca vai parar.</b></i><span class="pitch__by">Dany Sakugawa</span></p>
 
@@ -619,6 +632,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
             <p class="lgpd">Ao se cadastrar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
             <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Quando a Black Week Motorizada abrir, você fica sabendo.</p></div>
           </div>
+          <a class="next" href="#reveal">Veja o que muda no seu livro<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
         </div>
 
         <p class="dany-q"><i>“Eu queria que o autor abrisse a segunda-feira e já soubesse o que fazer pelo livro. Agora ele sabe, sempre.”</i><span>Dany Sakugawa</span></p>
@@ -848,6 +862,22 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <figure><img src="../assets/dany-sakugawa-mauricio-de-sousa.webp" alt="Dany Sakugawa com Maurício de Sousa" decoding="async" width="820" height="1093"><figcaption>Com Maurício de Sousa</figcaption></figure>
         <figure><img src="../assets/dany-sakugawa-band-entrevista.webp" alt="Dany Sakugawa no Band Entrevista" decoding="async" width="820" height="615"><figcaption>Band Entrevista</figcaption></figure>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7b. perguntas -->
+  <section class="blk" style="border-top:1px solid var(--line)">
+    <div class="wrap faq">
+      <div class="center rv">
+        <p class="eyebrow">Antes de você perguntar</p>
+        <h2 class="h2">Perguntas rápidas.</h2>
+      </div>
+      <div class="faq__list rv">
+        <details><summary>O que é o LOMBADA?</summary><p>A ferramenta que mostra o que fazer pelo seu livro: o plano da semana, as oportunidades do seu gênero e ideias de post ilimitadas. Tudo sai das aulas do Método The Book Business.</p></details>
+        <details><summary>Funciona para livro antigo? E para quem ainda está escrevendo?</summary><p>Sim. O plano muda conforme a fase do livro: escrevendo, recém-lançado ou parado há anos.</p></details>
+        <details><summary>O que vem na Black Week Motorizada?</summary><p>O Método The Book Business com o LOMBADA dentro. As condições aparecem na abertura, dia 9 de novembro, às 20h.</p></details>
+        <details><summary>O cadastro custa alguma coisa?</summary><p>Não. É gratuito e sem compromisso. Você só recebe o aviso quando a Black Week Motorizada abrir.</p></details>
       </div>
     </div>
   </section>
