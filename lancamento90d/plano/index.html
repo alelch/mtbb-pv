@@ -131,9 +131,6 @@ input[type=date]:hover{border-color:var(--laranja)}
 .nota{display:block;font-size:13px;line-height:1.45;color:var(--tinta-55);margin-top:2px;font-weight:400;max-width:68ch}
 .tarefa.feita .nota{color:var(--tinta-32)}
 
-.refs{margin:4px 0 0;font-size:12.5px;line-height:1.45;color:var(--tinta-55);font-style:italic}
-.tarefa.feita .refs{color:var(--tinta-32)}
-.post .refs{color:var(--tinta-55)}
 .apoios{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .chip{
   display:inline-flex;align-items:center;gap:6px;text-decoration:none;
@@ -211,7 +208,6 @@ input[type=date]:hover{border-color:var(--laranja)}
   .nota{font-size:8.5pt;line-height:1.35}
   .apoios{margin-top:4px;gap:4px}
   .chip{padding:2px 5px;font-size:7.5pt}
-  .refs{font-size:8pt;margin-top:1px;line-height:1.3}
   .post{margin-top:10px;padding:10px 12px}
   .post .frase{font-size:12pt}
   .faixa{margin-top:18px;padding-block:12px 14px}
@@ -285,48 +281,10 @@ input[type=date]:hover{border-color:var(--laranja)}
 (function(){
 'use strict';
 
-// Aula e material do Metodo entram como TEXTO, nunca como link: esta pagina
-// acompanha o Lancamento 90D e quem a recebe pode nao ter acesso a area de
-// membros do Metodo The Book Business.
-function aula(nome, id){ return {t:'ref', nome:nome}; }
-function mat(nome){ return {t:'ref', nome:nome}; }
+// A pagina acompanha o Lancamento 90D: nenhuma mencao a area de membros do
+// Metodo The Book Business. Só entram links que nao sao do Metodo.
 function fora(nome, url){ return {t:'fora', nome:nome, url:url}; }
 
-var A = {
-  guia:        function(){ return aula('Aula 2.3 Guia de Parceiros','m7Y6k80ZO6'); },
-  capa:        function(){ return aula('Aula 2.2 Capa boa x capa vendedora','ROxonv9V7D'); },
-  tipos:       function(){ return aula('Aula 2.5 Tipos de publicação','ROxoMdNp7D'); },
-  raiox:       function(){ return aula('Aula 2.4 Raio-X do livro','y4PZldXl7x'); },
-  microciclos: function(){ return aula('Aula 2.11 Micro-ciclos','V7yGkkWP4J'); },
-  objetivo:    function(){ return aula('Aula 3.3 Objetivo do livro','M7qwGvMy4x'); },
-  objetivoMao: function(){ return aula('Aula 3.4 Mão na massa','V73WM1nY73'); },
-  leitor:      function(){ return aula('Aula 3.5 Leitor ideal','ROxo8k8J7D'); },
-  zona:        function(){ return aula('Aula 3.8 Zona de influência','k45d665qOl'); },
-  plataforma:  function(){ return aula('Aula 3.13 Sua plataforma de autor','V4VPWANx72'); },
-  descricao:   function(){ return aula('Aula 3.17 Descrição do livro','K4kZ8KmEOY'); },
-  preco:       function(){ return aula('Aula 3.22 Precificação','M7qwrgYj4x'); },
-  prelanc:     function(){ return aula('Aula 3.23 Pré-lançamento','y4PZXX6E7x'); },
-  cronoPre:    function(){ return aula('Aula 3.24 Cronograma de pré-venda','BeZEa1x84w'); },
-  cronoLanc:   function(){ return aula('Aula 3.25 Cronograma de lançamento','k7QxDR6Pey'); },
-  cronoPos:    function(){ return aula('Aula 3.26 Cronograma de pós-lançamento','EOgkB1dgO6'); },
-  excel:       function(){ return aula('Aula 3.27 Cronograma no Excel','k45dk9nROl'); },
-  avaliacoes:  function(){ return aula('Aula 4.1 Avaliações na Amazon','M7qw132N4x'); },
-  evento:      function(){ return aula('Aula 4.2 Evento de lançamento','14o9E9ak7p'); },
-  grupo:       function(){ return aula('Aula 4.05 Grupo de lançamento','EOgkqMwpO6'); },
-  site:        function(){ return aula('Aula 4.06 Site do autor','V7yG3LKG4J'); },
-  imprensa:    function(){ return aula('Aula 4.09 Assessoria de imprensa','m7Y6jpqZO6'); },
-  endossos:    function(){ return aula('Aula 4.10 Endossos','V73Wd23p73'); },
-  influContr:  function(){ return aula('Aula 4.12 Contratação de influencers','RO9daAvY7P'); },
-  influEnvio:  function(){ return aula('Aula 4.13 Envio para influencers','97BjX3AL7p'); },
-  patrocinio:  function(){ return aula('Aula 4.16 Patrocínio e vendas em lote','14o9DGA07p'); },
-  revelacao:   function(){ return aula('Aula 4.18 Revelação de capa','k7QxJdzkey'); },
-  datasCom:    function(){ return aula('Aula 4.20 Datas comemorativas','oODRDWZQeP'); },
-  eventos:     function(){ return aula('Aula 4.21 Participação em eventos','LO0lVRWMOG'); },
-  email:       function(){ return aula('Aula 4.22 E-mail','M7GQ0D684w'); },
-  contatos:    function(){ return aula('Aula 4.25 Ativando seus contatos','V4VkkvQ2e2'); }
-};
-
-var BANCO = mat('Banco de Ideias de Posts');
 
 var VIABILIZADORES = {
   id:'v', fase:'pre', rotulo:'Antes', num:'Viabilizadores',
@@ -335,11 +293,11 @@ var VIABILIZADORES = {
   itens:[
     {t:'Data exata da publicação definida (editora ou plataforma)'},
     {t:'Manuscrito finalizado'},
-    {t:'Leitura crítica feita, com leitor crítico especializado', apoio:[mat('Leitores Recomendados')]},
-    {t:'Tipo de publicação definido', nota:'Autopublicação, prestadora de serviço ou tradicional.', apoio:[A.tipos()]},
-    {t:'Primeira revisão feita', apoio:[A.guia()]},
-    {t:'Capa profissional pronta (ou em produção)', apoio:[A.capa()]},
-    {t:'Diagramação encaminhada', apoio:[A.guia()]},
+    {t:'Leitura crítica feita, com leitor crítico especializado'},
+    {t:'Tipo de publicação definido', nota:'Autopublicação, prestadora de serviço ou tradicional.'},
+    {t:'Primeira revisão feita'},
+    {t:'Capa profissional pronta (ou em produção)'},
+    {t:'Diagramação encaminhada'},
     {t:'ISBN solicitado (pelo autor ou pela editora)', apoio:[fora('Câmara Brasileira do Livro','https://www.cblservicos.org.br/')]},
     {t:'Ficha catalográfica solicitada (pelo autor ou pela editora)'}
   ]
@@ -350,12 +308,12 @@ var SEMANAS = [
   id:'s1', num:'Semana 1', semana:1, fase:'pre', rotulo:'Objetivo',
   foco:'Planejamento e objetivo',
   itens:[
-    {t:'Definir o objetivo do livro', apoio:[A.objetivo(), A.objetivoMao()]},
-    {t:'Definir público-alvo e persona do leitor ideal', apoio:[A.leitor()]},
-    {t:'Definir os temas universais que o livro aborda', apoio:[mat('Lista de Temas Universais')]},
-    {t:'Montar o cronograma reverso', nota:'Da data de publicação para trás.', apoio:[A.excel()]},
-    {t:'Tirar as fotos dos posts das próximas semanas', nota:'Lendo, escrevendo, assinando contrato, revisando o manuscrito, aprovando a diagramação.', apoio:[BANCO]},
-    {t:'Listar datas comemorativas e efemérides ligadas ao tema do livro', apoio:[A.datasCom(), mat('Planejamento Anual do Escritor')]}
+    {t:'Definir o objetivo do livro'},
+    {t:'Definir público-alvo e persona do leitor ideal'},
+    {t:'Definir os temas universais que o livro aborda'},
+    {t:'Montar o cronograma reverso', nota:'Da data de publicação para trás.'},
+    {t:'Tirar as fotos dos posts das próximas semanas', nota:'Lendo, escrevendo, assinando contrato, revisando o manuscrito, aprovando a diagramação.'},
+    {t:'Listar datas comemorativas e efemérides ligadas ao tema do livro'}
   ],
   post:{frase:'O porquê.', nota:'Foto de criança: "essa criança nunca imaginou que um dia lançaria um livro…"'}
 },
@@ -363,8 +321,8 @@ var SEMANAS = [
   id:'s2', num:'Semana 2', semana:2, fase:'pre', rotulo:'Listas',
   foco:'Soft marketing e organização de listas',
   itens:[
-    {t:'Atualizar site, página de autor e perfis nas redes', apoio:[A.plataforma(), A.site()], subs:[{t:'Instagram'},{t:'LinkedIn'}]},
-    {t:'Criar o Grupo de Lançamento', nota:'20 a 30 pessoas, no WhatsApp.', apoio:[A.grupo()]},
+    {t:'Atualizar site, página de autor e perfis nas redes', subs:[{t:'Instagram'},{t:'LinkedIn'}]},
+    {t:'Criar o Grupo de Lançamento', nota:'20 a 30 pessoas, no WhatsApp.'},
     {t:'Compartilhar o processo de produção nos stories', nota:'"mais um capítulo revisado"'},
     {t:'Registrar o livro na Câmara Brasileira do Livro', nota:'ISBN e ficha catalográfica.', apoio:[fora('cblservicos.org.br','https://www.cblservicos.org.br/')]},
     {t:'Enviar o post da semana no Grupo de Lançamento', nota:'Peça engajamento.'}
@@ -375,7 +333,7 @@ var SEMANAS = [
   id:'s3', num:'Semana 3', semana:3, fase:'pre', rotulo:'Contatos',
   foco:'Mapeamento de contatos',
   itens:[
-    {t:'Mapear contatos por origem', nota:'Família, amigos, carreira, escola, clube, condomínio, igreja.', apoio:[A.zona(), A.contatos()]},
+    {t:'Mapear contatos por origem', nota:'Família, amigos, carreira, escola, clube, condomínio, igreja.'},
     {t:'Atribuir tarefas aos contatos mapeados', subs:[
       {t:'Possíveis compradores da pré-venda'},
       {t:'Parceiros estratégicos (outros autores, empresas, instituições)'},
@@ -383,9 +341,9 @@ var SEMANAS = [
       {t:'Influenciadores online (mais de 3.000 seguidores)'},
       {t:'Influenciadores offline (professores, coordenadores, empresários)'}
     ]},
-    {t:'Criar um Instagram ou TikTok de estudo', nota:'Para acompanhar o que os concorrentes fazem.', apoio:[A.raiox()]},
-    {t:'Mapear influenciadores do nicho', nota:'Bookstagrammers, booktubers, podcasters.', apoio:[A.influContr(), mat('Lista de Influenciadores Verificados')]},
-    {t:'Mapear veículos e podcasts da sua região', nota:'Rádios, revistas, jornais, portais.', apoio:[A.imprensa()]},
+    {t:'Criar um Instagram ou TikTok de estudo', nota:'Para acompanhar o que os concorrentes fazem.'},
+    {t:'Mapear influenciadores do nicho', nota:'Bookstagrammers, booktubers, podcasters.'},
+    {t:'Mapear veículos e podcasts da sua região', nota:'Rádios, revistas, jornais, portais.'},
     {t:'Enviar o post da semana no Grupo de Lançamento'}
   ],
   post:{frase:'Recomendação de livros.', nota:'"comenta aqui se você já leu algum deles ou se acrescentaria mais algum nessa lista"'}
@@ -395,8 +353,8 @@ var SEMANAS = [
   foco:'Endossos e estudo do mercado',
   itens:[
     {t:'Preparar a amostra do livro com 3 capítulos', nota:'Em PDF, com marca d’água, no máximo 30% do livro.'},
-    {t:'Pedir depoimentos e endossos de pessoas relevantes', nota:'Escritores, jornalistas, profissionais ligados ao tema universal do seu livro.', apoio:[A.endossos()]},
-    {t:'Montar a lista de livros comparáveis', nota:'Editora, páginas, formatos, preços de capa.', apoio:[A.raiox()]},
+    {t:'Pedir depoimentos e endossos de pessoas relevantes', nota:'Escritores, jornalistas, profissionais ligados ao tema universal do seu livro.'},
+    {t:'Montar a lista de livros comparáveis', nota:'Editora, páginas, formatos, preços de capa.'},
     {t:'Enviar o post da semana no Grupo de Lançamento'}
   ],
   post:{frase:'Terminei de escrever o livro.', nota:'"Foram mais de X anos, Y referências, Z viagens, e finalmente…"'}
@@ -406,21 +364,21 @@ var SEMANAS = [
   foco:'Capa e identidade visual',
   itens:[
     {t:'Compartilhar o processo nos stories', nota:'Capa, revisão, diagramação.'},
-    {t:'Definir o preço de capa', apoio:[A.preco()]},
-    {t:'Finalizar a sinopse do livro', nota:'Para a quarta-capa e os cadastros digitais.', apoio:[A.descricao()]},
-    {t:'Criar o press release', nota:'Foto do autor, capa, sinopse, bio, links, preço.', apoio:[A.imprensa()]},
-    {t:'Planejar os kits para influenciadores e jornalistas', apoio:[A.influEnvio()], subs:[
+    {t:'Definir o preço de capa'},
+    {t:'Finalizar a sinopse do livro', nota:'Para a quarta-capa e os cadastros digitais.'},
+    {t:'Criar o press release', nota:'Foto do autor, capa, sinopse, bio, links, preço.'},
+    {t:'Planejar os kits para influenciadores e jornalistas', subs:[
       {t:'Livro'},{t:'Carta personalizada'},{t:'Release do livro'},{t:'Brinde (opcional)'}
     ]},
     {t:'Enviar o post da semana no Grupo de Lançamento'}
   ],
-  post:{frase:'Revelar a capa oficial.', nota:'Evento online ou post especial.', apoio:[A.revelacao()]}
+  post:{frase:'Revelar a capa oficial.', nota:'Evento online ou post especial.'}
 },
 {
   id:'s6', num:'Semana 6', semana:6, fase:'pre', rotulo:'Oferta',
   foco:'Planejamento da pré-venda',
   itens:[
-    {t:'Alinhar início e fim da pré-venda com a editora ou plataforma', apoio:[A.cronoPre(), A.prelanc()]},
+    {t:'Alinhar início e fim da pré-venda com a editora ou plataforma'},
     {t:'Definir as condições especiais da pré-venda', subs:[
       {t:'Brinde'},{t:'Bônus'},{t:'Desconto'},{t:'Pacotes'}
     ]},
@@ -434,7 +392,7 @@ var SEMANAS = [
   id:'s7', num:'Semana 7', semana:7, fase:'pre', rotulo:'Evento',
   foco:'Evento de lançamento',
   itens:[
-    {t:'Planejar o evento de lançamento', nota:'Presencial ou online.', apoio:[A.evento()]},
+    {t:'Planejar o evento de lançamento', nota:'Presencial ou online.'},
     {t:'Definir o local do evento'},
     {t:'Confirmar os detalhes com a livraria', subs:[
       {t:'O local tem estacionamento?'},
@@ -452,7 +410,7 @@ var SEMANAS = [
   id:'s8', num:'Semana 8', semana:8, fase:'pre', rotulo:'Aquecer',
   foco:'Aquecimento final',
   itens:[
-    {t:'Agendar entrevistas e podcasts para a semana do lançamento', apoio:[A.imprensa()]},
+    {t:'Agendar entrevistas e podcasts para a semana do lançamento'},
     {t:'Reforçar o soft marketing', nota:'Bastidores, depoimentos e expectativas nos stories.'},
     {t:'Repassar o mapeamento de contatos com foco na pré-venda', subs:[
       {t:'Quem não mora na cidade do evento'},
@@ -469,9 +427,9 @@ var SEMANAS = [
   itens:[
     {t:'Abrir oficialmente a pré-venda', nota:'Site, Amazon, editora.'},
     {t:'Divulgar os bônus exclusivos de quem compra na pré-venda', nota:'Desconto, brindes, acesso antecipado.'},
-    {t:'Ativar os contatos com potencial de compra em lote, de um em um', apoio:[A.patrocinio()]},
+    {t:'Ativar os contatos com potencial de compra em lote, de um em um'},
     {t:'Divulgar a pré-venda no Grupo de Lançamento', nota:'São os primeiros compradores.'},
-    {t:'Enviar e-mails e mensagens para a lista anunciando a pré-venda', apoio:[A.email()]}
+    {t:'Enviar e-mails e mensagens para a lista anunciando a pré-venda'}
   ],
   post:{frase:'5 formas de ajudar um escritor.'}
 },
@@ -503,9 +461,9 @@ var SEMANAS = [
   id:'s12', num:'Semana 12', semana:12, fase:'lanc', rotulo:'Lançar',
   foco:'Lançamento',
   itens:[
-    {t:'Enviar os convites individualmente', nota:'Grupo de Lançamento, lista de e-mails e WhatsApp, no dia seguinte ao encerramento da pré-venda.', apoio:[A.cronoLanc()]},
+    {t:'Enviar os convites individualmente', nota:'Grupo de Lançamento, lista de e-mails e WhatsApp, no dia seguinte ao encerramento da pré-venda.'},
     {t:'Ativar a mídia', nota:'Entrevistas, podcasts e matérias já agendadas.'},
-    {t:'Incentivar os compradores a avaliar na Amazon e nas redes', nota:'Individualmente, de 30 em 30.', apoio:[A.avaliacoes()]},
+    {t:'Incentivar os compradores a avaliar na Amazon e nas redes', nota:'Individualmente, de 30 em 30.'},
     {t:'Repostar menções e agradecer cada leitor'},
     {t:'Monitorar rankings e vendas', nota:'Amazon, Amazon Associados, site, editora.'},
     {t:'Fazer stories e posts com o livro nas mãos dos leitores'}
@@ -520,9 +478,9 @@ var POS = {
   intro:'O lançamento acaba. O livro, não. Estes três blocos seguram o livro em movimento depois da data de publicação.',
   blocos:[
     {foco:'Evento de lançamento', itens:[
-      {t:'Realizar o evento de lançamento', apoio:[A.evento()]},
+      {t:'Realizar o evento de lançamento'},
       {t:'Ativar a mídia', nota:'Entrevistas, podcasts e matérias já agendadas.'},
-      {t:'Incentivar os compradores a avaliar na Amazon e nas redes', apoio:[A.avaliacoes()]},
+      {t:'Incentivar os compradores a avaliar na Amazon e nas redes'},
       {t:'Repostar menções e agradecer publicamente cada leitor'},
       {t:'Fazer stories e posts com o livro nas mãos dos leitores'}
     ]},
@@ -530,17 +488,17 @@ var POS = {
       {t:'Enviar agradecimento personalizado para quem esteve no evento', nota:'Com a foto que o fotógrafo tirou, e o pedido de avaliação na Amazon.'},
       {t:'Compartilhar as primeiras avaliações e depoimentos de leitores'},
       {t:'Fazer o post de bastidores do lançamento', nota:'Aprendizados, emoções.'},
-      {t:'Enviar os kits para influenciadores e parceiros estratégicos', nota:'Primeiro lote.', apoio:[A.influEnvio()]}
+      {t:'Enviar os kits para influenciadores e parceiros estratégicos', nota:'Primeiro lote.'}
     ]},
     {foco:'Microciclos mensais', itens:[
-      {t:'Planejar os próximos microciclos mensais', apoio:[A.microciclos(), A.cronoPos()], subs:[
-        {t:'Datas comemorativas, com oportunidade contextualizada', apoio:[A.datasCom()]},
+      {t:'Planejar os próximos microciclos mensais', subs:[
+        {t:'Datas comemorativas, com oportunidade contextualizada'},
         {t:'Marcos de vendas', nota:'Primeira edição, lançamento do audiobook, 5 países com leitores.'},
-        {t:'Participação em eventos', apoio:[A.eventos()]},
+        {t:'Participação em eventos'},
         {t:'Lives com parceiros'},
-        {t:'Inscrição em prêmios e concursos', apoio:[mat('Workshop Prêmios e Concursos')]},
+        {t:'Inscrição em prêmios e concursos'},
         {t:'Novos lotes de envio para influenciadores', nota:'A cada trimestre.'},
-        {t:'Sprint de novas avaliações na Amazon', apoio:[A.avaliacoes()]}
+        {t:'Sprint de novas avaliações na Amazon'}
       ]}
     ]}
   ]
@@ -630,16 +588,12 @@ function esc(s){
 }
 function chips(lista){
   if(!lista || !lista.length) return '';
-  var links = [], refs = [];
+  var h = '<div class="apoios">';
   for(var i=0;i<lista.length;i++){
     var a = lista[i];
-    if(a.t === 'fora') links.push('<a class="chip" href="'+esc(a.url)+'" target="_blank" rel="noopener">'+esc(a.nome)+' &#8599;</a>');
-    else refs.push(esc(a.nome));
+    h += '<a class="chip" href="'+esc(a.url)+'" target="_blank" rel="noopener">'+esc(a.nome)+' &#8599;</a>';
   }
-  var h = '';
-  if(refs.length) h += '<p class="refs">' + refs.join(' &middot; ') + '</p>';
-  if(links.length) h += '<div class="apoios">' + links.join('') + '</div>';
-  return h;
+  return h + '</div>';
 }
 function tarefa(id, it){
   var feito = !!estado.feitos[id];
@@ -670,7 +624,7 @@ function blocoPost(p){
     for(var i=0;i<p.lista.length;i++) corpo += '<li>'+esc(p.lista[i])+'</li>';
     corpo += '</ul>';
   }
-  corpo += chips((p.apoio||[]).concat([BANCO]));
+  corpo += chips(p.apoio);
   return '<div class="post">'+corpo+'</div>';
 }
 function idsDe(bloco){
