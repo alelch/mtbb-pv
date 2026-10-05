@@ -473,10 +473,10 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   .hero .btn { min-height: 61px; font-size: 23px; }
   .lead-form .fine { margin-top: 12px; font-size: 14px; }
   .dany-m { display: none; }
-  .dany-d { display: block; position: absolute; z-index: -1; left: calc(50% + 248px); top: 128px; width: 470px; height: auto;
-    -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 96%); mask-image: linear-gradient(to bottom, #000 74%, transparent 96%);
-    filter: drop-shadow(-30px 20px 60px rgba(0, 0, 0, .55)); }
-  .dany-q { display: block; position: absolute; left: calc(50% + 330px); top: 58px; width: 250px; text-align: center; font-size: 13.5px; font-weight: 500; line-height: 1.4; color: rgba(255, 255, 255, .5); }
+  /* a foto começa depois da coluna de texto (metade dela = 324px) e nunca fica por cima do texto */
+  .dany-d { display: block; position: absolute; z-index: -1; left: calc(50% + 300px); top: 150px; width: 430px; height: auto;
+    -webkit-mask-image: linear-gradient(to bottom, #000 76%, transparent 97%); mask-image: linear-gradient(to bottom, #000 76%, transparent 97%); }
+  .dany-q { display: block; position: absolute; left: calc(50% + 352px); top: 46px; width: 260px; text-align: center; font-size: 13.5px; font-weight: 500; line-height: 1.4; color: rgba(255, 255, 255, .5); }
   .dany-q span { display: block; margin-top: 4px; font-size: 12px; font-style: normal; color: rgba(255, 255, 255, .42); }
 
   .dx__checks { margin-top: 64px; }
@@ -497,6 +497,12 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   .fecho__gift { left: 27%; }
   footer { padding-bottom: 56px; }
   .dock { display: none; }
+}
+/* computador estreito: não cabe a foto ao lado do texto, então ela volta para o meio, como no celular */
+@media (min-width: 900px) and (max-width: 1179px) {
+  .dany-m { display: block; width: 300px; }
+  .dany-d, .dany-q { display: none; }
+  .hero { min-height: 0; }
 }
 @media (max-width: 380px) {
   .lead-form form { grid-template-columns: minmax(0, 1fr); }
