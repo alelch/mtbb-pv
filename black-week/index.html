@@ -19,7 +19,8 @@
 <!-- Montserrat só para o logo da Black Week; o texto é Poppins (local, a mesma das PVs) -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,900&display=swap" rel="stylesheet">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/poppins-400.woff2">
-<link rel="preload" as="image" href="https://thebookbusiness.com.br/wp-content/uploads/2025/10/dany-grande-degrade2.webp">
+<link rel="preload" as="image" href="assets/dany-bw-m.webp" media="(max-width: 899px)">
+<link rel="preload" as="image" href="assets/dany-bw.webp" media="(min-width: 900px)">
 <script src="../pixel.js"></script>
 <script src="../gtag.js" defer></script>
 <style>
@@ -207,8 +208,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   animation: gold 6s linear infinite; filter: drop-shadow(0 8px 34px rgba(250, 171, 0, .22)); }
 .h1-sub { margin-top: 10px; font-size: clamp(13px, 3.8vw, 18px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); text-wrap: balance; }
 .pitch { margin: 22px auto 0; max-width: 470px; font-size: clamp(16px, 4.4vw, 19px); line-height: 1.45; }
-.dany-m { width: 240px; height: 190px; margin: 14px auto -22px; object-fit: cover; object-position: 50% 6%;
-  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); }
+.dany-m { width: 280px; height: auto; margin: 18px auto -18px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
 .dany-d, .dany-q { display: none; }
 
 /* ---------- 2. a cena do sonho (guiada pela rolagem; --p vai de 0 a 1) ---------- */
@@ -388,7 +389,11 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .ages__foot { margin-top: 24px; font-size: clamp(18px, 5vw, 24px); font-weight: 500; }
 
 /* ---------- 7. quem colocou o motor ---------- */
-.who__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; }
+.who__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.who__pic { position: relative; width: 230px; margin: 0 auto; }
+.who__pic::before { content: ""; position: absolute; inset: 18% -20% 0; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse, rgba(250, 171, 0, .25), rgba(250, 171, 0, 0) 68%); filter: blur(20px); }
+.who__pic img { width: 100%; height: auto; -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
+.who__body .stats { margin-top: 32px; }
 .who__txt { margin-top: 18px; }
 .who__txt p { font-size: clamp(16px, 4.4vw, 18px); line-height: 1.55; color: var(--ink-2); }
 .who__txt p + p { margin-top: 10px; }
@@ -468,7 +473,9 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   .hero .btn { min-height: 61px; font-size: 23px; }
   .lead-form .fine { margin-top: 12px; font-size: 14px; }
   .dany-m { display: none; }
-  .dany-d { display: block; position: absolute; z-index: -1; left: calc(50% + 281px); top: 133px; width: 418px; height: auto; }
+  .dany-d { display: block; position: absolute; z-index: -1; left: calc(50% + 248px); top: 128px; width: 470px; height: auto;
+    -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 96%); mask-image: linear-gradient(to bottom, #000 74%, transparent 96%);
+    filter: drop-shadow(-30px 20px 60px rgba(0, 0, 0, .55)); }
   .dany-q { display: block; position: absolute; left: calc(50% + 330px); top: 58px; width: 250px; text-align: center; font-size: 13.5px; font-weight: 500; line-height: 1.4; color: rgba(255, 255, 255, .5); }
   .dany-q span { display: block; margin-top: 4px; font-size: 12px; font-style: normal; color: rgba(255, 255, 255, .42); }
 
@@ -480,7 +487,9 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   .feat:not(.feat--rev) .feat__win .try-wrap, .feat:not(.feat--rev) .feat__win .panel { margin-left: auto; margin-right: 0; }
   .feat--rev .feat__win .panel { margin-left: 0; }
   .mon { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .who__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+  .who__grid { grid-template-columns: 340px minmax(0, 1fr); gap: 64px; align-items: center; }
+  .who__pic { width: 100%; }
+  .who__body .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 40px; }
   .media figure { width: 260px; }
   .fecho__grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); }
   .fecho__offer { padding: 80px 48px 56px 64px; }
@@ -546,7 +555,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
 
           <h1 class="h1"><span class="h1__a">A ferramenta que todo autor</span> <span class="h1__b">sonhou</span></h1>
           <p class="h1-sub">Mas nunca pensou que poderia existir</p>
-          <img class="dany-m" src="https://thebookbusiness.com.br/wp-content/uploads/2025/10/dany-grande-degrade2.webp" alt="Dany Sakugawa" width="577" height="1024" decoding="async">
+          <img class="dany-m" src="assets/dany-bw-m.webp" alt="Dany Sakugawa" width="560" height="378" decoding="async">
           <p class="pitch"><i>Seu livro agora tem <b class="amber">motor</b><br><b>E ele nunca vai parar.</b></i></p>
 
           <div class="lead-form" data-pos="topo">
@@ -564,7 +573,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
         </div>
 
         <p class="dany-q"><i>“Eu queria que o autor abrisse a segunda-feira e já soubesse o que fazer pelo livro. Agora ele sabe, sempre.”</i><span>Dany Sakugawa</span></p>
-        <img class="dany-d" src="https://thebookbusiness.com.br/wp-content/uploads/2025/10/dany-grande-degrade2.webp" alt="" width="577" height="1024" decoding="async">
+        <img class="dany-d" src="assets/dany-bw.webp" alt="Dany Sakugawa" width="840" height="1135" decoding="async">
       </div>
     </div>
   </section>
@@ -753,7 +762,9 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   <section class="blk">
     <div class="wrap">
       <div class="who__grid">
-        <div class="rv">
+        <figure class="who__pic rv"><img src="https://thebookbusiness.com.br/wp-content/uploads/2025/10/dany-grande-degrade2.webp" alt="Dany Sakugawa no palco" width="577" height="1024" loading="lazy" decoding="async"></figure>
+        <div class="who__body">
+          <div class="rv">
           <p class="eyebrow">Quem colocou o motor</p>
           <h2 class="h2">Dany Sakugawa.</h2>
           <div class="who__txt">
@@ -761,12 +772,13 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
             <p><b>Agora, colocou um motor nele.</b></p>
           </div>
           <p class="who__q">“O maior risco que um autor corre é ser esquecido.”<small>Dany Sakugawa</small></p>
-        </div>
-        <div class="stats rv">
+          </div>
+          <div class="stats rv">
           <div class="stat"><p class="n" data-n="15" data-p="+">+15</p><p class="t">anos nos bastidores</p></div>
           <div class="stat"><p class="n" data-n="800" data-p="+">+800</p><p class="t">autores lançados</p></div>
           <div class="stat"><p class="n" data-n="10" data-p="+" data-s="M">+10M</p><p class="t">livros vendidos em lançamentos</p></div>
           <div class="stat"><p class="n" data-n="4400" data-p="+">+4.400</p><p class="t">alunos no Método</p></div>
+          </div>
         </div>
       </div>
       <div class="media-k rv"><p class="eyebrow">Dany na mídia</p><span>Arraste para o lado</span></div>
