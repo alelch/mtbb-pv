@@ -277,43 +277,30 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .next span { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(250, 171, 0, .5); border-radius: 50%; transition: background .25s; }
 .next:hover span { background: rgba(250, 171, 0, .1); }
 .next svg { width: 18px; height: 18px; animation: bob 1.6s ease-in-out infinite; }
-.dx { position: relative; height: 270vh; background: #000; }
-.dx__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; padding: 0 var(--gutter); text-align: center; }
-.dx__a, .dx__b { grid-area: 1 / 1; width: 100%; max-width: 900px; transition: opacity .6s ease, transform .6s var(--ease), filter .6s ease; }
-.dx__lead { font-size: clamp(14px, 4vw, 19px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
-.dx__lines { position: relative; height: 2.5em; margin-top: 16px; font-size: clamp(28px, 7.6vw, 60px); }
-.dx__l { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 600; line-height: 1.12; letter-spacing: -.02em; text-wrap: balance;
-  opacity: 0; transform: translateY(40%); filter: blur(8px); transition: opacity .55s ease, transform .55s var(--ease), filter .55s ease; }
-.dx__l em { font-style: normal; background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
-.dx__l.on { opacity: 1; transform: none; filter: none; }
-.dx__l.past { transform: translateY(-40%); }
-.dx__b { opacity: 0; transform: scale(.94); filter: blur(10px); pointer-events: none; }
-.dx.final .dx__a { opacity: 0; transform: scale(1.06); filter: blur(10px); }
-.dx.final .dx__b { opacity: 1; transform: none; filter: none; pointer-events: auto; }
+/* rolagem normal: a página anda a cada gesto (a cena presa na tela parecia travada) */
+.dream { position: relative; padding: var(--sec) 0; overflow: hidden; text-align: center; background: #000; }
+.dream__lead { font-size: clamp(14px, 4vw, 19px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.dream__list { list-style: none; display: grid; gap: clamp(18px, 4vw, 30px); max-width: 860px; margin: 28px auto 0; }
+.dream__list li { font-size: clamp(26px, 7.2vw, 54px); font-weight: 600; line-height: 1.12; letter-spacing: -.02em; text-wrap: balance;
+  opacity: .22; transform: scale(.97); transition: opacity .7s ease, transform .7s var(--ease); }
+.dream__list li.lit { opacity: 1; transform: none; }
+.dream__list em { font-style: normal; color: var(--ink-2); transition: color .7s ease; }
+.dream__list li.lit em { background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
+.dream__end { position: relative; margin-top: clamp(72px, 14vw, 120px); padding: 40px 0 8px; }
+.dream__ring { position: absolute; left: 50%; top: 50%; z-index: -1; width: min(640px, 130vw); aspect-ratio: 480 / 540; pointer-events: none;
+  background: var(--infinity) 0% 50% / 200% 100% no-repeat; opacity: 0; transform: translate(-50%, -50%) scale(.85); transition: opacity 1.4s ease, transform 2.2s var(--ease); }
+.dream__glow { position: absolute; left: 50%; top: 50%; z-index: -1; width: 760px; height: 520px; transform: translate(-50%, -50%); pointer-events: none;
+  background: radial-gradient(ellipse, rgba(250, 171, 0, .26), rgba(250, 171, 0, 0) 62%); }
+.dream__end.in .dream__ring { opacity: .4; transform: translate(-50%, -50%) scale(1); }
+.dream__end { isolation: isolate; }
 .dx__pre { font-size: clamp(13px, 3.8vw, 17px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
 .dx__now { margin-top: 10px; font-size: clamp(50px, 15vw, 128px); font-weight: 700; line-height: 1; letter-spacing: -.035em;
-  background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
-  animation: gold 5s linear infinite; filter: drop-shadow(0 8px 40px rgba(250, 171, 0, .25)); }
+  background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
 .dx__tag { max-width: 520px; margin: 22px auto 0; font-size: clamp(16px, 4.4vw, 21px); line-height: 1.45; text-wrap: balance; }
 .dx__cue { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; padding: 12px 20px; border: 1px solid rgba(250, 171, 0, .5); border-radius: 99px;
-  font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); text-decoration: none; transition: background .2s; }
+  font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: background .2s; }
 .dx__cue:hover { background: rgba(250, 171, 0, .1); }
 .dx__cue svg { width: 16px; height: 16px; animation: bob 1.6s ease-in-out infinite; }
-/* uma só volta do infinito, como um anel em volta do "Agora existe." */
-.dx__ring { position: absolute; left: 50%; top: 50%; width: min(760px, 150vw); aspect-ratio: 480 / 540; pointer-events: none;
-  background: var(--infinity) 0% 50% / 200% 100% no-repeat; opacity: 0; transform: translate(-50%, -50%) scale(.82);
-  transition: opacity 1.4s ease, transform 2.2s var(--ease); }
-.dx.final .dx__ring { opacity: .42; transform: translate(-50%, -50%) scale(1); }
-.dx__glow { position: absolute; left: 50%; top: 50%; width: 900px; height: 600px; transform: translate(-50%, -50%); pointer-events: none;
-  background: radial-gradient(ellipse, rgba(250, 171, 0, .3), rgba(250, 171, 0, 0) 62%); opacity: calc(.15 + var(--p, 0) * .5); transition: opacity .4s; }
-/* cada sonho que passa vira um item marcado */
-.dx__checks { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 960px; margin: 44px auto 0; list-style: none; }
-.dx__checks li { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px 7px 9px; border: 1px solid rgba(255, 255, 255, .12); border-radius: 99px;
-  font-size: 12px; font-weight: 500; color: rgba(255, 255, 255, .28); transition: color .45s var(--ease), border-color .45s, background .45s; }
-.dx__checks li::before { content: ""; width: 14px; height: 14px; border: 1.5px solid rgba(255, 255, 255, .2); border-radius: 50%; background: center / 9px no-repeat; transition: all .45s; }
-.dx__checks li.ok { color: #fff; border-color: rgba(250, 171, 0, .55); background: rgba(250, 171, 0, .08); }
-.dx__checks li.ok::before { border-color: var(--amber); background-color: var(--amber);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E"); }
 
 /* ---------- 3. test drive ---------- */
 .drive { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(250, 171, 0, .1), rgba(0, 0, 0, 0) 70%), var(--bg-2); }
@@ -547,8 +534,6 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .dany-q { display: block; position: absolute; left: calc(50% + 352px); top: 46px; width: 260px; text-align: center; font-size: 13.5px; font-weight: 500; line-height: 1.4; color: rgba(255, 255, 255, .5); }
   .dany-q span { display: block; margin-top: 4px; font-size: 12px; font-style: normal; color: rgba(255, 255, 255, .42); }
 
-  .dx { height: 340vh; }
-  .dx__checks { margin-top: 64px; }
   .drive__grid { grid-template-columns: minmax(0, 1fr) 410px; gap: 72px; align-items: center; }
   /* ritmo no computador: 56 cabeçalho→conteúdo, 64 entre blocos, 80 entre as duas funcionalidades */
   .feat { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; margin-top: 56px; }
@@ -647,11 +632,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 .rm .streaks { display: none; }
 .rm .media, .no-js .media { overflow-x: auto; }
 .rm .media__track { animation: none; }
-.no-js .dx, .rm .dx { height: auto; }
-.no-js .dx__stage, .rm .dx__stage { position: relative; height: auto; padding: 96px var(--gutter); }
-.no-js .dx__a, .no-js .dx__checks, .rm .dx__a, .rm .dx__checks { display: none; }
-.no-js .dx__b, .rm .dx__b { opacity: 1; transform: none; filter: none; pointer-events: auto; }
-.no-js .dx__ring, .rm .dx__ring { opacity: .3; transform: translate(-50%, -50%); }
+.no-js .dream__list li, .rm .dream__list li { opacity: 1; transform: none; }
+.no-js .dream__ring, .rm .dream__ring { opacity: .4; transform: translate(-50%, -50%); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
@@ -709,25 +691,20 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   </section>
 
   <!-- 2. o sonho: cena guiada pela rolagem, termina em "Agora existe." -->
-  <section class="dx" id="reveal">
-    <div class="dx__stage">
-      <div class="dx__ring" aria-hidden="true"></div>
-      <div class="dx__glow" aria-hidden="true"></div>
-      <div class="dx__a">
-        <p class="dx__lead">Todo autor já sonhou em</p>
-        <div class="dx__lines">
-          <p class="dx__l"><span>ver o livro sendo <em>lido de verdade.</em></span></p>
-          <p class="dx__l"><span>receber mensagem <em>de um leitor desconhecido.</em></span></p>
-          <p class="dx__l"><span>ser convidado <em>para falar do livro.</em></span></p>
-          <p class="dx__l"><span>lançar e <em>ver o livro não parar.</em></span></p>
-          <p class="dx__l"><span>ver o livro antigo <em>voltar a vender.</em></span></p>
-          <p class="dx__l"><span>nunca mais <em>ser esquecido.</em></span></p>
-        </div>
-        <ul class="dx__checks" aria-hidden="true">
-          <li>Lido de verdade</li><li>Leitores novos</li><li>Convites</li><li>Lançamento que não para</li><li>Livro antigo vendendo</li><li>Lembrado</li>
-        </ul>
-      </div>
-      <div class="dx__b">
+  <section class="dream" id="reveal">
+    <div class="wrap">
+      <p class="dream__lead rv">Todo autor já sonhou em</p>
+      <ol class="dream__list">
+        <li>ver o livro sendo <em>lido de verdade.</em></li>
+        <li>receber mensagem <em>de um leitor desconhecido.</em></li>
+        <li>ser convidado <em>para falar do livro.</em></li>
+        <li>lançar e <em>ver o livro não parar.</em></li>
+        <li>ver o livro antigo <em>voltar a vender.</em></li>
+        <li>nunca mais <em>ser esquecido.</em></li>
+      </ol>
+      <div class="dream__end rv">
+        <div class="dream__glow" aria-hidden="true"></div>
+        <div class="dream__ring" aria-hidden="true"></div>
         <p class="dx__pre">Parecia impossível.</p>
         <p class="dx__now">Agora existe.</p>
         <p class="dx__tag">Tudo o que você precisa fazer para o seu livro ser lido cada vez mais, <span class="amber">em um lugar só.</span></p>
@@ -881,25 +858,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   }
   function setPressed(group, btn) { $$('button', group).forEach(function (x) { x.setAttribute('aria-pressed', x === btn ? 'true' : 'false'); }); }
 
-  /* ================= 2. CENA DO SONHO (rolagem) ================= */
-  var dx = $('#reveal'), dxIn = false;
+  /* ================= 2. O SONHO: cada frase acende quando passa pelo meio da tela ================= */
+  var dx = $('#reveal');
   (function () {
-    var lines = $$('.dx__l', dx), checks = $$('.dx__checks li', dx);
-    if (REDUCED) { dx.classList.add('final'); return; }
-    var N = lines.length, FIM = .74, ticking = false;
-    function upd() {
-      ticking = false;
-      var r = dx.getBoundingClientRect(), vh = window.innerHeight;
-      var p = Math.min(1, Math.max(0, -r.top / (r.height - vh)));
-      dx.style.setProperty('--p', p.toFixed(3));
-      var idx = Math.min(N - 1, Math.floor(p / (FIM / N)));
-      lines.forEach(function (l, i) { l.classList.toggle('on', i === idx && p < FIM); l.classList.toggle('past', i < idx); });
-      checks.forEach(function (c, i) { c.classList.toggle('ok', i < idx || (i === idx && p > (idx + .5) * FIM / N)); });
-      dx.classList.toggle('final', p >= FIM);
-    }
-    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
-    window.addEventListener('resize', upd);
-    upd();
+    var items = $$('.dream__list li', dx);
+    if (REDUCED || !('IntersectionObserver' in window)) { items.forEach(function (li) { li.classList.add('lit'); }); return; }
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting || (en.rootBounds && en.boundingClientRect.bottom < en.rootBounds.top)) en.target.classList.add('lit'); }); }, { rootMargin: '-38% 0px -38% 0px' });
+    items.forEach(function (li) { io.observe(li); });
   })();
 
   /* ================= 7. DANY NA MÍDIA: esteira contínua ================= */
@@ -935,14 +900,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   /* ================= ENTRADA DOS BLOCOS ================= */
   $$('.rv').forEach(function (el) { onView(el, function (t) { t.classList.add('in'); }); });
 
-  /* ================= BOTÃO FIXO (celular): some no topo, na cena do sonho e no cadastro final ================= */
+  /* ================= BOTÃO FIXO (celular): some no topo e no cadastro final ================= */
   var dock = $('#dock'), topForm = $('.lead-form[data-pos=topo]');
   var seenTop = true, seenEnd = false;
-  function dockUpdate() { dock.classList.toggle('on', !seenTop && !seenEnd && !dxIn && !topForm.classList.contains('is-done')); }
+  function dockUpdate() { dock.classList.toggle('on', !seenTop && !seenEnd && !topForm.classList.contains('is-done')); }
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (es) { seenTop = es[0].isIntersecting || es[0].boundingClientRect.top > 0; dockUpdate(); }).observe(topForm);
     new IntersectionObserver(function (es) { seenEnd = es[0].isIntersecting; dockUpdate(); }).observe($('#cadastro-fim'));
-    new IntersectionObserver(function (es) { dxIn = es[0].isIntersecting; dockUpdate(); }, { threshold: .02 }).observe(dx);
   }
 
   /* ================= CADASTRO ================= */
