@@ -13,6 +13,10 @@
 //   utm_source?, utm_medium?, utm_campaign?, utm_content?, utm_term?,
 //   lang?: "es"           // produto INTERNACIONAL (so preco): lista/tag proprias, sem field 68, sem forcar DDI 55
 // }
+//
+// Black Week Motorizada 2026 (pagina /black-week): variant "black-week", sem stage obrigatorio.
+// { nome, email, whatsapp, variant: "black-week", posicao, td_fase?, td_livro?, utm_* }
+// -> lista 15 + tag 380; se ja for aluno do Metodo (RPC bw_eh_aluno) ganha tambem a tag 381.
 
 // deno-lint-ignore-file no-explicit-any
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
@@ -28,6 +32,15 @@ const FIELD_ESTAGIO = 68;         // MTBB_ESTAGIO_FUNIL (dropdown)
 
 const STAGES_VALID = new Set(["escrevendo", "lancando", "publicado"]);
 const VARIANTS_VALID = new Set(["checkout", "lista"]);
+
+// Black Week Motorizada 2026 (criados no AC em 2026-10-05)
+const BW_LIST_ID = 15;            // lista "Black Week Motorizada 2026"
+const BW_TAG_CADASTRO = 380;      // tag "bw-motorizada-cadastro"
+const BW_TAG_ALUNO = 381;         // tag "bw-motorizada-aluno" (ja comprou o Metodo)
+const BW_FIELD_LIVRO = 122;       // campo "BW Livro (test drive)" (%BW_LIVRO%)
+const BW_FASE_ESTAGIO: Record<string, string> = { construcao: "escrevendo", lancamento: "lancando", permanencia: "publicado" };
+const SB_URL = Deno.env.get("SUPABASE_URL") ?? "";
+const SB_SERVICE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 
 // ES (produto internacional, so preco): estrutura SEPARADA do BR. Preencher apos criar no AC.
 const ES_LIST_ID: number | null = 13;          // lista "MTBB ES (internacional)" (criada 2026-09-08)
@@ -78,6 +91,50 @@ function sanitize(s: any, max = 200): string {
   return String(s ?? "").trim().slice(0, max);
 }
 
+// ---------------------------------------------------------------------------
+// Black Week Motorizada 2026: cadastro da pagina /black-week
+// ---------------------------------------------------------------------------
+async function ehAluno(email: string): Promise<boolean> {
+  if (!SB_URL || !SB_SERVICE) return false;
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/rpc/bw_eh_aluno`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", apikey: SB_SERVICE, Authorization: `Bearer ${SB_SERVICE}` },
+      body: JSON.stringify({ p_email: email }),
+    });
+    return r.ok ? (await r.json()) === true : false;
+  } catch { return false; } // nunca quebra o cadastro
+}
+
+async function blackWeek(payload: any, nome: string, email: string, whatsapp: string) {
+  const [firstName, ...rest] = nome.split(/\s+/);
+  const estagio = BW_FASE_ESTAGIO[sanitize(payload.td_fase, 20)] || "";
+  const livro = sanitize(payload.td_livro, 48);
+  const fieldValues: any[] = [];
+  if (estagio) fieldValues.push({ field: FIELD_ESTAGIO, value: estagio });
+  if (livro) fieldValues.push({ field: BW_FIELD_LIVRO, value: livro });
+
+  const sync = await acFetch("/contact/sync", { method: "POST", body: JSON.stringify({ contact: { email, firstName, lastName: rest.join(" "), phone: whatsapp || undefined, fieldValues } }) });
+  if (!sync.ok) return json({ error: "ac_sync_failed", status: sync.status, detail: sync.text?.slice(0, 500) }, 502);
+  const contactId = Number(sync.data?.contact?.id);
+  if (!contactId) return json({ error: "ac_no_contact_id", detail: sync.text?.slice(0, 500) }, 502);
+
+  const lista = await acFetch("/contactLists", { method: "POST", body: JSON.stringify({ contactList: { list: BW_LIST_ID, contact: contactId, status: 1 } }) });
+  // a tag de aluno entra ANTES da de cadastro: a automacao que dispara na 380 ja enxerga a 381
+  const aluno = await ehAluno(email);
+  let tagAluno: boolean | null = null;
+  if (aluno) {
+    const t = await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: BW_TAG_ALUNO } }) });
+    tagAluno = t.ok || t.status === 422;
+  }
+  const tag = await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: BW_TAG_CADASTRO } }) });
+  return json({
+    ok: true, variant: "black-week", contact_id: contactId,
+    list_added: lista.ok || lista.status === 422, tag_applied: tag.ok || tag.status === 422,
+    aluno, tag_aluno: tagAluno, estagio: estagio || null, posicao: sanitize(payload.posicao, 10),
+  });
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS_HEADERS });
   if (req.method !== "POST") return json({ error: "method_not_allowed" }, 405);
@@ -100,6 +157,7 @@ serve(async (req) => {
 
   if (!nome || nome.length < 2) return json({ error: "nome_invalid" }, 400);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: "email_invalid" }, 400);
+  if (variant === "black-week") return blackWeek(payload, nome, email, whatsapp);
   if (!STAGES_VALID.has(stage)) return json({ error: "stage_invalid" }, 400);
   if (!VARIANTS_VALID.has(variant)) return json({ error: "variant_invalid" }, 400);
 
