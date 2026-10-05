@@ -489,15 +489,15 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .hero__in { padding: 20px 0 70px; }
   .hero__main { max-width: 648px; margin: 0 auto; }
   .proof { font-size: 13px; }
-  .logo-box { margin-top: 40px; }
-  .bwlogo { font-size: 76px; }
-  .h1 { margin-top: 38px; }
+  .logo-box { margin-top: 26px; }
+  .bwlogo { font-size: 68px; }
+  .h1 { margin-top: 26px; }
   .h1__a { font-size: 21px; letter-spacing: .2em; }
   .h1-sub { margin-top: 12px; font-size: 18px; letter-spacing: .18em; }
-  .hero .when-pill { margin-top: 22px; font-size: 14px; }
+  .hero .when-pill { margin-top: 18px; font-size: 14px; }
   .hero { min-height: 1000px; }
-  .pitch { margin-top: 24px; max-width: 600px; font-size: 21px; line-height: 1.5; }
-  .hero .lead-form { max-width: 594px; margin-top: 34px; }
+  .pitch { margin-top: 40px; max-width: 600px; font-size: 21px; line-height: 1.5; }
+  .hero .lead-form { max-width: 594px; margin-top: 24px; }
   .lead-form .hint { margin-bottom: 12px; font-size: 16px; }
   .lead-form form { gap: 10px; }
   .fld input { height: 52px; font-size: 17px; }
@@ -536,9 +536,30 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .dany-d, .dany-q { display: none; }
   .hero { min-height: 0; }
 }
-@media (max-width: 380px) {
+/* celular: o cadastro tem que aparecer na primeira tela. O formulário sobe para logo depois da data; a Dany e a frase vêm depois dele */
+.hero__main { display: flex; flex-direction: column; }
+.proof, .hero .when-pill { align-self: center; }
+.hero .lead-form { order: 1; width: 100%; }
+.dany-glow, .dany-m, .pitch { order: 2; }
+.next { order: 3; }
+@media (max-width: 899px) {
+  .hero__in { padding-top: 16px; }
+  .logo-box { margin-top: 14px; }
+  .logo-box .bwlogo { font-size: clamp(36px, 10vw, 46px); }
+  .h1 { margin-top: 14px; }
+  .h1-sub { margin-top: 6px; }
+  .hero .when-pill { margin-top: 12px; }
+  .hero .lead-form { margin-top: 16px; }
+  .hero .lead-form .hint { margin-bottom: 8px; font-size: 14px; }
+  .dany-m { margin-top: 40px; }
+}
+@media (max-width: 340px) {
   .lead-form form { grid-template-columns: minmax(0, 1fr); }
   .fld.half { grid-column: 1 / -1; }
+}
+@media (max-width: 380px) {
+  .fld.half input { padding: 0 11px; }
+  .fld.half input::placeholder { font-size: 15px; }
   .seg button { font-size: 12px; }
 }
 
@@ -603,7 +624,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
             <p class="hint">Faça seu cadastro e seja avisado na abertura</p>
             <form novalidate>
               <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
-              <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu melhor e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
+              <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
               <div class="fld half" data-f="whatsapp"><input name="whatsapp" type="tel" autocomplete="tel" inputmode="numeric" enterkeyhint="send" maxlength="16" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD"><p class="msg">Confira o número com DDD.</p></div>
               <button class="btn" type="submit">Quero liberar meu acesso <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
             </form>
@@ -852,7 +873,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
             <div class="lead-form" data-pos="fim">
               <form novalidate>
                 <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
-                <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu melhor e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
+                <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
                 <div class="fld half" data-f="whatsapp"><input name="whatsapp" type="tel" autocomplete="tel" inputmode="numeric" enterkeyhint="send" maxlength="16" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD"><p class="msg">Confira o número com DDD.</p></div>
                 <button class="btn" type="submit">Quero liberar meu acesso <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
               </form>
