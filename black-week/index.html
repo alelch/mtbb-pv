@@ -100,18 +100,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .center .lede { margin-left: auto; margin-right: auto; }
 .blk { position: relative; padding: var(--sec) 0; }
 
-/* ---------- perguntas ---------- */
-.faq { max-width: 760px; margin: 0 auto; }
-.faq__list { margin-top: 32px; border-top: 1px solid var(--line); }
-.faq details { border-bottom: 1px solid var(--line); }
-.faq summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 2px; cursor: pointer; list-style: none;
-  font-size: clamp(16px, 4.3vw, 19px); font-weight: 500; line-height: 1.35; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid rgba(250, 171, 0, .5); border-radius: 50%;
-  font-size: 18px; font-weight: 400; color: var(--amber); transition: transform .3s var(--ease); }
-.faq details[open] summary::after { transform: rotate(45deg); }
-.faq details p { padding: 0 2px 22px; max-width: 640px; font-size: clamp(15px, 4vw, 17px); line-height: 1.6; color: var(--ink-2); }
-
 /* ---------- logos ---------- */
 /* Black Week Motorizada (vetor, o mesmo do VD_05) */
 .bwlogo { --bw-ink: #f4efe4; --bw-amber: #faab00; --bw-page: transparent;
@@ -862,22 +850,6 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <figure><img src="../assets/dany-sakugawa-mauricio-de-sousa.webp" alt="Dany Sakugawa com Maurício de Sousa" decoding="async" width="820" height="1093"><figcaption>Com Maurício de Sousa</figcaption></figure>
         <figure><img src="../assets/dany-sakugawa-band-entrevista.webp" alt="Dany Sakugawa no Band Entrevista" decoding="async" width="820" height="615"><figcaption>Band Entrevista</figcaption></figure>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7b. perguntas -->
-  <section class="blk" style="border-top:1px solid var(--line)">
-    <div class="wrap faq">
-      <div class="center rv">
-        <p class="eyebrow">Antes de você perguntar</p>
-        <h2 class="h2">Perguntas rápidas.</h2>
-      </div>
-      <div class="faq__list rv">
-        <details><summary>O que é o LOMBADA?</summary><p>A ferramenta que mostra o que fazer pelo seu livro: o plano da semana, as oportunidades do seu gênero e ideias de post ilimitadas. Tudo sai das aulas do Método The Book Business.</p></details>
-        <details><summary>Funciona para livro antigo? E para quem ainda está escrevendo?</summary><p>Sim. O plano muda conforme a fase do livro: escrevendo, recém-lançado ou parado há anos.</p></details>
-        <details><summary>O que vem na Black Week Motorizada?</summary><p>O Método The Book Business com o LOMBADA dentro. As condições aparecem na abertura, dia 9 de novembro, às 20h.</p></details>
-        <details><summary>O cadastro custa alguma coisa?</summary><p>Não. É gratuito e sem compromisso. Você só recebe o aviso quando a Black Week Motorizada abrir.</p></details>
       </div>
     </div>
   </section>
