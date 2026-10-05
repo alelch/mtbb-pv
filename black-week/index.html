@@ -440,10 +440,12 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .stat .t { margin-top: 8px; font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--ink-2); }
 .media-k { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 56px; }
 .media-k span { font-size: 12px; color: var(--ink-3); }
-.media { display: flex; gap: 12px; margin-top: 16px; padding-bottom: 6px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch;
-  -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
-.media::-webkit-scrollbar { display: none; }
-.media figure { flex: none; width: 230px; scroll-snap-align: start; }
+/* esteira que corre sozinha; para no mouse ou no toque */
+.media { margin-top: 16px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.media__track { display: flex; gap: 12px; width: max-content; animation: belt 55s linear infinite; }
+.media:hover .media__track, .media.hold .media__track { animation-play-state: paused; }
+.media figure { flex: none; width: 230px; }
 .media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); border-radius: 12px; filter: grayscale(.25); transition: filter .3s; }
 .media figure:hover img { filter: none; }
 .media figcaption { margin-top: 8px; font-size: 12px; font-weight: 500; color: var(--ink-3); }
@@ -470,11 +472,13 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .fecho__form .fld.half { grid-column: 1 / -1; }
 
 /* ---------- rodapé e botão fixo ---------- */
-footer { padding: 44px 20px calc(110px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); text-align: center; font-size: 12px; color: var(--ink-3); }
-footer .brand { margin-bottom: 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--ink); }
-footer p + p { margin-top: 8px; }
-footer a { color: var(--amber); }
-footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
+/* rodapé igual ao da página do Aniversário: logo do Método, direitos, privacidade em azul e aviso legal */
+footer { padding: 56px 20px calc(110px + env(safe-area-inset-bottom)); background: #000; text-align: center; font-size: 12px; line-height: 1.5; color: #fff; }
+.foot-logo { width: 80px; height: auto; margin: 0 auto 14px; }
+footer p + p { margin-top: 6px; }
+.foot-link { color: #04b4fc; text-decoration: none; }
+.foot-link:hover { text-decoration: underline; }
+footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-height: 1.6; color: #fff; }
 .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
   background: linear-gradient(to top, #000 60%, rgba(0, 0, 0, 0)); transform: translateY(110%); transition: transform .35s var(--ease); }
 .dock.on { transform: none; }
@@ -564,6 +568,8 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
 
 /* sem JavaScript ou com animação desligada: tudo visível e parado */
 .rm .streaks { display: none; }
+.rm .media, .no-js .media { overflow-x: auto; }
+.rm .media__track { animation: none; }
 .no-js .dx, .rm .dx { height: auto; }
 .no-js .dx__stage, .rm .dx__stage { position: relative; height: auto; padding: 96px var(--gutter); }
 .no-js .dx__a, .no-js .dx__checks, .rm .dx__a, .rm .dx__checks { display: none; }
@@ -833,15 +839,17 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
           </div>
         </div>
       </div>
-      <div class="media-k rv"><p class="eyebrow">Dany na mídia</p><span>Arraste para o lado</span></div>
+      <div class="media-k rv"><p class="eyebrow">Dany na mídia</p></div>
       <div class="media rv" aria-label="Dany na mídia">
-        <figure><img src="../assets/dany-sakugawa-band.webp" alt="Dany Sakugawa na Band" loading="lazy" decoding="async" width="820" height="460"><figcaption>Band</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-sbt.webp" alt="Dany Sakugawa no SBT" loading="lazy" decoding="async" width="820" height="413"><figcaption>SBT</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-bienal-do-livro.webp" alt="Dany Sakugawa na Bienal do Livro" loading="lazy" decoding="async" width="820" height="615"><figcaption>Bienal do Livro</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-premio-publishnews.webp" alt="Dany Sakugawa no Prêmio PublishNews" loading="lazy" decoding="async" width="820" height="615"><figcaption>Prêmio PublishNews</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-hotmart-festival.webp" alt="Dany Sakugawa no Hotmart Festival" loading="lazy" decoding="async" width="820" height="457"><figcaption>Hotmart Festival</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-mauricio-de-sousa.webp" alt="Dany Sakugawa com Maurício de Sousa" loading="lazy" decoding="async" width="820" height="1093"><figcaption>Com Maurício de Sousa</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-band-entrevista.webp" alt="Dany Sakugawa no Band Entrevista" loading="lazy" decoding="async" width="820" height="615"><figcaption>Band Entrevista</figcaption></figure>
+        <div class="media__track">
+        <figure><img src="../assets/dany-sakugawa-band.webp" alt="Dany Sakugawa na Band" decoding="async" width="820" height="460"><figcaption>Band</figcaption></figure>
+        <figure><img src="../assets/dany-sakugawa-sbt.webp" alt="Dany Sakugawa no SBT" decoding="async" width="820" height="413"><figcaption>SBT</figcaption></figure>
+        <figure><img src="../assets/dany-sakugawa-bienal-do-livro.webp" alt="Dany Sakugawa na Bienal do Livro" decoding="async" width="820" height="615"><figcaption>Bienal do Livro</figcaption></figure>
+        <figure><img src="../assets/dany-sakugawa-premio-publishnews.webp" alt="Dany Sakugawa no Prêmio PublishNews" decoding="async" width="820" height="615"><figcaption>Prêmio PublishNews</figcaption></figure>
+        <figure><img src="../assets/dany-sakugawa-hotmart-festival.webp" alt="Dany Sakugawa no Hotmart Festival" decoding="async" width="820" height="457"><figcaption>Hotmart Festival</figcaption></figure>
+        <figure><img src="../assets/dany-sakugawa-mauricio-de-sousa.webp" alt="Dany Sakugawa com Maurício de Sousa" decoding="async" width="820" height="1093"><figcaption>Com Maurício de Sousa</figcaption></figure>
+        <figure><img src="../assets/dany-sakugawa-band-entrevista.webp" alt="Dany Sakugawa no Band Entrevista" decoding="async" width="820" height="615"><figcaption>Band Entrevista</figcaption></figure>
+        </div>
       </div>
     </div>
   </section>
@@ -888,10 +896,10 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
 </main>
 
 <footer>
-  <p class="brand">Método The Book Business</p>
-  <p>© 2026 The Book Business. Todos os direitos reservados.</p>
-  <p><a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a></p>
-  <p class="legal"><b>Aviso Legal:</b> “Nenhuma informação contida neste site deve ser interpretada como uma afirmação de resultados ou de retornos financeiros. Qualquer referência a desempenho passado ou potencial é uma estratégia elaborada no contexto individual de cada autor, e não deve ser interpretada como recomendação ou garantia de resultados específicos.”</p>
+  <img class="foot-logo" src="assets/logo-mtbb.webp" alt="Método The Book Business" width="80" height="52" loading="lazy" decoding="async">
+  <p>© 2026 . The Book Business. Todos os direitos reservados.</p>
+  <p><a class="foot-link" href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a></p>
+  <p class="legal"><b>Aviso Legal:</b> “Nenhuma informação contida neste site deve ser interpretada como uma afirmação de resultados ou de retornos financeiros. Qualquer referência a desempenho passado ou potencial é uma estratégia elaborada no contexto <b>individual de cada autor</b>, e não deve ser interpretada como recomendação ou garantia de resultados específicos.”</p>
 </footer>
 
 <div class="dock" id="dock"><a class="btn" href="#cadastro-fim">Cadastre-se <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div>
@@ -1149,6 +1157,15 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
     window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
     window.addEventListener('resize', upd);
     upd();
+  })();
+
+  /* ================= 7. DANY NA MÍDIA: esteira contínua ================= */
+  (function () {
+    var media = $('.media'), track = $('.media__track', media);
+    if (!track || REDUCED) return;
+    track.insertAdjacentHTML('beforeend', track.innerHTML.replace(/<figure>/g, '<figure aria-hidden="true">'));
+    media.addEventListener('touchstart', function () { media.classList.add('hold'); }, { passive: true });
+    media.addEventListener('touchend', function () { setTimeout(function () { media.classList.remove('hold'); }, 1200); }, { passive: true });
   })();
 
   /* ================= 7. NÚMEROS QUE SOBEM ================= */
