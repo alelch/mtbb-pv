@@ -16,11 +16,9 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://connect.facebook.net">
 <!-- Montserrat só para o logo da Black Week; o texto é Poppins (local, a mesma das PVs) -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/infinity.webp" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/poppins-400.woff2">
 <link rel="preload" as="image" href="assets/dany-bw-m.webp" media="(max-width: 899px)">
 <link rel="preload" as="image" href="assets/dany-bw.webp" media="(min-width: 900px)">
@@ -38,6 +36,9 @@
 @font-face { font-family: "Poppins"; font-weight: 500; font-display: swap; src: url("../assets/fonts/poppins-500.woff2") format("woff2"); }
 @font-face { font-family: "Poppins"; font-weight: 600; font-display: swap; src: url("../assets/fonts/poppins-600.woff2") format("woff2"); }
 @font-face { font-family: "Poppins"; font-weight: 700; font-display: swap; src: url("../assets/fonts/poppins-700.woff2") format("woff2"); }
+/* Montserrat só para o logo da Black Week: local, para não travar o desenho da página */
+@font-face { font-family: "Montserrat"; font-weight: 500; font-display: swap; src: url("assets/fonts/montserrat-500-latin.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-style: italic; font-weight: 900; font-display: swap; src: url("assets/fonts/montserrat-900i-latin.woff2") format("woff2"); }
 @font-face { font-family: "Archivo LMB"; font-weight: 900; font-display: swap; src: url("assets/fonts/archivo-900-latin.woff2") format("woff2"); }
 
 /* ---------- tokens ---------- */
@@ -662,7 +663,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         </div>
 
         <p class="dany-q"><i>“Eu queria que o autor abrisse a segunda-feira e já soubesse o que fazer pelo livro. Agora ele sabe, sempre.”</i><span>Dany Sakugawa</span></p>
-        <img class="dany-d" src="assets/dany-bw.webp" alt="Dany Sakugawa" width="840" height="1135" decoding="async">
+        <img class="dany-d" src="assets/dany-bw.webp" alt="Dany Sakugawa" width="840" height="1135" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
@@ -861,13 +862,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       <div class="media-k rv"><p class="eyebrow">Dany na mídia</p></div>
       <div class="media rv" aria-label="Dany na mídia">
         <div class="media__track">
-        <figure><img src="../assets/dany-sakugawa-band.webp" alt="Dany Sakugawa na Band" decoding="async" width="820" height="460"><figcaption>Band</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-sbt.webp" alt="Dany Sakugawa no SBT" decoding="async" width="820" height="413"><figcaption>SBT</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-bienal-do-livro.webp" alt="Dany Sakugawa na Bienal do Livro" decoding="async" width="820" height="615"><figcaption>Bienal do Livro</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-premio-publishnews.webp" alt="Dany Sakugawa no Prêmio PublishNews" decoding="async" width="820" height="615"><figcaption>Prêmio PublishNews</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-hotmart-festival.webp" alt="Dany Sakugawa no Hotmart Festival" decoding="async" width="820" height="457"><figcaption>Hotmart Festival</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-mauricio-de-sousa.webp" alt="Dany Sakugawa com Maurício de Sousa" decoding="async" width="820" height="1093"><figcaption>Com Maurício de Sousa</figcaption></figure>
-        <figure><img src="../assets/dany-sakugawa-band-entrevista.webp" alt="Dany Sakugawa no Band Entrevista" decoding="async" width="820" height="615"><figcaption>Band Entrevista</figcaption></figure>
+        <figure><img src="assets/midia/band.webp" alt="Dany Sakugawa na Band" loading="lazy" decoding="async" width="520" height="292"><figcaption>Band</figcaption></figure>
+        <figure><img src="assets/midia/sbt.webp" alt="Dany Sakugawa no SBT" loading="lazy" decoding="async" width="520" height="262"><figcaption>SBT</figcaption></figure>
+        <figure><img src="assets/midia/bienal-do-livro.webp" alt="Dany Sakugawa na Bienal do Livro" loading="lazy" decoding="async" width="520" height="390"><figcaption>Bienal do Livro</figcaption></figure>
+        <figure><img src="assets/midia/premio-publishnews.webp" alt="Dany Sakugawa no Prêmio PublishNews" loading="lazy" decoding="async" width="520" height="390"><figcaption>Prêmio PublishNews</figcaption></figure>
+        <figure><img src="assets/midia/hotmart-festival.webp" alt="Dany Sakugawa no Hotmart Festival" loading="lazy" decoding="async" width="520" height="290"><figcaption>Hotmart Festival</figcaption></figure>
+        <figure><img src="assets/midia/mauricio-de-sousa.webp" alt="Dany Sakugawa com Maurício de Sousa" loading="lazy" decoding="async" width="520" height="693"><figcaption>Com Maurício de Sousa</figcaption></figure>
+        <figure><img src="assets/midia/band-entrevista.webp" alt="Dany Sakugawa no Band Entrevista" loading="lazy" decoding="async" width="520" height="390"><figcaption>Band Entrevista</figcaption></figure>
         </div>
       </div>
     </div>
