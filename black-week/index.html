@@ -379,9 +379,9 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .mon .tag { margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
 .mon .l { font-size: 16px; font-weight: 500; line-height: 1.45; }
 .mon .l + .l { margin-top: 6px; }
-.mon .before { border: 1.5px solid rgba(214, 72, 60, .75); background: linear-gradient(160deg, rgba(204, 51, 51, .14), rgba(204, 51, 51, .03)); color: #e9b3ab; }
-.mon .before .tag { color: var(--err); }
-.mon .before .l { text-decoration: line-through; text-decoration-color: rgba(255, 107, 94, .55); }
+.mon .before { border: 1.5px solid rgba(150, 82, 74, .55); background: linear-gradient(160deg, rgba(120, 52, 46, .16), rgba(120, 52, 46, .04)); color: #b9a29d; }
+.mon .before .tag { color: #c4867c; }
+.mon .before .l { text-decoration: line-through; text-decoration-color: rgba(196, 134, 124, .5); }
 .mon .after { border: 1.5px solid var(--amber); background: linear-gradient(160deg, rgba(250, 171, 0, .16), rgba(250, 171, 0, .04)); }
 .mon .after .tag { color: var(--amber); }
 .mon-foot { margin-top: 30px; text-align: center; font-size: clamp(18px, 5vw, 24px); font-weight: 600; text-wrap: balance; }
@@ -554,7 +554,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
 <body class="no-js">
 <script>document.body.classList.remove('no-js'); if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('rm');</script>
 
-<div class="topbar">O mercado literário <b>nunca viu</b> nada parecido</div>
+<div class="topbar">O <b>maior lançamento</b> do mercado literário</div>
 
 <main>
   <!-- 1. abertura + cadastro -->
@@ -576,7 +576,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
           <p class="pitch"><i>Seu livro agora tem <b class="amber">motor</b><br><b>E ele nunca vai parar.</b></i></p>
 
           <div class="lead-form" data-pos="topo">
-            <p class="hint">Faça seu cadastro e saiba primeiro</p>
+            <p class="hint">Faça seu cadastro e seja avisado na abertura</p>
             <form novalidate>
               <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
               <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu melhor e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
@@ -655,7 +655,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
               <div class="app-top">
                 <div class="app-brand"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span><span class="chip" id="td-chip" data-f="permanencia">Permanência</span></div>
                 <p class="app-day">Segunda · plano da semana</p>
-                <p class="app-title" id="td-titulo">O seu livro</p>
+                <p class="app-title" id="td-titulo">A Casa das Marés</p>
                 <div class="app-prog"><span id="td-cont">0 de 3</span><span class="bar"><i id="td-bar"></i></span></div>
               </div>
               <div class="app-list" id="td-list" aria-live="polite"></div>
@@ -687,7 +687,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
             <div class="panel__top">
               <div class="panel__k"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/></svg>LOMBADA</span><span class="tg">Oportunidades</span></div>
               <p class="panel__t">O que vem aí para o seu livro</p>
-              <p class="panel__d">Escolha o gênero. O prazo já vem contando.</p>
+              <p class="panel__d">Escolha o gênero do seu livro.</p>
               <div class="pills gen" role="group" aria-label="Gênero do livro" id="op-gen">
                 <button type="button" data-g="Romance" aria-pressed="true">Romance</button>
                 <button type="button" data-g="Infantil" aria-pressed="false" class="pulse">Infantil</button>
@@ -714,7 +714,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
             <div class="panel__top">
               <div class="panel__k"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/></svg>LOMBADA</span><span class="tg">Ideias de post</span></div>
               <p class="panel__t">Ideias de post ilimitadas</p>
-              <p class="panel__d">Responda 3 perguntas. O gerador já sabe o seu livro, a fase e a ação da semana.</p>
+              <p class="panel__d">Escolha a rede, a habilidade e o tom.</p>
             </div>
             <div class="idea">
               <div><span class="q__l">1. Para qual rede?</span><div class="pills" data-k="rede"><button type="button" aria-pressed="true">Instagram</button><button type="button" aria-pressed="false">TikTok</button><button type="button" aria-pressed="false">LinkedIn</button><button type="button" aria-pressed="false">YouTube</button></div></div>
@@ -841,7 +841,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
                 <button class="btn" type="submit">Cadastre-se <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
               </form>
               <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
-              <p class="fine">As condições saem na abertura, segunda, 9 de novembro, às 20h. Quem está cadastrado fica sabendo na hora.</p>
+              <p class="fine">Cadastro gratuito e sem compromisso.</p>
               <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Quando a Black Week Motorizada abrir, você fica sabendo.</p></div>
             </div>
           </div>
@@ -908,8 +908,8 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   // nome do livro: o que a pessoa digitou ou o que a demonstração está "digitando"
   function livro(padrao) { var v = (userTouched ? inLivro.value : demoNome).trim(); return v || padrao; }
   function comLivro(s, padrao) { return esc(s).replace(/\{T\}/g, '<span class="bk">' + esc(livro(padrao)) + '</span>'); }
-  function fmtTexto(s) { return comLivro(s, 'O seu livro').replace(/\[\[(.+?)\]\]/g, '<span class="vr">$1</span>'); }
-  function plain(s) { return s.replace(/\{T\}/g, livro('O seu livro')).replace(/\[\[(.+?)\]\]/g, '[$1]'); }
+  function fmtTexto(s) { return comLivro(s, 'A Casa das Marés').replace(/\[\[(.+?)\]\]/g, '<span class="vr">$1</span>'); }
+  function plain(s) { return s.replace(/\{T\}/g, livro('A Casa das Marés')).replace(/\[\[(.+?)\]\]/g, '[$1]'); }
   function meta(i) { return FASES[fase].acoes[i].min + ' min · ' + (feitas[i] ? 'Feito' : 'Esta semana'); }
 
   function progresso() {
@@ -918,11 +918,11 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
     bar.style.width = (n / tot * 100) + '%';
     screen.classList.toggle('complete', n === tot);
   }
-  function setTitulo(digitando) { tTitulo.innerHTML = esc(livro('O seu livro')) + (digitando ? '<span class="caret"></span>' : ''); }
+  function setTitulo(digitando) { tTitulo.innerHTML = esc(livro('A Casa das Marés')) + (digitando ? '<span class="caret"></span>' : ''); }
   function refreshTexts() {
     $$('.act', list).forEach(function (el) {
       var a = FASES[fase].acoes[+el.getAttribute('data-i')];
-      $('.act__t', el).innerHTML = comLivro(a.t, 'O seu livro');
+      $('.act__t', el).innerHTML = comLivro(a.t, 'A Casa das Marés');
       var b = $('.texto__b', el); if (b) b.innerHTML = fmtTexto(a.texto);
     });
   }
@@ -934,7 +934,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
       var tx = a.texto ? '<div class="texto"><div class="texto__h"><span>Texto pronto</span><button type="button" class="copy" data-i="' + i + '">Copiar texto</button></div><p class="texto__b">' + fmtTexto(a.texto) + '</p></div>' : '';
       return '<div class="act' + (feitas[i] ? ' done' : '') + '" data-i="' + i + '"><div class="act__row">' +
         '<button type="button" class="check' + (!userTouched && i === 0 ? ' pulse' : '') + '" aria-label="Marcar como feito" aria-pressed="' + !!feitas[i] + '" data-i="' + i + '"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>' +
-        '<div><p class="act__t">' + comLivro(a.t, 'O seu livro') + '</p><p class="act__m">' + meta(i) + '</p></div></div>' + tx + '</div>';
+        '<div><p class="act__t">' + comLivro(a.t, 'A Casa das Marés') + '</p><p class="act__m">' + meta(i) + '</p></div></div>' + tx + '</div>';
     }).join('') + '<div class="app-done">Semana completa.<small>Segunda tem plano novo.</small></div>';
     progresso();
   }
@@ -977,7 +977,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
   function stopDemo() { timers.forEach(clearTimeout); timers = []; setTitulo(false); }
   if (!REDUCED) onView($('.phone'), function () {
     if (userTouched) return;
-    var nome = 'A Casa das Marés', passo = 70, t0 = 500;
+    var nome = 'O Último Verão', passo = 70, t0 = 500;
     for (var k = 1; k <= nome.length; k++) (function (k) { later(function () { demoNome = nome.slice(0, k); setTitulo(true); refreshTexts(); }, t0 + k * passo); })(k);
     var fim = t0 + nome.length * passo + 300;
     later(function () { setTitulo(false); }, fim);
@@ -1078,7 +1078,7 @@ footer .legal { max-width: 660px; margin: 14px auto 0; line-height: 1.55; }
       var it = lista[(i - 1) % lista.length], f = fmts[(gerados + k) % fmts.length];
       html += '<div class="ia' + (destacar ? ' new' : '') + '"><span class="ia__ic">' + IC[f[1]] + '</span><div class="ia__b">' +
         '<p class="ia__tg"><b>Ideia ' + (gerados + k + 1) + '</b><span>' + escolha.rede + ' · ' + f[0] + '</span><span>' + escolha.tom + '</span></p>' +
-        '<p class="ia__t">' + comLivro(it[0], 'seu livro') + '</p><p class="ia__h">' + esc(it[1]) + '</p></div></div>';
+        '<p class="ia__t">' + comLivro(it[0], 'A Casa das Marés') + '</p><p class="ia__h">' + esc(it[1]) + '</p></div></div>';
     }
     gerados += 3;
     ideasBox.insertAdjacentHTML('afterbegin', html);
