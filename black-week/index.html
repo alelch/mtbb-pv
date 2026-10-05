@@ -958,6 +958,18 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { fn(en.target); io.unobserve(en.target); } }); }, opts || { rootMargin: '0px 0px -8% 0px' });
     io.observe(el);
   }
+  // o que vai, volta: entra ao descer; ao subir, o bloco que sai por baixo da tela se desfaz para entrar de novo
+  function reversivel(els, cls, margem) {
+    if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add(cls); }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting) en.target.classList.add(cls);
+        else if (en.rootBounds && en.boundingClientRect.top > en.rootBounds.bottom) en.target.classList.remove(cls);
+        else if (en.rootBounds && en.boundingClientRect.bottom < en.rootBounds.top) en.target.classList.add(cls);
+      });
+    }, { rootMargin: margem });
+    els.forEach(function (el) { io.observe(el); });
+  }
   function setPressed(group, btn) { $$('button', group).forEach(function (x) { x.setAttribute('aria-pressed', x === btn ? 'true' : 'false'); }); }
 
   /* ================= 3. TEST DRIVE =================
@@ -1182,8 +1194,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   (function () {
     var items = $$('.dream__list li', dx);
     if (REDUCED || !('IntersectionObserver' in window)) { items.forEach(function (li) { li.classList.add('lit'); }); return; }
-    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting || (en.rootBounds && en.boundingClientRect.bottom < en.rootBounds.top)) en.target.classList.add('lit'); }); }, { rootMargin: '-38% 0px -38% 0px' });
-    items.forEach(function (li) { io.observe(li); });
+    reversivel(items, 'lit', '-38% 0px -38% 0px');
   })();
 
   /* ================= 6b. DEPOIMENTOS =================
@@ -1246,7 +1257,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   }
 
   /* ================= ENTRADA DOS BLOCOS ================= */
-  $$('.rv').forEach(function (el) { onView(el, function (t) { t.classList.add('in'); }); });
+  reversivel($$('.rv'), 'in', '0px 0px -8% 0px');
 
   /* ================= BOTÃO FIXO (celular): some no topo e no cadastro final ================= */
   var dock = $('#dock'), topForm = $('.lead-form[data-pos=topo]');
