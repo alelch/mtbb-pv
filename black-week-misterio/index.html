@@ -298,11 +298,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .dream__list li.lit { opacity: 1; transform: none; }
 .dream__list em { font-style: normal; color: var(--ink-2); transition: color .7s ease; }
 .dream__list li.lit em { background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
-/* a virada: o que separa o sonho da realidade */
-.dream__turn { max-width: 620px; margin: clamp(56px, 11vw, 88px) auto 0; font-size: clamp(21px, 5.6vw, 32px); line-height: 1.25; letter-spacing: -.01em; text-wrap: balance; }
-.dream__turn p:first-child { font-weight: 500; color: var(--ink-2); }
-.dream__turn p + p { margin-top: 6px; }
-.dream__turn b { font-weight: 600; }
 .dream__end { position: relative; margin-top: clamp(72px, 14vw, 120px); padding: 40px 0 8px; }
 .dream__ring { position: absolute; left: 50%; top: 50%; z-index: -1; width: min(640px, 130vw); aspect-ratio: 480 / 540; pointer-events: none;
   background: var(--infinity) 0% 50% / 200% 100% no-repeat; opacity: 0; transform: translate(-50%, -50%) scale(.85); transition: opacity 1.4s ease, transform 2.2s var(--ease); }
@@ -712,21 +707,17 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     <div class="wrap">
       <p class="dream__lead rv">Todo autor já sonhou em</p>
       <ol class="dream__list">
-        <li>ver o livro sendo <em>lido de verdade.</em></li>
-        <li>receber mensagem <em>de um leitor desconhecido.</em></li>
-        <li>ser convidado <em>para falar do livro.</em></li>
+        <li>acordar todo dia <em>sabendo o que fazer pelo livro.</em></li>
         <li>lançar e <em>ver o livro não parar.</em></li>
-        <li>ver o livro antigo <em>voltar a vender.</em></li>
-        <li>nunca mais <em>ser esquecido.</em></li>
+        <li>ser <em>lido de verdade.</em></li>
+        <li>ver o livro <em>crescendo a cada dia.</em></li>
+        <li>ver o livro que ficou parado <em>voltar a vender.</em></li>
+        <li>ver o livro <em>se tornar orgulho.</em></li>
       </ol>
-      <div class="dream__turn rv">
-        <p>O sonho todo autor tem.</p>
-        <p><b>O que falta é saber <span class="amber">o próximo passo.</span></b></p>
-      </div>
       <div class="dream__end rv">
         <div class="dream__glow" aria-hidden="true"></div>
         <div class="dream__ring" aria-hidden="true"></div>
-        <p class="dx__pre">Parecia impossível ter isso toda semana.</p>
+        <p class="dx__pre">Parecia impossível.</p>
         <p class="dx__now">Agora existe.</p>
         <p class="dx__name">E se chama <span class="lmb">LOMBADA</span>.</p>
         <p class="dx__tag">Tudo o que você precisa fazer para o seu livro ser lido cada vez mais, <span class="amber">em um lugar só.</span></p>
