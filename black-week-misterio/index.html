@@ -97,7 +97,10 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 /* ---------- tipografia de seção ---------- */
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); }
 .eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--amber); }
-.h2 { margin-top: 12px; font-size: clamp(26px, 6.8vw, 40px); font-weight: 600; line-height: 1.15; letter-spacing: -.02em; text-wrap: balance; }
+.h2 { margin-top: 12px; font-size: clamp(30px, 8.4vw, 50px); font-weight: 600; line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
+/* destaque de título: o mesmo dourado com brilho do "SONHOU" (texto pequeno continua em .amber) */
+.gold { background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .lede { margin-top: 16px; max-width: 540px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.55; color: var(--ink-2); text-wrap: balance; }
 .center .lede { margin-left: auto; margin-right: auto; }
 .blk { position: relative; padding: var(--sec) 0; }
@@ -129,9 +132,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .ages__rows { display: grid; gap: 4px; }
 .ages__r { font-size: clamp(24px, 7.4vw, 50px); font-weight: 600; line-height: 1; letter-spacing: -.01em; text-transform: uppercase; }
 .ages__r small { display: block; margin: 6px 0 16px; font-size: clamp(12px, 3.4vw, 15px); font-weight: 500; letter-spacing: .04em; text-transform: none; color: var(--ink-3); }
-.ages__r.c1 { color: var(--f-construcao); }
-.ages__r.c2 { color: var(--f-lancamento); }
-.ages__r.c3 { color: var(--f-permanencia); }
 .ages__foot { margin-top: 24px; font-size: clamp(18px, 5vw, 24px); font-weight: 500; text-wrap: balance; }
 @media (min-width: 900px) {
   .secret__grid { grid-template-columns: minmax(0, 1fr) 360px; gap: 80px; }
@@ -139,8 +139,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 
 /* ---------- depoimentos: uma palavra de cada autor (sente, mas não vê) ---------- */
 .depo { border-top: 1px solid var(--line); }
-.depo__h { font-size: clamp(30px, 8.4vw, 50px); line-height: 1.08; }
-.depo__h .gold { display: inline-block; background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
 .depo__pre { display: flex; align-items: center; justify-content: center; gap: 8px; width: max-content; max-width: 100%; margin: 4px auto 14px; padding: 7px 14px;
   border: 1px solid rgba(255, 255, 255, .12); border-radius: 99px; background: rgba(255, 255, 255, .04);
   font-size: clamp(13px, 3.6vw, 15px); font-weight: 500; font-style: italic; letter-spacing: 0; line-height: 1.3; color: var(--ink-2); }
@@ -593,6 +591,15 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 .speak { display: contents; }
 .hero .lead-form { order: 1; width: 100%; }
 .dany-glow, .dany-m, .pitch { order: 2; }
+/* celular: todas as seções centralizadas, como o resto da página */
+@media (max-width: 899px) {
+  .secret__txt, .who__body { text-align: center; }
+  .nots li { justify-content: center; }
+  .nots li::before { display: none; }
+  .media-k { justify-content: center; }
+  .who__q { padding-left: 0; border-left: 0; }
+  .who__q::before { content: ""; display: block; width: 32px; height: 2px; margin: 0 auto 14px; border-radius: 2px; background: var(--amber); }
+}
 /* celular, como a referência: tudo empilhado no centro e o cadastro na primeira dobra.
    Ritmo: apertado dentro de cada grupo (logo / título / data / Dany+frase / formulário), respiro entre eles */
 @media (max-width: 899px) {
@@ -720,7 +727,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <li><em>ganhar mais leitores</em> a cada ação.</li>
         <li>e <em>nunca mais ver o livro parar.</em></li>
       </ol>
-      <p class="dream__auto rv">Tudo isso,<br><span class="amber">de forma automática.</span></p>
+      <p class="dream__auto rv">Tudo isso,<br><span class="gold">de forma automática.</span></p>
       <div class="dream__end rv">
         <div class="dream__glow" aria-hidden="true"></div>
         <div class="dream__ring" aria-hidden="true"></div>
@@ -738,12 +745,12 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       <div class="secret__grid">
         <div class="secret__txt rv">
           <p class="eyebrow">Ainda em segredo</p>
-          <h2 class="h2">O LOMBADA ainda não pode ser mostrado. <span class="amber">Mas já está pronto.</span></h2>
+          <h2 class="h2">O LOMBADA ainda não pode ser mostrado. <span class="gold">Mas já está pronto.</span></h2>
           <p class="lede">O mercado literário nunca viu nada parecido.</p>
           <ul class="nots">
             <li>Não é um curso.</li>
             <li>Não é mais uma planilha.</li>
-            <li><b>É o motor que faltava no <span class="amber">seu livro.</span></b></li>
+            <li><b>É o motor que faltava no <span class="gold">seu livro.</span></b></li>
           </ul>
         </div>
         <div class="vault rv" aria-hidden="true">
@@ -774,13 +781,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   <section class="ages">
     <div class="wrap">
       <p class="eyebrow rv">Para todo autor</p>
-      <h2 class="h2 rv">Não importa em que fase você está. <span class="amber">O LOMBADA é para você.</span></h2>
+      <h2 class="h2 rv">Não importa em que fase você está. <span class="gold">O LOMBADA é para você.</span></h2>
       <div class="ages__rows">
         <p class="ages__r c1 rv">Ainda escrevendo<small>Começa antes do lançamento.</small></p>
         <p class="ages__r c2 rv">Acabou de lançar<small>Não deixa o livro parar.</small></p>
         <p class="ages__r c3 rv">Parado há anos<small>Coloca o livro para andar.</small></p>
       </div>
-      <p class="ages__foot rv">Primeiro livro ou décimo. <span class="amber">O LOMBADA é único.</span></p>
+      <p class="ages__foot rv">Primeiro livro ou décimo. <span class="gold">O LOMBADA é único.</span></p>
     </div>
   </section>
 
@@ -831,7 +838,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <div class="fecho__grid">
           <div class="fecho__offer">
             <p class="eyebrow">Na Black Week Motorizada</p>
-            <h3 class="fecho__t">Método The Book Business <span class="amber">+</span> LOMBADA</h3>
+            <h3 class="fecho__t">Método The Book Business <span class="gold">+</span> LOMBADA</h3>
             <p class="fecho__s">O Método The Book Business ensina. O LOMBADA não deixa parar.</p>
             <ul class="fecho__list">
               <li>O que fazer pelo livro, <span class="amber">todo dia.</span></li>
