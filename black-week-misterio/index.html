@@ -140,8 +140,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 /* ---------- depoimentos: uma palavra de cada autor (sente, mas não vê) ---------- */
 .depo { border-top: 1px solid var(--line); }
 .words { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 40px; }
-.word { position: relative; display: flex; flex-direction: column; align-items: center; padding: 22px 14px 18px; border: 1px solid #222126; border-radius: 14px; background: #121114; text-align: center; }
-.word strong { font-size: clamp(22px, 6.4vw, 28px); font-weight: 700; line-height: 1.1; letter-spacing: -.02em;
+.word { position: relative; display: flex; flex-direction: column; align-items: center; padding: 22px 10px 18px; border: 1px solid #222126; border-radius: 14px; background: #121114; text-align: center; }
+.word strong { max-width: 100%; font-size: clamp(18px, 4.8vw, 24px); font-weight: 700; line-height: 1.1; letter-spacing: -.02em;
   background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
 .word > p:not(.word__by) { margin: 10px 0 14px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
 .word__by { margin-top: auto; font-size: 11px; line-height: 1.4; color: var(--ink-3); }
@@ -758,7 +758,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     <div class="wrap">
       <div class="center rv">
         <p class="eyebrow">Liberamos antes para 20 autores</p>
-        <h2 class="h2">Pedimos uma palavra para cada um. <span class="amber">Ninguém revelou o segredo.</span></h2>
+        <h2 class="h2">Em 10 palavras, <span class="amber">o que muda para o seu livro.</span></h2>
       </div>
     </div>
     <div class="wrap"><div class="words" id="depo-track"></div></div>
@@ -904,8 +904,19 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   /* ================= 3b. DEPOIMENTOS: uma palavra de cada autor =================
      Preencher com o que os autores mandaram (palavras e frase exatas, com autorização). Lista vazia = seção escondida.
      { palavra: 'Uma palavra.', texto: 'Uma linha explicando a palavra.', nome: 'Nome Sobrenome', livro: 'Título do livro', foto: 'assets/depo/arquivo.webp' (opcional) } */
-  // palavras enviadas pelos autores que receberam antes (confirmado pelo cliente em 06/10); sem nome por enquanto
-  var DEPOS = [{ palavra: 'Finalmente.' }, { palavra: 'Clareza.' }, { palavra: 'Direção.' }, { palavra: 'Alívio.' }, { palavra: 'Constância.' }, { palavra: 'Foco.' }, { palavra: 'Leveza.' }, { palavra: 'Rumo.' }, { palavra: 'Ritmo.' }, { palavra: 'Confiança.' }];
+  // as 10 palavras do que muda com o LOMBADA (texto do cliente, 06/10); não são falas de autor, por isso sem rosto e sem nome
+  var DEPOS = [
+    { palavra: 'Clareza.', texto: 'Sabe o que fazer pelo livro esta semana.' },
+    { palavra: 'Constância.', texto: 'Uma ação por vez, toda semana, sem parar.' },
+    { palavra: 'Permanência.', texto: 'O livro não é esquecido depois do lançamento.' },
+    { palavra: 'Confiança.', texto: 'O exemplo pronto tira o medo da tela em branco.' },
+    { palavra: 'Leveza.', texto: 'Divulgar deixa de ser um peso solto na cabeça.' },
+    { palavra: 'Foco.', texto: 'Só o que serve à fase do livro.' },
+    { palavra: 'Presença.', texto: 'Aparece para os leitores com frequência, não só no lançamento.' },
+    { palavra: 'Autonomia.', texto: 'O autor escolhe as ações que quer fazer.' },
+    { palavra: 'Calma.', texto: 'Menos ansiedade sobre “o que eu deveria estar fazendo”.' },
+    { palavra: 'Vendas.', texto: 'Ação constante é o que faz o livro vender.' }
+  ];
   (function () {
     var lista = DEPOS, exemplo = false;
     if (!lista.length && new URLSearchParams(location.search).get('depo') === 'exemplo') {
@@ -924,7 +935,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       return;
     }
     $('#depo-track').innerHTML = lista.map(function (d) {
-      return '<figure class="word">' + (exemplo ? '<span class="ex">EXEMPLO</span>' : '') + (d.foto ? '<img class="word__av" src="' + esc(d.foto) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : AV) +
+      return '<figure class="word">' + (exemplo ? '<span class="ex">EXEMPLO</span>' : '') + (d.foto ? '<img class="word__av" src="' + esc(d.foto) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : (d.nome ? AV : '')) +
         '<strong>' + esc(d.palavra) + '</strong>' + (d.texto ? '<p>' + esc(d.texto) + '</p>' : '') +
         (d.nome ? '<p class="word__by"><b>' + esc(d.nome) + '</b>' + esc(d.livro || '') + '</p>' : '') + '</figure>';
     }).join('');
