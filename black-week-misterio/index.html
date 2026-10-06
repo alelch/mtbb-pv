@@ -539,8 +539,10 @@ footer p + p { margin-top: 6px; }
 .foot-link:hover { text-decoration: underline; }
 footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-height: 1.6; color: #fff; }
 .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
-  background: linear-gradient(to top, #000 60%, rgba(0, 0, 0, 0)); transform: translateY(110%); transition: transform .35s var(--ease); }
-.dock.on { transform: none; }
+  background: linear-gradient(to top, #000 60%, rgba(0, 0, 0, 0)); transform: translateY(110%); opacity: 0; visibility: hidden; pointer-events: none;
+  transition: transform .35s var(--ease), opacity .25s ease, visibility 0s linear .35s; }
+/* escondido de verdade: no iPhone a barra do Safari é translúcida e mostrava o botão por trás dela */
+.dock.on { transform: none; opacity: 1; visibility: visible; pointer-events: auto; transition: transform .35s var(--ease), opacity .25s ease, visibility 0s; }
 .dock .btn { min-height: 54px; }
 
 /* ---------- entrada dos blocos ---------- */
@@ -619,6 +621,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 @media (max-width: 899px) {
   .secret__txt, .who__body { text-align: center; }
   .nots__punch { margin-left: auto; margin-right: auto; }
+  .fecho .eyebrow { gap: 8px; font-size: 10px; letter-spacing: .12em; white-space: nowrap; }
   .nots li { justify-content: center; }
   .nots li::before { display: none; }
   .media-k { justify-content: center; }
