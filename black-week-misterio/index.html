@@ -146,6 +146,10 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .word > p:not(.word__by) { margin: 10px 0 14px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
 .word__by { margin-top: auto; font-size: 11px; line-height: 1.4; color: var(--ink-3); }
 .word__by b { display: block; font-weight: 600; color: var(--ink-2); }
+.word__av { width: 44px; height: 44px; margin-bottom: 12px; border-radius: 50%; object-fit: cover; background: #2a292e; color: #5a5860; }
+.word__av svg { width: 100%; height: 100%; }
+.word.soon strong { filter: blur(7px); user-select: none; }
+.word__soon { display: inline-block; margin-top: 4px; padding: 3px 9px; border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); }
 .word .ex { position: absolute; top: 8px; right: 8px; padding: 2px 6px; border-radius: 99px; background: #c0392b; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
 @media (min-width: 900px) {
   .words { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 56px; }
@@ -749,8 +753,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     </div>
   </section>
 
-  <!-- 3b. depoimentos dos autores que receberam o LOMBADA antes (fica escondida enquanto não houver depoimento) -->
-  <section class="blk depo" id="depoimentos" hidden>
+  <!-- 3b. depoimentos dos autores que receberam o LOMBADA antes (cartões "em breve" até chegarem os reais) -->
+  <section class="blk depo" id="depoimentos">
     <div class="wrap">
       <div class="center rv">
         <p class="eyebrow">Liberamos antes para 20 autores</p>
@@ -899,7 +903,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 
   /* ================= 3b. DEPOIMENTOS: uma palavra de cada autor =================
      Preencher com o que os autores mandaram (palavras e frase exatas, com autorização). Lista vazia = seção escondida.
-     { palavra: 'Uma palavra.', texto: 'Uma linha explicando a palavra.', nome: 'Nome Sobrenome', livro: 'Título do livro' } */
+     { palavra: 'Uma palavra.', texto: 'Uma linha explicando a palavra.', nome: 'Nome Sobrenome', livro: 'Título do livro', foto: 'assets/depo/arquivo.webp' (opcional) } */
   var DEPOS = [];
   (function () {
     var lista = DEPOS, exemplo = false;
@@ -909,10 +913,17 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         return { palavra: w, texto: 'Uma linha do autor explicando a palavra.', nome: 'Nome do autor ' + (i + 1), livro: 'Título do livro' };
       });
     }
-    if (!lista.length) return;
     var sec = $('#depoimentos');
+    var AV = '<span class="word__av" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="17" r="8" fill="currentColor"/><path d="M7 40c2-8 8-12 15-12s13 4 15 12" fill="currentColor"/></svg></span>';
+    if (!lista.length) {
+      // ainda sem depoimento real: cartões honestos de "em breve" (nada inventado)
+      $('#depo-track').innerHTML = Array.apply(null, Array(10)).map(function () {
+        return '<figure class="word soon">' + AV + '<strong aria-hidden="true">Segredo.</strong><p>A palavra deste autor chega aqui antes do dia 9.</p><span class="word__soon">Em breve</span></figure>';
+      }).join('');
+      return;
+    }
     $('#depo-track').innerHTML = lista.map(function (d) {
-      return '<figure class="word">' + (exemplo ? '<span class="ex">EXEMPLO</span>' : '') +
+      return '<figure class="word">' + (exemplo ? '<span class="ex">EXEMPLO</span>' : '') + (d.foto ? '<img class="word__av" src="' + esc(d.foto) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : AV) +
         '<strong>' + esc(d.palavra) + '</strong><p>' + esc(d.texto) + '</p>' +
         '<p class="word__by"><b>' + esc(d.nome) + '</b>' + esc(d.livro || '') + '</p></figure>';
     }).join('');
