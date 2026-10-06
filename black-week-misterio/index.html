@@ -762,6 +762,17 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     </div>
   </section>
 
+  <!-- 3b. depoimentos dos autores que receberam o LOMBADA antes (fica escondida enquanto não houver depoimento) -->
+  <section class="blk depo" id="depoimentos" hidden>
+    <div class="wrap">
+      <div class="center rv">
+        <p class="eyebrow">Quem já usou</p>
+        <h2 class="h2">Liberamos o LOMBADA antes para 20 autores. <span class="amber">Veja o que eles disseram.</span></h2>
+      </div>
+    </div>
+    <div class="depo__track" id="depo-track"></div>
+  </section>
+
   <!-- 4. para todo autor -->
   <section class="ages">
     <div class="wrap">
@@ -774,17 +785,6 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       </div>
       <p class="ages__foot rv">Primeiro livro ou décimo. <span class="amber">O LOMBADA é único.</span></p>
     </div>
-  </section>
-
-  <!-- 6b. depoimentos dos autores que receberam o LOMBADA antes (fica escondida enquanto não houver depoimento) -->
-  <section class="blk depo" id="depoimentos" hidden>
-    <div class="wrap">
-      <div class="center rv">
-        <p class="eyebrow">Quem já viu</p>
-        <h2 class="h2">Eles já viram o LOMBADA por dentro. <span class="amber">Você vê dia 9.</span></h2>
-      </div>
-    </div>
-    <div class="depo__track" id="depo-track"></div>
   </section>
 
   <!-- 7. quem colocou o motor -->
@@ -920,9 +920,16 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     if (!lista.length && new URLSearchParams(location.search).get('depo') === 'exemplo') {
       exemplo = true;
       lista = [
-        { nome: 'Nome do autor', livro: 'Título do livro', fase: 'construcao', texto: 'Aqui entra o depoimento real, com as palavras do autor. Um parágrafo curto funciona melhor.' },
-        { nome: 'Nome do autor', livro: 'Título do livro', fase: 'lancamento', texto: 'Depoimento mais longo para ver como o cartão cresce. Duas ou três frases, contando o que mudou depois de usar e o que mais surpreendeu.' },
-        { nome: 'Nome do autor', livro: 'Título do livro', fase: 'permanencia', texto: 'Depoimento curto.' }
+        { nome: 'Nome do autor 1', livro: 'Título do livro', fase: 'construcao', texto: 'Depoimento curto do autor.' },
+        { nome: 'Nome do autor 2', livro: 'Título do livro', fase: 'lancamento', texto: 'Depoimento mais longo para ver como o cartão cresce. Duas ou três frases, contando o que mudou depois de usar e o que mais surpreendeu.' },
+        { nome: 'Nome do autor 3', livro: 'Título do livro', fase: 'permanencia', texto: 'Aqui entra o depoimento real, com as palavras do autor. Um parágrafo curto funciona melhor.' },
+        { nome: 'Nome do autor 4', livro: 'Título do livro', fase: 'construcao', texto: 'Depoimento curto do autor.' },
+        { nome: 'Nome do autor 5', livro: 'Título do livro', fase: 'lancamento', texto: 'Depoimento mais longo para ver como o cartão cresce. Duas ou três frases, contando o que mudou depois de usar e o que mais surpreendeu.' },
+        { nome: 'Nome do autor 6', livro: 'Título do livro', fase: 'permanencia', texto: 'Aqui entra o depoimento real, com as palavras do autor. Um parágrafo curto funciona melhor.' },
+        { nome: 'Nome do autor 7', livro: 'Título do livro', fase: 'construcao', texto: 'Depoimento curto do autor.' },
+        { nome: 'Nome do autor 8', livro: 'Título do livro', fase: 'lancamento', texto: 'Depoimento mais longo para ver como o cartão cresce. Duas ou três frases, contando o que mudou depois de usar e o que mais surpreendeu.' },
+        { nome: 'Nome do autor 9', livro: 'Título do livro', fase: 'permanencia', texto: 'Aqui entra o depoimento real, com as palavras do autor. Um parágrafo curto funciona melhor.' },
+        { nome: 'Nome do autor 10', livro: 'Título do livro', fase: 'construcao', texto: 'Depoimento curto do autor.' }
       ];
     }
     if (!lista.length) return;
