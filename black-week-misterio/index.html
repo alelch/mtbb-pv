@@ -41,6 +41,9 @@
 @font-face { font-family: "Montserrat"; font-style: italic; font-weight: 900; font-display: swap; src: url("../black-week/assets/fonts/montserrat-900i-latin.woff2") format("woff2"); }
 @font-face { font-family: "Archivo LMB"; font-weight: 900; font-display: swap; src: url("../black-week/assets/fonts/archivo-900-latin.woff2") format("woff2"); }
 
+/* quebra de linha: parágrafos e itens evitam palavra sozinha na última linha */
+p, li, small, figcaption { text-wrap: pretty; }
+
 /* ---------- tokens ---------- */
 :root {
   --bg: #000;
@@ -149,6 +152,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   .ages__r br.d2 { display: inline; }
   .ages__r small { margin-top: 12px; }
 }
+.ages__foot .amber { display: block; text-wrap: balance; }
 .ages__foot { max-width: 640px; margin: 48px auto 0; padding-top: 32px; border-top: 1px solid var(--line); font-size: clamp(19px, 5.2vw, 26px); font-weight: 500; line-height: 1.35; text-wrap: balance; }
 @media (min-width: 900px) {
   .secret__grid { max-width: 920px; margin: 0 auto; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; }
@@ -163,7 +167,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .words { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 40px; }
 .word { position: relative; display: flex; flex-direction: column; align-items: center; padding: 22px 10px 18px; border: 1px solid #222126; border-radius: 14px; background: #121114; text-align: center; }
 .word strong { max-width: 100%; font-size: clamp(18px, 4.8vw, 24px); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; color: var(--amber); }
-.word > p:not(.word__by) { margin: 10px 0 14px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+.word > p:not(.word__by) { margin: 10px 0 14px; font-size: 13px; line-height: 1.45; color: var(--ink-2); text-wrap: balance; }
 .word__by { margin-top: auto; font-size: 11px; line-height: 1.4; color: var(--ink-3); }
 .word__by b { display: block; font-weight: 600; color: var(--ink-2); }
 .word__av { width: 44px; height: 44px; margin-bottom: 12px; border-radius: 50%; object-fit: cover; background: #2a292e; color: #5a5860; }
@@ -515,7 +519,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .fecho__gift { position: absolute; left: 50%; top: 0; width: 120px; height: auto; transform: translate(-50%, -62%); filter: drop-shadow(0 12px 24px rgba(0, 0, 0, .6)); }
 .fecho__grid { display: grid; grid-template-columns: minmax(0, 1fr); }
 .fecho__offer { padding: 74px 24px 6px; }
-.fecho__t { margin-top: 12px; font-size: clamp(24px, 6.4vw, 32px); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; text-wrap: balance; }
+.fecho__t { margin-top: 12px; font-size: clamp(19px, 5.6vw, 32px); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; text-wrap: balance; }
 .fecho__s { margin-top: 8px; font-size: clamp(15px, 4.2vw, 18px); color: var(--amber); }
 .fecho__list { display: grid; gap: 14px; margin-top: 24px; list-style: none; }
 .fecho__list li { position: relative; padding-left: 30px; font-size: clamp(15px, 4.1vw, 17px); line-height: 1.45; }
@@ -717,7 +721,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 
           <h1 class="h1"><span class="h1__a">A ferramenta que todo autor</span> <span class="h1__b">sonhou</span></h1>
           <p class="h1-sub">Mas nunca pensou que poderia existir</p>
-          <p class="h1-plus">+ O Método The Book Business <b>Vitalício</b></p>
+          <p class="h1-plus">+ O Método The&nbsp;Book&nbsp;Business <b>Vitalício</b></p>
           <p class="when-pill">Revelada 9 de novembro, às 20h</p>
           <div class="speak">
           <span class="dany-glow" aria-hidden="true"></span><img class="dany-m" src="../black-week/assets/dany-bw-m.webp" alt="Dany Sakugawa" width="408" height="378" decoding="async">
@@ -831,7 +835,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           <h2 class="h2">Dany Sakugawa.</h2>
           <div class="who__txt">
             <p>Passou 15 anos nos bastidores das grandes editoras, vendo de perto o que faz um livro vender.</p>
-            <p>Transformou isso no <b>Método The Book Business</b>.</p>
+            <p>Transformou isso no <b>Método The&nbsp;Book&nbsp;Business</b>.</p>
             <p><b>Agora, criou o motor que não deixa o seu livro parar.</b></p>
           </div>
           <p class="who__q">“O maior risco que um autor corre é ser esquecido.”<small>Dany Sakugawa</small></p>
@@ -840,7 +844,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           <div class="stat"><p class="n" data-n="15" data-p="+">+15</p><p class="t">anos nos bastidores</p></div>
           <div class="stat"><p class="n" data-n="800" data-p="+">+800</p><p class="t">autores lançados</p></div>
           <div class="stat"><p class="n" data-n="10" data-p="+" data-s="M">+10M</p><p class="t">livros vendidos em lançamentos</p></div>
-          <div class="stat"><p class="n" data-n="4400" data-p="+">+4.400</p><p class="t">alunos no Método The Book Business</p></div>
+          <div class="stat"><p class="n" data-n="4400" data-p="+">+4.400</p><p class="t">alunos no Método The&nbsp;Book&nbsp;Business</p></div>
           </div>
         </div>
       </div>
@@ -867,7 +871,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <div class="fecho__grid">
           <div class="fecho__offer">
             <p class="eyebrow">Somente na Black Week Motorizada</p>
-            <h3 class="fecho__t">Método The Book Business <span class="gold">vitalício</span> + <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></h3>
+            <h3 class="fecho__t">Método&nbsp;The&nbsp;Book&nbsp;Business<br><span class="gold">vitalício</span> + <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></h3>
             <p class="when-pill fecho__date">9 de novembro, às 20h</p>
           </div>
           <div class="fecho__form">
@@ -892,7 +896,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 
 <footer>
   <img class="foot-logo" src="../black-week/assets/logo-mtbb.webp" alt="Método The Book Business" width="80" height="52" loading="lazy" decoding="async">
-  <p>© 2026 . The Book Business. Todos os direitos reservados.</p>
+  <p>© 2026 . The&nbsp;Book&nbsp;Business. Todos os direitos reservados.</p>
   <p><a class="foot-link" href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a></p>
   <p class="legal"><b>Aviso Legal:</b> “Nenhuma informação contida neste site deve ser interpretada como uma afirmação de resultados ou de retornos financeiros. Qualquer referência a desempenho passado ou potencial é uma estratégia elaborada no contexto <b>individual de cada autor</b>, e não deve ser interpretada como recomendação ou garantia de resultados específicos.”</p>
 </footer>
