@@ -110,8 +110,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .nots { margin-top: 28px; list-style: none; display: grid; gap: 10px; }
 .nots li { display: flex; align-items: center; gap: 12px; font-size: clamp(17px, 4.6vw, 21px); font-weight: 500; color: var(--ink-2); }
 .nots li::before { content: ""; flex: none; width: 18px; height: 1.5px; background: var(--ink-3); }
-.nots li:last-child { margin-top: 6px; color: var(--ink); }
-.nots li:last-child::before { background: var(--amber); }
+.nots__punch { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); max-width: 460px; font-size: clamp(19px, 5.2vw, 24px); font-weight: 600; line-height: 1.3; text-wrap: balance; }
 .vault { display: flex; justify-content: center; }
 .vault__phone { position: relative; width: min(300px, 78vw); aspect-ratio: 9 / 18; border: 10px solid #1b1a1f; border-radius: 42px; overflow: hidden;
   background: linear-gradient(180deg, #16151a, #0c0c0e); box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .9), 0 0 90px -30px rgba(250, 171, 0, .35); }
@@ -333,9 +332,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .dx__pre { max-width: 300px; margin: 0 auto; font-size: clamp(13px, 3.8vw, 17px); font-weight: 300; letter-spacing: .14em; line-height: 1.5; text-transform: uppercase; text-wrap: balance; color: var(--ink-3); }
 /* o nome aparece aqui pela primeira vez: o nome, não o conteúdo */
 .dx__name { margin-top: 18px; font-size: clamp(20px, 5.6vw, 30px); font-weight: 500; }
-.h2 .lmb, .fecho__t .lmb, .vault__brand .lmb { color: var(--ink); }
+.h2 .lmb, .fecho__t .lmb { color: var(--ink); }
 .h2 .lmb { vertical-align: -.04em; }
-.vault__brand { position: absolute; top: 34px; left: 0; right: 0; z-index: 2; display: flex; justify-content: center; font-size: 22px; opacity: .9; }
 .dx__name .lmb { margin-left: .15em; font-size: 1.15em; color: var(--ink); }
 .dx__now { margin-top: 10px; font-size: clamp(50px, 15vw, 128px); font-weight: 700; line-height: 1; letter-spacing: -.035em;
   background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
@@ -617,6 +615,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 /* celular: todas as seções centralizadas, como o resto da página */
 @media (max-width: 899px) {
   .secret__txt, .who__body { text-align: center; }
+  .nots__punch { margin-left: auto; margin-right: auto; }
   .nots li { justify-content: center; }
   .nots li::before { display: none; }
   .media-k { justify-content: center; }
@@ -773,12 +772,11 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           <ul class="nots">
             <li>Não é um curso.</li>
             <li>Não é mais uma planilha.</li>
-            <li><b>É o motor que faltava para o seu livro <span class="gold">nunca parar de crescer.</span></b></li>
           </ul>
+          <p class="nots__punch">É o motor que faltava para o seu livro <span class="amber">nunca parar de crescer.</span></p>
         </div>
         <div class="vault rv">
           <div class="vault__phone">
-            <div class="vault__brand"><span class="lmb" aria-hidden="true"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></div>
             <div class="vault__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
             <div class="vault__lock">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
