@@ -139,6 +139,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 
 /* ---------- depoimentos: uma palavra de cada autor (sente, mas não vê) ---------- */
 .depo { border-top: 1px solid var(--line); }
+.depo__pre { display: block; margin-bottom: 6px; font-size: .55em; font-weight: 500; letter-spacing: 0; color: var(--ink-2); }
 .words { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 40px; }
 .word { position: relative; display: flex; flex-direction: column; align-items: center; padding: 22px 10px 18px; border: 1px solid #222126; border-radius: 14px; background: #121114; text-align: center; }
 .word strong { max-width: 100%; font-size: clamp(18px, 4.8vw, 24px); font-weight: 700; line-height: 1.1; letter-spacing: -.02em;
@@ -758,7 +759,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     <div class="wrap">
       <div class="center rv">
         <p class="eyebrow">Liberamos antes para 20 autores</p>
-        <h2 class="h2">Eles não podem contar o que é. <span class="amber">Mas contaram o que mudou.</span></h2>
+        <h2 class="h2"><span class="depo__pre">Eles não podem contar o que é.</span> <span class="amber">Mas contaram o que mudou.</span></h2>
       </div>
     </div>
     <div class="wrap"><div class="words" id="depo-track"></div></div>
