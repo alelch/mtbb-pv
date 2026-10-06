@@ -124,6 +124,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, .55), rgba(0, 0, 0, .15) 70%); }
 .vault__lock svg { width: 54px; height: 54px; padding: 13px; border: 1.5px solid rgba(250, 171, 0, .6); border-radius: 50%; color: var(--amber); background: rgba(0, 0, 0, .5);
   animation: headlight 2.4s ease-in-out infinite; }
+.vault__btn { width: auto; min-height: 46px; margin-top: 4px; padding: 0 20px; font-size: 14px; letter-spacing: .02em; }
 .vault__lock p { max-width: 190px; font-size: 12px; font-weight: 600; letter-spacing: .16em; line-height: 1.6; text-transform: uppercase; }
 
 /* ---------- para todo autor ---------- */
@@ -767,12 +768,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
             <li><b>É o motor que faltava no <span class="gold">seu livro.</span></b></li>
           </ul>
         </div>
-        <div class="vault rv" aria-hidden="true">
+        <div class="vault rv">
           <div class="vault__phone">
-            <div class="vault__blur"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="vault__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
             <div class="vault__lock">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
               <p>Revelado dia 9 de novembro, às 20h</p>
+              <a class="btn vault__btn" href="#cadastro-fim">Quero ver primeiro</a>
             </div>
           </div>
         </div>
