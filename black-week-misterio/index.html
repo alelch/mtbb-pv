@@ -936,7 +936,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     }
     $('#depo-track').innerHTML = lista.map(function (d) {
       return '<figure class="word">' + (exemplo ? '<span class="ex">EXEMPLO</span>' : '') + (d.foto ? '<img class="word__av" src="' + esc(d.foto) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : (d.nome ? AV : '')) +
-        '<strong>' + esc(d.palavra) + '</strong>' + (d.texto ? '<p>' + esc(d.texto) + '</p>' : '') +
+        '<strong>' + esc(d.palavra) + '</strong>' + (d.texto ? '<p>“' + esc(d.texto) + '”</p>' : '') +
         (d.nome ? '<p class="word__by"><b>' + esc(d.nome) + '</b>' + esc(d.livro || '') + '</p>' : '') + '</figure>';
     }).join('');
     sec.hidden = false;
