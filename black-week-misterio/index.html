@@ -331,7 +331,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .dx__pre { max-width: 300px; margin: 0 auto; font-size: clamp(13px, 3.8vw, 17px); font-weight: 300; letter-spacing: .14em; line-height: 1.5; text-transform: uppercase; text-wrap: balance; color: var(--ink-3); }
 /* o nome aparece aqui pela primeira vez: o nome, não o conteúdo */
 .dx__name { margin-top: 18px; font-size: clamp(20px, 5.6vw, 30px); font-weight: 500; }
-.dx__name .lmb { margin-left: .15em; font-size: 1.15em; color: var(--ink); }
+.dx__name { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .4em; }
+.dx__logo { width: auto; height: 1.55em; }
 .dx__now { margin-top: 10px; font-size: clamp(50px, 15vw, 128px); font-weight: 700; line-height: 1; letter-spacing: -.035em;
   background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
 .dx__tag { max-width: 520px; margin: 22px auto 0; font-size: clamp(16px, 4.4vw, 21px); line-height: 1.45; text-wrap: balance; }
@@ -751,7 +752,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <div class="dream__ring" aria-hidden="true"></div>
         <p class="dx__pre">Parecia impossível.</p>
         <p class="dx__now">Agora existe.</p>
-        <p class="dx__name">E se chama <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></p>
+        <p class="dx__name">E se chama <img class="dx__logo" src="../black-week/assets/lombada-logo-branco.svg" alt="LOMBADA" width="1209" height="185" decoding="async"></p>
         <a class="dx__cue" href="#segredo">O que é? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
       </div>
     </div>
