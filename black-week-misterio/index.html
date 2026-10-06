@@ -298,6 +298,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .dream__list li.lit { opacity: 1; transform: none; }
 .dream__list em { font-style: normal; color: var(--ink-2); transition: color .7s ease; }
 .dream__list li.lit em { background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
+.dream__auto { margin-top: clamp(48px, 10vw, 72px); font-size: clamp(22px, 6vw, 34px); font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
 .dream__end { position: relative; margin-top: clamp(72px, 14vw, 120px); padding: 40px 0 8px; }
 .dream__ring { position: absolute; left: 50%; top: 50%; z-index: -1; width: min(640px, 130vw); aspect-ratio: 480 / 540; pointer-events: none;
   background: var(--infinity) 0% 50% / 200% 100% no-repeat; opacity: 0; transform: translate(-50%, -50%) scale(.85); transition: opacity 1.4s ease, transform 2.2s var(--ease); }
@@ -708,12 +709,10 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       <p class="dream__lead rv">Todo autor já sonhou em</p>
       <ol class="dream__list">
         <li>acordar todo dia <em>sabendo o que fazer pelo livro.</em></li>
-        <li>lançar e <em>ver o livro não parar.</em></li>
-        <li>ser <em>lido de verdade.</em></li>
-        <li>ver o livro <em>crescendo a cada dia.</em></li>
-        <li>ver o livro que ficou parado <em>voltar a vender.</em></li>
-        <li>ver o livro <em>se tornar orgulho.</em></li>
+        <li>ver o livro <em>crescendo dia a dia.</em></li>
+        <li>sentir que o seu livro <em>está alcançando cada vez mais espaço.</em></li>
       </ol>
+      <p class="dream__auto rv">Tudo isso,<br><span class="amber">de forma automática.</span></p>
       <div class="dream__end rv">
         <div class="dream__glow" aria-hidden="true"></div>
         <div class="dream__ring" aria-hidden="true"></div>
