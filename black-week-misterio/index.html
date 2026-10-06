@@ -319,16 +319,19 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 /* ---------- 2. a cena do sonho (guiada pela rolagem; --p vai de 0 a 1) ---------- */
 /* rolagem normal: a página anda a cada gesto (a cena presa na tela parecia travada) */
 .dream { position: relative; padding: var(--sec) 0; overflow: hidden; text-align: center; background: #000; }
-.dream__lead { font-size: clamp(14px, 4vw, 19px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
-/* lista de leitura fácil: um item por linha, ✓ dourado, destaque liso (sem brilho) */
-.dream__list { list-style: none; display: grid; gap: 28px; width: max-content; max-width: 100%; margin: 30px auto 0; text-align: left; }
-.dream__list li { position: relative; padding-left: 36px; font-size: clamp(18px, 5vw, 26px); font-weight: 500; line-height: 1.35; letter-spacing: -.01em; text-wrap: pretty;
+/* título grande + caminho numerado nas cores das fases do LOMBADA (verde, laranja, amarelo) */
+.dream__lead { font-size: clamp(32px, 9vw, 54px); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; text-wrap: balance; }
+.dream__list { position: relative; list-style: none; display: grid; gap: 22px; width: max-content; max-width: 100%; margin: 36px auto 0; text-align: left; }
+.dream__list::before { content: ""; position: absolute; left: 21px; top: 22px; bottom: 22px; width: 2px; border-radius: 2px;
+  background: linear-gradient(var(--f-construcao), var(--f-lancamento), var(--f-permanencia)); opacity: .55; }
+.dream__list li { --c: var(--f-construcao); position: relative; display: flex; align-items: center; gap: 16px; font-size: clamp(17px, 4.7vw, 22px); font-weight: 500; line-height: 1.35; text-wrap: pretty;
   opacity: .25; transform: translateY(8px); transition: opacity .6s ease, transform .6s var(--ease); }
-.dream__list li::before { content: ""; position: absolute; left: 0; top: .2em; width: 22px; height: 22px; border-radius: 50%; background-color: var(--amber);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
-  background-size: 13px; background-position: center; background-repeat: no-repeat; }
+.dream__list li.f2 { --c: var(--f-lancamento); }
+.dream__list li.f3 { --c: var(--f-permanencia); }
 .dream__list li.lit { opacity: 1; transform: none; }
-.dream__list em { font-style: normal; font-weight: 600; color: var(--amber); }
+.dream__n { flex: none; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #000; border: 2px solid var(--c);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--c) 40%, transparent); font-size: 14px; font-weight: 700; color: var(--c); }
+.dream__list em { font-style: normal; font-weight: 600; color: var(--c); }
 .dream__auto { margin-top: clamp(40px, 8vw, 56px); font-size: clamp(20px, 5.4vw, 30px); font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
 .dream__end { position: relative; margin-top: clamp(72px, 14vw, 120px); padding: 40px 0 8px; }
 .dream__ring { position: absolute; left: 50%; top: 50%; z-index: -1; width: min(640px, 130vw); aspect-ratio: 480 / 540; pointer-events: none;
@@ -754,13 +757,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   <!-- 2. o sonho: cena guiada pela rolagem, termina em "Agora existe." -->
   <section class="dream" id="reveal">
     <div class="wrap">
-      <p class="dream__lead rv">Todo autor já sonhou em</p>
+      <h2 class="dream__lead rv">Todo autor já <span class="gold">sonhou em…</span></h2>
       <ol class="dream__list">
-        <li>acordar com <em>o que fazer pelo livro já definido.</em></li>
-        <li>abrir as redes com <em>o post já pensado.</em></li>
-        <li><em>aproveitar</em> cada prêmio, feira e edital.</li>
-        <li><em>ganhar mais leitores</em> a&nbsp;cada ação.</li>
-        <li>e <em>nunca mais ver o livro parar.</em></li>
+        <li class="f1"><span class="dream__n">01</span><span>acordar com o que fazer pelo livro <em>já definido.</em></span></li>
+        <li class="f1"><span class="dream__n">02</span><span>abrir as redes com o post <em>já pensado.</em></span></li>
+        <li class="f2"><span class="dream__n">03</span><span>aproveitar cada prêmio, <em>feira e edital.</em></span></li>
+        <li class="f2"><span class="dream__n">04</span><span>ganhar mais leitores <em>a&nbsp;cada ação.</em></span></li>
+        <li class="f3"><span class="dream__n">05</span><span>e nunca mais ver <em>o livro parar.</em></span></li>
       </ol>
       <p class="dream__auto rv">Tudo isso, <span class="amber">de forma automática.</span></p>
       <div class="dream__end rv">
