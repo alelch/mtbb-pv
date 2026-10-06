@@ -138,7 +138,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .ages__dot { flex: none; position: relative; width: 24px; height: 24px; border-radius: 50%; background: #000; border: 2px solid var(--c); box-shadow: 0 0 18px color-mix(in srgb, var(--c) 45%, transparent); }
 .ages__dot::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--c); }
 .ages__r b { display: block; font-size: clamp(22px, 6.4vw, 34px); font-weight: 600; line-height: 1.05; letter-spacing: -.01em; text-transform: uppercase; }
-.ages__r small { display: block; margin-top: 4px; font-size: clamp(13px, 3.6vw, 15px); font-weight: 500; color: var(--ink-3); }
+.ages__r small { display: block; margin-top: 6px; font-size: clamp(15px, 4.2vw, 19px); font-weight: 500; line-height: 1.35; color: var(--ink-2); }
+.ages__r br.d2 { display: none; }
 .ages__r.c1 { --c: var(--f-construcao); }
 .ages__r.c2 { --c: var(--f-lancamento); }
 .ages__r.c3 { --c: var(--f-permanencia); }
@@ -146,6 +147,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   .ages__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; width: 100%; max-width: 980px; text-align: center; }
   .ages__rows::before { left: 16.6%; right: 16.6%; top: 11px; bottom: auto; width: auto; height: 2px; background: linear-gradient(90deg, var(--f-construcao), var(--f-lancamento), var(--f-permanencia)); }
   .ages__r { flex-direction: column; gap: 16px; }
+  .ages__r br.d2 { display: inline; }
+  .ages__r small { margin-top: 12px; }
 }
 .ages__foot { max-width: 640px; margin: 48px auto 0; padding-top: 32px; border-top: 1px solid var(--line); font-size: clamp(19px, 5.2vw, 26px); font-weight: 500; line-height: 1.35; text-wrap: balance; }
 @media (min-width: 900px) {
@@ -799,9 +802,9 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       <p class="eyebrow rv">Para todo autor</p>
       <h2 class="h2 rv">Não importa em que fase você está.</h2>
       <ol class="ages__rows">
-        <li class="ages__r c1 rv"><span class="ages__dot" aria-hidden="true"></span><span><b>Ainda escrevendo</b><small>Lança já vendendo.</small></span></li>
-        <li class="ages__r c2 rv"><span class="ages__dot" aria-hidden="true"></span><span><b>Acabou de lançar</b><small>Não deixa o livro parar.</small></span></li>
-        <li class="ages__r c3 rv"><span class="ages__dot" aria-hidden="true"></span><span><b>Parado há anos</b><small>Coloca o livro para andar.</small></span></li>
+        <li class="ages__r c1 rv"><span class="ages__dot" aria-hidden="true"></span><span><b>Ainda <br class="d2">escrevendo</b><small>Lança já vendendo.</small></span></li>
+        <li class="ages__r c2 rv"><span class="ages__dot" aria-hidden="true"></span><span><b>Acabou de <br class="d2">lançar</b><small>Não deixa o livro parar.</small></span></li>
+        <li class="ages__r c3 rv"><span class="ages__dot" aria-hidden="true"></span><span><b>Parado <br class="d2">há anos</b><small>Coloca o livro para andar.</small></span></li>
       </ol>
       <p class="ages__foot rv">Do primeiro livro ao décimo.<br><span class="amber">O LOMBADA é personalizado para o seu livro e o seu momento.</span></p>
     </div>
