@@ -511,10 +511,10 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 /* ---------- 8. fecho: oferta + cadastro num cartão só ---------- */
 .fecho { padding: calc(var(--sec) + 30px) 0 var(--sec); border-top: 1px solid var(--line);
   background: radial-gradient(ellipse 60% 50% at 0% 50%, rgba(var(--teal), .32), rgba(var(--teal), 0) 70%), radial-gradient(ellipse 50% 40% at 50% 30%, rgba(250, 171, 0, .08), rgba(0, 0, 0, 0) 70%); }
-.fecho__card { position: relative; max-width: 1080px; margin: 0 auto; border-radius: 16px; background: #000; box-shadow: 0 0 0 1px rgba(250, 171, 0, .35), 0 0 34px rgba(250, 171, 0, .38); }
+.fecho__card { position: relative; max-width: 620px; text-align: center; margin: 0 auto; border-radius: 16px; background: #000; box-shadow: 0 0 0 1px rgba(250, 171, 0, .35), 0 0 34px rgba(250, 171, 0, .38); }
 .fecho__gift { position: absolute; left: 50%; top: 0; width: 120px; height: auto; transform: translate(-50%, -62%); filter: drop-shadow(0 12px 24px rgba(0, 0, 0, .6)); }
 .fecho__grid { display: grid; grid-template-columns: minmax(0, 1fr); }
-.fecho__offer { padding: 74px 24px 30px; }
+.fecho__offer { padding: 74px 24px 6px; }
 .fecho__t { margin-top: 12px; font-size: clamp(24px, 6.4vw, 32px); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; text-wrap: balance; }
 .fecho__s { margin-top: 8px; font-size: clamp(15px, 4.2vw, 18px); color: var(--amber); }
 .fecho__list { display: grid; gap: 14px; margin-top: 24px; list-style: none; }
@@ -522,8 +522,9 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .fecho__list li::before { content: ""; position: absolute; left: 0; top: .2em; width: 18px; height: 18px; border-radius: 50%;
   background: var(--amber) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat; }
 .fecho__list b { font-weight: 600; }
-.fecho__form { margin: 0 12px 12px; padding: 30px 18px 26px; border: 1px solid rgba(250, 171, 0, .22); border-radius: 14px; background: linear-gradient(170deg, rgba(250, 171, 0, .1), rgba(250, 171, 0, .03)); text-align: center; }
-.fecho__h { font-size: clamp(24px, 6.6vw, 32px); font-weight: 600; line-height: 1.15; letter-spacing: -.02em; text-wrap: balance; }
+/* coluna única, como a referência: sem caixa dentro da caixa */
+.fecho__form { padding: 26px 24px 30px; text-align: center; }
+.fecho__h { font-size: clamp(17px, 4.6vw, 20px); font-weight: 500; color: var(--ink-2); line-height: 1.3; text-wrap: balance; }
 .fecho__m { margin-top: 8px; font-size: clamp(14px, 4vw, 16px); color: var(--amber); text-wrap: balance; }
 .fecho__form .lead-form { margin-top: 22px; }
 .fecho__form .lead-form form { grid-template-columns: minmax(0, 1fr); }
@@ -593,10 +594,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .who__pic { width: 100%; }
   .who__body .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 40px; }
   .media figure { width: 260px; }
-  .fecho__grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); }
-  .fecho__offer { padding: 80px 48px 56px 64px; }
-  .fecho__form { display: flex; flex-direction: column; justify-content: center; margin: 18px; padding: 56px 40px 40px; }
-  .fecho__gift { left: 27%; }
+  .fecho__offer { padding: 84px 56px 8px; }
+  .fecho__form { padding: 28px 56px 48px; }
   footer { padding-bottom: 56px; }
   .dock { display: none; }
 }
