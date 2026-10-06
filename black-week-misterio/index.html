@@ -314,6 +314,9 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .dream__end.in .dream__ring { opacity: .4; transform: translate(-50%, -50%) scale(1); }
 .dream__end { isolation: isolate; }
 .dx__pre { font-size: clamp(13px, 3.8vw, 17px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+/* o nome aparece aqui pela primeira vez: o nome, não o conteúdo */
+.dx__name { margin-top: 18px; font-size: clamp(20px, 5.6vw, 30px); font-weight: 500; }
+.dx__name .lmb { margin-left: .15em; font-size: 1.15em; color: var(--ink); }
 .dx__now { margin-top: 10px; font-size: clamp(50px, 15vw, 128px); font-weight: 700; line-height: 1; letter-spacing: -.035em;
   background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
 .dx__tag { max-width: 520px; margin: 22px auto 0; font-size: clamp(16px, 4.4vw, 21px); line-height: 1.45; text-wrap: balance; }
@@ -725,6 +728,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <div class="dream__ring" aria-hidden="true"></div>
         <p class="dx__pre">Parecia impossível.</p>
         <p class="dx__now">Agora existe.</p>
+        <p class="dx__name">E se chama <span class="lmb">LOMBADA</span>.</p>
         <p class="dx__tag">Tudo o que você precisa fazer para o seu livro ser lido cada vez mais, <span class="amber">em um lugar só.</span></p>
         <a class="dx__cue" href="#segredo">O que é? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
       </div>
@@ -794,7 +798,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           <h2 class="h2">Dany Sakugawa.</h2>
           <div class="who__txt">
             <p>15 anos nos bastidores das grandes editoras. Criou o <b>Método The Book Business</b>.</p>
-            <p><b>Agora, colocou um motor nele.</b></p>
+            <p><b>Agora, criou o motor.</b></p>
+            <p>O LOMBADA chega na Black Week Motorizada, junto com o <b>Método The Book Business</b>.</p>
           </div>
           <p class="who__q">“O maior risco que um autor corre é ser esquecido.”<small>Dany Sakugawa</small></p>
           </div>
@@ -835,13 +840,12 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
               <li>O LOMBADA, revelado na abertura.</li>
               <li>Para quem ainda está escrevendo.</li>
               <li>Para livro novo <span class="amber">e para livro parado há anos.</span></li>
-              <li>Condições só no dia 9 de novembro, às 20h.</li>
             </ul>
           </div>
           <div class="fecho__form">
             <p class="when-pill">9 de novembro, às 20h</p>
             <h3 class="fecho__h">Ligue o motor do seu livro.</h3>
-            <p class="fecho__m">Cadastre-se e seja avisado no minuto em que a Black Week Motorizada abrir.</p>
+            <p class="fecho__m">As condições da Black Week Motorizada saem dia 9 de novembro, às 20h. Quem se cadastra fica sabendo primeiro.</p>
             <div class="lead-form" data-pos="fim">
               <form novalidate>
                 <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
