@@ -124,7 +124,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, .55), rgba(0, 0, 0, .15) 70%); }
 .vault__lock svg { width: 54px; height: 54px; padding: 13px; border: 1.5px solid rgba(250, 171, 0, .6); border-radius: 50%; color: var(--amber); background: rgba(0, 0, 0, .5);
   animation: headlight 2.4s ease-in-out infinite; }
-.vault__btn { width: auto; min-height: 46px; margin-top: 4px; padding: 0 20px; font-size: 14px; letter-spacing: .02em; }
+.vault .vault__btn { width: auto; min-height: 46px; margin-top: 4px; padding: 0 20px; font-size: 14px; letter-spacing: .02em; white-space: nowrap; }
 .vault__lock p { max-width: 190px; font-size: 12px; font-weight: 600; letter-spacing: .16em; line-height: 1.6; text-transform: uppercase; }
 
 /* ---------- para todo autor ---------- */
@@ -152,7 +152,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 }
 .ages__foot { max-width: 640px; margin: 48px auto 0; padding-top: 32px; border-top: 1px solid var(--line); font-size: clamp(19px, 5.2vw, 26px); font-weight: 500; line-height: 1.35; text-wrap: balance; }
 @media (min-width: 900px) {
-  .secret__grid { grid-template-columns: minmax(0, 1fr) 360px; gap: 80px; }
+  .secret__grid { max-width: 920px; margin: 0 auto; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; }
 }
 
 /* ---------- depoimentos: uma palavra de cada autor (sente, mas não vê) ---------- */
