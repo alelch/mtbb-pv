@@ -137,30 +137,18 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   .secret__grid { grid-template-columns: minmax(0, 1fr) 360px; gap: 80px; }
 }
 
-/* ---------- depoimentos ---------- */
+/* ---------- depoimentos: uma palavra de cada autor (sente, mas não vê) ---------- */
 .depo { border-top: 1px solid var(--line); }
-.depo__track { display: flex; gap: 12px; margin-top: 40px; padding: 4px var(--gutter) 8px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
-.depo__track::-webkit-scrollbar { display: none; }
-.depo__c { flex: none; width: min(84%, 340px); scroll-snap-align: start; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; padding: 24px 22px;
-  border: 1px solid #2a292e; border-radius: 16px; background: linear-gradient(170deg, #141317, #0b0b0d); }
-.depo__q { position: relative; font-size: 16px; line-height: 1.55; color: var(--ink); }
-.depo__q::before { content: "“"; display: block; height: 30px; font-size: 54px; font-weight: 700; line-height: 1; color: var(--amber); }
-.depo__who { display: flex; align-items: center; gap: 12px; }
-.depo__who img, .depo__who .ini { flex: none; width: 46px; height: 46px; border-radius: 50%; object-fit: cover; }
-.depo__who .ini { display: grid; place-items: center; background: #2a292e; font-weight: 600; color: var(--amber); }
-.depo__who b { display: block; font-size: 15px; font-weight: 600; }
-.depo__who i { display: block; font-size: 13px; color: var(--ink-2); }
-.depo__f { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
-.depo__f::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.depo__f.construcao { color: var(--f-construcao); }
-.depo__f.lancamento { color: var(--f-lancamento); }
-.depo__f.permanencia { color: var(--f-permanencia); }
-.depo__ex { position: absolute; top: 12px; right: 12px; padding: 3px 8px; border-radius: 99px; background: #c0392b; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .1em; }
-.depo__c { position: relative; }
+.words { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 40px; }
+.word { position: relative; display: flex; flex-direction: column; align-items: center; padding: 22px 14px 18px; border: 1px solid #222126; border-radius: 14px; background: #121114; text-align: center; }
+.word strong { font-size: clamp(22px, 6.4vw, 28px); font-weight: 700; line-height: 1.1; letter-spacing: -.02em;
+  background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
+.word > p:not(.word__by) { margin: 10px 0 14px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+.word__by { margin-top: auto; font-size: 11px; line-height: 1.4; color: var(--ink-3); }
+.word__by b { display: block; font-weight: 600; color: var(--ink-2); }
+.word .ex { position: absolute; top: 8px; right: 8px; padding: 2px 6px; border-radius: 99px; background: #c0392b; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
 @media (min-width: 900px) {
-  /* no computador: colunas tipo mural, sem rolagem lateral */
-  .depo__track { display: block; max-width: 1120px; margin: 56px auto 0; padding: 0 var(--gutter); overflow: visible; columns: 3; column-gap: 16px; }
-  .depo__c { width: auto; margin-bottom: 16px; break-inside: avoid; }
+  .words { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 56px; }
 }
 
 /* ---------- logos ---------- */
@@ -765,11 +753,11 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   <section class="blk depo" id="depoimentos" hidden>
     <div class="wrap">
       <div class="center rv">
-        <p class="eyebrow">Quem já usou</p>
-        <h2 class="h2">Liberamos o LOMBADA antes para 20 autores. <span class="amber">Veja o que eles disseram.</span></h2>
+        <p class="eyebrow">Liberamos antes para 20 autores</p>
+        <h2 class="h2">Pedimos uma palavra para cada um. <span class="amber">Ninguém revelou o segredo.</span></h2>
       </div>
     </div>
-    <div class="depo__track" id="depo-track"></div>
+    <div class="wrap"><div class="words" id="depo-track"></div></div>
   </section>
 
   <!-- 4. para todo autor -->
@@ -909,38 +897,24 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     reversivel(items, 'lit', '-38% 0px -38% 0px');
   })();
 
-  /* ================= 6b. DEPOIMENTOS =================
-     Preencher com os depoimentos reais (texto exato, com autorização do autor). Enquanto a lista estiver vazia, a seção fica escondida.
-     { nome: 'Nome Sobrenome', livro: 'Título do livro', fase: 'construcao' | 'lancamento' | 'permanencia', foto: 'assets/depo/arquivo.webp' (opcional), texto: '...' } */
+  /* ================= 3b. DEPOIMENTOS: uma palavra de cada autor =================
+     Preencher com o que os autores mandaram (palavras e frase exatas, com autorização). Lista vazia = seção escondida.
+     { palavra: 'Uma palavra.', texto: 'Uma linha explicando a palavra.', nome: 'Nome Sobrenome', livro: 'Título do livro' } */
   var DEPOS = [];
   (function () {
     var lista = DEPOS, exemplo = false;
     if (!lista.length && new URLSearchParams(location.search).get('depo') === 'exemplo') {
       exemplo = true;
-      lista = [
-        { nome: 'Nome do autor 1', livro: 'Título do livro', fase: 'construcao', texto: 'Depoimento curto do autor.' },
-        { nome: 'Nome do autor 2', livro: 'Título do livro', fase: 'lancamento', texto: 'Depoimento mais longo para ver como o cartão cresce. Duas ou três frases, contando o que mudou depois de usar e o que mais surpreendeu.' },
-        { nome: 'Nome do autor 3', livro: 'Título do livro', fase: 'permanencia', texto: 'Aqui entra o depoimento real, com as palavras do autor. Um parágrafo curto funciona melhor.' },
-        { nome: 'Nome do autor 4', livro: 'Título do livro', fase: 'construcao', texto: 'Depoimento curto do autor.' },
-        { nome: 'Nome do autor 5', livro: 'Título do livro', fase: 'lancamento', texto: 'Depoimento mais longo para ver como o cartão cresce. Duas ou três frases, contando o que mudou depois de usar e o que mais surpreendeu.' },
-        { nome: 'Nome do autor 6', livro: 'Título do livro', fase: 'permanencia', texto: 'Aqui entra o depoimento real, com as palavras do autor. Um parágrafo curto funciona melhor.' },
-        { nome: 'Nome do autor 7', livro: 'Título do livro', fase: 'construcao', texto: 'Depoimento curto do autor.' },
-        { nome: 'Nome do autor 8', livro: 'Título do livro', fase: 'lancamento', texto: 'Depoimento mais longo para ver como o cartão cresce. Duas ou três frases, contando o que mudou depois de usar e o que mais surpreendeu.' },
-        { nome: 'Nome do autor 9', livro: 'Título do livro', fase: 'permanencia', texto: 'Aqui entra o depoimento real, com as palavras do autor. Um parágrafo curto funciona melhor.' },
-        { nome: 'Nome do autor 10', livro: 'Título do livro', fase: 'construcao', texto: 'Depoimento curto do autor.' }
-      ];
+      lista = ['Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.'].map(function (w, i) {
+        return { palavra: w, texto: 'Uma linha do autor explicando a palavra.', nome: 'Nome do autor ' + (i + 1), livro: 'Título do livro' };
+      });
     }
     if (!lista.length) return;
-    var FASE = { construcao: 'Escrevendo', lancamento: 'Recém-lançado', permanencia: 'Livro publicado' };
-    var sec = $('#depoimentos'), track = $('#depo-track'), n = $('.depo__n', sec);
-    if (n) n.textContent = lista.length;
-    track.innerHTML = lista.map(function (d) {
-      var ini = esc(String(d.nome || '?').trim().charAt(0).toUpperCase());
-      var foto = d.foto ? '<img src="' + esc(d.foto) + '" alt="" width="46" height="46" loading="lazy" decoding="async">' : '<span class="ini" aria-hidden="true">' + ini + '</span>';
-      return '<figure class="depo__c">' + (exemplo ? '<span class="depo__ex">EXEMPLO</span>' : '') +
-        '<blockquote class="depo__q">' + esc(d.texto) + '</blockquote>' +
-        '<figcaption class="depo__who">' + foto + '<span><b>' + esc(d.nome) + '</b><i>' + esc(d.livro) + '</i>' +
-        (FASE[d.fase] ? '<span class="depo__f ' + d.fase + '">' + FASE[d.fase] + '</span>' : '') + '</span></figcaption></figure>';
+    var sec = $('#depoimentos');
+    $('#depo-track').innerHTML = lista.map(function (d) {
+      return '<figure class="word">' + (exemplo ? '<span class="ex">EXEMPLO</span>' : '') +
+        '<strong>' + esc(d.palavra) + '</strong><p>' + esc(d.texto) + '</p>' +
+        '<p class="word__by"><b>' + esc(d.nome) + '</b>' + esc(d.livro || '') + '</p></figure>';
     }).join('');
     sec.hidden = false;
   })();
