@@ -155,6 +155,10 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .ages__foot .amber { display: block; text-wrap: balance; }
 .ages__foot { max-width: 640px; margin: 48px auto 0; padding-top: 32px; border-top: 1px solid var(--line); font-size: clamp(19px, 5.2vw, 26px); font-weight: 500; line-height: 1.35; text-wrap: balance; }
 @media (min-width: 900px) {
+  .dream .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); column-gap: 64px; align-items: center; max-width: 1040px; }
+  .dream__lead { max-width: 380px; text-align: left; font-size: 56px; }
+  .dream__list { margin: 0; }
+  .dream__auto, .dream__end { grid-column: 1 / -1; }
   .secret__grid { max-width: 920px; margin: 0 auto; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; }
 }
 
@@ -331,7 +335,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .dream__list li.lit { opacity: 1; transform: none; }
 .dream__n { flex: none; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #000; border: 2px solid var(--c);
   box-shadow: 0 0 16px color-mix(in srgb, var(--c) 40%, transparent); font-size: 14px; font-weight: 700; color: var(--c); }
-.dream__list em { font-style: normal; font-weight: 600; color: var(--c); }
+.dream__list em { font-style: normal; font-weight: 600; color: var(--ink); }
 .dream__auto { margin-top: clamp(40px, 8vw, 56px); font-size: clamp(20px, 5.4vw, 30px); font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
 .dream__end { position: relative; margin-top: clamp(72px, 14vw, 120px); padding: 40px 0 8px; }
 .dream__ring { position: absolute; left: 50%; top: 50%; z-index: -1; width: min(640px, 130vw); aspect-ratio: 480 / 540; pointer-events: none;
@@ -759,7 +763,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     <div class="wrap">
       <h2 class="dream__lead rv">Todo autor já <span class="gold">sonhou em…</span></h2>
       <ol class="dream__list">
-        <li class="f1"><span class="dream__n">01</span><span>acordar com o que fazer pelo livro <em>já definido.</em></span></li>
+        <li class="f1"><span class="dream__n">01</span><span>acordar todo dia com o que fazer pelo livro <em>já definido.</em></span></li>
         <li class="f1"><span class="dream__n">02</span><span>abrir as redes com o post <em>já pensado.</em></span></li>
         <li class="f2"><span class="dream__n">03</span><span>aproveitar cada prêmio, <em>feira e edital.</em></span></li>
         <li class="f2"><span class="dream__n">04</span><span>ganhar mais leitores <em>a&nbsp;cada ação.</em></span></li>
