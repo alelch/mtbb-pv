@@ -320,13 +320,16 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 /* rolagem normal: a página anda a cada gesto (a cena presa na tela parecia travada) */
 .dream { position: relative; padding: var(--sec) 0; overflow: hidden; text-align: center; background: #000; }
 .dream__lead { font-size: clamp(14px, 4vw, 19px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
-.dream__list { list-style: none; display: grid; gap: clamp(18px, 4vw, 30px); max-width: 860px; margin: 28px auto 0; }
-.dream__list li { font-size: clamp(26px, 7.2vw, 54px); font-weight: 600; line-height: 1.12; letter-spacing: -.02em; text-wrap: balance;
-  opacity: .22; transform: scale(.97); transition: opacity .7s ease, transform .7s var(--ease); }
+/* lista de leitura fácil: um item por linha, ✓ dourado, destaque liso (sem brilho) */
+.dream__list { list-style: none; display: grid; gap: 16px; width: max-content; max-width: 100%; margin: 30px auto 0; text-align: left; }
+.dream__list li { position: relative; padding-left: 36px; font-size: clamp(18px, 5vw, 26px); font-weight: 500; line-height: 1.35; letter-spacing: -.01em; text-wrap: pretty;
+  opacity: .25; transform: translateY(8px); transition: opacity .6s ease, transform .6s var(--ease); }
+.dream__list li::before { content: ""; position: absolute; left: 0; top: .2em; width: 22px; height: 22px; border-radius: 50%; background-color: var(--amber);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+  background-size: 13px; background-position: center; background-repeat: no-repeat; }
 .dream__list li.lit { opacity: 1; transform: none; }
-.dream__list em { font-style: normal; color: var(--ink-2); transition: color .7s ease; }
-.dream__list li.lit em { background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
-.dream__auto { margin-top: clamp(48px, 10vw, 72px); font-size: clamp(22px, 6vw, 34px); font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+.dream__list em { font-style: normal; font-weight: 600; color: var(--amber); }
+.dream__auto { margin-top: clamp(40px, 8vw, 56px); font-size: clamp(20px, 5.4vw, 30px); font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
 .dream__end { position: relative; margin-top: clamp(72px, 14vw, 120px); padding: 40px 0 8px; }
 .dream__ring { position: absolute; left: 50%; top: 50%; z-index: -1; width: min(640px, 130vw); aspect-ratio: 480 / 540; pointer-events: none;
   background: var(--infinity) 0% 50% / 200% 100% no-repeat; opacity: 0; transform: translate(-50%, -50%) scale(.85); transition: opacity 1.4s ease, transform 2.2s var(--ease); }
@@ -756,10 +759,10 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <li>acordar com <em>o que fazer pelo livro já definido.</em></li>
         <li>abrir as redes com <em>o post já pensado.</em></li>
         <li><em>aproveitar</em> cada prêmio, feira e edital.</li>
-        <li><em>ganhar mais leitores</em> a cada ação.</li>
+        <li><em>ganhar mais leitores</em> a&nbsp;cada ação.</li>
         <li>e <em>nunca mais ver o livro parar.</em></li>
       </ol>
-      <p class="dream__auto rv">Tudo isso,<br><span class="gold">de forma automática.</span></p>
+      <p class="dream__auto rv">Tudo isso, <span class="amber">de forma automática.</span></p>
       <div class="dream__end rv">
         <div class="dream__glow" aria-hidden="true"></div>
         <div class="dream__ring" aria-hidden="true"></div>
