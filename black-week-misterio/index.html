@@ -904,7 +904,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   /* ================= 3b. DEPOIMENTOS: uma palavra de cada autor =================
      Preencher com o que os autores mandaram (palavras e frase exatas, com autorização). Lista vazia = seção escondida.
      { palavra: 'Uma palavra.', texto: 'Uma linha explicando a palavra.', nome: 'Nome Sobrenome', livro: 'Título do livro', foto: 'assets/depo/arquivo.webp' (opcional) } */
-  var DEPOS = [];
+  // palavras enviadas pelos autores que receberam antes (confirmado pelo cliente em 06/10); sem nome por enquanto
+  var DEPOS = [{ palavra: 'Finalmente.' }, { palavra: 'Clareza.' }, { palavra: 'Direção.' }, { palavra: 'Alívio.' }, { palavra: 'Constância.' }, { palavra: 'Foco.' }, { palavra: 'Leveza.' }, { palavra: 'Rumo.' }, { palavra: 'Ritmo.' }, { palavra: 'Confiança.' }];
   (function () {
     var lista = DEPOS, exemplo = false;
     if (!lista.length && new URLSearchParams(location.search).get('depo') === 'exemplo') {
@@ -924,8 +925,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     }
     $('#depo-track').innerHTML = lista.map(function (d) {
       return '<figure class="word">' + (exemplo ? '<span class="ex">EXEMPLO</span>' : '') + (d.foto ? '<img class="word__av" src="' + esc(d.foto) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : AV) +
-        '<strong>' + esc(d.palavra) + '</strong><p>' + esc(d.texto) + '</p>' +
-        '<p class="word__by"><b>' + esc(d.nome) + '</b>' + esc(d.livro || '') + '</p></figure>';
+        '<strong>' + esc(d.palavra) + '</strong>' + (d.texto ? '<p>' + esc(d.texto) + '</p>' : '') +
+        (d.nome ? '<p class="word__by"><b>' + esc(d.nome) + '</b>' + esc(d.livro || '') + '</p>' : '') + '</figure>';
     }).join('');
     sec.hidden = false;
   })();
