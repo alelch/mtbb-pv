@@ -593,6 +593,9 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .who__grid { grid-template-columns: 340px minmax(0, 1fr); gap: 64px; align-items: center; }
   .who__pic { width: 100%; }
   .who__body .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 40px; }
+  /* 4 cartões lado a lado: o número acompanha a largura para "+4.400" caber */
+  .who__body .stat { padding: 18px 14px; }
+  .who__body .stat .n { font-size: clamp(26px, 2.4vw, 36px); white-space: nowrap; }
   .media figure { width: 260px; }
   .fecho__offer { padding: 84px 56px 8px; }
   .fecho__form { padding: 28px 56px 48px; }
@@ -826,7 +829,6 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           <div class="who__txt">
             <p>15 anos nos bastidores das grandes editoras. Criou o <b>Método The Book Business</b>.</p>
             <p><b>Agora, criou o motor.</b></p>
-            <p>O LOMBADA chega na Black Week Motorizada, junto com o <b>Método The Book Business vitalício</b>.</p>
           </div>
           <p class="who__q">“O maior risco que um autor corre é ser esquecido.”<small>Dany Sakugawa</small></p>
           </div>
