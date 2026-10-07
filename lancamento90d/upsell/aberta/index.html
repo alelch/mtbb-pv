@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>Diagnóstico + Plano de Ação</title>
+<!-- ============================================================
+     PÁGINA ABERTA DO UPSELL · atalho, não é uma cópia.
+     ============================================================
+     O upsell normal fica trancado até a VSL chamar o botão (165s antes do
+     fim). Esta URL existe para quem NÃO deve ter que assistir: aprovação
+     interna, remarketing, link em e-mail, obrigado de outro produto.
+
+     É só um redirect para ../?abrir=1, PRESERVANDO as UTMs, o sck e o xcod.
+     Mesma convenção da /lancamento90d/aberta/ do front. De propósito não é
+     um segundo arquivo da página: duas cópias desandam uma da outra na
+     primeira vez que alguém edita só uma.
+
+     noindex porque é a mesma página da canônica.
+     ============================================================ -->
+<script>
+(function(){
+  var qs = location.search || '';
+  var sep = qs ? (qs.charAt(0)==='?' ? qs + '&' : '?' + qs + '&') : '?';
+  location.replace('../' + sep + 'abrir=1' + location.hash);
+})();
+</script>
+<meta http-equiv="refresh" content="0;url=../?abrir=1">
+</head>
+<body style="font:16px/1.5 system-ui;margin:0;padding:40px;background:#F3F0E8;color:#292927">
+<p>Abrindo a página… <a href="../?abrir=1">clique aqui se não abrir sozinho</a>.</p>
+</body>
+</html>
