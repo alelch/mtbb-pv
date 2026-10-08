@@ -347,6 +347,9 @@ function carregar(){
 }
 var API = 'https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/l90d-plano';
 var SESSAO = 'plano90d.sessao';
+var SESSAO_ATE = 'plano90d.sessao_ate';     // cliente 08/10: "2h, depois logoff"
+var PENDENTE = 'plano90d.pendente';         // marcou algo e a sessão acabou antes de salvar: sobe no próximo login
+var DUAS_HORAS = 2 * 3600 * 1000, timerLogoff = null;
 var token = null, timerSalvar = null, pendente = false;
 function api(corpo){
   return fetch(API, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(corpo)})
@@ -361,8 +364,8 @@ function enviar(){
   pendente = false;
   statusSalvo('salvando…');
   api({acao:'salvar', token:token, estado:estado}).then(function(d){
-    if(d && d.ok){ statusSalvo('salvo na sua conta', 'ok'); }
-    else if(d && (d.erro === 'sessao' || d.erro === 'sem_acesso')){ sairLocal(d.erro); }
+    if(d && d.ok){ statusSalvo('salvo na sua conta', 'ok'); try{ localStorage.removeItem(PENDENTE); }catch(e){} }
+    else if(d && (d.erro === 'sessao' || d.erro === 'sem_acesso')){ try{ localStorage.setItem(PENDENTE, '1'); }catch(e){} sairLocal(d.erro); }
     else { pendente = true; statusSalvo('não salvou, tentando de novo', 'erro'); setTimeout(enviar, 5000); }
   }).catch(function(){ pendente = true; statusSalvo('sem conexão, tentando de novo', 'erro'); setTimeout(enviar, 5000); });
 }
@@ -679,7 +682,7 @@ var MSG = {
   sem_acesso:'Esta compra não está mais ativa. Se acha que é um engano, fale com o suporte.',
   bloqueado:'Muitas tentativas seguidas. Espere 15 minutos e tente de novo.',
   servidor:'Não conseguimos conferir agora. Tente de novo em instantes.',
-  sessao:'Sua sessão terminou. Entre de novo.'
+  sessao:'Por segurança, a sessão termina depois de 2 horas. Entre de novo com o seu e-mail: o seu progresso está salvo.'
 };
 function mostrarEntrar(msg){
   document.body.classList.add('sem-conta');
@@ -689,7 +692,8 @@ function mostrarEntrar(msg){
 }
 function sairLocal(motivo){
   token = null;
-  try{ localStorage.removeItem(SESSAO); }catch(e){}
+  clearTimeout(timerLogoff);
+  try{ localStorage.removeItem(SESSAO); localStorage.removeItem(SESSAO_ATE); }catch(e){}
   mostrarEntrar(MSG[motivo] || '');
 }
 function iniciar(d){
@@ -697,7 +701,8 @@ function iniciar(d){
   prepararDados();
   var srv = d.estado, local = null;
   try{ var b = localStorage.getItem(CHAVE); if(b) local = JSON.parse(b); }catch(e){}
-  var origem = srv && (srv.pub || srv.evento || (srv.feitos && Object.keys(srv.feitos).length)) ? srv : (local || srv || {});
+  var pend = false; try{ pend = localStorage.getItem(PENDENTE) === '1'; }catch(e){}
+  var origem = (pend && local) ? local : (srv && (srv.pub || srv.evento || (srv.feitos && Object.keys(srv.feitos).length)) ? srv : (local || srv || {}));
   estado.pub = typeof origem.pub === 'string' ? origem.pub : '';
   estado.evento = typeof origem.evento === 'string' ? origem.evento : '';
   estado.feitos = (origem.feitos && typeof origem.feitos === 'object') ? origem.feitos : {};
@@ -712,9 +717,18 @@ function iniciar(d){
   statusSalvo(d.salvo_em ? 'salvo na sua conta' : 'o que você marcar fica salvo na sua conta', 'ok');
   redesenhar();
 }
+function agendarLogoff(){
+  clearTimeout(timerLogoff);
+  var ate = 0; try{ ate = +localStorage.getItem(SESSAO_ATE) || 0; }catch(e){}
+  if(!ate) return;
+  var falta = ate - Date.now();
+  if(falta <= 0){ if(pendente){ try{ localStorage.setItem(PENDENTE,'1'); }catch(e){} } sairLocal('sessao'); return; }
+  timerLogoff = setTimeout(agendarLogoff, Math.min(falta, 60000) + 50);   // reconfere a cada minuto (relógio do celular dormindo)
+}
+document.addEventListener('visibilitychange', function(){ if(!document.hidden && token) agendarLogoff(); });
 function abrirPlano(){
   api({acao:'plano', token:token}).then(function(d){
-    if(d && d.ok) iniciar(d); else sairLocal(d && d.erro);
+    if(d && d.ok){ iniciar(d); agendarLogoff(); } else sairLocal(d && d.erro);
   }).catch(function(){ mostrarEntrar(MSG.servidor); });
 }
 document.getElementById('formEntrar').addEventListener('submit', function(ev){
@@ -724,7 +738,7 @@ document.getElementById('formEntrar').addEventListener('submit', function(ev){
   bt.disabled = true; bt.textContent = 'Conferindo…';
   api({acao:'entrar', email:email}).then(function(d){
     bt.disabled = false; bt.textContent = 'Entrar';
-    if(d && d.ok){ token = d.token; try{ localStorage.setItem(SESSAO, token); }catch(e){} abrirPlano(); }
+    if(d && d.ok){ token = d.token; try{ localStorage.setItem(SESSAO, token); localStorage.setItem(SESSAO_ATE, String(Date.now() + DUAS_HORAS)); }catch(e){} abrirPlano(); }
     else mostrarEntrar(MSG[d && d.erro] || MSG.servidor);
   }).catch(function(){ bt.disabled = false; bt.textContent = 'Entrar'; mostrarEntrar(MSG.servidor); });
 });
@@ -739,7 +753,9 @@ document.addEventListener('click', function(ev){
   if(a && token && a.closest('#conteudo')) api({acao:'evento', token:token, tipo:'link', dados:{nome:(a.textContent||'').trim().slice(0,80)}}).catch(function(){});
 });
 try{ token = localStorage.getItem(SESSAO); }catch(e){ token = null; }
-if(token) abrirPlano(); else mostrarEntrar('');
+var venceu = false; try{ var ateIni = +localStorage.getItem(SESSAO_ATE) || 0; venceu = !!token && ateIni > 0 && ateIni <= Date.now(); }catch(e){}
+if(venceu) sairLocal('sessao');
+else if(token) abrirPlano(); else mostrarEntrar('');
 
 })();
 </script>
