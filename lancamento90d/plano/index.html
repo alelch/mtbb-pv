@@ -708,7 +708,7 @@ function iniciar(d){
   estado.feitos = (origem.feitos && typeof origem.feitos === 'object') ? origem.feitos : {};
   if(origem === local && local) salvar();          // sobe o progresso antigo deste navegador pra conta
   else try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){}
-  var nome = (d.nome || '').trim(), primeiro = nome ? nome.split(/\s+/)[0] : '';
+  var nome = (d.nome || '').trim(), primeiro = nome ? nome.replace(/^[^A-Za-zÀ-ÿ]+/, '').split(/\s+/)[0] : '';   // nome da Hotmart às vezes vem com ponto na frente
   document.getElementById('quem').textContent = primeiro ? 'Plano de ' + primeiro.charAt(0).toUpperCase() + primeiro.slice(1).toLowerCase() : 'Seu plano';
   document.getElementById('marcaDagua').textContent = 'Plano de ' + (nome || d.email) + ' · ' + d.email + ' · Lançamento 90D · uso pessoal';
   document.getElementById('entrar').hidden = true;
