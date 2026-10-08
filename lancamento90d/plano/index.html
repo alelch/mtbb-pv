@@ -187,7 +187,31 @@ input[type=date]:hover{border-color:var(--laranja)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
+/* 08/10 · conta */
+body.sem-conta .abre, body.sem-conta #conteudo, body.sem-conta .regras, body.sem-conta .papel, body.sem-conta .rodape{display:none}
+.entrar{padding-block:48px 64px;max-width:460px}
+.entrar .logo{margin-bottom:28px}
+.entrar h2{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.entrar .sub{color:var(--tinta-72);margin:0 0 22px}
+.entrar form{display:grid;gap:6px}
+.entrar label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;margin-top:10px}
+.entrar input{font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--linha-2);background:var(--papel);color:var(--tinta);border-radius:0}
+.entrar input:focus{outline:2px solid var(--laranja);outline-offset:1px;border-color:var(--tinta)}
+.entrar .dica{color:var(--tinta-55);font-size:12.5px}
+.entrar .erro{margin:10px 0 0;padding:10px 12px;background:var(--creme);border-left:3px solid var(--laranja);font-size:13.5px}
+.entrar .btn{margin-top:16px;justify-content:center;padding-block:15px}
+.entrar .btn:disabled{opacity:.6;cursor:wait}
+.entrar .ajuda{margin-top:26px;font-size:13px;color:var(--tinta-55)}
+.entrar .ajuda a{color:var(--tinta)}
+.quem{font-size:12px;color:var(--tinta-72);white-space:nowrap}
+.quem .btn-texto{font-size:12px;padding:0}
+.salvo{font-size:12px;color:var(--tinta-55);white-space:nowrap}
+.salvo.ok::before{content:'● ';color:#2e8b57}
+.salvo.erro{color:#b3261e}
+.marca-dagua{display:none}
 @media print{
+  .marca-dagua{display:block;position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:8.5pt;color:#555;padding:4px 0;background:#fff}
+  .quem,.salvo{display:none}
   body{font-size:10.5pt}
   .papel,.btn-texto,.topo-acao{display:none!important}
   .faixa-lanc{background:#fff;color:#000;border-top:2px solid #000;padding-inline:0}
@@ -223,16 +247,31 @@ input[type=date]:hover{border-color:var(--laranja)}
 </style>
 <style>img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
-<body>
+<body class="sem-conta">
+<section class="env entrar" id="entrar" hidden>
+  <h1 class="logo"><span>Lançamento</span><span class="b">90D</span></h1>
+  <h2 class="d">Seu plano de 90 dias</h2>
+  <p class="sub">Entre com o e-mail da sua compra na Hotmart. O que você marcar fica salvo na sua conta e abre igual no celular e no computador.</p>
+  <form id="formEntrar" novalidate>
+    <label for="email">E-mail da compra</label>
+    <input type="email" id="email" autocomplete="email" inputmode="email" required placeholder="voce@email.com">
+    <small class="dica">O mesmo e-mail em que você recebeu o acesso da Hotmart.</small>
+    <p class="erro" id="entrarErro" role="alert" hidden></p>
+    <button type="submit" class="btn btn-cheio" id="btEntrar">Entrar</button>
+  </form>
+  <p class="ajuda">Não consegue entrar? Fale com o suporte no WhatsApp <b>(81) 98637-0023</b> · <a href="https://wa.me/5581986370023?text=Oi%2C%20comprei%20o%20Lan%C3%A7amento%2090D%20e%20n%C3%A3o%20consigo%20entrar%20no%20plano." target="_blank" rel="noopener">abrir conversa</a></p>
+</section>
+<div class="marca-dagua" id="marcaDagua" aria-hidden="true"></div>
 <section class="env abre">
   <div class="topo-linha">
     <h1 class="logo topo"><span>Lançamento</span><span class="b">90D</span></h1>
     <div class="topo-acao">
+      <span class="quem"><b id="quem">Seu plano</b> · <button type="button" class="btn-texto" id="sair">sair</button></span>
       <button type="button" class="btn btn-vazio js-imprimir">Imprimir</button>
       <span class="aviso-print" id="avisoTopo" hidden></span>
     </div>
   </div>
-  <p class="sub">A execução inteira, semana a semana. Marque o que já fez: a página guarda o seu progresso neste navegador.</p>
+  <p class="sub">A execução inteira, semana a semana. Marque o que já fez: o seu progresso fica salvo na sua conta. <span class="salvo" id="salvoStatus"></span></p>
 
   <div class="console" aria-label="Datas do lançamento">
     <div class="console-grade">
@@ -268,9 +307,8 @@ input[type=date]:hover{border-color:var(--laranja)}
 
 <section class="env papel">
   <button type="button" class="btn btn-cheio js-imprimir">Imprimir ou salvar em PDF</button>
-  <a class="btn btn-vazio" href="Plano-90-Dias.pdf" target="_blank" rel="noopener">Baixar o PDF em branco</a>
   <button type="button" class="btn-texto" id="zerar">zerar progresso</button>
-  <p id="notaPapel">No destino da impressão, escolha "Salvar como PDF" para guardar o arquivo. O que você marcar fica guardado neste navegador.</p>
+  <p id="notaPapel">No destino da impressão, escolha "Salvar como PDF" para guardar o arquivo. O que você marcar fica salvo na sua conta.</p>
 </section>
 
 <div class="env rodape">
@@ -283,233 +321,8 @@ input[type=date]:hover{border-color:var(--laranja)}
 
 // Esta pagina acompanha o Lancamento 90D e nao cita nem linka outro produto.
 // So entram links externos (orgao oficial, cadastro).
-function fora(nome, url){ return {t:'fora', nome:nome, url:url}; }
-
-
-var VIABILIZADORES = {
-  id:'v', fase:'pre', rotulo:'Antes', num:'Viabilizadores',
-  foco:'O que precisa estar pronto antes do Dia 1',
-  intro:'Se algum destes ainda não está de pé, o relógio dos 90 dias não começou. Resolva aqui antes de abrir a Semana 1.',
-  itens:[
-    {t:'Data exata da publicação definida (editora ou plataforma)'},
-    {t:'Manuscrito finalizado'},
-    {t:'Leitura crítica feita, com leitor crítico especializado'},
-    {t:'Tipo de publicação definido', nota:'Autopublicação, prestadora de serviço ou tradicional.'},
-    {t:'Primeira revisão feita'},
-    {t:'Capa profissional pronta (ou em produção)'},
-    {t:'Diagramação encaminhada'},
-    {t:'ISBN solicitado (pelo autor ou pela editora)'},
-    {t:'Ficha catalográfica solicitada (pelo autor ou pela editora)'}
-  ]
-};
-
-var SEMANAS = [
-{
-  id:'s1', num:'Semana 1', semana:1, fase:'pre', rotulo:'Objetivo',
-  foco:'Planejamento e objetivo',
-  itens:[
-    {t:'Definir o objetivo do livro'},
-    {t:'Definir público-alvo e persona do leitor ideal'},
-    {t:'Definir os temas universais que o livro aborda', apoio:[fora('Lista de Temas Universais','https://docs.google.com/document/d/1GqO_ObhQJIWnbhTbUjyKaiFMdKUSdaKZSAlWP3ngvlU/edit?usp=sharing')]},
-    {t:'Montar o cronograma reverso', nota:'Da data de publicação para trás.'},
-    {t:'Tirar as fotos dos posts das próximas semanas', nota:'Lendo, escrevendo, assinando contrato, revisando o manuscrito, aprovando a diagramação.'},
-    {t:'Listar datas comemorativas e efemérides ligadas ao tema do livro'}
-  ],
-  post:{frase:'O porquê.', nota:'Foto de criança: "essa criança nunca imaginou que um dia lançaria um livro…"'}
-},
-{
-  id:'s2', num:'Semana 2', semana:2, fase:'pre', rotulo:'Listas',
-  foco:'Soft marketing e organização de listas',
-  itens:[
-    {t:'Atualizar site, página de autor e perfis nas redes', subs:[{t:'Instagram'},{t:'LinkedIn'}]},
-    {t:'Criar o Grupo de Lançamento', nota:'20 a 30 pessoas, no WhatsApp.'},
-    {t:'Compartilhar o processo de produção nos stories', nota:'"mais um capítulo revisado"'},
-    {t:'Registrar o livro na Câmara Brasileira do Livro', nota:'ISBN e ficha catalográfica.', apoio:[fora('Solicitar o ISBN na CBL','https://www.cblservicos.org.br/isbn/')]},
-    {t:'Enviar o post da semana no Grupo de Lançamento', nota:'Peça engajamento.'}
-  ],
-  post:{frase:'Por trás de todo bom escritor, existe um bom leitor.'}
-},
-{
-  id:'s3', num:'Semana 3', semana:3, fase:'pre', rotulo:'Contatos',
-  foco:'Mapeamento de contatos',
-  itens:[
-    {t:'Mapear contatos por origem', nota:'Família, amigos, carreira, escola, clube, condomínio, igreja.', apoio:[fora('Copiar a Planilha Modelo','https://docs.google.com/spreadsheets/d/1NdM4y1ueuNkYWmgFqqXW_TDFtVEDx1Q1ghbPZUIlGBk/copy')]},
-    {t:'Atribuir tarefas aos contatos mapeados', subs:[
-      {t:'Possíveis compradores da pré-venda'},
-      {t:'Parceiros estratégicos (outros autores, empresas, instituições)'},
-      {t:'Convidados do evento de lançamento'},
-      {t:'Influenciadores online (mais de 3.000 seguidores)'},
-      {t:'Influenciadores offline (professores, coordenadores, empresários)'}
-    ]},
-    {t:'Criar um Instagram ou TikTok de estudo', nota:'Para acompanhar o que os concorrentes fazem.'},
-    {t:'Mapear influenciadores do nicho', nota:'Bookstagrammers, booktubers, podcasters.'},
-    {t:'Mapear veículos e podcasts da sua região', nota:'Rádios, revistas, jornais, portais.'},
-    {t:'Enviar o post da semana no Grupo de Lançamento'}
-  ],
-  post:{frase:'Recomendação de livros.', nota:'"comenta aqui se você já leu algum deles ou se acrescentaria mais algum nessa lista"'}
-},
-{
-  id:'s4', num:'Semana 4', semana:4, fase:'pre', rotulo:'Endossos',
-  foco:'Endossos e estudo do mercado',
-  itens:[
-    {t:'Preparar a amostra do livro com 3 capítulos', nota:'Em PDF, com marca d’água, no máximo 30% do livro.'},
-    {t:'Pedir depoimentos e endossos de pessoas relevantes', nota:'Escritores, jornalistas, profissionais ligados ao tema universal do seu livro.'},
-    {t:'Montar a lista de livros comparáveis', nota:'Editora, páginas, formatos, preços de capa.'},
-    {t:'Enviar o post da semana no Grupo de Lançamento'}
-  ],
-  post:{frase:'Terminei de escrever o livro.', nota:'"Foram mais de X anos, Y referências, Z viagens, e finalmente…"'}
-},
-{
-  id:'s5', num:'Semana 5', semana:5, fase:'pre', rotulo:'Capa',
-  foco:'Capa e identidade visual',
-  itens:[
-    {t:'Compartilhar o processo nos stories', nota:'Capa, revisão, diagramação.'},
-    {t:'Definir o preço de capa'},
-    {t:'Finalizar a sinopse do livro', nota:'Para a quarta-capa e os cadastros digitais.'},
-    {t:'Criar o press release', nota:'Foto do autor, capa, sinopse, bio, links, preço.'},
-    {t:'Planejar os kits para influenciadores e jornalistas', subs:[
-      {t:'Livro'},{t:'Carta personalizada'},{t:'Release do livro'},{t:'Brinde (opcional)'}
-    ]},
-    {t:'Enviar o post da semana no Grupo de Lançamento'}
-  ],
-  post:{frase:'Revelar a capa oficial.', nota:'Evento online ou post especial.'}
-},
-{
-  id:'s6', num:'Semana 6', semana:6, fase:'pre', rotulo:'Oferta',
-  foco:'Planejamento da pré-venda',
-  itens:[
-    {t:'Alinhar início e fim da pré-venda com a editora ou plataforma'},
-    {t:'Definir as condições especiais da pré-venda', subs:[
-      {t:'Brinde'},{t:'Bônus'},{t:'Desconto'},{t:'Pacotes'}
-    ]},
-    {t:'Organizar as lives de pré-venda', nota:'Uma semana inteira de lives com outros escritores e profissionais ligados ao tema do livro.'},
-    {t:'Fazer cadastro na Amazon Associados', apoio:[fora('associados.amazon.com.br','https://associados.amazon.com.br/')]},
-    {t:'Enviar o post da semana no Grupo de Lançamento'}
-  ],
-  post:{frase:'Assinatura de contrato.'}
-},
-{
-  id:'s7', num:'Semana 7', semana:7, fase:'pre', rotulo:'Evento',
-  foco:'Evento de lançamento',
-  itens:[
-    {t:'Planejar o evento de lançamento', nota:'Presencial ou online.'},
-    {t:'Definir o local do evento'},
-    {t:'Confirmar os detalhes com a livraria', subs:[
-      {t:'O local tem estacionamento?'},
-      {t:'Pode servir buffet?'},
-      {t:'Pode levar fotógrafo?'},
-      {t:'O que é um bom número de vendas para aquela loja?'}
-    ]},
-    {t:'Montar a lista final de convidados'},
-    {t:'Enviar o post da semana no Grupo de Lançamento'},
-    {t:'Mandar o Save the Date para as pessoas mais importantes e ocupadas'}
-  ],
-  post:{frase:'Crenças e valores.'}
-},
-{
-  id:'s8', num:'Semana 8', semana:8, fase:'pre', rotulo:'Aquecer',
-  foco:'Aquecimento final',
-  itens:[
-    {t:'Agendar entrevistas e podcasts para a semana do lançamento'},
-    {t:'Reforçar o soft marketing', nota:'Bastidores, depoimentos e expectativas nos stories.'},
-    {t:'Repassar o mapeamento de contatos com foco na pré-venda', subs:[
-      {t:'Quem não mora na cidade do evento'},
-      {t:'Quem tem potencial de comprar mais de um exemplar'},
-      {t:'Quem tem perfil de influenciador (online ou offline)'}
-    ]}
-  ],
-  post:{frase:'História pessoal + tema universal do livro.'}
-},
-{
-  id:'s9', num:'Semana 9', semana:9, fase:'venda', rotulo:'Abertura',
-  foco:'Abertura da pré-venda',
-  lembrete:'Não tenha vergonha de vender. A pré-venda é uma janela de oportunidade, e ela fecha.',
-  itens:[
-    {t:'Abrir oficialmente a pré-venda', nota:'Site, Amazon, editora.'},
-    {t:'Divulgar os bônus exclusivos de quem compra na pré-venda', nota:'Desconto, brindes, acesso antecipado.'},
-    {t:'Ativar os contatos com potencial de compra em lote, de um em um'},
-    {t:'Divulgar a pré-venda no Grupo de Lançamento', nota:'São os primeiros compradores.'},
-    {t:'Enviar e-mails e mensagens para a lista anunciando a pré-venda'}
-  ],
-  post:{frase:'5 formas de ajudar um escritor.'}
-},
-{
-  id:'s10', num:'Semana 10', semana:10, fase:'venda', rotulo:'Provas',
-  foco:'Vendas em lote e provas sociais',
-  itens:[
-    {t:'Incentivar o Grupo de Lançamento a compartilhar'},
-    {t:'Fazer lives e stories', nota:'Bastidores, depoimentos, bônus.'}
-  ],
-  post:{frase:'Intensificar as postagens sobre a pré-venda nas redes sociais.', lista:[
-    'Post com a oferta da pré-venda',
-    'Post com prints de quem já comprou',
-    'Post emocional com o motivo pelo qual você escreveu esse livro',
-    'Post com trechos do prefácio ou dos endossos'
-  ]}
-},
-{
-  id:'s11', num:'Semana 11', semana:11, fase:'venda', rotulo:'Urgência',
-  foco:'Urgência e provas sociais',
-  itens:[
-    {t:'Realizar a agenda de lives de pré-venda'},
-    {t:'Reforçar nos stories o fim da pré-venda', nota:'Contagem regressiva.'},
-    {t:'Intensificar o contato direto', nota:'Mensagens pessoais para amigos, familiares e leitores próximos.'}
-  ],
-  post:{frase:'Depoimentos de quem já comprou na pré-venda.'}
-},
-{
-  id:'s12', num:'Semana 12', semana:12, fase:'lanc', rotulo:'Lançar',
-  foco:'Lançamento',
-  itens:[
-    {t:'Enviar os convites individualmente', nota:'Grupo de Lançamento, lista de e-mails e WhatsApp, no dia seguinte ao encerramento da pré-venda.'},
-    {t:'Ativar a mídia', nota:'Entrevistas, podcasts e matérias já agendadas.'},
-    {t:'Incentivar os compradores a avaliar na Amazon e nas redes', nota:'Individualmente, de 30 em 30.'},
-    {t:'Repostar menções e agradecer cada leitor'},
-    {t:'Monitorar rankings e vendas', nota:'Amazon, Amazon Associados, site, editora.'},
-    {t:'Fazer stories e posts com o livro nas mãos dos leitores'}
-  ],
-  post:{frase:'Unboxing e agradecimento a quem comprou na pré-venda.'}
-}
-];
-
-var POS = {
-  id:'pos', num:'Pós-lançamento', fase:'pos', rotulo:'Depois',
-  foco:'Depois do Dia 90',
-  intro:'O lançamento acaba. O livro, não. Estes três blocos seguram o livro em movimento depois da data de publicação.',
-  blocos:[
-    {foco:'Evento de lançamento', itens:[
-      {t:'Realizar o evento de lançamento'},
-      {t:'Ativar a mídia', nota:'Entrevistas, podcasts e matérias já agendadas.'},
-      {t:'Incentivar os compradores a avaliar na Amazon e nas redes'},
-      {t:'Repostar menções e agradecer publicamente cada leitor'},
-      {t:'Fazer stories e posts com o livro nas mãos dos leitores'}
-    ]},
-    {foco:'Pós-lançamento imediato', itens:[
-      {t:'Enviar agradecimento personalizado para quem esteve no evento', nota:'Com a foto que o fotógrafo tirou, e o pedido de avaliação na Amazon.'},
-      {t:'Compartilhar as primeiras avaliações e depoimentos de leitores'},
-      {t:'Fazer o post de bastidores do lançamento', nota:'Aprendizados, emoções.'},
-      {t:'Enviar os kits para influenciadores e parceiros estratégicos', nota:'Primeiro lote.'}
-    ]},
-    {foco:'Microciclos mensais', itens:[
-      {t:'Planejar os próximos microciclos mensais', subs:[
-        {t:'Datas comemorativas, com oportunidade contextualizada'},
-        {t:'Marcos de vendas', nota:'Primeira edição, lançamento do audiobook, 5 países com leitores.'},
-        {t:'Participação em eventos'},
-        {t:'Lives com parceiros'},
-        {t:'Inscrição em prêmios e concursos'},
-        {t:'Novos lotes de envio para influenciadores', nota:'A cada trimestre.'},
-        {t:'Sprint de novas avaliações na Amazon'}
-      ]}
-    ]}
-  ]
-};
-
-var FASES = {
-  pre:  {nome:'Pré-lançamento', classe:'faixa-pre',   semanas:'Semanas 1 a 8',    texto:'Ninguém compra um livro que não sabe que existe. Estas oito semanas constroem o terreno: objetivo, leitor, contatos, capa e o plano da pré-venda.'},
-  venda:{nome:'Pré-venda',      classe:'faixa-venda', semanas:'Semanas 9 a 11',   texto:'A janela em que o livro vende antes de existir na estante. É aqui que o trabalho das oito semanas anteriores vira número.'},
-  lanc: {nome:'Lançamento',     classe:'faixa-lanc',  semanas:'Semana 12',        texto:'A semana do Dia 90. Convite individual, mídia no ar, e a corrida das primeiras avaliações.'},
-  pos:  {nome:'Pós-lançamento', classe:'faixa-pos',   semanas:'Depois do Dia 90', texto:'O evento, os agradecimentos e os microciclos que impedem o livro de ser esquecido.'}
-};
+// 08/10: o conteúdo do plano NÃO mora mais aqui (o repositório é público). Chega do servidor depois do login.
+var VIABILIZADORES, SEMANAS, POS, FASES;
 
 /* ---------------- estado ---------------- */
 
@@ -529,9 +342,36 @@ function carregar(){
     }
   }catch(e){}
 }
+var API = 'https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/l90d-plano';
+var SESSAO = 'plano90d.sessao';
+var token = null, timerSalvar = null, pendente = false;
+function api(corpo){
+  return fetch(API, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(corpo)})
+    .then(function(r){ return r.json(); });
+}
+function statusSalvo(txt, cls){
+  var el = document.getElementById('salvoStatus'); if(!el) return;
+  el.textContent = txt; el.className = 'salvo ' + (cls||'');
+}
+function enviar(){
+  if(!token) return;
+  pendente = false;
+  statusSalvo('salvando…');
+  api({acao:'salvar', token:token, estado:estado}).then(function(d){
+    if(d && d.ok){ statusSalvo('salvo na sua conta', 'ok'); }
+    else if(d && (d.erro === 'sessao' || d.erro === 'sem_acesso')){ sairLocal(d.erro); }
+    else { pendente = true; statusSalvo('não salvou, tentando de novo', 'erro'); setTimeout(enviar, 5000); }
+  }).catch(function(){ pendente = true; statusSalvo('sem conexão, tentando de novo', 'erro'); setTimeout(enviar, 5000); });
+}
 function salvar(){
   try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){}
+  pendente = true;
+  clearTimeout(timerSalvar);
+  timerSalvar = setTimeout(enviar, 800);
 }
+window.addEventListener('beforeunload', function(){
+  if(pendente && token){ try{ navigator.sendBeacon(API, new Blob([JSON.stringify({acao:'salvar', token:token, estado:estado})], {type:'text/plain'})); }catch(e){} }
+});
 
 /* ---------------- datas ----------------
    90 dias = 6 dias de viabilizadores + 12 semanas de 7 dias.
@@ -641,12 +481,16 @@ function idsDe(bloco){
   return ids;
 }
 
-var TODOS = [VIABILIZADORES].concat(SEMANAS).concat([POS]);
+var TODOS = [];
 
 // Fase com uma seção só (Lançamento, Pós) repetiria o mesmo título duas vezes:
 // a faixa fala, e a seção entra direto na lista.
 var CONTA_FASE = {};
-for(var q=0;q<TODOS.length;q++) CONTA_FASE[TODOS[q].fase] = (CONTA_FASE[TODOS[q].fase]||0) + 1;
+function prepararDados(){
+  TODOS = [VIABILIZADORES].concat(SEMANAS).concat([POS]);
+  CONTA_FASE = {};
+  for(var q=0;q<TODOS.length;q++) CONTA_FASE[TODOS[q].fase] = (CONTA_FASE[TODOS[q].fase]||0) + 1;
+}
 
 function montar(){
   var h = '';
@@ -786,6 +630,7 @@ function imprimir(){
     nota.textContent = aviso;
     if(topo){ topo.textContent = aviso; topo.hidden = false; }
   };
+  if(token) api({acao:'evento', token:token, tipo:'imprimiu'}).catch(function(){});
   if(typeof window.print !== 'function'){ falhou(); return; }
   var abriu = false;
   var marcar = function(){ abriu = true; };
@@ -814,15 +659,84 @@ document.addEventListener('click', function(ev){
   if(ev.target.id === 'zerar'){
     if(confirm('Isso desmarca todos os itens do plano. Continuar?')){
       estado.feitos = {};
+      if(token) api({acao:'evento', token:token, tipo:'zerou'}).catch(function(){});
       salvar();
       redesenhar();
     }
   }
 });
 
-carregar();
-document.getElementById('dataPub').value = estado.pub || '';
-redesenhar();
+/* ---------------- conta ----------------
+   08/10 (cliente: "a página do plano tem que ter login e tem que gravar o plano da pessoa").
+   Entra só com o e-mail da compra (cliente: "não precisa de senha, só o e-mail basta"), se a compra estiver ativa.
+   O plano e o progresso vêm do servidor; quem tinha progresso só neste navegador leva junto no 1º login. */
+var MSG = {
+  dados:'Confira o e-mail digitado.',
+  nao_confere:'Não achamos uma compra ativa do Lançamento 90D com esse e-mail. Use o e-mail em que você recebeu o acesso da Hotmart.',
+  sem_acesso:'Esta compra não está mais ativa. Se acha que é um engano, fale com o suporte.',
+  bloqueado:'Muitas tentativas seguidas. Espere 15 minutos e tente de novo.',
+  servidor:'Não conseguimos conferir agora. Tente de novo em instantes.',
+  sessao:'Sua sessão terminou. Entre de novo.'
+};
+function mostrarEntrar(msg){
+  document.body.classList.add('sem-conta');
+  document.getElementById('entrar').hidden = false;
+  var e = document.getElementById('entrarErro');
+  e.textContent = msg || ''; e.hidden = !msg;
+}
+function sairLocal(motivo){
+  token = null;
+  try{ localStorage.removeItem(SESSAO); }catch(e){}
+  mostrarEntrar(MSG[motivo] || '');
+}
+function iniciar(d){
+  VIABILIZADORES = d.plano.VIABILIZADORES; SEMANAS = d.plano.SEMANAS; POS = d.plano.POS; FASES = d.plano.FASES;
+  prepararDados();
+  var srv = d.estado, local = null;
+  try{ var b = localStorage.getItem(CHAVE); if(b) local = JSON.parse(b); }catch(e){}
+  var origem = srv && (srv.pub || srv.evento || (srv.feitos && Object.keys(srv.feitos).length)) ? srv : (local || srv || {});
+  estado.pub = typeof origem.pub === 'string' ? origem.pub : '';
+  estado.evento = typeof origem.evento === 'string' ? origem.evento : '';
+  estado.feitos = (origem.feitos && typeof origem.feitos === 'object') ? origem.feitos : {};
+  if(origem === local && local) salvar();          // sobe o progresso antigo deste navegador pra conta
+  else try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){}
+  var nome = (d.nome || '').trim(), primeiro = nome ? nome.split(/\s+/)[0] : '';
+  document.getElementById('quem').textContent = primeiro ? 'Plano de ' + primeiro.charAt(0).toUpperCase() + primeiro.slice(1).toLowerCase() : 'Seu plano';
+  document.getElementById('marcaDagua').textContent = 'Plano de ' + (nome || d.email) + ' · ' + d.email + ' · Lançamento 90D · uso pessoal';
+  document.getElementById('entrar').hidden = true;
+  document.body.classList.remove('sem-conta');
+  document.getElementById('dataPub').value = estado.pub || '';
+  statusSalvo(d.salvo_em ? 'salvo na sua conta' : 'o que você marcar fica salvo na sua conta', 'ok');
+  redesenhar();
+}
+function abrirPlano(){
+  api({acao:'plano', token:token}).then(function(d){
+    if(d && d.ok) iniciar(d); else sairLocal(d && d.erro);
+  }).catch(function(){ mostrarEntrar(MSG.servidor); });
+}
+document.getElementById('formEntrar').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var email = document.getElementById('email').value.trim();
+  var bt = document.getElementById('btEntrar');
+  bt.disabled = true; bt.textContent = 'Conferindo…';
+  api({acao:'entrar', email:email}).then(function(d){
+    bt.disabled = false; bt.textContent = 'Entrar';
+    if(d && d.ok){ token = d.token; try{ localStorage.setItem(SESSAO, token); }catch(e){} abrirPlano(); }
+    else mostrarEntrar(MSG[d && d.erro] || MSG.servidor);
+  }).catch(function(){ bt.disabled = false; bt.textContent = 'Entrar'; mostrarEntrar(MSG.servidor); });
+});
+document.getElementById('sair').addEventListener('click', function(){
+  var t = token;
+  if(pendente) enviar();
+  if(t) api({acao:'sair', token:t}).catch(function(){});
+  sairLocal('');
+});
+document.addEventListener('click', function(ev){
+  var a = ev.target.closest && ev.target.closest('a[href^="http"]');
+  if(a && token && a.closest('#conteudo')) api({acao:'evento', token:token, tipo:'link', dados:{nome:(a.textContent||'').trim().slice(0,80)}}).catch(function(){});
+});
+try{ token = localStorage.getItem(SESSAO); }catch(e){ token = null; }
+if(token) abrirPlano(); else mostrarEntrar('');
 
 })();
 </script>
