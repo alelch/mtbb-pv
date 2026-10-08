@@ -201,8 +201,10 @@ body.sem-conta .abre, body.sem-conta #conteudo, body.sem-conta .regras, body.sem
 .entrar .erro{margin:10px 0 0;padding:10px 12px;background:var(--creme);border-left:3px solid var(--laranja);font-size:13.5px}
 .entrar .btn{margin-top:16px;justify-content:center;padding-block:15px}
 .entrar .btn:disabled{opacity:.6;cursor:wait}
-.entrar .ajuda{margin-top:26px;font-size:13px;color:var(--tinta-55)}
-.entrar .ajuda a{color:var(--tinta)}
+.entrar .ajuda{margin-top:30px;padding-top:22px;border-top:1px solid var(--linha);display:grid;gap:10px;justify-items:start;font-size:13.5px;color:var(--tinta-72)}
+.entrar .ajuda p{margin:0}
+.entrar .ajuda small{color:var(--tinta-55);font-size:12px}
+.entrar .btn-dezza{padding:13px 18px}
 .quem{font-size:12px;color:var(--tinta-72);white-space:nowrap}
 .quem .btn-texto{font-size:12px;padding:0}
 .salvo{font-size:12px;color:var(--tinta-55);white-space:nowrap}
@@ -259,7 +261,11 @@ body.sem-conta .abre, body.sem-conta #conteudo, body.sem-conta .regras, body.sem
     <p class="erro" id="entrarErro" role="alert" hidden></p>
     <button type="submit" class="btn btn-cheio" id="btEntrar">Entrar</button>
   </form>
-  <p class="ajuda">Não consegue entrar? Fale com o suporte no WhatsApp <b>(81) 98637-0023</b> · <a href="https://wa.me/5581986370023?text=Oi%2C%20comprei%20o%20Lan%C3%A7amento%2090D%20e%20n%C3%A3o%20consigo%20entrar%20no%20plano." target="_blank" rel="noopener">abrir conversa</a></p>
+  <div class="ajuda">
+    <p>Dúvidas ou não consegue entrar? A Dezza te ajuda pelo WhatsApp.</p>
+    <a class="btn btn-vazio btn-dezza" href="https://wa.me/5581986370023?text=Oi%20Dezza%2C%20comprei%20o%20Lan%C3%A7amento%2090D%20e%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20plano." target="_blank" rel="noopener">Falar com a Dezza no WhatsApp</a>
+    <small>(81) 98637-0023</small>
+  </div>
 </section>
 <div class="marca-dagua" id="marcaDagua" aria-hidden="true"></div>
 <section class="env abre">
