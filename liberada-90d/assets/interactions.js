@@ -161,8 +161,9 @@
       q.forEach(function (v, k) {
         if (/^utm_|^fbclid$|^gclid$|^ttclid$/.test(k) && !url.searchParams.has(k)) url.searchParams.set(k, v);
       });
-      if (!url.searchParams.has('sck')) url.searchParams.set('sck', PAGE_ID);
-      if (!url.searchParams.has('src')) url.searchParams.set('src', PAGE_ID);
+      // 13/10: a origem da página (src/sck) vai junto pro checkout, pra medir o A/B das mensagens
+      url.searchParams.set('src', q.get('src') || PAGE_ID);
+      url.searchParams.set('sck', q.get('sck') || q.get('src') || PAGE_ID);
       a.href = url.toString();
     } catch (e) {}
   }
