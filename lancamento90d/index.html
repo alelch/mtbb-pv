@@ -1703,7 +1703,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         <li><b>Desconhecidos descobrindo o livro</b> sem você parecer vendedor<span class="meio">com o soft-marketing e exemplos prontos</span></li>
         <li><b>Um livro que não morre</b> em trinta dias<span class="meio">com o roteiro do pós-lançamento</span></li>
       </ul>
-      <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn verde block" id="ctaMain" data-cta="oferta">Acesso Imediato e Vitalício</a>
+      <a href="https://pay.hotmart.com/F107221310T?off=xpzf016q" class="btn verde block" id="ctaMain" data-cta="oferta" data-track-manual>Acesso Imediato e Vitalício</a>
         <div class="seals"><span>Pagamento seguro pela Hotmart</span><span>15 dias de garantia, sem perguntas</span></div>
     </div>
 
@@ -1811,7 +1811,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
   <a href="#preco" class="btn verde" data-cta="sticky">Acesso Imediato e Vitalício</a>
 </div>
 
-<script src="../tracker.js" defer></script>
+<script src="../tracker.js?v=1" defer></script>
 <script>
 (function(){
   /* ============================================================
@@ -1964,8 +1964,9 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
       return;
     }
     try { l9Ctx(); } catch(e){}   // última chance de o clique levar o fbp antes do checkout
-    try { if (window.fbq) fbq('track','InitiateCheckout',
-      {content_ids:['L90D'],content_type:'product',currency:'BRL',value:297}); } catch(e){}
+    /* 14/10: o InitiateCheckout NÃO sai mais daqui. O checkout da Hotmart já manda o dele (navegador + servidor,
+       deduplicados entre si) para o pixel OFICIAL; este, sem eventID, não deduplicava com o da Hotmart e cada pessoa
+       contava 2 checkouts no Meta (razão ~2,0 em 13 dias). */
     try { if (window.MTBB_TRACK) MTBB_TRACK('hotmart_click',{cta:origem,produto:'L90D', meta:{vsl:(function(){ var e=document.querySelector('vturb-smartplayer'); return e ? (e.getAttribute('original-id')||e.id) : null; })(), xcod:l9Xcod, vid:l9Vid()}}); } catch(e){}
     window.location.href = checkoutUrl();
   }

@@ -198,6 +198,9 @@
     document.addEventListener('click', function (e) {
       var a = e.target && e.target.closest && e.target.closest('a[href]');
       if (!a) return;
+      // 14/10: a página que grava o próprio clique (com mais dados) marca o botão com data-track-manual;
+      // sem isso o hotmart_click saía 2x por clique (este hook + a chamada da página)
+      if (a.hasAttribute('data-track-manual')) return;
       var href = a.getAttribute('href') || '';
       if (href.indexOf('pay.hotmart.com') >= 0) {
         track('hotmart_click');
