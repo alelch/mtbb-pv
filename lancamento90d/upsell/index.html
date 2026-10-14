@@ -683,6 +683,20 @@ footer{background:var(--ink);border-top:0;padding:30px 0;text-align:center;font-
   .btn{padding:19px 26px;font-size:1.02rem}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ── MODO BIANCA (14/10) ─────────────────────────────────────
+   Quem chega pelo link que a Bianca manda no WhatsApp (/upsell/bianca/) NAO
+   esta no meio de uma compra: o widget de 1 clique nao carrega pra ele, e
+   "passo 2 de 3" / "nao feche esta pagina" nao fazem sentido. Entao, nesse
+   modo, sai o aviso, sai a pilula de passos, sai o widget, e a saida do PIX
+   vira o botao principal (verde), apontando pro checkout normal do
+   Diagnostico (o mesmo off=n740dj0b). A classe entra no <head>. */
+.modo-bianca .aviso,.modo-bianca .passos,.modo-bianca #compra,
+.modo-bianca .pix .q,.modo-bianca .vagas span{display:none}
+.modo-bianca .pix{margin-top:4px;padding-top:22px}
+.modo-bianca .pix .btn{background:var(--go);color:#fff;border-color:var(--ink);
+  box-shadow:4px 4px 0 var(--ink);font-size:clamp(1rem,2.2vw,1.1rem);padding:18px 30px}
+.modo-bianca .pix .btn:hover,.modo-bianca .pix .btn:focus-visible{background:var(--go2);color:#fff}
 </style>
 
 <!-- Meta Pixel: mesmos dois IDs do front -->
@@ -714,6 +728,8 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 <!-- ?abrir=1 abre a página inteira sem esperar o vídeo (24/09), igual ao front:
      pra revisar a página ou mandar o link pra alguém ver. -->
 <script>if(!/[?&]abrir=1/.test(location.search))document.documentElement.classList.add('vsl-travada')</script>
+<!-- ?via=bianca (14/10): link que a Bianca manda no WhatsApp. Ver MODO BIANCA no CSS. -->
+<script>if(/[?&]via=bianca/.test(location.search))document.documentElement.classList.add('modo-bianca')</script>
 <body>
 
 <div class="prog" id="prog"></div>
@@ -814,6 +830,9 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
              nao existe texto nosso que possa discordar do checkout.
              ============================================================ -->
         <div class="funil" id="compra"><div id="hotmart-sales-funnel"></div></div>
+        <!-- modo Bianca: a lib da Hotmart monta sozinha em #hotmart-sales-funnel, entao o
+             bloco sai do DOM antes de ela carregar (esconder com CSS nao basta). -->
+        <script>if(document.documentElement.classList.contains('modo-bianca'))document.getElementById('compra').remove()</script>
         <!-- ============================================================
              A SAIDA DO PIX, dentro do card e logo abaixo do widget, chamativa
              de proposito (pedido do cliente 23/09, com referencia).
@@ -1068,6 +1087,8 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
 
   function montar(){
     if (montado) return; montado = true;
+    /* modo Bianca: nao ha compra em andamento, o widget nao teria o que mostrar */
+    if (document.documentElement.classList.contains('modo-bianca')) return;
     montarEm('#hotmart-sales-funnel');
   }
 
@@ -1117,11 +1138,14 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
   function ligaPix(chave){
     var a = document.getElementById('pix-checkout');
     if (!a) return;
+    if (document.documentElement.classList.contains('modo-bianca'))
+      a.innerHTML = 'Quero a minha vaga <span aria-hidden="true">&rarr;</span>';
     try {
       var u = new URL(PIX_CHECKOUT);
       if (chave) u.searchParams.set('xcod', chave);
       new URLSearchParams(location.search).forEach(function(v, k){
-        if (k !== 'xcod' && !u.searchParams.get(k)) u.searchParams.set(k, v);
+        /* abrir/via so controlam esta pagina; o checkout nao precisa deles */
+        if (k !== 'xcod' && k !== 'abrir' && k !== 'via' && !u.searchParams.get(k)) u.searchParams.set(k, v);
       });
       a.setAttribute('href', u.toString());
     } catch(e){ a.setAttribute('href', PIX_CHECKOUT); }

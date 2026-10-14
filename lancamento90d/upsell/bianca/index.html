@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>Diagnóstico + Plano de Ação</title>
+<!-- ============================================================
+     LINK DA BIANCA (14/10) · atalho, não é uma cópia.
+     É a página que a Bianca manda no WhatsApp pra quem respondeu a mensagem
+     do Diagnóstico. Redirect pra ../?abrir=1&via=bianca&sck=bianca-pagina:
+     abre sem esperar o vídeo, liga o MODO BIANCA (sem aviso de não fechar,
+     sem passos, sem widget de 1 clique; botão normal pro checkout
+     off=n740dj0b) e marca a venda com sck=bianca-pagina.
+     Preserva a query que chegar (utm, sck próprio vence o default).
+     ============================================================ -->
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  q.set('abrir','1'); q.set('via','bianca');
+  if (!q.get('sck')) q.set('sck','bianca-pagina');
+  location.replace('../?' + q.toString() + location.hash);
+})();
+</script>
+<meta http-equiv="refresh" content="0;url=../?abrir=1&amp;via=bianca&amp;sck=bianca-pagina">
+</head>
+<body style="font:16px/1.5 system-ui;margin:0;padding:40px;background:#F3F0E8;color:#292927">
+<p>Abrindo a página… <a href="../?abrir=1&amp;via=bianca&amp;sck=bianca-pagina">clique aqui se não abrir sozinho</a>.</p>
+</body>
+</html>
