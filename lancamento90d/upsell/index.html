@@ -693,7 +693,16 @@ footer{background:var(--ink);border-top:0;padding:30px 0;text-align:center;font-
    Diagnostico (o mesmo off=n740dj0b). A classe entra no <head>. */
 .modo-bianca .aviso,.modo-bianca .passos,.modo-bianca #compra,
 .modo-bianca .pix .q,.modo-bianca .vagas span{display:none}
-.modo-bianca .pix{margin-top:4px;padding-top:22px}
+.so-bianca{display:none}
+.modo-bianca .so-bianca{display:block;text-align:center;padding:26px 0 0}
+.sb-nome{margin:0 0 16px;font:700 clamp(1.3rem,3vw,1.6rem)/1.15 var(--fd);letter-spacing:-.02em;color:var(--ink)}
+.sb-lista{list-style:none;margin:0 auto 22px;padding:0;max-width:440px;text-align:left;display:grid;gap:10px}
+.sb-lista li{position:relative;padding-left:28px;line-height:1.4;color:var(--ink)}
+.sb-lista li:before{content:"✓";position:absolute;left:0;top:0;font-weight:700;color:var(--go)}
+.sb-preco{margin:0;font:700 clamp(2rem,6vw,2.6rem)/1 var(--fd);letter-spacing:-.03em;color:var(--ink)}
+.sb-preco small{font-size:.45em;font-weight:600;letter-spacing:0;vertical-align:middle}
+.sb-avista{margin:8px 0 0;color:var(--mut);font-size:.95rem}
+.modo-bianca .pix{margin-top:4px;padding-top:22px;padding-bottom:6px}
 .modo-bianca .pix .btn{background:var(--go);color:#fff;border-color:var(--ink);
   box-shadow:4px 4px 0 var(--ink);font-size:clamp(1rem,2.2vw,1.1rem);padding:18px 30px}
 .modo-bianca .pix .btn:hover,.modo-bianca .pix .btn:focus-visible{background:var(--go2);color:#fff}
@@ -813,6 +822,20 @@ document.addEventListener(ev,go,{once:true,passive:true});});})();
              ⚠️ A VSL ainda fala "vinte vagas" em voz alta. Nao contradiz (vinte e'
              pouco), mas a pagina e o video deixaram de dizer a mesma coisa. -->
         <p class="vagas"><b>Poucas vagas disponíveis por&nbsp;mês</b><span>Ao sair desta página, sua vaga passa para outro&nbsp;autor.</span></p>
+        <!-- MODO BIANCA (14/10): sem o widget, o card ficava vazio (cliente: "esse quadro
+             ficou SEM NADA"). Aqui entra o que o widget mostrava: produto, entregas e preco.
+             ⚠️ Preco conferido no checkout n740dj0b em 14/10: R$697 ou 12x de R$69,56.
+             Se a oferta mudar, mudar aqui tambem. -->
+        <div class="so-bianca">
+          <p class="sb-nome">Diagnóstico + Plano de&nbsp;Ação</p>
+          <ul class="sb-lista">
+            <li>Sessão individual de 1 hora com o time da Dany, gravada</li>
+            <li>Plano de ação por escrito em até 5 dias úteis</li>
+            <li>2 e-books para acelerar o seu lançamento</li>
+          </ul>
+          <p class="sb-preco"><small>12x de</small> R$&nbsp;69,56</p>
+          <p class="sb-avista">ou R$&nbsp;697 à vista</p>
+        </div>
         <!-- 23/09: sairam daqui o nome do produto e a lista das tres entregas.
              O cliente cortou: quem ja assistiu o video nao precisa da ficha
              tecnica de novo, e o card vira so o gesto de comprar. -->
