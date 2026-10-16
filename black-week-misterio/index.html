@@ -127,6 +127,16 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 /* pistas ainda trancadas: frases verdadeiras, só que borradas (não dá para selecionar) */
 .pistas__x em { min-width: 0; overflow: hidden; white-space: nowrap; font-style: normal; filter: blur(6px); opacity: .55; user-select: none; -webkit-user-select: none; pointer-events: none; }
 .pistas__x span { opacity: .45; }
+/* borrão em degraus: 1ª e 2ª abertas, a 3ª quase aberta (lê-se), daí em diante cada vez mais trancada */
+.pistas__q em { font-style: normal; filter: blur(.9px); opacity: .85; }
+.pistas__q span { opacity: .8; }
+.pistas__x:nth-child(4) em { filter: blur(2.4px); opacity: .72; }
+.pistas__x:nth-child(5) em { filter: blur(4.5px); opacity: .58; }
+.pistas__x:nth-child(6) em { filter: blur(7px); opacity: .44; }
+.pistas__x:nth-child(7) em { filter: blur(10px); opacity: .32; }
+.pistas__x:nth-child(4) span { opacity: .6; }
+.pistas__x:nth-child(6) span { opacity: .32; }
+.pistas__x:nth-child(7) span { opacity: .22; }
 /* reveladas: cadeado aberto; trancadas: fechado e apagado */
 .nots__punch { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); max-width: 460px; font-size: clamp(19px, 5.2vw, 24px); font-weight: 600; line-height: 1.3; text-wrap: balance; }
 .vault { display: flex; justify-content: center; }
@@ -882,10 +892,11 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           <ul class="pistas">
             <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 7.6-1.8"/></svg></span>Ele lembra do seu livro quando você esquece.</li>
             <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 7.6-1.8"/></svg></span>Ele enxerga chances que você não vê.</li>
-            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 7.6-1.8"/></svg></span>Ele sabe o que a Dany faria no seu&nbsp;lugar.</li>
+            <li class="pistas__q"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>Ele sabe o que a Dany faria no seu&nbsp;lugar.</em></li>
             <li class="pistas__x" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>Seu livro ganha uma página só dele.</em></li>
             <li class="pistas__x" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>Você organiza o ano inteiro do seu livro.</em></li>
             <li class="pistas__x" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>Os textos chegam prontos para postar.</em></li>
+            <li class="pistas__x" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>Você acha os fornecedores certos para o seu livro.</em></li>
           </ul>
           <p class="nots__punch">O resto, <span class="amber">só no dia 9.</span></p>
         </div>
