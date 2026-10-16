@@ -557,7 +557,12 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; align-content: start; }
 .stat { padding: 20px 18px; border: 1px solid var(--line); border-radius: 14px; }
 .stat .n { font-size: clamp(28px, 7.6vw, 40px); font-weight: 600; line-height: 1; color: var(--amber); font-variant-numeric: tabular-nums; }
-.stat .t { margin-top: 8px; font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--ink-2); }
+.depo__l { display: block; }
+/* celular estreito: "de forma automática." desce inteiro para a linha de baixo */
+@media (max-width: 420px) { .dream__auto .amber { display: block; } }
+/* celular: título dos alunos um pouco menor para "Método The Book Business." caber numa linha */
+@media (max-width: 899px) { .depo__h { font-size: clamp(22px, 6.5vw, 34px); } }
+.stat .t { text-wrap: balance; margin-top: 8px; font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--ink-2); }
 .media-k { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 48px; }
 .media-k span { font-size: 12px; color: var(--ink-3); }
 /* esteira que corre sozinha; para no mouse ou no toque */
@@ -871,7 +876,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       <div class="secret__grid">
         <div class="secret__txt rv">
           <p class="eyebrow">Ainda em segredo</p>
-          <h2 class="h2">O LOMBADA ainda não pode ser mostrado. <span class="gold">Mas já está pronto.</span></h2>
+          <h2 class="h2">O LOMBADA ainda não pode ser mostrado. <span class="gold depo__l">Mas já está pronto.</span></h2>
           <ul class="pistas">
             <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>Ele pensa no seu livro por você.</li>
             <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>Seu livro vai chegar a lugares que você nem sabia que existiam.</li>
@@ -902,7 +907,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     <div class="wrap">
       <div class="center rv">
         <p class="eyebrow">Alunos do Método The&nbsp;Book&nbsp;Business</p>
-        <h2 class="h2 depo__h">O LOMBADA nasceu do Método The&nbsp;Book&nbsp;Business. <span class="gold">Veja até onde ele já levou autores.</span></h2>
+        <h2 class="h2 depo__h"><span class="depo__l">O LOMBADA nasceu do</span> <span class="depo__l">Método The&nbsp;Book&nbsp;Business.</span> <span class="depo__l gold">Veja onde ele já levou autores.</span></h2>
       </div>
     </div>
     <div class="casos">
@@ -935,9 +940,9 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           </div>
           </div>
           <div class="stats rv">
-          <div class="stat"><p class="n" data-n="15" data-p="+">+15</p><p class="t">anos nos bastidores</p></div>
+          <div class="stat"><p class="n" data-n="15" data-p="+">+15</p><p class="t">anos nos&nbsp;bastidores</p></div>
           <div class="stat"><p class="n" data-n="800" data-p="+">+800</p><p class="t">autores lançados</p></div>
-          <div class="stat"><p class="n" data-n="10" data-p="+" data-s="M">+10M</p><p class="t">livros vendidos em lançamentos</p></div>
+          <div class="stat"><p class="n" data-n="10" data-p="+" data-s="M">+10M</p><p class="t">livros vendidos em&nbsp;lançamentos</p></div>
           <div class="stat"><p class="n" data-n="4400" data-p="+">+4.400</p><p class="t">alunos no Método The&nbsp;Book&nbsp;Business</p></div>
           </div>
         </div>
