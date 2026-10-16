@@ -1087,7 +1087,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
      Depois da hora, a data vira "Aberta agora". Se VENDA_URL estiver preenchido, os formulários viram o botão de entrar. */
   /* ================= ESTANTE AO FUNDO: 0 no topo; sobe devagar depois da primeira dobra até um teto baixo ================= */
   (function () {
-    var TETO = .13, raf = 0, root = document.documentElement;
+    // no computador a estante aparece maior e em mais área: teto mais baixo (fica no nível de onde o nome LOMBADA aparece)
+    var TETO = innerWidth >= 900 ? .075 : .115, raf = 0, root = document.documentElement;
     function upd() { raf = 0; var h = innerHeight, t = (scrollY - h * .55) / (h * 2.2);
       root.style.setProperty('--estante', (Math.max(0, Math.min(1, t)) * TETO).toFixed(3)); }
     addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true });
