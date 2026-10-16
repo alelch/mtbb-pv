@@ -1864,8 +1864,14 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     var u; try { u = new URL(base); } catch(e) { return base; }
     var here = new URLSearchParams(location.search), stored = {};
     try { stored = JSON.parse(localStorage.getItem('mtbb_utms') || '{}') || {}; } catch(e) {}
+    /* 16/10: chegou com origem na URL (anúncio, link com src)? Então a origem é SÓ a da URL.
+       Antes, o que faltava vinha do guardado no navegador: uma compradora do VD_24 levou um
+       src=link-bio de uma visita de agosto e a venda saiu "link-bio" na Hotmart.
+       O guardado só preenche quando a URL não traz origem nenhuma (recarga, link limpo). */
+    var temOrigem = ['utm_source','utm_campaign','utm_content','utm_term','src','fbclid','gclid','ttclid']
+                      .some(function(k){ return here.get(k); });
     PASS.forEach(function(k){
-      var v = here.get(k) || stored[k];
+      var v = here.get(k) || (temOrigem ? null : stored[k]);
       if (v && !u.searchParams.get(k)) u.searchParams.set(k, v);
     });
     /* a venda na Hotmart só guarda src e sck, as utm_* ela descarta. Sem isto,
