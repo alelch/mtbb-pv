@@ -801,7 +801,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
             </form>
             <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
             <p class="lgpd">Ao se cadastrar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
-            <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Você tem acesso primeiro, dia 9 de novembro, às 20h.</p><a class="done__next" href="https://www.instagram.com/dany.sakugawa" target="_blank" rel="noopener">Enquanto isso, siga a Dany no Instagram</a></div>
+            <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Você tem acesso primeiro, dia 9 de novembro, às 20h.</p><a class="done__next" href="https://thebookbusiness.com.br/black-grupo">Entrar no grupo do WhatsApp</a></div>
           </div>
           <!-- celular: a frase da Dany vem logo depois do formulário (na primeira tela só cabe a foto) -->
           <p class="pitch pitch--m" aria-hidden="true"><i>Seu livro agora vai ter <b class="amber">motor</b>.<br><b>E ele nunca vai parar.</b></i></p>
@@ -841,12 +841,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <div class="secret__txt rv">
           <p class="eyebrow">Ainda em segredo</p>
           <h2 class="h2">O LOMBADA ainda não pode ser mostrado. <span class="gold">Mas já está pronto.</span></h2>
-          <p class="lede">O mercado literário nunca viu nada parecido.</p>
+          <p class="lede">Três pistas:</p>
           <ul class="nots">
-            <li>Não é um curso.</li>
-            <li>Não é mais uma planilha.</li>
+            <li>Ele pensa no seu livro por você.</li>
+            <li>Seu livro vai chegar a lugares que você nem sabia que existiam.</li>
+            <li>E vai vender cada vez mais.</li>
           </ul>
-          <p class="nots__punch">É o motor que faltava para o seu livro <span class="amber">nunca parar de crescer.</span></p>
+          <p class="nots__punch">O resto, <span class="amber">só no dia 9.</span></p>
         </div>
         <div class="vault rv">
           <div class="vault__phone">
@@ -951,7 +952,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
               </form>
               <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
               <p class="lgpd">Ao se cadastrar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
-              <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Você tem acesso primeiro, dia 9 de novembro, às 20h.</p><a class="done__next" href="https://www.instagram.com/dany.sakugawa" target="_blank" rel="noopener">Enquanto isso, siga a Dany no Instagram</a></div>
+              <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Você tem acesso primeiro, dia 9 de novembro, às 20h.</p><a class="done__next" href="https://thebookbusiness.com.br/black-grupo">Entrar no grupo do WhatsApp</a></div>
             </div>
           </div>
         </div>
@@ -1109,6 +1110,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   var ENDPOINT = 'https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/pv-lead';
   var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
   var boxes = $$('.lead-form');
+  var GRUPO = 'https://thebookbusiness.com.br/black-grupo';
   function allDone() { boxes.forEach(function (b) { b.classList.add('is-done'); }); dockUpdate(); }
 
   boxes.forEach(function (box) {
@@ -1156,6 +1158,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         try { if (window.fbq) { fbq('track', 'Lead', { content_name: 'black-week-motorizada' }); fbq('trackCustom', 'CadastroBlackWeek'); } } catch (e) {}
         try { if (window.gtag) gtag('event', 'generate_lead', { campaign: 'black-week-motorizada' }); } catch (e) {}
         allDone();
+        // depois do cadastro a pessoa vai direto ao grupo do WhatsApp (o botão do obrigado fica de reserva)
+        setTimeout(function () { location.href = GRUPO; }, 1200);
       }).catch(function () {
         btn.disabled = false; btn.innerHTML = btnHTML;
         err.style.display = 'block';
