@@ -40,8 +40,22 @@
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document,'script');
 fbq('init','1665265050801984'); fbq('init','617884976680212');
-(function(){try{['1665265050801984','617884976680212'].forEach(function(id){
-new Image().src='https://www.facebook.com/tr?id='+id+'&ev=PageView&noscript=1';});}catch(e){}})();
+/* 16/10: o beacon ia sem fbc/fbp/endereço (nota do PageView 6,7; o Meta não sabia de que anúncio veio a visita).
+   Agora cria os cookies _fbp/_fbc no formato do pixel (o fbevents reaproveita quando carregar) e manda tudo no beacon,
+   no mesmo instante de antes. O fbevents não manda outro PageView (não há track na fila), então não duplica. */
+(function(){try{
+  var H=location.hostname.split('.'), dom=H.length>2?'.'+H.slice(/\.com\.br$/.test(location.hostname)?-3:-2).join('.'):'';
+  var ck=function(n){var m=document.cookie.match(new RegExp('(?:^|;\\s*)'+n+'=([^;]+)'));return m?m[1]:null;};
+  var put=function(n,v){document.cookie=n+'='+v+';path=/;max-age=7776000;SameSite=Lax'+(dom?';domain='+dom:'');};
+  var now=Date.now(), fbp=ck('_fbp'), fbc=ck('_fbc'), fbclid=new URLSearchParams(location.search).get('fbclid');
+  if(!fbp){fbp='fb.1.'+now+'.'+Math.floor(Math.random()*2147483647);put('_fbp',fbp);}
+  if(fbclid&&(!fbc||fbc.split('.').slice(3).join('.')!==fbclid)){fbc='fb.1.'+now+'.'+fbclid;put('_fbc',fbc);}
+  var eid='pv.'+now+'.'+Math.random().toString(36).slice(2,10);
+  ['1665265050801984','617884976680212'].forEach(function(id){
+    new Image().src='https://www.facebook.com/tr?id='+id+'&ev=PageView&eid='+eid+'&dl='+encodeURIComponent(location.href)
+      +'&rl='+encodeURIComponent(document.referrer||'')+'&if=false&ts='+now+'&fbp='+encodeURIComponent(fbp)
+      +(fbc?'&fbc='+encodeURIComponent(fbc):'');});
+}catch(e){}})();
 (function(){var l=false;function go(){if(l)return;l=true;var t=document.createElement('script');
 t.async=true;t.src='https://connect.facebook.net/en_US/fbevents.js';
 var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(t,s);}
