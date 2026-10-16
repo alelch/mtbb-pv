@@ -119,13 +119,15 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .nots li { display: flex; align-items: center; gap: 12px; font-size: clamp(17px, 4.6vw, 21px); font-weight: 500; color: var(--ink-2); }
 .nots li::before { content: ""; flex: none; width: 18px; height: 1.5px; background: var(--ink-3); }
 /* três pistas do segredo: cada uma com um cadeado (alinhado no topo, vale para frase de 2 linhas) */
-.pistas { margin-top: 26px; list-style: none; display: grid; gap: 18px; max-width: 520px; }
+.pistas { width: 100%; margin-top: 26px; list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; max-width: 520px; }
+.pistas li { min-width: 0; text-wrap: balance; }
 .pistas li { display: flex; gap: 14px; align-items: flex-start; text-align: left; font-size: clamp(17px, 4.6vw, 21px); font-weight: 500; line-height: 1.35; }
 .pistas span { flex: none; display: grid; place-items: center; width: 34px; height: 34px; margin-top: -3px; border-radius: 50%; border: 1.5px solid rgba(250, 171, 0, .6); background: rgba(250, 171, 0, .08); color: var(--amber); }
 .pistas svg { width: 16px; height: 16px; }
 /* pistas ainda trancadas: frases verdadeiras, só que borradas (não dá para selecionar) */
-.pistas__x em { font-style: normal; filter: blur(6px); opacity: .55; user-select: none; -webkit-user-select: none; pointer-events: none; }
-.pistas__x span { opacity: .6; }
+.pistas__x em { min-width: 0; overflow: hidden; white-space: nowrap; font-style: normal; filter: blur(6px); opacity: .55; user-select: none; -webkit-user-select: none; pointer-events: none; }
+.pistas__x span { opacity: .45; }
+/* reveladas: cadeado aberto; trancadas: fechado e apagado */
 .nots__punch { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); max-width: 460px; font-size: clamp(19px, 5.2vw, 24px); font-weight: 600; line-height: 1.3; text-wrap: balance; }
 .vault { display: flex; justify-content: center; }
 .vault__phone { position: relative; width: min(300px, 78vw); aspect-ratio: 9 / 18; border: 10px solid #1b1a1f; border-radius: 42px; overflow: hidden;
@@ -878,12 +880,12 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           <p class="eyebrow">Ainda em segredo</p>
           <h2 class="h2">O LOMBADA ainda não pode ser mostrado. <span class="gold depo__l">Mas já está pronto.</span></h2>
           <ul class="pistas">
-            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>Ele pensa no seu livro por você.</li>
-            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>Seu livro vai chegar a lugares que você nem sabia que existiam.</li>
-            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>Vai vender cada vez mais.</li>
-            <li class="pistas__x" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>Todo dia você sabe exatamente o que fazer pelo seu livro.</em></li>
+            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 7.6-1.8"/></svg></span>Ele pensa no seu livro por você.</li>
+            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 7.6-1.8"/></svg></span>Ele separa os prêmios e editais certos para o seu livro.</li>
+            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 7.6-1.8"/></svg></span>Ele nunca deixa faltar o&nbsp;que&nbsp;postar.</li>
             <li class="pistas__x" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>Seu livro ganha uma página só dele.</em></li>
-            <li class="pistas__x" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>Os textos já chegam prontos para você postar.</em></li>
+            <li class="pistas__x" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>Você organiza o ano inteiro do seu livro.</em></li>
+            <li class="pistas__x" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span><em>É como ter a Dany ao seu lado, todo dia.</em></li>
           </ul>
           <p class="nots__punch">O resto, <span class="amber">só no dia 9.</span></p>
         </div>
