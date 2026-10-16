@@ -182,6 +182,21 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .word__by b { display: block; font-weight: 600; color: var(--ink-2); }
 .word__av { width: 44px; height: 44px; margin-bottom: 12px; border-radius: 50%; object-fit: cover; background: #2a292e; color: #5a5860; }
 .word__av svg { width: 100%; height: 100%; }
+/* casos do Método: 3 esteiras com foto, cada uma correndo para um lado (param no toque/mouse) */
+.casos { display: grid; gap: 12px; margin-top: 40px; }
+.casos-belt { overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.casos-track { display: flex; gap: 12px; width: max-content; animation: belt 70s linear infinite; }
+.casos-belt.rev .casos-track { animation-direction: reverse; animation-duration: 80s; }
+.casos-belt:hover .casos-track, .casos-belt.hold .casos-track { animation-play-state: paused; }
+.caso { flex: none; display: flex; align-items: center; gap: 14px; width: 300px; padding: 14px 16px; border: 1px solid #222126; border-radius: 14px; background: #121114; }
+.caso img { flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(250, 171, 0, .5); }
+.caso figcaption { min-width: 0; line-height: 1.25; }
+.caso strong { display: block; font-size: 15px; font-weight: 700; color: var(--amber); }
+.caso b { display: block; margin-top: 5px; font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.caso span { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 11.5px; color: var(--ink-3); }
+.rm .casos-belt, .no-js .casos-belt { overflow-x: auto; }
+.rm .casos-track { animation: none; }
 .word.soon strong { filter: blur(7px); user-select: none; }
 .word__soon { display: inline-block; margin-top: 4px; padding: 3px 9px; border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); }
 .word .ex { position: absolute; top: 8px; right: 8px; padding: 2px 6px; border-radius: 99px; background: #c0392b; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
@@ -870,13 +885,18 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 
   <!-- 3b. as 10 palavras do que muda (logo abaixo do segredo) -->
   <section class="blk depo" id="depoimentos">
+    <!-- casos reais e públicos de alunos do Método The Book Business (resultados.thebookbusiness.com.br) -->
     <div class="wrap">
       <div class="center rv">
-        <p class="eyebrow">Liberamos antes para 20 autores</p>
-        <h2 class="h2 depo__h"><span class="depo__pre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Eles não podem contar o que é.</span> Mas contaram <span class="gold">o que mudou.</span></h2>
+        <p class="eyebrow">Alunos do Método The&nbsp;Book&nbsp;Business</p>
+        <h2 class="h2 depo__h">O LOMBADA nasceu do Método The&nbsp;Book&nbsp;Business. <span class="gold">Veja até onde ele já levou autores.</span></h2>
       </div>
     </div>
-    <div class="wrap"><div class="words" id="depo-track"></div></div>
+    <div class="casos">
+      <div class="casos-belt"><div class="casos-track"><figure class="caso"><img src="assets/casos/c0.webp" alt="Vinicius Profinho" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>8 mil cópias vendidas</strong><b>Vinicius Profinho</b><span>O Guia da Redação Nota 1000</span></figcaption></figure><figure class="caso"><img src="assets/casos/c6.webp" alt="Tom Orgado" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Destaque de vendas na Bienal do Rio</strong><b>Tom Orgado</b><span>Baque</span></figcaption></figure><figure class="caso"><img src="assets/casos/c7.webp" alt="Ingrid Azevedo" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Quase 600 na pré-venda</strong><b>Ingrid Azevedo</b><span>O caminho do despertar</span></figcaption></figure><figure class="caso"><img src="assets/casos/c4.webp" alt="Edinete dos Santos" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>2º lugar em prêmio nacional</strong><b>Edinete dos Santos</b><span>A nobreza e os desafios de ser mulher</span></figcaption></figure><figure class="caso"><img src="assets/casos/c33.webp" alt="Candice Pascoal" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Mais de 50 mil exemplares</strong><b>Candice Pascoal</b><span>Seu Sonho Tem Futuro</span></figcaption></figure><figure class="caso"><img src="assets/casos/c15.webp" alt="Marcela Gomes de Mendonça" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Convites para podcast e feiras</strong><b>Marcela Gomes de Mendonça</b><span>O senhor das montanhas</span></figcaption></figure><figure class="caso"><img src="assets/casos/c8.webp" alt="Nei Santa Bárbara" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Traduzido para inglês e espanhol</strong><b>Nei Santa Bárbara</b><span>Improve</span></figcaption></figure><figure class="caso"><img src="assets/casos/c26.webp" alt="Cibele Lauretino" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Premiada em Portugal</strong><b>Cibele Lauretino</b><span>Cactos</span></figcaption></figure></div></div>
+      <div class="casos-belt rev"><div class="casos-track"><figure class="caso"><img src="assets/casos/c3.webp" alt="Lelo Apovian" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Best-seller Veja, Amazon e PublishNews</strong><b>Lelo Apovian</b><span>Muito Acima da Média</span></figcaption></figure><figure class="caso"><img src="assets/casos/c16.webp" alt="Maíra Metelo" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>6º mais vendido da Amazon</strong><b>Maíra Metelo</b><span>Se Ninguém Soubesse Quem Sou</span></figcaption></figure><figure class="caso"><img src="assets/casos/c18.webp" alt="Maria Gravina Ogata" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>8 prêmios literários</strong><b>Maria Gravina Ogata</b><span>As bambinas e os samurais brasileiros</span></figcaption></figure><figure class="caso"><img src="assets/casos/c9.webp" alt="Emília Nunez" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>1º lugar nos lançamentos da Amazon</strong><b>Emília Nunez</b><span>Capaz</span></figcaption></figure><figure class="caso"><img src="assets/casos/c30.webp" alt="Larissa Cruvinel" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Leitores em 7 países</strong><b>Larissa Cruvinel</b><span>A Serenidade da Renúncia</span></figcaption></figure><figure class="caso"><img src="assets/casos/c22.webp" alt="Bernardo Stamato" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Meta de vendas batida em evento</strong><b>Bernardo Stamato</b><span>A Era do Abismo</span></figcaption></figure><figure class="caso"><img src="assets/casos/c10.webp" alt="Célia Alves Cardoso" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>4 livros por editora tradicional</strong><b>Célia Alves Cardoso</b><span>Os recomeços de Deus</span></figcaption></figure><figure class="caso"><img src="assets/casos/c28.webp" alt="Susana Arbex" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>1º lugar em negócios na PublishNews</strong><b>Susana Arbex</b><span>Sua Marca Pessoal</span></figcaption></figure></div></div>
+      <div class="casos-belt"><div class="casos-track"><figure class="caso"><img src="assets/casos/c32.webp" alt="Arnoni Caldart" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>1º lugar na Amazon</strong><b>Arnoni Caldart</b><span>Ative Sua Mente</span></figcaption></figure><figure class="caso"><img src="assets/casos/c35.webp" alt="Léo Dicker" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Adotado por escolas</strong><b>Léo Dicker</b><span>Clara e Guto, os segredos de Londres</span></figcaption></figure><figure class="caso"><img src="assets/casos/c21.webp" alt="Patrícia Guimarães" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Lançado no Brasil e nos EUA</strong><b>Patrícia Guimarães</b><span>Putz, sério que fiz isso?</span></figcaption></figure><figure class="caso"><img src="assets/casos/c11.webp" alt="Fernanda Pompeu" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Virou audiobook</strong><b>Fernanda Pompeu</b><span>Escriba Errante</span></figcaption></figure><figure class="caso"><img src="assets/casos/c31.webp" alt="Bruno de Deus Vieira" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Selecionado para feiras na Europa</strong><b>Bruno de Deus Vieira</b><span>Trem de Louco</span></figcaption></figure><figure class="caso"><img src="assets/casos/c29.webp" alt="Cícero Santos" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Presente em 3 Bienais</strong><b>Cícero Santos</b><span>Cartas para o Futuro</span></figcaption></figure><figure class="caso"><img src="assets/casos/c34.webp" alt="Simone Simon" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Nas livrarias de aeroportos</strong><b>Simone Simon</b><span>Faça Ser Fácil</span></figcaption></figure><figure class="caso"><img src="assets/casos/c12.webp" alt="Luciana Barbosa" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Escrito e lançado em 1 ano</strong><b>Luciana Barbosa</b><span>O que você quer de verdade?</span></figcaption></figure></div></div>
+    </div>
   </section>
 
   <!-- 4. para todo autor -->
@@ -1016,39 +1036,24 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
      Preencher com o que os autores mandaram (palavras e frase exatas, com autorização). Lista vazia = seção escondida.
      { palavra: 'Uma palavra.', texto: 'Uma linha explicando a palavra.', nome: 'Nome Sobrenome', livro: 'Título do livro', foto: 'assets/depo/arquivo.webp' (opcional) } */
   // o que as 20 pessoas que receberam antes falaram (o cliente confirmou em 06/10 que palavras e frases vêm das respostas delas); sem nome por enquanto
-  var DEPOS = [
-    { palavra: 'Clareza.', texto: 'Agora eu sei o que fazer pelo meu livro.' },
-    { palavra: 'Constância.', texto: 'Toda semana eu faço alguma coisa por ele.' },
-    { palavra: 'Permanência.', texto: 'Meu livro não ficou esquecido depois do lançamento.' },
-    { palavra: 'Confiança.', texto: 'Não travo mais na hora de postar.' },
-    { palavra: 'Leveza.', texto: 'Divulgar deixou de ser um peso na minha cabeça.' },
-    { palavra: 'Autonomia.', texto: 'Eu escolho o que fazer e quando fazer.' },
-    { palavra: 'Calma.', texto: 'É só abrir o LOMBADA, e o meu plano já está lá.' },
-    { palavra: 'Vendas.', texto: 'Meu livro voltou a vender porque eu voltei a falar dele.' }
-  ];
+  /* ================= CASOS DO MÉTODO: esteira contínua ================= */
   (function () {
-    var lista = DEPOS, exemplo = false;
-    if (!lista.length && new URLSearchParams(location.search).get('depo') === 'exemplo') {
-      exemplo = true;
-      lista = ['Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.', 'Palavra.'].map(function (w, i) {
-        return { palavra: w, texto: 'Uma linha do autor explicando a palavra.', nome: 'Nome do autor ' + (i + 1), livro: 'Título do livro' };
-      });
+    var belts = $$('.casos-belt');
+    // celular: 2 faixas de 12 (a 3ª faixa é distribuída entre as duas primeiras)
+    if (innerWidth < 900 && belts.length === 3) {
+      var extra = $$('.caso', belts[2]);
+      extra.forEach(function (c, i) { $('.casos-track', belts[i % 2]).appendChild(c); });
+      belts[2].remove(); belts = belts.slice(0, 2);
     }
-    var sec = $('#depoimentos');
-    var AV = '<span class="word__av" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="17" r="8" fill="currentColor"/><path d="M7 40c2-8 8-12 15-12s13 4 15 12" fill="currentColor"/></svg></span>';
-    if (!lista.length) {
-      // ainda sem depoimento real: cartões honestos de "em breve" (nada inventado)
-      $('#depo-track').innerHTML = Array.apply(null, Array(10)).map(function () {
-        return '<figure class="word soon">' + AV + '<strong aria-hidden="true">Segredo.</strong><p>A palavra deste autor chega aqui antes do dia 9.</p><span class="word__soon">Em breve</span></figure>';
-      }).join('');
-      return;
-    }
-    $('#depo-track').innerHTML = lista.map(function (d) {
-      return '<figure class="word">' + (exemplo ? '<span class="ex">EXEMPLO</span>' : '') + (d.foto ? '<img class="word__av" src="' + esc(d.foto) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : (d.nome ? AV : '')) +
-        '<strong>' + esc(d.palavra) + '</strong>' + (d.texto ? '<p>“' + esc(d.texto) + '”</p>' : '') +
-        (d.nome ? '<p class="word__by"><b>' + esc(d.nome) + '</b>' + esc(d.livro || '') + '</p>' : '') + '</figure>';
-    }).join('');
-    sec.hidden = false;
+    if (REDUCED) return;
+    belts.forEach(function (belt) {
+      var track = $('.casos-track', belt);
+      // mesma velocidade em qualquer tela e tamanho de faixa (~28 px/s, devagar para dar para ler)
+      track.style.animationDuration = Math.round(track.scrollWidth / 28) + 's';
+      track.insertAdjacentHTML('beforeend', track.innerHTML.replace(/<figure class="caso">/g, '<figure class="caso" aria-hidden="true">'));
+      belt.addEventListener('touchstart', function () { belt.classList.add('hold'); }, { passive: true });
+      belt.addEventListener('touchend', function () { setTimeout(function () { belt.classList.remove('hold'); }, 1200); }, { passive: true });
+    });
   })();
 
   /* ================= 7. DANY NA MÍDIA: esteira contínua ================= */
