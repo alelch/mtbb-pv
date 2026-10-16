@@ -58,6 +58,7 @@ p, li, small, figcaption { text-wrap: pretty; }
   --err: #ff6b5e;
   --red: #d6483c;
   --teal: 26, 88, 90;
+  --sky: #5ad2cf; /* azul da data, o mesmo tom da página da Black 2025 */
   --gold: linear-gradient(100deg, #9c5414 0%, #e08a12 18%, #faab00 32%, #ffe6a8 46%, #faab00 58%, #c9731a 78%, #8a4a12 100%);
   /* cores das fases, as mesmas do LOMBADA (clareadas para fundo preto) */
   --f-construcao: #3fae84;
@@ -297,6 +298,11 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 /* data de abertura: só a data, sempre em uma linha */
 .when-pill { display: inline-block; margin-top: 18px; padding: 8px 18px; border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; background: rgba(250, 171, 0, .08);
   font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; color: var(--ink); }
+/* aula de abertura, no desenho da MasterClass da Black 2025: "revelada" em laranja fino, título inteiro em seminegrito branco, data em azul */
+.aula { margin-top: 16px; text-transform: uppercase; }
+.aula__t { font-size: clamp(14px, 4.1vw, 24px); font-weight: 600; line-height: 1.25; letter-spacing: .04em; margin-right: -.04em; color: var(--ink); white-space: nowrap; }
+.aula__k { margin-right: -.16em; font-size: clamp(12px, 3.4vw, 18px); font-weight: 400; letter-spacing: .16em; color: var(--amber); }
+.aula__d { margin-top: 4px; margin-right: -.12em; font-size: clamp(11px, 3.2vw, 17px); font-weight: 400; letter-spacing: .12em; color: var(--sky); white-space: nowrap; }
 .fecho__offer .fecho__s { margin-top: 10px; font-size: clamp(14px, 3.9vw, 16px); }
 .fecho__offer .fecho__date { margin: 18px 0 0; }
 .fecho__offer .fecho__date + .fecho__s { margin-top: 18px; }
@@ -586,6 +592,9 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .h1__a { font-size: 21px; letter-spacing: .2em; }
   .h1-sub { margin-top: 12px; font-size: 18px; letter-spacing: .18em; }
   .hero .when-pill { margin-top: 18px; font-size: 14px; }
+  .aula { margin-top: 24px; }
+  .aula__t { font-size: 26px; }
+  .aula__d { font-size: 17px; }
   .hero { min-height: 1000px; }
   .pitch { margin-top: 40px; max-width: 600px; font-size: 21px; line-height: 1.5; }
   .hero .lead-form { max-width: 594px; margin-top: 24px; }
@@ -639,6 +648,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 .speak { display: contents; }
 .hero .lead-form { order: 1; width: 100%; }
 .dany-glow, .dany-m, .pitch { order: 2; }
+.pitch--m { display: none; }
 /* celular: todas as seções centralizadas, como o resto da página */
 @media (max-width: 899px) {
   .secret__txt, .who__body { text-align: center; }
@@ -667,11 +677,13 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .speak { display: block; position: relative; margin-top: 6px; }
   .speak .dany-glow { display: block; }
   .speak .dany-glow::before { top: 0; width: 240px; height: 190px; }
-  .speak .dany-m { width: auto; height: 158px; margin: 0 auto; -webkit-mask-image: linear-gradient(to bottom, #000 46%, transparent 82%); mask-image: linear-gradient(to bottom, #000 46%, transparent 82%); }
-  .speak .pitch { margin: -32px auto 0; max-width: 360px; font-size: 16px; line-height: 1.25; text-shadow: 0 2px 14px rgba(0, 0, 0, .95); }
+  .speak .dany-m { width: auto; height: clamp(120px, 20vh, 142px); margin: 0 auto; -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 98%); mask-image: linear-gradient(to bottom, #000 60%, transparent 98%); }
+  .speak .pitch { display: none; margin: -32px auto 0; max-width: 360px; font-size: 16px; line-height: 1.25; text-shadow: 0 2px 14px rgba(0, 0, 0, .95); }
   .speak .pitch i { font-size: clamp(17px, 5vw, 20px); }
   .speak .pitch__by { display: none; }
-  .hero .lead-form { margin-top: 6px; }
+  .hero .pitch--m { display: block; margin: 28px auto 0; max-width: 360px; line-height: 1.3; }
+  .hero .pitch--m i { font-size: clamp(17px, 5vw, 20px); }
+  .hero .lead-form { margin-top: 0; }
   .hero .lead-form .hint { margin-bottom: 6px; font-size: 13px; }
   .hero .fld input { height: 46px; }
   .hero .lead-form .btn { min-height: 52px; }
@@ -739,16 +751,15 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           </div>
 
           <h1 class="h1"><span class="h1__a">A ferramenta que todo autor</span> <span class="h1__b">sonhou</span></h1>
-          <p class="h1-sub">Mas nunca pensou que poderia existir</p>
           <p class="h1-plus">+ O Método The&nbsp;Book&nbsp;Business <b>Vitalício</b></p>
-          <p class="when-pill">Revelada 9 de novembro, às 20h</p>
+          <div class="aula"><p class="aula__k">Revelada ao vivo na aula</p><p class="aula__t">Seu livro vendendo cada vez mais</p><p class="aula__d">09 de novembro, segunda-feira | 20h</p></div>
           <div class="speak">
           <span class="dany-glow" aria-hidden="true"></span><img class="dany-m" src="../black-week/assets/dany-bw-m.webp" alt="Dany Sakugawa" width="408" height="378" decoding="async">
           <p class="pitch"><i>Seu livro agora vai ter <b class="amber">motor</b>.<br><b>E ele nunca vai parar.</b></i><span class="pitch__by">Dany Sakugawa</span></p>
           </div>
 
           <div class="lead-form" data-pos="topo" id="form-topo">
-            <p class="hint">Cadastre-se gratuitamente e tenha acesso primeiro</p>
+            <p class="hint">Cadastre-se e participe da aula</p>
             <form novalidate>
               <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
               <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
@@ -759,6 +770,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
             <p class="lgpd">Ao se cadastrar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
             <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Você tem acesso primeiro, dia 9 de novembro, às 20h.</p><a class="done__next" href="https://www.instagram.com/dany.sakugawa" target="_blank" rel="noopener">Enquanto isso, siga a Dany no Instagram</a></div>
           </div>
+          <!-- celular: a frase da Dany vem logo depois do formulário (na primeira tela só cabe a foto) -->
+          <p class="pitch pitch--m" aria-hidden="true"><i>Seu livro agora vai ter <b class="amber">motor</b>.<br><b>E ele nunca vai parar.</b></i></p>
         </div>
         <p class="dany-q"><i>“Eu queria que o autor acordasse todo dia e já soubesse o que fazer pelo livro. Agora ele sabe, sempre.”</i><span>Dany Sakugawa</span></p>
         <img class="dany-d" src="../black-week/assets/dany-bw.webp" alt="Dany Sakugawa" width="840" height="1135" loading="lazy" decoding="async">
