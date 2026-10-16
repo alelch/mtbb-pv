@@ -792,7 +792,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
           </div>
 
           <div class="lead-form" data-pos="topo" id="form-topo">
-            <p class="hint">Cadastre-se e participe da aula</p>
+            <p class="hint">Cadastre-se gratuitamente e participe</p>
             <form novalidate>
               <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
               <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
@@ -941,7 +941,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
             <div class="aula fecho__aula"><p class="aula__k">Revelada ao vivo na aula</p><p class="aula__t">Seu livro vendendo cada vez mais</p><p class="aula__d">09 de novembro, segunda-feira | 20h</p></div>
           </div>
           <div class="fecho__form">
-            <h3 class="fecho__h">Cadastre-se e saia na frente de todo mundo.</h3>
+            <h3 class="fecho__h">Cadastre-se gratuitamente e participe</h3>
             <div class="lead-form" data-pos="fim">
               <form novalidate>
                 <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
@@ -1069,7 +1069,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
      Depois da hora, a data vira "Aberta agora". Se VENDA_URL estiver preenchido, os formulários viram o botão de entrar. */
   /* ================= ESTANTE AO FUNDO: 0 no topo; sobe devagar depois da primeira dobra até um teto baixo ================= */
   (function () {
-    var TETO = .11, raf = 0, root = document.documentElement;
+    var TETO = .13, raf = 0, root = document.documentElement;
     function upd() { raf = 0; var h = innerHeight, t = (scrollY - h * .55) / (h * 2.2);
       root.style.setProperty('--estante', (Math.max(0, Math.min(1, t)) * TETO).toFixed(3)); }
     addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true });
