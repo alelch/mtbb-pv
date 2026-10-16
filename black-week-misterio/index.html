@@ -561,6 +561,35 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .fecho__form .lead-form { margin-top: 22px; }
 .fecho__form .lead-form form { grid-template-columns: minmax(0, 1fr); }
 .fecho__form .fld.half { grid-column: 1 / -1; }
+/* o cartão final repete a gramática da primeira dobra: linha fina e espaçada, palavra grande em dourado,
+   "+ LOMBADA" no lugar do "+ Método", a aula nas mesmas 3 linhas e o convite curto acima do mesmo formulário */
+.fecho__offer .eyebrow { display: block; font-size: clamp(10px, 2.9vw, 13px); font-weight: 400; letter-spacing: .2em; color: var(--ink-2); }
+.fecho__offer .eyebrow::before { display: none; }
+.fecho__t { margin-top: 14px; font-size: inherit; font-weight: 400; line-height: 1; letter-spacing: 0; }
+.fecho__t-a { display: block; font-size: clamp(14px, 4.1vw, 20px); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.fecho__t-b { display: block; margin-top: 4px; font-size: clamp(54px, 16vw, 92px); font-weight: 700; line-height: .95; letter-spacing: -.02em; filter: drop-shadow(0 8px 34px rgba(250, 171, 0, .22)); }
+.fecho__t-c { display: block; margin-top: 12px; font-size: clamp(17px, 4.8vw, 22px); font-weight: 500; color: var(--ink); }
+.fecho__t-c .lmb { font-size: 1.15em; vertical-align: -.08em; }
+.fecho .fecho__aula .aula__k { font-size: 15px; }
+.fecho .fecho__aula .aula__t { font-size: 21px; }
+.fecho .fecho__aula .aula__d { font-size: 14px; }
+.fecho .fecho__aula { margin: 26px auto 0; padding-top: 22px; border-top: 1px solid rgba(250, 171, 0, .22); max-width: 460px; }
+.fecho__form { padding-top: 24px; }
+.fecho__h { font-size: 15px; font-weight: 400; color: var(--ink-2); }
+.fecho__form .lead-form { margin-top: 12px; }
+.fecho__form .lead-form form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.fecho__form .fld.half { grid-column: auto; }
+@media (max-width: 899px) {
+  .fecho__offer { padding-left: 18px; padding-right: 18px; }
+  .fecho__form { padding-left: 18px; padding-right: 18px; }
+  .fecho .fecho__aula .aula__t { font-size: clamp(13px, 3.75vw, 16px); }
+  .fecho .fecho__aula .aula__d { font-size: clamp(10px, 2.9vw, 12px); }
+  .fecho__h { font-size: 13px; }
+  .fecho__form { padding-left: 14px; padding-right: 14px; }
+  .fecho .fld input { padding: 0 12px; }
+}
+/* celular: no cartão (mais estreito que a primeira dobra), e-mail e WhatsApp ocupam a linha inteira; o "DDD + WhatsApp" não cabe pela metade */
+@media (max-width: 899px) { .fecho__form .lead-form form { grid-template-columns: minmax(0, 1fr); } .fecho__form .fld.half { grid-column: 1 / -1; } }
 
 /* ---------- rodapé e botão fixo ---------- */
 /* rodapé igual ao da página do Aniversário: logo do Método, direitos, privacidade em azul e aviso legal */
@@ -908,9 +937,8 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         <div class="fecho__grid">
           <div class="fecho__offer">
             <p class="eyebrow">Somente na Black Week Motorizada</p>
-            <h3 class="fecho__t">Método&nbsp;The&nbsp;Book&nbsp;Business<br><span class="gold">vitalício</span> + <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></h3>
-            <p class="fecho__s">Acesso para sempre ao Método&nbsp;The&nbsp;Book&nbsp;Business.</p>
-            <p class="when-pill fecho__date">9 de novembro, às 20h</p>
+            <h3 class="fecho__t"><span class="fecho__t-a">Método The&nbsp;Book&nbsp;Business</span><span class="fecho__t-b gold">vitalício</span><span class="fecho__t-c">+ <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></span></h3>
+            <div class="aula fecho__aula"><p class="aula__k">Revelada ao vivo na aula</p><p class="aula__t">Seu livro vendendo cada vez mais</p><p class="aula__d">09 de novembro, segunda-feira | 20h</p></div>
           </div>
           <div class="fecho__form">
             <h3 class="fecho__h">Cadastre-se e saia na frente de todo mundo.</h3>
@@ -1041,7 +1069,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
      Depois da hora, a data vira "Aberta agora". Se VENDA_URL estiver preenchido, os formulários viram o botão de entrar. */
   /* ================= ESTANTE AO FUNDO: 0 no topo; sobe devagar depois da primeira dobra até um teto baixo ================= */
   (function () {
-    var TETO = .2, raf = 0, root = document.documentElement;
+    var TETO = .11, raf = 0, root = document.documentElement;
     function upd() { raf = 0; var h = innerHeight, t = (scrollY - h * .55) / (h * 2.2);
       root.style.setProperty('--estante', (Math.max(0, Math.min(1, t)) * TETO).toFixed(3)); }
     addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true });
