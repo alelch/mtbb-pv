@@ -51,6 +51,7 @@ fbq('init','1665265050801984'); fbq('init','617884976680212');
   if(!fbp){fbp='fb.1.'+now+'.'+Math.floor(Math.random()*2147483647);put('_fbp',fbp);}
   if(fbclid&&(!fbc||fbc.split('.').slice(3).join('.')!==fbclid)){fbc='fb.1.'+now+'.'+fbclid;put('_fbc',fbc);}
   var eid='pv.'+now+'.'+Math.random().toString(36).slice(2,10);
+  window.__l9pv={eid:eid,ts:now,url:location.href};   // 16/10: o pv-click manda o MESMO PageView pelo servidor (CAPI)
   ['1665265050801984','617884976680212'].forEach(function(id){
     new Image().src='https://www.facebook.com/tr?id='+id+'&ev=PageView&eid='+eid+'&dl='+encodeURIComponent(location.href)
       +'&rl='+encodeURIComponent(document.referrer||'')+'&if=false&ts='+now+'&fbp='+encodeURIComponent(fbp)
@@ -1950,6 +1951,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
      e trava o 1º toque de UTM, então reenviar só COMPLETA. */
   function l9Ctx(){
     try {
+      /* 16/10: na 1ª chamada leva o bloco pv (mesmo event_id do beacon) e o pv-click manda o PageView pelo servidor; depois não manda de novo */
+      var pv = window.__l9pv || null; window.__l9pv = null;
       var vid = l9Vid(); if (!vid) return;
       var q = new URLSearchParams(location.search), st = {};
       try { st = JSON.parse(localStorage.getItem('mtbb_utms') || '{}') || {}; } catch(e) {}
@@ -1962,7 +1965,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
         body: JSON.stringify({ vid: vid, fbc: fbc, fbp: fbp,
           utm_source: g('utm_source'), utm_medium: g('utm_medium'), utm_campaign: g('utm_campaign'),
           utm_term: adset, utm_content: g('utm_content'),
-          adset_id: /^\d{15,}$/.test(adset || '') ? adset : null, criativo: g('utm_content') }) });
+          adset_id: /^\d{15,}$/.test(adset || '') ? adset : null, criativo: g('utm_content'), pv: pv }) });
     } catch(e) {}
   }
   setTimeout(l9Ctx, 1200);
