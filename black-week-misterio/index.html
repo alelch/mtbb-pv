@@ -92,6 +92,10 @@ button { font: inherit; color: inherit; }
 ::selection { background: var(--amber); color: #111; }
 :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
 .amber { color: var(--amber); }
+/* estante da tela de entrada do LOMBADA atrás da página: a primeira dobra fica preta e os livros aparecem conforme a pessoa desce (--estante, ajustado no script) */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: var(--estante, 0);
+  background: linear-gradient(rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)), url("assets/estante.webp") center top / 820px auto repeat; }
+@media (min-width: 900px) { body::before { background-size: auto, 1300px auto; } }
 .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter); }
 .center { text-align: center; }
 /* textura de filme quase imperceptível */
@@ -325,7 +329,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 
 /* ---------- 2. a cena do sonho (guiada pela rolagem; --p vai de 0 a 1) ---------- */
 /* rolagem normal: a página anda a cada gesto (a cena presa na tela parecia travada) */
-.dream { position: relative; padding: var(--sec) 0; overflow: hidden; text-align: center; background: #000; }
+.dream { position: relative; padding: var(--sec) 0; overflow: hidden; text-align: center; }
 /* título grande + caminho numerado nas cores das fases do LOMBADA (verde, laranja, amarelo) */
 .dream__lead { font-size: clamp(32px, 9vw, 54px); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; text-wrap: balance; }
 .dream__list { position: relative; list-style: none; display: grid; gap: 34px; width: max-content; max-width: 100%; margin: 40px auto 0; text-align: left; }
@@ -1035,6 +1039,15 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
 
   /* ================= ABERTURA: 9/11, 20h de Brasília (23h UTC) =================
      Depois da hora, a data vira "Aberta agora". Se VENDA_URL estiver preenchido, os formulários viram o botão de entrar. */
+  /* ================= ESTANTE AO FUNDO: 0 no topo; sobe devagar depois da primeira dobra até um teto baixo ================= */
+  (function () {
+    var TETO = .28, raf = 0, root = document.documentElement;
+    function upd() { raf = 0; var h = innerHeight, t = (scrollY - h * .55) / (h * 2.2);
+      root.style.setProperty('--estante', (Math.max(0, Math.min(1, t)) * TETO).toFixed(3)); }
+    addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true });
+    addEventListener('resize', upd); upd();
+  })();
+
   var ABRE = Date.UTC(2026, 10, 9, 23, 0, 0), VENDA_URL = '';
   if (Date.now() >= ABRE) {
     $$('.when-pill').forEach(function (el) { el.textContent = 'Aberta agora'; });
