@@ -22,6 +22,34 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/poppins-400.woff2">
 <link rel="preload" as="image" href="../black-week/assets/dany-bw-m.webp" media="(max-width: 899px)">
 <link rel="preload" as="image" href="../black-week/assets/dany-bw.webp" media="(min-width: 900px)">
+<script>
+/* 19/10 · TESTE A/B da Black (A = longa /black-week-misterio/ × B = curta /black-week-curta/). Liga e pausa pelo dash da
+   Black no Miolo (tabela bf26_ab_config). PAUSADO = nada acontece: ninguém é redirecionado e nada é registrado.
+   Ativo: sorteia pelo peso, guarda no cookie bf26ab (30 dias, a pessoa vê sempre a mesma), a longa manda o B para a
+   curta (com as UTMs) e cada página registra 1 visita por visitante (bf26_ab_visita). Roda antes do pixel. */
+(function () {
+  var PAG = 'A', K = 'bf26ab', SB = 'https://jsqtpsxpaclslakafmvd.supabase.co', AN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
+  function ck() { var m = document.cookie.match('(?:^|; )' + K + '=([^;]*)'); return m ? m[1] : null; }
+  function grava(v) { document.cookie = K + '=' + v + ';path=/;max-age=2592000;SameSite=Lax'; }
+  function vid() { try { var v = localStorage.getItem('bf26vid'); if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('bf26vid', v); } return v; } catch (e) { return null; } }
+  var feito = false;
+  function decide(c) {
+    if (feito || !c || !c.ativo) return; feito = true;
+    var v = ck();
+    if (PAG === 'B') { if (v !== 'B') grava('B'); v = 'B'; }
+    else if (v !== 'A' && v !== 'B') { v = Math.random() * 100 < (+c.peso_b || 0) ? 'B' : 'A'; grava(v); }
+    if (PAG === 'A' && v === 'B') { location.replace('/black-week-curta/' + location.search + location.hash); return; }
+    var id = vid(); if (!id) return;
+    try { fetch(SB + '/rest/v1/rpc/bf26_ab_visita', { method: 'POST', keepalive: true, headers: { apikey: AN, Authorization: 'Bearer ' + AN, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_var: v, p_vid: id }) }); } catch (e) {}
+  }
+  var cache = null; try { cache = JSON.parse(localStorage.getItem('bf26ab_cfg') || 'null'); } catch (e) {}
+  if (cache) decide(cache);
+  fetch(SB + '/rest/v1/bf26_ab_config?select=ativo,peso_b&id=eq.1', { headers: { apikey: AN, Authorization: 'Bearer ' + AN } })
+    .then(function (r) { return r.json(); })
+    .then(function (d) { var c = d && d[0]; if (!c) return; try { localStorage.setItem('bf26ab_cfg', JSON.stringify(c)); } catch (e) {} decide(c); })
+    .catch(function () {});
+})();
+</script>
 <!-- 19/10 (cliente: "o connect rate da página tá terrível"): aqui o pixel NÃO usa o ../pixel.js, que só baixa o fbevents
      no ocioso/1º gesto (até 3 s) e deixava de contar quem saía antes (connect rate ~65%). Carrega na hora, só o pixel
      OFICIAL (onde a campanha da Black otimiza e onde o Sendflow dispara o Lead). -->
