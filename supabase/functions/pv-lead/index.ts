@@ -16,7 +16,7 @@
 //
 // Black Week Motorizada 2026 (pagina /black-week): variant "black-week", sem stage obrigatorio.
 // { nome, email, whatsapp, variant: "black-week", posicao, td_fase?, td_livro?, utm_* }
-// -> lista 15 + tag 380; se ja for aluno do Metodo (RPC bw_eh_aluno) ganha tambem a tag 381.
+// -> lista 15 + tag 382 (BF-26); se ja for aluno do Metodo (RPC bw_eh_aluno) ganha tambem a tag 383 (BF-26-aluno).
 
 // deno-lint-ignore-file no-explicit-any
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
@@ -35,8 +35,8 @@ const VARIANTS_VALID = new Set(["checkout", "lista"]);
 
 // Black Week Motorizada 2026 (criados no AC em 2026-10-05)
 const BW_LIST_ID = 15;            // lista "Black Week Motorizada 2026"
-const BW_TAG_CADASTRO = 380;      // tag "bw-motorizada-cadastro"
-const BW_TAG_ALUNO = 381;         // tag "bw-motorizada-aluno" (ja comprou o Metodo)
+const BW_TAG_CADASTRO = 382;      // tag "BF-26" (cliente, 19/10; antes 380 bw-motorizada-cadastro)
+const BW_TAG_ALUNO = 383;         // tag "BF-26-aluno" (ja comprou o Metodo; antes 381)
 const BW_FIELD_LIVRO = 122;       // campo "BW Livro (test drive)" (%BW_LIVRO%)
 const BW_FASE_ESTAGIO: Record<string, string> = { construcao: "escrevendo", lancamento: "lancando", permanencia: "publicado" };
 const SB_URL = Deno.env.get("SUPABASE_URL") ?? "";
@@ -120,7 +120,7 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
   if (!contactId) return json({ error: "ac_no_contact_id", detail: sync.text?.slice(0, 500) }, 502);
 
   const lista = await acFetch("/contactLists", { method: "POST", body: JSON.stringify({ contactList: { list: BW_LIST_ID, contact: contactId, status: 1 } }) });
-  // a tag de aluno entra ANTES da de cadastro: a automacao que dispara na 380 ja enxerga a 381
+  // a tag de aluno entra ANTES da de cadastro: a automacao que dispara na BF-26 ja enxerga a BF-26-aluno
   const aluno = await ehAluno(email);
   let tagAluno: boolean | null = null;
   if (aluno) {
