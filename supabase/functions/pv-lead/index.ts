@@ -37,6 +37,7 @@ const VARIANTS_VALID = new Set(["checkout", "lista"]);
 const BW_LIST_ID = 15;            // lista "Black Week Motorizada 2026"
 const BW_TAG_CADASTRO = 382;      // tag "BF-26" (cliente, 19/10; antes 380 bw-motorizada-cadastro)
 const BW_TAG_ALUNO = 383;         // tag "BF-26-aluno" (ja comprou o Metodo; antes 381)
+const BW_AUTOMACAO = 855;         // "[BF26] [OPERACIONAL] - Confirmação Inscrição" (cliente, 19/10): todo cadastro da página entra nela
 const BW_FIELD_LIVRO = 122;       // campo "BW Livro (test drive)" (%BW_LIVRO%)
 const BW_FASE_ESTAGIO: Record<string, string> = { construcao: "escrevendo", lancamento: "lancando", permanencia: "publicado" };
 const SB_URL = Deno.env.get("SUPABASE_URL") ?? "";
@@ -120,18 +121,18 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
   if (!contactId) return json({ error: "ac_no_contact_id", detail: sync.text?.slice(0, 500) }, 502);
 
   const lista = await acFetch("/contactLists", { method: "POST", body: JSON.stringify({ contactList: { list: BW_LIST_ID, contact: contactId, status: 1 } }) });
-  // a tag de aluno entra ANTES da de cadastro: a automacao que dispara na BF-26 ja enxerga a BF-26-aluno
+  // 19/10: a BF-26-aluno NÃO é aplicada aqui. Ela dispara a automação de alunos (856), que é da página de alunos
+  // (ainda não feita). Na página do mistério todo mundo, aluno ou não, recebe a BF-26 e entra na automação 855.
   const aluno = await ehAluno(email);
-  let tagAluno: boolean | null = null;
-  if (aluno) {
-    const t = await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: BW_TAG_ALUNO } }) });
-    tagAluno = t.ok || t.status === 422;
-  }
+  const tagAluno: boolean | null = null;
   const tag = await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: BW_TAG_CADASTRO } }) });
+  const auto = await acFetch("/contactAutomations", { method: "POST", body: JSON.stringify({ contactAutomation: { contact: contactId, automation: BW_AUTOMACAO } }) });
   return json({
     ok: true, variant: "black-week", contact_id: contactId,
     list_added: lista.ok || lista.status === 422, tag_applied: tag.ok || tag.status === 422,
-    aluno, tag_aluno: tagAluno, estagio: estagio || null, posicao: sanitize(payload.posicao, 10),
+    // 422 = automação inativa (ou contato já dentro): o cadastro segue valendo, mas a confirmação não sai
+    automation_added: auto.ok, automation_status: auto.status, automation_detail: auto.ok ? null : auto.text?.slice(0, 200),
+    aluno, tag_aluno: tagAluno, estagio: estagio || null, posicao: sanitize(payload.posicao, 20),
   });
 }
 
