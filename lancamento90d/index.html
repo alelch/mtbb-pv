@@ -52,6 +52,8 @@ fbq('init','1665265050801984'); fbq('init','617884976680212');
   if(fbclid&&(!fbc||fbc.split('.').slice(3).join('.')!==fbclid)){fbc='fb.1.'+now+'.'+fbclid;put('_fbc',fbc);}
   var eid='pv.'+now+'.'+Math.random().toString(36).slice(2,10);
   window.__l9pv={eid:eid,ts:now,url:location.href};   // 16/10: o pv-click manda o MESMO PageView pelo servidor (CAPI)
+  /* 19/10: IP como o Cloudflare vê (IPv6 quando o aparelho tem); o Meta apontou IPv4 no servidor × IPv6 no pixel */
+  try{ window.__l9ipP=fetch('https://crm-mtbb.pages.dev/ip',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){return j&&j.ip||null;}).catch(function(){return null;}); }catch(e){}
   ['1665265050801984','617884976680212'].forEach(function(id){
     new Image().src='https://www.facebook.com/tr?id='+id+'&ev=PageView&eid='+eid+'&dl='+encodeURIComponent(location.href)
       +'&rl='+encodeURIComponent(document.referrer||'')+'&if=false&ts='+now+'&fbp='+encodeURIComponent(fbp)
@@ -1953,6 +1955,14 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     try {
       /* 16/10: na 1ª chamada leva o bloco pv (mesmo event_id do beacon) e o pv-click manda o PageView pelo servidor; depois não manda de novo */
       var pv = window.__l9pv || null; window.__l9pv = null;
+      /* 19/10: espera o IP no máximo 1,5 s; sem ele o servidor usa o do cabeçalho, como antes */
+      if (pv && window.__l9ipP) {
+        Promise.race([window.__l9ipP, new Promise(function(ok){ setTimeout(function(){ ok(null); }, 1500); })])
+          .then(function(ip){ if (ip) pv.ip = ip; envia(); });
+        return;
+      }
+      envia();
+      function envia(){ try {
       var vid = l9Vid(); if (!vid) return;
       var q = new URLSearchParams(location.search), st = {};
       try { st = JSON.parse(localStorage.getItem('mtbb_utms') || '{}') || {}; } catch(e) {}
@@ -1966,6 +1976,7 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
           utm_source: g('utm_source'), utm_medium: g('utm_medium'), utm_campaign: g('utm_campaign'),
           utm_term: adset, utm_content: g('utm_content'),
           adset_id: /^\d{15,}$/.test(adset || '') ? adset : null, criativo: g('utm_content'), pv: pv }) });
+      } catch(e) {} }
     } catch(e) {}
   }
   setTimeout(l9Ctx, 1200);
