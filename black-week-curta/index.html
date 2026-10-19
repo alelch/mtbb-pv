@@ -39,14 +39,16 @@
     if (PAG === 'B') { if (v !== 'B') grava('B'); v = 'B'; }
     else if (v !== 'A' && v !== 'B') { v = Math.random() * 100 < (+c.peso_b || 0) ? 'B' : 'A'; grava(v); }
     if (PAG === 'A' && v === 'B') { location.replace('/black-week-curta/' + location.search + location.hash); return; }
+    window.__bf26ab = v;   // vai junto no cadastro (payload.ab): o placar só conta quem foi sorteado
     var id = vid(); if (!id) return;
     try { fetch(SB + '/rest/v1/rpc/bf26_ab_visita', { method: 'POST', keepalive: true, headers: { apikey: AN, Authorization: 'Bearer ' + AN, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_var: v, p_vid: id }) }); } catch (e) {}
   }
   var cache = null; try { cache = JSON.parse(localStorage.getItem('bf26ab_cfg') || 'null'); } catch (e) {}
+  if (cache && !(Date.now() - (+cache.t || 0) < 900000)) cache = null;
   if (cache) decide(cache);
   fetch(SB + '/rest/v1/bf26_ab_config?select=ativo,peso_b&id=eq.1', { headers: { apikey: AN, Authorization: 'Bearer ' + AN } })
     .then(function (r) { return r.json(); })
-    .then(function (d) { var c = d && d[0]; if (!c) return; try { localStorage.setItem('bf26ab_cfg', JSON.stringify(c)); } catch (e) {} decide(c); })
+    .then(function (d) { var c = d && d[0]; if (!c) return; try { c.t = Date.now(); localStorage.setItem('bf26ab_cfg', JSON.stringify(c)); } catch (e) {} decide(c); })
     .catch(function () {});
 })();
 </script>
@@ -1124,6 +1126,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         posicao: 'curta-' + box.getAttribute('data-pos')
       };
       Object.keys(utms).forEach(function (k) { payload[k] = utms[k]; });
+      if (window.__bf26ab) payload.ab = window.__bf26ab;
 
       fetch(ENDPOINT, {
         method: 'POST',
