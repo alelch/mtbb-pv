@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Entrando no grupo…</title>
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#000;color:#fff;font:600 17px/1.4 system-ui,-apple-system,Arial,sans-serif;text-align:center;padding:16px}a{color:#1ebb00}</style>
+</head><body>
+<p>Abrindo o grupo do WhatsApp…<br><a id="ir" href="https://thebookbusiness.com.br/black-grupo">Toque aqui se não abrir</a></p>
+<script>
+/* 20/10/2026 · botão "Entrar no grupo" das mensagens da Mariana (Black): registra o clique e segue pro grupo */
+(function () {
+  var GRUPO = 'https://thebookbusiness.com.br/black-grupo';
+  var c = new URLSearchParams(location.search).get('c') || '';
+  var AN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
+  var ir = function () { location.replace(GRUPO); };
+  if (!c) return ir();
+  try {
+    fetch('https://jsqtpsxpaclslakafmvd.supabase.co/rest/v1/rpc/bf26_zap_clique', { method: 'POST', keepalive: true,
+      headers: { apikey: AN, Authorization: 'Bearer ' + AN, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_c: c }) })
+      .then(ir, ir);
+  } catch (e) { ir(); }
+  setTimeout(ir, 700);
+})();
+</script>
+</body></html>
