@@ -835,6 +835,20 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   .rv { opacity: 1; transform: none; }
   .pulse::after { animation: none !important; opacity: .7; }
 }
+/* 20/10: +55 fixo no campo do WhatsApp (a pessoa digita só DDD + número) */
+.fld .zapbox { position: relative; display: block; }
+.fld .zapbox .ddi { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px;
+  padding-right: 9px; border-right: 1px solid rgba(154, 150, 142, .45); color: #9a968e; font-weight: 600; font-size: 15px; line-height: 1; pointer-events: none; }
+.fld .zapbox .ddi svg { display: block; border-radius: 2px; }
+.lead-form .fld .zapbox input { padding-left: 104px; }
+.fld .zapbox .ddi-f { font-style: normal; display: flex; font-size: 18px; line-height: 1; }
+.fld .zapbox .ddi-v { opacity: .8; }
+.fld .zapbox .pais { position: absolute; left: 0; top: 0; bottom: 0; width: 84px; opacity: 0; cursor: pointer; font-size: 16px; z-index: 1; }
+.fld .zapbox .pais:focus-visible + input { box-shadow: 0 0 0 3px rgba(250, 171, 0, .3); }
+/* celular: com o +55 o WhatsApp não cabe pela metade; e-mail e WhatsApp em linhas inteiras */
+@media (max-width: 899px) { .lead-form .fld.half { grid-column: 1 / -1; } }
+/* cartão do fim é estreito também no computador: e-mail e WhatsApp em linhas inteiras */
+.fecho .lead-form .fld.half { grid-column: 1 / -1; }
 </style>
 </head>
 <body class="no-js">
@@ -868,7 +882,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
             <form novalidate>
               <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
               <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
-              <div class="fld half" data-f="whatsapp"><input name="whatsapp" type="tel" autocomplete="tel" inputmode="numeric" enterkeyhint="send" maxlength="16" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD"><p class="msg">Confira o número com DDD.</p></div>
+              <div class="fld half" data-f="whatsapp"><span class="zapbox"><span class="ddi" aria-hidden="true"><i class="ddi-f"><svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" rx="2" fill="#229e45"/><path d="M10 1.6 18.2 7 10 12.4 1.8 7z" fill="#f8e509"/><circle cx="10" cy="7" r="3.1" fill="#2b49a3"/></svg></i><b>+55</b><svg class="ddi-v" viewBox="0 0 10 6" width="9" height="6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><select class="pais" name="pais" aria-label="País do WhatsApp"><option value="55" data-p="BR" selected>🇧🇷 Brasil (+55)</option><option value="351" data-p="PT">🇵🇹 Portugal (+351)</option><option value="1" data-p="US">🇺🇸 Estados Unidos (+1)</option><option value="81" data-p="JP">🇯🇵 Japão (+81)</option><option value="44" data-p="GB">🇬🇧 Reino Unido (+44)</option><option value="353" data-p="IE">🇮🇪 Irlanda (+353)</option><option value="34" data-p="ES">🇪🇸 Espanha (+34)</option><option value="39" data-p="IT">🇮🇹 Itália (+39)</option><option value="33" data-p="FR">🇫🇷 França (+33)</option><option value="49" data-p="DE">🇩🇪 Alemanha (+49)</option><option value="41" data-p="CH">🇨🇭 Suíça (+41)</option><option value="31" data-p="NL">🇳🇱 Holanda (+31)</option><option value="32" data-p="BE">🇧🇪 Bélgica (+32)</option><option value="1" data-p="CA">🇨🇦 Canadá (+1)</option><option value="61" data-p="AU">🇦🇺 Austrália (+61)</option><option value="54" data-p="AR">🇦🇷 Argentina (+54)</option><option value="595" data-p="PY">🇵🇾 Paraguai (+595)</option><option value="598" data-p="UY">🇺🇾 Uruguai (+598)</option><option value="56" data-p="CL">🇨🇱 Chile (+56)</option><option value="52" data-p="MX">🇲🇽 México (+52)</option><option value="244" data-p="AO">🇦🇴 Angola (+244)</option><option value="258" data-p="MZ">🇲🇿 Moçambique (+258)</option><option value="238" data-p="CV">🇨🇻 Cabo Verde (+238)</option></select><input name="whatsapp" type="tel" autocomplete="tel-national" inputmode="numeric" enterkeyhint="send" maxlength="22" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD (Brasil, +55)"></span><p class="msg">Confira o número com DDD.</p></div>
               <button class="btn" type="submit">Quero liberar meu acesso <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
             </form>
             <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
@@ -1016,7 +1030,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
               <form novalidate>
                 <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
                 <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu e-mail" aria-label="E-mail"><p class="msg">Confira o e-mail.</p></div>
-                <div class="fld half" data-f="whatsapp"><input name="whatsapp" type="tel" autocomplete="tel" inputmode="numeric" enterkeyhint="send" maxlength="16" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD"><p class="msg">Confira o número com DDD.</p></div>
+                <div class="fld half" data-f="whatsapp"><span class="zapbox"><span class="ddi" aria-hidden="true"><i class="ddi-f"><svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" rx="2" fill="#229e45"/><path d="M10 1.6 18.2 7 10 12.4 1.8 7z" fill="#f8e509"/><circle cx="10" cy="7" r="3.1" fill="#2b49a3"/></svg></i><b>+55</b><svg class="ddi-v" viewBox="0 0 10 6" width="9" height="6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><select class="pais" name="pais" aria-label="País do WhatsApp"><option value="55" data-p="BR" selected>🇧🇷 Brasil (+55)</option><option value="351" data-p="PT">🇵🇹 Portugal (+351)</option><option value="1" data-p="US">🇺🇸 Estados Unidos (+1)</option><option value="81" data-p="JP">🇯🇵 Japão (+81)</option><option value="44" data-p="GB">🇬🇧 Reino Unido (+44)</option><option value="353" data-p="IE">🇮🇪 Irlanda (+353)</option><option value="34" data-p="ES">🇪🇸 Espanha (+34)</option><option value="39" data-p="IT">🇮🇹 Itália (+39)</option><option value="33" data-p="FR">🇫🇷 França (+33)</option><option value="49" data-p="DE">🇩🇪 Alemanha (+49)</option><option value="41" data-p="CH">🇨🇭 Suíça (+41)</option><option value="31" data-p="NL">🇳🇱 Holanda (+31)</option><option value="32" data-p="BE">🇧🇪 Bélgica (+32)</option><option value="1" data-p="CA">🇨🇦 Canadá (+1)</option><option value="61" data-p="AU">🇦🇺 Austrália (+61)</option><option value="54" data-p="AR">🇦🇷 Argentina (+54)</option><option value="595" data-p="PY">🇵🇾 Paraguai (+595)</option><option value="598" data-p="UY">🇺🇾 Uruguai (+598)</option><option value="56" data-p="CL">🇨🇱 Chile (+56)</option><option value="52" data-p="MX">🇲🇽 México (+52)</option><option value="244" data-p="AO">🇦🇴 Angola (+244)</option><option value="258" data-p="MZ">🇲🇿 Moçambique (+258)</option><option value="238" data-p="CV">🇨🇻 Cabo Verde (+238)</option></select><input name="whatsapp" type="tel" autocomplete="tel-national" inputmode="numeric" enterkeyhint="send" maxlength="22" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD (Brasil, +55)"></span><p class="msg">Confira o número com DDD.</p></div>
                 <button class="btn" type="submit">Quero liberar meu acesso <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
               </form>
               <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
@@ -1174,10 +1188,31 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
   var GRUPO = 'https://thebookbusiness.com.br/black-grupo';
   function allDone() { boxes.forEach(function (b) { b.classList.add('is-done'); }); dockUpdate(); }
 
+  /* 20/10 · WhatsApp: decide pelo NÚMERO DE DÍGITOS, nunca pelo começo (DDD 55 existe: Santa Maria/RS).
+     11 = DDD + celular (mesmo começando com 55) · 13 começando com 55 = +55 + DDD + celular (tira o 55)
+     12 começando com 55 = +55 + DDD + 8 dígitos (tira o 55) · 10 = DDD + 8 (celular ganha o 9). Nunca corta dígito. */
+  var DDDS = '11 12 13 14 15 16 17 18 19 21 22 24 27 28 31 32 33 34 35 37 38 41 42 43 44 45 46 47 48 49 51 53 54 55 61 62 63 64 65 66 67 68 69 71 73 74 75 77 79 81 82 83 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99';
+  // ddi = código do país escolhido no seletor (padrão 55). Fora do Brasil: só dígitos, sem regra de DDD.
+  function zapDig(v, ddi) {
+    if (ddi && ddi !== '55') { var x = String(v || '').replace(/\D/g, '').replace(/^0+/, ''); if (x.indexOf(ddi) === 0 && x.length > ddi.length + 7) x = x.slice(ddi.length); return x.slice(0, 14); }
+    var d = String(v || '').replace(/\D/g, '').replace(/^0+/, '');
+    if ((d.length === 12 || d.length === 13) && d.slice(0, 2) === '55') d = d.slice(2);
+    return d.slice(0, 11);
+  }
+  function zapFinal(v, ddi) { if (ddi && ddi !== '55') return '+' + ddi + zapDig(v, ddi); var d = zapDig(v); if (d.length === 10 && /[6-9]/.test(d.charAt(2))) d = d.slice(0, 2) + '9' + d.slice(2); return d; }
+  function zapOk(d) { if (d.charAt(0) === '+') return d.length >= 9 && d.length <= 17; return DDDS.indexOf(d.slice(0, 2)) >= 0 && d.slice(0, 2).length === 2 && (d.length === 10 || (d.length === 11 && d.charAt(2) === '9')); }
   boxes.forEach(function (box) {
-    var form = $('form', box), btn = $('.btn', form), btnHTML = btn.innerHTML, err = $('.form-err', box), zap = form.whatsapp;
+    var form = $('form', box), btn = $('.btn', form), btnHTML = btn.innerHTML, err = $('.form-err', box), zap = form.whatsapp, pais = form.pais, ddiTxt = $('.ddi b', form), ddiF = $('.ddi-f', form), FL = ddiF.innerHTML;
+    pais.addEventListener('change', function () {
+      var o = pais.options[pais.selectedIndex], br = pais.value === '55';
+      ddiTxt.textContent = '+' + pais.value; ddiF.innerHTML = br ? FL : o.textContent.split(' ')[0];
+      zap.placeholder = br ? 'DDD + WhatsApp' : 'Número do WhatsApp';
+      var dd = $('.ddi', form); zap.style.paddingLeft = (dd.offsetLeft + dd.offsetWidth + 12) + 'px';
+      zap.dispatchEvent(new Event('input')); if (zap.value) check('whatsapp'); zap.focus();
+    });
     zap.addEventListener('input', function () {
-      var d = zap.value.replace(/\D/g, '').slice(0, 11), o = d;
+      var d = zapDig(zap.value, pais.value), o = d;
+      if (pais.value !== '55') { zap.value = d; return; }
       if (d.length > 2) o = '(' + d.slice(0, 2) + ') ' + d.slice(2);
       if (d.length > 7) o = '(' + d.slice(0, 2) + ') ' + d.slice(2, d.length - 4) + '-' + d.slice(-4);
       zap.value = o;
@@ -1185,7 +1220,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
     var rules = {
       nome: function () { return form.nome.value.trim().length >= 2; },
       email: function () { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.value.trim()); },
-      whatsapp: function () { var n = zap.value.replace(/\D/g, '').length; return n === 10 || n === 11; }
+      whatsapp: function () { return zapOk(zapFinal(zap.value, pais.value)); }
     };
     function check(n) { var ok = rules[n](); $('[data-f=' + n + ']', form).classList.toggle('invalid', !ok); return ok; }
     Object.keys(rules).forEach(function (n) {
@@ -1204,7 +1239,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       var payload = {
         nome: form.nome.value.trim(),
         email: form.email.value.trim(),
-        whatsapp: zap.value.replace(/\D/g, ''),
+        whatsapp: zapFinal(zap.value, pais.value),
         variant: 'black-week',
         posicao: 'organico-' + box.getAttribute('data-pos')
       };

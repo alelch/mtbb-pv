@@ -83,8 +83,12 @@ function normalizePhone(raw: string, intl = false): string {
   const d = (raw || "").replace(/\D+/g, "");
   if (!d) return "";
   if (intl) return d.length >= 8 && d.length <= 15 ? d : "";
-  if (d.length >= 12 && d.length <= 13) return d;          // já tem DDI
-  if (d.length === 10 || d.length === 11) return "55" + d;  // adiciona DDI BR
+  // 20/10: decide pelo NÚMERO DE DÍGITOS, nunca pelo começo (DDD 55 existe: Santa Maria/RS). 0 da operadora sai.
+  // 11 = DDD+celular (mesmo começando com 55) · 12/13 começando com 55 = já tem DDI · 10 = DDD+8 (celular ganha o 9).
+  let n = d.replace(/^0+/, "");
+  if ((n.length === 12 || n.length === 13) && n.startsWith("55")) n = n.slice(2);
+  if (n.length === 10 && /[6-9]/.test(n.charAt(2))) n = n.slice(0, 2) + "9" + n.slice(2);
+  if (n.length === 10 || n.length === 11) return "55" + n;
   return d;
 }
 
@@ -165,7 +169,10 @@ serve(async (req) => {
   const email = sanitize(payload.email, 200).toLowerCase();
   const lang = sanitize(payload.lang, 5).toLowerCase();
   const isEs = lang === "es";
-  const whatsapp = normalizePhone(sanitize(payload.whatsapp, 30), isEs);
+  // 20/10: a página manda "+<DDI>..." quando a pessoa escolhe outro país no seletor; aí não aplica a regra do Brasil
+  const zapRaw = sanitize(payload.whatsapp, 30);
+  const zapIntl = isEs || (/^\s*\+/.test(zapRaw) && !/^\s*\+\s*55/.test(zapRaw));
+  const whatsapp = normalizePhone(zapRaw, zapIntl);
   const stage = sanitize(payload.stage, 30);
   const variant = sanitize(payload.variant, 30);
 
