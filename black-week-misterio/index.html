@@ -23,7 +23,7 @@
 <link rel="preload" as="image" href="../black-week/assets/dany-bw-m.webp" media="(max-width: 899px)">
 <link rel="preload" as="image" href="../black-week/assets/dany-bw.webp" media="(min-width: 900px)">
 <script>
-/* 19/10 · TESTE A/B da Black (A = longa /black-week-misterio/ × B = curta /black-week-curta/). Liga e pausa pelo dash da
+/* 19/10 · TESTE A/B/C da Black (A = longa /black-week-misterio/ × B = curta /black-week-curta/ × C = BF-25 /black-week-25/). Liga e pausa pelo dash da
    Black no Miolo (tabela bf26_ab_config). PAUSADO = nada acontece: ninguém é redirecionado e nada é registrado.
    Ativo: sorteia pelo peso, guarda no cookie bf26ab (30 dias, a pessoa vê sempre a mesma), a longa manda o B para a
    curta (com as UTMs) e cada página registra 1 visita por visitante (bf26_ab_visita). Roda antes do pixel. */
@@ -37,8 +37,9 @@
     if (feito || !c || !c.ativo) return; feito = true;
     var v = ck();
     if (PAG === 'B') { if (v !== 'B') grava('B'); v = 'B'; }
-    else if (v !== 'A' && v !== 'B') { v = Math.random() * 100 < (+c.peso_b || 0) ? 'B' : 'A'; grava(v); }
+    else if (v !== 'A' && v !== 'B' && v !== 'C') { var r = Math.random() * 100, pb = +c.peso_b || 0, pc = +c.peso_c || 0; v = r < pb ? 'B' : r < pb + pc ? 'C' : 'A'; grava(v); }
     if (PAG === 'A' && v === 'B') { location.replace('/black-week-curta/' + location.search + location.hash); return; }
+    if (PAG === 'A' && v === 'C') { location.replace('/black-week-25/' + location.search + location.hash); return; }
     window.__bf26ab = v;   // vai junto no cadastro (payload.ab): o placar só conta quem foi sorteado
     var id = vid(); if (!id) return;
     try { fetch(SB + '/rest/v1/rpc/bf26_ab_visita', { method: 'POST', keepalive: true, headers: { apikey: AN, Authorization: 'Bearer ' + AN, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_var: v, p_vid: id }) }); } catch (e) {}
@@ -46,7 +47,7 @@
   var cache = null; try { cache = JSON.parse(localStorage.getItem('bf26ab_cfg') || 'null'); } catch (e) {}
   if (cache && !(Date.now() - (+cache.t || 0) < 900000)) cache = null;
   if (cache) decide(cache);
-  fetch(SB + '/rest/v1/bf26_ab_config?select=ativo,peso_b&id=eq.1', { headers: { apikey: AN, Authorization: 'Bearer ' + AN } })
+  fetch(SB + '/rest/v1/bf26_ab_config?select=ativo,peso_b,peso_c&id=eq.1', { headers: { apikey: AN, Authorization: 'Bearer ' + AN } })
     .then(function (r) { return r.json(); })
     .then(function (d) { var c = d && d[0]; if (!c) return; try { c.t = Date.now(); localStorage.setItem('bf26ab_cfg', JSON.stringify(c)); } catch (e) {} decide(c); })
     .catch(function () {});
