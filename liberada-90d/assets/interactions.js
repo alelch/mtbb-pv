@@ -20,7 +20,8 @@
   $$('.elementor-countdown-wrapper[data-date]').forEach(function (w) {
     // liberada-90d (13/10): o crédito do Lançamento 90D vale até a meia-noite do dia da aula (Brasília); conta até lá, todo dia
     var hojeBR = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date());
-    var end = new Date(hojeBR + 'T23:59:59-03:00').getTime();
+    // 20/10: link da exceção (30 min) conta até o fim dele; quando zera, recarrega e a página volta pra R$1.500
+    var end = window.__ofertaFim || new Date(hojeBR + 'T23:59:59-03:00').getTime(), recarregou = false;
     var eh = $('.elementor-countdown-hours', w), em = $('.elementor-countdown-minutes', w), es = $('.elementor-countdown-seconds', w);
     function pad(n) { return (n < 10 ? '0' : '') + n; }
     function tick() {
@@ -28,6 +29,7 @@
       if (eh) eh.textContent = pad(Math.floor(t / 3600) % 24);
       if (em) em.textContent = pad(Math.floor(t / 60) % 60);
       if (es) es.textContent = pad(t % 60);
+      if (t === 0 && window.__ofertaFim && !recarregou) { recarregou = true; setTimeout(function () { location.reload(); }, 1500); }
     }
     tick(); setInterval(tick, 1000);
   });
