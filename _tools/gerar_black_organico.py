@@ -14,7 +14,7 @@ def troca(a, b, n=1, regex=False):
     if k != n: sys.exit(f'gerar_black_organico: esperava {n}x, achei {k}x: {a[:70]!r}')
     h = novo
 
-troca(r'<script>\n/\* 19/10 · TESTE A/B.*?</script>\n', '', regex=True)
+# 20/10: o teste A/B de página acabou e o script saiu da longa (antes era removido aqui)
 troca('<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-misterio/">',
       '<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-organico/">')
 # arquivos locais da longa: aponta para a pasta dela (não duplica imagem)
