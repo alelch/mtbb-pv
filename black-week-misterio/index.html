@@ -37,7 +37,8 @@
     if (feito || !c || !c.ativo) return; feito = true;
     var v = ck();
     if (PAG === 'B') { if (v !== 'B') grava('B'); v = 'B'; }
-    else if (v !== 'A' && v !== 'B' && v !== 'C') { var r = Math.random() * 100, pb = +c.peso_b || 0, pc = +c.peso_c || 0; v = r < pb ? 'B' : r < pb + pc ? 'C' : 'A'; grava(v); }
+    else if (v === 'C' && !(+c.peso_c > 0)) v = null;   // C saiu do sorteio (20/10): quem era C é sorteado de novo entre A e B
+    if (PAG === 'A' && v !== 'A' && v !== 'B' && v !== 'C') { var r = Math.random() * 100, pb = +c.peso_b || 0, pc = +c.peso_c || 0; v = r < pb ? 'B' : r < pb + pc ? 'C' : 'A'; grava(v); }
     if (PAG === 'A' && v === 'B') { location.replace('/black-week-curta/' + location.search + location.hash); return; }
     if (PAG === 'A' && v === 'C') { location.replace('/black-week-25/' + location.search + location.hash); return; }
     window.__bf26ab = v;   // vai junto no cadastro (payload.ab): o placar só conta quem foi sorteado
