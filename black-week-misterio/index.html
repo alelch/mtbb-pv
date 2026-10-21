@@ -1245,8 +1245,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       Object.keys(utms).forEach(function (k) { payload[k] = utms[k]; });
       if (window.__bf26ab) payload.ab = window.__bf26ab;
       // 20/10 · teste A/B da página de obrigado (A = ingresso, B = progresso): sorteio fixo por aparelho, vai junto no cadastro
-      var obg = null; try { obg = localStorage.getItem('bf26obg'); } catch (e) {}
-      if (obg !== 'A' && obg !== 'B') { obg = Math.random() < .5 ? 'A' : 'B'; try { localStorage.setItem('bf26obg', obg); } catch (e) {} }
+      var obg = 'A';   // 21/10: teste ingresso (A) × progresso (B) encerrado; todo mundo vê o ingresso
       payload.obg = obg;
       payload.obg_tk = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);   // liga o clique da página de obrigado ao cadastro
 
