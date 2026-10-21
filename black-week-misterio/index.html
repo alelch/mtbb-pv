@@ -1245,7 +1245,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       Object.keys(utms).forEach(function (k) { payload[k] = utms[k]; });
       if (window.__bf26ab) payload.ab = window.__bf26ab;
       // 20/10 · teste A/B da página de obrigado (A = ingresso, B = progresso): sorteio fixo por aparelho, vai junto no cadastro
-      var obg = 'A';   // 21/10: teste ingresso (A) × progresso (B) encerrado; todo mundo vê o ingresso
+      var obg = 'C';   // 21/10: página de obrigado = ingresso, 3 s, com "Não conseguiu entrar?" na volta (sem teste por enquanto)
       payload.obg = obg;
       payload.obg_tk = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);   // liga o clique da página de obrigado ao cadastro
 
@@ -1261,7 +1261,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         try { if (window.gtag) gtag('event', 'generate_lead', { campaign: 'black-week-motorizada' }); } catch (e) {}
         allDone();
         // depois do cadastro a pessoa vai direto ao grupo do WhatsApp (o botão do obrigado fica de reserva)
-        setTimeout(function () { try { sessionStorage.setItem('bf26_nome', payload.nome); sessionStorage.setItem('bf26_tk', payload.obg_tk); } catch (e) {} location.href = (payload.obg === 'B' ? '/black-week-obrigado-b/' : '/black-week-obrigado/'); }, 1000);
+        setTimeout(function () { try { sessionStorage.setItem('bf26_nome', payload.nome); sessionStorage.setItem('bf26_tk', payload.obg_tk); } catch (e) {} location.href = '/black-week-obrigado/'; }, 1000);
       }).catch(function () {
         btn.disabled = false; btn.innerHTML = btnHTML;
         err.style.display = 'block';

@@ -142,7 +142,7 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
         utm_term: u("utm_term"), utm_id: u("utm_id"), sck: u("sck"), fbclid: u("fbclid", 300), src: u("src"),
         ac_contact_id: contactId, automacao_ok: auto.ok,
         ab: ['A', 'B', 'C'].includes(String(payload.ab)) ? String(payload.ab) : null,   // 19/10: variante do teste A/B (só quem foi sorteado)
-        obg: ['A', 'B'].includes(String(payload.obg)) ? String(payload.obg) : null, obg_tk: sanitize(payload.obg_tk, 32) || null }),   // 20/10: teste A/B da página de obrigado
+        obg: ['A', 'B', 'C', 'D'].includes(String(payload.obg)) ? String(payload.obg) : null, obg_tk: sanitize(payload.obg_tk, 32) || null }),   // 20/10: teste A/B da página de obrigado
     });
   } catch { /* o cadastro no AC já valeu */ }
   return json({

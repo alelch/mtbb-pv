@@ -60,6 +60,11 @@ h1 em { font-style: normal; background: linear-gradient(180deg, var(--gold1), va
 .btn .wa { width: 28px; height: 28px; flex: none; }
 .auto { min-height: 22px; margin: 14px 0 0; font-size: 14px; color: var(--soft); }
 .auto b { color: var(--ink); }
+.volta { margin: 16px auto 0; max-width: 400px; padding: 16px; border: 1.5px solid rgba(250,171,0,.55); border-radius: 16px; background: rgba(250,171,0,.08); }
+.volta p { margin: 0 0 12px; font-size: 15px; color: var(--ink); text-wrap: balance; }
+.volta p b { color: var(--amber); }
+.cta[hidden] { display: none; }
+.btn2 { min-height: 64px; font-size: 18px; box-shadow: 0 12px 32px rgba(30,187,0,.42); }
 
 /* ---------- computador: QR + duas colunas ---------- */
 .qr { display: none; margin: 22px auto 0; padding: 18px; border: 1px solid var(--line); border-radius: 16px; max-width: 400px; background: rgba(255,255,255,.03); }
@@ -161,7 +166,7 @@ CSS_B=r'''
 @media (min-width: 900px) { .prog { margin-left: 0; max-width: 440px; } }
 '''
 
-def pagina(versao, titulo_html, meio_html, css_extra, canonical):
+def pagina(versao, titulo_html, meio_html, css_extra, canonical, segundos=3):
     return f'''<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -201,6 +206,10 @@ fbq('init','617884976680212'); fbq('track','PageView');
     <a class="btn" id="ir" href="https://thebookbusiness.com.br/black-grupo">{WA}Entrar no grupo do WhatsApp</a>
   </div>
   <p class="auto" id="auto" aria-live="polite"></p>
+  <div class="volta" id="volta" hidden>
+    <p><b>Não conseguiu entrar?</b> Às vezes o WhatsApp não abre de primeira. Toque no botão abaixo pra tentar de novo.</p>
+    <a class="btn btn2" id="ir2" href="https://thebookbusiness.com.br/black-grupo">{WA}Tentar de novo</a>
+  </div>
   <div class="qr"><div class="qr-in">
     <img src="../black-week-obrigado/assets/qr-grupo.svg" alt="QR code do grupo da Black Week no WhatsApp" width="124" height="124">
     <p><b>Está no computador?</b>Aponte a câmera do celular para o código e entre no grupo pelo WhatsApp.</p>
@@ -217,21 +226,32 @@ fbq('init','617884976680212'); fbq('track','PageView');
   // teste A/B: registra visita, clique no botão e abertura automática (código do cadastro guardado neste aparelho)
   var VAR = '{versao}', TK = ''; try {{ TK = sessionStorage.getItem('bf26_tk') || ''; }} catch (e) {{}}
   var TESTE = /[?&]teste=1/.test(location.search);
+  // 21/10: de onde a pessoa abriu (navegador do Instagram/Facebook costuma não abrir o WhatsApp de primeira)
+  var UA = navigator.userAgent || '', DISP = (/Instagram/i.test(UA) ? 'insta' : /FBAN|FBAV|FB_IAB|FBIOS/i.test(UA) ? 'face' : /Android|iPhone|iPad|Mobile/i.test(UA) ? 'celular' : 'computador') + (/iPhone|iPad/i.test(UA) ? '-ios' : /Android/i.test(UA) ? '-android' : '');
   var AN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
   var ev = function (e) {{ if (TESTE) return; try {{ fetch('https://jsqtpsxpaclslakafmvd.supabase.co/rest/v1/rpc/bf26_obg_evento', {{ method: 'POST', keepalive: true,
-      headers: {{ apikey: AN, Authorization: 'Bearer ' + AN, 'Content-Type': 'application/json' }}, body: JSON.stringify({{ p_var: VAR, p_ev: e, p_tk: TK }}) }}); }} catch (x) {{}} }};
+      headers: {{ apikey: AN, Authorization: 'Bearer ' + AN, 'Content-Type': 'application/json' }}, body: JSON.stringify({{ p_var: VAR, p_ev: e, p_tk: TK, p_disp: DISP }}) }}); }} catch (x) {{}} }};
   ev('visita');
   var btn = document.getElementById('ir'); var clicou = false;
   btn.addEventListener('click', function () {{ clicou = true; ev('clique'); }});
+  // 21/10 · ajuda na volta: a pessoa saiu pro WhatsApp e voltou pra cá (botão voltar ou troca de app) → "Não conseguiu entrar?"
+  var saiu = false, mostrou = false, el = document.getElementById('auto');
+  var mostrar = function () {{ if (mostrou) return; mostrou = true; var v = document.getElementById('volta'); v.hidden = false; el.textContent = ''; var cta = document.querySelector('.cta'); if (cta) cta.hidden = true; ev('volta'); try {{ v.scrollIntoView({{ block: 'center', behavior: 'smooth' }}); }} catch (x) {{}} }};
+  document.addEventListener('visibilitychange', function () {{ if (document.hidden) saiu = true; else if (saiu) mostrar(); }});
+  window.addEventListener('pagehide', function () {{ saiu = true; }});
+  window.addEventListener('pageshow', function (e2) {{ if (e2.persisted) mostrar(); }});
+  try {{ var nav = performance.getEntriesByType('navigation')[0]; if (nav && nav.type === 'back_forward') setTimeout(mostrar, 300); }} catch (x) {{}}
+  document.getElementById('ir2').addEventListener('click', function () {{ ev('clique_volta'); }});
   // no celular abre o WhatsApp sozinho em 3 s; o botão fica de reserva. No computador não (o link costuma travar): fica o QR.
   var desktop = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches && !('ontouchstart' in window);
   if (desktop) document.documentElement.classList.add('desk');
+  if (/[?&]teste=volta/.test(location.search)) {{ mostrar(); return; }}
   if (desktop || /[?&]teste=1/.test(location.search)) return;
-  var s = 3, el = document.getElementById('auto');
+  var s = {segundos};
   var tick = function () {{
     if (clicou) return;
     if (s <= 0) {{ el.textContent = 'Abrindo o WhatsApp…'; ev('auto'); setTimeout(function () {{ location.href = GRUPO; }}, 150); return; }}
-    el.innerHTML = 'Abrindo o grupo em <b>' + s + 's</b>…'; s--; setTimeout(tick, 1000);
+    el.innerHTML = 'Abrindo o grupo em <b>' + String(Math.ceil(s)) + 's</b>…'; s -= .5; setTimeout(tick, 500);
   }};
   setTimeout(tick, 600);
 }})();
@@ -262,7 +282,8 @@ B_MEIO='''  <div class="prog" aria-label="Inscrição 50% concluída">
     </ul>
   </div>'''
 
-open(OUT+'black-week-obrigado/index.html','w').write(pagina('A','<span id="nome"></span><span id="f">Falta</span> só <em>1 passo</em> para garantir o seu lugar!',A_MEIO,CSS_A,'black-week-obrigado'))
-import os; os.makedirs(OUT+'black-week-obrigado-b',exist_ok=True)
-open(OUT+'black-week-obrigado-b/index.html','w').write(pagina('B','<span id="nome"></span><span id="f">Sua</span> inscrição ainda <em>não terminou</em>',B_MEIO,CSS_B,'black-week-obrigado-b'))
+T_A='<span id="nome"></span><span id="f">Falta</span> só <em>1 passo</em> para garantir o seu lugar!'
+# 21/10: teste de TEMPO na página A (ingresso), com a ajuda "não conseguiu entrar?" nas duas. C = 3 s · D = 1,5 s
+# 21/10: cliente decidiu ficar só nos 3 s + ajuda "Não conseguiu entrar?" (os dados mostraram que dá tempo de ler; 22 apertaram DEPOIS de abrir sozinho)
+open(OUT+'black-week-obrigado/index.html','w').write(pagina('C',T_A,A_MEIO,CSS_A,'black-week-obrigado',3))
 print('ok')

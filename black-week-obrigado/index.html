@@ -16,7 +16,7 @@ s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'
 fbq('init','617884976680212'); fbq('track','PageView');
 </script>
 <style>
-/* 20/10/2026 · obrigado da Black, versão A: a inscrição só termina quando a pessoa entra no grupo do WhatsApp.
+/* 20/10/2026 · obrigado da Black, versão C: a inscrição só termina quando a pessoa entra no grupo do WhatsApp.
    Teste A/B: A = ingresso dourado "pendente" · B = progresso travado em 50%. Sorteio na página de cadastro (cookie bf26obg). */
 
 @font-face{font-family:"Poppins";font-weight:400;font-display:swap;src:url("../assets/fonts/poppins-400.woff2") format("woff2")}
@@ -72,6 +72,11 @@ h1 em { font-style: normal; background: linear-gradient(180deg, var(--gold1), va
 .btn .wa { width: 28px; height: 28px; flex: none; }
 .auto { min-height: 22px; margin: 14px 0 0; font-size: 14px; color: var(--soft); }
 .auto b { color: var(--ink); }
+.volta { margin: 16px auto 0; max-width: 400px; padding: 16px; border: 1.5px solid rgba(250,171,0,.55); border-radius: 16px; background: rgba(250,171,0,.08); }
+.volta p { margin: 0 0 12px; font-size: 15px; color: var(--ink); text-wrap: balance; }
+.volta p b { color: var(--amber); }
+.cta[hidden] { display: none; }
+.btn2 { min-height: 64px; font-size: 18px; box-shadow: 0 12px 32px rgba(30,187,0,.42); }
 
 /* ---------- computador: QR + duas colunas ---------- */
 .qr { display: none; margin: 22px auto 0; padding: 18px; border: 1px solid var(--line); border-radius: 16px; max-width: 400px; background: rgba(255,255,255,.03); }
@@ -178,6 +183,10 @@ h1 em { font-style: normal; background: linear-gradient(180deg, var(--gold1), va
     <a class="btn" id="ir" href="https://thebookbusiness.com.br/black-grupo"><svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 6.9L3.1 29l6.5-1.9c2 1.1 4.1 1.6 6.4 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2 0-4-.6-5.7-1.6l-.4-.2-3.8 1.1 1.1-3.7-.3-.4c-1.1-1.7-1.7-3.7-1.7-5.8C5.2 9.9 10 5.3 16 5.3s10.8 4.6 10.8 10.5S22 26.4 16 26.4zm5.9-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>Entrar no grupo do WhatsApp</a>
   </div>
   <p class="auto" id="auto" aria-live="polite"></p>
+  <div class="volta" id="volta" hidden>
+    <p><b>Não conseguiu entrar?</b> Às vezes o WhatsApp não abre de primeira. Toque no botão abaixo pra tentar de novo.</p>
+    <a class="btn btn2" id="ir2" href="https://thebookbusiness.com.br/black-grupo"><svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 6.9L3.1 29l6.5-1.9c2 1.1 4.1 1.6 6.4 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2 0-4-.6-5.7-1.6l-.4-.2-3.8 1.1 1.1-3.7-.3-.4c-1.1-1.7-1.7-3.7-1.7-5.8C5.2 9.9 10 5.3 16 5.3s10.8 4.6 10.8 10.5S22 26.4 16 26.4zm5.9-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>Tentar de novo</a>
+  </div>
   <div class="qr"><div class="qr-in">
     <img src="../black-week-obrigado/assets/qr-grupo.svg" alt="QR code do grupo da Black Week no WhatsApp" width="124" height="124">
     <p><b>Está no computador?</b>Aponte a câmera do celular para o código e entre no grupo pelo WhatsApp.</p>
@@ -192,23 +201,34 @@ h1 em { font-style: normal; background: linear-gradient(180deg, var(--gold1), va
   try { var n = sessionStorage.getItem('bf26_nome'); if (n) { var p = n.split(/\s+/)[0].slice(0, 24); var e = document.getElementById('nome'); if (e) e.textContent = p + ', '; var f = document.getElementById('f'); if (f) f.textContent = f.textContent.toLowerCase(); } } catch (e) {}
   var bar = document.getElementById('barra'); if (bar) setTimeout(function () { bar.style.width = '50%'; }, 200);
   // teste A/B: registra visita, clique no botão e abertura automática (código do cadastro guardado neste aparelho)
-  var VAR = 'A', TK = ''; try { TK = sessionStorage.getItem('bf26_tk') || ''; } catch (e) {}
+  var VAR = 'C', TK = ''; try { TK = sessionStorage.getItem('bf26_tk') || ''; } catch (e) {}
   var TESTE = /[?&]teste=1/.test(location.search);
+  // 21/10: de onde a pessoa abriu (navegador do Instagram/Facebook costuma não abrir o WhatsApp de primeira)
+  var UA = navigator.userAgent || '', DISP = (/Instagram/i.test(UA) ? 'insta' : /FBAN|FBAV|FB_IAB|FBIOS/i.test(UA) ? 'face' : /Android|iPhone|iPad|Mobile/i.test(UA) ? 'celular' : 'computador') + (/iPhone|iPad/i.test(UA) ? '-ios' : /Android/i.test(UA) ? '-android' : '');
   var AN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
   var ev = function (e) { if (TESTE) return; try { fetch('https://jsqtpsxpaclslakafmvd.supabase.co/rest/v1/rpc/bf26_obg_evento', { method: 'POST', keepalive: true,
-      headers: { apikey: AN, Authorization: 'Bearer ' + AN, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_var: VAR, p_ev: e, p_tk: TK }) }); } catch (x) {} };
+      headers: { apikey: AN, Authorization: 'Bearer ' + AN, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_var: VAR, p_ev: e, p_tk: TK, p_disp: DISP }) }); } catch (x) {} };
   ev('visita');
   var btn = document.getElementById('ir'); var clicou = false;
   btn.addEventListener('click', function () { clicou = true; ev('clique'); });
+  // 21/10 · ajuda na volta: a pessoa saiu pro WhatsApp e voltou pra cá (botão voltar ou troca de app) → "Não conseguiu entrar?"
+  var saiu = false, mostrou = false, el = document.getElementById('auto');
+  var mostrar = function () { if (mostrou) return; mostrou = true; var v = document.getElementById('volta'); v.hidden = false; el.textContent = ''; var cta = document.querySelector('.cta'); if (cta) cta.hidden = true; ev('volta'); try { v.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (x) {} };
+  document.addEventListener('visibilitychange', function () { if (document.hidden) saiu = true; else if (saiu) mostrar(); });
+  window.addEventListener('pagehide', function () { saiu = true; });
+  window.addEventListener('pageshow', function (e2) { if (e2.persisted) mostrar(); });
+  try { var nav = performance.getEntriesByType('navigation')[0]; if (nav && nav.type === 'back_forward') setTimeout(mostrar, 300); } catch (x) {}
+  document.getElementById('ir2').addEventListener('click', function () { ev('clique_volta'); });
   // no celular abre o WhatsApp sozinho em 3 s; o botão fica de reserva. No computador não (o link costuma travar): fica o QR.
   var desktop = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches && !('ontouchstart' in window);
   if (desktop) document.documentElement.classList.add('desk');
+  if (/[?&]teste=volta/.test(location.search)) { mostrar(); return; }
   if (desktop || /[?&]teste=1/.test(location.search)) return;
-  var s = 3, el = document.getElementById('auto');
+  var s = 3;
   var tick = function () {
     if (clicou) return;
     if (s <= 0) { el.textContent = 'Abrindo o WhatsApp…'; ev('auto'); setTimeout(function () { location.href = GRUPO; }, 150); return; }
-    el.innerHTML = 'Abrindo o grupo em <b>' + s + 's</b>…'; s--; setTimeout(tick, 1000);
+    el.innerHTML = 'Abrindo o grupo em <b>' + String(Math.ceil(s)) + 's</b>…'; s -= .5; setTimeout(tick, 500);
   };
   setTimeout(tick, 600);
 })();
