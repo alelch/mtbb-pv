@@ -37,6 +37,11 @@ const VARIANTS_VALID = new Set(["checkout", "lista"]);
 const BW_LIST_ID = 15;            // lista "Black Week Motorizada 2026"
 const BW_TAG_CADASTRO = 382;      // tag "BF-26" (cliente, 19/10; antes 380 bw-motorizada-cadastro)
 const BW_TAG_ALUNO = 383;         // tag "BF-26-aluno" (ja comprou o Metodo; antes 381)
+// 22/10: páginas de alunos (/black-week-alunos/ e /black-week-vitalicio/). Aluno = tag BF-26-aluno + automação 856.
+// Vitalício: tag e automação próprias ainda não existem no AC (cliente cria); até lá recebe a BF-26-aluno e nenhuma automação.
+const BW_TAG_VITALICIO = 0;        // TROCAR pela tag do AC quando o cliente criar
+const BW_AUTOMACAO_ALUNO = 856;    // "Confirmação Inscrição - ALUNO"
+const BW_AUTOMACAO_VITALICIO = 0;  // TROCAR pela automação do AC quando o cliente criar
 const BW_AUTOMACAO = 855;         // "[BF26] [OPERACIONAL] - Confirmação Inscrição" (cliente, 19/10): todo cadastro da página entra nela
 const BW_FIELD_LIVRO = 122;       // campo "BW Livro (test drive)" (%BW_LIVRO%)
 const BW_FASE_ESTAGIO: Record<string, string> = { construcao: "escrevendo", lancamento: "lancando", permanencia: "publicado" };
@@ -113,7 +118,28 @@ async function ehAluno(email: string): Promise<boolean> {
   } catch { return false; } // nunca quebra o cadastro
 }
 
+// 22/10: aluno ou vitalício pela lista da Hotmart (tabela bf26_alunos). null = não é aluno. Erro de rede = deixa passar.
+async function publicoDoEmail(email: string): Promise<string | null | undefined> {
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/rpc/bf26_publico`, {
+      method: "POST", signal: AbortSignal.timeout(5000),
+      headers: { "Content-Type": "application/json", apikey: SB_SERVICE, Authorization: `Bearer ${SB_SERVICE}` },
+      body: JSON.stringify({ p_email: email }),
+    });
+    return r.ok ? await r.json() : undefined;
+  } catch { return undefined; }
+}
+
 async function blackWeek(payload: any, nome: string, email: string, whatsapp: string) {
+  // páginas de alunos: confere o e-mail ANTES de tudo. Fora da lista = 403 email_nao_aluno (a página mostra "Esse e-mail não é válido.").
+  // Vitalício que cair na página de alunos passa (também é aluno); aluno normal na página do vitalício não passa.
+  const publico = ["aluno", "vitalicio"].includes(String(payload.publico)) ? String(payload.publico) : "";
+  if (publico) {
+    const tipo = await publicoDoEmail(email);
+    if (tipo !== undefined && (!tipo || (publico === "vitalicio" && tipo !== "vitalicio"))) return json({ error: "email_nao_aluno" }, 403);
+  }
+  const tagId = publico === "vitalicio" && BW_TAG_VITALICIO ? BW_TAG_VITALICIO : publico ? BW_TAG_ALUNO : BW_TAG_CADASTRO;
+  const autoId = publico === "vitalicio" ? BW_AUTOMACAO_VITALICIO : publico ? BW_AUTOMACAO_ALUNO : BW_AUTOMACAO;
   const [firstName, ...rest] = nome.split(/\s+/);
   const estagio = BW_FASE_ESTAGIO[sanitize(payload.td_fase, 20)] || "";
   const livro = sanitize(payload.td_livro, 48);
@@ -131,8 +157,8 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
   // (ainda não feita). Na página do mistério todo mundo, aluno ou não, recebe a BF-26 e entra na automação 855.
   const aluno = await ehAluno(email);
   const tagAluno: boolean | null = null;
-  const tag = !contactId ? nada : await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: BW_TAG_CADASTRO } }) });
-  const auto = !contactId ? nada : await acFetch("/contactAutomations", { method: "POST", body: JSON.stringify({ contactAutomation: { contact: contactId, automation: BW_AUTOMACAO } }) });
+  const tag = !contactId ? nada : await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: tagId } }) });
+  const auto = !contactId || !autoId ? nada : await acFetch("/contactAutomations", { method: "POST", body: JSON.stringify({ contactAutomation: { contact: contactId, automation: autoId } }) });
   // 19/10: guarda o cadastro no Supabase para o dash da Black no Miolo (recadastro = nova linha). Nunca quebra o cadastro.
   try {
     const u = (k: string, n = 200) => sanitize(payload[k], n) || null;
@@ -144,7 +170,7 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
         utm_term: u("utm_term"), utm_id: u("utm_id"), sck: u("sck"), fbclid: u("fbclid", 300), src: u("src"),
         ac_contact_id: contactId || null, automacao_ok: auto.ok,
         ab: ['A', 'B', 'C'].includes(String(payload.ab)) ? String(payload.ab) : null,   // 19/10: variante do teste A/B (só quem foi sorteado)
-        obg: ['A', 'B', 'C', 'D'].includes(String(payload.obg)) ? String(payload.obg) : null, obg_tk: sanitize(payload.obg_tk, 32) || null }),   // 20/10: teste A/B da página de obrigado
+        obg: ['A', 'B', 'C', 'D'].includes(String(payload.obg)) ? String(payload.obg) : null, obg_tk: sanitize(payload.obg_tk, 32) || null, publico: publico || null }),   // 20/10: teste A/B da página de obrigado
     });
   } catch { /* o cadastro no AC já valeu */ }
   return json({

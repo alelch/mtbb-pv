@@ -1,0 +1,1194 @@
+<!-- GERADA por _tools/gerar_black_alunos.py a partir de /black-week-misterio/. Não editar aqui. -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Black Week Motorizada · Cashback de alunos</title>
+<meta name="description" content="Cashback de R$1.500 para alunos do Método The Book Business na Black Week Motorizada. Aula ao vivo dia 9 de novembro, às 20h.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-alunos/">
+<link rel="icon" type="image/webp" href="../lancamento90d/favicon.webp">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Black Week Motorizada · Cashback de alunos">
+<meta property="og:description" content="Cashback de R$1.500 para alunos do Método The Book Business na Black Week Motorizada. Aula ao vivo dia 9 de novembro, às 20h.">
+<meta property="og:image" content="https://metodo.thebookbusiness.com.br/black-week/assets/og-black-week.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://connect.facebook.net">
+<!-- Montserrat só para o logo da Black Week; o texto é Poppins (local, a mesma das PVs) -->
+<link rel="preload" as="image" href="../black-week/assets/infinity.webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/poppins-400.woff2">
+<link rel="preload" as="image" href="../black-week/assets/dany-bw-m.webp" media="(max-width: 899px)">
+<link rel="preload" as="image" href="../black-week/assets/dany-bw.webp" media="(min-width: 900px)">
+<!-- 19/10 (cliente: "o connect rate da página tá terrível"): aqui o pixel NÃO usa o ../pixel.js, que só baixa o fbevents
+     no ocioso/1º gesto (até 3 s) e deixava de contar quem saía antes (connect rate ~65%). Carrega na hora, só o pixel
+     OFICIAL (onde a campanha da Black otimiza e onde o Sendflow dispara o Lead). -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','617884976680212');
+fbq('track','PageView');
+</script>
+<script src="../gtag.js" defer></script>
+<style>
+/* =========================================================================
+   BLACK WEEK MOTORIZADA · página de cadastro
+   Estrutura: tokens → base → componentes → seções (na ordem da página) → movimento
+   ========================================================================= */
+
+/* ---------- fontes ---------- */
+@font-face { font-family: "Poppins"; font-weight: 300; font-display: swap; src: url("../assets/fonts/poppins-300.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 400; font-display: swap; src: url("../assets/fonts/poppins-400.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 500; font-display: swap; src: url("../assets/fonts/poppins-500.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 600; font-display: swap; src: url("../assets/fonts/poppins-600.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 700; font-display: swap; src: url("../assets/fonts/poppins-700.woff2") format("woff2"); }
+/* Montserrat só para o logo da Black Week: local, para não travar o desenho da página */
+@font-face { font-family: "Montserrat"; font-weight: 500; font-display: swap; src: url("../black-week/assets/fonts/montserrat-500-latin.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-style: italic; font-weight: 900; font-display: swap; src: url("../black-week/assets/fonts/montserrat-900i-latin.woff2") format("woff2"); }
+@font-face { font-family: "Archivo LMB"; font-weight: 900; font-display: swap; src: url("../black-week/assets/fonts/archivo-900-latin.woff2") format("woff2"); }
+
+/* quebra de linha: parágrafos e itens evitam palavra sozinha na última linha */
+p, li, small, figcaption { text-wrap: pretty; }
+
+/* ---------- tokens ---------- */
+:root {
+  --bg: #000;
+  --bg-2: #0a0a0b;
+  --ink: #fff;
+  --ink-2: #d2cec6;
+  --ink-3: #8b877f;
+  --line: #222127;
+  --amber: #faab00;
+  --yellow: #ffcc00;
+  --green: #1ebb00; /* botão de cadastro, o mesmo verde da página do Aniversário */
+  --err: #ff6b5e;
+  --red: #d6483c;
+  --teal: 26, 88, 90;
+  --sky: #5ad2cf; /* azul da data, o mesmo tom da página da Black 2025 */
+  --gold: linear-gradient(100deg, #9c5414 0%, #e08a12 18%, #faab00 32%, #ffe6a8 46%, #faab00 58%, #c9731a 78%, #8a4a12 100%);
+  /* cores das fases, as mesmas do LOMBADA (clareadas para fundo preto) */
+  --f-construcao: #3fae84;
+  --f-lancamento: #fc783c;
+  --f-permanencia: #faab00;
+  /* telas do app (papel claro, como no LOMBADA) */
+  --app-paper: #f3f0e8;
+  --app-ink: #1a1a1a;
+  --app-soft: #6b665d;
+  --app-line: #e3ded2;
+  --app-chip: #efe9dc;
+  --app-ochre: #8a5a00;
+  /* ritmo */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --pop: cubic-bezier(.34, 1.56, .64, 1);
+  /* ritmo vertical: 12 rótulo→título, 16 título→texto, 40 cabeçalho→conteúdo, 48 entre blocos, --sec de folga em cada seção */
+  --sec: 64px;
+  --gutter: 20px;
+  --infinity: url("../black-week/assets/infinity.webp");
+}
+@media (min-width: 900px) { :root { --sec: 104px; } }
+
+/* ---------- base ---------- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.5 "Poppins", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+b, strong { font-weight: 700; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--amber); color: #111; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+.amber { color: var(--amber); }
+/* estante da tela de entrada do LOMBADA atrás da página: a primeira dobra fica preta e os livros aparecem conforme a pessoa desce.
+   Camada própria (.estante) com opacidade ajustada no script: só ela muda na rolagem, nada mais da página é recalculado */
+.estante { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0; will-change: opacity; transform: translateZ(0);
+  background: linear-gradient(rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)), url("../black-week-misterio/assets/estante.webp") center top / 820px auto repeat; }
+@media (min-width: 900px) { .estante { background-size: auto, 1300px auto; } }
+.wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter); }
+.center { text-align: center; }
+/* textura de filme quase imperceptível */
+body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: .05; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* ---------- tipografia de seção ---------- */
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); }
+.eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--amber); }
+.h2 { margin-top: 12px; font-size: clamp(30px, 8.4vw, 50px); font-weight: 600; line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
+/* destaque de título: o mesmo dourado com brilho do "SONHOU" (texto pequeno continua em .amber) */
+.gold { background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.lede { margin-top: 16px; max-width: 540px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.55; color: var(--ink-2); text-wrap: balance; }
+.center .lede { margin-left: auto; margin-right: auto; }
+.blk { position: relative; padding: var(--sec) 0; }
+
+/* ---------- segredo (versão mistério: nenhuma tela do LOMBADA aparece) ---------- */
+.secret__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: center; }
+.nots { margin-top: 28px; list-style: none; display: grid; gap: 10px; }
+.nots li { display: flex; align-items: center; gap: 12px; font-size: clamp(17px, 4.6vw, 21px); font-weight: 500; color: var(--ink-2); }
+.nots li::before { content: ""; flex: none; width: 18px; height: 1.5px; background: var(--ink-3); }
+/* três pistas do segredo: cada uma com um cadeado (alinhado no topo, vale para frase de 2 linhas) */
+.pistas { width: 100%; margin-top: 26px; list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; max-width: 520px; }
+.pistas li { min-width: 0; text-wrap: balance; }
+.pistas li { display: flex; gap: 14px; align-items: flex-start; text-align: left; font-size: clamp(17px, 4.6vw, 21px); font-weight: 500; line-height: 1.35; }
+.pistas span { flex: none; display: grid; place-items: center; width: 34px; height: 34px; margin-top: -3px; border-radius: 50%; border: 1.5px solid rgba(250, 171, 0, .6); background: rgba(250, 171, 0, .08); color: var(--amber); }
+.pistas svg { width: 16px; height: 16px; }
+/* pistas ainda trancadas: frases verdadeiras, só que borradas (não dá para selecionar) */
+.pistas__x em { min-width: 0; overflow: hidden; white-space: nowrap; font-style: normal; filter: blur(6px); opacity: .55; user-select: none; -webkit-user-select: none; pointer-events: none; }
+.pistas__x span { opacity: .45; }
+/* borrão em degraus: 1ª e 2ª abertas, a 3ª quase aberta (lê-se), daí em diante cada vez mais trancada */
+.pistas__q em { font-style: normal; filter: blur(.9px); opacity: .85; }
+.pistas__q span { opacity: .8; }
+.pistas__x:nth-child(4) em { filter: blur(2.4px); opacity: .72; }
+.pistas__x:nth-child(5) em { filter: blur(4.5px); opacity: .58; }
+.pistas__x:nth-child(6) em { filter: blur(7px); opacity: .44; }
+.pistas__x:nth-child(7) em { filter: blur(10px); opacity: .32; }
+.pistas__x:nth-child(4) span { opacity: .6; }
+.pistas__x:nth-child(6) span { opacity: .32; }
+.pistas__x:nth-child(7) span { opacity: .22; }
+/* reveladas: cadeado aberto; trancadas: fechado e apagado */
+.nots__punch { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); max-width: 460px; font-size: clamp(19px, 5.2vw, 24px); font-weight: 600; line-height: 1.3; text-wrap: balance; }
+.vault { display: flex; justify-content: center; }
+.vault__phone { position: relative; width: min(300px, 78vw); aspect-ratio: 9 / 18; border: 10px solid #1b1a1f; border-radius: 42px; overflow: hidden;
+  background: linear-gradient(180deg, #16151a, #0c0c0e); box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .9), 0 0 90px -30px rgba(250, 171, 0, .35); }
+.vault__blur { position: absolute; inset: 0; padding: 38px 20px; display: grid; align-content: start; gap: 14px; filter: blur(9px); opacity: .7; }
+.vault__blur i { display: block; height: 54px; border-radius: 14px; background: linear-gradient(90deg, rgba(250, 171, 0, .35), rgba(255, 255, 255, .08)); }
+.vault__blur i:nth-child(1) { height: 22px; width: 55%; }
+.vault__blur i:nth-child(2) { height: 90px; }
+.vault__blur i:nth-child(odd) { background: linear-gradient(90deg, rgba(255, 255, 255, .14), rgba(250, 171, 0, .2)); }
+.vault__lock { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 24px; text-align: center;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, .55), rgba(0, 0, 0, .15) 70%); }
+.vault__lock svg { width: 54px; height: 54px; padding: 13px; border: 1.5px solid rgba(250, 171, 0, .6); border-radius: 50%; color: var(--amber); background: rgba(0, 0, 0, .5);
+  animation: headlight 2.4s ease-in-out infinite; }
+.vault .vault__btn { width: auto; min-height: 46px; margin-top: 4px; padding: 0 20px; font-size: 14px; letter-spacing: .02em; white-space: nowrap; }
+.vault__lock p { max-width: 190px; font-size: 12px; font-weight: 600; letter-spacing: .16em; line-height: 1.6; text-transform: uppercase; }
+
+/* ---------- para todo autor ---------- */
+.ages { padding: var(--sec) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; overflow: hidden; }
+.ages .h2 { max-width: 720px; margin: 12px auto 40px; }
+/* linha do tempo do livro: um ponto por fase, na cor do LOMBADA (vertical no celular, horizontal no computador) */
+.ages__rows { position: relative; display: grid; gap: 30px; width: max-content; max-width: 100%; margin: 0 auto; list-style: none; text-align: left; }
+.ages__rows::before { content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 2px; border-radius: 2px;
+  background: linear-gradient(var(--f-construcao), var(--f-lancamento), var(--f-permanencia)); opacity: .5; }
+.ages__r { --c: var(--ink); position: relative; display: flex; align-items: center; gap: 18px; color: var(--c); }
+.ages__dot { flex: none; position: relative; width: 24px; height: 24px; border-radius: 50%; background: #000; border: 2px solid var(--c); box-shadow: 0 0 18px color-mix(in srgb, var(--c) 45%, transparent); }
+.ages__dot::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--c); }
+.ages__r b { display: block; font-size: clamp(22px, 6.4vw, 34px); font-weight: 600; line-height: 1.05; letter-spacing: -.01em; text-transform: uppercase; }
+.ages__r small { display: block; margin-top: 6px; font-size: clamp(15px, 4.2vw, 19px); font-weight: 500; line-height: 1.35; color: var(--ink-2); }
+.ages__r br.d2 { display: none; }
+.ages__r.c1 { --c: var(--f-construcao); }
+.ages__r.c2 { --c: var(--f-lancamento); }
+.ages__r.c3 { --c: var(--f-permanencia); }
+@media (min-width: 900px) {
+  .ages__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; width: 100%; max-width: 980px; text-align: center; }
+  .ages__rows::before { left: 16.6%; right: 16.6%; top: 11px; bottom: auto; width: auto; height: 2px; background: linear-gradient(90deg, var(--f-construcao), var(--f-lancamento), var(--f-permanencia)); }
+  .ages__r { flex-direction: column; gap: 16px; }
+  .ages__r br.d2 { display: inline; }
+  .ages__r small { margin-top: 12px; }
+}
+/* fechamento das fases: "1º —— 10º" em dourado ligados pelo fio das 3 fases */
+.ages__end { max-width: 620px; margin: 52px auto 0; }
+.ages__n { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 6px; font-size: clamp(40px, 11vw, 64px); font-weight: 700; line-height: 1.1; letter-spacing: -.03em; }
+.ages__n span { background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ages__n i { display: block; width: 80px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, var(--f-construcao), var(--f-lancamento), var(--f-permanencia)); }
+.ages__end-a { font-size: clamp(19px, 5.2vw, 26px); font-weight: 600; line-height: 1.2; }
+.ages__end-b { margin-top: 4px; font-size: clamp(15px, 4.2vw, 19px); color: var(--ink-2); text-wrap: balance; }
+.ages__foot .amber { display: block; text-wrap: balance; }
+.ages__foot { max-width: 640px; margin: 48px auto 0; padding-top: 32px; border-top: 1px solid var(--line); font-size: clamp(19px, 5.2vw, 26px); font-weight: 500; line-height: 1.35; text-wrap: balance; }
+@media (min-width: 900px) {
+  .secret__grid { max-width: 920px; margin: 0 auto; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; }
+}
+
+/* ---------- depoimentos: uma palavra de cada autor (sente, mas não vê) ---------- */
+.depo { border-top: 1px solid var(--line); }
+.depo__pre { display: flex; align-items: center; justify-content: center; gap: 8px; width: max-content; max-width: 100%; margin: 4px auto 14px; padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, .12); border-radius: 99px; background: rgba(255, 255, 255, .04);
+  font-size: clamp(13px, 3.6vw, 15px); font-weight: 500; font-style: italic; letter-spacing: 0; line-height: 1.3; color: var(--ink-2); }
+.depo__pre svg { flex: none; width: 15px; height: 15px; color: var(--amber); }
+.words { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 40px; }
+.word { position: relative; display: flex; flex-direction: column; align-items: center; padding: 22px 10px 18px; border: 1px solid #222126; border-radius: 14px; background: #121114; text-align: center; }
+.word strong { max-width: 100%; font-size: clamp(18px, 4.8vw, 24px); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; color: var(--amber); }
+.word > p:not(.word__by) { margin: 10px 0 14px; font-size: 13px; line-height: 1.45; color: var(--ink-2); text-wrap: balance; }
+.word__by { margin-top: auto; font-size: 11px; line-height: 1.4; color: var(--ink-3); }
+.word__by b { display: block; font-weight: 600; color: var(--ink-2); }
+.word__av { width: 44px; height: 44px; margin-bottom: 12px; border-radius: 50%; object-fit: cover; background: #2a292e; color: #5a5860; }
+.word__av svg { width: 100%; height: 100%; }
+/* casos do Método: 3 esteiras com foto, cada uma correndo para um lado (param no toque/mouse) */
+.casos { display: grid; gap: 12px; margin-top: 40px; }
+.casos-belt { overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.casos-track { display: flex; gap: 12px; width: max-content; animation: belt 70s linear infinite; }
+.casos-belt.rev .casos-track { animation-direction: reverse; animation-duration: 80s; }
+.casos-belt:hover .casos-track, .casos-belt.hold .casos-track { animation-play-state: paused; }
+.caso { flex: none; display: flex; align-items: center; gap: 14px; width: 300px; padding: 14px 16px; border: 1px solid #222126; border-radius: 14px; background: #121114; }
+.caso img { flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(250, 171, 0, .5); }
+.caso figcaption { min-width: 0; line-height: 1.25; }
+.caso strong { display: block; font-size: 15px; font-weight: 700; color: var(--amber); }
+.caso b { display: block; margin-top: 5px; font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.caso span { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 11.5px; color: var(--ink-3); }
+.rm .casos-belt, .no-js .casos-belt { overflow-x: auto; }
+.rm .casos-track { animation: none; }
+.word.soon strong { filter: blur(7px); user-select: none; }
+.word__soon { display: inline-block; margin-top: 4px; padding: 3px 9px; border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); }
+.word .ex { position: absolute; top: 8px; right: 8px; padding: 2px 6px; border-radius: 99px; background: #c0392b; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
+@media (min-width: 900px) {
+  .words { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 56px; max-width: 920px; margin-left: auto; margin-right: auto; }
+}
+
+/* ---------- logos ---------- */
+/* Black Week Motorizada (vetor, o mesmo do VD_05) */
+.bwlogo { --bw-ink: #f4efe4; --bw-amber: #faab00; --bw-page: transparent;
+  display: inline-flex; flex-direction: column; align-items: flex-start; font-family: "Montserrat", sans-serif; color: var(--bw-ink); font-size: clamp(40px, 11.5vw, 54px); }
+.bwlogo .r1, .bwlogo .r2 .w { display: block; font-style: italic; font-weight: 900; line-height: .84; letter-spacing: -.035em; }
+.bwlogo .r1 { margin-left: .05em; }
+.bwlogo .r2 { display: flex; align-items: center; margin-top: .02em; }
+.bwlogo .book { display: block; width: .95em; height: .92em; margin: .02em 0 0 -.01em; overflow: visible; }
+.bwlogo .book .lines { animation: rev 1.6s cubic-bezier(.5, 0, .5, 1) infinite; }
+.bwlogo .sub { align-self: center; display: flex; align-items: center; gap: .57em; margin-top: .42em; font-style: normal; font-weight: 500; font-size: .29em; letter-spacing: .34em; }
+.bwlogo .sub .t { margin-right: -.34em; }
+.bwlogo .sub::before, .bwlogo .sub::after { content: ""; width: 1.25em; height: .12em; border-radius: .1em; background: var(--bw-amber); }
+/* LOMBADA (lombadinhas + Archivo 900, igual ao Wordmark.jsx do app) */
+.lmb { display: inline-flex; align-items: center; white-space: nowrap; font: 900 1em/1 "Archivo LMB", "Arial Black", Impact, sans-serif; letter-spacing: -.03em; color: var(--app-ink); }
+.lmb-ic { flex: none; width: .84em; height: .82em; margin-right: .26em; position: relative; top: -.03em; }
+
+/* ---------- botão ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; padding: 0 20px;
+  border: 0; border-radius: 6px; background: var(--green); color: #fff; cursor: pointer; text-decoration: none;
+  font: 600 clamp(16px, 4.6vw, 21px)/1 "Poppins", sans-serif; letter-spacing: .01em; text-transform: uppercase;
+  transition: transform .15s, box-shadow .2s, filter .2s; }
+.btn:hover { filter: brightness(1.06); transform: translateY(-1px); box-shadow: 0 12px 28px -14px rgba(30, 187, 0, .8); }
+.btn:active { transform: scale(.99); }
+.btn[disabled] { opacity: .65; cursor: wait; transform: none; }
+.btn svg { flex: none; width: 26px; height: 20px; }
+
+/* ---------- formulário de cadastro (o mesmo nos dois lugares) ---------- */
+.lead-form { max-width: 440px; margin: 30px auto 0; text-align: left; }
+.lead-form .hint { margin-bottom: 10px; text-align: center; font-size: 15px; color: var(--ink-2); }
+.lead-form form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
+.fld { grid-column: 1 / -1; }
+.fld.half { grid-column: auto; }
+.fld input { width: 100%; height: 50px; padding: 0 14px; border: 1.5px solid var(--amber); border-radius: 6px; outline: none;
+  background: rgba(0, 0, 0, .35); color: var(--ink); font: 400 16px/1 "Poppins", sans-serif; transition: box-shadow .15s, border-color .15s, background .15s; }
+.fld input::placeholder { color: #9a968e; }
+.fld input:focus { background: rgba(250, 171, 0, .06); box-shadow: 0 0 0 3px rgba(250, 171, 0, .16); }
+.fld.invalid input { border-color: var(--err); }
+.fld .msg { display: none; margin-top: 4px; font-size: 12px; font-weight: 600; color: var(--err); }
+.fld.invalid .msg { display: block; }
+.lead-form .btn { grid-column: 1 / -1; margin-top: 2px; }
+.lead-form .fine { margin-top: 10px; text-align: center; font-size: 13px; line-height: 1.5; color: var(--ink-2); text-wrap: balance; }
+.lead-form .form-err { display: none; margin-top: 8px; text-align: center; font-size: 14px; font-weight: 600; color: var(--err); }
+.lead-form .done { display: none; padding: 22px 18px; border: 1.5px solid var(--amber); border-radius: 12px; background: rgba(250, 171, 0, .12); text-align: center; }
+.lead-form .done .big { font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
+.lead-form .done__next { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--amber); text-underline-offset: 3px; }
+.lead-form .done p + p { margin-top: 6px; font-size: 15px; color: var(--ink-2); }
+.lead-form .lgpd { margin-top: 6px; text-align: center; font-size: 11px; line-height: 1.5; color: var(--ink-3); }
+.lead-form .lgpd a { color: var(--ink-2); }
+.lead-form.is-done .hint, .lead-form.is-done form, .lead-form.is-done .fine, .lead-form.is-done .lgpd { display: none; }
+.lead-form.is-done .done { display: block; animation: pop .5s var(--pop); }
+
+/* ---------- telas do app (test drive, oportunidades, ideias) ---------- */
+.bk { background: linear-gradient(transparent 62%, rgba(250, 171, 0, .45) 62%); }
+.panel { position: relative; z-index: 1; display: flex; flex-direction: column; max-width: 460px; margin: 0 auto; overflow: hidden;
+  border-radius: 22px; background: var(--app-paper); color: var(--app-ink); box-shadow: 0 0 0 1px #2e2d33, 0 40px 80px -30px rgba(0, 0, 0, .95); }
+.panel__top { padding: 18px 18px 14px; border-bottom: 1px solid var(--app-line); }
+.panel__k { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.panel__k .lmb { font-size: 14px; }
+.panel__k .tg { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--app-soft); }
+.panel__t { margin-top: 10px; font-size: 20px; font-weight: 700; line-height: 1.2; }
+.panel__d { margin-top: 4px; font-size: 13px; line-height: 1.45; color: var(--app-soft); }
+.panel__foot { padding: 0 18px 16px; font-size: 11px; line-height: 1.45; color: var(--app-soft); }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pills button { padding: 8px 12px; border: 1px solid #d3ccbd; border-radius: 99px; background: #fff; color: #3a3833; cursor: pointer; font: 500 12px/1 "Poppins", sans-serif; transition: background .2s, color .2s, border-color .2s; }
+.pills button:hover { border-color: #1a1a1a; }
+.pills button[aria-pressed="true"] { background: #1a1a1a; border-color: #1a1a1a; color: #fff; }
+
+/* selo "interativo" e pulso no primeiro lugar para tocar */
+.try-wrap { position: relative; z-index: 2; margin-bottom: 14px; text-align: center; }
+.try { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; background: rgba(250, 171, 0, .12);
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
+.try i { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+.try i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--amber); animation: ping 1.6s cubic-bezier(0, 0, .2, 1) infinite; }
+.pulse { position: relative; }
+.pulse::after { content: ""; position: absolute; inset: -4px; border: 2px solid var(--amber); border-radius: inherit; pointer-events: none; animation: ring 1.6s cubic-bezier(0, 0, .2, 1) infinite; }
+
+/* ---------- 0. faixa do topo ---------- */
+.topbar { position: relative; z-index: 5; padding: 11px 10px; white-space: nowrap; background: var(--yellow); color: #111; text-align: center;
+  font-size: clamp(10px, 3vw, 13px); font-weight: 500; letter-spacing: .02em; text-transform: uppercase; }
+
+/* ---------- 1. abertura ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; }
+/* infinito dourado ampliado (como na página do Aniversário): só a grande volta aparece, nunca o cruzamento */
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none; opacity: .46;
+  background: var(--infinity) no-repeat 42vw -24px / 1020px auto; }
+/* brilho petróleo à esquerda + degradê até o preto */
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 72%, #000 100%), radial-gradient(ellipse 58% 42% at 4% 50%, rgba(var(--teal), .55), rgba(var(--teal), 0) 72%); }
+.hero__in { position: relative; padding: 22px 0 60px; }
+.hero__main { text-align: center; }
+.proof { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-2); }
+.proof img { flex: none; width: auto; height: 21px; }
+.proof span { text-align: left; line-height: 1.3; }
+.proof b { color: var(--ink); }
+.logo-box { position: relative; margin-top: 22px; display: flex; justify-content: center; }
+/* TCHAN do logo (o desenho não muda): entra acelerando e freia, deixa rastro, reflexo de lataria e o livro pulsando como farol */
+.logo-box .bwlogo { position: relative; animation: arrive 1.15s var(--ease) .15s both; }
+.logo-box .bwlogo::after { content: ""; position: absolute; inset: -10% -20%; pointer-events: none; mix-blend-mode: color-dodge;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .55) 48%, rgba(255, 236, 190, .35) 52%, transparent 62%) no-repeat;
+  background-size: 260% 100%; background-position: 140% 0; animation: sheen 5.5s ease-in-out 1.6s infinite; }
+.logo-box .bwlogo .book { animation: headlight 2.4s ease-in-out 1.3s infinite; }
+.streaks { position: absolute; top: 50%; left: 50%; width: 0; height: 0; pointer-events: none; }
+.streaks i { position: absolute; right: 60px; height: 3px; width: 160px; border-radius: 3px; opacity: 0;
+  background: linear-gradient(90deg, rgba(250, 171, 0, 0), rgba(250, 171, 0, .9)); animation: streak 1s var(--ease) .2s both; }
+.streaks i:nth-child(1) { top: -34px; width: 120px; }
+.streaks i:nth-child(2) { top: -6px; width: 190px; animation-delay: .26s; }
+.streaks i:nth-child(3) { top: 22px; width: 140px; animation-delay: .32s; }
+.h1 { margin-top: 26px; text-transform: uppercase; }
+.h1__a { display: block; font-size: clamp(14px, 4.1vw, 20px); font-weight: 400; line-height: 1.4; letter-spacing: .16em; color: var(--ink); }
+.h1__b { display: block; margin-top: 2px; font-size: clamp(60px, 19vw, 112px); font-weight: 700; line-height: .95; letter-spacing: -.02em;
+  background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: gold 6s linear infinite; filter: drop-shadow(0 8px 34px rgba(250, 171, 0, .22)); }
+.h1-plus { margin-top: 6px; font-size: clamp(13px, 3.6vw, 17px); font-weight: 500; letter-spacing: .02em; color: var(--ink); }
+.h1-plus b { font-weight: 700; color: var(--amber); }
+.h1-sub { margin-top: 10px; font-size: clamp(13px, 3.8vw, 18px); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); text-wrap: balance; }
+/* data de abertura: só a data, sempre em uma linha */
+.when-pill { display: inline-block; margin-top: 18px; padding: 8px 18px; border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; background: rgba(250, 171, 0, .08);
+  font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; color: var(--ink); }
+/* aula de abertura, no desenho da MasterClass da Black 2025: "revelada" em laranja fino, título inteiro em seminegrito branco, data em azul */
+.aula { margin-top: 16px; text-transform: uppercase; }
+.aula__t { font-size: clamp(14px, 4.1vw, 24px); font-weight: 600; line-height: 1.25; letter-spacing: .04em; margin-right: -.04em; color: var(--ink); white-space: nowrap; }
+.aula__k { margin-right: -.16em; font-size: clamp(12px, 3.4vw, 18px); font-weight: 400; letter-spacing: .16em; color: var(--amber); }
+.aula__d { margin-top: 4px; margin-right: -.12em; font-size: clamp(11px, 3.2vw, 17px); font-weight: 400; letter-spacing: .12em; color: var(--sky); white-space: nowrap; }
+.fecho__offer .fecho__s { margin-top: 10px; font-size: clamp(14px, 3.9vw, 16px); }
+.fecho__offer .fecho__date { margin: 18px 0 0; }
+.fecho__offer .fecho__date + .fecho__s { margin-top: 18px; }
+.pitch { margin: 22px auto 0; max-width: 470px; font-size: clamp(16px, 4.4vw, 19px); line-height: 1.45; }
+.dany-m { width: 280px; height: auto; margin: 18px auto -18px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
+.dany-d, .dany-q, .pitch__by, .dany-glow { display: none; }
+/* celular e telas médias: a foto vem antes, a frase logo abaixo (nunca por cima) com a assinatura da Dany */
+@media (max-width: 1179px) {
+  .dany-m { position: relative; z-index: 1; margin-bottom: 0; }
+  .dany-glow { display: block; position: relative; height: 0; }
+  .dany-glow::before { content: ""; position: absolute; left: 50%; top: 18px; width: 300px; height: 260px; transform: translateX(-50%); border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(250, 171, 0, .28), rgba(250, 171, 0, 0) 68%); filter: blur(10px); }
+  .dany-m { width: 250px; -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); }
+  .pitch { position: relative; z-index: 2; max-width: 360px; margin: 18px auto 0; padding: 0 8px; line-height: 1.3; }
+  .pitch i { display: block; font-size: 23px; letter-spacing: -.01em; }
+  .pitch__by { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 12px; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); text-shadow: none; }
+  .pitch__by::before, .pitch__by::after { content: ""; width: 18px; height: 1.5px; background: var(--amber); }
+}
+
+/* ---------- 2. a cena do sonho (guiada pela rolagem; --p vai de 0 a 1) ---------- */
+/* rolagem normal: a página anda a cada gesto (a cena presa na tela parecia travada) */
+.dream { position: relative; padding: var(--sec) 0; overflow: hidden; text-align: center; }
+/* título grande + caminho numerado nas cores das fases do LOMBADA (verde, laranja, amarelo) */
+.dream__lead { font-size: clamp(32px, 9vw, 54px); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; text-wrap: balance; }
+.dream__list { position: relative; list-style: none; display: grid; gap: 34px; width: max-content; max-width: 100%; margin: 40px auto 0; text-align: left; }
+.dream__list::before { content: ""; position: absolute; left: 21px; top: 22px; bottom: 22px; width: 2px; border-radius: 2px;
+  background: linear-gradient(var(--f-construcao), var(--f-lancamento), var(--f-permanencia)); opacity: .55; }
+.dream__list li { --c: var(--f-construcao); position: relative; display: flex; align-items: center; gap: 16px; font-size: clamp(17px, 4.7vw, 22px); font-weight: 500; line-height: 1.35; text-wrap: pretty;
+  opacity: .25; transform: translateY(8px); transition: opacity .6s ease, transform .6s var(--ease); }
+.dream__list li.f2 { --c: var(--f-lancamento); }
+.dream__list li.f3 { --c: var(--f-permanencia); }
+.dream__list li.lit { opacity: 1; transform: none; }
+.dream__n { flex: none; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #000; border: 2px solid var(--c);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--c) 40%, transparent); font-size: 14px; font-weight: 700; color: var(--c); }
+.dream__list em { font-style: normal; font-weight: 600; color: var(--ink); }
+.dream__auto { margin-top: clamp(40px, 8vw, 56px); font-size: clamp(20px, 5.4vw, 30px); font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+.dream__end { position: relative; margin-top: clamp(72px, 14vw, 120px); padding: 40px 0 8px; }
+.dream__ring { position: absolute; left: 50%; top: 50%; z-index: -1; width: min(640px, 130vw); aspect-ratio: 480 / 540; pointer-events: none;
+  background: var(--infinity) 0% 50% / 200% 100% no-repeat; opacity: 0; transform: translate(-50%, -50%) scale(.85); transition: opacity 1.4s ease, transform 2.2s var(--ease); }
+.dream__glow { position: absolute; left: 50%; top: 50%; z-index: -1; width: 760px; height: 520px; transform: translate(-50%, -50%); pointer-events: none;
+  background: radial-gradient(ellipse, rgba(250, 171, 0, .26), rgba(250, 171, 0, 0) 62%); }
+.dream__end.in .dream__ring { opacity: .4; transform: translate(-50%, -50%) scale(1); }
+.dream__end { isolation: isolate; }
+.dx__pre { max-width: 300px; margin: 0 auto; font-size: clamp(13px, 3.8vw, 17px); font-weight: 300; letter-spacing: .14em; line-height: 1.5; text-transform: uppercase; text-wrap: balance; color: var(--ink-3); }
+/* o nome aparece aqui pela primeira vez: o nome, não o conteúdo */
+.dx__pre2 { font-size: clamp(20px, 5.6vw, 30px); font-weight: 500; color: var(--ink-2); text-wrap: balance; }
+.dx__name.dx__name--big { margin-top: 14px; font-size: clamp(44px, 13vw, 88px); }
+.dx__name.dx__name--big .lmb { margin-left: 0; font-size: 1em; }
+.dx__name { margin-top: 18px; font-size: clamp(20px, 5.6vw, 30px); font-weight: 500; }
+.h2 .lmb, .fecho__t .lmb { color: var(--ink); }
+.h2 .lmb { vertical-align: -.04em; }
+.dx__name .lmb { margin-left: .15em; font-size: 1.15em; color: var(--ink); }
+.dx__now { margin-top: 10px; font-size: clamp(50px, 15vw, 128px); font-weight: 700; line-height: 1; letter-spacing: -.035em;
+  background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
+.dx__tag { max-width: 520px; margin: 22px auto 0; font-size: clamp(16px, 4.4vw, 21px); line-height: 1.45; text-wrap: balance; }
+.dx__cue { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; padding: 12px 20px; border: 1px solid rgba(250, 171, 0, .5); border-radius: 99px;
+  font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: background .2s; }
+.dx__cue:hover { background: rgba(250, 171, 0, .1); }
+.dx__cue svg { width: 16px; height: 16px; animation: bob 1.6s ease-in-out infinite; }
+
+/* ---------- 3. test drive ---------- */
+.drive { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(250, 171, 0, .1), rgba(0, 0, 0, 0) 70%), var(--bg-2); }
+.drive__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+.ctrl { display: grid; gap: 18px; margin-top: 28px; }
+.ctrl label, .ctrl .lbl { display: block; margin-bottom: 8px; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
+.ctrl input { width: 100%; height: 56px; padding: 0 16px; border: 1.5px solid #34323a; border-radius: 10px; outline: none; background: #141416; color: var(--ink);
+  font: 500 17px/1 "Poppins", sans-serif; transition: border-color .15s, box-shadow .15s; }
+.ctrl input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(250, 171, 0, .2); }
+.seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.seg button { --c: var(--amber); min-height: 64px; padding: 8px 6px; border: 1.5px solid #34323a; border-radius: 10px; background: #141416; color: var(--ink-2);
+  cursor: pointer; font: 600 13px/1.2 "Poppins", sans-serif; transition: border-color .2s, background .2s, color .2s, box-shadow .2s; }
+.seg button small { display: block; margin-top: 4px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.seg button[data-f="construcao"] { --c: var(--f-construcao); }
+.seg button[data-f="lancamento"] { --c: var(--f-lancamento); }
+.seg button[aria-pressed="true"] { border-color: var(--c); color: var(--ink); background: color-mix(in srgb, var(--c) 14%, #141416); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent); }
+.seg button[aria-pressed="true"] small { color: var(--c); }
+.ctrl .note { font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.ctrl .note b { color: var(--ink); }
+.drive__claim { margin-top: 14px; font-size: 12.5px; line-height: 1.5; color: var(--ink-3); }
+
+.phone { position: relative; width: 100%; max-width: 390px; margin: 0 auto; padding: 12px; border-radius: 42px; background: linear-gradient(160deg, #2b2a2f, #0e0e10 60%);
+  box-shadow: 0 0 0 1px #34333a, 0 40px 80px -30px rgba(0, 0, 0, .9), 0 0 80px -30px rgba(250, 171, 0, .22); animation: float 6s ease-in-out infinite; }
+.phone::before { content: ""; position: absolute; top: 22px; left: 50%; z-index: 3; width: 92px; height: 24px; border-radius: 20px; background: #000; transform: translateX(-50%); }
+.screen { position: relative; display: flex; flex-direction: column; height: 620px; overflow: hidden; border-radius: 32px; background: var(--app-paper); color: var(--app-ink); }
+.app-top { padding: 52px 18px 14px; border-bottom: 1px solid var(--app-line); }
+.app-brand { display: flex; align-items: center; justify-content: space-between; }
+.app-brand .lmb { font-size: 17px; }
+.chip { padding: 5px 9px; border-radius: 99px; background: var(--f-permanencia); color: #111; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: background .3s; }
+.chip[data-f="construcao"] { background: #14523e; color: #fff; }
+.chip[data-f="lancamento"] { background: var(--f-lancamento); }
+.app-day { margin-top: 14px; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--app-soft); }
+.app-title { min-height: 1.1em; margin-top: 2px; font-size: 22px; font-weight: 700; line-height: 1.1; color: var(--app-ochre); }
+.caret { display: inline-block; width: 2px; height: .9em; margin-left: 2px; vertical-align: -2px; background: var(--app-ochre); animation: blink 1s steps(1) infinite; }
+.app-prog { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--app-soft); }
+.app-prog .bar { flex: 1; height: 6px; overflow: hidden; border-radius: 6px; background: var(--app-line); }
+.app-prog .bar i { display: block; width: 0; height: 100%; border-radius: 6px; background: var(--app-ink); transition: width .5s var(--ease); }
+.app-list { flex: 1; display: grid; align-content: start; gap: 10px; padding: 14px 14px 22px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.act { padding: 14px; border: 1px solid var(--app-line); border-radius: 14px; background: #fff; animation: slide .45s var(--ease) both; }
+.act:nth-child(2) { animation-delay: .07s; }
+.act:nth-child(3) { animation-delay: .14s; }
+.act__row { display: flex; align-items: flex-start; gap: 12px; }
+.check { flex: none; display: grid; place-items: center; width: 26px; height: 26px; margin-top: 1px; border: 2px solid #c9c3b5; border-radius: 50%; background: #fff; cursor: pointer; transition: background .2s, border-color .2s; }
+.check svg { width: 14px; height: 14px; opacity: 0; transform: scale(.4); transition: opacity .25s, transform .25s var(--pop); }
+.check.pulse::after { inset: -5px; border-radius: 50%; }
+.act.done .check { background: var(--app-ink); border-color: var(--app-ink); }
+.act.done .check svg { opacity: 1; transform: none; }
+.act__t { font-size: 14px; font-weight: 600; line-height: 1.35; }
+.act.done .act__t { color: var(--app-soft); text-decoration: line-through; text-decoration-color: rgba(26, 26, 26, .4); }
+.act__m { margin-top: 5px; font-size: 11px; font-weight: 600; letter-spacing: .02em; color: var(--app-soft); }
+.texto { margin-top: 12px; padding: 12px; border: 1px dashed #d8d1c1; border-radius: 10px; background: #faf8f3; }
+.texto__h { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--app-soft); }
+.copy { padding: 8px 10px; border: 0; border-radius: 8px; background: var(--app-ink); color: #fff; cursor: pointer; font: 600 11px/1 "Poppins", sans-serif; letter-spacing: .04em; transition: background .2s; }
+.copy.ok { background: #14523e; }
+.texto__b { margin-top: 10px; font-size: 12.5px; line-height: 1.5; white-space: pre-line; color: #2b2925; }
+.texto__b .bk { font-weight: 700; }
+.texto__b .vr { font-weight: 600; color: var(--app-ochre); border-bottom: 1.5px dotted #c99a3a; }
+.app-done { display: none; padding: 18px 10px 4px; text-align: center; font-size: 15px; font-weight: 700; }
+.app-done small { display: block; margin-top: 4px; font-size: 12px; font-weight: 500; color: var(--app-soft); }
+.screen.complete .app-done { display: block; animation: pop .5s var(--pop); }
+.phone-cap { max-width: 380px; margin: 20px auto 0; text-align: center; font-size: 16px; font-weight: 600; font-style: italic; line-height: 1.4; text-wrap: balance; }
+
+/* ---------- 4. tem mais motor aí dentro ---------- */
+.feat { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: center; margin-top: 48px; }
+.feat__k { display: inline-block; padding: 6px 12px; border: 1px solid rgba(250, 171, 0, .4); border-radius: 99px; font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--amber); }
+.feat__h { margin-top: 16px; font-size: clamp(28px, 7.6vw, 46px); font-weight: 600; line-height: 1.1; letter-spacing: -.02em; text-wrap: balance; }
+.feat__p { margin-top: 14px; max-width: 460px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.55; color: var(--ink-2); }
+.feat__inf { margin-top: 4px; font-size: clamp(80px, 22vw, 150px); font-weight: 300; line-height: 1; background: var(--gold); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.feat__win { position: relative; }
+.feat__win::before { content: ""; position: absolute; inset: 10% 6%; z-index: 0; background: radial-gradient(ellipse, rgba(250, 171, 0, .28), rgba(250, 171, 0, 0) 70%); filter: blur(30px); }
+/* oportunidades */
+.gen { flex-wrap: nowrap; margin-top: 12px; padding-bottom: 2px; overflow-x: auto; scrollbar-width: none; }
+.gen::-webkit-scrollbar { display: none; }
+.gen button { flex: none; font-weight: 600; }
+.ops { display: grid; gap: 8px; padding: 12px 14px 16px; }
+.op { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--app-line); border-radius: 12px; background: #fff; animation: slide .4s var(--ease) both; }
+.op:nth-child(2) { animation-delay: .05s; } .op:nth-child(3) { animation-delay: .1s; } .op:nth-child(4) { animation-delay: .15s; } .op:nth-child(5) { animation-delay: .2s; }
+.op__d { flex: none; width: 46px; padding: 6px 0 5px; border-radius: 9px; background: var(--app-ink); color: #fff; text-align: center; }
+.op__d b { display: block; font-size: 18px; line-height: 1; }
+.op__d small { display: block; margin-top: 2px; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); }
+.op.dt .op__d { background: var(--amber); color: var(--app-ink); }
+.op.dt .op__d small { color: var(--app-ink); }
+.op__n { font-size: 13px; font-weight: 700; line-height: 1.25; }
+.op__m { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 3px; font-size: 11px; font-weight: 600; color: var(--app-soft); }
+.op__m .ty { padding: 3px 7px; border-radius: 99px; background: var(--app-chip); color: #4b473f; }
+.op__m .cd { color: #b4461a; }
+/* ideias de post */
+.idea { display: flex; flex-direction: column; gap: 12px; padding: 16px 18px 18px; }
+.q__l { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--app-soft); }
+.gen-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; margin-top: 4px; border: 0; border-radius: 12px;
+  background: var(--app-ink); color: #fff; cursor: pointer; font: 600 15px/1 "Poppins", sans-serif; letter-spacing: .02em; transition: transform .15s, background .2s; }
+.gen-btn:hover { background: #000; }
+.gen-btn:active { transform: scale(.98); }
+.gen-btn svg { width: 18px; height: 18px; }
+.ideas__count { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 600; color: var(--app-soft); }
+.ideas__count b { color: var(--app-ochre); }
+.ideas__count .inf { font-size: 18px; line-height: 1; color: var(--app-ochre); }
+.ideas { display: grid; align-content: start; gap: 8px; height: 250px; padding: 2px 2px 2px 0; overflow-y: auto; }
+.ia { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border: 1px solid var(--app-line); border-radius: 14px; background: #fff; animation: slide .45s var(--ease) both; }
+.ia.new { box-shadow: 0 0 0 2px rgba(250, 171, 0, .55); }
+.ia__ic { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 10px; background: var(--app-ink); color: var(--amber); }
+.ia__ic svg { width: 20px; height: 20px; }
+.ia__b { min-width: 0; }
+.ia__tg { display: flex; flex-wrap: wrap; gap: 4px 8px; margin-bottom: 4px; font-size: 10.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--app-soft); }
+.ia__tg b { color: var(--app-ochre); }
+.ia__t { font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+.ia__h { margin-top: 4px; font-size: 12.5px; line-height: 1.4; color: var(--app-soft); }
+
+/* ---------- 5. por dentro do motor ---------- */
+.belt { display: grid; gap: 12px; margin-top: 40px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.belt__row { display: flex; gap: 12px; width: max-content; animation: belt 70s linear infinite; }
+.belt__row.rev { animation-direction: reverse; animation-duration: 84s; }
+.belt span { flex: none; padding: 12px 16px; border: 1px solid #2a292e; border-radius: 99px; background: #111113; color: var(--ink-2); font-size: 14px; font-weight: 500; white-space: nowrap; }
+.belt span b { color: var(--amber); font-weight: 600; }
+.mon { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 48px; }
+.mon > div { padding: 26px 24px; border-radius: 16px; }
+.mon .tag { margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.mon .l { font-size: 16px; font-weight: 500; line-height: 1.45; }
+.mon .l + .l { margin-top: 6px; }
+.mon .before { border: 1.5px solid rgba(150, 82, 74, .55); background: linear-gradient(160deg, rgba(120, 52, 46, .16), rgba(120, 52, 46, .04)); color: #b9a29d; }
+.mon .before .tag { color: #c4867c; }
+.mon .before .l { text-decoration: line-through; text-decoration-color: rgba(196, 134, 124, .5); }
+.mon .after { border: 1.5px solid var(--amber); background: linear-gradient(160deg, rgba(250, 171, 0, .16), rgba(250, 171, 0, .04)); }
+.mon .after .tag { color: var(--amber); }
+.mon-foot { margin-top: 28px; text-align: center; font-size: clamp(18px, 5vw, 24px); font-weight: 600; text-wrap: balance; }
+
+
+/* ---------- 6. cada etapa do livro ---------- */
+/* as três fases do livro, numa linha só */
+.phases { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-top: 16px; font-size: clamp(13px, 3.6vw, 16px); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.phases span { display: inline-flex; align-items: center; gap: 8px; }
+.phases span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.phases .c1 { color: var(--f-construcao); }
+.phases .c2 { color: var(--f-lancamento); }
+.phases .c3 { color: var(--f-permanencia); }
+
+/* ---------- 7. quem colocou o motor ---------- */
+.who__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.who__pic { position: relative; width: 230px; margin: 0 auto; }
+.who__pic::before { content: ""; position: absolute; inset: 18% -20% 0; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse, rgba(250, 171, 0, .25), rgba(250, 171, 0, 0) 68%); filter: blur(20px); }
+.who__pic img { width: 100%; height: auto; -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
+.who__body .stats { margin-top: 32px; }
+/* carta da Dany, em primeira pessoa: leitura confortável, alinhada à esquerda */
+.who__letter { max-width: 560px; margin-top: 20px; text-align: left; }
+.who__letter p { font-size: clamp(16px, 4.3vw, 18px); line-height: 1.65; color: var(--ink-2); text-wrap: pretty; }
+.who__letter p + p { margin-top: 14px; }
+.who__letter b { font-weight: 600; color: var(--ink); }
+.who__letter .who__key { font-size: clamp(19px, 5vw, 22px); font-weight: 600; color: var(--amber); }
+.who__sign { display: flex; align-items: center; gap: 10px; font-size: 14px !important; font-style: italic; color: var(--ink-3) !important; }
+.who__sign::before { content: ""; width: 24px; height: 2px; border-radius: 2px; background: var(--amber); }
+.who__txt { margin-top: 18px; }
+.who__txt p { font-size: clamp(16px, 4.4vw, 18px); line-height: 1.55; color: var(--ink-2); }
+.who__txt p + p { margin-top: 10px; }
+.who__txt b { color: var(--ink); }
+.who__q { margin-top: 28px; padding-left: 18px; border-left: 3px solid var(--amber); font-size: clamp(19px, 5.2vw, 24px); font-weight: 500; font-style: italic; line-height: 1.3; text-wrap: balance; }
+.who__q small { display: block; margin-top: 8px; font-size: 13px; font-weight: 500; font-style: normal; color: var(--ink-3); }
+.stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; align-content: start; }
+.stat { padding: 20px 18px; border: 1px solid var(--line); border-radius: 14px; }
+.stat .n { font-size: clamp(28px, 7.6vw, 40px); font-weight: 600; line-height: 1; color: var(--amber); font-variant-numeric: tabular-nums; }
+.depo__l { display: block; }
+/* celular estreito: "de forma automática." desce inteiro para a linha de baixo */
+@media (max-width: 420px) { .dream__auto .amber { display: block; } }
+/* celular: título dos alunos um pouco menor para "Método The Book Business." caber numa linha */
+@media (max-width: 899px) { .depo__h { font-size: clamp(22px, 6.5vw, 34px); } }
+.stat .t { text-wrap: balance; margin-top: 8px; font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--ink-2); }
+.media-k { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 48px; }
+.media-k span { font-size: 12px; color: var(--ink-3); }
+/* esteira que corre sozinha; para no mouse ou no toque */
+.media { margin-top: 16px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.media__track { display: flex; gap: 12px; width: max-content; animation: belt 55s linear infinite; }
+.media:hover .media__track, .media.hold .media__track { animation-play-state: paused; }
+.media figure { flex: none; width: 230px; }
+.media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); border-radius: 12px; filter: grayscale(.25); transition: filter .3s; }
+.media figure:hover img { filter: none; }
+.media figcaption { margin-top: 8px; font-size: 12px; font-weight: 500; color: var(--ink-3); }
+
+/* ---------- 8. fecho: oferta + cadastro num cartão só ---------- */
+.fecho { padding: calc(var(--sec) + 30px) 0 var(--sec); border-top: 1px solid var(--line);
+  background: radial-gradient(ellipse 60% 50% at 0% 50%, rgba(var(--teal), .32), rgba(var(--teal), 0) 70%), radial-gradient(ellipse 50% 40% at 50% 30%, rgba(250, 171, 0, .08), rgba(0, 0, 0, 0) 70%); }
+.fecho__card { position: relative; max-width: 620px; text-align: center; margin: 0 auto; border-radius: 16px; background: #000; box-shadow: 0 0 0 1px rgba(250, 171, 0, .35), 0 0 34px rgba(250, 171, 0, .38); }
+.fecho__gift { position: absolute; left: 50%; top: 0; width: 120px; height: auto; transform: translate(-50%, -62%); filter: drop-shadow(0 12px 24px rgba(0, 0, 0, .6)); }
+.fecho__grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+.fecho__offer { padding: 74px 24px 6px; }
+.fecho__t { margin-top: 12px; font-size: clamp(19px, 5.6vw, 32px); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; text-wrap: balance; }
+.fecho__s { margin-top: 8px; font-size: clamp(15px, 4.2vw, 18px); color: var(--amber); }
+.fecho__list { display: grid; gap: 14px; margin-top: 24px; list-style: none; }
+.fecho__list li { position: relative; padding-left: 30px; font-size: clamp(15px, 4.1vw, 17px); line-height: 1.45; }
+.fecho__list li::before { content: ""; position: absolute; left: 0; top: .2em; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--amber) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat; }
+.fecho__list b { font-weight: 600; }
+/* coluna única, como a referência: sem caixa dentro da caixa */
+.fecho__form { padding: 26px 24px 30px; text-align: center; }
+.fecho__h { font-size: clamp(17px, 4.6vw, 20px); font-weight: 500; color: var(--ink-2); line-height: 1.3; text-wrap: balance; }
+.fecho__m { margin-top: 8px; font-size: clamp(14px, 4vw, 16px); color: var(--amber); text-wrap: balance; }
+.fecho__form .lead-form { margin-top: 22px; }
+.fecho__form .lead-form form { grid-template-columns: minmax(0, 1fr); }
+.fecho__form .fld.half { grid-column: 1 / -1; }
+/* o cartão final repete a gramática da primeira dobra: linha fina e espaçada, palavra grande em dourado,
+   "+ LOMBADA" no lugar do "+ Método", a aula nas mesmas 3 linhas e o convite curto acima do mesmo formulário */
+.fecho__offer .eyebrow { display: block; font-size: clamp(10px, 2.9vw, 13px); font-weight: 400; letter-spacing: .2em; color: var(--ink-2); }
+.fecho__offer .eyebrow::before { display: none; }
+.fecho__t { margin-top: 14px; font-size: inherit; font-weight: 400; line-height: 1; letter-spacing: 0; }
+.fecho__t-a { display: block; font-size: clamp(14px, 4.1vw, 20px); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.fecho__t-b { display: block; margin-top: 4px; font-size: clamp(54px, 16vw, 92px); font-weight: 700; line-height: .95; letter-spacing: -.02em; filter: drop-shadow(0 8px 34px rgba(250, 171, 0, .22)); }
+.fecho__t-c { display: block; margin-top: 12px; font-size: clamp(17px, 4.8vw, 22px); font-weight: 500; color: var(--ink); }
+.fecho__t-c .lmb { font-size: 1.15em; vertical-align: -.08em; }
+.fecho .fecho__aula .aula__k { font-size: 15px; }
+.fecho .fecho__aula .aula__t { font-size: 21px; }
+.fecho .fecho__aula .aula__d { font-size: 14px; }
+.fecho .fecho__aula { margin: 26px auto 0; padding-top: 22px; border-top: 1px solid rgba(250, 171, 0, .22); max-width: 460px; }
+.fecho__form { padding-top: 24px; }
+.fecho__h { font-size: 15px; font-weight: 400; color: var(--ink-2); }
+.fecho__form .lead-form { margin-top: 12px; }
+.fecho__form .lead-form form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.fecho__form .fld.half { grid-column: auto; }
+@media (max-width: 899px) {
+  .fecho__offer { padding-left: 18px; padding-right: 18px; }
+  .fecho__form { padding-left: 18px; padding-right: 18px; }
+  .fecho .fecho__aula .aula__t { font-size: clamp(13px, 3.75vw, 16px); }
+  .fecho .fecho__aula .aula__d { font-size: clamp(10px, 2.9vw, 12px); }
+  .fecho__h { font-size: 13px; }
+  .fecho__form { padding-left: 14px; padding-right: 14px; }
+  .fecho .fld input { padding: 0 12px; }
+}
+/* celular: no cartão (mais estreito que a primeira dobra), e-mail e WhatsApp ocupam a linha inteira; o "DDD + WhatsApp" não cabe pela metade */
+@media (max-width: 899px) { .fecho__form .lead-form form { grid-template-columns: minmax(0, 1fr); } .fecho__form .fld.half { grid-column: 1 / -1; } }
+
+/* ---------- rodapé e botão fixo ---------- */
+/* rodapé igual ao da página do Aniversário: logo do Método, direitos, privacidade em azul e aviso legal */
+footer { padding: 56px 20px calc(110px + env(safe-area-inset-bottom)); background: #000; text-align: center; font-size: 12px; line-height: 1.5; color: #fff; }
+.foot-logo { width: 80px; height: auto; margin: 0 auto 14px; }
+footer p + p { margin-top: 6px; }
+.foot-link { color: #04b4fc; text-decoration: none; }
+.foot-link:hover { text-decoration: underline; }
+footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-height: 1.6; color: #fff; }
+.dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, #000 60%, rgba(0, 0, 0, 0)); transform: translateY(110%); opacity: 0; visibility: hidden; pointer-events: none;
+  transition: transform .35s var(--ease), opacity .25s ease, visibility 0s linear .35s; }
+/* escondido de verdade: no iPhone a barra do Safari é translúcida e mostrava o botão por trás dela */
+.dock.on { transform: none; opacity: 1; visibility: visible; pointer-events: auto; transition: transform .35s var(--ease), opacity .25s ease, visibility 0s; }
+.dock .btn { min-height: 54px; }
+
+/* ---------- entrada dos blocos ---------- */
+.rv { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.rv.in, .no-js .rv { opacity: 1; transform: none; }
+.rv { transition-delay: var(--d, 0s); }
+/* desempenho: animações infinitas param quando a seção sai da tela (classe .off no script) */
+.off, .off *, .off *::before, .off *::after, .off::before, .off::after { animation-play-state: paused !important; }
+.casos-track, .media__track, .belt__row { will-change: transform; }
+@media (max-width: 899px) {
+  body::after { display: none; }
+  .h1__b, .fecho__t-b { filter: none; }
+  .logo-box .bwlogo .book { animation: none; }
+  /* entradas mais curtas e suaves no celular */
+  .rv { transform: translate3d(0, 18px, 0); transition-duration: .65s; }
+  .rv.in { transform: none; }
+}
+
+/* ---------- computador ---------- */
+@media (min-width: 900px) {
+  .topbar { font-size: 15px; }
+  /* abertura com as medidas da página do Aniversário em 1280px */
+  .hero { min-height: 930px; }
+  .hero::after { opacity: 1; background-position: 49.3vw 32px; background-size: 150vw auto; }
+  .hero__in { padding: 20px 0 70px; }
+  .hero__main { max-width: 648px; margin: 0 auto; }
+  .proof { font-size: 13px; }
+  .logo-box { margin-top: 26px; }
+  .bwlogo { font-size: 68px; }
+  .h1 { margin-top: 26px; }
+  .h1__a { font-size: 21px; letter-spacing: .2em; }
+  .h1-sub { margin-top: 12px; font-size: 18px; letter-spacing: .18em; }
+  .hero .when-pill { margin-top: 18px; font-size: 14px; }
+  .aula { margin-top: 24px; }
+  .aula__t { font-size: 26px; }
+  .aula__d { font-size: 17px; }
+  .hero { min-height: 1000px; }
+  .pitch { margin-top: 40px; max-width: 600px; font-size: 21px; line-height: 1.5; }
+  .hero .lead-form { max-width: 594px; margin-top: 24px; }
+  .lead-form .hint { margin-bottom: 12px; font-size: 16px; }
+  .lead-form form { gap: 10px; }
+  .fld input { height: 52px; font-size: 17px; }
+  .hero .btn { min-height: 61px; font-size: 23px; }
+  .lead-form .fine { margin-top: 12px; font-size: 14px; }
+  .dany-m { display: none; }
+  /* a foto começa depois da coluna de texto (metade dela = 324px) e nunca fica por cima do texto */
+  .dany-d { display: block; position: absolute; z-index: -1; left: calc(50% + 300px); top: 150px; width: 430px; height: auto;
+    -webkit-mask-image: linear-gradient(to bottom, #000 76%, transparent 97%); mask-image: linear-gradient(to bottom, #000 76%, transparent 97%); }
+  .dany-q { display: block; position: absolute; left: calc(50% + 352px); top: 46px; width: 260px; text-align: center; font-size: 13.5px; font-weight: 500; line-height: 1.4; color: rgba(255, 255, 255, .5); }
+  .dany-q span { display: block; margin-top: 4px; font-size: 12px; font-style: normal; color: rgba(255, 255, 255, .42); }
+
+  .drive__grid { grid-template-columns: minmax(0, 1fr) 410px; gap: 72px; align-items: center; }
+  /* ritmo no computador: 56 cabeçalho→conteúdo, 64 entre blocos, 80 entre as duas funcionalidades */
+  .feat { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; margin-top: 56px; }
+  .feat + .feat { margin-top: 80px; }
+  .belt { margin-top: 56px; }
+  .mon { margin-top: 64px; }
+  .mon-foot { margin-top: 32px; }
+  .media-k { margin-top: 64px; }
+  .feat--rev .feat__txt { order: 2; }
+  .feat__win .try-wrap { max-width: 460px; }
+  .feat:not(.feat--rev) .feat__win .try-wrap, .feat:not(.feat--rev) .feat__win .panel { margin-left: auto; margin-right: 0; }
+  .feat--rev .feat__win .panel { margin-left: 0; }
+  .mon { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .who__grid { grid-template-columns: 340px minmax(0, 1fr); gap: 64px; align-items: center; }
+  .who__pic { width: 100%; }
+  .who__body .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 40px; }
+  /* 4 cartões lado a lado: o número acompanha a largura para "+4.400" caber */
+  .who__body .stat { padding: 18px 14px; }
+  .who__body .stat .n { font-size: clamp(26px, 2.4vw, 36px); white-space: nowrap; }
+  .media figure { width: 260px; }
+  .fecho__offer { padding: 84px 56px 8px; }
+  .fecho__form { padding: 28px 56px 48px; }
+  footer { padding-bottom: 56px; }
+  .dock { display: none; }
+}
+/* computador estreito: não cabe a foto ao lado do texto, então ela volta para o meio, como no celular */
+@media (min-width: 900px) and (max-width: 1179px) {
+  .dany-m { display: block; width: 250px; }
+  .dany-d, .dany-q { display: none; }
+  .hero { min-height: 0; }
+}
+/* a Dany e o cadastro na primeira tela. No computador a frase fica depois do formulário (a foto grande já está ao lado);
+   no celular a Dany e a frase viram uma fala compacta (foto à esquerda, frase à direita) logo antes do formulário */
+.hero__main { display: flex; flex-direction: column; }
+.proof, .hero .when-pill { align-self: center; }
+.speak { display: contents; }
+.hero .lead-form { order: 1; width: 100%; }
+.dany-glow, .dany-m, .pitch { order: 2; }
+.pitch--m { display: none; }
+/* celular: todas as seções centralizadas, como o resto da página */
+@media (max-width: 899px) {
+  .secret__txt, .who__body { text-align: center; }
+  .who__letter { margin-left: auto; margin-right: auto; }
+  .nots__punch { margin-left: auto; margin-right: auto; }
+  .pistas { margin-left: auto; margin-right: auto; }
+  .fecho .eyebrow { gap: 8px; font-size: 10px; letter-spacing: .12em; white-space: nowrap; }
+  .nots li { justify-content: center; }
+  .nots li::before { display: none; }
+  .media-k { justify-content: center; }
+  .who__q { padding-left: 0; border-left: 0; }
+  .who__q::before { content: ""; display: block; width: 32px; height: 2px; margin: 0 auto 14px; border-radius: 2px; background: var(--amber); }
+}
+/* celular, como a referência: tudo empilhado no centro e o cadastro na primeira dobra.
+   Ritmo: apertado dentro de cada grupo (logo / título / data / Dany+frase / formulário), respiro entre eles */
+@media (max-width: 899px) {
+  .topbar { padding: 9px 10px; }
+  .hero__in { padding-top: 14px; }
+  .proof { display: none; }
+  .logo-box { margin-top: 0; }
+  .logo-box .bwlogo { font-size: clamp(28px, 7.4vw, 38px); }
+  .h1 { margin-top: 12px; }
+  .h1__b { font-size: clamp(46px, 13vw, 72px); }
+  .h1-sub { margin-top: 6px; font-size: clamp(11px, 3.1vw, 14px); letter-spacing: .1em; }
+  .hero .when-pill { margin-top: 8px; padding: 5px 14px; font-size: 11px; letter-spacing: .14em; }
+  /* Dany no centro e a frase sobre o esmaecido da foto */
+  .speak { display: block; position: relative; margin-top: 6px; }
+  .speak .dany-glow { display: block; }
+  .speak .dany-glow::before { top: 0; width: 240px; height: 190px; }
+  .speak .dany-m { width: auto; height: clamp(120px, 20vh, 142px); margin: 0 auto; -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 98%); mask-image: linear-gradient(to bottom, #000 60%, transparent 98%); }
+  .speak .pitch { display: none; margin: -32px auto 0; max-width: 360px; font-size: 16px; line-height: 1.25; text-shadow: 0 2px 14px rgba(0, 0, 0, .95); }
+  .speak .pitch i { font-size: clamp(17px, 5vw, 20px); }
+  .speak .pitch__by { display: none; }
+  .hero .pitch--m { display: block; margin: 28px auto 0; max-width: 360px; line-height: 1.3; }
+  .hero .pitch--m i { font-size: clamp(17px, 5vw, 20px); }
+  .hero .lead-form { margin-top: 0; }
+  .hero .lead-form .hint { margin-bottom: 6px; font-size: 13px; }
+  .hero .fld input { height: 46px; }
+  .hero .lead-form .btn { min-height: 52px; }
+}
+/* cartão final é mais estreito: o botão cabe numa linha */
+@media (max-width: 520px) {
+  .fecho .btn { gap: 8px; padding: 0 12px; font-size: 15px; letter-spacing: 0; }
+  .fecho .btn svg { width: 24px; }
+}
+@media (max-width: 340px) {
+  .lead-form form { grid-template-columns: minmax(0, 1fr); }
+  .fld.half { grid-column: 1 / -1; }
+}
+@media (max-width: 380px) {
+  .fld.half input { padding: 0 11px; }
+  .fld.half input::placeholder { font-size: 15px; }
+  .seg button { font-size: 12px; }
+}
+
+/* ---------- movimento ---------- */
+@keyframes arrive { 0% { opacity: 0; transform: translateX(-90px) skewX(-14deg); filter: blur(8px); } 55% { opacity: 1; transform: translateX(10px) skewX(4deg); filter: blur(0); } 78% { transform: translateX(-3px) skewX(-1deg); } 100% { opacity: 1; transform: none; filter: none; } }
+@keyframes streak { 0% { opacity: 0; transform: translateX(-140px) scaleX(.4); } 35% { opacity: 1; } 100% { opacity: 0; transform: translateX(-10px) scaleX(1); } }
+@keyframes sheen { 0%, 60% { background-position: 140% 0; } 100% { background-position: -40% 0; } }
+@keyframes headlight { 0%, 100% { filter: drop-shadow(0 0 0 rgba(250, 171, 0, 0)); } 50% { filter: drop-shadow(0 0 10px rgba(250, 171, 0, .75)); } }
+@keyframes rev { 0%, 100% { transform: translateX(0); opacity: 1; } 50% { transform: translateX(-6px); opacity: .75; } }
+@keyframes pop { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+@keyframes slide { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes float { 50% { transform: translateY(-8px); } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes bob { 50% { transform: translateY(4px); } }
+@keyframes gold { from { background-position: 120% 0; } to { background-position: -100% 0; } }
+@keyframes belt { to { transform: translateX(-50%); } }
+@keyframes ping { 75%, 100% { opacity: 0; transform: scale(2.4); } }
+@keyframes ring { 0% { opacity: .95; transform: scale(1); } 100% { opacity: 0; transform: scale(1.18); } }
+
+/* sem JavaScript ou com animação desligada: tudo visível e parado */
+.rm .streaks { display: none; }
+.rm .media, .no-js .media { overflow-x: auto; }
+.rm .media__track { animation: none; }
+.no-js .dream__list li, .rm .dream__list li { opacity: 1; transform: none; }
+.no-js .dream__ring, .rm .dream__ring { opacity: .4; transform: translate(-50%, -50%); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .rv { opacity: 1; transform: none; }
+  .pulse::after { animation: none !important; opacity: .7; }
+}
+/* 20/10: +55 fixo no campo do WhatsApp (a pessoa digita só DDD + número) */
+.fld .zapbox { position: relative; display: block; }
+.fld .zapbox .ddi { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px;
+  padding-right: 9px; border-right: 1px solid rgba(154, 150, 142, .45); color: #9a968e; font-weight: 600; font-size: 15px; line-height: 1; pointer-events: none; }
+.fld .zapbox .ddi svg { display: block; border-radius: 2px; }
+.lead-form .fld .zapbox input { padding-left: 104px; }
+.fld .zapbox .ddi-f { font-style: normal; display: flex; font-size: 18px; line-height: 1; }
+.fld .zapbox .ddi-v { opacity: .8; }
+.fld .zapbox .pais { position: absolute; left: 0; top: 0; bottom: 0; width: 84px; opacity: 0; cursor: pointer; font-size: 16px; z-index: 1; }
+.fld .zapbox .pais:focus-visible + input { box-shadow: 0 0 0 3px rgba(250, 171, 0, .3); }
+/* celular: com o +55 o WhatsApp não cabe pela metade; e-mail e WhatsApp em linhas inteiras */
+@media (max-width: 899px) { .lead-form .fld.half { grid-column: 1 / -1; } }
+/* cartão do fim é estreito também no computador: e-mail e WhatsApp em linhas inteiras */
+.fecho .lead-form .fld.half { grid-column: 1 / -1; }
+
+/* ---------- páginas de alunos: título curto + cupom dourado com a Dany (molde: alunos da BF-25) ---------- */
+.al-h { margin-top: 24px; text-transform: none; }
+.al-h .a { display: block; font-size: clamp(26px, 7.4vw, 40px); font-weight: 700; line-height: 1.08; letter-spacing: -.01em; }
+.al-h .b { display: block; font-size: clamp(24px, 6.6vw, 36px); font-weight: 500; line-height: 1.12; color: var(--ink); }
+.al-lead { max-width: 30em; margin: 12px auto 0; font-size: clamp(14px, 3.9vw, 16px); font-weight: 400; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.al-lead b { font-weight: 700; }
+.al-lead .amber { color: var(--amber); }
+.cupom { --tink: #1d1406; --g1: #ffe39a; --g2: #faab00; --g3: #c97a00; position: relative; margin: 20px auto 0; max-width: 400px; text-align: left; color: var(--tink);
+  filter: drop-shadow(0 12px 28px rgba(250,171,0,.2)); }
+.cupom .c-top, .cupom .c-bot { position: relative; overflow: hidden; background: linear-gradient(125deg, var(--g1) 0%, #ffd060 30%, var(--g2) 65%, var(--g3) 100%); }
+.cupom .c-top { border-radius: 14px 14px 0 0; padding: 14px 16px 16px;
+  -webkit-mask: radial-gradient(circle 11px at 0 100%, #0000 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% 100%, #0000 98%, #000) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle 11px at 0 100%, #0000 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% 100%, #0000 98%, #000) right / 51% 100% no-repeat; }
+.cupom .c-bot { border-radius: 0 0 14px 14px; padding: 11px 16px 12px; display: flex; align-items: center; gap: 10px;
+  -webkit-mask: radial-gradient(circle 11px at 0 0, #0000 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% 0, #0000 98%, #000) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle 11px at 0 0, #0000 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% 0, #0000 98%, #000) right / 51% 100% no-repeat; }
+.cupom .c-bot::before { content: ""; position: absolute; left: 18px; right: 18px; top: 0; border-top: 2px dashed rgba(29,20,6,.32); }
+.cupom .c-top::after { content: ""; position: absolute; top: -40%; bottom: -40%; width: 34%; left: -60%; transform: skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); animation: cbrilho 5s ease-in-out infinite 1.4s; }
+@keyframes cbrilho { 0% { left: -60%; } 45%, 100% { left: 130%; } }
+.c-eyebrow { position: relative; z-index: 1; font-weight: 700; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; opacity: .72; }
+.c-valor { position: relative; z-index: 1; margin-top: 4px; font: 900 italic clamp(40px, 12vw, 54px)/1 "Montserrat", sans-serif; letter-spacing: -.03em; }
+.c-oferta { position: relative; z-index: 1; max-width: 60%; margin-top: 6px; font-weight: 500; font-size: 13px; line-height: 1.3; }
+.c-dany { position: absolute; z-index: 0; right: -4px; bottom: 0; width: 38%; max-width: 150px; height: auto; }
+.c-bot b { font-weight: 700; font-size: 14px; letter-spacing: -.01em; }
+.c-stamp { flex: none; margin-left: auto; padding: 4px 8px 3px; border: 2px solid rgba(29,20,6,.75); border-radius: 6px; font: 900 italic 11px/1 "Montserrat", sans-serif;
+  letter-spacing: .08em; transform: rotate(-4deg); text-transform: uppercase; background: rgba(255,235,190,.45); }
+.hero .lead-form[data-pos=topo] { margin-top: 26px; }
+.al-aviso { margin-top: 10px; font-size: 12px; color: var(--soft, #a9a296); }
+/* computador: tudo centrado (como a referência); a Dany já está no cupom, então sai a foto grande e a frase do lado */
+@media (min-width: 900px) { .dany-d, .dany-q { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .cupom .c-top::after { animation: none; } }
+</style>
+</head>
+<body class="no-js">
+<div class="estante" aria-hidden="true"></div>
+<script>document.body.classList.remove('no-js'); if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('rm');</script>
+
+<div class="topbar">Exclusivo para <b>alunos</b> do Método</div>
+
+<main>
+  <!-- 1. abertura + cadastro -->
+  <section class="hero" id="cadastro">
+    <div class="wrap">
+      <div class="hero__in">
+        <div class="hero__main">
+
+          <div class="logo-box">
+            <span class="streaks" aria-hidden="true"><i></i><i></i><i></i></span>
+            <div class="bwlogo" role="img" aria-label="Black Week Motorizada"><span class="r1">BLACK</span><span class="r2"><span class="w">WEEK</span><svg class="book" viewBox="0 0 126 122" aria-hidden="true"><g stroke-linejoin="round" stroke-linecap="round"><path class="lines" d="M12.0 42.7 L79.2 32.2 L79.2 39.8 L12.0 45.3 Z M4.0 58.7 L77.1 56.2 L77.1 63.8 L4.0 61.3 Z M12.0 74.7 L75.0 80.2 L75.0 87.8 L12.0 77.3 Z" fill="var(--bw-amber)" stroke="var(--bw-amber)" stroke-width="2" stroke-linejoin="round"/><path d="M30 29 L98 9" fill="none" stroke="var(--bw-amber)" stroke-width="9"/><path d="M20 92 L88 113" fill="none" stroke="var(--bw-amber)" stroke-width="9"/><path d="M78 15 L98 9 L89 113 L70 107 Z" fill="var(--bw-amber)" stroke="var(--bw-amber)" stroke-width="3"/><path d="M26 23 L100 3" fill="none" stroke="var(--bw-ink)" stroke-width="4.5"/><path d="M18 97 L88 118" fill="none" stroke="var(--bw-ink)" stroke-width="4.5"/><path d="M98 5 L122 9 L113 119 L88 115 Z" fill="var(--bw-page)" stroke="var(--bw-ink)" stroke-width="5.5"/><path d="M104 9 L95 116 M110 10 L101 117 M116 11 L107 118" fill="none" stroke="var(--bw-ink)" stroke-width="2.6"/></g></svg></span><span class="sub"><span class="t">MOTORIZADA</span></span></div>
+          </div>
+
+          <h1 class="al-h"><span class="a gold">Cashback exclusivo</span><span class="b">para alunos</span></h1>
+          <p class="al-lead">Aluno do <b>Método The&nbsp;Book&nbsp;Business</b> tem <b class="amber">R$1.500 de cashback</b> na maior oferta que o The&nbsp;Book&nbsp;Business já fez.</p>
+          <div class="cupom" aria-label="Cupom de R$1.500 de cashback">
+            <div class="c-top"><div class="c-eyebrow">Cupom de aluno</div><p class="c-valor">R$1.500</p><p class="c-oferta">de cashback na oferta da Black Week Motorizada</p><img class="c-dany" src="../black-week/assets/dany-bw-m.webp" alt="" width="408" height="378" decoding="async"></div>
+            <div class="c-bot"><b>Aula ao vivo · 09/11 · 20h</b><span class="c-stamp">Aluno</span></div>
+          </div>
+          <div class="aula"><p class="aula__k">Abre ao vivo na aula</p><p class="aula__t">Seu livro vendendo cada vez mais</p><p class="aula__d">09 de novembro, segunda-feira | 20h</p></div>
+
+          <div class="lead-form" data-pos="topo" id="form-topo">
+            <p class="hint">Cadastre o e-mail que você usou na compra do Método</p>
+            <form novalidate>
+              <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
+              <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu e-mail" aria-label="E-mail"><p class="msg">Esse e-mail não é válido.<br>Use o mesmo e-mail de compra do Método The&nbsp;Book&nbsp;Business.</p></div>
+              <div class="fld half" data-f="whatsapp"><span class="zapbox"><span class="ddi" aria-hidden="true"><i class="ddi-f"><svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" rx="2" fill="#229e45"/><path d="M10 1.6 18.2 7 10 12.4 1.8 7z" fill="#f8e509"/><circle cx="10" cy="7" r="3.1" fill="#2b49a3"/></svg></i><b>+55</b><svg class="ddi-v" viewBox="0 0 10 6" width="9" height="6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><select class="pais" name="pais" aria-label="País do WhatsApp"><option value="55" data-p="BR" selected>🇧🇷 Brasil (+55)</option><option value="351" data-p="PT">🇵🇹 Portugal (+351)</option><option value="1" data-p="US">🇺🇸 Estados Unidos (+1)</option><option value="81" data-p="JP">🇯🇵 Japão (+81)</option><option value="44" data-p="GB">🇬🇧 Reino Unido (+44)</option><option value="353" data-p="IE">🇮🇪 Irlanda (+353)</option><option value="34" data-p="ES">🇪🇸 Espanha (+34)</option><option value="39" data-p="IT">🇮🇹 Itália (+39)</option><option value="33" data-p="FR">🇫🇷 França (+33)</option><option value="49" data-p="DE">🇩🇪 Alemanha (+49)</option><option value="41" data-p="CH">🇨🇭 Suíça (+41)</option><option value="31" data-p="NL">🇳🇱 Holanda (+31)</option><option value="32" data-p="BE">🇧🇪 Bélgica (+32)</option><option value="1" data-p="CA">🇨🇦 Canadá (+1)</option><option value="61" data-p="AU">🇦🇺 Austrália (+61)</option><option value="54" data-p="AR">🇦🇷 Argentina (+54)</option><option value="595" data-p="PY">🇵🇾 Paraguai (+595)</option><option value="598" data-p="UY">🇺🇾 Uruguai (+598)</option><option value="56" data-p="CL">🇨🇱 Chile (+56)</option><option value="52" data-p="MX">🇲🇽 México (+52)</option><option value="244" data-p="AO">🇦🇴 Angola (+244)</option><option value="258" data-p="MZ">🇲🇿 Moçambique (+258)</option><option value="238" data-p="CV">🇨🇻 Cabo Verde (+238)</option></select><input name="whatsapp" type="tel" autocomplete="tel-national" inputmode="numeric" enterkeyhint="send" maxlength="22" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD (Brasil, +55)"></span><p class="msg">Confira o número com DDD.</p></div>
+              <button class="btn" type="submit">Quero meu cashback <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
+            </form>
+            <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
+            <p class="lgpd">Ao se cadastrar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+            <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Você tem acesso primeiro, dia 9 de novembro, às 20h.</p><a class="done__next" href="https://sndflw.com/i/Re69lZi7NOj6jo8A42B9">Entrar no grupo do WhatsApp</a></div>
+          </div>
+        </div>
+        <p class="dany-q"><i>“Eu queria que o autor acordasse todo dia e já soubesse o que fazer pelo livro. Agora ele sabe, sempre.”</i><span>Dany Sakugawa</span></p>
+        <img class="dany-d" src="../black-week/assets/dany-bw.webp" alt="Dany Sakugawa" width="840" height="1135" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. fecho: a oferta e o cadastro num cartão só -->
+  <section class="fecho" id="cadastro-fim">
+    <div class="wrap">
+      <div class="fecho__card rv">
+        <img class="fecho__gift" src="../black-week/assets/presente.webp" alt="" width="260" height="260" loading="lazy" decoding="async">
+        <div class="fecho__grid">
+          <div class="fecho__offer">
+            <p class="eyebrow">Somente para alunos</p>
+            <h3 class="fecho__t"><span class="fecho__t-a">Método The&nbsp;Book&nbsp;Business</span><span class="fecho__t-b gold">vitalício</span><span class="fecho__t-c">+ <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></span></h3>
+            <div class="aula fecho__aula"><p class="aula__k">Abre ao vivo na aula</p><p class="aula__t">Seu livro vendendo cada vez mais</p><p class="aula__d">09 de novembro, segunda-feira | 20h</p></div>
+          </div>
+          <div class="fecho__form">
+            <h3 class="fecho__h">Garanta o seu cashback</h3><p class="al-aviso">Use o e-mail da sua compra do Método The&nbsp;Book&nbsp;Business.</p>
+            <div class="lead-form" data-pos="fim">
+              <form novalidate>
+                <div class="fld" data-f="nome"><input name="nome" type="text" autocomplete="given-name" enterkeyhint="next" placeholder="Primeiro nome" aria-label="Primeiro nome"><p class="msg">Escreva o seu nome.</p></div>
+                <div class="fld half" data-f="email"><input name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="Seu e-mail" aria-label="E-mail"><p class="msg">Esse e-mail não é válido.<br>Use o mesmo e-mail de compra do Método The&nbsp;Book&nbsp;Business.</p></div>
+                <div class="fld half" data-f="whatsapp"><span class="zapbox"><span class="ddi" aria-hidden="true"><i class="ddi-f"><svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" rx="2" fill="#229e45"/><path d="M10 1.6 18.2 7 10 12.4 1.8 7z" fill="#f8e509"/><circle cx="10" cy="7" r="3.1" fill="#2b49a3"/></svg></i><b>+55</b><svg class="ddi-v" viewBox="0 0 10 6" width="9" height="6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><select class="pais" name="pais" aria-label="País do WhatsApp"><option value="55" data-p="BR" selected>🇧🇷 Brasil (+55)</option><option value="351" data-p="PT">🇵🇹 Portugal (+351)</option><option value="1" data-p="US">🇺🇸 Estados Unidos (+1)</option><option value="81" data-p="JP">🇯🇵 Japão (+81)</option><option value="44" data-p="GB">🇬🇧 Reino Unido (+44)</option><option value="353" data-p="IE">🇮🇪 Irlanda (+353)</option><option value="34" data-p="ES">🇪🇸 Espanha (+34)</option><option value="39" data-p="IT">🇮🇹 Itália (+39)</option><option value="33" data-p="FR">🇫🇷 França (+33)</option><option value="49" data-p="DE">🇩🇪 Alemanha (+49)</option><option value="41" data-p="CH">🇨🇭 Suíça (+41)</option><option value="31" data-p="NL">🇳🇱 Holanda (+31)</option><option value="32" data-p="BE">🇧🇪 Bélgica (+32)</option><option value="1" data-p="CA">🇨🇦 Canadá (+1)</option><option value="61" data-p="AU">🇦🇺 Austrália (+61)</option><option value="54" data-p="AR">🇦🇷 Argentina (+54)</option><option value="595" data-p="PY">🇵🇾 Paraguai (+595)</option><option value="598" data-p="UY">🇺🇾 Uruguai (+598)</option><option value="56" data-p="CL">🇨🇱 Chile (+56)</option><option value="52" data-p="MX">🇲🇽 México (+52)</option><option value="244" data-p="AO">🇦🇴 Angola (+244)</option><option value="258" data-p="MZ">🇲🇿 Moçambique (+258)</option><option value="238" data-p="CV">🇨🇻 Cabo Verde (+238)</option></select><input name="whatsapp" type="tel" autocomplete="tel-national" inputmode="numeric" enterkeyhint="send" maxlength="22" placeholder="DDD + WhatsApp" aria-label="WhatsApp com DDD (Brasil, +55)"></span><p class="msg">Confira o número com DDD.</p></div>
+                <button class="btn" type="submit">Quero meu cashback <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></button>
+              </form>
+              <p class="form-err" role="alert">Não conseguimos registrar agora. Tente de novo em instantes.</p>
+              <p class="lgpd">Ao se cadastrar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+              <div class="done" role="status" aria-live="polite"><p class="big">Cadastro feito.</p><p>Você tem acesso primeiro, dia 9 de novembro, às 20h.</p><a class="done__next" href="https://sndflw.com/i/Re69lZi7NOj6jo8A42B9">Entrar no grupo do WhatsApp</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <img class="foot-logo" src="../black-week/assets/logo-mtbb.webp" alt="Método The Book Business" width="80" height="52" loading="lazy" decoding="async">
+  <p>© 2026 . The&nbsp;Book&nbsp;Business. Todos os direitos reservados.</p>
+  <p><a class="foot-link" href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a></p>
+  <p class="legal"><b>Aviso Legal:</b> “Nenhuma informação contida neste site deve ser interpretada como uma afirmação de resultados ou de retornos financeiros. Qualquer referência a desempenho passado ou potencial é uma estratégia elaborada no contexto <b>individual de cada autor</b>, e não deve ser interpretada como recomendação ou garantia de resultados específicos.”</p>
+</footer>
+
+<div class="dock" id="dock"><a class="btn" href="#cadastro-fim">Quero meu cashback <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= utilidades ================= */
+  var REDUCED = document.body.classList.contains('rm');
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function onView(el, fn, opts) {
+    if (!el) return;
+    if (!('IntersectionObserver' in window)) { fn(el); return; }
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { fn(en.target); io.unobserve(en.target); } }); }, opts || { rootMargin: '0px 0px -8% 0px' });
+    io.observe(el);
+  }
+  // o que vai, volta: entra ao descer; ao subir, o bloco que sai por baixo da tela se desfaz para entrar de novo
+  function reversivel(els, cls, margem) {
+    if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add(cls); }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting) en.target.classList.add(cls);
+        else if (en.rootBounds && en.boundingClientRect.top > en.rootBounds.bottom) en.target.classList.remove(cls);
+        else if (en.rootBounds && en.boundingClientRect.bottom < en.rootBounds.top) en.target.classList.add(cls);
+      });
+    }, { rootMargin: margem });
+    els.forEach(function (el) { io.observe(el); });
+  }
+  function setPressed(group, btn) { $$('button', group).forEach(function (x) { x.setAttribute('aria-pressed', x === btn ? 'true' : 'false'); }); }
+
+  /* ================= 2. O SONHO: cada frase acende quando passa pelo meio da tela ================= */
+  var dx = $('#reveal');
+  (function () {
+    var items = $$('.dream__list li', dx);
+    if (REDUCED || !('IntersectionObserver' in window)) { items.forEach(function (li) { li.classList.add('lit'); }); return; }
+    reversivel(items, 'lit', '-38% 0px -38% 0px');
+  })();
+
+  /* ================= 3b. DEPOIMENTOS: uma palavra de cada autor =================
+     Preencher com o que os autores mandaram (palavras e frase exatas, com autorização). Lista vazia = seção escondida.
+     { palavra: 'Uma palavra.', texto: 'Uma linha explicando a palavra.', nome: 'Nome Sobrenome', livro: 'Título do livro', foto: 'assets/depo/arquivo.webp' (opcional) } */
+  // o que as 20 pessoas que receberam antes falaram (o cliente confirmou em 06/10 que palavras e frases vêm das respostas delas); sem nome por enquanto
+  /* ================= CASOS DO MÉTODO: esteira contínua ================= */
+  (function () {
+    var belts = $$('.casos-belt');
+    // celular: 2 faixas de 12 (a 3ª faixa é distribuída entre as duas primeiras)
+    if (innerWidth < 900 && belts.length === 3) {
+      var extra = $$('.caso', belts[2]);
+      extra.forEach(function (c, i) { $('.casos-track', belts[i % 2]).appendChild(c); });
+      belts[2].remove(); belts = belts.slice(0, 2);
+    }
+    if (REDUCED) return;
+    belts.forEach(function (belt) {
+      var track = $('.casos-track', belt);
+      // mesma velocidade em qualquer tela e tamanho de faixa (~28 px/s, devagar para dar para ler)
+      track.style.animationDuration = Math.round(track.scrollWidth / 28) + 's';
+      track.insertAdjacentHTML('beforeend', track.innerHTML.replace(/<figure class="caso">/g, '<figure class="caso" aria-hidden="true">'));
+      belt.addEventListener('touchstart', function () { belt.classList.add('hold'); }, { passive: true });
+      belt.addEventListener('touchend', function () { setTimeout(function () { belt.classList.remove('hold'); }, 1200); }, { passive: true });
+    });
+  })();
+
+  /* ================= 7. DANY NA MÍDIA: esteira contínua ================= */
+  (function () {
+    var media = $('.media'), track = $('.media__track', media);
+    if (!track || REDUCED) return;
+    track.insertAdjacentHTML('beforeend', track.innerHTML.replace(/<figure>/g, '<figure aria-hidden="true">'));
+    media.addEventListener('touchstart', function () { media.classList.add('hold'); }, { passive: true });
+    media.addEventListener('touchend', function () { setTimeout(function () { media.classList.remove('hold'); }, 1200); }, { passive: true });
+  })();
+
+  /* ================= 7. NÚMEROS QUE SOBEM ================= */
+  if (!REDUCED) $$('.stat .n').forEach(function (el) {
+    var n = +el.getAttribute('data-n'), pre = el.getAttribute('data-p') || '', suf = el.getAttribute('data-s') || '';
+    function fmt(v) { return pre + Math.round(v).toLocaleString('pt-BR') + suf; }
+    el.textContent = fmt(0);
+    onView(el, function () {
+      var t0 = performance.now(), dur = 1400;
+      (function step(now) { var k = Math.min(1, (now - t0) / dur); el.textContent = k < 1 ? fmt(n * (1 - Math.pow(1 - k, 3))) : fmt(n); if (k < 1) requestAnimationFrame(step); })(t0);
+    });
+  });
+
+  /* ================= ABERTURA: 9/11, 20h de Brasília (23h UTC) =================
+     Depois da hora, a data vira "Aberta agora". Se VENDA_URL estiver preenchido, os formulários viram o botão de entrar. */
+  /* ================= DESEMPENHO: seções fora da tela param as animações infinitas ================= */
+  if ('IntersectionObserver' in window) {
+    var ioOff = new IntersectionObserver(function (es) { es.forEach(function (en) { en.target.classList.toggle('off', !en.isIntersecting); }); }, { rootMargin: '120px 0px' });
+    $$('main > section, .topbar, footer').forEach(function (el) { ioOff.observe(el); });
+  }
+
+  /* ================= ESTANTE AO FUNDO: 0 no topo; sobe devagar depois da primeira dobra até um teto baixo ================= */
+  (function () {
+    // no computador a estante aparece maior e em mais área: teto mais baixo (fica no nível de onde o nome LOMBADA aparece)
+    var TETO = innerWidth >= 900 ? .075 : .115, raf = 0, est = $('.estante'), atual = -1;
+    function upd() { raf = 0; var h = innerHeight, t = (scrollY - h * .55) / (h * 2.2), v = Math.round(Math.max(0, Math.min(1, t)) * TETO * 1000) / 1000;
+      if (v !== atual) { atual = v; est.style.opacity = v; } }
+    addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true });
+    addEventListener('resize', upd); upd();
+  })();
+
+  var ABRE = Date.UTC(2026, 10, 9, 23, 0, 0), VENDA_URL = '';
+  if (Date.now() >= ABRE) {
+    $$('.when-pill').forEach(function (el) { el.textContent = 'Aberta agora'; });
+    if (VENDA_URL) $$('.lead-form').forEach(function (b) {
+      b.innerHTML = '<a class="btn" href="' + VENDA_URL + '">Entrar na Black Week Motorizada</a>';
+    });
+  }
+
+  /* ================= ENTRADA DOS BLOCOS ================= */
+  reversivel($$('.rv'), 'in', '0px 0px -8% 0px');
+
+  /* ================= BOTÃO FIXO (celular): some no topo e no cadastro final ================= */
+  var dock = $('#dock'), topForm = $('.lead-form[data-pos=topo]');
+  var seenTop = true, seenEnd = false;
+  function dockUpdate() { dock.classList.toggle('on', !seenTop && !seenEnd && !topForm.classList.contains('is-done')); }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { seenTop = es[0].isIntersecting || es[0].boundingClientRect.top > 0; dockUpdate(); }).observe(topForm);
+    new IntersectionObserver(function (es) { seenEnd = es[0].isIntersecting; dockUpdate(); }).observe($('#cadastro-fim'));
+  }
+
+  /* ================= CADASTRO ================= */
+  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'sck', 'src'];
+  var utms = {};
+  try { utms = JSON.parse(localStorage.getItem('mtbb_utms') || '{}') || {}; } catch (e) {}
+  var qs = new URLSearchParams(location.search);
+  KEYS.forEach(function (k) { var v = qs.get(k); if (v) utms[k] = v; });
+  try { localStorage.setItem('mtbb_utms', JSON.stringify(utms)); } catch (e) {}
+
+  // ?teste=1: mostra o obrigado sem chamar o servidor e sem disparar pixel
+  var TESTE = qs.get('teste') === '1';
+  var ENDPOINT = 'https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/pv-lead';
+  var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc';
+  var boxes = $$('.lead-form');
+  var GRUPO = 'https://sndflw.com/i/Re69lZi7NOj6jo8A42B9';
+  function allDone() { boxes.forEach(function (b) { b.classList.add('is-done'); }); dockUpdate(); }
+
+  /* 20/10 · WhatsApp: decide pelo NÚMERO DE DÍGITOS, nunca pelo começo (DDD 55 existe: Santa Maria/RS).
+     11 = DDD + celular (mesmo começando com 55) · 13 começando com 55 = +55 + DDD + celular (tira o 55)
+     12 começando com 55 = +55 + DDD + 8 dígitos (tira o 55) · 10 = DDD + 8 (celular ganha o 9). Nunca corta dígito. */
+  var DDDS = '11 12 13 14 15 16 17 18 19 21 22 24 27 28 31 32 33 34 35 37 38 41 42 43 44 45 46 47 48 49 51 53 54 55 61 62 63 64 65 66 67 68 69 71 73 74 75 77 79 81 82 83 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99';
+  // ddi = código do país escolhido no seletor (padrão 55). Fora do Brasil: só dígitos, sem regra de DDD.
+  function zapDig(v, ddi) {
+    if (ddi && ddi !== '55') { var x = String(v || '').replace(/\D/g, '').replace(/^0+/, ''); if (x.indexOf(ddi) === 0 && x.length > ddi.length + 7) x = x.slice(ddi.length); return x.slice(0, 14); }
+    var d = String(v || '').replace(/\D/g, '').replace(/^0+/, '');
+    if ((d.length === 12 || d.length === 13) && d.slice(0, 2) === '55') d = d.slice(2);
+    return d.slice(0, 11);
+  }
+  function zapFinal(v, ddi) { if (ddi && ddi !== '55') return '+' + ddi + zapDig(v, ddi); var d = zapDig(v); if (d.length === 10 && /[6-9]/.test(d.charAt(2))) d = d.slice(0, 2) + '9' + d.slice(2); return d; }
+  function zapOk(d) { if (d.charAt(0) === '+') return d.length >= 9 && d.length <= 17; return DDDS.indexOf(d.slice(0, 2)) >= 0 && d.slice(0, 2).length === 2 && (d.length === 10 || (d.length === 11 && d.charAt(2) === '9')); }
+  boxes.forEach(function (box) {
+    var form = $('form', box), btn = $('.btn', form), btnHTML = btn.innerHTML, err = $('.form-err', box), zap = form.whatsapp, pais = form.pais, ddiTxt = $('.ddi b', form), ddiF = $('.ddi-f', form), FL = ddiF.innerHTML;
+    pais.addEventListener('change', function () {
+      var o = pais.options[pais.selectedIndex], br = pais.value === '55';
+      ddiTxt.textContent = '+' + pais.value; ddiF.innerHTML = br ? FL : o.textContent.split(' ')[0];
+      zap.placeholder = br ? 'DDD + WhatsApp' : 'Número do WhatsApp';
+      var dd = $('.ddi', form); zap.style.paddingLeft = (dd.offsetLeft + dd.offsetWidth + 12) + 'px';
+      zap.dispatchEvent(new Event('input')); if (zap.value) check('whatsapp'); zap.focus();
+    });
+    zap.addEventListener('input', function () {
+      var d = zapDig(zap.value, pais.value), o = d;
+      if (pais.value !== '55') { zap.value = d; return; }
+      if (d.length > 2) o = '(' + d.slice(0, 2) + ') ' + d.slice(2);
+      if (d.length > 7) o = '(' + d.slice(0, 2) + ') ' + d.slice(2, d.length - 4) + '-' + d.slice(-4);
+      zap.value = o;
+    });
+    var rules = {
+      nome: function () { return form.nome.value.trim().length >= 2; },
+      email: function () { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.value.trim()); },
+      whatsapp: function () { return zapOk(zapFinal(zap.value, pais.value)); }
+    };
+    function check(n) { var ok = rules[n](); $('[data-f=' + n + ']', form).classList.toggle('invalid', !ok); return ok; }
+    Object.keys(rules).forEach(function (n) {
+      form[n].addEventListener('blur', function () { if (form[n].value) check(n); });
+      form[n].addEventListener('input', function () { if ($('[data-f=' + n + ']', form).classList.contains('invalid')) check(n); });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      err.style.display = 'none';
+      var bad = Object.keys(rules).filter(function (n) { return !check(n); });
+      if (bad.length) { form[bad[0]].focus(); return; }
+      if (TESTE) { allDone(); return; }
+
+      btn.disabled = true; btn.textContent = 'Enviando...';
+      var payload = {
+        nome: form.nome.value.trim(),
+        email: form.email.value.trim(),
+        whatsapp: zapFinal(zap.value, pais.value),
+        variant: 'black-week',
+        publico: 'aluno',
+        posicao: 'aluno-' + box.getAttribute('data-pos')
+      };
+      Object.keys(utms).forEach(function (k) { payload[k] = utms[k]; });
+      // 20/10 · teste A/B da página de obrigado (A = ingresso, B = progresso): sorteio fixo por aparelho, vai junto no cadastro
+      var obg = 'C';   // 21/10: página de obrigado = ingresso, 3 s, com "Não conseguiu entrar?" na volta (sem teste por enquanto)
+      payload.obg = obg;
+      payload.obg_tk = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);   // liga o clique da página de obrigado ao cadastro
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + ANON, 'apikey': ANON },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        if (r.status === 403) return r.json().catch(function () { return {}; }).then(function (j) { throw j && j.error === 'email_nao_aluno' ? 'email' : 'http'; });
+        if (!r.ok) throw new Error('http ' + r.status);
+        // 19/10: o Lead padrão sai daqui. Quem dispara o Lead é o Sendflow, ao abrir a página do grupo (1 por pessoa);
+        // a campanha otimiza nele. Aqui fica só o evento próprio, para comparar cadastro x chegada no grupo.
+        try { if (window.fbq) { fbq('trackCustom', 'CadastroBlackWeekAluno', { publico: 'aluno' }); } } catch (e) {}
+        try { if (window.gtag) gtag('event', 'generate_lead', { campaign: 'black-week-motorizada' }); } catch (e) {}
+        allDone();
+        // depois do cadastro a pessoa vai direto ao grupo do WhatsApp (o botão do obrigado fica de reserva)
+        setTimeout(function () { try { sessionStorage.setItem('bf26_nome', payload.nome); sessionStorage.setItem('bf26_tk', payload.obg_tk); } catch (e) {} location.href = '/black-week-alunos/obrigado/'; }, 1000);
+      }).catch(function (e) {
+        btn.disabled = false; btn.innerHTML = btnHTML;
+        // e-mail fora da base de compradores: marca o campo, sem mensagem de erro geral
+        if (e === 'email') { $('[data-f=email]', form).classList.add('invalid'); form.email.focus(); return; }
+        err.style.display = 'block';
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
