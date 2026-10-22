@@ -40,8 +40,10 @@ const BW_TAG_ALUNO = 383;         // tag "BF-26-aluno" (ja comprou o Metodo; ant
 // 22/10: páginas de alunos (/black-week-alunos/ e /black-week-vitalicio/). Aluno = tag BF-26-aluno + automação 856.
 // Vitalício: tag e automação próprias ainda não existem no AC (cliente cria); até lá recebe a BF-26-aluno e nenhuma automação.
 const BW_TAG_VITALICIO = 385;      // "BF-26-vitalicio" (criada em 22/10)
-const BW_AUTOMACAO_ALUNO = 856;    // "Confirmação Inscrição - ALUNO"
-const BW_AUTOMACAO_VITALICIO = 0;  // TROCAR pela automação do AC quando o cliente criar
+// 22/10: a 856 (aluno) e a 857 (vitalícios) entram pelo GATILHO DE TAG no próprio AC. Colocar também pela API duplicava a entrada
+// (multientry ligado = 2 e-mails iguais). Por isso aqui fica 0: a tag certa basta.
+const BW_AUTOMACAO_ALUNO = 0;      // 856 "Confirmação Inscrição - ALUNO" (gatilho: tag BF-26-aluno)
+const BW_AUTOMACAO_VITALICIO = 0;  // 857 "Confirmação Inscrição - VITALÍCIOS" (gatilho: tag BF-26-vitalicio)
 const BW_AUTOMACAO = 855;         // "[BF26] [OPERACIONAL] - Confirmação Inscrição" (cliente, 19/10): todo cadastro da página entra nela
 const BW_FIELD_LIVRO = 122;       // campo "BW Livro (test drive)" (%BW_LIVRO%)
 const BW_FASE_ESTAGIO: Record<string, string> = { construcao: "escrevendo", lancamento: "lancando", permanencia: "publicado" };
