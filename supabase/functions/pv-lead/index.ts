@@ -172,7 +172,8 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
         utm_term: u("utm_term"), utm_id: u("utm_id"), sck: u("sck"), fbclid: u("fbclid", 300), src: u("src"),
         ac_contact_id: contactId || null, automacao_ok: auto.ok,
         ab: ['A', 'B', 'C'].includes(String(payload.ab)) ? String(payload.ab) : null,   // 19/10: variante do teste A/B (só quem foi sorteado)
-        obg: ['A', 'B', 'C', 'D'].includes(String(payload.obg)) ? String(payload.obg) : null, obg_tk: sanitize(payload.obg_tk, 32) || null, publico: publico || null }),   // 20/10: teste A/B da página de obrigado
+        obg: ['A', 'B', 'C', 'D'].includes(String(payload.obg)) ? String(payload.obg) : null, obg_tk: sanitize(payload.obg_tk, 32) || null, publico: publico || null,
+        ac_estagio: estagio || null, ac_livro: livro || null, ac_erro: contactId ? null : (sync.text || "").slice(0, 200) || null }),   // 22/10: dados pro reenvio ao AC   // 20/10: teste A/B da página de obrigado
     });
   } catch { /* o cadastro no AC já valeu */ }
   return json({
@@ -184,10 +185,47 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
   });
 }
 
+
+// 22/10 · REENVIO AO AC: cadastro da Black gravado com ac_contact_id nulo (AC fora/lento). pg_cron a cada 5 min chama
+// POST /pv-lead?modo=reenviar_ac com x-sync-key. Faz o que o cadastro faria (contato + lista + tag do público + automação).
+async function reenviarAc() {
+  const H = { "Content-Type": "application/json", apikey: SB_SERVICE, Authorization: `Bearer ${SB_SERVICE}` };
+  const desde = new Date(Date.now() - 7 * 864e5).toISOString();
+  const r = await fetch(`${SB_URL}/rest/v1/bf26_cadastros?select=id,email,nome,whatsapp,publico,ac_estagio,ac_livro,ac_tentativas&ac_contact_id=is.null&ac_tentativas=lt.30&criado_em=gte.${desde}&order=criado_em&limit=30`, { headers: H });
+  const lst: any[] = r.ok ? await r.json() : [];
+  const marca = (id: number, b: unknown) => fetch(`${SB_URL}/rest/v1/bf26_cadastros?id=eq.${id}`, { method: "PATCH", headers: H, body: JSON.stringify(b) });
+  let ok = 0, falhou = 0;
+  for (const c of lst) {
+    if (/(@exemplo\.com$|^teste)/i.test(c.email || "")) { await marca(c.id, { ac_tentativas: 99, ac_erro: "teste: não reenvia" }); continue; }
+    const [firstName, ...rest] = String(c.nome || "").split(/\s+/);
+    const fieldValues: any[] = [];
+    if (c.ac_estagio) fieldValues.push({ field: FIELD_ESTAGIO, value: c.ac_estagio });
+    if (c.ac_livro) fieldValues.push({ field: BW_FIELD_LIVRO, value: c.ac_livro });
+    const sync = await acFetch("/contact/sync", { method: "POST", body: JSON.stringify({ contact: { email: c.email, firstName, lastName: rest.join(" "), phone: c.whatsapp || undefined, fieldValues } }) });
+    const contactId = sync.ok ? Number(sync.data?.contact?.id) || 0 : 0;
+    if (!contactId) {
+      falhou++; await marca(c.id, { ac_tentativas: (c.ac_tentativas || 0) + 1, ac_erro: (sync.text || "").slice(0, 200) });
+      if (sync.status === 0 || sync.status >= 500) break;   // AC ainda fora: tenta na próxima rodada
+      continue;
+    }
+    const pub = String(c.publico || "");
+    const tagId = pub === "vitalicio" && BW_TAG_VITALICIO ? BW_TAG_VITALICIO : pub ? BW_TAG_ALUNO : BW_TAG_CADASTRO;
+    const autoId = pub === "vitalicio" ? BW_AUTOMACAO_VITALICIO : pub ? BW_AUTOMACAO_ALUNO : BW_AUTOMACAO;
+    await acFetch("/contactLists", { method: "POST", body: JSON.stringify({ contactList: { list: BW_LIST_ID, contact: contactId, status: 1 } }) });
+    await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: tagId } }) });
+    const auto = autoId ? await acFetch("/contactAutomations", { method: "POST", body: JSON.stringify({ contactAutomation: { contact: contactId, automation: autoId } }) }) : { ok: false };
+    await marca(c.id, { ac_contact_id: contactId, automacao_ok: auto.ok, ac_tentativas: (c.ac_tentativas || 0) + 1, ac_erro: null, ac_reenviado_em: new Date().toISOString() });
+    ok++;
+  }
+  return json({ ok: true, reenvio_ac: { pendentes: lst.length, enviados: ok, falharam: falhou } });
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS_HEADERS });
   if (req.method !== "POST") return json({ error: "method_not_allowed" }, 405);
   if (!AC_API_KEY) return json({ error: "ac_key_not_configured" }, 500);
+  const SYNC_KEY = Deno.env.get("LOMBADA_SYNC_KEY") ?? "";
+  if (SYNC_KEY && req.headers.get("x-sync-key") === SYNC_KEY && new URL(req.url).searchParams.get("modo") === "reenviar_ac") return await reenviarAc();
 
   let payload: any;
   try {
