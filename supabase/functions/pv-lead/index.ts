@@ -39,7 +39,7 @@ const BW_TAG_CADASTRO = 382;      // tag "BF-26" (cliente, 19/10; antes 380 bw-m
 const BW_TAG_ALUNO = 383;         // tag "BF-26-aluno" (ja comprou o Metodo; antes 381)
 // 22/10: páginas de alunos (/black-week-alunos/ e /black-week-vitalicio/). Aluno = tag BF-26-aluno + automação 856.
 // Vitalício: tag e automação próprias ainda não existem no AC (cliente cria); até lá recebe a BF-26-aluno e nenhuma automação.
-const BW_TAG_VITALICIO = 0;        // TROCAR pela tag do AC quando o cliente criar
+const BW_TAG_VITALICIO = 385;      // "BF-26-vitalicio" (criada em 22/10)
 const BW_AUTOMACAO_ALUNO = 856;    // "Confirmação Inscrição - ALUNO"
 const BW_AUTOMACAO_VITALICIO = 0;  // TROCAR pela automação do AC quando o cliente criar
 const BW_AUTOMACAO = 855;         // "[BF26] [OPERACIONAL] - Confirmação Inscrição" (cliente, 19/10): todo cadastro da página entra nela
