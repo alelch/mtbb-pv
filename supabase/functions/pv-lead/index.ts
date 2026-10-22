@@ -132,6 +132,40 @@ async function publicoDoEmail(email: string): Promise<string | null | undefined>
   } catch { return undefined; }
 }
 
+
+// 22/10 · CAPI do cadastro da Black: o mesmo evento do navegador (CadastroBlackWeek / CadastroBlackWeekAluno) sai também
+// pelo servidor com e-mail, telefone e nome criptografados (SHA-256) + fbc/fbp/IP/UA. Mesmo event_id (payload.eid) = o Meta
+// deduplica. Só envia quando a página manda eid (página sem eid não ganharia dedup e contaria em dobro). Nunca quebra o cadastro.
+const CAPI_PIXEL = "617884976680212";   // pixel OFICIAL
+async function sha(v: string) {
+  const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(v));
+  return Array.from(new Uint8Array(b), (x) => x.toString(16).padStart(2, "0")).join("");
+}
+async function capiCadastro(payload: any, email: string, nome: string, whatsapp: string, publico: string) {
+  const tok = Deno.env.get("META_CAPI_TOKEN") ?? "";
+  const eid = sanitize(payload.eid, 64);
+  if (!tok || !eid) return { ok: null as boolean | null, erro: !tok ? "sem token" : "sem eid" };
+  const [fn, ...ln] = nome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").split(/\s+/);
+  const ud: Record<string, unknown> = { em: [await sha(email)], external_id: [await sha(email)] };
+  if (whatsapp) ud.ph = [await sha(whatsapp)];
+  if (whatsapp.startsWith("55")) ud.country = [await sha("br")];
+  if (fn) ud.fn = [await sha(fn)];
+  if (ln.length) ud.ln = [await sha(ln[ln.length - 1])];
+  if (payload._ip) ud.client_ip_address = payload._ip;
+  if (payload._ua) ud.client_user_agent = payload._ua;
+  const fbc = sanitize(payload.fbc, 300), fbp = sanitize(payload.fbp, 120);
+  if (fbc) ud.fbc = fbc;
+  if (fbp) ud.fbp = fbp;
+  const ev = { data: [{ event_name: publico ? "CadastroBlackWeekAluno" : "CadastroBlackWeek", event_time: Math.floor(Date.now() / 1000), event_id: eid,
+    action_source: "website", event_source_url: sanitize(payload.url, 500) || "https://metodo.thebookbusiness.com.br/black-week-misterio/",
+    user_data: ud, custom_data: publico ? { publico } : {} }] };
+  try {
+    const r = await fetch(`https://graph.facebook.com/v21.0/${CAPI_PIXEL}/events?access_token=${tok}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(ev), signal: AbortSignal.timeout(4000) });
+    const t = await r.text();
+    return { ok: r.ok, erro: r.ok ? null : t.slice(0, 200) };
+  } catch (e) { return { ok: false, erro: String(e).slice(0, 200) }; }
+}
+
 async function blackWeek(payload: any, nome: string, email: string, whatsapp: string) {
   // páginas de alunos: confere o e-mail ANTES de tudo. Fora da lista = 403 email_nao_aluno (a página mostra "Esse e-mail não é válido.").
   // Vitalício que cair na página de alunos passa (também é aluno); aluno normal na página do vitalício não passa.
@@ -161,6 +195,7 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
   const tagAluno: boolean | null = null;
   const tag = !contactId ? nada : await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: tagId } }) });
   const auto = !contactId || !autoId ? nada : await acFetch("/contactAutomations", { method: "POST", body: JSON.stringify({ contactAutomation: { contact: contactId, automation: autoId } }) });
+  const capi = await capiCadastro(payload, email, nome, whatsapp, publico);   // 22/10: mesmo evento pelo servidor
   // 19/10: guarda o cadastro no Supabase para o dash da Black no Miolo (recadastro = nova linha). Nunca quebra o cadastro.
   try {
     const u = (k: string, n = 200) => sanitize(payload[k], n) || null;
@@ -173,11 +208,13 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
         ac_contact_id: contactId || null, automacao_ok: auto.ok,
         ab: ['A', 'B', 'C'].includes(String(payload.ab)) ? String(payload.ab) : null,   // 19/10: variante do teste A/B (só quem foi sorteado)
         obg: ['A', 'B', 'C', 'D'].includes(String(payload.obg)) ? String(payload.obg) : null, obg_tk: sanitize(payload.obg_tk, 32) || null, publico: publico || null,
-        ac_estagio: estagio || null, ac_livro: livro || null, ac_erro: contactId ? null : (sync.text || "").slice(0, 200) || null }),   // 22/10: dados pro reenvio ao AC   // 20/10: teste A/B da página de obrigado
+        ac_estagio: estagio || null, ac_livro: livro || null, ac_erro: contactId ? null : (sync.text || "").slice(0, 200) || null,
+        capi_ok: capi.ok, capi_erro: capi.erro }),   // 22/10: dados pro reenvio ao AC   // 20/10: teste A/B da página de obrigado
     });
   } catch { /* o cadastro no AC já valeu */ }
   return json({
     ok: true, variant: "black-week", contact_id: contactId || null, ac_ok: !!contactId, ac_status: sync.status,
+    capi_ok: capi.ok,
     list_added: lista.ok || lista.status === 422, tag_applied: tag.ok || tag.status === 422,
     // 422 = automação inativa (ou contato já dentro): o cadastro segue valendo, mas a confirmação não sai
     automation_added: auto.ok, automation_status: auto.status, automation_detail: auto.ok ? null : auto.text?.slice(0, 200),
@@ -234,6 +271,8 @@ serve(async (req) => {
     return json({ error: "invalid_json" }, 400);
   }
 
+  payload._ip = (req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "").split(",")[0].trim();
+  payload._ua = req.headers.get("user-agent") || "";
   const nome = sanitize(payload.nome, 120);
   const email = sanitize(payload.email, 200).toLowerCase();
   const lang = sanitize(payload.lang, 5).toLowerCase();

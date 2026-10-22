@@ -1165,6 +1165,10 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
       var obg = 'C';   // 21/10: página de obrigado = ingresso, 3 s, com "Não conseguiu entrar?" na volta (sem teste por enquanto)
       payload.obg = obg;
       payload.obg_tk = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);   // liga o clique da página de obrigado ao cadastro
+      // 22/10: o cadastro também vai ao Meta pelo servidor (pv-lead). eid igual nos dois lados = o Meta conta 1 vez só.
+      payload.eid = 'cbw.' + payload.obg_tk;
+      payload.url = location.href.split('#')[0];
+      try { var ck = function (n) { var m = document.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? decodeURIComponent(m[1]) : ''; }; payload.fbp = ck('_fbp'); payload.fbc = ck('_fbc'); } catch (e) {}
 
       fetch(ENDPOINT, {
         method: 'POST',
@@ -1175,7 +1179,7 @@ footer .legal { max-width: 640px; margin: 12px auto 0; font-size: 11px; line-hei
         if (!r.ok) throw new Error('http ' + r.status);
         // 19/10: o Lead padrão sai daqui. Quem dispara o Lead é o Sendflow, ao abrir a página do grupo (1 por pessoa);
         // a campanha otimiza nele. Aqui fica só o evento próprio, para comparar cadastro x chegada no grupo.
-        try { if (window.fbq) { fbq('trackCustom', 'CadastroBlackWeekAluno', { publico: 'vitalicio' }); } } catch (e) {}
+        try { if (window.fbq) { fbq('trackCustom', 'CadastroBlackWeekAluno', { publico: 'vitalicio' }, { eventID: payload.eid }); } } catch (e) {}
         try { if (window.gtag) gtag('event', 'generate_lead', { campaign: 'black-week-motorizada' }); } catch (e) {}
         allDone();
         // depois do cadastro a pessoa vai direto ao grupo do WhatsApp (o botão do obrigado fica de reserva)

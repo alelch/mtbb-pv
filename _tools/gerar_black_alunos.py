@@ -135,7 +135,7 @@ for pasta, P in PUBLICOS.items():
     s = troca(s, "if (!r.ok) throw new Error('http ' + r.status);",
               "if (r.status === 403) return r.json().catch(function () { return {}; }).then(function (j) { throw j && j.error === 'email_nao_aluno' ? 'email' : 'http'; });\n"
               "        if (!r.ok) throw new Error('http ' + r.status);")
-    s = troca(s, "fbq('trackCustom', 'CadastroBlackWeek');", "fbq('trackCustom', 'CadastroBlackWeekAluno', { publico: '" + P['publico'] + "' });")
+    s = troca(s, "fbq('trackCustom', 'CadastroBlackWeek', {}, { eventID: payload.eid });", "fbq('trackCustom', 'CadastroBlackWeekAluno', { publico: '" + P['publico'] + "' }, { eventID: payload.eid });")
     s = troca(s, "location.href = '/black-week-obrigado/';", f"location.href = '/black-week-{pasta}/obrigado/';")
     s = troca(s, """      }).catch(function () {
         btn.disabled = false; btn.innerHTML = btnHTML;
