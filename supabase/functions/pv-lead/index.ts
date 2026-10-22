@@ -63,16 +63,18 @@ function json(body: unknown, status = 200) {
 }
 
 async function acFetch(path: string, init: RequestInit = {}) {
-  const r = await fetch(`${AC_API_URL}${path}`, {
-    ...init,
+  // 22/10: AC caiu (522) e derrubou o cadastro. Timeout de 8 s e erro de rede vira ok:false (status 0), nunca exceção.
+  let r: Response;
+  try { r = await fetch(`${AC_API_URL}${path}`, {
+    ...init, signal: AbortSignal.timeout(8000),
     headers: {
       "Api-Token": AC_API_KEY,
       "Content-Type": "application/json",
       "Accept": "application/json",
       ...(init.headers || {}),
     },
-  });
-  const text = await r.text();
+  }); } catch (e) { return { ok: false, status: 0, data: null, text: String(e) }; }
+  const text = await r.text().catch(() => "");
   let data: any = null;
   try { data = text ? JSON.parse(text) : null; } catch { /* keep null */ }
   return { ok: r.ok, status: r.status, data, text };
@@ -120,17 +122,17 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
   if (livro) fieldValues.push({ field: BW_FIELD_LIVRO, value: livro });
 
   const sync = await acFetch("/contact/sync", { method: "POST", body: JSON.stringify({ contact: { email, firstName, lastName: rest.join(" "), phone: whatsapp || undefined, fieldValues } }) });
-  if (!sync.ok) return json({ error: "ac_sync_failed", status: sync.status, detail: sync.text?.slice(0, 500) }, 502);
-  const contactId = Number(sync.data?.contact?.id);
-  if (!contactId) return json({ error: "ac_no_contact_id", detail: sync.text?.slice(0, 500) }, 502);
-
-  const lista = await acFetch("/contactLists", { method: "POST", body: JSON.stringify({ contactList: { list: BW_LIST_ID, contact: contactId, status: 1 } }) });
+  // 22/10: AC fora do ar NÃO perde o cadastro: grava no Supabase com ac_contact_id nulo e a pessoa segue pro obrigado.
+  // Quem ficou sem AC é reenviado depois (ac_contact_id is null).
+  const contactId = sync.ok ? Number(sync.data?.contact?.id) || 0 : 0;
+  const nada = { ok: false, status: 0, data: null, text: "ac_indisponivel" };
+  const lista = !contactId ? nada : await acFetch("/contactLists", { method: "POST", body: JSON.stringify({ contactList: { list: BW_LIST_ID, contact: contactId, status: 1 } }) });
   // 19/10: a BF-26-aluno NÃO é aplicada aqui. Ela dispara a automação de alunos (856), que é da página de alunos
   // (ainda não feita). Na página do mistério todo mundo, aluno ou não, recebe a BF-26 e entra na automação 855.
   const aluno = await ehAluno(email);
   const tagAluno: boolean | null = null;
-  const tag = await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: BW_TAG_CADASTRO } }) });
-  const auto = await acFetch("/contactAutomations", { method: "POST", body: JSON.stringify({ contactAutomation: { contact: contactId, automation: BW_AUTOMACAO } }) });
+  const tag = !contactId ? nada : await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: BW_TAG_CADASTRO } }) });
+  const auto = !contactId ? nada : await acFetch("/contactAutomations", { method: "POST", body: JSON.stringify({ contactAutomation: { contact: contactId, automation: BW_AUTOMACAO } }) });
   // 19/10: guarda o cadastro no Supabase para o dash da Black no Miolo (recadastro = nova linha). Nunca quebra o cadastro.
   try {
     const u = (k: string, n = 200) => sanitize(payload[k], n) || null;
@@ -140,13 +142,13 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
       body: JSON.stringify({ email, nome, whatsapp: whatsapp || null, aluno, posicao: sanitize(payload.posicao, 20) || null,
         utm_source: u("utm_source"), utm_medium: u("utm_medium"), utm_campaign: u("utm_campaign"), utm_content: u("utm_content"),
         utm_term: u("utm_term"), utm_id: u("utm_id"), sck: u("sck"), fbclid: u("fbclid", 300), src: u("src"),
-        ac_contact_id: contactId, automacao_ok: auto.ok,
+        ac_contact_id: contactId || null, automacao_ok: auto.ok,
         ab: ['A', 'B', 'C'].includes(String(payload.ab)) ? String(payload.ab) : null,   // 19/10: variante do teste A/B (só quem foi sorteado)
         obg: ['A', 'B', 'C', 'D'].includes(String(payload.obg)) ? String(payload.obg) : null, obg_tk: sanitize(payload.obg_tk, 32) || null }),   // 20/10: teste A/B da página de obrigado
     });
   } catch { /* o cadastro no AC já valeu */ }
   return json({
-    ok: true, variant: "black-week", contact_id: contactId,
+    ok: true, variant: "black-week", contact_id: contactId || null, ac_ok: !!contactId, ac_status: sync.status,
     list_added: lista.ok || lista.status === 422, tag_applied: tag.ok || tag.status === 422,
     // 422 = automação inativa (ou contato já dentro): o cadastro segue valendo, mas a confirmação não sai
     automation_added: auto.ok, automation_status: auto.status, automation_detail: auto.ok ? null : auto.text?.slice(0, 200),
