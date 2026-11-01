@@ -87,7 +87,41 @@ _LEVA = [
   ("Projeto Especial", "Editora Perfeita", "Como analisar propostas e escolher a editora certa para o seu livro."),
   ("Projeto Especial", "Destaque Amazon", "Título, descrição, categorias e palavras-chave para o seu livro aparecer na Amazon."),
 ]
-LEVA = "".join(f'<div class="lv rv"><span class="lv__k">{k}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div>' for k, t, d in _LEVA)
+_IMG = ["p-metodo", "p-autoridade", "p-gerador", "p-calendario", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros", "p-jabuti", "p-autopublicacao", "p-editora", "p-amazon"]
+LEVA = "".join(f'<div class="lv rv"><img class="lv__img" src="assets/{_IMG[n]}.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">{k}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div></div>' for n, (k, t, d) in enumerate(_LEVA))
+# cupons dos parceiros (valores e regras passados pelo cliente em 01/11; Literare só entra quando ele confirmar o valor)
+_CUP = [("Gráfica Renograf", "Impressão do seu livro", "até R$ 1.200", "Desconto progressivo pelo valor da impressão. Vale reimpressão."),
+        ("Histórias Bem Contadas", "Leitura crítica", "R$ 250", "Válido por 24 meses."),
+        ("Histórias Bem Contadas", "Edição de texto", "R$ 250", "Válido por 24 meses."),
+        ("Jimenes Comunicação", "Assessoria de imprensa", "R$ 2.000", "Projeto semestral. Válido por 24 meses."),
+        ("Editora Labrador", "Publicação do seu livro solo", "R$ 1.000", "Válido por 12 meses.")]
+CUPONS = "".join(f'<div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>{v}</b></div><div class="cup__t"><span>{q}</span><h3>{n}</h3><p>{d}</p></div></div>' for n, q, v, d in _CUP)
+
+# 01/11 (cliente: "a parte do test drive da primeira versão era legal, só a parte do LOMBADA volta"):
+# test drive + oportunidades + ideias de post da black-week/ voltam como estavam (markup, CSS e JS próprios)
+_BL = bw.split("\n")
+_body = bw[bw.index("<main>"):bw.index("</main>")]
+def _bloco(a, b):
+    x = _body.index(a); return _body[x:_body.index(b, x)]
+DEMO_DRIVE = _bloco('<section class="blk drive"', '<!-- 4.').replace('class="blk drive"', 'class="lmbx drive"')
+DEMO_MOTOR = _bloco('<section class="blk" id="mais-motor">', '<!-- 5.').replace('class="blk" id="mais-motor"', 'class="lmbx" id="mais-motor"')
+_KW = ('drive', 'feat', 'panel', 'phone', 'screen', 'app-', 'ops', 'idea', '.seg', 'ctrl', 'try', 'pills', 'q__l', 'gen-btn', 'ideas', '.op', '.act', '.ia', '.chip', 'td-', 'pulse', 'caret', '.bk', '.vr')
+def _media(a, b, cond):
+    ls = [l for l in _BL[a-1:b] if l.startswith('  .') and any(k in l for k in _KW)]
+    return f"@media {cond} {{\n" + "\n".join(ls) + "\n}" if ls else ""
+DEMO_CSS = "\n".join([
+    "\n".join(_BL[97:102]),            # .eyebrow e .lede
+    "\n".join(_BL[180:205]),           # telas do app
+    "\n".join(_BL[289:396]),           # test drive + tem mais motor
+    _media(495, 548, "(min-width: 900px)"),
+    _media(549, 562, "(min-width: 900px) and (max-width: 1179px)"),
+    _media(563, 586, "(max-width: 899px)"),
+    _media(587, 600, "(max-width: 520px)"),
+    "\n".join(l for l in _BL[601:617] if l.startswith("@keyframes") and "gold" not in l),
+    ".lmbx { position: relative; padding: var(--sec) 0; }",
+])
+_i = bw.index("  /* ================= utilidades"); _j = bw.index("  /* ================= 5. ESTEIRA")
+DEMO_JS = "<script>\n(function () {\n  'use strict';\n" + bw[_i:_j] + "})();\n</script>"
 
 HTML = f'''<!doctype html>
 <html lang="pt-BR">
@@ -123,6 +157,10 @@ HTML = f'''<!doctype html>
   --paper: #f3f0e8; --paper-ink: #1a1a1a; --paper-soft: #6b665d;
   --gold: linear-gradient(100deg, #9c5414 0%, #e08a12 18%, #faab00 32%, #ffe6a8 46%, #faab00 58%, #c9731a 78%, #8a4a12 100%);
   --ease: cubic-bezier(.22, 1, .36, 1);
+  --pop: cubic-bezier(.34, 1.56, .64, 1);
+  --ink-2: #d2cec6; --ink-3: #8b877f; --bg-2: #0a0a0b; --sec: 64px; --gutter: 20px;
+  --f-construcao: #3fae84; --f-lancamento: #fc783c; --f-permanencia: #faab00;
+  --app-paper: #f3f0e8; --app-ink: #1a1a1a; --app-soft: #6b665d; --app-line: #e3ded2; --app-chip: #efe9dc; --app-ochre: #8a5a00;
 }}
 *, *::before, *::after {{ margin: 0; padding: 0; box-sizing: border-box; }}
 html {{ -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }}
@@ -185,10 +223,39 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .h__price {{ display: inline-flex; align-items: baseline; gap: 8px; margin-top: 28px; padding: 10px 20px; border-radius: 99px; background: rgba(250, 171, 0, .1); box-shadow: inset 0 0 0 1px rgba(250, 171, 0, .5); animation: rise 1s var(--ease) .55s both; }}
 .h__price span {{ font-size: 14px; color: var(--ink2); }}
 .h__price b {{ font-size: clamp(22px, 6vw, 28px); font-weight: 800; }}
-.h .cta {{ max-width: 480px; margin: 22px auto 0; animation: rise 1s var(--ease) .65s both; }}
+.h .cta {{ max-width: 480px; margin: 22px auto 0; }}
 .h__cue {{ display: inline-flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 34px; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink3); text-decoration: none; }}
 .h__cue svg {{ width: 20px; height: 20px; animation: bob 1.8s ease-in-out infinite; }}
 
+/* imagens dos produtos, bônus e cupons */
+.lv {{ overflow: hidden; padding: 0 !important; }}
+.lv__img {{ width: 100%; aspect-ratio: 720 / 567; object-fit: cover; }}
+.lv__b {{ padding: 20px 20px 24px; }}
+.bon2__ph {{ width: 46%; max-width: 190px; margin: 18px auto 0; padding: 6px; border-radius: 26px; background: linear-gradient(160deg, #2b2a2f, #0e0e10 60%); box-shadow: 0 24px 40px -18px rgba(0, 0, 0, .8), 0 0 0 1px #3a3226; }}
+.bon2__c .bon2__ph img {{ max-width: none; margin: 0; filter: none; width: 100%; aspect-ratio: 716 / 1200; object-fit: cover; object-position: top; border-radius: 21px; }}
+.cups {{ border-top: 1px solid var(--line); }}
+.cups__l {{ margin: 16px auto 0; max-width: 560px; font-size: clamp(16px, 4.4vw, 20px); color: var(--ink2); text-wrap: balance; }}
+.cupg {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 900px; margin: 36px auto 0; text-align: left; }}
+@media (min-width: 760px) {{ .cupg {{ grid-template-columns: 1fr 1fr; }} }}
+.cup {{ position: relative; display: grid; grid-template-columns: 112px 1fr; min-height: 118px; border-radius: 14px; background: #f7f1e3; color: #1a1a1a; box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .8); }}
+.cup::before, .cup::after {{ content: ""; position: absolute; left: 104px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); }}
+.cup::before {{ top: -8px; }} .cup::after {{ bottom: -8px; }}
+.cup__v {{ display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 8px; border-right: 2px dashed #cbbf9f; border-radius: 14px 0 0 14px; background: var(--gold); text-align: center; }}
+.cup__v small {{ font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #3a2200; }}
+.cup__v b {{ margin-top: 4px; font-size: 20px; font-weight: 800; line-height: 1.05; color: #111; }}
+.cup__t {{ padding: 14px 16px; }}
+.cup__t span {{ font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8a5a00; }}
+.cup__t h3 {{ margin-top: 4px; font-size: 17px; font-weight: 800; line-height: 1.2; }}
+.cup__t p {{ margin-top: 4px; font-size: 13px; line-height: 1.4; color: #5c574e; }}
+.cups__fine {{ margin: 18px auto 0; max-width: 640px; font-size: 12px; line-height: 1.5; color: var(--ink3); }}
+
+/* LOMBADA: título antes do test drive */
+.lmbh {{ max-width: 860px; margin: 40px auto 0; text-align: center; }}
+.lmbh__mark {{ margin-top: 16px; font-size: clamp(46px, 13vw, 110px); line-height: 1; }}
+.lmbh__mark .lmb {{ color: var(--ink); }}
+.lmbh__t {{ margin-top: 14px; font-size: clamp(26px, 7.4vw, 50px); font-weight: 800; line-height: 1.06; letter-spacing: -.03em; text-wrap: balance; }}
+.leva--resto {{ border-top: 0; padding-top: 40px; }}
+.lmbx .h2 {{ font-size: clamp(30px, 8vw, 48px); }}
 /* LOMBADA: a semana e o "ele ainda te dá" */
 .lv.lv--lmb .lv__big {{ margin: 14px auto 0; max-width: 760px; font-size: clamp(28px, 8vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; color: var(--paper-ink); text-wrap: balance; }}
 .lv.lv--lmb .lv__lead {{ margin-top: 12px; font-size: clamp(15px, 4.2vw, 18px); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8a5a00; }}
@@ -220,7 +287,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .price {{ margin-top: 64px; }}
 .price__big {{ margin-top: 14px; line-height: 1; }}
 .price__big small {{ display: block; font-size: 18px; font-weight: 500; color: var(--ink2); }}
-.price__big span {{ display: block; margin-top: 6px; font-size: clamp(60px, 18vw, 104px); font-weight: 800; letter-spacing: -.04em; background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }}
+.price__big span {{ display: block; white-space: nowrap; margin-top: 6px; font-size: clamp(52px, 15.5vw, 104px); font-weight: 800; letter-spacing: -.04em; background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }}
 .price__cash {{ margin-top: 8px; font-size: 16px; color: var(--ink2); }}
 .price__cta {{ max-width: 480px; margin: 26px auto 0; }}
 .resumo .card__list {{ margin-top: 22px; }}
@@ -297,7 +364,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .st {{ position: absolute; inset: 0 0 auto; opacity: 0; transform: translateY(14px); transition: opacity .45s ease, transform .45s var(--ease); pointer-events: none; text-align: center; }}
 .st.on {{ position: relative; opacity: 1; transform: none; }}
 @media (min-width: 860px) {{ .st {{ text-align: left; }} }}
-.st__n {{ font-size: 13px; font-weight: 800; letter-spacing: .2em; color: #8a5a00; }}
+.st__n {{ font-size: 14px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #8a5a00; }}
 .st__t, .lv .st__t {{ margin-top: 8px; font-size: clamp(24px, 6.6vw, 46px); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }}
 .st__d, .lv .st__d {{ margin-top: 8px; font-size: clamp(15px, 4.1vw, 20px); line-height: 1.5; color: var(--paper-soft); text-wrap: balance; }}
 
@@ -466,6 +533,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 @keyframes bob {{ 50% {{ transform: translateY(5px); }} }}
 @keyframes rev {{ 0%, 100% {{ transform: translateX(0); opacity: 1; }} 50% {{ transform: translateX(-6px); opacity: .75; }} }}
 @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation: none !important; transition: none !important; }} .rv {{ opacity: 1; transform: none; }} }}
+/* ===== demo do LOMBADA (da black-week/) ===== */
+{DEMO_CSS}
 </style>
 </head>
 <body>
@@ -499,10 +568,10 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="blk">
         <p class="q1">Agora, as contas de quanto você investiria para ter acesso a tudo isso ao longo do tempo:</p>
         <div class="bill">
-          <div class="bill__row"><span>Todos os produtos · 1º ano</span><b>R$ 10.594,00</b></div>
-          <div class="bill__row"><span>Todos os produtos · 2º ano</span><b>R$ 5.297,00</b></div>
-          <div class="bill__row"><span>Todos os produtos · 3º ano</span><b>R$ 5.297,00</b></div>
-          <div class="bill__row"><span>Todos os produtos · 4º ano</span><b>R$ 5.297,00</b></div>
+          <div class="bill__row"><span>1º ano</span><b>R$ 10.594,00</b></div>
+          <div class="bill__row"><span>2º ano</span><b>R$ 5.297,00</b></div>
+          <div class="bill__row"><span>3º ano</span><b>R$ 5.297,00</b></div>
+          <div class="bill__row"><span>4º ano</span><b>R$ 5.297,00</b></div>
           <div class="bill__tot"><span>Total investido</span><b>R$ 26.485,00</b></div>
         </div>
       </div>
@@ -524,6 +593,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="bon2">
         <div class="bon2__c rv">
           <span class="lv__k">Bônus 1</span>
+          <div class="bon2__ph"><img src="assets/tela-semana.webp" alt="LOMBADA no celular" width="716" height="1460" loading="lazy" decoding="async"></div>
           <p class="bon2__big gold">6 anos</p>
           <h3>de {LMB}. O dobro.</h3>
           <p>Amanhã volta a ser 3. Quem entra hoje leva o LOMBADA ao lado do seu livro por 6 anos.</p>
@@ -538,6 +608,19 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     </div>
   </section>
 
+  <!-- 5b. cupons dos parceiros -->
+  <section class="sec cups">
+    <div class="wrap center">
+      <div class="rv">
+        <p class="kick">E tem mais</p>
+        <h2 class="h2">Até <span class="gold">R$ 4.700</span> em cupons de desconto com parceiros.</h2>
+        <p class="cups__l">Se você vai imprimir, publicar ou divulgar o seu livro, a Black já se paga.</p>
+      </div>
+      <div class="cupg">{CUPONS}</div>
+      <p class="cups__fine rv">Cupons intransferíveis, de uso único, só para novos projetos e não cumulativos. Resgate com o e-mail de compra.</p>
+    </div>
+  </section>
+
   <!-- 6. resumo + botão -->
   <section class="sec resumo" id="oferta">
     <div class="wrap center">
@@ -549,6 +632,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
           <li class="d9-only">{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
+          <li>{CK}<span>Até <b>R$ 4.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
         <p class="resumo__de">De <s>R$ 26.485,00</s></p>
         <p class="resumo__por">por apenas</p>
@@ -566,23 +650,18 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   <section class="sec leva">
     <div class="wrap">
       <div class="center rv"><p class="kick">Quem aproveitar essa oferta agora</p><h2 class="h2">Vai levar:</h2></div>
-      <div class="lv lv--lmb rv" id="ferramenta">
+      <div class="lmbh rv" id="ferramenta">
         <span class="lv__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
-        <h3 class="lv__lmb">{LMB}</h3>
-        <p class="lv__big">A ferramenta que nunca deixa o seu livro parar.</p>
-        <p class="lv__lead">Veja uma semana com ele.</p>
-        <div class="wk" role="tablist" aria-label="Dias da semana">{STORY_TABS}</div>
-        <div class="story" id="story">
-          <div class="story__ph" role="button" tabindex="0" aria-label="Próximo dia">
-            <div class="story__bars">{STORY_BARS}</div>
-            <div class="story__scr">{STORY_IMGS}</div>
-          </div>
-          <div class="story__txt" aria-live="polite">{STORY_TXT}</div>
-        </div>
-        <p class="lv__mais">E ele ainda te dá:</p>
-        <div class="tiles"><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></i><b>A página do seu livro</b><span>No ar, montada a partir do seu cadastro. Com 4 visuais para escolher.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></i><b>O guia de fornecedores</b><span>Revisão, capa, diagramação e gráfica: quem a gente indica.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></i><b>A agenda literária</b><span>Datas comemorativas e o calendário literário do ano inteiro.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></i><b>O plano se adapta a você</b><span>Não deu essa semana? Adie ou troque a tarefa. O ritmo é o seu.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M9 14.5 8 22l4-2 4 2-1-7.5"/></svg></i><b>Selos de evolução</b><span>Cada conquista do seu livro vira um selo.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></i><b>Travou? A equipe fica sabendo</b><span>Um toque em "Tive dificuldade" e a equipe te ajuda.</span></div></div>
-        <div class="days"><p class="days__n gold" data-to-d9="2190" data-to-depois="1095">0</p><p class="days__a">manhãs. Nenhuma sem saber o que fazer pelo seu livro.</p></div>
+        <p class="lmbh__mark">{LMB}</p>
+        <p class="lmbh__t">A ferramenta que nunca deixa o seu livro parar.</p>
       </div>
+    </div>
+  </section>
+  {DEMO_DRIVE}
+  {DEMO_MOTOR}
+  <section class="sec leva leva--resto">
+    <div class="wrap">
+      <div class="center rv"><p class="kick">E mais</p></div>
       <div class="leva__g">{LEVA}</div>
       <div class="cta leva__cta rv">{CTA}</div>
     </div>
@@ -721,15 +800,18 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     $$('.rv').forEach(function (el) {{ io.observe(el); }});
   }} else $$('.rv').forEach(function (el) {{ el.classList.add('in'); }});
 
-  // botão fixo no celular: aparece depois da abertura, some na oferta
-  var dock = document.getElementById('dock'), passou = false, naOferta = false;
-  function upd() {{ dock.classList.toggle('on', passou && !naOferta); }}
+  // botão fixo no celular: aparece depois do primeiro preço e some quando um botão da página já está na tela
+  var dock = document.getElementById('dock'), passou = false, vis = 0;
+  function upd() {{ dock.classList.toggle('on', passou && vis === 0); }}
   if ('IntersectionObserver' in window) {{
-    new IntersectionObserver(function (es) {{ passou = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; upd(); }}).observe(document.querySelector('.price'));
-    new IntersectionObserver(function (es) {{ naOferta = es[0].isIntersecting; upd(); }}).observe(document.getElementById('oferta'));
+    var preco = document.querySelector('.price');
+    addEventListener('scroll', function () {{ var p = preco.getBoundingClientRect().bottom < 0; if (p !== passou) {{ passou = p; upd(); }} }}, {{ passive: true }});
+    var io2 = new IntersectionObserver(function (es) {{ es.forEach(function (e) {{ vis += e.isIntersecting ? 1 : (e.target._v ? -1 : 0); e.target._v = e.isIntersecting; }}); vis = Math.max(0, vis); upd(); }});
+    $$('main .btn').forEach(function (b) {{ io2.observe(b); }});
   }}
 }})();
 </script>
+{DEMO_JS}
 </body>
 </html>
 '''

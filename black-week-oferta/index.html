@@ -32,6 +32,10 @@
   --paper: #f3f0e8; --paper-ink: #1a1a1a; --paper-soft: #6b665d;
   --gold: linear-gradient(100deg, #9c5414 0%, #e08a12 18%, #faab00 32%, #ffe6a8 46%, #faab00 58%, #c9731a 78%, #8a4a12 100%);
   --ease: cubic-bezier(.22, 1, .36, 1);
+  --pop: cubic-bezier(.34, 1.56, .64, 1);
+  --ink-2: #d2cec6; --ink-3: #8b877f; --bg-2: #0a0a0b; --sec: 64px; --gutter: 20px;
+  --f-construcao: #3fae84; --f-lancamento: #fc783c; --f-permanencia: #faab00;
+  --app-paper: #f3f0e8; --app-ink: #1a1a1a; --app-soft: #6b665d; --app-line: #e3ded2; --app-chip: #efe9dc; --app-ochre: #8a5a00;
 }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -103,10 +107,39 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .h__price { display: inline-flex; align-items: baseline; gap: 8px; margin-top: 28px; padding: 10px 20px; border-radius: 99px; background: rgba(250, 171, 0, .1); box-shadow: inset 0 0 0 1px rgba(250, 171, 0, .5); animation: rise 1s var(--ease) .55s both; }
 .h__price span { font-size: 14px; color: var(--ink2); }
 .h__price b { font-size: clamp(22px, 6vw, 28px); font-weight: 800; }
-.h .cta { max-width: 480px; margin: 22px auto 0; animation: rise 1s var(--ease) .65s both; }
+.h .cta { max-width: 480px; margin: 22px auto 0; }
 .h__cue { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 34px; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink3); text-decoration: none; }
 .h__cue svg { width: 20px; height: 20px; animation: bob 1.8s ease-in-out infinite; }
 
+/* imagens dos produtos, bônus e cupons */
+.lv { overflow: hidden; padding: 0 !important; }
+.lv__img { width: 100%; aspect-ratio: 720 / 567; object-fit: cover; }
+.lv__b { padding: 20px 20px 24px; }
+.bon2__ph { width: 46%; max-width: 190px; margin: 18px auto 0; padding: 6px; border-radius: 26px; background: linear-gradient(160deg, #2b2a2f, #0e0e10 60%); box-shadow: 0 24px 40px -18px rgba(0, 0, 0, .8), 0 0 0 1px #3a3226; }
+.bon2__c .bon2__ph img { max-width: none; margin: 0; filter: none; width: 100%; aspect-ratio: 716 / 1200; object-fit: cover; object-position: top; border-radius: 21px; }
+.cups { border-top: 1px solid var(--line); }
+.cups__l { margin: 16px auto 0; max-width: 560px; font-size: clamp(16px, 4.4vw, 20px); color: var(--ink2); text-wrap: balance; }
+.cupg { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 900px; margin: 36px auto 0; text-align: left; }
+@media (min-width: 760px) { .cupg { grid-template-columns: 1fr 1fr; } }
+.cup { position: relative; display: grid; grid-template-columns: 112px 1fr; min-height: 118px; border-radius: 14px; background: #f7f1e3; color: #1a1a1a; box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .8); }
+.cup::before, .cup::after { content: ""; position: absolute; left: 104px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); }
+.cup::before { top: -8px; } .cup::after { bottom: -8px; }
+.cup__v { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 8px; border-right: 2px dashed #cbbf9f; border-radius: 14px 0 0 14px; background: var(--gold); text-align: center; }
+.cup__v small { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #3a2200; }
+.cup__v b { margin-top: 4px; font-size: 20px; font-weight: 800; line-height: 1.05; color: #111; }
+.cup__t { padding: 14px 16px; }
+.cup__t span { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8a5a00; }
+.cup__t h3 { margin-top: 4px; font-size: 17px; font-weight: 800; line-height: 1.2; }
+.cup__t p { margin-top: 4px; font-size: 13px; line-height: 1.4; color: #5c574e; }
+.cups__fine { margin: 18px auto 0; max-width: 640px; font-size: 12px; line-height: 1.5; color: var(--ink3); }
+
+/* LOMBADA: título antes do test drive */
+.lmbh { max-width: 860px; margin: 40px auto 0; text-align: center; }
+.lmbh__mark { margin-top: 16px; font-size: clamp(46px, 13vw, 110px); line-height: 1; }
+.lmbh__mark .lmb { color: var(--ink); }
+.lmbh__t { margin-top: 14px; font-size: clamp(26px, 7.4vw, 50px); font-weight: 800; line-height: 1.06; letter-spacing: -.03em; text-wrap: balance; }
+.leva--resto { border-top: 0; padding-top: 40px; }
+.lmbx .h2 { font-size: clamp(30px, 8vw, 48px); }
 /* LOMBADA: a semana e o "ele ainda te dá" */
 .lv.lv--lmb .lv__big { margin: 14px auto 0; max-width: 760px; font-size: clamp(28px, 8vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; color: var(--paper-ink); text-wrap: balance; }
 .lv.lv--lmb .lv__lead { margin-top: 12px; font-size: clamp(15px, 4.2vw, 18px); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8a5a00; }
@@ -138,7 +171,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .price { margin-top: 64px; }
 .price__big { margin-top: 14px; line-height: 1; }
 .price__big small { display: block; font-size: 18px; font-weight: 500; color: var(--ink2); }
-.price__big span { display: block; margin-top: 6px; font-size: clamp(60px, 18vw, 104px); font-weight: 800; letter-spacing: -.04em; background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
+.price__big span { display: block; white-space: nowrap; margin-top: 6px; font-size: clamp(52px, 15.5vw, 104px); font-weight: 800; letter-spacing: -.04em; background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }
 .price__cash { margin-top: 8px; font-size: 16px; color: var(--ink2); }
 .price__cta { max-width: 480px; margin: 26px auto 0; }
 .resumo .card__list { margin-top: 22px; }
@@ -215,7 +248,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .st { position: absolute; inset: 0 0 auto; opacity: 0; transform: translateY(14px); transition: opacity .45s ease, transform .45s var(--ease); pointer-events: none; text-align: center; }
 .st.on { position: relative; opacity: 1; transform: none; }
 @media (min-width: 860px) { .st { text-align: left; } }
-.st__n { font-size: 13px; font-weight: 800; letter-spacing: .2em; color: #8a5a00; }
+.st__n { font-size: 14px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #8a5a00; }
 .st__t, .lv .st__t { margin-top: 8px; font-size: clamp(24px, 6.6vw, 46px); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }
 .st__d, .lv .st__d { margin-top: 8px; font-size: clamp(15px, 4.1vw, 20px); line-height: 1.5; color: var(--paper-soft); text-wrap: balance; }
 
@@ -384,6 +417,172 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
 @keyframes bob { 50% { transform: translateY(5px); } }
 @keyframes rev { 0%, 100% { transform: translateX(0); opacity: 1; } 50% { transform: translateX(-6px); opacity: .75; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .rv { opacity: 1; transform: none; } }
+/* ===== demo do LOMBADA (da black-week/) ===== */
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); }
+.eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--amber); }
+.h2 { margin-top: 12px; font-size: clamp(26px, 6.8vw, 40px); font-weight: 600; line-height: 1.15; letter-spacing: -.02em; text-wrap: balance; }
+.lede { margin-top: 16px; max-width: 540px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.55; color: var(--ink-2); text-wrap: balance; }
+.center .lede { margin-left: auto; margin-right: auto; }
+/* ---------- telas do app (test drive, oportunidades, ideias) ---------- */
+.bk { background: linear-gradient(transparent 62%, rgba(250, 171, 0, .45) 62%); }
+.panel { position: relative; z-index: 1; display: flex; flex-direction: column; max-width: 460px; margin: 0 auto; overflow: hidden;
+  border-radius: 22px; background: var(--app-paper); color: var(--app-ink); box-shadow: 0 0 0 1px #2e2d33, 0 40px 80px -30px rgba(0, 0, 0, .95); }
+.panel__top { padding: 18px 18px 14px; border-bottom: 1px solid var(--app-line); }
+.panel__k { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.panel__k .lmb { font-size: 14px; }
+.panel__k .tg { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--app-soft); }
+.panel__t { margin-top: 10px; font-size: 20px; font-weight: 700; line-height: 1.2; }
+.panel__d { margin-top: 4px; font-size: 13px; line-height: 1.45; color: var(--app-soft); }
+.panel__foot { padding: 0 18px 16px; font-size: 11px; line-height: 1.45; color: var(--app-soft); }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pills button { padding: 8px 12px; border: 1px solid #d3ccbd; border-radius: 99px; background: #fff; color: #3a3833; cursor: pointer; font: 500 12px/1 "Poppins", sans-serif; transition: background .2s, color .2s, border-color .2s; }
+.pills button:hover { border-color: #1a1a1a; }
+.pills button[aria-pressed="true"] { background: #1a1a1a; border-color: #1a1a1a; color: #fff; }
+
+/* selo "interativo" e pulso no primeiro lugar para tocar */
+.try-wrap { position: relative; z-index: 2; margin-bottom: 14px; text-align: center; }
+.try { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid rgba(250, 171, 0, .45); border-radius: 99px; background: rgba(250, 171, 0, .12);
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
+.try i { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+.try i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--amber); animation: ping 1.6s cubic-bezier(0, 0, .2, 1) infinite; }
+.pulse { position: relative; }
+.pulse::after { content: ""; position: absolute; inset: -4px; border: 2px solid var(--amber); border-radius: inherit; pointer-events: none; animation: ring 1.6s cubic-bezier(0, 0, .2, 1) infinite; }
+
+/* ---------- 3. test drive ---------- */
+.drive { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(250, 171, 0, .1), rgba(0, 0, 0, 0) 70%), var(--bg-2); }
+.drive__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+.ctrl { display: grid; gap: 18px; margin-top: 28px; }
+.ctrl label, .ctrl .lbl { display: block; margin-bottom: 8px; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
+.ctrl input { width: 100%; height: 56px; padding: 0 16px; border: 1.5px solid #34323a; border-radius: 10px; outline: none; background: #141416; color: var(--ink);
+  font: 500 17px/1 "Poppins", sans-serif; transition: border-color .15s, box-shadow .15s; }
+.ctrl input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(250, 171, 0, .2); }
+.seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.seg button { --c: var(--amber); min-height: 64px; padding: 8px 6px; border: 1.5px solid #34323a; border-radius: 10px; background: #141416; color: var(--ink-2);
+  cursor: pointer; font: 600 13px/1.2 "Poppins", sans-serif; transition: border-color .2s, background .2s, color .2s, box-shadow .2s; }
+.seg button small { display: block; margin-top: 4px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.seg button[data-f="construcao"] { --c: var(--f-construcao); }
+.seg button[data-f="lancamento"] { --c: var(--f-lancamento); }
+.seg button[aria-pressed="true"] { border-color: var(--c); color: var(--ink); background: color-mix(in srgb, var(--c) 14%, #141416); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent); }
+.seg button[aria-pressed="true"] small { color: var(--c); }
+.ctrl .note { font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.ctrl .note b { color: var(--ink); }
+.drive__claim { margin-top: 14px; font-size: 12.5px; line-height: 1.5; color: var(--ink-3); }
+
+.phone { position: relative; width: 100%; max-width: 390px; margin: 0 auto; padding: 12px; border-radius: 42px; background: linear-gradient(160deg, #2b2a2f, #0e0e10 60%);
+  box-shadow: 0 0 0 1px #34333a, 0 40px 80px -30px rgba(0, 0, 0, .9), 0 0 80px -30px rgba(250, 171, 0, .22); animation: float 6s ease-in-out infinite; }
+.phone::before { content: ""; position: absolute; top: 22px; left: 50%; z-index: 3; width: 92px; height: 24px; border-radius: 20px; background: #000; transform: translateX(-50%); }
+.screen { position: relative; display: flex; flex-direction: column; height: 620px; overflow: hidden; border-radius: 32px; background: var(--app-paper); color: var(--app-ink); }
+.app-top { padding: 52px 18px 14px; border-bottom: 1px solid var(--app-line); }
+.app-brand { display: flex; align-items: center; justify-content: space-between; }
+.app-brand .lmb { font-size: 17px; }
+.chip { padding: 5px 9px; border-radius: 99px; background: var(--f-permanencia); color: #111; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: background .3s; }
+.chip[data-f="construcao"] { background: #14523e; color: #fff; }
+.chip[data-f="lancamento"] { background: var(--f-lancamento); }
+.app-day { margin-top: 14px; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--app-soft); }
+.app-title { min-height: 1.1em; margin-top: 2px; font-size: 22px; font-weight: 700; line-height: 1.1; color: var(--app-ochre); }
+.caret { display: inline-block; width: 2px; height: .9em; margin-left: 2px; vertical-align: -2px; background: var(--app-ochre); animation: blink 1s steps(1) infinite; }
+.app-prog { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--app-soft); }
+.app-prog .bar { flex: 1; height: 6px; overflow: hidden; border-radius: 6px; background: var(--app-line); }
+.app-prog .bar i { display: block; width: 0; height: 100%; border-radius: 6px; background: var(--app-ink); transition: width .5s var(--ease); }
+.app-list { flex: 1; display: grid; align-content: start; gap: 10px; padding: 14px 14px 22px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.act { padding: 14px; border: 1px solid var(--app-line); border-radius: 14px; background: #fff; animation: slide .45s var(--ease) both; }
+.act:nth-child(2) { animation-delay: .07s; }
+.act:nth-child(3) { animation-delay: .14s; }
+.act__row { display: flex; align-items: flex-start; gap: 12px; }
+.check { flex: none; display: grid; place-items: center; width: 26px; height: 26px; margin-top: 1px; border: 2px solid #c9c3b5; border-radius: 50%; background: #fff; cursor: pointer; transition: background .2s, border-color .2s; }
+.check svg { width: 14px; height: 14px; opacity: 0; transform: scale(.4); transition: opacity .25s, transform .25s var(--pop); }
+.check.pulse::after { inset: -5px; border-radius: 50%; }
+.act.done .check { background: var(--app-ink); border-color: var(--app-ink); }
+.act.done .check svg { opacity: 1; transform: none; }
+.act__t { font-size: 14px; font-weight: 600; line-height: 1.35; }
+.act.done .act__t { color: var(--app-soft); text-decoration: line-through; text-decoration-color: rgba(26, 26, 26, .4); }
+.act__m { margin-top: 5px; font-size: 11px; font-weight: 600; letter-spacing: .02em; color: var(--app-soft); }
+.texto { margin-top: 12px; padding: 12px; border: 1px dashed #d8d1c1; border-radius: 10px; background: #faf8f3; }
+.texto__h { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--app-soft); }
+.copy { padding: 8px 10px; border: 0; border-radius: 8px; background: var(--app-ink); color: #fff; cursor: pointer; font: 600 11px/1 "Poppins", sans-serif; letter-spacing: .04em; transition: background .2s; }
+.copy.ok { background: #14523e; }
+.texto__b { margin-top: 10px; font-size: 12.5px; line-height: 1.5; white-space: pre-line; color: #2b2925; }
+.texto__b .bk { font-weight: 700; }
+.texto__b .vr { font-weight: 600; color: var(--app-ochre); border-bottom: 1.5px dotted #c99a3a; }
+.app-done { display: none; padding: 18px 10px 4px; text-align: center; font-size: 15px; font-weight: 700; }
+.app-done small { display: block; margin-top: 4px; font-size: 12px; font-weight: 500; color: var(--app-soft); }
+.screen.complete .app-done { display: block; animation: pop .5s var(--pop); }
+.phone-cap { max-width: 380px; margin: 20px auto 0; text-align: center; font-size: 16px; font-weight: 600; font-style: italic; line-height: 1.4; text-wrap: balance; }
+
+/* ---------- 4. tem mais motor aí dentro ---------- */
+.feat { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: center; margin-top: 48px; }
+.feat__k { display: inline-block; padding: 6px 12px; border: 1px solid rgba(250, 171, 0, .4); border-radius: 99px; font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--amber); }
+.feat__h { margin-top: 16px; font-size: clamp(28px, 7.6vw, 46px); font-weight: 600; line-height: 1.1; letter-spacing: -.02em; text-wrap: balance; }
+.feat__p { margin-top: 14px; max-width: 460px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.55; color: var(--ink-2); }
+.feat__inf { margin-top: 4px; font-size: clamp(80px, 22vw, 150px); font-weight: 300; line-height: 1; background: var(--gold); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.feat__win { position: relative; }
+.feat__win::before { content: ""; position: absolute; inset: 10% 6%; z-index: 0; background: radial-gradient(ellipse, rgba(250, 171, 0, .28), rgba(250, 171, 0, 0) 70%); filter: blur(30px); }
+/* oportunidades */
+.gen { flex-wrap: nowrap; margin-top: 12px; padding-bottom: 2px; overflow-x: auto; scrollbar-width: none; }
+.gen::-webkit-scrollbar { display: none; }
+.gen button { flex: none; font-weight: 600; }
+.ops { display: grid; gap: 8px; padding: 12px 14px 16px; }
+.op { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--app-line); border-radius: 12px; background: #fff; animation: slide .4s var(--ease) both; }
+.op:nth-child(2) { animation-delay: .05s; } .op:nth-child(3) { animation-delay: .1s; } .op:nth-child(4) { animation-delay: .15s; } .op:nth-child(5) { animation-delay: .2s; }
+.op__d { flex: none; width: 46px; padding: 6px 0 5px; border-radius: 9px; background: var(--app-ink); color: #fff; text-align: center; }
+.op__d b { display: block; font-size: 18px; line-height: 1; }
+.op__d small { display: block; margin-top: 2px; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); }
+.op.dt .op__d { background: var(--amber); color: var(--app-ink); }
+.op.dt .op__d small { color: var(--app-ink); }
+.op__n { font-size: 13px; font-weight: 700; line-height: 1.25; }
+.op__m { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 3px; font-size: 11px; font-weight: 600; color: var(--app-soft); }
+.op__m .ty { padding: 3px 7px; border-radius: 99px; background: var(--app-chip); color: #4b473f; }
+.op__m .cd { color: #b4461a; }
+/* ideias de post */
+.idea { display: flex; flex-direction: column; gap: 12px; padding: 16px 18px 18px; }
+.q__l { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--app-soft); }
+.gen-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; margin-top: 4px; border: 0; border-radius: 12px;
+  background: var(--app-ink); color: #fff; cursor: pointer; font: 600 15px/1 "Poppins", sans-serif; letter-spacing: .02em; transition: transform .15s, background .2s; }
+.gen-btn:hover { background: #000; }
+.gen-btn:active { transform: scale(.98); }
+.gen-btn svg { width: 18px; height: 18px; }
+.ideas__count { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 600; color: var(--app-soft); }
+.ideas__count b { color: var(--app-ochre); }
+.ideas__count .inf { font-size: 18px; line-height: 1; color: var(--app-ochre); }
+.ideas { display: grid; align-content: start; gap: 8px; height: 250px; padding: 2px 2px 2px 0; overflow-y: auto; }
+.ia { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border: 1px solid var(--app-line); border-radius: 14px; background: #fff; animation: slide .45s var(--ease) both; }
+.ia.new { box-shadow: 0 0 0 2px rgba(250, 171, 0, .55); }
+.ia__ic { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 10px; background: var(--app-ink); color: var(--amber); }
+.ia__ic svg { width: 20px; height: 20px; }
+.ia__b { min-width: 0; }
+.ia__tg { display: flex; flex-wrap: wrap; gap: 4px 8px; margin-bottom: 4px; font-size: 10.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--app-soft); }
+.ia__tg b { color: var(--app-ochre); }
+.ia__t { font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+.ia__h { margin-top: 4px; font-size: 12.5px; line-height: 1.4; color: var(--app-soft); }
+
+@media (min-width: 900px) {
+  .drive__grid { grid-template-columns: minmax(0, 1fr) 410px; gap: 72px; align-items: center; }
+  .feat { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; margin-top: 56px; }
+  .feat + .feat { margin-top: 80px; }
+  .feat--rev .feat__txt { order: 2; }
+  .feat__win .try-wrap { max-width: 460px; }
+  .feat:not(.feat--rev) .feat__win .try-wrap, .feat:not(.feat--rev) .feat__win .panel { margin-left: auto; margin-right: 0; }
+  .feat--rev .feat__win .panel { margin-left: 0; }
+}
+
+
+@media (max-width: 520px) {
+  .seg button { font-size: 12px; }
+}
+@keyframes arrive { 0% { opacity: 0; transform: translateX(-90px) skewX(-14deg); filter: blur(8px); } 55% { opacity: 1; transform: translateX(10px) skewX(4deg); filter: blur(0); } 78% { transform: translateX(-3px) skewX(-1deg); } 100% { opacity: 1; transform: none; filter: none; } }
+@keyframes streak { 0% { opacity: 0; transform: translateX(-140px) scaleX(.4); } 35% { opacity: 1; } 100% { opacity: 0; transform: translateX(-10px) scaleX(1); } }
+@keyframes sheen { 0%, 60% { background-position: 140% 0; } 100% { background-position: -40% 0; } }
+@keyframes headlight { 0%, 100% { filter: drop-shadow(0 0 0 rgba(250, 171, 0, 0)); } 50% { filter: drop-shadow(0 0 10px rgba(250, 171, 0, .75)); } }
+@keyframes rev { 0%, 100% { transform: translateX(0); opacity: 1; } 50% { transform: translateX(-6px); opacity: .75; } }
+@keyframes pop { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+@keyframes slide { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes float { 50% { transform: translateY(-8px); } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes bob { 50% { transform: translateY(4px); } }
+@keyframes belt { to { transform: translateX(-50%); } }
+@keyframes ping { 75%, 100% { opacity: 0; transform: scale(2.4); } }
+@keyframes ring { 0% { opacity: .95; transform: scale(1); } 100% { opacity: 0; transform: scale(1.18); } }
+.lmbx { position: relative; padding: var(--sec) 0; }
 </style>
 </head>
 <body>
@@ -417,10 +616,10 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
       <div class="blk">
         <p class="q1">Agora, as contas de quanto você investiria para ter acesso a tudo isso ao longo do tempo:</p>
         <div class="bill">
-          <div class="bill__row"><span>Todos os produtos · 1º ano</span><b>R$ 10.594,00</b></div>
-          <div class="bill__row"><span>Todos os produtos · 2º ano</span><b>R$ 5.297,00</b></div>
-          <div class="bill__row"><span>Todos os produtos · 3º ano</span><b>R$ 5.297,00</b></div>
-          <div class="bill__row"><span>Todos os produtos · 4º ano</span><b>R$ 5.297,00</b></div>
+          <div class="bill__row"><span>1º ano</span><b>R$ 10.594,00</b></div>
+          <div class="bill__row"><span>2º ano</span><b>R$ 5.297,00</b></div>
+          <div class="bill__row"><span>3º ano</span><b>R$ 5.297,00</b></div>
+          <div class="bill__row"><span>4º ano</span><b>R$ 5.297,00</b></div>
           <div class="bill__tot"><span>Total investido</span><b>R$ 26.485,00</b></div>
         </div>
       </div>
@@ -442,6 +641,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
       <div class="bon2">
         <div class="bon2__c rv">
           <span class="lv__k">Bônus 1</span>
+          <div class="bon2__ph"><img src="assets/tela-semana.webp" alt="LOMBADA no celular" width="716" height="1460" loading="lazy" decoding="async"></div>
           <p class="bon2__big gold">6 anos</p>
           <h3>de <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span>. O dobro.</h3>
           <p>Amanhã volta a ser 3. Quem entra hoje leva o LOMBADA ao lado do seu livro por 6 anos.</p>
@@ -456,6 +656,19 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
     </div>
   </section>
 
+  <!-- 5b. cupons dos parceiros -->
+  <section class="sec cups">
+    <div class="wrap center">
+      <div class="rv">
+        <p class="kick">E tem mais</p>
+        <h2 class="h2">Até <span class="gold">R$ 4.700</span> em cupons de desconto com parceiros.</h2>
+        <p class="cups__l">Se você vai imprimir, publicar ou divulgar o seu livro, a Black já se paga.</p>
+      </div>
+      <div class="cupg"><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>até R$ 1.200</b></div><div class="cup__t"><span>Impressão do seu livro</span><h3>Gráfica Renograf</h3><p>Desconto progressivo pelo valor da impressão. Vale reimpressão.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 250</b></div><div class="cup__t"><span>Leitura crítica</span><h3>Histórias Bem Contadas</h3><p>Válido por 24 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 250</b></div><div class="cup__t"><span>Edição de texto</span><h3>Histórias Bem Contadas</h3><p>Válido por 24 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 2.000</b></div><div class="cup__t"><span>Assessoria de imprensa</span><h3>Jimenes Comunicação</h3><p>Projeto semestral. Válido por 24 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 1.000</b></div><div class="cup__t"><span>Publicação do seu livro solo</span><h3>Editora Labrador</h3><p>Válido por 12 meses.</p></div></div></div>
+      <p class="cups__fine rv">Cupons intransferíveis, de uso único, só para novos projetos e não cumulativos. Resgate com o e-mail de compra.</p>
+    </div>
+  </section>
+
   <!-- 6. resumo + botão -->
   <section class="sec resumo" id="oferta">
     <div class="wrap center">
@@ -467,6 +680,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
           <li class="d9-only"><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
+          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Até <b>R$ 4.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
         <p class="resumo__de">De <s>R$ 26.485,00</s></p>
         <p class="resumo__por">por apenas</p>
@@ -484,24 +698,125 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
   <section class="sec leva">
     <div class="wrap">
       <div class="center rv"><p class="kick">Quem aproveitar essa oferta agora</p><h2 class="h2">Vai levar:</h2></div>
-      <div class="lv lv--lmb rv" id="ferramenta">
+      <div class="lmbh rv" id="ferramenta">
         <span class="lv__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
-        <h3 class="lv__lmb"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></h3>
-        <p class="lv__big">A ferramenta que nunca deixa o seu livro parar.</p>
-        <p class="lv__lead">Veja uma semana com ele.</p>
-        <div class="wk" role="tablist" aria-label="Dias da semana"><button type="button" class="on" data-i="0">Seg</button><button type="button" class="" data-i="1">Ter</button><button type="button" class="" data-i="2">Qua</button><button type="button" class="" data-i="3">Qui</button><button type="button" class="" data-i="4">Sex</button></div>
-        <div class="story" id="story">
-          <div class="story__ph" role="button" tabindex="0" aria-label="Próximo dia">
-            <div class="story__bars"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
-            <div class="story__scr"><img src="assets/tela-semana.webp" alt="Tela do LOMBADA" width="716" height="1440" decoding="async" class="on"><img src="assets/tela-acoes.webp" alt="Tela do LOMBADA" width="716" height="1440" decoding="async" loading="lazy"><img src="assets/tela-posts.webp" alt="Tela do LOMBADA" width="716" height="1440" decoding="async" loading="lazy"><img src="assets/tela-oportunidades.webp" alt="Tela do LOMBADA" width="716" height="1440" decoding="async" loading="lazy"><img src="assets/tela-evolucao.webp" alt="Tela do LOMBADA" width="716" height="1440" decoding="async" loading="lazy"></div>
-          </div>
-          <div class="story__txt" aria-live="polite"><div class="st on"><span class="st__n">Segunda, 9h</span><p class="st__t">O seu celular avisa. E o plano da semana já está pronto.</p><p class="st__d">Montado pela fase do seu livro, pelo gênero e pelo tempo que você tem.</p></div><div class="st"><span class="st__n">Terça</span><p class="st__t">Uma ação por vez. Com o texto pronto e a aula por trás.</p><p class="st__d">O texto já vem com o nome do seu livro. E a aula do Método The Book Business explica o porquê.</p></div><div class="st"><span class="st__n">Quarta</span><p class="st__t">O post da semana, pronto. E ideias sem fim.</p><p class="st__d">3 ideias de post toda semana e um gerador ilimitado, feito para o seu livro.</p></div><div class="st"><span class="st__n">Quinta</span><p class="st__t">Um prêmio do seu gênero aparece. Com o prazo na tela.</p><p class="st__d">Prêmios, feiras, editais e datas literárias. Nenhuma chance passa por você.</p></div><div class="st"><span class="st__n">Sexta</span><p class="st__t">Você marca como feito. E vê o seu livro andando.</p><p class="st__d">Uma lombada nova na sua estante a cada ação. Selo por selo, a prova de que ele não parou.</p></div></div>
-        </div>
-        <p class="lv__mais">E ele ainda te dá:</p>
-        <div class="tiles"><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></i><b>A página do seu livro</b><span>No ar, montada a partir do seu cadastro. Com 4 visuais para escolher.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></i><b>O guia de fornecedores</b><span>Revisão, capa, diagramação e gráfica: quem a gente indica.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></i><b>A agenda literária</b><span>Datas comemorativas e o calendário literário do ano inteiro.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></i><b>O plano se adapta a você</b><span>Não deu essa semana? Adie ou troque a tarefa. O ritmo é o seu.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M9 14.5 8 22l4-2 4 2-1-7.5"/></svg></i><b>Selos de evolução</b><span>Cada conquista do seu livro vira um selo.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></i><b>Travou? A equipe fica sabendo</b><span>Um toque em "Tive dificuldade" e a equipe te ajuda.</span></div></div>
-        <div class="days"><p class="days__n gold" data-to-d9="2190" data-to-depois="1095">0</p><p class="days__a">manhãs. Nenhuma sem saber o que fazer pelo seu livro.</p></div>
+        <p class="lmbh__mark"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></p>
+        <p class="lmbh__t">A ferramenta que nunca deixa o seu livro parar.</p>
       </div>
-      <div class="leva__g"><div class="lv rv"><span class="lv__k">Acesso vitalício</span><h3>Método The&nbsp;Book&nbsp;Business</h3><p>O ecossistema completo de marketing literário. Aulas práticas, passo a passo claro e modelos prontos para transformar o seu livro em referência, com leitores de verdade.</p></div><div class="lv rv"><span class="lv__k">Acesso vitalício</span><h3>Autoridade Digital para Escritores</h3><p>Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores.</p></div><div class="lv rv"><span class="lv__k">Acesso vitalício</span><h3>Gerador de Posts Magnéticos</h3><p>Ideias ilimitadas, feitas pelo gênero do seu livro, pela fase e pelo seu jeito de falar. Posts em minutos.</p></div><div class="lv rv"><span class="lv__k">Acesso vitalício</span><h3>Calendário Estratégico do Autor</h3><p>O ano inteiro mapeado, com datas comemorativas e ideias de posts mês a mês.</p></div><div class="lv rv"><span class="lv__k">Acesso vitalício</span><h3>Comunidade The&nbsp;Book&nbsp;Business</h3><p>A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma.</p></div><div class="lv rv"><span class="lv__k">Acesso vitalício</span><h3>Workshops Mão na Massa</h3><ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul></div><div class="lv rv"><span class="lv__k">Acesso vitalício</span><h3>Gravação de 100% das lives, encontros e eventos</h3><p>Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país.</p></div><div class="lv rv"><span class="lv__k">3 anos</span><h3>Encontros em grupo ao vivo com a Dany</h3><p>36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído.</p></div><div class="lv rv"><span class="lv__k">Projeto Especial</span><h3>Prêmio Jabuti</h3><p>A inscrição certa, na categoria certa, no maior prêmio literário do país.</p></div><div class="lv rv"><span class="lv__k">Projeto Especial</span><h3>Autopublicação Profissional</h3><p>Revisão, capa, diagramação, ISBN e distribuição, com padrão de mercado.</p></div><div class="lv rv"><span class="lv__k">Projeto Especial</span><h3>Editora Perfeita</h3><p>Como analisar propostas e escolher a editora certa para o seu livro.</p></div><div class="lv rv"><span class="lv__k">Projeto Especial</span><h3>Destaque Amazon</h3><p>Título, descrição, categorias e palavras-chave para o seu livro aparecer na Amazon.</p></div></div>
+    </div>
+  </section>
+  <section class="lmbx drive" id="test-drive">
+    <div class="wrap">
+      <div class="drive__grid">
+        <div class="rv">
+          <p class="eyebrow">Test drive</p>
+          <h2 class="h2">Instale um motor no seu livro.</h2>
+          <p class="lede">Escreva o nome dele. Escolha a fase. A sua segunda-feira aparece na hora.</p>
+          <div class="ctrl">
+            <div>
+              <label for="td-livro">O nome do seu livro</label>
+              <input id="td-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done">
+            </div>
+            <div>
+              <span class="lbl" id="td-fase-l">Em que fase ele está</span>
+              <div class="seg" role="group" aria-labelledby="td-fase-l">
+                <button type="button" data-f="construcao" aria-pressed="false">Escrevendo</button>
+                <button type="button" data-f="lancamento" aria-pressed="false">Recém-<br>lançado</button>
+                <button type="button" data-f="permanencia" aria-pressed="true">Parado<br>há anos</button>
+              </div>
+            </div>
+            <p class="note">Copie o texto, publique e marque como feito. <b>Toda semana tem plano novo para o seu livro andar.</b></p>
+          </div>
+          <p class="drive__claim">Demonstração. No LOMBADA, o plano é montado pela fase do seu livro, pelo gênero e pelo tempo que você tem, e o texto vem preenchido com os dados do seu cadastro.</p>
+        </div>
+        <div class="rv">
+          <div class="try-wrap"><p class="try"><i aria-hidden="true"></i>Interativo · toque para testar</p></div>
+          <div class="phone">
+            <div class="screen" id="td-screen">
+              <div class="app-top">
+                <div class="app-brand"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span><span class="chip" id="td-chip" data-f="permanencia">Permanência</span></div>
+                <p class="app-day">Segunda · plano da semana</p>
+                <p class="app-title" id="td-titulo">A Casa das Marés</p>
+                <div class="app-prog"><span id="td-cont">0 de 3</span><span class="bar"><i id="td-bar"></i></span></div>
+              </div>
+              <div class="app-list" id="td-list" aria-live="polite"></div>
+            </div>
+          </div>
+          <p class="phone-cap">É como ter a Dany, todo dia ao seu lado, falando o que fazer para o seu livro alcançar cada vez mais leitores.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="lmbx" id="mais-motor">
+    <div class="wrap">
+      <div class="center rv">
+        <p class="eyebrow">E não para na segunda</p>
+        <h2 class="h2">Tem mais motor aí dentro.</h2>
+      </div>
+
+      <div class="feat rv">
+        <div class="feat__txt">
+          <p class="feat__k">Oportunidades</p>
+          <h3 class="feat__h">Prêmios, feiras e editais. <span class="amber">Não perca nenhuma chance de ver o seu livro brilhar.</span></h3>
+          <p class="feat__p">O LOMBADA mostra o que vem aí para o gênero do seu livro: prêmios, feiras, editais e datas comemorativas. Você só escolhe onde entrar.</p>
+        </div>
+        <div class="feat__win">
+          <div class="try-wrap"><p class="try"><i aria-hidden="true"></i>Interativo · toque para testar</p></div>
+          <div class="panel">
+            <div class="panel__top">
+              <div class="panel__k"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/></svg>LOMBADA</span><span class="tg">Oportunidades</span></div>
+              <p class="panel__t">O que vem aí para o seu livro</p>
+              <p class="panel__d">Escolha o gênero do seu livro.</p>
+              <div class="pills gen" role="group" aria-label="Gênero do livro" id="op-gen">
+                <button type="button" data-g="Romance" aria-pressed="true">Romance</button>
+                <button type="button" data-g="Infantil" aria-pressed="false" class="pulse">Infantil</button>
+                <button type="button" data-g="Negócios" aria-pressed="false">Negócios</button>
+                <button type="button" data-g="Poesia" aria-pressed="false">Poesia</button>
+                <button type="button" data-g="Biografia e memórias" aria-pressed="false">Memórias</button>
+              </div>
+            </div>
+            <div class="ops" id="op-list" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat feat--rev rv">
+        <div class="feat__txt">
+          <p class="feat__k">Ideias de post ilimitadas</p>
+          <h3 class="feat__h">Faça suas redes sociais <span class="amber">decolarem.</span></h3>
+          <p class="feat__p">O LOMBADA já sabe tudo sobre o seu livro: o gênero, o leitor, a fase e a ação da semana. Por isso cria posts únicos, feitos para o seu livro. Responda 3 perguntas e gere quantos quiser.</p>
+          <p class="feat__inf" aria-hidden="true">∞</p>
+        </div>
+        <div class="feat__win">
+          <div class="try-wrap"><p class="try"><i aria-hidden="true"></i>Interativo · toque para testar</p></div>
+          <div class="panel">
+            <div class="panel__top">
+              <div class="panel__k"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/></svg>LOMBADA</span><span class="tg">Ideias de post</span></div>
+              <p class="panel__t">Ideias de post ilimitadas</p>
+              <p class="panel__d">Escolha a rede, a habilidade e o tom.</p>
+            </div>
+            <div class="idea">
+              <div><span class="q__l">1. Para qual rede?</span><div class="pills" data-k="rede"><button type="button" aria-pressed="true">Instagram</button><button type="button" aria-pressed="false">TikTok</button><button type="button" aria-pressed="false">LinkedIn</button><button type="button" aria-pressed="false">YouTube</button></div></div>
+              <div><span class="q__l">2. Sua habilidade em redes</span><div class="pills" data-k="hab"><button type="button" aria-pressed="false">alta</button><button type="button" aria-pressed="true">média</button><button type="button" aria-pressed="false">baixa</button></div></div>
+              <div><span class="q__l">3. Que tom?</span><div class="pills" data-k="tom"><button type="button" aria-pressed="true">inspirador</button><button type="button" aria-pressed="false">provocativo</button><button type="button" aria-pressed="false">educativo</button><button type="button" aria-pressed="false">humor</button></div></div>
+              <button type="button" class="gen-btn pulse" id="idea-btn"><span>Gerar ideias</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.6L12 15l-1.8-4.4L5.5 9l4.7-1.4z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button>
+              <p class="ideas__count" id="ideas-count"></p>
+              <div class="ideas" id="ideas" aria-live="polite"></div>
+            </div>
+            <p class="panel__foot">Exemplos. No LOMBADA, as ideias saem com os dados do seu livro.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="sec leva leva--resto">
+    <div class="wrap">
+      <div class="center rv"><p class="kick">E mais</p></div>
+      <div class="leva__g"><div class="lv rv"><img class="lv__img" src="assets/p-metodo.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Método The&nbsp;Book&nbsp;Business</h3><p>O ecossistema completo de marketing literário. Aulas práticas, passo a passo claro e modelos prontos para transformar o seu livro em referência, com leitores de verdade.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-autoridade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Autoridade Digital para Escritores</h3><p>Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-gerador.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Gerador de Posts Magnéticos</h3><p>Ideias ilimitadas, feitas pelo gênero do seu livro, pela fase e pelo seu jeito de falar. Posts em minutos.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-calendario.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Calendário Estratégico do Autor</h3><p>O ano inteiro mapeado, com datas comemorativas e ideias de posts mês a mês.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-comunidade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Comunidade The&nbsp;Book&nbsp;Business</h3><p>A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-workshops.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Workshops Mão na Massa</h3><ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul></div></div><div class="lv rv"><img class="lv__img" src="assets/p-gravacoes.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Gravação de 100% das lives, encontros e eventos</h3><p>Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-encontros.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">3 anos</span><h3>Encontros em grupo ao vivo com a Dany</h3><p>36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-jabuti.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Prêmio Jabuti</h3><p>A inscrição certa, na categoria certa, no maior prêmio literário do país.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-autopublicacao.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Autopublicação Profissional</h3><p>Revisão, capa, diagramação, ISBN e distribuição, com padrão de mercado.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-editora.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Editora Perfeita</h3><p>Como analisar propostas e escolher a editora certa para o seu livro.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-amazon.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Destaque Amazon</h3><p>Título, descrição, categorias e palavras-chave para o seu livro aparecer na Amazon.</p></div></div></div>
       <div class="cta leva__cta rv"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div>
     </div>
   </section>
@@ -639,13 +954,256 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
     $$('.rv').forEach(function (el) { io.observe(el); });
   } else $$('.rv').forEach(function (el) { el.classList.add('in'); });
 
-  // botão fixo no celular: aparece depois da abertura, some na oferta
-  var dock = document.getElementById('dock'), passou = false, naOferta = false;
-  function upd() { dock.classList.toggle('on', passou && !naOferta); }
+  // botão fixo no celular: aparece depois do primeiro preço e some quando um botão da página já está na tela
+  var dock = document.getElementById('dock'), passou = false, vis = 0;
+  function upd() { dock.classList.toggle('on', passou && vis === 0); }
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) { passou = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; upd(); }).observe(document.querySelector('.price'));
-    new IntersectionObserver(function (es) { naOferta = es[0].isIntersecting; upd(); }).observe(document.getElementById('oferta'));
+    var preco = document.querySelector('.price');
+    addEventListener('scroll', function () { var p = preco.getBoundingClientRect().bottom < 0; if (p !== passou) { passou = p; upd(); } }, { passive: true });
+    var io2 = new IntersectionObserver(function (es) { es.forEach(function (e) { vis += e.isIntersecting ? 1 : (e.target._v ? -1 : 0); e.target._v = e.isIntersecting; }); vis = Math.max(0, vis); upd(); });
+    $$('main .btn').forEach(function (b) { io2.observe(b); });
   }
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  /* ================= utilidades ================= */
+  var REDUCED = document.body.classList.contains('rm');
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function onView(el, fn, opts) {
+    if (!el) return;
+    if (!('IntersectionObserver' in window)) { fn(el); return; }
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { fn(en.target); io.unobserve(en.target); } }); }, opts || { rootMargin: '0px 0px -8% 0px' });
+    io.observe(el);
+  }
+  // o que vai, volta: entra ao descer; ao subir, o bloco que sai por baixo da tela se desfaz para entrar de novo
+  function reversivel(els, cls, margem) {
+    if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add(cls); }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting) en.target.classList.add(cls);
+        else if (en.rootBounds && en.boundingClientRect.top > en.rootBounds.bottom) en.target.classList.remove(cls);
+        else if (en.rootBounds && en.boundingClientRect.bottom < en.rootBounds.top) en.target.classList.add(cls);
+      });
+    }, { rootMargin: margem });
+    els.forEach(function (el) { io.observe(el); });
+  }
+  function setPressed(group, btn) { $$('button', group).forEach(function (x) { x.setAttribute('aria-pressed', x === btn ? 'true' : 'false'); }); }
+
+  /* ================= 3. TEST DRIVE =================
+     Ações e textos reais do catálogo do LOMBADA (plataforma-do-autor/src/dados/acoes_mtbb.js).
+     {T} = nome do livro. [[x]] = campo que o LOMBADA preenche com o cadastro do autor. */
+  var FASES = {
+    construcao: { nome: 'Construção', acoes: [
+      { t: 'Anuncie que decidiu escrever {T}', min: 30, texto:
+        'Eu nunca contei isso aqui.\n\nVou publicar um livro. Chama {T}.\n\n[[o que o livro faz pelo leitor]]\n\nEscrevi pensando em [[quem vai ler]]. Não é um projeto de fim de semana: é uma coisa que eu carrego há tempo.\n\nVou mostrar os bastidores por aqui, do rascunho até a capa. Quem quiser acompanhar, me conta nos comentários: você já leu um livro que mudou uma decisão sua?\n\n[[seu nome]]' },
+      { t: 'Escreva em uma frase o que {T} faz pelo leitor', min: 40 },
+      { t: 'Dê nome e rosto ao leitor ideal de {T}', min: 60 }
+    ] },
+    lancamento: { nome: 'Lançamento', acoes: [
+      { t: 'Peça avaliação a quem comprou {T} ou te marcou nesta semana', min: 30, texto:
+        'Oi, [[nome do leitor]]! Vi que você comprou {T}. Obrigado de verdade.\n\nPosso te pedir 2 minutos? Uma avaliação honesta na página do livro, com estrelas e uma frase, é o que mais ajuda o livro a ser encontrado por outras pessoas.\n\nÉ só entrar aqui e rolar até "Avaliações": [[link do seu livro]]\n\nNão precisa ser longa. O que ficou com você já basta.\n\n[[seu nome]]' },
+      { t: 'Reposte tudo que {T} gerou: marcações, matérias, depoimentos', min: 30 },
+      { t: 'Avise sua lista que {T} está no ar', min: 30 }
+    ] },
+    permanencia: { nome: 'Permanência', acoes: [
+      { t: 'Republique um trecho de {T} como post', min: 20, texto:
+        '"[[o seu trecho favorito]]"\n\nEsse é um trecho de {T}. Escrevi para [[quem vai ler]], e é a parte que mais recebo mensagem.\n\n[[o que o livro faz pelo leitor]]\n\nSe essa frase mexeu com você, o livro inteiro está aqui: [[link do seu livro]]\n\n[[seu nome]]' },
+      { t: 'Peça avaliação a quem comprou {T} ou te marcou', min: 30 },
+      { t: 'Busque uma audiência nova para falar de {T}', min: 45 }
+    ] }
+  };
+
+  var inLivro = $('#td-livro'), list = $('#td-list'), screen = $('#td-screen'), chip = $('#td-chip');
+  var tTitulo = $('#td-titulo'), cont = $('#td-cont'), bar = $('#td-bar'), seg = $('.seg');
+  var fase = 'permanencia', feitas = {}, demoNome = '', userTouched = false;
+
+  // nome do livro: o que a pessoa digitou ou o que a demonstração está "digitando"
+  function livro(padrao) { var v = (userTouched ? inLivro.value : demoNome).trim(); return v || padrao; }
+  function comLivro(s, padrao) { return esc(s).replace(/\{T\}/g, '<span class="bk">' + esc(livro(padrao)) + '</span>'); }
+  function fmtTexto(s) { return comLivro(s, 'A Casa das Marés').replace(/\[\[(.+?)\]\]/g, '<span class="vr">$1</span>'); }
+  function plain(s) { return s.replace(/\{T\}/g, livro('A Casa das Marés')).replace(/\[\[(.+?)\]\]/g, '[$1]'); }
+  function meta(i) { return FASES[fase].acoes[i].min + ' min · ' + (feitas[i] ? 'Feito' : 'Esta semana'); }
+
+  function progresso() {
+    var n = Object.keys(feitas).length, tot = FASES[fase].acoes.length;
+    cont.textContent = n + ' de ' + tot;
+    bar.style.width = (n / tot * 100) + '%';
+    screen.classList.toggle('complete', n === tot);
+  }
+  function setTitulo(digitando) { tTitulo.innerHTML = esc(livro('A Casa das Marés')) + (digitando ? '<span class="caret"></span>' : ''); }
+  function refreshTexts() {
+    $$('.act', list).forEach(function (el) {
+      var a = FASES[fase].acoes[+el.getAttribute('data-i')];
+      $('.act__t', el).innerHTML = comLivro(a.t, 'A Casa das Marés');
+      var b = $('.texto__b', el); if (b) b.innerHTML = fmtTexto(a.texto);
+    });
+  }
+  function render() {
+    var f = FASES[fase];
+    chip.textContent = f.nome; chip.setAttribute('data-f', fase);
+    setTitulo(false);
+    list.innerHTML = f.acoes.map(function (a, i) {
+      var tx = a.texto ? '<div class="texto"><div class="texto__h"><span>Texto pronto</span><button type="button" class="copy" data-i="' + i + '">Copiar texto</button></div><p class="texto__b">' + fmtTexto(a.texto) + '</p></div>' : '';
+      return '<div class="act' + (feitas[i] ? ' done' : '') + '" data-i="' + i + '"><div class="act__row">' +
+        '<button type="button" class="check' + (!userTouched && i === 0 ? ' pulse' : '') + '" aria-label="Marcar como feito" aria-pressed="' + !!feitas[i] + '" data-i="' + i + '"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>' +
+        '<div><p class="act__t">' + comLivro(a.t, 'A Casa das Marés') + '</p><p class="act__m">' + meta(i) + '</p></div></div>' + tx + '</div>';
+    }).join('') + '<div class="app-done">Semana completa.<small>Segunda tem plano novo.</small></div>';
+    progresso();
+  }
+  function marcar(i, on) {
+    if (on) feitas[i] = 1; else delete feitas[i];
+    var card = $('.act[data-i="' + i + '"]', list); if (!card) return;
+    card.classList.toggle('done', on);
+    $('.check', card).setAttribute('aria-pressed', on);
+    $('.act__m', card).textContent = meta(i);
+    progresso();
+  }
+  function choose(f) {
+    if (f === fase) return;
+    fase = f; feitas = {};
+    setPressed(seg, $('[data-f="' + f + '"]', seg));
+    render();
+  }
+  function takeOver() { if (!userTouched) { userTouched = true; stopDemo(); } }
+
+  inLivro.addEventListener('focus', takeOver);
+  inLivro.addEventListener('input', function () { takeOver(); setTitulo(false); refreshTexts(); });
+  seg.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; takeOver(); choose(b.getAttribute('data-f')); });
+  list.addEventListener('click', function (e) {
+    var c = e.target.closest('.check');
+    if (c) { takeOver(); var i = +c.getAttribute('data-i'); marcar(i, !feitas[i]); return; }
+    var cp = e.target.closest('.copy');
+    if (cp) {
+      takeOver();
+      var t = plain(FASES[fase].acoes[+cp.getAttribute('data-i')].texto);
+      var ok = function () { cp.textContent = 'Copiado'; cp.classList.add('ok'); setTimeout(function () { cp.textContent = 'Copiar texto'; cp.classList.remove('ok'); }, 1800); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, ok);
+      else { var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (er) {} ta.remove(); ok(); }
+    }
+  });
+  render();
+
+  // demonstração: quando o celular entra na tela, o painel "digita" um livro sozinho; para no primeiro toque
+  var timers = [];
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function stopDemo() { timers.forEach(clearTimeout); timers = []; setTitulo(false); }
+  if (!REDUCED) onView($('.phone'), function () {
+    if (userTouched) return;
+    var nome = 'O Último Verão', passo = 70, t0 = 500;
+    for (var k = 1; k <= nome.length; k++) (function (k) { later(function () { demoNome = nome.slice(0, k); setTitulo(true); refreshTexts(); }, t0 + k * passo); })(k);
+    var fim = t0 + nome.length * passo + 300;
+    later(function () { setTitulo(false); }, fim);
+    later(function () { choose('lancamento'); }, fim + 1600);
+    later(function () { if (!userTouched) marcar(1, true); }, fim + 3000);
+  }, { threshold: .45 });
+
+  /* ================= 4a. OPORTUNIDADES =================
+     Dados reais do app: dados/oportunidades_reais.js e regras/datas_comemorativas.js. */
+  var ALL = '*';
+  var OPS = [ // [prazo, tipo de prazo, data prevista?, tipo, nome, gêneros]
+    ['2026-12-31', 'acompanhar', 1, 'Edital', 'Editais da Política Nacional Aldir Blanc para livro e leitura', ALL],
+    ['2027-01-14', 'inscricao', 1, 'Prêmio', 'Prêmio Cepe Nacional de Literatura', ['Romance', 'Poesia', 'Infantil']],
+    ['2027-02-14', 'inscricao', 1, 'Prêmio', '23º Prêmio Barco a Vapor', ['Infantil']],
+    ['2027-03-02', 'inscricao', 1, 'Prêmio', 'Prêmio Sesc de Literatura', ['Romance', 'Poesia']],
+    ['2027-03-09', 'inscricao', 1, 'Prêmio', 'Prêmio Oceanos', ['Romance', 'Poesia']],
+    ['2027-03-31', 'acompanhar', 1, 'Prêmio', 'Prêmio Off Flip de Literatura', ['Romance', 'Poesia', 'Infantil']],
+    ['2027-04-24', 'evento', 0, 'Feira', 'Flipoços 2027', ALL],
+    ['2027-04-29', 'evento', 1, 'Feira', 'Bienal Mineira do Livro', ALL],
+    ['2027-04-30', 'acompanhar', 1, 'Prêmio', 'Prêmio Todavia de Não Ficção', ['Negócios', 'Biografia e memórias']],
+    ['2027-05-19', 'inscricao', 1, 'Prêmio', '69º Prêmio Jabuti', ALL],
+    ['2027-05-31', 'acompanhar', 1, 'Prêmio', 'Prêmio Malê de Literatura', ['Romance', 'Poesia', 'Biografia e memórias']],
+    ['2027-06-01', 'evento', 1, 'Feira', 'Salão FNLIJ do Livro para Crianças e Jovens', ['Infantil']],
+    ['2027-06-15', 'evento', 1, 'Feira', 'Bienal do Livro Rio', ALL],
+    ['2027-07-08', 'inscricao', 1, 'Prêmio', 'Prêmio Literário Biblioteca Nacional', ['Romance', 'Poesia', 'Infantil', 'Biografia e memórias']],
+    ['2027-07-21', 'evento', 1, 'Evento', 'Flip 2027 · Paraty', ALL],
+    ['2027-08-31', 'inscricao', 1, 'Prêmio', '12º Prêmio Kindle de Literatura', ['Romance']]
+  ];
+  var DATAS = [ // [mês, dia, nome, gêneros]
+    [3, 8, 'Dia Internacional da Mulher', ALL], [3, 14, 'Dia Nacional da Poesia', ['Poesia']], [4, 18, 'Dia Nacional do Livro Infantil', ['Infantil']],
+    [4, 23, 'Dia Mundial do Livro', ALL], [6, 12, 'Dia dos Namorados', ['Romance', 'Poesia']], [7, 25, 'Dia do Escritor', ALL],
+    [7, 26, 'Dia dos Avós', ['Romance', 'Biografia e memórias', 'Infantil']], [10, 5, 'Dia do Empreendedor', ['Negócios']],
+    [10, 12, 'Dia das Crianças', ['Infantil']], [10, 29, 'Dia Nacional do Livro', ALL], [12, 25, 'Natal', ALL]
+  ];
+  var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  var opList = $('#op-list'), opGen = $('#op-gen');
+  function dias(d) { return Math.round((d - hoje) / 864e5); }
+  function serve(gs, g) { return gs === ALL || gs.indexOf(g) !== -1; }
+  function renderOps(g) {
+    var itens = OPS.filter(function (o) { return serve(o[5], g); }).map(function (o) { return { d: new Date(o[0] + 'T00:00:00'), n: o[4], ty: o[3], tp: o[1], est: o[2] }; });
+    DATAS.forEach(function (x) {
+      if (!serve(x[3], g)) return;
+      var d = new Date(hoje.getFullYear(), x[0] - 1, x[1]); if (d < hoje) d.setFullYear(d.getFullYear() + 1);
+      itens.push({ d: d, n: x[2], ty: 'Data comemorativa', tp: 'data', est: 0 });
+    });
+    itens = itens.filter(function (o) { return dias(o.d) >= 0; }).sort(function (a, b) { return a.d - b.d; }).slice(0, 5);
+    opList.innerHTML = itens.map(function (o) {
+      var n = dias(o.d), ev = o.tp === 'evento' || o.tp === 'data';
+      var cd = n === 0 ? (ev ? 'É hoje' : 'Vence hoje') : n === 1 ? (ev ? 'É amanhã' : 'Vence amanhã') : (ev ? 'Em ' : 'Vence em ') + n + ' dias';
+      return '<div class="op' + (o.tp === 'data' ? ' dt' : '') + '"><div class="op__d"><b>' + o.d.getDate() + '</b><small>' + MES[o.d.getMonth()] + '</small></div>' +
+        '<div><p class="op__n">' + esc(o.n) + '</p><p class="op__m"><span class="ty">' + o.ty + '</span><span class="cd">' + cd + '</span>' + (o.est ? '<span>data prevista</span>' : '') + '</p></div></div>';
+    }).join('');
+  }
+  opGen.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    setPressed(opGen, b);
+    $$('.pulse', opGen).forEach(function (x) { x.classList.remove('pulse'); });
+    renderOps(b.getAttribute('data-g'));
+  });
+  renderOps('Romance');
+
+  /* ================= 4b. IDEIAS DE POST ILIMITADAS =================
+     No app: 3 perguntas (rede, habilidade, tom) e o Gerador de Posts abre no ChatGPT com o livro, a fase e a ação da semana.
+     Aqui: exemplos por tom, que se acumulam, para mostrar que não acaba. */
+  var IDEIAS = {
+    inspirador: [['O dia em que eu quase desisti de {T}.', 'Conte a cena. Termine com o que te fez continuar.'], ['O que {T} me ensinou antes de ensinar o leitor.', 'Uma lição por slide. Feche com o livro.'], ['Por que eu escrevi {T} mesmo com medo.', 'Fale do medo primeiro. A decisão vem depois.'], ['A frase de {T} que eu precisava ter lido anos atrás.', 'A frase no centro. Na legenda, o porquê.'], ['Para quem acha que é tarde: {T} começou assim.', 'Mostre o começo real: data, lugar, rascunho.'], ['Quem eu era antes de escrever {T}.', 'Antes e depois. Uma foto de cada.']],
+    provocativo: [['Ninguém te conta isso sobre o tema de {T}.', 'Abra com a afirmação. Prove em 3 pontos.'], ['O erro que quase todo mundo comete, e que {T} desmonta.', 'Nomeie o erro. Mostre a saída.'], ['A opinião impopular que virou {T}.', 'A opinião na primeira linha. Convide a discordar.'], ['Discordo de quase todo mundo sobre isso. Está em {T}.', 'Uma frase forte e o trecho que sustenta.'], ['Se você acha que já sabe tudo sobre o tema, leia {T}.', 'Desafie o leitor. Termine com uma pergunta.'], ['O que eu cortei de {T} porque ia causar briga.', 'Bastidor. Conte só o suficiente.']],
+    educativo: [['3 lições de {T} em 30 segundos.', 'Uma lição por cena. Fala direta para a câmera.'], ['A ideia central de {T}, explicada com um exemplo.', 'Um exemplo do dia a dia. Sem jargão.'], ['Um mito que {T} derruba.', 'O mito na capa. A verdade no último slide.'], ['As perguntas que os leitores mais fazem sobre {T}.', 'Uma resposta por slide.'], ['Antes e depois: o que muda quando você aplica {T}.', 'Duas colunas. Concreto, não abstrato.'], ['O glossário de {T} em 5 palavras.', 'Uma palavra por slide, com a definição.']],
+    humor: [['Eu escrevendo {T} x eu revisando {T}.', 'Dois cortes. A mesma roupa, outra cara.'], ['Minha família quando eu falo de {T} pela vigésima vez.', 'Vídeo de reação com um áudio em alta.'], ['Expectativa x realidade do lançamento de {T}.', 'Tela dividida. Seja honesto.'], ['Coisas que só quem escreveu um livro entende (versão {T}).', 'Lista rápida. Uma por cena.'], ['O que meus amigos acham que é {T} x o que é.', 'Brinque com o mal-entendido.'], ['Eu pedindo avaliação de {T} pela terceira vez na semana.', 'Rir de si mesmo pede avaliação sem pedir.']]
+  };
+  var IC = {
+    carrossel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="M19 7v10M22 9v6"/></svg>',
+    video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>',
+    stories: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5" stroke-dasharray="3 2.2"/><circle cx="12" cy="12" r="4"/></svg>',
+    texto: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg>'
+  };
+  var FORMATO = {
+    Instagram: [['Carrossel', 'carrossel'], ['Reels', 'video'], ['Stories', 'stories']],
+    TikTok: [['Vídeo curto', 'video'], ['Trend', 'video'], ['Carrossel', 'carrossel']],
+    LinkedIn: [['Post de texto', 'texto'], ['Carrossel', 'carrossel'], ['Vídeo', 'video']],
+    YouTube: [['Shorts', 'video'], ['Vídeo', 'video'], ['Comunidade', 'texto']]
+  };
+  var escolha = { rede: 'Instagram', hab: 'média', tom: 'inspirador' }, gerados = 0, porTom = {};
+  var ideasBox = $('#ideas'), ideasCount = $('#ideas-count'), ideaBtn = $('#idea-btn');
+  $$('.pills[data-k]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      setPressed(g, b);
+      escolha[g.getAttribute('data-k')] = b.textContent;
+    });
+  });
+  function gerar(destacar) {
+    var lista = IDEIAS[escolha.tom], fmts = FORMATO[escolha.rede], html = '';
+    $$('.ia.new', ideasBox).forEach(function (x) { x.classList.remove('new'); });
+    for (var k = 0; k < 3; k++) {
+      var i = porTom[escolha.tom] = (porTom[escolha.tom] || 0) + 1;
+      var it = lista[(i - 1) % lista.length], f = fmts[(gerados + k) % fmts.length];
+      html += '<div class="ia' + (destacar ? ' new' : '') + '"><span class="ia__ic">' + IC[f[1]] + '</span><div class="ia__b">' +
+        '<p class="ia__tg"><b>Ideia ' + (gerados + k + 1) + '</b><span>' + escolha.rede + ' · ' + f[0] + '</span><span>' + escolha.tom + '</span></p>' +
+        '<p class="ia__t">' + comLivro(it[0], 'A Casa das Marés') + '</p><p class="ia__h">' + esc(it[1]) + '</p></div></div>';
+    }
+    gerados += 3;
+    ideasBox.insertAdjacentHTML('afterbegin', html);
+    ideasBox.scrollTop = 0;
+    ideasCount.innerHTML = '<span><b>' + gerados + ' ideias</b> geradas</span><span>gere quantas quiser <span class="inf">∞</span></span>';
+  }
+  ideaBtn.addEventListener('click', function () { gerar(true); ideaBtn.classList.remove('pulse'); $('span', ideaBtn).textContent = 'Gerar mais ideias'; });
+  gerar(false);
+
 })();
 </script>
 </body>
