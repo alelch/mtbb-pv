@@ -477,7 +477,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap h__in">
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
-      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> {LMB}</span><span class="h__tag">A ferramenta que leva o seu livro cada vez mais longe.</span></h1>
+      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> {LMB}</span><span class="h__tag">Leva o seu livro cada vez mais longe.</span></h1>
       <ul class="hk">
         <li>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></li>
         <li>{CK}<span>O <b>LOMBADA</b>, o personal trainer do seu livro, por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b>.</span></li>
