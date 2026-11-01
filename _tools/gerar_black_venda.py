@@ -104,6 +104,21 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .met__c .v { margin-top: 10px; font-size: clamp(26px, 7vw, 36px); font-weight: 700; line-height: 1.05; }
 .met__c p { margin-top: 10px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
 
+/* tudo o que entra */
+.stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 900px; margin: 40px auto 0; list-style: none; text-align: left; }
+@media (min-width: 760px) { .stack { grid-template-columns: 1fr 1fr; } .stack .st--wide { grid-column: 1 / -1; } }
+.stack > li { padding: 22px 20px; border-radius: 16px; background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--line); }
+.st__k { display: inline-block; padding: 4px 10px; border-radius: 99px; background: rgba(250, 171, 0, .14); color: var(--amber); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.stack h3 { margin-top: 12px; font-size: clamp(19px, 5vw, 23px); font-weight: 700; line-height: 1.2; }
+.stack p { margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+.stack ul { margin-top: 10px; list-style: none; display: grid; gap: 7px; }
+.stack ul li { position: relative; padding-left: 17px; font-size: 15px; line-height: 1.45; color: var(--ink-2); }
+.stack ul li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+.stack ul b { color: var(--ink); font-weight: 600; }
+.stack .st--lmb { box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .6); background: radial-gradient(ellipse 80% 90% at 50% 0%, rgba(250, 171, 0, .12), transparent 70%), var(--bg-2); }
+.stack .st--lmb h3 { font-size: clamp(26px, 7vw, 34px); }
+.stack .st--lmb .lmb { color: var(--ink); }
+
 /* bônus do dia 9 */
 .bonus { border-top: 1px solid var(--line); background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(250, 171, 0, .12), rgba(0, 0, 0, 0) 70%); }
 .bonus__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; max-width: 860px; margin: 40px auto 0; }
@@ -178,7 +193,7 @@ MAIN = f"""<main>
           <p class="pitch"><i>Seu livro <b class="amber">não vai parar</b>.<br><b>Todo dia, o que fazer.</b></i><span class="pitch__by">Dany Sakugawa</span></p>
           </div>
           <div class="cta-box">
-            <div class="d9band d9-only"><p><b>Só hoje:</b> LOMBADA por <b>6 anos</b> (o dobro) + os bônus de quem esteve ao vivo.</p><div class="clock" data-clock></div></div>
+            <div class="d9band d9-only"><p><b>Só hoje:</b> LOMBADA por <b>6 anos</b> (o dobro) + os bônus de hoje.</p><div class="clock" data-clock></div></div>
             {CTA}
             <p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p>
           </div>
@@ -231,18 +246,26 @@ MAIN = f"""<main>
 
   {belt}
 
-  <!-- 5. o Método The Book Business -->
+  <!-- 5. tudo o que entra (o mesmo pacote do Aniversário, sem o Retiro) -->
   <section class="blk" style="border-top:1px solid var(--line)">
     <div class="wrap center">
       <div class="rv">
-        <p class="eyebrow">E junto vem</p>
-        <h2 class="h2">O Método The&nbsp;Book&nbsp;Business. <span class="gold">As aulas, pra sempre.</span></h2>
+        <p class="eyebrow">E junto com o LOMBADA</p>
+        <h2 class="h2">Tudo do Método The&nbsp;Book&nbsp;Business. <span class="gold">Pra sempre.</span></h2>
         <p class="lede">Do primeiro livro ao décimo. Da escrita ao lançamento, do lançamento à permanência.</p>
       </div>
-      <div class="met__grid rv">
-        <div class="met__c"><p class="k">Aulas</p><p class="v gold">Vitalício</p><p>Todo o Método The&nbsp;Book&nbsp;Business, para você voltar quantas vezes quiser, livro após livro.</p></div>
-        <div class="met__c"><p class="k">Com a Dany</p><p class="v gold">3 anos</p><p>Encontros em grupo com a Dany Sakugawa durante 3 anos.</p></div>
-      </div>
+      <ul class="stack">
+        <li class="rv"><span class="st__k">Vitalício</span><h3>Método The&nbsp;Book&nbsp;Business</h3><p>O ecossistema completo de marketing literário: formação estratégica, trilhas de implementação e modelos prontos para divulgar o seu livro e atrair leitores. Nova versão 2026.</p></li>
+        <li class="rv"><span class="st__k">Vitalício</span><h3>Autoridade Digital para Escritores</h3><p>Quais redes usar, o que postar e com que frequência, para multiplicar o seu alcance e ser descoberto por novas audiências.</p></li>
+        <li class="rv"><span class="st__k">Vitalício</span><h3>Gerador de Posts Magnéticos</h3><p>Ideias ilimitadas e personalizadas pelo gênero do seu livro, pela fase, pela rede e pelo seu jeito de falar.</p></li>
+        <li class="rv"><span class="st__k">Vitalício</span><h3>Calendário Estratégico do Autor</h3><p>O ano inteiro mapeado, com datas comemorativas e ideias de post mês a mês.</p></li>
+        <li class="rv"><span class="st__k">Vitalício</span><h3>Comunidade The&nbsp;Book&nbsp;Business</h3><p>A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma.</p></li>
+        <li class="rv"><span class="st__k">Vitalício</span><h3>Workshops Mão na Massa</h3><ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul></li>
+        <li class="rv"><span class="st__k">Vitalício</span><h3>Gravação de 100% das lives, encontros e eventos</h3><p>Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país. Reveja quando quiser.</p></li>
+        <li class="rv"><span class="st__k">3 anos</span><h3>Encontros em grupo ao vivo com a Dany</h3><p>Todo mês, ao vivo com a Dany Sakugawa, para ajustar a estratégia e tirar dúvidas sobre o seu livro. 36 encontros.</p></li>
+        <li class="rv st--wide"><span class="st__k">Projetos Especiais</span><h3>4 projetos para levar o seu livro mais longe</h3><ul><li><b>Prêmio Jabuti:</b> a inscrição certa, na categoria certa.</li><li><b>Autopublicação Profissional:</b> revisão, capa, diagramação, ISBN e distribuição com padrão de mercado.</li><li><b>Editora Perfeita:</b> como analisar propostas e escolher a editora certa.</li><li><b>Destaque Amazon:</b> título, descrição, categorias e palavras-chave para o seu livro aparecer.</li></ul></li>
+        <li class="rv st--wide st--lmb"><span class="st__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span><h3>{LMB}</h3><p>O personal trainer do seu livro. Todo dia, o que fazer.</p></li>
+      </ul>
     </div>
   </section>
 
@@ -250,12 +273,12 @@ MAIN = f"""<main>
   <section class="blk bonus d9-only" id="bonus">
     <div class="wrap center">
       <div class="rv">
-        <p class="eyebrow">Só para quem esteve ao vivo</p>
+        <p class="eyebrow">Só para quem entrar hoje</p>
         <h2 class="h2">Os bônus <span class="gold">de hoje.</span></h2>
       </div>
       <div class="bonus__grid">
-        <div class="bon rv"><span class="bon__tag">Bônus 1</span><h3>3 Playbooks MTBB físicos, entregues na sua casa</h3><p>A extensão prática do Método The&nbsp;Book&nbsp;Business, criada pela Dany. Pra anotar ideias, organizar estratégias e acompanhar a evolução do seu livro.</p></div>
-        <div class="bon rv"><span class="bon__tag">Bônus 2</span><h3>Projetos Especiais</h3><ul><li>Autopublicação Profissional</li><li>Destaque Amazon</li><li>Editora Perfeita</li><li>Prêmio Jabuti</li></ul></div>
+        <div class="bon rv"><span class="bon__tag">Bônus 1</span><h3>Playbooks MTBB, entregues fisicamente na sua casa</h3><p>A nova extensão prática do Método The&nbsp;Book&nbsp;Business, criada pessoalmente pela Dany. Pra anotar ideias, organizar estratégias e acompanhar a evolução do seu livro.</p></div>
+        <div class="bon rv"><span class="bon__tag">Bônus 2</span><h3>O dobro do LOMBADA: 6 anos</h3><p>Quem entra hoje leva 6 anos de LOMBADA. A partir de amanhã, são 3.</p></div>
       </div>
       <p class="bonus__end rv">Esses bônus saem da página à meia-noite.</p>
     </div>
@@ -281,11 +304,14 @@ MAIN = f"""<main>
         <p class="offer__k">Na Black Week Motorizada</p>
         <h2 class="offer__t"><span class="a">Método The&nbsp;Book&nbsp;Business</span><span class="b gold">vitalício</span><span class="c">+ {LMB}</span></h2>
         <ul class="offer__list">
-          <li>{CK}<span>Aulas do Método The&nbsp;Book&nbsp;Business, <b>acesso vitalício</b></span></li>
-          <li>{CK}<span><b>Encontros em grupo</b> com a Dany por 3 anos</span></li>
+          <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, acesso vitalício</span></li>
+          <li>{CK}<span>Autoridade Digital, Gerador de Posts, Calendário, Comunidade e Workshops, <b>vitalícios</b></span></li>
+          <li>{CK}<span>Gravação de <b>100% das lives</b> e eventos</span></li>
+          <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
+          <li>{CK}<span><b>4 Projetos Especiais</b>: Jabuti, Autopublicação, Editora Perfeita e Destaque Amazon</span></li>
           <li class="d9-only">{CK}<span>LOMBADA por <b>6 anos</b> <span class="x">(depois de hoje: 3 anos)</span></span></li>
           <li class="after-only">{CK}<span>LOMBADA por <b>3 anos</b></span></li>
-          <li class="d9-only">{CK}<span><b>3 Playbooks MTBB físicos</b> + <b>Projetos Especiais</b> <span class="x">(só hoje)</span></span></li>
+          <li class="d9-only">{CK}<span><b>Playbooks MTBB físicos</b> na sua casa <span class="x">(só hoje)</span></span></li>
           <li>{CK}<span>Garantia de <b>15 dias</b></span></li>
         </ul>
         <div class="offer__price">
