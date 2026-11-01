@@ -250,7 +250,10 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* abertura: a maior oferta */
 .h__big {{ display: block; font-size: clamp(46px, 13.6vw, 100px); font-weight: 800; line-height: .94; letter-spacing: -.035em; text-transform: uppercase; text-wrap: balance; padding-bottom: .04em; }}
 .h__sub {{ display: block; margin-top: 18px; font-size: clamp(24px, 7vw, 52px); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; color: var(--ink); text-wrap: balance; }}
-.h__sub b {{ color: var(--amber); font-weight: 800; }}
+.h__sub b {{ color: var(--amber); font-weight: 800; margin-right: .2em; }}
+.h .h__sub {{ display: flex; justify-content: center; align-items: center; font-size: clamp(40px, 12vw, 84px); }}
+.h__sub .lmb {{ color: var(--ink); }}
+.h__tag {{ display: block; margin-top: 12px; font-size: clamp(20px, 5.8vw, 36px); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; color: var(--ink2); text-wrap: balance; }}
 
 /* story do LOMBADA */
 .story {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-items: center; max-width: 940px; margin: 48px auto 0; }}
@@ -449,7 +452,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap h__in">
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
-      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> A ferramenta que todo autor sonhou.</span></h1>
+      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> {LMB}</span><span class="h__tag">A ferramenta que todo autor sonhou.</span></h1>
       <ul class="hk">
         <li>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></li>
         <li>{CK}<span>O <b>LOMBADA</b>, o personal trainer do seu livro, por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b>.</span></li>
