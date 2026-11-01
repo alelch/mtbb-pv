@@ -31,8 +31,10 @@ drive = bloco('<section class="blk drive"', '<!-- 4.')
 motor = bloco('<section class="blk" id="mais-motor">', '<!-- 5.')
 belt = bloco('<section class="blk" style="border-top', '<!-- 6.')
 dany = bloco('<!-- 7. quem colocou o motor -->', '<!-- 8.')
+dream = bloco('<section class="dream" id="reveal">', '<!-- 3.')
 fix = lambda s: s.replace('src="assets/', 'src="../black-week/assets/')
-drive, motor, belt, dany = map(fix, (drive, motor, belt, dany))
+drive, motor, belt, dany, dream = map(fix, (drive, motor, belt, dany, dream))
+dream = dream.replace('<a class="dx__cue" href="#test-drive">Faça um test drive', '<a class="dx__cue" href="#test-drive">Veja por dentro')
 drive = drive.replace('<p class="eyebrow">Test drive</p>', '<p class="eyebrow">Teste agora</p>')
 belt = belt.replace('Saiba o que fazer, quando fazer, em cada etapa do seu livro.', 'Do primeiro livro ao décimo, o que fazer em cada etapa.')
 dany = dany.replace('<p><b>Agora, colocou um motor nele.</b></p>', '<p><b>Depois, colocou o Método inteiro na palma da sua mão.</b></p>'.replace('o Método inteiro', 'o Método The&nbsp;Book&nbsp;Business inteiro'))
@@ -73,7 +75,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .slow__p + .slow__p { margin-top: 6px; }
 .slow__p b { color: var(--ink); font-weight: 600; }
 .slow__lmb { margin-top: 30px; font-size: clamp(24px, 7vw, 40px); font-weight: 600; line-height: 1.2; }
-.slow__lmb .lmb { color: var(--ink); }
+.slow .lmb { color: var(--ink); }
 .slow__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 440px; margin: 32px auto 0; }
 .slow__pair p { padding: 16px 10px; border-radius: 12px; background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--line); font-size: clamp(15px, 4.2vw, 18px); font-weight: 600; }
 .slow__pair p:last-child { box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .6); color: var(--amber); }
@@ -187,17 +189,17 @@ MAIN = f"""<main>
     </div>
   </section>
 
-  <!-- 2. o problema: esquecido aos poucos -->
+  <!-- 2. o sonho: cada frase acende na rolagem e termina em "Agora existe." -->
+  {dream}
+
+  <!-- 2b. foi feito pra você -->
   <section class="blk slow">
     <div class="wrap">
       <div class="slow__in rv">
-        <p class="slow__big">Livro nenhum fracassa de uma vez.</p>
-        <p class="slow__big gold">Ele é esquecido aos poucos.</p>
-        <p class="slow__p">Não foi preguiça.</p>
-        <p class="slow__p">Foi falta de alguém dizendo: <b>hoje é isso.</b></p>
-        <p class="slow__lmb">O {LMB} diz.</p>
-        <p class="slow__p">Todo dia ele abre com o que fazer pelo seu livro. Montado pela fase do livro, pelo gênero e pelo tempo que você tem.</p>
+        <p class="slow__big">Isso foi feito <span class="gold">pra você.</span></p>
+        <p class="slow__p">Todo dia o {LMB} abre com o próximo passo do seu livro. Montado pela fase dele, pelo gênero e pelo tempo que você tem.</p>
         <div class="slow__pair"><p>Ele monta o treino.</p><p>Você executa.</p></div>
+        <p class="slow__p"><b>E o seu livro vai mais longe a cada dia.</b></p>
       </div>
     </div>
   </section>
@@ -315,7 +317,7 @@ MAIN = f"""<main>
   <!-- 10. fechamento -->
   <section class="blk end">
     <div class="wrap rv">
-      <p class="end__a">Seu livro não precisa de sorte.<br>Precisa de um dia depois do outro.</p>
+      <p class="end__a">Lido. Desejado. Lembrado.<br><b style="color:var(--ink)">É possível. E começa hoje.</b></p>
       <p class="end__b">Seu livro <span class="gold">não vai parar.</span></p>
       <p class="end__c">Todo dia, o que fazer.</p>
       {CTA}
@@ -330,8 +332,6 @@ DOCK = f'<div class="dock" id="dock"><a class="btn" href="#oferta" data-cta>Quer
 # JS: mantém utilidades + telas do LOMBADA + Dany; tira cadastro/abertura; põe modo do dia 9, relógio e botão fixo
 js = script
 a = js.index("  /* ================= 6b. DEPOIMENTOS"); b = js.index("  /* ================= 7. DANY NA MÍDIA")
-js = js[:a] + js[b:]
-a = js.index("  /* ================= 2. O SONHO"); b = js.index("  /* ================= 7. DANY NA MÍDIA")
 js = js[:a] + js[b:]
 a = js.index("  /* ================= ABERTURA")
 js = js[:a] + """  /* ================= MODO: dia 9 (até 23h59 de Brasília = 02h59 UTC do dia 10) ou depois ================= */

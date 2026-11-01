@@ -672,7 +672,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .slow__p + .slow__p { margin-top: 6px; }
 .slow__p b { color: var(--ink); font-weight: 600; }
 .slow__lmb { margin-top: 30px; font-size: clamp(24px, 7vw, 40px); font-weight: 600; line-height: 1.2; }
-.slow__lmb .lmb { color: var(--ink); }
+.slow .lmb { color: var(--ink); }
 .slow__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 440px; margin: 32px auto 0; }
 .slow__pair p { padding: 16px 10px; border-radius: 12px; background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--line); font-size: clamp(15px, 4.2vw, 18px); font-weight: 600; }
 .slow__pair p:last-child { box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .6); color: var(--amber); }
@@ -794,17 +794,39 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
     </div>
   </section>
 
-  <!-- 2. o problema: esquecido aos poucos -->
+  <!-- 2. o sonho: cada frase acende na rolagem e termina em "Agora existe." -->
+  <section class="dream" id="reveal">
+    <div class="wrap">
+      <p class="dream__lead rv">Todo autor já sonhou em</p>
+      <ol class="dream__list">
+        <li>ver o livro sendo <em>lido de verdade.</em></li>
+        <li>receber mensagem <em>de um leitor desconhecido.</em></li>
+        <li>ser convidado <em>para falar do livro.</em></li>
+        <li>lançar e <em>ver o livro não parar.</em></li>
+        <li>ver o livro antigo <em>voltar a vender.</em></li>
+        <li>nunca mais <em>ser esquecido.</em></li>
+      </ol>
+      <div class="dream__end rv">
+        <div class="dream__glow" aria-hidden="true"></div>
+        <div class="dream__ring" aria-hidden="true"></div>
+        <p class="dx__pre">Parecia impossível.</p>
+        <p class="dx__now">Agora existe.</p>
+        <p class="dx__tag">Tudo o que você precisa fazer para o seu livro ser lido cada vez mais, <span class="amber">em um lugar só.</span></p>
+        <a class="dx__cue" href="#test-drive">Veja por dentro <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- 2b. foi feito pra você -->
   <section class="blk slow">
     <div class="wrap">
       <div class="slow__in rv">
-        <p class="slow__big">Livro nenhum fracassa de uma vez.</p>
-        <p class="slow__big gold">Ele é esquecido aos poucos.</p>
-        <p class="slow__p">Não foi preguiça.</p>
-        <p class="slow__p">Foi falta de alguém dizendo: <b>hoje é isso.</b></p>
-        <p class="slow__lmb">O <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span> diz.</p>
-        <p class="slow__p">Todo dia ele abre com o que fazer pelo seu livro. Montado pela fase do livro, pelo gênero e pelo tempo que você tem.</p>
+        <p class="slow__big">Isso foi feito <span class="gold">pra você.</span></p>
+        <p class="slow__p">Todo dia o <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span> abre com o próximo passo do seu livro. Montado pela fase dele, pelo gênero e pelo tempo que você tem.</p>
         <div class="slow__pair"><p>Ele monta o treino.</p><p>Você executa.</p></div>
+        <p class="slow__p"><b>E o seu livro vai mais longe a cada dia.</b></p>
       </div>
     </div>
   </section>
@@ -1101,7 +1123,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
   <!-- 10. fechamento -->
   <section class="blk end">
     <div class="wrap rv">
-      <p class="end__a">Seu livro não precisa de sorte.<br>Precisa de um dia depois do outro.</p>
+      <p class="end__a">Lido. Desejado. Lembrado.<br><b style="color:var(--ink)">É possível. E começa hoje.</b></p>
       <p class="end__b">Seu livro <span class="gold">não vai parar.</span></p>
       <p class="end__c">Todo dia, o que fazer.</p>
       <a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a>
@@ -1363,6 +1385,14 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
   var A2 = ['Peça avaliação a quem comprou <b>seu livro</b>', 'Republique um trecho como post', 'Crie um microciclo para uma data comemorativa', 'Proponha uma pauta ao jornal da sua cidade', 'Reposte tudo que <b>seu livro</b> gerou', 'Busque uma audiência nova', 'Faça um sorteio ou concurso cultural', 'Escreva o release no padrão da imprensa', 'Divulgue em quais livrarias <b>seu livro</b> está'];
   function fill(id, arr) { $(id).innerHTML = arr.concat(arr).map(function (s) { return '<span>' + s + '</span>'; }).join(''); }
   fill('#belt-1', A1); fill('#belt-2', A2);
+
+  /* ================= 2. O SONHO: cada frase acende quando passa pelo meio da tela ================= */
+  var dx = $('#reveal');
+  (function () {
+    var items = $$('.dream__list li', dx);
+    if (REDUCED || !('IntersectionObserver' in window)) { items.forEach(function (li) { li.classList.add('lit'); }); return; }
+    reversivel(items, 'lit', '-38% 0px -38% 0px');
+  })();
 
   /* ================= 7. DANY NA MÍDIA: esteira contínua ================= */
   (function () {
