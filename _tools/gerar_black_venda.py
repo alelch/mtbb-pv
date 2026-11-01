@@ -67,18 +67,18 @@ STORY_TXT = "".join(f'<div class="st{" on" if not i else ""}"><span class="st__n
 _CASOS = [("c0","Vinicius Profinho","11 mil cópias vendidas","O Guia da Redação Nota 1000"),("c9","Emília Nunez","Ganhadora do Prêmio Jabuti","Capaz"),("c33","Candice Pascoal","Mais de 50 mil exemplares","Seu Sonho Tem Futuro"),("c3","Lelo Apovian","Best-seller Veja, Amazon e PublishNews","Muito Acima da Média"),("c6","Tom Orgado","Destaque de vendas na Bienal do Rio","Baque"),("c16","Maíra Metelo","6º mais vendido da Amazon","Se Ninguém Soubesse Quem Sou"),("c18","Maria Gravina Ogata","8 prêmios literários","As bambinas e os samurais brasileiros"),("c30","Larissa Cruvinel","Leitores em 7 países","A Serenidade da Renúncia"),("c28","Susana Arbex","1º lugar em negócios na PublishNews","Sua Marca Pessoal"),("c35","Léo Dicker","Adotado por escolas","Clara e Guto, os segredos de Londres"),("c34","Simone Simon","Nas livrarias de aeroportos","Faça Ser Fácil"),("c7","Ingrid Azevedo","Quase 600 na pré-venda","O caminho do despertar")]
 CASOS = "".join(f'<figure class="caso rv"><img src="../black-week-misterio/assets/casos/{f}.webp" alt="{n}" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>{r}</strong><b>{n}</b><span>{l}</span></figcaption></figure>' for f, n, r, l in _CASOS)
 _LEVA = [
-  ("Acesso vitalício", "Método The&nbsp;Book&nbsp;Business", "O ecossistema completo de marketing literário: as estratégias mais eficazes do mercado para transformar autores desconhecidos em referências, com leitores de verdade. Aulas práticas, passo a passo claro, trilhas de implementação e modelos prontos para divulgar o seu livro e aumentar as suas vendas."),
-  ("Acesso vitalício", "Autoridade Digital para Escritores", "Use as plataformas digitais para multiplicar o seu alcance, ser descoberto por novas audiências e atrair leitores. Quais redes usar, o que postar, com que frequência e como criar conteúdo de forma estratégica."),
-  ("Acesso vitalício", "Gerador de Posts Magnéticos", "Ideias ilimitadas e personalizadas pelo gênero do seu livro, pela fase, pela rede que você mais usa e pelo seu jeito de falar. Posts em minutos que despertam curiosidade e transformam seguidores em leitores."),
-  ("Acesso vitalício", "Calendário Estratégico do Autor", "O seu plano anual de conteúdo pronto para usar, com datas comemorativas e ideias de posts mês a mês. O ano inteiro mapeado."),
-  ("Acesso vitalício", "Comunidade The&nbsp;Book&nbsp;Business", "A maior comunidade de autores do Brasil, com mais de 2.000 escritores. Ideias, feedbacks, parcerias e o apoio que faltava. A sua nova turma de autores."),
+  ("Acesso vitalício", "Método The&nbsp;Book&nbsp;Business", "O ecossistema completo de marketing literário. Aulas práticas, passo a passo claro e modelos prontos para transformar o seu livro em referência, com leitores de verdade."),
+  ("Acesso vitalício", "Autoridade Digital para Escritores", "Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores."),
+  ("Acesso vitalício", "Gerador de Posts Magnéticos", "Ideias ilimitadas, feitas pelo gênero do seu livro, pela fase e pelo seu jeito de falar. Posts em minutos."),
+  ("Acesso vitalício", "Calendário Estratégico do Autor", "O ano inteiro mapeado, com datas comemorativas e ideias de posts mês a mês."),
+  ("Acesso vitalício", "Comunidade The&nbsp;Book&nbsp;Business", "A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma."),
   ("Acesso vitalício", "Workshops Mão na Massa", "<ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul>"),
-  ("Acesso vitalício", "Gravação de 100% das lives, encontros e eventos", "Tudo para você rever quando quiser, no seu ritmo. Com roteiristas premiadas, agentes literárias, publishers das maiores editoras do país e profissionais que estão moldando o mercado."),
-  ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo com a Dany Sakugawa para falar e tirar dúvidas sobre o seu livro. Todo mês, para ajustar a estratégia e acompanhar o seu progresso. O que muitos chamam de mentoria, aqui está incluído."),
-  ("Projeto Especial", "Prêmio Jabuti", "O processo completo de inscrição, da escolha da categoria ideal ao que fazer para aumentar as suas chances no maior prêmio literário do país."),
-  ("Projeto Especial", "Autopublicação Profissional", "O passo a passo para transformar o seu manuscrito em livro profissional: revisão, capa, diagramação, ISBN e distribuição. Com padrão de mercado."),
-  ("Projeto Especial", "Editora Perfeita", "Ao vivo com a Dany: como analisar propostas, comparar contratos e escolher a editora que faz sentido para o seu livro."),
-  ("Projeto Especial", "Destaque Amazon", "Título, descrição, categorias e palavras-chave configurados para o seu livro aparecer onde deveria: na estante dos leitores."),
+  ("Acesso vitalício", "Gravação de 100% das lives, encontros e eventos", "Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país."),
+  ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
+  ("Projeto Especial", "Prêmio Jabuti", "A inscrição certa, na categoria certa, no maior prêmio literário do país."),
+  ("Projeto Especial", "Autopublicação Profissional", "Revisão, capa, diagramação, ISBN e distribuição, com padrão de mercado."),
+  ("Projeto Especial", "Editora Perfeita", "Como analisar propostas e escolher a editora certa para o seu livro."),
+  ("Projeto Especial", "Destaque Amazon", "Título, descrição, categorias e palavras-chave para o seu livro aparecer na Amazon."),
 ]
 LEVA = "".join(f'<div class="lv rv"><span class="lv__k">{k}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div>' for k, t, d in _LEVA)
 
@@ -87,7 +87,7 @@ HTML = f'''<!doctype html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Black Week Motorizada · Tudo, pra sempre + LOMBADA</title>
+<title>Black Week Motorizada · A maior oferta de todos os tempos</title>
 <meta name="description" content="Tudo o que a Dany Sakugawa criou para autores, pra sempre. E o LOMBADA, o personal trainer do seu livro. Na Black Week Motorizada.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#000000">
@@ -199,6 +199,8 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .price__big small {{ display: block; font-size: 18px; font-weight: 500; color: var(--ink2); }}
 .price__big span {{ display: block; margin-top: 6px; font-size: clamp(60px, 18vw, 104px); font-weight: 800; letter-spacing: -.04em; background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }}
 .price__cash {{ margin-top: 8px; font-size: 16px; color: var(--ink2); }}
+.price__cta {{ max-width: 480px; margin: 26px auto 0; }}
+.resumo .card__list {{ margin-top: 22px; }}
 .bon2 {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 900px; margin: 34px auto 0; }}
 @media (min-width: 760px) {{ .bon2 {{ grid-template-columns: 1fr 1fr; }} }}
 .bon2__c {{ padding: 26px 22px; border-radius: 18px; background: #0d0b08; box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .5); text-align: center; }}
@@ -456,7 +458,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <ul class="hk">
         <li>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></li>
         <li>{CK}<span>O <b>LOMBADA</b>, o personal trainer do seu livro, por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b>.</span></li>
-        <li>{CK}<span>Os bônus mais poderosos já criados dentro da melhor estratégia literária do Brasil.</span></li>
+        <li class="d9-only">{CK}<span>Os bônus mais poderosos já criados dentro da melhor estratégia literária do Brasil.</span></li>
+        <li class="after-only">{CK}<span><b>3 anos de encontros em grupo</b> ao vivo com a Dany.</span></li>
       </ul>
 
       <!-- 2. quanto custaria por um ano -->
@@ -486,6 +489,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="q2">Mas comprando hoje, você não vai investir tudo isso.<br>Você só vai investir:</p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
+        <div class="cta price__cta">{CTA}<p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
       </div>
     </div>
   </section>
@@ -516,6 +520,13 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap center">
       <div class="card rv">
         <p class="q2">Resumindo: na Black Week Motorizada você leva tudo isso, mais o LOMBADA<span class="d9-only"> e os bônus de hoje</span>.</p>
+        <ul class="card__list">
+          <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos, workshops e Projetos Especiais, <b>vitalícios</b></span></li>
+          <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
+          <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
+          <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
+          <li class="d9-only">{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
+        </ul>
         <p class="resumo__de">De <s>R$ 26.485,00</s></p>
         <p class="resumo__por">por apenas</p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
@@ -590,6 +601,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="faq__l rv">
         <details><summary>“Não tenho tempo.”</summary><p>Uma ação por dia já conta. O LOMBADA monta o plano pelo tempo que você tem.</p></details>
         <details><summary>“Meu livro é antigo. Ou ainda estou escrevendo.”</summary><p>O plano começa pela fase em que o seu livro está. Livro antigo é o que mais ganha quando volta a aparecer.</p></details>
+        <details><summary>“Posso parcelar?”</summary><p>Sim. Em até 12x de R$ 249,51, ou R$ 2.500 à vista.</p></details>
         <details><summary>“E se não for pra mim?”</summary><p>Você tem 15 dias. Não gostou, devolvemos tudo.</p></details>
       </div>
     </div>
@@ -656,6 +668,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       clearTimeout(t); t = setTimeout(function () {{ show(i + 1); }}, DUR);
     }}
     box.querySelector('.story__ph').addEventListener('click', function () {{ show(i + 1); }});
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) DUR = 9000;
     var started = false;
     function go() {{ if (!started) {{ started = true; show(0); }} }}
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) {{ if (es[0].isIntersecting) go(); }}, {{ threshold: .3 }}).observe(box); else go();
