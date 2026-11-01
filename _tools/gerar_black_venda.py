@@ -64,6 +64,24 @@ _ON = ' class="on"'
 STORY_IMGS = "".join(f'<img src="assets/{f}.webp" alt="Tela do LOMBADA" width="716" height="1440" decoding="async"{_LZ if i else ""}{"" if i else _ON}>' for i, (f, t, d) in enumerate(_ST))
 STORY_TXT = "".join(f'<div class="st{" on" if not i else ""}"><span class="st__n">0{i+1}</span><p class="st__t">{t}</p><p class="st__d">{d}</p></div>' for i, (f, t, d) in enumerate(_ST))
 
+_CASOS = [("c0","Vinicius Profinho","11 mil cópias vendidas","O Guia da Redação Nota 1000"),("c9","Emília Nunez","Ganhadora do Prêmio Jabuti","Capaz"),("c33","Candice Pascoal","Mais de 50 mil exemplares","Seu Sonho Tem Futuro"),("c3","Lelo Apovian","Best-seller Veja, Amazon e PublishNews","Muito Acima da Média"),("c6","Tom Orgado","Destaque de vendas na Bienal do Rio","Baque"),("c16","Maíra Metelo","6º mais vendido da Amazon","Se Ninguém Soubesse Quem Sou"),("c18","Maria Gravina Ogata","8 prêmios literários","As bambinas e os samurais brasileiros"),("c30","Larissa Cruvinel","Leitores em 7 países","A Serenidade da Renúncia"),("c28","Susana Arbex","1º lugar em negócios na PublishNews","Sua Marca Pessoal"),("c35","Léo Dicker","Adotado por escolas","Clara e Guto, os segredos de Londres"),("c34","Simone Simon","Nas livrarias de aeroportos","Faça Ser Fácil"),("c7","Ingrid Azevedo","Quase 600 na pré-venda","O caminho do despertar")]
+CASOS = "".join(f'<figure class="caso rv"><img src="../black-week-misterio/assets/casos/{f}.webp" alt="{n}" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>{r}</strong><b>{n}</b><span>{l}</span></figcaption></figure>' for f, n, r, l in _CASOS)
+_LEVA = [
+  ("Acesso vitalício", "Método The&nbsp;Book&nbsp;Business", "O ecossistema completo de marketing literário: as estratégias mais eficazes do mercado para transformar autores desconhecidos em referências, com leitores de verdade. Aulas práticas, passo a passo claro, trilhas de implementação e modelos prontos para divulgar o seu livro e aumentar as suas vendas."),
+  ("Acesso vitalício", "Autoridade Digital para Escritores", "Use as plataformas digitais para multiplicar o seu alcance, ser descoberto por novas audiências e atrair leitores. Quais redes usar, o que postar, com que frequência e como criar conteúdo de forma estratégica."),
+  ("Acesso vitalício", "Gerador de Posts Magnéticos", "Ideias ilimitadas e personalizadas pelo gênero do seu livro, pela fase, pela rede que você mais usa e pelo seu jeito de falar. Posts em minutos que despertam curiosidade e transformam seguidores em leitores."),
+  ("Acesso vitalício", "Calendário Estratégico do Autor", "O seu plano anual de conteúdo pronto para usar, com datas comemorativas e ideias de posts mês a mês. O ano inteiro mapeado."),
+  ("Acesso vitalício", "Comunidade The&nbsp;Book&nbsp;Business", "A maior comunidade de autores do Brasil, com mais de 2.000 escritores. Ideias, feedbacks, parcerias e o apoio que faltava. A sua nova turma de autores."),
+  ("Acesso vitalício", "Workshops Mão na Massa", "<ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul>"),
+  ("Acesso vitalício", "Gravação de 100% das lives, encontros e eventos", "Tudo para você rever quando quiser, no seu ritmo. Com roteiristas premiadas, agentes literárias, publishers das maiores editoras do país e profissionais que estão moldando o mercado."),
+  ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo com a Dany Sakugawa para falar e tirar dúvidas sobre o seu livro. Todo mês, para ajustar a estratégia e acompanhar o seu progresso. O que muitos chamam de mentoria, aqui está incluído."),
+  ("Projeto Especial", "Prêmio Jabuti", "O processo completo de inscrição, da escolha da categoria ideal ao que fazer para aumentar as suas chances no maior prêmio literário do país."),
+  ("Projeto Especial", "Autopublicação Profissional", "O passo a passo para transformar o seu manuscrito em livro profissional: revisão, capa, diagramação, ISBN e distribuição. Com padrão de mercado."),
+  ("Projeto Especial", "Editora Perfeita", "Ao vivo com a Dany: como analisar propostas, comparar contratos e escolher a editora que faz sentido para o seu livro."),
+  ("Projeto Especial", "Destaque Amazon", "Título, descrição, categorias e palavras-chave configurados para o seu livro aparecer onde deveria: na estante dos leitores."),
+]
+LEVA = "".join(f'<div class="lv rv"><span class="lv__k">{k}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div>' for k, t, d in _LEVA)
+
 HTML = f'''<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -144,8 +162,8 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 @media (min-width: 900px) {{ .obar p {{ max-width: none; font-size: 13px; }} .obar .clock span {{ min-width: 48px; font-size: 20px; }} }}
 
 /* 1. abertura */
-.h {{ position: relative; min-height: calc(100svh - 52px); display: flex; align-items: center; overflow: hidden; isolation: isolate; padding: 40px 0 70px; text-align: center; }}
-.h::before {{ content: ""; position: absolute; left: 50%; top: -60vmax; width: 160vmax; height: 160vmax; margin-left: -80vmax; z-index: -1; pointer-events: none;
+.h {{ position: relative; overflow: hidden; isolation: isolate; padding: 34px 0 80px; text-align: center; }}
+.h::before {{ content: ""; position: absolute; left: 50%; top: -110vmax; width: 160vmax; height: 160vmax; margin-left: -80vmax; z-index: -1; pointer-events: none;
   background: repeating-conic-gradient(from 0deg, rgba(250, 171, 0, .13) 0deg 5deg, transparent 5deg 18deg);
   -webkit-mask-image: radial-gradient(closest-side, #000 10%, transparent 70%); mask-image: radial-gradient(closest-side, #000 10%, transparent 70%); animation: rays 90s linear infinite; }}
 .h::after {{ content: ""; position: absolute; left: 50%; top: 0; width: 120vmax; height: 70vmax; z-index: -1; transform: translate(-50%, -45%); border-radius: 50%; background: radial-gradient(closest-side, rgba(250, 171, 0, .22), transparent); pointer-events: none; }}
@@ -163,6 +181,71 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .h .cta {{ max-width: 480px; margin: 22px auto 0; animation: rise 1s var(--ease) .65s both; }}
 .h__cue {{ display: inline-flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 34px; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink3); text-decoration: none; }}
 .h__cue svg {{ width: 20px; height: 20px; animation: bob 1.8s ease-in-out infinite; }}
+
+/* abertura emendada na oferta (ordem do Aniversário) */
+.hk {{ max-width: 560px; margin: 26px auto 0; list-style: none; display: grid; gap: 12px; text-align: left; }}
+.hk li {{ display: flex; gap: 12px; align-items: flex-start; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.45; color: var(--ink2); }}
+.hk b {{ color: var(--ink); }} .hk b.amber {{ color: var(--amber); }}
+.amber {{ color: var(--amber); }}
+.blk {{ max-width: 640px; margin: 56px auto 0; }}
+.q1 {{ font-size: clamp(18px, 5vw, 24px); font-weight: 500; line-height: 1.4; color: var(--ink2); text-wrap: balance; }}
+.q1 u {{ color: var(--ink); font-weight: 700; text-decoration-color: var(--amber); text-underline-offset: 4px; }}
+.q2 {{ font-size: clamp(20px, 5.6vw, 28px); font-weight: 700; line-height: 1.3; text-wrap: balance; }}
+.blk .bill {{ margin-top: 22px; text-align: left; }}
+.bill__row--lmb span .lmb {{ color: var(--ink); font-size: 1.05em; }}
+.bill__row--lmb b {{ color: var(--amber) !important; font-weight: 700; }}
+.price {{ margin-top: 64px; }}
+.price__big {{ margin-top: 14px; line-height: 1; }}
+.price__big small {{ display: block; font-size: 18px; font-weight: 500; color: var(--ink2); }}
+.price__big span {{ display: block; margin-top: 6px; font-size: clamp(60px, 18vw, 104px); font-weight: 800; letter-spacing: -.04em; background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; }}
+.price__cash {{ margin-top: 8px; font-size: 16px; color: var(--ink2); }}
+.bon2 {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 900px; margin: 34px auto 0; }}
+@media (min-width: 760px) {{ .bon2 {{ grid-template-columns: 1fr 1fr; }} }}
+.bon2__c {{ padding: 26px 22px; border-radius: 18px; background: #0d0b08; box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .5); text-align: center; }}
+.bon2__c img {{ width: 70%; max-width: 260px; margin: 16px auto 0; filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .7)); }}
+.bon2__c .bon2__big {{ margin-top: 14px; font-size: clamp(84px, 26vw, 140px); font-weight: 800; line-height: .9; letter-spacing: -.05em; }}
+.bon2__c h3 {{ margin-top: 12px; font-size: clamp(20px, 5.4vw, 26px); font-weight: 800; line-height: 1.2; }}
+.bon2__c h3 .lmb {{ color: var(--ink); }}
+.bon2__c > p:not(.bon2__big) {{ margin-top: 10px; font-size: 15px; line-height: 1.55; color: var(--ink2); }}
+.resumo {{ border-top: 1px solid var(--line); }}
+.resumo .card {{ padding-top: 34px; }}
+.resumo__de {{ margin-top: 22px; font-size: 18px; color: var(--ink2); }}
+.resumo__de s {{ color: var(--ink3); }}
+.resumo__por {{ margin-top: 4px; font-size: 16px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }}
+.warn {{ max-width: 600px; margin: 22px auto 0; padding: 16px 18px; border-radius: 14px; background: #1a0f05; box-shadow: inset 0 0 0 1px rgba(250, 171, 0, .4); font-size: 15px; line-height: 1.5; color: var(--ink2); text-align: left; }}
+.warn b {{ color: var(--amber); }}
+.leva {{ border-top: 1px solid var(--line); }}
+.lv__k {{ display: inline-block; padding: 5px 11px; border-radius: 99px; background: rgba(250, 171, 0, .14); color: var(--amber); font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }}
+.lv.lv--lmb {{ max-width: 980px; margin: 40px auto 0; padding: 30px 20px 34px; border-radius: 24px; background: var(--paper); color: var(--paper-ink); text-align: center; }}
+.lv.lv--lmb .lv__k {{ background: var(--paper-ink); color: var(--amber); }}
+.lv.lv--lmb .lv__lmb {{ margin-top: 14px; font-size: clamp(38px, 11vw, 110px); line-height: 1; }}
+.lv.lv--lmb .lv__lmb .lmb {{ color: var(--paper-ink); }}
+.lv.lv--lmb .lv__lead {{ margin: 14px auto 0; max-width: 560px; font-size: clamp(16px, 4.4vw, 20px); font-weight: 500; line-height: 1.45; color: var(--paper-soft); text-wrap: balance; }}
+.lv.lv--lmb .story {{ margin-top: 30px; }}
+.lv.lv--lmb .days {{ margin-top: 30px; padding: 26px 10px 6px; border-top: 1px solid #e3ded2; }}
+.lv.lv--lmb .days::before {{ display: none; }}
+.lv.lv--lmb p.days__n {{ font-size: clamp(84px, 26vw, 200px); }}
+.lv.lv--lmb p.days__a {{ margin-top: 10px; font-size: clamp(22px, 6vw, 38px); color: var(--paper-ink); }}
+.leva__g {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 980px; margin: 14px auto 0; }}
+@media (min-width: 760px) {{ .leva__g {{ grid-template-columns: 1fr 1fr; }} }}
+.lv {{ padding: 24px 20px; border-radius: 18px; background: var(--bg2); box-shadow: inset 0 0 0 1px var(--line); }}
+.lv h3 {{ margin-top: 12px; font-size: clamp(21px, 5.6vw, 26px); font-weight: 800; line-height: 1.15; letter-spacing: -.015em; }}
+.lv > p {{ margin-top: 10px; font-size: 15px; line-height: 1.6; color: var(--ink2); }}
+.lv ul {{ margin-top: 12px; list-style: none; display: grid; gap: 8px; }}
+.lv ul li {{ position: relative; padding-left: 18px; font-size: 15px; color: var(--ink2); }}
+.lv ul li::before {{ content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }}
+.leva__cta {{ max-width: 480px; margin: 40px auto 0; }}
+.casos-sec {{ border-top: 1px solid var(--line); }}
+.casos {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; max-width: 980px; margin: 40px auto 0; }}
+@media (min-width: 700px) {{ .casos {{ grid-template-columns: 1fr 1fr; }} }}
+@media (min-width: 1000px) {{ .casos {{ grid-template-columns: 1fr 1fr 1fr; }} }}
+.caso {{ display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: #121114; box-shadow: inset 0 0 0 1px #222126; }}
+.caso img {{ flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(250, 171, 0, .5); }}
+.caso figcaption {{ min-width: 0; line-height: 1.25; }}
+.caso strong {{ display: block; font-size: 15px; font-weight: 700; color: var(--amber); }}
+.caso b {{ display: block; margin-top: 4px; font-size: 13px; font-weight: 600; }}
+.caso span {{ display: block; font-size: 12px; color: var(--ink3); }}
+.casos__more {{ margin-top: 18px; text-align: center; font-size: 15px; color: var(--ink2); }}
 
 /* abertura: a maior oferta */
 .h__big {{ display: block; font-size: clamp(46px, 13.6vw, 100px); font-weight: 800; line-height: .94; letter-spacing: -.035em; text-transform: uppercase; text-wrap: balance; padding-bottom: .04em; }}
@@ -187,14 +270,14 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .st.on {{ position: relative; opacity: 1; transform: none; }}
 @media (min-width: 860px) {{ .st {{ text-align: left; }} }}
 .st__n {{ font-size: 13px; font-weight: 800; letter-spacing: .2em; color: #8a5a00; }}
-.st__t {{ margin-top: 8px; font-size: clamp(24px, 6.6vw, 46px); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }}
-.st__d {{ margin-top: 8px; font-size: clamp(15px, 4.1vw, 20px); line-height: 1.5; color: var(--paper-soft); text-wrap: balance; }}
+.st__t, .lv .st__t {{ margin-top: 8px; font-size: clamp(24px, 6.6vw, 46px); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }}
+.st__d, .lv .st__d {{ margin-top: 8px; font-size: clamp(15px, 4.1vw, 20px); line-height: 1.5; color: var(--paper-soft); text-wrap: balance; }}
 
 /* contador de dias */
 .days {{ overflow: hidden; isolation: isolate; text-align: center; }}
 .days::before {{ content: ""; position: absolute; left: 50%; top: 50%; width: 900px; height: 900px; z-index: -1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(250, 171, 0, .2), transparent); }}
-.days__n {{ font-size: clamp(110px, 34vw, 280px); font-weight: 800; line-height: .85; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }}
-.days__a {{ margin: 18px auto 0; max-width: 720px; font-size: clamp(26px, 7.4vw, 50px); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }}
+.days__n, .lv .days__n {{ font-size: clamp(110px, 34vw, 280px); font-weight: 800; line-height: .85; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }}
+.days__a, .lv .days__a {{ margin: 18px auto 0; max-width: 720px; font-size: clamp(26px, 7.4vw, 50px); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }}
 .days__b {{ margin-top: 16px; font-size: clamp(15px, 4.2vw, 19px); color: var(--ink2); }}
 
 /* a conta */
@@ -361,150 +444,131 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 <div class="obar"><p class="d9-only">O dobro do LOMBADA e os bônus terminam em</p>{CLOCK.replace('class="clock"', 'class="clock d9-only"')}<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
 
 <main>
-  <!-- 1. abertura: a maior oferta de todos os tempos (sem preço) -->
+  <!-- 1. abertura (a única seção que ficou da versão anterior), já emendada na oferta -->
   <section class="h" id="topo">
     <div class="wrap h__in">
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
       <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> A ferramenta que todo autor sonhou.</span></h1>
-      <div class="cta">{CTA}</div>
-      <a class="h__cue" href="#ferramenta">Conheça a ferramenta<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
-    </div>
-  </section>
+      <ul class="hk">
+        <li>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></li>
+        <li>{CK}<span>O <b>LOMBADA</b>, o personal trainer do seu livro, por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b>.</span></li>
+        <li>{CK}<span>Os bônus mais poderosos já criados dentro da melhor estratégia literária do Brasil.</span></li>
+      </ul>
 
-  <!-- 2. a ferramenta: o LOMBADA rodando como story, cada tela com o ganho dela -->
-  <section class="sec lmbs" id="ferramenta">
-    <div class="wrap">
-      <div class="center rv">
-        <p class="kick">A ferramenta que todo autor sonhou</p>
-        <p class="lmbs__mark">{LMB}</p>
-        <p class="lmbs__p">O personal trainer do seu livro. Ele monta o treino. Você executa.</p>
-      </div>
-      <div class="story rv" id="story">
-        <div class="story__ph" role="button" tabindex="0" aria-label="Próxima tela">
-          <div class="story__bars">{STORY_BARS}</div>
-          <div class="story__scr">{STORY_IMGS}</div>
+      <!-- 2. quanto custaria por um ano -->
+      <div class="blk">
+        <p class="q1">Para ter acesso <u>por um ano</u> a todos os produtos dessa oferta, você <u>precisaria</u> investir:</p>
+        <div class="bill">
+          {BILL}
+          <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>nunca foi vendido</b></div>
+          <div class="bill__tot"><span>Total</span><b>R$ 10.594,00</b></div>
         </div>
-        <div class="story__txt" aria-live="polite">{STORY_TXT}</div>
+      </div>
+
+      <!-- 3. ao longo do tempo -->
+      <div class="blk">
+        <p class="q1">Agora, as contas de quanto você investiria para ter acesso a tudo isso ao longo do tempo:</p>
+        <div class="bill">
+          <div class="bill__row"><span>Todos os produtos · 1º ano</span><b>R$ 10.594,00</b></div>
+          <div class="bill__row"><span>Todos os produtos · 2º ano</span><b>R$ 5.297,00</b></div>
+          <div class="bill__row"><span>Todos os produtos · 3º ano</span><b>R$ 5.297,00</b></div>
+          <div class="bill__row"><span>Todos os produtos · 4º ano</span><b>R$ 5.297,00</b></div>
+          <div class="bill__tot"><span>Total investido</span><b>R$ 26.485,00</b></div>
+        </div>
+      </div>
+
+      <!-- 4. o preço -->
+      <div class="blk price">
+        <p class="q2">Mas comprando hoje, você não vai investir tudo isso.<br>Você só vai investir:</p>
+        <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
+        <p class="price__cash">ou R$ 2.500 à vista</p>
       </div>
     </div>
   </section>
 
-  <!-- 2b. o contador: quantos dias o LOMBADA fica ao lado do livro -->
-  <section class="sec days">
-    <div class="wrap center rv" id="days">
-      <p class="days__n gold" data-to-d9="2190" data-to-depois="1095">0</p>
-      <p class="days__a">manhãs acordando sabendo o que fazer pelo seu livro.</p>
-      <p class="days__b"><span class="d9-only">6 anos de LOMBADA para quem entra hoje.</span><span class="after-only">3 anos de LOMBADA.</span> Todo dia, o próximo passo.</p>
-    </div>
-  </section>
-
-  <!-- 2. a pilha: tudo o que entra -->
-  <section class="sec pile" id="tudo">
-    <div class="wrap">
-      <div class="center rv">
-        <p class="kick">E não para no LOMBADA</p>
-        <h2 class="h2">Olha tudo o que <span class="serif gold">entra.</span></h2>
-        <p class="pile__lede">Nada fica de fora. Cada produto, cada workshop, cada projeto especial. E o LOMBADA.</p>
-      </div>
-      <ol class="rows">
-{rows}
-      </ol>
-      <div class="total rv">
-        <p class="total__n gold"><span class="after-only">{N}</span><span class="d9-only">{N+1}</span></p>
-        <p class="total__a">entregas para o seu livro ir mais longe.</p>
-        <p class="total__b serif gold">Um preço só.</p>
-        <div class="cta">{CTA}</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. a conta: quanto custaria ter tudo isso (valores da página do Aniversário Vitalício) -->
-  <section class="sec conta">
-    <div class="wrap">
-      <div class="center rv">
-        <p class="kick">Faça as contas</p>
-        <h2 class="h2">Para ter tudo isso <span class="serif gold">por um ano</span>, você precisaria investir:</h2>
-      </div>
-      <div class="bill rv">
-        {BILL}
-        <div class="bill__tot"><span>Total por 1 ano</span><b>R$ 10.594,00</b></div>
-      </div>
-      <div class="center rv"><p class="conta__q">E para ter acesso a tudo isso ao longo do tempo:</p></div>
-      <div class="bill bill--anos rv">
-        <div class="bill__row"><span>1º ano</span><b>R$ 10.594,00</b></div>
-        <div class="bill__row"><span>2º ano</span><b>R$ 5.297,00</b></div>
-        <div class="bill__row"><span>3º ano</span><b>R$ 5.297,00</b></div>
-        <div class="bill__row"><span>4º ano</span><b>R$ 5.297,00</b></div>
-        <div class="bill__tot"><span>Total investido</span><b class="strike">R$ 26.485,00</b></div>
-      </div>
-      <p class="conta__lmb rv"><span class="q">E o {LMB}?</span> <span class="d">Ele nunca foi vendido. Nem entra nessa conta.</span></p>
-    </div>
-  </section>
-
-  <!-- 4. bônus de hoje (só dia 9) -->
+  <!-- 5. bônus de hoje -->
   <section class="sec d9 d9-only" id="hoje">
     <div class="wrap center">
-      <div class="rv">
-        <p class="kick">Só para quem entrar hoje</p>
-        <p class="d9__big gold">6 anos</p>
-        <p class="d9__sub">de LOMBADA. O dobro.</p>
-        <p class="d9__p">Amanhã volta a ser 3. Quem entra hoje leva o LOMBADA ao lado do seu livro por 6 anos.</p>
-      </div>
-      <p class="d9__plus rv">+</p>
-      <div class="d9__pb rv">
-        <img src="assets/playbooks.webp" alt="Playbooks MTBB" width="475" height="592" loading="lazy" decoding="async">
-        <div>
-          <h3>Playbooks MTBB físicos, entregues na sua casa.</h3>
-          <p>A extensão prática do Método The&nbsp;Book&nbsp;Business, criada pessoalmente pela Dany. Pra anotar ideias, organizar estratégias e acompanhar a evolução do seu livro.</p>
-          <ul><li>Fundamentos</li><li>Método</li><li>Ativações</li></ul>
+      <p class="q2 rv">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p>
+      <div class="bon2">
+        <div class="bon2__c rv">
+          <span class="lv__k">Bônus 1</span>
+          <p class="bon2__big gold">6 anos</p>
+          <h3>de {LMB}. O dobro.</h3>
+          <p>Amanhã volta a ser 3. Quem entra hoje leva o LOMBADA ao lado do seu livro por 6 anos.</p>
+        </div>
+        <div class="bon2__c rv">
+          <span class="lv__k">Bônus 2</span>
+          <img src="assets/playbooks.webp" alt="Playbooks MTBB" width="475" height="592" loading="lazy" decoding="async">
+          <h3>Playbooks MTBB, entregues fisicamente na sua casa.</h3>
+          <p>A nova extensão prática do Método The&nbsp;Book&nbsp;Business, criada pessoalmente pela Dany. Pra anotar ideias, organizar estratégias e acompanhar a evolução do seu livro.</p>
         </div>
       </div>
-      <div class="d9__end rv"><p>Termina à meia-noite</p>{CLOCK}</div>
     </div>
   </section>
 
-  <!-- 6. a oferta -->
-  <section class="sec offer" id="oferta">
-    <div class="wrap">
+  <!-- 6. resumo + botão -->
+  <section class="sec resumo" id="oferta">
+    <div class="wrap center">
       <div class="card rv">
-        {BWLOGO}
-        <h2 class="card__t">Tudo o que a Dany criou. <span class="serif gold">Pra sempre.</span><span class="lmb-row">+ {LMB}</span></h2>
-        <ul class="card__list">
-          <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b> e todos os produtos, workshops e Projetos Especiais, <b>vitalícios</b></span></li>
-          <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
-          <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
-          <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
-          <li class="d9-only">{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
-          <li>{CK}<span>Garantia de <b>15 dias</b></span></li>
-        </ul>
-        <div class="card__price">
-          <p class="pre">Na Black Week Motorizada, você não vai investir <s>R$ 26.485</s>.<br>Vai investir 12x de</p>
-          <p class="big"><small>R$</small>249,51</p>
-          <p class="cash">ou R$2.500 à vista</p>
-        </div>
+        <p class="q2">Resumindo: na Black Week Motorizada você leva tudo isso, mais o LOMBADA<span class="d9-only"> e os bônus de hoje</span>.</p>
+        <p class="resumo__de">De <s>R$ 26.485,00</s></p>
+        <p class="resumo__por">por apenas</p>
+        <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
+        <p class="price__cash">ou R$ 2.500 à vista</p>
         <div class="card__clock d9-only"><p><b>6 anos de LOMBADA e os Playbooks</b> terminam à meia-noite.</p>{CLOCK}</div>
         {CTA}
-        <div class="seal"><i>15<small>dias</small></i><p><b>Garantia de 15 dias.</b> Entre, use, conheça tudo. Se não for pra você, devolvemos 100% em até 15 dias.</p></div>
+        <div class="seal"><i>15<small>dias</small></i><p><b>Garantia de 15 dias.</b> Entre, use, conheça tudo. Se não for pra você, devolvemos 100%.</p></div>
       </div>
+      <div class="warn rv d9-only"><b>Atenção:</b> os 6 anos de LOMBADA e os Playbooks são só para quem entrar hoje. A partir de amanhã, o LOMBADA volta a ser 3 anos e os bônus saem da oferta.</div>
     </div>
   </section>
 
-  <!-- 5. Dany -->
+  <!-- 7. o que você leva: o LOMBADA primeiro, em story, e depois cada produto -->
+  <section class="sec leva">
+    <div class="wrap">
+      <div class="center rv"><p class="kick">Quem aproveitar essa oferta agora</p><h2 class="h2">Vai levar:</h2></div>
+      <div class="lv lv--lmb rv" id="ferramenta">
+        <span class="lv__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
+        <h3 class="lv__lmb">{LMB}</h3>
+        <p class="lv__lead">A ferramenta que todo autor sonhou. O personal trainer do seu livro: ele monta o treino, você executa.</p>
+        <div class="story" id="story">
+          <div class="story__ph" role="button" tabindex="0" aria-label="Próxima tela">
+            <div class="story__bars">{STORY_BARS}</div>
+            <div class="story__scr">{STORY_IMGS}</div>
+          </div>
+          <div class="story__txt" aria-live="polite">{STORY_TXT}</div>
+        </div>
+        <div class="days"><p class="days__n gold" data-to-d9="2190" data-to-depois="1095">0</p><p class="days__a">manhãs acordando sabendo o que fazer pelo seu livro.</p></div>
+      </div>
+      <div class="leva__g">{LEVA}</div>
+      <div class="cta leva__cta rv">{CTA}</div>
+    </div>
+  </section>
+
+  <!-- 8. casos -->
+  <section class="sec casos-sec">
+    <div class="wrap">
+      <div class="center rv"><h2 class="h2">A estratégia que mais transforma autores comuns em <span class="serif gold">best-sellers de verdade.</span></h2></div>
+      <div class="casos">{CASOS}</div>
+      <p class="casos__more rv">E muito mais.</p>
+      <div class="cta leva__cta rv">{CTA}</div>
+    </div>
+  </section>
+
+  <!-- 9. quem é a Dany -->
   <section class="sec dany">
     <div class="wrap">
       <div class="dany__g">
         <figure class="dany__pic rv"><img src="../black-week/assets/dany-palco.webp" alt="Dany Sakugawa" width="680" height="1207" loading="lazy" decoding="async"></figure>
         <div class="rv">
-          <p class="kick">Uma carta da Dany</p>
-          <h2 class="dany__h">Isso foi feito <span class="serif gold">pra você.</span></h2>
+          <h2 class="dany__h">Quem é a <span class="serif gold">Dany Sakugawa?</span></h2>
           <div class="dany__l">
-            <p><b>Meu sonho sempre foi que o autor acordasse todo dia sabendo o que fazer pelo livro.</b></p>
-            <p>Por isso criei o Método The&nbsp;Book&nbsp;Business: tudo o que aprendi em 15 anos nos bastidores das editoras, organizado para o autor.</p>
-            <p>Mas eu queria ir além. Queria estar ao lado de cada aluno, todo dia, dizendo o que fazer, quando e por quê.</p>
-            <p><b>Foi assim que nasceu o LOMBADA.</b> E agora ele pode ser seu.</p>
+            <p>Uma das maiores referências em marketing editorial do país. Mais de 15 anos nos bastidores das grandes editoras, por trás de lançamentos que ultrapassaram <b>10 milhões de exemplares vendidos</b>.</p>
+            <p>Deixou o cargo de diretora de marketing em uma das maiores editoras do Brasil para guiar autores pelo melhor caminho, com ou sem editora.</p>
+            <p><b>Criou o Método The&nbsp;Book&nbsp;Business. E agora, o LOMBADA.</b></p>
           </div>
-          <p class="dany__sig serif">Dany Sakugawa</p>
           <div class="stats">
             <div class="stat"><b>+15</b><span>anos nos bastidores das editoras</span></div>
             <div class="stat"><b>+800</b><span>autores lançados</span></div>
@@ -615,7 +679,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   var dock = document.getElementById('dock'), passou = false, naOferta = false;
   function upd() {{ dock.classList.toggle('on', passou && !naOferta); }}
   if ('IntersectionObserver' in window) {{
-    new IntersectionObserver(function (es) {{ passou = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; upd(); }}).observe(document.querySelector('.h .cta'));
+    new IntersectionObserver(function (es) {{ passou = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; upd(); }}).observe(document.querySelector('.price'));
     new IntersectionObserver(function (es) {{ naOferta = es[0].isIntersecting; upd(); }}).observe(document.getElementById('oferta'));
   }}
 }})();
