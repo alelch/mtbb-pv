@@ -66,6 +66,41 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .cta-box .fine { margin-top: 10px; text-align: center; font-size: 13px; color: var(--ink-2); }
 @media (min-width: 900px) { .hero .cta-box { max-width: 594px; } .hero .cta-box .btn { min-height: 61px; font-size: 23px; } }
 
+/* abertura de oferta */
+.obar { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px 12px; background: var(--yellow); color: #111; text-align: left; }
+.obar p { max-width: 150px; font-size: 11px; font-weight: 700; line-height: 1.2; letter-spacing: .04em; text-transform: uppercase; }
+.obar p.after-only { max-width: none; padding: 4px 0; font-weight: 500; }
+.clock--bar { margin: 0; gap: 4px; }
+.clock--bar span { min-width: 40px; padding: 4px 3px; background: #111; color: #fff; box-shadow: none; font-size: 17px; border-radius: 6px; }
+.clock--bar small { font-size: 7.5px; margin-top: 2px; color: #bbb; }
+@media (min-width: 900px) { .obar p { max-width: none; font-size: 13px; } .clock--bar span { min-width: 48px; font-size: 20px; } }
+.ohero .hero__in { padding: 8px 0 64px; }
+@media (min-width: 900px) { .ohero { min-height: 0; } .ohero .hero__in { padding: 18px 0 90px; } }
+.oh { max-width: 760px; margin: 0 auto; text-align: center; }
+.oh .logo-box { margin-top: 18px; }
+.oh .logo-box .bwlogo { font-size: clamp(44px, 13vw, 84px); }
+.oh__h { margin-top: 22px; }
+.oh__a { display: block; font-size: clamp(30px, 9vw, 64px); font-weight: 700; line-height: 1; letter-spacing: .04em; text-transform: uppercase; }
+.oh__b { display: block; margin-top: 8px; font-size: clamp(22px, 6.4vw, 44px); font-weight: 700; line-height: 1.08; letter-spacing: .03em; text-transform: uppercase; text-wrap: balance; }
+.oh__path { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 8px; margin-top: 18px; font-size: clamp(11px, 3.2vw, 15px); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.oh__path i { font-style: normal; color: var(--amber); }
+.oh__card { position: relative; margin: 30px auto 0; max-width: 560px; padding: 26px 18px 22px; border-radius: 20px; background: radial-gradient(ellipse 90% 80% at 50% 0%, rgba(250, 171, 0, .16), rgba(0, 0, 0, 0) 72%), #050505;
+  box-shadow: 0 0 0 1.5px rgba(250, 171, 0, .55), 0 0 60px rgba(250, 171, 0, .25); }
+.oh__m { font-size: clamp(13px, 3.9vw, 19px); font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.oh__v { margin-top: 2px; font-size: clamp(50px, 15.5vw, 96px); font-weight: 700; line-height: .95; letter-spacing: -.02em; text-transform: uppercase; filter: drop-shadow(0 10px 40px rgba(250, 171, 0, .25)); }
+.oh__l { margin-top: 10px; font-size: clamp(34px, 10vw, 58px); font-weight: 600; line-height: 1; }
+.oh__l .lmb { color: var(--ink); }
+.oh__s { margin-top: 10px; font-size: clamp(12px, 3.4vw, 15px); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-2); }
+.oh__list { max-width: 520px; margin: 26px auto 0; list-style: none; display: grid; gap: 12px; text-align: left; }
+.oh__list li { display: flex; gap: 12px; align-items: flex-start; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.4; color: var(--ink-2); }
+.oh__list li b { color: var(--ink); }
+.oh__list li b.amber { color: var(--amber); }
+.oh__list svg { flex: none; width: 22px; height: 22px; padding: 4px; margin-top: 1px; border-radius: 50%; background: var(--green); color: #fff; }
+.ohero .cta-box { max-width: 520px; margin: 28px auto 0; }
+.ohero .cta-box .btn { min-height: 62px; font-size: clamp(17px, 5vw, 23px); }
+@media (min-width: 1100px) { .ohero .dany-d { display: block; position: absolute; z-index: -1; left: calc(50% + 330px); top: 210px; width: 400px; height: auto; } .oh { transform: translateX(-90px); } }
+@media (max-width: 1099px) { .ohero .dany-d { display: none; } }
+
 /* esquecido aos poucos: o problema, frase a frase */
 .slow { border-top: 1px solid var(--line); }
 .slow__in { max-width: 680px; margin: 0 auto; text-align: center; }
@@ -179,27 +214,32 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 """
 
 MAIN = f"""<main>
-  <!-- 1. abertura: a oferta inteira em uma tela -->
-  <section class="hero" id="topo">
+  <!-- 1. abertura de OFERTA (no espírito do Aniversário Vitalício): inscrições liberadas, a oferta grande, o relógio -->
+  <section class="hero ohero" id="topo">
     <div class="wrap">
       <div class="hero__in">
-        <div class="hero__main">
-          <div class="proof"><img src="../black-week/assets/alunos.webp" alt="" width="118" height="26"><span><b>+4.400 autores</b> impactando vidas</span></div>
+        <div class="oh">
           {bloco('<div class="logo-box">', '<h1').strip().replace('src="assets/', 'src="../black-week/assets/')}
-          <h1 class="h1"><span class="h1__a">Método The&nbsp;Book&nbsp;Business</span> <span class="h1__b vit">vitalício</span></h1>
-          <p class="h1-plus">+ {LMB}<small>O personal trainer do seu livro</small></p>
-          <div class="speak">
-          <span class="dany-glow" aria-hidden="true"></span><img class="dany-m" src="../black-week/assets/dany-bw-m.webp" alt="Dany Sakugawa" width="408" height="378" decoding="async">
-          <p class="pitch"><i>Seu livro <b class="amber">não vai parar</b>.<br><b>Todo dia, o que fazer.</b></i><span class="pitch__by">Dany Sakugawa</span></p>
+          <h1 class="oh__h"><span class="oh__a">Inscrições liberadas</span><span class="oh__b">para a <span class="gold">Black&nbsp;Week Motorizada</span></span></h1>
+          <p class="oh__path"><span>Saiba o que fazer</span><i>›</i><span>Todo dia</span><i>›</i><span>Seja lido de verdade</span><i>›</i><span>Para sempre</span></p>
+          <div class="oh__card">
+            <p class="oh__m">Método The&nbsp;Book&nbsp;Business</p>
+            <p class="oh__v gold">vitalício</p>
+            <p class="oh__l">+ {LMB}</p>
+            <p class="oh__s">O personal trainer do seu livro</p>
           </div>
+          <ul class="oh__list">
+            <li>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já levou mais de 4.400 autores mais longe.</span></li>
+            <li>{CK}<span>O <b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b>: todo dia, o próximo passo do seu livro.</span></li>
+            <li>{CK}<span><b>3 anos de encontros em grupo</b> ao vivo com a Dany.</span></li>
+            <li class="d9-only">{CK}<span><b>Playbooks MTBB físicos</b> na sua casa. Só hoje.</span></li>
+          </ul>
           <div class="cta-box">
-            <div class="d9band d9-only"><p><b>Só hoje:</b> LOMBADA por <b>6 anos</b> (o dobro) + os bônus de hoje.</p><div class="clock" data-clock></div></div>
             {CTA}
             <p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p>
           </div>
         </div>
-        <p class="dany-q"><i>“Eu queria que o autor abrisse a segunda-feira e já soubesse o que fazer pelo livro. Agora ele sabe, sempre.”</i><span>Dany Sakugawa</span></p>
-        <img class="dany-d" src="../black-week/assets/dany-bw.webp" alt="Dany Sakugawa" width="840" height="1135" loading="lazy" decoding="async">
+        <img class="dany-d" src="../black-week/assets/dany-bw.webp" alt="Dany Sakugawa" width="840" height="1135" decoding="async">
       </div>
     </div>
   </section>
@@ -398,7 +438,7 @@ js = js[:a] + """  /* ================= MODO: dia 9 (até 23h59 de Brasília = 0
 """
 # o test drive mandava a fase/livro no cadastro: aqui não há cadastro
 out = head + CSS + "</style>\n</head>\n<body class=\"no-js\">\n<script>document.body.classList.remove('no-js'); if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('rm');</script>\n\n" \
-      + '<div class="topbar">Black Week Motorizada · <b>a oferta está aberta</b></div>\n\n' + MAIN + "\n" + FOOT + DOCK + js
+      + '<div class="obar"><p class="d9-only">O dobro do LOMBADA e os bônus terminam em</p><div class="clock clock--bar d9-only" data-clock></div><p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>\n\n' + MAIN + "\n" + FOOT + DOCK + js
 os.makedirs(f"{R}/black-week-oferta", exist_ok=True)
 open(f"{R}/black-week-oferta/index.html", "w", encoding="utf-8").write(out)
 print("ok", len(out))
