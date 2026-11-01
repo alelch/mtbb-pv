@@ -57,12 +57,19 @@ telas = "\n".join(
 
 
 BILL = "".join(f'<div class="bill__row"><span>{n.replace("The Book Business", "The&nbsp;Book&nbsp;Business")}</span><b>{v}</b></div>' for n, v in [('Método The Book Business', 'R$ 1.500,00'), ('Autoridade Digital para Escritores', 'R$ 1.500,00'), ('Gerador de Posts Magnéticos', 'R$ 297,00'), ('Calendário Estratégico do Autor', 'R$ 297,00'), ('Comunidade The Book Business', 'R$ 500,00'), ('Workshops Mão na Massa (5)', 'R$ 2.500,00'), ('Projeto Especial Prêmio Jabuti', 'R$ 1.200,00'), ('Projeto Especial Destaque Amazon', 'R$ 1.200,00'), ('Projeto Especial Autopublicação', 'R$ 1.200,00'), ('Projeto Especial Editora Perfeita', 'R$ 1.200,00')])
-_ST = [('tela-semana', 'Toda semana, você já sabe o que fazer pelo seu livro.', 'As ações chegam montadas pela fase do livro, pelo gênero e pelo tempo que você tem.'), ('tela-acoes', 'Uma ação por vez. Com a aula por trás.', 'Você nunca faz sem entender por quê. E marca como feito.'), ('tela-oportunidades', 'Nenhum prêmio, feira ou edital passa por você.', 'Os do gênero do seu livro, com o prazo na tela.'), ('tela-evolucao', 'Você vê o seu livro andando.', 'Selo por selo, a prova de que ele não parou.'), ('tela-posts', 'Ideias de post sem fim, feitas para o seu livro.', 'Responda 3 perguntas e gere quantas quiser.')]
+_ST = [
+  ("tela-semana", "Segunda, 9h", "O seu celular avisa. E o plano da semana já está pronto.", "Montado pela fase do seu livro, pelo gênero e pelo tempo que você tem."),
+  ("tela-acoes", "Terça", "Uma ação por vez. Com o texto pronto e a aula por trás.", "O texto já vem com o nome do seu livro. E a aula do Método The Book Business explica o porquê."),
+  ("tela-posts", "Quarta", "O post da semana, pronto. E ideias sem fim.", "3 ideias de post toda semana e um gerador ilimitado, feito para o seu livro."),
+  ("tela-oportunidades", "Quinta", "Um prêmio do seu gênero aparece. Com o prazo na tela.", "Prêmios, feiras, editais e datas literárias. Nenhuma chance passa por você."),
+  ("tela-evolucao", "Sexta", "Você marca como feito. E vê o seu livro andando.", "Uma lombada nova na sua estante a cada ação. Selo por selo, a prova de que ele não parou."),
+]
 STORY_BARS = "".join('<i><b></b></i>' for _ in _ST)
+STORY_TABS = "".join(f'<button type="button" class="{"on" if not i else ""}" data-i="{i}">{d.split(",")[0][:3]}</button>' for i, (f, d, t, x) in enumerate(_ST))
 _LZ = ' loading="lazy"'
 _ON = ' class="on"'
-STORY_IMGS = "".join(f'<img src="assets/{f}.webp" alt="Tela do LOMBADA" width="716" height="1440" decoding="async"{_LZ if i else ""}{"" if i else _ON}>' for i, (f, t, d) in enumerate(_ST))
-STORY_TXT = "".join(f'<div class="st{" on" if not i else ""}"><span class="st__n">0{i+1}</span><p class="st__t">{t}</p><p class="st__d">{d}</p></div>' for i, (f, t, d) in enumerate(_ST))
+STORY_IMGS = "".join(f'<img src="assets/{f}.webp" alt="Tela do LOMBADA" width="716" height="1440" decoding="async"{_LZ if i else ""}{"" if i else _ON}>' for i, (f, dia, t, d) in enumerate(_ST))
+STORY_TXT = "".join(f'<div class="st{" on" if not i else ""}"><span class="st__n">{dia}</span><p class="st__t">{t}</p><p class="st__d">{d}</p></div>' for i, (f, dia, t, d) in enumerate(_ST))
 
 _CASOS = [("c0","Vinicius Profinho","11 mil cópias vendidas","O Guia da Redação Nota 1000"),("c9","Emília Nunez","Ganhadora do Prêmio Jabuti","Capaz"),("c33","Candice Pascoal","Mais de 50 mil exemplares","Seu Sonho Tem Futuro"),("c3","Lelo Apovian","Best-seller Veja, Amazon e PublishNews","Muito Acima da Média"),("c6","Tom Orgado","Destaque de vendas na Bienal do Rio","Baque"),("c16","Maíra Metelo","6º mais vendido da Amazon","Se Ninguém Soubesse Quem Sou"),("c18","Maria Gravina Ogata","8 prêmios literários","As bambinas e os samurais brasileiros"),("c30","Larissa Cruvinel","Leitores em 7 países","A Serenidade da Renúncia"),("c28","Susana Arbex","1º lugar em negócios na PublishNews","Sua Marca Pessoal"),("c35","Léo Dicker","Adotado por escolas","Clara e Guto, os segredos de Londres"),("c34","Simone Simon","Nas livrarias de aeroportos","Faça Ser Fácil"),("c7","Ingrid Azevedo","Quase 600 na pré-venda","O caminho do despertar")]
 CASOS = "".join(f'<figure class="caso rv"><img src="../black-week-misterio/assets/casos/{f}.webp" alt="{n}" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>{r}</strong><b>{n}</b><span>{l}</span></figcaption></figure>' for f, n, r, l in _CASOS)
@@ -181,6 +188,22 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .h .cta {{ max-width: 480px; margin: 22px auto 0; animation: rise 1s var(--ease) .65s both; }}
 .h__cue {{ display: inline-flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 34px; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink3); text-decoration: none; }}
 .h__cue svg {{ width: 20px; height: 20px; animation: bob 1.8s ease-in-out infinite; }}
+
+/* LOMBADA: a semana e o "ele ainda te dá" */
+.lv.lv--lmb .lv__big {{ margin: 14px auto 0; max-width: 760px; font-size: clamp(28px, 8vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; color: var(--paper-ink); text-wrap: balance; }}
+.lv.lv--lmb .lv__lead {{ margin-top: 12px; font-size: clamp(15px, 4.2vw, 18px); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8a5a00; }}
+.wk {{ display: flex; justify-content: center; gap: 6px; margin-top: 18px; flex-wrap: wrap; }}
+.wk button {{ min-width: 54px; padding: 9px 10px; border: 0; border-radius: 99px; background: #fff; color: var(--paper-soft); box-shadow: 0 0 0 1px #e3ded2; font: 700 13px/1 "Poppins", sans-serif; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; transition: background .25s, color .25s; }}
+.wk button.on {{ background: var(--paper-ink); color: var(--amber); box-shadow: none; }}
+.lv.lv--lmb .story {{ margin-top: 22px; }}
+.lv.lv--lmb .lv__mais {{ color: var(--paper-ink); margin-top: 44px; font-size: clamp(22px, 6vw, 32px); font-weight: 800; letter-spacing: -.02em; }}
+.tiles {{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 860px; margin: 18px auto 0; text-align: left; }}
+@media (min-width: 860px) {{ .tiles {{ grid-template-columns: 1fr 1fr 1fr; }} }}
+.tile {{ padding: 16px 14px; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; }}
+.tile i {{ display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--paper-ink); color: var(--amber); }}
+.tile svg {{ width: 21px; height: 21px; }}
+.tile b {{ display: block; margin-top: 12px; font-size: 15px; font-weight: 800; line-height: 1.2; color: var(--paper-ink); }}
+.tile span {{ display: block; margin-top: 4px; font-size: 13px; line-height: 1.45; color: var(--paper-soft); }}
 
 /* abertura emendada na oferta (ordem do Aniversário) */
 .hk {{ max-width: 560px; margin: 26px auto 0; list-style: none; display: grid; gap: 12px; text-align: left; }}
@@ -546,15 +569,19 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="lv lv--lmb rv" id="ferramenta">
         <span class="lv__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
         <h3 class="lv__lmb">{LMB}</h3>
-        <p class="lv__lead">A ferramenta que todo autor sonhou. O personal trainer do seu livro: ele monta o treino, você executa.</p>
+        <p class="lv__big">A ferramenta que nunca deixa o seu livro parar.</p>
+        <p class="lv__lead">Veja uma semana com ele.</p>
+        <div class="wk" role="tablist" aria-label="Dias da semana">{STORY_TABS}</div>
         <div class="story" id="story">
-          <div class="story__ph" role="button" tabindex="0" aria-label="Próxima tela">
+          <div class="story__ph" role="button" tabindex="0" aria-label="Próximo dia">
             <div class="story__bars">{STORY_BARS}</div>
             <div class="story__scr">{STORY_IMGS}</div>
           </div>
           <div class="story__txt" aria-live="polite">{STORY_TXT}</div>
         </div>
-        <div class="days"><p class="days__n gold" data-to-d9="2190" data-to-depois="1095">0</p><p class="days__a">manhãs acordando sabendo o que fazer pelo seu livro.</p></div>
+        <p class="lv__mais">E ele ainda te dá:</p>
+        <div class="tiles"><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></i><b>A página do seu livro</b><span>No ar, montada a partir do seu cadastro. Com 4 visuais para escolher.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></i><b>O guia de fornecedores</b><span>Revisão, capa, diagramação e gráfica: quem a gente indica.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></i><b>A agenda literária</b><span>Datas comemorativas e o calendário literário do ano inteiro.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></i><b>O plano se adapta a você</b><span>Não deu essa semana? Adie ou troque a tarefa. O ritmo é o seu.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M9 14.5 8 22l4-2 4 2-1-7.5"/></svg></i><b>Selos de evolução</b><span>Cada conquista do seu livro vira um selo.</span></div><div class="tile rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></i><b>Travou? A equipe fica sabendo</b><span>Um toque em "Tive dificuldade" e a equipe te ajuda.</span></div></div>
+        <div class="days"><p class="days__n gold" data-to-d9="2190" data-to-depois="1095">0</p><p class="days__a">manhãs. Nenhuma sem saber o que fazer pelo seu livro.</p></div>
       </div>
       <div class="leva__g">{LEVA}</div>
       <div class="cta leva__cta rv">{CTA}</div>
@@ -659,11 +686,14 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   (function () {{
     var box = document.getElementById('story'); if (!box) return;
     var imgs = [].slice.call(box.querySelectorAll('.story__scr img')), txt = [].slice.call(box.querySelectorAll('.st')), bars = [].slice.call(box.querySelectorAll('.story__bars i'));
-    var scr = box.querySelector('.story__scr'), i = 0, t = null, DUR = 4500;
+    var scr = box.querySelector('.story__scr'), i = 0, t = null, DUR = 5000;
+    var tabs = [].slice.call(document.querySelectorAll('.wk button'));
+    tabs.forEach(function (b, k) {{ b.addEventListener('click', function () {{ started = true; show(k); }}); }});
     function show(n) {{
       i = (n + imgs.length) % imgs.length;
       imgs.forEach(function (im, k) {{ im.classList.remove('on'); if (k === i) {{ void im.offsetWidth; var d = im.offsetHeight - scr.offsetHeight; im.style.setProperty('--pan', (d > 0 ? -d : 0) + 'px'); im.classList.add('on'); }} }});
       txt.forEach(function (x, k) {{ x.classList.toggle('on', k === i); }});
+      tabs.forEach(function (x, k) {{ x.classList.toggle('on', k === i); x.setAttribute('aria-selected', k === i); }});
       bars.forEach(function (b, k) {{ b.classList.remove('run'); b.classList.toggle('done', k < i); if (k === i) {{ void b.offsetWidth; b.classList.add('run'); }} }});
       clearTimeout(t); t = setTimeout(function () {{ show(i + 1); }}, DUR);
     }}
