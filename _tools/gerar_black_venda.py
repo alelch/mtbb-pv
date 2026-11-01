@@ -80,8 +80,6 @@ HTML = f'''<!doctype html>
 <meta property="og:description" content="Tudo o que a Dany criou para autores, pra sempre. E o LOMBADA.">
 <meta property="og:image" content="https://metodo.thebookbusiness.com.br/black-week/assets/og-black-week.jpg">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/poppins-800.woff2">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet">
 <script src="../pixel.js"></script>
 <script src="../gtag.js" defer></script>
 <style>
@@ -100,7 +98,6 @@ HTML = f'''<!doctype html>
   --paper: #f3f0e8; --paper-ink: #1a1a1a; --paper-soft: #6b665d;
   --gold: linear-gradient(100deg, #9c5414 0%, #e08a12 18%, #faab00 32%, #ffe6a8 46%, #faab00 58%, #c9731a 78%, #8a4a12 100%);
   --ease: cubic-bezier(.22, 1, .36, 1);
-  --serif: "Newsreader", Georgia, serif;
 }}
 *, *::before, *::after {{ margin: 0; padding: 0; box-sizing: border-box; }}
 html {{ -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }}
@@ -110,7 +107,7 @@ a {{ color: inherit; }}
 p, li, small {{ text-wrap: pretty; }}
 .wrap {{ width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }}
 .gold {{ background: var(--gold); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gold 6s linear infinite; -webkit-box-decoration-break: clone; box-decoration-break: clone; }}
-.serif {{ font-family: var(--serif); font-style: italic; font-weight: 500; letter-spacing: -.01em; text-transform: none; }}
+.serif {{ font-style: normal; font-weight: 800; }}
 .kick {{ display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--amber); }}
 .kick::before, .kick::after {{ content: ""; width: 22px; height: 1.5px; background: currentColor; opacity: .7; }}
 .sec {{ position: relative; padding: 88px 0; }}
@@ -169,7 +166,8 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 
 /* abertura: a maior oferta */
 .h__big {{ display: block; font-size: clamp(46px, 13.6vw, 100px); font-weight: 800; line-height: .94; letter-spacing: -.035em; text-transform: uppercase; text-wrap: balance; padding-bottom: .04em; }}
-.h__sub {{ display: block; margin-top: 18px; font-size: clamp(26px, 7.6vw, 58px); line-height: 1.1; color: var(--ink); text-wrap: balance; }}
+.h__sub {{ display: block; margin-top: 18px; font-size: clamp(24px, 7vw, 52px); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; color: var(--ink); text-wrap: balance; }}
+.h__sub b {{ color: var(--amber); font-weight: 800; }}
 
 /* story do LOMBADA */
 .story {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-items: center; max-width: 940px; margin: 48px auto 0; }}
@@ -368,7 +366,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap h__in">
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
-      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub serif">e a ferramenta que todo autor sonhou.</span></h1>
+      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> A ferramenta que todo autor sonhou.</span></h1>
       <div class="cta">{CTA}</div>
       <a class="h__cue" href="#ferramenta">Conheça a ferramenta<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     </div>
