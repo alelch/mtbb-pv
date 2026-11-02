@@ -440,6 +440,36 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .jn__e2 {{ margin: 6px auto 0; max-width: 900px; font-size: clamp(34px, 9.6vw, 72px); font-weight: 800; line-height: 1.02; letter-spacing: -.035em; text-wrap: balance; }}
 .jn__end .cta {{ max-width: 480px; margin: 32px auto 0; }}
 
+/* passo 5: página do livro · passo 6: vitrine */
+.pg {{ margin-top: 12px; overflow: hidden; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; }}
+.pg__bar {{ display: flex; align-items: center; gap: 5px; padding: 8px 10px; background: #efe9dc; }}
+.pg__bar i {{ width: 8px; height: 8px; border-radius: 50%; background: #d3ccbd; }}
+.pg__bar span {{ flex: 1; min-width: 0; margin-left: 6px; padding: 4px 10px; overflow: hidden; border-radius: 99px; background: #fff; font-size: 11px; color: var(--paper-soft); white-space: nowrap; text-overflow: ellipsis; }}
+.pg__bar span b {{ color: #8a5a00; }}
+.pg__b {{ display: grid; grid-template-columns: 96px 1fr; gap: 14px; padding: 16px; }}
+.pg__capa {{ display: flex; align-items: flex-end; aspect-ratio: 2 / 3; padding: 8px; border-radius: 4px 8px 8px 4px; background: linear-gradient(160deg, #b5402e, #6e2418); box-shadow: inset 6px 0 0 rgba(0, 0, 0, .18), 0 10px 20px -10px rgba(0, 0, 0, .5); color: #fff; font-size: 11px; font-weight: 800; line-height: 1.15; overflow: hidden; }}
+.pg__ti {{ font-size: 18px; font-weight: 800; line-height: 1.15; }}
+.pg__au {{ margin-top: 2px; font-size: 12px; color: var(--paper-soft); }}
+.pg__si {{ margin-top: 8px; font-size: 12.5px; line-height: 1.45; color: var(--paper-soft); }}
+.pg__btn {{ display: inline-block; margin-top: 10px; padding: 8px 14px; border-radius: 8px; background: var(--paper-ink); color: var(--amber); font-size: 12px; font-weight: 700; }}
+.vt {{ background: #fe7743 !important; }}
+.vt .ap__tg {{ color: #3a1a08; }}
+.vt__shelf {{ display: flex; align-items: flex-end; justify-content: center; gap: 6px; height: 190px; margin-top: 14px; padding: 0 10px; border-bottom: 8px solid #3a1a08; }}
+.vt__shelf i {{ width: 30px; height: var(--h); border-radius: 4px 4px 0 0; background: var(--c); box-shadow: inset 0 -12px 0 rgba(0, 0, 0, .12); }}
+.vt__me {{ display: flex; align-items: center; justify-content: center; width: 46px; height: 100%; border-radius: 5px 5px 0 0; background: #1a1a1a; box-shadow: 0 0 0 3px #faab00, 0 0 24px rgba(250, 171, 0, .8); animation: vtpulse 2.4s ease-in-out infinite; }}
+.vt__me span {{ writing-mode: vertical-rl; transform: rotate(180deg); max-height: 92%; overflow: hidden; color: #faab00; font-size: 12px; font-weight: 800; white-space: nowrap; text-overflow: ellipsis; }}
+.vt__cap {{ margin-top: 10px; text-align: center; font-size: 12.5px; font-weight: 700; color: #3a1a08; }}
+@keyframes vtpulse {{ 50% {{ box-shadow: 0 0 0 3px #faab00, 0 0 40px rgba(250, 171, 0, 1); }} }}
+/* garantia: sem as linhas de separação, com mais presença */
+.gar {{ border-top: 0 !important; background: none !important; padding-top: 24px; }}
+.gar + .dany {{ border-top: 0; padding-top: 24px; }}
+.gar__c {{ max-width: 900px; padding: 34px 24px; background: radial-gradient(ellipse 70% 120% at 0% 50%, rgba(250, 171, 0, .24), transparent 70%), linear-gradient(135deg, #17120a, #0a0806) !important; box-shadow: 0 0 0 2px rgba(250, 171, 0, .75), 0 0 80px rgba(250, 171, 0, .25) !important; }}
+@media (min-width: 760px) {{ .gar__c {{ grid-template-columns: 230px 1fr !important; padding: 44px 48px; }} }}
+.gar__seal {{ width: 190px !important; height: 190px !important; }}
+.gar__seal b {{ font-size: 84px !important; }}
+.gar__k {{ font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--amber); }}
+.gar__t h2 {{ margin-top: 8px; }}
+
 /* LOMBADA: os 3 benefícios */
 .tri {{ display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 22px; list-style: none; }}
 .tri li {{ display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px 10px 10px; border-radius: 99px; background: #15120c; box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .5); font-size: clamp(17px, 4.6vw, 22px); font-weight: 800; }}
@@ -784,7 +814,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           </div>
         </li>
         <li class="jn__s rv">
-          <div class="jn__t"><span class="jn__n">3</span><h3><b class="jl" data-l-cap>O seu livro</b> chega a lugares novos.</h3><p>Prêmios, feiras, editais e datas do gênero do seu livro, com o prazo na tela. Nenhuma chance passa por você.</p></div>
+          <div class="jn__t"><span class="jn__n">3</span><h3><b class="jl" data-l-cap>O seu livro</b> chega a lugares novos.</h3><p>Prêmios, feiras e editais do gênero do seu livro, com o prazo na tela. Nenhuma chance passa por você.</p></div>
           <div class="jn__app">
             <div class="ap__top">{LMB_S}<span class="ap__tg">Oportunidades</span></div>
             <div class="ap__pills" id="jn-gen" role="group" aria-label="Gênero do livro"><button type="button" aria-pressed="true" data-g="Romance">Romance</button><button type="button" aria-pressed="false" data-g="Infantil">Infantil</button><button type="button" aria-pressed="false" data-g="Negócios">Negócios</button><button type="button" aria-pressed="false" data-g="Poesia">Poesia</button><button type="button" aria-pressed="false" data-g="Biografia e memórias">Memórias</button></div>
@@ -797,6 +827,27 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
             <div class="ap__top">{LMB_S}<span class="ap__tg">Ideias de post</span></div>
             <div class="ap__ideas" id="jn-ideas"></div>
             <button type="button" class="ap__copy" id="jn-more">Gerar mais ideias</button>
+          </div>
+        </li>
+        <li class="jn__s rv">
+          <div class="jn__t"><span class="jn__n">5</span><h3><b class="jl" data-l-cap>O seu livro</b> ganha uma página só dele.</h3><p>No ar, montada a partir do seu cadastro, com a capa, a sinopse e o link para comprar. Pronta para mandar para leitores, imprensa e livrarias.</p></div>
+          <div class="jn__app">
+            <div class="ap__top">{LMB_S}<span class="ap__tg">Página do livro</span></div>
+            <div class="pg">
+              <div class="pg__bar"><i></i><i></i><i></i><span>lombada.thebookbusiness.com.br/<b id="jn-slug">o-seu-livro</b></span></div>
+              <div class="pg__b">
+                <div class="pg__capa"><span data-l-cap>O seu livro</span></div>
+                <div class="pg__t"><p class="pg__ti" data-l-cap>O seu livro</p><p class="pg__au">por você</p><p class="pg__si">A sinopse do seu livro aparece aqui, do jeito que você escreveu no cadastro.</p><span class="pg__btn">Comprar o livro</span></div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="jn__s rv">
+          <div class="jn__t"><span class="jn__n">6</span><h3>E entra na vitrine, para vender mais.</h3><p>Na vitrine dos autores do LOMBADA, o seu livro fica na estante ao lado de outros autores, onde novos leitores passam e descobrem o seu.</p></div>
+          <div class="jn__app vt">
+            <div class="ap__top">{LMB_S}<span class="ap__tg">Vitrine dos autores</span></div>
+            <div class="vt__shelf" aria-hidden="true"><i style="--h:78%;--c:#14523e"></i><i style="--h:92%;--c:#b5402e"></i><i style="--h:70%;--c:#3a3530"></i><b class="vt__me"><span data-l-cap>O seu livro</span></b><i style="--h:84%;--c:#fc783c"></i><i style="--h:66%;--c:#f3f0e8"></i><i style="--h:88%;--c:#14523e"></i></div>
+            <p class="vt__cap">↑ o seu livro, entre os autores do LOMBADA</p>
           </div>
         </li>
       </ol>
@@ -828,6 +879,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="gar__c rv">
         <div class="gar__seal"><b>15</b><span>dias de<br>garantia</span></div>
         <div class="gar__t">
+          <p class="gar__k">Risco zero para você</p>
           <h2>Entre, use, conheça tudo.</h2>
           <p>Você tem 15 dias para entrar no Método The&nbsp;Book&nbsp;Business, abrir o LOMBADA e testar com o seu livro. Se não for pra você, devolvemos 100% do valor. Sem pergunta.</p>
         </div>
@@ -994,7 +1046,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     function dias(d) {{ return Math.round((d - hoje) / 864e5); }}
     function rOps() {{
       var it = OPS.filter(function (o) {{ return serve(o[5], gen); }}).map(function (o) {{ return {{ d: new Date(o[0] + 'T00:00:00'), n: o[4], ty: o[3], tp: o[1] }}; }});
-      DATAS.forEach(function (x) {{ if (!serve(x[3], gen)) return; var d = new Date(hoje.getFullYear(), x[0] - 1, x[1]); if (d < hoje) d.setFullYear(d.getFullYear() + 1); it.push({{ d: d, n: x[2], ty: 'Data comemorativa', tp: 'data' }}); }});
       it = it.filter(function (o) {{ return dias(o.d) >= 0; }}).sort(function (a, b) {{ return a.d - b.d; }}).slice(0, 4);
       opsBox.innerHTML = it.map(function (o) {{ var n = dias(o.d), ev = o.tp === 'evento' || o.tp === 'data';
         return '<div class="ap__op"><div class="d"><b>' + o.d.getDate() + '</b><small>' + MES[o.d.getMonth()] + '</small></div><div><p>' + esc(o.n) + '</p><span>' + o.ty + '</span><span class="cd">' + (ev ? 'Em ' : 'Vence em ') + n + ' dias</span></div></div>'; }}).join('');
@@ -1004,7 +1055,9 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     function mais() {{ for (var j = 0; j < 3; j++) {{ var tom = TONS[k % 4], lista = IDEIAS[tom]; ideias.unshift([tom, lista[Math.floor(k / 4) % lista.length]]); k++; }} rIdeas(); ideasBox.scrollTop = 0; }}
     function rIdeas() {{ ideasBox.innerHTML = ideias.map(function (x, i) {{ return '<div class="ap__idea"><small>Ideia ' + (ideias.length - i) + ' · ' + x[0] + '</small><p>' + T(x[1][0]) + '</p><span>' + esc(x[1][1]) + '</span></div>'; }}).join(''); }}
     document.getElementById('jn-more').addEventListener('click', mais);
+    function slug(x) {{ return (x || 'o seu livro').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }}
     function rNome() {{
+      document.getElementById('jn-slug').textContent = slug(nome());
       [].forEach.call(document.querySelectorAll('[data-l]'), function (el) {{ el.textContent = L(false); }});
       [].forEach.call(document.querySelectorAll('[data-l-cap]'), function (el) {{ el.textContent = L(true); }});
       rActs(); rTxt(); rIdeas();
