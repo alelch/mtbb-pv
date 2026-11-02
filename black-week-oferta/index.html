@@ -111,6 +111,34 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .h__cue { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 34px; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink3); text-decoration: none; }
 .h__cue svg { width: 20px; height: 20px; animation: bob 1.8s ease-in-out infinite; }
 
+/* bônus em dobro, lombadinhas e o quadro especial do LOMBADA */
+.dbl { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 18px; }
+.dbl > div { text-align: center; }
+.dbl b { display: block; white-space: nowrap; font-size: clamp(26px, 7.4vw, 46px); font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+.dbl__a b { color: var(--ink3); text-decoration: line-through; text-decoration-thickness: 3px; text-decoration-color: rgba(214, 72, 60, .9); }
+.dbl__b b { font-size: clamp(46px, 13.5vw, 84px); }
+.dbl small { display: block; margin-top: 4px; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3); }
+.dbl__b small { color: var(--amber); }
+.dbl__ar { font-size: 30px; font-weight: 800; color: var(--amber); }
+.spines { display: flex; align-items: flex-end; justify-content: center; gap: 6px; height: 92px; margin: 18px auto 0; }
+.spines i { width: 26px; height: var(--h); border-radius: 4px 4px 0 0; background: var(--c); box-shadow: inset 0 -10px 0 rgba(0, 0, 0, .12); }
+.lmbc { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 980px; margin: 40px auto 12px; overflow: hidden; border-radius: 22px; background: var(--paper); color: var(--paper-ink); box-shadow: 0 0 0 2px rgba(250, 171, 0, .7), 0 0 60px rgba(250, 171, 0, .25); }
+@media (min-width: 760px) { .lmbc { grid-template-columns: 5fr 7fr; } }
+.lmbc__art { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 34px 20px 26px; background: #16110c; }
+.lmbc__art .spines { height: 120px; margin: 0; }
+.lmbc__art .spines i { width: 30px; }
+.lmbc__mark { margin-top: 16px; font-size: clamp(34px, 9vw, 46px); line-height: 1; }
+.lmbc__mark .lmb { color: #f3f0e8; }
+.lmbc__b { padding: 26px 22px 28px; text-align: left; }
+.lmbc__b .lv__k { background: var(--paper-ink); color: var(--amber); }
+.lmbc__b h3 { margin-top: 12px; font-size: clamp(24px, 6.4vw, 32px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; }
+.lmbc__b ul { margin-top: 14px; list-style: none; display: grid; gap: 9px; }
+.lmbc__b li { position: relative; padding-left: 26px; font-size: 15px; line-height: 1.45; color: var(--paper-soft); }
+.lmbc__b li::before { content: ""; position: absolute; left: 0; top: .2em; width: 16px; height: 16px; border-radius: 50%; background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4L18 8'/%3E%3C/svg%3E") center / 12px no-repeat; }
+.lmbc__btn { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 13px 18px; border-radius: 99px; background: var(--paper-ink); color: var(--amber); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; }
+.lmbc__btn svg { width: 18px; height: 18px; animation: bob 1.8s ease-in-out infinite; }
+.lmbsec { border-top: 1px solid var(--line); padding-bottom: 0; scroll-margin-top: 56px; }
+
 /* imagens dos produtos, bônus e cupons */
 .lv { overflow: hidden; padding: 0 !important; }
 .lv__img { width: 100%; aspect-ratio: 720 / 567; object-fit: cover; }
@@ -157,7 +185,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .tile span { display: block; margin-top: 4px; font-size: 13px; line-height: 1.45; color: var(--paper-soft); }
 
 /* abertura emendada na oferta (ordem do Aniversário) */
-.hk { max-width: 560px; margin: 26px auto 0; list-style: none; display: grid; gap: 12px; text-align: left; }
+.hk { max-width: 560px; margin: 48px auto 0; list-style: none; display: grid; gap: 12px; text-align: left; }
 .hk li { display: flex; gap: 12px; align-items: flex-start; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.45; color: var(--ink2); }
 .hk b { color: var(--ink); } .hk b.amber { color: var(--amber); }
 .amber { color: var(--amber); }
@@ -212,15 +240,21 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .lv ul li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
 .leva__cta { max-width: 480px; margin: 40px auto 0; }
 .casos-sec { border-top: 1px solid var(--line); }
-.casos { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; max-width: 980px; margin: 40px auto 0; }
-@media (min-width: 700px) { .casos { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1000px) { .casos { grid-template-columns: 1fr 1fr 1fr; } }
-.caso { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: #121114; box-shadow: inset 0 0 0 1px #222126; }
+.casos { display: grid; gap: 12px; margin-top: 40px; }
+.casos-belt { overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.casos-track { display: flex; gap: 12px; width: max-content; animation: belt 70s linear infinite; }
+.casos-belt.rev .casos-track { animation-direction: reverse; animation-duration: 80s; }
+.casos-belt:hover .casos-track, .casos-belt.hold .casos-track { animation-play-state: paused; }
+.caso { flex: none; display: flex; align-items: center; gap: 14px; width: 300px; padding: 14px 16px; border: 1px solid #222126; border-radius: 14px; background: #121114; }
 .caso img { flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(250, 171, 0, .5); }
 .caso figcaption { min-width: 0; line-height: 1.25; }
 .caso strong { display: block; font-size: 15px; font-weight: 700; color: var(--amber); }
-.caso b { display: block; margin-top: 4px; font-size: 13px; font-weight: 600; }
-.caso span { display: block; font-size: 12px; color: var(--ink3); }
+.caso b { display: block; margin-top: 5px; font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.caso span { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 11.5px; color: var(--ink-3); }
+.rm .casos-belt, .no-js .casos-belt { overflow-x: auto; }
+.rm .casos-track { animation: none; }
+.casos-track, .media__track, .belt__row { will-change: transform; }
 .casos__more { margin-top: 18px; text-align: center; font-size: 15px; color: var(--ink2); }
 
 /* abertura: a maior oferta */
@@ -641,10 +675,10 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
       <div class="bon2">
         <div class="bon2__c rv">
           <span class="lv__k">Bônus 1</span>
-          <div class="bon2__ph"><img src="assets/tela-semana.webp" alt="LOMBADA no celular" width="716" height="1460" loading="lazy" decoding="async"></div>
-          <p class="bon2__big gold">6 anos</p>
-          <h3>de <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span>. O dobro.</h3>
-          <p>Amanhã volta a ser 3. Quem entra hoje leva o LOMBADA ao lado do seu livro por 6 anos.</p>
+          <div class="dbl"><div class="dbl__a"><b>3 anos</b><small>normal</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div>
+          <div class="spines" aria-hidden="true"><i style="--h:62%;--c:#14523e"></i><i style="--h:84%;--c:#faab00"></i><i style="--h:70%;--c:#b5402e"></i><i style="--h:100%;--c:#f3f0e8"></i><i style="--h:56%;--c:#fc783c"></i><i style="--h:78%;--c:#3a3530"></i></div>
+          <h3><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span> em dobro.</h3>
+          <p>Hoje você recebe o dobro: 6 anos de LOMBADA no lugar de 3. Amanhã volta a ser 3.</p>
         </div>
         <div class="bon2__c rv">
           <span class="lv__k">Bônus 2</span>
@@ -661,10 +695,10 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
     <div class="wrap center">
       <div class="rv">
         <p class="kick">E tem mais</p>
-        <h2 class="h2">Até <span class="gold">R$ 4.700</span> em cupons de desconto com parceiros.</h2>
+        <h2 class="h2">Até <span class="gold">R$ 6.700</span> em cupons de desconto com parceiros.</h2>
         <p class="cups__l">Se você vai imprimir, publicar ou divulgar o seu livro, a Black já se paga.</p>
       </div>
-      <div class="cupg"><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>até R$ 1.200</b></div><div class="cup__t"><span>Impressão do seu livro</span><h3>Gráfica Renograf</h3><p>Desconto progressivo pelo valor da impressão. Vale reimpressão.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 250</b></div><div class="cup__t"><span>Leitura crítica</span><h3>Histórias Bem Contadas</h3><p>Válido por 24 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 250</b></div><div class="cup__t"><span>Edição de texto</span><h3>Histórias Bem Contadas</h3><p>Válido por 24 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 2.000</b></div><div class="cup__t"><span>Assessoria de imprensa</span><h3>Jimenes Comunicação</h3><p>Projeto semestral. Válido por 24 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 1.000</b></div><div class="cup__t"><span>Publicação do seu livro solo</span><h3>Editora Labrador</h3><p>Válido por 12 meses.</p></div></div></div>
+      <div class="cupg"><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>até R$ 1.200</b></div><div class="cup__t"><span>Impressão do seu livro</span><h3>Gráfica Renograf</h3><p>Desconto progressivo pelo valor da impressão. Vale reimpressão.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 250</b></div><div class="cup__t"><span>Leitura crítica</span><h3>Histórias Bem Contadas</h3><p>Válido por 24 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 250</b></div><div class="cup__t"><span>Edição de texto</span><h3>Histórias Bem Contadas</h3><p>Válido por 24 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 2.000</b></div><div class="cup__t"><span>Assessoria de imprensa</span><h3>Jimenes Comunicação</h3><p>Projeto semestral. Válido por 24 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 1.000</b></div><div class="cup__t"><span>Publicação do seu livro solo</span><h3>Editora Labrador</h3><p>Válido por 12 meses.</p></div></div><div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>R$ 2.000</b></div><div class="cup__t"><span>Publicação do seu livro solo</span><h3>Editora Literare</h3><p>Válido por 12 meses.</p></div></div></div>
       <p class="cups__fine rv">Cupons intransferíveis, de uso único, só para novos projetos e não cumulativos. Resgate com o e-mail de compra.</p>
     </div>
   </section>
@@ -673,14 +707,14 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
   <section class="sec resumo" id="oferta">
     <div class="wrap center">
       <div class="card rv">
-        <p class="q2">Resumindo: na Black Week Motorizada você leva tudo isso, mais o LOMBADA<span class="d9-only"> e os bônus de hoje</span>.</p>
+        <p class="q2">Tudo o que você leva na Black Week Motorizada:</p>
         <ul class="card__list">
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos, workshops e Projetos Especiais, <b>vitalícios</b></span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
           <li class="d9-only"><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
-          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Até <b>R$ 4.700 em cupons</b> de desconto com parceiros</span></li>
+          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
         <p class="resumo__de">De <s>R$ 26.485,00</s></p>
         <p class="resumo__por">por apenas</p>
@@ -694,16 +728,35 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
     </div>
   </section>
 
-  <!-- 7. o que você leva: o LOMBADA primeiro, em story, e depois cada produto -->
+  <!-- 7. o que você leva: o LOMBADA num quadro especial (botão leva às telas), depois cada produto -->
   <section class="sec leva">
     <div class="wrap">
       <div class="center rv"><p class="kick">Quem aproveitar essa oferta agora</p><h2 class="h2">Vai levar:</h2></div>
-      <div class="lmbh rv" id="ferramenta">
-        <span class="lv__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
-        <p class="lmbh__mark"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></p>
-        <p class="lmbh__t">A ferramenta que nunca deixa o seu livro parar.</p>
+      <div class="lmbc rv">
+        <div class="lmbc__art"><div class="spines" aria-hidden="true"><i style="--h:62%;--c:#14523e"></i><i style="--h:84%;--c:#faab00"></i><i style="--h:70%;--c:#b5402e"></i><i style="--h:100%;--c:#f3f0e8"></i><i style="--h:56%;--c:#fc783c"></i><i style="--h:78%;--c:#3a3530"></i></div><p class="lmbc__mark"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></p></div>
+        <div class="lmbc__b">
+          <span class="lv__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
+          <h3>A ferramenta que nunca deixa o seu livro parar.</h3>
+          <ul>
+            <li>O plano da semana do seu livro, pela fase, pelo gênero e pelo seu tempo.</li>
+            <li>O texto pronto em cada ação, com a aula do Método por trás.</li>
+            <li>Prêmios, feiras e editais do seu gênero, com o prazo na tela.</li>
+            <li>Ideias de post ilimitadas, feitas para o seu livro.</li>
+          </ul>
+          <a class="lmbc__btn" href="#ferramenta">Entender melhor o LOMBADA <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        </div>
       </div>
+      <div class="leva__g"><div class="lv rv"><img class="lv__img" src="assets/p-metodo.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Método The&nbsp;Book&nbsp;Business</h3><p>O ecossistema completo de marketing literário. Aulas práticas, passo a passo claro e modelos prontos para transformar o seu livro em referência, com leitores de verdade.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-autoridade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Autoridade Digital para Escritores</h3><p>Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-gerador.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Gerador de Posts Magnéticos</h3><p>Ideias ilimitadas, feitas pelo gênero do seu livro, pela fase e pelo seu jeito de falar. Posts em minutos.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-calendario.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Calendário Estratégico do Autor</h3><p>O ano inteiro mapeado, com datas comemorativas e ideias de posts mês a mês.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-comunidade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Comunidade The&nbsp;Book&nbsp;Business</h3><p>A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-workshops.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Workshops Mão na Massa</h3><ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul></div></div><div class="lv rv"><img class="lv__img" src="assets/p-gravacoes.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Gravação de 100% das lives, encontros e eventos</h3><p>Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-encontros.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">3 anos</span><h3>Encontros em grupo ao vivo com a Dany</h3><p>36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-jabuti.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Prêmio Jabuti</h3><p>A inscrição certa, na categoria certa, no maior prêmio literário do país.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-autopublicacao.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Autopublicação Profissional</h3><p>Revisão, capa, diagramação, ISBN e distribuição, com padrão de mercado.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-editora.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Editora Perfeita</h3><p>Como analisar propostas e escolher a editora certa para o seu livro.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-amazon.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Destaque Amazon</h3><p>Título, descrição, categorias e palavras-chave para o seu livro aparecer na Amazon.</p></div></div></div>
+      <div class="cta leva__cta rv"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div>
     </div>
+  </section>
+
+  <!-- 7b. o LOMBADA por dentro: test drive, oportunidades e ideias de post -->
+  <section class="sec lmbsec" id="ferramenta">
+    <div class="wrap"><div class="lmbh rv">
+      <p class="lmbh__mark"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></p>
+      <p class="lmbh__t">A ferramenta que nunca deixa o seu livro parar.</p>
+    </div></div>
   </section>
   <section class="lmbx drive" id="test-drive">
     <div class="wrap">
@@ -813,19 +866,20 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
   </section>
 
   
-  <section class="sec leva leva--resto">
-    <div class="wrap">
-      <div class="center rv"><p class="kick">E mais</p></div>
-      <div class="leva__g"><div class="lv rv"><img class="lv__img" src="assets/p-metodo.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Método The&nbsp;Book&nbsp;Business</h3><p>O ecossistema completo de marketing literário. Aulas práticas, passo a passo claro e modelos prontos para transformar o seu livro em referência, com leitores de verdade.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-autoridade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Autoridade Digital para Escritores</h3><p>Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-gerador.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Gerador de Posts Magnéticos</h3><p>Ideias ilimitadas, feitas pelo gênero do seu livro, pela fase e pelo seu jeito de falar. Posts em minutos.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-calendario.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Calendário Estratégico do Autor</h3><p>O ano inteiro mapeado, com datas comemorativas e ideias de posts mês a mês.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-comunidade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Comunidade The&nbsp;Book&nbsp;Business</h3><p>A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-workshops.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Workshops Mão na Massa</h3><ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul></div></div><div class="lv rv"><img class="lv__img" src="assets/p-gravacoes.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Gravação de 100% das lives, encontros e eventos</h3><p>Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-encontros.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">3 anos</span><h3>Encontros em grupo ao vivo com a Dany</h3><p>36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-jabuti.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Prêmio Jabuti</h3><p>A inscrição certa, na categoria certa, no maior prêmio literário do país.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-autopublicacao.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Autopublicação Profissional</h3><p>Revisão, capa, diagramação, ISBN e distribuição, com padrão de mercado.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-editora.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Editora Perfeita</h3><p>Como analisar propostas e escolher a editora certa para o seu livro.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-amazon.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Projeto Especial</span><h3>Destaque Amazon</h3><p>Título, descrição, categorias e palavras-chave para o seu livro aparecer na Amazon.</p></div></div></div>
-      <div class="cta leva__cta rv"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div>
-    </div>
-  </section>
+  <div class="wrap"><div class="cta leva__cta rv" style="margin-bottom:64px"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div></div>
 
   <!-- 8. casos -->
   <section class="sec casos-sec">
     <div class="wrap">
-      <div class="center rv"><h2 class="h2">A estratégia que mais transforma autores comuns em <span class="serif gold">best-sellers de verdade.</span></h2></div>
-      <div class="casos"><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c0.webp" alt="Vinicius Profinho" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>11 mil cópias vendidas</strong><b>Vinicius Profinho</b><span>O Guia da Redação Nota 1000</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c9.webp" alt="Emília Nunez" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Ganhadora do Prêmio Jabuti</strong><b>Emília Nunez</b><span>Capaz</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c33.webp" alt="Candice Pascoal" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Mais de 50 mil exemplares</strong><b>Candice Pascoal</b><span>Seu Sonho Tem Futuro</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c3.webp" alt="Lelo Apovian" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Best-seller Veja, Amazon e PublishNews</strong><b>Lelo Apovian</b><span>Muito Acima da Média</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c6.webp" alt="Tom Orgado" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Destaque de vendas na Bienal do Rio</strong><b>Tom Orgado</b><span>Baque</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c16.webp" alt="Maíra Metelo" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>6º mais vendido da Amazon</strong><b>Maíra Metelo</b><span>Se Ninguém Soubesse Quem Sou</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c18.webp" alt="Maria Gravina Ogata" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>8 prêmios literários</strong><b>Maria Gravina Ogata</b><span>As bambinas e os samurais brasileiros</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c30.webp" alt="Larissa Cruvinel" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Leitores em 7 países</strong><b>Larissa Cruvinel</b><span>A Serenidade da Renúncia</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c28.webp" alt="Susana Arbex" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>1º lugar em negócios na PublishNews</strong><b>Susana Arbex</b><span>Sua Marca Pessoal</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c35.webp" alt="Léo Dicker" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Adotado por escolas</strong><b>Léo Dicker</b><span>Clara e Guto, os segredos de Londres</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c34.webp" alt="Simone Simon" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Nas livrarias de aeroportos</strong><b>Simone Simon</b><span>Faça Ser Fácil</span></figcaption></figure><figure class="caso rv"><img src="../black-week-misterio/assets/casos/c7.webp" alt="Ingrid Azevedo" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Quase 600 na pré-venda</strong><b>Ingrid Azevedo</b><span>O caminho do despertar</span></figcaption></figure></div>
+      <div class="center rv"><h2 class="h2">A estratégia que mais transforma autores comuns em <span class="serif gold"><span style="white-space:nowrap">best-sellers</span> de verdade.</span></h2></div>
+    </div>
+    <div class="casos">
+      <div class="casos-belt"><div class="casos-track"><figure class="caso"><img src="../black-week-misterio/assets/casos/c0.webp" alt="Vinicius Profinho" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>11 mil cópias vendidas</strong><b>Vinicius Profinho</b><span>O Guia da Redação Nota 1000</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c6.webp" alt="Tom Orgado" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Destaque de vendas na Bienal do Rio</strong><b>Tom Orgado</b><span>Baque</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c7.webp" alt="Ingrid Azevedo" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Quase 600 na pré-venda</strong><b>Ingrid Azevedo</b><span>O caminho do despertar</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c4.webp" alt="Edinete dos Santos" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>2º lugar em prêmio nacional</strong><b>Edinete dos Santos</b><span>A nobreza e os desafios de ser mulher</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c33.webp" alt="Candice Pascoal" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Mais de 50 mil exemplares</strong><b>Candice Pascoal</b><span>Seu Sonho Tem Futuro</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c15.webp" alt="Marcela Gomes de Mendonça" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Convites para podcast e feiras</strong><b>Marcela Gomes de Mendonça</b><span>O senhor das montanhas</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c8.webp" alt="Nei Santa Bárbara" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>300 encomendas em inglês e em espanhol</strong><b>Nei Santa Bárbara</b><span>Improve</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c26.webp" alt="Cibele Lauretino" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Premiada em Portugal</strong><b>Cibele Lauretino</b><span>Cactos</span></figcaption></figure></div></div>
+      <div class="casos-belt rev"><div class="casos-track"><figure class="caso"><img src="../black-week-misterio/assets/casos/c3.webp" alt="Lelo Apovian" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Best-seller Veja, Amazon e PublishNews</strong><b>Lelo Apovian</b><span>Muito Acima da Média</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c16.webp" alt="Maíra Metelo" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>6º mais vendido da Amazon</strong><b>Maíra Metelo</b><span>Se Ninguém Soubesse Quem Sou</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c18.webp" alt="Maria Gravina Ogata" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>8 prêmios literários</strong><b>Maria Gravina Ogata</b><span>As bambinas e os samurais brasileiros</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c9.webp" alt="Emília Nunez" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Ganhadora do Prêmio Jabuti</strong><b>Emília Nunez</b><span>Capaz</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c30.webp" alt="Larissa Cruvinel" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Leitores em 7 países</strong><b>Larissa Cruvinel</b><span>A Serenidade da Renúncia</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c37.webp" alt="Tonia Casarin" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Best-seller na pré-venda</strong><b>Tonia Casarin</b><span>Liderança Exponencial</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c10.webp" alt="Célia Alves Cardoso" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>4 livros por editora tradicional</strong><b>Célia Alves Cardoso</b><span>Os recomeços de Deus</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c28.webp" alt="Susana Arbex" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>1º lugar em negócios na PublishNews</strong><b>Susana Arbex</b><span>Sua Marca Pessoal</span></figcaption></figure></div></div>
+      <div class="casos-belt"><div class="casos-track"><figure class="caso"><img src="../black-week-misterio/assets/casos/c32.webp" alt="Arnoni Caldart" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Best-seller na Revista Veja</strong><b>Arnoni Caldart</b><span>Ative Sua Mente</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c35.webp" alt="Léo Dicker" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Adotado por escolas</strong><b>Léo Dicker</b><span>Clara e Guto, os segredos de Londres</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c21.webp" alt="Patrícia Guimarães" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Best-seller na Amazon</strong><b>Patrícia Guimarães</b><span>Putz, sério que fiz isso?</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c31.webp" alt="Bruno de Deus Vieira" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Selecionado para feiras na Europa</strong><b>Bruno de Deus Vieira</b><span>Trem de Louco</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c17.webp" alt="José Julio Cerquetane de Menezes" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Best-seller e destaque no Globo</strong><b>José Julio Cerquetane de Menezes</b><span>O fim da depressão</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c34.webp" alt="Simone Simon" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Nas livrarias de aeroportos</strong><b>Simone Simon</b><span>Faça Ser Fácil</span></figcaption></figure><figure class="caso"><img src="../black-week-misterio/assets/casos/c36.webp" alt="Robson Leite" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>Destaque na Folha de S.Paulo</strong><b>Robson Leite</b><span>Estratégias e Liderança em tempos de profundas mudanças</span></figcaption></figure></div></div>
+    </div>
+    
+    <div class="wrap">
       <p class="casos__more rv">E muito mais.</p>
       <div class="cta leva__cta rv"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div>
     </div>
@@ -850,19 +904,6 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
             <div class="stat"><b>+4.400</b><span>alunos no Método The&nbsp;Book&nbsp;Business</span></div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. dúvidas -->
-  <section class="sec faq">
-    <div class="wrap">
-      <div class="center rv"><p class="kick">Dúvidas</p><h2 class="h2">Antes de entrar.</h2></div>
-      <div class="faq__l rv">
-        <details><summary>“Não tenho tempo.”</summary><p>Uma ação por dia já conta. O LOMBADA monta o plano pelo tempo que você tem.</p></details>
-        <details><summary>“Meu livro é antigo. Ou ainda estou escrevendo.”</summary><p>O plano começa pela fase em que o seu livro está. Livro antigo é o que mais ganha quando volta a aparecer.</p></details>
-        <details><summary>“Posso parcelar?”</summary><p>Sim. Em até 12x de R$ 249,51, ou R$ 2.500 à vista.</p></details>
-        <details><summary>“E se não for pra mim?”</summary><p>Você tem 15 dias. Não gostou, devolvemos tudo.</p></details>
       </div>
     </div>
   </section>
@@ -946,6 +987,19 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
       (function step(now) { var k = Math.min(1, (now - t0) / dur); el.textContent = fmt(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); })(t0); }
     if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) { el.textContent = fmt(to); return; }
     new IntersectionObserver(function (es) { if (es[0].isIntersecting) run(); }, { threshold: .5 }).observe(el);
+  })();
+
+  // casos: 3 faixas rolando, cada uma para um lado (cliente: "três linhas, uma indo para cada lado")
+  (function () {
+    var belts = $$('.casos-belt');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    belts.forEach(function (belt) {
+      var track = belt.querySelector('.casos-track');
+      track.style.animationDuration = Math.round(track.scrollWidth / 28) + 's';
+      track.insertAdjacentHTML('beforeend', track.innerHTML.replace(/<figure class="caso">/g, '<figure class="caso" aria-hidden="true">'));
+      belt.addEventListener('touchstart', function () { belt.classList.add('hold'); }, { passive: true });
+      belt.addEventListener('touchend', function () { setTimeout(function () { belt.classList.remove('hold'); }, 1200); }, { passive: true });
+    });
   })();
 
   // entrada dos blocos: a pilha entra item por item

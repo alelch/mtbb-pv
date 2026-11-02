@@ -89,12 +89,13 @@ _LEVA = [
 ]
 _IMG = ["p-metodo", "p-autoridade", "p-gerador", "p-calendario", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros", "p-jabuti", "p-autopublicacao", "p-editora", "p-amazon"]
 LEVA = "".join(f'<div class="lv rv"><img class="lv__img" src="assets/{_IMG[n]}.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">{k}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div></div>' for n, (k, t, d) in enumerate(_LEVA))
-# cupons dos parceiros (valores e regras passados pelo cliente em 01/11; Literare só entra quando ele confirmar o valor)
+# cupons dos parceiros (valores e regras passados pelo cliente em 01/11; Literare R$2.000 confirmada no mesmo dia: total R$6.700)
 _CUP = [("Gráfica Renograf", "Impressão do seu livro", "até R$ 1.200", "Desconto progressivo pelo valor da impressão. Vale reimpressão."),
         ("Histórias Bem Contadas", "Leitura crítica", "R$ 250", "Válido por 24 meses."),
         ("Histórias Bem Contadas", "Edição de texto", "R$ 250", "Válido por 24 meses."),
         ("Jimenes Comunicação", "Assessoria de imprensa", "R$ 2.000", "Projeto semestral. Válido por 24 meses."),
-        ("Editora Labrador", "Publicação do seu livro solo", "R$ 1.000", "Válido por 12 meses.")]
+        ("Editora Labrador", "Publicação do seu livro solo", "R$ 1.000", "Válido por 12 meses."),
+        ("Editora Literare", "Publicação do seu livro solo", "R$ 2.000", "Válido por 12 meses.")]
 CUPONS = "".join(f'<div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>{v}</b></div><div class="cup__t"><span>{q}</span><h3>{n}</h3><p>{d}</p></div></div>' for n, q, v, d in _CUP)
 
 # 01/11 (cliente: "a parte do test drive da primeira versão era legal, só a parte do LOMBADA volta"):
@@ -123,6 +124,10 @@ DEMO_CSS = "\n".join([
 _i = bw.index("  /* ================= utilidades"); _j = bw.index("  /* ================= 5. ESTEIRA")
 DEMO_JS = "<script>\n(function () {\n  'use strict';\n" + bw[_i:_j] + "})();\n</script>"
 
+_mis = open(f"{R}/black-week-misterio/index.html", encoding="utf-8").read()
+CASOS_BELT = _mis[_mis.index('<div class="casos">'):_mis.index('<!-- depois dos alunos')].replace('src="assets/casos/', 'src="../black-week-misterio/assets/casos/')
+CASOS_CSS = "\n".join(l for l in _mis.split("\n") if l.startswith(('.casos', '.caso', '.rm .casos')) or l.startswith('  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%'))
+SPINES = '<div class="spines" aria-hidden="true"><i style="--h:62%;--c:#14523e"></i><i style="--h:84%;--c:#faab00"></i><i style="--h:70%;--c:#b5402e"></i><i style="--h:100%;--c:#f3f0e8"></i><i style="--h:56%;--c:#fc783c"></i><i style="--h:78%;--c:#3a3530"></i></div>'
 HTML = f'''<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -227,6 +232,34 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .h__cue {{ display: inline-flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 34px; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink3); text-decoration: none; }}
 .h__cue svg {{ width: 20px; height: 20px; animation: bob 1.8s ease-in-out infinite; }}
 
+/* bônus em dobro, lombadinhas e o quadro especial do LOMBADA */
+.dbl {{ display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 18px; }}
+.dbl > div {{ text-align: center; }}
+.dbl b {{ display: block; white-space: nowrap; font-size: clamp(26px, 7.4vw, 46px); font-weight: 800; line-height: 1; letter-spacing: -.03em; }}
+.dbl__a b {{ color: var(--ink3); text-decoration: line-through; text-decoration-thickness: 3px; text-decoration-color: rgba(214, 72, 60, .9); }}
+.dbl__b b {{ font-size: clamp(46px, 13.5vw, 84px); }}
+.dbl small {{ display: block; margin-top: 4px; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3); }}
+.dbl__b small {{ color: var(--amber); }}
+.dbl__ar {{ font-size: 30px; font-weight: 800; color: var(--amber); }}
+.spines {{ display: flex; align-items: flex-end; justify-content: center; gap: 6px; height: 92px; margin: 18px auto 0; }}
+.spines i {{ width: 26px; height: var(--h); border-radius: 4px 4px 0 0; background: var(--c); box-shadow: inset 0 -10px 0 rgba(0, 0, 0, .12); }}
+.lmbc {{ display: grid; grid-template-columns: minmax(0, 1fr); max-width: 980px; margin: 40px auto 12px; overflow: hidden; border-radius: 22px; background: var(--paper); color: var(--paper-ink); box-shadow: 0 0 0 2px rgba(250, 171, 0, .7), 0 0 60px rgba(250, 171, 0, .25); }}
+@media (min-width: 760px) {{ .lmbc {{ grid-template-columns: 5fr 7fr; }} }}
+.lmbc__art {{ display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 34px 20px 26px; background: #16110c; }}
+.lmbc__art .spines {{ height: 120px; margin: 0; }}
+.lmbc__art .spines i {{ width: 30px; }}
+.lmbc__mark {{ margin-top: 16px; font-size: clamp(34px, 9vw, 46px); line-height: 1; }}
+.lmbc__mark .lmb {{ color: #f3f0e8; }}
+.lmbc__b {{ padding: 26px 22px 28px; text-align: left; }}
+.lmbc__b .lv__k {{ background: var(--paper-ink); color: var(--amber); }}
+.lmbc__b h3 {{ margin-top: 12px; font-size: clamp(24px, 6.4vw, 32px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; }}
+.lmbc__b ul {{ margin-top: 14px; list-style: none; display: grid; gap: 9px; }}
+.lmbc__b li {{ position: relative; padding-left: 26px; font-size: 15px; line-height: 1.45; color: var(--paper-soft); }}
+.lmbc__b li::before {{ content: ""; position: absolute; left: 0; top: .2em; width: 16px; height: 16px; border-radius: 50%; background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4L18 8'/%3E%3C/svg%3E") center / 12px no-repeat; }}
+.lmbc__btn {{ white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 13px 18px; border-radius: 99px; background: var(--paper-ink); color: var(--amber); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; }}
+.lmbc__btn svg {{ width: 18px; height: 18px; animation: bob 1.8s ease-in-out infinite; }}
+.lmbsec {{ border-top: 1px solid var(--line); padding-bottom: 0; scroll-margin-top: 56px; }}
+
 /* imagens dos produtos, bônus e cupons */
 .lv {{ overflow: hidden; padding: 0 !important; }}
 .lv__img {{ width: 100%; aspect-ratio: 720 / 567; object-fit: cover; }}
@@ -273,7 +306,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .tile span {{ display: block; margin-top: 4px; font-size: 13px; line-height: 1.45; color: var(--paper-soft); }}
 
 /* abertura emendada na oferta (ordem do Aniversário) */
-.hk {{ max-width: 560px; margin: 26px auto 0; list-style: none; display: grid; gap: 12px; text-align: left; }}
+.hk {{ max-width: 560px; margin: 48px auto 0; list-style: none; display: grid; gap: 12px; text-align: left; }}
 .hk li {{ display: flex; gap: 12px; align-items: flex-start; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.45; color: var(--ink2); }}
 .hk b {{ color: var(--ink); }} .hk b.amber {{ color: var(--amber); }}
 .amber {{ color: var(--amber); }}
@@ -328,15 +361,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .lv ul li::before {{ content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }}
 .leva__cta {{ max-width: 480px; margin: 40px auto 0; }}
 .casos-sec {{ border-top: 1px solid var(--line); }}
-.casos {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; max-width: 980px; margin: 40px auto 0; }}
-@media (min-width: 700px) {{ .casos {{ grid-template-columns: 1fr 1fr; }} }}
-@media (min-width: 1000px) {{ .casos {{ grid-template-columns: 1fr 1fr 1fr; }} }}
-.caso {{ display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: #121114; box-shadow: inset 0 0 0 1px #222126; }}
-.caso img {{ flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(250, 171, 0, .5); }}
-.caso figcaption {{ min-width: 0; line-height: 1.25; }}
-.caso strong {{ display: block; font-size: 15px; font-weight: 700; color: var(--amber); }}
-.caso b {{ display: block; margin-top: 4px; font-size: 13px; font-weight: 600; }}
-.caso span {{ display: block; font-size: 12px; color: var(--ink3); }}
+{CASOS_CSS}
 .casos__more {{ margin-top: 18px; text-align: center; font-size: 15px; color: var(--ink2); }}
 
 /* abertura: a maior oferta */
@@ -593,10 +618,10 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="bon2">
         <div class="bon2__c rv">
           <span class="lv__k">Bônus 1</span>
-          <div class="bon2__ph"><img src="assets/tela-semana.webp" alt="LOMBADA no celular" width="716" height="1460" loading="lazy" decoding="async"></div>
-          <p class="bon2__big gold">6 anos</p>
-          <h3>de {LMB}. O dobro.</h3>
-          <p>Amanhã volta a ser 3. Quem entra hoje leva o LOMBADA ao lado do seu livro por 6 anos.</p>
+          <div class="dbl"><div class="dbl__a"><b>3 anos</b><small>normal</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div>
+          {SPINES}
+          <h3>{LMB} em dobro.</h3>
+          <p>Hoje você recebe o dobro: 6 anos de LOMBADA no lugar de 3. Amanhã volta a ser 3.</p>
         </div>
         <div class="bon2__c rv">
           <span class="lv__k">Bônus 2</span>
@@ -613,7 +638,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap center">
       <div class="rv">
         <p class="kick">E tem mais</p>
-        <h2 class="h2">Até <span class="gold">R$ 4.700</span> em cupons de desconto com parceiros.</h2>
+        <h2 class="h2">Até <span class="gold">R$ 6.700</span> em cupons de desconto com parceiros.</h2>
         <p class="cups__l">Se você vai imprimir, publicar ou divulgar o seu livro, a Black já se paga.</p>
       </div>
       <div class="cupg">{CUPONS}</div>
@@ -625,14 +650,14 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   <section class="sec resumo" id="oferta">
     <div class="wrap center">
       <div class="card rv">
-        <p class="q2">Resumindo: na Black Week Motorizada você leva tudo isso, mais o LOMBADA<span class="d9-only"> e os bônus de hoje</span>.</p>
+        <p class="q2">Tudo o que você leva na Black Week Motorizada:</p>
         <ul class="card__list">
           <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos, workshops e Projetos Especiais, <b>vitalícios</b></span></li>
           <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
           <li class="d9-only">{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
-          <li>{CK}<span>Até <b>R$ 4.700 em cupons</b> de desconto com parceiros</span></li>
+          <li>{CK}<span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
         <p class="resumo__de">De <s>R$ 26.485,00</s></p>
         <p class="resumo__por">por apenas</p>
@@ -646,32 +671,47 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     </div>
   </section>
 
-  <!-- 7. o que você leva: o LOMBADA primeiro, em story, e depois cada produto -->
+  <!-- 7. o que você leva: o LOMBADA num quadro especial (botão leva às telas), depois cada produto -->
   <section class="sec leva">
     <div class="wrap">
       <div class="center rv"><p class="kick">Quem aproveitar essa oferta agora</p><h2 class="h2">Vai levar:</h2></div>
-      <div class="lmbh rv" id="ferramenta">
-        <span class="lv__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
-        <p class="lmbh__mark">{LMB}</p>
-        <p class="lmbh__t">A ferramenta que nunca deixa o seu livro parar.</p>
+      <div class="lmbc rv">
+        <div class="lmbc__art">{SPINES}<p class="lmbc__mark">{LMB}</p></div>
+        <div class="lmbc__b">
+          <span class="lv__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
+          <h3>A ferramenta que nunca deixa o seu livro parar.</h3>
+          <ul>
+            <li>O plano da semana do seu livro, pela fase, pelo gênero e pelo seu tempo.</li>
+            <li>O texto pronto em cada ação, com a aula do Método por trás.</li>
+            <li>Prêmios, feiras e editais do seu gênero, com o prazo na tela.</li>
+            <li>Ideias de post ilimitadas, feitas para o seu livro.</li>
+          </ul>
+          <a class="lmbc__btn" href="#ferramenta">Entender melhor o LOMBADA <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        </div>
       </div>
-    </div>
-  </section>
-  {DEMO_DRIVE}
-  {DEMO_MOTOR}
-  <section class="sec leva leva--resto">
-    <div class="wrap">
-      <div class="center rv"><p class="kick">E mais</p></div>
       <div class="leva__g">{LEVA}</div>
       <div class="cta leva__cta rv">{CTA}</div>
     </div>
   </section>
 
+  <!-- 7b. o LOMBADA por dentro: test drive, oportunidades e ideias de post -->
+  <section class="sec lmbsec" id="ferramenta">
+    <div class="wrap"><div class="lmbh rv">
+      <p class="lmbh__mark">{LMB}</p>
+      <p class="lmbh__t">A ferramenta que nunca deixa o seu livro parar.</p>
+    </div></div>
+  </section>
+  {DEMO_DRIVE}
+  {DEMO_MOTOR}
+  <div class="wrap"><div class="cta leva__cta rv" style="margin-bottom:64px">{CTA}</div></div>
+
   <!-- 8. casos -->
   <section class="sec casos-sec">
     <div class="wrap">
-      <div class="center rv"><h2 class="h2">A estratégia que mais transforma autores comuns em <span class="serif gold">best-sellers de verdade.</span></h2></div>
-      <div class="casos">{CASOS}</div>
+      <div class="center rv"><h2 class="h2">A estratégia que mais transforma autores comuns em <span class="serif gold"><span style="white-space:nowrap">best-sellers</span> de verdade.</span></h2></div>
+    </div>
+    {CASOS_BELT}
+    <div class="wrap">
       <p class="casos__more rv">E muito mais.</p>
       <div class="cta leva__cta rv">{CTA}</div>
     </div>
@@ -696,19 +736,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
             <div class="stat"><b>+4.400</b><span>alunos no Método The&nbsp;Book&nbsp;Business</span></div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. dúvidas -->
-  <section class="sec faq">
-    <div class="wrap">
-      <div class="center rv"><p class="kick">Dúvidas</p><h2 class="h2">Antes de entrar.</h2></div>
-      <div class="faq__l rv">
-        <details><summary>“Não tenho tempo.”</summary><p>Uma ação por dia já conta. O LOMBADA monta o plano pelo tempo que você tem.</p></details>
-        <details><summary>“Meu livro é antigo. Ou ainda estou escrevendo.”</summary><p>O plano começa pela fase em que o seu livro está. Livro antigo é o que mais ganha quando volta a aparecer.</p></details>
-        <details><summary>“Posso parcelar?”</summary><p>Sim. Em até 12x de R$ 249,51, ou R$ 2.500 à vista.</p></details>
-        <details><summary>“E se não for pra mim?”</summary><p>Você tem 15 dias. Não gostou, devolvemos tudo.</p></details>
       </div>
     </div>
   </section>
@@ -792,6 +819,19 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       (function step(now) {{ var k = Math.min(1, (now - t0) / dur); el.textContent = fmt(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); }})(t0); }}
     if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {{ el.textContent = fmt(to); return; }}
     new IntersectionObserver(function (es) {{ if (es[0].isIntersecting) run(); }}, {{ threshold: .5 }}).observe(el);
+  }})();
+
+  // casos: 3 faixas rolando, cada uma para um lado (cliente: "três linhas, uma indo para cada lado")
+  (function () {{
+    var belts = $$('.casos-belt');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    belts.forEach(function (belt) {{
+      var track = belt.querySelector('.casos-track');
+      track.style.animationDuration = Math.round(track.scrollWidth / 28) + 's';
+      track.insertAdjacentHTML('beforeend', track.innerHTML.replace(/<figure class="caso">/g, '<figure class="caso" aria-hidden="true">'));
+      belt.addEventListener('touchstart', function () {{ belt.classList.add('hold'); }}, {{ passive: true }});
+      belt.addEventListener('touchend', function () {{ setTimeout(function () {{ belt.classList.remove('hold'); }}, 1200); }}, {{ passive: true }});
+    }});
   }})();
 
   // entrada dos blocos: a pilha entra item por item
