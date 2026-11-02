@@ -303,9 +303,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .lmbx .feat__h {{ font-weight: 800; letter-spacing: -.02em; }}
 @media (min-width: 900px) {{ :root {{ --sec: 110px; }} }}
 /* prova logo abaixo da abertura */
-.proof2 {{ display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; padding: 8px 16px 8px 8px; border-radius: 99px; background: rgba(255, 255, 255, .04); box-shadow: inset 0 0 0 1px #2a2620; }}
-.proof2 img {{ width: 118px; height: auto; }}
-.proof2 span {{ font-size: 13px; color: var(--ink2); text-align: left; line-height: 1.3; }}
+.proof2 {{ display: flex; width: max-content; max-width: 100%; margin: 0 auto 22px; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 99px; background: rgba(255, 255, 255, .04); box-shadow: inset 0 0 0 1px #2a2620; }}
+.proof2 img {{ width: 96px; height: auto; }}
+.proof2 span {{ white-space: nowrap; font-size: 12px; color: var(--ink2); text-align: left; line-height: 1.3; }}
 .proof2 b {{ color: var(--ink); }}
 /* a conta: o total cresce e o preço cai como um golpe */
 .bill__tot b {{ transition: transform .6s var(--pop); }}
@@ -521,6 +521,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   <!-- 1. abertura (a única seção que ficou da versão anterior), já emendada na oferta -->
   <section class="h" id="topo">
     <div class="wrap h__in">
+      <p class="proof2"><img src="../black-week/assets/alunos.webp" alt="" width="118" height="26"><span><b>+4.400 autores</b> impactando vidas</span></p>
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
       <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> {LMB}</span><span class="h__tag">Leva o seu livro cada vez mais longe.</span></h1>
@@ -530,7 +531,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <li class="d9-only">{CK}<span>Os bônus mais poderosos já criados dentro da melhor estratégia literária do Brasil.</span></li>
         <li class="after-only">{CK}<span><b>3 anos de encontros em grupo</b> ao vivo com a Dany.</span></li>
       </ul>
-      <p class="proof2"><img src="../black-week/assets/alunos.webp" alt="" width="118" height="26"><span><b>+4.400 autores</b> já estão no<br>Método The&nbsp;Book&nbsp;Business</span></p>
 
       <!-- 2. quanto custaria por um ano -->
       <div class="blk">
