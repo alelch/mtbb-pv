@@ -3,7 +3,8 @@
 # Nada da página de cadastro: abertura de oferta, a pilha de tudo o que entra (pacote do Aniversário sem o Retiro),
 # o LOMBADA em telas reais, bônus do dia 9, Dany, preço, dúvidas, fecho.
 # Só o logo da Black e o wordmark do LOMBADA vêm da black-week/ (marca). Saída: black-week-oferta/index.html
-# Modo: até 23h59 de 9/11 (Brasília) = "dia 9" (LOMBADA 6 anos + Playbooks + relógio); depois = LOMBADA 3 anos.
+# Modo: até 23h59 de 9/11 (Brasília) = "dia 9" (LOMBADA 6 anos + relógio); depois = LOMBADA 3 anos. Os Playbooks ficam
+# na oferta nos dois modos (cliente 02/11: "os playbooks não terminam meia-noite, só o dobro de acesso ao LOMBADA").
 # Prévia: ?modo=d9 ou ?modo=depois força o modo.
 import os, re
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,7 +41,7 @@ rows = "\n".join(
 N = len(PILHA) + 1  # + LOMBADA
 rows += f'''
         <li class="row row--lmb rv"><span class="row__n">{N:02d}</span><span class="row__t"><b>{LMB}</b><small>O personal trainer do seu livro. Todo dia, o que fazer.</small></span><span class="row__k"><span class="d9-only">6 anos</span><span class="after-only">3 anos</span></span></li>
-        <li class="row row--bonus rv d9-only"><span class="row__n">{N+1:02d}</span><span class="row__t"><b>Playbooks MTBB físicos, na sua casa</b><small>Só para quem entrar hoje.</small></span><span class="row__k">Bônus</span></li>'''
+        <li class="row row--bonus rv"><span class="row__n">{N+1:02d}</span><span class="row__t"><b>Playbooks MTBB físicos, na sua casa</b></span><span class="row__k">Bônus</span></li>'''
 
 TELAS = [
     ("tela-semana", "A semana do seu livro", "Ele abre com as ações da semana, feitas para o seu livro."),
@@ -268,6 +269,8 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .bon2__c h3 {{ font-size: clamp(20px, 5.4vw, 28px); }}
 /* bônus lado a lado, com o mesmo peso (cliente: "preferia lado a lado") */
 @media (min-width: 760px) {{ .bon2.bon2 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 980px; }} }}
+/* depois do dia 9 sobra só o cartão dos Playbooks: uma coluna, centralizada */
+@media (min-width: 760px) {{ body.m-depois .bon2.bon2 {{ grid-template-columns: minmax(0, 1fr); max-width: 480px; }} }}
 .bon2__txt {{ display: contents; }}
 .bon2__c > .bon2__txt > .lv__k, .bon2__c .bon2__txt .lv__k {{ order: -1; }}
 .bon2__txt h3 {{ margin-top: 12px; }}
@@ -698,7 +701,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 </style>
 </head>
 <body>
-<div class="obar"><p class="d9-only">O dobro do LOMBADA e os bônus terminam em</p>{CLOCK.replace('class="clock"', 'class="clock d9-only"')}<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
+<div class="obar"><p class="d9-only">O dobro do LOMBADA termina em</p>{CLOCK.replace('class="clock"', 'class="clock d9-only"')}<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
 
 <main>
   <!-- 1. abertura (a única seção que ficou da versão anterior), já emendada na oferta -->
@@ -711,7 +714,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <ul class="hk">
         <li>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></li>
         <li>{CK}<span>O <b>LOMBADA</b>, o personal trainer do seu livro, por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b>.</span></li>
-        <li class="d9-only">{CK}<span>Os bônus mais poderosos já criados dentro da melhor estratégia literária do Brasil.</span></li>
+        <li>{CK}<span>Os bônus mais poderosos já criados dentro da melhor estratégia literária do Brasil.</span></li>
         <li class="after-only">{CK}<span><b>3 anos de encontros em grupo</b> ao vivo com a Dany.</span></li>
       </ul>
 
@@ -748,12 +751,12 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     </div>
   </section>
 
-  <!-- 5. bônus de hoje -->
-  <section class="sec d9 d9-only" id="hoje">
+  <!-- 5. bônus: o LOMBADA em dobro só hoje; os Playbooks ficam depois também -->
+  <section class="sec d9" id="hoje">
     <div class="wrap center">
-      <p class="q2 rv">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p>
+      <p class="q2 rv d9-only">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p><p class="q2 rv after-only">E ainda por cima, você vai ganhar:</p>
       <div class="bon2">
-        <div class="bon2__c rv">
+        <div class="bon2__c rv d9-only">
           <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>normal</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div>{SPINES}</div>
           <div class="bon2__txt">
           <span class="lv__k">Bônus 1</span>
@@ -764,7 +767,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <div class="bon2__c rv">
           <div class="bon2__vis"><img src="assets/playbooks.webp" alt="Playbooks MTBB" width="475" height="592" loading="lazy" decoding="async"></div>
           <div class="bon2__txt">
-          <span class="lv__k">Bônus 2</span>
+          <span class="lv__k"><span class="d9-only">Bônus 2</span><span class="after-only">Bônus</span></span>
           <h3>Playbooks MTBB físicos, entregues na sua casa.</h3>
           <p>A extensão prática do Método The&nbsp;Book&nbsp;Business, criada pela Dany, para organizar as estratégias e acompanhar a evolução do seu livro.</p>
                   </div>
@@ -796,18 +799,18 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
-          <li class="d9-only">{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
+          <li>{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
           <li>{CK}<span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
-        <p class="resumo__de">De <s>R$ 26.485,00</s></p>
+        <p class="resumo__de">De <s>R$ 25.000,00</s></p>
         <p class="resumo__por">por apenas</p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
-        <div class="card__clock d9-only"><p><b>6 anos de LOMBADA e os Playbooks</b> terminam à meia-noite.</p>{CLOCK}</div>
+        <div class="card__clock d9-only"><p>O <b>dobro do LOMBADA</b> termina à meia-noite.</p>{CLOCK}</div>
         {CTA}
         <div class="seal"><i>15<small>dias</small></i><p><b>Garantia de 15 dias.</b> Entre, use, conheça tudo. Se não for pra você, devolvemos 100%.</p></div>
       </div>
-      <div class="warn rv d9-only"><b>Atenção:</b> os 6 anos de LOMBADA e os Playbooks são só para quem entrar hoje. A partir de amanhã, o LOMBADA volta a ser 3 anos e os bônus saem da oferta.</div>
+      <div class="warn rv d9-only"><b>Atenção:</b> os 6 anos de LOMBADA são só para quem entrar hoje. A partir de amanhã, o LOMBADA volta a ser 3 anos.</div>
     </div>
   </section>
 
@@ -979,7 +982,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <p class="end__a">Essa é a sua <span class="serif gold">chance.</span></p>
       <p class="end__b">Tudo o que a Dany criou, pra sempre. E o LOMBADA ao lado do seu livro, todo dia.</p>
       <div class="end__price"><p class="price__big"><small>12x de</small><span>R$ 249,51</span></p><p class="price__cash">ou R$ 2.500 à vista</p></div>
-      <div class="card__clock d9-only"><p><b>6 anos de LOMBADA e os Playbooks</b> terminam à meia-noite.</p>{CLOCK}</div>
+      <div class="card__clock d9-only"><p>O <b>dobro do LOMBADA</b> termina à meia-noite.</p>{CLOCK}</div>
       <div class="cta">{CTA}<p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
     </div>
   </section>
@@ -1000,7 +1003,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   var $$ = function (s) {{ return [].slice.call(document.querySelectorAll(s)); }};
   var q = new URLSearchParams(location.search);
 
-  // modo: dia 9 até 23h59 de Brasília (02h59 UTC do dia 10); depois, LOMBADA 3 anos e sem bônus
+  // modo: dia 9 até 23h59 de Brasília (02h59 UTC do dia 10); depois, LOMBADA 3 anos (os Playbooks continuam)
   var FIM_D9 = Date.UTC(2026, 10, 10, 2, 59, 59);
   var modo = q.get('modo') || (Date.now() <= FIM_D9 ? 'd9' : 'depois');
   document.body.classList.add(modo === 'depois' ? 'm-depois' : 'm-d9');
