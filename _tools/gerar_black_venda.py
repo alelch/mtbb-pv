@@ -981,8 +981,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   var modo = q.get('modo') || (Date.now() <= FIM_D9 ? 'd9' : 'depois');
   document.body.classList.add(modo === 'depois' ? 'm-depois' : 'm-d9');
 
-  // checkout (Hotmart): o cliente manda os links. Repassa src/sck/utm até o checkout.
-  var CHECKOUT = {{ d9: '', depois: '' }}, url = CHECKOUT[modo === 'depois' ? 'depois' : 'd9'];
+  // checkout (Hotmart): o mesmo da página do Aniversário (oferta R$2.500, off=ntrx21f9; cliente 01/11). Repassa src/sck/utm até o checkout.
+  var CHECKOUT = {{ d9: 'https://pay.hotmart.com/D102625845Q?off=ntrx21f9&checkoutMode=10', depois: 'https://pay.hotmart.com/D102625845Q?off=ntrx21f9&checkoutMode=10' }}, url = CHECKOUT[modo === 'depois' ? 'depois' : 'd9'];
   if (url) {{
     var u = new URL(url);
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'sck', 'src'].forEach(function (k) {{ if (q.get(k)) u.searchParams.set(k, q.get(k)); }});
