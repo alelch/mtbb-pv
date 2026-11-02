@@ -460,6 +460,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .bon2 {{ gap: 28px !important; }}
 .cupg {{ gap: 18px !important; }}
 
+.jn__vid {{ max-width: 860px; margin: 26px auto 48px; overflow: hidden; border-radius: 18px; background: #000; box-shadow: 0 0 0 2px rgba(250, 171, 0, .6), 0 30px 70px -30px rgba(250, 171, 0, .45); }}
+.jn__vid video {{ display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; }}
+
 /* passo 5: página do livro · passo 6: vitrine */
 .pg {{ margin-top: 12px; overflow: hidden; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; }}
 .pg__bar {{ display: flex; align-items: center; gap: 5px; padding: 8px 10px; background: #efe9dc; }}
@@ -821,7 +824,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap">
       <div class="jn__head center rv">
         <p class="lmbh__mark">{LMB}</p>
-        <h2 class="h2">Escreva o nome do seu livro. <span class="gold">E veja ele ir longe.</span></h2>
+        <div class="jn__vid"><video controls preload="none" playsinline poster="assets/lombada-poster.jpg" aria-label="Vídeo: conheça o LOMBADA"><source src="assets/lombada.mp4" type="video/mp4"></video></div>
+        <h2 class="h2">Agora escreva o nome do seu livro. <span class="gold">E veja ele ir longe.</span></h2>
         <label class="jn__in"><span>O nome do seu livro</span><input id="jn-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done"></label>
         <p class="jn__hint">Experimente. É assim que o LOMBADA trabalha pelo seu livro.</p>
       </div>
