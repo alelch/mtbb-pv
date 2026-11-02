@@ -172,6 +172,39 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .lmbc__btn svg { width: 18px; height: 18px; animation: bob 1.8s ease-in-out infinite; }
 .lmbsec { border-top: 1px solid var(--line); padding-bottom: 0; scroll-margin-top: 56px; }
 
+/* revisão final: ritmo, prova e acabamento */
+.lmbx .eyebrow { font-size: 12px; letter-spacing: .26em; }
+.lmbx .eyebrow::before { height: 1.5px; opacity: .7; }
+.lmbx .h2 { font-weight: 800; letter-spacing: -.03em; line-height: 1.04; }
+.lmbx .feat__h { font-weight: 800; letter-spacing: -.02em; }
+@media (min-width: 900px) { :root { --sec: 110px; } }
+/* prova logo abaixo da abertura */
+.proof2 { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; padding: 8px 16px 8px 8px; border-radius: 99px; background: rgba(255, 255, 255, .04); box-shadow: inset 0 0 0 1px #2a2620; }
+.proof2 img { width: 118px; height: auto; }
+.proof2 span { font-size: 13px; color: var(--ink2); text-align: left; line-height: 1.3; }
+.proof2 b { color: var(--ink); }
+/* a conta: o total cresce e o preço cai como um golpe */
+.bill__tot b { transition: transform .6s var(--pop); }
+.bill.in .bill__tot b, .rv.in .bill__tot b { transform: scale(1.04); }
+.price__day { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 99px; background: rgba(30, 187, 0, .12); color: #7be26a; font-size: 14px; font-weight: 600; }
+/* Dany na mídia */
+.midia { margin-top: 48px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.midia__k { margin-top: 56px; text-align: center; }
+.midia__t { display: flex; gap: 12px; width: max-content; animation: belt 60s linear infinite; }
+.midia:hover .midia__t { animation-play-state: paused; }
+.midia figure { flex: none; width: 220px; }
+.midia img { width: 220px; height: 140px; object-fit: cover; border-radius: 12px; box-shadow: 0 0 0 1px #2a2620; }
+.midia figcaption { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--ink3); text-align: center; }
+/* fecho com o preço e o relógio */
+.end__price { margin-top: 26px; }
+.end__price .price__big span { font-size: clamp(48px, 13vw, 84px); }
+.end .card__clock { max-width: 480px; margin: 22px auto 0; }
+/* seções alternam um fundo levemente mais quente para dar ritmo */
+.cups, .gar, .lmbsec { background: linear-gradient(180deg, #050403, #000 70%); }
+
+.d9 { overflow: hidden; isolation: isolate; border-top: 1px solid var(--line); }
+.d9::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(250, 171, 0, .2), transparent 70%); }
+
 /* imagens dos produtos, bônus e cupons */
 .lv { overflow: hidden; padding: 0 !important; }
 .lv__img { width: 100%; aspect-ratio: 720 / 567; object-fit: cover; }
@@ -201,22 +234,6 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .lmbh__t { margin-top: 14px; font-size: clamp(26px, 7.4vw, 50px); font-weight: 800; line-height: 1.06; letter-spacing: -.03em; text-wrap: balance; }
 .leva--resto { border-top: 0; padding-top: 40px; }
 .lmbx .h2 { font-size: clamp(30px, 8vw, 48px); }
-/* LOMBADA: a semana e o "ele ainda te dá" */
-.lv.lv--lmb .lv__big { margin: 14px auto 0; max-width: 760px; font-size: clamp(28px, 8vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; color: var(--paper-ink); text-wrap: balance; }
-.lv.lv--lmb .lv__lead { margin-top: 12px; font-size: clamp(15px, 4.2vw, 18px); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8a5a00; }
-.wk { display: flex; justify-content: center; gap: 6px; margin-top: 18px; flex-wrap: wrap; }
-.wk button { min-width: 54px; padding: 9px 10px; border: 0; border-radius: 99px; background: #fff; color: var(--paper-soft); box-shadow: 0 0 0 1px #e3ded2; font: 700 13px/1 "Poppins", sans-serif; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; transition: background .25s, color .25s; }
-.wk button.on { background: var(--paper-ink); color: var(--amber); box-shadow: none; }
-.lv.lv--lmb .story { margin-top: 22px; }
-.lv.lv--lmb .lv__mais { color: var(--paper-ink); margin-top: 44px; font-size: clamp(22px, 6vw, 32px); font-weight: 800; letter-spacing: -.02em; }
-.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 860px; margin: 18px auto 0; text-align: left; }
-@media (min-width: 860px) { .tiles { grid-template-columns: 1fr 1fr 1fr; } }
-.tile { padding: 16px 14px; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; }
-.tile i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--paper-ink); color: var(--amber); }
-.tile svg { width: 21px; height: 21px; }
-.tile b { display: block; margin-top: 12px; font-size: 15px; font-weight: 800; line-height: 1.2; color: var(--paper-ink); }
-.tile span { display: block; margin-top: 4px; font-size: 13px; line-height: 1.45; color: var(--paper-soft); }
-
 /* abertura emendada na oferta (ordem do Aniversário) */
 .hk { max-width: 560px; margin: 48px auto 0; list-style: none; display: grid; gap: 12px; text-align: left; }
 .hk li { display: flex; gap: 12px; align-items: flex-start; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.45; color: var(--ink2); }
@@ -298,34 +315,6 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .h__sub .lmb { color: var(--ink); }
 .h__tag { display: block; margin-top: 12px; font-size: clamp(20px, 5.8vw, 36px); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; color: var(--ink2); text-wrap: balance; }
 
-/* story do LOMBADA */
-.story { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-items: center; max-width: 940px; margin: 48px auto 0; }
-@media (min-width: 860px) { .story { grid-template-columns: 340px 1fr; gap: 64px; } }
-.story__ph { position: relative; width: min(64vw, 320px); margin: 0 auto; padding: 10px; border-radius: 40px; background: linear-gradient(160deg, #2b2a2f, #0e0e10 60%); box-shadow: 0 40px 70px -30px rgba(0, 0, 0, .6); cursor: pointer; }
-.story__bars { position: absolute; left: 24px; right: 24px; top: 20px; z-index: 3; display: flex; gap: 4px; }
-.story__bars i { flex: 1; height: 3px; border-radius: 3px; background: rgba(0, 0, 0, .18); overflow: hidden; }
-.story__bars b { display: block; height: 100%; width: 0; background: var(--paper-ink); }
-.story__bars i.done b { width: 100%; }
-.story__bars i.run b { animation: bar var(--dur, 4.5s) linear forwards; }
-.story__scr { position: relative; aspect-ratio: 716 / 1300; overflow: hidden; border-radius: 30px; background: #fff; }
-.story__scr img { position: absolute; left: 0; top: 0; width: 100%; height: auto; opacity: 0; transition: opacity .45s ease; }
-.story__scr img.on { opacity: 1; animation: pan var(--dur, 4.5s) ease-in-out forwards; }
-.story__txt { position: relative; min-height: 150px; order: -1; }
-@media (min-width: 860px) { .story__txt { order: 0; min-height: 190px; } }
-.st { position: absolute; inset: 0 0 auto; opacity: 0; transform: translateY(14px); transition: opacity .45s ease, transform .45s var(--ease); pointer-events: none; text-align: center; }
-.st.on { position: relative; opacity: 1; transform: none; }
-@media (min-width: 860px) { .st { text-align: left; } }
-.st__n { font-size: 14px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #8a5a00; }
-.st__t, .lv .st__t { margin-top: 8px; font-size: clamp(24px, 6.6vw, 46px); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }
-.st__d, .lv .st__d { margin-top: 8px; font-size: clamp(15px, 4.1vw, 20px); line-height: 1.5; color: var(--paper-soft); text-wrap: balance; }
-
-/* contador de dias */
-.days { overflow: hidden; isolation: isolate; text-align: center; }
-.days::before { content: ""; position: absolute; left: 50%; top: 50%; width: 900px; height: 900px; z-index: -1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(250, 171, 0, .2), transparent); }
-.days__n, .lv .days__n { font-size: clamp(110px, 34vw, 280px); font-weight: 800; line-height: .85; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
-.days__a, .lv .days__a { margin: 18px auto 0; max-width: 720px; font-size: clamp(26px, 7.4vw, 50px); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }
-.days__b { margin-top: 16px; font-size: clamp(15px, 4.2vw, 19px); color: var(--ink2); }
-
 /* a conta */
 .conta { border-top: 1px solid var(--line); }
 .bill { max-width: 640px; margin: 40px auto 0; padding: 8px 20px; border-radius: 18px; background: #0d0c0a; box-shadow: inset 0 0 0 1px var(--line); }
@@ -341,69 +330,6 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .conta__lmb .q { display: inline-flex; align-items: center; gap: .3em; white-space: nowrap; }
 .conta__lmb .d { display: block; margin-top: 8px; font-size: clamp(15px, 4.2vw, 18px); font-weight: 500; color: var(--ink2); }
 .card__price .pre s { color: var(--ink3); }
-
-/* 2. a pilha */
-.pile { background: linear-gradient(var(--bg), var(--bg2)); border-top: 1px solid var(--line); }
-.pile__lede { margin: 18px auto 0; max-width: 560px; font-size: clamp(16px, 4.4vw, 20px); color: var(--ink2); text-wrap: balance; }
-.rows { max-width: 860px; margin: 48px auto 0; list-style: none; border-top: 1px solid var(--line); }
-.row { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 18px 2px; border-bottom: 1px solid var(--line); }
-.row__n { font-size: 13px; font-weight: 700; color: var(--ink3); font-variant-numeric: tabular-nums; }
-.row__t b { display: block; font-size: clamp(17px, 4.6vw, 23px); font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
-.row__t small { display: block; margin-top: 3px; font-size: 14px; line-height: 1.4; color: var(--ink3); }
-.row__k { padding: 5px 10px; border-radius: 99px; background: rgba(250, 171, 0, .12); color: var(--amber); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
-.row--lmb { margin: 10px -12px 0; padding: 24px 12px; border: 0; border-radius: 16px; background: radial-gradient(ellipse 80% 120% at 50% 0%, rgba(250, 171, 0, .2), transparent 70%), #100d07; box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .6); }
-.row--lmb .row__t b { font-size: clamp(30px, 8.4vw, 44px); }
-.row--lmb .lmb { color: var(--ink); }
-.row--lmb .row__n { color: var(--amber); }
-.row--lmb .row__k { background: var(--amber); color: #111; font-size: 12px; }
-.row--bonus { margin: 10px -12px 0; padding: 20px 12px; border: 0; border-radius: 16px; background: #0f1a0c; box-shadow: inset 0 0 0 1.5px rgba(30, 187, 0, .55); }
-.row--bonus .row__k { background: var(--green); color: #fff; }
-.rv { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-.rv.in { opacity: 1; transform: none; }
-.total { margin-top: 64px; text-align: center; }
-.total__n { font-size: clamp(120px, 40vw, 300px); font-weight: 800; line-height: .82; letter-spacing: -.06em; }
-.total__a { margin-top: 10px; font-size: clamp(24px, 7vw, 46px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; text-wrap: balance; }
-.total__b { margin-top: 10px; font-size: clamp(34px, 10vw, 64px); line-height: 1.05; }
-.total .cta { max-width: 480px; margin: 34px auto 0; }
-
-/* 3. LOMBADA em telas reais */
-.lmbs { background: var(--paper); color: var(--paper-ink); overflow: hidden; }
-.lmbs .kick { color: #8a5a00; }
-.lmbs__mark { margin-top: 18px; font-size: clamp(46px, 13vw, 140px); line-height: 1; }
-.lmbs__mark .lmb { color: var(--paper-ink); }
-.lmbs__p { margin: 22px auto 0; max-width: 600px; font-size: clamp(18px, 5vw, 26px); font-weight: 500; line-height: 1.4; text-wrap: balance; }
-.lmbs__pair { display: inline-grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
-.lmbs__pair span { padding: 14px 18px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; font-size: clamp(14px, 4vw, 18px); font-weight: 700; }
-.lmbs__pair span:last-child { background: var(--paper-ink); color: var(--amber); box-shadow: none; }
-.telas { display: flex; gap: 18px; margin-top: 52px; padding: 10px 20px 26px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-.telas::-webkit-scrollbar { display: none; }
-@media (min-width: 1100px) { .telas { justify-content: center; overflow: visible; } }
-.tela { flex: none; width: min(68vw, 250px); scroll-snap-align: center; }
-.tela__ph { position: relative; padding: 9px; border-radius: 34px; background: linear-gradient(160deg, #2b2a2f, #0e0e10 60%); box-shadow: 0 30px 60px -28px rgba(0, 0, 0, .55); }
-.tela__ph img { width: 100%; aspect-ratio: 716 / 1300; object-fit: cover; object-position: top; border-radius: 26px; background: #fff; }
-.tela figcaption { margin-top: 14px; text-align: center; }
-.tela figcaption b { display: block; font-size: 16px; font-weight: 700; }
-.tela figcaption span { display: block; margin-top: 2px; font-size: 13.5px; line-height: 1.4; color: var(--paper-soft); }
-.lmbs__note { margin-top: 6px; font-size: 12px; color: var(--paper-soft); text-align: center; }
-.lmbs__swipe { margin-top: 4px; font-size: 12px; font-weight: 600; color: #8a5a00; text-align: center; }
-@media (min-width: 1100px) { .lmbs__swipe { display: none; } }
-
-/* 4. bônus do dia 9 */
-.d9 { overflow: hidden; isolation: isolate; border-top: 1px solid var(--line); }
-.d9::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(250, 171, 0, .22), transparent 70%); }
-.d9__big { margin-top: 10px; font-size: clamp(100px, 32vw, 240px); font-weight: 800; line-height: .85; letter-spacing: -.05em; }
-.d9__sub { margin-top: 8px; font-size: clamp(22px, 6vw, 36px); font-weight: 800; letter-spacing: -.02em; }
-.d9__p { margin: 14px auto 0; max-width: 520px; font-size: clamp(16px, 4.4vw, 20px); color: var(--ink2); text-wrap: balance; }
-.d9__plus { margin: 40px auto 0; font-size: clamp(36px, 10vw, 56px); font-weight: 800; line-height: 1; color: var(--amber); }
-.d9__pb { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: center; max-width: 860px; margin: 16px auto 0; text-align: left; }
-@media (min-width: 760px) { .d9__pb { grid-template-columns: 1fr 1fr; } }
-.d9__pb img { width: 100%; max-width: 380px; margin: 0 auto; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .7)); }
-.d9__pb h3 { font-size: clamp(24px, 6.4vw, 34px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; }
-.d9__pb p { margin-top: 12px; font-size: 16px; line-height: 1.55; color: var(--ink2); }
-.d9__pb ul { margin-top: 14px; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
-.d9__pb li { padding: 6px 12px; border-radius: 99px; background: #15120c; box-shadow: inset 0 0 0 1px #3a3226; font-size: 13px; font-weight: 600; }
-.d9__end { margin-top: 48px; }
-.d9__end p { margin-bottom: 14px; font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
 
 /* 5. Dany */
 .dany { border-top: 1px solid var(--line); }
@@ -449,16 +375,6 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .seal i small { display: block; margin-top: 2px; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
 .seal p { font-size: 14px; line-height: 1.45; color: var(--ink2); }
 .seal b { color: var(--ink); }
-
-/* 7. dúvidas */
-.faq { border-top: 1px solid var(--line); }
-.faq__l { max-width: 720px; margin: 36px auto 0; }
-.faq details { border-bottom: 1px solid var(--line); }
-.faq summary { display: flex; justify-content: space-between; gap: 14px; padding: 20px 2px; cursor: pointer; list-style: none; font-size: clamp(16px, 4.4vw, 19px); font-weight: 600; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; flex: none; color: var(--amber); font-size: 24px; line-height: 1; transition: transform .2s; }
-.faq details[open] summary::after { transform: rotate(45deg); }
-.faq details p { padding: 0 2px 20px; font-size: 16px; line-height: 1.55; color: var(--ink2); }
 
 /* 8. fecho */
 .end { overflow: hidden; isolation: isolate; border-top: 1px solid var(--line); text-align: center; }
@@ -668,6 +584,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
         <li class="d9-only"><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Os bônus mais poderosos já criados dentro da melhor estratégia literária do Brasil.</span></li>
         <li class="after-only"><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>3 anos de encontros em grupo</b> ao vivo com a Dany.</span></li>
       </ul>
+      <p class="proof2"><img src="../black-week/assets/alunos.webp" alt="" width="118" height="26"><span><b>+4.400 autores</b> já estão no<br>Método The&nbsp;Book&nbsp;Business</span></p>
 
       <!-- 2. quanto custaria por um ano -->
       <div class="blk">
@@ -696,6 +613,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
         <p class="q2">Mas comprando hoje, você não vai investir tudo isso.<br>Você só vai investir:</p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
+        <p class="price__day">Menos de R$ 7 por dia no primeiro ano. E o Método é seu pra sempre.</p>
         <div class="cta price__cta"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a><p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
       </div>
     </div>
@@ -952,6 +870,8 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
           </div>
         </div>
       </div>
+      <div class="midia__k rv"><p class="kick">Dany na mídia</p></div>
+      <div class="midia rv"><div class="midia__t"><figure><img src="../black-week/assets/midia/band.webp" alt="Dany Sakugawa: Band" width="220" height="140" loading="lazy" decoding="async"><figcaption>Band</figcaption></figure><figure><img src="../black-week/assets/midia/sbt.webp" alt="Dany Sakugawa: SBT" width="220" height="140" loading="lazy" decoding="async"><figcaption>SBT</figcaption></figure><figure><img src="../black-week/assets/midia/bienal-do-livro.webp" alt="Dany Sakugawa: Bienal do Livro" width="220" height="140" loading="lazy" decoding="async"><figcaption>Bienal do Livro</figcaption></figure><figure><img src="../black-week/assets/midia/premio-publishnews.webp" alt="Dany Sakugawa: Prêmio PublishNews" width="220" height="140" loading="lazy" decoding="async"><figcaption>Prêmio PublishNews</figcaption></figure><figure><img src="../black-week/assets/midia/hotmart-festival.webp" alt="Dany Sakugawa: Hotmart Festival" width="220" height="140" loading="lazy" decoding="async"><figcaption>Hotmart Festival</figcaption></figure><figure><img src="../black-week/assets/midia/mauricio-de-sousa.webp" alt="Dany Sakugawa: Com Maurício de Sousa" width="220" height="140" loading="lazy" decoding="async"><figcaption>Com Maurício de Sousa</figcaption></figure><figure><img src="../black-week/assets/midia/band-entrevista.webp" alt="Dany Sakugawa: Band Entrevista" width="220" height="140" loading="lazy" decoding="async"><figcaption>Band Entrevista</figcaption></figure><figure><img src="../black-week/assets/midia/band.webp" alt="Dany Sakugawa: Band" width="220" height="140" loading="lazy" decoding="async"><figcaption>Band</figcaption></figure><figure><img src="../black-week/assets/midia/sbt.webp" alt="Dany Sakugawa: SBT" width="220" height="140" loading="lazy" decoding="async"><figcaption>SBT</figcaption></figure><figure><img src="../black-week/assets/midia/bienal-do-livro.webp" alt="Dany Sakugawa: Bienal do Livro" width="220" height="140" loading="lazy" decoding="async"><figcaption>Bienal do Livro</figcaption></figure><figure><img src="../black-week/assets/midia/premio-publishnews.webp" alt="Dany Sakugawa: Prêmio PublishNews" width="220" height="140" loading="lazy" decoding="async"><figcaption>Prêmio PublishNews</figcaption></figure><figure><img src="../black-week/assets/midia/hotmart-festival.webp" alt="Dany Sakugawa: Hotmart Festival" width="220" height="140" loading="lazy" decoding="async"><figcaption>Hotmart Festival</figcaption></figure><figure><img src="../black-week/assets/midia/mauricio-de-sousa.webp" alt="Dany Sakugawa: Com Maurício de Sousa" width="220" height="140" loading="lazy" decoding="async"><figcaption>Com Maurício de Sousa</figcaption></figure><figure><img src="../black-week/assets/midia/band-entrevista.webp" alt="Dany Sakugawa: Band Entrevista" width="220" height="140" loading="lazy" decoding="async"><figcaption>Band Entrevista</figcaption></figure></div></div>
     </div>
   </section>
 
@@ -961,6 +881,8 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
       <p class="kick">Black Week Motorizada</p>
       <p class="end__a">Essa é a sua <span class="serif gold">chance.</span></p>
       <p class="end__b">Tudo o que a Dany criou, pra sempre. E o LOMBADA ao lado do seu livro, todo dia.</p>
+      <div class="end__price"><p class="price__big"><small>12x de</small><span>R$ 249,51</span></p><p class="price__cash">ou R$ 2.500 à vista</p></div>
+      <div class="card__clock d9-only"><p><b>6 anos de LOMBADA e os Playbooks</b> terminam à meia-noite.</p><div class="clock" data-clock aria-label="Tempo até a meia-noite"></div></div>
       <div class="cta"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a><p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
     </div>
   </section>
