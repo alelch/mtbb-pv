@@ -1156,3 +1156,21 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 '''
 open(f"{R}/black-week-oferta/index.html", "w", encoding="utf-8").write(HTML)
 print("ok", len(HTML))
+
+# 02/11 (cliente): versão CURTA, igual à oferta mas sem a demo do LOMBADA (seção 7b) e sem o botão que leva até ela.
+# Mesmos arquivos da oferta (assets apontam para ../black-week-oferta/). Saída: black-week-oferta-curta/index.html
+_a = HTML.index('  <!-- 7b. o LOMBADA em uma história só')
+_b = HTML.index('  <!-- 8. casos -->')
+CURTA = HTML[:_a] + HTML[_b:]
+_btn = CURTA.index('<a class="lmbc__btn" href="#ferramenta">')
+CURTA = CURTA[:_btn] + CURTA[CURTA.index('</a>', _btn) + 4:]
+CURTA = (CURTA.replace('src="assets/', 'src="../black-week-oferta/assets/')
+              .replace('url("../assets/', 'url("../assets/')
+              .replace('<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-oferta/">',
+                       '<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-oferta-curta/">')
+              .replace('<meta property="og:url" content="https://metodo.thebookbusiness.com.br/black-week-oferta/">',
+                       '<meta property="og:url" content="https://metodo.thebookbusiness.com.br/black-week-oferta-curta/">'))
+assert 'id="ferramenta"' not in CURTA and 'href="#ferramenta"' not in CURTA
+os.makedirs(f"{R}/black-week-oferta-curta", exist_ok=True)
+open(f"{R}/black-week-oferta-curta/index.html", "w", encoding="utf-8").write(CURTA)
+print("curta", len(CURTA))
