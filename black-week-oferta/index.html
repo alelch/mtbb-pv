@@ -309,6 +309,11 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .jn__end { margin-top: 72px; text-align: center; }
 .jn__e1 { font-size: clamp(20px, 5.6vw, 30px); font-weight: 600; color: var(--ink2); }
 .jn__e2 { margin: 6px auto 0; max-width: 900px; font-size: clamp(34px, 9.6vw, 72px); font-weight: 800; line-height: 1.02; letter-spacing: -.035em; text-wrap: balance; }
+.jn__dep { max-width: 680px; margin: 34px auto 0; padding: 24px 26px; border-radius: 18px; background: rgba(255, 255, 255, .04); box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .45); text-align: left; }
+.jn__dep blockquote { position: relative; padding-left: 34px; font-size: clamp(17px, 4.6vw, 21px); font-weight: 600; line-height: 1.45; color: #fff; }
+.jn__dep blockquote::before { content: "“"; position: absolute; left: 0; top: -14px; font-size: 56px; font-weight: 800; line-height: 1; color: var(--amber); }
+.jn__dep figcaption { margin-top: 12px; padding-left: 34px; font-size: 14px; color: var(--ink2); }
+.jn__dep figcaption b { color: var(--amber); }
 .jn__end .cta { max-width: 480px; margin: 32px auto 0; }
 
 /* mais ar entre os cartões do "vai levar" e dos bônus */
@@ -770,6 +775,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
       <div class="jn__end rv">
         <p class="jn__e1">Daqui a <span class="d9-only">6</span><span class="after-only">3</span> anos,</p>
         <p class="jn__e2"><b class="jl" data-l>o seu livro</b> ainda vai estar sendo lido.</p>
+        <figure class="jn__dep"><blockquote>A ideia de construir o hábito de trabalhar no livro diariamente, por meio de pequenas ações, foi especialmente motivadora.</blockquote><figcaption><b>Georgiana Leite</b>, autora de <i>Vai Brilhar!</i>, usou o LOMBADA no piloto</figcaption></figure>
         <div class="cta"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div>
       </div>
     </div>
