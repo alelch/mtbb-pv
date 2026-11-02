@@ -19,10 +19,8 @@ CLOCK = '<div class="clock" data-clock aria-label="Tempo até a meia-noite"></di
 
 # a pilha: o pacote do Aniversário (thebookbusiness.com.br/aula-8-semanas), sem o Retiro; encontros por 3 anos
 PILHA = [
-    ("Método The&nbsp;Book&nbsp;Business", "Nova versão 2026. Toda a estratégia, do primeiro livro ao décimo.", "Vitalício"),
+    ("Método The&nbsp;Book&nbsp;Business", "Toda a estratégia, do primeiro livro ao décimo.", "Vitalício"),
     ("Autoridade Digital para Escritores", "Quais redes usar, o que postar e como ser descoberto.", "Vitalício"),
-    ("Gerador de Posts Magnéticos", "Ideias ilimitadas, feitas para o seu livro.", "Vitalício"),
-    ("Calendário Estratégico do Autor", "O ano inteiro mapeado, mês a mês.", "Vitalício"),
     ("Comunidade The&nbsp;Book&nbsp;Business", "Mais de 2.000 escritores. A sua nova turma.", "Vitalício"),
     ("Workshop MasterClass Best-Seller de Verdade", "", "Vitalício"),
     ("Workshop Redes Sociais para Autores", "", "Vitalício"),
@@ -56,7 +54,7 @@ telas = "\n".join(
     for f, t, d in TELAS)
 
 
-BILL = "".join(f'<div class="bill__row"><span>{n.replace("The Book Business", "The&nbsp;Book&nbsp;Business")}</span><b>{v}</b></div>' for n, v in [('Método The Book Business', 'R$ 1.500,00'), ('Autoridade Digital para Escritores', 'R$ 1.500,00'), ('Gerador de Posts Magnéticos', 'R$ 297,00'), ('Calendário Estratégico do Autor', 'R$ 297,00'), ('Comunidade The Book Business', 'R$ 500,00'), ('Workshops Mão na Massa (5)', 'R$ 2.500,00'), ('Projeto Especial Prêmio Jabuti', 'R$ 1.200,00'), ('Projeto Especial Destaque Amazon', 'R$ 1.200,00'), ('Projeto Especial Autopublicação', 'R$ 1.200,00'), ('Projeto Especial Editora Perfeita', 'R$ 1.200,00')])
+BILL = "".join(f'<div class="bill__row"><span>{n.replace("The Book Business", "The&nbsp;Book&nbsp;Business")}</span><b>{v}</b></div>' for n, v in [('Método The Book Business', 'R$ 1.500,00'), ('Autoridade Digital para Escritores', 'R$ 1.500,00'), ('Comunidade The Book Business', 'R$ 500,00'), ('Workshops Mão na Massa (5)', 'R$ 2.500,00'), ('Projeto Especial Prêmio Jabuti', 'R$ 1.200,00'), ('Projeto Especial Destaque Amazon', 'R$ 1.200,00'), ('Projeto Especial Autopublicação', 'R$ 1.200,00'), ('Projeto Especial Editora Perfeita', 'R$ 1.200,00')])
 _ST = [
   ("tela-semana", "Segunda, 9h", "O seu celular avisa. E o plano da semana já está pronto.", "Montado pela fase do seu livro, pelo gênero e pelo tempo que você tem."),
   ("tela-acoes", "Terça", "Uma ação por vez. Com o texto pronto e a aula por trás.", "O texto já vem com o nome do seu livro. E a aula do Método The Book Business explica o porquê."),
@@ -76,15 +74,13 @@ CASOS = "".join(f'<figure class="caso rv"><img src="../black-week-misterio/asset
 _LEVA = [
   ("Acesso vitalício", "Método The&nbsp;Book&nbsp;Business", "O ecossistema completo de marketing literário. Aulas práticas, passo a passo claro e modelos prontos para transformar o seu livro em referência, com leitores de verdade."),
   ("Acesso vitalício", "Autoridade Digital para Escritores", "Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores."),
-  ("Acesso vitalício", "Gerador de Posts Magnéticos", "Ideias ilimitadas, feitas pelo gênero do seu livro, pela fase e pelo seu jeito de falar. Posts em minutos."),
-  ("Acesso vitalício", "Calendário Estratégico do Autor", "O ano inteiro mapeado, com datas comemorativas e ideias de posts mês a mês."),
   ("Acesso vitalício", "Comunidade The&nbsp;Book&nbsp;Business", "A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma."),
   ("Acesso vitalício", "Workshops Mão na Massa", "<ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul>"),
   ("Acesso vitalício", "Gravação de 100% das lives, encontros e eventos", "Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país."),
   ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
   ("4 Projetos Especiais", "Projetos Especiais", "<ul><li><b>Prêmio Jabuti:</b> a inscrição certa, na categoria certa.</li><li><b>Autopublicação Profissional:</b> revisão, capa, diagramação, ISBN e distribuição.</li><li><b>Editora Perfeita:</b> como escolher a editora certa para o seu livro.</li><li><b>Destaque Amazon:</b> para o seu livro aparecer na Amazon.</li></ul>"),
 ]
-_IMG = ["p-metodo", "p-autoridade", "p-gerador", "p-calendario", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros", "p-projetos"]
+_IMG = ["p-metodo", "p-autoridade", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros", "p-projetos"]
 def _tag(k):
     return k
 LEVA = "".join(f'<div class="lv rv"><img class="lv__img" src="assets/{_IMG[n]}.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">{_tag(k)}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div></div>' for n, (k, t, d) in enumerate(_LEVA) if n > 0)
@@ -685,6 +681,11 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 .dock.on {{ transform: none; }}
 .dock .btn {{ min-height: 56px; }}
 @media (min-width: 900px) {{ .dock {{ display: none; }} footer {{ padding-bottom: 40px; }} }}
+/* 02/11 (cliente): botão flutuante para falar com a Dezza no WhatsApp; sobe quando a barra de compra aparece */
+.zap {{ position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 45; display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); transition: bottom .35s var(--ease); }}
+.zap svg {{ width: 32px; height: 32px; }}
+.dock.on ~ .zap {{ bottom: calc(92px + env(safe-area-inset-bottom)); }}
+@media (min-width: 900px) {{ .zap, .dock.on ~ .zap {{ right: 28px; bottom: 28px; }} }}
 
 @keyframes bar {{ to {{ width: 100%; }} }}
 @keyframes pan {{ 0%, 12% {{ transform: translateY(0); }} 100% {{ transform: translateY(var(--pan, 0px)); }} }}
@@ -720,7 +721,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <div class="bill">
           {BILL}
           <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>nunca foi vendido</b></div>
-          <div class="bill__tot"><span>Total</span><b>R$ 10.594,00</b></div>
+          <div class="bill__tot"><span>Total</span><b>R$ 10.000,00</b></div>
         </div>
       </div>
 
@@ -728,11 +729,11 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="blk">
         <p class="q1">Agora, as contas de quanto você investiria para ter acesso a tudo isso ao longo do tempo:</p>
         <div class="bill">
-          <div class="bill__row"><span>1º ano</span><b>R$ 10.594,00</b></div>
-          <div class="bill__row"><span>2º ano</span><b>R$ 5.297,00</b></div>
-          <div class="bill__row"><span>3º ano</span><b>R$ 5.297,00</b></div>
-          <div class="bill__row"><span>4º ano</span><b>R$ 5.297,00</b></div>
-          <div class="bill__tot"><span>Total investido</span><b>R$ 26.485,00</b></div>
+          <div class="bill__row"><span>1º ano</span><b>R$ 10.000,00</b></div>
+          <div class="bill__row"><span>2º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row"><span>3º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row"><span>4º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__tot"><span>Total investido</span><b>R$ 25.000,00</b></div>
         </div>
       </div>
 
@@ -822,7 +823,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           <p>O ecossistema completo de marketing literário. Tudo o que a Dany aprendeu em 15 anos nos bastidores das editoras, organizado para o autor: aulas práticas, passo a passo claro e modelos prontos para o seu livro ser lido, desejado e lembrado.</p>
           <ul>
             <li>Do primeiro livro ao décimo, da escrita à permanência.</li>
-            <li>Nova versão 2026, com todas as atualizações para sempre.</li>
           </ul>
         </div>
       </div>
@@ -992,6 +992,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 </footer>
 
 <div class="dock" id="dock"><a class="btn" href="#oferta" data-cta>Quero entrar na Black {SETA}</a></div>
+<a class="zap" href="https://thebookbusiness.com.br/dezza" target="_blank" rel="noopener" aria-label="Falar com a Dezza no WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C8.86 3 3.02 8.83 3.02 16c0 2.3.6 4.53 1.74 6.5L3 29l6.68-1.75A12.95 12.95 0 0 0 16.04 29C23.2 29 29.04 23.17 29.04 16S23.2 3 16.04 3Zm0 23.62c-1.98 0-3.92-.53-5.61-1.54l-.4-.24-3.97 1.04 1.06-3.86-.26-.4a10.6 10.6 0 0 1-1.63-5.64c0-5.86 4.78-10.63 10.66-10.63 5.87 0 10.64 4.77 10.64 10.63 0 5.87-4.78 10.64-10.49 10.64Zm5.83-7.96c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.9-1.78-2.22-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.14 3.09 1.3 3.3c.16.21 2.25 3.43 5.45 4.81.76.33 1.36.53 1.82.67.77.24 1.46.21 2.01.13.61-.09 1.89-.77 2.15-1.52.27-.74.27-1.38.19-1.52-.08-.13-.29-.21-.61-.37Z"/></svg></a>
 
 <script>
 (function () {{
