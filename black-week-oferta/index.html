@@ -329,6 +329,26 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .jn__vid { max-width: 860px; margin: 26px auto 48px; overflow: hidden; border-radius: 18px; background: #000; box-shadow: 0 0 0 2px rgba(250, 171, 0, .6), 0 30px 70px -30px rgba(250, 171, 0, .45); }
 .jn__vid vturb-smartplayer { display: block; width: 100%; min-height: 200px; }
 
+/* passo 6: a vitrine como ela é (estante de capas, filtros de gênero) */
+.vt2 { background: #16110c !important; color: #fff !important; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .9), 0 0 0 1px #3a3226 !important; }
+.vt2__top { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid #2c241b; }
+.vt2__top .lmb { color: #f3f0e8 !important; }
+.vt2__top span:last-child { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--amber); }
+.vt2__chips { display: flex; gap: 6px; margin-top: 12px; overflow: hidden; }
+.vt2__chips i { flex: none; padding: 6px 11px; border-radius: 99px; box-shadow: inset 0 0 0 1px #3a3226; font-style: normal; font-size: 11px; font-weight: 600; color: #e9e2d4; }
+.vt2__chips i.on { background: var(--amber); color: #111; box-shadow: none; }
+.vt2__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 10px; margin-top: 16px; }
+.vb { position: relative; min-width: 0; }
+.vb__c { position: relative; padding: 0 6% 6px; border-bottom: 5px solid #4a3a2a; }
+.vb__c img, .vb__capa { display: block; width: 100%; aspect-ratio: 164 / 240; border-radius: 2px 5px 5px 2px; box-shadow: 0 8px 16px -8px rgba(0, 0, 0, .8); }
+.vb__capa { display: flex; flex-direction: column; justify-content: space-between; padding: 12% 10% 8%; background: linear-gradient(160deg, #fe7743, #b5402e); box-shadow: inset 5px 0 0 rgba(0, 0, 0, .18), 0 0 0 2px #faab00, 0 0 24px rgba(250, 171, 0, .6); overflow: hidden; }
+.vb__capa b { font-size: 12px; font-weight: 800; line-height: 1.1; color: #fff; text-align: center; overflow-wrap: anywhere; }
+.vb__capa small { font-size: 7px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255, 255, 255, .8); text-align: center; }
+.vb__t { margin-top: 8px; overflow: hidden; font-size: 11.5px; font-weight: 700; line-height: 1.2; white-space: nowrap; text-overflow: ellipsis; }
+.vb__a { margin-top: 2px; font-size: 10.5px; color: #a8a090; }
+.vb--me .vb__t { color: var(--amber); }
+.vb__tag { position: absolute; left: 50%; top: -9px; z-index: 2; padding: 3px 8px; border-radius: 99px; background: var(--amber); color: #111; font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; transform: translateX(-50%); }
+
 /* passo 5: página do livro · passo 6: vitrine */
 .pg { margin-top: 12px; overflow: hidden; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; }
 .pg__bar { display: flex; align-items: center; gap: 5px; padding: 8px 10px; background: #efe9dc; }
@@ -757,18 +777,11 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
           </div>
         </li>
         <li class="jn__s rv">
-          <div class="jn__t"><span class="jn__n">6</span><h3>E entra na vitrine, para vender mais.</h3><p>O seu livro entra na estante da vitrine dos autores do LOMBADA. Quem passa por ali descobre o seu livro e vai direto para a página dele.</p></div>
-          <div class="jn__app vt">
-            <div class="ap__top"><span class="ap__lmb"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></span><span class="ap__tg">Vitrine dos autores</span></div>
-            <div class="vt__stage">
-              <div class="vt__pop"><span class="vt__pc" aria-hidden="true"></span><span><small>Um leitor abriu</small><b data-l-cap>O seu livro</b></span></div>
-              <div class="vt__shelf" aria-hidden="true">
-                <i style="--w:26px;--h:74%;--c:#14523e"></i><i style="--w:34px;--h:88%;--c:#f3f0e8"></i><i style="--w:22px;--h:64%;--c:#b5402e"></i><i style="--w:30px;--h:80%;--c:#3a3530"></i>
-                <b class="vt__me"><span data-l-cap>O seu livro</span></b>
-                <i style="--w:28px;--h:70%;--c:#faab00"></i><i style="--w:24px;--h:90%;--c:#14523e"></i><i style="--w:32px;--h:76%;--c:#b5402e"></i><i style="--w:22px;--h:60%;--c:#f3f0e8"></i>
-              </div>
-              <div class="vt__wood" aria-hidden="true"></div>
-            </div>
+          <div class="jn__t"><span class="jn__n">6</span><h3>E entra na vitrine, para vender mais.</h3><p>O seu livro entra na vitrine dos autores do LOMBADA, com a capa ao lado de outros autores e filtro por gênero. Cada capa leva direto para a página do livro.</p></div>
+          <div class="jn__app vt2">
+            <div class="vt2__top"><span class="ap__lmb"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></span><span>Vitrine dos autores</span></div>
+            <div class="vt2__chips"><i class="on">Todos</i><i>Romance</i><i>Infantojuvenil</i><i>Fantasia</i><i>Contos</i></div>
+            <div class="vt2__grid"><div class="vb"><div class="vb__c"><img src="assets/vt-mar.webp" alt="" width="164" height="240" loading="lazy" decoding="async"></div><p class="vb__t">Mar de Dentro</p><p class="vb__a">Clara Moura</p></div><div class="vb vb--me"><span class="vb__tag">Seu livro</span><div class="vb__c"><div class="vb__capa"><b data-l-cap>O seu livro</b><small>você</small></div></div><p class="vb__t" data-l-cap>O seu livro</p><p class="vb__a">Você</p></div><div class="vb"><div class="vb__c"><img src="assets/vt-liderar.webp" alt="" width="164" height="240" loading="lazy" decoding="async"></div><p class="vb__t">Liderar sem Gritar</p><p class="vb__a">Caio Nunes</p></div><div class="vb"><div class="vb__c"><img src="assets/vt-raizes.webp" alt="" width="164" height="240" loading="lazy" decoding="async"></div><p class="vb__t">Raízes</p><p class="vb__a">Marta Dias</p></div><div class="vb"><div class="vb__c"><img src="assets/vt-mapa.webp" alt="" width="164" height="240" loading="lazy" decoding="async"></div><p class="vb__t">O Mapa</p><p class="vb__a">Sofia Lins</p></div><div class="vb"><div class="vb__c"><img src="assets/vt-verao.webp" alt="" width="164" height="240" loading="lazy" decoding="async"></div><p class="vb__t">O Último Verão</p><p class="vb__a">Inês Lago</p></div></div>
           </div>
         </li>
       </ol>
