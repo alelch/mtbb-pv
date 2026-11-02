@@ -82,12 +82,9 @@ _LEVA = [
   ("Acesso vitalício", "Workshops Mão na Massa", "<ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul>"),
   ("Acesso vitalício", "Gravação de 100% das lives, encontros e eventos", "Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país."),
   ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
-  ("Projeto Especial", "Prêmio Jabuti", "A inscrição certa, na categoria certa, no maior prêmio literário do país."),
-  ("Projeto Especial", "Autopublicação Profissional", "Revisão, capa, diagramação, ISBN e distribuição, com padrão de mercado."),
-  ("Projeto Especial", "Editora Perfeita", "Como analisar propostas e escolher a editora certa para o seu livro."),
-  ("Projeto Especial", "Destaque Amazon", "Título, descrição, categorias e palavras-chave para o seu livro aparecer na Amazon."),
+  ("4 Projetos Especiais", "Projetos Especiais", "<ul><li><b>Prêmio Jabuti:</b> a inscrição certa, na categoria certa.</li><li><b>Autopublicação Profissional:</b> revisão, capa, diagramação, ISBN e distribuição.</li><li><b>Editora Perfeita:</b> como escolher a editora certa para o seu livro.</li><li><b>Destaque Amazon:</b> para o seu livro aparecer na Amazon.</li></ul>"),
 ]
-_IMG = ["p-metodo", "p-autoridade", "p-gerador", "p-calendario", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros", "p-jabuti", "p-autopublicacao", "p-editora", "p-amazon"]
+_IMG = ["p-metodo", "p-autoridade", "p-gerador", "p-calendario", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros", "p-projetos"]
 LEVA = "".join(f'<div class="lv rv"><img class="lv__img" src="assets/{_IMG[n]}.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">{k}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div></div>' for n, (k, t, d) in enumerate(_LEVA))
 # cupons dos parceiros (valores e regras passados pelo cliente em 01/11; Literare R$2.000 confirmada no mesmo dia: total R$6.700)
 _CUP = [("Gráfica Renograf", "Impressão do seu livro", "até R$ 1.200", "Desconto progressivo pelo valor da impressão. Vale reimpressão."),
@@ -127,6 +124,10 @@ DEMO_JS = "<script>\n(function () {\n  'use strict';\n" + bw[_i:_j] + "})();\n</
 _mis = open(f"{R}/black-week-misterio/index.html", encoding="utf-8").read()
 CASOS_BELT = _mis[_mis.index('<div class="casos">'):_mis.index('<!-- depois dos alunos')].replace('src="assets/casos/', 'src="../black-week-misterio/assets/casos/')
 CASOS_CSS = "\n".join(l for l in _mis.split("\n") if l.startswith(('.casos', '.caso', '.rm .casos')) or l.startswith('  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%'))
+_VID = [("MVWV1r5AFqM", "Lelo Apovian"), ("ffBPbjjEWd4", "Vinicius Profinho"), ("FKATT3aFxOM", "Emília Nunez"), ("dwfYj5r0-Gs", "Candice Pascoal"),
+        ("bOgr78gqu5w", "Susana Arbex"), ("6Zpwi9VAtMg", "Tonia Casarin"), ("0wa0Zg28OUw", "Arnoni Caldart"), ("RGlPbXowLWw", "Léo Dicker"),
+        ("2jrXvu11h78", "Simone Simon"), ("hW7NjsY2WrA", "Robson Leite"), ("E8K6Bd2A12w", "Cibele Lauretino"), ("8vlXq0HOO6Q", "José Julio Cerquetane")]
+VIDEOS = "".join(f'<button type="button" class="vid" data-yt="{v}" aria-label="Assistir ao depoimento de {n}"><img src="https://i.ytimg.com/vi/{v}/hqdefault.jpg" alt="Depoimento de {n}" width="480" height="360" loading="lazy" decoding="async"><span class="vid__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="vid__n">{n}</span></button>' for v, n in _VID)
 SPINES = '<div class="spines" aria-hidden="true"><i style="--h:62%;--c:#14523e"></i><i style="--h:84%;--c:#faab00"></i><i style="--h:70%;--c:#b5402e"></i><i style="--h:100%;--c:#f3f0e8"></i><i style="--h:56%;--c:#fc783c"></i><i style="--h:78%;--c:#3a3530"></i></div>'
 HTML = f'''<!doctype html>
 <html lang="pt-BR">
@@ -232,6 +233,39 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .h__cue {{ display: inline-flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 34px; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink3); text-decoration: none; }}
 .h__cue svg {{ width: 20px; height: 20px; animation: bob 1.8s ease-in-out infinite; }}
 
+/* bônus com o mesmo peso: mesma largura, mesma área de imagem, mesmo título */
+@media (min-width: 760px) {{ .bon2 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }} }}
+.bon2__c {{ display: flex; flex-direction: column; align-items: center; }}
+.bon2__vis {{ display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 280px; margin-top: 14px; }}
+.bon2__c .bon2__vis img {{ width: auto; max-width: 100%; height: 100%; margin: 0; object-fit: contain; }}
+.bon2__vis .dbl {{ margin-top: 0; }}
+.bon2__vis .dbl b {{ font-size: clamp(26px, 7vw, 40px); }}
+.bon2__vis .dbl__b b {{ font-size: clamp(46px, 13vw, 72px); }}
+.bon2__vis .spines {{ height: 110px; margin-top: 22px; }}
+.bon2__c h3 {{ min-height: 2.4em; font-size: clamp(20px, 5.4vw, 26px); }}
+
+/* vídeos dos alunos e garantia */
+.vids {{ display: flex; gap: 12px; margin: 36px -20px 0; padding: 0 20px 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }}
+.vids::-webkit-scrollbar {{ display: none; }}
+@media (min-width: 900px) {{ .vids {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 40px auto 0; padding: 0; overflow: visible; max-width: 1080px; }} }}
+.vid {{ position: relative; flex: none; width: 82vw; max-width: 420px; aspect-ratio: 16 / 9; overflow: hidden; border: 0; border-radius: 14px; padding: 0; background: #111; cursor: pointer; scroll-snap-align: center; box-shadow: 0 0 0 1px #2a2620; }}
+@media (min-width: 900px) {{ .vid {{ width: auto; max-width: none; }} }}
+.vid img {{ width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease); }}
+.vid:hover img {{ transform: scale(1.04); }}
+.vid__play {{ position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; background: rgba(0, 0, 0, .6); color: #fff; box-shadow: 0 0 0 2px rgba(250, 171, 0, .9); }}
+.vid__play svg {{ width: 26px; height: 26px; margin-left: 3px; }}
+.vid__n {{ position: absolute; left: 10px; bottom: 10px; padding: 4px 10px; border-radius: 99px; background: rgba(0, 0, 0, .7); font-size: 12px; font-weight: 700; color: #fff; }}
+.vid iframe {{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }}
+.vids__k {{ margin-top: 40px; text-align: center; font-size: clamp(17px, 4.6vw, 22px); font-weight: 700; }}
+.gar {{ border-top: 1px solid var(--line); }}
+.gar__c {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; align-items: center; max-width: 820px; margin: 0 auto; padding: 30px 22px; border-radius: 22px; background: radial-gradient(ellipse 80% 120% at 0% 50%, rgba(250, 171, 0, .16), transparent 70%), #0d0b08; box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .45); text-align: center; }}
+@media (min-width: 760px) {{ .gar__c {{ grid-template-columns: 200px 1fr; text-align: left; padding: 36px 40px; }} }}
+.gar__seal {{ display: flex; flex-direction: column; align-items: center; justify-content: center; width: 170px; height: 170px; margin: 0 auto; border-radius: 50%; background: var(--gold); color: #111; box-shadow: 0 0 0 8px rgba(250, 171, 0, .15), 0 20px 40px -16px rgba(250, 171, 0, .6); }}
+.gar__seal b {{ font-size: 72px; font-weight: 800; line-height: .9; letter-spacing: -.04em; }}
+.gar__seal span {{ margin-top: 4px; font-size: 12px; font-weight: 800; line-height: 1.2; letter-spacing: .14em; text-transform: uppercase; text-align: center; }}
+.gar__t h2 {{ font-size: clamp(28px, 7.6vw, 44px); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; }}
+.gar__t p {{ margin-top: 12px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.6; color: var(--ink2); }}
+
 /* bônus em dobro, lombadinhas e o quadro especial do LOMBADA */
 .dbl {{ display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 18px; }}
 .dbl > div {{ text-align: center; }}
@@ -325,7 +359,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .price__cta {{ max-width: 480px; margin: 26px auto 0; }}
 .resumo .card__list {{ margin-top: 22px; }}
 .bon2 {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 900px; margin: 34px auto 0; }}
-@media (min-width: 760px) {{ .bon2 {{ grid-template-columns: 1fr 1fr; }} }}
+@media (min-width: 760px) {{ .bon2 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }} }}
 .bon2__c {{ padding: 26px 22px; border-radius: 18px; background: #0d0b08; box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .5); text-align: center; }}
 .bon2__c img {{ width: 70%; max-width: 260px; margin: 16px auto 0; filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .7)); }}
 .bon2__c .bon2__big {{ margin-top: 14px; font-size: clamp(84px, 26vw, 140px); font-weight: 800; line-height: .9; letter-spacing: -.05em; }}
@@ -618,16 +652,15 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="bon2">
         <div class="bon2__c rv">
           <span class="lv__k">Bônus 1</span>
-          <div class="dbl"><div class="dbl__a"><b>3 anos</b><small>normal</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div>
-          {SPINES}
-          <h3>{LMB} em dobro.</h3>
-          <p>Hoje você recebe o dobro: 6 anos de LOMBADA no lugar de 3. Amanhã volta a ser 3.</p>
+          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>normal</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div>{SPINES}</div>
+          <h3>LOMBADA em dobro: 6 anos no lugar de 3.</h3>
+          <p>Hoje você recebe o dobro: 6 anos com o LOMBADA ao lado do seu livro, todo dia. Amanhã volta a ser 3.</p>
         </div>
         <div class="bon2__c rv">
           <span class="lv__k">Bônus 2</span>
-          <img src="assets/playbooks.webp" alt="Playbooks MTBB" width="475" height="592" loading="lazy" decoding="async">
-          <h3>Playbooks MTBB, entregues fisicamente na sua casa.</h3>
-          <p>A nova extensão prática do Método The&nbsp;Book&nbsp;Business, criada pessoalmente pela Dany. Pra anotar ideias, organizar estratégias e acompanhar a evolução do seu livro.</p>
+          <div class="bon2__vis"><img src="assets/playbooks.webp" alt="Playbooks MTBB" width="475" height="592" loading="lazy" decoding="async"></div>
+          <h3>Playbooks MTBB físicos, entregues na sua casa.</h3>
+          <p>A extensão prática do Método The&nbsp;Book&nbsp;Business, criada pela Dany, para organizar as estratégias e acompanhar a evolução do seu livro.</p>
         </div>
       </div>
     </div>
@@ -709,11 +742,26 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   <section class="sec casos-sec">
     <div class="wrap">
       <div class="center rv"><h2 class="h2">A estratégia que mais transforma autores comuns em <span class="serif gold"><span style="white-space:nowrap">best-sellers</span> de verdade.</span></h2></div>
+      <div class="vids">{VIDEOS}</div>
+      <p class="vids__k rv">E tem muito mais autor chegando longe:</p>
     </div>
     {CASOS_BELT}
     <div class="wrap">
       <p class="casos__more rv">E muito mais.</p>
       <div class="cta leva__cta rv">{CTA}</div>
+    </div>
+  </section>
+
+  <!-- 8b. garantia -->
+  <section class="sec gar">
+    <div class="wrap">
+      <div class="gar__c rv">
+        <div class="gar__seal"><b>15</b><span>dias de<br>garantia</span></div>
+        <div class="gar__t">
+          <h2>Entre, use, conheça tudo.</h2>
+          <p>Você tem 15 dias para entrar no Método The&nbsp;Book&nbsp;Business, abrir o LOMBADA e testar com o seu livro. Se não for pra você, devolvemos 100% do valor. Sem pergunta.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -833,6 +881,14 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       belt.addEventListener('touchend', function () {{ setTimeout(function () {{ belt.classList.remove('hold'); }}, 1200); }}, {{ passive: true }});
     }});
   }})();
+
+  // vídeos: só carrega o YouTube quando a pessoa clica
+  $$('.vid').forEach(function (b) {{
+    b.addEventListener('click', function () {{
+      if (b.querySelector('iframe')) return;
+      b.insertAdjacentHTML('beforeend', '<iframe src="https://www.youtube-nocookie.com/embed/' + b.getAttribute('data-yt') + '?autoplay=1&rel=0" title="Depoimento" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>');
+    }});
+  }});
 
   // entrada dos blocos: a pilha entra item por item
   if ('IntersectionObserver' in window) {{
