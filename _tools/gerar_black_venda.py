@@ -30,10 +30,6 @@ PILHA = [
     ("Workshop Planejamento Anual", "", "Vitalício"),
     ("Gravação de 100% das lives, encontros e eventos", "Com roteiristas premiadas, agentes literárias e publishers das maiores editoras.", "Vitalício"),
     ("Encontros em grupo ao vivo com a Dany", "Todo mês, para ajustar a estratégia do seu livro.", "3 anos"),
-    ("Projeto Especial Prêmio Jabuti", "", "Vitalício"),
-    ("Projeto Especial Autopublicação Profissional", "", "Vitalício"),
-    ("Projeto Especial Editora Perfeita", "", "Vitalício"),
-    ("Projeto Especial Destaque Amazon", "", "Vitalício"),
 ]
 rows = "\n".join(
     f'        <li class="row rv"><span class="row__n">{i:02d}</span><span class="row__t"><b>{t}</b>{f"<small>{d}</small>" if d else ""}</span><span class="row__k">{k}</span></li>'
@@ -55,7 +51,7 @@ telas = "\n".join(
     for f, t, d in TELAS)
 
 
-BILL = "".join(f'<div class="bill__row"><span>{n.replace("The Book Business", "The&nbsp;Book&nbsp;Business")}</span><b>{v}</b></div>' for n, v in [('Método The Book Business', 'R$ 1.500,00'), ('Autoridade Digital para Escritores', 'R$ 1.500,00'), ('Comunidade The Book Business', 'R$ 500,00'), ('Workshops Mão na Massa (5)', 'R$ 2.500,00'), ('Projeto Especial Prêmio Jabuti', 'R$ 1.200,00'), ('Projeto Especial Destaque Amazon', 'R$ 1.200,00'), ('Projeto Especial Autopublicação', 'R$ 1.200,00'), ('Projeto Especial Editora Perfeita', 'R$ 1.200,00')])
+BILL = "".join(f'<div class="bill__row"><span>{n.replace("The Book Business", "The&nbsp;Book&nbsp;Business")}</span><b>{v}</b></div>' for n, v in [('Método The Book Business', 'R$ 1.500,00'), ('Autoridade Digital para Escritores', 'R$ 1.500,00'), ('Comunidade The Book Business', 'R$ 500,00'), ('Workshops Mão na Massa (5)', 'R$ 2.500,00')])
 _ST = [
   ("tela-semana", "Segunda, 9h", "O seu celular avisa. E o plano da semana já está pronto.", "Montado pela fase do seu livro, pelo gênero e pelo tempo que você tem."),
   ("tela-acoes", "Terça", "Uma ação por vez. Com o texto pronto e a aula por trás.", "O texto já vem com o nome do seu livro. E a aula do Método The Book Business explica o porquê."),
@@ -79,9 +75,8 @@ _LEVA = [
   ("Acesso vitalício", "Workshops Mão na Massa", "<ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul>"),
   ("Acesso vitalício", "Gravação de 100% das lives, encontros e eventos", "Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país."),
   ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
-  ("4 Projetos Especiais", "Projetos Especiais", "<ul><li><b>Prêmio Jabuti:</b> a inscrição certa, na categoria certa.</li><li><b>Autopublicação Profissional:</b> revisão, capa, diagramação, ISBN e distribuição.</li><li><b>Editora Perfeita:</b> como escolher a editora certa para o seu livro.</li><li><b>Destaque Amazon:</b> para o seu livro aparecer na Amazon.</li></ul>"),
 ]
-_IMG = ["p-metodo", "p-autoridade", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros", "p-projetos"]
+_IMG = ["p-metodo", "p-autoridade", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros"]
 def _tag(k):
     return k
 LEVA = "".join(f'<div class="lv rv"><img class="lv__img" src="assets/{_IMG[n]}.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">{_tag(k)}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div></div>' for n, (k, t, d) in enumerate(_LEVA) if n > 0)
@@ -724,7 +719,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <div class="bill">
           {BILL}
           <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>nunca foi vendido</b></div>
-          <div class="bill__tot"><span>Total</span><b>R$ 10.000,00</b></div>
+          <div class="bill__tot"><span>Total</span><b>R$ 6.000,00</b></div>
         </div>
       </div>
 
@@ -732,11 +727,11 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="blk">
         <p class="q1">Agora, as contas de quanto você investiria para ter acesso a tudo isso ao longo do tempo:</p>
         <div class="bill">
-          <div class="bill__row"><span>1º ano</span><b>R$ 10.000,00</b></div>
-          <div class="bill__row"><span>2º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__row"><span>3º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__row"><span>4º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__tot"><span>Total investido</span><b>R$ 25.000,00</b></div>
+          <div class="bill__row"><span>1º ano</span><b>R$ 6.000,00</b></div>
+          <div class="bill__row"><span>2º ano</span><b>R$ 3.000,00</b></div>
+          <div class="bill__row"><span>3º ano</span><b>R$ 3.000,00</b></div>
+          <div class="bill__row"><span>4º ano</span><b>R$ 3.000,00</b></div>
+          <div class="bill__tot"><span>Total investido</span><b>R$ 15.000,00</b></div>
         </div>
       </div>
 
@@ -795,14 +790,14 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="card rv">
         <p class="q2">Tudo o que você leva na Black Week Motorizada:</p>
         <ul class="card__list">
-          <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos, workshops e Projetos Especiais, <b>vitalícios</b></span></li>
+          <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos e workshops, <b>vitalícios</b></span></li>
           <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
           <li>{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
           <li>{CK}<span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
-        <p class="resumo__de">De <s>R$ 25.000,00</s></p>
+        <p class="resumo__de">De <s>R$ 15.000,00</s></p>
         <p class="resumo__por">por apenas</p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
