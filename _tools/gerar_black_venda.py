@@ -86,7 +86,7 @@ _LEVA = [
 ]
 _IMG = ["p-metodo", "p-autoridade", "p-gerador", "p-calendario", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros", "p-projetos"]
 def _tag(k):
-    return "Bônus · " + ("vitalício" if k == "Acesso vitalício" else k)
+    return k
 LEVA = "".join(f'<div class="lv rv"><img class="lv__img" src="assets/{_IMG[n]}.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">{_tag(k)}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div></div>' for n, (k, t, d) in enumerate(_LEVA) if n > 0)
 # cupons dos parceiros (valores e regras passados pelo cliente em 01/11; Literare R$2.000 confirmada no mesmo dia: total R$6.700)
 _CUP = [("Gráfica Renograf", "Impressão do seu livro", "até R$ 1.200", "Desconto progressivo pelo valor da impressão. Vale reimpressão."),
@@ -158,9 +158,19 @@ HTML = f'''<!doctype html>
 <link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-oferta/">
 <link rel="icon" type="image/webp" href="../lancamento90d/favicon.webp">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Black Week Motorizada · Inscrições liberadas">
-<meta property="og:description" content="Tudo o que a Dany criou para autores, pra sempre. E o LOMBADA.">
-<meta property="og:image" content="https://metodo.thebookbusiness.com.br/black-week/assets/og-black-week.jpg">
+<meta property="og:url" content="https://metodo.thebookbusiness.com.br/black-week-oferta/">
+<meta property="og:site_name" content="The Book Business">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="A maior oferta de todos os tempos + LOMBADA">
+<meta property="og:description" content="Inscrições liberadas na Black Week Motorizada. Método The Book Business vitalício + LOMBADA: leva o seu livro cada vez mais longe.">
+<meta property="og:image" content="https://metodo.thebookbusiness.com.br/black-week-oferta/assets/og-oferta.jpg">
+<meta property="og:image:secure_url" content="https://metodo.thebookbusiness.com.br/black-week-oferta/assets/og-oferta.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Black Week Motorizada: a maior oferta de todos os tempos + LOMBADA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://metodo.thebookbusiness.com.br/black-week-oferta/assets/og-oferta.jpg">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/poppins-800.woff2">
 <script src="../pixel.js"></script>
 <script src="../gtag.js" defer></script>
@@ -440,6 +450,16 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .jn__e2 {{ margin: 6px auto 0; max-width: 900px; font-size: clamp(34px, 9.6vw, 72px); font-weight: 800; line-height: 1.02; letter-spacing: -.035em; text-wrap: balance; }}
 .jn__end .cta {{ max-width: 480px; margin: 32px auto 0; }}
 
+/* mais ar entre os cartões do "vai levar" e dos bônus */
+.leva__g {{ gap: 28px !important; margin-top: 28px !important; }}
+@media (min-width: 760px) {{ .leva__g {{ gap: 32px !important; }} }}
+.lv__b {{ padding: 24px 22px 28px !important; }}
+.lv__b h3 {{ margin-top: 14px !important; }}
+.lv__b p, .lv__b ul {{ margin-top: 12px !important; }}
+.lmbc {{ margin-top: 28px !important; }}
+.bon2 {{ gap: 28px !important; }}
+.cupg {{ gap: 18px !important; }}
+
 /* passo 5: página do livro · passo 6: vitrine */
 .pg {{ margin-top: 12px; overflow: hidden; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; }}
 .pg__bar {{ display: flex; align-items: center; gap: 5px; padding: 8px 10px; background: #efe9dc; }}
@@ -454,12 +474,22 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .pg__btn {{ display: inline-block; margin-top: 10px; padding: 8px 14px; border-radius: 8px; background: var(--paper-ink); color: var(--amber); font-size: 12px; font-weight: 700; }}
 .vt {{ background: #fe7743 !important; }}
 .vt .ap__tg {{ color: #3a1a08; }}
-.vt__shelf {{ display: flex; align-items: flex-end; justify-content: center; gap: 6px; height: 190px; margin-top: 14px; padding: 0 10px; border-bottom: 8px solid #3a1a08; }}
-.vt__shelf i {{ width: 30px; height: var(--h); border-radius: 4px 4px 0 0; background: var(--c); box-shadow: inset 0 -12px 0 rgba(0, 0, 0, .12); }}
-.vt__me {{ display: flex; align-items: center; justify-content: center; width: 46px; height: 100%; border-radius: 5px 5px 0 0; background: #1a1a1a; box-shadow: 0 0 0 3px #faab00, 0 0 24px rgba(250, 171, 0, .8); animation: vtpulse 2.4s ease-in-out infinite; }}
-.vt__me span {{ writing-mode: vertical-rl; transform: rotate(180deg); max-height: 92%; overflow: hidden; color: #faab00; font-size: 12px; font-weight: 800; white-space: nowrap; text-overflow: ellipsis; }}
-.vt__cap {{ margin-top: 10px; text-align: center; font-size: 12.5px; font-weight: 700; color: #3a1a08; }}
-@keyframes vtpulse {{ 50% {{ box-shadow: 0 0 0 3px #faab00, 0 0 40px rgba(250, 171, 0, 1); }} }}
+.vt__stage {{ position: relative; margin-top: 14px; padding-top: 70px; }}
+.vt__shelf {{ display: flex; align-items: flex-end; justify-content: center; gap: 4px; height: 200px; padding: 0 6px; }}
+.vt__shelf i {{ position: relative; flex: none; width: var(--w); height: var(--h); border-radius: 3px 3px 0 0; background: var(--c); box-shadow: inset -4px 0 0 rgba(0, 0, 0, .12), inset 0 -14px 0 rgba(0, 0, 0, .1); }}
+.vt__shelf i::before, .vt__shelf i::after {{ content: ""; position: absolute; left: 22%; right: 22%; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .55); }}
+.vt__shelf i::before {{ bottom: 22px; }} .vt__shelf i::after {{ bottom: 30px; }}
+.vt__me {{ position: relative; flex: none; display: flex; align-items: center; justify-content: center; width: 50px; height: 100%; border-radius: 4px 4px 0 0; background: #1a1a1a; transform: translateY(-14px); box-shadow: 0 0 0 3px #faab00, 0 14px 30px rgba(0, 0, 0, .35), 0 0 30px rgba(250, 171, 0, .7); animation: vtsobe 3.6s var(--ease) infinite; }}
+.vt__me span {{ writing-mode: vertical-rl; transform: rotate(180deg); max-height: 90%; overflow: hidden; color: #faab00; font-size: 13px; font-weight: 800; white-space: nowrap; text-overflow: ellipsis; }}
+.vt__wood {{ height: 12px; border-radius: 0 0 6px 6px; background: linear-gradient(#5a2a0e, #3a1a08); box-shadow: 0 10px 18px -8px rgba(0, 0, 0, .5); }}
+.vt__pop {{ position: absolute; left: 50%; top: 0; display: flex; align-items: center; gap: 10px; max-width: 92%; padding: 8px 14px 8px 8px; border-radius: 12px; background: #fff; box-shadow: 0 14px 28px -12px rgba(0, 0, 0, .5); transform: translateX(-50%); animation: vtpop 3.6s var(--ease) infinite; }}
+.vt__pop::after {{ content: ""; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; background: #fff; transform: translateX(-50%) rotate(45deg); }}
+.vt__pc {{ flex: none; width: 30px; height: 42px; border-radius: 2px 5px 5px 2px; background: linear-gradient(160deg, #b5402e, #6e2418); box-shadow: inset 4px 0 0 rgba(0, 0, 0, .2); }}
+.vt__pop small {{ display: block; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8a5a00; }}
+.vt__pop b {{ display: block; max-width: 190px; overflow: hidden; font-size: 14px; font-weight: 800; white-space: nowrap; text-overflow: ellipsis; color: #1a1a1a; }}
+@media (max-width: 520px) {{ .vt__shelf {{ gap: 3px; padding: 0; }} .vt__shelf i {{ width: calc(var(--w) * .7); }} .vt__me {{ width: 40px; }} .vt__me span {{ font-size: 11.5px; }} }}
+@keyframes vtsobe {{ 0%, 15% {{ transform: translateY(0); }} 35%, 85% {{ transform: translateY(-14px); }} 100% {{ transform: translateY(0); }} }}
+@keyframes vtpop {{ 0%, 100% {{ transform: translate(-50%, 0); }} 50% {{ transform: translate(-50%, -6px); }} }}
 /* garantia: sem as linhas de separação, com mais presença */
 .gar {{ border-top: 0 !important; background: none !important; padding-top: 24px; }}
 .gar + .dany {{ border-top: 0; padding-top: 24px; }}
@@ -759,7 +789,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="mtc rv">
         <img class="mtc__img" src="assets/p-metodo.webp" alt="Método The Book Business" width="720" height="567" loading="lazy" decoding="async">
         <div class="mtc__b">
-          <span class="lv__k mtc__k">Produto principal · vitalício</span>
+          <span class="lv__k mtc__k">Acesso vitalício</span>
           <h3>Método The&nbsp;Book&nbsp;Business</h3>
           <p>O ecossistema completo de marketing literário. Tudo o que a Dany aprendeu em 15 anos nos bastidores das editoras, organizado para o autor: aulas práticas, passo a passo claro e modelos prontos para o seu livro ser lido, desejado e lembrado.</p>
           <ul>
@@ -771,7 +801,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="lmbc rv">
         <div class="lmbc__art">{SPINES}<p class="lmbc__mark">{LMB}</p></div>
         <div class="lmbc__b">
-          <span class="lv__k">Bônus principal · <span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
+          <span class="lv__k"><span class="d9-only">6 anos de acesso hoje</span><span class="after-only">3 anos de acesso</span></span>
           <h3>A ferramenta que nunca deixa o seu livro parar.</h3>
           <ul>
             <li><b>Seu livro não para:</b> toda semana, o plano pronto, com o texto e a aula por trás.</li>
@@ -843,11 +873,18 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           </div>
         </li>
         <li class="jn__s rv">
-          <div class="jn__t"><span class="jn__n">6</span><h3>E entra na vitrine, para vender mais.</h3><p>Na vitrine dos autores do LOMBADA, o seu livro fica na estante ao lado de outros autores, onde novos leitores passam e descobrem o seu.</p></div>
+          <div class="jn__t"><span class="jn__n">6</span><h3>E entra na vitrine, para vender mais.</h3><p>O seu livro entra na estante da vitrine dos autores do LOMBADA. Quem passa por ali descobre o seu livro e vai direto para a página dele.</p></div>
           <div class="jn__app vt">
             <div class="ap__top">{LMB_S}<span class="ap__tg">Vitrine dos autores</span></div>
-            <div class="vt__shelf" aria-hidden="true"><i style="--h:78%;--c:#14523e"></i><i style="--h:92%;--c:#b5402e"></i><i style="--h:70%;--c:#3a3530"></i><b class="vt__me"><span data-l-cap>O seu livro</span></b><i style="--h:84%;--c:#fc783c"></i><i style="--h:66%;--c:#f3f0e8"></i><i style="--h:88%;--c:#14523e"></i></div>
-            <p class="vt__cap">↑ o seu livro, entre os autores do LOMBADA</p>
+            <div class="vt__stage">
+              <div class="vt__pop"><span class="vt__pc" aria-hidden="true"></span><span><small>Um leitor abriu</small><b data-l-cap>O seu livro</b></span></div>
+              <div class="vt__shelf" aria-hidden="true">
+                <i style="--w:26px;--h:74%;--c:#14523e"></i><i style="--w:34px;--h:88%;--c:#f3f0e8"></i><i style="--w:22px;--h:64%;--c:#b5402e"></i><i style="--w:30px;--h:80%;--c:#3a3530"></i>
+                <b class="vt__me"><span data-l-cap>O seu livro</span></b>
+                <i style="--w:28px;--h:70%;--c:#faab00"></i><i style="--w:24px;--h:90%;--c:#14523e"></i><i style="--w:32px;--h:76%;--c:#b5402e"></i><i style="--w:22px;--h:60%;--c:#f3f0e8"></i>
+              </div>
+              <div class="vt__wood" aria-hidden="true"></div>
+            </div>
           </div>
         </li>
       </ol>
