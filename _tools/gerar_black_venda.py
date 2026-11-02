@@ -141,6 +141,10 @@ _VID = [("MVWV1r5AFqM", "Lelo Apovian"), ("ffBPbjjEWd4", "Vinicius Profinho"), (
 VIDEOS = "".join(f'<button type="button" class="vid" data-yt="{v}" aria-label="Assistir ao depoimento de {n}"><img src="https://i.ytimg.com/vi/{v}/hqdefault.jpg" alt="Depoimento de {n}" width="480" height="360" loading="lazy" decoding="async"><span class="vid__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="vid__n">{n}</span></button>' for v, n in _VID)
 _MID = [("band", "Band"), ("sbt", "SBT"), ("bienal-do-livro", "Bienal do Livro"), ("premio-publishnews", "Prêmio PublishNews"), ("hotmart-festival", "Hotmart Festival"), ("mauricio-de-sousa", "Com Maurício de Sousa"), ("band-entrevista", "Band Entrevista")]
 MIDIA = "".join(f'<figure><img src="../black-week/assets/midia/{f}.webp" alt="Dany Sakugawa: {n}" width="220" height="140" loading="lazy" decoding="async"><figcaption>{n}</figcaption></figure>' for f, n in _MID)
+_ji = bw.index("  var ALL = '*';"); _jj = bw.index("  var MES = [")
+_ki = bw.index("  var IDEIAS = {"); _kj = bw.index("  var IC = {")
+JN_DADOS = bw[_ji:_jj] + bw[_ki:_kj]
+LMB_S = '<span class="ap__lmb">' + LMB + '</span>'
 SPINES = '<div class="spines" aria-hidden="true"><i style="--h:62%;--c:#14523e"></i><i style="--h:84%;--c:#faab00"></i><i style="--h:70%;--c:#b5402e"></i><i style="--h:100%;--c:#f3f0e8"></i><i style="--h:56%;--c:#fc783c"></i><i style="--h:78%;--c:#3a3530"></i></div>'
 HTML = f'''<!doctype html>
 <html lang="pt-BR">
@@ -379,6 +383,63 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .mtc__b li::before {{ content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }}
 .lmbc {{ margin-top: 14px !important; }}
 
+/* LOMBADA em uma história só */
+.jorn {{ border-top: 1px solid var(--line); scroll-margin-top: 56px; background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(250, 171, 0, .12), transparent 70%); }}
+.jn__head .h2 {{ max-width: 820px; margin-left: auto; margin-right: auto; }}
+.jn__in {{ display: block; max-width: 520px; margin: 28px auto 0; text-align: left; }}
+.jn__in span {{ display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); }}
+.jn__in input {{ width: 100%; height: 60px; padding: 0 18px; border: 2px solid var(--amber); border-radius: 12px; outline: none; background: #0d0b08; color: #fff; font: 600 20px/1 "Poppins", sans-serif; box-shadow: 0 0 0 6px rgba(250, 171, 0, .08); }}
+.jn__in input::placeholder {{ color: #7a746a; font-weight: 500; }}
+.jn__in input:focus {{ box-shadow: 0 0 0 6px rgba(250, 171, 0, .2); }}
+.jn__hint {{ margin-top: 12px; font-size: 14px; color: var(--ink3); }}
+.jl {{ color: var(--amber); }}
+.jn {{ position: relative; max-width: 1000px; margin: 56px auto 0; list-style: none; display: grid; gap: 56px; }}
+.jn::before {{ content: ""; position: absolute; left: 19px; top: 10px; bottom: 10px; width: 2px; background: linear-gradient(var(--amber), rgba(250, 171, 0, .15)); }}
+.jn__s {{ position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; padding-left: 58px; }}
+@media (min-width: 900px) {{ .jn__s {{ grid-template-columns: 5fr 6fr; gap: 44px; align-items: center; }} }}
+.jn__n {{ position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--gold); color: #111; font-size: 17px; font-weight: 800; box-shadow: 0 0 0 6px #000; }}
+.jn__t h3 {{ font-size: clamp(24px, 6.4vw, 36px); font-weight: 800; line-height: 1.1; letter-spacing: -.025em; text-wrap: balance; }}
+.jn__t p {{ margin-top: 10px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.55; color: var(--ink2); }}
+.jn__app {{ padding: 16px; border-radius: 20px; background: var(--paper); color: var(--paper-ink); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .9), 0 0 0 1px #2e2a24; }}
+.ap__top {{ display: flex; align-items: center; justify-content: space-between; gap: 10px; }}
+.ap__lmb {{ font-size: 14px; }} .ap__lmb .lmb {{ color: var(--paper-ink); }}
+.ap__tg {{ font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--paper-soft); }}
+.ap__ti {{ margin-top: 10px; font-size: 22px; font-weight: 800; line-height: 1.15; color: #8a5a00; }}
+.ap__pr {{ display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--paper-soft); }}
+.ap__pr i {{ flex: 1; height: 6px; border-radius: 6px; background: #e3ded2; overflow: hidden; }}
+.ap__pr b {{ display: block; height: 100%; width: 0; background: var(--green); transition: width .5s var(--ease); }}
+.ap__acts {{ display: grid; gap: 8px; margin-top: 12px; }}
+.ap__act {{ display: flex; gap: 12px; align-items: flex-start; width: 100%; padding: 12px; border: 0; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; text-align: left; cursor: pointer; font: inherit; color: inherit; transition: background .2s; }}
+.ap__act i {{ flex: none; display: grid; place-items: center; width: 24px; height: 24px; margin-top: 1px; border-radius: 50%; box-shadow: inset 0 0 0 2px #c9c1b0; color: transparent; font-style: normal; font-size: 14px; font-weight: 800; transition: background .2s, color .2s; }}
+.ap__act b {{ display: block; font-size: 14.5px; line-height: 1.35; }}
+.ap__act small {{ display: block; margin-top: 3px; font-size: 12px; color: var(--paper-soft); }}
+.ap__act.ok {{ background: #eef8ea; }}
+.ap__act.ok i {{ background: var(--green); box-shadow: none; color: #fff; }}
+.ap__act.ok b {{ text-decoration: line-through; text-decoration-color: rgba(0, 0, 0, .35); }}
+.ap__txt {{ margin-top: 12px; padding: 14px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; font-size: 14.5px; line-height: 1.6; white-space: pre-line; }}
+.ap__txt .vr {{ padding: 0 4px; border-radius: 4px; background: #efe9dc; color: var(--paper-soft); }}
+.ap__txt .jl, .ap__ideas .jl {{ color: #8a5a00; font-weight: 700; }}
+.ap__copy {{ display: block; width: 100%; margin-top: 10px; padding: 13px; border: 0; border-radius: 12px; background: var(--paper-ink); color: var(--amber); font: 700 14px/1 "Poppins", sans-serif; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }}
+.ap__pills {{ display: flex; gap: 6px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; }}
+.ap__pills button {{ flex: none; padding: 8px 12px; border: 1px solid #d3ccbd; border-radius: 99px; background: #fff; color: #3a3833; font: 600 12px/1 "Poppins", sans-serif; cursor: pointer; }}
+.ap__pills button[aria-pressed="true"] {{ background: var(--paper-ink); border-color: var(--paper-ink); color: #fff; }}
+.ap__ops {{ display: grid; gap: 8px; margin-top: 12px; }}
+.ap__op {{ display: flex; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; }}
+.ap__op .d {{ flex: none; width: 46px; padding: 6px 0; border-radius: 10px; background: var(--paper-ink); color: #fff; text-align: center; line-height: 1; }}
+.ap__op .d b {{ display: block; font-size: 18px; }} .ap__op .d small {{ display: block; margin-top: 2px; font-size: 10px; text-transform: uppercase; color: var(--amber); }}
+.ap__op p {{ font-size: 14px; font-weight: 700; line-height: 1.3; }}
+.ap__op span {{ display: inline-block; margin-top: 3px; margin-right: 6px; font-size: 11px; font-weight: 600; color: var(--paper-soft); }}
+.ap__op span.cd {{ color: #b5402e; }}
+.ap__ideas {{ display: grid; gap: 8px; margin-top: 12px; max-height: 330px; overflow-y: auto; }}
+.ap__idea {{ padding: 12px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #e3ded2; animation: rise .5s var(--ease) both; }}
+.ap__idea small {{ font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8a5a00; }}
+.ap__idea p {{ margin-top: 4px; font-size: 15px; font-weight: 700; line-height: 1.35; }}
+.ap__idea span {{ display: block; margin-top: 3px; font-size: 12.5px; color: var(--paper-soft); }}
+.jn__end {{ margin-top: 72px; text-align: center; }}
+.jn__e1 {{ font-size: clamp(20px, 5.6vw, 30px); font-weight: 600; color: var(--ink2); }}
+.jn__e2 {{ margin: 6px auto 0; max-width: 900px; font-size: clamp(34px, 9.6vw, 72px); font-weight: 800; line-height: 1.02; letter-spacing: -.035em; text-wrap: balance; }}
+.jn__end .cta {{ max-width: 480px; margin: 32px auto 0; }}
+
 /* LOMBADA: os 3 benefícios */
 .tri {{ display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 22px; list-style: none; }}
 .tri li {{ display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px 10px 10px; border-radius: 99px; background: #15120c; box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .5); font-size: clamp(17px, 4.6vw, 22px); font-weight: 800; }}
@@ -545,8 +606,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 @keyframes bob {{ 50% {{ transform: translateY(5px); }} }}
 @keyframes rev {{ 0%, 100% {{ transform: translateX(0); opacity: 1; }} 50% {{ transform: translateX(-6px); opacity: .75; }} }}
 @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation: none !important; transition: none !important; }} .rv {{ opacity: 1; transform: none; }} }}
-/* ===== demo do LOMBADA (da black-week/) ===== */
-{DEMO_CSS}
 </style>
 </head>
 <body>
@@ -697,17 +756,57 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     </div>
   </section>
 
-  <!-- 7b. o LOMBADA por dentro: test drive, oportunidades e ideias de post -->
-  <section class="sec lmbsec" id="ferramenta">
-    <div class="wrap"><div class="lmbh rv">
-      <p class="lmbh__mark">{LMB}</p>
-      <p class="lmbh__t">Com ele, o seu livro:</p>
-      <ol class="tri"><li><b>1</b>Não para.</li><li><b>2</b>Vai mais longe.</li><li><b>3</b>É lido.</li></ol>
-    </div></div>
+  <!-- 7b. o LOMBADA em uma história só: a pessoa escreve o nome do livro e acompanha ele ir longe -->
+  <section class="sec jorn" id="ferramenta">
+    <div class="wrap">
+      <div class="jn__head center rv">
+        <p class="lmbh__mark">{LMB}</p>
+        <h2 class="h2">Escreva o nome do seu livro. <span class="gold">E veja ele ir longe.</span></h2>
+        <label class="jn__in"><span>O nome do seu livro</span><input id="jn-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done"></label>
+        <p class="jn__hint">Experimente. É assim que o LOMBADA trabalha pelo seu livro.</p>
+      </div>
+      <ol class="jn">
+        <li class="jn__s rv">
+          <div class="jn__t"><span class="jn__n">1</span><h3>Segunda-feira, <b class="jl" data-l>o seu livro</b> já tem o que fazer.</h3><p>O plano da semana chega pronto, montado pela fase do livro, pelo gênero e pelo tempo que você tem. Você só executa.</p></div>
+          <div class="jn__app">
+            <div class="ap__top">{LMB_S}<span class="ap__tg">Plano da semana</span></div>
+            <p class="ap__ti" data-l-cap>O seu livro</p>
+            <div class="ap__pr"><span id="jn-cont">0 de 3 feitas</span><i><b id="jn-bar"></b></i></div>
+            <div class="ap__acts" id="jn-acts"></div>
+          </div>
+        </li>
+        <li class="jn__s rv">
+          <div class="jn__t"><span class="jn__n">2</span><h3>O texto já vem escrito.</h3><p>Cada ação traz o texto pronto, com o nome do seu livro, e a aula do Método The&nbsp;Book&nbsp;Business explicando o porquê.</p></div>
+          <div class="jn__app">
+            <div class="ap__top">{LMB_S}<span class="ap__tg">Texto pronto</span></div>
+            <div class="ap__txt" id="jn-txt"></div>
+            <button type="button" class="ap__copy" id="jn-copy">Copiar texto</button>
+          </div>
+        </li>
+        <li class="jn__s rv">
+          <div class="jn__t"><span class="jn__n">3</span><h3><b class="jl" data-l-cap>O seu livro</b> chega a lugares novos.</h3><p>Prêmios, feiras, editais e datas do gênero do seu livro, com o prazo na tela. Nenhuma chance passa por você.</p></div>
+          <div class="jn__app">
+            <div class="ap__top">{LMB_S}<span class="ap__tg">Oportunidades</span></div>
+            <div class="ap__pills" id="jn-gen" role="group" aria-label="Gênero do livro"><button type="button" aria-pressed="true" data-g="Romance">Romance</button><button type="button" aria-pressed="false" data-g="Infantil">Infantil</button><button type="button" aria-pressed="false" data-g="Negócios">Negócios</button><button type="button" aria-pressed="false" data-g="Poesia">Poesia</button><button type="button" aria-pressed="false" data-g="Biografia e memórias">Memórias</button></div>
+            <div class="ap__ops" id="jn-ops"></div>
+          </div>
+        </li>
+        <li class="jn__s rv">
+          <div class="jn__t"><span class="jn__n">4</span><h3>E encontra leitores.</h3><p>Ideias de post sem fim, feitas para o seu livro. Toque e gere mais: elas nunca acabam.</p></div>
+          <div class="jn__app">
+            <div class="ap__top">{LMB_S}<span class="ap__tg">Ideias de post</span></div>
+            <div class="ap__ideas" id="jn-ideas"></div>
+            <button type="button" class="ap__copy" id="jn-more">Gerar mais ideias</button>
+          </div>
+        </li>
+      </ol>
+      <div class="jn__end rv">
+        <p class="jn__e1">Daqui a <span class="d9-only">6</span><span class="after-only">3</span> anos,</p>
+        <p class="jn__e2"><b class="jl" data-l>o seu livro</b> ainda vai estar sendo lido.</p>
+        <div class="cta">{CTA}</div>
+      </div>
+    </div>
   </section>
-  {DEMO_DRIVE}
-  {DEMO_MOTOR}
-  <div class="wrap"><div class="cta leva__cta rv" style="margin-bottom:64px">{CTA}</div></div>
 
   <!-- 8. casos -->
   <section class="sec casos-sec">
@@ -865,6 +964,55 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     }});
   }});
 
+  // o LOMBADA em uma história: o nome que a pessoa escreve vira o personagem da seção inteira
+  (function () {{
+    var inp = document.getElementById('jn-livro'); if (!inp) return;
+    {JN_DADOS}
+    function esc(x) {{ return String(x).replace(/[&<>"']/g, function (c) {{ return {{ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }}[c]; }}); }}
+    function nome() {{ return inp.value.trim(); }}
+    function L(cap) {{ var n = nome(); return n ? n : (cap ? 'O seu livro' : 'o seu livro'); }}
+    function T(sx) {{ return esc(sx).replace(/\{{T\}}/g, '<b class="jl">' + esc(L(false)) + '</b>'); }}
+    var ACTS = [['Republique um trecho de {{T}} como post', '20 min · com texto pronto'], ['Peça avaliação a quem comprou {{T}}', '30 min · com texto pronto'], ['Busque uma audiência nova para falar de {{T}}', '45 min · com a aula por trás']];
+    var TXT = '"[o seu trecho favorito]"\\n\\nEsse é um trecho de {{T}}. Escrevi para [quem vai ler], e é a parte que mais recebo mensagem.\\n\\nSe essa frase mexeu com você, o livro inteiro está aqui: [link do seu livro]';
+    var feitas = {{}}, acts = document.getElementById('jn-acts'), cont = document.getElementById('jn-cont'), bar = document.getElementById('jn-bar');
+    function rActs() {{
+      acts.innerHTML = ACTS.map(function (a, i) {{ return '<button type="button" class="ap__act' + (feitas[i] ? ' ok' : '') + '" data-i="' + i + '"><i>✓</i><span><b>' + T(a[0]) + '</b><small>' + a[1] + '</small></span></button>'; }}).join('');
+      var n = Object.keys(feitas).filter(function (k) {{ return feitas[k]; }}).length;
+      cont.textContent = n + ' de 3 feitas'; bar.style.width = (n / 3 * 100) + '%';
+    }}
+    acts.addEventListener('click', function (e) {{ var b = e.target.closest('.ap__act'); if (!b) return; var i = b.getAttribute('data-i'); feitas[i] = !feitas[i]; rActs(); }});
+    var txt = document.getElementById('jn-txt');
+    function rTxt() {{ txt.innerHTML = T(TXT).replace(/\[(.+?)\]/g, '<span class="vr">$1</span>'); }}
+    document.getElementById('jn-copy').addEventListener('click', function () {{
+      var b = this, plain = TXT.replace(/\{{T\}}/g, L(false));
+      var ok = function () {{ b.textContent = 'Copiado'; setTimeout(function () {{ b.textContent = 'Copiar texto'; }}, 1600); }};
+      if (navigator.clipboard) navigator.clipboard.writeText(plain).then(ok, ok); else ok();
+    }});
+    var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'], hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    var gen = 'Romance', opsBox = document.getElementById('jn-ops'), genBox = document.getElementById('jn-gen');
+    function serve(gs, g) {{ return gs === ALL || gs.indexOf(g) !== -1; }}
+    function dias(d) {{ return Math.round((d - hoje) / 864e5); }}
+    function rOps() {{
+      var it = OPS.filter(function (o) {{ return serve(o[5], gen); }}).map(function (o) {{ return {{ d: new Date(o[0] + 'T00:00:00'), n: o[4], ty: o[3], tp: o[1] }}; }});
+      DATAS.forEach(function (x) {{ if (!serve(x[3], gen)) return; var d = new Date(hoje.getFullYear(), x[0] - 1, x[1]); if (d < hoje) d.setFullYear(d.getFullYear() + 1); it.push({{ d: d, n: x[2], ty: 'Data comemorativa', tp: 'data' }}); }});
+      it = it.filter(function (o) {{ return dias(o.d) >= 0; }}).sort(function (a, b) {{ return a.d - b.d; }}).slice(0, 4);
+      opsBox.innerHTML = it.map(function (o) {{ var n = dias(o.d), ev = o.tp === 'evento' || o.tp === 'data';
+        return '<div class="ap__op"><div class="d"><b>' + o.d.getDate() + '</b><small>' + MES[o.d.getMonth()] + '</small></div><div><p>' + esc(o.n) + '</p><span>' + o.ty + '</span><span class="cd">' + (ev ? 'Em ' : 'Vence em ') + n + ' dias</span></div></div>'; }}).join('');
+    }}
+    genBox.addEventListener('click', function (e) {{ var b = e.target.closest('button'); if (!b) return; [].forEach.call(genBox.children, function (x) {{ x.setAttribute('aria-pressed', x === b); }}); gen = b.getAttribute('data-g'); rOps(); }});
+    var TONS = ['inspirador', 'provocativo', 'educativo', 'humor'], ideias = [], ideasBox = document.getElementById('jn-ideas'), k = 0;
+    function mais() {{ for (var j = 0; j < 3; j++) {{ var tom = TONS[k % 4], lista = IDEIAS[tom]; ideias.unshift([tom, lista[Math.floor(k / 4) % lista.length]]); k++; }} rIdeas(); ideasBox.scrollTop = 0; }}
+    function rIdeas() {{ ideasBox.innerHTML = ideias.map(function (x, i) {{ return '<div class="ap__idea"><small>Ideia ' + (ideias.length - i) + ' · ' + x[0] + '</small><p>' + T(x[1][0]) + '</p><span>' + esc(x[1][1]) + '</span></div>'; }}).join(''); }}
+    document.getElementById('jn-more').addEventListener('click', mais);
+    function rNome() {{
+      [].forEach.call(document.querySelectorAll('[data-l]'), function (el) {{ el.textContent = L(false); }});
+      [].forEach.call(document.querySelectorAll('[data-l-cap]'), function (el) {{ el.textContent = L(true); }});
+      rActs(); rTxt(); rIdeas();
+    }}
+    inp.addEventListener('input', rNome);
+    mais(); rOps(); rNome();
+  }})();
+
   // entrada dos blocos: a pilha entra item por item
   if ('IntersectionObserver' in window) {{
     var io = new IntersectionObserver(function (es) {{ es.forEach(function (e) {{ if (e.isIntersecting) {{ e.target.classList.add('in'); io.unobserve(e.target); }} }}); }}, {{ rootMargin: '0px 0px -10% 0px' }});
@@ -882,7 +1030,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   }}
 }})();
 </script>
-{DEMO_JS}
 </body>
 </html>
 '''
