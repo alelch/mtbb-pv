@@ -121,16 +121,10 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .bon2__vis .dbl__b b { font-size: clamp(46px, 13vw, 72px); }
 .bon2__vis .spines { height: 110px; margin-top: 22px; }
 .bon2__c h3 { font-size: clamp(20px, 5.4vw, 28px); }
-/* um bônus por linha; no computador, imagem à esquerda e texto à direita */
-.bon2 { grid-template-columns: minmax(0, 1fr) !important; max-width: 860px; gap: 18px; }
-@media (min-width: 760px) {
-  .bon2__c { display: grid !important; grid-template-columns: 360px 1fr; column-gap: 40px; align-items: center; text-align: left; padding: 30px 34px; }
-  .bon2__c .bon2__vis { margin-top: 0; }
-  .bon2__txt { text-align: left; }
-  .bon2__vis .dbl { gap: 10px; }
-  .bon2__vis .dbl b { font-size: 22px; }
-  .bon2__vis .dbl__b b { font-size: 48px; }
-}
+/* bônus lado a lado, com o mesmo peso (cliente: "preferia lado a lado") */
+@media (min-width: 760px) { .bon2.bon2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 980px; } }
+.bon2__txt { display: contents; }
+.bon2__c > .bon2__txt > .lv__k, .bon2__c .bon2__txt .lv__k { order: -1; }
 .bon2__txt h3 { margin-top: 12px; }
 /* vídeos dos alunos e garantia */
 .vids { display: flex; gap: 12px; margin: 36px -20px 0; padding: 0 20px 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
