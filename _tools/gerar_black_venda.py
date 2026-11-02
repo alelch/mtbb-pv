@@ -85,7 +85,9 @@ _LEVA = [
   ("4 Projetos Especiais", "Projetos Especiais", "<ul><li><b>Prêmio Jabuti:</b> a inscrição certa, na categoria certa.</li><li><b>Autopublicação Profissional:</b> revisão, capa, diagramação, ISBN e distribuição.</li><li><b>Editora Perfeita:</b> como escolher a editora certa para o seu livro.</li><li><b>Destaque Amazon:</b> para o seu livro aparecer na Amazon.</li></ul>"),
 ]
 _IMG = ["p-metodo", "p-autoridade", "p-gerador", "p-calendario", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros", "p-projetos"]
-LEVA = "".join(f'<div class="lv rv"><img class="lv__img" src="assets/{_IMG[n]}.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">{k}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div></div>' for n, (k, t, d) in enumerate(_LEVA))
+def _tag(k):
+    return "Bônus · " + ("vitalício" if k == "Acesso vitalício" else k)
+LEVA = "".join(f'<div class="lv rv"><img class="lv__img" src="assets/{_IMG[n]}.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">{_tag(k)}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div></div>' for n, (k, t, d) in enumerate(_LEVA) if n > 0)
 # cupons dos parceiros (valores e regras passados pelo cliente em 01/11; Literare R$2.000 confirmada no mesmo dia: total R$6.700)
 _CUP = [("Gráfica Renograf", "Impressão do seu livro", "até R$ 1.200", "Desconto progressivo pelo valor da impressão. Vale reimpressão."),
         ("Histórias Bem Contadas", "Leitura crítica", "R$ 250", "Válido por 24 meses."),
@@ -102,11 +104,20 @@ _body = bw[bw.index("<main>"):bw.index("</main>")]
 def _bloco(a, b):
     x = _body.index(a); return _body[x:_body.index(b, x)]
 DEMO_DRIVE = _bloco('<section class="blk drive"', '<!-- 4.').replace('class="blk drive"', 'class="lmbx drive"')
+DEMO_DRIVE = DEMO_DRIVE.replace('<p class="eyebrow">Test drive</p>', '<p class="eyebrow">1 · Seu livro não para</p>') \
+    .replace('Instale um motor no seu livro.', 'Toda semana, o seu livro anda.') \
+    .replace('Escreva o nome dele. Escolha a fase. A sua segunda-feira aparece na hora.', 'O LOMBADA monta o plano da semana do seu livro. Você só executa. Escreva o nome dele e veja a sua semana aparecer.')
 DEMO_MOTOR = _bloco('<section class="blk" id="mais-motor">', '<!-- 5.').replace('class="blk" id="mais-motor"', 'class="lmbx" id="mais-motor"')
 _KW = ('drive', 'feat', 'panel', 'phone', 'screen', 'app-', 'ops', 'idea', '.seg', 'ctrl', 'try', 'pills', 'q__l', 'gen-btn', 'ideas', '.op', '.act', '.ia', '.chip', 'td-', 'pulse', 'caret', '.bk', '.vr')
 def _media(a, b, cond):
     ls = [l for l in _BL[a-1:b] if l.startswith('  .') and any(k in l for k in _KW)]
     return f"@media {cond} {{\n" + "\n".join(ls) + "\n}" if ls else ""
+DEMO_MOTOR = DEMO_MOTOR.replace('<p class="eyebrow">E não para na segunda</p>', '<p class="eyebrow">E o seu livro</p>') \
+    .replace('<h2 class="h2">Tem mais motor aí dentro.</h2>', '<h2 class="h2">Vai mais longe. <span class="amber">E é lido.</span></h2>') \
+    .replace('<p class="feat__k">Oportunidades</p>', '<p class="feat__k">2 · Seu livro vai mais longe</p>') \
+    .replace('Prêmios, feiras e editais. <span class="amber">Não perca nenhuma chance de ver o seu livro brilhar.</span>', 'Prêmios, feiras e editais levam o seu livro a lugares novos. <span class="amber">E você nunca perde o prazo.</span>') \
+    .replace('<p class="feat__k">Ideias de post ilimitadas</p>', '<p class="feat__k">3 · Seu livro é lido</p>') \
+    .replace('Faça suas redes sociais <span class="amber">decolarem.</span>', 'Novos leitores encontram o seu livro. <span class="amber">Toda semana.</span>')
 DEMO_CSS = "\n".join([
     "\n".join(_BL[97:102]),            # .eyebrow e .lede
     "\n".join(_BL[180:205]),           # telas do app
@@ -236,7 +247,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .h__cue svg {{ width: 20px; height: 20px; animation: bob 1.8s ease-in-out infinite; }}
 
 /* bônus com o mesmo peso: mesma largura, mesma área de imagem, mesmo título */
-@media (min-width: 760px) {{ .bon2 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }} }}
+
 .bon2__c {{ display: flex; flex-direction: column; align-items: center; }}
 .bon2__vis {{ display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 280px; margin-top: 14px; }}
 .bon2__c .bon2__vis img {{ width: auto; max-width: 100%; height: 100%; margin: 0; object-fit: contain; }}
@@ -244,8 +255,18 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .bon2__vis .dbl b {{ font-size: clamp(26px, 7vw, 40px); }}
 .bon2__vis .dbl__b b {{ font-size: clamp(46px, 13vw, 72px); }}
 .bon2__vis .spines {{ height: 110px; margin-top: 22px; }}
-.bon2__c h3 {{ min-height: 2.4em; font-size: clamp(20px, 5.4vw, 26px); }}
-
+.bon2__c h3 {{ font-size: clamp(20px, 5.4vw, 28px); }}
+/* um bônus por linha; no computador, imagem à esquerda e texto à direita */
+.bon2 {{ grid-template-columns: minmax(0, 1fr) !important; max-width: 860px; gap: 18px; }}
+@media (min-width: 760px) {{
+  .bon2__c {{ display: grid !important; grid-template-columns: 360px 1fr; column-gap: 40px; align-items: center; text-align: left; padding: 30px 34px; }}
+  .bon2__c .bon2__vis {{ margin-top: 0; }}
+  .bon2__txt {{ text-align: left; }}
+  .bon2__vis .dbl {{ gap: 10px; }}
+  .bon2__vis .dbl b {{ font-size: 22px; }}
+  .bon2__vis .dbl__b b {{ font-size: 48px; }}
+}}
+.bon2__txt h3 {{ margin-top: 12px; }}
 /* vídeos dos alunos e garantia */
 .vids {{ display: flex; gap: 12px; margin: 36px -20px 0; padding: 0 20px 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }}
 .vids::-webkit-scrollbar {{ display: none; }}
@@ -351,6 +372,26 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .cup__t p {{ margin-top: 4px; font-size: 13px; line-height: 1.4; color: #5c574e; }}
 .cups__fine {{ margin: 18px auto 0; max-width: 640px; font-size: 12px; line-height: 1.5; color: var(--ink3); }}
 
+/* Método: produto principal, largura total */
+.mtc {{ display: grid; grid-template-columns: minmax(0, 1fr); max-width: 980px; margin: 40px auto 0; overflow: hidden; border-radius: 22px; background: #0d0b08; box-shadow: 0 0 0 2px rgba(250, 171, 0, .7), 0 0 60px rgba(250, 171, 0, .2); text-align: left; }}
+@media (min-width: 760px) {{ .mtc {{ grid-template-columns: 5fr 7fr; }} }}
+.mtc__img {{ width: 100%; height: 100%; aspect-ratio: 720 / 567; object-fit: cover; }}
+.mtc__b {{ padding: 26px 22px 28px; align-self: center; }}
+.mtc__k {{ background: var(--gold) !important; color: #111 !important; }}
+.mtc__b h3 {{ margin-top: 12px; font-size: clamp(26px, 7vw, 36px); font-weight: 800; line-height: 1.08; letter-spacing: -.02em; }}
+.mtc__b p {{ margin-top: 12px; font-size: 15.5px; line-height: 1.6; color: var(--ink2); }}
+.mtc__b ul {{ margin-top: 12px; list-style: none; display: grid; gap: 8px; }}
+.mtc__b li {{ position: relative; padding-left: 18px; font-size: 15px; color: var(--ink2); }}
+.mtc__b li::before {{ content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }}
+.lmbc {{ margin-top: 14px !important; }}
+
+/* LOMBADA: os 3 benefícios */
+.tri {{ display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 22px; list-style: none; }}
+.tri li {{ display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px 10px 10px; border-radius: 99px; background: #15120c; box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .5); font-size: clamp(17px, 4.6vw, 22px); font-weight: 800; }}
+.tri b {{ display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: #111; font-size: 15px; }}
+.lmbc__b li b {{ color: var(--paper-ink); }}
+.lmbx .feat__k {{ color: var(--amber); }}
+
 /* LOMBADA: título antes do test drive */
 .lmbh {{ max-width: 860px; margin: 40px auto 0; text-align: center; }}
 .lmbh__mark {{ margin-top: 16px; font-size: clamp(46px, 13vw, 110px); line-height: 1; }}
@@ -378,7 +419,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .price__cta {{ max-width: 480px; margin: 26px auto 0; }}
 .resumo .card__list {{ margin-top: 22px; }}
 .bon2 {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 900px; margin: 34px auto 0; }}
-@media (min-width: 760px) {{ .bon2 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }} }}
+
 .bon2__c {{ padding: 26px 22px; border-radius: 18px; background: #0d0b08; box-shadow: inset 0 0 0 1.5px rgba(250, 171, 0, .5); text-align: center; }}
 .bon2__c img {{ width: 70%; max-width: 260px; margin: 16px auto 0; filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .7)); }}
 .bon2__c .bon2__big {{ margin-top: 14px; font-size: clamp(84px, 26vw, 140px); font-weight: 800; line-height: .9; letter-spacing: -.05em; }}
@@ -571,16 +612,20 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <p class="q2 rv">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p>
       <div class="bon2">
         <div class="bon2__c rv">
-          <span class="lv__k">Bônus 1</span>
           <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>normal</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div>{SPINES}</div>
+          <div class="bon2__txt">
+          <span class="lv__k">Bônus 1</span>
           <h3>LOMBADA em dobro: 6 anos no lugar de 3.</h3>
           <p>Hoje você recebe o dobro: 6 anos com o LOMBADA ao lado do seu livro, todo dia. Amanhã volta a ser 3.</p>
+                  </div>
         </div>
         <div class="bon2__c rv">
-          <span class="lv__k">Bônus 2</span>
           <div class="bon2__vis"><img src="assets/playbooks.webp" alt="Playbooks MTBB" width="475" height="592" loading="lazy" decoding="async"></div>
+          <div class="bon2__txt">
+          <span class="lv__k">Bônus 2</span>
           <h3>Playbooks MTBB físicos, entregues na sua casa.</h3>
           <p>A extensão prática do Método The&nbsp;Book&nbsp;Business, criada pela Dany, para organizar as estratégias e acompanhar a evolução do seu livro.</p>
+                  </div>
         </div>
       </div>
     </div>
@@ -628,16 +673,27 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   <section class="sec leva">
     <div class="wrap">
       <div class="center rv"><p class="kick">Quem aproveitar essa oferta agora</p><h2 class="h2">Vai levar:</h2></div>
+      <div class="mtc rv">
+        <img class="mtc__img" src="assets/p-metodo.webp" alt="Método The Book Business" width="720" height="567" loading="lazy" decoding="async">
+        <div class="mtc__b">
+          <span class="lv__k mtc__k">Produto principal · vitalício</span>
+          <h3>Método The&nbsp;Book&nbsp;Business</h3>
+          <p>O ecossistema completo de marketing literário. Tudo o que a Dany aprendeu em 15 anos nos bastidores das editoras, organizado para o autor: aulas práticas, passo a passo claro e modelos prontos para o seu livro ser lido, desejado e lembrado.</p>
+          <ul>
+            <li>Do primeiro livro ao décimo, da escrita à permanência.</li>
+            <li>Nova versão 2026, com todas as atualizações para sempre.</li>
+          </ul>
+        </div>
+      </div>
       <div class="lmbc rv">
         <div class="lmbc__art">{SPINES}<p class="lmbc__mark">{LMB}</p></div>
         <div class="lmbc__b">
-          <span class="lv__k"><span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
+          <span class="lv__k">Bônus principal · <span class="d9-only">6 anos hoje</span><span class="after-only">3 anos</span></span>
           <h3>A ferramenta que nunca deixa o seu livro parar.</h3>
           <ul>
-            <li>O plano da semana do seu livro, pela fase, pelo gênero e pelo seu tempo.</li>
-            <li>O texto pronto em cada ação, com a aula do Método por trás.</li>
-            <li>Prêmios, feiras e editais do seu gênero, com o prazo na tela.</li>
-            <li>Ideias de post ilimitadas, feitas para o seu livro.</li>
+            <li><b>Seu livro não para:</b> toda semana, o plano pronto, com o texto e a aula por trás.</li>
+            <li><b>Seu livro vai mais longe:</b> prêmios, feiras e editais do seu gênero, com o prazo na tela.</li>
+            <li><b>Seu livro é lido:</b> ideias de post ilimitadas para novos leitores te encontrarem.</li>
           </ul>
           <a class="lmbc__btn" href="#ferramenta">Entender melhor o LOMBADA <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
         </div>
@@ -651,7 +707,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   <section class="sec lmbsec" id="ferramenta">
     <div class="wrap"><div class="lmbh rv">
       <p class="lmbh__mark">{LMB}</p>
-      <p class="lmbh__t">A ferramenta que nunca deixa o seu livro parar.</p>
+      <p class="lmbh__t">Com ele, o seu livro:</p>
+      <ol class="tri"><li><b>1</b>Não para.</li><li><b>2</b>Vai mais longe.</li><li><b>3</b>É lido.</li></ol>
     </div></div>
   </section>
   {DEMO_DRIVE}
