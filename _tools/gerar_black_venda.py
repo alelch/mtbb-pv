@@ -847,7 +847,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap">
       <div class="jn__head center rv">
         <p class="lmbh__mark">{LMB}</p>
-        <div class="jn__vid" id="jn-vid"><vturb-smartplayer id="vid-6ae868e3ee6a40ad51237989" style="display:block;margin:0 auto;width:100%"></vturb-smartplayer></div>
+        <div class="jn__vid" id="jn-vid"><vturb-smartplayer id="vid-6ae9e43f36e9cc736abb97c1" style="display:block;margin:0 auto;width:100%"></vturb-smartplayer></div>
         <h2 class="h2">Agora escreva o nome do seu livro. <span class="gold">E veja ele ir longe.</span></h2>
         <label class="jn__in"><span>O nome do seu livro</span><input id="jn-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done"></label>
         <p class="jn__hint">Experimente. É assim que o LOMBADA trabalha pelo seu livro.</p>
@@ -1125,10 +1125,10 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     mais(); rOps(); rNome();
   }})();
 
-  // vídeo do LOMBADA no vturb (player 6ae868e3ee6a40ad51237989): o script só carrega quando a seção chega perto da tela
+  // vídeo do LOMBADA no vturb (player 6ae9e43f36e9cc736abb97c1): o script só carrega quando a seção chega perto da tela
   (function () {{
     var box = document.getElementById('jn-vid'); if (!box) return;
-    function carrega() {{ if (box._ok) return; box._ok = 1; var sc = document.createElement('script'); sc.src = 'https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6ae868e3ee6a40ad51237989/v4/player.js'; sc.async = true; document.head.appendChild(sc); }}
+    function carrega() {{ if (box._ok) return; box._ok = 1; var sc = document.createElement('script'); sc.src = 'https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/players/6ae9e43f36e9cc736abb97c1/v4/player.js'; sc.async = true; document.head.appendChild(sc); }}
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) {{ if (es[0].isIntersecting) carrega(); }}, {{ rootMargin: '900px 0px' }}).observe(box); else carrega();
   }})();
 
