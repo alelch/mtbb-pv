@@ -24,6 +24,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://metodo.thebookbusiness.com.br/ae8a9e17e350/assets/og-oferta.jpg">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/poppins-800.woff2">
+<script>try{localStorage.setItem('bf26pg','C')}catch(e){}</script>
 <script src="../pixel.js"></script>
 <script src="../gtag.js" defer></script>
 <style>
@@ -821,6 +822,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
   if (url) {
     var u = new URL(url);
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'sck', 'src'].forEach(function (k) { if (q.get(k)) u.searchParams.set(k, q.get(k)); });
+    if (q.get('sck')) u.searchParams.set('sck', q.get('sck') + '|pgC');
     $$('[data-cta]').forEach(function (a) { a.href = u.toString(); });
   }
 

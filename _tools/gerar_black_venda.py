@@ -1152,6 +1152,17 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 </body>
 </html>
 '''
+# 05/11 (cliente: "teste ab"): os anúncios de venda mandam para a longa; metade de quem vem do anúncio (utm_source=meta-ads)
+# vai para a curta, sempre a mesma pessoa na mesma versão (localStorage bf26pg). Quem chega por e-mail/WhatsApp fica na longa.
+# O sck do checkout ganha |pgL ou |pgC para ler a venda por versão na Hotmart.
+AB_LONGA = ("<script>(function(){try{var q=new URLSearchParams(location.search);if(q.get('utm_source')!=='meta-ads')return;"
+            "var v=localStorage.getItem('bf26pg');if(v!=='L'&&v!=='C'){v=Math.random()<.5?'L':'C';localStorage.setItem('bf26pg',v)}"
+            "if(v==='C')location.replace('/5c0424242e97/'+location.search+location.hash)}catch(e){}})();</script>\n")
+AB_CURTA = "<script>try{localStorage.setItem('bf26pg','C')}catch(e){}</script>\n"
+_px = '<script src="../pixel.js"></script>'
+_ck = "$$('[data-cta]').forEach(function (a) { a.href = u.toString(); });"
+assert HTML.count(_px) == 1 and HTML.count(_ck) == 1
+HTML = HTML.replace(_px, AB_LONGA + _px).replace(_ck, "if (q.get('sck')) u.searchParams.set('sck', q.get('sck') + '|pgL');\n    " + _ck)
 open(f"{R}/ae8a9e17e350/index.html", "w", encoding="utf-8").write(HTML)
 print("ok", len(HTML))
 
@@ -1168,7 +1179,8 @@ CURTA = (CURTA.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
                        '<link rel="canonical" href="https://metodo.thebookbusiness.com.br/5c0424242e97/">')
               .replace('<meta property="og:url" content="https://metodo.thebookbusiness.com.br/ae8a9e17e350/">',
                        '<meta property="og:url" content="https://metodo.thebookbusiness.com.br/5c0424242e97/">'))
-assert 'id="ferramenta"' not in CURTA and 'href="#ferramenta"' not in CURTA
+CURTA = CURTA.replace(AB_LONGA, AB_CURTA).replace("'|pgL'", "'|pgC'")
+assert 'id="ferramenta"' not in CURTA and 'href="#ferramenta"' not in CURTA and 'bf26pg' in CURTA and "'|pgC'" in CURTA
 os.makedirs(f"{R}/5c0424242e97", exist_ok=True)
 open(f"{R}/5c0424242e97/index.html", "w", encoding="utf-8").write(CURTA)
 print("curta", len(CURTA))
