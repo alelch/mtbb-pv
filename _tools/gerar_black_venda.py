@@ -2,7 +2,7 @@
 # tinha antes"; "quero uma coisa magnânima, onde o autor fale: nossa, essa é a melhor chance possível!").
 # Nada da página de cadastro: abertura de oferta, a pilha de tudo o que entra (pacote do Aniversário sem o Retiro),
 # o LOMBADA em telas reais, bônus do dia 9, Dany, preço, dúvidas, fecho.
-# Só o logo da Black e o wordmark do LOMBADA vêm da black-week/ (marca). Saída: black-week-oferta/index.html
+# Só o logo da Black e o wordmark do LOMBADA vêm da black-week/ (marca). Saída: ae8a9e17e350/index.html
 # Modo: até 23h59 de 9/11 (Brasília) = "dia 9" (LOMBADA 6 anos + relógio); depois = LOMBADA 3 anos. Os Playbooks ficam
 # na oferta nos dois modos (cliente 02/11: "os playbooks não terminam meia-noite, só o dobro de acesso ao LOMBADA").
 # Prévia: ?modo=d9 ou ?modo=depois força o modo.
@@ -147,22 +147,22 @@ HTML = f'''<!doctype html>
 <meta name="description" content="Tudo o que a Dany Sakugawa criou para autores, pra sempre. E o LOMBADA, o personal trainer do seu livro. Na Black Week Motorizada.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#000000">
-<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-oferta/">
+<link rel="canonical" href="https://metodo.thebookbusiness.com.br/ae8a9e17e350/">
 <link rel="icon" type="image/webp" href="../lancamento90d/favicon.webp">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://metodo.thebookbusiness.com.br/black-week-oferta/">
+<meta property="og:url" content="https://metodo.thebookbusiness.com.br/ae8a9e17e350/">
 <meta property="og:site_name" content="The Book Business">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="A maior oferta de todos os tempos + LOMBADA">
 <meta property="og:description" content="Inscrições liberadas na Black Week Motorizada. Método The Book Business vitalício + LOMBADA: leva o seu livro cada vez mais longe.">
-<meta property="og:image" content="https://metodo.thebookbusiness.com.br/black-week-oferta/assets/og-oferta.jpg">
-<meta property="og:image:secure_url" content="https://metodo.thebookbusiness.com.br/black-week-oferta/assets/og-oferta.jpg">
+<meta property="og:image" content="https://metodo.thebookbusiness.com.br/ae8a9e17e350/assets/og-oferta.jpg">
+<meta property="og:image:secure_url" content="https://metodo.thebookbusiness.com.br/ae8a9e17e350/assets/og-oferta.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Black Week Motorizada: a maior oferta de todos os tempos + LOMBADA">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://metodo.thebookbusiness.com.br/black-week-oferta/assets/og-oferta.jpg">
+<meta name="twitter:image" content="https://metodo.thebookbusiness.com.br/ae8a9e17e350/assets/og-oferta.jpg">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/poppins-800.woff2">
 <script src="../pixel.js"></script>
 <script src="../gtag.js" defer></script>
@@ -1152,23 +1152,23 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 </body>
 </html>
 '''
-open(f"{R}/black-week-oferta/index.html", "w", encoding="utf-8").write(HTML)
+open(f"{R}/ae8a9e17e350/index.html", "w", encoding="utf-8").write(HTML)
 print("ok", len(HTML))
 
 # 02/11 (cliente): versão CURTA, igual à oferta mas sem a demo do LOMBADA (seção 7b) e sem o botão que leva até ela.
-# Mesmos arquivos da oferta (assets apontam para ../black-week-oferta/). Saída: black-week-oferta-curta/index.html
+# Mesmos arquivos da oferta (assets apontam para ../ae8a9e17e350/). Saída: 5c0424242e97/index.html
 _a = HTML.index('  <!-- 7b. o LOMBADA em uma história só')
 _b = HTML.index('  <!-- 8. casos -->')
 CURTA = HTML[:_a] + HTML[_b:]
 _btn = CURTA.index('<a class="lmbc__btn" href="#ferramenta">')
 CURTA = CURTA[:_btn] + CURTA[CURTA.index('</a>', _btn) + 4:]
-CURTA = (CURTA.replace('src="assets/', 'src="../black-week-oferta/assets/')
+CURTA = (CURTA.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
               .replace('url("../assets/', 'url("../assets/')
-              .replace('<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-oferta/">',
-                       '<link rel="canonical" href="https://metodo.thebookbusiness.com.br/black-week-oferta-curta/">')
-              .replace('<meta property="og:url" content="https://metodo.thebookbusiness.com.br/black-week-oferta/">',
-                       '<meta property="og:url" content="https://metodo.thebookbusiness.com.br/black-week-oferta-curta/">'))
+              .replace('<link rel="canonical" href="https://metodo.thebookbusiness.com.br/ae8a9e17e350/">',
+                       '<link rel="canonical" href="https://metodo.thebookbusiness.com.br/5c0424242e97/">')
+              .replace('<meta property="og:url" content="https://metodo.thebookbusiness.com.br/ae8a9e17e350/">',
+                       '<meta property="og:url" content="https://metodo.thebookbusiness.com.br/5c0424242e97/">'))
 assert 'id="ferramenta"' not in CURTA and 'href="#ferramenta"' not in CURTA
-os.makedirs(f"{R}/black-week-oferta-curta", exist_ok=True)
-open(f"{R}/black-week-oferta-curta/index.html", "w", encoding="utf-8").write(CURTA)
+os.makedirs(f"{R}/5c0424242e97", exist_ok=True)
+open(f"{R}/5c0424242e97/index.html", "w", encoding="utf-8").write(CURTA)
 print("curta", len(CURTA))
