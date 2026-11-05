@@ -1155,6 +1155,10 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 # 05/11 (cliente: "teste ab"): os anúncios de venda mandam para a longa; metade de quem vem do anúncio (utm_source=meta-ads)
 # vai para a curta, sempre a mesma pessoa na mesma versão (localStorage bf26pg). Quem chega por e-mail/WhatsApp fica na longa.
 # O sck do checkout ganha |pgL ou |pgC para ler a venda por versão na Hotmart.
+# 05/11 (cliente: "tem dash desse teste ab?" → "sim agora"): o teste vira o ab_testes 'bf26-oferta-pagina' (painel da Black no Miolo).
+# Só quem está no teste (bf26pg) grava visita ('view') e clique no checkout ('initiate') em ab_eventos e leva a marca |bfpL/|bfpC no sck;
+# a venda entra sozinha pelo gatilho ab_purchase_from_venda (sck_tag 'bfp', pagina '' porque o sck do anúncio começa pelo id da campanha).
+# Sem sck no link (volta pelo e-mail), usa o sck guardado da 1ª visita do anúncio.
 AB_LONGA = ("<script>(function(){try{var q=new URLSearchParams(location.search);if(q.get('utm_source')!=='meta-ads')return;"
             "var v=localStorage.getItem('bf26pg');if(v!=='L'&&v!=='C'){v=Math.random()<.5?'L':'C';localStorage.setItem('bf26pg',v)}"
             "if(v==='C')location.replace('/5c0424242e97/'+location.search+location.hash)}catch(e){}})();</script>\n")
@@ -1162,7 +1166,20 @@ AB_CURTA = "<script>try{localStorage.setItem('bf26pg','C')}catch(e){}</script>\n
 _px = '<script src="../pixel.js"></script>'
 _ck = "$$('[data-cta]').forEach(function (a) { a.href = u.toString(); });"
 assert HTML.count(_px) == 1 and HTML.count(_ck) == 1
-HTML = HTML.replace(_px, AB_LONGA + _px).replace(_ck, "if (q.get('sck')) u.searchParams.set('sck', q.get('sck') + '|pgL');\n    " + _ck)
+AB_TRACK = ("var ABV = 'L', abIn = false; try { abIn = localStorage.getItem('bf26pg') === ABV; } catch (e) {}\n"
+  "    if (abIn) {\n"
+  "      var abVid, abSck = q.get('sck');\n"
+  "      try { abVid = localStorage.getItem('bf26vid'); if (!abVid) { abVid = Date.now().toString(36) + Math.random().toString(36).slice(2, 10); localStorage.setItem('bf26vid', abVid); }\n"
+  "        if (abSck) localStorage.setItem('bf26sck', abSck); else abSck = localStorage.getItem('bf26sck'); } catch (e) {}\n"
+  "      u.searchParams.set('sck', (abSck || 'bf26oferta') + '|bfp' + ABV);\n"
+  "      var abEv = function (ev) { try { fetch('https://jsqtpsxpaclslakafmvd.supabase.co/rest/v1/ab_eventos', { method: 'POST', keepalive: true,\n"
+  "        headers: { apikey: AK_AB, Authorization: 'Bearer ' + AK_AB, 'Content-Type': 'application/json', Prefer: 'return=minimal' },\n"
+  "        body: JSON.stringify({ teste_slug: 'bf26-oferta-pagina', variante: ABV, evento: ev, visitor_id: abVid || null, sck: abSck || null }) }); } catch (e) {} };\n"
+  "      var abSeen = null; try { abSeen = localStorage.getItem('bf26pg_view'); } catch (e) {}\n"
+  "      if (abSeen !== ABV) { try { localStorage.setItem('bf26pg_view', ABV); } catch (e) {} abEv('view'); }\n"
+  "      $$('[data-cta]').forEach(function (a) { a.addEventListener('click', function () { abEv('initiate'); }); });\n"
+  "    }\n    ").replace("AK_AB", "'" + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc" + "'")
+HTML = HTML.replace(_px, AB_LONGA + _px).replace(_ck, AB_TRACK + _ck)
 open(f"{R}/ae8a9e17e350/index.html", "w", encoding="utf-8").write(HTML)
 print("ok", len(HTML))
 
@@ -1179,8 +1196,8 @@ CURTA = (CURTA.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
                        '<link rel="canonical" href="https://metodo.thebookbusiness.com.br/5c0424242e97/">')
               .replace('<meta property="og:url" content="https://metodo.thebookbusiness.com.br/ae8a9e17e350/">',
                        '<meta property="og:url" content="https://metodo.thebookbusiness.com.br/5c0424242e97/">'))
-CURTA = CURTA.replace(AB_LONGA, AB_CURTA).replace("'|pgL'", "'|pgC'")
-assert 'id="ferramenta"' not in CURTA and 'href="#ferramenta"' not in CURTA and 'bf26pg' in CURTA and "'|pgC'" in CURTA
+CURTA = CURTA.replace(AB_LONGA, AB_CURTA).replace("var ABV = 'L'", "var ABV = 'C'")
+assert 'id="ferramenta"' not in CURTA and 'href="#ferramenta"' not in CURTA and 'bf26pg' in CURTA and "var ABV = 'C'" in CURTA
 os.makedirs(f"{R}/5c0424242e97", exist_ok=True)
 open(f"{R}/5c0424242e97/index.html", "w", encoding="utf-8").write(CURTA)
 print("curta", len(CURTA))

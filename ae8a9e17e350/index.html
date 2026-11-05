@@ -897,7 +897,19 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
   if (url) {
     var u = new URL(url);
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'sck', 'src'].forEach(function (k) { if (q.get(k)) u.searchParams.set(k, q.get(k)); });
-    if (q.get('sck')) u.searchParams.set('sck', q.get('sck') + '|pgL');
+    var ABV = 'L', abIn = false; try { abIn = localStorage.getItem('bf26pg') === ABV; } catch (e) {}
+    if (abIn) {
+      var abVid, abSck = q.get('sck');
+      try { abVid = localStorage.getItem('bf26vid'); if (!abVid) { abVid = Date.now().toString(36) + Math.random().toString(36).slice(2, 10); localStorage.setItem('bf26vid', abVid); }
+        if (abSck) localStorage.setItem('bf26sck', abSck); else abSck = localStorage.getItem('bf26sck'); } catch (e) {}
+      u.searchParams.set('sck', (abSck || 'bf26oferta') + '|bfp' + ABV);
+      var abEv = function (ev) { try { fetch('https://jsqtpsxpaclslakafmvd.supabase.co/rest/v1/ab_eventos', { method: 'POST', keepalive: true,
+        headers: { apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc', Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc', 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({ teste_slug: 'bf26-oferta-pagina', variante: ABV, evento: ev, visitor_id: abVid || null, sck: abSck || null }) }); } catch (e) {} };
+      var abSeen = null; try { abSeen = localStorage.getItem('bf26pg_view'); } catch (e) {}
+      if (abSeen !== ABV) { try { localStorage.setItem('bf26pg_view', ABV); } catch (e) {} abEv('view'); }
+      $$('[data-cta]').forEach(function (a) { a.addEventListener('click', function () { abEv('initiate'); }); });
+    }
     $$('[data-cta]').forEach(function (a) { a.href = u.toString(); });
   }
 
