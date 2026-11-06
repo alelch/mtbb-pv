@@ -892,8 +892,8 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
   var modo = q.get('modo') || (Date.now() <= FIM_D9 ? 'd9' : 'depois');
   document.body.classList.add(modo === 'depois' ? 'm-depois' : 'm-d9');
 
-  // checkout (Hotmart): oferta R$2.500 da Black, off=ntrx21f9 (cliente 02/11). Repassa src/sck/utm até o checkout.
-  var CHECKOUT = { d9: 'https://pay.hotmart.com/D102625845Q?off=ntrx21f9&checkoutMode=10', depois: 'https://pay.hotmart.com/D102625845Q?off=ntrx21f9&checkoutMode=10' }, url = CHECKOUT[modo === 'depois' ? 'depois' : 'd9'];
+  // checkout (Hotmart): oferta R$2.500 do combo novo da Black (8902433, off=lyfitc09, cliente 06/11; antes D102625845Q off=ntrx21f9). Repassa src/sck/utm até o checkout.
+  var CHECKOUT = { d9: 'https://pay.hotmart.com/A108368040G?off=lyfitc09&checkoutMode=10', depois: 'https://pay.hotmart.com/A108368040G?off=lyfitc09&checkoutMode=10' }, url = CHECKOUT[modo === 'depois' ? 'depois' : 'd9'];
   if (url) {
     var u = new URL(url);
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'sck', 'src'].forEach(function (k) { if (q.get(k)) u.searchParams.set(k, q.get(k)); });
