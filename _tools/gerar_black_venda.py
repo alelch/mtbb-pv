@@ -1406,7 +1406,7 @@ for slug, v in VARIANTES.items():
       'body:not(.trava) .cpm .c-stamp{border-color:#0f7a1f;color:#0f7a1f;background:rgba(220,255,214,.75)}'
       'body.trava .cpm .cp-u,body:not(.trava) .cpm .cp-l{display:none}body.trava .cpm{cursor:pointer}.h .cpm{margin:26px auto 4px}'
       '@media (prefers-reduced-motion:reduce){.cpm .c-top::after{animation:none}}'
-      '.ca{max-width:440px;margin:22px auto 0;padding:16px;border-radius:16px;background:#0d0b08;box-shadow:inset 0 0 0 1px rgba(250,171,0,.45);display:flex;gap:14px;align-items:center;text-align:left;cursor:pointer}'
+      '.ca{max-width:440px;margin:22px auto 0;padding:16px;border-radius:16px;background:#0d0b08;box-shadow:inset 0 0 0 1px rgba(250,171,0,.45);display:flex;gap:14px;align-items:center;text-align:left}'
       '.ca .tk{flex:none;width:128px;box-sizing:border-box;padding:12px 6px;border-radius:10px;background:linear-gradient(125deg,#ffe39a,#faab00 65%,#c97a00);color:#1d1406;text-align:center;border:2px dashed rgba(29,20,6,.35)}'
       '.ca .tk small{display:block;font:700 8.5px/1.15 Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase}.ca .tk b{display:block;font:900 italic 25px/1.05 "Montserrat",sans-serif;letter-spacing:-.03em;margin-top:4px;color:#1d1406}'
       '.ca p{margin:0;font:500 14px/1.4 Poppins,sans-serif;color:#cfc9bc}.ca p strong{display:block;color:#fff;font-size:16px;margin-bottom:3px}.ca p u{color:#faab00;font-weight:700;text-decoration:none}'
@@ -1418,8 +1418,8 @@ for slug, v in VARIANTES.items():
     # 08/11 (cliente escolheu a versão 8A): bloco escuro com o selo dourado do cashback, logo abaixo da trilha (sai a dupla de checks)
     _cp = {'aluno': ('Cashback de aluno', 'R$1.500', 'Se você é aluno, tem cashback.'),
            'vitalicio': ('Cashback de vitalício', 'R$2.000', 'Se você é vitalício, tem cashback.')}[_meu]
-    CUPOM = ('<div class="ca" data-trv aria-label="%s de %s"><div class="tk"><small>%s</small><b>%s</b></div>'
-             '<p><strong>%s</strong>%s de cashback na oferta da Black. <u class="cp-l">Ativar com o CPF &rsaquo;</u><u class="cp-u">Ativado no seu preço &check;</u></p></div>') % (_cp[0], _cp[1], _cp[0], _cp[1], _cp[2], _cp[1])
+    CUPOM = ('<div class="ca" aria-label="%s de %s"><div class="tk"><small>%s</small><b>%s</b></div>'
+             '<p><strong>%s</strong>%s de cashback na oferta da Black.</p></div>') % (_cp[0], _cp[1], _cp[0], _cp[1], _cp[2], _cp[1])   # 08/11 (cliente): só aviso, sem botão
     # 08/11 (cliente): pré-checkout. Um botão só: abre a verificação e, confirmado, vai direto ao pagamento
     GATE_BOX = '<p class="trv"><b>Preço exclusivo de %s.</b> Você confirma no próximo passo.</p>' % ('aluno' if _meu == 'aluno' else 'aluno vitalício')
     GATE_HTML = ('<div class="trv-m" id="trv"><div class="trv-c"><button class="trv-x" type="button" aria-label="Fechar" data-trvx>&times;</button>'
