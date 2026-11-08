@@ -383,18 +383,18 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .cups__h {{ display: block; margin-top: .25em; font-size: .62em; letter-spacing: -.02em; color: #fff; }}
 .cups__h .cups__v {{ font-size: 1.3em; }}
 .cups__l .cups__n {{ display: block; margin-bottom: 4px; font-size: 1.4em; font-weight: 800; color: var(--amber); }}
-.cupg {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 900px; margin: 36px auto 0; text-align: left; }}
+.cupg {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; max-width: 900px; margin: 36px auto 0; text-align: left; }}
 @media (min-width: 760px) {{ .cupg {{ grid-template-columns: 1fr 1fr; }} }}
-.cup {{ position: relative; display: grid; grid-template-columns: 112px 1fr; min-height: 118px; border-radius: 14px; background: #f7f1e3; color: #1a1a1a; box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .8); }}
-.cup::before, .cup::after {{ content: ""; position: absolute; left: 104px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); }}
-.cup::before {{ top: -8px; }} .cup::after {{ bottom: -8px; }}
-.cup__v {{ display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 8px; border-right: 2px dashed #cbbf9f; border-radius: 14px 0 0 14px; background: var(--gold); text-align: center; }}
-.cup__v small {{ font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #3a2200; }}
-.cup__v b {{ margin-top: 4px; font-size: 20px; font-weight: 800; line-height: 1.05; color: #111; }}
-.cup__t {{ display: flex; flex-direction: column; justify-content: center; padding: 14px 16px; }}
-.cup__t span {{ display: block; margin-top: 3px; font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8a5a00; }}
-.cup__t h3 {{ margin-top: 0; font-size: 17px; font-weight: 800; line-height: 1.2; }}
-.cup__t p {{ margin-top: 4px; font-size: 13px; line-height: 1.4; color: #5c574e; }}
+.cup {{ position: relative; display: grid; grid-template-columns: 96px 1fr; min-height: 84px; border-radius: 12px; background: #f7f1e3; color: #1a1a1a; box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .8); }}
+.cup::before, .cup::after {{ content: ""; position: absolute; left: 89px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); }}
+.cup::before {{ top: -7px; }} .cup::after {{ bottom: -7px; }}
+.cup__v {{ display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 6px; border-right: 2px dashed #cbbf9f; border-radius: 12px 0 0 12px; background: var(--gold); text-align: center; }}
+.cup__v small {{ font-size: 8px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #3a2200; }}
+.cup__v b {{ margin-top: 3px; font-size: 17px; font-weight: 800; line-height: 1.05; color: #111; }}
+.cup__t {{ display: flex; flex-direction: column; justify-content: center; padding: 10px 14px; }}
+.cup__t span {{ display: block; margin-top: 2px; font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8a5a00; }}
+.cup__t h3 {{ margin-top: 0; font-size: 15.5px; font-weight: 800; line-height: 1.2; }}
+.cup__t p {{ margin-top: 3px; font-size: 12.5px; line-height: 1.35; color: #5c574e; }}
 .cups__fine {{ margin: 18px auto 0; max-width: 640px; font-size: 12px; line-height: 1.5; color: var(--ink3); }}
 
 /* Método: produto principal, largura total */
