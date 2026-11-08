@@ -88,7 +88,17 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .btn:hover { background: #2fd14a; }
 .dock { background: #0b0a08 !important; border-top: 1px solid rgba(250,171,0,.25); box-shadow: 0 -14px 30px rgba(0,0,0,.6); padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important; }
 .dock .btn { min-height: 62px !important; font-size: clamp(17px, 4.9vw, 21px); }
-.dock.on ~ .zap { bottom: calc(96px + env(safe-area-inset-bottom)) !important; width: 52px; height: 52px; }
+/* 08/11 (cliente): no celular o WhatsApp não flutua sobre o texto; entra na barra fixa, à esquerda do botão */
+@media (max-width: 899px) {
+  .zap { opacity: 0; pointer-events: none; transition: opacity .3s; }
+  .dock.on { padding-left: 88px !important; }
+  .dock.on ~ .zap { opacity: 1; pointer-events: auto; left: 14px; right: auto; bottom: calc(10px + env(safe-area-inset-bottom)) !important; width: 62px; height: 62px; border-radius: 8px; background: #141310; border: 1.5px solid #25d366; color: #25d366; box-shadow: none; }
+  .dock.on ~ .zap svg { width: 30px; height: 30px; }
+  .dock.on { padding-left: 80px !important; }
+  .dock.on ~ .zap { width: 56px; }
+  .dock.on .btn { font-size: clamp(15px, 4.3vw, 19px); gap: 8px; padding: 0 12px; white-space: nowrap; }
+  .dock.on .btn svg { width: 20px; height: 16px; }
+}
 
 .btn svg { flex: none; width: 26px; height: 20px; }
 .fine { margin-top: 12px; font-size: 13px; color: var(--ink2); text-align: center; }
