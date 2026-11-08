@@ -1379,6 +1379,8 @@ for slug, v in VARIANTES.items():
     P = P.replace('<p class="price__cash">ou R$ 2.500 à vista</p>', '<p class="price__cash">ou %s à vista</p>' % v['preco'])
     P = P.replace('<p class="kick h__kick">Inscrições liberadas</p>', '<p class="kick h__kick">%s</p>' % v['kick'])
     P = re.sub(r'<p class="aluno-lk">.*?</p>', '', P)
+    # 08/11 (cliente): na página de aluno/vitalício o botão é 'Ativar cashback de R$ 1.500/2.000'
+    P = P.replace('>Quero entrar na Black ', '>Ativar cashback de %s ' % ('R$ 1.500' if v['preco'] == 'R$ 1.000' else 'R$ 2.000'))
     P = re.sub(r'<title>[^<]*</title>', '<title>%s</title>' % v['title'], P, count=1)
     P = (P.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
           .replace('https://metodo.thebookbusiness.com.br/ae8a9e17e350/"', 'https://metodo.thebookbusiness.com.br/%s/"' % slug))
@@ -1420,6 +1422,7 @@ for slug, v in VARIANTES.items():
       '.ca p{margin:0;font:500 14px/1.4 Poppins,sans-serif;color:#cfc9bc}.ca p strong{display:block;color:#fff;font-size:16px;margin-bottom:3px}.ca p u{color:#faab00;font-weight:700;text-decoration:none}'
       '.cbk{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:4px 10px;margin:14px auto 2px;font-family:Poppins,sans-serif}'
       '.cbk__a{font-size:22px;font-weight:700;color:#fff}.cbk__m{font-size:22px;font-weight:800;color:#3ddc57}.cbk__t{flex-basis:100%;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3ddc57;text-align:center}'
+      '@media (max-width:899px){.dock .btn{font-size:clamp(14px,4.1vw,18px)!important;padding:0 10px!important}.dock .btn svg{display:none}}'
       'body.trava .ca .cp-u,body:not(.trava) .ca .cp-l{display:none}body:not(.trava) .ca .cp-u{color:#3ddc57}body:not(.trava) .ca{cursor:default}'
       '</style>')
     # 08/11 (cliente escolheu a versão 8A): bloco escuro com o selo dourado do cashback, logo abaixo da trilha (sai a dupla de checks)
