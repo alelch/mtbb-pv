@@ -1419,8 +1419,8 @@ for slug, v in VARIANTES.items():
       'body.trava .ca .cp-u,body:not(.trava) .ca .cp-l{display:none}body:not(.trava) .ca .cp-u{color:#3ddc57}body:not(.trava) .ca{cursor:default}'
       '</style>')
     # 08/11 (cliente escolheu a versão 8A): bloco escuro com o selo dourado do cashback, logo abaixo da trilha (sai a dupla de checks)
-    _cp = {'aluno': ('Cashback de aluno', 'R$1.500', 'Você é aluno, tem cashback.'),
-           'vitalicio': ('Cashback de vitalício', 'R$2.000', 'Você é vitalício, tem cashback.')}[_meu]
+    _cp = {'aluno': ('Cashback de aluno', 'R$1.500', 'Se você é aluno, tem cashback.'),
+           'vitalicio': ('Cashback de vitalício', 'R$2.000', 'Se você é vitalício, tem cashback.')}[_meu]
     CUPOM = ('<div class="ca" data-trv aria-label="%s de %s"><div class="tk"><small>%s</small><b>%s</b></div>'
              '<p><strong>%s</strong>%s de cashback na oferta da Black. <u class="cp-l">Ativar com o CPF &rsaquo;</u><u class="cp-u">Ativado no seu preço &check;</u></p></div>') % (_cp[0], _cp[1], _cp[0], _cp[1], _cp[2], _cp[1])
     GATE_BOX = '<div class="trv"><b>Ative o seu cashback</b><p>Confirme com o CPF, o e-mail ou o celular da sua compra.</p><a class="btn" href="#" data-trv>Ativar e ver o meu preço</a></div>'
