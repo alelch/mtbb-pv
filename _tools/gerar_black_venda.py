@@ -380,6 +380,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .bon2__c .bon2__ph img {{ max-width: none; margin: 0; filter: none; width: 100%; aspect-ratio: 716 / 1200; object-fit: cover; object-position: top; border-radius: 21px; }}
 .cups {{ border-top: 1px solid var(--line); }}
 .cups__l {{ margin: 16px auto 0; max-width: 560px; font-size: clamp(16px, 4.4vw, 20px); color: var(--ink2); text-wrap: balance; }}
+.cups__h {{ display: block; margin-top: .25em; font-size: .62em; letter-spacing: -.02em; color: #fff; }}
+.cups__h .cups__v {{ font-size: 1.3em; }}
+.cups__l .cups__n {{ display: block; margin-bottom: 4px; font-size: 1.4em; font-weight: 800; color: var(--amber); }}
 .cupg {{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 900px; margin: 36px auto 0; text-align: left; }}
 @media (min-width: 760px) {{ .cupg {{ grid-template-columns: 1fr 1fr; }} }}
 .cup {{ position: relative; display: grid; grid-template-columns: 112px 1fr; min-height: 118px; border-radius: 14px; background: #f7f1e3; color: #1a1a1a; box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .8); }}
@@ -911,8 +914,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap center">
       <div class="rv">
         <p class="kick">E tem mais</p>
-        <h2 class="h2">A Black que <span class="gold">já se paga.</span></h2>
-        <p class="cups__l">Até <b>R$ 6.700 em cupons</b> para imprimir, publicar e divulgar o seu livro.</p>
+        <h2 class="h2">A Black que <span class="gold">já se paga.</span><span class="cups__h">Até <span class="cups__v gold">R$ 6.700</span> em cupons</span></h2>
+        <p class="cups__l">Para imprimir, publicar e divulgar o seu livro.</p>
       </div>
       <div class="cupg">{CUPONS}</div>
       <p class="cups__fine rv">Cupons intransferíveis, de uso único, só para novos projetos e não cumulativos. Resgate com o e-mail de compra.</p>
