@@ -1359,8 +1359,7 @@ PRE_BLOCK = r'''
 <input name="nome" type="text" autocomplete="name" placeholder="Nome completo *" aria-label="Nome completo">
 <input name="email" type="email" autocomplete="email" inputmode="email" placeholder="Insira seu melhor e-mail *" aria-label="E-mail">
 <input name="cpf" type="text" inputmode="numeric" maxlength="14" placeholder="Insira seu CPF *" aria-label="CPF">
-<div class="pre-tel"><select name="ddi" aria-label="País"><option value="55" selected>🇧🇷 +55</option><option value="351">🇵🇹 +351</option><option value="1">🇺🇸 +1</option><option value="81">🇯🇵 +81</option><option value="44">🇬🇧 +44</option><option value="34">🇪🇸 +34</option><option value="39">🇮🇹 +39</option><option value="33">🇫🇷 +33</option><option value="49">🇩🇪 +49</option><option value="41">🇨🇭 +41</option><option value="54">🇦🇷 +54</option><option value="56">🇨🇱 +56</option><option value="52">🇲🇽 +52</option><option value="244">🇦🇴 +244</option><option value="258">🇲🇿 +258</option></select>
-<input name="tel" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="16" placeholder="WhatsApp com DDD *" aria-label="WhatsApp"></div>
+
 <button class="btn" type="submit">Prosseguir</button>
 </form>
 <div class="pre-r" id="prer" role="alert"></div>
@@ -1375,11 +1374,9 @@ function dig(v){return String(v||'').replace(/\D/g,'')}
 function mCpf(v){v=dig(v).slice(0,11);return v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2')}
 function mTel(v){v=dig(v).slice(0,11);if(v.length>6)return v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/,'($1) $2-$3');if(v.length>2)return v.replace(/^(\d{2})(\d{0,5}).*/,'($1) $2');return v}
 f.cpf.addEventListener('input',function(){f.cpf.value=mCpf(f.cpf.value)});
-f.tel.addEventListener('input',function(){if(f.ddi.value==='55')f.tel.value=mTel(f.tel.value)});
 function base(){var a=document.querySelector('a[data-cta]');try{var u=new URL(a.href);if(u.protocol.indexOf('http')===0)return u}catch(e){}return new URL('https://thebookbusiness.com.br'+PATH[PAG])}
-function destino(qual){var u=base();u.pathname=PATH[qual];u.hash='';var n=f.nome.value.trim(),e=f.email.value.trim(),c=dig(f.cpf.value),t=dig(f.tel.value),d=f.ddi.value;
+function destino(qual){var u=base();u.pathname=PATH[qual];u.hash='';var n=f.nome.value.trim(),e=f.email.value.trim(),c=dig(f.cpf.value);
  if(n)u.searchParams.set('name',n);if(e)u.searchParams.set('email',e);if(c.length===11)u.searchParams.set('doc',c);
- if(t){if(d==='55'&&t.length>=10){u.searchParams.set('phoneac',t.slice(0,2));u.searchParams.set('phonenumber',t.slice(2))}else{u.searchParams.set('phonenumber',d+t)}}
  return u.toString()}
 function vai(qual){location.href=destino(qual)}
 function abre(e){var a=e.target.closest&&e.target.closest('[data-cta]');if(!a)return;e.preventDefault();e.stopPropagation();r.textContent='';bt.disabled=false;bt.textContent='Prosseguir';m.classList.add('on');setTimeout(function(){f.nome.focus()},60)}
@@ -1392,13 +1389,13 @@ function falhou(cat){bt.disabled=false;bt.textContent='Prosseguir';
  var msg=cat==='erro'?'Não consegui conferir a sua compra agora.':cat==='limite'?'Muitas tentativas seguidas.':'Não encontramos uma compra do Método The Book Business com esses dados. Confira o CPF e o e-mail da compra.';
  r.innerHTML=msg+' <a href="'+ZAP+'" target="_blank">Fale com a equipe</a>.<a class="pre-seg" href="'+destino('geral')+'">Seguir com o preço normal</a>'}
 f.addEventListener('submit',function(e){e.preventDefault();r.textContent='';
- var ok=true,br=f.ddi.value==='55';
- [['nome',f.nome.value.trim().length>=2],['email',/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim())],['cpf',!br||dig(f.cpf.value).length===11],['tel',dig(f.tel.value).length>=(br?10:6)]].forEach(function(x){f[x[0]].classList.toggle('err',!x[1]);if(!x[1])ok=false});
+ var ok=true;
+ [['nome',f.nome.value.trim().length>=2],['email',/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim())],['cpf',dig(f.cpf.value).length===11]].forEach(function(x){f[x[0]].classList.toggle('err',!x[1]);if(!x[1])ok=false});
  if(!ok){r.textContent='Confira os campos em vermelho.';return}
  bt.disabled=true;bt.textContent='Um instante...';
  var ctl='AbortController' in window?new AbortController():null,tm=setTimeout(function(){ctl&&ctl.abort()},7000);
  fetch('https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/bf26-precheckout',{method:'POST',headers:{'Content-Type':'application/json'},signal:ctl?ctl.signal:undefined,
-  body:JSON.stringify({nome:f.nome.value.trim(),email:f.email.value.trim(),cpf:dig(f.cpf.value),tel:dig(f.tel.value),ddi:f.ddi.value,pagina:PAG})})
+  body:JSON.stringify({nome:f.nome.value.trim(),email:f.email.value.trim(),cpf:dig(f.cpf.value),pagina:PAG})})
  .then(function(x){return x.json()}).catch(function(){return {categoria:'erro'}}).then(function(d){clearTimeout(tm);var c=(d&&d.categoria)||'erro';
   if(c==='vitalicio')return vai('vitalicio');
   if(c==='aluno')return vai('aluno');
