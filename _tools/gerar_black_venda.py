@@ -1410,14 +1410,14 @@ for slug, v in VARIANTES.items():
       '.cpm .c-bot b{display:inline;margin:0;font-weight:700;font-size:14px;letter-spacing:-.01em;color:#1d1406}'
       '.cpm .c-stamp{flex:none;margin-left:auto;padding:4px 8px 3px;border:2px solid rgba(29,20,6,.75);border-radius:6px;font:900 italic 11px/1 "Montserrat",sans-serif;letter-spacing:.08em;transform:rotate(-4deg);text-transform:uppercase;background:rgba(255,235,190,.45)}'
       'body:not(.trava) .cpm .c-stamp{border-color:#0f7a1f;color:#0f7a1f;background:rgba(220,255,214,.75)}'
-      'body.trava .cpm .cp-u,body:not(.trava) .cpm .cp-l{display:none}'
+      'body.trava .cpm .cp-u,body:not(.trava) .cpm .cp-l{display:none}body.trava .cpm{cursor:pointer}.h .cpm{margin:26px auto 4px}'
       '@media (prefers-reduced-motion:reduce){.cpm .c-top::after{animation:none}}'
       '</style>')
     _cp = {'aluno': ('Cupom de aluno', 'R$1.500', 'de cashback na oferta da Black Week Motorizada', 'Aluno'),
            'vitalicio': ('Cupom de aluno vitalício', 'R$2.000', 'de cashback na oferta da Black Week Motorizada', 'Vitalício')}[_meu]
-    CUPOM = ('<div class="cpm" aria-label="Cupom de %s de cashback"><div class="c-top"><div class="c-eyebrow">%s</div><p class="c-valor">%s</p><p class="c-oferta">%s</p>'
+    CUPOM = ('<div class="cpm" data-trv aria-label="Cupom de %s de cashback"><div class="c-top"><div class="c-eyebrow">%s</div><p class="c-valor">%s</p><p class="c-oferta">%s</p>'
              '<img class="c-dany" src="../black-week/assets/dany-bw-m.webp" alt="" width="408" height="378" decoding="async"></div>'
-             '<div class="c-bot"><b class="cp-l">Confirme abaixo para ativar</b><b class="cp-u">Cashback aplicado no seu preço</b>'
+             '<div class="c-bot"><b class="cp-l">Ative com o CPF da sua compra &rsaquo;</b><b class="cp-u">Cashback aplicado no seu preço</b>'
              '<span class="c-stamp"><span class="cp-l">%s</span><span class="cp-u">Ativado</span></span></div></div>') % (_cp[1], _cp[0], _cp[1], _cp[2], _cp[3])
     GATE_BOX = '<div class="trv"><b>Ative o seu cashback</b><p>Confirme com o CPF, o e-mail ou o celular da sua compra.</p><a class="btn" href="#" data-trv>Ativar e ver o meu preço</a></div>'
     GATE_HTML = ('<div class="trv-m" id="trv"><div class="trv-c"><button class="trv-x" type="button" aria-label="Fechar" data-trvx>&times;</button>'
@@ -1443,7 +1443,8 @@ for slug, v in VARIANTES.items():
       '}).catch(function(){bt.disabled=false;r.innerHTML="Não consegui conferir agora. <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">Fale com a equipe</a>."})})})();</script>') % (_meu, _outro)
     P = P.replace('</head>', GATE_CSS + '</head>', 1)
     P = P.replace('<p class="price__big">', GATE_BOX + '<p class="price__big">')
-    P = P.replace('<div class="trv">', CUPOM + '<div class="trv">', 1)   # cupom só no primeiro bloco de preço
+    P = P.replace('<div class="hk2">', CUPOM + '<div class="hk2">', 1)   # 08/11 (cliente): cupom no topo, logo abaixo da trilha
+    assert P.count('class="cpm"') == 1, slug
     P = P.replace('</main>', '</main>' + GATE_HTML + GATE_JS, 1)
     assert P.count('class="trv"') >= 2, slug
     os.makedirs(f"{R}/{slug}", exist_ok=True)
