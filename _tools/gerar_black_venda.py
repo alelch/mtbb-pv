@@ -600,7 +600,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .est__leg small {{ font-size: 10.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); margin-top: 2px; }}
 .est__leg span.o small {{ color: var(--amber); }}
 /* 08/11 (cliente): preço em dourado vivo (o degradê terminava marrom) e âncora riscada logo acima */
-.price__big span {{ background: linear-gradient(100deg, #f2a000, #ffcf5c 28%, #faab00 50%, #ffe39a 72%, #f2a000) !important; background-size: 220% 100% !important; }}
+.price__big span {{ background-image: linear-gradient(100deg, #f2a000, #ffcf5c 28%, #faab00 50%, #ffe39a 72%, #f2a000) !important; background-size: 220% 100% !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important; }}
 .price__de {{ margin-top: 10px; font-size: clamp(15px, 4vw, 18px); color: var(--ink2); }}
 .price__de s {{ text-decoration-color: #d62f24; text-decoration-thickness: 2px; color: #cfc9bc; }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
