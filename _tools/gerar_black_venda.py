@@ -765,7 +765,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="q1">Para ter acesso <u>por um ano</u>, você <u>precisaria</u> investir:</p>
         <div class="bill">
           {BILL}
-          <div class="bill__row bill__row--lmb"><span>{LMB}<a class="testar testar--sm" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Testar</span></a></span><b>R$ 2.000,00</b><i class="novo">Lançamento</i></div>
+          <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>R$ 2.000,00</b><i class="novo">Lançamento</i></div>
           <div class="bill__tot"><span>Total</span><b>R$ 9.485,00</b></div>
         </div>
       </div>
@@ -807,7 +807,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           <span class="lv__k">Bônus 1</span>
           <h3>LOMBADA em dobro: 6 anos no lugar de 3.</h3>
           <p>Hoje você recebe o dobro: 6 anos com o LOMBADA ao lado do seu livro, todo dia. Amanhã volta a ser 3.</p>
-          <a class="testar testar--b" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Teste com o nome do seu livro</span></a>
                   </div>
         </div>
         <div class="bon2__c rv">
@@ -842,7 +841,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="q2">Tudo o que você leva na Black Week Motorizada:</p>
         <ul class="card__list">
           <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos e workshops, <b>vitalícios</b></span></li>
-          <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b> <a class="testar testar--sm" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Testar</span></a></span></li>
+          <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
           <li>{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
