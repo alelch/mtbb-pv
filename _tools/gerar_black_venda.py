@@ -936,7 +936,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         {CTA}
         <div class="seal"><i>15<small>dias</small></i><p><b>Garantia de 15 dias.</b> Entre, use, conheça tudo. Se não for pra você, devolvemos 100%.</p></div>
       </div>
-      <div class="warn rv d9-only"><b>Atenção:</b> os 6 anos de LOMBADA são só para quem entrar hoje. A partir de amanhã, o LOMBADA volta a ser 3 anos.</div>
     </div>
   </section>
 
