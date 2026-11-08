@@ -599,6 +599,10 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .est__leg span.o {{ color: var(--amber); }}
 .est__leg small {{ font-size: 10.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); margin-top: 2px; }}
 .est__leg span.o small {{ color: var(--amber); }}
+/* 08/11 (cliente): preço em dourado vivo (o degradê terminava marrom) e âncora riscada logo acima */
+.price__big span {{ background: linear-gradient(100deg, #f2a000, #ffcf5c 28%, #faab00 50%, #ffe39a 72%, #f2a000) !important; background-size: 220% 100% !important; }}
+.price__de {{ margin-top: 10px; font-size: clamp(15px, 4vw, 18px); color: var(--ink2); }}
+.price__de s {{ text-decoration-color: #d62f24; text-decoration-thickness: 2px; color: #cfc9bc; }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -821,10 +825,10 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 
       <!-- 4. o preço -->
       <div class="blk price">
-        <p class="q2">Mas comprando hoje, você não vai investir tudo isso.<br>Você só vai investir:</p>
+        <p class="q2">Mas entrando hoje, você não paga nada disso.<br>Você leva tudo por:</p>
+        <p class="price__de">De <s><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
-        <p class="price__day">Menos de R$ 7 por dia no primeiro ano. E o Método é seu pra sempre.</p>
         <div class="cta price__cta">{CTA}<p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
       </div>
     </div>
@@ -1311,7 +1315,6 @@ for slug, v in VARIANTES.items():
                   "var CHECKOUT = { d9: '%s', depois: '%s' }" % (v['checkout'], v['checkout']))
     P = P.replace('<p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>', '<p class="price__big"><small>por</small><span>%s</span></p>' % v['preco'])
     P = P.replace('<p class="price__cash">ou R$ 2.500 à vista</p>', '<p class="price__cash">à vista ou parcelado no cartão</p>')
-    P = P.replace('<p class="price__day">Menos de R$ 7 por dia no primeiro ano. E o Método é seu pra sempre.</p>', '<p class="price__day">%s</p>' % v['dia'])
     P = P.replace('<p class="kick h__kick">Inscrições liberadas</p>', '<p class="kick h__kick">%s</p>' % v['kick'])
     P = re.sub(r'<title>[^<]*</title>', '<title>%s</title>' % v['title'], P, count=1)
     P = (P.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
