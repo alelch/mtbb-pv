@@ -87,7 +87,8 @@ _CUP = [("Gráfica Renograf", "Impressão do seu livro", "até R$ 1.200", "Desco
         ("Jimenes Comunicação", "Assessoria de imprensa", "R$ 2.000", "Projeto semestral. Válido por 24 meses."),
         ("Editora Labrador", "Publicação do seu livro solo", "R$ 1.000", "Válido por 12 meses."),
         ("Editora Literare", "Publicação do seu livro solo", "R$ 2.000", "Válido por 12 meses.")]
-CUPONS = "".join(f'<div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>{v}</b></div><div class="cup__t"><span>{q}</span><h3>{n}</h3><p>{d}</p></div></div>' for n, q, v, d in _CUP)
+# 08/11 (cliente): fornecedor pequeno em cima, tipo de serviço em destaque
+CUPONS = "".join(f'<div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>{v}</b></div><div class="cup__t"><span>{n}</span><h3>{q}</h3><p>{d}</p></div></div>' for n, q, v, d in _CUP)
 
 # 01/11 (cliente: "a parte do test drive da primeira versão era legal, só a parte do LOMBADA volta"):
 # test drive + oportunidades + ideias de post da black-week/ voltam como estavam (markup, CSS e JS próprios)
