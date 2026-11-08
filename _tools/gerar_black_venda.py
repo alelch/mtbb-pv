@@ -540,6 +540,12 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .leva--resto {{ border-top: 0; padding-top: 40px; }}
 .lmbx .h2 {{ font-size: clamp(30px, 8vw, 48px); }}
 /* abertura emendada na oferta (ordem do Aniversário) */
+/* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
+.trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
+.trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
+.trilha i {{ font-style: normal; color: var(--amber); margin: 0 .35em; }}
+@media (min-width: 720px) {{ .trilha {{ letter-spacing: .18em; }} .trilha .l1, .trilha .l2 {{ display: inline; }} }}
+.trilha + .hk2 {{ margin-top: 26px; }}
 /* 08/11 (cliente): os 2 destaques em colunas com divisória, como no Aniversário */
 .hk2 {{ display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 820px; margin: 40px auto 0; text-align: left; }}
 .hk2 p {{ display: flex; gap: 12px; align-items: flex-start; font-size: clamp(15px, 3.9vw, 17px); line-height: 1.5; color: #e9e3d6; }}
@@ -716,9 +722,10 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
       <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> {LMB}</span><span class="h__tag">Leva o seu livro cada vez mais longe.</span></h1>
+      <p class="trilha"><span class="l1"><span>Construa autoridade <i>›</i></span> <span>Seja lido de verdade <i>›</i></span></span> <span class="l2"><span>Gere impacto real <i>›</i></span> <span>Para sempre</span></span></p>
       <div class="hk2">
         <p>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></p>
-        <p>{CK}<span>O <b>LOMBADA</b>, o personal trainer do seu livro, por <b class="d9-only amber">6 anos</b><b class="after-only">3 anos</b>.</span></p>
+        <p>{CK}<span>Os bônus mais poderosos já criados dentro da melhor estratégia literária do Brasil.</span></p>
       </div>
 
       <!-- 2. quanto custaria por um ano -->
