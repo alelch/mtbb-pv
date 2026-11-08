@@ -1395,8 +1395,31 @@ for slug, v in VARIANTES.items():
       '.trv-c input{width:100%;box-sizing:border-box;padding:14px;border-radius:10px;border:1.5px solid rgba(250,171,0,.6);background:#000;color:#fff;font:inherit;font-size:16px}'
       '.trv-c .btn{margin-top:12px}.trv-x{position:absolute;right:10px;top:8px;background:none;border:0;color:#a8a399;font-size:26px;cursor:pointer}'
       '.trv-r{margin-top:12px;font-size:14px;line-height:1.5;color:#ffb3b0}.trv-r a{color:#faab00;font-weight:700}'
+      # 08/11 (cliente): o cupom de aluno/vitalício da página de cadastro aparece aqui; trava = "confirme", liberado = "Ativado"
+      '.cpm{display:block!important;max-width:400px;margin:20px auto 6px;text-align:left;color:#1d1406;filter:drop-shadow(0 12px 28px rgba(250,171,0,.22))}'
+      '.cpm .c-top,.cpm .c-bot{position:relative;overflow:hidden;background:linear-gradient(125deg,#ffe39a 0%,#ffd060 30%,#faab00 65%,#c97a00 100%)}'
+      '.cpm .c-top{border-radius:14px 14px 0 0;padding:14px 16px 16px;-webkit-mask:radial-gradient(circle 11px at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 11px at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat}'
+      '.cpm .c-bot{border-radius:0 0 14px 14px;padding:11px 16px 12px;display:flex;align-items:center;gap:10px;-webkit-mask:radial-gradient(circle 11px at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 0,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 11px at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 0,#0000 98%,#000) right/51% 100% no-repeat}'
+      '.cpm .c-bot::before{content:"";position:absolute;left:18px;right:18px;top:0;border-top:2px dashed rgba(29,20,6,.32)}'
+      '.cpm .c-top::after{content:"";position:absolute;top:-40%;bottom:-40%;width:34%;left:-60%;transform:skewX(-18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:cbrilho 5s ease-in-out infinite 1.4s}'
+      '@keyframes cbrilho{0%{left:-60%}45%,100%{left:130%}}'
+      '.cpm .c-eyebrow{position:relative;z-index:1;font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.72}'
+      '.cpm .c-valor{position:relative;z-index:1;margin:4px 0 0;font:900 italic clamp(40px,12vw,54px)/1 "Montserrat",sans-serif;letter-spacing:-.03em;color:#1d1406}'
+      '.cpm .c-oferta{position:relative;z-index:1;max-width:60%;margin:6px 0 0;font-weight:500;font-size:13px;line-height:1.3;color:#1d1406}'
+      '.cpm .c-dany{position:absolute;z-index:0;right:-4px;bottom:0;width:38%;max-width:150px;height:auto}'
+      '.cpm .c-bot b{display:inline;margin:0;font-weight:700;font-size:14px;letter-spacing:-.01em;color:#1d1406}'
+      '.cpm .c-stamp{flex:none;margin-left:auto;padding:4px 8px 3px;border:2px solid rgba(29,20,6,.75);border-radius:6px;font:900 italic 11px/1 "Montserrat",sans-serif;letter-spacing:.08em;transform:rotate(-4deg);text-transform:uppercase;background:rgba(255,235,190,.45)}'
+      'body:not(.trava) .cpm .c-stamp{border-color:#0f7a1f;color:#0f7a1f;background:rgba(220,255,214,.75)}'
+      'body.trava .cpm .cp-u,body:not(.trava) .cpm .cp-l{display:none}'
+      '@media (prefers-reduced-motion:reduce){.cpm .c-top::after{animation:none}}'
       '</style>')
-    GATE_BOX = '<div class="trv"><b>Preço exclusivo de aluno</b><p>Confirme com o CPF, o e-mail ou o celular da sua compra.</p><a class="btn" href="#" data-trv>Ver o meu preço</a></div>'
+    _cp = {'aluno': ('Cupom de aluno', 'R$1.500', 'de cashback na oferta da Black Week Motorizada', 'Aluno'),
+           'vitalicio': ('Cupom de aluno vitalício', 'R$2.000', 'de cashback na oferta da Black Week Motorizada', 'Vitalício')}[_meu]
+    CUPOM = ('<div class="cpm" aria-label="Cupom de %s de cashback"><div class="c-top"><div class="c-eyebrow">%s</div><p class="c-valor">%s</p><p class="c-oferta">%s</p>'
+             '<img class="c-dany" src="../black-week/assets/dany-bw-m.webp" alt="" width="408" height="378" decoding="async"></div>'
+             '<div class="c-bot"><b class="cp-l">Confirme abaixo para ativar</b><b class="cp-u">Cashback aplicado no seu preço</b>'
+             '<span class="c-stamp"><span class="cp-l">%s</span><span class="cp-u">Ativado</span></span></div></div>') % (_cp[1], _cp[0], _cp[1], _cp[2], _cp[3])
+    GATE_BOX = '<div class="trv"><b>Ative o seu cashback</b><p>Confirme com o CPF, o e-mail ou o celular da sua compra.</p><a class="btn" href="#" data-trv>Ativar e ver o meu preço</a></div>'
     GATE_HTML = ('<div class="trv-m" id="trv"><div class="trv-c"><button class="trv-x" type="button" aria-label="Fechar" data-trvx>&times;</button>'
       '<h3>Confirme que você é aluno</h3><p>Digite o CPF, o e-mail ou o celular que você usou na compra do Método The&nbsp;Book&nbsp;Business.</p>'
       '<form id="trvf"><input id="trvi" autocomplete="email" placeholder="CPF, e-mail ou celular" required><button class="btn" type="submit">Confirmar</button></form>'
@@ -1420,6 +1443,7 @@ for slug, v in VARIANTES.items():
       '}).catch(function(){bt.disabled=false;r.innerHTML="Não consegui conferir agora. <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">Fale com a equipe</a>."})})})();</script>') % (_meu, _outro)
     P = P.replace('</head>', GATE_CSS + '</head>', 1)
     P = P.replace('<p class="price__big">', GATE_BOX + '<p class="price__big">')
+    P = P.replace('<div class="trv">', CUPOM + '<div class="trv">', 1)   # cupom só no primeiro bloco de preço
     P = P.replace('</main>', '</main>' + GATE_HTML + GATE_JS, 1)
     assert P.count('class="trv"') >= 2, slug
     os.makedirs(f"{R}/{slug}", exist_ok=True)
