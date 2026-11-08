@@ -855,8 +855,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <div class="bon2__c rv d9-only">
           <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>Black</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div><p class="bon2__lmb">{LMB}</p></div>
           <div class="bon2__txt">
-          <h3>O LOMBADA em dobro.</h3>
-          <p>6 anos ao lado do seu livro, no lugar de 3.<br>Só para quem entrar hoje.</p>
+          <h3>Acesso em DOBRO</h3>
+          <p>Só para quem entrar hoje</p>
                   </div>
         </div>
         <div class="bon2__c rv">
