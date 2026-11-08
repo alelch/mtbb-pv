@@ -1327,6 +1327,85 @@ HTML = HTML.replace('</style>\n</head>', '.pg__capa { flex-direction: column; ju
 EQV_BLOCO = '\n<!-- 08/11 (cliente): verificador de número da equipe (anti-golpe), mesma lista de verificar-numero-equipe/widget_rodape.html -->\n<section class="eqv-wrap" style="padding:0 16px">\n<div id="eqv-card">\n  <h2 class="eqv-title">Verifique o número do nosso time</h2>\n  <p class="eqv-sub">Preencha o campo abaixo com o número de whatsapp e valide se faz parte da nossa equipe.</p>\n\n  <div class="eqv-row">\n    <div class="eqv-inputwrap">\n      <span class="eqv-flag">🇧🇷 <span class="eqv-ddi">+55</span></span>\n      <input id="eqv-phone" type="tel" inputmode="tel" autocomplete="off"\n             placeholder="(00) 0 0000-0000" maxlength="16" />\n    </div>\n    <button id="eqv-btn" type="button">Verificar Número</button>\n  </div>\n\n  <div id="eqv-result" class="eqv-result" hidden></div>\n</div>\n\n</section>\n<style>\n  #eqv-card{ max-width:640px; margin:8px auto 36px; background:#121212; border:1px solid #2a2a2a; border-radius:20px; padding:32px 22px; text-align:center; font-family:inherit; box-sizing:border-box; }\n  .eqv-title{ font-size:24px; line-height:1.2; font-weight:800; color:#fff; margin:0 0 10px; }\n  .eqv-sub{ font-size:14.5px; color:#a8a399; margin:0 auto 22px; max-width:520px; line-height:1.5; }\n  .eqv-row{ display:flex; align-items:stretch; max-width:500px; margin:0 auto; background:#0a0a0a; border:1px solid #333; border-radius:999px; padding:6px; }\n  .eqv-inputwrap{ display:flex; align-items:center; flex:1; padding-left:14px; min-width:0; }\n  .eqv-flag{ font-size:14px; color:#8d887f; white-space:nowrap; margin-right:8px; }\n  #eqv-phone{ flex:1; border:0; outline:0; background:transparent; font:inherit; font-size:16px; font-weight:500; color:#fff; min-width:0; padding:10px 4px; }\n  #eqv-phone::placeholder{ color:#5c5850; }\n  #eqv-btn{ border:0; cursor:pointer; background:#1ebb00; color:#fff; font:inherit; font-weight:800; font-size:15px; padding:0 26px; border-radius:999px; white-space:nowrap; }\n  #eqv-btn:hover{ background:#19a300; }\n  .eqv-result{ margin:18px auto 0; max-width:520px; padding:14px 18px; border-radius:14px; font-size:17px; font-weight:700; line-height:1.4; }\n  .eqv-result.ok{ background:rgba(30,187,0,.14); color:#6fe35a; }\n  .eqv-result.no{ background:rgba(226,75,74,.14); color:#ff8a89; }\n  .eqv-result.neutral{ background:#1c1c1c; color:#a8a399; font-weight:500; font-size:15px; }\n  @media (max-width:600px){ .eqv-row{ flex-direction:column; border-radius:16px; gap:8px; padding:10px; } .eqv-inputwrap{ justify-content:center; padding:6px 4px; } #eqv-btn{ padding:14px; width:100%; } }\n</style>\n<script>\n(function () {\n  \'use strict\';\n  if (window.__eqvInit) return; window.__eqvInit = true;\n\n  /* ============ EQUIPE — editar só aqui pra atualizar ============ */\n  var EQUIPE = [\n    { num: \'38 98848-7665\', nome: \'Aira\'    },\n    { num: \'81 98637-0023\', nome: \'Dezza\'   },\n    { num: \'11 92469-3585\', nome: \'Natália\' },\n    { num: \'11 94083-3397\', nome: \'Mariana\' },\n    { num: \'11 97829-5602\', nome: \'Bianca\'  },\n    { num: \'11 91519-4847\', nome: \'Time\'    }\n  ];\n  /* ============================================================== */\n\n  function canon(p) {\n    var d = String(p || \'\').replace(/\\D/g, \'\');\n    if (d.length < 10) return \'\';\n    if (d.length === 10 || d.length === 11) d = \'55\' + d;\n    if (d.length === 12 && \'6789\'.indexOf(d.charAt(4)) > -1) d = d.slice(0, 4) + \'9\' + d.slice(4);\n    return d;\n  }\n\n  var MAPA = {};\n  EQUIPE.forEach(function (e) { var c = canon(e.num); if (c) MAPA[c] = e.nome; });\n\n  var inp = document.getElementById(\'eqv-phone\');\n  var btn = document.getElementById(\'eqv-btn\');\n  var box = document.getElementById(\'eqv-result\');\n  if (!inp || !btn || !box) return;\n\n  function digits(s) { return String(s || \'\').replace(/\\D/g, \'\'); }\n\n  function mascara(v) {\n    v = digits(v);\n    if (v.indexOf(\'55\') === 0 && v.length > 11) v = v.slice(2);\n    v = v.slice(0, 11);\n    if (v.length > 7)      v = v.replace(/^(\\d{2})(\\d{1})(\\d{4})(\\d{0,4}).*/, \'($1) $2 $3-$4\');\n    else if (v.length > 3) v = v.replace(/^(\\d{2})(\\d{1})(\\d{0,4}).*/, \'($1) $2 $3\');\n    else if (v.length > 2) v = v.replace(/^(\\d{2})(\\d{0,1}).*/, \'($1) $2\');\n    else if (v.length > 0) v = v.replace(/^(\\d{0,2}).*/, \'($1\');\n    return v;\n  }\n  inp.addEventListener(\'input\', function () { inp.value = mascara(inp.value); });\n\n  function show(cls, text) { box.hidden = false; box.className = \'eqv-result \' + cls; box.textContent = text; }\n\n  function verificar() {\n    var c = canon(inp.value);\n    if (c === \'\') { show(\'neutral\', \'Digite o número completo, com DDD.\'); return; }\n    if (MAPA[c]) show(\'ok\', \'✓ Sim! Este número é da nossa equipe (\' + MAPA[c] + \').\');\n    else         show(\'no\', \'Este número não faz parte do Time\');\n  }\n\n  btn.addEventListener(\'click\', verificar);\n  inp.addEventListener(\'keydown\', function (e) { if (e.key === \'Enter\') { e.preventDefault(); verificar(); } });\n})();\n</script>\n'
 assert '</main>\n\n<footer>' in HTML
 HTML = HTML.replace('</main>\n\n<footer>', '</main>\n' + EQV_BLOCO + '\n<footer>', 1)
+
+# 08/11 (cliente): PRÉ-CHECKOUT nas 4 páginas, como no Aniversário. O botão abre o popup (nome, e-mail, CPF, WhatsApp);
+# a função bf26-precheckout confere aluno/vitalício/já comprou e manda o contato pro AC (tag BF-26-pre-checkout).
+# Aluno vai pro checkout de aluno, vitalício pro de vitalício, o resto pro de R$2.500. Checkout abre preenchido.
+PRE_BLOCK = r'''
+<style>
+.pre-m{position:fixed;inset:0;z-index:95;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,0,0,.8)}
+.pre-m.on{display:flex}
+.pre-c{position:relative;width:100%;max-width:430px;max-height:calc(100vh - 28px);overflow:auto;padding:26px 20px 20px;border-radius:16px;background:#0b0a08;box-shadow:0 0 0 1px rgba(250,171,0,.45),0 0 40px rgba(250,171,0,.25);text-align:center;font-family:Poppins,sans-serif}
+.pre-c h3{margin:0 0 6px;font-size:23px;font-weight:800;color:#fff}
+.pre-c .pre-s{margin:0 0 16px;font-size:14px;line-height:1.5;color:#cfc9bc}
+.pre-c form{display:grid;gap:10px;text-align:left}
+.pre-c input,.pre-c select{width:100%;box-sizing:border-box;height:52px;padding:0 14px;border-radius:10px;border:1.5px solid rgba(250,171,0,.5);background:#000;color:#fff;font:500 16px Poppins,sans-serif}
+.pre-c input::placeholder{color:#7d776c}
+.pre-c input.err{border-color:#ff6b66}
+.pre-tel{display:grid;grid-template-columns:104px 1fr;gap:8px}
+.pre-c .btn{margin-top:4px;min-height:62px;font-size:18px}
+.pre-x{position:absolute;right:10px;top:6px;background:none;border:0;color:#a8a399;font-size:28px;line-height:1;cursor:pointer}
+.pre-r{margin-top:12px;font-size:14px;line-height:1.5;color:#ffb3b0;text-align:center}
+.pre-r a{color:#faab00;font-weight:700}
+.pre-r .pre-seg{display:block;margin-top:10px;padding:12px;border-radius:10px;border:1.5px solid rgba(250,171,0,.5);color:#fff;text-decoration:none}
+.pre-l{margin:12px 0 0;font-size:11.5px;color:#8d887f}.pre-l a{color:#8d887f}
+</style>
+<div class="pre-m" id="pre" data-pag="geral" role="dialog" aria-modal="true" aria-labelledby="pre-t"><div class="pre-c">
+<button class="pre-x" type="button" aria-label="Fechar" data-prex>&times;</button>
+<h3 id="pre-t">Falta pouco</h3>
+<p class="pre-s" data-pre-s>Preencha para ir ao pagamento. Se você é aluno do Método The&nbsp;Book&nbsp;Business, o seu cashback entra sozinho.</p>
+<form id="pref" novalidate>
+<input name="nome" type="text" autocomplete="name" placeholder="Seu nome" aria-label="Nome">
+<input name="email" type="email" autocomplete="email" inputmode="email" placeholder="Seu e-mail" aria-label="E-mail">
+<input name="cpf" type="text" inputmode="numeric" maxlength="14" placeholder="Seu CPF" aria-label="CPF">
+<div class="pre-tel"><select name="ddi" aria-label="País"><option value="55" selected>🇧🇷 +55</option><option value="351">🇵🇹 +351</option><option value="1">🇺🇸 +1</option><option value="81">🇯🇵 +81</option><option value="44">🇬🇧 +44</option><option value="34">🇪🇸 +34</option><option value="39">🇮🇹 +39</option><option value="33">🇫🇷 +33</option><option value="49">🇩🇪 +49</option><option value="41">🇨🇭 +41</option><option value="54">🇦🇷 +54</option><option value="56">🇨🇱 +56</option><option value="52">🇲🇽 +52</option><option value="244">🇦🇴 +244</option><option value="258">🇲🇿 +258</option></select>
+<input name="tel" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="16" placeholder="WhatsApp com DDD" aria-label="WhatsApp"></div>
+<button class="btn" type="submit">Ir para o pagamento</button>
+</form>
+<div class="pre-r" id="prer" role="alert"></div>
+<p class="pre-l">Ao continuar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+</div></div>
+<script>(function(){
+var m=document.getElementById('pre'),f=document.getElementById('pref'),r=document.getElementById('prer'),bt=f.querySelector('button'),PAG=m.getAttribute('data-pag');
+var PATH={geral:'/oferta-black26',aluno:'/oferta-black-alunos',vitalicio:'/oferta-black-vitalicio'},ZAP='https://thebookbusiness.com.br/dezza';
+if(PAG!=='geral'){var s=m.querySelector('[data-pre-s]');if(s)s.textContent='Use os mesmos dados da sua compra do Método The Book Business para ativar o seu cashback.';}
+function dig(v){return String(v||'').replace(/\D/g,'')}
+function mCpf(v){v=dig(v).slice(0,11);return v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2')}
+function mTel(v){v=dig(v).slice(0,11);if(v.length>6)return v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/,'($1) $2-$3');if(v.length>2)return v.replace(/^(\d{2})(\d{0,5}).*/,'($1) $2');return v}
+f.cpf.addEventListener('input',function(){f.cpf.value=mCpf(f.cpf.value)});
+f.tel.addEventListener('input',function(){if(f.ddi.value==='55')f.tel.value=mTel(f.tel.value)});
+function base(){var a=document.querySelector('a[data-cta]');try{var u=new URL(a.href);if(u.protocol.indexOf('http')===0)return u}catch(e){}return new URL('https://thebookbusiness.com.br'+PATH[PAG])}
+function destino(qual){var u=base();u.pathname=PATH[qual];u.hash='';var n=f.nome.value.trim(),e=f.email.value.trim(),c=dig(f.cpf.value),t=dig(f.tel.value),d=f.ddi.value;
+ if(n)u.searchParams.set('name',n);if(e)u.searchParams.set('email',e);if(c.length===11)u.searchParams.set('doc',c);
+ if(t){if(d==='55'&&t.length>=10){u.searchParams.set('phoneac',t.slice(0,2));u.searchParams.set('phonenumber',t.slice(2))}else{u.searchParams.set('phonenumber',d+t)}}
+ return u.toString()}
+function vai(qual){location.href=destino(qual)}
+function abre(e){var a=e.target.closest&&e.target.closest('[data-cta]');if(!a)return;e.preventDefault();e.stopPropagation();r.textContent='';bt.disabled=false;bt.textContent='Ir para o pagamento';m.classList.add('on');setTimeout(function(){f.nome.focus()},60)}
+document.addEventListener('click',abre,true);
+m.querySelector('[data-prex]').addEventListener('click',function(){m.classList.remove('on')});
+m.addEventListener('click',function(e){if(e.target===m)m.classList.remove('on')});
+window.addEventListener('pageshow',function(){m.classList.remove('on');bt.disabled=false;bt.textContent='Ir para o pagamento';r.textContent=''});
+function falhou(cat){bt.disabled=false;bt.textContent='Ir para o pagamento';
+ if(cat==='ja_comprou'){r.innerHTML='Você já está na Black Week Motorizada. Qualquer dúvida, <a href="'+ZAP+'" target="_blank">fale com a equipe</a>.';return}
+ var msg=cat==='erro'?'Não consegui conferir a sua compra agora.':cat==='limite'?'Muitas tentativas seguidas.':'Não encontramos uma compra do Método The Book Business com esses dados. Confira o CPF e o e-mail da compra.';
+ r.innerHTML=msg+' <a href="'+ZAP+'" target="_blank">Fale com a equipe</a>.<a class="pre-seg" href="'+destino('geral')+'">Seguir com o preço normal</a>'}
+f.addEventListener('submit',function(e){e.preventDefault();r.textContent='';
+ var ok=true,br=f.ddi.value==='55';
+ [['nome',f.nome.value.trim().length>=2],['email',/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim())],['cpf',!br||dig(f.cpf.value).length===11],['tel',dig(f.tel.value).length>=(br?10:6)]].forEach(function(x){f[x[0]].classList.toggle('err',!x[1]);if(!x[1])ok=false});
+ if(!ok){r.textContent='Confira os campos em vermelho.';return}
+ bt.disabled=true;bt.textContent='Um instante...';
+ var ctl='AbortController' in window?new AbortController():null,tm=setTimeout(function(){ctl&&ctl.abort()},7000);
+ fetch('https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/bf26-precheckout',{method:'POST',headers:{'Content-Type':'application/json'},signal:ctl?ctl.signal:undefined,
+  body:JSON.stringify({nome:f.nome.value.trim(),email:f.email.value.trim(),cpf:dig(f.cpf.value),tel:dig(f.tel.value),ddi:f.ddi.value,pagina:PAG})})
+ .then(function(x){return x.json()}).catch(function(){return {categoria:'erro'}}).then(function(d){clearTimeout(tm);var c=(d&&d.categoria)||'erro';
+  if(c==='vitalicio')return vai('vitalicio');
+  if(c==='aluno')return vai('aluno');
+  if(c==='ja_comprou')return falhou(c);
+  if(PAG==='geral')return vai('geral');
+  falhou(c==='limite'||c==='erro'?c:'nao');})});
+})();</script>
+'''
+HTML = HTML.replace('</main>', '</main>' + PRE_BLOCK, 1)
 open(f"{R}/ae8a9e17e350/index.html", "w", encoding="utf-8").write(HTML)
 print("ok", len(HTML))
 
@@ -1381,7 +1460,7 @@ for slug, v in VARIANTES.items():
     GATE_CSS = ('<style>'
       ''
       '.trv{max-width:460px;margin:10px auto 2px;font-size:14px;line-height:1.5;color:#cfc9bc;text-align:center}.trv b{color:#faab00}'
-      'body:not(.trava) .trv{display:none}'
+      ''
       ''
       '.trv-m{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.78)}'
       '.trv-m.on{display:flex}.trv-c{width:100%;max-width:420px;padding:26px 20px;border-radius:16px;background:#0b0a08;box-shadow:0 0 0 1px rgba(250,171,0,.45),0 0 40px rgba(250,171,0,.25);text-align:center;position:relative}'
@@ -1452,7 +1531,7 @@ for slug, v in VARIANTES.items():
     P = re.sub(r'(<p class="price__cash">ou R\$ [\d.]+ à vista</p>)', lambda m: m.group(1) + GATE_BOX, P)   # 08/11: preço sempre visível; a verificação fica no botão
     P = re.sub(r'<div class="hk2">.*?</div>', CUPOM, P, count=1, flags=re.S)
     assert P.count('class="ca"') == 1 and 'class="hk2"' not in P, slug
-    P = P.replace('</main>', '</main>' + GATE_HTML + GATE_JS, 1)
+    P = P.replace('id="pre" data-pag="geral"', 'id="pre" data-pag="%s"' % _meu, 1)   # pré-checkout geral substitui o gate antigo
     assert P.count('class="trv"') >= 2, slug
     os.makedirs(f"{R}/{slug}", exist_ok=True)
     open(f"{R}/{slug}/index.html", "w", encoding="utf-8").write(P)
