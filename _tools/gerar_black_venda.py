@@ -737,7 +737,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 
       <!-- 2. quanto custaria por um ano -->
       <div class="blk">
-        <p class="q1">Para ter acesso <u>por um ano</u> a todos os produtos dessa oferta, você <u>precisaria</u> investir:</p>
+        <p class="q1">Para ter acesso <u>por um ano</u>, você <u>precisaria</u> investir:</p>
         <div class="bill">
           {BILL}
           <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>R$ 2.000,00</b></div>
