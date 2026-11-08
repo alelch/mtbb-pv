@@ -229,6 +229,8 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .lv { overflow: hidden; padding: 0 !important; }
 .lv__img { width: 100%; aspect-ratio: 720 / 567; object-fit: cover; }
 .lv__b { padding: 20px 20px 24px; }
+/* 08/11 (cliente): Encontros com a Dany ocupa a linha inteira (o último cartão ficava sozinho pela metade) */
+@media (min-width: 760px) { .leva__g > .lv:last-child:nth-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; } .leva__g > .lv:last-child:nth-child(odd) .lv__img { height: 100%; aspect-ratio: auto; } .leva__g > .lv:last-child:nth-child(odd) .lv__b { padding: 32px 36px !important; } }
 .bon2__ph { width: 46%; max-width: 190px; margin: 18px auto 0; padding: 6px; border-radius: 26px; background: linear-gradient(160deg, #2b2a2f, #0e0e10 60%); box-shadow: 0 24px 40px -18px rgba(0, 0, 0, .8), 0 0 0 1px #3a3226; }
 .bon2__c .bon2__ph img { max-width: none; margin: 0; filter: none; width: 100%; aspect-ratio: 716 / 1200; object-fit: cover; object-position: top; border-radius: 21px; }
 .cups { border-top: 1px solid var(--line); }
@@ -420,9 +422,20 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 /* 08/11 (cliente): bandeirinha diagonal "Novo" no LOMBADA do topo */
 .h__col { position: relative; }
 .novo-h { position: absolute; top: -1.45em; right: -1.15em; transform: rotate(9deg); font-style: normal; font-size: clamp(10px, 2.6vw, 14px); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; padding: .45em .8em .38em; background: #d62f24; color: #fff; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,.45); z-index: 2; }
-/* 08/11 (cliente): atalho discreto para a demonstração */
+/* (sem uso) */
 .h__ver { display: inline-block; margin-top: 18px; font-size: clamp(13px, 3.5vw, 15px); font-weight: 600; color: var(--amber); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(250,171,0,.45); }
 .h__ver:hover { text-decoration-color: var(--amber); }
+/* 08/11 (cliente): botão "Testar" junto de todo LOMBADA (leva à demonstração) */
+.testar { display: inline-flex; align-items: center; gap: .55em; padding: .62em 1.15em .62em .9em; border-radius: 999px; font-size: clamp(13.5px, 3.6vw, 15px); font-weight: 700; line-height: 1; color: var(--amber); text-decoration: none; text-transform: none; letter-spacing: 0; box-shadow: inset 0 0 0 1.5px rgba(250,171,0,.7); background: rgba(250,171,0,.06); transition: background .15s, box-shadow .15s; white-space: nowrap; vertical-align: middle; }
+.testar:hover { background: rgba(250,171,0,.14); box-shadow: inset 0 0 0 1.5px var(--amber); }
+.testar svg { width: 1.05em; height: 1.05em; flex: none; }
+.testar--h { margin-top: 20px; }
+.testar--b { margin-top: 16px; }
+.testar--sm { margin-left: 10px; padding: .45em .8em .45em .6em; font-size: 12px; }
+.bill__row--lmb .testar--sm { margin-left: 12px; }
+@media (max-width: 719px) { .bill__row--lmb .testar--sm { display: none; } }
+.lmbc .testar { color: #1a1a1a; background: #faab00; box-shadow: none; }
+.lmbc .testar:hover { background: #ffbb2e; }
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha { margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }
 .trilha span { white-space: nowrap; } .trilha .l1, .trilha .l2 { display: block; }
@@ -757,7 +770,6 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
             <li><b>Seu livro vai mais longe:</b> prêmios, feiras e editais do seu gênero, com o prazo na tela.</li>
             <li><b>Seu livro é lido:</b> ideias de post ilimitadas para novos leitores te encontrarem.</li>
           </ul>
-          
         </div>
       </div>
       <div class="leva__g"><div class="lv rv"><img class="lv__img" src="../ae8a9e17e350/assets/p-autoridade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Autoridade Digital para Escritores</h3><p>Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores.</p></div></div><div class="lv rv"><img class="lv__img" src="../ae8a9e17e350/assets/p-comunidade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Comunidade The&nbsp;Book&nbsp;Business</h3><p>A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma.</p></div></div><div class="lv rv"><img class="lv__img" src="../ae8a9e17e350/assets/p-workshops.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Workshops Mão na Massa</h3><ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul></div></div><div class="lv rv"><img class="lv__img" src="../ae8a9e17e350/assets/p-gravacoes.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Gravação de 100% das lives, encontros e eventos</h3><p>Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país.</p></div></div><div class="lv rv"><img class="lv__img" src="../ae8a9e17e350/assets/p-encontros.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">3 anos</span><h3>Encontros em grupo ao vivo com a Dany</h3><p>36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído.</p></div></div></div>

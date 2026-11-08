@@ -359,6 +359,8 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .lv {{ overflow: hidden; padding: 0 !important; }}
 .lv__img {{ width: 100%; aspect-ratio: 720 / 567; object-fit: cover; }}
 .lv__b {{ padding: 20px 20px 24px; }}
+/* 08/11 (cliente): Encontros com a Dany ocupa a linha inteira (o último cartão ficava sozinho pela metade) */
+@media (min-width: 760px) {{ .leva__g > .lv:last-child:nth-child(odd) {{ grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; }} .leva__g > .lv:last-child:nth-child(odd) .lv__img {{ height: 100%; aspect-ratio: auto; }} .leva__g > .lv:last-child:nth-child(odd) .lv__b {{ padding: 32px 36px !important; }} }}
 .bon2__ph {{ width: 46%; max-width: 190px; margin: 18px auto 0; padding: 6px; border-radius: 26px; background: linear-gradient(160deg, #2b2a2f, #0e0e10 60%); box-shadow: 0 24px 40px -18px rgba(0, 0, 0, .8), 0 0 0 1px #3a3226; }}
 .bon2__c .bon2__ph img {{ max-width: none; margin: 0; filter: none; width: 100%; aspect-ratio: 716 / 1200; object-fit: cover; object-position: top; border-radius: 21px; }}
 .cups {{ border-top: 1px solid var(--line); }}
@@ -550,9 +552,20 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* 08/11 (cliente): bandeirinha diagonal "Novo" no LOMBADA do topo */
 .h__col {{ position: relative; }}
 .novo-h {{ position: absolute; top: -1.45em; right: -1.15em; transform: rotate(9deg); font-style: normal; font-size: clamp(10px, 2.6vw, 14px); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; padding: .45em .8em .38em; background: #d62f24; color: #fff; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,.45); z-index: 2; }}
-/* 08/11 (cliente): atalho discreto para a demonstração */
+/* (sem uso) */
 .h__ver {{ display: inline-block; margin-top: 18px; font-size: clamp(13px, 3.5vw, 15px); font-weight: 600; color: var(--amber); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(250,171,0,.45); }}
 .h__ver:hover {{ text-decoration-color: var(--amber); }}
+/* 08/11 (cliente): botão "Testar" junto de todo LOMBADA (leva à demonstração) */
+.testar {{ display: inline-flex; align-items: center; gap: .55em; padding: .62em 1.15em .62em .9em; border-radius: 999px; font-size: clamp(13.5px, 3.6vw, 15px); font-weight: 700; line-height: 1; color: var(--amber); text-decoration: none; text-transform: none; letter-spacing: 0; box-shadow: inset 0 0 0 1.5px rgba(250,171,0,.7); background: rgba(250,171,0,.06); transition: background .15s, box-shadow .15s; white-space: nowrap; vertical-align: middle; }}
+.testar:hover {{ background: rgba(250,171,0,.14); box-shadow: inset 0 0 0 1.5px var(--amber); }}
+.testar svg {{ width: 1.05em; height: 1.05em; flex: none; }}
+.testar--h {{ margin-top: 20px; }}
+.testar--b {{ margin-top: 16px; }}
+.testar--sm {{ margin-left: 10px; padding: .45em .8em .45em .6em; font-size: 12px; }}
+.bill__row--lmb .testar--sm {{ margin-left: 12px; }}
+@media (max-width: 719px) {{ .bill__row--lmb .testar--sm {{ display: none; }} }}
+.lmbc .testar {{ color: #1a1a1a; background: #faab00; box-shadow: none; }}
+.lmbc .testar:hover {{ background: #ffbb2e; }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -740,7 +753,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
       <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> <span class="h__col"><i class="novo-h">Lançamento</i>{LMB}<span class="h__tag">Seu livro, em movimento todo dia.</span></span></span></h1>
-      <a class="h__ver" href="#ferramenta">Ver o LOMBADA funcionando <span aria-hidden="true">↓</span></a>
+      <a class="testar testar--h" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Teste com o nome do seu livro</span></a>
       <p class="trilha"><span class="l1"><span>Construa autoridade <i>›</i></span> <span>Seja lido de verdade <i>›</i></span></span> <span class="l2"><span>Gere impacto real <i>›</i></span> <span>Para sempre</span></span></p>
       <div class="hk2">
         <p>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></p>
@@ -752,7 +765,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="q1">Para ter acesso <u>por um ano</u>, você <u>precisaria</u> investir:</p>
         <div class="bill">
           {BILL}
-          <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>R$ 2.000,00</b><i class="novo">Lançamento</i></div>
+          <div class="bill__row bill__row--lmb"><span>{LMB}<a class="testar testar--sm" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Testar</span></a></span><b>R$ 2.000,00</b><i class="novo">Lançamento</i></div>
           <div class="bill__tot"><span>Total</span><b>R$ 9.485,00</b></div>
         </div>
       </div>
@@ -794,6 +807,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           <span class="lv__k">Bônus 1</span>
           <h3>LOMBADA em dobro: 6 anos no lugar de 3.</h3>
           <p>Hoje você recebe o dobro: 6 anos com o LOMBADA ao lado do seu livro, todo dia. Amanhã volta a ser 3.</p>
+          <a class="testar testar--b" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Teste com o nome do seu livro</span></a>
                   </div>
         </div>
         <div class="bon2__c rv">
@@ -828,7 +842,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="q2">Tudo o que você leva na Black Week Motorizada:</p>
         <ul class="card__list">
           <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos e workshops, <b>vitalícios</b></span></li>
-          <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
+          <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b> <a class="testar testar--sm" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Testar</span></a></span></li>
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
           <li>{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
@@ -871,7 +885,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
             <li><b>Seu livro vai mais longe:</b> prêmios, feiras e editais do seu gênero, com o prazo na tela.</li>
             <li><b>Seu livro é lido:</b> ideias de post ilimitadas para novos leitores te encontrarem.</li>
           </ul>
-          <a class="lmbc__btn" href="#ferramenta">Entender melhor o LOMBADA <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+          <a class="testar testar--b lmbc__btn" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Teste com o nome do seu livro</span></a>
         </div>
       </div>
       <div class="leva__g">{LEVA}</div>
@@ -1237,10 +1251,7 @@ print("ok", len(HTML))
 _a = HTML.index('  <!-- 7b. o LOMBADA em uma história só')
 _b = HTML.index('  <!-- 8. casos -->')
 CURTA = HTML[:_a] + HTML[_b:]
-_btn = CURTA.index('<a class="lmbc__btn" href="#ferramenta">')
-CURTA = CURTA[:_btn] + CURTA[CURTA.index('</a>', _btn) + 4:]
-_ver = CURTA.index('\n      <a class="h__ver" href="#ferramenta">')
-CURTA = CURTA[:_ver] + CURTA[CURTA.index('</a>', _ver) + 4:]
+CURTA = re.sub(r'\s*<a class="testar[^"]*" href="#ferramenta">.*?</a>', '', CURTA, flags=re.S)
 CURTA = (CURTA.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
               .replace('url("../assets/', 'url("../assets/')
               .replace('<link rel="canonical" href="https://metodo.thebookbusiness.com.br/ae8a9e17e350/">',
