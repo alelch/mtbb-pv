@@ -70,7 +70,7 @@ _CASOS = [("c0","Vinicius Profinho","11 mil cópias vendidas","O Guia da Redaç�
 CASOS = "".join(f'<figure class="caso rv"><img src="../black-week-misterio/assets/casos/{f}.webp" alt="{n}" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>{r}</strong><b>{n}</b><span>{l}</span></figcaption></figure>' for f, n, r, l in _CASOS)
 _LEVA = [
   ("Acesso vitalício", "Método The&nbsp;Book&nbsp;Business", "O ecossistema completo de marketing literário. Aulas práticas, passo a passo claro e modelos prontos para transformar o seu livro em referência, com leitores de verdade."),
-  ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
+  ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo pelo Zoom com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
   ("Acesso vitalício", "Autoridade Digital para Escritores", "Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores."),
   ("Acesso vitalício", "Comunidade The&nbsp;Book&nbsp;Business", "A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma."),
   ("Acesso vitalício", "Workshops Mão na Massa", "<ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul>"),
@@ -632,6 +632,16 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .fecho__t-c {{ display: block; margin-top: 12px; font-size: clamp(17px, 4.8vw, 22px); font-weight: 500; color: var(--ink); }}
 .fecho__t-c .lmb {{ font-size: 1.15em; vertical-align: -.08em; color: var(--ink); }}
 .card--fecho .card__list {{ margin-top: 26px !important; padding-top: 22px; border-top: 1px solid rgba(250,171,0,.22); }}
+/* 08/11 (cliente): cartões de bônus iguais: visual na mesma altura, filete dourado, etiqueta, título e apoio no mesmo tamanho */
+.bon2 {{ align-items: stretch; }}
+.bon2__c {{ padding: 0 !important; overflow: hidden; background: linear-gradient(180deg, #141008, #0a0907) !important; box-shadow: inset 0 0 0 1px rgba(250,171,0,.45), 0 24px 50px -24px rgba(250,171,0,.35) !important; border-radius: 20px !important; }}
+.bon2__c .bon2__vis {{ height: 300px !important; min-height: 0 !important; margin: 0 !important; padding: 26px 22px 10px; background: radial-gradient(60% 70% at 50% 45%, rgba(250,171,0,.16), transparent 70%); }}
+.bon2__c .bon2__vis img {{ height: 100% !important; }}
+.bon2__txt {{ display: flex !important; flex-direction: column; align-items: center; gap: 0; width: 100%; padding: 22px 26px 30px; border-top: 1px solid rgba(250,171,0,.22); flex: 1; }}
+.bon2__tag {{ display: inline-block; padding: 6px 12px 5px; border-radius: 99px; background: #d62f24; color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }}
+.bon2__tag--casa {{ background: rgba(250,171,0,.14); color: var(--amber); box-shadow: inset 0 0 0 1px rgba(250,171,0,.45); }}
+.bon2__txt h3 {{ margin-top: 14px !important; font-size: clamp(24px, 6vw, 32px) !important; line-height: 1.1 !important; }}
+.bon2__txt p {{ margin-top: 10px !important; font-size: clamp(15px, 3.9vw, 16.5px) !important; max-width: 25em !important; }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -871,15 +881,17 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <div class="bon2__c rv d9-only">
           <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>Black</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div><p class="bon2__lmb">{LMB}</p></div>
           <div class="bon2__txt">
+          <span class="bon2__tag">Só hoje</span>
           <h3>Acesso em DOBRO</h3>
-          <p>Só para quem entrar hoje</p>
+          <p>6 anos com o LOMBADA ao lado do seu livro.<br>Só para quem entrar hoje.</p>
                   </div>
         </div>
         <div class="bon2__c rv">
           <div class="bon2__vis"><img src="../assets/playbooks-metodo-the-book-business.webp" alt="Os 3 Playbooks do Método The Book Business" width="640" height="562" loading="lazy" decoding="async"></div>
           <div class="bon2__txt">
-          <h3>Playbooks MTBB físicos, entregues na sua casa.</h3>
-          <p>A extensão prática do Método The&nbsp;Book&nbsp;Business, criada pela Dany, para organizar as estratégias e acompanhar a evolução do seu livro.</p>
+          <span class="bon2__tag bon2__tag--casa">Entregue em casa</span>
+          <h3>Playbooks na sua casa</h3>
+          <p>Os 3 livros físicos do Método, para pôr a estratégia no papel e ver o seu livro avançar.</p>
                   </div>
         </div>
       </div>
