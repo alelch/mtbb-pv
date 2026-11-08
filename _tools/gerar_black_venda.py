@@ -1455,7 +1455,7 @@ for slug, v in VARIANTES.items():
     _cb = '1.500' if _meu == 'aluno' else '2.000'
     CONTA_CB = ('<p class="cbk"><span class="cbk__a">R$ 2.500</span><span class="cbk__m">&minus; R$ %s</span>'
                 '<span class="cbk__t">de cashback de %s</span></p>') % (_cb, 'aluno' if _meu == 'aluno' else 'vitalício')
-    P = P.replace('<p class="price__big"><small>só</small>', CONTA_CB + '<p class="price__big"><small>você paga 12x de</small>')
+    P = P.replace('<p class="price__big"><small>só</small>', CONTA_CB + '<p class="price__big"><small>você paga apenas 12x de</small>')
     P = re.sub(r'(<p class="price__cash">ou R\$ [\d.]+ à vista</p>)', lambda m: m.group(1) + GATE_BOX, P)   # 08/11: preço sempre visível; a verificação fica no botão
     P = re.sub(r'<div class="hk2">.*?</div>', CUPOM, P, count=1, flags=re.S)
     assert P.count('class="ca"') == 1 and 'class="hk2"' not in P, slug
