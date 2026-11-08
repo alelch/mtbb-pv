@@ -51,7 +51,7 @@ telas = "\n".join(
     for f, t, d in TELAS)
 
 
-BILL = "".join(f'<div class="bill__row"><span>{n.replace("The Book Business", "The&nbsp;Book&nbsp;Business")}</span><b>{v}</b></div>' for n, v in [('Método The Book Business', 'R$ 1.500,00'), ('Autoridade Digital para Escritores', 'R$ 1.500,00'), ('Comunidade The Book Business', 'R$ 500,00'), ('Workshops Mão na Massa (5)', 'R$ 2.500,00')])
+BILL = "".join(f'<div class="bill__row"><span>{n.replace("The Book Business", "The&nbsp;Book&nbsp;Business")}</span><b>{v}</b></div>' for n, v in [('Método The Book Business', 'R$ 1.500,00'), ('Autoridade Digital para Escritores', 'R$ 1.500,00'), ('Comunidade The Book Business', 'R$ 500,00'), ('Workshop MasterClass Best-Seller de Verdade', 'R$ 797,00'), ('Workshop Redes Sociais para Autores', 'R$ 797,00'), ('Workshop Prêmios e Concursos Literários', 'R$ 797,00'), ('Workshop Escrita Criativa', 'R$ 797,00'), ('Workshop Planejamento Anual', 'R$ 797,00')])  # 08/11 cliente: workshops R$797/ano cada, só no 1º ano
 _ST = [
   ("tela-semana", "Segunda, 9h", "O seu celular avisa. E o plano da semana já está pronto.", "Montado pela fase do seu livro, pelo gênero e pelo tempo que você tem."),
   ("tela-acoes", "Terça", "Uma ação por vez. Com o texto pronto e a aula por trás.", "O texto já vem com o nome do seu livro. E a aula do Método The Book Business explica o porquê."),
@@ -740,8 +740,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="q1">Para ter acesso <u>por um ano</u> a todos os produtos dessa oferta, você <u>precisaria</u> investir:</p>
         <div class="bill">
           {BILL}
-          <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>R$ 1.200,00</b></div>
-          <div class="bill__tot"><span>Total</span><b>R$ 7.200,00</b></div>
+          <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>R$ 2.000,00</b></div>
+          <div class="bill__tot"><span>Total</span><b>R$ 9.485,00</b></div>
         </div>
       </div>
 
@@ -749,14 +749,14 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="blk">
         <p class="q1">Agora, as contas de quanto você investiria para ter acesso a tudo isso ao longo do tempo:</p>
         <div class="bill">
-          <!-- 08/11 (cliente): a conta segue o prazo do LOMBADA: 6 anos no dia 9, 3 anos depois -->
-          <div class="bill__row"><span>1º ano</span><b>R$ 7.200,00</b></div>
-          <div class="bill__row"><span>2º ano</span><b>R$ 4.200,00</b></div>
-          <div class="bill__row"><span>3º ano</span><b>R$ 4.200,00</b></div>
-          <div class="bill__row d9-only"><span>4º ano</span><b>R$ 4.200,00</b></div>
-          <div class="bill__row d9-only"><span>5º ano</span><b>R$ 4.200,00</b></div>
-          <div class="bill__row d9-only"><span>6º ano</span><b>R$ 4.200,00</b></div>
-          <div class="bill__tot"><span>Total investido</span><b><span class="d9-only">R$ 28.200,00</span><span class="after-only">R$ 15.600,00</span></b></div>
+          <!-- 08/11 (cliente): a conta segue o prazo do LOMBADA (6 anos no dia 9, 3 depois). 1º ano R$9.485; renova por ano Método + Autoridade + LOMBADA = R$5.000 (Comunidade e Workshops só no 1º ano) -->
+          <div class="bill__row"><span>1º ano</span><b>R$ 9.485,00</b></div>
+          <div class="bill__row"><span>2º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row"><span>3º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row d9-only"><span>4º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row d9-only"><span>5º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row d9-only"><span>6º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__tot"><span>Total investido</span><b><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></b></div>
         </div>
       </div>
 
@@ -822,7 +822,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           <li>{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
           <li>{CK}<span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
-        <p class="resumo__de">De <s><span class="d9-only">R$ 28.200,00</span><span class="after-only">R$ 15.600,00</span></s></p>
+        <p class="resumo__de">De <s><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
         <p class="resumo__por">por apenas</p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
