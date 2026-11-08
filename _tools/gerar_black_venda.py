@@ -1371,6 +1371,47 @@ for slug, v in VARIANTES.items():
     P = (P.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
           .replace('https://metodo.thebookbusiness.com.br/ae8a9e17e350/"', 'https://metodo.thebookbusiness.com.br/%s/"' % slug))
     assert 'bf26pg' not in P and 'oferta-black26' not in P.split('var CHECKOUT')[1][:300] and v['preco'] in P and '249,51' not in P and 'R$ 2.500 à vista' not in P, slug
+    # 08/11 (cliente): a página confere CPF, e-mail ou celular antes de mostrar o preço de aluno/vitalício (função bf26-conferir-publico)
+    _outro = {'eda7d6898635': '/c966d3cc27f2/', 'c966d3cc27f2': '/eda7d6898635/'}[slug]
+    _meu = 'aluno' if slug == 'eda7d6898635' else 'vitalicio'
+    GATE_CSS = ('<style>'
+      'body.trava .price__big, body.trava .price__cash, body.trava .price__de, body.trava .resumo__por {display:none!important}'
+      '.trv{max-width:460px;margin:18px auto 0;padding:18px 16px;border-radius:14px;background:#0d0b08;box-shadow:inset 0 0 0 1px rgba(250,171,0,.5);text-align:center}'
+      'body:not(.trava) .trv{display:none}'
+      '.trv b{display:block;font-size:17px;color:#fff;margin-bottom:4px}.trv p{margin:0 0 12px;font-size:14px;color:#a8a399}'
+      '.trv-m{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.78)}'
+      '.trv-m.on{display:flex}.trv-c{width:100%;max-width:420px;padding:26px 20px;border-radius:16px;background:#0b0a08;box-shadow:0 0 0 1px rgba(250,171,0,.45),0 0 40px rgba(250,171,0,.25);text-align:center;position:relative}'
+      '.trv-c h3{margin:0 0 6px;font-size:22px;color:#fff}.trv-c p{margin:0 0 16px;font-size:14.5px;color:#cfc9bc;line-height:1.5}'
+      '.trv-c input{width:100%;box-sizing:border-box;padding:14px;border-radius:10px;border:1.5px solid rgba(250,171,0,.6);background:#000;color:#fff;font:inherit;font-size:16px}'
+      '.trv-c .btn{margin-top:12px}.trv-x{position:absolute;right:10px;top:8px;background:none;border:0;color:#a8a399;font-size:26px;cursor:pointer}'
+      '.trv-r{margin-top:12px;font-size:14px;line-height:1.5;color:#ffb3b0}.trv-r a{color:#faab00;font-weight:700}'
+      '</style>')
+    GATE_BOX = '<div class="trv"><b>Preço exclusivo de aluno</b><p>Confirme com o CPF, o e-mail ou o celular da sua compra.</p><a class="btn" href="#" data-trv>Ver o meu preço</a></div>'
+    GATE_HTML = ('<div class="trv-m" id="trv"><div class="trv-c"><button class="trv-x" type="button" aria-label="Fechar" data-trvx>&times;</button>'
+      '<h3>Confirme que você é aluno</h3><p>Digite o CPF, o e-mail ou o celular que você usou na compra do Método The&nbsp;Book&nbsp;Business.</p>'
+      '<form id="trvf"><input id="trvi" autocomplete="email" placeholder="CPF, e-mail ou celular" required><button class="btn" type="submit">Confirmar</button></form>'
+      '<div class="trv-r" id="trvr" role="alert"></div></div></div>')
+    GATE_JS = ('<script>(function(){var MEU="%s",OUTRO="%s",K="bf26trv_"+MEU;var b=document.body,m=document.getElementById("trv"),f=document.getElementById("trvf"),i=document.getElementById("trvi"),r=document.getElementById("trvr");'
+      'var ok=false;try{ok=sessionStorage.getItem(K)==="1"}catch(e){}'
+      'function trava(t){b.classList.toggle("trava",t)}'
+      'trava(!ok);function abre(e){if(!b.classList.contains("trava"))return;e.preventDefault();e.stopPropagation();r.textContent="";m.classList.add("on");setTimeout(function(){i.focus()},50)}'
+      'document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-cta],[data-trv]");if(a)abre(e)},true);'
+      'document.querySelector("[data-trvx]").addEventListener("click",function(){m.classList.remove("on")});'
+      'f.addEventListener("submit",function(e){e.preventDefault();var bt=f.querySelector("button");bt.disabled=true;r.style.color="#cfc9bc";r.textContent="Conferindo...";'
+      'fetch("https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/bf26-conferir-publico",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({busca:i.value,pagina:MEU})})'
+      '.then(function(x){return x.json()}).then(function(d){bt.disabled=false;r.style.color="";var c=d.categoria;'
+      'if(c===MEU){try{sessionStorage.setItem(K,"1")}catch(e){}m.classList.remove("on");trava(false);var p=document.querySelector(".price__big");if(p)p.scrollIntoView({behavior:"smooth",block:"center"});return}'
+      'if(c==="vitalicio"&&MEU==="aluno"){r.innerHTML="Você é aluno vitalício e tem um preço ainda melhor. <a href=\\""+OUTRO+location.search+"\\">Ver o meu preço</a>";return}'
+      'if(c==="aluno"&&MEU==="vitalicio"){r.innerHTML="Encontramos a sua compra do Método. A sua condição é a de aluno: <a href=\\""+OUTRO+location.search+"\\">ver o meu preço</a>";return}'
+      'if(c==="ja_comprou"){r.innerHTML="Você já está na Black Week Motorizada. Qualquer dúvida, <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">fale com a equipe</a>.";return}'
+      'if(c==="limite"){r.innerHTML="Muitas tentativas. <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">Fale com a equipe</a> que a gente confere para você.";return}'
+      'if(c==="invalido"){r.textContent="Digite o CPF, o e-mail ou o celular completo.";return}'
+      'r.innerHTML="Não encontramos uma compra do Método The Book Business com esse dado. Tente o e-mail ou o CPF da compra, ou <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">fale com a equipe</a>."'
+      '}).catch(function(){bt.disabled=false;r.innerHTML="Não consegui conferir agora. <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">Fale com a equipe</a>."})})})();</script>') % (_meu, _outro)
+    P = P.replace('</head>', GATE_CSS + '</head>', 1)
+    P = P.replace('<p class="price__big">', GATE_BOX + '<p class="price__big">')
+    P = P.replace('</main>', '</main>' + GATE_HTML + GATE_JS, 1)
+    assert P.count('class="trv"') >= 2, slug
     os.makedirs(f"{R}/{slug}", exist_ok=True)
     open(f"{R}/{slug}/index.html", "w", encoding="utf-8").write(P)
     print(v['rot'], slug, len(P))
