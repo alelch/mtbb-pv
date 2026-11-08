@@ -603,6 +603,19 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .price__big span {{ background-image: linear-gradient(100deg, #f2a000, #ffcf5c 28%, #faab00 50%, #ffe39a 72%, #f2a000) !important; background-size: 220% 100% !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important; }}
 .price__de {{ margin-top: 10px; font-size: clamp(15px, 4vw, 18px); color: var(--ink2); }}
 .price__de s {{ text-decoration-color: #d62f24; text-decoration-thickness: 2px; color: #cfc9bc; }}
+/* 08/11 (cliente): bônus do LOMBADA como um selo dourado de 6 anos (a estante ficou fraca) */
+.bon2__vis--selo {{ height: auto; min-height: 280px; gap: 18px; }}
+.selo6 {{ position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle at 35% 28%, #ffe7a6, #faab00 45%, #c27c00 100%); box-shadow: 0 0 0 6px #0d0c0a, 0 0 0 8px rgba(250,171,0,.6), 0 0 60px rgba(250,171,0,.45), inset 0 -10px 24px rgba(120,70,0,.45), inset 0 8px 18px rgba(255,255,255,.35); color: #1a1206; }}
+.selo6::before {{ content: ""; position: absolute; inset: 12px; border-radius: 50%; border: 1.5px dashed rgba(60,35,0,.45); }}
+.selo6__top {{ font-size: 13px; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; }}
+.selo6__n {{ font-size: 92px; font-weight: 900; line-height: .85; letter-spacing: -.04em; }}
+.selo6__a {{ font-size: 20px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin-top: 2px; }}
+.selo6__de {{ position: absolute; right: -34px; top: 18px; transform: rotate(12deg); padding: 6px 12px; border-radius: 4px; background: #1c1a17; color: #a8a399; font-size: 14px; font-weight: 800; box-shadow: 0 4px 12px rgba(0,0,0,.5); }}
+.selo6__de s {{ text-decoration-color: #d62f24; text-decoration-thickness: 2px; }}
+.selo6__lmb {{ font-size: clamp(22px, 6vw, 28px); font-weight: 900; color: #fff; line-height: 1; }} .selo6__lmb .lmb {{ color: #fff; }}
+/* 08/11 (cliente): texto de baixo dos bônus com respiro e hierarquia */
+.bon2__txt h3 {{ font-size: clamp(22px, 5.6vw, 30px) !important; line-height: 1.15 !important; letter-spacing: -.01em; }}
+.bon2__txt p {{ margin-top: 12px !important; font-size: clamp(15px, 3.9vw, 17px) !important; line-height: 1.55 !important; color: var(--ink2) !important; max-width: 30em; margin-left: auto; margin-right: auto; }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -840,10 +853,10 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <p class="q2 rv d9-only">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p><p class="q2 rv after-only">E ainda por cima, você vai ganhar:</p>
       <div class="bon2">
         <div class="bon2__c rv d9-only">
-          <div class="bon2__vis bon2__vis--est"><p class="est__lmb">{LMB}</p><div class="est" aria-label="6 anos de LOMBADA"><i class="est__l" style="--c:#14523e;--h:78%"><b>1</b></i><i class="est__l" style="--c:#faab00;--h:92%"><b>2</b></i><i class="est__l" style="--c:#b5402e;--h:84%"><b>3</b></i><i class="est__l est__l--ouro" style="--h:96%"><b>4</b></i><i class="est__l est__l--ouro" style="--h:86%"><b>5</b></i><i class="est__l est__l--ouro" style="--h:100%"><b>6</b></i></div><div class="est__leg"><span>3 anos<small>normal</small></span><span class="o">+ 3 anos<small>só hoje</small></span></div></div>
+          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>Black</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div><p class="bon2__lmb">{LMB}</p></div>
           <div class="bon2__txt">
-          <h3>O LOMBADA em dobro: 6 anos.</h3>
-          <p>Só para quem entrar hoje. Amanhã volta a ser 3.</p>
+          <h3>O LOMBADA em dobro.</h3>
+          <p>6 anos ao lado do seu livro, no lugar de 3.<br>Só para quem entrar hoje.</p>
                   </div>
         </div>
         <div class="bon2__c rv">
