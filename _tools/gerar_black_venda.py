@@ -925,7 +925,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
-          <li>{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
+          <li>{CK}<span><b>3 Playbooks físicos</b> na sua casa</span></li>
           <li>{CK}<span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
         <p class="resumo__de">De <s><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
@@ -1105,7 +1105,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap rv">
       <p class="kick">Black Week Motorizada</p>
       <p class="end__a">Essa é a sua <span class="serif gold">chance.</span></p>
-      <p class="end__b">Tudo o que a Dany criou, pra sempre. E o LOMBADA ao lado do seu livro, todo dia.</p>
+      <p class="end__b">O Método The&nbsp;Book&nbsp;Business, pra sempre. E o LOMBADA ao lado do seu livro, todo dia.</p>
       <div class="end__price"><p class="price__big"><small>12x de</small><span>R$ 249,51</span></p><p class="price__cash">ou R$ 2.500 à vista</p></div>
       <div class="card__clock d9-only"><p>O <b>dobro do LOMBADA</b> termina à meia-noite.</p>{CLOCK}</div>
       <div class="cta">{CTA}<p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
@@ -1358,7 +1358,7 @@ for slug, v in VARIANTES.items():
     P = HTML.replace(AB_LONGA, '').replace(AB_TRACK, '')
     P = P.replace("var CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black26', depois: 'https://thebookbusiness.com.br/oferta-black26' }",
                   "var CHECKOUT = { d9: '%s', depois: '%s' }" % (v['checkout'], v['checkout']))
-    P = P.replace('<p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>', '<p class="price__big"><small>por</small><span>%s</span></p>' % v['preco'])
+    P = P.replace('<p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>', '<p class="price__big"><small>só</small><span>%s</span></p>' % v['preco'])
     P = P.replace('<p class="price__cash">ou R$ 2.500 à vista</p>', '<p class="price__cash">à vista ou parcelado no cartão</p>')
     P = P.replace('<p class="kick h__kick">Inscrições liberadas</p>', '<p class="kick h__kick">%s</p>' % v['kick'])
     P = re.sub(r'<title>[^<]*</title>', '<title>%s</title>' % v['title'], P, count=1)
