@@ -829,7 +829,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 </head>
 <body>
 <div class="estante" aria-hidden="true"></div>
-<div class="obar"><p class="d9-only">O dobro do LOMBADA termina em</p>{CLOCK.replace('class="clock"', 'class="clock d9-only"')}<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
+<div class="obar"><p class="d9-only">O dobro de acesso ao LOMBADA termina em</p>{CLOCK.replace('class="clock"', 'class="clock d9-only"')}<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
 
 <main>
   <!-- 1. abertura (a única seção que ficou da versão anterior), já emendada na oferta -->
@@ -938,7 +938,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="resumo__por">por apenas</p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
-        <div class="card__clock d9-only"><p>O <b>dobro do LOMBADA</b> termina à meia-noite.</p>{CLOCK}</div>
+        <div class="card__clock d9-only"><p>O <b>dobro de acesso ao LOMBADA</b> termina à meia-noite.</p>{CLOCK}</div>
         {CTA}<p class="aluno-lk">É aluno do Método The&nbsp;Book&nbsp;Business? <a href="https://thebookbusiness.com.br/dezza" target="_blank" rel="noopener">Fale com a equipe</a></p>
         <div class="seal"><i>15<small>dias</small></i><p><b>Garantia de 15 dias.</b> Entre, use, conheça tudo. Se não for pra você, devolvemos 100%.</p></div>
       </div>
@@ -1112,7 +1112,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <p class="end__a">Essa é a sua <span class="serif gold">chance.</span></p>
       <p class="end__b">O Método The&nbsp;Book&nbsp;Business, pra sempre. E o LOMBADA ao lado do seu livro, todo dia.</p>
       <div class="end__price"><p class="price__big"><small>12x de</small><span>R$ 249,51</span></p><p class="price__cash">ou R$ 2.500 à vista</p></div>
-      <div class="card__clock d9-only"><p>O <b>dobro do LOMBADA</b> termina à meia-noite.</p>{CLOCK}</div>
+      <div class="card__clock d9-only"><p>O <b>dobro de acesso ao LOMBADA</b> termina à meia-noite.</p>{CLOCK}</div>
       <div class="cta">{CTA}<p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
     </div>
   </section>
