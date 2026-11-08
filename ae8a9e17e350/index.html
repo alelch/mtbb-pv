@@ -234,7 +234,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .end__price .price__big span { font-size: clamp(48px, 13vw, 84px); }
 .end .card__clock { max-width: 480px; margin: 22px auto 0; }
 /* seções alternam um fundo levemente mais quente para dar ritmo */
-.cups, .gar, .lmbsec { background: linear-gradient(180deg, #050403, #000 70%); }
+.cups, .gar, .lmbsec { background: none; }  /* 08/11: transparente para a estante aparecer */
 
 .d9 { overflow: hidden; isolation: isolate; border-top: 1px solid var(--line); }
 .d9::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(250, 171, 0, .2), transparent 70%); }
@@ -490,9 +490,6 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .resumo__logo { display: flex; justify-content: center; margin-bottom: 8px; }
 .resumo__logo .bwlogo { font-size: clamp(38px, 10vw, 54px); }
 /* 08/11 (cliente): o resumo da oferta com a cara do cartão final da página de cadastro (estante desfocada, brilho dourado, presente) */
-.resumo { position: relative; isolation: isolate; overflow: hidden; }
-.resumo::before { content: ""; position: absolute; inset: -20px; z-index: -1; background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.7)), url("../black-week-misterio/assets/estante.webp") center top / 820px auto repeat; filter: blur(3px); }
-@media (min-width: 900px) { .resumo::before { background-size: auto, 1300px auto; } }
 .card--fecho { margin-top: 60px !important; background: #000 !important; border-radius: 16px !important; box-shadow: 0 0 0 1px rgba(250,171,0,.35), 0 0 34px rgba(250,171,0,.38) !important; padding-top: 74px !important; }
 .card--fecho .fecho__gift { position: absolute; left: 50%; top: 0; width: 120px; height: auto; transform: translate(-50%, -62%); filter: drop-shadow(0 12px 24px rgba(0,0,0,.6)); }
 .fecho__eb { font-size: clamp(10px, 2.9vw, 13px); font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: var(--ink2); }
@@ -512,6 +509,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .bon2__tag--casa { background: rgba(250,171,0,.14); color: var(--amber); box-shadow: inset 0 0 0 1px rgba(250,171,0,.45); }
 .bon2__txt h3 { margin-top: 14px !important; font-size: clamp(24px, 6vw, 32px) !important; line-height: 1.1 !important; }
 .bon2__txt p { margin-top: 10px !important; font-size: clamp(15px, 3.9vw, 16.5px) !important; max-width: 25em !important; }
+/* 08/11 (cliente): a estante do cadastro atrás da página toda, bem escura: some no topo e aparece aos poucos ao descer */
+.estante { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0; will-change: opacity; transform: translateZ(0); background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url("../black-week-misterio/assets/estante.webp") center top / 820px auto repeat; }
+@media (min-width: 900px) { .estante { background-size: auto, 1300px auto; } }
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha { margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }
 .trilha span { white-space: nowrap; } .trilha .l1, .trilha .l2 { display: block; }
@@ -709,6 +709,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
 </style>
 </head>
 <body>
+<div class="estante" aria-hidden="true"></div>
 <div class="obar"><p class="d9-only">O dobro do LOMBADA termina em</p><div class="clock d9-only" data-clock aria-label="Tempo até a meia-noite"></div><p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
 
 <main>
@@ -806,7 +807,8 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
         <p class="fecho__eb">Somente na Black Week Motorizada</p>
         <p class="fecho__t"><span class="fecho__t-a">Método The&nbsp;Book&nbsp;Business</span><span class="fecho__t-b gold">vitalício</span><span class="fecho__t-c">+ <span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></span></p>
         <ul class="card__list">
-          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos e workshops, <b>vitalícios</b></span></li>
+          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Método The&nbsp;Book&nbsp;Business</b>, Autoridade Digital e Comunidade, <b>vitalícios</b></span></li>
+          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>5 Workshops Mão na Massa</b>, <b>vitalícios</b></span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
@@ -852,7 +854,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
           </ul>
         </div>
       </div>
-      <div class="leva__g"><div class="lv rv"><img class="lv__img" src="assets/p-encontros.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">3 anos</span><h3>Encontros em grupo ao vivo com a Dany</h3><p>36 encontros ao vivo pelo Zoom com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-autoridade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Autoridade Digital para Escritores</h3><p>Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-comunidade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Comunidade The&nbsp;Book&nbsp;Business</h3><p>A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-workshops.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Workshops Mão na Massa</h3><ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul></div></div><div class="lv rv"><img class="lv__img" src="assets/p-gravacoes.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Gravação de 100% das lives, encontros e eventos</h3><p>Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país.</p></div></div></div>
+      <div class="leva__g"><div class="lv rv"><img class="lv__img" src="assets/p-encontros.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">3 anos</span><h3>Encontros em grupo ao vivo com a Dany</h3><p>36 encontros ao vivo, online pelo Zoom, com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-autoridade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Autoridade Digital para Escritores</h3><p>Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-comunidade.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Comunidade The&nbsp;Book&nbsp;Business</h3><p>A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma.</p></div></div><div class="lv rv"><img class="lv__img" src="assets/p-workshops.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Workshops Mão na Massa</h3><ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul></div></div><div class="lv rv"><img class="lv__img" src="assets/p-gravacoes.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">Acesso vitalício</span><h3>Gravação de 100% das lives, encontros e eventos</h3><p>Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país.</p></div></div></div>
       <div class="cta leva__cta rv"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a></div>
     </div>
   </section>
@@ -1001,6 +1003,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
       <div class="cta"><a class="btn" href="#oferta" data-cta>Quero entrar na Black <svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg></a><p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
     </div>
   </section>
+<script>(function(){var est=document.querySelector('.estante');if(!est)return;var TETO=innerWidth>=900?.075:.115,raf=0,atual=-1;function upd(){raf=0;var h=innerHeight,t=(scrollY-h*.55)/(h*2.2),v=Math.round(Math.max(0,Math.min(1,t))*TETO*1000)/1000;if(v!==atual){atual=v;est.style.opacity=v;}}addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(upd);},{passive:true});addEventListener('resize',upd);upd();})();</script>
 <script>(function(){function fit(){var t=document.querySelector('.h__col .h__tag'),l=document.querySelector('.h__col .lmb');if(!t||!l)return;t.style.fontSize='20px';var w=l.getBoundingClientRect().width,n=t.getBoundingClientRect().width;if(!w||!n)return;var f=Math.max(12,Math.min(32,20*w/n));t.style.fontSize=f+'px';}if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);window.addEventListener('load',fit);window.addEventListener('resize',fit);fit();})();</script>
 </main>
 

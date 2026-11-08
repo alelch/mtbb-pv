@@ -70,7 +70,7 @@ _CASOS = [("c0","Vinicius Profinho","11 mil cópias vendidas","O Guia da Redaç�
 CASOS = "".join(f'<figure class="caso rv"><img src="../black-week-misterio/assets/casos/{f}.webp" alt="{n}" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>{r}</strong><b>{n}</b><span>{l}</span></figcaption></figure>' for f, n, r, l in _CASOS)
 _LEVA = [
   ("Acesso vitalício", "Método The&nbsp;Book&nbsp;Business", "O ecossistema completo de marketing literário. Aulas práticas, passo a passo claro e modelos prontos para transformar o seu livro em referência, com leitores de verdade."),
-  ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo pelo Zoom com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
+  ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo, online pelo Zoom, com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
   ("Acesso vitalício", "Autoridade Digital para Escritores", "Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores."),
   ("Acesso vitalício", "Comunidade The&nbsp;Book&nbsp;Business", "A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma."),
   ("Acesso vitalício", "Workshops Mão na Massa", "<ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul>"),
@@ -364,7 +364,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .end__price .price__big span {{ font-size: clamp(48px, 13vw, 84px); }}
 .end .card__clock {{ max-width: 480px; margin: 22px auto 0; }}
 /* seções alternam um fundo levemente mais quente para dar ritmo */
-.cups, .gar, .lmbsec {{ background: linear-gradient(180deg, #050403, #000 70%); }}
+.cups, .gar, .lmbsec {{ background: none; }}  /* 08/11: transparente para a estante aparecer */
 
 .d9 {{ overflow: hidden; isolation: isolate; border-top: 1px solid var(--line); }}
 .d9::before {{ content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(250, 171, 0, .2), transparent 70%); }}
@@ -620,9 +620,6 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .resumo__logo {{ display: flex; justify-content: center; margin-bottom: 8px; }}
 .resumo__logo .bwlogo {{ font-size: clamp(38px, 10vw, 54px); }}
 /* 08/11 (cliente): o resumo da oferta com a cara do cartão final da página de cadastro (estante desfocada, brilho dourado, presente) */
-.resumo {{ position: relative; isolation: isolate; overflow: hidden; }}
-.resumo::before {{ content: ""; position: absolute; inset: -20px; z-index: -1; background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.7)), url("../black-week-misterio/assets/estante.webp") center top / 820px auto repeat; filter: blur(3px); }}
-@media (min-width: 900px) {{ .resumo::before {{ background-size: auto, 1300px auto; }} }}
 .card--fecho {{ margin-top: 60px !important; background: #000 !important; border-radius: 16px !important; box-shadow: 0 0 0 1px rgba(250,171,0,.35), 0 0 34px rgba(250,171,0,.38) !important; padding-top: 74px !important; }}
 .card--fecho .fecho__gift {{ position: absolute; left: 50%; top: 0; width: 120px; height: auto; transform: translate(-50%, -62%); filter: drop-shadow(0 12px 24px rgba(0,0,0,.6)); }}
 .fecho__eb {{ font-size: clamp(10px, 2.9vw, 13px); font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: var(--ink2); }}
@@ -642,6 +639,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .bon2__tag--casa {{ background: rgba(250,171,0,.14); color: var(--amber); box-shadow: inset 0 0 0 1px rgba(250,171,0,.45); }}
 .bon2__txt h3 {{ margin-top: 14px !important; font-size: clamp(24px, 6vw, 32px) !important; line-height: 1.1 !important; }}
 .bon2__txt p {{ margin-top: 10px !important; font-size: clamp(15px, 3.9vw, 16.5px) !important; max-width: 25em !important; }}
+/* 08/11 (cliente): a estante do cadastro atrás da página toda, bem escura: some no topo e aparece aos poucos ao descer */
+.estante {{ position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0; will-change: opacity; transform: translateZ(0); background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url("../black-week-misterio/assets/estante.webp") center top / 820px auto repeat; }}
+@media (min-width: 900px) {{ .estante {{ background-size: auto, 1300px auto; }} }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -822,6 +822,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 </style>
 </head>
 <body>
+<div class="estante" aria-hidden="true"></div>
 <div class="obar"><p class="d9-only">O dobro do LOMBADA termina em</p>{CLOCK.replace('class="clock"', 'class="clock d9-only"')}<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
 
 <main>
@@ -919,7 +920,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="fecho__eb">Somente na Black Week Motorizada</p>
         <p class="fecho__t"><span class="fecho__t-a">Método The&nbsp;Book&nbsp;Business</span><span class="fecho__t-b gold">vitalício</span><span class="fecho__t-c">+ {LMB}</span></p>
         <ul class="card__list">
-          <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos e workshops, <b>vitalícios</b></span></li>
+          <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, Autoridade Digital e Comunidade, <b>vitalícios</b></span></li>
+          <li>{CK}<span><b>5 Workshops Mão na Massa</b>, <b>vitalícios</b></span></li>
           <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
@@ -1311,7 +1313,7 @@ AB_TRACK = ("var ABV = 'L', abIn = false; try { abIn = localStorage.getItem('bf2
   "      $$('[data-cta]').forEach(function (a) { a.addEventListener('click', function () { abEv('initiate'); }); });\n"
   "    }\n    ").replace("AK_AB", "'" + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc" + "'")
 HTML = HTML.replace(_px, AB_LONGA + _px).replace(_ck, AB_TRACK + _ck)
-HTML = HTML.replace('</main>', "<script>(function(){function fit(){var t=document.querySelector('.h__col .h__tag'),l=document.querySelector('.h__col .lmb');if(!t||!l)return;t.style.fontSize='20px';var w=l.getBoundingClientRect().width,n=t.getBoundingClientRect().width;if(!w||!n)return;var f=Math.max(12,Math.min(32,20*w/n));t.style.fontSize=f+'px';}if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);window.addEventListener('load',fit);window.addEventListener('resize',fit);fit();})();</script>\n" + '</main>', 1)
+HTML = HTML.replace('</main>', "<script>(function(){var est=document.querySelector('.estante');if(!est)return;var TETO=innerWidth>=900?.075:.115,raf=0,atual=-1;function upd(){raf=0;var h=innerHeight,t=(scrollY-h*.55)/(h*2.2),v=Math.round(Math.max(0,Math.min(1,t))*TETO*1000)/1000;if(v!==atual){atual=v;est.style.opacity=v;}}addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(upd);},{passive:true});addEventListener('resize',upd);upd();})();</script>\n" + "<script>(function(){function fit(){var t=document.querySelector('.h__col .h__tag'),l=document.querySelector('.h__col .lmb');if(!t||!l)return;t.style.fontSize='20px';var w=l.getBoundingClientRect().width,n=t.getBoundingClientRect().width;if(!w||!n)return;var f=Math.max(12,Math.min(32,20*w/n));t.style.fontSize=f+'px';}if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);window.addEventListener('load',fit);window.addEventListener('resize',fit);fit();})();</script>\n" + '</main>', 1)
 # 08/11 (cliente): a capa do "seu livro" igual na página do livro e na vitrine
 _CAPA_OLD = '<div class="pg__capa"><span data-l-cap>O seu livro</span></div>'
 assert _CAPA_OLD in HTML
