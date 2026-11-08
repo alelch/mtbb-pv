@@ -420,7 +420,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .jn__in input:focus {{ box-shadow: 0 0 0 6px rgba(250, 171, 0, .2); }}
 /* 08/11 (cliente): deixar claro que a demonstração é interativa: carimbo, campo escrevendo sozinho e borda pulsando */
 .jn__in .jn__box {{ position: relative; display: block; margin: 0; letter-spacing: 0; text-transform: none; }}
-.jn__stamp {{ position: absolute; top: -15px; right: -6px; z-index: 2; transform: rotate(7deg); padding: 6px 10px 5px; border-radius: 3px; background: #d62f24; color: #fff; font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; box-shadow: 0 3px 10px rgba(0,0,0,.45); pointer-events: none; transition: opacity .3s; }}
+.jn__stamp {{ position: absolute; top: -17px; right: 4px; z-index: 2; transform: rotate(-6deg); padding: 6px 11px 5px; border: 2px dashed var(--amber); border-radius: 8px; background: #0d0b08; color: var(--amber); font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; line-height: 1; box-shadow: 0 0 18px rgba(250,171,0,.25); pointer-events: none; transition: opacity .3s; }}
 .jn__box.usou .jn__stamp {{ opacity: 0; }}
 .jn__in input.vivo {{ animation: jnpulse 1.6s ease-in-out infinite; }}
 @keyframes jnpulse {{ 0%, 100% {{ box-shadow: 0 0 0 6px rgba(250,171,0,.08); }} 50% {{ box-shadow: 0 0 0 10px rgba(250,171,0,.28), 0 0 30px rgba(250,171,0,.35); }} }}
@@ -995,7 +995,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="lmbh__mark">{LMB}</p>
         <div class="jn__vid" id="jn-vid"><vturb-smartplayer id="vid-6ae9e43f36e9cc736abb97c1" style="display:block;margin:0 auto;width:100%"></vturb-smartplayer></div>
         <h2 class="h2">Agora escreva o nome do seu livro. <span class="gold">E veja ele ir longe.</span></h2>
-        <label class="jn__in"><span>O nome do seu livro</span><span class="jn__box"><i class="jn__stamp" aria-hidden="true">Experimente</i><input id="jn-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done"></span></label>
+        <label class="jn__in"><span>O nome do seu livro</span><span class="jn__box"><i class="jn__stamp" aria-hidden="true">&#9998; Experimente</i><input id="jn-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done"></span></label>
         <p class="jn__hint">Experimente. É assim que o LOMBADA trabalha pelo seu livro.</p>
       </div>
       <ol class="jn">
