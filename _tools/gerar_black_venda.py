@@ -753,7 +753,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
       <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> <span class="h__col"><i class="novo-h">Lançamento</i>{LMB}<span class="h__tag">Seu livro, em movimento todo dia.</span></span></span></h1>
-      <a class="testar testar--h" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Teste com o nome do seu livro</span></a>
       <p class="trilha"><span class="l1"><span>Construa autoridade <i>›</i></span> <span>Seja lido de verdade <i>›</i></span></span> <span class="l2"><span>Gere impacto real <i>›</i></span> <span>Para sempre</span></span></p>
       <div class="hk2">
         <p>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></p>
@@ -884,7 +883,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
             <li><b>Seu livro vai mais longe:</b> prêmios, feiras e editais do seu gênero, com o prazo na tela.</li>
             <li><b>Seu livro é lido:</b> ideias de post ilimitadas para novos leitores te encontrarem.</li>
           </ul>
-          <a class="testar testar--b lmbc__btn" href="#ferramenta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Teste com o nome do seu livro</span></a>
         </div>
       </div>
       <div class="leva__g">{LEVA}</div>
