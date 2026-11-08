@@ -570,6 +570,8 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .blk .bill {{ margin-top: 22px; text-align: left; }}
 .bill__row--lmb span .lmb {{ color: var(--ink); font-size: 1.05em; }}
 .bill__row--lmb b {{ color: var(--amber) !important; font-weight: 700; }}
+.bill__row--lmb > span {{ display: inline-flex; align-items: center; gap: 10px; }}
+.novo {{ display: inline-block; font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; line-height: 1; padding: 5px 8px 4px; border-radius: 4px; background: #d62f24; color: #fff; }}
 .price {{ margin-top: 64px; }}
 .price__big {{ margin-top: 14px; line-height: 1; }}
 .price__big small {{ display: block; font-size: 18px; font-weight: 500; color: var(--ink2); }}
@@ -740,7 +742,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="q1">Para ter acesso <u>por um ano</u>, você <u>precisaria</u> investir:</p>
         <div class="bill">
           {BILL}
-          <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>R$ 2.000,00</b></div>
+          <div class="bill__row bill__row--lmb"><span>{LMB}<i class="novo">Novo</i></span><b>R$ 2.000,00</b></div>
           <div class="bill__tot"><span>Total</span><b>R$ 9.485,00</b></div>
         </div>
       </div>
