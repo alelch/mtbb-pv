@@ -1386,9 +1386,9 @@ for slug, v in VARIANTES.items():
     _meu = 'aluno' if slug == 'eda7d6898635' else 'vitalicio'
     GATE_CSS = ('<style>'
       'body.trava .price__big, body.trava .price__cash, body.trava .price__de, body.trava .resumo__por {display:none!important}'
-      '.trv{max-width:460px;margin:18px auto 0;padding:18px 16px;border-radius:14px;background:#0d0b08;box-shadow:inset 0 0 0 1px rgba(250,171,0,.5);text-align:center}'
+      '.trv{max-width:460px;margin:14px auto 4px;font-size:15px;line-height:1.5;color:#cfc9bc;text-align:center}.trv b{color:#faab00}'
       'body:not(.trava) .trv{display:none}'
-      '.trv b{display:block;font-size:17px;color:#fff;margin-bottom:4px}.trv p{margin:0 0 12px;font-size:14px;color:#a8a399}'
+      ''
       '.trv-m{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.78)}'
       '.trv-m.on{display:flex}.trv-c{width:100%;max-width:420px;padding:26px 20px;border-radius:16px;background:#0b0a08;box-shadow:0 0 0 1px rgba(250,171,0,.45),0 0 40px rgba(250,171,0,.25);text-align:center;position:relative}'
       '.trv-c h3{margin:0 0 6px;font-size:22px;color:#fff}.trv-c p{margin:0 0 16px;font-size:14.5px;color:#cfc9bc;line-height:1.5}'
@@ -1423,10 +1423,11 @@ for slug, v in VARIANTES.items():
            'vitalicio': ('Cashback de vitalício', 'R$2.000', 'Se você é vitalício, tem cashback.')}[_meu]
     CUPOM = ('<div class="ca" data-trv aria-label="%s de %s"><div class="tk"><small>%s</small><b>%s</b></div>'
              '<p><strong>%s</strong>%s de cashback na oferta da Black. <u class="cp-l">Ativar com o CPF &rsaquo;</u><u class="cp-u">Ativado no seu preço &check;</u></p></div>') % (_cp[0], _cp[1], _cp[0], _cp[1], _cp[2], _cp[1])
-    GATE_BOX = '<div class="trv"><b>Ative o seu cashback</b><p>Confirme com o CPF, o e-mail ou o celular da sua compra.</p><a class="btn" href="#" data-trv>Ativar e ver o meu preço</a></div>'
+    # 08/11 (cliente): pré-checkout. Um botão só: abre a verificação e, confirmado, vai direto ao pagamento
+    GATE_BOX = '<p class="trv"><b>Preço exclusivo de %s.</b> Você confirma o cashback no próximo passo.</p>' % ('aluno' if _meu == 'aluno' else 'aluno vitalício')
     GATE_HTML = ('<div class="trv-m" id="trv"><div class="trv-c"><button class="trv-x" type="button" aria-label="Fechar" data-trvx>&times;</button>'
-      '<h3>Confirme que você é aluno</h3><p>Digite o CPF, o e-mail ou o celular que você usou na compra do Método The&nbsp;Book&nbsp;Business.</p>'
-      '<form id="trvf"><input id="trvi" autocomplete="email" placeholder="CPF, e-mail ou celular" required><button class="btn" type="submit">Confirmar</button></form>'
+      '<h3>Ative o seu cashback</h3><p>Digite o CPF, o e-mail ou o celular que você usou na compra do Método The&nbsp;Book&nbsp;Business.</p>'
+      '<form id="trvf"><input id="trvi" autocomplete="email" placeholder="CPF, e-mail ou celular" required><button class="btn" type="submit">Ativar e continuar</button></form>'
       '<div class="trv-r" id="trvr" role="alert"></div></div></div>')
     GATE_JS = ('<script>(function(){var MEU="%s",OUTRO="%s",K="bf26trv_"+MEU;var b=document.body,m=document.getElementById("trv"),f=document.getElementById("trvf"),i=document.getElementById("trvi"),r=document.getElementById("trvr");'
       'var ok=false;try{ok=sessionStorage.getItem(K)==="1"}catch(e){}'
@@ -1437,7 +1438,7 @@ for slug, v in VARIANTES.items():
       'f.addEventListener("submit",function(e){e.preventDefault();var bt=f.querySelector("button");bt.disabled=true;r.style.color="#cfc9bc";r.textContent="Conferindo...";'
       'fetch("https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/bf26-conferir-publico",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({busca:i.value,pagina:MEU})})'
       '.then(function(x){return x.json()}).then(function(d){bt.disabled=false;r.style.color="";var c=d.categoria;'
-      'if(c===MEU){try{sessionStorage.setItem(K,"1")}catch(e){}m.classList.remove("on");trava(false);var p=document.querySelector(".price__big");if(p)p.scrollIntoView({behavior:"smooth",block:"center"});return}'
+      'if(c===MEU){try{sessionStorage.setItem(K,"1")}catch(e){}trava(false);r.style.color="#3ddc57";r.textContent="Cashback ativado. Indo para o pagamento...";var ck=document.querySelector("a[data-cta]");setTimeout(function(){if(ck&&ck.href.indexOf("#")<0)location.href=ck.href;else m.classList.remove("on")},700);return}'
       'if(c==="vitalicio"&&MEU==="aluno"){r.innerHTML="Você é aluno vitalício e tem um preço ainda melhor. <a href=\\""+OUTRO+location.search+"\\">Ver o meu preço</a>";return}'
       'if(c==="aluno"&&MEU==="vitalicio"){r.innerHTML="Encontramos a sua compra do Método. A sua condição é a de aluno: <a href=\\""+OUTRO+location.search+"\\">ver o meu preço</a>";return}'
       'if(c==="ja_comprou"){r.innerHTML="Você já está na Black Week Motorizada. Qualquer dúvida, <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">fale com a equipe</a>.";return}'
