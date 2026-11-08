@@ -1344,7 +1344,7 @@ HTML = HTML.replace('</main>\n\n<footer>', '</main>\n' + EQV_BLOCO + '\n<footer>
 # Aluno vai pro checkout de aluno, vitalício pro de vitalício, o resto pro de R$2.500. Checkout abre preenchido.
 PRE_BLOCK = r'''
 <style>
-.pre-m{position:fixed;inset:0;z-index:95;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,0,0,.8)}
+.pre-m{position:fixed;inset:0;z-index:95;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,0,0,.93);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .pre-m.on{display:flex}
 .pre-c{position:relative;width:100%;max-width:430px;max-height:calc(100vh - 28px);overflow:auto;padding:26px 20px 20px;border-radius:16px;background:#0b0a08;box-shadow:0 0 0 1px rgba(250,171,0,.45),0 0 40px rgba(250,171,0,.25);text-align:center;font-family:Poppins,sans-serif}
 .pre-logo{display:flex;justify-content:center;margin:2px 0 14px}.pre-logo .bwlogo{font-size:30px;animation:none}
