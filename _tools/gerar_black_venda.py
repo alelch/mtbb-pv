@@ -642,6 +642,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* 08/11 (cliente): a estante do cadastro atrás da página toda, bem escura: some no topo e aparece aos poucos ao descer */
 .estante {{ position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0; will-change: opacity; transform: translateZ(0); background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url("../black-week-misterio/assets/estante.webp") center top / 820px auto repeat; }}
 @media (min-width: 900px) {{ .estante {{ background-size: auto, 1300px auto; }} }}
+/* 08/11 (cliente): imagem do quadro do LOMBADA = frase grande sobre a estante do login */
+.lmbc__art--img {{ padding: 0 !important; background: #120d09 !important; }}
+.lmbc__art--img img {{ display: block; width: 100%; height: 100%; object-fit: cover; }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -955,7 +958,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         </div>
       </div>
       <div class="lmbc rv">
-        <div class="lmbc__art">{SPINES}<p class="lmbc__mark">{LMB}</p></div>
+        <div class="lmbc__art lmbc__art--img"><img src="assets/lombada-quadro.webp" alt="LOMBADA: seu livro, em movimento todo dia." width="1140" height="840" loading="lazy" decoding="async"></div>
         <div class="lmbc__b">
           <span class="lv__k"><span class="d9-only">6 anos de acesso hoje</span><span class="after-only">3 anos de acesso</span></span>
           <h3>A ferramenta que nunca deixa o seu livro parar.</h3>
