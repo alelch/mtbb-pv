@@ -619,6 +619,19 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* 08/11 (cliente): o resumo abre com o logo da Black, sem a frase */
 .resumo__logo {{ display: flex; justify-content: center; margin-bottom: 8px; }}
 .resumo__logo .bwlogo {{ font-size: clamp(38px, 10vw, 54px); }}
+/* 08/11 (cliente): o resumo da oferta com a cara do cartão final da página de cadastro (estante desfocada, brilho dourado, presente) */
+.resumo {{ position: relative; isolation: isolate; overflow: hidden; }}
+.resumo::before {{ content: ""; position: absolute; inset: -20px; z-index: -1; background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.7)), url("../black-week-misterio/assets/estante.webp") center top / 820px auto repeat; filter: blur(3px); }}
+@media (min-width: 900px) {{ .resumo::before {{ background-size: auto, 1300px auto; }} }}
+.card--fecho {{ margin-top: 60px !important; background: #000 !important; border-radius: 16px !important; box-shadow: 0 0 0 1px rgba(250,171,0,.35), 0 0 34px rgba(250,171,0,.38) !important; padding-top: 74px !important; }}
+.card--fecho .fecho__gift {{ position: absolute; left: 50%; top: 0; width: 120px; height: auto; transform: translate(-50%, -62%); filter: drop-shadow(0 12px 24px rgba(0,0,0,.6)); }}
+.fecho__eb {{ font-size: clamp(10px, 2.9vw, 13px); font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: var(--ink2); }}
+.fecho__t {{ margin-top: 14px; line-height: 1; }}
+.fecho__t-a {{ display: block; font-size: clamp(14px, 4.1vw, 20px); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }}
+.fecho__t-b {{ display: block; margin-top: 4px; font-size: clamp(54px, 16vw, 92px); font-weight: 700; line-height: .95; letter-spacing: -.02em; filter: drop-shadow(0 8px 34px rgba(250,171,0,.22)); }}
+.fecho__t-c {{ display: block; margin-top: 12px; font-size: clamp(17px, 4.8vw, 22px); font-weight: 500; color: var(--ink); }}
+.fecho__t-c .lmb {{ font-size: 1.15em; vertical-align: -.08em; color: var(--ink); }}
+.card--fecho .card__list {{ margin-top: 26px !important; padding-top: 22px; border-top: 1px solid rgba(250,171,0,.22); }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -889,8 +902,10 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   <!-- 6. resumo + botão -->
   <section class="sec resumo" id="oferta">
     <div class="wrap center">
-      <div class="card rv">
-        <div class="resumo__logo">{BWLOGO}</div>
+      <div class="card card--fecho rv">
+        <img class="fecho__gift" src="../black-week/assets/presente.webp" alt="" width="260" height="260" loading="lazy" decoding="async">
+        <p class="fecho__eb">Somente na Black Week Motorizada</p>
+        <p class="fecho__t"><span class="fecho__t-a">Método The&nbsp;Book&nbsp;Business</span><span class="fecho__t-b gold">vitalício</span><span class="fecho__t-c">+ {LMB}</span></p>
         <ul class="card__list">
           <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos e workshops, <b>vitalícios</b></span></li>
           <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
