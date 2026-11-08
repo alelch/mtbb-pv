@@ -1385,8 +1385,8 @@ for slug, v in VARIANTES.items():
     _outro = {'eda7d6898635': '/c966d3cc27f2/', 'c966d3cc27f2': '/eda7d6898635/'}[slug]
     _meu = 'aluno' if slug == 'eda7d6898635' else 'vitalicio'
     GATE_CSS = ('<style>'
-      'body.trava .price__big, body.trava .price__cash, body.trava .price__de, body.trava .resumo__por {display:none!important}'
-      '.trv{max-width:460px;margin:14px auto 4px;font-size:15px;line-height:1.5;color:#cfc9bc;text-align:center}.trv b{color:#faab00}'
+      ''
+      '.trv{max-width:460px;margin:10px auto 2px;font-size:14px;line-height:1.5;color:#cfc9bc;text-align:center}.trv b{color:#faab00}'
       'body:not(.trava) .trv{display:none}'
       ''
       '.trv-m{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.78)}'
@@ -1424,7 +1424,7 @@ for slug, v in VARIANTES.items():
     CUPOM = ('<div class="ca" data-trv aria-label="%s de %s"><div class="tk"><small>%s</small><b>%s</b></div>'
              '<p><strong>%s</strong>%s de cashback na oferta da Black. <u class="cp-l">Ativar com o CPF &rsaquo;</u><u class="cp-u">Ativado no seu preço &check;</u></p></div>') % (_cp[0], _cp[1], _cp[0], _cp[1], _cp[2], _cp[1])
     # 08/11 (cliente): pré-checkout. Um botão só: abre a verificação e, confirmado, vai direto ao pagamento
-    GATE_BOX = '<p class="trv"><b>Preço exclusivo de %s.</b> Você confirma o cashback no próximo passo.</p>' % ('aluno' if _meu == 'aluno' else 'aluno vitalício')
+    GATE_BOX = '<p class="trv"><b>Preço exclusivo de %s.</b> Você confirma no próximo passo.</p>' % ('aluno' if _meu == 'aluno' else 'aluno vitalício')
     GATE_HTML = ('<div class="trv-m" id="trv"><div class="trv-c"><button class="trv-x" type="button" aria-label="Fechar" data-trvx>&times;</button>'
       '<h3>Ative o seu cashback</h3><p>Digite o CPF, o e-mail ou o celular que você usou na compra do Método The&nbsp;Book&nbsp;Business.</p>'
       '<form id="trvf"><input id="trvi" autocomplete="email" placeholder="CPF, e-mail ou celular" required><button class="btn" type="submit">Ativar e continuar</button></form>'
@@ -1447,7 +1447,7 @@ for slug, v in VARIANTES.items():
       'r.innerHTML="Não encontramos uma compra do Método The Book Business com esse dado. Tente o e-mail ou o CPF da compra, ou <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">fale com a equipe</a>."'
       '}).catch(function(){bt.disabled=false;r.innerHTML="Não consegui conferir agora. <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">Fale com a equipe</a>."})})})();</script>') % (_meu, _outro)
     P = P.replace('</head>', GATE_CSS + '</head>', 1)
-    P = P.replace('<p class="price__big">', GATE_BOX + '<p class="price__big">')
+    P = P.replace('<p class="price__cash">à vista ou parcelado no cartão</p>', '<p class="price__cash">à vista ou parcelado no cartão</p>' + GATE_BOX)   # 08/11: preço sempre visível; a verificação fica no botão
     P = re.sub(r'<div class="hk2">.*?</div>', CUPOM, P, count=1, flags=re.S)
     assert P.count('class="ca"') == 1 and 'class="hk2"' not in P, slug
     P = P.replace('</main>', '</main>' + GATE_HTML + GATE_JS, 1)
