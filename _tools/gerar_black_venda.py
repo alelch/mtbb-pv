@@ -1201,3 +1201,30 @@ assert 'id="ferramenta"' not in CURTA and 'href="#ferramenta"' not in CURTA and 
 os.makedirs(f"{R}/5c0424242e97", exist_ok=True)
 open(f"{R}/5c0424242e97/index.html", "w", encoding="utf-8").write(CURTA)
 print("curta", len(CURTA))
+
+# 08/11 (cliente): versões de ALUNO (R$ 1.000) e VITALÍCIO (R$ 500) da oferta longa, nos endereços escondidos que os links
+# finais black-liberada-alunos / black-liberada-vitalicio abrem a partir de 09/11 20h. Sem o teste A/B (não sorteia
+# para a curta de R$ 2.500, não grava em ab_eventos); checkout pela máscara de cada uma, repassando src/sck/utm.
+VARIANTES = {
+    'eda7d6898635': dict(rot='aluno', checkout='https://thebookbusiness.com.br/oferta-black-alunos', preco='R$ 1.000',
+                         dia='Menos de R$ 3 por dia no primeiro ano. E o Método é seu pra sempre.',
+                         kick='Condição exclusiva de aluno do Método', title='Black Week Motorizada · Alunos'),
+    'c966d3cc27f2': dict(rot='vitalício', checkout='https://thebookbusiness.com.br/oferta-black-vitalicio', preco='R$ 500',
+                         dia='Menos de R$ 1,50 por dia no primeiro ano. O Método você já tem pra sempre.',
+                         kick='Condição exclusiva de aluno vitalício', title='Black Week Motorizada · Alunos vitalícios'),
+}
+for slug, v in VARIANTES.items():
+    P = HTML.replace(AB_LONGA, '').replace(AB_TRACK, '')
+    P = P.replace("var CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black26', depois: 'https://thebookbusiness.com.br/oferta-black26' }",
+                  "var CHECKOUT = { d9: '%s', depois: '%s' }" % (v['checkout'], v['checkout']))
+    P = P.replace('<p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>', '<p class="price__big"><small>por</small><span>%s</span></p>' % v['preco'])
+    P = P.replace('<p class="price__cash">ou R$ 2.500 à vista</p>', '<p class="price__cash">à vista ou parcelado no cartão</p>')
+    P = P.replace('<p class="price__day">Menos de R$ 7 por dia no primeiro ano. E o Método é seu pra sempre.</p>', '<p class="price__day">%s</p>' % v['dia'])
+    P = P.replace('<p class="kick h__kick">Inscrições liberadas</p>', '<p class="kick h__kick">%s</p>' % v['kick'])
+    P = re.sub(r'<title>[^<]*</title>', '<title>%s</title>' % v['title'], P, count=1)
+    P = (P.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
+          .replace('https://metodo.thebookbusiness.com.br/ae8a9e17e350/"', 'https://metodo.thebookbusiness.com.br/%s/"' % slug))
+    assert 'bf26pg' not in P and 'oferta-black26' not in P.split('var CHECKOUT')[1][:300] and v['preco'] in P and '249,51' not in P and 'R$ 2.500 à vista' not in P, slug
+    os.makedirs(f"{R}/{slug}", exist_ok=True)
+    open(f"{R}/{slug}/index.html", "w", encoding="utf-8").write(P)
+    print(v['rot'], slug, len(P))
