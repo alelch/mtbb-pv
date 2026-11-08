@@ -550,6 +550,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* 08/11 (cliente): bandeirinha diagonal "Novo" no LOMBADA do topo */
 .h__col {{ position: relative; }}
 .novo-h {{ position: absolute; top: -.78em; right: -.7em; transform: rotate(12deg); font-style: normal; font-size: clamp(10px, 2.6vw, 14px); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; padding: .45em .8em .38em; background: #d62f24; color: #fff; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,.45); z-index: 2; }}
+/* 08/11 (cliente): atalho discreto para a demonstração */
+.h__ver {{ display: inline-block; margin-top: 18px; font-size: clamp(13px, 3.5vw, 15px); font-weight: 600; color: var(--amber); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(250,171,0,.45); }}
+.h__ver:hover {{ text-decoration-color: var(--amber); }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -736,6 +739,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
       <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> <span class="h__col"><i class="novo-h">Novo</i>{LMB}<span class="h__tag">Seu livro, em movimento todo dia.</span></span></span></h1>
+      <a class="h__ver" href="#ferramenta">Ver o LOMBADA funcionando <span aria-hidden="true">↓</span></a>
       <p class="trilha"><span class="l1"><span>Construa autoridade <i>›</i></span> <span>Seja lido de verdade <i>›</i></span></span> <span class="l2"><span>Gere impacto real <i>›</i></span> <span>Para sempre</span></span></p>
       <div class="hk2">
         <p>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></p>
@@ -1143,9 +1147,12 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     }}
     genBox.addEventListener('click', function (e) {{ var b = e.target.closest('button'); if (!b) return; [].forEach.call(genBox.children, function (x) {{ x.setAttribute('aria-pressed', x === b); }}); gen = b.getAttribute('data-g'); rOps(); }});
     var TONS = ['inspirador', 'provocativo', 'educativo', 'humor'], ideias = [], ideasBox = document.getElementById('jn-ideas'), k = 0;
-    function mais() {{ for (var j = 0; j < 3; j++) {{ var tom = TONS[k % 4], lista = IDEIAS[tom]; ideias.unshift([tom, lista[Math.floor(k / 4) % lista.length]]); k++; }} rIdeas(); ideasBox.scrollTop = 0; }}
+    var MAXI = TONS.reduce(function (n, t) {{ return n + IDEIAS[t].length; }}, 0), btnMais = document.getElementById('jn-more');
+    function mais() {{ if (ideias.length >= MAXI) {{ var o = document.getElementById('oferta'); if (o) o.scrollIntoView({{ behavior: 'smooth' }}); return; }}
+      for (var j = 0; j < 3 && ideias.length < MAXI; j++) {{ var tom = TONS[k % 4], lista = IDEIAS[tom]; ideias.unshift([tom, lista[Math.floor(k / 4) % lista.length]]); k++; }} rIdeas(); ideasBox.scrollTop = 0;
+      if (ideias.length >= MAXI && btnMais) {{ btnMais.textContent = 'Quer ideias infinitas? Elas estão no LOMBADA.'; btnMais.classList.add('ap__copy--fim'); }} }}
     function rIdeas() {{ ideasBox.innerHTML = ideias.map(function (x, i) {{ return '<div class="ap__idea"><small>Ideia ' + (ideias.length - i) + ' · ' + x[0] + '</small><p>' + T(x[1][0]) + '</p><span>' + esc(x[1][1]) + '</span></div>'; }}).join(''); }}
-    document.getElementById('jn-more').addEventListener('click', mais);
+    btnMais.addEventListener('click', mais);
     function slug(x) {{ return (x || 'o seu livro').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }}
     function rNome() {{
       document.getElementById('jn-slug').textContent = slug(nome());
@@ -1231,6 +1238,8 @@ _b = HTML.index('  <!-- 8. casos -->')
 CURTA = HTML[:_a] + HTML[_b:]
 _btn = CURTA.index('<a class="lmbc__btn" href="#ferramenta">')
 CURTA = CURTA[:_btn] + CURTA[CURTA.index('</a>', _btn) + 4:]
+_ver = CURTA.index('\n      <a class="h__ver" href="#ferramenta">')
+CURTA = CURTA[:_ver] + CURTA[CURTA.index('</a>', _ver) + 4:]
 CURTA = (CURTA.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
               .replace('url("../assets/', 'url("../assets/')
               .replace('<link rel="canonical" href="https://metodo.thebookbusiness.com.br/ae8a9e17e350/">',
