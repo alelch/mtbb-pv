@@ -749,11 +749,14 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="blk">
         <p class="q1">Agora, as contas de quanto você investiria para ter acesso a tudo isso ao longo do tempo:</p>
         <div class="bill">
+          <!-- 08/11 (cliente): a conta segue o prazo do LOMBADA: 6 anos no dia 9, 3 anos depois -->
           <div class="bill__row"><span>1º ano</span><b>R$ 7.200,00</b></div>
           <div class="bill__row"><span>2º ano</span><b>R$ 4.200,00</b></div>
           <div class="bill__row"><span>3º ano</span><b>R$ 4.200,00</b></div>
-          <div class="bill__row"><span>4º ano</span><b>R$ 4.200,00</b></div>
-          <div class="bill__tot"><span>Total investido</span><b>R$ 19.800,00</b></div>
+          <div class="bill__row d9-only"><span>4º ano</span><b>R$ 4.200,00</b></div>
+          <div class="bill__row d9-only"><span>5º ano</span><b>R$ 4.200,00</b></div>
+          <div class="bill__row d9-only"><span>6º ano</span><b>R$ 4.200,00</b></div>
+          <div class="bill__tot"><span>Total investido</span><b><span class="d9-only">R$ 28.200,00</span><span class="after-only">R$ 15.600,00</span></b></div>
         </div>
       </div>
 
@@ -819,7 +822,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           <li>{CK}<span><b>Playbooks MTBB físicos</b> na sua casa</span></li>
           <li>{CK}<span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
-        <p class="resumo__de">De <s>R$ 19.800,00</s></p>
+        <p class="resumo__de">De <s><span class="d9-only">R$ 28.200,00</span><span class="after-only">R$ 15.600,00</span></s></p>
         <p class="resumo__por">por apenas</p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
