@@ -1328,7 +1328,8 @@ AB_TRACK = ("var ABV = 'L', abIn = false; try { abIn = localStorage.getItem('bf2
   "      if (abSeen !== ABV) { try { localStorage.setItem('bf26pg_view', ABV); } catch (e) {} abEv('view'); }\n"
   "      $$('[data-cta]').forEach(function (a) { a.addEventListener('click', function () { abEv('initiate'); }); });\n"
   "    }\n    ").replace("AK_AB", "'" + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcXRwc3hwYWNsc2xha2FmbXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTY5NTMsImV4cCI6MjA5MDg5Mjk1M30.6f3CmgozaE3fTORF0SBSeRDzZNZ1E27tcdQ9h6tKLgc" + "'")
-HTML = HTML.replace(_px, AB_LONGA + _px).replace(_ck, AB_TRACK + _ck)
+# 08/11 noite (cliente): a curta foi descartada; sem sorteio, todo mundo fica na longa
+# HTML = HTML.replace(_px, AB_LONGA + _px).replace(_ck, AB_TRACK + _ck)
 HTML = HTML.replace('</main>', "<script>(function(){var est=document.querySelector('.estante');if(!est)return;var TETO=innerWidth>=900?.075:.115,raf=0,atual=-1;function upd(){raf=0;var h=innerHeight,t=(scrollY-h*.55)/(h*2.2),v=Math.round(Math.max(0,Math.min(1,t))*TETO*1000)/1000;if(v!==atual){atual=v;est.style.opacity=v;}}addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(upd);},{passive:true});addEventListener('resize',upd);upd();})();</script>\n" + "<script>(function(){function fit(){var t=document.querySelector('.h__col .h__tag'),l=document.querySelector('.h__col .lmb');if(!t||!l)return;t.style.fontSize='20px';var w=l.getBoundingClientRect().width,n=t.getBoundingClientRect().width;if(!w||!n)return;var f=Math.max(12,Math.min(32,20*w/n));t.style.fontSize=f+'px';}if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);window.addEventListener('load',fit);window.addEventListener('resize',fit);fit();})();</script>\n" + '</main>', 1)
 # 08/11 (cliente): a capa do "seu livro" igual na página do livro e na vitrine
 _CAPA_OLD = '<div class="pg__capa"><span data-l-cap>O seu livro</span></div>'
@@ -1433,8 +1434,12 @@ CURTA = (CURTA.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
               .replace('<meta property="og:url" content="https://metodo.thebookbusiness.com.br/ae8a9e17e350/">',
                        '<meta property="og:url" content="https://metodo.thebookbusiness.com.br/5c0424242e97/">'))
 CURTA = CURTA.replace(AB_LONGA, AB_CURTA).replace("var ABV = 'L'", "var ABV = 'C'")
-assert 'id="ferramenta"' not in CURTA and 'href="#ferramenta"' not in CURTA and 'bf26pg' in CURTA and "var ABV = 'C'" in CURTA
+assert 'id="ferramenta"' not in CURTA and 'href="#ferramenta"' not in CURTA
 os.makedirs(f"{R}/5c0424242e97", exist_ok=True)
+# 08/11 noite (cliente): curta descartada. O endereço continua existindo e manda para a longa, levando src/utm
+CURTA = ('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex">'
+         '<script>try{localStorage.removeItem("bf26pg")}catch(e){}location.replace("/ae8a9e17e350/"+location.search+location.hash)</script>'
+         '</head><body></body></html>')
 open(f"{R}/5c0424242e97/index.html", "w", encoding="utf-8").write(CURTA)
 print("curta", len(CURTA))
 
