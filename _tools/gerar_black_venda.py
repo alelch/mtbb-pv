@@ -418,6 +418,13 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .jn__in input {{ width: 100%; height: 60px; padding: 0 18px; border: 2px solid var(--amber); border-radius: 12px; outline: none; background: #0d0b08; color: #fff; font: 600 20px/1 "Poppins", sans-serif; box-shadow: 0 0 0 6px rgba(250, 171, 0, .08); }}
 .jn__in input::placeholder {{ color: #7a746a; font-weight: 500; }}
 .jn__in input:focus {{ box-shadow: 0 0 0 6px rgba(250, 171, 0, .2); }}
+/* 08/11 (cliente): deixar claro que a demonstração é interativa: carimbo, campo escrevendo sozinho e borda pulsando */
+.jn__in .jn__box {{ position: relative; display: block; margin: 0; letter-spacing: 0; text-transform: none; }}
+.jn__stamp {{ position: absolute; top: -15px; right: -6px; z-index: 2; transform: rotate(7deg); padding: 6px 10px 5px; border-radius: 3px; background: #d62f24; color: #fff; font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; box-shadow: 0 3px 10px rgba(0,0,0,.45); pointer-events: none; transition: opacity .3s; }}
+.jn__box.usou .jn__stamp {{ opacity: 0; }}
+.jn__in input.vivo {{ animation: jnpulse 1.6s ease-in-out infinite; }}
+@keyframes jnpulse {{ 0%, 100% {{ box-shadow: 0 0 0 6px rgba(250,171,0,.08); }} 50% {{ box-shadow: 0 0 0 10px rgba(250,171,0,.28), 0 0 30px rgba(250,171,0,.35); }} }}
+@media (prefers-reduced-motion: reduce) {{ .jn__in input.vivo {{ animation: none; }} }}
 .jn__hint {{ margin-top: 12px; font-size: 14px; color: var(--ink3); }}
 .jl {{ color: var(--amber); }}
 .jn {{ position: relative; max-width: 1000px; margin: 56px auto 0; list-style: none; display: grid; gap: 56px; }}
@@ -988,7 +995,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="lmbh__mark">{LMB}</p>
         <div class="jn__vid" id="jn-vid"><vturb-smartplayer id="vid-6ae9e43f36e9cc736abb97c1" style="display:block;margin:0 auto;width:100%"></vturb-smartplayer></div>
         <h2 class="h2">Agora escreva o nome do seu livro. <span class="gold">E veja ele ir longe.</span></h2>
-        <label class="jn__in"><span>O nome do seu livro</span><input id="jn-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done"></label>
+        <label class="jn__in"><span>O nome do seu livro</span><span class="jn__box"><i class="jn__stamp" aria-hidden="true">Experimente</i><input id="jn-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done"></span></label>
         <p class="jn__hint">Experimente. É assim que o LOMBADA trabalha pelo seu livro.</p>
       </div>
       <ol class="jn">
@@ -1409,6 +1416,7 @@ f.addEventListener('submit',function(e){e.preventDefault();r.textContent='';
 })();</script>
 '''
 HTML = HTML.replace('</main>', '</main>' + PRE_BLOCK.replace('@@BWLOGO@@', BWLOGO), 1)
+HTML = HTML.replace('</main>', '</main>' + "<script>(function(){var inp=document.getElementById('jn-livro');if(!inp)return;var box=inp.parentNode,N=['A Casa das Marés','Mar de Dentro','Raízes do Sertão','Liderar sem Gritar','O Mapa do Verão'],i=0,c=0,apaga=false,t=null,on=false;\nfunction viva(){return !inp.value&&document.activeElement!==inp}\nfunction passo(){if(!on||!viva()){inp.classList.remove('vivo');return}inp.classList.add('vivo');var nome=N[i];if(!apaga){c++;if(c>nome.length){apaga=true;t=setTimeout(passo,1400);inp.placeholder='Ex.: '+nome;return}}else{c--;if(c<0){apaga=false;c=0;i=(i+1)%N.length;t=setTimeout(passo,350);return}}inp.placeholder='Ex.: '+nome.slice(0,c)+'|';t=setTimeout(passo,apaga?35:85)}\nfunction liga(){if(on)return;on=true;clearTimeout(t);passo()}function desliga(){on=false;clearTimeout(t);inp.classList.remove('vivo');inp.placeholder='Ex.: A Casa das Marés'}\ninp.addEventListener('focus',function(){box.classList.add('usou');desliga()});inp.addEventListener('input',function(){box.classList.add('usou')});inp.addEventListener('blur',function(){if(!inp.value){box.classList.remove('usou');liga()}});\nif('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&viva())liga();else if(!e.isIntersecting)desliga()})},{threshold:.4}).observe(inp)}else liga()})();</script>\n", 1)   # 08/11: demonstração viva
 open(f"{R}/ae8a9e17e350/index.html", "w", encoding="utf-8").write(HTML)
 print("ok", len(HTML))
 
