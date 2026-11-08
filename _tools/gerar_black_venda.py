@@ -645,6 +645,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* 08/11 (cliente): imagem do quadro do LOMBADA = frase grande sobre a estante do login */
 .lmbc__art--img {{ padding: 0 !important; background: #120d09 !important; }}
 .lmbc__art--img img {{ display: block; width: 100%; height: 100%; object-fit: cover; }}
+/* 08/11 (cliente): aviso para aluno do Método (só ele tem desconto); leva para a equipe, sem mostrar o preço de aluno */
+.aluno-lk {{ margin-top: 14px; font-size: 14px; color: var(--ink2); }}
+.aluno-lk a {{ color: var(--amber); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -872,7 +875,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="price__de">De <s><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
-        <div class="cta price__cta">{CTA}<p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
+        <div class="cta price__cta">{CTA}<p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p><p class="aluno-lk">É aluno do Método The&nbsp;Book&nbsp;Business? <a href="https://thebookbusiness.com.br/dezza" target="_blank" rel="noopener">Fale com a equipe</a></p></div>
       </div>
     </div>
   </section>
@@ -936,7 +939,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
         <div class="card__clock d9-only"><p>O <b>dobro do LOMBADA</b> termina à meia-noite.</p>{CLOCK}</div>
-        {CTA}
+        {CTA}<p class="aluno-lk">É aluno do Método The&nbsp;Book&nbsp;Business? <a href="https://thebookbusiness.com.br/dezza" target="_blank" rel="noopener">Fale com a equipe</a></p>
         <div class="seal"><i>15<small>dias</small></i><p><b>Garantia de 15 dias.</b> Entre, use, conheça tudo. Se não for pra você, devolvemos 100%.</p></div>
       </div>
     </div>
@@ -1363,6 +1366,7 @@ for slug, v in VARIANTES.items():
     P = P.replace('<p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>', '<p class="price__big"><small>só</small><span>%s</span></p>' % v['preco'])
     P = P.replace('<p class="price__cash">ou R$ 2.500 à vista</p>', '<p class="price__cash">à vista ou parcelado no cartão</p>')
     P = P.replace('<p class="kick h__kick">Inscrições liberadas</p>', '<p class="kick h__kick">%s</p>' % v['kick'])
+    P = re.sub(r'<p class="aluno-lk">.*?</p>', '', P)
     P = re.sub(r'<title>[^<]*</title>', '<title>%s</title>' % v['title'], P, count=1)
     P = (P.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
           .replace('https://metodo.thebookbusiness.com.br/ae8a9e17e350/"', 'https://metodo.thebookbusiness.com.br/%s/"' % slug))
