@@ -70,13 +70,13 @@ _CASOS = [("c0","Vinicius Profinho","11 mil cópias vendidas","O Guia da Redaç�
 CASOS = "".join(f'<figure class="caso rv"><img src="../black-week-misterio/assets/casos/{f}.webp" alt="{n}" width="56" height="56" loading="lazy" decoding="async"><figcaption><strong>{r}</strong><b>{n}</b><span>{l}</span></figcaption></figure>' for f, n, r, l in _CASOS)
 _LEVA = [
   ("Acesso vitalício", "Método The&nbsp;Book&nbsp;Business", "O ecossistema completo de marketing literário. Aulas práticas, passo a passo claro e modelos prontos para transformar o seu livro em referência, com leitores de verdade."),
+  ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
   ("Acesso vitalício", "Autoridade Digital para Escritores", "Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores."),
   ("Acesso vitalício", "Comunidade The&nbsp;Book&nbsp;Business", "A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma."),
   ("Acesso vitalício", "Workshops Mão na Massa", "<ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul>"),
   ("Acesso vitalício", "Gravação de 100% das lives, encontros e eventos", "Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país."),
-  ("3 anos", "Encontros em grupo ao vivo com a Dany", "36 encontros ao vivo com a Dany para tirar dúvidas e ajustar a estratégia do seu livro. O que muitos chamam de mentoria, aqui está incluído."),
 ]
-_IMG = ["p-metodo", "p-autoridade", "p-comunidade", "p-workshops", "p-gravacoes", "p-encontros"]
+_IMG = ["p-metodo", "p-encontros", "p-autoridade", "p-comunidade", "p-workshops", "p-gravacoes"]
 def _tag(k):
     return k
 LEVA = "".join(f'<div class="lv rv"><img class="lv__img" src="assets/{_IMG[n]}.webp" alt="" width="720" height="567" loading="lazy" decoding="async"><div class="lv__b"><span class="lv__k">{_tag(k)}</span><h3>{t}</h3>{d if d.startswith("<ul>") else f"<p>{d}</p>"}</div></div>' for n, (k, t, d) in enumerate(_LEVA) if n > 0)
@@ -317,6 +317,13 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .lmbc__art {{ display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 34px 20px 26px; background: #16110c; }}
 .lmbc__art .spines {{ height: 120px; margin: 0; }}
 .lmbc__art .spines i {{ width: 30px; }}
+/* 08/11 (cliente): lombadas com volume, filete e prateleira (antes eram barras chapadas) */
+.lmbc__art .spines {{ position: relative; gap: 7px; padding: 0 16px 10px; }}
+.lmbc__art .spines::after {{ content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; border-radius: 3px; background: linear-gradient(90deg, #5a4632, #8a6a45 50%, #5a4632); box-shadow: 0 10px 18px rgba(0,0,0,.55); }}
+.lmbc__art .spines i {{ position: relative; width: 34px; border-radius: 4px 4px 2px 2px; background: linear-gradient(90deg, rgba(0,0,0,.3), rgba(255,255,255,.16) 35%, rgba(0,0,0,.2)), var(--c); box-shadow: inset 0 3px 0 rgba(255,255,255,.14), 0 6px 12px rgba(0,0,0,.35); }}
+.lmbc__art .spines i::before {{ content: ""; position: absolute; left: 0; right: 0; top: 14px; height: 3px; background: rgba(255,255,255,.32); }}
+.lmbc__art .spines i::after {{ content: ""; position: absolute; left: 25%; right: 25%; bottom: 18px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.4); box-shadow: 0 -7px 0 rgba(255,255,255,.4); }}
+.lmbc__art {{ background: radial-gradient(70% 60% at 50% 40%, rgba(250,171,0,.18), transparent 70%), #16110c !important; }}
 .lmbc__mark {{ margin-top: 16px; font-size: clamp(34px, 9vw, 46px); line-height: 1; }}
 .lmbc__mark .lmb {{ color: #f3f0e8; }}
 .lmbc__b {{ padding: 26px 22px 28px; text-align: left; }}
@@ -367,7 +374,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .lv__img {{ width: 100%; aspect-ratio: 720 / 567; object-fit: cover; }}
 .lv__b {{ padding: 20px 20px 24px; }}
 /* 08/11 (cliente): Encontros com a Dany ocupa a linha inteira (o último cartão ficava sozinho pela metade) */
-@media (min-width: 760px) {{ .leva__g > .lv:last-child:nth-child(odd) {{ grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; }} .leva__g > .lv:last-child:nth-child(odd) .lv__img {{ height: 100%; aspect-ratio: auto; }} .leva__g > .lv:last-child:nth-child(odd) .lv__b {{ padding: 32px 36px !important; }} }}
+@media (min-width: 760px) {{ .leva__g > .lv:first-child {{ grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; }} .leva__g > .lv:first-child .lv__img {{ height: 100%; aspect-ratio: auto; }} .leva__g > .lv:first-child .lv__b {{ padding: 32px 36px !important; }} }}
 .bon2__ph {{ width: 46%; max-width: 190px; margin: 18px auto 0; padding: 6px; border-radius: 26px; background: linear-gradient(160deg, #2b2a2f, #0e0e10 60%); box-shadow: 0 24px 40px -18px rgba(0, 0, 0, .8), 0 0 0 1px #3a3226; }}
 .bon2__c .bon2__ph img {{ max-width: none; margin: 0; filter: none; width: 100%; aspect-ratio: 716 / 1200; object-fit: cover; object-position: top; border-radius: 21px; }}
 .cups {{ border-top: 1px solid var(--line); }}
@@ -576,6 +583,22 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* 08/11 (cliente): bônus sem os selos "Bônus 1/2"; no lugar das lombadas soltas, a marca do LOMBADA */
 .bon2__lmb {{ margin: 26px 0 0; font-size: clamp(34px, 9vw, 52px); font-weight: 900; line-height: 1; color: #fff; text-align: center; }}
 .bon2__lmb .lmb {{ color: #fff; }}
+/* 08/11 (cliente): bônus do LOMBADA como uma estante de 6 anos (3 normais + 3 dourados de hoje) */
+.bon2__vis--est {{ height: auto; min-height: 280px; gap: 18px; }}
+.est__lmb {{ font-size: clamp(22px, 6vw, 30px); font-weight: 900; color: #fff; line-height: 1; }} .est__lmb .lmb {{ color: #fff; }}
+.est {{ position: relative; display: flex; align-items: flex-end; gap: 7px; height: 150px; padding: 0 18px 9px; }}
+.est::after {{ content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 9px; border-radius: 3px; background: linear-gradient(90deg, #5a4632, #8a6a45 50%, #5a4632); box-shadow: 0 10px 18px rgba(0,0,0,.55); }}
+.est__l {{ position: relative; display: flex; align-items: flex-end; justify-content: center; width: 38px; height: var(--h); border-radius: 4px 4px 2px 2px; font-style: normal; background: linear-gradient(90deg, rgba(0,0,0,.28), rgba(255,255,255,.14) 35%, rgba(0,0,0,.18)), var(--c); box-shadow: inset 0 3px 0 rgba(255,255,255,.12); }}
+.est__l::before {{ content: ""; position: absolute; left: 0; right: 0; top: 14px; height: 3px; background: rgba(255,255,255,.35); }}
+.est__l b {{ margin-bottom: 10px; font-size: 13px; font-weight: 800; color: rgba(255,255,255,.85); }}
+.est__l--ouro {{ --c: #faab00; background: linear-gradient(90deg, #c98100, #ffd56a 38%, #e09a00); box-shadow: 0 0 22px rgba(250,171,0,.45), inset 0 3px 0 rgba(255,255,255,.35); }}
+.est__l--ouro::before {{ background: rgba(26,20,6,.35); }} .est__l--ouro b {{ color: #1a1206; }}
+.est__l:nth-child(3) {{ margin-right: 14px; }}
+.est__leg {{ display: flex; gap: 40px; justify-content: center; }}
+.est__leg span {{ display: flex; flex-direction: column; align-items: center; font-size: 15px; font-weight: 800; color: #cfc9bc; }}
+.est__leg span.o {{ color: var(--amber); }}
+.est__leg small {{ font-size: 10.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); margin-top: 2px; }}
+.est__leg span.o small {{ color: var(--amber); }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -649,6 +672,8 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .leva__cta {{ max-width: 480px; margin: 40px auto 0; }}
 .casos-sec {{ border-top: 1px solid var(--line); }}
 {CASOS_CSS}
+/* 08/11 (cliente): os casos rolam, cada faixa para um lado, como na página de cadastro (faltava a animação) */
+@keyframes belt {{ to {{ transform: translateX(-50%); }} }}
 .casos__more {{ margin-top: 18px; text-align: center; font-size: 15px; color: var(--ink2); }}
 
 /* abertura: a maior oferta */
@@ -811,14 +836,14 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <p class="q2 rv d9-only">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p><p class="q2 rv after-only">E ainda por cima, você vai ganhar:</p>
       <div class="bon2">
         <div class="bon2__c rv d9-only">
-          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>normal</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div><p class="bon2__lmb">{LMB}</p></div>
+          <div class="bon2__vis bon2__vis--est"><p class="est__lmb">{LMB}</p><div class="est" aria-label="6 anos de LOMBADA"><i class="est__l" style="--c:#14523e;--h:78%"><b>1</b></i><i class="est__l" style="--c:#faab00;--h:92%"><b>2</b></i><i class="est__l" style="--c:#b5402e;--h:84%"><b>3</b></i><i class="est__l est__l--ouro" style="--h:96%"><b>4</b></i><i class="est__l est__l--ouro" style="--h:86%"><b>5</b></i><i class="est__l est__l--ouro" style="--h:100%"><b>6</b></i></div><div class="est__leg"><span>3 anos<small>normal</small></span><span class="o">+ 3 anos<small>só hoje</small></span></div></div>
           <div class="bon2__txt">
-          <h3>LOMBADA em dobro: 6 anos no lugar de 3.</h3>
-          <p>Hoje você recebe o dobro: 6 anos com o LOMBADA ao lado do seu livro, todo dia. Amanhã volta a ser 3.</p>
+          <h3>O LOMBADA em dobro: 6 anos.</h3>
+          <p>Só para quem entrar hoje. Amanhã volta a ser 3.</p>
                   </div>
         </div>
         <div class="bon2__c rv">
-          <div class="bon2__vis"><img src="assets/playbooks.webp" alt="Playbooks MTBB" width="475" height="592" loading="lazy" decoding="async"></div>
+          <div class="bon2__vis"><img src="../assets/playbooks-metodo-the-book-business.webp" alt="Os 3 Playbooks do Método The Book Business" width="640" height="562" loading="lazy" decoding="async"></div>
           <div class="bon2__txt">
           <h3>Playbooks MTBB físicos, entregues na sua casa.</h3>
           <p>A extensão prática do Método The&nbsp;Book&nbsp;Business, criada pela Dany, para organizar as estratégias e acompanhar a evolução do seu livro.</p>
