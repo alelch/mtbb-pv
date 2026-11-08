@@ -214,6 +214,13 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
   background: var(--green); color: #fff; text-decoration: none; cursor: pointer; font: 700 clamp(17px, 4.8vw, 22px)/1 "Poppins", sans-serif; letter-spacing: .01em; text-transform: uppercase;
   box-shadow: 0 18px 40px -18px rgba(30, 187, 0, .9); transition: transform .15s, filter .2s; }}
 .btn:hover {{ filter: brightness(1.07); transform: translateY(-2px); }}
+/* 08/11 (cliente): botão com a presença do Aniversário (verde vivo, mais alto, brilho) e barra fixa do celular sólida */
+.btn {{ min-height: 70px; background: #26c03d; font-weight: 800; letter-spacing: .02em; box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset, 0 10px 30px -6px rgba(38,192,61,.65), 0 0 46px -10px rgba(38,192,61,.8); }}
+.btn:hover {{ background: #2fd14a; }}
+.dock {{ background: #0b0a08 !important; border-top: 1px solid rgba(250,171,0,.25); box-shadow: 0 -14px 30px rgba(0,0,0,.6); padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important; }}
+.dock .btn {{ min-height: 62px !important; font-size: clamp(17px, 4.9vw, 21px); }}
+.dock.on ~ .zap {{ bottom: calc(96px + env(safe-area-inset-bottom)) !important; width: 52px; height: 52px; }}
+
 .btn svg {{ flex: none; width: 26px; height: 20px; }}
 .fine {{ margin-top: 12px; font-size: 13px; color: var(--ink2); text-align: center; }}
 
@@ -566,6 +573,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 @media (max-width: 719px) {{ .bill__row--lmb .testar--sm {{ display: none; }} }}
 .lmbc .testar {{ color: #1a1a1a; background: #faab00; box-shadow: none; }}
 .lmbc .testar:hover {{ background: #ffbb2e; }}
+/* 08/11 (cliente): bônus sem os selos "Bônus 1/2"; no lugar das lombadas soltas, a marca do LOMBADA */
+.bon2__lmb {{ margin: 26px 0 0; font-size: clamp(34px, 9vw, 52px); font-weight: 900; line-height: 1; color: #fff; text-align: center; }}
+.bon2__lmb .lmb {{ color: #fff; }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -801,9 +811,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <p class="q2 rv d9-only">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p><p class="q2 rv after-only">E ainda por cima, você vai ganhar:</p>
       <div class="bon2">
         <div class="bon2__c rv d9-only">
-          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>normal</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div>{SPINES}</div>
+          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>normal</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div><p class="bon2__lmb">{LMB}</p></div>
           <div class="bon2__txt">
-          <span class="lv__k">Bônus 1</span>
           <h3>LOMBADA em dobro: 6 anos no lugar de 3.</h3>
           <p>Hoje você recebe o dobro: 6 anos com o LOMBADA ao lado do seu livro, todo dia. Amanhã volta a ser 3.</p>
                   </div>
@@ -811,7 +820,6 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <div class="bon2__c rv">
           <div class="bon2__vis"><img src="assets/playbooks.webp" alt="Playbooks MTBB" width="475" height="592" loading="lazy" decoding="async"></div>
           <div class="bon2__txt">
-          <span class="lv__k"><span class="d9-only">Bônus 2</span><span class="after-only">Bônus</span></span>
           <h3>Playbooks MTBB físicos, entregues na sua casa.</h3>
           <p>A extensão prática do Método The&nbsp;Book&nbsp;Business, criada pela Dany, para organizar as estratégias e acompanhar a evolução do seu livro.</p>
                   </div>
