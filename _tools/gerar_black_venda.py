@@ -1416,6 +1416,8 @@ for slug, v in VARIANTES.items():
       '.ca .tk{flex:none;width:128px;box-sizing:border-box;padding:12px 6px;border-radius:10px;background:linear-gradient(125deg,#ffe39a,#faab00 65%,#c97a00);color:#1d1406;text-align:center;border:2px dashed rgba(29,20,6,.35)}'
       '.ca .tk small{display:block;font:700 8.5px/1.15 Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase}.ca .tk b{display:block;font:900 italic 25px/1.05 "Montserrat",sans-serif;letter-spacing:-.03em;margin-top:4px;color:#1d1406}'
       '.ca p{margin:0;font:500 14px/1.4 Poppins,sans-serif;color:#cfc9bc}.ca p strong{display:block;color:#fff;font-size:16px;margin-bottom:3px}.ca p u{color:#faab00;font-weight:700;text-decoration:none}'
+      '.cbk{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:4px 10px;margin:14px auto 2px;font-family:Poppins,sans-serif}'
+      '.cbk__a{font-size:22px;font-weight:700;color:#fff}.cbk__m{font-size:22px;font-weight:800;color:#3ddc57}.cbk__t{flex-basis:100%;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3ddc57;text-align:center}'
       'body.trava .ca .cp-u,body:not(.trava) .ca .cp-l{display:none}body:not(.trava) .ca .cp-u{color:#3ddc57}body:not(.trava) .ca{cursor:default}'
       '</style>')
     # 08/11 (cliente escolheu a versão 8A): bloco escuro com o selo dourado do cashback, logo abaixo da trilha (sai a dupla de checks)
@@ -1447,6 +1449,11 @@ for slug, v in VARIANTES.items():
       'r.innerHTML="Não encontramos uma compra do Método The Book Business com esse dado. Tente o e-mail ou o CPF da compra, ou <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">fale com a equipe</a>."'
       '}).catch(function(){bt.disabled=false;r.innerHTML="Não consegui conferir agora. <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">Fale com a equipe</a>."})})})();</script>') % (_meu, _outro)
     P = P.replace('</head>', GATE_CSS + '</head>', 1)
+    # 08/11 (cliente): mostrar que o preço é R$2.500 menos o cashback
+    _cb = '1.500' if _meu == 'aluno' else '2.000'
+    CONTA_CB = ('<p class="cbk"><span class="cbk__a">R$ 2.500</span><span class="cbk__m">&minus; R$ %s</span>'
+                '<span class="cbk__t">de cashback de %s</span></p>') % (_cb, 'aluno' if _meu == 'aluno' else 'vitalício')
+    P = P.replace('<p class="price__big"><small>só</small>', CONTA_CB + '<p class="price__big"><small>você paga</small>')
     P = P.replace('<p class="price__cash">à vista ou parcelado no cartão</p>', '<p class="price__cash">à vista ou parcelado no cartão</p>' + GATE_BOX)   # 08/11: preço sempre visível; a verificação fica no botão
     P = re.sub(r'<div class="hk2">.*?</div>', CUPOM, P, count=1, flags=re.S)
     assert P.count('class="ca"') == 1 and 'class="hk2"' not in P, slug
