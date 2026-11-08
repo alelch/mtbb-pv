@@ -911,8 +911,8 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap center">
       <div class="rv">
         <p class="kick">E tem mais</p>
-        <h2 class="h2">Até <span class="gold">R$ 6.700</span> em cupons de desconto com parceiros.</h2>
-        <p class="cups__l">Se você vai imprimir, publicar ou divulgar o seu livro, a Black já se paga.</p>
+        <h2 class="h2">A Black que <span class="gold">já se paga.</span></h2>
+        <p class="cups__l">Até <b>R$ 6.700 em cupons</b> para imprimir, publicar e divulgar o seu livro.</p>
       </div>
       <div class="cupg">{CUPONS}</div>
       <p class="cups__fine rv">Cupons intransferíveis, de uso único, só para novos projetos e não cumulativos. Resgate com o e-mail de compra.</p>
