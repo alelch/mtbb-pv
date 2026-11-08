@@ -1336,8 +1336,9 @@ PRE_BLOCK = r'''
 .pre-m{position:fixed;inset:0;z-index:95;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,0,0,.8)}
 .pre-m.on{display:flex}
 .pre-c{position:relative;width:100%;max-width:430px;max-height:calc(100vh - 28px);overflow:auto;padding:26px 20px 20px;border-radius:16px;background:#0b0a08;box-shadow:0 0 0 1px rgba(250,171,0,.45),0 0 40px rgba(250,171,0,.25);text-align:center;font-family:Poppins,sans-serif}
-.pre-c h3{margin:0 0 6px;font-size:23px;font-weight:800;color:#fff}
-.pre-c .pre-s{margin:0 0 16px;font-size:14px;line-height:1.5;color:#cfc9bc}
+.pre-logo{display:flex;justify-content:center;margin:2px 0 14px}.pre-logo .bwlogo{font-size:30px;animation:none}
+.pre-ok{margin:14px 0 0;font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#e8e2d4}
+.pre-c .pre-s{margin:0 0 16px;font-size:14px;line-height:1.5;color:#cfc9bc}.pre-c .pre-s b{color:#fff}
 .pre-c form{display:grid;gap:10px;text-align:left}
 .pre-c input,.pre-c select{width:100%;box-sizing:border-box;height:52px;padding:0 14px;border-radius:10px;border:1.5px solid rgba(250,171,0,.5);background:#000;color:#fff;font:500 16px Poppins,sans-serif}
 .pre-c input::placeholder{color:#7d776c}
@@ -1352,23 +1353,24 @@ PRE_BLOCK = r'''
 </style>
 <div class="pre-m" id="pre" data-pag="geral" role="dialog" aria-modal="true" aria-labelledby="pre-t"><div class="pre-c">
 <button class="pre-x" type="button" aria-label="Fechar" data-prex>&times;</button>
-<h3 id="pre-t">Falta pouco</h3>
-<p class="pre-s" data-pre-s>Preencha para ir ao pagamento. Se você é aluno do Método The&nbsp;Book&nbsp;Business, o seu cashback entra sozinho.</p>
+<div class="pre-logo" id="pre-t" aria-label="Black Week Motorizada">@@BWLOGO@@</div>
+<p class="pre-s" data-pre-s><b>Complete os seus dados</b> para prosseguir com sua compra e ser direcionado para a página de pagamento.</p>
 <form id="pref" novalidate>
-<input name="nome" type="text" autocomplete="name" placeholder="Seu nome" aria-label="Nome">
-<input name="email" type="email" autocomplete="email" inputmode="email" placeholder="Seu e-mail" aria-label="E-mail">
-<input name="cpf" type="text" inputmode="numeric" maxlength="14" placeholder="Seu CPF" aria-label="CPF">
+<input name="nome" type="text" autocomplete="name" placeholder="Nome completo *" aria-label="Nome completo">
+<input name="email" type="email" autocomplete="email" inputmode="email" placeholder="Insira seu melhor e-mail *" aria-label="E-mail">
+<input name="cpf" type="text" inputmode="numeric" maxlength="14" placeholder="Insira seu CPF *" aria-label="CPF">
 <div class="pre-tel"><select name="ddi" aria-label="País"><option value="55" selected>🇧🇷 +55</option><option value="351">🇵🇹 +351</option><option value="1">🇺🇸 +1</option><option value="81">🇯🇵 +81</option><option value="44">🇬🇧 +44</option><option value="34">🇪🇸 +34</option><option value="39">🇮🇹 +39</option><option value="33">🇫🇷 +33</option><option value="49">🇩🇪 +49</option><option value="41">🇨🇭 +41</option><option value="54">🇦🇷 +54</option><option value="56">🇨🇱 +56</option><option value="52">🇲🇽 +52</option><option value="244">🇦🇴 +244</option><option value="258">🇲🇿 +258</option></select>
-<input name="tel" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="16" placeholder="WhatsApp com DDD" aria-label="WhatsApp"></div>
-<button class="btn" type="submit">Ir para o pagamento</button>
+<input name="tel" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="16" placeholder="WhatsApp com DDD *" aria-label="WhatsApp"></div>
+<button class="btn" type="submit">Prosseguir</button>
 </form>
 <div class="pre-r" id="prer" role="alert"></div>
+<p class="pre-ok">&#128274; Seus dados estão seguros</p>
 <p class="pre-l">Ao continuar, você concorda com a <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
 </div></div>
 <script>(function(){
 var m=document.getElementById('pre'),f=document.getElementById('pref'),r=document.getElementById('prer'),bt=f.querySelector('button'),PAG=m.getAttribute('data-pag');
 var PATH={geral:'/oferta-black26',aluno:'/oferta-black-alunos',vitalicio:'/oferta-black-vitalicio'},ZAP='https://thebookbusiness.com.br/dezza';
-if(PAG!=='geral'){var s=m.querySelector('[data-pre-s]');if(s)s.textContent='Use os mesmos dados da sua compra do Método The Book Business para ativar o seu cashback.';}
+if(PAG!=='geral'){var s=m.querySelector('[data-pre-s]');if(s)s.innerHTML='<b>Complete com os dados da sua compra</b> do Método The Book Business para ativar o seu cashback e prosseguir para o pagamento.';}
 function dig(v){return String(v||'').replace(/\D/g,'')}
 function mCpf(v){v=dig(v).slice(0,11);return v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2')}
 function mTel(v){v=dig(v).slice(0,11);if(v.length>6)return v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/,'($1) $2-$3');if(v.length>2)return v.replace(/^(\d{2})(\d{0,5}).*/,'($1) $2');return v}
@@ -1380,12 +1382,12 @@ function destino(qual){var u=base();u.pathname=PATH[qual];u.hash='';var n=f.nome
  if(t){if(d==='55'&&t.length>=10){u.searchParams.set('phoneac',t.slice(0,2));u.searchParams.set('phonenumber',t.slice(2))}else{u.searchParams.set('phonenumber',d+t)}}
  return u.toString()}
 function vai(qual){location.href=destino(qual)}
-function abre(e){var a=e.target.closest&&e.target.closest('[data-cta]');if(!a)return;e.preventDefault();e.stopPropagation();r.textContent='';bt.disabled=false;bt.textContent='Ir para o pagamento';m.classList.add('on');setTimeout(function(){f.nome.focus()},60)}
+function abre(e){var a=e.target.closest&&e.target.closest('[data-cta]');if(!a)return;e.preventDefault();e.stopPropagation();r.textContent='';bt.disabled=false;bt.textContent='Prosseguir';m.classList.add('on');setTimeout(function(){f.nome.focus()},60)}
 document.addEventListener('click',abre,true);
 m.querySelector('[data-prex]').addEventListener('click',function(){m.classList.remove('on')});
 m.addEventListener('click',function(e){if(e.target===m)m.classList.remove('on')});
-window.addEventListener('pageshow',function(){m.classList.remove('on');bt.disabled=false;bt.textContent='Ir para o pagamento';r.textContent=''});
-function falhou(cat){bt.disabled=false;bt.textContent='Ir para o pagamento';
+window.addEventListener('pageshow',function(){m.classList.remove('on');bt.disabled=false;bt.textContent='Prosseguir';r.textContent=''});
+function falhou(cat){bt.disabled=false;bt.textContent='Prosseguir';
  if(cat==='ja_comprou'){r.innerHTML='Você já está na Black Week Motorizada. Qualquer dúvida, <a href="'+ZAP+'" target="_blank">fale com a equipe</a>.';return}
  var msg=cat==='erro'?'Não consegui conferir a sua compra agora.':cat==='limite'?'Muitas tentativas seguidas.':'Não encontramos uma compra do Método The Book Business com esses dados. Confira o CPF e o e-mail da compra.';
  r.innerHTML=msg+' <a href="'+ZAP+'" target="_blank">Fale com a equipe</a>.<a class="pre-seg" href="'+destino('geral')+'">Seguir com o preço normal</a>'}
@@ -1405,7 +1407,7 @@ f.addEventListener('submit',function(e){e.preventDefault();r.textContent='';
   falhou(c==='limite'||c==='erro'?c:'nao');})});
 })();</script>
 '''
-HTML = HTML.replace('</main>', '</main>' + PRE_BLOCK, 1)
+HTML = HTML.replace('</main>', '</main>' + PRE_BLOCK.replace('@@BWLOGO@@', BWLOGO), 1)
 open(f"{R}/ae8a9e17e350/index.html", "w", encoding="utf-8").write(HTML)
 print("ok", len(HTML))
 
