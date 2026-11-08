@@ -1412,13 +1412,17 @@ for slug, v in VARIANTES.items():
       'body:not(.trava) .cpm .c-stamp{border-color:#0f7a1f;color:#0f7a1f;background:rgba(220,255,214,.75)}'
       'body.trava .cpm .cp-u,body:not(.trava) .cpm .cp-l{display:none}body.trava .cpm{cursor:pointer}.h .cpm{margin:26px auto 4px}'
       '@media (prefers-reduced-motion:reduce){.cpm .c-top::after{animation:none}}'
+      '.ca{max-width:440px;margin:22px auto 0;padding:16px;border-radius:16px;background:#0d0b08;box-shadow:inset 0 0 0 1px rgba(250,171,0,.45);display:flex;gap:14px;align-items:center;text-align:left;cursor:pointer}'
+      '.ca .tk{flex:none;width:128px;box-sizing:border-box;padding:12px 6px;border-radius:10px;background:linear-gradient(125deg,#ffe39a,#faab00 65%,#c97a00);color:#1d1406;text-align:center;border:2px dashed rgba(29,20,6,.35)}'
+      '.ca .tk small{display:block;font:700 8.5px/1.15 Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase}.ca .tk b{display:block;font:900 italic 25px/1.05 "Montserrat",sans-serif;letter-spacing:-.03em;margin-top:4px;color:#1d1406}'
+      '.ca p{margin:0;font:500 14px/1.4 Poppins,sans-serif;color:#cfc9bc}.ca p strong{display:block;color:#fff;font-size:16px;margin-bottom:3px}.ca p u{color:#faab00;font-weight:700;text-decoration:none}'
+      'body.trava .ca .cp-u,body:not(.trava) .ca .cp-l{display:none}body:not(.trava) .ca .cp-u{color:#3ddc57}body:not(.trava) .ca{cursor:default}'
       '</style>')
-    _cp = {'aluno': ('Cashback de aluno', 'R$1.500', 'de cashback na oferta da Black Week Motorizada', 'Aluno'),
-           'vitalicio': ('Cashback de aluno vitalício', 'R$2.000', 'de cashback na oferta da Black Week Motorizada', 'Vitalício')}[_meu]
-    CUPOM = ('<div class="cpm" data-trv aria-label="Cashback de %s"><div class="c-top"><div class="c-eyebrow">%s</div><p class="c-valor">%s</p><p class="c-oferta">%s</p>'
-             '<img class="c-dany" src="../black-week/assets/dany-bw-m.webp" alt="" width="408" height="378" decoding="async"></div>'
-             '<div class="c-bot"><b class="cp-l">Ative com o CPF da sua compra &rsaquo;</b><b class="cp-u">Cashback aplicado no seu preço</b>'
-             '<span class="c-stamp"><span class="cp-l">%s</span><span class="cp-u">Ativado</span></span></div></div>') % (_cp[1], _cp[0], _cp[1], _cp[2], _cp[3])
+    # 08/11 (cliente escolheu a versão 8A): bloco escuro com o selo dourado do cashback, logo abaixo da trilha (sai a dupla de checks)
+    _cp = {'aluno': ('Cashback de aluno', 'R$1.500', 'Você é aluno, tem cashback.'),
+           'vitalicio': ('Cashback de vitalício', 'R$2.000', 'Você é vitalício, tem cashback.')}[_meu]
+    CUPOM = ('<div class="ca" data-trv aria-label="%s de %s"><div class="tk"><small>%s</small><b>%s</b></div>'
+             '<p><strong>%s</strong>%s de cashback na oferta da Black. <u class="cp-l">Ativar com o CPF &rsaquo;</u><u class="cp-u">Ativado no seu preço &check;</u></p></div>') % (_cp[0], _cp[1], _cp[0], _cp[1], _cp[2], _cp[1])
     GATE_BOX = '<div class="trv"><b>Ative o seu cashback</b><p>Confirme com o CPF, o e-mail ou o celular da sua compra.</p><a class="btn" href="#" data-trv>Ativar e ver o meu preço</a></div>'
     GATE_HTML = ('<div class="trv-m" id="trv"><div class="trv-c"><button class="trv-x" type="button" aria-label="Fechar" data-trvx>&times;</button>'
       '<h3>Confirme que você é aluno</h3><p>Digite o CPF, o e-mail ou o celular que você usou na compra do Método The&nbsp;Book&nbsp;Business.</p>'
@@ -1443,8 +1447,8 @@ for slug, v in VARIANTES.items():
       '}).catch(function(){bt.disabled=false;r.innerHTML="Não consegui conferir agora. <a href=\\"https://thebookbusiness.com.br/dezza\\" target=\\"_blank\\">Fale com a equipe</a>."})})})();</script>') % (_meu, _outro)
     P = P.replace('</head>', GATE_CSS + '</head>', 1)
     P = P.replace('<p class="price__big">', GATE_BOX + '<p class="price__big">')
-    P = P.replace('<div class="hk2">', CUPOM + '<div class="hk2">', 1)   # 08/11 (cliente): cupom no topo, logo abaixo da trilha
-    assert P.count('class="cpm"') == 1, slug
+    P = re.sub(r'<div class="hk2">.*?</div>', CUPOM, P, count=1, flags=re.S)
+    assert P.count('class="ca"') == 1 and 'class="hk2"' not in P, slug
     P = P.replace('</main>', '</main>' + GATE_HTML + GATE_JS, 1)
     assert P.count('class="trv"') >= 2, slug
     os.makedirs(f"{R}/{slug}", exist_ok=True)
