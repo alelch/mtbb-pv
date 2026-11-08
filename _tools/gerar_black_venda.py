@@ -547,6 +547,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .h .h__sub > b {{ align-self: flex-start; line-height: 1; margin-top: .2em; }}
 .h .h__col .h__tag {{ margin-top: 8px; }}
 @media (max-width: 719px) {{ .h h1.h__t .h__sub {{ font-size: clamp(32px, 9.4vw, 40px); }} }}
+/* 08/11 (cliente): bandeirinha diagonal "Novo" no LOMBADA do topo */
+.h__col {{ position: relative; }}
+.novo-h {{ position: absolute; top: -.78em; right: -.7em; transform: rotate(12deg); font-style: normal; font-size: clamp(10px, 2.6vw, 14px); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; padding: .45em .8em .38em; background: #d62f24; color: #fff; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,.45); z-index: 2; }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -571,7 +574,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .bill__row--lmb span .lmb {{ color: var(--ink); font-size: 1.05em; }}
 .bill__row--lmb b {{ color: var(--amber) !important; font-weight: 700; }}
 .bill__row--lmb > span {{ display: inline-flex; align-items: center; gap: 10px; }}
-.novo {{ display: inline-block; font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; line-height: 1; padding: 5px 8px 4px; border-radius: 4px; background: #d62f24; color: #fff; }}
+.bill__row--lmb {{ position: relative; overflow: hidden; margin: 0 -20px; padding-left: 20px !important; padding-right: 20px !important; background: linear-gradient(90deg, rgba(250,171,0,.07), rgba(250,171,0,0) 70%); }}
+.novo {{ position: absolute; top: 9px; left: -30px; width: 104px; transform: rotate(-45deg); font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; padding: 4px 0 3px; text-align: center; background: #d62f24; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.4); }}
+.bill__row--lmb > span {{ padding-left: 26px; }}
 .price {{ margin-top: 64px; }}
 .price__big {{ margin-top: 14px; line-height: 1; }}
 .price__big small {{ display: block; font-size: 18px; font-weight: 500; color: var(--ink2); }}
@@ -730,7 +735,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap h__in">
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
-      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> <span class="h__col">{LMB}<span class="h__tag">Seu livro, em movimento todo dia.</span></span></span></h1>
+      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> <span class="h__col"><i class="novo-h">Novo</i>{LMB}<span class="h__tag">Seu livro, em movimento todo dia.</span></span></span></h1>
       <p class="trilha"><span class="l1"><span>Construa autoridade <i>›</i></span> <span>Seja lido de verdade <i>›</i></span></span> <span class="l2"><span>Gere impacto real <i>›</i></span> <span>Para sempre</span></span></p>
       <div class="hk2">
         <p>{CK}<span><b class="amber">Acesso vitalício</b> a toda a estratégia que já transformou milhares de autores em referência.</span></p>
@@ -742,7 +747,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="q1">Para ter acesso <u>por um ano</u>, você <u>precisaria</u> investir:</p>
         <div class="bill">
           {BILL}
-          <div class="bill__row bill__row--lmb"><span>{LMB}<i class="novo">Novo</i></span><b>R$ 2.000,00</b></div>
+          <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>R$ 2.000,00</b><i class="novo">Novo</i></div>
           <div class="bill__tot"><span>Total</span><b>R$ 9.485,00</b></div>
         </div>
       </div>
