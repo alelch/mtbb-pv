@@ -885,7 +885,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="price__de">De <s><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
-        <div class="cta price__cta">{CTA}<p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p><p class="aluno-lk">É aluno do Método The&nbsp;Book&nbsp;Business? <a href="https://thebookbusiness.com.br/dezza" target="_blank" rel="noopener">Fale com a equipe</a></p></div>
+        <div class="cta price__cta">{CTA}<p class="aluno-lk">É aluno do Método The&nbsp;Book&nbsp;Business? <a href="https://thebookbusiness.com.br/dezza" target="_blank" rel="noopener">Fale com a equipe</a></p></div>
       </div>
     </div>
   </section>
@@ -1123,7 +1123,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <p class="end__b">O Método The&nbsp;Book&nbsp;Business, pra sempre. E o LOMBADA ao lado do seu livro, todo dia.</p>
       <div class="end__price"><p class="price__big"><small>12x de</small><span>R$ 249,51</span></p><p class="price__cash">ou R$ 2.500 à vista</p></div>
       <div class="card__clock d9-only"><p>O <b>dobro de acesso ao LOMBADA</b> termina à meia-noite.</p>{CLOCK}</div>
-      <div class="cta">{CTA}<p class="fine">Garantia de 15 dias. Não gostou, devolvemos tudo.</p></div>
+      <div class="cta">{CTA}</div>
     </div>
   </section>
 </main>
