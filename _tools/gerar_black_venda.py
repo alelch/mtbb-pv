@@ -87,8 +87,8 @@ _CUP = [("Gráfica Renograf", "Impressão do seu livro", "até R$ 1.200", "Desco
         ("Jimenes Comunicação", "Assessoria de imprensa", "R$ 2.000", "Projeto semestral. Válido por 24 meses."),
         ("Editora Labrador", "Publicação do seu livro solo", "R$ 1.000", "Válido por 12 meses."),
         ("Editora Literare", "Publicação do seu livro solo", "R$ 2.000", "Válido por 12 meses.")]
-# 08/11 (cliente): fornecedor pequeno em cima, tipo de serviço em destaque
-CUPONS = "".join(f'<div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>{v}</b></div><div class="cup__t"><span>{n}</span><h3>{q}</h3><p>{d}</p></div></div>' for n, q, v, d in _CUP)
+# 08/11 (cliente): tipo de serviço em destaque em cima, fornecedor pequeno embaixo
+CUPONS = "".join(f'<div class="cup rv"><div class="cup__v"><small>Cupom de</small><b>{v}</b></div><div class="cup__t"><h3>{q}</h3><span>{n}</span><p>{d}</p></div></div>' for n, q, v, d in _CUP)
 
 # 01/11 (cliente: "a parte do test drive da primeira versão era legal, só a parte do LOMBADA volta"):
 # test drive + oportunidades + ideias de post da black-week/ voltam como estavam (markup, CSS e JS próprios)
@@ -391,9 +391,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .cup__v {{ display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 8px; border-right: 2px dashed #cbbf9f; border-radius: 14px 0 0 14px; background: var(--gold); text-align: center; }}
 .cup__v small {{ font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #3a2200; }}
 .cup__v b {{ margin-top: 4px; font-size: 20px; font-weight: 800; line-height: 1.05; color: #111; }}
-.cup__t {{ padding: 14px 16px; }}
-.cup__t span {{ font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8a5a00; }}
-.cup__t h3 {{ margin-top: 4px; font-size: 17px; font-weight: 800; line-height: 1.2; }}
+.cup__t {{ display: flex; flex-direction: column; justify-content: center; padding: 14px 16px; }}
+.cup__t span {{ display: block; margin-top: 3px; font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8a5a00; }}
+.cup__t h3 {{ margin-top: 0; font-size: 17px; font-weight: 800; line-height: 1.2; }}
 .cup__t p {{ margin-top: 4px; font-size: 13px; line-height: 1.4; color: #5c574e; }}
 .cups__fine {{ margin: 18px auto 0; max-width: 640px; font-size: 12px; line-height: 1.5; color: var(--ink3); }}
 
