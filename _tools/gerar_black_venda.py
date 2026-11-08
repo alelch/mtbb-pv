@@ -549,7 +549,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 @media (max-width: 719px) {{ .h h1.h__t .h__sub {{ font-size: clamp(32px, 9.4vw, 40px); }} }}
 /* 08/11 (cliente): bandeirinha diagonal "Novo" no LOMBADA do topo */
 .h__col {{ position: relative; }}
-.novo-h {{ position: absolute; top: -.78em; right: -.7em; transform: rotate(12deg); font-style: normal; font-size: clamp(10px, 2.6vw, 14px); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; padding: .45em .8em .38em; background: #d62f24; color: #fff; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,.45); z-index: 2; }}
+.novo-h {{ position: absolute; top: -1.45em; right: -1.15em; transform: rotate(9deg); font-style: normal; font-size: clamp(10px, 2.6vw, 14px); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; padding: .45em .8em .38em; background: #d62f24; color: #fff; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,.45); z-index: 2; }}
 /* 08/11 (cliente): atalho discreto para a demonstração */
 .h__ver {{ display: inline-block; margin-top: 18px; font-size: clamp(13px, 3.5vw, 15px); font-weight: 600; color: var(--amber); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(250,171,0,.45); }}
 .h__ver:hover {{ text-decoration-color: var(--amber); }}
@@ -578,8 +578,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .bill__row--lmb b {{ color: var(--amber) !important; font-weight: 700; }}
 .bill__row--lmb > span {{ display: inline-flex; align-items: center; gap: 10px; }}
 .bill__row--lmb {{ position: relative; overflow: hidden; margin: 0 -20px; padding-left: 20px !important; padding-right: 20px !important; background: linear-gradient(90deg, rgba(250,171,0,.07), rgba(250,171,0,0) 70%); }}
-.novo {{ position: absolute; top: 9px; left: -30px; width: 104px; transform: rotate(-45deg); font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; line-height: 1; padding: 4px 0 3px; text-align: center; background: #d62f24; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.4); }}
-.bill__row--lmb > span {{ padding-left: 26px; }}
+.novo {{ position: absolute; top: 22px; left: -34px; width: 150px; transform: rotate(-45deg); font-style: normal; font-size: 8.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; line-height: 1; padding: 5px 0 4px; text-align: center; background: #d62f24; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.4); }}
+.bill__row--lmb {{ min-height: 64px; align-items: center; }}
+.bill__row--lmb > span {{ padding-left: 40px; }}
 .price {{ margin-top: 64px; }}
 .price__big {{ margin-top: 14px; line-height: 1; }}
 .price__big small {{ display: block; font-size: 18px; font-weight: 500; color: var(--ink2); }}
@@ -738,7 +739,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     <div class="wrap h__in">
       {BWLOGO}
       <p class="kick h__kick">Inscrições liberadas</p>
-      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> <span class="h__col"><i class="novo-h">Novo</i>{LMB}<span class="h__tag">Seu livro, em movimento todo dia.</span></span></span></h1>
+      <h1 class="h__t"><span class="h__big gold">A maior oferta de todos os tempos</span><span class="h__sub"><b>+</b> <span class="h__col"><i class="novo-h">Lançamento</i>{LMB}<span class="h__tag">Seu livro, em movimento todo dia.</span></span></span></h1>
       <a class="h__ver" href="#ferramenta">Ver o LOMBADA funcionando <span aria-hidden="true">↓</span></a>
       <p class="trilha"><span class="l1"><span>Construa autoridade <i>›</i></span> <span>Seja lido de verdade <i>›</i></span></span> <span class="l2"><span>Gere impacto real <i>›</i></span> <span>Para sempre</span></span></p>
       <div class="hk2">
@@ -751,7 +752,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="q1">Para ter acesso <u>por um ano</u>, você <u>precisaria</u> investir:</p>
         <div class="bill">
           {BILL}
-          <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>R$ 2.000,00</b><i class="novo">Novo</i></div>
+          <div class="bill__row bill__row--lmb"><span>{LMB}</span><b>R$ 2.000,00</b><i class="novo">Lançamento</i></div>
           <div class="bill__tot"><span>Total</span><b>R$ 9.485,00</b></div>
         </div>
       </div>
