@@ -1413,9 +1413,9 @@ for slug, v in VARIANTES.items():
       'body.trava .cpm .cp-u,body:not(.trava) .cpm .cp-l{display:none}body.trava .cpm{cursor:pointer}.h .cpm{margin:26px auto 4px}'
       '@media (prefers-reduced-motion:reduce){.cpm .c-top::after{animation:none}}'
       '</style>')
-    _cp = {'aluno': ('Cupom de aluno', 'R$1.500', 'de cashback na oferta da Black Week Motorizada', 'Aluno'),
-           'vitalicio': ('Cupom de aluno vitalício', 'R$2.000', 'de cashback na oferta da Black Week Motorizada', 'Vitalício')}[_meu]
-    CUPOM = ('<div class="cpm" data-trv aria-label="Cupom de %s de cashback"><div class="c-top"><div class="c-eyebrow">%s</div><p class="c-valor">%s</p><p class="c-oferta">%s</p>'
+    _cp = {'aluno': ('Cashback de aluno', 'R$1.500', 'de cashback na oferta da Black Week Motorizada', 'Aluno'),
+           'vitalicio': ('Cashback de aluno vitalício', 'R$2.000', 'de cashback na oferta da Black Week Motorizada', 'Vitalício')}[_meu]
+    CUPOM = ('<div class="cpm" data-trv aria-label="Cashback de %s"><div class="c-top"><div class="c-eyebrow">%s</div><p class="c-valor">%s</p><p class="c-oferta">%s</p>'
              '<img class="c-dany" src="../black-week/assets/dany-bw-m.webp" alt="" width="408" height="378" decoding="async"></div>'
              '<div class="c-bot"><b class="cp-l">Ative com o CPF da sua compra &rsaquo;</b><b class="cp-u">Cashback aplicado no seu preço</b>'
              '<span class="c-stamp"><span class="cp-l">%s</span><span class="cp-u">Ativado</span></span></div></div>') % (_cp[1], _cp[0], _cp[1], _cp[2], _cp[3])
