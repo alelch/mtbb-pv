@@ -872,6 +872,102 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
   </section>
 </main>
 
+<!-- 08/11 (cliente): verificador de número da equipe (anti-golpe), mesma lista de verificar-numero-equipe/widget_rodape.html -->
+<section class="eqv-wrap" style="padding:0 16px">
+<div id="eqv-card">
+  <h2 class="eqv-title">Verifique o número do nosso time</h2>
+  <p class="eqv-sub">Preencha o campo abaixo com o número de whatsapp e valide se faz parte da nossa equipe.</p>
+
+  <div class="eqv-row">
+    <div class="eqv-inputwrap">
+      <span class="eqv-flag">🇧🇷 <span class="eqv-ddi">+55</span></span>
+      <input id="eqv-phone" type="tel" inputmode="tel" autocomplete="off"
+             placeholder="(00) 0 0000-0000" maxlength="16" />
+    </div>
+    <button id="eqv-btn" type="button">Verificar Número</button>
+  </div>
+
+  <div id="eqv-result" class="eqv-result" hidden></div>
+</div>
+
+</section>
+<style>
+  #eqv-card{ max-width:640px; margin:8px auto 36px; background:#121212; border:1px solid #2a2a2a; border-radius:20px; padding:32px 22px; text-align:center; font-family:inherit; box-sizing:border-box; }
+  .eqv-title{ font-size:24px; line-height:1.2; font-weight:800; color:#fff; margin:0 0 10px; }
+  .eqv-sub{ font-size:14.5px; color:#a8a399; margin:0 auto 22px; max-width:520px; line-height:1.5; }
+  .eqv-row{ display:flex; align-items:stretch; max-width:500px; margin:0 auto; background:#0a0a0a; border:1px solid #333; border-radius:999px; padding:6px; }
+  .eqv-inputwrap{ display:flex; align-items:center; flex:1; padding-left:14px; min-width:0; }
+  .eqv-flag{ font-size:14px; color:#8d887f; white-space:nowrap; margin-right:8px; }
+  #eqv-phone{ flex:1; border:0; outline:0; background:transparent; font:inherit; font-size:16px; font-weight:500; color:#fff; min-width:0; padding:10px 4px; }
+  #eqv-phone::placeholder{ color:#5c5850; }
+  #eqv-btn{ border:0; cursor:pointer; background:#1ebb00; color:#fff; font:inherit; font-weight:800; font-size:15px; padding:0 26px; border-radius:999px; white-space:nowrap; }
+  #eqv-btn:hover{ background:#19a300; }
+  .eqv-result{ margin:18px auto 0; max-width:520px; padding:14px 18px; border-radius:14px; font-size:17px; font-weight:700; line-height:1.4; }
+  .eqv-result.ok{ background:rgba(30,187,0,.14); color:#6fe35a; }
+  .eqv-result.no{ background:rgba(226,75,74,.14); color:#ff8a89; }
+  .eqv-result.neutral{ background:#1c1c1c; color:#a8a399; font-weight:500; font-size:15px; }
+  @media (max-width:600px){ .eqv-row{ flex-direction:column; border-radius:16px; gap:8px; padding:10px; } .eqv-inputwrap{ justify-content:center; padding:6px 4px; } #eqv-btn{ padding:14px; width:100%; } }
+</style>
+<script>
+(function () {
+  'use strict';
+  if (window.__eqvInit) return; window.__eqvInit = true;
+
+  /* ============ EQUIPE — editar só aqui pra atualizar ============ */
+  var EQUIPE = [
+    { num: '38 98848-7665', nome: 'Aira'    },
+    { num: '81 98637-0023', nome: 'Dezza'   },
+    { num: '11 92469-3585', nome: 'Natália' },
+    { num: '11 94083-3397', nome: 'Mariana' },
+    { num: '11 97829-5602', nome: 'Bianca'  },
+    { num: '11 91519-4847', nome: 'Time'    }
+  ];
+  /* ============================================================== */
+
+  function canon(p) {
+    var d = String(p || '').replace(/\D/g, '');
+    if (d.length < 10) return '';
+    if (d.length === 10 || d.length === 11) d = '55' + d;
+    if (d.length === 12 && '6789'.indexOf(d.charAt(4)) > -1) d = d.slice(0, 4) + '9' + d.slice(4);
+    return d;
+  }
+
+  var MAPA = {};
+  EQUIPE.forEach(function (e) { var c = canon(e.num); if (c) MAPA[c] = e.nome; });
+
+  var inp = document.getElementById('eqv-phone');
+  var btn = document.getElementById('eqv-btn');
+  var box = document.getElementById('eqv-result');
+  if (!inp || !btn || !box) return;
+
+  function digits(s) { return String(s || '').replace(/\D/g, ''); }
+
+  function mascara(v) {
+    v = digits(v);
+    if (v.indexOf('55') === 0 && v.length > 11) v = v.slice(2);
+    v = v.slice(0, 11);
+    if (v.length > 7)      v = v.replace(/^(\d{2})(\d{1})(\d{4})(\d{0,4}).*/, '($1) $2 $3-$4');
+    else if (v.length > 3) v = v.replace(/^(\d{2})(\d{1})(\d{0,4}).*/, '($1) $2 $3');
+    else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,1}).*/, '($1) $2');
+    else if (v.length > 0) v = v.replace(/^(\d{0,2}).*/, '($1');
+    return v;
+  }
+  inp.addEventListener('input', function () { inp.value = mascara(inp.value); });
+
+  function show(cls, text) { box.hidden = false; box.className = 'eqv-result ' + cls; box.textContent = text; }
+
+  function verificar() {
+    var c = canon(inp.value);
+    if (c === '') { show('neutral', 'Digite o número completo, com DDD.'); return; }
+    if (MAPA[c]) show('ok', '✓ Sim! Este número é da nossa equipe (' + MAPA[c] + ').');
+    else         show('no', 'Este número não faz parte do Time');
+  }
+
+  btn.addEventListener('click', verificar);
+  inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); verificar(); } });
+})();
+</script>
+
 <footer>
   <p>© 2026 The Book Business. Todos os direitos reservados.</p>
   <p><a href="https://thebookbusiness.com.br/contrato-vitalicio-26" target="_blank" rel="noopener">Termos da oferta</a> · <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a></p>
