@@ -1373,14 +1373,16 @@ for slug, v in VARIANTES.items():
     P = HTML.replace(AB_LONGA, '').replace(AB_TRACK, '')
     P = P.replace("var CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black26', depois: 'https://thebookbusiness.com.br/oferta-black26' }",
                   "var CHECKOUT = { d9: '%s', depois: '%s' }" % (v['checkout'], v['checkout']))
-    P = P.replace('<p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>', '<p class="price__big"><small>só</small><span>%s</span></p>' % v['preco'])
-    P = P.replace('<p class="price__cash">ou R$ 2.500 à vista</p>', '<p class="price__cash">à vista ou parcelado no cartão</p>')
+    # 08/11 (cliente): sempre parcela grande, à vista pequeno (12x R$99,80 / R$49,90, mesma conta da Hotmart de 12x R$249,51)
+    _parc = 'R$ 99,80' if v['preco'] == 'R$ 1.000' else 'R$ 49,90'
+    P = P.replace('<p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>', '<p class="price__big"><small>só</small><span>%s</span></p>' % _parc)
+    P = P.replace('<p class="price__cash">ou R$ 2.500 à vista</p>', '<p class="price__cash">ou %s à vista</p>' % v['preco'])
     P = P.replace('<p class="kick h__kick">Inscrições liberadas</p>', '<p class="kick h__kick">%s</p>' % v['kick'])
     P = re.sub(r'<p class="aluno-lk">.*?</p>', '', P)
     P = re.sub(r'<title>[^<]*</title>', '<title>%s</title>' % v['title'], P, count=1)
     P = (P.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
           .replace('https://metodo.thebookbusiness.com.br/ae8a9e17e350/"', 'https://metodo.thebookbusiness.com.br/%s/"' % slug))
-    assert 'bf26pg' not in P and 'oferta-black26' not in P.split('var CHECKOUT')[1][:300] and v['preco'] in P and '249,51' not in P and 'R$ 2.500 à vista' not in P, slug
+    assert 'bf26pg' not in P and 'oferta-black26' not in P.split('var CHECKOUT')[1][:300] and _parc in P and '249,51' not in P and 'R$ 2.500 à vista' not in P, slug
     # 08/11 (cliente): a página confere CPF, e-mail ou celular antes de mostrar o preço de aluno/vitalício (função bf26-conferir-publico)
     _outro = {'eda7d6898635': '/c966d3cc27f2/', 'c966d3cc27f2': '/eda7d6898635/'}[slug]
     _meu = 'aluno' if slug == 'eda7d6898635' else 'vitalicio'
@@ -1453,8 +1455,8 @@ for slug, v in VARIANTES.items():
     _cb = '1.500' if _meu == 'aluno' else '2.000'
     CONTA_CB = ('<p class="cbk"><span class="cbk__a">R$ 2.500</span><span class="cbk__m">&minus; R$ %s</span>'
                 '<span class="cbk__t">de cashback de %s</span></p>') % (_cb, 'aluno' if _meu == 'aluno' else 'vitalício')
-    P = P.replace('<p class="price__big"><small>só</small>', CONTA_CB + '<p class="price__big"><small>você paga</small>')
-    P = P.replace('<p class="price__cash">à vista ou parcelado no cartão</p>', '<p class="price__cash">à vista ou parcelado no cartão</p>' + GATE_BOX)   # 08/11: preço sempre visível; a verificação fica no botão
+    P = P.replace('<p class="price__big"><small>só</small>', CONTA_CB + '<p class="price__big"><small>você paga 12x de</small>')
+    P = re.sub(r'(<p class="price__cash">ou R\$ [\d.]+ à vista</p>)', lambda m: m.group(1) + GATE_BOX, P)   # 08/11: preço sempre visível; a verificação fica no botão
     P = re.sub(r'<div class="hk2">.*?</div>', CUPOM, P, count=1, flags=re.S)
     assert P.count('class="ca"') == 1 and 'class="hk2"' not in P, slug
     P = P.replace('</main>', '</main>' + GATE_HTML + GATE_JS, 1)
