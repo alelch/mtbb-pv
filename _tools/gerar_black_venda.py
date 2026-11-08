@@ -616,6 +616,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* 08/11 (cliente): texto de baixo dos bônus com respiro e hierarquia */
 .bon2__txt h3 {{ font-size: clamp(22px, 5.6vw, 30px) !important; line-height: 1.15 !important; letter-spacing: -.01em; }}
 .bon2__txt p {{ margin-top: 12px !important; font-size: clamp(15px, 3.9vw, 17px) !important; line-height: 1.55 !important; color: var(--ink2) !important; max-width: 30em; margin-left: auto; margin-right: auto; }}
+/* 08/11 (cliente): o resumo abre com o logo da Black, sem a frase */
+.resumo__logo {{ display: flex; justify-content: center; margin-bottom: 8px; }}
+.resumo__logo .bwlogo {{ font-size: clamp(38px, 10vw, 54px); }}
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha {{ margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }}
 .trilha span {{ white-space: nowrap; }} .trilha .l1, .trilha .l2 {{ display: block; }}
@@ -887,7 +890,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   <section class="sec resumo" id="oferta">
     <div class="wrap center">
       <div class="card rv">
-        <p class="q2">Tudo o que você leva na Black Week Motorizada:</p>
+        <div class="resumo__logo">{BWLOGO}</div>
         <ul class="card__list">
           <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos e workshops, <b>vitalícios</b></span></li>
           <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>

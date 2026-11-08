@@ -485,6 +485,9 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 /* 08/11 (cliente): texto de baixo dos bônus com respiro e hierarquia */
 .bon2__txt h3 { font-size: clamp(22px, 5.6vw, 30px) !important; line-height: 1.15 !important; letter-spacing: -.01em; }
 .bon2__txt p { margin-top: 12px !important; font-size: clamp(15px, 3.9vw, 17px) !important; line-height: 1.55 !important; color: var(--ink2) !important; max-width: 30em; margin-left: auto; margin-right: auto; }
+/* 08/11 (cliente): o resumo abre com o logo da Black, sem a frase */
+.resumo__logo { display: flex; justify-content: center; margin-bottom: 8px; }
+.resumo__logo .bwlogo { font-size: clamp(38px, 10vw, 54px); }
 /* 08/11 (cliente): a trilha do Aniversário abaixo do LOMBADA */
 .trilha { margin: 34px auto 0; font-size: clamp(9.5px, 2.7vw, 15px); font-weight: 700; letter-spacing: .1em; line-height: 2; text-transform: uppercase; color: #f4efe4; }
 .trilha span { white-space: nowrap; } .trilha .l1, .trilha .l2 { display: block; }
@@ -773,7 +776,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
   <section class="sec resumo" id="oferta">
     <div class="wrap center">
       <div class="card rv">
-        <p class="q2">Tudo o que você leva na Black Week Motorizada:</p>
+        <div class="resumo__logo"><div class="bwlogo" role="img" aria-label="Black Week Motorizada"><span class="r1">BLACK</span><span class="r2"><span class="w">WEEK</span><svg class="book" viewBox="0 0 126 122" aria-hidden="true"><g stroke-linejoin="round" stroke-linecap="round"><path class="lines" d="M12.0 42.7 L79.2 32.2 L79.2 39.8 L12.0 45.3 Z M4.0 58.7 L77.1 56.2 L77.1 63.8 L4.0 61.3 Z M12.0 74.7 L75.0 80.2 L75.0 87.8 L12.0 77.3 Z" fill="var(--bw-amber)" stroke="var(--bw-amber)" stroke-width="2" stroke-linejoin="round"/><path d="M30 29 L98 9" fill="none" stroke="var(--bw-amber)" stroke-width="9"/><path d="M20 92 L88 113" fill="none" stroke="var(--bw-amber)" stroke-width="9"/><path d="M78 15 L98 9 L89 113 L70 107 Z" fill="var(--bw-amber)" stroke="var(--bw-amber)" stroke-width="3"/><path d="M26 23 L100 3" fill="none" stroke="var(--bw-ink)" stroke-width="4.5"/><path d="M18 97 L88 118" fill="none" stroke="var(--bw-ink)" stroke-width="4.5"/><path d="M98 5 L122 9 L113 119 L88 115 Z" fill="var(--bw-page)" stroke="var(--bw-ink)" stroke-width="5.5"/><path d="M104 9 L95 116 M110 10 L101 117 M116 11 L107 118" fill="none" stroke="var(--bw-ink)" stroke-width="2.6"/></g></svg></span><span class="sub"><span class="t">MOTORIZADA</span></span></div></div>
         <ul class="card__list">
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Método The&nbsp;Book&nbsp;Business</b>, produtos e workshops, <b>vitalícios</b></span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
