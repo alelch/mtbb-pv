@@ -88,7 +88,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 .btn:hover { background: #2fd14a; }
 .dock { background: #0b0a08 !important; border-top: 1px solid rgba(250,171,0,.25); box-shadow: 0 -14px 30px rgba(0,0,0,.6); padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important; }
 .dock .btn { min-height: 62px !important; font-size: clamp(17px, 4.9vw, 21px); }
-.dock.on ~ .zap { bottom: calc(96px + env(safe-area-inset-bottom)) !important; width: 52px; height: 52px; }
+.dock.on ~ .zap { bottom: calc(94px + env(safe-area-inset-bottom)) !important; width: 46px; height: 46px; }
 
 .btn svg { flex: none; width: 26px; height: 20px; }
 .fine { margin-top: 12px; font-size: 13px; color: var(--ink2); text-align: center; }
@@ -695,8 +695,8 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
 .dock .btn { min-height: 56px; }
 @media (min-width: 900px) { .dock { display: none; } footer { padding-bottom: 40px; } }
 /* 02/11 (cliente): botão flutuante para falar com a Dezza no WhatsApp; sobe quando a barra de compra aparece */
-.zap { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 45; display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); transition: bottom .35s var(--ease); }
-.zap svg { width: 32px; height: 32px; }
+.zap { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 45; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: #25d366; color: #fff; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); transition: bottom .35s var(--ease); }
+.zap svg { width: 26px; height: 26px; }
 .dock.on ~ .zap { bottom: calc(92px + env(safe-area-inset-bottom)); }
 @media (min-width: 900px) { .zap, .dock.on ~ .zap { right: 28px; bottom: 28px; } }
 
