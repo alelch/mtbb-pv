@@ -420,8 +420,10 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .jn__in input:focus {{ box-shadow: 0 0 0 6px rgba(250, 171, 0, .2); }}
 /* 08/11 (cliente): deixar claro que a demonstração é interativa: carimbo, campo escrevendo sozinho e borda pulsando */
 .jn__in .jn__box {{ position: relative; display: block; margin: 0; letter-spacing: 0; text-transform: none; }}
-.jn__stamp {{ position: absolute; top: -17px; right: 4px; z-index: 2; transform: rotate(-6deg); padding: 6px 11px 5px; border: 2px dashed var(--amber); border-radius: 8px; background: #0d0b08; color: var(--amber); font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; line-height: 1; box-shadow: 0 0 18px rgba(250,171,0,.25); pointer-events: none; transition: opacity .3s; }}
+.jn__stamp {{ position: absolute; top: -17px; right: 4px; z-index: 2; transform: rotate(-6deg); padding: 6px 11px 5px; border: 2px dashed #1f5fd6; border-radius: 8px; background: #eaf1ff; color: #1f5fd6; font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; line-height: 1; box-shadow: 0 4px 14px rgba(0,0,0,.35); pointer-events: none; transition: opacity .3s; }}
 .jn__box.usou .jn__stamp {{ opacity: 0; }}
+.jn__app.tem-stamp {{ position: relative; overflow: visible; }}
+.jn__app .jn__stamp {{ top: -13px; right: 12px; }}
 .jn__in input.vivo {{ animation: jnpulse 1.6s ease-in-out infinite; }}
 @keyframes jnpulse {{ 0%, 100% {{ box-shadow: 0 0 0 6px rgba(250,171,0,.08); }} 50% {{ box-shadow: 0 0 0 10px rgba(250,171,0,.28), 0 0 30px rgba(250,171,0,.35); }} }}
 @media (prefers-reduced-motion: reduce) {{ .jn__in input.vivo {{ animation: none; }} }}
@@ -995,7 +997,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <p class="lmbh__mark">{LMB}</p>
         <div class="jn__vid" id="jn-vid"><vturb-smartplayer id="vid-6ae9e43f36e9cc736abb97c1" style="display:block;margin:0 auto;width:100%"></vturb-smartplayer></div>
         <h2 class="h2">Agora escreva o nome do seu livro. <span class="gold">E veja ele ir longe.</span></h2>
-        <label class="jn__in"><span>O nome do seu livro</span><span class="jn__box"><i class="jn__stamp" aria-hidden="true">&#9998; Experimente</i><input id="jn-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done"></span></label>
+        <label class="jn__in"><span>O nome do seu livro</span><span class="jn__box"><i class="jn__stamp" aria-hidden="true">&#9998; Interativo</i><input id="jn-livro" type="text" maxlength="48" placeholder="Ex.: A Casa das Marés" autocomplete="off" enterkeyhint="done"></span></label>
         <p class="jn__hint">Experimente. É assim que o LOMBADA trabalha pelo seu livro.</p>
       </div>
       <ol class="jn">
@@ -1417,6 +1419,7 @@ f.addEventListener('submit',function(e){e.preventDefault();r.textContent='';
 '''
 HTML = HTML.replace('</main>', '</main>' + PRE_BLOCK.replace('@@BWLOGO@@', BWLOGO), 1)
 HTML = HTML.replace('</main>', '</main>' + "<script>(function(){var inp=document.getElementById('jn-livro');if(!inp)return;var box=inp.parentNode,N=['A Casa das Marés','Mar de Dentro','Raízes do Sertão','Liderar sem Gritar','O Mapa do Verão'],i=0,c=0,apaga=false,t=null,on=false;\nfunction viva(){return !inp.value&&document.activeElement!==inp}\nfunction passo(){if(!on||!viva()){inp.classList.remove('vivo');return}inp.classList.add('vivo');var nome=N[i];if(!apaga){c++;if(c>nome.length){apaga=true;t=setTimeout(passo,1400);inp.placeholder='Ex.: '+nome;return}}else{c--;if(c<0){apaga=false;c=0;i=(i+1)%N.length;t=setTimeout(passo,350);return}}inp.placeholder='Ex.: '+nome.slice(0,c)+'|';t=setTimeout(passo,apaga?35:85)}\nfunction liga(){if(on)return;on=true;clearTimeout(t);passo()}function desliga(){on=false;clearTimeout(t);inp.classList.remove('vivo');inp.placeholder='Ex.: A Casa das Marés'}\ninp.addEventListener('focus',function(){box.classList.add('usou');desliga()});inp.addEventListener('input',function(){box.classList.add('usou')});inp.addEventListener('blur',function(){if(!inp.value){box.classList.remove('usou');liga()}});\nif('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&viva())liga();else if(!e.isIntersecting)desliga()})},{threshold:.4}).observe(inp)}else liga()})();</script>\n", 1)   # 08/11: demonstração viva
+HTML = HTML.replace('</main>', '</main>' + "<script>window.addEventListener('load',function(){document.querySelectorAll('#ferramenta .jn__app').forEach(function(a){if(!a.querySelector('button')||a.classList.contains('tem-stamp'))return;a.classList.add('tem-stamp');var i=document.createElement('i');i.className='jn__stamp';i.setAttribute('aria-hidden','true');i.innerHTML='&#9757; Interativo';a.appendChild(i)})});</script>\n", 1)   # 08/11 (cliente): carimbo 'Interativo' nas janelas que dá pra mexer
 open(f"{R}/ae8a9e17e350/index.html", "w", encoding="utf-8").write(HTML)
 print("ok", len(HTML))
 
