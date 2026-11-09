@@ -1509,15 +1509,14 @@ for slug, v in VARIANTES.items():
       '.cbk__a{font-size:22px;font-weight:700;color:#fff}.cbk__m{font-size:22px;font-weight:800;color:#3ddc57}.cbk__t{flex-basis:100%;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3ddc57;text-align:center}'
       '@media (max-width:899px){.dock .btn{font-size:clamp(14px,4.1vw,18px)!important;padding:0 10px!important}.dock .btn svg{display:none}}'
       '@media (max-width:899px){a.btn[data-cta]:not(.dock a){font-size:clamp(14.5px,4.3vw,20px);white-space:nowrap;gap:8px}}'
-      '.pl{max-width:460px;margin:16px auto 6px;display:grid;gap:10px;font-family:Poppins,sans-serif}'
-      '.pl__r{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-radius:12px;background:#151310;text-align:left}'
-      '.pl__r span{font-size:14px;color:#cfc9bc}.pl__r b{white-space:nowrap;font-size:17px;font-weight:800;color:#fff}'
-      '.pl__r--off b{color:#a8a399;font-weight:600}'
-      '.price__de s{text-decoration:none}'
-      '.pl__r--on{padding:20px 18px;background:#1c160b;box-shadow:inset 0 0 0 2px #faab00,0 0 30px rgba(250,171,0,.22)}'
-      '.pl__r--on span{color:#fff;font-weight:600}.pl__r--on b{font-size:22px;color:#faab00}'
-      '.pl__tag{position:absolute;top:-10px;left:14px;padding:3px 9px 2px;border-radius:999px;background:#26c03d;color:#fff;font-style:normal;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}'
-      '.pl__cash{margin:2px 0 0;text-align:center;font-size:15px;color:#cfc9bc}'
+      '.pl{max-width:460px;margin:6px auto 4px;display:grid;gap:12px;font-family:Poppins,sans-serif}'
+      '.pl__por{margin:0 0 2px;text-align:center;font-size:clamp(20px,5.6vw,26px);font-weight:800;color:#fff}'
+      '.pl__r{display:block;padding:18px 20px;border-radius:12px;background:#171513;text-align:left}'
+      '.pl__r span{display:block;font-size:15px;color:#fff}'
+      '.pl__r b{display:block;margin-top:8px;font-size:clamp(24px,6.6vw,30px);font-weight:600;color:#faab00;line-height:1.1}'
+      '.pl__r small{display:block;margin-top:6px;font-size:13.5px;color:#a8a399}'
+      '.pl__r--on{box-shadow:inset 0 0 0 1.5px rgba(250,171,0,.55)}'
+      '.price__de{font-size:clamp(20px,5.6vw,26px)!important;font-weight:800;color:#fff!important}.price__de b{font-weight:800}.price__de s{color:#ef6b5f!important;text-decoration:none!important}'
       'body.trava .ca .cp-u,body:not(.trava) .ca .cp-l{display:none}body:not(.trava) .ca .cp-u{color:#3ddc57}body:not(.trava) .ca{cursor:default}'
       '</style>')
     # 08/11 (cliente escolheu a versão 8A): bloco escuro com o selo dourado do cashback, logo abaixo da trilha (sai a dupla de checks)
@@ -1557,11 +1556,13 @@ for slug, v in VARIANTES.items():
     P = re.sub(r'(<p class="price__cash">ou R\$ [\d.]+ à vista</p>)', lambda m: m.group(1) + GATE_BOX, P)   # 08/11: preço sempre visível; a verificação fica no botão
     # 08/11 noite (cliente: "como era no aniversário? podemos fazer parecido"): duas linhas, Não aluno x Aluno, como no Aniversário
     _rot = 'Aluno do Método The&nbsp;Book&nbsp;Business' if _meu == 'aluno' else 'Aluno vitalício do Método The&nbsp;Book&nbsp;Business'
-    LINHAS = ('<div class="pl"><div class="pl__r pl__r--off"><span>Não aluno</span><b>12x de R$ 249,51</b></div>'
-              '<div class="pl__r pl__r--on"><i class="pl__tag">Seu preço</i><span>%s</span><b>12x de %s</b></div>'
-              '<p class="pl__cash">ou %s à vista</p></div>') % (_rot, _parc, v['preco'])
+    LINHAS = ('<div class="pl"><p class="pl__por">Por apenas:</p>'
+              '<div class="pl__r"><span>Não aluno</span><b>12x de R$ 249,51</b></div>'
+              '<div class="pl__r pl__r--on"><span>%s</span><b>12x de %s</b><small>ou %s à vista</small></div></div>') % (_rot, _parc, v['preco'])
     P = re.sub(r'<p class="cbk">.*?</p>\s*<p class="price__big">.*?</p>\s*<p class="price__cash">ou R\$ [\d.]+ à vista</p>', lambda m: LINHAS, P, flags=re.S)
     assert P.count('class="pl"') >= 2 and 'class="cbk"' not in P, slug
+    P = P.replace('<p class="price__de">De <s>', '<p class="price__de"><b>De:</b> <s>')
+    P = P.replace('Mas entrando hoje, você não paga nada disso.<br>Você leva tudo por:', 'Mas entrando hoje, você não paga nada disso.')
     P = re.sub(r'<div class="hk2">.*?</div>', CUPOM, P, count=1, flags=re.S)
     assert P.count('class="ca"') == 1 and 'class="hk2"' not in P, slug
     P = P.replace('id="pre" data-pag="geral"', 'id="pre" data-pag="%s"' % _meu, 1)   # pré-checkout geral substitui o gate antigo
