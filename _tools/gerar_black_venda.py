@@ -1516,7 +1516,7 @@ for slug, v in VARIANTES.items():
       '.pl__r b{display:block;margin-top:8px;font-size:clamp(24px,6.6vw,30px);font-weight:600;color:#faab00;line-height:1.1}'
       '.pl__r small{display:block;margin-top:6px;font-size:13.5px;color:#a8a399}'
       '.pl__r--on{box-shadow:inset 0 0 0 1.5px rgba(250,171,0,.55)}'
-      '.price__de{font-size:clamp(20px,5.6vw,26px)!important;font-weight:800;color:#fff!important}.price__de b{font-weight:800}.price__de s{color:#ef6b5f!important;text-decoration:none!important}'
+      '.price__de{font-size:clamp(20px,5.6vw,26px)!important;font-weight:800;color:#fff!important}.price__de b{font-weight:800}.price__de s{color:#ef6b5f!important;text-decoration:line-through!important;text-decoration-color:#ef6b5f!important;text-decoration-thickness:3px!important}'
       'body.trava .ca .cp-u,body:not(.trava) .ca .cp-l{display:none}body:not(.trava) .ca .cp-u{color:#3ddc57}body:not(.trava) .ca{cursor:default}'
       '</style>')
     # 08/11 (cliente escolheu a versão 8A): bloco escuro com o selo dourado do cashback, logo abaixo da trilha (sai a dupla de checks)
