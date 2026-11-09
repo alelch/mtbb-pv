@@ -270,6 +270,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 .bon2__vis {{ display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 280px; margin-top: 14px; }}
 .bon2__c .bon2__vis img {{ width: auto; max-width: 100%; height: 100%; margin: 0; object-fit: contain; }}
 .bon2__vis .dbl {{ margin-top: 0; }}
+.bon2__c .bon2__vis img.lmb3 {{ width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }}
 .bon2__vis .dbl b {{ font-size: clamp(26px, 7vw, 40px); }}
 .bon2__vis .dbl__b b {{ font-size: clamp(46px, 13vw, 72px); }}
 .bon2__vis .spines {{ height: 110px; margin-top: 22px; }}
@@ -904,9 +905,9 @@ footer .claro a {{ color: #fff; text-decoration: underline; }}
       <p class="q2 rv d9-only">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p><p class="q2 rv after-only">E ainda por cima, você vai ganhar:</p>
       <div class="bon2">
         <div class="bon2__c rv">
-          <div class="bon2__vis"><div class="dbl"><div class="dbl__a d9-only"><b>3 anos</b><small>Black</small></div><span class="dbl__ar d9-only" aria-hidden="true">→</span><div class="dbl__b"><b class="gold"><span data-anos>6</span> anos</b><small class="d9-only">hoje</small><small class="after-only">de acesso</small></div></div><p class="bon2__lmb">{LMB}</p></div>
+          <div class="bon2__vis"><img class="after-only lmb3" src="assets/lombada-3anos.webp" alt="LOMBADA" width="960" height="560" loading="lazy" decoding="async"><div class="dbl d9-only"><div class="dbl__a d9-only"><b>3 anos</b><small>Black</small></div><span class="dbl__ar d9-only" aria-hidden="true">→</span><div class="dbl__b"><b class="gold"><span data-anos>6</span> anos</b><small class="d9-only">hoje</small></div></div><p class="bon2__lmb d9-only">{LMB}</p></div>
           <div class="bon2__txt">
-          <span class="bon2__tag d9-only">Só hoje</span>
+          <span class="bon2__tag d9-only">Só hoje</span><span class="bon2__tag bon2__tag--casa after-only">3 anos de acesso</span>
           <h3 data-dobro>Acesso em DOBRO</h3>
           <p><span data-anos>6</span> anos com o LOMBADA ao lado do seu livro.<span class="d9-only"><br>Só para quem entrar hoje.</span></p>
                   </div>
