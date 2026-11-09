@@ -1600,8 +1600,7 @@ for slug, dest, antes, src in FINAIS:
         P = P.replace('/%s/' % s, '/%s/' % d)
     P = P.replace('@@ASSETS@@', '/ae8a9e17e350/assets/')
     trava = ("<script>(function(){var s=location.search;"
-             "if(!/[?&]modo=/.test(s)&&Date.now()<Date.UTC(2026,10,9,23,0,0)){location.replace('/%s/'+(s||'?src=%s-antes')+location.hash);return}"
-             "if(!s&&history.replaceState)history.replaceState(null,'',location.pathname+'?src=%s'+location.hash)})();</script>") % (antes, src, src)
+             "if(!s&&history.replaceState)history.replaceState(null,'',location.pathname+'?src=%s'+location.hash)})();</script>") % src   # 09/11 (cliente): sem trava, oferta já aberta
     P = re.sub(r'(<head[^>]*>)', lambda m: m.group(1) + trava, P, count=1)
     assert trava in P and slug not in P.replace('/ae8a9e17e350/assets/', ''), dest
     os.makedirs(f"{R}/{dest}", exist_ok=True)
