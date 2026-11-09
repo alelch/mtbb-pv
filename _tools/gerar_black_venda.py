@@ -903,12 +903,12 @@ footer .claro a {{ color: #fff; text-decoration: underline; }}
     <div class="wrap center">
       <p class="q2 rv d9-only">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p><p class="q2 rv after-only">E ainda por cima, você vai ganhar:</p>
       <div class="bon2">
-        <div class="bon2__c rv d9-only">
-          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>Black</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold"><span data-anos>6</span> anos</b><small>hoje</small></div></div><p class="bon2__lmb">{LMB}</p></div>
+        <div class="bon2__c rv">
+          <div class="bon2__vis"><div class="dbl"><div class="dbl__a d9-only"><b>3 anos</b><small>Black</small></div><span class="dbl__ar d9-only" aria-hidden="true">→</span><div class="dbl__b"><b class="gold"><span data-anos>6</span> anos</b><small class="d9-only">hoje</small><small class="after-only">de acesso</small></div></div><p class="bon2__lmb">{LMB}</p></div>
           <div class="bon2__txt">
-          <span class="bon2__tag">Só hoje</span>
+          <span class="bon2__tag d9-only">Só hoje</span>
           <h3 data-dobro>Acesso em DOBRO</h3>
-          <p><span data-anos>6</span> anos com o LOMBADA ao lado do seu livro.<br>Só para quem entrar hoje.</p>
+          <p><span data-anos>6</span> anos com o LOMBADA ao lado do seu livro.<span class="d9-only"><br>Só para quem entrar hoje.</span></p>
                   </div>
         </div>
         <div class="bon2__c rv">
@@ -1167,8 +1167,9 @@ footer .claro a {{ color: #fff; text-decoration: underline; }}
   if (q.get('modo') === 'depois') ANOS = 3;
   var modo = ANOS > 3 ? 'd9' : 'depois';
   document.body.classList.add(modo === 'depois' ? 'm-depois' : 'm-d9');
+  $$('[data-anos]').forEach(function (e) {{ e.textContent = ANOS; }});
+  if (ANOS === 3) $$('[data-dobro]').forEach(function (e) {{ e.textContent = 'Acesso ao LOMBADA'; }});
   if (ANOS > 3) {{
-    $$('[data-anos]').forEach(function (e) {{ e.textContent = ANOS; }});
     $$('[data-ano]').forEach(function (e) {{ if (+e.getAttribute('data-ano') > ANOS) e.style.display = 'none'; }});
     var TOT = (9485 + 5000 * (ANOS - 1)).toLocaleString('pt-BR');
     $$('[data-tot]').forEach(function (e) {{ e.textContent = 'R$ ' + TOT + ',00'; }});
