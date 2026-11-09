@@ -277,7 +277,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* bônus lado a lado, com o mesmo peso (cliente: "preferia lado a lado") */
 @media (min-width: 760px) {{ .bon2.bon2 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 980px; }} }}
 /* depois do dia 9 sobra só o cartão dos Playbooks: uma coluna, centralizada */
-@media (min-width: 760px) {{ body.m-depois .bon2.bon2 {{ grid-template-columns: minmax(0, 1fr); max-width: 480px; }} }}
+/* 09/11: com a escada, o card do LOMBADA aparece também com 3 anos; os 2 cards ficam lado a lado como nos outros dias */
 .bon2__txt {{ display: contents; }}
 .bon2__c > .bon2__txt > .lv__k, .bon2__c .bon2__txt .lv__k {{ order: -1; }}
 .bon2__txt h3 {{ margin-top: 12px; }}
