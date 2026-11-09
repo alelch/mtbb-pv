@@ -701,6 +701,11 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only { display: none !impor
 footer { padding: 40px 20px 110px; border-top: 1px solid var(--line); text-align: center; font-size: 12px; line-height: 1.6; color: var(--ink3); }
 footer p + p { margin-top: 8px; }
 footer .legal { max-width: 720px; margin: 14px auto 0; }
+footer .claro { margin: -40px -20px 32px; padding: 40px 20px 36px; background: #161616; font-size: 15px; line-height: 1.7; color: #fff; }
+footer .claro p { max-width: 760px; margin-left: auto; margin-right: auto; }
+footer .claro p + p { margin-top: 18px; }
+footer .claro__t { font-size: 18px; font-weight: 800; }
+footer .claro a { color: #fff; text-decoration: underline; }
 .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, rgba(0, 0, 0, .9) 30%);
   transform: translateY(110%); transition: transform .35s var(--ease); }
 .dock.on { transform: none; }
@@ -727,7 +732,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
 <style>.trv{max-width:460px;margin:10px auto 2px;font-size:14px;line-height:1.5;color:#cfc9bc;text-align:center}.trv b{color:#faab00}.trv-m{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.78)}.trv-m.on{display:flex}.trv-c{width:100%;max-width:420px;padding:26px 20px;border-radius:16px;background:#0b0a08;box-shadow:0 0 0 1px rgba(250,171,0,.45),0 0 40px rgba(250,171,0,.25);text-align:center;position:relative}.trv-c h3{margin:0 0 6px;font-size:22px;color:#fff}.trv-c p{margin:0 0 16px;font-size:14.5px;color:#cfc9bc;line-height:1.5}.trv-c input{width:100%;box-sizing:border-box;padding:14px;border-radius:10px;border:1.5px solid rgba(250,171,0,.6);background:#000;color:#fff;font:inherit;font-size:16px}.trv-c .btn{margin-top:12px}.trv-x{position:absolute;right:10px;top:8px;background:none;border:0;color:#a8a399;font-size:26px;cursor:pointer}.trv-r{margin-top:12px;font-size:14px;line-height:1.5;color:#ffb3b0}.trv-r a{color:#faab00;font-weight:700}.cpm{display:block!important;max-width:400px;margin:20px auto 6px;text-align:left;color:#1d1406;filter:drop-shadow(0 12px 28px rgba(250,171,0,.22))}.cpm .c-top,.cpm .c-bot{position:relative;overflow:hidden;background:linear-gradient(125deg,#ffe39a 0%,#ffd060 30%,#faab00 65%,#c97a00 100%)}.cpm .c-top{border-radius:14px 14px 0 0;padding:14px 16px 16px;-webkit-mask:radial-gradient(circle 11px at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 11px at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat}.cpm .c-bot{border-radius:0 0 14px 14px;padding:11px 16px 12px;display:flex;align-items:center;gap:10px;-webkit-mask:radial-gradient(circle 11px at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 0,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 11px at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 0,#0000 98%,#000) right/51% 100% no-repeat}.cpm .c-bot::before{content:"";position:absolute;left:18px;right:18px;top:0;border-top:2px dashed rgba(29,20,6,.32)}.cpm .c-top::after{content:"";position:absolute;top:-40%;bottom:-40%;width:34%;left:-60%;transform:skewX(-18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:cbrilho 5s ease-in-out infinite 1.4s}@keyframes cbrilho{0%{left:-60%}45%,100%{left:130%}}.cpm .c-eyebrow{position:relative;z-index:1;font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.72}.cpm .c-valor{position:relative;z-index:1;margin:4px 0 0;font:900 italic clamp(40px,12vw,54px)/1 "Montserrat",sans-serif;letter-spacing:-.03em;color:#1d1406}.cpm .c-oferta{position:relative;z-index:1;max-width:60%;margin:6px 0 0;font-weight:500;font-size:13px;line-height:1.3;color:#1d1406}.cpm .c-dany{position:absolute;z-index:0;right:-4px;bottom:0;width:38%;max-width:150px;height:auto}.cpm .c-bot b{display:inline;margin:0;font-weight:700;font-size:14px;letter-spacing:-.01em;color:#1d1406}.cpm .c-stamp{flex:none;margin-left:auto;padding:4px 8px 3px;border:2px solid rgba(29,20,6,.75);border-radius:6px;font:900 italic 11px/1 "Montserrat",sans-serif;letter-spacing:.08em;transform:rotate(-4deg);text-transform:uppercase;background:rgba(255,235,190,.45)}body:not(.trava) .cpm .c-stamp{border-color:#0f7a1f;color:#0f7a1f;background:rgba(220,255,214,.75)}body.trava .cpm .cp-u,body:not(.trava) .cpm .cp-l{display:none}body.trava .cpm{cursor:pointer}.h .cpm{margin:26px auto 4px}@media (prefers-reduced-motion:reduce){.cpm .c-top::after{animation:none}}.ca{width:fit-content;max-width:100%;box-sizing:border-box;margin:22px auto 0;padding:12px 20px 12px 12px;border-radius:16px;background:#0d0b08;box-shadow:inset 0 0 0 1px rgba(250,171,0,.45);display:flex;gap:14px;align-items:center;text-align:left}.ca .tk{flex:none;width:128px;box-sizing:border-box;padding:12px 6px;border-radius:10px;background:linear-gradient(125deg,#ffe39a,#faab00 65%,#c97a00);color:#1d1406;text-align:center;border:2px dashed rgba(29,20,6,.35)}.ca .tk small{display:block;font:700 8.5px/1.15 Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase}.ca .tk b{display:block;font:900 italic 25px/1.05 "Montserrat",sans-serif;letter-spacing:-.03em;margin-top:4px;color:#1d1406}.ca p{margin:0;max-width:232px;font:500 14px/1.4 Poppins,sans-serif;color:#cfc9bc}.ca p strong{display:block;color:#fff;font-size:16px;margin-bottom:3px}.ca p u{color:#faab00;font-weight:700;text-decoration:none}.cbk{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:4px 10px;margin:14px auto 2px;font-family:Poppins,sans-serif}.cbk__a{font-size:22px;font-weight:700;color:#fff}.cbk__m{font-size:22px;font-weight:800;color:#3ddc57}.cbk__t{flex-basis:100%;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3ddc57;text-align:center}@media (max-width:899px){.dock .btn{font-size:clamp(14px,4.1vw,18px)!important;padding:0 10px!important}.dock .btn svg{display:none}}@media (max-width:899px){a.btn[data-cta]:not(.dock a){font-size:clamp(14.5px,4.3vw,20px);white-space:nowrap;gap:8px}}.price__cta{max-width:640px!important}.pl{max-width:640px;margin:6px auto 4px;display:grid;gap:12px;font-family:Poppins,sans-serif}.pl__por{margin:0 0 2px;text-align:center;font-size:clamp(20px,5.6vw,26px);font-weight:800;color:#fff}.pl__r{display:block;padding:18px 20px;border-radius:12px;background:#171513;text-align:left}.pl__r span{display:block;font-size:15px;color:#fff}.pl__r b{display:block;margin-top:8px;font-size:clamp(24px,6.6vw,30px);font-weight:600;color:#faab00;line-height:1.1}.pl__r small{display:block;margin-top:6px;font-size:13.5px;color:#a8a399}.pl__r--on{box-shadow:inset 0 0 0 1.5px rgba(250,171,0,.55)}.price__de{font-size:clamp(20px,5.6vw,26px)!important;font-weight:800;color:#fff!important}.price__de b{font-weight:800}.price__de s{color:#ef6b5f!important;text-decoration:line-through!important;text-decoration-color:#ef6b5f!important;text-decoration-thickness:3px!important}body.trava .ca .cp-u,body:not(.trava) .ca .cp-l{display:none}body:not(.trava) .ca .cp-u{color:#3ddc57}body:not(.trava) .ca{cursor:default}</style></head>
 <body>
 <div class="estante" aria-hidden="true"></div>
-<div class="obar"><p class="d9-only">O dobro de acesso ao LOMBADA termina em</p><div class="clock d9-only" data-clock aria-label="Tempo até a meia-noite"></div><p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
+<div class="obar"><p class="d9-only" data-obar>O dobro de acesso ao LOMBADA termina em</p><div class="clock d9-only" data-clock aria-label="Tempo até a meia-noite"></div><p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
 
 <main>
   <!-- 1. abertura (a única seção que ficou da versão anterior), já emendada na oferta -->
@@ -757,17 +762,17 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
           <div class="bill__row"><span>1º ano</span><b>R$ 9.485,00</b></div>
           <div class="bill__row"><span>2º ano</span><b>R$ 5.000,00</b></div>
           <div class="bill__row"><span>3º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__row d9-only"><span>4º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__row d9-only"><span>5º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__row d9-only"><span>6º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__tot"><span>Total investido</span><b><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></b></div>
+          <div class="bill__row d9-only" data-ano="4"><span>4º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row d9-only" data-ano="5"><span>5º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row d9-only" data-ano="6"><span>6º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__tot"><span>Total investido</span><b><span class="d9-only" data-tot>R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></b></div>
         </div>
       </div>
 
       <!-- 4. o preço -->
       <div class="blk price">
         <p class="q2">Mas entrando hoje, você não paga nada disso.</p>
-        <p class="price__de"><b>De:</b> <s><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
+        <p class="price__de"><b>De:</b> <s><span class="d9-only" data-tot>R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
         <div class="pl"><p class="pl__por">Por apenas:</p><div class="pl__r"><span>Não aluno</span><b>12x de R$ 249,51</b><small>ou R$ 2.500 à vista</small></div><div class="pl__r pl__r--on"><span>Aluno do Método The&nbsp;Book&nbsp;Business</span><b>12x de R$ 99,80</b><small>ou R$ 1.000 à vista</small></div></div>
         <div class="cta price__cta"><a class="btn" href="#oferta" data-cta>Clique para garantir sua vaga</a></div>
       </div>
@@ -780,11 +785,11 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
       <p class="q2 rv d9-only">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p><p class="q2 rv after-only">E ainda por cima, você vai ganhar:</p>
       <div class="bon2">
         <div class="bon2__c rv d9-only">
-          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>Black</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div><p class="bon2__lmb"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></p></div>
+          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>Black</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold"><span data-anos>6</span> anos</b><small>hoje</small></div></div><p class="bon2__lmb"><span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span></p></div>
           <div class="bon2__txt">
           <span class="bon2__tag">Só hoje</span>
-          <h3>Acesso em DOBRO</h3>
-          <p>6 anos com o LOMBADA ao lado do seu livro.<br>Só para quem entrar hoje.</p>
+          <h3 data-dobro>Acesso em DOBRO</h3>
+          <p><span data-anos>6</span> anos com o LOMBADA ao lado do seu livro.<br>Só para quem entrar hoje.</p>
                   </div>
         </div>
         <div class="bon2__c rv">
@@ -822,13 +827,13 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
         <ul class="card__list">
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Método The&nbsp;Book&nbsp;Business</b>, Autoridade Digital e Comunidade, <b>vitalícios</b></span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>5 Workshops Mão na Massa</b>, <b>vitalícios</b></span></li>
-          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
+          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>LOMBADA</b> por <b class="d9-only"><span data-anos>6</span> anos</b><b class="after-only">3 anos</b></span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>3 Playbooks físicos</b> na sua casa</span></li>
           <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
-        <p class="resumo__de">De <s><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
+        <p class="resumo__de">De <s><span class="d9-only" data-tot>R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
         <p class="resumo__por">por apenas</p>
         <div class="pl"><p class="pl__por">Por apenas:</p><div class="pl__r"><span>Não aluno</span><b>12x de R$ 249,51</b><small>ou R$ 2.500 à vista</small></div><div class="pl__r pl__r--on"><span>Aluno do Método The&nbsp;Book&nbsp;Business</span><b>12x de R$ 99,80</b><small>ou R$ 1.000 à vista</small></div></div>
         
@@ -856,7 +861,7 @@ footer .legal { max-width: 720px; margin: 14px auto 0; }
       <div class="lmbc rv">
         <div class="lmbc__art lmbc__art--img"><img src="../ae8a9e17e350/assets/lombada-quadro.webp" alt="LOMBADA" width="1140" height="840" loading="lazy" decoding="async"></div>
         <div class="lmbc__b">
-          <span class="lv__k"><span class="d9-only">6 anos de acesso hoje</span><span class="after-only">3 anos de acesso</span></span>
+          <span class="lv__k"><span class="d9-only"><span data-anos>6</span> anos de acesso hoje</span><span class="after-only">3 anos de acesso</span></span>
           <h3>A ferramenta que nunca deixa o seu livro parar.</h3>
           <ul>
             <li><b>Seu livro não para:</b> toda semana, o plano pronto, com o texto e a aula por trás.</li>
@@ -1193,6 +1198,11 @@ f.addEventListener('submit',function(e){e.preventDefault();r.textContent='';
 </script>
 
 <footer>
+  <div class="claro"><!-- 09/11 (cliente): disclaimer no formato do Ladeira + escada do LOMBADA -->
+    <p class="claro__t">Disclaimer:</p>
+    <p>Acesso Vitalício enquanto a empresa BOOK BUSINESS EMPREENDIMENTOS DIGITAIS existir (baixa definitiva da empresa). O acesso vale apenas para os cursos e bônus listados nesta oferta. Não inclui outros cursos nem cursos que venham a ser lançados. Os encontros em grupo ao vivo valem por 3 anos e o LOMBADA vale de 3 a 6 anos, conforme o dia da compra (6 anos em 09/11, 5 em 10/11, 4 em 11/11 e 3 a partir de 12/11): não têm acesso vitalício.</p>
+    <p><a href="https://thebookbusiness.com.br/contrato-vitalicio-26" target="_blank" rel="noopener">Termos de compra</a></p>
+  </div>
   <p>© 2026 The Book Business. Todos os direitos reservados.</p>
   <p><a href="https://thebookbusiness.com.br/contrato-vitalicio-26" target="_blank" rel="noopener">Termos da oferta</a> · <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a></p>
   <p class="legal"><b>Aviso Legal:</b> “Nenhuma informação contida neste site deve ser interpretada como uma afirmação de resultados ou de retornos financeiros. Qualquer referência a desempenho passado ou potencial é uma estratégia elaborada no contexto individual de cada autor, e não deve ser interpretada como recomendação ou garantia de resultados específicos.”</p>
@@ -1208,9 +1218,26 @@ f.addEventListener('submit',function(e){e.preventDefault();r.textContent='';
   var q = new URLSearchParams(location.search);
 
   // modo: dia 9 até 23h59 de Brasília (02h59 UTC do dia 10); depois, LOMBADA 3 anos (os Playbooks continuam)
-  var FIM_D9 = Date.UTC(2026, 10, 10, 2, 59, 59);
-  var modo = q.get('modo') || (Date.now() <= FIM_D9 ? 'd9' : 'depois');
+  // 09/11 (cliente): escada do LOMBADA, um degrau por dia (Brasília): 09/11 = 6 anos, 10/11 = 5, 11/11 = 4, a partir de 12/11 = 3.
+  // O relógio conta até a meia-noite do dia, quando o degrau cai. Prévia: ?anos=5 (ou ?modo=depois = 3 anos).
+  var DEGRAUS = [[Date.UTC(2026, 10, 10, 3), 6], [Date.UTC(2026, 10, 11, 3), 5], [Date.UTC(2026, 10, 12, 3), 4]];
+  var ANOS = 3, FIM_D9 = 0;
+  for (var di = 0; di < DEGRAUS.length; di++) { if (Date.now() < DEGRAUS[di][0]) { ANOS = DEGRAUS[di][1]; FIM_D9 = DEGRAUS[di][0] - 1000; break; } }
+  if (q.get('anos')) { ANOS = Math.max(3, Math.min(6, +q.get('anos') || 3)); FIM_D9 = Date.now() + 3600e3; }
+  if (q.get('modo') === 'd9') { ANOS = 6; FIM_D9 = FIM_D9 || Date.now() + 3600e3; }
+  if (q.get('modo') === 'depois') ANOS = 3;
+  var modo = ANOS > 3 ? 'd9' : 'depois';
   document.body.classList.add(modo === 'depois' ? 'm-depois' : 'm-d9');
+  if (ANOS > 3) {
+    $$('[data-anos]').forEach(function (e) { e.textContent = ANOS; });
+    $$('[data-ano]').forEach(function (e) { if (+e.getAttribute('data-ano') > ANOS) e.style.display = 'none'; });
+    var TOT = (9485 + 5000 * (ANOS - 1)).toLocaleString('pt-BR');
+    $$('[data-tot]').forEach(function (e) { e.textContent = 'R$ ' + TOT + ',00'; });
+    if (ANOS < 6) {
+      $$('[data-obar]').forEach(function (e) { e.textContent = 'Os ' + ANOS + ' anos de LOMBADA terminam em'; });
+      $$('[data-dobro]').forEach(function (e) { e.textContent = 'Acesso EXTRA'; });
+    }
+  }
 
   // checkout (Hotmart): oferta R$2.500 do combo novo da Black (8902433, off=lyfitc09, pela máscara oferta-black26 com repasse de parâmetros, cliente 06/11; antes D102625845Q off=ntrx21f9). Repassa src/sck/utm até o checkout.
   var CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black-alunos', depois: 'https://thebookbusiness.com.br/oferta-black-alunos' }, url = CHECKOUT[modo === 'depois' ? 'depois' : 'd9'];
@@ -1220,7 +1247,7 @@ f.addEventListener('submit',function(e){e.preventDefault();r.textContent='';
     $$('[data-cta]').forEach(function (a) { a.href = u.toString(); });
   }
 
-  // relógio até a meia-noite do dia 9
+  // relógio até a meia-noite do dia (fim do degrau)
   var clocks = $$('[data-clock]');
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function tick() {

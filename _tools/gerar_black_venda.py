@@ -36,7 +36,7 @@ rows = "\n".join(
     for i, (t, d, k) in enumerate(PILHA, 1))
 N = len(PILHA) + 1  # + LOMBADA
 rows += f'''
-        <li class="row row--lmb rv"><span class="row__n">{N:02d}</span><span class="row__t"><b>{LMB}</b><small>O personal trainer do seu livro. Todo dia, o que fazer.</small></span><span class="row__k"><span class="d9-only">6 anos</span><span class="after-only">3 anos</span></span></li>
+        <li class="row row--lmb rv"><span class="row__n">{N:02d}</span><span class="row__t"><b>{LMB}</b><small>O personal trainer do seu livro. Todo dia, o que fazer.</small></span><span class="row__k"><span class="d9-only"><span data-anos>6</span> anos</span><span class="after-only">3 anos</span></span></li>
         <li class="row row--bonus rv"><span class="row__n">{N+1:02d}</span><span class="row__t"><b>Playbooks MTBB físicos, na sua casa</b></span><span class="row__k">Bônus</span></li>'''
 
 TELAS = [
@@ -819,6 +819,11 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 footer {{ padding: 40px 20px 110px; border-top: 1px solid var(--line); text-align: center; font-size: 12px; line-height: 1.6; color: var(--ink3); }}
 footer p + p {{ margin-top: 8px; }}
 footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
+footer .claro {{ margin: -40px -20px 32px; padding: 40px 20px 36px; background: #161616; font-size: 15px; line-height: 1.7; color: #fff; }}
+footer .claro p {{ max-width: 760px; margin-left: auto; margin-right: auto; }}
+footer .claro p + p {{ margin-top: 18px; }}
+footer .claro__t {{ font-size: 18px; font-weight: 800; }}
+footer .claro a {{ color: #fff; text-decoration: underline; }}
 .dock {{ position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, rgba(0, 0, 0, .9) 30%);
   transform: translateY(110%); transition: transform .35s var(--ease); }}
 .dock.on {{ transform: none; }}
@@ -842,7 +847,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 </head>
 <body>
 <div class="estante" aria-hidden="true"></div>
-<div class="obar"><p class="d9-only">O dobro de acesso ao LOMBADA termina em</p>{CLOCK.replace('class="clock"', 'class="clock d9-only"')}<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
+<div class="obar"><p class="d9-only" data-obar>O dobro de acesso ao LOMBADA termina em</p>{CLOCK.replace('class="clock"', 'class="clock d9-only"')}<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p></div>
 
 <main>
   <!-- 1. abertura (a única seção que ficou da versão anterior), já emendada na oferta -->
@@ -875,17 +880,17 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
           <div class="bill__row"><span>1º ano</span><b>R$ 9.485,00</b></div>
           <div class="bill__row"><span>2º ano</span><b>R$ 5.000,00</b></div>
           <div class="bill__row"><span>3º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__row d9-only"><span>4º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__row d9-only"><span>5º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__row d9-only"><span>6º ano</span><b>R$ 5.000,00</b></div>
-          <div class="bill__tot"><span>Total investido</span><b><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></b></div>
+          <div class="bill__row d9-only" data-ano="4"><span>4º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row d9-only" data-ano="5"><span>5º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__row d9-only" data-ano="6"><span>6º ano</span><b>R$ 5.000,00</b></div>
+          <div class="bill__tot"><span>Total investido</span><b><span class="d9-only" data-tot>R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></b></div>
         </div>
       </div>
 
       <!-- 4. o preço -->
       <div class="blk price">
         <p class="q2">Mas entrando hoje, você não paga nada disso.<br>Você leva tudo por:</p>
-        <p class="price__de">De <s><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
+        <p class="price__de">De <s><span class="d9-only" data-tot>R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
         <div class="cta price__cta">{CTA}<p class="aluno-lk">É aluno do Método The&nbsp;Book&nbsp;Business? <a href="https://thebookbusiness.com.br/dezza" target="_blank" rel="noopener">Fale com a equipe</a></p></div>
@@ -899,11 +904,11 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <p class="q2 rv d9-only">E ainda por cima, quem entrar <b class="amber">hoje</b> vai ganhar:</p><p class="q2 rv after-only">E ainda por cima, você vai ganhar:</p>
       <div class="bon2">
         <div class="bon2__c rv d9-only">
-          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>Black</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold">6 anos</b><small>hoje</small></div></div><p class="bon2__lmb">{LMB}</p></div>
+          <div class="bon2__vis"><div class="dbl"><div class="dbl__a"><b>3 anos</b><small>Black</small></div><span class="dbl__ar" aria-hidden="true">→</span><div class="dbl__b"><b class="gold"><span data-anos>6</span> anos</b><small>hoje</small></div></div><p class="bon2__lmb">{LMB}</p></div>
           <div class="bon2__txt">
           <span class="bon2__tag">Só hoje</span>
-          <h3>Acesso em DOBRO</h3>
-          <p>6 anos com o LOMBADA ao lado do seu livro.<br>Só para quem entrar hoje.</p>
+          <h3 data-dobro>Acesso em DOBRO</h3>
+          <p><span data-anos>6</span> anos com o LOMBADA ao lado do seu livro.<br>Só para quem entrar hoje.</p>
                   </div>
         </div>
         <div class="bon2__c rv">
@@ -941,13 +946,13 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
         <ul class="card__list">
           <li>{CK}<span><b>Método The&nbsp;Book&nbsp;Business</b>, Autoridade Digital e Comunidade, <b>vitalícios</b></span></li>
           <li>{CK}<span><b>5 Workshops Mão na Massa</b>, <b>vitalícios</b></span></li>
-          <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only">6 anos</b><b class="after-only">3 anos</b></span></li>
+          <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only"><span data-anos>6</span> anos</b><b class="after-only">3 anos</b></span></li>
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
           <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
           <li>{CK}<span><b>3 Playbooks físicos</b> na sua casa</span></li>
           <li>{CK}<span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
-        <p class="resumo__de">De <s><span class="d9-only">R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
+        <p class="resumo__de">De <s><span class="d9-only" data-tot>R$ 34.485,00</span><span class="after-only">R$ 19.485,00</span></s></p>
         <p class="resumo__por">por apenas</p>
         <p class="price__big"><small>12x de</small><span>R$ 249,51</span></p>
         <p class="price__cash">ou R$ 2.500 à vista</p>
@@ -976,7 +981,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
       <div class="lmbc rv">
         <div class="lmbc__art lmbc__art--img"><img src="assets/lombada-quadro.webp" alt="LOMBADA" width="1140" height="840" loading="lazy" decoding="async"></div>
         <div class="lmbc__b">
-          <span class="lv__k"><span class="d9-only">6 anos de acesso hoje</span><span class="after-only">3 anos de acesso</span></span>
+          <span class="lv__k"><span class="d9-only"><span data-anos>6</span> anos de acesso hoje</span><span class="after-only">3 anos de acesso</span></span>
           <h3>A ferramenta que nunca deixa o seu livro parar.</h3>
           <ul>
             <li><b>Seu livro não para:</b> toda semana, o plano pronto, com o texto e a aula por trás.</li>
@@ -1132,6 +1137,11 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
 </main>
 
 <footer>
+  <div class="claro"><!-- 09/11 (cliente): disclaimer no formato do Ladeira + escada do LOMBADA -->
+    <p class="claro__t">Disclaimer:</p>
+    <p>Acesso Vitalício enquanto a empresa BOOK BUSINESS EMPREENDIMENTOS DIGITAIS existir (baixa definitiva da empresa). O acesso vale apenas para os cursos e bônus listados nesta oferta. Não inclui outros cursos nem cursos que venham a ser lançados. Os encontros em grupo ao vivo valem por 3 anos e o LOMBADA vale de 3 a 6 anos, conforme o dia da compra (6 anos em 09/11, 5 em 10/11, 4 em 11/11 e 3 a partir de 12/11): não têm acesso vitalício.</p>
+    <p><a href="https://thebookbusiness.com.br/contrato-vitalicio-26" target="_blank" rel="noopener">Termos de compra</a></p>
+  </div>
   <p>© 2026 The Book Business. Todos os direitos reservados.</p>
   <p><a href="https://thebookbusiness.com.br/contrato-vitalicio-26" target="_blank" rel="noopener">Termos da oferta</a> · <a href="https://thebookbusiness.com.br/wp-content/uploads/2026/07/Politica-de-Privacidade_6514.pdf" target="_blank" rel="noopener">Política de Privacidade</a></p>
   <p class="legal"><b>Aviso Legal:</b> “Nenhuma informação contida neste site deve ser interpretada como uma afirmação de resultados ou de retornos financeiros. Qualquer referência a desempenho passado ou potencial é uma estratégia elaborada no contexto individual de cada autor, e não deve ser interpretada como recomendação ou garantia de resultados específicos.”</p>
@@ -1147,9 +1157,26 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   var q = new URLSearchParams(location.search);
 
   // modo: dia 9 até 23h59 de Brasília (02h59 UTC do dia 10); depois, LOMBADA 3 anos (os Playbooks continuam)
-  var FIM_D9 = Date.UTC(2026, 10, 10, 2, 59, 59);
-  var modo = q.get('modo') || (Date.now() <= FIM_D9 ? 'd9' : 'depois');
+  // 09/11 (cliente): escada do LOMBADA, um degrau por dia (Brasília): 09/11 = 6 anos, 10/11 = 5, 11/11 = 4, a partir de 12/11 = 3.
+  // O relógio conta até a meia-noite do dia, quando o degrau cai. Prévia: ?anos=5 (ou ?modo=depois = 3 anos).
+  var DEGRAUS = [[Date.UTC(2026, 10, 10, 3), 6], [Date.UTC(2026, 10, 11, 3), 5], [Date.UTC(2026, 10, 12, 3), 4]];
+  var ANOS = 3, FIM_D9 = 0;
+  for (var di = 0; di < DEGRAUS.length; di++) {{ if (Date.now() < DEGRAUS[di][0]) {{ ANOS = DEGRAUS[di][1]; FIM_D9 = DEGRAUS[di][0] - 1000; break; }} }}
+  if (q.get('anos')) {{ ANOS = Math.max(3, Math.min(6, +q.get('anos') || 3)); FIM_D9 = Date.now() + 3600e3; }}
+  if (q.get('modo') === 'd9') {{ ANOS = 6; FIM_D9 = FIM_D9 || Date.now() + 3600e3; }}
+  if (q.get('modo') === 'depois') ANOS = 3;
+  var modo = ANOS > 3 ? 'd9' : 'depois';
   document.body.classList.add(modo === 'depois' ? 'm-depois' : 'm-d9');
+  if (ANOS > 3) {{
+    $$('[data-anos]').forEach(function (e) {{ e.textContent = ANOS; }});
+    $$('[data-ano]').forEach(function (e) {{ if (+e.getAttribute('data-ano') > ANOS) e.style.display = 'none'; }});
+    var TOT = (9485 + 5000 * (ANOS - 1)).toLocaleString('pt-BR');
+    $$('[data-tot]').forEach(function (e) {{ e.textContent = 'R$ ' + TOT + ',00'; }});
+    if (ANOS < 6) {{
+      $$('[data-obar]').forEach(function (e) {{ e.textContent = 'Os ' + ANOS + ' anos de LOMBADA terminam em'; }});
+      $$('[data-dobro]').forEach(function (e) {{ e.textContent = 'Acesso EXTRA'; }});
+    }}
+  }}
 
   // checkout (Hotmart): oferta R$2.500 do combo novo da Black (8902433, off=lyfitc09, pela máscara oferta-black26 com repasse de parâmetros, cliente 06/11; antes D102625845Q off=ntrx21f9). Repassa src/sck/utm até o checkout.
   var CHECKOUT = {{ d9: 'https://thebookbusiness.com.br/oferta-black26', depois: 'https://thebookbusiness.com.br/oferta-black26' }}, url = CHECKOUT[modo === 'depois' ? 'depois' : 'd9'];
@@ -1159,7 +1186,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
     $$('[data-cta]').forEach(function (a) {{ a.href = u.toString(); }});
   }}
 
-  // relógio até a meia-noite do dia 9
+  // relógio até a meia-noite do dia (fim do degrau)
   var clocks = $$('[data-clock]');
   function pad(n) {{ return (n < 10 ? '0' : '') + n; }}
   function tick() {{
