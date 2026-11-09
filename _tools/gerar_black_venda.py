@@ -1557,7 +1557,7 @@ for slug, v in VARIANTES.items():
     # 08/11 noite (cliente: "como era no aniversário? podemos fazer parecido"): duas linhas, Não aluno x Aluno, como no Aniversário
     _rot = 'Aluno do Método The&nbsp;Book&nbsp;Business' if _meu == 'aluno' else 'Aluno vitalício do Método The&nbsp;Book&nbsp;Business'
     LINHAS = ('<div class="pl"><p class="pl__por">Por apenas:</p>'
-              '<div class="pl__r"><span>Não aluno</span><b>12x de R$ 249,51</b></div>'
+              '<div class="pl__r"><span>Não aluno</span><b>12x de R$ 249,51</b><small>ou R$ 2.500 à vista</small></div>'
               '<div class="pl__r pl__r--on"><span>%s</span><b>12x de %s</b><small>ou %s à vista</small></div></div>') % (_rot, _parc, v['preco'])
     P = re.sub(r'<p class="cbk">.*?</p>\s*<p class="price__big">.*?</p>\s*<p class="price__cash">ou R\$ [\d.]+ à vista</p>', lambda m: LINHAS, P, flags=re.S)
     assert P.count('class="pl"') >= 2 and 'class="cbk"' not in P, slug
