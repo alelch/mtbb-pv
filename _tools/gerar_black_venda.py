@@ -1614,3 +1614,20 @@ for slug, dest, antes, src in FINAIS:
 # curta (descartada) aponta direto para o endereço final
 _c = open(f"{R}/5c0424242e97/index.html", encoding="utf-8").read().replace('/ae8a9e17e350/"', '/black-liberada/"')
 open(f"{R}/5c0424242e97/index.html", "w", encoding="utf-8").write(_c)
+
+# ── 09/11 manhã (cliente): "cria uma com o preço para aluno e não aluno agora". Página ÚNICA com os 2 preços (como no
+# Aniversário), a partir da de aluno. Sem preço de vitalício na página: o pré-checkout (modo geral) manda cada um para o seu
+# pagamento: vitalício → oferta-black-vitalicio, aluno → oferta-black-alunos, não encontrado → R$ 2.500 direto.
+U = open(f"{R}/black-liberada-alunos/index.html", encoding="utf-8").read()
+U = U.replace('<p class="kick h__kick">Condição exclusiva de aluno do Método</p>', '<p class="kick h__kick">Inscrições liberadas</p>')
+U = U.replace('id="pre" data-pag="aluno"', 'id="pre" data-pag="geral"', 1)
+U = re.sub(r'<title>[^<]*</title>', '<title>Black Week Motorizada</title>', U, count=1)
+U = U.replace('https://metodo.thebookbusiness.com.br/black-liberada-alunos/"', 'https://metodo.thebookbusiness.com.br/black-oferta/"')
+U = U.replace("'?src=liberada-alunos'", "'?src=oferta'")
+_VIT = '<p class="pl__vit">É aluno vitalício? O seu preço é ainda menor e aparece no próximo passo.</p>'
+U = U.replace('<small>ou R$ 1.000 à vista</small></div></div>', '<small>ou R$ 1.000 à vista</small></div>' + _VIT + '</div>')
+U = U.replace('</head>', '<style>.pl__vit{margin:0;text-align:center;font-size:14px;line-height:1.45;color:#cfc9bc}</style></head>', 1)
+assert U.count('class="pl__vit"') >= 2 and 'data-pag="geral"' in U and 'Inscrições liberadas' in U and 'black-liberada-alunos/"' not in U
+os.makedirs(f"{R}/black-oferta", exist_ok=True)
+open(f"{R}/black-oferta/index.html", "w", encoding="utf-8").write(U)
+print("unica black-oferta", len(U), U.count('class="pl__vit"'))
