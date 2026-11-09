@@ -218,6 +218,7 @@ body:not(.m-d9) .d9-only, body:not(.m-depois) .after-only {{ display: none !impo
 /* 08/11 (cliente): botão com a presença do Aniversário (verde vivo, mais alto, brilho) e barra fixa do celular sólida */
 .btn {{ min-height: 70px; background: #26c03d; font-weight: 800; letter-spacing: .02em; box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset, 0 10px 30px -6px rgba(38,192,61,.65), 0 0 46px -10px rgba(38,192,61,.8); }}
 .btn:hover {{ background: #2fd14a; }}
+@media (max-width: 899px) {{ .btn {{ font-size: clamp(14.5px, 4.3vw, 20px); white-space: nowrap; }} }}
 .dock {{ background: #0b0a08 !important; border-top: 1px solid rgba(250,171,0,.25); box-shadow: 0 -14px 30px rgba(0,0,0,.6); padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important; }}
 .dock .btn {{ min-height: 62px !important; font-size: clamp(17px, 4.9vw, 21px); }}
 .dock.on ~ .zap {{ bottom: calc(94px + env(safe-area-inset-bottom)) !important; width: 46px; height: 46px; }}
