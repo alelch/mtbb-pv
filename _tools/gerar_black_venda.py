@@ -15,7 +15,7 @@ BWCSS = "\n".join(l for l in bw.split("\n")[132:142])
 LMB = '<span class="lmb" role="img" aria-label="LOMBADA"><svg class="lmb-ic" viewBox="8 10 84 82" aria-hidden="true"><rect x="8" y="30" width="20" height="62" rx="3" fill="#14523e"/><rect x="30" y="16" width="22" height="76" rx="3" fill="#faab00"/><rect x="54" y="24" width="18" height="68" rx="3" fill="#b5402e"/><rect x="74" y="10" width="18" height="82" rx="3" fill="currentColor"/><rect x="12" y="78" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="12" y="84" width="12" height="3" fill="#f3f0e8" opacity=".85"/><rect x="34" y="78" width="14" height="3" fill="#fff" opacity=".85"/><rect x="34" y="84" width="14" height="3" fill="#fff" opacity=".85"/><circle cx="63" cy="36" r="4" fill="#f3f0e8"/><rect x="78" y="78" width="10" height="3" fill="#faab00"/><rect x="78" y="84" width="10" height="3" fill="#faab00"/></svg>LOMBADA</span>'
 SETA = '<svg viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h25M21 6l6 6-6 6"/></svg>'
 CK = '<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
-CTA = f'<a class="btn" href="#oferta" data-cta>Quero entrar na Black {SETA}</a>'
+CTA = f'<a class="btn" href="#oferta" data-cta>Clique para garantir sua vaga</a>'
 CLOCK = '<div class="clock" data-clock aria-label="Tempo até a meia-noite"></div>'
 
 # a pilha: o pacote do Aniversário (thebookbusiness.com.br/aula-8-semanas), sem o Retiro; encontros por 3 anos
@@ -1135,7 +1135,7 @@ footer .legal {{ max-width: 720px; margin: 14px auto 0; }}
   <p class="legal"><b>Aviso Legal:</b> “Nenhuma informação contida neste site deve ser interpretada como uma afirmação de resultados ou de retornos financeiros. Qualquer referência a desempenho passado ou potencial é uma estratégia elaborada no contexto individual de cada autor, e não deve ser interpretada como recomendação ou garantia de resultados específicos.”</p>
 </footer>
 
-<div class="dock" id="dock"><a class="btn" href="#oferta" data-cta>Quero entrar na Black {SETA}</a></div>
+<div class="dock" id="dock"><a class="btn" href="#oferta" data-cta>Clique para garantir sua vaga</a></div>
 <a class="zap" href="https://thebookbusiness.com.br/dezza" target="_blank" rel="noopener" aria-label="Falar com a Dezza no WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C8.86 3 3.02 8.83 3.02 16c0 2.3.6 4.53 1.74 6.5L3 29l6.68-1.75A12.95 12.95 0 0 0 16.04 29C23.2 29 29.04 23.17 29.04 16S23.2 3 16.04 3Zm0 23.62c-1.98 0-3.92-.53-5.61-1.54l-.4-.24-3.97 1.04 1.06-3.86-.26-.4a10.6 10.6 0 0 1-1.63-5.64c0-5.86 4.78-10.63 10.66-10.63 5.87 0 10.64 4.77 10.64 10.63 0 5.87-4.78 10.64-10.49 10.64Zm5.83-7.96c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.9-1.78-2.22-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.14 3.09 1.3 3.3c.16.21 2.25 3.43 5.45 4.81.76.33 1.36.53 1.82.67.77.24 1.46.21 2.01.13.61-.09 1.89-.77 2.15-1.52.27-.74.27-1.38.19-1.52-.08-.13-.29-.21-.61-.37Z"/></svg></a>
 
 <script>
@@ -1465,7 +1465,7 @@ for slug, v in VARIANTES.items():
     P = P.replace('<p class="kick h__kick">Inscrições liberadas</p>', '<p class="kick h__kick">%s</p>' % v['kick'])
     P = re.sub(r'<p class="aluno-lk">.*?</p>', '', P)
     # 08/11 (cliente): na página de aluno/vitalício o botão é 'Ativar cashback de R$ 1.500/2.000'
-    P = P.replace('>Quero entrar na Black ', '>Ativar cashback de %s ' % ('R$ 1.500' if v['preco'] == 'R$ 1.000' else 'R$ 2.000'))
+    # 08/11 noite (cliente): botão sempre 'Clique para garantir sua vaga' (como no Aniversário)
     P = re.sub(r'<title>[^<]*</title>', '<title>%s</title>' % v['title'], P, count=1)
     P = (P.replace('src="assets/', 'src="../ae8a9e17e350/assets/')
           .replace('https://metodo.thebookbusiness.com.br/ae8a9e17e350/"', 'https://metodo.thebookbusiness.com.br/%s/"' % slug))
