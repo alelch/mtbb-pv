@@ -1583,3 +1583,35 @@ for slug, v in VARIANTES.items():
     os.makedirs(f"{R}/{slug}", exist_ok=True)
     open(f"{R}/{slug}/index.html", "w", encoding="utf-8").write(P)
     print(v['rot'], slug, len(P))
+
+# ── 09/11 manhã (cliente): "não quero mais esconder as páginas, quero elas na sua URL final".
+# A oferta passa a morar direto em /black-liberada/, /black-liberada-alunos/ e /black-liberada-vitalicio/.
+# Antes de 09/11 20h (Brasília) cada uma manda para o cadastro de antes (como já era); ?modo=... fura a trava para conferir.
+# Os endereços escondidos viram só um redirecionamento para o endereço final (links antigos continuam funcionando).
+FINAIS = [('ae8a9e17e350', 'black-liberada', 'black-week-organico', 'liberada'),
+          ('eda7d6898635', 'black-liberada-alunos', 'black-week-alunos', 'liberada-alunos'),
+          ('c966d3cc27f2', 'black-liberada-vitalicio', 'black-week-vitalicio', 'liberada-vitalicio')]
+_NOVO = {s: d for s, d, _, _ in FINAIS}
+for slug, dest, antes, src in FINAIS:
+    P = open(f"{R}/{slug}/index.html", encoding="utf-8").read()
+    P = P.replace('src="assets/', 'src="../ae8a9e17e350/assets/').replace('href="assets/', 'href="../ae8a9e17e350/assets/')
+    P = P.replace('/ae8a9e17e350/assets/', '@@ASSETS@@')
+    for s, d in _NOVO.items():
+        P = P.replace('/%s/' % s, '/%s/' % d)
+    P = P.replace('@@ASSETS@@', '/ae8a9e17e350/assets/')
+    trava = ("<script>(function(){var s=location.search;"
+             "if(!/[?&]modo=/.test(s)&&Date.now()<Date.UTC(2026,10,9,23,0,0)){location.replace('/%s/'+(s||'?src=%s-antes')+location.hash);return}"
+             "if(!s&&history.replaceState)history.replaceState(null,'',location.pathname+'?src=%s'+location.hash)})();</script>") % (antes, src, src)
+    P = re.sub(r'(<head[^>]*>)', lambda m: m.group(1) + trava, P, count=1)
+    assert trava in P and slug not in P.replace('/ae8a9e17e350/assets/', ''), dest
+    os.makedirs(f"{R}/{dest}", exist_ok=True)
+    open(f"{R}/{dest}/index.html", "w", encoding="utf-8").write(P)
+    open(f"{R}/{slug}/index.html", "w", encoding="utf-8").write(
+        '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow">'
+        '<title>Black Week Motorizada</title><script>location.replace("/%s/"+location.search+location.hash)</script>'
+        '<meta http-equiv="refresh" content="0; url=/%s/"></head><body><a href="/%s/">Ir para a Black Week Motorizada</a></body></html>'
+        % (dest, dest, dest))
+    print("final", dest, len(P))
+# curta (descartada) aponta direto para o endereço final
+_c = open(f"{R}/5c0424242e97/index.html", encoding="utf-8").read().replace('/ae8a9e17e350/"', '/black-liberada/"')
+open(f"{R}/5c0424242e97/index.html", "w", encoding="utf-8").write(_c)
