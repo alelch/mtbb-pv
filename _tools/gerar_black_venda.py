@@ -1521,6 +1521,7 @@ for slug, v in VARIANTES.items():
       '.cbk__a{font-size:22px;font-weight:700;color:#fff}.cbk__m{font-size:22px;font-weight:800;color:#3ddc57}.cbk__t{flex-basis:100%;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3ddc57;text-align:center}'
       '@media (max-width:899px){.dock .btn{font-size:clamp(14px,4.1vw,18px)!important;padding:0 10px!important}.dock .btn svg{display:none}}'
       '@media (max-width:899px){a.btn[data-cta]:not(.dock a){font-size:clamp(14.5px,4.3vw,20px);white-space:nowrap;gap:8px}}'
+      '.price__cta{max-width:640px!important}'
       '.pl{max-width:640px;margin:6px auto 4px;display:grid;gap:12px;font-family:Poppins,sans-serif}'
       '.pl__por{margin:0 0 2px;text-align:center;font-size:clamp(20px,5.6vw,26px);font-weight:800;color:#fff}'
       '.pl__r{display:block;padding:18px 20px;border-radius:12px;background:#171513;text-align:left}'
