@@ -9,8 +9,8 @@ REC = ('<a class="rec" href="#oferta" data-cta data-rec><b>Parcelado Hotmart</b>
        '<span>Parcele sem usar o seu limite</span></a>')
 CSS = ('<style>/*rec*/a.rec{display:block;max-width:520px;margin:12px auto 0;padding:12px 16px;border:1.5px solid rgba(255,255,255,.35);'
        'border-radius:12px;color:#fff;text-decoration:none;text-align:center;font-family:Poppins,sans-serif;line-height:1.3}'
-       'a.rec b{display:block;font-size:15px;font-weight:700}a.rec span{display:block;margin-top:3px;font-size:14px;font-weight:600;color:#4da3ff}'
-       'a.rec:hover{border-color:#faab00}</style>')
+       'a.rec b{display:block;font-size:15px;font-weight:700}a.rec span{display:block;margin-top:3px;font-size:14px;font-weight:600;color:#fff}'
+       'a.rec:hover{background:#1a5fd0}</style>')
 JS = ("<script>/*rec*/window.__REC=false;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-cta],[data-trv]');"
       "if(a)window.__REC=a.hasAttribute('data-rec')},true);"
       "window.recUrl=function(q,h){var O={geral:'va4f27ws',aluno:'ye3d1313'};if(!window.__REC||!O[q])return h;"
