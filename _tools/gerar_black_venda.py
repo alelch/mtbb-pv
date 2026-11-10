@@ -1554,11 +1554,11 @@ for slug, v in VARIANTES.items():
       '.price__cta{max-width:640px!important}'
       '.pl{max-width:640px;margin:6px auto 4px;display:grid;gap:12px;font-family:Poppins,sans-serif}'
       '.pl__por{margin:0 0 2px;text-align:center;font-size:clamp(20px,5.6vw,26px);font-weight:800;color:#fff}'
-      '.pl__r{display:block;padding:18px 20px;border-radius:12px;background:#171513;text-align:left}'
-      '.pl__r span{display:block;font-size:15px;color:#fff}'
-      '.pl__r b{display:block;margin-top:8px;font-size:clamp(24px,6.6vw,30px);font-weight:600;color:#faab00;line-height:1.1}'
-      '.pl__r small{display:block;margin-top:6px;font-size:13.5px;color:#a8a399}'
-      '.pl__r--on{box-shadow:inset 0 0 0 1.5px rgba(250,171,0,.55)}'
+      '.pl__r{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:16px;padding:18px 20px;border-radius:12px;background:#171513;text-align:left}'
+      '.pl__r span{grid-column:1;grid-row:1/3;font-size:15px;line-height:1.35;color:#fff}'
+      '.pl__r b{grid-column:2;display:block;margin:0;text-align:right;white-space:nowrap;font-size:clamp(19px,5.2vw,26px);font-weight:600;color:#faab00;line-height:1.1}'
+      '.pl__r small{grid-column:2;display:block;margin-top:4px;text-align:right;white-space:nowrap;font-size:12.5px;color:#a8a399}'
+      '.pl__r--on{box-shadow:none}'
       '.price__de{font-size:clamp(20px,5.6vw,26px)!important;font-weight:800;color:#fff!important}.price__de b{font-weight:800}.price__de s{color:#ef6b5f!important;text-decoration:line-through!important;text-decoration-color:#ef6b5f!important;text-decoration-thickness:3px!important}'
       'body.trava .ca .cp-u,body:not(.trava) .ca .cp-l{display:none}body:not(.trava) .ca .cp-u{color:#3ddc57}body:not(.trava) .ca{cursor:default}'
       '</style>')
@@ -1659,9 +1659,10 @@ U = re.sub(r'      <div class="ca" aria-label="Cashback de aluno[^\n]*</div>\n',
 # 10/11 (cliente): sem o formulário (JS falhou), o botão cai no preço normal, não no de aluno
 U = U.replace("CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black-alunos', depois: 'https://thebookbusiness.com.br/oferta-black-alunos' }", "CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black26', depois: 'https://thebookbusiness.com.br/oferta-black26' }")
 _VIT = '<p class="pl__vit">É aluno vitalício? O seu preço é ainda menor e aparece no próximo passo.</p>'
-U = U.replace('<small>ou R$ 1.000 à vista</small></div></div>', '<small>ou R$ 1.000 à vista</small></div>' + _VIT + '</div>')
+# 10/11 (cliente): sem a frase do vitalício embaixo dos preços
+# U = U.replace('<small>ou R$ 1.000 à vista</small></div></div>', '<small>ou R$ 1.000 à vista</small></div>' + _VIT + '</div>')
 U = U.replace('</head>', '<style>.pl__vit{margin:0;text-align:center;font-size:14px;line-height:1.45;color:#cfc9bc}</style></head>', 1)
-assert U.count('class="pl__vit"') >= 2 and 'data-pag="geral"' in U and 'Inscrições liberadas' in U and 'black-liberada-alunos/"' not in U
+assert 'data-pag="geral"' in U and 'Inscrições liberadas' in U and 'black-liberada-alunos/"' not in U
 os.makedirs(f"{R}/black-oferta", exist_ok=True)
 open(f"{R}/black-oferta/index.html", "w", encoding="utf-8").write(U)
 print("unica black-oferta", len(U), U.count('class="pl__vit"'))
