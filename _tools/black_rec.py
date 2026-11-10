@@ -6,10 +6,10 @@ import os, re
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CTA = '<a class="btn" href="#oferta" data-cta>Clique para garantir sua vaga</a>'
 REC = ('<a class="rec" href="#oferta" data-cta data-rec><b>Parcelado Hotmart</b>'
-       '<span>Parcele sem usar o limite do cartão (Pix, boleto ou cartão recorrente)</span></a>')
+       '<span>Parcele sem usar o seu limite</span></a>')
 CSS = ('<style>/*rec*/a.rec{display:block;max-width:520px;margin:12px auto 0;padding:12px 16px;border:1.5px solid rgba(255,255,255,.35);'
        'border-radius:12px;color:#fff;text-decoration:none;text-align:center;font-family:Poppins,sans-serif;line-height:1.3}'
-       'a.rec b{display:block;font-size:15px;font-weight:700}a.rec span{display:block;margin-top:3px;font-size:12.5px;color:#cfc9bc}'
+       'a.rec b{display:block;font-size:15px;font-weight:700}a.rec span{display:block;margin-top:3px;font-size:14px;font-weight:600;color:#faab00}'
        'a.rec:hover{border-color:#faab00}</style>')
 JS = ("<script>/*rec*/window.__REC=false;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-cta],[data-trv]');"
       "if(a)window.__REC=a.hasAttribute('data-rec')},true);"
