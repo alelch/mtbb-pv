@@ -1653,6 +1653,8 @@ U = U.replace('id="pre" data-pag="aluno"', 'id="pre" data-pag="geral"', 1)
 U = re.sub(r'<title>[^<]*</title>', '<title>Black Week Motorizada</title>', U, count=1)
 U = U.replace('https://metodo.thebookbusiness.com.br/black-liberada-alunos/"', 'https://metodo.thebookbusiness.com.br/black-oferta/"')
 U = U.replace("'?src=liberada-alunos'", "'?src=oferta'")
+# 10/11 (cliente): sem o formulário (JS falhou), o botão cai no preço normal, não no de aluno
+U = U.replace("CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black-alunos', depois: 'https://thebookbusiness.com.br/oferta-black-alunos' }", "CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black26', depois: 'https://thebookbusiness.com.br/oferta-black26' }")
 _VIT = '<p class="pl__vit">É aluno vitalício? O seu preço é ainda menor e aparece no próximo passo.</p>'
 U = U.replace('<small>ou R$ 1.000 à vista</small></div></div>', '<small>ou R$ 1.000 à vista</small></div>' + _VIT + '</div>')
 U = U.replace('</head>', '<style>.pl__vit{margin:0;text-align:center;font-size:14px;line-height:1.45;color:#cfc9bc}</style></head>', 1)
