@@ -1672,3 +1672,6 @@ for _d in ("black-liberada-alunos", "black-liberada-vitalicio", "black-oferta"):
     _p = f"{R}/{_d}/index.html"; _s = open(_p, encoding="utf-8").read()
     _s2 = re.sub(r'(<p class="resumo__por">por apenas</p>\s*<div class="pl">)\s*<p class="pl__por">Por apenas:</p>', r'\1', _s)
     if _s2 != _s: open(_p, "w", encoding="utf-8").write(_s2); print("resumo sem Por apenas duplicado:", _d)
+
+# 10/11: segundo botão Parcelado Hotmart (recorrência) na geral e na de aluno
+exec(open(f"{R}/_tools/black_rec.py", encoding="utf-8").read())
