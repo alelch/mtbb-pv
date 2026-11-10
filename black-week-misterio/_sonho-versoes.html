@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sonho · versões</title>
+<style>
+@font-face { font-family: "Poppins"; font-weight: 300; src: url("../assets/fonts/poppins-300.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 400; src: url("../assets/fonts/poppins-400.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 500; src: url("../assets/fonts/poppins-500.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 600; src: url("../assets/fonts/poppins-600.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 700; src: url("../assets/fonts/poppins-700.woff2") format("woff2"); }
+:root { --amber: #faab00; --ink: #fff; --ink-2: #c9c5bd; --ink-3: #8a867f; --line: #222126;
+  --gold: linear-gradient(100deg, #f6c453, #fde7a8 30%, #faab00 55%, #e08a00 80%, #f6c453); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #000; color: var(--ink); font-family: "Poppins", sans-serif; -webkit-font-smoothing: antialiased; }
+.v { padding: 64px 20px; border-top: 1px solid var(--line); text-align: center; overflow: hidden; }
+.tag { display: inline-block; margin-bottom: 10px; padding: 6px 14px; border-radius: 99px; background: #2a1d00; color: var(--amber); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.why { max-width: 520px; margin: 0 auto 36px; font-size: 13px; color: var(--ink-3); }
+.lead { font-size: 14px; font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.auto { margin-top: 40px; font-size: clamp(20px, 5.4vw, 28px); font-weight: 600; text-wrap: balance; }
+.amber { color: var(--amber); }
+.gold { background: var(--gold); -webkit-background-clip: text; background-clip: text; color: transparent; }
+svg.ic { width: 22px; height: 22px; stroke: var(--amber); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* A · cartões com ícone */
+.cards { display: grid; gap: 12px; max-width: 420px; margin: 28px auto 0; text-align: left; }
+.card { display: flex; align-items: center; gap: 16px; padding: 18px 18px; border: 1px solid #26252a; border-radius: 16px; background: linear-gradient(160deg, #141317, #0b0b0d); }
+.card .ico { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(250, 171, 0, .1); }
+.card p { font-size: 16px; line-height: 1.4; }
+.card b { font-weight: 600; color: var(--amber); }
+
+/* B · um por vez, editorial */
+.ed { max-width: 420px; margin: 20px auto 0; }
+.ed p { padding: 26px 0; border-bottom: 1px solid var(--line); font-size: clamp(22px, 6.2vw, 30px); font-weight: 500; line-height: 1.25; letter-spacing: -.01em; text-wrap: balance; }
+.ed p:last-child { border-bottom: 0; }
+.ed p span { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 600; letter-spacing: .2em; color: var(--amber); }
+
+/* C · grade de ícones */
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 420px; margin: 28px auto 0; }
+.cell { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 22px 12px; border: 1px solid #26252a; border-radius: 16px; background: #0f0e11; }
+.cell:last-child { grid-column: 1 / -1; }
+.cell svg.ic { width: 30px; height: 30px; }
+.cell p { font-size: 14px; line-height: 1.4; color: var(--ink-2); text-wrap: balance; }
+.cell p b { display: block; font-size: 16px; font-weight: 600; color: var(--ink); }
+
+/* D · um dia com o motor (linha vertical) */
+.day { position: relative; max-width: 380px; margin: 30px auto 0; text-align: left; }
+.day::before { content: ""; position: absolute; left: 22px; top: 22px; bottom: 22px; width: 2px; background: linear-gradient(var(--amber), rgba(250, 171, 0, .15)); }
+.step { position: relative; display: flex; gap: 18px; padding: 12px 0; }
+.step .dot { flex: none; z-index: 1; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #000; border: 1.5px solid var(--amber); }
+.step p { padding-top: 4px; font-size: 16px; line-height: 1.4; color: var(--ink-2); }
+.step p b { display: block; margin-bottom: 2px; font-size: 17px; font-weight: 600; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-post" viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M9 7h6M9 11h6M9 15h3"/></symbol>
+  <symbol id="i-premio" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 21h8"/></symbol>
+  <symbol id="i-leitor" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4"/><circle cx="17" cy="9" r="2.6"/><path d="M16 14.6c2.6.2 4.4 2 5 5.4"/></symbol>
+  <symbol id="i-inf" viewBox="0 0 24 24"><path d="M7.5 9c-2 0-3.5 1.4-3.5 3s1.5 3 3.5 3c3.5 0 5.5-6 9-6 2 0 3.5 1.4 3.5 3s-1.5 3-3.5 3c-3.5 0-5.5-6-9-6z"/></symbol>
+</svg>
+
+<section class="v">
+  <span class="tag">A · Cartões com ícone</span>
+  <p class="why">Cada sonho num cartão, com um ícone que resume. Leitura rápida, cara de produto.</p>
+  <p class="lead">Todo autor já sonhou em</p>
+  <div class="cards">
+    <div class="card"><span class="ico"><svg class="ic"><use href="#i-sol"/></svg></span><p>acordar com <b>o que fazer pelo livro já definido.</b></p></div>
+    <div class="card"><span class="ico"><svg class="ic"><use href="#i-post"/></svg></span><p>abrir as redes com <b>o post já pensado.</b></p></div>
+    <div class="card"><span class="ico"><svg class="ic"><use href="#i-premio"/></svg></span><p><b>aproveitar</b> cada prêmio, feira e edital.</p></div>
+    <div class="card"><span class="ico"><svg class="ic"><use href="#i-leitor"/></svg></span><p><b>ganhar mais leitores</b> a&nbsp;cada ação.</p></div>
+    <div class="card"><span class="ico"><svg class="ic"><use href="#i-inf"/></svg></span><p>e <b>nunca mais ver o livro parar.</b></p></div>
+  </div>
+  <p class="auto">Tudo isso, <span class="amber">de forma automática.</span></p>
+</section>
+
+<section class="v">
+  <span class="tag">B · Editorial, um por vez</span>
+  <p class="why">Só tipografia, sem ícone nem caixa. Cada sonho numa faixa, separados por um fio. Elegante, de leitura lenta.</p>
+  <p class="lead">Todo autor já sonhou em</p>
+  <div class="ed">
+    <p><span>01</span>acordar com o que fazer pelo livro <span class="amber" style="display:inline;margin:0;font-size:inherit;letter-spacing:0;font-weight:600">já definido.</span></p>
+    <p><span>02</span>abrir as redes com o post <span class="amber" style="display:inline;margin:0;font-size:inherit;letter-spacing:0;font-weight:600">já pensado.</span></p>
+    <p><span>03</span>aproveitar cada prêmio, <span class="amber" style="display:inline;margin:0;font-size:inherit;letter-spacing:0;font-weight:600">feira e edital.</span></p>
+    <p><span>04</span>ganhar mais leitores <span class="amber" style="display:inline;margin:0;font-size:inherit;letter-spacing:0;font-weight:600">a&nbsp;cada ação.</span></p>
+    <p><span>05</span>e nunca mais ver <span class="amber" style="display:inline;margin:0;font-size:inherit;letter-spacing:0;font-weight:600">o livro parar.</span></p>
+  </div>
+  <p class="auto">Tudo isso, <span class="amber">de forma automática.</span></p>
+</section>
+
+<section class="v">
+  <span class="tag">C · Grade de ícones</span>
+  <p class="why">Cinco quadros em grade, ícone grande e frase curta. A mais compacta: cabe quase toda numa tela.</p>
+  <p class="lead">Todo autor já sonhou em</p>
+  <div class="grid">
+    <div class="cell"><svg class="ic"><use href="#i-sol"/></svg><p><b>Acordar sabendo</b>o que fazer pelo livro</p></div>
+    <div class="cell"><svg class="ic"><use href="#i-post"/></svg><p><b>O post pronto</b>ao abrir as redes</p></div>
+    <div class="cell"><svg class="ic"><use href="#i-premio"/></svg><p><b>Cada prêmio</b>feira e edital aproveitado</p></div>
+    <div class="cell"><svg class="ic"><use href="#i-leitor"/></svg><p><b>Mais leitores</b>a cada ação</p></div>
+    <div class="cell"><svg class="ic"><use href="#i-inf"/></svg><p><b>Nunca mais</b>ver o livro parar</p></div>
+  </div>
+  <p class="auto">Tudo isso, <span class="amber">de forma automática.</span></p>
+</section>
+
+<section class="v">
+  <span class="tag">D · O caminho do livro</span>
+  <p class="why">Uma linha que liga os sonhos, do primeiro passo do dia até o livro que não para. Conta uma progressão.</p>
+  <p class="lead">Todo autor já sonhou em</p>
+  <div class="day">
+    <div class="step"><span class="dot"><svg class="ic"><use href="#i-sol"/></svg></span><p><b>Acordar com o plano pronto</b>o que fazer pelo livro, já definido.</p></div>
+    <div class="step"><span class="dot"><svg class="ic"><use href="#i-post"/></svg></span><p><b>Abrir as redes com o post pensado</b>sem travar na tela em branco.</p></div>
+    <div class="step"><span class="dot"><svg class="ic"><use href="#i-premio"/></svg></span><p><b>Aproveitar cada oportunidade</b>prêmios, feiras e editais.</p></div>
+    <div class="step"><span class="dot"><svg class="ic"><use href="#i-leitor"/></svg></span><p><b>Ganhar mais leitores</b>a cada ação.</p></div>
+    <div class="step"><span class="dot"><svg class="ic"><use href="#i-inf"/></svg></span><p><b>E nunca mais ver o livro parar.</b></p></div>
+  </div>
+  <p class="auto">Tudo isso, <span class="amber">de forma automática.</span></p>
+</section>
+
+</body>
+</html>
