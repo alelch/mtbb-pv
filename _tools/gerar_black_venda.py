@@ -1654,7 +1654,8 @@ U = re.sub(r'<title>[^<]*</title>', '<title>Black Week Motorizada</title>', U, c
 U = U.replace('https://metodo.thebookbusiness.com.br/black-liberada-alunos/"', 'https://metodo.thebookbusiness.com.br/black-oferta/"')
 U = U.replace("'?src=liberada-alunos'", "'?src=oferta'")
 # 10/11 (cliente): sem o selo de cashback de aluno no topo
-U = re.sub(r'      <div class="ca" aria-label="Cashback de aluno[^\n]*</div>\n', '', U, count=1)
+_HK = re.search(r'      <div class="hk2">.*?\n      </div>\n', open(f"{R}/black-liberada/index.html", encoding="utf-8").read(), re.S).group(0)
+U = re.sub(r'      <div class="ca" aria-label="Cashback de aluno[^\n]*</div>\n', lambda m: _HK, U, count=1)  # topo igual ao da página normal
 # 10/11 (cliente): sem o formulário (JS falhou), o botão cai no preço normal, não no de aluno
 U = U.replace("CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black-alunos', depois: 'https://thebookbusiness.com.br/oferta-black-alunos' }", "CHECKOUT = { d9: 'https://thebookbusiness.com.br/oferta-black26', depois: 'https://thebookbusiness.com.br/oferta-black26' }")
 _VIT = '<p class="pl__vit">É aluno vitalício? O seu preço é ainda menor e aparece no próximo passo.</p>'
