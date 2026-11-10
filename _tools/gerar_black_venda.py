@@ -1665,3 +1665,9 @@ assert U.count('class="pl__vit"') >= 2 and 'data-pag="geral"' in U and 'Inscriç
 os.makedirs(f"{R}/black-oferta", exist_ok=True)
 open(f"{R}/black-oferta/index.html", "w", encoding="utf-8").write(U)
 print("unica black-oferta", len(U), U.count('class="pl__vit"'))
+
+# 10/11 (cliente): no resumo das páginas de 2 preços saía "POR APENAS" + "Por apenas:" (dois seguidos). Fica só o primeiro.
+for _d in ("black-liberada-alunos", "black-liberada-vitalicio", "black-oferta"):
+    _p = f"{R}/{_d}/index.html"; _s = open(_p, encoding="utf-8").read()
+    _s2 = re.sub(r'(<p class="resumo__por">por apenas</p>\s*<div class="pl">)\s*<p class="pl__por">Por apenas:</p>', r'\1', _s)
+    if _s2 != _s: open(_p, "w", encoding="utf-8").write(_s2); print("resumo sem Por apenas duplicado:", _d)
