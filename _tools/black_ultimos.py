@@ -4,9 +4,8 @@ Idempotente."""
 import os
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OLD = '<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p>'
-NEW = ('<p class="after-only ult">Últimos dias · A Black termina em</p>'
-       '<div class="clock after-only" data-fim aria-label="Tempo até o fim da Black"></div>')
-CSS = ('<style>/*ult*/.m-depois .obar{background:#d62828;color:#fff}.obar p.ult{max-width:170px;padding:0;font-weight:800;color:#fff}'
+NEW = '<p class="after-only ult">Últimos dias · <b>Black Week Motorizada</b></p>'  # 13/11: sem timer (cliente)
+CSS = ('<style>/*ult*/.m-depois .obar{background:#d62828;color:#fff}.obar p.ult{max-width:none;padding:5px 0;font-weight:800;color:#fff}'
        '.obar [data-fim] span{background:#111;color:#fff}.obar [data-fim] small{color:#ffd6d6}</style>')
 JS = ("<script>/*ult*/(function(){var FIM=new Date('2026-11-16T23:59:59-03:00').getTime();function p(n){return(n<10?'0':'')+n}"
       "function t(){var s=Math.max(0,Math.floor((FIM-Date.now())/1000)),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60;"
@@ -17,5 +16,5 @@ for d in ("black-liberada", "black-liberada-alunos", "black-liberada-vitalicio",
     p = f"{R}/{d}/index.html"; s = open(p, encoding="utf-8").read()
     if "/*ult*/" in s: print("já tinha:", d); continue
     assert s.count(OLD) == 1, d
-    s = s.replace(OLD, NEW).replace("</head>", CSS + "</head>", 1).replace("</body>", JS + "</body>", 1)
+    s = s.replace(OLD, NEW).replace("</head>", CSS + "</head>", 1)
     open(p, "w", encoding="utf-8").write(s); print("últimos dias:", d)
