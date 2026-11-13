@@ -1675,3 +1675,6 @@ for _d in ("black-liberada-alunos", "black-liberada-vitalicio", "black-oferta"):
 
 # 10/11: segundo botão Parcelado Hotmart (recorrência) na geral e na de aluno
 exec(open(f"{R}/_tools/black_rec.py", encoding="utf-8").read())
+
+# 13/11: tarja vermelha de últimos dias (fim 16/11 23h59)
+exec(open(f"{R}/_tools/black_ultimos.py", encoding="utf-8").read())
