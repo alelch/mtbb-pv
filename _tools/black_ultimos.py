@@ -5,7 +5,7 @@ import os
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OLD = '<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p>'
 NEW = '<p class="after-only ult">Vai acabar · <b>Black Week Motorizada</b></p>'  # 13/11: sem timer (cliente)
-CSS = ('<style>/*ult*/.m-depois .obar{background:#d62828;color:#fff}.obar p.ult{max-width:none;padding:5px 0;font-weight:800;color:#fff}'
+CSS = ('<style>/*ult*/.m-depois .obar{background:#d62828;color:#fff}.obar p.ult{max-width:none;padding:6px 0;font-size:clamp(16px,4.4vw,20px);font-weight:800;line-height:1.25;text-align:center;color:#fff}'
        '.obar [data-fim] span{background:#111;color:#fff}.obar [data-fim] small{color:#ffd6d6}</style>')
 JS = ("<script>/*ult*/(function(){var FIM=new Date('2026-11-16T23:59:59-03:00').getTime();function p(n){return(n<10?'0':'')+n}"
       "function t(){var s=Math.max(0,Math.floor((FIM-Date.now())/1000)),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60;"
