@@ -4,7 +4,7 @@ Idempotente."""
 import os
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OLD = '<p class="after-only">Inscrições abertas · <b>Black Week Motorizada</b></p>'
-NEW = '<p class="after-only ult">Últimos dias · <b>Black Week Motorizada</b></p>'  # 13/11: sem timer (cliente)
+NEW = '<p class="after-only ult">Vai acabar · <b>Black Week Motorizada</b></p>'  # 13/11: sem timer (cliente)
 CSS = ('<style>/*ult*/.m-depois .obar{background:#d62828;color:#fff}.obar p.ult{max-width:none;padding:5px 0;font-weight:800;color:#fff}'
        '.obar [data-fim] span{background:#111;color:#fff}.obar [data-fim] small{color:#ffd6d6}</style>')
 JS = ("<script>/*ult*/(function(){var FIM=new Date('2026-11-16T23:59:59-03:00').getTime();function p(n){return(n<10?'0':'')+n}"
