@@ -4,20 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f0f0f">
 <title>Aula exclusiva Lançamento 90D</title>
 <!--
   13/11/2026 · Sala própria da aula diária do L90D (substitui o HotWebinar).
-  - Todo dia às 20h (Brasília) o vídeo roda no mesmo ponto para todo mundo (não dá para adiantar).
-  - Vídeo: YouTube não listado CInJET9aMj8 = aula de 13/10 editada (v12, 1:38:47), igual à do HotWebinar.
+  Layout de página de vídeo (vídeo à esquerda, chat à direita; no celular o vídeo fica preso no topo).
+  - Todo dia às 20h (Brasília) o vídeo roda no mesmo ponto para todo mundo (não dá para adiantar nem pausar).
+  - Vídeo: YouTube não listado CInJET9aMj8 = aula de 13/10 editada (v12, 1:38:47).
   - Chat: mensagens REAIS da aula de 13/10 (chat.json, [segundo, nome, texto, 1=equipe]).
-  - Botão da oferta aos 1:20:19 → liberada-90d/?aula=hw&src=hotwebinar&d=<dia> (mesmo link do HotWebinar,
-    então a página carimba o dia e o Miolo conta como venda do webinário).
-  - Presença → Edge Function sala-90d → sala90d_presenca + tags AC 376-379 (as mesmas do HotWebinar).
-  - Entrada sem formulário: ?nome=&email=&telefone= (o motor do DuoChat já manda assim).
+    Quem escreve recebe resposta da assistente (IA com o cérebro da Bianca) quando é dúvida; o resto fica para a equipe.
+  - Botão da oferta aos 1:20:19 → liberada-90d/?aula=hw&src=hotwebinar&d=<dia>.
+  - Presença → Edge Function sala-90d → sala90d_presenca + tags AC 376-379 (+ webhook opcional).
+  - Só mostra o que é real: "N assistindo agora" (se ligado no Miolo) e aviso de venda real do dia.
+  - Entrada: link normal (pede nome e e-mail) ou link mágico ?nome=&email=&telefone=.
   - Teste: ?teste=1 (não mexe no AC) · &t=4800 (começa nesse segundo) · &estado=espera|fim
-  Nada de "ao vivo", contador de pessoas, vagas ou vendas simuladas (regra do cliente).
 -->
-<link rel="preconnect" href="https://www.youtube.com">
+<link rel="preconnect" href="https://www.youtube-nocookie.com">
+<link rel="preconnect" href="https://i.ytimg.com">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../liberada-90d/assets/2026/03/poppins-v24-latin-600.woff2">
 <script>
 /* Meta Pixel HÍBRIDO (padrão do repo): PageView beacon imediato nos 2 pixels, fbevents.js só no idle. */
@@ -37,148 +40,195 @@ if('requestIdleCallback'in window){requestIdleCallback(loadFb,{timeout:5000});}e
 @font-face{font-family:Poppins;font-weight:500;font-display:swap;src:url(../liberada-90d/assets/2026/03/poppins-v24-latin-500.woff2) format('woff2')}
 @font-face{font-family:Poppins;font-weight:600;font-display:swap;src:url(../liberada-90d/assets/2026/03/poppins-v24-latin-600.woff2) format('woff2')}
 @font-face{font-family:Poppins;font-weight:700;font-display:swap;src:url(../liberada-90d/assets/2026/03/poppins-v24-latin-700.woff2) format('woff2')}
-:root{--bg:#131313;--card:#1c1c1c;--card2:#242424;--linha:#2e2e2e;--txt:#f2f2f2;--sub:#a9a9a9;--verde:#A0EC50;--verde-esc:#0f1a05}
+:root{--bg:#0f0f0f;--sup:#212121;--sup2:#272727;--linha:#303030;--txt:#f1f1f1;--sub:#aaa;--verde:#A0EC50;--verde-esc:#0f1a05;--topo:56px}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--txt);font-family:Poppins,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-body{min-height:100vh;min-height:100dvh}
-p,li{text-wrap:pretty}h1,h2{text-wrap:balance}
+p,li{text-wrap:pretty}h1,h2,h3{text-wrap:balance}
 [hidden]{display:none!important}
-.topo{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--linha)}
-.topo b{font-weight:600;font-size:15px}
-.topo span{color:var(--sub);font-size:13px}
-.marca{width:8px;height:8px;border-radius:50%;background:var(--verde);flex:none}
+button{font:inherit}
 
-/* ---- telas centrais (entrada, espera, fim) ---- */
-.centro{min-height:calc(100dvh - 50px);display:flex;align-items:center;justify-content:center;padding:32px 16px}
-.caixa{width:100%;max-width:520px;text-align:center}
-.selo{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--verde);border:1px solid rgba(160,236,80,.35);border-radius:99px;padding:6px 14px;margin-bottom:18px}
-.caixa h1{font-size:28px;line-height:1.25;font-weight:700;margin:0 0 12px}
-.caixa .hora{font-size:18px;font-weight:600;color:var(--verde);margin:0 0 14px}
-.caixa .promessa{font-size:16px;line-height:1.55;color:#d9d9d9;margin:0 auto 26px;max-width:440px}
-.relogio{display:flex;justify-content:center;gap:10px;margin:0 0 22px}
-.relogio div{background:var(--card);border:1px solid var(--linha);border-radius:12px;min-width:76px;padding:12px 6px}
-.relogio b{display:block;font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
-.relogio small{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.06em}
-.aviso{font-size:14px;color:var(--sub);line-height:1.5;margin:0}
-form.entrar{display:grid;gap:12px;text-align:left;margin-top:8px}
-form.entrar label{font-size:13px;color:var(--sub)}
-form.entrar input{width:100%;font:inherit;font-size:16px;color:var(--txt);background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:13px 14px;margin-top:6px}
-form.entrar input:focus{outline:2px solid var(--verde);outline-offset:1px;border-color:transparent}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;font:inherit;font-size:17px;font-weight:700;color:var(--verde-esc);background:var(--verde);border:0;border-radius:12px;padding:16px 20px;cursor:pointer;text-decoration:none;text-align:center}
-.btn:hover{filter:brightness(1.06)}
-.erro{color:#ff8a8a;font-size:13px;min-height:1em;margin:0}
+/* topo */
+.topo{position:sticky;top:0;z-index:20;height:var(--topo);display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:var(--bg)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.01em}
+.logo i{width:30px;height:22px;border-radius:7px;background:var(--verde);display:grid;place-items:center}
+.logo i::after{content:"";border-left:8px solid var(--verde-esc);border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px}
+.eu{width:34px;height:34px;border-radius:50%;background:#5b4bd6;display:grid;place-items:center;font-weight:600;font-size:15px;color:#fff;text-transform:uppercase}
 
-/* ---- sala ---- */
-.sala{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px;padding:20px;max-width:1500px;margin:0 auto}
-.palco{min-width:0}
-.video{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden}
+/* grade */
+.pg{display:grid;grid-template-columns:minmax(0,1fr) 402px;gap:24px;max-width:1720px;margin:0 auto;padding:8px 24px 40px}
+.col{min-width:0}
+.video{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
 .video #yt,.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.escudo{position:absolute;inset:0;z-index:2;cursor:pointer;display:flex;align-items:center;justify-content:center;background:transparent}
-.som{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.78);border:1px solid rgba(255,255,255,.2);color:#fff;font-weight:600;font-size:16px;padding:14px 22px;border-radius:99px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.escudo{position:absolute;inset:0;z-index:2;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.som{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.22);color:#fff;font-weight:600;font-size:16px;padding:14px 22px;border-radius:99px;box-shadow:0 8px 30px rgba(0,0,0,.45)}
 .som svg{width:22px;height:22px}
-.carregando{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:14px;z-index:1}
-.barra-video{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px}
-.barra-video h2{font-size:17px;font-weight:600;margin:0;line-height:1.35}
-.barra-video .tela{flex:none;font:inherit;font-size:13px;color:var(--sub);background:var(--card);border:1px solid var(--linha);border-radius:8px;padding:8px 12px;cursor:pointer}
-.oferta{margin-top:16px;background:linear-gradient(180deg,#1f2a12,#171d10);border:1px solid rgba(160,236,80,.45);border-radius:14px;padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;animation:sobe .5s ease}
-@keyframes sobe{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.oferta h3{margin:0 0 6px;font-size:18px;font-weight:700}
-.oferta p{margin:0;color:#d4dccb;font-size:14px;line-height:1.5}
-.oferta .preco{margin-top:8px;font-size:15px}
-.oferta .preco s{color:var(--sub)}
-.oferta .preco b{color:var(--verde);font-size:20px}
-.oferta .btn{width:auto;white-space:nowrap}
-.chat{background:var(--card);border:1px solid var(--linha);border-radius:14px;display:flex;flex-direction:column;height:calc(100dvh - 90px);min-height:420px;position:sticky;top:20px}
-.chat header{padding:14px 16px;border-bottom:1px solid var(--linha);font-weight:600;font-size:15px}
-.msgs{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px;overscroll-behavior:contain}
-.msg{font-size:14px;line-height:1.45;word-wrap:break-word}
-.msg b{font-weight:600;color:#cfcfcf;margin-right:6px}
-.msg.eq{background:var(--card2);border-left:3px solid var(--verde);padding:8px 10px;border-radius:6px}
-.msg.eq b{color:var(--verde)}
-.msg.eu b{color:#fff}
-.msg .tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--verde-esc);background:var(--verde);border-radius:4px;padding:1px 5px;margin-right:6px;vertical-align:1px}
-.chat form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--linha)}
-.chat input{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--txt);background:var(--bg);border:1px solid var(--linha);border-radius:10px;padding:10px 12px}
-.chat button{font:inherit;font-weight:600;font-size:14px;color:var(--verde-esc);background:var(--verde);border:0;border-radius:10px;padding:0 14px;cursor:pointer}
+.ctl{position:absolute;right:10px;bottom:10px;z-index:3;display:flex;gap:6px}
+.ctl button{width:38px;height:38px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;display:grid;place-items:center}
+.ctl svg{width:20px;height:20px}
 .video:fullscreen{border-radius:0}
 
-@media (max-width:980px){
-  .sala{grid-template-columns:1fr;padding:0;gap:0}
-  .video{border-radius:0}
-  .barra-video{padding:12px 16px 0}
-  .barra-video h2{font-size:15px}
-  .oferta{margin:14px 16px 0;grid-template-columns:1fr;padding:16px}
+/* capa: sala de espera e aula encerrada ficam dentro do player */
+.capa{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px;
+  background:linear-gradient(rgba(10,10,10,.72),rgba(10,10,10,.86)),url(https://i.ytimg.com/vi/CInJET9aMj8/maxresdefault.jpg) center/cover}
+.capa .selo{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--verde);border:1px solid rgba(160,236,80,.4);border-radius:99px;padding:5px 14px;margin-bottom:14px;background:rgba(0,0,0,.35)}
+.capa h2{margin:0 0 6px;font-size:clamp(18px,2.6vw,30px);font-weight:700;line-height:1.25;max-width:22em}
+.capa .quando{margin:0 0 16px;font-size:clamp(14px,1.5vw,18px);color:#ddd}
+.relogio{display:flex;gap:10px}
+.relogio div{background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.14);border-radius:12px;min-width:78px;padding:10px 6px;backdrop-filter:blur(4px)}
+.relogio b{display:block;font-size:clamp(22px,3vw,34px);font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.relogio small{font-size:10.5px;color:#bbb;text-transform:uppercase;letter-spacing:.07em}
+.capa .aviso{margin:14px 0 0;font-size:13.5px;color:#cfcfcf;display:flex;align-items:center;gap:8px;text-align:left}
+.capa .aviso .pulsa{flex:none}
+.pulsa{width:8px;height:8px;border-radius:50%;background:var(--verde);animation:pulsa 1.6s ease-in-out infinite}
+@keyframes pulsa{50%{opacity:.25}}
+
+/* abaixo do vídeo */
+h1.titulo{font-size:20px;line-height:1.35;font-weight:600;margin:14px 0 10px}
+.canal{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.canal img{width:42px;height:42px;border-radius:50%;object-fit:cover;object-position:50% 18%;flex:none}
+.canal .quem{display:flex;flex-direction:column;line-height:1.25;margin-right:auto}
+.canal .quem b{font-weight:600;font-size:15.5px}
+.canal .quem span{font-size:12.5px;color:var(--sub)}
+.pilula{display:inline-flex;align-items:center;gap:7px;background:var(--sup2);border-radius:99px;padding:8px 14px;font-size:13.5px;font-weight:500;color:var(--txt);white-space:nowrap}
+.pilula .pulsa{width:7px;height:7px}
+.oferta{margin-top:14px;background:linear-gradient(180deg,#1f2a12,#171d10);border:1px solid rgba(160,236,80,.5);border-radius:12px;padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;animation:sobe .5s ease}
+@keyframes sobe{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.oferta h3{margin:0 0 4px;font-size:17px;font-weight:700}
+.oferta p{margin:0;color:#d4dccb;font-size:14px;line-height:1.5}
+.oferta .preco{margin-top:6px;font-size:15px}
+.oferta .preco s{color:var(--sub)}
+.oferta .preco b{color:var(--verde);font-size:20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;width:100%;font:inherit;font-size:16px;font-weight:700;color:var(--verde-esc);background:var(--verde);border:0;border-radius:99px;padding:14px 22px;cursor:pointer;text-decoration:none;text-align:center}
+.btn:hover{filter:brightness(1.06)}
+.oferta .btn{width:auto;white-space:nowrap}
+.desc{margin-top:14px;background:var(--sup2);border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.6}
+.desc b{font-weight:600}
+.desc p{margin:6px 0 0;color:#dcdcdc}
+
+/* chat */
+.chat{border:1px solid var(--linha);border-radius:12px;display:flex;flex-direction:column;height:calc(100dvh - var(--topo) - 32px);min-height:440px;position:sticky;top:calc(var(--topo) + 8px);overflow:hidden;background:var(--bg)}
+.chat header{padding:12px 16px;border-bottom:1px solid var(--linha);font-weight:500;font-size:15.5px;display:flex;align-items:center;justify-content:space-between}
+.chat header small{font-size:12.5px;color:var(--sub);font-weight:400}
+.msgs{flex:1;overflow-y:auto;padding:8px 0;display:flex;flex-direction:column;overscroll-behavior:contain}
+.msgs .vazio{margin:auto;padding:24px;text-align:center;color:var(--sub);font-size:14px;line-height:1.5}
+.msg{display:flex;gap:12px;padding:5px 16px;font-size:13.5px;line-height:1.45}
+.msg .av{width:24px;height:24px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:11.5px;font-weight:600;color:#fff;margin-top:1px;text-transform:uppercase}
+.msg .tx{min-width:0;overflow-wrap:anywhere}
+.msg .nm{color:var(--sub);font-weight:500;margin-right:8px}
+.msg.eq .nm{color:var(--verde-esc);background:var(--verde);border-radius:4px;padding:1px 6px;font-weight:600}
+.msg.eu .nm{color:#fff}
+.msg.venda{margin:4px 12px;padding:9px 12px;border-radius:8px;background:#1d2b12;border:1px solid rgba(160,236,80,.35);color:#e6f5d4;font-weight:500}
+.msg.dig .tx{color:var(--sub);font-style:italic}
+.chat form{display:flex;gap:10px;align-items:center;padding:12px 14px;border-top:1px solid var(--linha)}
+.chat form .eu{width:26px;height:26px;font-size:12px;flex:none}
+.chat input{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--txt);background:var(--sup2);border:1px solid transparent;border-radius:99px;padding:9px 16px}
+.chat input:focus{outline:none;border-color:#555}
+.chat form button{width:38px;height:38px;border-radius:50%;border:0;background:transparent;color:var(--sub);cursor:pointer;display:grid;place-items:center;flex:none}
+.chat form button:hover{background:var(--sup2);color:#fff}
+.chat form button svg{width:21px;height:21px}
+
+/* entrada (link normal) */
+.entrada{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px}
+.entrada .cx{width:100%;max-width:420px;background:var(--sup);border:1px solid var(--linha);border-radius:16px;padding:26px 24px;text-align:center}
+.entrada img{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:50% 18%}
+.entrada h2{font-size:20px;line-height:1.3;margin:12px 0 6px}
+.entrada p{margin:0 0 16px;color:var(--sub);font-size:14px}
+.entrada form{display:grid;gap:12px;text-align:left}
+.entrada label{font-size:13px;color:var(--sub)}
+.entrada input{width:100%;font:inherit;font-size:16px;color:var(--txt);background:var(--bg);border:1px solid var(--linha);border-radius:10px;padding:12px 14px;margin-top:5px}
+.entrada input:focus{outline:2px solid var(--verde);outline-offset:1px;border-color:transparent}
+.erro{color:#ff8a8a;font-size:13px;min-height:1em;margin:0}
+
+@media (max-width:1000px){
+  :root{--topo:48px}
+  .topo{padding:0 14px}.logo{font-size:15.5px}
+  .pg{display:block;padding:0}
+  .video{border-radius:0;position:sticky;top:var(--topo);z-index:10}
+  .info{padding:0 14px}
+  h1.titulo{font-size:16.5px;margin:12px 0 8px}
+  .canal img{width:36px;height:36px}
+  .oferta{grid-template-columns:1fr;padding:14px 16px}
   .oferta .btn{width:100%}
-  .chat{position:static;margin:14px 16px 16px;height:58dvh;min-height:340px}
-  .topo{padding:10px 16px}
-  .topo span{display:none}
-}
-@media (max-width:420px){
-  .caixa h1{font-size:23px}
-  .relogio{gap:8px}.relogio div{min-width:0;flex:1}.relogio b{font-size:26px}
+  .desc{display:none}
+  .chat{position:static;height:auto;min-height:0;border-radius:0;border-width:1px 0 0;margin-top:12px}
+  .msgs{min-height:260px;max-height:none;height:calc(100dvh - var(--topo) - 56.25vw - 250px)}
+  .chat form{position:sticky;bottom:0;background:var(--bg);padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+  .relogio div{min-width:62px;padding:7px 4px}
+  .capa{padding:10px}
+  .capa .selo{display:none}.capa h2{font-size:clamp(15px,4.3vw,22px);margin-bottom:2px}.capa .quando{margin-bottom:8px;font-size:13.5px}
+  .relogio b{font-size:clamp(19px,5.4vw,28px)}.relogio small{font-size:9.5px}
+  .capa .aviso{margin-top:8px;font-size:11.5px;line-height:1.3}
 }
 </style>
 </head>
 <body>
-<div class="topo"><i class="marca"></i><b>The&nbsp;Book&nbsp;Business</b><span>· Aula exclusiva Lançamento 90D</span></div>
+<header class="topo">
+  <div class="logo"><i></i>The&nbsp;Book&nbsp;Business</div>
+  <div class="eu" id="euTopo" hidden></div>
+</header>
 
-<!-- ENTRADA (só quem chega sem nome/e-mail no link) -->
-<main id="telaEntrada" class="centro" hidden>
-  <div class="caixa">
-    <div class="selo">Para quem comprou o Lançamento 90D</div>
-    <h1>Aula exclusiva para quem comprou o Lançamento&nbsp;90D</h1>
-    <p class="hora">Todos os dias às 20h (horário de Brasília)</p>
-    <form class="entrar" id="fEntrar" novalidate>
+<div class="pg">
+  <div class="col">
+    <div class="video" id="caixaVideo">
+      <div id="yt"></div>
+      <div class="escudo" id="escudo" role="button" aria-label="Ativar o som" hidden>
+        <div class="som" id="som"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/></svg>Toque para ativar o som</div>
+      </div>
+      <div class="ctl" id="ctl" hidden>
+        <button id="btTela" type="button" aria-label="Tela cheia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+      </div>
+      <div class="capa" id="capa">
+        <div class="selo" id="capaSelo">Aula exclusiva</div>
+        <h2 id="capaTitulo">Como o seu livro pode virar best-seller no lançamento</h2>
+        <p class="quando" id="capaQuando">A aula começa hoje às 20h</p>
+        <div class="relogio">
+          <div><b id="cH">00</b><small>horas</small></div>
+          <div><b id="cM">00</b><small>min</small></div>
+          <div><b id="cS">00</b><small>seg</small></div>
+        </div>
+        <p class="aviso" id="capaAviso"><i class="pulsa"></i>Deixe esta página aberta: a aula começa aqui na hora certa.</p>
+      </div>
+    </div>
+    <div class="info">
+      <h1 class="titulo">Aula exclusiva Lançamento 90D: como o seu livro pode virar best-seller no lançamento</h1>
+      <div class="canal">
+        <img src="../assets/dany-sakugawa.webp" alt="Dany Sakugawa" width="42" height="42">
+        <div class="quem"><b>Dany Sakugawa</b><span>The Book Business</span></div>
+        <span class="pilula" id="pPublico" hidden><i class="pulsa"></i><span id="nPublico"></span></span>
+        <span class="pilula" id="pHora">Todos os dias às 20h</span>
+      </div>
+      <div id="caixaOferta" hidden></div>
+      <div class="desc">
+        <b>Aula exclusiva para quem comprou o Lançamento 90D</b>
+        <p>Você pode aproveitar o seu lançamento pra virar best-seller. Nesta aula a Dany mostra o que faz um livro entrar nas listas de mais vendidos do Brasil, como cada lista funciona e o que fazer no seu lançamento.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="chat">
+    <header>Chat da aula<small id="chatSub"></small></header>
+    <div class="msgs" id="msgs"><div class="vazio" id="chatVazio">O chat abre junto com a aula.<br>Enquanto isso, deixe esta página aberta.</div></div>
+    <form id="fChat" autocomplete="off">
+      <div class="eu" id="euChat"></div>
+      <input id="iChat" maxlength="500" placeholder="Escreva sua dúvida ou comentário" aria-label="Escreva sua dúvida ou comentário">
+      <button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17L22 12 3 20.5zm2-3 11.85-5.5L5 6.5v4l6 1.5-6 1.5v4z"/></svg></button>
+    </form>
+  </aside>
+</div>
+
+<!-- ENTRADA (link normal, sem nome/e-mail) -->
+<div class="entrada" id="telaEntrada" hidden>
+  <div class="cx">
+    <img src="../assets/dany-sakugawa.webp" alt="" width="64" height="64">
+    <h2>Aula exclusiva para quem comprou o Lançamento&nbsp;90D</h2>
+    <p>Todos os dias às 20h, horário de Brasília.</p>
+    <form id="fEntrar" novalidate>
       <label>Seu nome<input name="nome" autocomplete="given-name" required></label>
-      <label>Seu e-mail<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+      <label>Seu e-mail (o mesmo da compra)<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
       <p class="erro" id="eEntrar"></p>
       <button class="btn" type="submit">Entrar na aula</button>
     </form>
   </div>
-</main>
-
-<!-- SALA DE ESPERA / AULA ENCERRADA -->
-<main id="telaEspera" class="centro" hidden>
-  <div class="caixa">
-    <div class="selo">Aula exclusiva</div>
-    <h1 id="espTitulo">Aula exclusiva para quem comprou o Lançamento&nbsp;90D</h1>
-    <p class="hora" id="espHora">A aula começa às 20h</p>
-    <p class="promessa" id="espPromessa">Você pode aproveitar o seu lançamento pra virar best-seller. Nesta aula, a Dany mostra como.</p>
-    <div class="relogio" aria-live="off">
-      <div><b id="cH">00</b><small>horas</small></div>
-      <div><b id="cM">00</b><small>min</small></div>
-      <div><b id="cS">00</b><small>seg</small></div>
-    </div>
-    <p class="aviso" id="espAviso">Deixe esta página aberta: a aula abre aqui na hora certa.</p>
-    <div id="espOferta" hidden style="margin-top:26px"></div>
-  </div>
-</main>
-
-<!-- AULA -->
-<main id="telaAula" class="sala" hidden>
-  <section class="palco">
-    <div class="video" id="caixaVideo">
-      <div class="carregando">Carregando a aula…</div>
-      <div id="yt"></div>
-      <div class="escudo" id="escudo" role="button" aria-label="Ativar o som">
-        <div class="som" id="som"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/></svg>Toque para ativar o som</div>
-      </div>
-    </div>
-    <div class="barra-video">
-      <h2>Como o seu livro pode virar best-seller no lançamento · Dany Sakugawa</h2>
-      <button class="tela" id="btTela" type="button">Tela cheia</button>
-    </div>
-    <div id="caixaOferta" hidden></div>
-  </section>
-  <aside class="chat">
-    <header>Chat da aula</header>
-    <div class="msgs" id="msgs"></div>
-    <form id="fChat" autocomplete="off">
-      <input id="iChat" maxlength="500" placeholder="Escreva sua mensagem" aria-label="Escreva sua mensagem">
-      <button type="submit">Enviar</button>
-    </form>
-  </aside>
-</main>
+</div>
 
 <template id="tplOferta">
   <div class="oferta">
@@ -194,33 +244,29 @@ form.entrar input:focus{outline:2px solid var(--verde);outline-offset:1px;border
 <script>
 (function(){
 'use strict';
-var VID='CInJET9aMj8', DUR=5927, PITCH=4060, BOTAO=4819, HORA_UTC=23; /* 20h em Brasília = 23h UTC (sem horário de verão) */
+var VID='CInJET9aMj8', DUR=5927, PITCH=4060, BOTAO=4819, HORA_UTC=23; /* 20h em Brasília = 23h UTC */
 var FN='https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/sala-90d';
 var $=function(id){return document.getElementById(id);};
 var Q=new URLSearchParams(location.search);
 var TESTE=Q.get('teste')==='1';
+var DISP=(matchMedia('(max-width:1000px)').matches||/Mobi|Android|iPhone/i.test(navigator.userAgent))?'celular':'desktop';
 
 /* ---------- relógio ---------- */
-var desvio=0; /* ms: só usado no modo teste */
-function agora(){return Date.now()+desvio;}
+function agora(){return Date.now();}
 function diaBR(ms){return new Date(ms-3*3600e3).toISOString().slice(0,10);}
 function inicioDoDia(dia){var p=dia.split('-');return Date.UTC(+p[0],+p[1]-1,+p[2],HORA_UTC,0,0);}
 var inicioTeste=null;
 if(TESTE){
-  var est=Q.get('estado'), t=parseFloat(Q.get('t')||'0');
+  var est=Q.get('estado'), t0=parseFloat(Q.get('t')||'0');
   if(est==='espera') inicioTeste=Date.now()+90e3;
   else if(est==='fim') inicioTeste=Date.now()-(DUR+60)*1e3;
-  else inicioTeste=Date.now()-t*1e3;
+  else inicioTeste=Date.now()-t0*1e3;
 }
-/* estado atual: {fase:'espera'|'aula'|'fim', dia, seg, alvo} */
 function estado(){
-  var n=agora();
-  var ini=inicioTeste!==null?inicioTeste:inicioDoDia(diaBR(n));
-  var dia=diaBR(ini);
-  var s=(n-ini)/1e3;
+  var n=agora(), ini=inicioTeste!==null?inicioTeste:inicioDoDia(diaBR(n)), dia=diaBR(ini), s=(n-ini)/1e3;
   if(s<0) return {fase:'espera',dia:dia,alvo:ini};
   if(s<DUR) return {fase:'aula',dia:dia,seg:s};
-  return {fase:'fim',dia:dia,alvo:inicioTeste!==null?ini+864e5:ini+864e5};
+  return {fase:'fim',dia:dia,alvo:ini+864e5};
 }
 
 /* ---------- quem é ---------- */
@@ -232,22 +278,26 @@ var eu=null;
   else{try{eu=JSON.parse(ls.get('sala90d_eu')||'null');}catch(x){eu=null;}}
 })();
 function primeiroNome(){return ((eu&&eu.nome)||'Você').split(' ')[0];}
+function pintarEu(){var l=(primeiroNome()||'V').charAt(0);$('euTopo').textContent=l;$('euChat').textContent=l;$('euTopo').hidden=!eu;}
 
 /* ---------- eventos → sala-90d ---------- */
 var enviados={};
-function enviar(evento,extra,beacon){
-  if(!eu) return;
+function corpoBase(evento,extra){
   var st=estado();
-  var corpo={evento:evento,dia:st.dia,email:eu.email,nome:eu.nome,telefone:eu.telefone,seg:Math.floor(st.seg||0),
-    src:Q.get('src')||Q.get('utm_source')||'',teste:TESTE};
-  if(extra) for(var k in extra) corpo[k]=extra[k];
-  var b=JSON.stringify(corpo);
-  if(beacon&&navigator.sendBeacon){navigator.sendBeacon(FN,new Blob([b],{type:'text/plain'}));return;}
-  fetch(FN,{method:'POST',body:b,keepalive:true,headers:{'Content-Type':'text/plain'}}).catch(function(){});
+  var c={evento:evento,dia:st.dia,email:eu?eu.email:'',nome:eu?eu.nome:'',telefone:eu?eu.telefone:'',seg:Math.floor(st.seg||0),
+    src:Q.get('src')||Q.get('utm_source')||'',teste:TESTE,dispositivo:DISP};
+  if(extra) for(var k in extra) c[k]=extra[k];
+  return JSON.stringify(c);
+}
+function enviar(evento,extra,beacon){
+  if(!eu) return Promise.resolve(null);
+  var b=corpoBase(evento,extra);
+  if(beacon&&navigator.sendBeacon){navigator.sendBeacon(FN,new Blob([b],{type:'text/plain'}));return Promise.resolve(null);}
+  return fetch(FN,{method:'POST',body:b,keepalive:true,headers:{'Content-Type':'text/plain'}}).then(function(r){return r.json();}).catch(function(){return null;});
 }
 function umaVez(evento){var k=evento+'|'+estado().dia;if(enviados[k])return;enviados[k]=1;enviar(evento);}
 
-/* ---------- link da oferta (mesmo do HotWebinar: a página carimba o dia) ---------- */
+/* ---------- oferta (mesmo link do HotWebinar: a página carimba o dia) ---------- */
 function linkOferta(dia){
   var u=new URL('../liberada-90d/',location.href);
   u.searchParams.set('aula','hw');u.searchParams.set('src','hotwebinar');u.searchParams.set('d',dia);
@@ -255,16 +305,14 @@ function linkOferta(dia){
   ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(function(k){if(Q.get(k))u.searchParams.set(k,Q.get(k));});
   return u.toString();
 }
-function montarOferta(alvo,dia){
-  if(alvo.firstChild) return;
-  var n=$('tplOferta').content.cloneNode(true);
-  var a=n.querySelector('[data-oferta]');a.href=linkOferta(dia);
+function montarOferta(dia){
+  var alvo=$('caixaOferta'); if(alvo.firstChild) return;
+  var n=$('tplOferta').content.cloneNode(true), a=n.querySelector('[data-oferta]');a.href=linkOferta(dia);
   a.addEventListener('click',function(){umaVez('clicou');try{window.fbq&&fbq('trackCustom','SalaClicouOferta');}catch(e){}});
   alvo.appendChild(n);alvo.hidden=false;
 }
 
-/* ---------- telas ---------- */
-function mostrar(id){['telaEntrada','telaEspera','telaAula'].forEach(function(x){$(x).hidden=(x!==id);});}
+/* ---------- capa (espera / fim) ---------- */
 var fase=null, tickRelogio=null;
 function pad(n){return (n<10?'0':'')+n;}
 function contar(alvo){
@@ -273,63 +321,99 @@ function contar(alvo){
   f();tickRelogio=setInterval(f,1000);
 }
 function decidir(){
-  if(!eu){mostrar('telaEntrada');return;}
+  pintarEu();
+  $('telaEntrada').hidden=!!eu;
   var st=estado();
-  if(st.fase===fase&&fase!=='espera') return;
-  fase=st.fase;
+  if(st.fase===fase&&fase==='aula') return;
+  var mudou=st.fase!==fase; fase=st.fase;
   if(st.fase==='espera'){
-    mostrar('telaEspera');umaVez('espera');
-    var hoje=diaBR(agora())===st.dia;
-    $('espHora').textContent=hoje?'A aula começa hoje às 20h':'A aula começa amanhã às 20h';
-    contar(st.alvo);
+    $('capa').hidden=false;$('escudo').hidden=true;$('ctl').hidden=true;
+    $('capaSelo').textContent='Aula exclusiva';
+    $('capaTitulo').textContent='Como o seu livro pode virar best-seller no lançamento';
+    $('capaQuando').textContent=(diaBR(agora())===st.dia)?'A aula começa hoje às 20h':'A aula começa amanhã às 20h';
+    if(mudou){contar(st.alvo);if(eu)umaVez('espera');}
   } else if(st.fase==='aula'){
-    mostrar('telaAula');iniciarAula();
+    if(!eu) return;
+    $('capa').hidden=true;$('escudo').hidden=false;$('ctl').hidden=false;
+    $('chatVazio')&&$('chatVazio').remove();
+    iniciarAula();
   } else {
-    pararAula();mostrar('telaEspera');
-    $('espTitulo').textContent='A aula de hoje terminou';
-    $('espHora').textContent='A próxima aula é amanhã às 20h';
+    pararAula();
+    $('capa').hidden=false;$('escudo').hidden=true;$('ctl').hidden=true;
     var viu=ls.get('sala90d_botao_'+st.dia)==='1';
-    $('espPromessa').textContent=viu?'Que bom que você assistiu! A oferta especial vale só até hoje, 23h59.':'Você pode aproveitar o seu lançamento pra virar best-seller. Volte amanhã às 20h para assistir.';
-    $('espAviso').textContent='Deixe esta página aberta: a próxima aula abre aqui na hora certa.';
-    if(viu) montarOferta($('espOferta'),st.dia);
-    contar(st.alvo);
+    $('capaSelo').textContent='Aula encerrada';
+    $('capaTitulo').textContent=viu?'Que bom que você assistiu!':'A aula de hoje terminou';
+    $('capaQuando').textContent=viu?'A oferta especial vale só até hoje, 23h59. A próxima aula é amanhã às 20h.':'A próxima aula é amanhã às 20h.';
+    if(viu) montarOferta(st.dia);
+    if(mudou) contar(st.alvo);
   }
 }
 
-/* ---------- formulário de entrada ---------- */
+/* ---------- entrada ---------- */
 $('fEntrar').addEventListener('submit',function(ev){
   ev.preventDefault();
   var f=ev.target, nome=f.nome.value.trim(), email=f.email.value.trim().toLowerCase();
   if(!nome){$('eEntrar').textContent='Digite o seu nome.';return;}
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){$('eEntrar').textContent='Confira o seu e-mail.';return;}
-  eu={nome:nome,email:email,telefone:''};ls.set('sala90d_eu',JSON.stringify(eu));decidir();
+  eu={nome:nome,email:email,telefone:''};ls.set('sala90d_eu',JSON.stringify(eu));fase=null;decidir();
 });
 
-/* ---------- chat reprisado ---------- */
+/* ---------- chat ---------- */
+var CORES=['#5b4bd6','#c2410c','#0e7490','#a21caf','#15803d','#b45309','#be123c','#1d4ed8','#4d7c0f','#6d28d9'];
+function corDe(nome){var h=0;for(var i=0;i<nome.length;i++)h=(h*31+nome.charCodeAt(i))>>>0;return CORES[h%CORES.length];}
 var chat=[], chatIdx=0;
 fetch('chat.json?v=1').then(function(r){return r.json();}).then(function(d){chat=d;}).catch(function(){});
-function linhaChat(nome,texto,equipe,minha){
-  var box=$('msgs'), perto=box.scrollHeight-box.scrollTop-box.clientHeight<80;
-  var d=document.createElement('div');d.className='msg'+(equipe?' eq':'')+(minha?' eu':'');
-  if(equipe){var t=document.createElement('span');t.className='tag';t.textContent='Equipe';d.appendChild(t);}
-  var b=document.createElement('b');b.textContent=nome;d.appendChild(b);
-  d.appendChild(document.createTextNode(texto));box.appendChild(d);
-  if(perto||minha) box.scrollTop=box.scrollHeight;
+function linhaChat(nome,texto,tipo){
+  var box=$('msgs'), perto=box.scrollHeight-box.scrollTop-box.clientHeight<90;
+  var d=document.createElement('div');d.className='msg'+(tipo?' '+tipo:'');
+  if(tipo==='venda'){d.textContent=texto;}
+  else{
+    var av=document.createElement('span');av.className='av';av.textContent=nome.charAt(0);av.style.background=tipo==='eq'?'#3f6212':corDe(nome);d.appendChild(av);
+    var tx=document.createElement('span');tx.className='tx';var b=document.createElement('span');b.className='nm';b.textContent=nome;tx.appendChild(b);
+    tx.appendChild(document.createTextNode(texto));d.appendChild(tx);
+  }
+  box.appendChild(d);
+  if(perto||tipo==='eu') box.scrollTop=box.scrollHeight;
+  return d;
 }
 function avancarChat(seg){
-  while(chatIdx<chat.length&&chat[chatIdx][0]<=seg){var m=chat[chatIdx++];linhaChat(m[1],m[2],!!m[3],false);}
+  while(chatIdx<chat.length&&chat[chatIdx][0]<=seg){var m=chat[chatIdx++];linhaChat(m[1],m[2],m[3]?'eq':'');}
 }
 $('fChat').addEventListener('submit',function(ev){
-  ev.preventDefault();var v=$('iChat').value.trim();if(!v)return;
-  linhaChat(primeiroNome(),v,false,true);$('iChat').value='';enviar('mensagem',{texto:v});
+  ev.preventDefault();var v=$('iChat').value.trim();if(!v||!eu)return;
+  if(fase!=='aula'){$('iChat').value='';return;}
+  linhaChat(primeiroNome(),v,'eu');$('iChat').value='';
+  var dig=null, tm=setTimeout(function(){dig=linhaChat('Assistente The Book Business','digitando…','eq dig');},1500);
+  enviar('mensagem',{texto:v}).then(function(r){
+    clearTimeout(tm);if(dig)dig.remove();
+    if(r&&r.resposta) linhaChat('Assistente The Book Business',r.resposta,'eq');
+  });
 });
 
+/* ---------- só o que é real: quem está na sala e vendas de hoje ---------- */
+var vendasVistas={}, primeiraLeitura=true;
+function lerAgora(){
+  fetch(FN,{method:'POST',body:JSON.stringify({evento:'agora',teste:TESTE}),headers:{'Content-Type':'text/plain'}}).then(function(r){return r.json();}).then(function(d){
+    if(!d) return; var cfg=d.cfg||{};
+    var mostra=cfg.publico&&fase==='aula'&&d.na_sala>=2;
+    $('pPublico').hidden=!mostra; if(mostra)$('nPublico').textContent=d.na_sala+' assistindo agora';
+    (d.vendas||[]).forEach(function(v){
+      if(vendasVistas[v.id]) return; vendasVistas[v.id]=1;
+      if(!primeiraLeitura&&cfg.aviso_venda&&fase==='aula') linhaChat('', '🎉 '+v.nome+' acabou de entrar no Método The Book Business','venda');
+    });
+    primeiraLeitura=false;
+  }).catch(function(){});
+}
+
 /* ---------- player sincronizado ---------- */
-var player=null, pronto=false, mudo=true, loop=null, ping=null, viuBotao=false;
+var player=null, pronto=false, mudo=true, loop=null, ping=null, pollAgora=null, viuBotao=false;
 function iniciarAula(){
   umaVez('acessou');
   var st=estado();
-  avancarChat(st.seg);
+  /* quem entra atrasado vê só as últimas 25 mensagens, já no fim da lista */
+  while(chatIdx<chat.length&&chat[chatIdx][0]<=st.seg) chatIdx++;
+  chatIdx=Math.max(0,chatIdx-25);
+  avancarChat(st.seg);$('msgs').scrollTop=$('msgs').scrollHeight;
   if(st.seg>=BOTAO) mostrarBotao(st.dia);
   if(!window.YT||!YT.Player){
     window.onYouTubeIframeAPIReady=criarPlayer;
@@ -337,10 +421,12 @@ function iniciarAula(){
   } else criarPlayer();
   clearInterval(loop);loop=setInterval(sincronizar,1000);
   clearInterval(ping);ping=setInterval(function(){enviar('ping');},60e3);
+  clearInterval(pollAgora);lerAgora();pollAgora=setInterval(lerAgora,30e3);
   addEventListener('pagehide',sair);
 }
 function criarPlayer(){
   if(player) return;
+  if(!$('yt')){var d=document.createElement('div');d.id='yt';$('caixaVideo').insertBefore(d,$('caixaVideo').firstChild);}
   var st=estado();
   player=new YT.Player('yt',{videoId:VID,host:'https://www.youtube-nocookie.com',
     playerVars:{autoplay:1,mute:1,controls:0,disablekb:1,fs:0,rel:0,modestbranding:1,playsinline:1,iv_load_policy:3,start:Math.floor(st.seg||0)},
@@ -359,12 +445,9 @@ function sincronizar(forcar){
   var cur=player.getCurrentTime?player.getCurrentTime():0;
   if((forcar===true||Math.abs(cur-st.seg)>4)&&Date.now()-ultimoAjuste>3000){ultimoAjuste=Date.now();player.seekTo(st.seg,true);}
 }
-function mostrarBotao(dia){
-  viuBotao=true;ls.set('sala90d_botao_'+dia,'1');umaVez('botao');
-  montarOferta($('caixaOferta'),dia);
-}
+function mostrarBotao(dia){viuBotao=true;ls.set('sala90d_botao_'+dia,'1');umaVez('botao');montarOferta(dia);}
 function sair(){var st=estado();if(st.fase==='aula'&&!viuBotao&&!enviados['nao_viu|'+st.dia]){enviados['nao_viu|'+st.dia]=1;enviar('nao_viu',null,true);}}
-function pararAula(){clearInterval(loop);clearInterval(ping);removeEventListener('pagehide',sair);if(player&&player.destroy){try{player.destroy();}catch(e){}player=null;pronto=false;}}
+function pararAula(){clearInterval(loop);clearInterval(ping);clearInterval(pollAgora);removeEventListener('pagehide',sair);$('pPublico').hidden=true;if(player&&player.destroy){try{player.destroy();}catch(e){}player=null;pronto=false;}}
 
 /* som: o navegador só deixa o vídeo começar sem som; o toque libera */
 $('escudo').addEventListener('click',function(){
@@ -379,7 +462,6 @@ $('btTela').addEventListener('click',function(){
 });
 if(!(document.fullscreenEnabled||document.webkitFullscreenEnabled)) $('btTela').hidden=true;
 
-/* voltou para a aba: ressincroniza na hora */
 document.addEventListener('visibilitychange',function(){if(!document.hidden){if(fase==='aula')sincronizar(true);else decidir();}});
 setInterval(function(){if(fase!=='aula')decidir();},15e3);
 decidir();
