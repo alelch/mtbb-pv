@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Aula exclusiva Lançamento 90D</title>
+<!--
+  13/11/2026 · Sala própria da aula diária do L90D (substitui o HotWebinar).
+  - Todo dia às 20h (Brasília) o vídeo roda no mesmo ponto para todo mundo (não dá para adiantar).
+  - Vídeo: YouTube não listado CInJET9aMj8 = aula de 13/10 editada (v12, 1:38:47), igual à do HotWebinar.
+  - Chat: mensagens REAIS da aula de 13/10 (chat.json, [segundo, nome, texto, 1=equipe]).
+  - Botão da oferta aos 1:20:19 → liberada-90d/?aula=hw&src=hotwebinar&d=<dia> (mesmo link do HotWebinar,
+    então a página carimba o dia e o Miolo conta como venda do webinário).
+  - Presença → Edge Function sala-90d → sala90d_presenca + tags AC 376-379 (as mesmas do HotWebinar).
+  - Entrada sem formulário: ?nome=&email=&telefone= (o motor do DuoChat já manda assim).
+  - Teste: ?teste=1 (não mexe no AC) · &t=4800 (começa nesse segundo) · &estado=espera|fim
+  Nada de "ao vivo", contador de pessoas, vagas ou vendas simuladas (regra do cliente).
+-->
+<link rel="preconnect" href="https://www.youtube.com">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../liberada-90d/assets/2026/03/poppins-v24-latin-600.woff2">
+<script>
+/* Meta Pixel HÍBRIDO (padrão do repo): PageView beacon imediato nos 2 pixels, fbevents.js só no idle. */
+(function(){var ids=['1665265050801984','617884976680212'];
+ids.forEach(function(id){new Image().src='https://www.facebook.com/tr?id='+id+'&ev=PageView&noscript=1&dl='+encodeURIComponent(location.href);});
+function loadFb(){if(window.__fbloaded)return;window.__fbloaded=1;
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+ids.forEach(function(id){fbq('init',id);});}
+if('requestIdleCallback'in window){requestIdleCallback(loadFb,{timeout:5000});}else{setTimeout(loadFb,4000);}
+['click','touchstart','keydown'].forEach(function(ev){addEventListener(ev,loadFb,{once:true,passive:true});});
+})();
+</script>
+<style>
+@font-face{font-family:Poppins;font-weight:400;font-display:swap;src:url(../liberada-90d/assets/2026/03/poppins-v24-latin-regular.woff2) format('woff2')}
+@font-face{font-family:Poppins;font-weight:500;font-display:swap;src:url(../liberada-90d/assets/2026/03/poppins-v24-latin-500.woff2) format('woff2')}
+@font-face{font-family:Poppins;font-weight:600;font-display:swap;src:url(../liberada-90d/assets/2026/03/poppins-v24-latin-600.woff2) format('woff2')}
+@font-face{font-family:Poppins;font-weight:700;font-display:swap;src:url(../liberada-90d/assets/2026/03/poppins-v24-latin-700.woff2) format('woff2')}
+:root{--bg:#131313;--card:#1c1c1c;--card2:#242424;--linha:#2e2e2e;--txt:#f2f2f2;--sub:#a9a9a9;--verde:#A0EC50;--verde-esc:#0f1a05}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font-family:Poppins,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;min-height:100dvh}
+p,li{text-wrap:pretty}h1,h2{text-wrap:balance}
+[hidden]{display:none!important}
+.topo{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--linha)}
+.topo b{font-weight:600;font-size:15px}
+.topo span{color:var(--sub);font-size:13px}
+.marca{width:8px;height:8px;border-radius:50%;background:var(--verde);flex:none}
+
+/* ---- telas centrais (entrada, espera, fim) ---- */
+.centro{min-height:calc(100dvh - 50px);display:flex;align-items:center;justify-content:center;padding:32px 16px}
+.caixa{width:100%;max-width:520px;text-align:center}
+.selo{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--verde);border:1px solid rgba(160,236,80,.35);border-radius:99px;padding:6px 14px;margin-bottom:18px}
+.caixa h1{font-size:28px;line-height:1.25;font-weight:700;margin:0 0 12px}
+.caixa .hora{font-size:18px;font-weight:600;color:var(--verde);margin:0 0 14px}
+.caixa .promessa{font-size:16px;line-height:1.55;color:#d9d9d9;margin:0 auto 26px;max-width:440px}
+.relogio{display:flex;justify-content:center;gap:10px;margin:0 0 22px}
+.relogio div{background:var(--card);border:1px solid var(--linha);border-radius:12px;min-width:76px;padding:12px 6px}
+.relogio b{display:block;font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.relogio small{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.06em}
+.aviso{font-size:14px;color:var(--sub);line-height:1.5;margin:0}
+form.entrar{display:grid;gap:12px;text-align:left;margin-top:8px}
+form.entrar label{font-size:13px;color:var(--sub)}
+form.entrar input{width:100%;font:inherit;font-size:16px;color:var(--txt);background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:13px 14px;margin-top:6px}
+form.entrar input:focus{outline:2px solid var(--verde);outline-offset:1px;border-color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;font:inherit;font-size:17px;font-weight:700;color:var(--verde-esc);background:var(--verde);border:0;border-radius:12px;padding:16px 20px;cursor:pointer;text-decoration:none;text-align:center}
+.btn:hover{filter:brightness(1.06)}
+.erro{color:#ff8a8a;font-size:13px;min-height:1em;margin:0}
+
+/* ---- sala ---- */
+.sala{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px;padding:20px;max-width:1500px;margin:0 auto}
+.palco{min-width:0}
+.video{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden}
+.video #yt,.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.escudo{position:absolute;inset:0;z-index:2;cursor:pointer;display:flex;align-items:center;justify-content:center;background:transparent}
+.som{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.78);border:1px solid rgba(255,255,255,.2);color:#fff;font-weight:600;font-size:16px;padding:14px 22px;border-radius:99px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.som svg{width:22px;height:22px}
+.carregando{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:14px;z-index:1}
+.barra-video{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px}
+.barra-video h2{font-size:17px;font-weight:600;margin:0;line-height:1.35}
+.barra-video .tela{flex:none;font:inherit;font-size:13px;color:var(--sub);background:var(--card);border:1px solid var(--linha);border-radius:8px;padding:8px 12px;cursor:pointer}
+.oferta{margin-top:16px;background:linear-gradient(180deg,#1f2a12,#171d10);border:1px solid rgba(160,236,80,.45);border-radius:14px;padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;animation:sobe .5s ease}
+@keyframes sobe{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.oferta h3{margin:0 0 6px;font-size:18px;font-weight:700}
+.oferta p{margin:0;color:#d4dccb;font-size:14px;line-height:1.5}
+.oferta .preco{margin-top:8px;font-size:15px}
+.oferta .preco s{color:var(--sub)}
+.oferta .preco b{color:var(--verde);font-size:20px}
+.oferta .btn{width:auto;white-space:nowrap}
+.chat{background:var(--card);border:1px solid var(--linha);border-radius:14px;display:flex;flex-direction:column;height:calc(100dvh - 90px);min-height:420px;position:sticky;top:20px}
+.chat header{padding:14px 16px;border-bottom:1px solid var(--linha);font-weight:600;font-size:15px}
+.msgs{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px;overscroll-behavior:contain}
+.msg{font-size:14px;line-height:1.45;word-wrap:break-word}
+.msg b{font-weight:600;color:#cfcfcf;margin-right:6px}
+.msg.eq{background:var(--card2);border-left:3px solid var(--verde);padding:8px 10px;border-radius:6px}
+.msg.eq b{color:var(--verde)}
+.msg.eu b{color:#fff}
+.msg .tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--verde-esc);background:var(--verde);border-radius:4px;padding:1px 5px;margin-right:6px;vertical-align:1px}
+.chat form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--linha)}
+.chat input{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--txt);background:var(--bg);border:1px solid var(--linha);border-radius:10px;padding:10px 12px}
+.chat button{font:inherit;font-weight:600;font-size:14px;color:var(--verde-esc);background:var(--verde);border:0;border-radius:10px;padding:0 14px;cursor:pointer}
+.video:fullscreen{border-radius:0}
+
+@media (max-width:980px){
+  .sala{grid-template-columns:1fr;padding:0;gap:0}
+  .video{border-radius:0}
+  .barra-video{padding:12px 16px 0}
+  .barra-video h2{font-size:15px}
+  .oferta{margin:14px 16px 0;grid-template-columns:1fr;padding:16px}
+  .oferta .btn{width:100%}
+  .chat{position:static;margin:14px 16px 16px;height:58dvh;min-height:340px}
+  .topo{padding:10px 16px}
+  .topo span{display:none}
+}
+@media (max-width:420px){
+  .caixa h1{font-size:23px}
+  .relogio{gap:8px}.relogio div{min-width:0;flex:1}.relogio b{font-size:26px}
+}
+</style>
+</head>
+<body>
+<div class="topo"><i class="marca"></i><b>The&nbsp;Book&nbsp;Business</b><span>· Aula exclusiva Lançamento 90D</span></div>
+
+<!-- ENTRADA (só quem chega sem nome/e-mail no link) -->
+<main id="telaEntrada" class="centro" hidden>
+  <div class="caixa">
+    <div class="selo">Para quem comprou o Lançamento 90D</div>
+    <h1>Aula exclusiva para quem comprou o Lançamento&nbsp;90D</h1>
+    <p class="hora">Todos os dias às 20h (horário de Brasília)</p>
+    <form class="entrar" id="fEntrar" novalidate>
+      <label>Seu nome<input name="nome" autocomplete="given-name" required></label>
+      <label>Seu e-mail<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+      <p class="erro" id="eEntrar"></p>
+      <button class="btn" type="submit">Entrar na aula</button>
+    </form>
+  </div>
+</main>
+
+<!-- SALA DE ESPERA / AULA ENCERRADA -->
+<main id="telaEspera" class="centro" hidden>
+  <div class="caixa">
+    <div class="selo">Aula exclusiva</div>
+    <h1 id="espTitulo">Aula exclusiva para quem comprou o Lançamento&nbsp;90D</h1>
+    <p class="hora" id="espHora">A aula começa às 20h</p>
+    <p class="promessa" id="espPromessa">Você pode aproveitar o seu lançamento pra virar best-seller. Nesta aula, a Dany mostra como.</p>
+    <div class="relogio" aria-live="off">
+      <div><b id="cH">00</b><small>horas</small></div>
+      <div><b id="cM">00</b><small>min</small></div>
+      <div><b id="cS">00</b><small>seg</small></div>
+    </div>
+    <p class="aviso" id="espAviso">Deixe esta página aberta: a aula abre aqui na hora certa.</p>
+    <div id="espOferta" hidden style="margin-top:26px"></div>
+  </div>
+</main>
+
+<!-- AULA -->
+<main id="telaAula" class="sala" hidden>
+  <section class="palco">
+    <div class="video" id="caixaVideo">
+      <div class="carregando">Carregando a aula…</div>
+      <div id="yt"></div>
+      <div class="escudo" id="escudo" role="button" aria-label="Ativar o som">
+        <div class="som" id="som"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/></svg>Toque para ativar o som</div>
+      </div>
+    </div>
+    <div class="barra-video">
+      <h2>Como o seu livro pode virar best-seller no lançamento · Dany Sakugawa</h2>
+      <button class="tela" id="btTela" type="button">Tela cheia</button>
+    </div>
+    <div id="caixaOferta" hidden></div>
+  </section>
+  <aside class="chat">
+    <header>Chat da aula</header>
+    <div class="msgs" id="msgs"></div>
+    <form id="fChat" autocomplete="off">
+      <input id="iChat" maxlength="500" placeholder="Escreva sua mensagem" aria-label="Escreva sua mensagem">
+      <button type="submit">Enviar</button>
+    </form>
+  </aside>
+</main>
+
+<template id="tplOferta">
+  <div class="oferta">
+    <div>
+      <h3>Oferta especial para quem está nesta aula</h3>
+      <p>Método The Book Business com o cashback do seu Lançamento 90D. Vale só até hoje, 23h59.</p>
+      <p class="preco">De <s>R$ 1.500</s> por <b>R$ 1.200</b> · ou 12x de R$ 119,76</p>
+    </div>
+    <a class="btn" target="_blank" rel="noopener" data-oferta>Quero a Oferta Especial</a>
+  </div>
+</template>
+
+<script>
+(function(){
+'use strict';
+var VID='CInJET9aMj8', DUR=5927, PITCH=4060, BOTAO=4819, HORA_UTC=23; /* 20h em Brasília = 23h UTC (sem horário de verão) */
+var FN='https://jsqtpsxpaclslakafmvd.supabase.co/functions/v1/sala-90d';
+var $=function(id){return document.getElementById(id);};
+var Q=new URLSearchParams(location.search);
+var TESTE=Q.get('teste')==='1';
+
+/* ---------- relógio ---------- */
+var desvio=0; /* ms: só usado no modo teste */
+function agora(){return Date.now()+desvio;}
+function diaBR(ms){return new Date(ms-3*3600e3).toISOString().slice(0,10);}
+function inicioDoDia(dia){var p=dia.split('-');return Date.UTC(+p[0],+p[1]-1,+p[2],HORA_UTC,0,0);}
+var inicioTeste=null;
+if(TESTE){
+  var est=Q.get('estado'), t=parseFloat(Q.get('t')||'0');
+  if(est==='espera') inicioTeste=Date.now()+90e3;
+  else if(est==='fim') inicioTeste=Date.now()-(DUR+60)*1e3;
+  else inicioTeste=Date.now()-t*1e3;
+}
+/* estado atual: {fase:'espera'|'aula'|'fim', dia, seg, alvo} */
+function estado(){
+  var n=agora();
+  var ini=inicioTeste!==null?inicioTeste:inicioDoDia(diaBR(n));
+  var dia=diaBR(ini);
+  var s=(n-ini)/1e3;
+  if(s<0) return {fase:'espera',dia:dia,alvo:ini};
+  if(s<DUR) return {fase:'aula',dia:dia,seg:s};
+  return {fase:'fim',dia:dia,alvo:inicioTeste!==null?ini+864e5:ini+864e5};
+}
+
+/* ---------- quem é ---------- */
+var ls={get:function(k){try{return localStorage.getItem(k);}catch(e){return null;}},set:function(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
+var eu=null;
+(function(){
+  var e=(Q.get('email')||'').trim().toLowerCase();
+  if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){eu={nome:(Q.get('nome')||'').trim(),email:e,telefone:(Q.get('telefone')||'').trim()};ls.set('sala90d_eu',JSON.stringify(eu));}
+  else{try{eu=JSON.parse(ls.get('sala90d_eu')||'null');}catch(x){eu=null;}}
+})();
+function primeiroNome(){return ((eu&&eu.nome)||'Você').split(' ')[0];}
+
+/* ---------- eventos → sala-90d ---------- */
+var enviados={};
+function enviar(evento,extra,beacon){
+  if(!eu) return;
+  var st=estado();
+  var corpo={evento:evento,dia:st.dia,email:eu.email,nome:eu.nome,telefone:eu.telefone,seg:Math.floor(st.seg||0),
+    src:Q.get('src')||Q.get('utm_source')||'',teste:TESTE};
+  if(extra) for(var k in extra) corpo[k]=extra[k];
+  var b=JSON.stringify(corpo);
+  if(beacon&&navigator.sendBeacon){navigator.sendBeacon(FN,new Blob([b],{type:'text/plain'}));return;}
+  fetch(FN,{method:'POST',body:b,keepalive:true,headers:{'Content-Type':'text/plain'}}).catch(function(){});
+}
+function umaVez(evento){var k=evento+'|'+estado().dia;if(enviados[k])return;enviados[k]=1;enviar(evento);}
+
+/* ---------- link da oferta (mesmo do HotWebinar: a página carimba o dia) ---------- */
+function linkOferta(dia){
+  var u=new URL('../liberada-90d/',location.href);
+  u.searchParams.set('aula','hw');u.searchParams.set('src','hotwebinar');u.searchParams.set('d',dia);
+  u.searchParams.set('sck',Q.get('sck')||'sala90d');
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(function(k){if(Q.get(k))u.searchParams.set(k,Q.get(k));});
+  return u.toString();
+}
+function montarOferta(alvo,dia){
+  if(alvo.firstChild) return;
+  var n=$('tplOferta').content.cloneNode(true);
+  var a=n.querySelector('[data-oferta]');a.href=linkOferta(dia);
+  a.addEventListener('click',function(){umaVez('clicou');try{window.fbq&&fbq('trackCustom','SalaClicouOferta');}catch(e){}});
+  alvo.appendChild(n);alvo.hidden=false;
+}
+
+/* ---------- telas ---------- */
+function mostrar(id){['telaEntrada','telaEspera','telaAula'].forEach(function(x){$(x).hidden=(x!==id);});}
+var fase=null, tickRelogio=null;
+function pad(n){return (n<10?'0':'')+n;}
+function contar(alvo){
+  clearInterval(tickRelogio);
+  function f(){var r=Math.max(0,Math.floor((alvo-agora())/1e3));$('cH').textContent=pad(Math.floor(r/3600));$('cM').textContent=pad(Math.floor(r%3600/60));$('cS').textContent=pad(r%60);if(r<=0){clearInterval(tickRelogio);decidir();}}
+  f();tickRelogio=setInterval(f,1000);
+}
+function decidir(){
+  if(!eu){mostrar('telaEntrada');return;}
+  var st=estado();
+  if(st.fase===fase&&fase!=='espera') return;
+  fase=st.fase;
+  if(st.fase==='espera'){
+    mostrar('telaEspera');umaVez('espera');
+    var hoje=diaBR(agora())===st.dia;
+    $('espHora').textContent=hoje?'A aula começa hoje às 20h':'A aula começa amanhã às 20h';
+    contar(st.alvo);
+  } else if(st.fase==='aula'){
+    mostrar('telaAula');iniciarAula();
+  } else {
+    pararAula();mostrar('telaEspera');
+    $('espTitulo').textContent='A aula de hoje terminou';
+    $('espHora').textContent='A próxima aula é amanhã às 20h';
+    var viu=ls.get('sala90d_botao_'+st.dia)==='1';
+    $('espPromessa').textContent=viu?'Que bom que você assistiu! A oferta especial vale só até hoje, 23h59.':'Você pode aproveitar o seu lançamento pra virar best-seller. Volte amanhã às 20h para assistir.';
+    $('espAviso').textContent='Deixe esta página aberta: a próxima aula abre aqui na hora certa.';
+    if(viu) montarOferta($('espOferta'),st.dia);
+    contar(st.alvo);
+  }
+}
+
+/* ---------- formulário de entrada ---------- */
+$('fEntrar').addEventListener('submit',function(ev){
+  ev.preventDefault();
+  var f=ev.target, nome=f.nome.value.trim(), email=f.email.value.trim().toLowerCase();
+  if(!nome){$('eEntrar').textContent='Digite o seu nome.';return;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){$('eEntrar').textContent='Confira o seu e-mail.';return;}
+  eu={nome:nome,email:email,telefone:''};ls.set('sala90d_eu',JSON.stringify(eu));decidir();
+});
+
+/* ---------- chat reprisado ---------- */
+var chat=[], chatIdx=0;
+fetch('chat.json?v=1').then(function(r){return r.json();}).then(function(d){chat=d;}).catch(function(){});
+function linhaChat(nome,texto,equipe,minha){
+  var box=$('msgs'), perto=box.scrollHeight-box.scrollTop-box.clientHeight<80;
+  var d=document.createElement('div');d.className='msg'+(equipe?' eq':'')+(minha?' eu':'');
+  if(equipe){var t=document.createElement('span');t.className='tag';t.textContent='Equipe';d.appendChild(t);}
+  var b=document.createElement('b');b.textContent=nome;d.appendChild(b);
+  d.appendChild(document.createTextNode(texto));box.appendChild(d);
+  if(perto||minha) box.scrollTop=box.scrollHeight;
+}
+function avancarChat(seg){
+  while(chatIdx<chat.length&&chat[chatIdx][0]<=seg){var m=chat[chatIdx++];linhaChat(m[1],m[2],!!m[3],false);}
+}
+$('fChat').addEventListener('submit',function(ev){
+  ev.preventDefault();var v=$('iChat').value.trim();if(!v)return;
+  linhaChat(primeiroNome(),v,false,true);$('iChat').value='';enviar('mensagem',{texto:v});
+});
+
+/* ---------- player sincronizado ---------- */
+var player=null, pronto=false, mudo=true, loop=null, ping=null, viuBotao=false;
+function iniciarAula(){
+  umaVez('acessou');
+  var st=estado();
+  avancarChat(st.seg);
+  if(st.seg>=BOTAO) mostrarBotao(st.dia);
+  if(!window.YT||!YT.Player){
+    window.onYouTubeIframeAPIReady=criarPlayer;
+    if(!document.querySelector('script[src*="iframe_api"]')){var s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s);}
+  } else criarPlayer();
+  clearInterval(loop);loop=setInterval(sincronizar,1000);
+  clearInterval(ping);ping=setInterval(function(){enviar('ping');},60e3);
+  addEventListener('pagehide',sair);
+}
+function criarPlayer(){
+  if(player) return;
+  var st=estado();
+  player=new YT.Player('yt',{videoId:VID,host:'https://www.youtube-nocookie.com',
+    playerVars:{autoplay:1,mute:1,controls:0,disablekb:1,fs:0,rel:0,modestbranding:1,playsinline:1,iv_load_policy:3,start:Math.floor(st.seg||0)},
+    events:{onReady:function(){pronto=true;player.mute();player.playVideo();sincronizar(true);}}});
+}
+var ultimoAjuste=0;
+function sincronizar(forcar){
+  var st=estado();
+  if(st.fase!=='aula'){decidir();return;}
+  avancarChat(st.seg);
+  if(st.seg>=PITCH) umaVez('pitch');
+  if(st.seg>=BOTAO&&!viuBotao) mostrarBotao(st.dia);
+  if(!pronto) return;
+  var es=player.getPlayerState?player.getPlayerState():-1;
+  if(es===2||es===5||es===-1||es===0){player.playVideo();}
+  var cur=player.getCurrentTime?player.getCurrentTime():0;
+  if((forcar===true||Math.abs(cur-st.seg)>4)&&Date.now()-ultimoAjuste>3000){ultimoAjuste=Date.now();player.seekTo(st.seg,true);}
+}
+function mostrarBotao(dia){
+  viuBotao=true;ls.set('sala90d_botao_'+dia,'1');umaVez('botao');
+  montarOferta($('caixaOferta'),dia);
+}
+function sair(){var st=estado();if(st.fase==='aula'&&!viuBotao&&!enviados['nao_viu|'+st.dia]){enviados['nao_viu|'+st.dia]=1;enviar('nao_viu',null,true);}}
+function pararAula(){clearInterval(loop);clearInterval(ping);removeEventListener('pagehide',sair);if(player&&player.destroy){try{player.destroy();}catch(e){}player=null;pronto=false;}}
+
+/* som: o navegador só deixa o vídeo começar sem som; o toque libera */
+$('escudo').addEventListener('click',function(){
+  if(!pronto) return;
+  if(mudo){player.unMute();player.setVolume(100);mudo=false;$('som').hidden=true;sincronizar(true);}
+});
+$('btTela').addEventListener('click',function(){
+  var v=$('caixaVideo');
+  if(document.fullscreenElement){document.exitFullscreen();return;}
+  if(v.requestFullscreen) v.requestFullscreen().catch(function(){});
+  else if(v.webkitRequestFullscreen) v.webkitRequestFullscreen();
+});
+if(!(document.fullscreenEnabled||document.webkitFullscreenEnabled)) $('btTela').hidden=true;
+
+/* voltou para a aba: ressincroniza na hora */
+document.addEventListener('visibilitychange',function(){if(!document.hidden){if(fase==='aula')sincronizar(true);else decidir();}});
+setInterval(function(){if(fase!=='aula')decidir();},15e3);
+decidir();
+})();
+</script>
+</body>
+</html>
