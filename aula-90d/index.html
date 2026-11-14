@@ -376,7 +376,13 @@ function linhaChat(nome,texto,tipo){
   if(perto||tipo==='eu') box.scrollTop=box.scrollHeight;
   return d;
 }
+var chatCortado=false;
 function avancarChat(seg){
+  if(!chat.length) return;
+  /* quem entra atrasado vê só as últimas 25 mensagens, já no fim da lista (o chat pode carregar depois do vídeo) */
+  if(!chatCortado){chatCortado=true;while(chatIdx<chat.length&&chat[chatIdx][0]<=seg)chatIdx++;chatIdx=Math.max(0,chatIdx-25);
+    while(chatIdx<chat.length&&chat[chatIdx][0]<=seg){var m0=chat[chatIdx++];linhaChat(m0[1],m0[2],m0[3]?'eq':'');}
+    $('msgs').scrollTop=$('msgs').scrollHeight;return;}
   while(chatIdx<chat.length&&chat[chatIdx][0]<=seg){var m=chat[chatIdx++];linhaChat(m[1],m[2],m[3]?'eq':'');}
 }
 $('fChat').addEventListener('submit',function(ev){
@@ -410,10 +416,7 @@ var player=null, pronto=false, mudo=true, loop=null, ping=null, pollAgora=null, 
 function iniciarAula(){
   umaVez('acessou');
   var st=estado();
-  /* quem entra atrasado vê só as últimas 25 mensagens, já no fim da lista */
-  while(chatIdx<chat.length&&chat[chatIdx][0]<=st.seg) chatIdx++;
-  chatIdx=Math.max(0,chatIdx-25);
-  avancarChat(st.seg);$('msgs').scrollTop=$('msgs').scrollHeight;
+  avancarChat(st.seg);
   if(st.seg>=BOTAO) mostrarBotao(st.dia);
   if(!window.YT||!YT.Player){
     window.onYouTubeIframeAPIReady=criarPlayer;
