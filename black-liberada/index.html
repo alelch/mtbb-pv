@@ -1227,7 +1227,7 @@ f.addEventListener('submit',function(e){e.preventDefault();r.textContent='';
   var DEGRAUS = [[Date.UTC(2026, 10, 10, 3), 6], [Date.UTC(2026, 10, 11, 3), 5], [Date.UTC(2026, 10, 12, 3), 4]];
   var ANOS = 3, FIM_D9 = 0;
   for (var di = 0; di < DEGRAUS.length; di++) { if (Date.now() < DEGRAUS[di][0]) { ANOS = DEGRAUS[di][1]; FIM_D9 = DEGRAUS[di][0] - 1000; break; } }
-  if (q.get('anos')) { ANOS = Math.max(3, Math.min(6, +q.get('anos') || 3)); FIM_D9 = Date.now() + 3600e3; }
+  if (q.get('anos')) { ANOS = Math.max(3, Math.min(6, +q.get('anos') || 3)); var hb = new Date(Date.now() - 3 * 3600e3); FIM_D9 = Date.UTC(hb.getUTCFullYear(), hb.getUTCMonth(), hb.getUTCDate() + 1, 3) - 1000; } // 15/11: ?anos=N (resgate da Black) conta até a meia-noite de Brasília, não 1 h
   if (q.get('modo') === 'd9') { ANOS = 6; FIM_D9 = FIM_D9 || Date.now() + 3600e3; }
   if (q.get('modo') === 'depois') ANOS = 3;
   var modo = ANOS > 3 ? 'd9' : 'depois';
