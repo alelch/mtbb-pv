@@ -1678,3 +1678,6 @@ exec(open(f"{R}/_tools/black_rec.py", encoding="utf-8").read())
 
 # 13/11: tarja vermelha de últimos dias (fim 16/11 23h59)
 exec(open(f"{R}/_tools/black_ultimos.py", encoding="utf-8").read())
+
+# 15/11: barra fixa do celular mais limpa
+exec(open(f"{R}/_tools/black_dock.py", encoding="utf-8").read())
