@@ -26,7 +26,7 @@
      próprio tempo de carga. Os dois preloads são o script do teste A/B e o
      smartplayer; os dns-prefetch são os hosts que o vídeo usa depois. -->
 <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
-<link rel="preload" href="https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6aac034536f51977b87306ba/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6afa2c159ae0e713609f6e3f/player.js" as="script">
 <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
 <link rel="dns-prefetch" href="https://cdn.converteai.net">
 <link rel="dns-prefetch" href="https://scripts.converteai.net">
@@ -1264,6 +1264,13 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
     'vid-6aabffc77f8c8bdc79cff7af': 18*60+6,    // A · pitch 18:06 · vídeo de 21min30
     'vid-6aac028e9ade27369c6a214e': 16*60+54,   // B · pitch 16:54 · vídeo de 20min15
     'vid-6aabfd7e7d9f1e22a867a669': 16*60+42,   // C · pitch 16:42 · vídeo de 20min02
+    /* 15/11: teste "90D - V3 (A/B/C/D) x vencedora V1". As 4 V3 são a VSL nova
+       (mesmo corpo, abertura diferente); número = fim de "R$ 297 à vista",
+       igual ao segundo em que o botão do VTurb aparece em cada uma. */
+    'vid-6afa20e4059096235afdaac0': 22*60+38,   // V3 A · vídeo de 28min20
+    'vid-6afa2224086871827a97b08f': 22*60+34,   // V3 B · vídeo de 28min16
+    'vid-6afa236a8360444fc8f5139b': 22*60+38,   // V3 C · vídeo de 28min20
+    'vid-6afa253d086871827a97b093': 22*60+25,   // V3 D · vídeo de 28min07
   };
 
   /* ⬆⬆⬆ ----------------------------------- ⬆⬆⬆ */
@@ -1849,8 +1856,8 @@ html.js.sem-motion .hero .player,html.js.sem-motion .stats{
      trava lá em cima).
      ============================================================ */
   var VSL = {
-    src: 'https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6aac034536f51977b87306ba/player.js',
-    id:  'ab-6aac034536f51977b87306ba',
+    src: 'https://scripts.converteai.net/6b353be1-c671-4a98-af52-02bc731efaae/ab-test/6afa2c159ae0e713609f6e3f/player.js',
+    id:  'ab-6afa2c159ae0e713609f6e3f',
     temporaria: false
   };
 
