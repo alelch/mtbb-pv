@@ -1,4 +1,4 @@
-"""16/11 (cliente: "coloque escassez na página"). A Black fecha terça 17/11 23h59 (as páginas ficam no ar até 22/11
+"""16/11 (cliente: "coloque escassez na página"). 17/11: entre 00h e 01h de 18/11 a tarja diz "Últimos minutos" (tempo extra); só às 01h vira "por tempo limitado". A Black fecha terça 17/11 23h59 (as páginas ficam no ar até 22/11
 para a exceção das IAs). Texto muda sozinho pela data de Brasília:
   até 16/11: ACABA AMANHÃ · 17/11: ACABA HOJE · depois: condição por tempo limitado.
 Entra na tarja do topo e num aviso antes dos dois blocos de preço. Idempotente."""
@@ -17,7 +17,8 @@ CSS = ('<style>/*esc*/.esc{max-width:640px;margin:0 auto 28px;padding:14px 18px;
        '.esc__s{margin:6px 0 0;color:#f4efe4;font-size:14.5px;line-height:1.45}</style>')
 JS = ("<script>/*esc*/(function(){var FIM=new Date('2026-11-17T23:59:59-03:00').getTime();function p(n){return(n<10?'0':'')+n}"
       "function t(){var s=Math.floor((FIM-Date.now())/1000);"
-      "if(s<=0){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML='Condição da Black · <b>por tempo limitado</b>';e.style.maxWidth='none'});"
+      "if(s<=0&&s>-3600){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML='Últimos minutos · <b>Black Week Motorizada</b>';e.style.maxWidth='none'});document.querySelectorAll('[data-esc-clk]').forEach(function(e){e.style.display='none'});return}"
+      "if(s<=-3600){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML='Condição da Black · <b>por tempo limitado</b>';e.style.maxWidth='none'});"
       "document.querySelectorAll('[data-esc-clk]').forEach(function(e){e.style.display='none'});"
       "document.querySelectorAll('[data-esc-t]').forEach(function(e){e.textContent='Condição liberada por tempo limitado'});"
       "document.querySelectorAll('.esc__s').forEach(function(e){e.textContent='A Black Week Motorizada encerrou em 17/11. Esta condição vale só pelo link que você recebeu.'});return}"
