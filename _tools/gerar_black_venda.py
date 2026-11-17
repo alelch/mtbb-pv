@@ -1681,3 +1681,6 @@ exec(open(f"{R}/_tools/black_ultimos.py", encoding="utf-8").read())
 
 # 15/11: barra fixa do celular mais limpa
 exec(open(f"{R}/_tools/black_dock.py", encoding="utf-8").read())
+
+# 16/11: tarja com contagem até 17/11 23h59 (depois: condição por tempo limitado) + botão do resumo
+exec(open(f"{R}/_tools/black_escassez.py", encoding="utf-8").read())
