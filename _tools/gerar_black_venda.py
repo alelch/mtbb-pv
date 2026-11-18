@@ -1684,6 +1684,3 @@ exec(open(f"{R}/_tools/black_dock.py", encoding="utf-8").read())
 
 # 16/11: tarja com contagem até 17/11 23h59 (depois: condição por tempo limitado) + botão do resumo
 exec(open(f"{R}/_tools/black_escassez.py", encoding="utf-8").read())
-
-# 18/11: Black encerrada; só o link pessoal de 20 min (lp) abre a oferta
-exec(open(f"{R}/_tools/black_fechada.py", encoding="utf-8").read())
