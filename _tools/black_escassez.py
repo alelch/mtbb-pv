@@ -18,7 +18,7 @@ CSS = ('<style>/*esc*/.esc{max-width:640px;margin:0 auto 28px;padding:14px 18px;
 JS = ("<script>/*esc*/(function(){var FIM=new Date('2026-11-17T23:59:59-03:00').getTime();function p(n){return(n<10?'0':'')+n}"
       "function t(){var s=Math.floor((FIM-Date.now())/1000);"
       "if(s<=0&&s>-3600){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML='Últimos minutos · <b>Black Week Motorizada</b>';e.style.maxWidth='none'});document.querySelectorAll('[data-esc-clk]').forEach(function(e){e.style.display='none'});return}"
-      "if(s<=-3600){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML='Condição da Black · <b>por tempo limitado</b>';e.style.maxWidth='none'});"
+      "if(s<=-3600){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML=(/[?&]lp=/.test(location.search)?'Condição da Black · <b>por tempo limitado</b>':'Black Week Motorizada · <b>encerrada</b>');e.style.maxWidth='none'});"
       "document.querySelectorAll('[data-esc-clk]').forEach(function(e){e.style.display='none'});"
       "document.querySelectorAll('[data-esc-t]').forEach(function(e){e.textContent='Condição liberada por tempo limitado'});"
       "document.querySelectorAll('.esc__s').forEach(function(e){e.textContent='A Black Week Motorizada encerrou em 17/11. Esta condição vale só pelo link que você recebeu.'});return}"

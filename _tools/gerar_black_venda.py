@@ -1684,3 +1684,6 @@ exec(open(f"{R}/_tools/black_dock.py", encoding="utf-8").read())
 
 # 16/11: tarja com contagem até 17/11 23h59 (depois: condição por tempo limitado) + botão do resumo
 exec(open(f"{R}/_tools/black_escassez.py", encoding="utf-8").read())
+
+# 18/11: botão vira ENCERRADO + "Falar com a equipe"; link pessoal (lp) mantém a compra
+exec(open(f"{R}/_tools/black_encerrado.py", encoding="utf-8").read())
