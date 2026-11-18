@@ -4,7 +4,7 @@ entra embaixo "Falar com a equipe" (WhatsApp da Natália, que abre a exceção d
 crm-mtbb /l/) e o link ainda vale (link_prazo_abrir = ativo) vê os botões normais. Idempotente."""
 import os
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CSS = ('<style>/*encerrado*/a.btn.enc{min-height:50px!important;font-size:15px!important;background:#c62828!important;color:#fff!important;box-shadow:none!important;cursor:default;filter:none!important;transform:none!important}'
+CSS = ('<style>/*encerrado*/a.btn.enc{display:flex!important;width:78%!important;margin-left:auto!important;margin-right:auto!important;min-height:50px!important;font-size:15px!important;background:#c62828!important;color:#fff!important;box-shadow:none!important;cursor:default;filter:none!important;transform:none!important}'
        'a.eqp{display:flex;align-items:center;justify-content:center;width:100%;max-width:none;box-sizing:border-box;min-height:66px;margin:12px auto 0;padding:0 16px;border-radius:10px;'
        'background:var(--gold,linear-gradient(90deg,#b8860b,#faab00,#ffe08a,#faab00,#b8860b));background-size:220% 100%;animation:gold 3.5s linear infinite;'
        'box-shadow:0 8px 24px -8px rgba(250,171,0,.7);color:#111;font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(17px,4.8vw,20px);letter-spacing:.02em;text-transform:uppercase;text-align:center;text-decoration:none}'
