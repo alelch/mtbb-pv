@@ -223,6 +223,42 @@ async function blackWeek(payload: any, nome: string, email: string, whatsapp: st
 }
 
 
+// 19/11 · ISCAS DO SITE (ex-formulários Elementor do WordPress): as 7 páginas de material gratuito
+// (leitor-ideal, cronograma-do-livro, ...) faziam: contato + lista 6 + tag própria da isca + campo 12 "ESTAGIO LIVRO".
+// Aqui faz exatamente o mesmo (nada além disso: sem estágio 68, sem tag de tráfego, sem automação pela API),
+// para o lead receber o mesmo de antes. Quem chama é a Function do site (thebookbusiness.com.br, _middleware.js).
+// { variant: "isca", isca: "<slug da página>", nome, email, whatsapp?, estagio_livro? }
+const ISCA_TAGS: Record<string, number> = {
+  "leitor-ideal": 89,            // Form_LP_Leitor_Ideal
+  "cronograma-do-livro": 84,     // Form_LP_Cronograma_Livro
+  "business-plan-do-livro": 95,  // Form_LP_Buiness_Plan
+  "escada-de-produtos": 85,      // Form_LP_Escada_Produto
+  "google-diz-sobre-voce": 91,   // Form_LP_Google_Voce
+  "objetivo-do-livro": 90,       // Form_LP_Objetivo_Livro
+  "site-do-autor": 94,           // Form_LP_Site_Autor
+};
+const FIELD_ESTAGIO_LIVRO = 12;  // "ESTAGIO LIVRO" (texto), o mesmo que o Elementor preenchia
+
+async function isca(payload: any, nome: string, email: string, whatsapp: string) {
+  const slug = sanitize(payload.isca, 60);
+  const tagId = ISCA_TAGS[slug];
+  if (!tagId) return json({ error: "isca_invalida" }, 400);
+  const [firstName, ...rest] = nome.split(/\s+/);
+  const estagio = sanitize(payload.estagio_livro, 100);
+  const contact: any = { email, firstName, lastName: rest.join(" ") };
+  if (whatsapp) contact.phone = whatsapp;
+  if (estagio) contact.fieldValues = [{ field: FIELD_ESTAGIO_LIVRO, value: estagio }];
+  const sync = await acFetch("/contact/sync", { method: "POST", body: JSON.stringify({ contact }) });
+  const contactId = sync.ok ? Number(sync.data?.contact?.id) || 0 : 0;
+  if (!contactId) return json({ error: "ac_sync_failed", status: sync.status, detail: (sync.text || "").slice(0, 300) }, 502);
+  const lista = await acFetch("/contactLists", { method: "POST", body: JSON.stringify({ contactList: { list: LIST_ID, contact: contactId, status: 1 } }) });
+  const tag = await acFetch("/contactTags", { method: "POST", body: JSON.stringify({ contactTag: { contact: contactId, tag: tagId } }) });
+  const listOk = lista.ok || lista.status === 422, tagOk = tag.ok || tag.status === 422;
+  if (!listOk || !tagOk) return json({ error: "ac_parcial", contact_id: contactId, list_added: listOk, tag_applied: tagOk }, 502);
+  return json({ ok: true, variant: "isca", isca: slug, contact_id: contactId, list_added: listOk, tag_applied: tagOk });
+}
+
+
 // 22/10 · REENVIO AO AC: cadastro da Black gravado com ac_contact_id nulo (AC fora/lento). pg_cron a cada 5 min chama
 // POST /pv-lead?modo=reenviar_ac com x-sync-key. Faz o que o cadastro faria (contato + lista + tag do público + automação).
 async function reenviarAc() {
@@ -287,6 +323,7 @@ serve(async (req) => {
   if (!nome || nome.length < 2) return json({ error: "nome_invalid" }, 400);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: "email_invalid" }, 400);
   if (variant === "black-week") return blackWeek(payload, nome, email, whatsapp);
+  if (variant === "isca") return isca(payload, nome, email, whatsapp);
   if (!STAGES_VALID.has(stage)) return json({ error: "stage_invalid" }, 400);
   if (!VARIANTS_VALID.has(variant)) return json({ error: "variant_invalid" }, 400);
 
