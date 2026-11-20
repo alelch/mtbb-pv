@@ -256,7 +256,7 @@ function agora(){return Date.now();}
 function diaBR(ms){return new Date(ms-3*3600e3).toISOString().slice(0,10);}
 function inicioDoDia(dia){var p=dia.split('-');return Date.UTC(+p[0],+p[1]-1,+p[2],HORA_UTC,0,0);}
 var inicioTeste=null;
-if(TESTE){
+if(TESTE&&Q.get('relogio')!=='1'){ /* ?teste=1&relogio=1 = teste no horário de verdade (20h) */
   var est=Q.get('estado'), t0=parseFloat(Q.get('t')||'0');
   if(est==='espera') inicioTeste=Date.now()+90e3;
   else if(est==='fim') inicioTeste=Date.now()-(DUR+60)*1e3;
@@ -399,7 +399,10 @@ $('fChat').addEventListener('submit',function(ev){
 /* ---------- só o que é real: quem está na sala e vendas de hoje ---------- */
 var vendasVistas={}, primeiraLeitura=true;
 function lerAgora(){
-  fetch(FN,{method:'POST',body:JSON.stringify({evento:'agora',teste:TESTE}),headers:{'Content-Type':'text/plain'}}).then(function(r){return r.json();}).then(function(d){
+  fetch(FN,{method:'POST',body:JSON.stringify({evento:'agora',teste:TESTE}),headers:{'Content-Type':'text/plain'}}).then(function(r){return r.json();}).then(pintarAgora).catch(function(){});
+}
+function pintarAgora(d){
+  (function(){
     if(!d) return; var cfg=d.cfg||{};
     var mostra=cfg.publico&&fase==='aula'&&d.na_sala>=2;
     $('pPublico').hidden=!mostra; if(mostra)$('nPublico').textContent=d.na_sala+' assistindo agora';
@@ -408,7 +411,7 @@ function lerAgora(){
       if(!primeiraLeitura&&cfg.aviso_venda&&fase==='aula') linhaChat('', '🎉 '+v.nome+' acabou de entrar no Método The Book Business','venda');
     });
     primeiraLeitura=false;
-  }).catch(function(){});
+  })();
 }
 
 /* ---------- player sincronizado ---------- */
@@ -423,8 +426,8 @@ function iniciarAula(){
     if(!document.querySelector('script[src*="iframe_api"]')){var s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s);}
   } else criarPlayer();
   clearInterval(loop);loop=setInterval(sincronizar,1000);
-  clearInterval(ping);ping=setInterval(function(){enviar('ping');},60e3);
-  clearInterval(pollAgora);lerAgora();pollAgora=setInterval(lerAgora,30e3);
+  clearInterval(ping);ping=setInterval(function(){enviar('ping').then(function(r){if(r&&r.agora)pintarAgora(r.agora);});},60e3);
+  clearInterval(pollAgora);lerAgora();
   addEventListener('pagehide',sair);
 }
 function criarPlayer(){
