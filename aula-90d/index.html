@@ -151,7 +151,7 @@ h1.titulo{font-size:20px;line-height:1.35;font-weight:600;margin:14px 0 10px}
   .oferta .btn{width:100%}
   .desc{display:none}
   .chat{position:static;height:auto;min-height:0;border-radius:0;border-width:1px 0 0;margin-top:12px}
-  .msgs{min-height:260px;max-height:none;height:calc(100dvh - var(--topo) - 56.25vw - 250px)}
+  .msgs{flex:0 0 auto;min-height:260px;max-height:none;height:calc(100dvh - var(--topo) - 56.25vw - 250px)} /* flex:none: sem isso a lista crescia sem limite e a mensagem nova ficava fora da tela */
   .chat form{position:sticky;bottom:0;background:var(--bg);padding-bottom:calc(12px + env(safe-area-inset-bottom))}
   .relogio div{min-width:62px;padding:7px 4px}
   .capa{padding:10px}
