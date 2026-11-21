@@ -9,7 +9,7 @@
 <!--
   13/11/2026 · Sala própria da aula diária do L90D (substitui o HotWebinar).
   Layout de página de vídeo (vídeo à esquerda, chat à direita; no celular o vídeo fica preso no topo).
-  - Todo dia às 20h (Brasília) o vídeo roda no mesmo ponto para todo mundo (não dá para adiantar nem pausar).
+  - Às 20h (Brasília) o vídeo roda no mesmo ponto para todo mundo (não dá para adiantar nem pausar).
   - Vídeo: YouTube não listado CInJET9aMj8 = aula de 13/10 editada (v12, 1:38:47).
   - Chat: mensagens REAIS da aula de 13/10 (chat.json, [segundo, nome, texto, 1=equipe]).
     Quem escreve recebe resposta da assistente (IA com o cérebro da Bianca) quando é dúvida; o resto fica para a equipe.
@@ -195,7 +195,7 @@ h1.titulo{font-size:20px;line-height:1.35;font-weight:600;margin:14px 0 10px}
         <img src="../assets/dany-sakugawa.webp" alt="Dany Sakugawa" width="42" height="42">
         <div class="quem"><b>Dany Sakugawa</b><span>The Book Business</span></div>
         <span class="pilula" id="pPublico" hidden><i class="pulsa"></i><span id="nPublico"></span></span>
-        <span class="pilula" id="pHora">Todos os dias às 20h</span>
+        <span class="pilula" id="pHora">Hoje às 20h</span>
       </div>
       <div id="caixaOferta" hidden></div>
       <div class="desc">
@@ -220,7 +220,7 @@ h1.titulo{font-size:20px;line-height:1.35;font-weight:600;margin:14px 0 10px}
   <div class="cx">
     <img src="../assets/dany-sakugawa.webp" alt="" width="64" height="64">
     <h2>Aula exclusiva para quem comprou o Lançamento&nbsp;90D</h2>
-    <p>Todos os dias às 20h, horário de Brasília.</p>
+    <p>Hoje às 20h, horário de Brasília.</p>
     <form id="fEntrar" novalidate>
       <label>Seu nome<input name="nome" autocomplete="given-name" required></label>
       <label>Seu e-mail (o mesmo da compra)<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
@@ -328,9 +328,10 @@ function decidir(){
   var mudou=st.fase!==fase; fase=st.fase;
   if(st.fase==='espera'){
     $('capa').hidden=false;$('escudo').hidden=true;$('ctl').hidden=true;
+    document.querySelector('#capa .relogio').hidden=false;$('capaAviso').hidden=false;
     $('capaSelo').textContent='Aula exclusiva';
     $('capaTitulo').textContent='Como o seu livro pode virar best-seller no lançamento';
-    $('capaQuando').textContent=(diaBR(agora())===st.dia)?'A aula começa hoje às 20h':'A aula começa amanhã às 20h';
+    $('capaQuando').textContent=(diaBR(agora())===st.dia)?'A aula começa hoje às 20h':'A aula começa às 20h';
     if(mudou){contar(st.alvo);if(eu)umaVez('espera');}
   } else if(st.fase==='aula'){
     if(!eu) return;
@@ -342,8 +343,9 @@ function decidir(){
     $('capa').hidden=false;$('escudo').hidden=true;$('ctl').hidden=true;
     var viu=ls.get('sala90d_botao_'+st.dia)==='1';
     $('capaSelo').textContent='Aula encerrada';
-    $('capaTitulo').textContent=viu?'Que bom que você assistiu!':'A aula de hoje terminou';
-    $('capaQuando').textContent=viu?'A oferta especial vale só até hoje, 23h59. A próxima aula é amanhã às 20h.':'A próxima aula é amanhã às 20h.';
+    $('capaTitulo').textContent=viu?'Que bom que você assistiu!':'A aula terminou';
+    $('capaQuando').textContent=viu?'A oferta especial vale só até hoje, 23h59.':'';
+    document.querySelector('#capa .relogio').hidden=true;$('capaAviso').hidden=true;
     if(viu) montarOferta(st.dia);
     if(mudou) contar(st.alvo);
   }
