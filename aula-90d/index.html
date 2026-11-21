@@ -195,7 +195,7 @@ h1.titulo{font-size:20px;line-height:1.35;font-weight:600;margin:14px 0 10px}
         <img src="../assets/dany-sakugawa.webp" alt="Dany Sakugawa" width="42" height="42">
         <div class="quem"><b>Dany Sakugawa</b><span>The Book Business</span></div>
         <span class="pilula" id="pPublico" hidden><i class="pulsa"></i><span id="nPublico"></span></span>
-        <span class="pilula" id="pHora">Hoje às 20h</span>
+        <span class="pilula" id="pHora" hidden>Hoje às 20h</span>
       </div>
       <div id="caixaOferta" hidden></div>
       <div class="desc">
@@ -326,6 +326,7 @@ function decidir(){
   var st=estado();
   if(st.fase===fase&&fase==='aula') return;
   var mudou=st.fase!==fase; fase=st.fase;
+  $('pHora').hidden=st.fase!=='espera'; /* o horário só interessa antes da aula */
   if(st.fase==='espera'){
     $('capa').hidden=false;$('escudo').hidden=true;$('ctl').hidden=true;
     document.querySelector('#capa .relogio').hidden=false;$('capaAviso').hidden=false;
