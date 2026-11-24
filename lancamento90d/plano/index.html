@@ -104,6 +104,21 @@ input[type=date]:hover{border-color:var(--laranja)}
 .contador.ok{color:var(--laranja)}
 .sem-cab.so-conta{grid-template-columns:1fr;justify-items:end;margin-bottom:12px}
 .semana.colada{padding-top:16px;border-top:0}
+/* 23/11: "Comece agora" só aparece para quem lança a mais de 90 dias */
+.antes{margin-top:44px;border:2px solid var(--laranja);padding:22px 20px 24px;scroll-margin-top:20px}
+.antes .olho{font-weight:700;text-transform:uppercase;letter-spacing:-.01em;font-size:11px;color:var(--laranja);margin-bottom:10px}
+.antes h2{font-size:clamp(26px,5vw,38px)}
+.antes > p{margin:12px 0 20px;font-size:14.5px;line-height:1.55;color:var(--tinta-72);max-width:60ch}
+.antes .sem-cab{margin-bottom:6px}
+/* 24/11: cartão do bônus (Gerador), para todos */
+.bonus{margin-top:44px;background:var(--laranja);color:var(--tinta);padding:22px 20px 24px}
+.bonus .olho{font-weight:800;text-transform:uppercase;letter-spacing:-.01em;font-size:12px;margin-bottom:8px}
+.bonus h2{font-size:clamp(24px,4.6vw,34px)}
+.bonus p b{font-weight:800}
+.bonus p{margin:10px 0 18px;font-size:14.5px;line-height:1.55;max-width:56ch}
+.bonus-btn{display:inline-block;background:var(--tinta);color:var(--papel);font-weight:800;font-size:15px;padding:13px 20px;text-decoration:none}
+.bonus-btn:hover{opacity:.9}
+.bonus + *{margin-top:0}
 .sem-tag .hoje{font-style:normal;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;background:var(--laranja);color:var(--tinta);padding:2px 6px}
 .contagem small a{color:var(--laranja);font-weight:700;text-decoration:none;border-bottom:1px solid currentColor}
 .contagem small a:hover{color:var(--tinta)}
@@ -441,16 +456,18 @@ function chips(lista){
   }
   return h + '</div>';
 }
-function tarefa(id, it){
+// copia: a mesma tarefa aparece de novo no "Comece agora". O progresso continua salvo pelo id original (data-id).
+function tarefa(id, it, copia){
   var feito = !!estado.feitos[id];
+  var dom = copia ? 'a__' + id : id;
   var h = '<li class="tarefa'+(feito?' feita':'')+'">';
-  h += '<input type="checkbox" class="marca-cx" id="'+id+'"'+(feito?' checked':'')+'>';
-  h += '<div><label class="txt" for="'+id+'">'+esc(it.t)+'</label>';
+  h += '<input type="checkbox" class="marca-cx" id="'+dom+'" data-id="'+id+'"'+(feito?' checked':'')+'>';
+  h += '<div><label class="txt" for="'+dom+'">'+esc(it.t)+'</label>';
   if(it.nota) h += '<span class="nota">'+esc(it.nota)+'</span>';
   h += chips(it.apoio);
   if(it.subs && it.subs.length){
     h += '<ul class="sub">';
-    for(var j=0;j<it.subs.length;j++) h += tarefa(id+'_'+j, it.subs[j]);
+    for(var j=0;j<it.subs.length;j++) h += tarefa(id+'_'+j, it.subs[j], copia);
     h += '</ul>';
   }
   h += '</div></li>';
@@ -498,8 +515,56 @@ function prepararDados(){
   for(var q=0;q<TODOS.length;q++) CONTA_FASE[TODOS[q].fase] = (CONTA_FASE[TODOS[q].fase]||0) + 1;
 }
 
+/* 23/11 (cliente: "vamos adequar para quem tá com o lançamento lá na frente").
+   Quem lança a mais de 90 dias não tinha nada pra fazer até a Semana 1 abrir.
+   Estas tarefas do plano não dependem do livro pronto, então já podem começar.
+   São as MESMAS tarefas das semanas 1 a 3 (mesmo id): marcou aqui, aparece marcado lá. */
+var ANTES = [['s1',0],['s1',1],['s1',2],['s1',5],['s2',0],['s2',2],['s3',0],['s3',2],['s3',3]];
+function longe(){ var d = diasAte(); return d !== null && d > 89; }
+function itemDe(sem, i){
+  for(var k=0;k<SEMANAS.length;k++) if(SEMANAS[k].id === sem) return SEMANAS[k].itens[i] || null;
+  return null;
+}
+function idsAntes(){
+  var ids = [];
+  for(var i=0;i<ANTES.length;i++){
+    var it = itemDe(ANTES[i][0], ANTES[i][1]); if(!it) continue;
+    var id = ANTES[i][0]+'_'+ANTES[i][1];
+    ids.push(id);
+    if(it.subs) for(var j=0;j<it.subs.length;j++) ids.push(id+'_'+j);
+  }
+  return ids;
+}
+function blocoAntes(){
+  var gate = janelaGate();
+  var h = '<section class="env"><div class="antes" id="antes">'
+    + '<div class="sem-cab"><div><div class="olho">Antes dos 90 dias</div>'
+    + '<h2 class="d">Comece agora</h2></div>'
+    + '<div class="contador" id="c_antes"></div></div>'
+    + '<p>Os seus 90 dias começam em '+esc(fmtLongo(gate.ini))+'. Até lá, dá para adiantar o que não depende do livro pronto. '
+    + 'Quanto antes você começa, mais tempo as pessoas têm para conhecer você e o seu livro. '
+    + 'O que você marcar aqui já fica marcado nas semanas do plano.</p>'
+    + '<ul class="lista">';
+  for(var i=0;i<ANTES.length;i++){
+    var it = itemDe(ANTES[i][0], ANTES[i][1]); if(!it) continue;
+    h += tarefa(ANTES[i][0]+'_'+ANTES[i][1], it, true);
+  }
+  return h + '</ul></div></section>';
+}
+
+// 24/11: o Gerador é BÔNUS de todo comprador do 90D (cliente: "tem que ter a sensação que é um bônus
+// mesmo"). Cartão próprio no topo, para todos; nunca como link pequeno dentro de tarefa.
+function cartaoBonus(){
+  return '<section class="env"><div class="bonus">'
+    + '<div class="olho">Seu bônus</div>'
+    + '<h2 class="d">Gerador de Posts Magnéticos</h2>'
+    + '<p><b>Vendido separadamente por R$197.</b><br>Responda 7 perguntas sobre o seu livro e receba 5 ideias de post, com a legenda pronta.</p>'
+    + '<a class="bonus-btn" href="https://thebookbusiness.com.br/posts-magneticos/?de=plano" target="_blank" rel="noopener">Abrir o meu Gerador</a>'
+    + '</div></section>';
+}
+
 function montar(){
-  var h = '';
+  var h = cartaoBonus() + (longe() ? blocoAntes() : '');
   var faseAberta = '';
   var atual = semanaAtual();
 
@@ -564,6 +629,13 @@ function atualizarProgresso(){
       c.className = 'contador' + (n === ids.length ? ' ok' : '');
     }
   }
+  var ca = document.getElementById('c_antes');
+  if(ca){
+    var ia = idsAntes(), na = 0;
+    for(var q=0;q<ia.length;q++) if(estado.feitos[ia[q]]) na++;
+    ca.textContent = na + '/' + ia.length;
+    ca.className = 'contador' + (na === ia.length ? ' ok' : '');
+  }
 }
 
 function atualizarDatas(){
@@ -594,6 +666,8 @@ function atualizarDatas(){
   for(var i=0;i<TODOS.length;i++) if(TODOS[i].id === atual) nomeAtual = TODOS[i].num + ', ' + TODOS[i].foco.toLowerCase();
   sub.innerHTML = d < 0
     ? 'Você está no <a href="#pos">pós-lançamento</a>. Os microciclos começam agora.'
+    : d > 89
+    ? ('Os seus 90 dias começam em ' + esc(fmtLongo(janelaGate().ini)) + '. Até lá, <a href="#antes">comece agora</a>.')
     : ('Você está na <a href="#' + esc(atual) + '">' + esc(nomeAtual) + '</a>.');
 
   var j9 = janela(9), j11 = janela(11);
@@ -615,7 +689,14 @@ function redesenhar(){
 document.addEventListener('change', function(ev){
   var alvo = ev.target;
   if(alvo.classList && alvo.classList.contains('marca-cx')){
-    if(alvo.checked) estado.feitos[alvo.id] = 1; else delete estado.feitos[alvo.id];
+    var chave = alvo.getAttribute('data-id') || alvo.id;   // a cópia do "Comece agora" salva no id original
+    if(alvo.checked) estado.feitos[chave] = 1; else delete estado.feitos[chave];
+    var gemeas = document.querySelectorAll('.marca-cx[data-id="'+chave+'"]');
+    for(var g=0; g<gemeas.length; g++){
+      gemeas[g].checked = alvo.checked;
+      var lig = gemeas[g].closest('.tarefa');
+      if(lig) lig.classList.toggle('feita', alvo.checked);
+    }
     var li = alvo.closest('.tarefa');
     if(li) li.classList.toggle('feita', alvo.checked);
     salvar();
