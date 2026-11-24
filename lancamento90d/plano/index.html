@@ -1084,18 +1084,18 @@ function tour(){
   var semLivro = !(estado.livro || '').trim();
   var passos = [
     // passo 1 (cliente 24/11: "passo 1 colocar nome do livro"): abre o campo e a pessoa digita ali mesmo
-    semLivro ? {alvo: document.querySelector('.hero .boasvindas > div'), t: 'Qual é o nome do seu livro?',
+    semLivro ? {acha: function(){ return document.querySelector('.hero .boasvindas > div'); }, t: 'Qual é o nome do seu livro?',
      p: 'Escreva aqui. Se ainda não tem título, é só seguir.', antes: function(){
        document.getElementById('bvSub').hidden = true; document.getElementById('livroForm').hidden = false; },
      depois: function(){ var i = document.getElementById('livroNome'); if(i.value.trim()) document.getElementById('livroForm').requestSubmit(); else { document.getElementById('livroForm').hidden = true; document.getElementById('bvSub').hidden = false; } },
      foco: '#livroNome'} : null,
-    {alvo: vis('.hero .console'), t: temData ? 'A data do seu livro' : (semLivro ? 'Agora, a data' : 'Comece pela data'),
+    {acha: function(){ return vis('.hero .console'); }, t: temData ? 'A data do seu livro' : (semLivro ? 'Agora, a data' : 'Comece pela data'),
      p: temData ? 'O Plano monta as 12 semanas a partir dela. Dá para trocar quando quiser.' : 'Coloque quando o seu livro sai. O Plano monta as 12 semanas a partir dela.'},
-    {alvo: vis('#hoje .tarefa, #antes .tarefa'), t: 'Marque o que já fez',
+    {acha: function(){ return vis('#hoje .tarefa, #antes .tarefa'); }, t: 'Marque o que já fez',
      p: 'Fica salvo na sua conta, no celular e no computador.'},
-    {alvo: vis('.chip.aula'), t: 'Ficou com dúvida?',
+    {acha: function(){ return vis('.chip.aula'); }, t: 'Ficou com dúvida?',
      p: 'Cada tarefa mostra a aula e o minuto em que a Dany explica.'}
-  ].filter(function(x){ return x && x.alvo; });
+  ].filter(function(x){ return x && x.acha(); });
   if(!passos.length) return;
   document.body.classList.add('em-tour');
   var luz = document.createElement('div'); luz.className = 'tour-luz';
@@ -1103,9 +1103,12 @@ function tour(){
   var bloq = document.createElement('div');
   document.body.appendChild(luz); document.body.appendChild(cx);
   var n = 0;
-  function fim(){ document.body.classList.remove('em-tour'); try{ localStorage.setItem(TOUR_VISTO, '1'); }catch(e){} [luz, cx, bloq].forEach(function(x){ x.remove(); }); window.removeEventListener('resize', pos); window.removeEventListener('scroll', pos); }
+  var segue = setInterval(function(){ pos(); }, 250);   // acompanha mudanças na tela (data digitada, título salvo)
+  function fim(){ clearInterval(segue); document.body.classList.remove('em-tour'); try{ localStorage.setItem(TOUR_VISTO, '1'); }catch(e){} [luz, cx, bloq].forEach(function(x){ x.remove(); }); window.removeEventListener('resize', pos); window.removeEventListener('scroll', pos); }
   function pos(){
-    var a = passos[n].alvo, r = a.getBoundingClientRect(), m = 8;
+    var a = passos[n].acha();   // procura de novo: se a data mudou, a lista foi redesenhada
+    if(!a) return;
+    var r = a.getBoundingClientRect(), m = 8;
     luz.style.top = (r.top - m) + 'px'; luz.style.left = (r.left - m) + 'px';
     luz.style.width = (r.width + 2*m) + 'px'; luz.style.height = (r.height + 2*m) + 'px';
     var w = Math.min(320, innerWidth - 32), x = Math.max(16, Math.min(r.left, innerWidth - w - 16));
@@ -1119,7 +1122,8 @@ function tour(){
     cx.innerHTML = '<div class="tour-n">' + (n+1) + ' de ' + passos.length + '</div><h3>' + esc(x.t) + '</h3><p>' + esc(x.p) + '</p>'
       + '<div class="tour-bts"><button type="button" class="tour-pula">' + (ult ? '' : 'pular') + '</button>'
       + '<button type="button" class="tour-vai">' + (ult ? 'Entendi' : 'Próximo') + '</button></div>';
-    x.alvo.scrollIntoView({block:'center', behavior:'instant' in document.documentElement.style ? 'instant' : 'auto'});
+    var al = x.acha(); if(!al){ if(ult) fim(); else { n++; mostra(); } return; }
+    al.scrollIntoView({block:'center', behavior:'instant' in document.documentElement.style ? 'instant' : 'auto'});
     setTimeout(pos, 30);
     var sai = function(){ if(x.depois) x.depois(); };
     cx.querySelector('.tour-vai').onclick = function(){ sai(); if(ult) fim(); else { n++; mostra(); } };
