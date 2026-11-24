@@ -4241,7 +4241,7 @@
     var now=new Date();
     var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
     var mt=lastTue(now.getFullYear(),now.getMonth());
-    if(today>mt){mt=lastTue(now.getFullYear(),now.getMonth()+1);}
+    if(today>mt||today.getTime()===new Date(2026,10,24).getTime()){mt=lastTue(now.getFullYear(),now.getMonth()+1);} /* 24/11/26 (cliente): só hoje já mostra o encontro de dezembro */
     var d=document.getElementById('liveDay'),m=document.getElementById('liveMon'),u=document.getElementById('liveUrgency');
     if(d){d.textContent=mt.getDate();}
     if(m){m.textContent=MON3[mt.getMonth()];}
