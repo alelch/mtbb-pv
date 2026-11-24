@@ -360,6 +360,26 @@ body{background:var(--fundo)}
 [data-tema="71"] .bv-foto{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:50% 50%}
 [data-tema="71"] .bv-oi{font-size:24px}
 .entrar-foto{display:block;width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 0 16px}
+/* 24/11 cliente: "esse é o melhor que consegue?" · topo num cartão só: Dany + saudação | a data. Sem os 3 passos (repetiam a pergunta da data). */
+.hero{margin-top:28px;background:#fff;border-radius:24px;box-shadow:0 2px 18px rgba(120,80,20,.09);padding:24px 22px;display:grid;gap:22px}
+.hero .boasvindas{margin:0}
+.hero .boasvindas p{margin-top:2px}
+.hero .passos{display:none!important}
+.hero .progresso{margin:0;grid-row:3}
+.hero .console{margin:0;padding:20px 0 0;border-top:1px solid var(--linha);border-bottom:0}
+.hero .console-grade{display:block}
+.hero .rot{font-size:15px;font-weight:800;text-transform:none;letter-spacing:-.02em;color:var(--tinta)}
+.hero input[type=date]{border:1.5px solid var(--linha-2);box-shadow:none!important;padding:11px 14px;font-size:16px;min-width:200px}
+.hero input[type=date]:focus{border-color:var(--laranja);outline:0;box-shadow:0 0 0 3px rgba(254,119,67,.2)!important}
+.hero .campo-data{margin-top:10px}
+.hero .contagem{margin-top:8px;font-size:0}
+.hero .contagem small{margin-top:0;font-size:13px;color:var(--tinta-55)}
+.hero .console-grade > div:nth-child(2){margin-top:16px}
+@media (min-width:760px){
+  .hero{grid-template-columns:1fr 1fr;padding:30px 32px;gap:24px 40px;align-items:center}
+  .hero .console{padding:0 0 0 40px;border-top:0;border-left:1px solid var(--linha)}
+  .hero .progresso{grid-column:1/-1}
+}
 </style>
 </head>
 <body class="sem-conta">
@@ -389,10 +409,11 @@ body{background:var(--fundo)}
       <span class="quem"><b id="quem"></b><button type="button" class="btn-texto" id="sair">sair</button></span>
     </div>
   </div>
+  <div class="hero">
   <div class="boasvindas">
     <img src="dany-rosto.webp" alt="Dany Sakugawa" class="bv-foto" width="320" height="320">
     <div>
-      <h2 class="bv-oi" id="bvOi">Oi!</h2>
+      <h2 class="bv-oi" id="bvOi">Boas-vindas!</h2>
       <p>Seu lançamento, uma semana por vez.</p>
     </div>
   </div>
@@ -421,6 +442,7 @@ body{background:var(--fundo)}
         <div class="datas-chave" id="datasChave"></div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
