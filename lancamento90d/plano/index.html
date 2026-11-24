@@ -364,6 +364,12 @@ body{background:var(--fundo)}
 .bv-livro{background:none;border:0;padding:0;margin-top:6px;font:inherit;font-size:14px;font-weight:700;color:var(--laranja);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .bv-livro.discreto{font-weight:500;font-size:12.5px;color:var(--tinta-55)}
 .livro-form{display:flex;gap:8px;margin-top:10px}
+.bv-links{display:flex;flex-wrap:wrap;gap:4px 16px}
+.bv-livro:disabled{cursor:wait;opacity:.7}
+#antes:not(.tudo) .extra{display:none}
+.ver-mais{margin-top:10px;background:none;border:1.5px solid var(--linha-2);border-radius:999px;padding:9px 18px;font:inherit;font-size:13.5px;font-weight:700;cursor:pointer;color:var(--tinta)}
+.ver-mais:hover{border-color:var(--laranja)}
+
 .hero .boasvindas > div{min-width:0}
 @media (max-width:640px){
   [data-tema="71"] .hero .boasvindas{grid-template-columns:1fr;gap:14px}
@@ -428,7 +434,7 @@ body{background:var(--fundo)}
     <div>
       <h2 class="bv-oi" id="bvOi">Olá!</h2>
       <p class="bv-frase" id="bvFrase">12 semanas para o seu livro chegar aos leitores.</p>
-      <p id="bvSub"><button type="button" class="bv-livro" id="bvLivroBt">Qual é o nome do seu livro?</button></p>
+      <p id="bvSub" class="bv-links"><button type="button" class="bv-livro" id="bvLivroBt">Qual é o nome do seu livro?</button></p>
       <form id="livroForm" class="livro-form" hidden><input id="livroNome" maxlength="120" placeholder="Nome do seu livro" aria-label="Nome do seu livro" autocomplete="off"><button type="submit">ok</button></form>
     </div>
   </div>
@@ -710,11 +716,18 @@ function blocoAntes(){
     + '<div class="contador" id="c_antes"></div></div>'
     + '<p>'+abre+'</p>'
     + '<ul class="lista">';
+  // 24/11: só as 3 próximas à vista; o resto (e as feitas) atrás de "Ver as outras"
+  var vis = 0, extra = 0;
   for(var i=0;i<ANTES.length;i++){
     var it = itemDe(ANTES[i][0], ANTES[i][1]); if(!it) continue;
-    h += tarefa(ANTES[i][0]+'_'+ANTES[i][1], it, true);
+    var id = ANTES[i][0]+'_'+ANTES[i][1], li = tarefa(id, it, true);
+    if(!estado.feitos[id] && vis < 3){ vis++; h += li; }
+    else { extra++; h += li.replace('<li class="tarefa', '<li class="extra tarefa'); }
   }
-  return h + '</ul></div></section>';
+  if(!vis) h = h.replace(/<li class="extra tarefa/g, '<li class="tarefa');   // tudo feito: mostra tudo
+  h += '</ul>';
+  if(extra && vis) h += '<button type="button" class="ver-mais" id="verMaisAntes" data-n="'+extra+'">Ver as outras tarefas</button>';
+  return h + '</div></section>';
 }
 
 // 24/11: o Gerador é BÔNUS de todo comprador do 90D (cliente: "tem que ter a sensação que é um bônus
@@ -900,6 +913,11 @@ function redesenhar(){
 
 /* ---------------- eventos ---------------- */
 
+document.addEventListener('click', function(ev){
+  var b = ev.target.closest && ev.target.closest('#verMaisAntes'); if(!b) return;
+  var a = document.getElementById('antes'), tudo = a.classList.toggle('tudo');
+  b.textContent = tudo ? 'Mostrar menos' : 'Ver as outras tarefas';
+});
 document.addEventListener('change', function(ev){
   var alvo = ev.target;
   if(alvo.classList && alvo.classList.contains('marca-cx')){
@@ -1037,7 +1055,7 @@ function iniciar(d){
   var origem = (pend && local) ? local : (srv && (srv.pub || srv.evento || srv.livro || (srv.feitos && Object.keys(srv.feitos).length)) ? srv : (local || srv || {}));
   estado.pub = typeof origem.pub === 'string' ? origem.pub : '';
   estado.evento = typeof origem.evento === 'string' ? origem.evento : '';
-  estado.livro = typeof origem.livro === 'string' ? origem.livro : (srv && typeof srv.livro === 'string' ? srv.livro : '');
+  estado.livro = typeof origem.livro === 'string' && origem.livro ? origem.livro : (srv && typeof srv.livro === 'string' ? srv.livro : '');
   estado.feitos = (origem.feitos && typeof origem.feitos === 'object') ? origem.feitos : {};
   if(origem === local && local) salvar();          // sobe o progresso antigo deste navegador pra conta
   else try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){}
