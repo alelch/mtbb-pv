@@ -359,7 +359,6 @@ body{background:var(--fundo)}
 [data-tema="71"] .bv-foto{width:100%;height:auto;aspect-ratio:4/3;border-radius:24px;object-position:50% 45%}
 [data-tema="71"] .bv-oi{font-size:26px}
 @media (min-width:641px){[data-tema="71"] .bv-foto{aspect-ratio:16/9;object-position:50% 40%}}
-.chip.aula::before{content:'';width:20px;height:20px;border-radius:50%;background:url(dany-mini.webp) center/cover;flex:none}
 </style>
 </head>
 <body class="sem-conta">
@@ -578,7 +577,7 @@ var AULA_DE = {
 };
 function chipAula(id){
   var a = AULA_DE[id]; if(!a) return '';
-  return '<a class="chip aula" href="https://hotmart.com/pt-br/club/the-book-business/products/8341226/content/'+AULA_PAG[a[0]]+'" target="_blank" rel="noopener" title="Abre a aula na área de membros">'+(parseInt(a[1],10) ? 'A Dany explica na aula '+a[0]+', aos '+parseInt(a[1],10)+' min' : 'A Dany explica no começo da aula '+a[0])+'</a>';
+  return '<a class="chip aula" href="https://hotmart.com/pt-br/club/the-book-business/products/8341226/content/'+AULA_PAG[a[0]]+'" target="_blank" rel="noopener" title="Abre a aula na área de membros">'+(parseInt(a[1],10) ? 'Explicado na aula '+a[0]+', aos '+parseInt(a[1],10)+' min' : 'Explicado no começo da aula '+a[0])+'</a>';
 }
 // copia: a mesma tarefa aparece de novo no "Comece agora". O progresso continua salvo pelo id original (data-id).
 function tarefa(id, it, copia){
@@ -706,7 +705,7 @@ function blocoHoje(){
 }
 var ABERTAS = {};
 function montar(){
-  var h = blocoHoje() + cartaoBonus() + (mostrarAntes() ? blocoAntes() : '');
+  var h = blocoHoje() + (mostrarAntes() ? blocoAntes() : '') + cartaoBonus();   // 24/11: o bônus depois do que fazer agora
   var faseAberta = '';
   var atual = semanaAtual();
 
