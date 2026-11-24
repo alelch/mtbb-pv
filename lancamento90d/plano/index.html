@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-tema="71">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+
 <style>
 :root{
   color-scheme: light;
@@ -59,6 +60,41 @@ button{font-family:inherit;font-size:inherit;color:inherit}
 .logo.topo{font-size:clamp(20px,3.2vw,28px)}
 .abre .sub{margin:24px 0 0;font-size:15px;line-height:1.55;color:var(--tinta-72);max-width:52ch}
 
+/* ---------- 24/11 prévia "acolhedor" ---------- */
+.boasvindas{margin-top:28px;display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:center}
+.bv-foto{width:96px;height:96px;object-fit:cover;object-position:50% 20%;border-radius:50%;background:var(--creme)}
+.bv-oi{font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.15}
+.boasvindas p{margin:6px 0 0;font-size:14.5px;line-height:1.55;color:var(--tinta-72);max-width:52ch}
+.passos{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.passos.some{display:none}
+.passos li{display:flex;gap:8px;align-items:center;background:var(--creme);padding:10px 10px;font-size:12.5px;font-weight:700;line-height:1.2}
+.passos li b{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-content:center;background:var(--papel);border:1.5px solid var(--laranja);color:var(--laranja);font-size:12px;font-weight:800}
+.passos li a{text-decoration:none}
+.passos li.feito b{background:var(--laranja);color:var(--papel);font-size:0}
+.passos li.feito b::after{content:'✓';font-size:13px}
+.passos li.feito span{color:var(--tinta-55)}
+.progresso{margin-top:20px}
+.barra{height:8px;background:var(--linha);border-radius:4px;overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:var(--laranja);border-radius:4px;transition:width .4s}
+.prog-txt{margin-top:8px;font-size:12.5px;color:var(--tinta-72);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.prog-txt a{color:var(--laranja);font-weight:700;text-decoration:none}
+@media (max-width:640px){
+  .boasvindas{grid-template-columns:72px 1fr;gap:14px}
+  .bv-foto{width:72px;height:72px}
+  .bv-oi{font-size:20px}
+}
+.sem-titulo.d{text-transform:none;letter-spacing:-.025em;line-height:1.2;font-weight:800;font-size:19px}
+.semana .sem-cab{cursor:pointer;margin-bottom:16px}
+.seta{display:inline-block;width:9px;height:9px;border-right:2px solid var(--tinta-55);border-bottom:2px solid var(--tinta-55);transform:rotate(45deg);margin-left:12px;transition:transform .2s;position:relative;top:-3px}
+.semana.fechada .seta{transform:rotate(-45deg);top:-1px}
+.semana.fechada{padding-block:16px}
+.semana.fechada .sem-cab{margin-bottom:0}
+.semana.fechada .sem-corpo{display:none}
+.semana.fechada .sem-tag{margin-bottom:4px}
+.faixa h2{font-size:clamp(22px,4.2vw,30px)}
+.faixa{margin-top:36px}
+@media print{.semana.fechada .sem-corpo{display:block!important}.seta{display:none}}
+
 /* ---------- console de datas ---------- */
 .console{margin-top:30px;border-top:1px solid var(--linha-2);border-bottom:1px solid var(--linha-2);padding-block:26px 28px}
 .console-grade{display:grid;grid-template-columns:minmax(220px,290px) 1fr;gap:26px 40px;align-items:start}
@@ -72,6 +108,8 @@ input[type=date]{
 input[type=date]:hover{border-color:var(--laranja)}
 .contagem{margin-top:18px;font-weight:900;text-transform:uppercase;letter-spacing:-.05em;line-height:.92;font-size:26px;color:var(--tinta-32)}
 .contagem.viva{color:var(--laranja)}
+.contagem.pede{color:var(--laranja)}
+.console.sem-data input[type=date]{border-color:var(--laranja);box-shadow:0 0 0 2px var(--laranja)}
 .contagem small{display:block;font-weight:500;font-size:12.5px;letter-spacing:0;color:var(--tinta-72);text-transform:none;margin-top:10px;line-height:1.5}
 .datas-chave{display:flex;flex-direction:column}
 .dk{display:grid;grid-template-columns:1fr auto;gap:14px;padding:9px 0;align-items:baseline;border-top:1px solid var(--linha)}
@@ -105,17 +143,17 @@ input[type=date]:hover{border-color:var(--laranja)}
 .sem-cab.so-conta{grid-template-columns:1fr;justify-items:end;margin-bottom:12px}
 .semana.colada{padding-top:16px;border-top:0}
 /* 23/11: "Comece agora" só aparece para quem lança a mais de 90 dias */
-.antes{margin-top:44px;border:2px solid var(--laranja);padding:22px 20px 24px;scroll-margin-top:20px}
+.antes{margin-top:24px;border:2px solid var(--laranja);padding:22px 20px 24px;scroll-margin-top:20px}
 .antes .olho{font-weight:700;text-transform:uppercase;letter-spacing:-.01em;font-size:11px;color:var(--laranja);margin-bottom:10px}
-.antes h2{font-size:clamp(26px,5vw,38px)}
+.antes h2{font-size:21px;font-weight:800;letter-spacing:-.03em}
 .antes > p{margin:12px 0 20px;font-size:14.5px;line-height:1.55;color:var(--tinta-72);max-width:60ch}
 .antes .sem-cab{margin-bottom:6px}
 /* 24/11: cartão do bônus (Gerador), para todos */
-.bonus{margin-top:44px;background:var(--laranja);color:var(--tinta);padding:22px 20px 24px}
+.bonus{margin-top:32px;background:var(--laranja);color:var(--tinta);padding:22px 20px 24px}
 .bonus .olho{font-weight:800;text-transform:uppercase;letter-spacing:-.01em;font-size:12px;margin-bottom:8px}
-.bonus h2{font-size:clamp(24px,4.6vw,34px)}
+.bonus h2{font-size:21px;font-weight:800;letter-spacing:-.03em;line-height:1.15}
 .bonus p b{font-weight:800}
-.bonus p{margin:10px 0 18px;font-size:14.5px;line-height:1.55;max-width:56ch}
+.bonus p{margin:6px 0 14px;font-size:14.5px;line-height:1.55;max-width:56ch}
 .bonus-btn{display:inline-block;background:var(--tinta);color:var(--papel);font-weight:800;font-size:15px;padding:13px 20px;text-decoration:none}
 .bonus-btn:hover{opacity:.9}
 .bonus + *{margin-top:0}
@@ -262,7 +300,67 @@ body.sem-conta .abre, body.sem-conta #conteudo, body.sem-conta .regras, body.sem
   a{text-decoration:none}
 }
 </style>
-<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<style>img{max-width:100%}[hidden]{display:none!important}/* arejado + humano (24/11, cliente: "deixe mais aerado, mais humano") */
+body{line-height:1.6}
+.abre{padding-block:40px 0}
+.boasvindas{margin-top:36px}
+.progresso{margin-top:24px}
+.console{margin-top:36px;border-bottom:0}
+.contagem{text-transform:none;letter-spacing:-.03em;font-size:24px;font-weight:800;line-height:1.15}
+.faixa{margin-top:56px;padding-block:20px 18px;border-top:1px solid var(--linha-2)}
+.faixa h2.d{text-transform:none;font-size:22px;letter-spacing:-.03em;line-height:1.2;font-weight:800}
+.semana{border-top:1px solid var(--linha)}
+.semana.fechada{padding-block:20px}
+.bonus{background:var(--creme);border-left:4px solid var(--laranja);padding:22px 20px;margin-top:40px}
+.bonus-btn{background:var(--laranja);color:var(--tinta)}
+.hoje-card{margin-top:40px;border:2px solid var(--laranja);padding:22px 20px 18px;scroll-margin-top:20px}
+.hoje-card .olho{font-weight:700;font-size:12px;color:var(--laranja);text-transform:uppercase;letter-spacing:.02em}
+.hoje-card h2{font-size:21px;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin:6px 0 4px}
+.hoje-card .quando{font-size:13px;color:var(--tinta-55);margin-bottom:14px;display:flex;justify-content:space-between;gap:10px}
+.tarefa{padding:10px 0}
+
+.chip.aula{border:0;background:none;padding:2px 0;color:var(--laranja);font-weight:700;font-size:12px}
+.chip.aula::before{content:'▶';width:auto;height:auto;background:none;font-size:9px}
+.post .frase{text-transform:none;letter-spacing:-.02em;font-size:16px;font-weight:800}
+.console.compacta .console-grade{display:block}
+.console.compacta .console-grade > div:nth-child(2), .console.compacta .campo-data{display:none}
+.console.compacta.ver .console-grade > div:nth-child(2){display:block;margin-top:18px}
+.console.compacta.ver .campo-data{display:flex}
+.resumo-data{display:none;font-size:14px;color:var(--tinta-72);margin-top:6px}
+.console.compacta .resumo-data{display:block}
+.resumo-data button{background:none;border:0;padding:0;color:var(--laranja);font-weight:700;cursor:pointer;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.console.compacta .contagem{display:none}
+
+/* ===== bordas arredondadas (base de todas as versões) ===== */
+:root{--raio:16px;--fundo:var(--papel);--cartao:#fff;--borda-cartao:var(--linha)}
+body{background:var(--fundo)}
+.hoje-card,.bonus,.antes,.passos li,.post,.lembrete{border-radius:var(--raio)}
+.bonus-btn,.btn,.entrar input,.campo-data input,.btn-fantasma{border-radius:12px}
+.bv-foto{border-radius:50%}
+.marca-cx{border-radius:6px}
+.sub .marca-cx{border-radius:5px}
+.chip{border-radius:999px}
+.console input[type=date]{border-radius:12px}
+/* semanas como cartões */
+[data-tema] .semana{border-top:0;padding-block:6px}
+[data-tema] .semana > .env > .sem-cab, [data-tema] .semana > .env > .sem-corpo{}
+[data-tema] .semana > .env{background:var(--cartao);border:1px solid var(--borda-cartao);border-radius:var(--raio);padding:16px 18px;max-width:calc(var(--col) - 2*var(--gutter));margin-inline:auto}
+@media (max-width:860px){[data-tema] .semana > .env{margin-inline:var(--gutter)}}
+[data-tema] .semana.fechada{padding-block:6px}
+[data-tema] .faixa{border-top:0;margin-top:36px;padding-block:8px 4px}
+[data-tema] .faixa h2.d{font-size:18px}
+
+/* 71 · escolhida 24/11: foto grande (7) + fundo creme quente (1). Dany também nos selos "A Dany explica". */
+[data-tema="71"]{--fundo:#fdf7ec;--cartao:#fff;--borda-cartao:transparent;--raio:20px}
+[data-tema="71"] .semana > .env,[data-tema="71"] .hoje-card{box-shadow:0 2px 14px rgba(120,80,20,.08)}
+[data-tema="71"] .hoje-card{background:#fff;border:0}
+[data-tema="71"] .bonus{background:#fff1dc;border-left:0}
+[data-tema="71"] .boasvindas{grid-template-columns:1fr;gap:14px}
+[data-tema="71"] .bv-foto{width:100%;height:auto;aspect-ratio:4/3;border-radius:24px;object-position:50% 45%}
+[data-tema="71"] .bv-oi{font-size:26px}
+@media (min-width:641px){[data-tema="71"] .bv-foto{aspect-ratio:16/9;object-position:50% 40%}}
+.chip.aula::before{content:'';width:20px;height:20px;border-radius:50%;background:url(dany-mini.webp) center/cover;flex:none}
+</style>
 </head>
 <body class="sem-conta">
 <section class="env entrar" id="entrar" hidden>
@@ -287,19 +385,32 @@ body.sem-conta .abre, body.sem-conta #conteudo, body.sem-conta .regras, body.sem
   <div class="topo-linha">
     <h1 class="logo topo"><span>Lançamento</span><span class="b">90D</span></h1>
     <div class="topo-acao">
-      <span class="quem"><b id="quem">Seu plano</b> · <button type="button" class="btn-texto" id="sair">sair</button></span>
+      <span class="quem"><b id="quem"></b><button type="button" class="btn-texto" id="sair">sair</button></span>
     </div>
   </div>
-  <p class="sub">A execução inteira, semana a semana. Marque o que já fez: o seu progresso fica salvo na sua conta. <span class="salvo" id="salvoStatus"></span></p>
+  <div class="boasvindas">
+    <img src="dany-topo.webp" alt="Dany Sakugawa" class="bv-foto" width="960" height="720">
+    <div>
+      <h2 class="bv-oi" id="bvOi">Oi!</h2>
+      <p>Seu lançamento, uma semana por vez.</p>
+    </div>
+  </div>
+  <ol class="passos">
+    <li id="p1"><b>1</b><span><a href="#dataPub">A data</a></span></li>
+    <li id="p2"><b>2</b><span><a href="#antes">1ª tarefa</a></span></li>
+    <li id="p3"><b>3</b><span>As semanas</span></li>
+  </ol>
+  <div class="progresso"><div class="barra"><i id="barra"></i></div><div class="prog-txt"><span id="progTxt"></span> <span class="salvo" id="salvoStatus"></span></div></div>
 
   <div class="console" aria-label="Datas do lançamento">
     <div class="console-grade">
       <div>
-        <div class="rot">Data de publicação</div>
+        <div class="rot" id="rotData">Data de publicação</div>
         <div class="campo-data">
           <input type="date" id="dataPub" aria-label="Data de publicação do livro">
           <button type="button" class="btn-fantasma" id="limparData">limpar</button>
         </div>
+        <div class="resumo-data" id="resumoData"></div>
         <div class="contagem" id="contagem">defina a data
           <small id="contagemSub">Com a data, cada semana ganha dia certo e a lista marca onde você está hoje.</small>
         </div>
@@ -379,7 +490,7 @@ function enviar(){
   pendente = false;
   statusSalvo('salvando…');
   api({acao:'salvar', token:token, estado:estado}).then(function(d){
-    if(d && d.ok){ statusSalvo('salvo na sua conta', 'ok'); try{ localStorage.removeItem(PENDENTE); }catch(e){} }
+    if(d && d.ok){ statusSalvo('salvo', 'ok'); try{ localStorage.removeItem(PENDENTE); }catch(e){} }
     else if(d && (d.erro === 'sessao' || d.erro === 'sem_acesso')){ try{ localStorage.setItem(PENDENTE, '1'); }catch(e){} sairLocal(d.erro); }
     else { pendente = true; statusSalvo('não salvou, tentando de novo', 'erro'); setTimeout(enviar, 5000); }
   }).catch(function(){ pendente = true; statusSalvo('sem conexão, tentando de novo', 'erro'); setTimeout(enviar, 5000); });
@@ -447,14 +558,27 @@ var raiz = document.getElementById('conteudo');
 function esc(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-function chips(lista){
-  if(!lista || !lista.length) return '';
-  var h = '<div class="apoios">';
+function chips(lista, antes){
+  if((!lista || !lista.length) && !antes) return '';
+  lista = lista || [];
+  var h = '<div class="apoios">' + (antes || '');
   for(var i=0;i<lista.length;i++){
     var a = lista[i];
     h += '<a class="chip" href="'+esc(a.url)+'" target="_blank" rel="noopener">'+esc(a.nome)+' &#8599;</a>';
   }
   return h + '</div>';
+}
+// 24/11 (cliente: "cada tarefa poderia ter a aula específica linkada"). Tarefa → aula e minuto em que a Dany explica,
+// tirados das transcrições (aula 7 já descontando o corte da versão no ar). Abre a aula na área de membros da Hotmart.
+var AULA_PAG = {6:'ROxd8REgOD', 7:'a4RKd9Zxen', 8:'r48lrdRD4R'};
+var AULA_DE = {
+  v_0:[6,'1:35'], v_1:[6,'1:35'], v_2:[6,'2:05'], v_3:[6,'2:05'], v_4:[6,'2:35'], v_5:[6,'2:35'], v_6:[6,'3:04'], v_7:[6,'3:04'], v_8:[6,'3:04'], s1_0:[6,'6:26'], s1_1:[6,'7:25'], s1_2:[6,'8:07'], s1_3:[6,'10:36'], s1_4:[6,'11:42'], s1_5:[6,'11:42'], s2_0:[6,'17:21'], s2_1:[6,'19:12'], s2_2:[6,'20:41'], s2_3:[6,'21:13'], s2_4:[6,'21:41'], s3_0:[6,'24:42'], s3_1:[6,'25:13'], s3_2:[6,'29:46'], s3_3:[6,'31:12'], s3_4:[6,'31:44'], s3_5:[6,'32:17'], s4_0:[6,'35:37'], s4_1:[6,'36:06'], s4_2:[6,'37:03'], s4_3:[6,'39:11'],
+  s5_0:[7,'0:00'], s5_1:[7,'0:35'], s5_2:[7,'1:36'], s5_3:[7,'4:02'], s5_4:[7,'4:33'], s5_5:[7,'5:02'], s6_0:[7,'6:32'], s6_1:[7,'7:03'], s6_2:[7,'7:36'], s6_3:[7,'8:02'], s6_4:[7,'9:39'], s7_0:[7,'10:41'], s7_1:[7,'10:41'], s7_2:[7,'10:41'], s7_3:[7,'11:07'], s7_4:[7,'12:42'], s7_5:[7,'11:35'], s8_0:[7,'14:23'], s8_1:[7,'14:50'], s8_2:[7,'14:50'], s9_0:[7,'17:41'], s9_1:[7,'18:08'], s9_2:[7,'18:36'], s9_3:[7,'18:36'], s9_4:[7,'18:36'], s10_0:[7,'19:33'], s10_1:[7,'20:04'], s11_0:[7,'21:03'], s11_1:[7,'21:36'], s11_2:[7,'21:36'], s12_0:[7,'23:31'], s12_1:[7,'24:05'], s12_2:[7,'24:32'], s12_3:[7,'25:00'], s12_4:[7,'25:00'], s12_5:[7,'25:00'],
+  posb0_0:[8,'0:35'], posb0_1:[8,'2:57'], posb0_2:[8,'3:24'], posb0_3:[8,'3:55'], posb0_4:[8,'4:25'], posb1_0:[8,'2:01'], posb1_1:[8,'4:56'], posb1_2:[8,'4:56'], posb1_3:[8,'4:56'], posb2_0:[8,'6:02']
+};
+function chipAula(id){
+  var a = AULA_DE[id]; if(!a) return '';
+  return '<a class="chip aula" href="https://hotmart.com/pt-br/club/the-book-business/products/8341226/content/'+AULA_PAG[a[0]]+'" target="_blank" rel="noopener" title="Abre a aula na área de membros">'+(parseInt(a[1],10) ? 'A Dany explica na aula '+a[0]+', aos '+parseInt(a[1],10)+' min' : 'A Dany explica no começo da aula '+a[0])+'</a>';
 }
 // copia: a mesma tarefa aparece de novo no "Comece agora". O progresso continua salvo pelo id original (data-id).
 function tarefa(id, it, copia){
@@ -464,7 +588,7 @@ function tarefa(id, it, copia){
   h += '<input type="checkbox" class="marca-cx" id="'+dom+'" data-id="'+id+'"'+(feito?' checked':'')+'>';
   h += '<div><label class="txt" for="'+dom+'">'+esc(it.t)+'</label>';
   if(it.nota) h += '<span class="nota">'+esc(it.nota)+'</span>';
-  h += chips(it.apoio);
+  h += chips(it.apoio, chipAula(id));
   if(it.subs && it.subs.length){
     h += '<ul class="sub">';
     for(var j=0;j<it.subs.length;j++) h += tarefa(id+'_'+j, it.subs[j], copia);
@@ -521,6 +645,9 @@ function prepararDados(){
    São as MESMAS tarefas das semanas 1 a 3 (mesmo id): marcou aqui, aparece marcado lá. */
 var ANTES = [['s1',0],['s1',1],['s1',2],['s1',5],['s2',0],['s2',2],['s3',0],['s3',2],['s3',3]];
 function longe(){ var d = diasAte(); return d !== null && d > 89; }
+// 24/11 (cliente: "faz o 1 primeiro"): sem data o Comece agora também aparece. Quem abria o Plano e saía
+// sem pôr a data pediu reembolso 19% das vezes (7% de quem nunca entrou); a tela sem data era só checklist.
+function mostrarAntes(){ return !dePub() || longe(); }
 function itemDe(sem, i){
   for(var k=0;k<SEMANAS.length;k++) if(SEMANAS[k].id === sem) return SEMANAS[k].itens[i] || null;
   return null;
@@ -537,13 +664,12 @@ function idsAntes(){
 }
 function blocoAntes(){
   var gate = janelaGate();
+  var abre = gate ? 'Seus 90 dias começam em '+esc(fmtLongo(gate.ini))+'. Dá para adiantar estas desde já.' : 'Dá para fazer hoje, sem o livro pronto.';
   var h = '<section class="env"><div class="antes" id="antes">'
-    + '<div class="sem-cab"><div><div class="olho">Antes dos 90 dias</div>'
-    + '<h2 class="d">Comece agora</h2></div>'
+    + '<div class="sem-cab"><div>'
+    + '<h2>Comece agora</h2></div>'
     + '<div class="contador" id="c_antes"></div></div>'
-    + '<p>Os seus 90 dias começam em '+esc(fmtLongo(gate.ini))+'. Até lá, dá para adiantar o que não depende do livro pronto. '
-    + 'Quanto antes você começa, mais tempo as pessoas têm para conhecer você e o seu livro. '
-    + 'O que você marcar aqui já fica marcado nas semanas do plano.</p>'
+    + '<p>'+abre+'</p>'
     + '<ul class="lista">';
   for(var i=0;i<ANTES.length;i++){
     var it = itemDe(ANTES[i][0], ANTES[i][1]); if(!it) continue;
@@ -557,14 +683,30 @@ function blocoAntes(){
 function cartaoBonus(){
   return '<section class="env"><div class="bonus">'
     + '<div class="olho">Seu bônus</div>'
-    + '<h2 class="d">Gerador de Posts Magnéticos</h2>'
-    + '<p><b>Vendido separadamente por R$197.</b><br>Responda 7 perguntas sobre o seu livro e receba 5 ideias de post, com a legenda pronta.</p>'
+    + '<h2>Gerador de Posts Magnéticos</h2>'
+    + '<p>5 ideias de post para o seu livro, com legenda pronta. <b>Vale R$197.</b></p>'
     + '<a class="bonus-btn" href="https://thebookbusiness.com.br/posts-magneticos/?de=plano" target="_blank" rel="noopener">Abrir o meu Gerador</a>'
     + '</div></section>';
 }
 
+// "Esta semana" no topo: a semana de hoje com as tarefas (mesmo id, marcou aqui marca lá).
+function blocoHoje(){
+  var at = semanaAtual(); if(!at || mostrarAntes()) return '';
+  var b = null; for(var i=0;i<TODOS.length;i++) if(TODOS[i].id === at) b = TODOS[i];
+  if(!b) return '';
+  var jan = at === 'v' ? janelaGate() : (b.semana ? janela(b.semana) : null);
+  var h = '<section class="env"><div class="hoje-card" id="hoje">'
+    + '<div class="olho">Esta semana</div>'
+    + '<h2>'+esc(at === 'v' ? 'O que já está pronto do seu livro?' : b.foco)+'</h2>'
+    + '<div class="quando"><span>'+esc(b.num)+(jan ? ' · '+esc(fmt(jan.ini)+' a '+fmtLongo(jan.fim)) : '')+'</span><span class="contador" id="c_hoje"></span></div>'
+    + '<ul class="lista">';
+  if(b.blocos){ for(var k=0;k<b.blocos.length;k++) for(var j=0;j<b.blocos[k].itens.length;j++) h += tarefa(b.id+'b'+k+'_'+j, b.blocos[k].itens[j], true); }
+  else for(var q=0;q<b.itens.length;q++) h += tarefa(b.id+'_'+q, b.itens[q], true);
+  return h + '</ul>' + blocoPost(b.post) + '</div></section>';
+}
+var ABERTAS = {};
 function montar(){
-  var h = cartaoBonus() + (longe() ? blocoAntes() : '');
+  var h = blocoHoje() + cartaoBonus() + (mostrarAntes() ? blocoAntes() : '');
   var faseAberta = '';
   var atual = semanaAtual();
 
@@ -575,29 +717,28 @@ function montar(){
       var f = FASES[faseAberta];
       h += '<section class="faixa '+f.classe+'"><div class="env">'
         + '<div class="olho">'+esc(f.semanas)+'</div>'
-        + '<h2 class="d">'+esc(f.nome)+'</h2><p>'+esc(f.texto)+'</p>'
+        + '<h2 class="d">'+esc(f.nome)+'</h2>'
         + '</div></section>';
     }
 
     var jan = b.id === 'v' ? janelaGate() : (b.semana ? janela(b.semana) : null);
     var quando = jan ? fmt(jan.ini) + ' a ' + fmtLongo(jan.fim) : '';
 
-    var sozinha = CONTA_FASE[b.fase] === 1;
-    h += '<section class="semana'+(sozinha?' colada':'')+(atual===b.id?' agora':'')+'" id="'+b.id+'"><div class="env">';
-    if(sozinha){
-      h += '<div class="sem-cab so-conta"><div class="contador" id="c_'+b.id+'"></div></div>';
-    }else{
-      h += '<div class="sem-cab"><div>'
-        + '<div class="sem-tag"><b>'+esc(b.num)+'</b>'
-        + (atual===b.id ? '<i class="hoje">esta semana</i>' : '')
-        + (quando ? '<span>'+esc(quando)+'</span>' : '')+'</div>'
-        + '<h3 class="sem-titulo d">'+esc(b.foco)+'</h3>'
-        + '</div>'
-        + '<div class="contador" id="c_'+b.id+'"></div>'
-        + '</div>';
-    }
+    // 24/11 prévia: toda semana tem cabeçalho e abre/fecha; só a semana de hoje começa aberta.
+    var aberta = ABERTAS[b.id] !== undefined ? ABERTAS[b.id] : false;
+    var titulo = b.id === 'v' ? 'O que já está pronto do seu livro?' : b.foco;
+    var intro = b.id === 'v' ? 'O que faltar, você resolve em paralelo.' : b.intro;
+    h += '<section class="semana'+(aberta?'':' fechada')+(atual===b.id?' agora':'')+'" id="'+b.id+'"><div class="env">';
+    h += '<div class="sem-cab" role="button" tabindex="0" aria-expanded="'+(aberta?'true':'false')+'" data-sem="'+b.id+'"><div>'
+      + '<div class="sem-tag"><b>'+esc(b.num)+'</b>'
+      + (atual===b.id ? '<i class="hoje">esta semana</i>' : '')
+      + (quando ? '<span>'+esc(quando)+'</span>' : '')+'</div>'
+      + '<h3 class="sem-titulo d">'+esc(titulo)+'</h3>'
+      + '</div>'
+      + '<div class="contador"><span id="c_'+b.id+'"></span><i class="seta" aria-hidden="true"></i></div>'
+      + '</div><div class="sem-corpo">';
 
-    if(b.intro) h += '<p style="margin:0 0 22px;font-size:14.5px;color:var(--creme-72);max-width:62ch">'+esc(b.intro)+'</p>';
+    if(intro) h += '<p style="margin:0 0 22px;font-size:14.5px;color:var(--tinta-72);max-width:62ch">'+esc(intro)+'</p>';
     if(b.lembrete) h += '<div class="lembrete"><b>Lembrete</b>'+esc(b.lembrete)+'</div>';
 
     if(b.blocos){
@@ -610,7 +751,7 @@ function montar(){
     }
 
     h += blocoPost(b.post);
-    h += '</div></section>';
+    h += '</div></div></section>';
   }
   raiz.innerHTML = h;
 
@@ -629,6 +770,26 @@ function atualizarProgresso(){
       c.className = 'contador' + (n === ids.length ? ' ok' : '');
     }
   }
+  var tot = 0, fz = 0;
+  for(var t=0;t<TODOS.length;t++){ var li2 = idsDe(TODOS[t]); tot += li2.length; for(var u=0;u<li2.length;u++) if(estado.feitos[li2[u]]) fz++; }
+  document.getElementById('barra').style.width = (tot ? Math.round(100*fz/tot) : 0) + '%';
+  var at = semanaAtual(), nomeAt = '';
+  for(var w=0;w<TODOS.length;w++) if(TODOS[w].id === at) nomeAt = TODOS[w].num;
+  // 24/11 (cliente: "105 assusta"): nunca mostrar o total. Conta o que já fez e em que semana está.
+  var nSem = at && /^s\d+$/.test(at) ? +at.slice(1) : 0;
+  var partes = [];
+  if(nSem) partes.push('<a href="#hoje">Semana ' + nSem + ' de 12</a>');
+  else if(at === 'pos') partes.push('<a href="#hoje">Pós-lançamento</a>');
+  if(fz) partes.push(fz + (fz === 1 ? ' tarefa feita' : ' tarefas feitas'));
+  document.getElementById('progTxt').innerHTML = partes.join(' · ');
+  document.querySelector('.progresso').style.display = partes.length ? '' : 'none';
+  if(nSem) document.getElementById('barra').style.width = Math.round(100 * (nSem - 1) / 12) + '%';
+  document.getElementById('p1').classList.toggle('feito', !!dePub());
+  document.getElementById('p2').classList.toggle('feito', fz > 0);
+  document.querySelector('.passos').classList.toggle('some', !!dePub() && fz > 0);   // feito o começo, os passos saem da frente
+  var ch = document.getElementById('c_hoje');
+  if(ch){ var bh = null; for(var y=0;y<TODOS.length;y++) if(TODOS[y].id === at) bh = TODOS[y];
+    if(bh){ var ih = idsDe(bh), nh = 0; for(var z=0;z<ih.length;z++) if(estado.feitos[ih[z]]) nh++; ch.textContent = nh + '/' + ih.length; ch.className = 'contador' + (nh === ih.length ? ' ok' : ''); } }
   var ca = document.getElementById('c_antes');
   if(ca){
     var ia = idsAntes(), na = 0;
@@ -644,10 +805,17 @@ function atualizarDatas(){
   var sub = document.getElementById('contagemSub');
   var dk = document.getElementById('datasChave');
 
+  document.querySelector('.console').classList.toggle('sem-data', !pub);
+  document.getElementById('limparData').style.display = pub ? '' : 'none';
   if(!pub){
-    cont.firstChild.nodeValue = 'defina a data';
+    document.getElementById('rotData').textContent = 'Quando sai o seu livro?';
+    document.querySelector('.console').classList.remove('compacta','ver');
+    cont.firstChild.nodeValue = '';
     cont.classList.remove('viva');
-    sub.textContent = 'Com a data, cada semana ganha dia certo e a lista marca onde você está hoje.';
+    cont.classList.add('pede');
+    sub.textContent = 'Não sabe ainda? Coloque uma data provável.';
+    dk.parentNode.style.display = 'none';
+    return;
     dk.innerHTML = '<div class="dk"><b>Início da pré-venda</b><span>a definir</span></div>'
       + '<div class="dk"><b>Encerramento da pré-venda</b><span>a definir</span></div>'
       + '<div class="dk destaque"><b>Data de publicação</b><span>a definir</span></div>'
@@ -655,7 +823,14 @@ function atualizarDatas(){
     return;
   }
 
+  document.getElementById('rotData').textContent = 'Seu livro sai em';
+  document.querySelector('.console').classList.add('compacta');
+  document.getElementById('resumoData').innerHTML = '<b style="color:var(--tinta);font-size:17px">'+esc(fmtLongo(pub))+'</b>'
+    + (function(){ var dd = diasAte(); return dd > 1 ? ' · faltam '+dd+' dias' : dd === 1 ? ' · falta 1 dia' : dd === 0 ? ' · é hoje' : ''; })()
+    + '<br><button type="button" id="verDatas">ver datas ou trocar</button>';
+  dk.parentNode.style.display = '';
   var d = diasAte();
+  cont.classList.remove('pede');
   cont.classList.add('viva');
   if(d > 0){ cont.firstChild.nodeValue = 'faltam ' + d + (d === 1 ? ' dia' : ' dias'); }
   else if(d === 0){ cont.firstChild.nodeValue = 'é hoje'; }
@@ -667,8 +842,8 @@ function atualizarDatas(){
   sub.innerHTML = d < 0
     ? 'Você está no <a href="#pos">pós-lançamento</a>. Os microciclos começam agora.'
     : d > 89
-    ? ('Os seus 90 dias começam em ' + esc(fmtLongo(janelaGate().ini)) + '. Até lá, <a href="#antes">comece agora</a>.')
-    : ('Você está na <a href="#' + esc(atual) + '">' + esc(nomeAtual) + '</a>.');
+    ? ''
+    : '';
 
   var j9 = janela(9), j11 = janela(11);
   var evento = somaDias(pub, 7);
@@ -735,8 +910,24 @@ function imprimir(){
   }, 700);
 }
 
+function alternar(cab){
+  var sec = cab.closest('.semana'); if(!sec) return;
+  var abrir = sec.classList.contains('fechada');
+  sec.classList.toggle('fechada', !abrir);
+  cab.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+  ABERTAS[sec.id] = abrir;
+}
+document.addEventListener('keydown', function(ev){
+  var cab = ev.target.closest && ev.target.closest('.sem-cab[data-sem]');
+  if(cab && (ev.key === 'Enter' || ev.key === ' ')){ ev.preventDefault(); alternar(cab); }
+});
 document.addEventListener('click', function(ev){
   if(ev.target.closest && ev.target.closest('.js-imprimir')){ imprimir(); return; }
+  var cab = ev.target.closest && ev.target.closest('.sem-cab[data-sem]');
+  if(cab && !ev.target.closest('a')){ alternar(cab); return; }
+  var ir = ev.target.closest && ev.target.closest('a[href^="#"]');
+  if(ir){ var alvo = document.getElementById(ir.getAttribute('href').slice(1)); var s2 = alvo && alvo.closest('.semana.fechada'); if(s2){ alternar(s2.querySelector('.sem-cab')); } }
+  if(ev.target.id === 'verDatas'){ document.querySelector('.console').classList.toggle('ver'); return; }
   if(ev.target.id === 'limparData'){
     estado.pub = '';
     document.getElementById('dataPub').value = '';
@@ -790,12 +981,14 @@ function iniciar(d){
   if(origem === local && local) salvar();          // sobe o progresso antigo deste navegador pra conta
   else try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){}
   var nome = (d.nome || '').trim(), primeiro = nome ? nome.replace(/^[^A-Za-zÀ-ÿ]+/, '').split(/\s+/)[0] : '';   // nome da Hotmart às vezes vem com ponto na frente
-  document.getElementById('quem').textContent = primeiro ? 'Plano de ' + primeiro.charAt(0).toUpperCase() + primeiro.slice(1).toLowerCase() : 'Seu plano';
+  if(primeiro) document.getElementById('bvOi').textContent = 'Oi, ' + primeiro.charAt(0).toUpperCase() + primeiro.slice(1).toLowerCase() + '!';
+  document.getElementById('quem').textContent = '';
+  if(false) document.getElementById('quem').textContent = primeiro ? 'Plano de ' + primeiro.charAt(0).toUpperCase() + primeiro.slice(1).toLowerCase() : 'Seu plano';
   document.getElementById('marcaDagua').textContent = 'Plano de ' + (nome || d.email) + ' · ' + d.email + ' · Lançamento 90D · uso pessoal';
   document.getElementById('entrar').hidden = true;
   document.body.classList.remove('sem-conta');
   document.getElementById('dataPub').value = estado.pub || '';
-  statusSalvo(d.salvo_em ? 'salvo na sua conta' : 'o que você marcar fica salvo na sua conta', 'ok');
+  statusSalvo('salvo', 'ok');
   redesenhar();
 }
 function agendarLogoff(){
