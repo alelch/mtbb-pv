@@ -411,6 +411,19 @@ body{background:var(--fundo)}
   .hero-faixa{grid-row:1/3;align-self:stretch;width:220px;height:auto;margin:-30px 0;min-height:260px;object-position:48% 40%}
   .hero .progresso{grid-column:2/-1;grid-row:2}
 }
+
+/* tutorial */
+.em-tour .livro-form button{display:none}
+
+.tour-bloq{position:fixed;inset:0;z-index:90}
+.tour-luz{position:fixed;z-index:91;border-radius:18px;box-shadow:0 0 0 9999px rgba(20,12,4,.62);pointer-events:none;transition:all .25s ease}
+.tour-cx{position:fixed;z-index:92;background:#fff;border-radius:18px;padding:18px 18px 14px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:top .25s ease,left .25s ease}
+.tour-n{font-size:12px;font-weight:700;color:var(--laranja)}
+.tour-cx h3{margin:4px 0 4px;font-size:18px;font-weight:800;letter-spacing:-.02em}
+.tour-cx p{margin:0;font-size:14.5px;line-height:1.5;color:var(--tinta-72)}
+.tour-bts{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.tour-pula{background:none;border:0;padding:6px 0;font:inherit;font-size:13px;color:var(--tinta-55);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.tour-vai{border:0;border-radius:12px;background:var(--laranja);color:var(--tinta);font:inherit;font-weight:800;font-size:14px;padding:10px 20px;cursor:pointer}
 </style>
 </head>
 <body class="sem-conta">
@@ -1058,6 +1071,66 @@ document.getElementById('livroForm').addEventListener('submit', function(ev){
   salvar(); pintarSaudacao();
   this.hidden = true; document.getElementById('bvSub').hidden = false;
 });
+
+/* ---------- tutorial de 3 passos (24/11, cliente: "aquele tutorialzinho que a tela escurece e vai passo a passo")
+   Aparece uma vez só (marca no navegador); "pular" encerra. ?tour=1 força. ---------- */
+var TOUR_VISTO = 'plano90d.tour';
+function tour(){
+  var forca = /[?&]tour=1/.test(location.search), visto = false;
+  try{ visto = localStorage.getItem(TOUR_VISTO) === '1'; }catch(e){}
+  if(visto && !forca) return;
+  var vis = function(sel){ var l = document.querySelectorAll(sel); for(var i=0;i<l.length;i++) if(l[i].offsetParent) return l[i]; return null; };
+  var temData = !!dePub();
+  var semLivro = !(estado.livro || '').trim();
+  var passos = [
+    // passo 1 (cliente 24/11: "passo 1 colocar nome do livro"): abre o campo e a pessoa digita ali mesmo
+    semLivro ? {alvo: document.querySelector('.hero .boasvindas > div'), t: 'Qual é o nome do seu livro?',
+     p: 'Escreva aqui. Se ainda não tem título, é só seguir.', antes: function(){
+       document.getElementById('bvSub').hidden = true; document.getElementById('livroForm').hidden = false; },
+     depois: function(){ var i = document.getElementById('livroNome'); if(i.value.trim()) document.getElementById('livroForm').requestSubmit(); else { document.getElementById('livroForm').hidden = true; document.getElementById('bvSub').hidden = false; } },
+     foco: '#livroNome'} : null,
+    {alvo: vis('.hero .console'), t: temData ? 'A data do seu livro' : (semLivro ? 'Agora, a data' : 'Comece pela data'),
+     p: temData ? 'O Plano monta as 12 semanas a partir dela. Dá para trocar quando quiser.' : 'Coloque quando o seu livro sai. O Plano monta as 12 semanas a partir dela.'},
+    {alvo: vis('#hoje .tarefa, #antes .tarefa'), t: 'Marque o que já fez',
+     p: 'Fica salvo na sua conta, no celular e no computador.'},
+    {alvo: vis('.chip.aula'), t: 'Ficou com dúvida?',
+     p: 'Cada tarefa mostra a aula e o minuto em que a Dany explica.'}
+  ].filter(function(x){ return x && x.alvo; });
+  if(!passos.length) return;
+  document.body.classList.add('em-tour');
+  var luz = document.createElement('div'); luz.className = 'tour-luz';
+  var cx = document.createElement('div'); cx.className = 'tour-cx'; cx.setAttribute('role','dialog'); cx.setAttribute('aria-live','polite');
+  var bloq = document.createElement('div');
+  document.body.appendChild(luz); document.body.appendChild(cx);
+  var n = 0;
+  function fim(){ document.body.classList.remove('em-tour'); try{ localStorage.setItem(TOUR_VISTO, '1'); }catch(e){} [luz, cx, bloq].forEach(function(x){ x.remove(); }); window.removeEventListener('resize', pos); window.removeEventListener('scroll', pos); }
+  function pos(){
+    var a = passos[n].alvo, r = a.getBoundingClientRect(), m = 8;
+    luz.style.top = (r.top - m) + 'px'; luz.style.left = (r.left - m) + 'px';
+    luz.style.width = (r.width + 2*m) + 'px'; luz.style.height = (r.height + 2*m) + 'px';
+    var w = Math.min(320, innerWidth - 32), x = Math.max(16, Math.min(r.left, innerWidth - w - 16));
+    cx.style.width = w + 'px'; cx.style.left = x + 'px';
+    var h = cx.offsetHeight, embaixo = r.bottom + m + 14;
+    cx.style.top = (embaixo + h < innerHeight - 12 ? embaixo : Math.max(12, r.top - m - 14 - h)) + 'px';
+  }
+  function mostra(){
+    var x = passos[n], ult = n === passos.length - 1;
+    if(x.antes) x.antes();
+    cx.innerHTML = '<div class="tour-n">' + (n+1) + ' de ' + passos.length + '</div><h3>' + esc(x.t) + '</h3><p>' + esc(x.p) + '</p>'
+      + '<div class="tour-bts"><button type="button" class="tour-pula">' + (ult ? '' : 'pular') + '</button>'
+      + '<button type="button" class="tour-vai">' + (ult ? 'Entendi' : 'Próximo') + '</button></div>';
+    x.alvo.scrollIntoView({block:'center', behavior:'instant' in document.documentElement.style ? 'instant' : 'auto'});
+    setTimeout(pos, 30);
+    var sai = function(){ if(x.depois) x.depois(); };
+    cx.querySelector('.tour-vai').onclick = function(){ sai(); if(ult) fim(); else { n++; mostra(); } };
+    cx.querySelector('.tour-pula').onclick = function(){ sai(); fim(); };
+    if(x.foco) setTimeout(function(){ document.querySelector(x.foco).focus({preventScroll:true}); }, 60);
+    else cx.querySelector('.tour-vai').focus({preventScroll:true});
+  }
+  window.addEventListener('resize', pos); window.addEventListener('scroll', pos, {passive:true});
+  mostra();
+}
+
 function iniciar(d){
   VIABILIZADORES = d.plano.VIABILIZADORES; SEMANAS = d.plano.SEMANAS; POS = d.plano.POS; FASES = d.plano.FASES;
   prepararDados();
@@ -1082,6 +1155,7 @@ function iniciar(d){
   document.getElementById('dataPub').value = estado.pub || '';
   statusSalvo('salvo', 'ok');
   redesenhar();
+  setTimeout(tour, 700);   // 24/11: tutorial de 3 passos, só na 1ª vez
 }
 function agendarLogoff(){
   clearTimeout(timerLogoff);
