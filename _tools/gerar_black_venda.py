@@ -28,7 +28,7 @@ PILHA = [
     ("Workshop Prêmios e Concursos Literários", "", "Vitalício"),
     ("Workshop Escrita Criativa", "", "Vitalício"),
     ("Workshop Planejamento Anual", "", "Vitalício"),
-    ("Gravação de 100% das lives, encontros e eventos", "Com roteiristas premiadas, agentes literárias e publishers das maiores editoras.", "Vitalício"),
+    ("Gravação de 100% das lives e eventos", "Com roteiristas premiadas, agentes literárias e publishers das maiores editoras.", "Vitalício"),
     ("Encontros em grupo ao vivo com a Dany", "Todo mês, para ajustar a estratégia do seu livro.", "3 anos"),
 ]
 rows = "\n".join(
@@ -74,7 +74,7 @@ _LEVA = [
   ("Acesso vitalício", "Autoridade Digital para Escritores", "Quais redes usar, o que postar e com que frequência para multiplicar o seu alcance e ser descoberto por novos leitores."),
   ("Acesso vitalício", "Comunidade The&nbsp;Book&nbsp;Business", "A maior comunidade de autores do Brasil, com mais de 2.000 escritores. A sua nova turma."),
   ("Acesso vitalício", "Workshops Mão na Massa", "<ul><li>MasterClass Best-Seller de Verdade</li><li>Redes Sociais para Autores</li><li>Prêmios e Concursos Literários</li><li>Escrita Criativa</li><li>Planejamento Anual</li></ul>"),
-  ("Acesso vitalício", "Gravação de 100% das lives, encontros e eventos", "Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país."),
+  ("Acesso vitalício", "Gravação de 100% das lives e eventos", "Para rever quando quiser. Com roteiristas premiadas, agentes literárias e publishers das maiores editoras do país."),
 ]
 _IMG = ["p-metodo", "p-encontros", "p-autoridade", "p-comunidade", "p-workshops", "p-gravacoes"]
 def _tag(k):
@@ -949,7 +949,7 @@ footer .claro a {{ color: #fff; text-decoration: underline; }}
           <li>{CK}<span><b>5 Workshops Mão na Massa</b>, <b>vitalícios</b></span></li>
           <li>{CK}<span><b>LOMBADA</b> por <b class="d9-only"><span data-anos>6</span> anos</b><b class="after-only">3 anos</b></span></li>
           <li>{CK}<span><b>Encontros em grupo</b> ao vivo com a Dany por 3 anos</span></li>
-          <li>{CK}<span>Gravação de <b>100% das lives</b>, encontros e eventos</span></li>
+          <li>{CK}<span>Gravação de <b>100% das lives</b> e eventos</span></li>
           <li>{CK}<span><b>3 Playbooks físicos</b> na sua casa</span></li>
           <li>{CK}<span>Até <b>R$ 6.700 em cupons</b> de desconto com parceiros</span></li>
         </ul>
