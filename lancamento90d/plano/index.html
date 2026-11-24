@@ -399,6 +399,18 @@ body{background:var(--fundo)}
   .hero .console{padding:0 0 0 40px;border-top:0;border-left:1px solid var(--linha)}
   .hero .progresso{grid-column:1/-1}
 }
+
+/* 24/11 cliente escolheu a D: Dany em faixa (lateral no desktop, topo no celular, mais alta) */
+.hero{position:relative;overflow:hidden}
+.hero .bv-foto{display:none}
+.hero .boasvindas{grid-template-columns:1fr!important}
+.hero .progresso{grid-row:auto;order:9}
+.hero-faixa{display:block;max-width:none;width:calc(100% + 44px);margin:-24px -22px 0;height:280px;object-fit:cover;object-position:50% 42%}
+@media (min-width:760px){
+  .hero{grid-template-columns:220px 1fr 1fr;padding-left:0}
+  .hero-faixa{grid-row:1/3;align-self:stretch;width:220px;height:auto;margin:-30px 0;min-height:260px;object-position:48% 40%}
+  .hero .progresso{grid-column:2/-1;grid-row:2}
+}
 </style>
 </head>
 <body class="sem-conta">
@@ -428,7 +440,7 @@ body{background:var(--fundo)}
       <span class="quem"><b id="quem"></b><button type="button" class="btn-texto" id="sair">sair</button></span>
     </div>
   </div>
-  <div class="hero">
+  <div class="hero"><img class="hero-faixa" src="dany-topo.webp" alt="Dany Sakugawa" width="960" height="720">
   <div class="boasvindas">
     <img src="dany-rosto.webp" alt="Dany Sakugawa" class="bv-foto" width="320" height="320">
     <div>
