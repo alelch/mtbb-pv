@@ -358,7 +358,20 @@ body{background:var(--fundo)}
 /* 24/11 cliente: "dentro, acho melhor a dany menor" + rosto centralizado; login com a fotinho */
 [data-tema="71"] .boasvindas{grid-template-columns:64px 1fr;gap:16px}
 [data-tema="71"] .bv-foto{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:50% 50%}
-[data-tema="71"] .bv-oi{font-size:24px}
+[data-tema="71"] .bv-oi{font-size:26px;line-height:1.15}
+.hero .boasvindas p.bv-frase{margin-top:6px;font-size:16px;font-weight:600;color:var(--tinta);line-height:1.4;text-wrap:balance}
+.bv-frase i{font-style:italic;font-weight:800;color:var(--laranja)}
+.bv-livro{background:none;border:0;padding:0;margin-top:6px;font:inherit;font-size:14px;font-weight:700;color:var(--laranja);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.bv-livro.discreto{font-weight:500;font-size:12.5px;color:var(--tinta-55)}
+.livro-form{display:flex;gap:8px;margin-top:10px}
+.hero .boasvindas > div{min-width:0}
+@media (max-width:640px){
+  [data-tema="71"] .hero .boasvindas{grid-template-columns:1fr;gap:14px}
+  [data-tema="71"] .hero .bv-foto{width:56px;height:56px}
+}
+.livro-form input{flex:1;min-width:0;font:inherit;font-size:16px;padding:10px 14px;border:1.5px solid var(--linha-2);border-radius:12px;background:#fff}
+.livro-form input:focus{outline:0;border-color:var(--laranja);box-shadow:0 0 0 3px rgba(254,119,67,.2)}
+.livro-form button{border:0;border-radius:12px;background:var(--laranja);color:var(--tinta);font-weight:800;padding:0 18px;cursor:pointer}
 .entrar-foto{display:block;width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 0 16px}
 /* 24/11 cliente: "esse é o melhor que consegue?" · topo num cartão só: Dany + saudação | a data. Sem os 3 passos (repetiam a pergunta da data). */
 .hero{margin-top:28px;background:#fff;border-radius:24px;box-shadow:0 2px 18px rgba(120,80,20,.09);padding:24px 22px;display:grid;gap:22px}
@@ -413,8 +426,10 @@ body{background:var(--fundo)}
   <div class="boasvindas">
     <img src="dany-rosto.webp" alt="Dany Sakugawa" class="bv-foto" width="320" height="320">
     <div>
-      <h2 class="bv-oi" id="bvOi">Boas-vindas!</h2>
-      <p>Seu lançamento, uma semana por vez.</p>
+      <h2 class="bv-oi" id="bvOi">Olá!</h2>
+      <p class="bv-frase" id="bvFrase">12 semanas para o seu livro chegar aos leitores.</p>
+      <p id="bvSub"><button type="button" class="bv-livro" id="bvLivroBt">Qual é o nome do seu livro?</button></p>
+      <form id="livroForm" class="livro-form" hidden><input id="livroNome" maxlength="120" placeholder="Nome do seu livro" aria-label="Nome do seu livro" autocomplete="off"><button type="submit">ok</button></form>
     </div>
   </div>
   <ol class="passos">
@@ -479,7 +494,7 @@ var VIABILIZADORES, SEMANAS, POS, FASES;
 /* ---------------- estado ---------------- */
 
 var CHAVE = 'plano90d.v1';
-var estado = {pub:'', feitos:{}, evento:''};
+var estado = {pub:'', feitos:{}, evento:'', livro:''};
 
 function carregar(){
   try{
@@ -489,6 +504,7 @@ function carregar(){
       if(o && typeof o === 'object'){
         estado.pub = typeof o.pub === 'string' ? o.pub : '';
         estado.evento = typeof o.evento === 'string' ? o.evento : '';
+        estado.livro = typeof o.livro === 'string' ? o.livro : '';
         estado.feitos = (o.feitos && typeof o.feitos === 'object') ? o.feitos : {};
       }
     }
@@ -991,20 +1007,43 @@ function sairLocal(motivo){
   try{ localStorage.removeItem(SESSAO); localStorage.removeItem(SESSAO_ATE); }catch(e){}
   mostrarEntrar(MSG[motivo] || '');
 }
+/* 24/11 cliente: nome da pessoa + nome do livro, no jeito do LOMBADA ("{Nome}, 5 ações para {título} chegar mais longe").
+   Sem nome ou sem título a frase continua inteira. */
+var PRIMEIRO = '';
+function pintarSaudacao(){
+  var t = (estado.livro || '').trim();
+  document.getElementById('bvOi').textContent = PRIMEIRO ? 'Olá, ' + PRIMEIRO + '!' : 'Olá!';   // cliente 24/11: "Olá [nome]"
+  document.getElementById('bvFrase').innerHTML = '12 semanas para ' + (t ? '<i>' + esc(t) + '</i>' : 'o seu livro') + ' chegar aos leitores.';
+  document.getElementById('bvLivroBt').textContent = t ? 'trocar o nome do livro' : 'Qual é o nome do seu livro?';
+  document.getElementById('bvLivroBt').classList.toggle('discreto', !!t);
+}
+document.getElementById('bvLivroBt').addEventListener('click', function(){
+  document.getElementById('bvSub').hidden = true;
+  var f = document.getElementById('livroForm'); f.hidden = false;
+  var i = document.getElementById('livroNome'); i.value = estado.livro || ''; i.focus();
+});
+document.getElementById('livroForm').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  estado.livro = document.getElementById('livroNome').value.replace(/[<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 120);
+  salvar(); pintarSaudacao();
+  this.hidden = true; document.getElementById('bvSub').hidden = false;
+});
 function iniciar(d){
   VIABILIZADORES = d.plano.VIABILIZADORES; SEMANAS = d.plano.SEMANAS; POS = d.plano.POS; FASES = d.plano.FASES;
   prepararDados();
   var srv = d.estado, local = null;
   try{ var b = localStorage.getItem(CHAVE); if(b) local = JSON.parse(b); }catch(e){}
   var pend = false; try{ pend = localStorage.getItem(PENDENTE) === '1'; }catch(e){}
-  var origem = (pend && local) ? local : (srv && (srv.pub || srv.evento || (srv.feitos && Object.keys(srv.feitos).length)) ? srv : (local || srv || {}));
+  var origem = (pend && local) ? local : (srv && (srv.pub || srv.evento || srv.livro || (srv.feitos && Object.keys(srv.feitos).length)) ? srv : (local || srv || {}));
   estado.pub = typeof origem.pub === 'string' ? origem.pub : '';
   estado.evento = typeof origem.evento === 'string' ? origem.evento : '';
+  estado.livro = typeof origem.livro === 'string' ? origem.livro : (srv && typeof srv.livro === 'string' ? srv.livro : '');
   estado.feitos = (origem.feitos && typeof origem.feitos === 'object') ? origem.feitos : {};
   if(origem === local && local) salvar();          // sobe o progresso antigo deste navegador pra conta
   else try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){}
   var nome = (d.nome || '').trim(), primeiro = nome ? nome.replace(/^[^A-Za-zÀ-ÿ]+/, '').split(/\s+/)[0] : '';   // nome da Hotmart às vezes vem com ponto na frente
-  if(primeiro) document.getElementById('bvOi').textContent = 'Oi, ' + primeiro.charAt(0).toUpperCase() + primeiro.slice(1).toLowerCase() + '!';
+  PRIMEIRO = primeiro ? primeiro.charAt(0).toUpperCase() + primeiro.slice(1).toLowerCase() : '';
+  pintarSaudacao();
   document.getElementById('quem').textContent = '';
   if(false) document.getElementById('quem').textContent = primeiro ? 'Plano de ' + primeiro.charAt(0).toUpperCase() + primeiro.slice(1).toLowerCase() : 'Seu plano';
   document.getElementById('marcaDagua').textContent = 'Plano de ' + (nome || d.email) + ' · ' + d.email + ' · Lançamento 90D · uso pessoal';
