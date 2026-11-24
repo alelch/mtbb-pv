@@ -355,15 +355,17 @@ body{background:var(--fundo)}
 [data-tema="71"] .semana > .env,[data-tema="71"] .hoje-card{box-shadow:0 2px 14px rgba(120,80,20,.08)}
 [data-tema="71"] .hoje-card{background:#fff;border:0}
 [data-tema="71"] .bonus{background:#fff1dc;border-left:0}
-[data-tema="71"] .boasvindas{grid-template-columns:1fr;gap:14px}
-[data-tema="71"] .bv-foto{width:100%;height:auto;aspect-ratio:4/3;border-radius:24px;object-position:50% 45%}
-[data-tema="71"] .bv-oi{font-size:26px}
-@media (min-width:641px){[data-tema="71"] .bv-foto{aspect-ratio:16/9;object-position:50% 40%}}
+/* 24/11 cliente: "dentro, acho melhor a dany menor" + rosto centralizado; login com a fotinho */
+[data-tema="71"] .boasvindas{grid-template-columns:64px 1fr;gap:16px}
+[data-tema="71"] .bv-foto{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:50% 50%}
+[data-tema="71"] .bv-oi{font-size:24px}
+.entrar-foto{display:block;width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 0 16px}
 </style>
 </head>
 <body class="sem-conta">
 <section class="env entrar" id="entrar" hidden>
   <h1 class="logo"><span>Lançamento</span><span class="b">90D</span></h1>
+  <img src="dany-rosto.webp" alt="Dany Sakugawa" class="entrar-foto" width="320" height="320">
   <h2 class="d">Seu plano de 90 dias</h2>
   <p class="sub">Entre com o e-mail da sua compra na Hotmart. O que você marcar fica salvo na sua conta e abre igual no celular e no computador.</p>
   <form id="formEntrar" novalidate>
@@ -388,7 +390,7 @@ body{background:var(--fundo)}
     </div>
   </div>
   <div class="boasvindas">
-    <img src="dany-topo.webp" alt="Dany Sakugawa" class="bv-foto" width="960" height="720">
+    <img src="dany-rosto.webp" alt="Dany Sakugawa" class="bv-foto" width="320" height="320">
     <div>
       <h2 class="bv-oi" id="bvOi">Oi!</h2>
       <p>Seu lançamento, uma semana por vez.</p>
