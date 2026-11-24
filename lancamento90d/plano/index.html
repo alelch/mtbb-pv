@@ -377,6 +377,7 @@ body{background:var(--fundo)}
 }
 .livro-form input{flex:1;min-width:0;font:inherit;font-size:16px;padding:10px 14px;border:1.5px solid var(--linha-2);border-radius:12px;background:#fff}
 .livro-form input:focus{outline:0;border-color:var(--laranja);box-shadow:0 0 0 3px rgba(254,119,67,.2)}
+.livro-form .cancelar{background:none!important;padding:0 4px!important;font-weight:500!important;font-size:12.5px;color:var(--tinta-55)!important;text-decoration:underline;text-underline-offset:3px}
 .livro-form button{border:0;border-radius:12px;background:var(--laranja);color:var(--tinta);font-weight:800;padding:0 18px;cursor:pointer}
 .entrar-foto{display:block;width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 0 16px}
 /* 24/11 cliente: "esse é o melhor que consegue?" · topo num cartão só: Dany + saudação | a data. Sem os 3 passos (repetiam a pergunta da data). */
@@ -419,6 +420,9 @@ body{background:var(--fundo)}
 .hero .dk b,.hero .dk span{white-space:nowrap}
 @media (min-width:760px){
   .hero{row-gap:0;grid-template-columns:220px minmax(0,1fr) minmax(0,1fr)}
+  .livro-form{flex-wrap:wrap}
+  .livro-form input{flex:1 1 100%}
+  .livro-form button[type=submit]{padding:9px 18px}
   .hero input[type=date]{min-width:0;flex:1 1 150px}
   .hero .campo-data{flex-wrap:wrap;gap:4px 12px}
   .hero-faixa{grid-row:1/span 3}
@@ -481,7 +485,7 @@ body{background:var(--fundo)}
       <h2 class="bv-oi" id="bvOi">Olá!</h2>
       <p class="bv-frase" id="bvFrase">12 semanas para o seu livro chegar aos leitores.</p>
       <p id="bvSub" class="bv-links"><button type="button" class="bv-livro" id="bvLivroBt">Qual é o nome do seu livro?</button></p>
-      <form id="livroForm" class="livro-form" hidden><input id="livroNome" maxlength="120" placeholder="Nome do seu livro" aria-label="Nome do seu livro" autocomplete="off"><button type="submit">ok</button></form>
+      <form id="livroForm" class="livro-form" hidden><input id="livroNome" maxlength="120" placeholder="Nome do seu livro" aria-label="Nome do seu livro" autocomplete="off"><button type="submit">ok</button><button type="button" class="cancelar" id="livroCancela">cancelar</button></form>
     </div>
   </div>
   <ol class="passos">
@@ -882,6 +886,7 @@ function atualizarProgresso(){
   document.getElementById('progTxt').innerHTML = partes.join(' · ');
   document.querySelector('.progresso').style.display = partes.length ? '' : 'none';
   if(nSem) document.getElementById('barra').style.width = Math.round(100 * (nSem - 1) / 12) + '%';
+  else if(at === 'pos') document.getElementById('barra').style.width = '100%';   // pós-lançamento: os 90 dias acabaram
   document.getElementById('p1').classList.toggle('feito', !!dePub());
   document.getElementById('p2').classList.toggle('feito', fz > 0);
   document.querySelector('.passos').classList.toggle('some', !!dePub() && fz > 0);   // feito o começo, os passos saem da frente
@@ -921,11 +926,11 @@ function atualizarDatas(){
     return;
   }
 
-  document.getElementById('rotData').textContent = 'Seu livro sai em';
+  document.getElementById('rotData').textContent = diasAte() < 0 ? 'Seu livro saiu em' : 'Seu livro sai em';
   document.querySelector('.console').classList.add('compacta');
   document.getElementById('resumoData').innerHTML = '<b style="color:var(--tinta);font-size:17px">'+esc(fmtLongo(pub))+'</b>'
     + (function(){ var dd = diasAte(); var q = function(t){ return '<span style="display:block">' + t + '</span>'; };
-      return dd > 1 ? q('faltam '+dd+' dias') : dd === 1 ? q('falta 1 dia') : dd === 0 ? q('é hoje') : ''; })()
+      return dd > 1 ? q('faltam '+dd+' dias') : dd === 1 ? q('falta 1 dia') : dd === 0 ? q('é hoje') : dd === -1 ? q('saiu ontem') : q('saiu há '+(-dd)+' dias'); })()
     + '<button type="button" id="verDatas" style="margin-top:4px">ver datas ou trocar</button>';
   dk.parentNode.style.display = '';
   var d = diasAte();
@@ -1061,6 +1066,7 @@ var MSG = {
   sessao:'Por segurança, a sessão termina depois de 2 horas. Entre de novo com o seu e-mail: o seu progresso está salvo.'
 };
 function mostrarEntrar(msg){
+  if(FIM_TOUR) FIM_TOUR();   // sessão acabou ou saiu no meio do tutorial: ele não fica por cima do login
   document.body.classList.add('sem-conta');
   document.getElementById('entrar').hidden = false;
   var e = document.getElementById('entrarErro');
@@ -1087,6 +1093,9 @@ document.getElementById('bvLivroBt').addEventListener('click', function(){
   var f = document.getElementById('livroForm'); f.hidden = false;
   var i = document.getElementById('livroNome'); i.value = estado.livro || ''; i.focus();
 });
+function fecharLivroForm(){ document.getElementById('livroForm').hidden = true; document.getElementById('bvSub').hidden = false; }
+document.getElementById('livroCancela').addEventListener('click', fecharLivroForm);
+document.getElementById('livroNome').addEventListener('keydown', function(ev){ if(ev.key === 'Escape' && !document.body.classList.contains('em-tour')) fecharLivroForm(); });
 document.getElementById('livroForm').addEventListener('submit', function(ev){
   ev.preventDefault();
   estado.livro = document.getElementById('livroNome').value.replace(/[<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 120);
@@ -1096,7 +1105,7 @@ document.getElementById('livroForm').addEventListener('submit', function(ev){
 
 /* ---------- tutorial de 3 passos (24/11, cliente: "aquele tutorialzinho que a tela escurece e vai passo a passo")
    Aparece uma vez só (marca no navegador); "pular" encerra. ?tour=1 força. ---------- */
-var TOUR_VISTO = 'plano90d.tour';
+var TOUR_VISTO = 'plano90d.tour', FIM_TOUR = null;
 function tour(){
   var forca = /[?&]tour=1/.test(location.search), visto = false;
   try{ visto = localStorage.getItem(TOUR_VISTO) === '1'; }catch(e){}
@@ -1126,7 +1135,7 @@ function tour(){
   document.body.appendChild(luz); document.body.appendChild(cx);
   var n = 0;
   var segue = setInterval(function(){ pos(); }, 250);   // acompanha mudanças na tela (data digitada, título salvo)
-  function fim(){ clearInterval(segue); document.body.classList.remove('em-tour'); try{ localStorage.setItem(TOUR_VISTO, '1'); }catch(e){} [luz, cx, bloq].forEach(function(x){ x.remove(); }); window.removeEventListener('resize', pos); window.removeEventListener('scroll', pos); }
+  function fim(){ FIM_TOUR = null; document.removeEventListener('keydown', teclaEsc); clearInterval(segue); document.body.classList.remove('em-tour'); try{ localStorage.setItem(TOUR_VISTO, '1'); }catch(e){} [luz, cx, bloq].forEach(function(x){ x.remove(); }); window.removeEventListener('resize', pos); window.removeEventListener('scroll', pos); }
   function pos(){
     var a = passos[n].acha();   // procura de novo: se a data mudou, a lista foi redesenhada
     if(!a) return;
@@ -1154,6 +1163,9 @@ function tour(){
     else cx.querySelector('.tour-vai').focus({preventScroll:true});
   }
   window.addEventListener('resize', pos); window.addEventListener('scroll', pos, {passive:true});
+  var teclaEsc = function(ev){ if(ev.key === 'Escape'){ var x = passos[n]; if(x && x.depois) x.depois(); fim(); } };
+  document.addEventListener('keydown', teclaEsc);
+  FIM_TOUR = function(){ fim(); };
   mostra();
 }
 
