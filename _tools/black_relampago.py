@@ -11,7 +11,7 @@ CSS = ('<style>/*relampago*/.rlp .obar [data-esc-clk],.rlp .esc [data-esc-clk],.
        '.rlp .esc__t{text-transform:uppercase}</style>')
 # dentro do /*esc*/: na janela, escreve a tarja e o aviso e para (sem relógio)
 ESC_OLD = "function t(){var s=Math.floor((FIM-Date.now())/1000);"
-ESC_NEW = ("function t(){if(window.__RLP){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML='REABERTURA RELÂMPAGO'});"
+ESC_NEW = ("function t(){if(window.__RLP){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML='Pode acabar a qualquer momento'});"
            "document.querySelectorAll('[data-esc-t]').forEach(function(e){e.textContent='Reabertura relâmpago'});"
            "document.querySelectorAll('.esc__s').forEach(function(e){e.textContent='Pode acabar a qualquer momento.'});return}"
            "var s=Math.floor((FIM-Date.now())/1000);")
