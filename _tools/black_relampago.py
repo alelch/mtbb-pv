@@ -3,7 +3,7 @@ Dentro da janela: tarja do topo e aviso antes do preço dizem "REABERTURA RELÂM
 de compra voltam ao normal (o /*encerrado*/ não age). Fora da janela tudo segue como estava (ENCERRADO). Idempotente."""
 import os
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INI, FIM = '2026-11-25T00:00:00-03:00', '2026-11-30T00:00:00-03:00'
+INI, FIM = '2026-11-25T00:00:00-03:00', '2026-11-29T00:00:00-03:00'
 FLAG = ("<script>/*relampago*/window.__RLP=(function(){var n=Date.now();return n>=new Date('" + INI + "').getTime()&&n<new Date('" + FIM + "').getTime()})();"
         "if(window.__RLP)document.documentElement.classList.add('rlp');</script>")
 CSS = ('<style>/*relampago*/.rlp .obar [data-esc-clk],.rlp .esc [data-esc-clk],.rlp .obar [data-clock]{display:none!important}'
@@ -11,7 +11,7 @@ CSS = ('<style>/*relampago*/.rlp .obar [data-esc-clk],.rlp .esc [data-esc-clk],.
        '.rlp .esc__t{text-transform:uppercase}</style>')
 # dentro do /*esc*/: na janela, escreve a tarja e o aviso e para (sem relógio)
 ESC_OLD = "function t(){var s=Math.floor((FIM-Date.now())/1000);"
-ESC_NEW = ("function t(){if(window.__RLP){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML=(new Date().toLocaleDateString('en-CA',{timeZone:'America/Sao_Paulo'})==='2026-11-29')?'Último dia · acaba hoje, para sempre':'Pode acabar a qualquer momento'});"
+ESC_NEW = ("function t(){if(window.__RLP){document.querySelectorAll('[data-esc-tarja]').forEach(function(e){e.innerHTML=(new Date().toLocaleDateString('en-CA',{timeZone:'America/Sao_Paulo'})==='2026-11-28')?'Último dia · acaba hoje, para sempre':'Pode acabar a qualquer momento'});"
            "document.querySelectorAll('[data-esc-t]').forEach(function(e){e.textContent='Reabertura relâmpago'});"
            "document.querySelectorAll('.esc__s').forEach(function(e){e.textContent='Pode acabar a qualquer momento.'});return}"
            "var s=Math.floor((FIM-Date.now())/1000);")
